@@ -932,6 +932,7 @@ p {
 
 .sidebar-tag-link:hover {
   color: #fff;
+  background-color: var(--color-primary);
 }
 
 .tag-cloud::after {
