@@ -1309,11 +1309,12 @@ p {
 .footer-sub-title {
   margin: 0 0 1.8rem;
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #131315;
   position: relative;
   overflow: hidden;
   padding-bottom: 2rem;
+  line-height: 1.4;
 }
 
 /* ── Footer Article List (Grid) ── */
@@ -1399,9 +1400,6 @@ p {
   display: block;
   color: #44464b;
   font-weight: 600;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
@@ -1437,10 +1435,41 @@ p {
 .footer-links-list li {
   position: relative;
   display: block;
+  margin-bottom: 1rem;
+}
+
+.footer-links-list li:last-child {
+  margin-bottom: 0;
 }
 
 .footer-links-list a {
   display: block;
+  position: relative;
+  z-index: 0;
+}
+
+/* Link hover decorative dot (from Vue widget_block li a::before) */
+.footer-links-list li > a::before {
+  content: "";
+  width: 0;
+  height: 0.8rem;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -0.2rem;
+  border-radius: var(--radius-full);
+  opacity: 0;
+  visibility: hidden;
+  background-color: var(--color-primary);
+  transform: translateX(-1.6rem);
+  transition: var(--transition-primary);
+}
+
+.footer-links-list li > a:hover::before {
+  opacity: 1;
+  visibility: visible;
+  margin-right: 1.2rem;
+  width: 0.8rem;
+  transform: translateX(0);
 }
 
 .footer-link-count {
@@ -1473,6 +1502,7 @@ p {
 .footer-contact-columns {
   display: flex;
   gap: 3rem;
+  align-items: flex-start;
 }
 
 .footer-contact-col {
@@ -1481,9 +1511,16 @@ p {
 
 .footer-contact-col p {
   font-size: 1.7rem;
-  margin-top: 1.6rem;
+  margin-top: 1.7rem;
   margin-bottom: 0;
-  color: #131315;
+}
+
+.footer-contact-col p a {
+  text-decoration: underline;
+}
+
+.footer-contact-col p a:hover {
+  text-decoration: none;
 }
 
 /* ── Footer Copyright ── */
@@ -1597,7 +1634,7 @@ p {
 }
 
 [data-theme="dark"] .footer-contact-col p {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 [data-theme="dark"] .footer-contact-col p strong {
@@ -1606,6 +1643,7 @@ p {
 
 [data-theme="dark"] .footer-contact-col p a {
   color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
 }
 
 [data-theme="dark"] .footer-link-count {
