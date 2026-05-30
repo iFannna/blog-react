@@ -1279,7 +1279,7 @@ p {
   padding-bottom: 2rem;
 }
 
-/* Widget title decorative lines (is-footer-heading-init-s1) */
+/* Widget title decorative lines (is-footer-heading-init-s1) — shared by widget-title and sub-title */
 .footer-widget-title::before,
 .footer-widget-title::after,
 .footer-sub-title::before,
@@ -1309,12 +1309,11 @@ p {
 .footer-sub-title {
   margin: 0 0 1.8rem;
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #131315;
   position: relative;
   overflow: hidden;
   padding-bottom: 2rem;
-  line-height: 1.4;
 }
 
 /* ── Footer Article List (Grid) ── */
