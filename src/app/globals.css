@@ -1046,23 +1046,47 @@ p {
 
 .sidebar-featured-post-title {
   display: block;
-  margin-top: 1rem;
-  font-size: 1.6rem;
+  margin: 1rem 0 0;
   font-weight: 600;
   line-height: 1.4;
-  color: var(--color-text);
+}
+
+.sidebar-featured-post-author,
+.sidebar-featured-post-date,
+.small-article-author,
+.small-article-date {
+  display: block;
+  font-size: 1.386rem;
+}
+
+.sidebar-featured-post-date {
+  margin-top: 0;
+}
+
+.sidebar-featured-post-author {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.sidebar-featured-post-date {
+  margin-top: 0;
+}
+
+.small-article-author {
+  margin-bottom: 0;
+}
+
+.small-article-date {
+  margin-top: 0;
+}
+
+.archive-date-link {
+  color: inherit;
   text-decoration: none;
-  transition: var(--transition-primary);
 }
 
-.sidebar-featured-post-title:hover {
-  color: var(--color-primary);
-}
-
-.sidebar-featured-post-meta {
-  margin-top: 0.4rem;
-  font-size: 0.8125em;
-  color: var(--color-text-muted);
+.archive-date-separator {
+  pointer-events: none;
 }
 
 /* ── Hot Articles: Small Thumbnails Grid ── */
@@ -1081,6 +1105,14 @@ p {
   column-gap: 2rem;
   row-gap: 0.2rem;
   align-items: center;
+}
+
+.small-article-item .small-article-title {
+  align-self: end;
+}
+
+.small-article-item .small-article-meta {
+  align-self: start;
 }
 
 .small-article-thumb {
@@ -1116,7 +1148,7 @@ p {
 .small-article-title {
   display: block;
   font-weight: 600;
-  color: var(--color-text);
+  line-height: 1.4;
   text-decoration: none;
   transition: var(--transition-primary);
 }
@@ -1127,7 +1159,6 @@ p {
 
 .small-article-meta {
   font-size: 0.8125em;
-  color: var(--color-text-muted);
 }
 
 /* ── Meta / Action Links ── */

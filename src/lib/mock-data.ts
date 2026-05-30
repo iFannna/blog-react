@@ -29,7 +29,7 @@ export const mockArticles: Article[] = [
     title: "Getting Started with Next.js: A Complete Guide",
     summary:
       "Learn how to build modern web applications with Next.js, React's most popular framework. This guide covers everything from project setup to deployment.",
-    coverImage: null,
+    coverImage: "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/media/image/2026/04/b482211c-135f-426a-b36d-ec519374b6a6.jpg",
     authorName: "SAu",
     authorAvatar: "",
     categories: [{ id: 1, name: "Technology" }],
@@ -42,7 +42,7 @@ export const mockArticles: Article[] = [
     title: "Understanding React Server Components",
     summary:
       "React Server Components represent a paradigm shift in how we build React applications. They allow you to render components on the server, reducing client-side JavaScript.",
-    coverImage: null,
+    coverImage: "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/media/image/2026/04/b482211c-135f-426a-b36d-ec519374b6a6.jpg",
     authorName: "SAu",
     authorAvatar: "",
     categories: [
@@ -58,7 +58,7 @@ export const mockArticles: Article[] = [
     title: "The best time to plant a tree was 20 years ago.",
     summary:
       "The second best time is now. Every expert was once a beginner. Keep building, keep learning, keep shipping.",
-    coverImage: null,
+    coverImage: "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/media/image/2026/04/b482211c-135f-426a-b36d-ec519374b6a6.jpg",
     authorName: "SAu",
     authorAvatar: "",
     categories: [{ id: 3, name: "Thoughts" }],
@@ -71,7 +71,7 @@ export const mockArticles: Article[] = [
     title: "Tailwind CSS: Why Utility-First Matters",
     summary:
       "Explore why utility-first CSS frameworks like Tailwind have gained massive adoption and how they solve common styling challenges in modern web development.",
-    coverImage: null,
+    coverImage: "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/media/image/2026/04/b482211c-135f-426a-b36d-ec519374b6a6.jpg",
     authorName: "SAu",
     authorAvatar: "",
     categories: [{ id: 2, name: "Frontend" }],
@@ -84,7 +84,7 @@ export const mockArticles: Article[] = [
     title: "Building a Blog with Spring Boot and Vue",
     summary:
       "A step-by-step tutorial on creating a full-stack blog application using Spring Boot for the backend and Vue.js for the frontend.",
-    coverImage: null,
+    coverImage: "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/media/image/2026/04/b482211c-135f-426a-b36d-ec519374b6a6.jpg",
     authorName: "SAu",
     authorAvatar: "",
     categories: [
@@ -100,7 +100,7 @@ export const mockArticles: Article[] = [
     title: "TypeScript Best Practices for 2025",
     summary:
       "Level up your TypeScript skills with these best practices, including type narrowing, generics patterns, and advanced utility types.",
-    coverImage: null,
+    coverImage: "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/media/image/2026/04/b482211c-135f-426a-b36d-ec519374b6a6.jpg",
     authorName: "SAu",
     authorAvatar: "",
     categories: [{ id: 2, name: "Frontend" }],

@@ -11,6 +11,16 @@ export default function Sidebar() {
   const featured = popularArticles[0];
   const smallArticles = popularArticles.slice(1);
 
+  function formatDate(iso: string) {
+    const d = new Date(iso);
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    return {
+      month: months[d.getMonth()],
+      day: d.getDate(),
+      year: d.getFullYear(),
+    };
+  }
+
   return (
     <aside id="secondary" className="sidebar-layout-secondary">
       <div className="sidebar-inner">
@@ -44,7 +54,7 @@ export default function Sidebar() {
 
         {/* Widget 2: 热门文章 */}
         <div className="sidebar-widget">
-          <div className="sidebar-widget-title">热门文章</div>
+          <div className="sidebar-widget-title">热点</div>
           {/* 特色大封面 */}
           <div className="sidebar-featured-cover">
             {featured.coverImage ? (
@@ -65,7 +75,10 @@ export default function Sidebar() {
           <Link href={featured.url} className="sidebar-featured-post-title">
             {featured.title}
           </Link>
-          <div className="sidebar-featured-post-meta">By {featured.authorName}</div>
+          <div className="sidebar-featured-post-author">by {featured.authorName}</div>
+          <div className="sidebar-featured-post-date">
+            {(() => { const d = formatDate(featured.publishTime); return <>{d.month} <span>&nbsp;</span>{d.day}<span>, </span>{d.year}</>; })()}
+          </div>
           {/* 小缩略图列表 */}
           <div className="sidebar-small-articles">
             {smallArticles.map((article) => (
@@ -89,7 +102,10 @@ export default function Sidebar() {
                   <Link href={article.url} className="small-article-title">
                     {article.title}
                   </Link>
-                  <p className="small-article-meta">By {article.authorName}</p>
+                  <div className="small-article-author">by {article.authorName}</div>
+                  <div className="small-article-date">
+                    {(() => { const d = formatDate(article.publishTime); return <>{d.month} <span>&nbsp;</span>{d.day}<span>, </span>{d.year}</>; })()}
+                  </div>
                 </div>
               </div>
             ))}
