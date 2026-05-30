@@ -1321,6 +1321,7 @@ p {
   list-style: none;
   padding: 0;
   margin: 0;
+  line-height: 1.5;
 }
 
 .footer-posts-list li {
@@ -1408,7 +1409,7 @@ p {
   align-self: start;
   font-size: 1.386rem;
   margin: 0;
-  color: inherit;
+  color: #44464b;
 }
 
 /* ── Footer Sub-columns (Other + Help) ── */
