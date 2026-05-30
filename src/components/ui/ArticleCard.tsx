@@ -7,10 +7,10 @@ interface ArticleCardProps {
 
 /* 4-color cycle for category pills */
 const CAT_COLORS = [
-  "bg-[#6178df]",
-  "bg-[#48aab1]",
-  "bg-[#a95edf]",
-  "bg-primary",
+  "article-cat-1",
+  "article-cat-2",
+  "article-cat-3",
+  "article-cat-4",
 ];
 
 export function ArticleCard({ article }: ArticleCardProps) {
