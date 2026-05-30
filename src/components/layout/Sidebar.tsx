@@ -26,10 +26,11 @@ export default function Sidebar() {
                 </div>
               )}
             </div>
-            <div className="min-w-0">
-              <p className="sidebar-developer-name">{developerProfile.name}</p>
-              <p className="sidebar-developer-role">{developerProfile.role}</p>
-            </div>
+            <p className="sidebar-developer-info">
+              <strong>{developerProfile.name}</strong>
+              <br />
+              {developerProfile.role}
+            </p>
           </div>
           <p className="sidebar-developer-bio">{developerProfile.bio}</p>
           <div className="sidebar-tech-list">
@@ -52,10 +53,11 @@ export default function Sidebar() {
               </Link>
             ) : (
               <Link href={featured.url}>
-                <div className="sidebar-featured-placeholder">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                <div className="flex h-full w-full flex-col items-center justify-center gap-[1.4rem] bg-[#f3eee8] text-[#a08a78]">
+                  <svg width="42" height="42" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M5 4.75h14A2.25 2.25 0 0 1 21.25 7v10A2.25 2.25 0 0 1 19 19.25H5A2.25 2.25 0 0 1 2.75 17V7A2.25 2.25 0 0 1 5 4.75Zm0 1.5A.75.75 0 0 0 4.25 7v10c0 .41.34.75.75.75h14a.75.75 0 0 0 .75-.75V7a.75.75 0 0 0-.75-.75H5Zm2.5 2a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm10.25 8.93V17H6.19l3.04-3.28a.75.75 0 0 1 1.08-.03l1.58 1.58 2.78-3.31a.75.75 0 0 1 1.11-.04l1.97 2.13v2.13Z" />
                   </svg>
+                  <span className="text-[1.4rem] font-semibold tracking-wide">暂无封面</span>
                 </div>
               </Link>
             )}
@@ -75,8 +77,8 @@ export default function Sidebar() {
                     </Link>
                   ) : (
                     <Link href={article.url}>
-                      <div className="thumb-placeholder">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                      <div className="flex h-full w-full flex-col items-center justify-center bg-[#f3eee8] text-[#a08a78]">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                           <path d="M5 4.75h14A2.25 2.25 0 0 1 21.25 7v10A2.25 2.25 0 0 1 19 19.25H5A2.25 2.25 0 0 1 2.75 17V7A2.25 2.25 0 0 1 5 4.75Zm0 1.5A.75.75 0 0 0 4.25 7v10c0 .41.34.75.75.75h14a.75.75 0 0 0 .75-.75V7a.75.75 0 0 0-.75-.75H5Zm2.5 2a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm10.25 8.93V17H6.19l3.04-3.28a.75.75 0 0 1 1.08-.03l1.58 1.58 2.78-3.31a.75.75 0 0 1 1.11-.04l1.97 2.13v2.13Z" />
                         </svg>
                       </div>
@@ -100,8 +102,8 @@ export default function Sidebar() {
           <form className="search-inside-wrapper">
             <input type="search" placeholder="搜索..." className="search-input" />
             <button type="submit" className="sidebar-search-btn" aria-label="搜索">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M28.962 26.499l-4.938-4.938c1.602-2.002 2.669-4.671 2.669-7.474 0-6.673-5.339-12.012-12.012S2.669 7.414 2.669 14.087a11.962 11.962 0 0012.012 12.012c2.803 0 5.472-1.068 7.474-2.669l4.938 4.938a1.745 1.745 0 002.469 0 1.745 1.745 0 00-.6-2.869zm-14.281-3.469c-4.938 0-8.943-4.005-8.943-8.943s4.005-8.943 8.943-8.943 8.943 4.005 8.943-8.943 8.943z" />
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13 5c-3.3 0-6 2.7-6 6 0 1.4.5 2.7 1.3 3.7l-3.8 3.8 1.1 1.1 3.8-3.8c1 .8 2.3 1.3 3.7 1.3 3.3 0 6-2.7 6-6S16.3 5 13 5zm0 10.5c-2.5 0-4.5-2-4.5-4.5s2-4.5 4.5-4.5 4.5 2 4.5 4.5-2 4.5-4.5 4.5z" />
               </svg>
             </button>
           </form>
@@ -110,7 +112,7 @@ export default function Sidebar() {
         {/* Widget 4: 分类列表 */}
         <div className="sidebar-widget">
           <div className="sidebar-widget-title">分类</div>
-          <ul>
+          <ul className="sidebar-category-list">
             {mockCategories.map((cat) => (
               <li key={cat.id} className="sidebar-category-item">
                 <Link href={`/category/${cat.name}`} className="sidebar-category-link">

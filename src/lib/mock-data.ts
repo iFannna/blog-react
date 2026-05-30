@@ -146,9 +146,9 @@ export const mockExploreLinks = [
 ];
 
 export const developerProfile = {
-  name: "SAu",
-  role: "全栈开发",
-  bio: "热爱编程，专注于现代 Web 技术开发。",
+  name: "赵瑾瑜",
+  role: "开发者 & 编辑",
+  bio: "你好！我是赵瑾瑜，一位在读的大学生。该博客使用 Vue + Spring Boot 独立开发。",
   avatar: "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/2025/04/312b700a-e1c7-42bf-aa23-5db8dc7121a6.jpg",
   techStack: [
     { name: "Node.js", icon: "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/nodejs.png" },
