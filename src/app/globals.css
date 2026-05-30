@@ -791,6 +791,7 @@ p {
 [data-theme="dark"] .sidebar-widget-title {
   background-color: rgba(0, 0, 0, 0.75);
   border: 0.1rem solid rgba(190, 190, 190, 0.3);
+  color: #ffffff;
 }
 
 /* ── Sidebar List Separators ── */
@@ -926,7 +927,7 @@ p {
   border: 0.1rem solid rgba(190, 190, 190, 0.3);
   font-size: 1.3rem;
   line-height: 1;
-  color: inherit;
+  color: var(--color-text);
   transition: var(--transition-primary);
 }
 
