@@ -130,10 +130,9 @@ export default function Sidebar() {
           <div className="sidebar-widget-title">分类</div>
           <ul className="sidebar-category-list">
             {mockCategories.map((cat) => (
-              <li key={cat.id} className="sidebar-category-item">
+              <li key={cat.id}>
                 <Link href={`/category/${cat.name}`} className="sidebar-category-link">
                   {cat.name}
-                  <span className="sidebar-category-count">{cat.count}</span>
                 </Link>
               </li>
             ))}
