@@ -3,135 +3,151 @@ import {
   mockArticles,
   mockCategories,
   mockTags,
+  developerProfile,
 } from "@/lib/mock-data";
 
 export default function Sidebar() {
   const popularArticles = mockArticles.slice(0, 4);
+  const featured = popularArticles[0];
+  const smallArticles = popularArticles.slice(1);
 
   return (
-    <aside className="flex w-[280px] flex-shrink-0">
-      <div className="space-y-[2rem]">
-        {/* Developer Profile */}
-        <div className="rounded-normal border border-border-faint bg-bg p-[2rem]">
-          <div className="flex flex-col items-center text-center">
-            <div className="mb-[1.2rem] h-[7rem] w-[7rem] overflow-hidden rounded-full bg-bg-muted">
-              <div className="flex h-full w-full items-center justify-center text-[2.4rem] text-text-light">
-                S
-              </div>
-            </div>
-            <p className="text-[1.6rem] text-text">
-              <strong className="font-semibold">SAu</strong>
-              <br />
-              <span className="text-text-muted">全栈开发</span>
-            </p>
-            <p className="mt-[0.8rem] text-[1.4rem] leading-relaxed text-text-light">
-              热爱编程，专注于现代 Web 技术开发。
-            </p>
-            <div className="mt-[1.2rem] flex flex-wrap justify-center gap-[0.4rem]">
-              {["Node", "React", "Java", "MySQL", "Redis", "Git", "Nginx"].map(
-                (tech) => (
-                  <span
-                    key={tech}
-                    className="icon-container inline-block rounded-md bg-bg-muted px-[0.8rem] py-[0.4rem] text-[1.2rem] text-text-muted transition-transform hover:scale-110"
-                  >
-                    {tech}
-                  </span>
-                )
+    <aside id="secondary" className="sidebar-layout-secondary">
+      <div className="sidebar-inner">
+        {/* Widget 1: 开发者资料卡 (无浮动标题) */}
+        <div className="sidebar-widget">
+          <div className="sidebar-developer-row">
+            <div className="sidebar-developer-avatar">
+              {developerProfile.avatar ? (
+                <img src={developerProfile.avatar} alt={developerProfile.name} />
+              ) : (
+                <div className="sidebar-developer-avatar-placeholder">
+                  {developerProfile.name.charAt(0)}
+                </div>
               )}
             </div>
+            <div className="min-w-0">
+              <p className="sidebar-developer-name">{developerProfile.name}</p>
+              <p className="sidebar-developer-role">{developerProfile.role}</p>
+            </div>
+          </div>
+          <p className="sidebar-developer-bio">{developerProfile.bio}</p>
+          <div className="sidebar-tech-list">
+            {developerProfile.techStack.map((tech) => (
+              <span key={tech.name} className="sidebar-icon-container" title={tech.name}>
+                <img src={tech.icon} alt={tech.name} />
+              </span>
+            ))}
           </div>
         </div>
 
-        {/* Hot Articles */}
-        <div className="rounded-normal border border-border-faint bg-bg p-[2rem]">
-          <h4 className="widget-title mb-[1.6rem] text-[1.4rem] font-bold text-text">
-            热门文章
-          </h4>
-          <ul>
-            {popularArticles.map((article, index) => (
-              <li key={article.id}>
-                {index > 0 && <div className="my-[1.5rem] border-b border-border-faint" />}
-                <Link
-                  href={article.url}
-                  className="grid grid-cols-[7.5rem_minmax(0,1fr)] items-center gap-[2rem] text-[1.4rem] transition-[var(--transition-primary)] hover:text-primary"
-                >
-                  {/* Thumbnail */}
-                  <div className="flex h-[7.5rem] w-[7.5rem] items-center justify-center overflow-hidden rounded-lg bg-[#f3eee8] text-[#a08a78]">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M5 4.75h14A2.25 2.25 0 0 1 21.25 7v10A2.25 2.25 0 0 1 19 19.25H5A2.25 2.25 0 0 1 2.75 17V7A2.25 2.25 0 0 1 5 4.75Zm0 1.5A.75.75 0 0 0 4.25 7v10c0 .41.34.75.75.75h14a.75.75 0 0 0 .75-.75V7a.75.75 0 0 0-.75-.75H5Zm2.5 2a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm10.25 8.93V17H6.19l3.04-3.28a.75.75 0 0 1 1.08-.03l1.58 1.58 2.78-3.31a.75.75 0 0 1 1.11-.04l1.97 2.13v2.13Z" />
-                    </svg>
-                  </div>
-                  <div className="min-w-0">
-                    <p className="line-clamp-2 font-medium leading-snug text-text">
-                      {article.title}
-                    </p>
-                    <p className="mt-[0.4rem] text-[1.2rem] text-text-light">
-                      By {article.authorName}
-                    </p>
-                  </div>
-                </Link>
-              </li>
+        {/* Widget 2: 热门文章 */}
+        <div className="sidebar-widget">
+          <div className="sidebar-widget-title">热门文章</div>
+          {/* 特色大封面 */}
+          <div className="sidebar-featured-cover">
+            {featured.coverImage ? (
+              <Link href={featured.url}>
+                <img src={featured.coverImage} alt={featured.title} />
+              </Link>
+            ) : (
+              <Link href={featured.url}>
+                <div className="sidebar-featured-placeholder">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M5 4.75h14A2.25 2.25 0 0 1 21.25 7v10A2.25 2.25 0 0 1 19 19.25H5A2.25 2.25 0 0 1 2.75 17V7A2.25 2.25 0 0 1 5 4.75Zm0 1.5A.75.75 0 0 0 4.25 7v10c0 .41.34.75.75.75h14a.75.75 0 0 0 .75-.75V7a.75.75 0 0 0-.75-.75H5Zm2.5 2a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm10.25 8.93V17H6.19l3.04-3.28a.75.75 0 0 1 1.08-.03l1.58 1.58 2.78-3.31a.75.75 0 0 1 1.11-.04l1.97 2.13v2.13Z" />
+                  </svg>
+                </div>
+              </Link>
+            )}
+          </div>
+          <Link href={featured.url} className="sidebar-featured-post-title">
+            {featured.title}
+          </Link>
+          <div className="sidebar-featured-post-meta">By {featured.authorName}</div>
+          {/* 小缩略图列表 */}
+          <div className="sidebar-small-articles">
+            {smallArticles.map((article) => (
+              <div key={article.id} className="small-article-item">
+                <div className="small-article-thumb">
+                  {article.coverImage ? (
+                    <Link href={article.url}>
+                      <img src={article.coverImage} alt={article.title} />
+                    </Link>
+                  ) : (
+                    <Link href={article.url}>
+                      <div className="thumb-placeholder">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M5 4.75h14A2.25 2.25 0 0 1 21.25 7v10A2.25 2.25 0 0 1 19 19.25H5A2.25 2.25 0 0 1 2.75 17V7A2.25 2.25 0 0 1 5 4.75Zm0 1.5A.75.75 0 0 0 4.25 7v10c0 .41.34.75.75.75h14a.75.75 0 0 0 .75-.75V7a.75.75 0 0 0-.75-.75H5Zm2.5 2a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm10.25 8.93V17H6.19l3.04-3.28a.75.75 0 0 1 1.08-.03l1.58 1.58 2.78-3.31a.75.75 0 0 1 1.11-.04l1.97 2.13v2.13Z" />
+                        </svg>
+                      </div>
+                    </Link>
+                  )}
+                </div>
+                <div>
+                  <Link href={article.url} className="small-article-title">
+                    {article.title}
+                  </Link>
+                  <p className="small-article-meta">By {article.authorName}</p>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
 
-        {/* Search */}
-        <div className="rounded-normal border border-border-faint bg-bg p-[2rem]">
-          <form className="flex gap-[0.8rem]">
-            <input
-              type="search"
-              placeholder="搜索..."
-              className="flex-1 rounded-normal border border-border bg-bg-muted px-[1.2rem] py-[0.8rem] text-[1.4rem] text-text placeholder:text-text-placeholder transition-[var(--transition-primary)] focus:border-primary focus:outline-none"
-            />
-            <button
-              type="submit"
-              className="inline-flex items-center justify-center rounded-normal bg-primary px-[1rem] py-[0.8rem] text-white shadow-btn transition-[var(--transition-primary)] hover:-translate-y-px"
-              aria-label="搜索"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        {/* Widget 3: 搜索框 */}
+        <div className="sidebar-widget search-widget">
+          <div className="sidebar-widget-title">搜索</div>
+          <form className="search-inside-wrapper">
+            <input type="search" placeholder="搜索..." className="search-input" />
+            <button type="submit" className="sidebar-search-btn" aria-label="搜索">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M28.962 26.499l-4.938-4.938c1.602-2.002 2.669-4.671 2.669-7.474 0-6.673-5.339-12.012-12.012S2.669 7.414 2.669 14.087a11.962 11.962 0 0012.012 12.012c2.803 0 5.472-1.068 7.474-2.669l4.938 4.938a1.745 1.745 0 002.469 0 1.745 1.745 0 00-.6-2.869zm-14.281-3.469c-4.938 0-8.943-4.005-8.943-8.943s4.005-8.943 8.943-8.943 8.943 4.005 8.943-8.943 8.943z" />
               </svg>
             </button>
           </form>
         </div>
 
-        {/* Categories */}
-        <div className="rounded-normal border border-border-faint bg-bg p-[2rem]">
-          <h4 className="widget-title mb-[1rem] text-[1.4rem] font-bold text-text">
-            分类
-          </h4>
-          <ul className="space-y-[0.8rem]">
+        {/* Widget 4: 分类列表 */}
+        <div className="sidebar-widget">
+          <div className="sidebar-widget-title">分类</div>
+          <ul>
             {mockCategories.map((cat) => (
-              <li key={cat.id}>
-                <Link
-                  href={`/category/${cat.name}`}
-                  className="flex justify-between text-[1.4rem] text-text-muted transition-[var(--transition-primary)] hover:text-primary"
-                >
-                  <span>{cat.name}</span>
-                  <span className="text-text-light">({cat.count})</span>
+              <li key={cat.id} className="sidebar-category-item">
+                <Link href={`/category/${cat.name}`} className="sidebar-category-link">
+                  {cat.name}
+                  <span className="sidebar-category-count">{cat.count}</span>
                 </Link>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Tags */}
-        <div className="rounded-normal border border-border-faint bg-bg p-[2rem]">
-          <h4 className="widget-title mb-[1rem] text-[1.4rem] font-bold text-text">
-            标签
-          </h4>
-          <div className="flex flex-wrap gap-[0.6rem]">
+        {/* Widget 5: 标签云 */}
+        <div className="sidebar-widget">
+          <div className="sidebar-widget-title">标签</div>
+          <div className="tag-cloud">
             {mockTags.map((tag) => (
-              <Link
-                key={tag.id}
-                href={`/tag/${tag.name}`}
-                className="rounded-full bg-bg-muted px-[1rem] py-[0.4rem] text-[1.2rem] text-text-muted transition-[var(--transition-primary)] hover:bg-primary hover:text-white"
-              >
+              <Link key={tag.id} href={`/tag/${tag.name}`} className="sidebar-tag-link">
                 {tag.name}
               </Link>
             ))}
           </div>
+        </div>
+
+        {/* Widget 6: 操作/链接 */}
+        <div className="sidebar-widget">
+          <div className="sidebar-widget-title">操作</div>
+          <ul>
+            <li>
+              <Link href="/settings" className="sidebar-meta-link">设置</Link>
+            </li>
+            <li>
+              <Link href="/login" className="sidebar-meta-link">登录</Link>
+            </li>
+            <li>
+              <Link href="/register" className="sidebar-meta-link">注册</Link>
+            </li>
+          </ul>
         </div>
       </div>
     </aside>

@@ -31,8 +31,8 @@ export default function SiteLayout({
       <main className="flex-1">
         <div className="mx-auto max-w-[1420px] px-[5rem] py-[5rem]">
           {showSidebar ? (
-            <div className="flex gap-[5rem]">
-              <div className="min-w-0 flex-1">{children}</div>
+            <div className="sidebar-layout">
+              <div className="sidebar-layout-primary">{children}</div>
               {sidebar}
             </div>
           ) : (
