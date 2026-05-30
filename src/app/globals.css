@@ -1268,7 +1268,8 @@ p {
   margin-top: 4rem;
 }
 
-.footer-widget-title {
+.footer-widget-title,
+.footer-sub-title {
   margin-top: 0;
   margin-bottom: 2rem;
   font-size: 2rem;
@@ -1279,7 +1280,7 @@ p {
   padding-bottom: 2rem;
 }
 
-/* Widget title decorative lines (is-footer-heading-init-s1) — shared by widget-title and sub-title */
+/* Widget title decorative lines (is-footer-heading-init-s1) */
 .footer-widget-title::before,
 .footer-widget-title::after,
 .footer-sub-title::before,
@@ -1296,28 +1297,21 @@ p {
 .footer-sub-title::before {
   width: 6rem;
   left: 0;
-  right: auto;
 }
 
 .footer-widget-title::after,
 .footer-sub-title::after {
   width: 2rem;
   left: 7rem;
-  right: auto;
 }
 
 .footer-sub-title {
-  margin: 0 0 1.8rem;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #131315;
-  position: relative;
-  overflow: hidden;
-  padding-bottom: 2rem;
+  margin-bottom: 1.8rem;
 }
 
-/* ── Footer Article List (Grid) ── */
-.footer-posts-list {
+/* ── Footer Article List ── */
+.footer-posts-list,
+.footer-links-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -1359,7 +1353,6 @@ p {
   height: 7.5rem;
   line-height: 0;
   overflow: hidden;
-  max-width: none;
 }
 
 .footer-post-thumb img {
@@ -1402,14 +1395,13 @@ p {
   overflow: hidden;
 }
 
-.footer-post-author {
+.footer-post-author,
+.footer-post-date {
   font-size: 1.386rem;
   margin: 0;
 }
 
 .footer-post-date {
-  font-size: 1.386rem;
-  margin: 0;
   color: #44464b;
 }
 
@@ -1417,23 +1409,14 @@ p {
 .footer-columns {
   display: flex;
   gap: 3rem;
-  margin-bottom: 0;
 }
 
 .footer-sub-column {
   flex: 1;
 }
 
-.footer-links-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  line-height: 1.5;
-}
-
 .footer-links-list li {
   position: relative;
-  display: block;
   margin-bottom: 1rem;
 }
 
@@ -1472,12 +1455,9 @@ p {
 }
 
 .footer-link-count {
-  font-style: normal;
-  margin-left: auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   position: absolute;
   right: 0;
   top: 0.3rem;
