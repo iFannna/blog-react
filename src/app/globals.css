@@ -54,7 +54,6 @@
 
   /* Layout */
   --gutter: 2.4rem;
-  --header-max-width: 100%;
 }
 
 [data-theme="dark"] {
@@ -192,10 +191,6 @@ a:hover {
   border-color: rgba(39, 39, 39, 0.75);
 }
 
-#header-inner::after {
-  content: "";
-}
-
 .header-container {
   display: flex;
   align-items: center;
@@ -314,10 +309,6 @@ a:hover {
   justify-content: flex-end;
 }
 
-.header-widgets:last-child {
-  margin-right: 0;
-}
-
 /* ── Individual Widget (from core.scss) ── */
 .header-widget {
   position: relative;
@@ -345,11 +336,6 @@ a:hover {
   padding-right: 0;
 }
 
-/* ── Separators: bloglo-header__separators-none → NO separator lines ── */
-/* Separator pseudo-element is defined in core.scss but only activated by
-   .bloglo-header__separators-regular or .bloglo-header__separators-slanted.
-   Since this project uses .bloglo-header__separators-none, we omit ::after entirely. */
-
 /* ── Widget Icon (from core.scss + Header.vue scoped style) ── */
 .widget-icon {
   display: inline-flex;
@@ -374,20 +360,9 @@ a:hover {
   border-radius: 10rem;
 }
 
-/* Icon sizing — from core.scss .bloglo-icon height: 2.057rem (default), 2rem (bloglo-large) */
-.widget-icon .icon {
-  height: 2.057rem;
-  width: auto;
-}
-
-/* Social nav icon — bloglo-large variant */
-.widget-icon.social-link .icon {
-  height: 2rem;
-}
-
-/* Social nav link margin */
-.header-widget .widget-icon.social-link {
-  margin-right: 1.6rem;
+.widget-icon .icon path {
+  fill: currentColor;
+  fill-rule: evenodd;
 }
 
 /* ── Social Nav (from core.scss .bloglo-social-nav) ── */
@@ -449,11 +424,6 @@ a:hover {
   opacity: 1;
   will-change: transform;
   transition: transform 0.22s;
-}
-
-.social-nav .social-link .icon img {
-  height: 100%;
-  width: auto;
 }
 
 .social-nav .social-link .bottom-icon {
@@ -637,28 +607,4 @@ a:hover {
 [data-theme="dark"] .site-header .logo a,
 [data-theme="dark"] .site-header .hamburger {
   color: #ffffff;
-}
-
-/* ── Animations ── */
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
