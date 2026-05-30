@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import WavesBackground from "@/components/ui/WavesBackground";
 
 interface SiteLayoutProps {
   children: ReactNode;
@@ -40,6 +41,7 @@ export default function SiteLayout({
         </div>
       </main>
       <Footer />
+      <WavesBackground />
     </div>
   );
 }
