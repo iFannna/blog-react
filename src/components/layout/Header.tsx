@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTheme } from "@/lib/useTheme";
 
 interface NavItem {
   href: string;
@@ -14,6 +15,7 @@ interface HeaderProps {
 
 export default function Header({ navItems }: HeaderProps) {
   const pathname = usePathname();
+  const { isDarkMode, toggleTheme } = useTheme();
 
   return (
     <header id="masthead" className="site-header">
@@ -140,10 +142,17 @@ export default function Header({ navItems }: HeaderProps) {
 /* ── Dark Mode Toggle (CSS crescent/sun via box-shadow) ── */
 
 function DarkModeToggle() {
+  const { isDarkMode, toggleTheme } = useTheme();
+
   return (
-    <label className="darkmode-toggle">
-      <input type="checkbox" className="sr-only" />
-      <span className="darkmode-face" />
-    </label>
+    <button
+      type="button"
+      className="darkmode-toggle"
+      aria-label={isDarkMode ? "切换到亮色模式" : "切换到暗色模式"}
+      aria-pressed={isDarkMode ? "true" : "false"}
+      onClick={(e) => toggleTheme(e)}
+    >
+      <span className="darkmode-face" aria-hidden="true" />
+    </button>
   );
 }

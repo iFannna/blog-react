@@ -66,9 +66,9 @@
   --color-border-light: #444444;
   --color-border-faint: #333333;
 
-  --color-bg: #1a1a1a;
+  --color-bg: #333333;
   --color-bg-muted: #2a2a2a;
-  --color-bg-hover: #333333;
+  --color-bg-hover: #3a3a3a;
 
   --color-warm-bg: rgba(0, 0, 0, 0.3);
   --color-warm-border: rgba(190, 190, 190, 0.2);
@@ -152,7 +152,7 @@ html {
 }
 
 body {
-  background-color: #fff;
+  background-color: var(--color-bg);
   color: var(--color-text);
   font-family: "Be Vietnam Pro", Helvetica, Arial, sans-serif;
   font-size: 1.7rem;
@@ -681,3 +681,31 @@ a:hover {
 .waves-wrapper .waves-circle:nth-child(3) { width: 53px; height: 50px; left: 90%; animation-delay: 4s; }
 .waves-wrapper .waves-circle:nth-child(4) { width: 53px; height: 50px; left: 60%; animation-delay: 18s; }
 .waves-wrapper .waves-circle:nth-child(5) { width: 43px; height: 40px; left: 90%; animation-delay: 1s; }
+
+/* ── View Transitions — 圆形扩散主题切换动画 ── */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+::view-transition-group(root) {
+  animation-duration: 0s;
+}
+
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
