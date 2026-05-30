@@ -162,7 +162,7 @@ export const developerProfile = {
 };
 
 export const mockFooterData = {
-  siteName: "赵瑾瑜的博客",
+  siteName: "赵瑾瑜的个人博客",
   email: "example@email.com",
   phone: "138****8888",
   icp: "京ICP备XXXXXXXX号",
