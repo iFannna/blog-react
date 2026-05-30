@@ -160,3 +160,13 @@ export const developerProfile = {
     { name: "Nginx", icon: "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/nginx.png" },
   ],
 };
+
+export const mockFooterData = {
+  siteName: "赵瑾瑜的博客",
+  email: "example@email.com",
+  phone: "138****8888",
+  icp: "京ICP备XXXXXXXX号",
+  police: "京公网安备XXXXXXXXXXXX号",
+  guestbookCount: 128,
+  friendLinkCount: 32,
+};
