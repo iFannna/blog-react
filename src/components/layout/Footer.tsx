@@ -38,12 +38,14 @@ function ArticleCard({ article }: { article: (typeof mockArticles)[number] }) {
           )}
         </Link>
       </div>
-      <Link href={article.url} className="footer-post-title">
-        {article.title}
-      </Link>
-      <div className="footer-post-author">by {article.authorName}</div>
-      <div className="footer-post-date">
-        {date.month} <span>&nbsp;</span>{date.day}<span>, </span>{date.year}
+      <div className="footer-post-content">
+        <Link href={article.url} className="footer-post-title">
+          {article.title}
+        </Link>
+        <div className="footer-post-author">by {article.authorName}</div>
+        <div className="footer-post-date">
+          {date.month} <span>&nbsp;</span>{date.day}<span>, </span>{date.year}
+        </div>
       </div>
     </li>
   );

@@ -1325,11 +1325,9 @@ p {
 }
 
 .footer-posts-list li {
-  display: grid;
-  grid-template-columns: 7.5rem minmax(0, 1fr);
-  column-gap: 2.2rem;
-  row-gap: 0.2rem;
+  display: flex;
   align-items: center;
+  column-gap: 2.2rem;
   margin-bottom: 1.6rem;
 }
 
@@ -1342,10 +1340,9 @@ p {
 }
 
 .footer-post-thumb {
-  grid-column: 1;
-  grid-row: 1 / span 3;
+  flex-shrink: 0;
   width: 7.5rem;
-  min-height: 7.5rem;
+  height: 7.5rem;
   border: 0.1rem solid rgba(39, 39, 39, 0.75);
   border-radius: 0.8rem;
   box-shadow: 2px 2px 3px 0 rgba(93, 112, 234, 0.1);
@@ -1362,13 +1359,17 @@ p {
   height: 7.5rem;
   line-height: 0;
   overflow: hidden;
+  max-width: none;
 }
 
 .footer-post-thumb img {
   display: block;
   width: 7.5rem;
   height: 7.5rem;
+  max-width: none !important;
+  max-height: none !important;
   object-fit: cover;
+  object-position: center;
   border-radius: 0.8rem;
 }
 
@@ -1389,24 +1390,27 @@ p {
   fill: currentColor;
 }
 
+.footer-post-content {
+  flex: 1;
+  min-width: 0;
+}
+
 .footer-post-title {
-  grid-column: 2;
-  align-self: end;
   display: block;
   color: #44464b;
   font-weight: 600;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .footer-post-author {
-  grid-column: 2;
-  align-self: start;
   font-size: 1.386rem;
   margin: 0;
 }
 
 .footer-post-date {
-  grid-column: 2;
-  align-self: start;
   font-size: 1.386rem;
   margin: 0;
   color: #44464b;
