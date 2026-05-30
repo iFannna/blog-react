@@ -1,26 +1,664 @@
 @import "tailwindcss";
 
+/*
+ * Design Token System
+ *
+ * Naming convention:
+ *   - Colors:  primary, secondary, accent + semantic (text, border, bg)
+ *   - No vendor/theme prefixes
+ *   - All values go through CSS variables → Tailwind utilities
+ *   - Never hardcode colors, spacing, or radii in components
+ *
+ * Font size base: 10px (1rem = 10px) to match original Bloglo theme
+ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-primary: #fc6668;
+  --color-primary-light: #fd7d7f;
+  --color-primary-dark: #e55557;
+  --color-primary-glow: rgba(252, 102, 104, 0.27);
+  --color-primary-subtle: rgba(252, 102, 104, 0.09);
+  --color-primary-faint: rgba(252, 102, 104, 0.04);
+
+  --color-secondary: #232323;
+  --color-secondary-light: #383838;
+
+  --color-accent: #c26148;
+  --color-warm-bg: #fff9f3;
+  --color-warm-border: #ffe7d2;
+
+  --color-text: #232323;
+  --color-text-muted: #757575;
+  --color-text-light: #949494;
+  --color-text-placeholder: #c2c2c2;
+
+  --color-border: #ddd;
+  --color-border-light: #e0e0e0;
+  --color-border-faint: #f0f0f0;
+
+  --color-bg: #ffffff;
+  --color-bg-muted: #f3f3f3;
+  --color-bg-hover: #f0f0f0;
+
+  /* Category tag colors (cycle through) */
+  --color-cat-1: #6178df;
+  --color-cat-2: #48aab1;
+  --color-cat-3: #a95edf;
+
+  --radius-normal: 0.3rem;
+  --radius-btn: 7px;
+  --radius-full: 10rem;
+
+  --transition-primary: all 0.35s cubic-bezier(0.645, 0.045, 0.355, 1);
+  --transition-fast: all 0.2s ease;
+
+  /* Layout */
+  --gutter: 2.4rem;
+  --header-max-width: 100%;
 }
+
+[data-theme="dark"] {
+  --color-text: #ffffff;
+  --color-text-muted: #949494;
+  --color-text-light: #757575;
+  --color-text-placeholder: #666666;
+
+  --color-border: #555555;
+  --color-border-light: #444444;
+  --color-border-faint: #333333;
+
+  --color-bg: #1a1a1a;
+  --color-bg-muted: #2a2a2a;
+  --color-bg-hover: #333333;
+
+  --color-warm-bg: rgba(0, 0, 0, 0.3);
+  --color-warm-border: rgba(190, 190, 190, 0.2);
+}
+
+/* ── Tailwind Theme Extension ── */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--color-primary);
+  --color-primary-light: var(--color-primary-light);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-primary-glow: var(--color-primary-glow);
+  --color-primary-subtle: var(--color-primary-subtle);
+  --color-primary-faint: var(--color-primary-faint);
+
+  --color-secondary: var(--color-secondary);
+  --color-secondary-light: var(--color-secondary-light);
+
+  --color-accent: var(--color-accent);
+  --color-warm-bg: var(--color-warm-bg);
+  --color-warm-border: var(--color-warm-border);
+
+  --color-cat-1: var(--color-cat-1);
+  --color-cat-2: var(--color-cat-2);
+  --color-cat-3: var(--color-cat-3);
+
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-light: var(--color-text-light);
+  --color-text-placeholder: var(--color-text-placeholder);
+
+  --color-border: var(--color-border);
+  --color-border-light: var(--color-border-light);
+  --color-border-faint: var(--color-border-faint);
+
+  --color-bg: var(--color-bg);
+  --color-bg-muted: var(--color-bg-muted);
+  --color-bg-hover: var(--color-bg-hover);
+
+  --color-gray-900: #1e1e1e;
+  --color-gray-800: #2f2f2f;
+  --color-gray-700: #757575;
+  --color-gray-600: #949494;
+  --color-gray-400: #cccccc;
+  --color-gray-300: #dddddd;
+  --color-gray-200: #e0e0e0;
+  --color-gray-100: #f0f0f0;
+
+  --radius-normal: var(--radius-normal);
+  --radius-btn: var(--radius-btn);
+  --radius-full: var(--radius-full);
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+
+  --font-sans: "Be Vietnam Pro", Helvetica, Arial, sans-serif;
+  --font-heading: "Plus Jakarta Sans", Helvetica, Arial, sans-serif;
+  --font-mono: Menlo, Monaco, Consolas, "Courier New", monospace;
+
+  --shadow-btn: 0 10px 18px 0 var(--color-primary-glow);
+  --shadow-btn-hover: 0 10px 18px 0 var(--color-primary-subtle);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1);
+
+  --ease-primary: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --duration-primary: 350ms;
+
+  --width-sidebar: 280px;
+  --width-content: 840px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base Styles ──
+ * Original theme uses 10px base font size (1rem = 10px).
+ * Tailwind uses 16px base, so we scale Tailwind values × 1.6 to match.
+ * We set html font-size to 62.5% so 1rem = 10px, matching the original.
+ */
+
+html {
+  font-size: 62.5%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #fff;
+  color: var(--color-text);
+  font-family: "Be Vietnam Pro", Helvetica, Arial, sans-serif;
+  font-size: 1.7rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: var(--transition-primary);
+}
+
+a:hover {
+  color: var(--color-primary);
+}
+
+/* ── Header Component Styles ──
+ * Strictly from source code:
+ *   body classes: bloglo-header-layout-2, bloglo-menu-animation-squarebox, bloglo-header__separators-none
+ *   Layout: Logo | Nav (flex:1) | Widgets (margin-left:auto, justify-content:flex-end)
+ */
+
+.site-header {
+  position: relative;
+  color: #30373e;
+}
+
+#header-inner {
+  position: relative;
+  background: #ffffff;
+  border-style: solid;
+  border-left: none;
+  border-right: none;
+  border-width: 0;
+  border-color: rgba(39, 39, 39, 0.75);
+}
+
+#header-inner::after {
+  content: "";
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  max-width: 1420px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 5rem;
+}
+
+/* ── Header Elements (from core.scss line 115) ── */
+.header-element {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  position: relative;
+  z-index: 99;
+}
+
+.mobile-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-nav {
+    display: flex;
+  }
+  .primary-nav {
+    display: none !important;
+  }
+  .header-widgets {
+    display: none !important;
+  }
+}
+
+/* ── Logo — layout-2: margin-right: 3.2rem ── */
+.logo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-right: 3.2rem;
+}
+
+.logo img {
+  max-height: 45px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo .logo-inner {
+  margin-top: 40px;
+  margin-right: 3px;
+  margin-bottom: 38px;
+}
+
+/* ── Desktop Nav — layout-2: flex: 1 ── */
+.primary-nav {
+  flex: 1;
+  font-size: 1.7rem;
+  align-items: center;
+  -webkit-font-smoothing: antialiased;
+}
+
+.primary-nav > .menu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 9rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Nav link — squarebox animation (from bloglo-menu-animation-squarebox) ── */
+.primary-nav > .menu > li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: 0.1rem;
+}
+
+.primary-nav > .menu > li:first-child {
+  margin-left: 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  padding: 0.4rem 1.4rem 0.4rem;
+  font-size: inherit;
+  font-weight: 500;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 0;
+  transition: var(--transition-primary);
+}
+
+.nav-link:hover,
+.nav-link:focus-visible,
+.nav-link.active {
+  background-color: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 10px 18px 0 var(--color-primary-glow);
+}
+
+/* ── Header Widgets — layout-2: margin-left auto, justify-content flex-end ── */
+.header-widgets {
+  display: flex;
+  align-items: center;
+  z-index: 5;
+  margin-left: auto;
+  justify-content: flex-end;
+}
+
+.header-widgets:last-child {
+  margin-right: 0;
+}
+
+/* ── Individual Widget (from core.scss) ── */
+.header-widget {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  max-height: 9rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+}
+
+/* First widget extra left margin */
+.header-widgets .header-widget:first-child {
+  margin-left: 1.8rem;
+}
+
+/* Button widget gets more padding */
+.header-widget__button {
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+}
+
+/* Last widget no right padding */
+.header-widget:last-child {
+  padding-right: 0;
+}
+
+/* ── Separators: bloglo-header__separators-none → NO separator lines ── */
+/* Separator pseudo-element is defined in core.scss but only activated by
+   .bloglo-header__separators-regular or .bloglo-header__separators-slanted.
+   Since this project uses .bloglo-header__separators-none, we omit ::after entirely. */
+
+/* ── Widget Icon (from core.scss + Header.vue scoped style) ── */
+.widget-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: inherit;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.widget-icon:hover {
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.widget-icon:focus-visible {
+  outline: 0.2rem solid rgba(252, 102, 104, 0.55);
+  outline-offset: 0.3rem;
+  border-radius: 10rem;
+}
+
+/* Icon sizing — from core.scss .bloglo-icon height: 2.057rem (default), 2rem (bloglo-large) */
+.widget-icon .icon {
+  height: 2.057rem;
+  width: auto;
+}
+
+/* Social nav icon — bloglo-large variant */
+.widget-icon.social-link .icon {
+  height: 2rem;
+}
+
+/* Social nav link margin */
+.header-widget .widget-icon.social-link {
+  margin-right: 1.6rem;
+}
+
+/* ── Social Nav (from core.scss .bloglo-social-nav) ── */
+.social-nav {
+  display: flex;
+  height: 100%;
+}
+
+.social-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.social-nav ul li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  height: 100%;
+}
+
+.social-nav .social-link {
+  display: block;
+  text-decoration: none;
+  margin-right: 1.6rem;
+}
+
+.social-nav ul li:last-child > .social-link {
+  margin-right: 0;
+}
+
+/* span 容器 — overflow-y hidden 实现滚动动画 */
+.social-nav .social-link > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: inherit;
+  font-weight: 400;
+  overflow-y: hidden;
+  transition: var(--transition-primary);
+}
+
+.social-nav .social-link .icon {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  width: auto;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+  opacity: 1;
+  will-change: transform;
+  transition: transform 0.22s;
+}
+
+.social-nav .social-link .icon img {
+  height: 100%;
+  width: auto;
+}
+
+.social-nav .social-link .bottom-icon {
+  position: absolute;
+  transform: translate3d(0, 225%, 0);
+  transition: transform 0.22s;
+}
+
+.social-nav .social-link:hover .icon:not(.bottom-icon) {
+  transform: translateY(-225%);
+}
+
+.social-nav .social-link:hover .bottom-icon {
+  transform: translateY(0);
+}
+
+.widget-icon .icon path {
+  fill: currentColor;
+  fill-rule: evenodd;
+}
+
+/* Widget wrapper — from core.scss */
+.widget-wrapper {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Subscribe Button (from theme-overrides.scss .bloglo-btn) ── */
+.subscribe-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 4rem;
+  padding: 0.8rem 2.4rem;
+  font-family: "Plus Jakarta Sans", Helvetica, Arial, sans-serif;
+  font-size: 1.62rem;
+  font-weight: 500;
+  line-height: 1.8;
+  color: #fff;
+  background-color: var(--color-primary);
+  border: 0.1rem solid var(--color-primary);
+  border-radius: 7px;
+  box-shadow: 0 10px 18px 0 var(--color-primary-glow);
+  transition: var(--transition-primary);
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.subscribe-btn:hover {
+  color: #fff;
+  background-color: var(--color-primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px 0 var(--color-primary-subtle);
+}
+
+.subscribe-btn:active {
+  transform: translateY(0);
+}
+
+/* ── Hamburger (from core.scss .bloglo-hamburger) ── */
+.hamburger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  border-radius: var(--radius-normal);
+}
+
+.hamburger-box {
+  width: 2.5rem;
+  height: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+  display: block;
+  width: 2.8rem;
+  height: 0.2rem;
+  background-color: currentColor;
+  border-radius: var(--radius-normal);
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.hamburger-inner {
+  position: relative;
+  top: 50%;
+  margin-top: -0.1rem;
+}
+
+.hamburger-inner::before,
+.hamburger-inner::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.hamburger-inner::before {
+  top: -5px;
+  width: 1.5rem;
+}
+
+.hamburger-inner::after {
+  bottom: -5px;
+}
+
+/* ── Dark Mode Toggle (from core.scss .bloglo-darkmode .bloglo-darkmode-toogle) ── */
+
+.darkmode-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.darkmode-face {
+  --size: 1.8rem;
+  appearance: none;
+  outline: none;
+  width: var(--size);
+  height: var(--size);
+  box-shadow: inset calc(var(--size) * 0.33) calc(var(--size) * -0.25) 0;
+  border-radius: 10rem;
+  color: var(--color-secondary);
+  border: none;
+  margin: 0 0 1px;
+  min-width: unset;
+  opacity: 1;
+  vertical-align: middle;
+  display: block;
+  transition: all 500ms;
+}
+
+.darkmode-toggle:hover .darkmode-face {
+  color: var(--color-primary);
+}
+
+/* Dark mode sun state (from dynamic.scss) */
+[data-theme="dark"] .darkmode-face {
+  --size: 1.375em;
+  --ray-size: calc(var(--size) * -0.4);
+  --offset-orthogonal: calc(var(--size) * 0.65);
+  --offset-diagonal: calc(var(--size) * 0.45);
+  transform: scale(0.75);
+  color: var(--color-primary);
+  box-shadow:
+    inset 0 0 0 var(--size),
+    calc(var(--offset-orthogonal) * -1) 0 0 var(--ray-size),
+    var(--offset-orthogonal) 0 0 var(--ray-size),
+    0 calc(var(--offset-orthogonal) * -1) 0 var(--ray-size),
+    0 var(--offset-orthogonal) 0 var(--ray-size),
+    calc(var(--offset-diagonal) * -1) calc(var(--offset-diagonal) * -1) 0 var(--ray-size),
+    var(--offset-diagonal) var(--offset-diagonal) 0 var(--ray-size),
+    calc(var(--offset-diagonal) * -1) var(--offset-diagonal) 0 var(--ray-size),
+    var(--offset-diagonal) calc(var(--offset-diagonal) * -1) 0 var(--ray-size);
+}
+
+/* Dark mode — invert social icons (from Header.vue scoped style) */
+[data-theme="dark"] .github-social-icon {
+  filter: brightness(0) invert(1);
+}
+
+/* Dark mode — header background and border (from dynamic.scss) */
+[data-theme="dark"] #header-inner {
+  background: #333333;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .site-header,
+[data-theme="dark"] .site-header .header-widgets a:not(.subscribe-btn),
+[data-theme="dark"] .site-header .logo a,
+[data-theme="dark"] .site-header .hamburger {
+  color: #ffffff;
+}
+
+/* ── Animations ── */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
