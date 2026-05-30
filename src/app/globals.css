@@ -1270,9 +1270,48 @@ p {
 
 .footer-widget-title {
   margin-bottom: 2rem;
-  font-size: 2.4rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #131315;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 2rem;
+}
+
+/* Widget title decorative lines (is-footer-heading-init-s1) */
+.footer-widget-title::before,
+.footer-widget-title::after,
+.footer-sub-title::before,
+.footer-sub-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 0.4rem;
+  width: 5rem;
+  border-radius: 2px;
+  background-color: var(--color-primary);
+}
+
+.footer-widget-title::before,
+.footer-sub-title::before {
+  left: 0;
+  right: auto;
+}
+
+.footer-widget-title::after,
+.footer-sub-title::after {
+  left: 7rem;
+  right: auto;
+}
+
+.footer-sub-title {
+  margin: 0 0 1.2rem;
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #131315;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 2rem;
 }
 
 /* ── Footer Article List (Grid) ── */
@@ -1288,7 +1327,11 @@ p {
   column-gap: 2.2rem;
   row-gap: 0.2rem;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.6rem;
+}
+
+.footer-posts-list li + li {
+  padding-top: 0.5rem;
 }
 
 .footer-posts-list li:last-child {
@@ -1349,7 +1392,6 @@ p {
   display: block;
   color: #44464b;
   font-weight: 600;
-  line-height: 1.4;
 }
 
 .footer-post-author {
@@ -1370,19 +1412,12 @@ p {
 /* ── Footer Sub-columns (Other + Help) ── */
 .footer-columns {
   display: flex;
-  gap: 2rem;
-  margin-bottom: 2.8rem;
+  gap: 3rem;
+  margin-bottom: 0;
 }
 
 .footer-sub-column {
   flex: 1;
-}
-
-.footer-sub-title {
-  margin: 0 0 1.2rem;
-  font-size: 1.7rem;
-  font-weight: 600;
-  color: #131315;
 }
 
 .footer-links-list {
@@ -1412,6 +1447,10 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  position: absolute;
+  right: 0;
+  top: 0.3rem;
   background-color: rgba(145, 145, 145, 0.1);
   min-width: 2.4rem;
   min-height: 2.4rem;
@@ -1421,19 +1460,17 @@ p {
   font-size: 1.386rem;
   font-weight: 400;
   pointer-events: none;
-  margin-left: 0.5rem;
-  vertical-align: middle;
 }
 
 .footer-links-list a:hover + .footer-link-count {
-  color: #fff;
+  color: var(--color-on-primary);
   background-color: var(--color-primary);
 }
 
 /* ── Footer Contact ── */
 .footer-contact-columns {
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 .footer-contact-col {
@@ -1447,26 +1484,28 @@ p {
 }
 
 /* ── Footer Copyright ── */
-.footer-copyright {
-  background-color: var(--color-warm-bg);
+.copyright-bar {
+  background: var(--color-warm-bg);
+  color: #333333;
   border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
-  color: #333333;
 }
 
-.footer-copyright a {
-  color: #333333;
-}
-
-.footer-copyright a:hover {
-  color: #fc6668;
-}
-
-.copyright-row {
+.copyright-bar > .footer-container {
+  padding-top: 1.9rem;
+  padding-bottom: 1.9rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 1.9rem 0;
   flex-wrap: wrap;
+}
+
+.copyright-bar a {
+  color: #333333;
+  text-decoration: none;
+  transition: var(--transition-primary);
+}
+
+.copyright-bar a:hover {
+  color: #fc6668;
 }
 
 .copyright-left,
@@ -1478,13 +1517,24 @@ p {
 }
 
 .copyright-left {
+  justify-content: flex-start;
   padding-left: 0;
 }
 
 .copyright-right {
-  padding-right: 0;
   justify-content: flex-end;
+  padding-right: 0;
   gap: 0.8rem;
+  margin-left: auto;
+}
+
+/* Mobile: stack and center */
+@media (max-width: 782px) {
+  .copyright-left,
+  .copyright-right {
+    justify-content: center;
+    padding: 0.6rem 0;
+  }
 }
 
 /* ── Footer Dark Mode ── */
@@ -1553,18 +1603,22 @@ p {
   color: rgba(255, 255, 255, 0.8);
 }
 
-[data-theme="dark"] .footer-copyright {
+[data-theme="dark"] .copyright-bar {
   background-color: rgba(0, 0, 0, 0.4);
   border-top-color: rgba(255, 255, 255, 0.1);
   transition: background-color 0.3s ease;
 }
 
-[data-theme="dark"] .footer-copyright,
-[data-theme="dark"] .footer-copyright a {
+[data-theme="dark"] .copyright-bar span,
+[data-theme="dark"] .copyright-bar {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="dark"] .copyright-bar a {
   color: rgba(255, 255, 255, 0.8);
 }
 
-[data-theme="dark"] .footer-copyright a:hover {
+[data-theme="dark"] .copyright-bar a:hover {
   color: #667eea;
 }
 

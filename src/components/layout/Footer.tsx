@@ -53,7 +53,7 @@ export default function Footer() {
   return (
     <footer id="colophon" className="site-footer">
       {/* Widgets */}
-      <div id="bloglo-footer">
+      <div id="footer">
         <div className="footer-container">
           <div className="footer-widgets">
             {/* Column 1: 精选文章 */}
@@ -138,21 +138,21 @@ export default function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="footer-copyright">
+      <div className="copyright-bar">
         <div className="footer-container">
-          <div className="copyright-row">
-            <div className="copyright-left">
-              <span>Copyright 2025 &mdash; {mockFooterData.siteName}.</span>
-            </div>
-            <div className="copyright-right">
-              <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
-                {mockFooterData.icp}
-              </a>
-              &nbsp;
-              <a href="https://beian.mps.gov.cn/" target="_blank" rel="noopener noreferrer">
-                {mockFooterData.police}
-              </a>
-            </div>
+          <div className="copyright-left">
+            <span>Copyright 2025 &mdash; {mockFooterData.siteName}.</span>
+          </div>
+          <div className="copyright-right">
+            <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
+              {mockFooterData.icp}
+            </a>
+            {mockFooterData.icp && mockFooterData.police && (
+              <>&nbsp;</>
+            )}
+            <a href="https://beian.mps.gov.cn/" target="_blank" rel="noopener noreferrer">
+              {mockFooterData.police}
+            </a>
           </div>
         </div>
       </div>
