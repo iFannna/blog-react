@@ -319,11 +319,6 @@ p {
 }
 
 @media (max-width: 768px) {
-  /* container padding shrink */
-  .site-main > div {
-    padding-left: 3rem !important;
-    padding-right: 3rem !important;
-  }
   /* header container padding shrink (Vue core.scss line 7887) */
   .header-container {
     padding: 0 3rem;
@@ -1309,10 +1304,6 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   align-self: end;
 }
 
-.small-article-item .small-article-meta {
-  align-self: start;
-}
-
 .small-article-thumb {
   width: 7.5rem;
   height: 7.5rem;
@@ -1356,10 +1347,6 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 
 .small-article-title:hover {
   color: var(--color-primary);
-}
-
-.small-article-meta {
-  font-size: 0.8125em;
 }
 
 /* ── Meta / Action Links ── */
