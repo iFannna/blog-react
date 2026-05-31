@@ -2,8 +2,27 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: {
+    default: "Blog",
+    template: "%s | Blog",
+  },
   description: "Personal blog",
+  metadataBase: new URL("https://java-ai-sau.oss-cn-beijing.aliyuncs.com"),
+  openGraph: {
+    type: "website",
+    locale: "zh_CN",
+    title: "Blog",
+    description: "Personal blog",
+    siteName: "Blog",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog",
+    description: "Personal blog",
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
