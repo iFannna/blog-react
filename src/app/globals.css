@@ -9,7 +9,7 @@
  *   - All values go through CSS variables → Tailwind utilities
  *   - Never hardcode colors, spacing, or radii in components
  *
- * Font size base: 10px (1rem = 10px) to match original Bloglo theme
+ * Font size base: 10px (1rem = 10px) to match original theme
  */
 
 :root {
@@ -239,6 +239,41 @@ p {
   }
   .header-widgets {
     display: none !important;
+  }
+  /* container padding shrink (Vue core.scss line 7887) */
+  .site-main > div {
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+  }
+  /* header container padding shrink (Vue core.scss line 7887) */
+  .header-container {
+    padding: 0 3rem;
+  }
+  /* logo shrink (Vue dynamic.scss line 748) */
+  .logo img {
+    max-height: 40px;
+  }
+  .logo .logo-inner {
+    margin-top: 35px;
+    margin-bottom: 25px;
+  }
+  /* footer widgets padding shrink (Vue core.scss line 8090, was 782px) */
+  .footer-widgets {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .footer-column {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  /* pyml container padding shrink */
+  .pyml-slider-container {
+    padding: 0 3rem;
+  }
+  /* copyright bar separator (Vue core.scss line 7934) */
+  .copyright-bar .footer-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 }
 
@@ -785,6 +820,37 @@ p {
   background-color: rgba(0, 0, 0, 0.75);
   border: 0.1rem solid rgba(190, 190, 190, 0.3);
   color: #ffffff;
+}
+
+/* ── Sidebar Responsive: collapse below 960px ── */
+@media (max-width: 960px) {
+  .sidebar-layout {
+    display: block;
+  }
+  .sidebar-layout-primary {
+    max-width: 100% !important;
+    padding-right: 0 !important;
+    margin-top: 4rem;
+    margin-bottom: 0;
+  }
+  .sidebar-layout-secondary {
+    width: 100%;
+    margin-top: 4rem;
+    margin-bottom: 0;
+  }
+  .sidebar-widget {
+    margin-bottom: 4rem;
+  }
+  .sidebar-widget:last-child {
+    margin-bottom: 0;
+  }
+  .sidebar-widget-title {
+    margin-left: 0;
+    padding-left: 1.2rem;
+  }
+  .sidebar-inner {
+    position: static;
+  }
 }
 
 /* ── Sidebar List Separators ── */
@@ -1540,7 +1606,7 @@ p {
 }
 
 /* Mobile: stack and center */
-@media (max-width: 782px) {
+@media (max-width: 768px) {
   .copyright-left,
   .copyright-right {
     justify-content: center;
@@ -1641,11 +1707,9 @@ p {
   }
 }
 
-@media (max-width: 782px) {
+@media (max-width: 768px) {
   .footer-column {
     flex: 1 1 100%;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
   }
 }
 
@@ -1674,7 +1738,10 @@ p {
   box-shadow: 0 1.6rem 3.8rem -1.2rem rgba(0, 0, 0, 0.5);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
+  .article-card {
+    display: block;
+  }
   .article-thumb {
     flex: 0 0 100%;
     margin-right: 0;
@@ -2368,13 +2435,13 @@ p {
 }
 
 /* responsive */
-@media (max-width: 992px) {
+@media (max-width: 960px) {
   .pyml-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
   .pyml-grid {
     grid-template-columns: 1fr;
   }
@@ -2539,6 +2606,37 @@ p {
 /* dark mode */
 [data-theme="dark"] .pagination-arrow svg {
   fill: #fff;
+}
+
+/* ── Responsive: global rem scale (from Vue dynamic.scss) ── */
+@media (max-width: 768px) {
+  html {
+    font-size: 53%;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 50%;
+  }
+  /* logo shrink further (Vue dynamic.scss line 805) */
+  .logo img {
+    max-height: 32px;
+  }
+  .logo .logo-inner {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  /* hide author avatar on small phones (Vue core.scss line 8040) */
+  .article-avatar img,
+  .article-avatar-placeholder {
+    display: none;
+  }
+  /* copyright widget padding reset (Vue core.scss line 8031) */
+  .copyright-bar .footer-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 /* ── Animation ── */
