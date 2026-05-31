@@ -228,12 +228,13 @@ p {
 
 .mobile-nav {
   display: none;
+  align-self: center;
 }
 
 /* ── Mobile Nav: show hamburger, hide desktop nav (Vue dynamic.scss line 423) ── */
 @media (max-width: 1024px) {
   .mobile-nav {
-    display: inline-flex;
+    display: flex;
   }
   .primary-nav {
     display: none !important;
@@ -248,6 +249,8 @@ p {
     height: 100%;
     min-height: 100vh;
     left: 0;
+    right: 0;
+    margin: -1px 0 0;
     background: var(--color-bg);
     border-top: 1px solid #eaeaea;
     box-shadow: 0 15px 25px -10px rgba(50, 52, 54, 0.125);
@@ -621,14 +624,13 @@ p {
   border: 0;
   cursor: pointer;
   border-radius: var(--radius-normal);
+  color: var(--color-header-text);
 }
 
 .hamburger-box {
   width: 2.5rem;
   height: 1.4rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
   position: relative;
 }
 
@@ -637,14 +639,16 @@ p {
 .hamburger-inner::after {
   display: block;
   width: 2.8rem;
-  height: 0.2rem;
+  height: 2px;
   background-color: currentColor;
   border-radius: var(--radius-normal);
-  transition: 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  position: absolute;
+  transition-property: transform;
+  transition-duration: 0.15s;
+  transition-timing-function: ease;
 }
 
 .hamburger-inner {
-  position: relative;
   top: 50%;
   margin-top: -0.1rem;
 }
@@ -652,20 +656,23 @@ p {
 .hamburger-inner::before,
 .hamburger-inner::after {
   content: "";
-  position: absolute;
   left: 0;
 }
 
 .hamburger-inner::before {
   top: -5px;
-  width: 1.5rem;
 }
 
 .hamburger-inner::after {
   bottom: -5px;
 }
 
-/* Hamburger spin animation — X shape when active (Vue core.scss line 6856) */
+/* Inactive state: shorter top line */
+body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::before {
+  width: 1.5rem;
+}
+
+/* Hamburger spin animation — X shape when active (Vue core.scss line 6867) */
 .hamburger--spin .hamburger-inner {
   transition-duration: 0.22s;
   transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
@@ -680,6 +687,7 @@ p {
     transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 }
 
+/* Active state via class on button (Vue core.scss line 6886) */
 .hamburger--spin.is-active .hamburger-inner {
   transform: rotate(225deg);
   transition-delay: 0.12s;
@@ -689,11 +697,40 @@ p {
 .hamburger--spin.is-active .hamburger-inner::before {
   top: 0;
   opacity: 0;
+  transition: top 0.1s ease-out, opacity 0.1s 0.12s ease-out;
 }
 
 .hamburger--spin.is-active .hamburger-inner::after {
   bottom: 0;
   transform: rotate(-90deg);
+  transition: bottom 0.1s ease-out,
+    transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+/* Active state via body class (Vue core.scss line 6987) */
+.is-mobile-menu-active .hamburger--spin .hamburger-inner {
+  transform: rotate(225deg);
+  transition-delay: 0.12s;
+  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.is-mobile-menu-active .hamburger--spin .hamburger-inner::before {
+  top: 0;
+  opacity: 0;
+  transition: top 0.1s ease-out, opacity 0.1s 0.12s ease-out;
+}
+
+.is-mobile-menu-active .hamburger--spin .hamburger-inner::after {
+  bottom: 0;
+  transform: rotate(-90deg);
+  transition: bottom 0.1s ease-out,
+    transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+/* Hover/active color (Vue dynamic.scss line 8288) */
+.hamburger:hover,
+.is-mobile-menu-active .hamburger {
+  color: var(--color-primary);
 }
 
 /* Mobile menu backdrop (Vue core.scss line 6968) */
@@ -708,6 +745,8 @@ p {
   z-index: 991;
   opacity: 0;
   visibility: hidden;
+  will-change: opacity, visibility;
+  transform: translate3d(0, 0, 0);
   transition: var(--transition-primary);
   pointer-events: none;
 }
@@ -716,10 +755,14 @@ p {
   background-color: rgba(0, 0, 0, 0.85);
 }
 
-/* Menu active state — show backdrop, lock scroll (Vue core.scss line 6987) */
+/* Menu active state — show backdrop, lock scroll, raise z-index (Vue core.scss line 6987) */
 .is-mobile-menu-active .site-header {
   position: relative;
   z-index: 99;
+}
+
+.is-mobile-menu-active .mobile-nav {
+  z-index: 992;
 }
 
 .is-mobile-menu-active .site-header::after {
