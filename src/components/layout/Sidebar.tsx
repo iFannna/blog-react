@@ -5,22 +5,12 @@ import {
   mockTags,
   developerProfile,
 } from "@/lib/mock-data";
+import { formatDate } from "@/lib/utils";
 
 export default function Sidebar() {
   const popularArticles = mockArticles.slice(0, 4);
   const featured = popularArticles[0];
   const smallArticles = popularArticles.slice(1);
-
-  function formatDate(iso: string) {
-    const d = new Date(iso);
-    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    return {
-      month: months[d.getMonth()],
-      monthNumber: d.getMonth() + 1,
-      day: d.getDate(),
-      year: d.getFullYear(),
-    };
-  }
 
   return (
     <aside id="secondary" className="sidebar-layout-secondary">

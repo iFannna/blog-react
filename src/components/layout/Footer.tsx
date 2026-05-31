@@ -1,24 +1,11 @@
 import Link from "next/link";
 import { mockArticles, mockFooterData } from "@/lib/mock-data";
+import { formatDate } from "@/lib/utils";
 
 const featuredArticles = mockArticles.slice(0, 3);
 const editorPickArticles = mockArticles.slice(3, 6);
 
-function formatDate(iso: string) {
-  const d = new Date(iso);
-  const months = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December",
-  ];
-  return {
-    month: months[d.getMonth()],
-    monthNumber: d.getMonth() + 1,
-    day: d.getDate(),
-    year: d.getFullYear(),
-  };
-}
-
-function ArticleCard({ article }: { article: (typeof mockArticles)[number] }) {
+function FooterArticleCard({ article }: { article: (typeof mockArticles)[number] }) {
   const date = formatDate(article.publishTime);
   return (
     <li>
@@ -69,7 +56,7 @@ export default function Footer() {
                 <h4 className="footer-widget-title">精选文章</h4>
                 <ul className="footer-posts-list">
                   {featuredArticles.map((article) => (
-                    <ArticleCard key={article.id} article={article} />
+                    <FooterArticleCard key={article.id} article={article} />
                   ))}
                 </ul>
               </div>
@@ -81,7 +68,7 @@ export default function Footer() {
                 <h4 className="footer-widget-title">编辑推荐</h4>
                 <ul className="footer-posts-list">
                   {editorPickArticles.map((article) => (
-                    <ArticleCard key={article.id} article={article} />
+                    <FooterArticleCard key={article.id} article={article} />
                   ))}
                 </ul>
               </div>

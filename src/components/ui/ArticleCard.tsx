@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Article } from "@/lib/mock-data";
+import { sanitizeCssUrl } from "@/lib/utils";
 
 interface ArticleCardProps {
   article: Article;
@@ -129,7 +130,7 @@ export function QuoteCard({ article }: QuoteCardProps) {
         className="quote-post-bg"
         style={
           article.coverImage
-            ? { backgroundImage: `url('${article.coverImage}')` }
+            ? { backgroundImage: `url('${sanitizeCssUrl(article.coverImage)}')` }
             : { backgroundColor: "var(--color-bg-muted)" }
         }
       />

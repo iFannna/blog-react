@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { Article } from "@/lib/mock-data";
+import { formatDate } from "@/lib/utils";
 
 /* 4-color cycle for category pills */
 const CAT_COLORS = [
@@ -10,20 +11,6 @@ const CAT_COLORS = [
   "article-cat-3",
   "article-cat-4",
 ];
-
-function formatDate(iso: string) {
-  const d = new Date(iso);
-  const months = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December",
-  ];
-  return {
-    month: months[d.getMonth()],
-    monthNumber: d.getMonth() + 1,
-    day: d.getDate(),
-    year: d.getFullYear(),
-  };
-}
 
 interface YouMayLikeProps {
   articles: Article[];

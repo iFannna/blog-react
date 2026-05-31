@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+// DarkModeToggle (line 222) uses useTheme — import kept for it
 import { useTheme } from "@/lib/useTheme";
 
 interface NavItem {
@@ -16,7 +18,6 @@ interface HeaderProps {
 
 export default function Header({ navItems }: HeaderProps) {
   const pathname = usePathname();
-  const { isDarkMode, toggleTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const closeMobileMenu = useCallback(() => {
