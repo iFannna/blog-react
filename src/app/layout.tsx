@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     description: "Personal blog",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/icon.svg",
   },
 };
 
