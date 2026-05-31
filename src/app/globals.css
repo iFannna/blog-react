@@ -187,11 +187,7 @@ p {
   margin-bottom: 1.6rem;
 }
 
-/* ── Header Component Styles ──
- * Strictly from source code:
- *   body classes: bloglo-header-layout-2, bloglo-menu-animation-squarebox, bloglo-header__separators-none
- *   Layout: Logo | Nav (flex:1) | Widgets (margin-left:auto, justify-content:flex-end)
- */
+/* ── Header Component Styles ── */
 
 .site-header {
   position: relative;
@@ -226,7 +222,7 @@ p {
   align-self: center;
 }
 
-/* ── Mobile Nav: show hamburger, hide desktop nav (Vue dynamic.scss line 423) ── */
+/* ── Mobile Nav ── */
 @media (max-width: 1024px) {
   .mobile-nav {
     display: flex;
@@ -296,7 +292,7 @@ p {
     color: #fff;
   }
 
-  /* Dark mode mobile nav (Vue dynamic.scss line 258) */
+  /* Dark mode mobile nav */
   [data-theme="dark"] .mobile-navigation {
     background: #333333;
     border-top-color: rgba(255, 255, 255, 0.08);
@@ -307,15 +303,15 @@ p {
   }
 }
 
-/* ── Widget visibility by screen size (Vue core.scss) ── */
-/* bloglo-hide-mobile: hidden on phones ≤480px */
+/* ── Widget visibility by screen size ── */
+/* hidden on phones ≤480px */
 @media (max-width: 480px) {
   .header-widget-hide-mobile {
     display: none !important;
   }
 }
 
-/* bloglo-hide-mobile-tablet: hidden on phones + tablets ≤768px */
+/* hidden on phones + tablets ≤768px */
 @media (max-width: 768px) {
   .header-widget-hide-mobile-tablet {
     display: none !important;
@@ -323,7 +319,7 @@ p {
 }
 
 @media (max-width: 768px) {
-  /* container padding shrink (Vue core.scss line 7887) */
+  /* container padding shrink */
   .site-main > div {
     padding-left: 3rem !important;
     padding-right: 3rem !important;
@@ -332,7 +328,7 @@ p {
   .header-container {
     padding: 0 3rem;
   }
-  /* logo shrink (Vue dynamic.scss line 748) */
+  /* logo shrink */
   .logo img {
     max-height: 40px;
   }
@@ -344,12 +340,12 @@ p {
   .pyml-slider-container {
     padding: 0 3rem;
   }
-  /* copyright bar separator (Vue core.scss line 7934) */
+  /* copyright bar separator */
   .copyright-bar .footer-container {
     padding-left: 3rem;
     padding-right: 3rem;
   }
-  /* mobile nav margin shrink (Vue core.scss line 7951) */
+  /* mobile nav margin shrink */
   .mobile-nav {
     margin-left: 1.6rem;
   }
@@ -395,7 +391,7 @@ p {
   padding: 0;
 }
 
-/* ── Nav link — squarebox animation (from bloglo-menu-animation-squarebox) ── */
+/* ── Nav link — squarebox animation ── */
 .primary-nav > .menu > li {
   position: relative;
   display: flex;
@@ -495,7 +491,7 @@ p {
   fill-rule: evenodd;
 }
 
-/* ── Social Nav (from core.scss .bloglo-social-nav) ── */
+/* ── Social Nav ── */
 .social-nav {
   display: flex;
   height: 100%;
@@ -578,7 +574,7 @@ p {
   align-items: center;
 }
 
-/* ── Subscribe Button (from theme-overrides.scss .bloglo-btn) ── */
+/* ── Subscribe Button ── */
 .subscribe-btn {
   display: inline-flex;
   align-items: center;
@@ -611,7 +607,7 @@ p {
   transform: translateY(0);
 }
 
-/* ── Hamburger (from core.scss .bloglo-hamburger) ── */
+/* ── Hamburger ── */
 .hamburger {
   display: inline-flex;
   align-items: center;
@@ -669,7 +665,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   width: 1.5rem;
 }
 
-/* Hamburger spin animation — X shape when active (Vue core.scss line 6867) */
+/* Hamburger spin animation — X shape when active */
 .hamburger--spin .hamburger-inner {
   transition-duration: 0.22s;
   transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
@@ -684,7 +680,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
     transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 }
 
-/* Active state via class on button (Vue core.scss line 6886) */
+/* Active state via class on button */
 .hamburger--spin.is-active .hamburger-inner {
   transform: rotate(225deg);
   transition-delay: 0.12s;
@@ -704,13 +700,13 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
     transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
-/* Hover/active color (Vue dynamic.scss line 8288) */
+/* Hover/active color */
 .hamburger:hover,
 .is-mobile-menu-active .hamburger {
   color: var(--color-primary);
 }
 
-/* Mobile menu backdrop (Vue core.scss line 6968) */
+/* Mobile menu backdrop */
 .site-header::after {
   content: "";
   position: fixed;
@@ -732,7 +728,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   background-color: rgba(0, 0, 0, 0.85);
 }
 
-/* Menu active state — show backdrop, lock scroll, raise z-index (Vue core.scss line 6987) */
+/* Menu active state — show backdrop, lock scroll, raise z-index */
 .is-mobile-menu-active .site-header {
   position: relative;
   z-index: 99;
@@ -752,7 +748,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   overflow: hidden;
 }
 
-/* ── Dark Mode Toggle (from core.scss .bloglo-darkmode .bloglo-darkmode-toogle) ── */
+/* ── Dark Mode Toggle ── */
 
 .darkmode-toggle {
   display: inline-flex;
@@ -1854,7 +1850,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   }
 }
 
-/* Footer columns: stack at 782px (Vue core.scss line 8099) */
+/* Footer columns: stack at 782px */
 @media (max-width: 782px) {
   .footer-column {
     flex: 1 1 100%;
@@ -1875,7 +1871,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   }
 }
 
-/* Copyright widget padding reset (Vue core.scss line 8026) */
+/* Copyright widget padding reset */
 @media (max-width: 599px) {
   .copyright-bar .footer-container {
     padding-left: 0;
@@ -2791,7 +2787,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   fill: #fff;
 }
 
-/* ── Responsive: global rem scale (from Vue dynamic.scss) ── */
+/* ── Responsive: global rem scale ── */
 @media (max-width: 768px) {
   html {
     font-size: 53%;
@@ -2802,7 +2798,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   html {
     font-size: 50%;
   }
-  /* logo shrink further (Vue dynamic.scss line 805) */
+  /* logo shrink further */
   .logo img {
     max-height: 32px;
   }
@@ -2810,7 +2806,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
     margin-top: 25px;
     margin-bottom: 25px;
   }
-  /* hide author avatar on small phones (Vue core.scss line 8040) */
+  /* hide author avatar on small phones */
   .article-avatar img,
   .article-avatar-placeholder {
     display: none;
