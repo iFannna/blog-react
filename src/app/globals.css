@@ -2022,7 +2022,7 @@ p {
   box-shadow: 0 1.6rem 3.8rem -1.2rem rgba(0, 0, 0, 0.7);
 }
 
-/* ── Scroll to Top Button — from Vue ScrollTopButton.vue + core.scss #bloglo-scroll-top ── */
+/* ── Scroll to Top Button ── */
 #scroll-top {
   display: flex;
   align-items: center;
@@ -2041,6 +2041,7 @@ p {
   border: 0;
   background: transparent;
   padding: 0;
+  cursor: pointer;
 }
 
 #scroll-top:focus-visible {
@@ -2087,13 +2088,8 @@ p {
   z-index: 1;
   border-radius: 10rem;
   background-color: var(--color-primary);
-  transition: var(--transition-primary);
-  transform: scale(1);
   border: 0.1rem solid rgba(190, 190, 190, 0.3);
-}
-
-#scroll-top:hover {
-  cursor: pointer;
+  transition: var(--transition-primary);
 }
 
 #scroll-top:hover::before {
