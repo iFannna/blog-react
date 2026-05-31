@@ -2614,14 +2614,14 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   line-height: 1.2;
 }
 
-/* responsive */
-@media (max-width: 960px) {
+/* responsive (Vue grid: col-xs-12, col-sm-6 @600px, col-md-3 @783px) */
+@media (max-width: 782px) {
   .pyml-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 599px) {
   .pyml-grid {
     grid-template-columns: 1fr;
   }
