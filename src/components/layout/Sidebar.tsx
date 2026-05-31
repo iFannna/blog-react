@@ -16,6 +16,7 @@ export default function Sidebar() {
     const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     return {
       month: months[d.getMonth()],
+      monthNumber: d.getMonth() + 1,
       day: d.getDate(),
       year: d.getFullYear(),
     };
@@ -77,7 +78,15 @@ export default function Sidebar() {
           </Link>
           <div className="sidebar-featured-post-author">by {featured.authorName}</div>
           <div className="sidebar-featured-post-date">
-            {(() => { const d = formatDate(featured.publishTime); return <>{d.month} <span>&nbsp;</span>{d.day}<span>, </span>{d.year}</>; })()}
+            {(() => { const d = formatDate(featured.publishTime); return (
+              <>
+                <Link className="archive-date-link" href={`/archive/${d.year}/${d.monthNumber}`}>{d.month}</Link>
+                <span className="archive-date-separator" aria-hidden="true">{" "}</span>
+                <Link className="archive-date-link" href={`/archive/${d.year}/${d.monthNumber}/${d.day}`}>{d.day}</Link>
+                <span className="archive-date-separator" aria-hidden="true">{", "}</span>
+                <Link className="archive-date-link" href={`/archive/${d.year}`}>{d.year}</Link>
+              </>
+            ); })()}
           </div>
           {/* 小缩略图列表 */}
           <div className="sidebar-small-articles">
@@ -104,7 +113,15 @@ export default function Sidebar() {
                   </Link>
                   <div className="small-article-author">by {article.authorName}</div>
                   <div className="small-article-date">
-                    {(() => { const d = formatDate(article.publishTime); return <>{d.month} <span>&nbsp;</span>{d.day}<span>, </span>{d.year}</>; })()}
+                    {(() => { const d = formatDate(article.publishTime); return (
+                      <>
+                        <Link className="archive-date-link" href={`/archive/${d.year}/${d.monthNumber}`}>{d.month}</Link>
+                        <span className="archive-date-separator" aria-hidden="true">{" "}</span>
+                        <Link className="archive-date-link" href={`/archive/${d.year}/${d.monthNumber}/${d.day}`}>{d.day}</Link>
+                        <span className="archive-date-separator" aria-hidden="true">{", "}</span>
+                        <Link className="archive-date-link" href={`/archive/${d.year}`}>{d.year}</Link>
+                      </>
+                    ); })()}
                   </div>
                 </div>
               </div>

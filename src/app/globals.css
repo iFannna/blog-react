@@ -1901,6 +1901,21 @@ p {
   text-decoration: none;
 }
 
+/* archive date link — from Vue .archive-date-link */
+.archive-date-link {
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+.archive-date-link:hover,
+.archive-date-link:focus-visible {
+  color: var(--color-primary);
+}
+
+.archive-date-separator {
+  pointer-events: none;
+}
+
 .article-summary {
   margin-top: 1.6rem;
   margin-bottom: 0;

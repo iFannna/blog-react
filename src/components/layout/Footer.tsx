@@ -12,6 +12,7 @@ function formatDate(iso: string) {
   ];
   return {
     month: months[d.getMonth()],
+    monthNumber: d.getMonth() + 1,
     day: d.getDate(),
     year: d.getFullYear(),
   };
@@ -44,7 +45,11 @@ function ArticleCard({ article }: { article: (typeof mockArticles)[number] }) {
         </Link>
         <div className="footer-post-author">by {article.authorName}</div>
         <div className="footer-post-date">
-          {date.month} <span>&nbsp;</span>{date.day}<span>, </span>{date.year}
+          <Link className="archive-date-link" href={`/archive/${date.year}/${date.monthNumber}`}>{date.month}</Link>
+          <span className="archive-date-separator" aria-hidden="true">{" "}</span>
+          <Link className="archive-date-link" href={`/archive/${date.year}/${date.monthNumber}/${date.day}`}>{date.day}</Link>
+          <span className="archive-date-separator" aria-hidden="true">{", "}</span>
+          <Link className="archive-date-link" href={`/archive/${date.year}`}>{date.year}</Link>
         </div>
       </div>
     </li>
