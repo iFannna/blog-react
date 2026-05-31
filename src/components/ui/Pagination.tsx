@@ -28,6 +28,11 @@ export default function Pagination({
 }: PaginationProps) {
   if (totalPages <= 1) return null;
 
+  const goToPage = (page: number) => {
+    onPageChange(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="bloglo-pagination">
       <nav className="navigation pagination" aria-label="Pagination">
@@ -38,9 +43,9 @@ export default function Pagination({
               className="prev page-numbers"
               role="button"
               tabIndex={0}
-              onClick={() => onPageChange(currentPage - 1)}
+              onClick={() => goToPage(currentPage - 1)}
               onKeyDown={(e) => {
-                if (e.key === "Enter") onPageChange(currentPage - 1);
+                if (e.key === "Enter") goToPage(currentPage - 1);
               }}
               aria-label="Previous page"
             >
@@ -75,9 +80,9 @@ export default function Pagination({
                     className="page-numbers page-number"
                     role="button"
                     tabIndex={0}
-                    onClick={() => onPageChange(page)}
+                    onClick={() => goToPage(page)}
                     onKeyDown={(e) => {
-                      if (e.key === "Enter") onPageChange(page);
+                      if (e.key === "Enter") goToPage(page);
                     }}
                   >
                     {page}
@@ -90,9 +95,9 @@ export default function Pagination({
                     className="page-numbers page-number"
                     role="button"
                     tabIndex={0}
-                    onClick={() => onPageChange(totalPages)}
+                    onClick={() => goToPage(totalPages)}
                     onKeyDown={(e) => {
-                      if (e.key === "Enter") onPageChange(totalPages);
+                      if (e.key === "Enter") goToPage(totalPages);
                     }}
                   >
                     {totalPages}
@@ -108,9 +113,9 @@ export default function Pagination({
               className="next page-numbers"
               role="button"
               tabIndex={0}
-              onClick={() => onPageChange(currentPage + 1)}
+              onClick={() => goToPage(currentPage + 1)}
               onKeyDown={(e) => {
-                if (e.key === "Enter") onPageChange(currentPage + 1);
+                if (e.key === "Enter") goToPage(currentPage + 1);
               }}
               aria-label="Next page"
             >

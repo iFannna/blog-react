@@ -2402,6 +2402,7 @@ p {
 .nav-links {
   display: inline-flex;
   align-items: center;
+  gap: 0;
 }
 
 /* page number buttons: 4.4rem circle */
@@ -2427,14 +2428,21 @@ p {
 }
 
 /* current / hover: primary bg + white text + shadow */
-.page-numbers.current,
+.page-numbers.current {
+  color: #fff;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 10px 18px 0 var(--color-primary-glow);
+  pointer-events: none;
+  cursor: pointer;
+}
+
 .page-numbers:not(.prev, .next):hover,
 .page-numbers:not(.prev, .next):focus-visible {
   color: #fff;
   background-color: var(--color-primary);
   border-color: var(--color-primary);
   box-shadow: 0 10px 18px 0 var(--color-primary-glow);
-  pointer-events: none;
 }
 
 /* dots */
@@ -2482,7 +2490,7 @@ p {
 
 .arrow-handle,
 .arrow-bar {
-  transition: transform var(--transition-primary);
+  transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .arrow-bar {
@@ -2510,17 +2518,15 @@ p {
 }
 
 /* hover: handle slides in, bar expands */
-.page-numbers:hover .arrow-handle,
-.page-numbers:focus-visible .arrow-handle {
+.bloglo-animate-arrow:hover .arrow-handle {
   transform: translateX(0);
 }
 
-.page-numbers:hover .arrow-bar,
-.page-numbers:focus-visible .arrow-bar {
+.bloglo-animate-arrow:hover .arrow-bar {
   transform: scaleX(1);
 }
 
-/* hover: arrow container gets primary bg */
+/* hover: page-numbers gets primary bg */
 .page-numbers:hover,
 .page-numbers:focus-visible {
   color: #fff;
