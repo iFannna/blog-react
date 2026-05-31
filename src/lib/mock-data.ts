@@ -165,6 +165,8 @@ export const developerProfile = {
   ],
 };
 
+export const mockYouMayLikeArticles = mockArticles.slice(0, 4);
+
 export const mockFooterData = {
   siteName: "赵瑾瑜的个人博客",
   email: "example@email.com",

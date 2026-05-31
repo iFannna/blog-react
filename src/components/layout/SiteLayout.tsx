@@ -3,6 +3,8 @@ import Header from "./Header";
 import Footer from "./Footer";
 import WavesBackground from "@/components/ui/WavesBackground";
 import ScrollTopButton from "@/components/ui/ScrollTopButton";
+import YouMayLike from "@/components/ui/YouMayLike";
+import { mockYouMayLikeArticles } from "@/lib/mock-data";
 
 interface SiteLayoutProps {
   children: ReactNode;
@@ -41,6 +43,7 @@ export default function SiteLayout({
           )}
         </div>
       </main>
+      <YouMayLike articles={mockYouMayLikeArticles} />
       <Footer />
       <ScrollTopButton />
       <WavesBackground />
