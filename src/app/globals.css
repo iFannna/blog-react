@@ -2022,6 +2022,108 @@ p {
   box-shadow: 0 1.6rem 3.8rem -1.2rem rgba(0, 0, 0, 0.7);
 }
 
+/* ── Scroll to Top Button — from Vue ScrollTopButton.vue + core.scss #bloglo-scroll-top ── */
+#scroll-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2rem;
+  z-index: 997;
+  width: 4rem;
+  height: 4rem;
+  opacity: 0;
+  transform: translate3d(0, 3rem, 0);
+  transition:
+    opacity 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+    transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+#scroll-top:focus-visible {
+  outline: 0.2rem solid rgba(252, 102, 104, 0.55);
+  outline-offset: 0.3rem;
+}
+
+#scroll-top.scroll-top--visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+#scroll-top .scroll-top-icon {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  overflow: hidden;
+  z-index: 2;
+}
+
+#scroll-top .scroll-top-arrow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.35s ease-out;
+}
+
+#scroll-top .scroll-top-arrow.top-icon {
+  transform: translateY(100%);
+}
+
+#scroll-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  border-radius: 10rem;
+  background-color: var(--color-primary);
+  transition: var(--transition-primary);
+  transform: scale(1);
+  border: 0.1rem solid rgba(190, 190, 190, 0.3);
+}
+
+#scroll-top:hover {
+  cursor: pointer;
+}
+
+#scroll-top:hover::before {
+  background-color: var(--color-bg);
+  box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.22);
+  transform: scale(1.2);
+}
+
+#scroll-top:hover .scroll-top-arrow {
+  transform: translateY(-100%);
+}
+
+#scroll-top:hover .scroll-top-arrow.top-icon {
+  transform: translateY(0);
+}
+
+#scroll-top svg {
+  fill: #fff;
+  width: 2rem;
+  height: 2rem;
+}
+
+#scroll-top:hover svg {
+  fill: var(--color-primary);
+}
+
+[data-theme="dark"] #scroll-top svg {
+  fill: #fff;
+}
+
 /* ── Animation ── */
 @keyframes shine {
   75% { left: 120%; }
