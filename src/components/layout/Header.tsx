@@ -60,7 +60,7 @@ export default function Header({ navItems }: HeaderProps) {
     if (!isMobileMenuOpen) return;
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (!target.closest(".mobile-nav")) {
+      if (!target.closest(".mobile-nav") && !target.closest(".mobile-navigation")) {
         closeMobileMenu();
       }
     };
@@ -86,7 +86,6 @@ export default function Header({ navItems }: HeaderProps) {
 
           {/* Mobile Nav */}
           <span className="mobile-nav header-element">
-            {/* Hamburger button */}
             <button
               type="button"
               className={`hamburger hamburger--spin${isMobileMenuOpen ? " is-active" : ""}`}
@@ -101,31 +100,31 @@ export default function Header({ navItems }: HeaderProps) {
                 <span className="hamburger-inner" />
               </span>
             </button>
-
-            {/* Mobile navigation panel */}
-            <nav
-              className="mobile-navigation"
-              style={{ display: isMobileMenuOpen ? "block" : "none" }}
-              aria-label="移动端导航"
-            >
-              <ul className="menu">
-                {navItems.map((item) => {
-                  const isActive = pathname === item.href;
-                  return (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        className={isActive ? "active" : ""}
-                        onClick={closeMobileMenu}
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
           </span>
+
+          {/* Mobile navigation panel — positioned relative to #header-inner */}
+          <nav
+            className="mobile-navigation"
+            style={{ display: isMobileMenuOpen ? "block" : "none" }}
+            aria-label="移动端导航"
+          >
+            <ul className="menu">
+              {navItems.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className={isActive ? "active" : ""}
+                      onClick={closeMobileMenu}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
 
           {/* Desktop Nav — layout-2: flex: 1 */}
           <nav className="primary-nav">
