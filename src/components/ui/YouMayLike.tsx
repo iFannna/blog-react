@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Article } from "@/lib/mock-data";
-import { formatDate } from "@/lib/utils";
+import { ArchiveDateLinks } from "./ArchiveDateLinks";
 
 /* 4-color cycle for category pills */
 const CAT_COLORS = [
@@ -29,7 +29,6 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
           </h4>
           <div className="pyml-grid">
           {articles.map((article) => {
-            const date = formatDate(article.publishTime);
             return (
               <div key={article.id} className="pyml-slide-item">
                 <div className="pyml-slider-backgrounds">
@@ -98,17 +97,7 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
                         </span>
                       </span>
                       <span>
-                        <Link className="archive-date-link" href={`/archive/${date.year}/${date.monthNumber}`}>
-                          {date.month}
-                        </Link>
-                        <span className="archive-date-separator" aria-hidden="true">{" "}</span>
-                        <Link className="archive-date-link" href={`/archive/${date.year}/${date.monthNumber}/${date.day}`}>
-                          {date.day}
-                        </Link>
-                        <span className="archive-date-separator" aria-hidden="true">{", "}</span>
-                        <Link className="archive-date-link" href={`/archive/${date.year}`}>
-                          {date.year}
-                        </Link>
+                        <ArchiveDateLinks publishTime={article.publishTime} />
                       </span>
                     </div>
                   </div>

@@ -6,7 +6,7 @@ import {
   mockTags,
   developerProfile,
 } from "@/lib/mock-data";
-import { formatDate } from "@/lib/utils";
+import { ArchiveDateLinks } from "@/components/ui/ArchiveDateLinks";
 
 export default function Sidebar() {
   const popularArticles = mockArticles.slice(0, 4);
@@ -66,15 +66,7 @@ export default function Sidebar() {
           </Link>
           <div className="sidebar-featured-post-author">by {featured.authorName}</div>
           <div className="sidebar-featured-post-date">
-            {(() => { const d = formatDate(featured.publishTime); return (
-              <>
-                <Link className="archive-date-link" href={`/archive/${d.year}/${d.monthNumber}`}>{d.month}</Link>
-                <span className="archive-date-separator" aria-hidden="true">{" "}</span>
-                <Link className="archive-date-link" href={`/archive/${d.year}/${d.monthNumber}/${d.day}`}>{d.day}</Link>
-                <span className="archive-date-separator" aria-hidden="true">{", "}</span>
-                <Link className="archive-date-link" href={`/archive/${d.year}`}>{d.year}</Link>
-              </>
-            ); })()}
+            <ArchiveDateLinks publishTime={featured.publishTime} />
           </div>
           <div className="sidebar-small-articles">
             {smallArticles.map((article) => (
@@ -100,15 +92,7 @@ export default function Sidebar() {
                   </Link>
                   <div className="small-article-author">by {article.authorName}</div>
                   <div className="small-article-date">
-                    {(() => { const d = formatDate(article.publishTime); return (
-                      <>
-                        <Link className="archive-date-link" href={`/archive/${d.year}/${d.monthNumber}`}>{d.month}</Link>
-                        <span className="archive-date-separator" aria-hidden="true">{" "}</span>
-                        <Link className="archive-date-link" href={`/archive/${d.year}/${d.monthNumber}/${d.day}`}>{d.day}</Link>
-                        <span className="archive-date-separator" aria-hidden="true">{", "}</span>
-                        <Link className="archive-date-link" href={`/archive/${d.year}`}>{d.year}</Link>
-                      </>
-                    ); })()}
+                    <ArchiveDateLinks publishTime={article.publishTime} />
                   </div>
                 </div>
               </div>

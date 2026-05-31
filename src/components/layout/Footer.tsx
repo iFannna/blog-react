@@ -1,13 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { mockArticles, mockFooterData } from "@/lib/mock-data";
-import { formatDate } from "@/lib/utils";
+import { ArchiveDateLinks } from "@/components/ui/ArchiveDateLinks";
 
 const featuredArticles = mockArticles.slice(0, 3);
 const editorPickArticles = mockArticles.slice(3, 6);
 
 function FooterArticleCard({ article }: { article: (typeof mockArticles)[number] }) {
-  const date = formatDate(article.publishTime);
   return (
     <li>
       <div className="footer-post-thumb">
@@ -35,11 +34,7 @@ function FooterArticleCard({ article }: { article: (typeof mockArticles)[number]
         </Link>
         <div className="footer-post-author">by {article.authorName}</div>
         <div className="footer-post-date">
-          <Link className="archive-date-link" href={`/archive/${date.year}/${date.monthNumber}`}>{date.month}</Link>
-          <span className="archive-date-separator" aria-hidden="true">{" "}</span>
-          <Link className="archive-date-link" href={`/archive/${date.year}/${date.monthNumber}/${date.day}`}>{date.day}</Link>
-          <span className="archive-date-separator" aria-hidden="true">{", "}</span>
-          <Link className="archive-date-link" href={`/archive/${date.year}`}>{date.year}</Link>
+          <ArchiveDateLinks publishTime={article.publishTime} />
         </div>
       </div>
     </li>
