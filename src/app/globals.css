@@ -1905,6 +1905,9 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
     flex-wrap: nowrap;
     align-items: stretch;
   }
+  .article-thumb-link {
+    aspect-ratio: unset;
+  }
 }
 
 .article-thumb {
@@ -1934,6 +1937,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   width: 100%;
   position: relative;
   overflow: hidden;
+  aspect-ratio: 4 / 3;
 }
 
 .article-thumb-link::before {

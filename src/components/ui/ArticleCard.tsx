@@ -28,7 +28,7 @@ export function ArticleCard({ article, priority }: ArticleCardProps) {
       <div className="article-thumb">
         <Link href={article.url} className="article-thumb-link">
           {article.coverImage ? (
-            <Image src={article.coverImage} alt={article.title} fill sizes="(max-width: 1024px) 100vw, 42vw" className="object-cover" priority={priority} />
+            <Image src={article.coverImage} alt={article.title} fill sizes="(max-width: 1024px) 100vw, 42vw" className="object-cover" priority={priority} loading={priority ? "eager" : "lazy"} />
           ) : (
             <span className="article-thumb-placeholder" aria-label="暂无封面">
               <svg width="42" height="42" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
