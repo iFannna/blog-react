@@ -230,16 +230,90 @@ p {
   display: none;
 }
 
-@media (max-width: 768px) {
+/* ── Mobile Nav: show hamburger, hide desktop nav (Vue dynamic.scss line 423) ── */
+@media (max-width: 1024px) {
   .mobile-nav {
-    display: flex;
+    display: inline-flex;
   }
   .primary-nav {
     display: none !important;
   }
-  .header-widgets {
+
+  /* Mobile navigation panel */
+  .mobile-navigation {
+    display: none;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    left: 0;
+    background: var(--color-bg);
+    border-top: 1px solid #eaeaea;
+    box-shadow: 0 15px 25px -10px rgba(50, 52, 54, 0.125);
+    z-index: 999;
+    font-size: 1.7rem;
+    padding: 0;
+  }
+
+  .mobile-navigation > ul {
+    overflow-y: auto;
+    max-height: 68vh;
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mobile-navigation > ul li {
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  .mobile-navigation > ul li:last-child {
+    border-bottom: 0;
+  }
+
+  .mobile-navigation > ul a {
+    display: block;
+    padding: 10px 30px;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: var(--transition-primary);
+  }
+
+  .mobile-navigation > ul a:hover,
+  .mobile-navigation > ul a.active {
+    color: var(--color-primary);
+    background: var(--color-bg-hover);
+  }
+
+  /* Dark mode mobile nav (Vue dynamic.scss line 258) */
+  [data-theme="dark"] .mobile-navigation {
+    background: #333333;
+  }
+  [data-theme="dark"] .mobile-navigation > ul li {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* ── Widget visibility by screen size (Vue core.scss) ── */
+/* bloglo-hide-mobile: hidden on phones ≤480px */
+@media (max-width: 480px) {
+  .header-widget-hide-mobile {
     display: none !important;
   }
+}
+
+/* bloglo-hide-mobile-tablet: hidden on phones + tablets ≤768px */
+@media (max-width: 768px) {
+  .header-widget-hide-mobile-tablet {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
   /* container padding shrink (Vue core.scss line 7887) */
   .site-main > div {
     padding-left: 3rem !important;
@@ -274,6 +348,10 @@ p {
   .copyright-bar .footer-container {
     padding-left: 3rem;
     padding-right: 3rem;
+  }
+  /* mobile nav margin shrink (Vue core.scss line 7951) */
+  .mobile-nav {
+    margin-left: 1.6rem;
   }
 }
 
@@ -585,6 +663,73 @@ p {
 
 .hamburger-inner::after {
   bottom: -5px;
+}
+
+/* Hamburger spin animation — X shape when active (Vue core.scss line 6856) */
+.hamburger--spin .hamburger-inner {
+  transition-duration: 0.22s;
+  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.hamburger--spin .hamburger-inner::before {
+  transition: top 0.1s 0.25s ease-in, opacity 0.1s ease-in;
+}
+
+.hamburger--spin .hamburger-inner::after {
+  transition: bottom 0.1s 0.25s ease-in,
+    transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.hamburger--spin.is-active .hamburger-inner {
+  transform: rotate(225deg);
+  transition-delay: 0.12s;
+  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.hamburger--spin.is-active .hamburger-inner::before {
+  top: 0;
+  opacity: 0;
+}
+
+.hamburger--spin.is-active .hamburger-inner::after {
+  bottom: 0;
+  transform: rotate(-90deg);
+}
+
+/* Mobile menu backdrop (Vue core.scss line 6968) */
+.site-header::after {
+  content: "";
+  position: fixed;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.85);
+  z-index: 991;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition-primary);
+  pointer-events: none;
+}
+
+[data-theme="dark"] .site-header::after {
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+/* Menu active state — show backdrop, lock scroll (Vue core.scss line 6987) */
+.is-mobile-menu-active .site-header {
+  position: relative;
+  z-index: 99;
+}
+
+.is-mobile-menu-active .site-header::after {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: all;
+}
+
+.is-mobile-menu-active {
+  overflow: hidden;
 }
 
 /* ── Dark Mode Toggle (from core.scss .bloglo-darkmode .bloglo-darkmode-toogle) ── */

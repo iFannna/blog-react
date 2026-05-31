@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "@/lib/useTheme";
@@ -16,6 +17,56 @@ interface HeaderProps {
 export default function Header({ navItems }: HeaderProps) {
   const pathname = usePathname();
   const { isDarkMode, toggleTheme } = useTheme();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const closeMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(false);
+  }, []);
+
+  const toggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen((prev) => !prev);
+  }, []);
+
+  // 路由变化时关闭菜单
+  useEffect(() => {
+    closeMobileMenu();
+  }, [pathname, closeMobileMenu]);
+
+  // 切换 html 的 is-mobile-menu-active class（控制 body overflow）
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isMobileMenuOpen) {
+      root.classList.add("is-mobile-menu-active");
+    } else {
+      root.classList.remove("is-mobile-menu-active");
+    }
+    return () => {
+      root.classList.remove("is-mobile-menu-active");
+    };
+  }, [isMobileMenuOpen]);
+
+  // Escape 键关闭
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeMobileMenu();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isMobileMenuOpen, closeMobileMenu]);
+
+  // 点击遮罩层关闭
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest(".mobile-nav")) {
+        closeMobileMenu();
+      }
+    };
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, [isMobileMenuOpen, closeMobileMenu]);
 
   return (
     <header id="masthead" className="site-header">
@@ -35,19 +86,49 @@ export default function Header({ navItems }: HeaderProps) {
 
           {/* Mobile Nav */}
           <span className="mobile-nav header-element">
+            {/* Hamburger button */}
             <button
               type="button"
-              className="hamburger"
-              aria-label="打开菜单"
+              className={`hamburger hamburger--spin${isMobileMenuOpen ? " is-active" : ""}`}
+              aria-label={isMobileMenuOpen ? "关闭菜单" : "打开菜单"}
+              aria-expanded={isMobileMenuOpen}
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleMobileMenu();
+              }}
             >
               <span className="hamburger-box">
                 <span className="hamburger-inner" />
               </span>
             </button>
+
+            {/* Mobile navigation panel */}
+            <nav
+              className="mobile-navigation"
+              style={{ display: isMobileMenuOpen ? "block" : "none" }}
+              aria-label="移动端导航"
+            >
+              <ul className="menu">
+                {navItems.map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className={isActive ? "active" : ""}
+                        onClick={closeMobileMenu}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
           </span>
 
           {/* Desktop Nav — layout-2: flex: 1 */}
-          <nav className="primary-nav hidden md:block">
+          <nav className="primary-nav">
             <ul className="menu">
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
@@ -66,9 +147,9 @@ export default function Header({ navItems }: HeaderProps) {
           </nav>
 
           {/* Right Widgets — layout-2: margin-left auto, justify-end */}
-          <div className="header-widgets hidden md:flex">
-            {/* Search */}
-            <div className="header-widget">
+          <div className="header-widgets">
+            {/* Search — visible on all screens (Vue: bloglo-all) */}
+            <div className="header-widget header-widget-all">
               <div className="widget-wrapper">
                 <button type="button" className="widget-icon" aria-label="搜索">
                       <svg className="icon" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 32 32" aria-hidden="true">
@@ -78,8 +159,8 @@ export default function Header({ navItems }: HeaderProps) {
               </div>
             </div>
 
-            {/* Language Toggle */}
-            <div className="header-widget">
+            {/* Language Toggle — visible on all screens (Vue: bloglo-all) */}
+            <div className="header-widget header-widget-all">
               <div className="widget-wrapper">
                 <button type="button" className="widget-icon" aria-label="切换语言">
                       <svg className="icon" viewBox="0 0 24 24" width="1.2em" height="1.2em" aria-hidden="true">
@@ -89,15 +170,15 @@ export default function Header({ navItems }: HeaderProps) {
               </div>
             </div>
 
-            {/* Dark Mode Toggle */}
-            <div className="header-widget">
+            {/* Dark Mode Toggle — visible on all screens (Vue: bloglo-all) */}
+            <div className="header-widget header-widget-all">
               <div className="widget-wrapper">
                 <DarkModeToggle />
               </div>
             </div>
 
-            {/* Social Links */}
-            <div className="header-widget">
+            {/* Social Links — hidden on mobile (Vue: bloglo-hide-mobile) */}
+            <div className="header-widget header-widget__socials header-widget-hide-mobile">
               <div className="widget-wrapper">
                 <nav className="social-nav minimal-fill social-nav--large" aria-label="社交链接">
                   <ul className="flex items-center">
@@ -124,8 +205,8 @@ export default function Header({ navItems }: HeaderProps) {
               </div>
             </div>
 
-            {/* Subscribe Button */}
-            <div className="header-widget header-widget__button">
+            {/* Subscribe Button — hidden on mobile+tablet (Vue: bloglo-hide-mobile-tablet) */}
+            <div className="header-widget header-widget__button header-widget-hide-mobile-tablet">
               <div className="widget-wrapper">
                 <Link href="/subscribe" className="subscribe-btn">
                   <span>订阅</span>
