@@ -1025,7 +1025,8 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   }
   .sidebar-widget-title {
     margin-left: 0;
-    padding-left: 1.2rem;
+    padding-left: 25px;
+    padding-right: 25px;
   }
   .sidebar-inner {
     position: static;
