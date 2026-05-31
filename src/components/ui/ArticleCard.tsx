@@ -5,7 +5,6 @@ import { sanitizeCssUrl } from "@/lib/utils";
 
 interface ArticleCardProps {
   article: Article;
-  priority?: boolean;
 }
 
 /* 4-color cycle for category pills */
@@ -16,7 +15,7 @@ const CAT_COLORS = [
   "article-cat-4",
 ];
 
-export function ArticleCard({ article, priority }: ArticleCardProps) {
+export function ArticleCard({ article }: ArticleCardProps) {
   const date = new Date(article.publishTime);
   const month = date.toLocaleString("en-US", { month: "short" });
   const day = date.getDate();
@@ -28,7 +27,7 @@ export function ArticleCard({ article, priority }: ArticleCardProps) {
       <div className="article-thumb">
         <Link href={article.url} className="article-thumb-link">
           {article.coverImage ? (
-            <Image src={article.coverImage} alt={article.title} fill sizes="(max-width: 1024px) 100vw, 42vw" className="object-cover" priority={priority} loading={priority ? "eager" : "lazy"} />
+            <Image src={article.coverImage} alt={article.title} fill sizes="(max-width: 1024px) 100vw, 42vw" className="object-cover" />
           ) : (
             <span className="article-thumb-placeholder" aria-label="暂无封面">
               <svg width="42" height="42" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

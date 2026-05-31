@@ -28,7 +28,7 @@ export default function ArticleFeed() {
             article.type === 2 ? (
               <QuoteCard key={article.id} article={article} />
             ) : (
-              <ArticleCard key={article.id} article={article} priority={index === 0} />
+              <ArticleCard key={article.id} article={article} />
             )
           )}
         </div>
