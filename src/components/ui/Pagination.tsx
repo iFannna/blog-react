@@ -34,7 +34,7 @@ export default function Pagination({
   };
 
   return (
-    <div className="bloglo-pagination">
+    <div className="pagination-container">
       <nav className="navigation pagination" aria-label="Pagination">
         <div className="nav-links">
           {/* Prev arrow */}
@@ -49,7 +49,7 @@ export default function Pagination({
               }}
               aria-label="Previous page"
             >
-              <button type="button" className="bloglo-animate-arrow left-arrow" aria-hidden="true">
+              <button type="button" className="pagination-arrow left-arrow" aria-hidden="true">
                 {ARROW_SVG}
               </button>
             </a>
@@ -119,7 +119,7 @@ export default function Pagination({
               }}
               aria-label="Next page"
             >
-              <button type="button" className="bloglo-animate-arrow right-arrow" aria-hidden="true">
+              <button type="button" className="pagination-arrow right-arrow" aria-hidden="true">
                 {ARROW_SVG}
               </button>
             </a>
