@@ -201,11 +201,6 @@ p {
 #header-inner {
   position: relative;
   background: var(--color-bg);
-  border-style: solid;
-  border-left: none;
-  border-right: none;
-  border-width: 0;
-  border-color: rgba(39, 39, 39, 0.75);
 }
 
 .header-container {
@@ -896,10 +891,6 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
-}
-
-::view-transition-old(root),
-::view-transition-new(root) {
   mix-blend-mode: normal;
 }
 
@@ -1776,20 +1767,10 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   width: 100%;
 }
 
-/* Mobile: stack and center */
-@media (max-width: 768px) {
-  .copyright-left,
-  .copyright-right {
-    justify-content: center;
-    padding: 0.6rem 0;
-  }
-}
-
 /* ── Footer Dark Mode ── */
 [data-theme="dark"] .site-footer {
   background-color: rgba(0, 0, 0, 0.3);
   border-top-color: #353535;
-  transition: background-color 0.3s ease;
 }
 
 [data-theme="dark"] .footer-widget-title,
@@ -1855,7 +1836,6 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 [data-theme="dark"] .copyright-bar {
   background-color: rgba(0, 0, 0, 0.4);
   border-top-color: rgba(255, 255, 255, 0.1);
-  transition: background-color 0.3s ease;
 }
 
 [data-theme="dark"] .copyright-bar span,
@@ -1884,14 +1864,12 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 @media (max-width: 782px) {
   .footer-column {
     flex: 1 1 100%;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
   .footer-widgets {
     padding-top: 3rem;
     padding-bottom: 3rem;
-  }
-  .footer-column {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
   }
 }
 
@@ -2838,11 +2816,6 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   .article-avatar img,
   .article-avatar-placeholder {
     display: none;
-  }
-  /* copyright widget padding reset (Vue core.scss line 8031) */
-  .copyright-bar .footer-container {
-    padding-left: 0;
-    padding-right: 0;
   }
 }
 
