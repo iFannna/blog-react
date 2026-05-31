@@ -80,5 +80,12 @@ export function useTheme() {
     }, 800);
   }, []);
 
+  // 组件卸载时清理防抖 timer
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
+
   return { isDarkMode, toggleTheme };
 }
