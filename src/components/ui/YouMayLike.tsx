@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import type { Article } from "@/lib/mock-data";
 import { formatDate } from "@/lib/utils";
 
@@ -35,10 +36,12 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
                   <Link href={article.url}>
                     <div className="pyml-slide-bg">
                       {article.coverImage ? (
-                        <img
+                        <Image
                           src={article.coverImage}
                           alt={article.title}
-                          loading="lazy"
+                          fill
+                          sizes="(max-width: 782px) 100vw, 25vw"
+                          className="object-cover"
                         />
                       ) : (
                         <span className="pyml-placeholder" aria-label="暂无封面">
@@ -79,12 +82,12 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
                         <span className="posted-by">
                           {article.authorAvatar && (
                             <span className="author-avatar">
-                              <img
+                              <Image
                                 src={article.authorAvatar}
                                 alt={article.authorName}
-                                width="30"
-                                height="30"
-                                loading="lazy"
+                                width={30}
+                                height={30}
+                                className="rounded-full"
                               />
                             </span>
                           )}

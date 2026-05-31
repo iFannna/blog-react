@@ -1,9 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Article } from "@/lib/mock-data";
 import { sanitizeCssUrl } from "@/lib/utils";
 
 interface ArticleCardProps {
   article: Article;
+  priority?: boolean;
 }
 
 /* 4-color cycle for category pills */
@@ -14,7 +16,7 @@ const CAT_COLORS = [
   "article-cat-4",
 ];
 
-export function ArticleCard({ article }: ArticleCardProps) {
+export function ArticleCard({ article, priority }: ArticleCardProps) {
   const date = new Date(article.publishTime);
   const month = date.toLocaleString("en-US", { month: "short" });
   const day = date.getDate();
@@ -26,7 +28,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
       <div className="article-thumb">
         <Link href={article.url} className="article-thumb-link">
           {article.coverImage ? (
-            <img src={article.coverImage} alt={article.title} loading="lazy" />
+            <Image src={article.coverImage} alt={article.title} fill sizes="(max-width: 1024px) 100vw, 42vw" className="object-cover" priority={priority} />
           ) : (
             <span className="article-thumb-placeholder" aria-label="暂无封面">
               <svg width="42" height="42" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -70,7 +72,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
           <span className="article-meta-author">
             <span className="article-avatar">
               {article.authorAvatar ? (
-                <img src={article.authorAvatar} alt={article.authorName} />
+                <Image src={article.authorAvatar} alt={article.authorName} width={40} height={40} className="rounded-full" />
               ) : (
                 <span className="article-avatar-placeholder">
                   {article.authorName.charAt(0)}

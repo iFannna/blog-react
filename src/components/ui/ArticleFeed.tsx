@@ -24,11 +24,11 @@ export default function ArticleFeed() {
     <div className="space-y-6">
       {hasArticles && (
         <div className="space-y-6">
-          {pagedArticles.map((article) =>
+          {pagedArticles.map((article, index) =>
             article.type === 2 ? (
               <QuoteCard key={article.id} article={article} />
             ) : (
-              <ArticleCard key={article.id} article={article} />
+              <ArticleCard key={article.id} article={article} priority={index === 0} />
             )
           )}
         </div>

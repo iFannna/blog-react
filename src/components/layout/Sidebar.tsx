@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   mockArticles,
   mockCategories,
@@ -20,7 +21,7 @@ export default function Sidebar() {
           <div className="sidebar-developer-row">
             <div className="sidebar-developer-avatar">
               {developerProfile.avatar ? (
-                <img src={developerProfile.avatar} alt={developerProfile.name} />
+                <Image src={developerProfile.avatar} alt={developerProfile.name} width={80} height={80} className="rounded-full" />
               ) : (
                 <div className="sidebar-developer-avatar-placeholder">
                   {developerProfile.name.charAt(0)}
@@ -49,8 +50,8 @@ export default function Sidebar() {
           {/* 特色大封面 */}
           <div className="sidebar-featured-cover">
             {featured.coverImage ? (
-              <Link href={featured.url}>
-                <img src={featured.coverImage} alt={featured.title} />
+              <Link href={featured.url} className="relative">
+                <Image src={featured.coverImage} alt={featured.title} fill sizes="(max-width: 1024px) 100vw, 42vw" className="object-cover" />
               </Link>
             ) : (
               <Link href={featured.url}>
@@ -84,8 +85,8 @@ export default function Sidebar() {
               <div key={article.id} className="small-article-item">
                 <div className="small-article-thumb">
                   {article.coverImage ? (
-                    <Link href={article.url}>
-                      <img src={article.coverImage} alt={article.title} />
+                    <Link href={article.url} className="relative">
+                      <Image src={article.coverImage} alt={article.title} fill sizes="7.5rem" className="object-cover" />
                     </Link>
                   ) : (
                     <Link href={article.url}>

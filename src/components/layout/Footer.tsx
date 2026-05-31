@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { mockArticles, mockFooterData } from "@/lib/mock-data";
 import { formatDate } from "@/lib/utils";
 
@@ -12,10 +13,12 @@ function FooterArticleCard({ article }: { article: (typeof mockArticles)[number]
       <div className="footer-post-thumb">
         <Link href={article.url}>
           {article.coverImage ? (
-            <img
+            <Image
               src={article.coverImage}
               alt={article.title}
-              loading="lazy"
+              width={120}
+              height={90}
+              className="footer-thumb-img"
             />
           ) : (
             <span className="footer-thumb-placeholder" aria-label="暂无封面">
