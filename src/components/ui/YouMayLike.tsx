@@ -111,7 +111,7 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
                         <Link className="archive-date-link" href={`/archive/${date.year}/${date.monthNumber}`}>
                           {date.month}
                         </Link>
-                        <span className="archive-date-separator" aria-hidden="true">{" "}</span>
+                        <span className="archive-date-separator" aria-hidden="true">{" "}</span>
                         <Link className="archive-date-link" href={`/archive/${date.year}/${date.monthNumber}/${date.day}`}>
                           {date.day}
                         </Link>
