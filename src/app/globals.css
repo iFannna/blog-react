@@ -1250,6 +1250,11 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   object-fit: cover;
 }
 
+.sidebar-featured-placeholder svg {
+  width: 4.2rem;
+  height: 4.2rem;
+}
+
 .sidebar-featured-post-title {
   display: block;
   margin: 1rem 0 0;
@@ -1334,6 +1339,11 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 .small-article-thumb img {
   display: block;
   object-fit: cover;
+}
+
+.small-article-placeholder svg {
+  width: 2.8rem;
+  height: 2.8rem;
 }
 
 .small-article-title {
@@ -1564,7 +1574,8 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   border-radius: 0.8rem;
 }
 
-.footer-thumb-placeholder {
+/* ── Cover Placeholder (通用占位符) ── */
+.cover-placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1572,13 +1583,19 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   height: 100%;
   color: #a08a78;
   background: #f3eee8;
+}
+
+.cover-placeholder svg {
+  fill: currentColor;
+}
+
+.footer-thumb-placeholder {
   min-height: 7.5rem;
 }
 
 .footer-thumb-placeholder svg {
   width: 2.2rem;
   height: 2.2rem;
-  fill: currentColor;
 }
 
 .footer-post-content {
@@ -1967,27 +1984,12 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 }
 
 .article-thumb-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  gap: 1.4rem;
-  color: #a08a78;
-  background: #f3eee8;
   aspect-ratio: 4 / 3;
 }
 
 .article-thumb-placeholder svg {
   width: 4.2rem;
   height: 4.2rem;
-}
-
-.article-thumb-placeholder span {
-  font-size: 1.4rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
 }
 
 .article-content {
@@ -2580,37 +2582,14 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   vertical-align: middle;
 }
 
-/* placeholder */
+/* YouMayLike 占位符尺寸 */
 .pyml-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  padding: 2rem;
-  color: #a08a78;
-  background: #f3eee8;
   min-height: 22rem;
 }
 
-.pyml-placeholder-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.pyml-placeholder-icon svg {
+.pyml-placeholder svg {
   width: 4rem;
   height: 4rem;
-  fill: currentColor;
-}
-
-.pyml-placeholder-text {
-  margin-top: 1rem;
-  font-size: 1.35rem;
-  font-weight: 600;
-  line-height: 1.2;
 }
 
 /* responsive (Vue grid: col-xs-12, col-sm-6 @600px, col-md-3 @783px) */
