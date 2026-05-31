@@ -295,11 +295,7 @@ p {
     transition: var(--transition-primary);
   }
 
-  .mobile-navigation > ul a:hover > span {
-    background-color: var(--color-primary);
-    color: #fff;
-  }
-
+  .mobile-navigation > ul a:hover > span,
   .mobile-navigation > ul a.active > span {
     background-color: var(--color-primary);
     color: #fff;
@@ -309,12 +305,10 @@ p {
   [data-theme="dark"] .mobile-navigation {
     background: #333333;
     border-top-color: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.7);
   }
   [data-theme="dark"] .mobile-navigation > ul li {
     border-bottom-color: rgba(255, 255, 255, 0.08);
-  }
-  [data-theme="dark"] .mobile-navigation {
-    color: rgba(255, 255, 255, 0.7);
   }
 }
 
@@ -718,26 +712,6 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 }
 
 .hamburger--spin.is-active .hamburger-inner::after {
-  bottom: 0;
-  transform: rotate(-90deg);
-  transition: bottom 0.1s ease-out,
-    transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-
-/* Active state via body class (Vue core.scss line 6987) */
-.is-mobile-menu-active .hamburger--spin .hamburger-inner {
-  transform: rotate(225deg);
-  transition-delay: 0.12s;
-  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-
-.is-mobile-menu-active .hamburger--spin .hamburger-inner::before {
-  top: 0;
-  opacity: 0;
-  transition: top 0.1s ease-out, opacity 0.1s 0.12s ease-out;
-}
-
-.is-mobile-menu-active .hamburger--spin .hamburger-inner::after {
   bottom: 0;
   transform: rotate(-90deg);
   transition: bottom 0.1s ease-out,
