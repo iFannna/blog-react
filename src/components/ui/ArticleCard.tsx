@@ -151,7 +151,7 @@ export function QuoteCard({ article }: QuoteCardProps) {
           {article.summary || article.title}
         </p>
         <span className="quote-author">
-          — {article.authorName}
+          —— {article.authorName}
         </span>
       </Link>
     </article>
