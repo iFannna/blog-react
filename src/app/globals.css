@@ -1777,7 +1777,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 }
 
 [data-theme="dark"] .site-footer a:hover {
-  color: #667eea;
+  color: var(--color-primary);
 }
 
 [data-theme="dark"] .footer-post-thumb {
@@ -1842,7 +1842,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 }
 
 [data-theme="dark"] .copyright-bar a:hover {
-  color: #667eea;
+  color: var(--color-primary);
 }
 
 /* ── Footer Responsive ── */
@@ -2184,6 +2184,10 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 
 [data-theme="dark"] .article-title a {
   color: #ffffff;
+}
+
+[data-theme="dark"] .article-title a:hover {
+  color: var(--color-primary);
 }
 
 [data-theme="dark"] .article-meta-divider {
