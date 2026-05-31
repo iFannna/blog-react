@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-// DarkModeToggle (line 222) uses useTheme — import kept for it
+// DarkModeToggle uses useTheme
 import { useTheme } from "@/lib/useTheme";
 
 interface NavItem {
@@ -29,12 +29,10 @@ export default function Header({ navItems }: HeaderProps) {
     setIsMobileMenuOpen((prev) => !prev);
   }, []);
 
-  // 路由变化时关闭菜单
   useEffect(() => {
     closeMobileMenu();
   }, [pathname, closeMobileMenu]);
 
-  // 切换 html 的 is-mobile-menu-active class（控制 body overflow）
   useEffect(() => {
     const root = document.documentElement;
     if (isMobileMenuOpen) {
@@ -47,7 +45,6 @@ export default function Header({ navItems }: HeaderProps) {
     };
   }, [isMobileMenuOpen]);
 
-  // Escape 键关闭
   useEffect(() => {
     if (!isMobileMenuOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -57,7 +54,6 @@ export default function Header({ navItems }: HeaderProps) {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isMobileMenuOpen, closeMobileMenu]);
 
-  // 点击遮罩层关闭
   useEffect(() => {
     if (!isMobileMenuOpen) return;
     const handleClick = (e: MouseEvent) => {
@@ -74,7 +70,6 @@ export default function Header({ navItems }: HeaderProps) {
     <header id="masthead" className="site-header">
       <div id="header-inner">
         <div className="header-container">
-          {/* Logo — layout-2: margin-right 3.2rem */}
           <div className="logo header-element">
             <Link href="/" rel="home" className="logo-inner block leading-none">
               <Image
@@ -86,7 +81,6 @@ export default function Header({ navItems }: HeaderProps) {
             </Link>
           </div>
 
-          {/* Mobile Nav */}
           <span className="mobile-nav header-element">
             <button
               type="button"
@@ -104,7 +98,6 @@ export default function Header({ navItems }: HeaderProps) {
             </button>
           </span>
 
-          {/* Mobile navigation panel — positioned relative to #header-inner */}
           <nav
             className="mobile-navigation"
             style={{ display: isMobileMenuOpen ? "block" : "none" }}
@@ -128,7 +121,6 @@ export default function Header({ navItems }: HeaderProps) {
             </ul>
           </nav>
 
-          {/* Desktop Nav — layout-2: flex: 1 */}
           <nav className="primary-nav">
             <ul className="menu">
               {navItems.map((item) => {
@@ -147,9 +139,7 @@ export default function Header({ navItems }: HeaderProps) {
             </ul>
           </nav>
 
-          {/* Right Widgets — layout-2: margin-left auto, justify-end */}
           <div className="header-widgets">
-            {/* Search — visible on all screens (Vue: bloglo-all) */}
             <div className="header-widget header-widget-all">
               <div className="widget-wrapper">
                 <button type="button" className="widget-icon" aria-label="搜索">
@@ -160,7 +150,6 @@ export default function Header({ navItems }: HeaderProps) {
               </div>
             </div>
 
-            {/* Language Toggle — visible on all screens (Vue: bloglo-all) */}
             <div className="header-widget header-widget-all">
               <div className="widget-wrapper">
                 <button type="button" className="widget-icon" aria-label="切换语言">
@@ -171,19 +160,16 @@ export default function Header({ navItems }: HeaderProps) {
               </div>
             </div>
 
-            {/* Dark Mode Toggle — visible on all screens (Vue: bloglo-all) */}
             <div className="header-widget header-widget-all">
               <div className="widget-wrapper">
                 <DarkModeToggle />
               </div>
             </div>
 
-            {/* Social Links — hidden on mobile (Vue: bloglo-hide-mobile) */}
             <div className="header-widget header-widget__socials header-widget-hide-mobile">
               <div className="widget-wrapper">
                 <nav className="social-nav minimal-fill social-nav--large" aria-label="社交链接">
                   <ul className="flex items-center">
-                    {/* GitHub */}
                     <li>
                       <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="GitHub">
                         <span>
@@ -192,7 +178,6 @@ export default function Header({ navItems }: HeaderProps) {
                         </span>
                       </a>
                     </li>
-                    {/* Gitee */}
                     <li>
                       <a href="#" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Gitee">
                         <span>
@@ -206,7 +191,6 @@ export default function Header({ navItems }: HeaderProps) {
               </div>
             </div>
 
-            {/* Subscribe Button — hidden on mobile+tablet (Vue: bloglo-hide-mobile-tablet) */}
             <div className="header-widget header-widget__button header-widget-hide-mobile-tablet">
               <div className="widget-wrapper">
                 <Link href="/subscribe" className="subscribe-btn">
@@ -220,8 +204,6 @@ export default function Header({ navItems }: HeaderProps) {
     </header>
   );
 }
-
-/* ── Dark Mode Toggle (CSS crescent/sun via box-shadow) ── */
 
 function DarkModeToggle() {
   const { isDarkMode, toggleTheme } = useTheme();

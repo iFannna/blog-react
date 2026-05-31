@@ -7,7 +7,6 @@ interface ArticleCardProps {
   article: Article;
 }
 
-/* 4-color cycle for category pills */
 const CAT_COLORS = [
   "article-cat-1",
   "article-cat-2",
@@ -23,7 +22,6 @@ export function ArticleCard({ article }: ArticleCardProps) {
 
   return (
     <article className="article-card">
-      {/* Cover Image — 42% width, left side */}
       <div className="article-thumb">
         <Link href={article.url} className="article-thumb-link">
           {article.coverImage ? (
@@ -38,9 +36,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
         </Link>
       </div>
 
-      {/* Content — flex-1 */}
       <div className="article-content">
-        {/* Categories — colored pills */}
         <div className="article-categories">
           {article.categories.length > 0 ? (
             article.categories.map((cat, i) => (
@@ -59,14 +55,12 @@ export function ArticleCard({ article }: ArticleCardProps) {
           )}
         </div>
 
-        {/* Title */}
         <h4 className="article-title">
           <Link href={article.url}>
             {article.title}
           </Link>
         </h4>
 
-        {/* Meta */}
         <div className="article-meta">
           <span className="article-meta-author">
             <span className="article-avatar">
@@ -90,7 +84,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
             <Link className="archive-date-link" href={`/archive/${year}/${date.getMonth() + 1}`}>
               {month}
             </Link>
-            <span className="archive-date-separator" aria-hidden="true">{" "}</span>
+            <span className="archive-date-separator" aria-hidden="true">{" "}</span>
             <Link className="archive-date-link" href={`/archive/${year}/${date.getMonth() + 1}/${day}`}>
               {day}
             </Link>
@@ -101,14 +95,12 @@ export function ArticleCard({ article }: ArticleCardProps) {
           </span>
         </div>
 
-        {/* Summary — 2 line clamp */}
         {article.summary && (
           <p className="article-summary">
             {article.summary}
           </p>
         )}
 
-        {/* Read More button */}
         <div className="article-footer">
           <Link href={article.url} className="article-read-more">
             阅读更多
@@ -126,7 +118,6 @@ interface QuoteCardProps {
 export function QuoteCard({ article }: QuoteCardProps) {
   return (
     <article className="article-card-quote">
-      {/* Background */}
       <div
         className="quote-post-bg"
         style={
@@ -137,7 +128,6 @@ export function QuoteCard({ article }: QuoteCardProps) {
       />
       <div className="quote-post-bg-overlay" />
 
-      {/* Content */}
       <Link href={article.url} className="quote-inner">
         <svg
           width="40"

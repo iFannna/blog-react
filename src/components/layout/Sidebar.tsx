@@ -16,7 +16,6 @@ export default function Sidebar() {
   return (
     <aside id="secondary" className="sidebar-layout-secondary">
       <div className="sidebar-inner">
-        {/* Widget 1: 开发者资料卡 (无浮动标题) */}
         <div className="sidebar-widget">
           <div className="sidebar-developer-row">
             <div className="sidebar-developer-avatar">
@@ -44,10 +43,8 @@ export default function Sidebar() {
           </div>
         </div>
 
-        {/* Widget 2: 热门文章 */}
         <div className="sidebar-widget">
           <div className="sidebar-widget-title">热点</div>
-          {/* 特色大封面 */}
           <div className="sidebar-featured-cover">
             {featured.coverImage ? (
               <Link href={featured.url} className="relative">
@@ -79,7 +76,6 @@ export default function Sidebar() {
               </>
             ); })()}
           </div>
-          {/* 小缩略图列表 */}
           <div className="sidebar-small-articles">
             {smallArticles.map((article) => (
               <div key={article.id} className="small-article-item">
@@ -120,7 +116,6 @@ export default function Sidebar() {
           </div>
         </div>
 
-        {/* Widget 3: 搜索框 */}
         <div className="sidebar-widget search-widget">
           <div className="sidebar-widget-title">搜索</div>
           <form className="search-inside-wrapper">
@@ -133,7 +128,6 @@ export default function Sidebar() {
           </form>
         </div>
 
-        {/* Widget 4: 分类列表 */}
         <div className="sidebar-widget">
           <div className="sidebar-widget-title">分类</div>
           <ul className="sidebar-category-list">
@@ -147,7 +141,6 @@ export default function Sidebar() {
           </ul>
         </div>
 
-        {/* Widget 5: 标签云 */}
         <div className="sidebar-widget">
           <div className="sidebar-widget-title">标签</div>
           <div className="tag-cloud">
@@ -159,7 +152,6 @@ export default function Sidebar() {
           </div>
         </div>
 
-        {/* Widget 6: 操作/链接 */}
         <div className="sidebar-widget">
           <div className="sidebar-widget-title">操作</div>
           <ul>

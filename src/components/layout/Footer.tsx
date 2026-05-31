@@ -49,11 +49,9 @@ function FooterArticleCard({ article }: { article: (typeof mockArticles)[number]
 export default function Footer() {
   return (
     <footer id="colophon" className="site-footer">
-      {/* Widgets */}
       <div id="footer">
         <div className="footer-container">
           <div className="footer-widgets">
-            {/* Column 1: 精选文章 */}
             <div className="footer-column">
               <div className="footer-widget">
                 <h4 className="footer-widget-title">精选文章</h4>
@@ -65,7 +63,6 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Column 2: 编辑推荐 */}
             <div className="footer-column">
               <div className="footer-widget">
                 <h4 className="footer-widget-title">编辑推荐</h4>
@@ -77,7 +74,6 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Column 3: 其他 + 帮助 + 联系方式 */}
             <div className="footer-column">
               <div className="footer-widget">
                 <div className="footer-columns">
@@ -134,7 +130,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Copyright */}
       <div className="copyright-bar">
         <div className="footer-container">
           <div className="copyright-left">
