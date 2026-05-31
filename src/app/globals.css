@@ -308,6 +308,7 @@ p {
   /* Dark mode mobile nav (Vue dynamic.scss line 258) */
   [data-theme="dark"] .mobile-navigation {
     background: #333333;
+    border-top-color: rgba(255, 255, 255, 0.08);
   }
   [data-theme="dark"] .mobile-navigation > ul li {
     border-bottom-color: rgba(255, 255, 255, 0.08);
