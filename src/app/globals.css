@@ -345,15 +345,6 @@ p {
     margin-top: 35px;
     margin-bottom: 25px;
   }
-  /* footer widgets padding shrink (Vue core.scss line 8090, was 782px) */
-  .footer-widgets {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-  .footer-column {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
   /* pyml container padding shrink */
   .pyml-slider-container {
     padding: 0 3rem;
@@ -1881,15 +1872,51 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 }
 
 /* ── Footer Responsive ── */
+/* Vue: footer-columns use col-xs-12 col-sm-6 col-md-4 grid (600px/783px breakpoints) */
+/* Container padding shrink */
 @media (max-width: 960px) {
   .footer-container {
     padding: 0 3rem;
   }
 }
 
-@media (max-width: 768px) {
+/* Footer columns: stack at 782px (Vue core.scss line 8099) */
+@media (max-width: 782px) {
   .footer-column {
     flex: 1 1 100%;
+  }
+  .footer-widgets {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .footer-column {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+/* 2 columns at 600px+ (Vue col-sm-6 @min-width:600px) */
+@media (min-width: 600px) and (max-width: 782px) {
+  .footer-column {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+/* Copyright widget padding reset (Vue core.scss line 8026) */
+@media (max-width: 599px) {
+  .copyright-bar .footer-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Stack sub-columns on mobile (Vue col-xs-12 default behavior) */
+  .footer-columns {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .footer-contact-columns {
+    flex-direction: column;
+    gap: 2rem;
   }
 }
 
