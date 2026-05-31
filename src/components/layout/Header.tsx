@@ -118,7 +118,7 @@ export default function Header({ navItems }: HeaderProps) {
                       className={isActive ? "active" : ""}
                       onClick={closeMobileMenu}
                     >
-                      {item.label}
+                      <span>{item.label}</span>
                     </Link>
                   </li>
                 );
