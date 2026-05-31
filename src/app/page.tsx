@@ -21,13 +21,18 @@ export default function HomePage() {
   const isSparse =
     hasArticles && mockArticles.length < 3 && mockArticles.length <= PAGE_SIZE;
 
+  const pagedArticles = mockArticles.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE,
+  );
+
   return (
     <SiteLayout showSidebar sidebar={<Sidebar />}>
       <div className="space-y-6">
         {/* Article Feed */}
         {hasArticles && (
           <div className="space-y-6">
-            {mockArticles.map((article) =>
+            {pagedArticles.map((article) =>
               article.type === 2 ? (
                 <QuoteCard key={article.id} article={article} />
               ) : (

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { mockArticles, mockFooterData } from "@/lib/mock-data";
 
 const featuredArticles = mockArticles.slice(0, 3);
-const editorPickArticles = mockArticles.slice(3);
+const editorPickArticles = mockArticles.slice(3, 6);
 
 function formatDate(iso: string) {
   const d = new Date(iso);
