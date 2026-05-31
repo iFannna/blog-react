@@ -36,7 +36,7 @@ function FooterArticleCard({ article }: { article: (typeof mockArticles)[number]
         <div className="footer-post-author">by {article.authorName}</div>
         <div className="footer-post-date">
           <Link className="archive-date-link" href={`/archive/${date.year}/${date.monthNumber}`}>{date.month}</Link>
-          <span className="archive-date-separator" aria-hidden="true">{" "}</span>
+          <span className="archive-date-separator" aria-hidden="true">{" "}</span>
           <Link className="archive-date-link" href={`/archive/${date.year}/${date.monthNumber}/${date.day}`}>{date.day}</Link>
           <span className="archive-date-separator" aria-hidden="true">{", "}</span>
           <Link className="archive-date-link" href={`/archive/${date.year}`}>{date.year}</Link>

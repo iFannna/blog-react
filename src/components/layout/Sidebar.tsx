@@ -69,7 +69,7 @@ export default function Sidebar() {
             {(() => { const d = formatDate(featured.publishTime); return (
               <>
                 <Link className="archive-date-link" href={`/archive/${d.year}/${d.monthNumber}`}>{d.month}</Link>
-                <span className="archive-date-separator" aria-hidden="true">{" "}</span>
+                <span className="archive-date-separator" aria-hidden="true">{" "}</span>
                 <Link className="archive-date-link" href={`/archive/${d.year}/${d.monthNumber}/${d.day}`}>{d.day}</Link>
                 <span className="archive-date-separator" aria-hidden="true">{", "}</span>
                 <Link className="archive-date-link" href={`/archive/${d.year}`}>{d.year}</Link>
@@ -103,7 +103,7 @@ export default function Sidebar() {
                     {(() => { const d = formatDate(article.publishTime); return (
                       <>
                         <Link className="archive-date-link" href={`/archive/${d.year}/${d.monthNumber}`}>{d.month}</Link>
-                        <span className="archive-date-separator" aria-hidden="true">{" "}</span>
+                        <span className="archive-date-separator" aria-hidden="true">{" "}</span>
                         <Link className="archive-date-link" href={`/archive/${d.year}/${d.monthNumber}/${d.day}`}>{d.day}</Link>
                         <span className="archive-date-separator" aria-hidden="true">{", "}</span>
                         <Link className="archive-date-link" href={`/archive/${d.year}`}>{d.year}</Link>
