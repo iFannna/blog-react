@@ -106,11 +106,11 @@ export function QuoteCard({ article }: QuoteCardProps) {
   return (
     <article className="article-card-quote">
       <div
-        className="quote-post-bg"
+        className={`quote-post-bg${article.coverImage ? "" : " quote-post-bg--empty"}`}
         style={
           article.coverImage
             ? { backgroundImage: `url('${sanitizeCssUrl(article.coverImage)}')` }
-            : { backgroundColor: "var(--color-bg-muted)" }
+            : undefined
         }
       />
       <div className="quote-post-bg-overlay" />

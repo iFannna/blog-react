@@ -2215,9 +2215,14 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   position: absolute;
   inset: 0;
   background-size: cover;
+  background-color: var(--color-primary);
   opacity: 0.88;
   z-index: 1;
   backface-visibility: hidden;
+}
+
+.quote-post-bg--empty {
+  opacity: 1;
 }
 
 .quote-post-bg-overlay {
