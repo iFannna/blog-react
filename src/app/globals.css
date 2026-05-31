@@ -1790,10 +1790,17 @@ p {
   text-decoration: none;
   margin: 0 0 0.8rem 0.4rem;
   background-color: var(--color-primary);
+  transition: color 0.2s ease, text-decoration 0.2s ease;
 }
 
 .article-cat-pill:first-child {
   margin-left: 0;
+}
+
+.article-cat-pill:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 0.1rem;
 }
 
 /* 4-color cycle matching Vue .post-category .cat-links a:nth-child(4n+N) */
