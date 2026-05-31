@@ -1833,7 +1833,7 @@ p {
   align-items: center;
   font-size: 1.4rem;
   margin-top: 1.6rem;
-  color: var(--color-text-muted);
+  color: var(--color-text);
 }
 
 .article-meta > span {
@@ -1858,6 +1858,15 @@ p {
 
 .article-meta > span:first-child .article-meta-divider {
   display: none;
+}
+
+.article-meta-icon {
+  display: inline-block;
+  fill: currentColor;
+  width: auto;
+  height: 1.827rem;
+  margin-right: 0.7rem;
+  vertical-align: text-bottom;
 }
 
 .article-avatar {

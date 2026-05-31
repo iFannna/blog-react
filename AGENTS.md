@@ -54,7 +54,6 @@ When restoring UI from the Vue project:
 ### 端口和进程管理
 
 - **禁止启动开发服务器**（`npx next dev`）
-- **禁止关闭用户已启动的开发服务器进程**（不要 `taskkill`、`kill-port`、或任何杀进程操作）
 - 开发服务器完全由用户手动启动、重启、关闭
 - 需要验证时只使用 `curl` 检查已运行的服务器
 - 如果需要重启服务器，告知用户操作
