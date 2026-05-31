@@ -22,7 +22,7 @@ export interface Tag {
   name: string;
 }
 
-const COVER = "";
+const COVER = "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/media/image/2026/04/b482211c-135f-426a-b36d-ec519374b6a6.jpg";
 const AVATAR = "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/2025/04/312b700a-e1c7-42bf-aa23-5db8dc7121a6.jpg";
 
 const CAT_POOL = [
