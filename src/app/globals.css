@@ -1549,7 +1549,6 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   border-radius: 0.8rem;
   box-shadow: 2px 2px 3px 0 rgba(93, 112, 234, 0.1);
   overflow: hidden;
-  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2450,7 +2449,6 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 
 .pyml-slide-bg {
   position: relative;
-  background-color: rgba(0, 0, 0, 0.18);
   z-index: 0;
 }
 
@@ -2609,10 +2607,6 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 }
 
 /* dark mode */
-[data-theme="dark"] .pyml-slide-bg {
-  background-color: rgba(39, 39, 39, 0.75);
-}
-
 [data-theme="dark"] .pyml-slide-item .entry-meta-elements > span::before {
   background-color: rgba(255, 255, 255, 0.25);
 }
