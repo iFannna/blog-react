@@ -48,6 +48,10 @@ export const mockArticles: Article[] = [
     categories: [
       { id: 1, name: "Technology" },
       { id: 2, name: "Frontend" },
+      { id: 3, name: "Backend" },
+      { id: 4, name: "React" },
+      { id: 5, name: "Next.js" },
+      { id: 6, name: "TypeScript" },
     ],
     publishTime: "2025-05-25T08:30:00Z",
     url: "/article/2025/05/25/react-server-components",
