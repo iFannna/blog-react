@@ -5,7 +5,7 @@ import type { Article } from "@/types/ui";
 function mapArticleVOToArticle(vo: ArticleVO): Article {
   return {
     id: vo.id,
-    type: 1,
+    type: vo.type as 1 | 2,
     title: vo.title,
     summary: vo.summary,
     coverImage: vo.cover_image,

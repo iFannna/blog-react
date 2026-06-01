@@ -14,6 +14,7 @@ export interface PaginatedData<T> {
 /** 后端 ArticleVO — snake_case 字段与 Go 结构体一致 */
 export interface ArticleVO {
   id: number;
+  type: number;
   title: string;
   url: string;
   summary: string;
