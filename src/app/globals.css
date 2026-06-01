@@ -2208,6 +2208,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   position: absolute;
   inset: 0;
   background-size: cover;
+  background-position: center;
   background-color: var(--color-primary);
   z-index: 1;
   backface-visibility: hidden;
