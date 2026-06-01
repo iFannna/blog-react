@@ -35,55 +35,71 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
 
   const buildHref = (page: number) => `/?page=${page}`;
 
+  const renderPageButton = (page: number) =>
+    page === currentPage ? (
+      <span key={page} className="page-numbers page-number current">
+        {page}
+      </span>
+    ) : (
+      <Link key={page} href={buildHref(page)} className="page-numbers page-number">
+        {page}
+      </Link>
+    );
+
+  const renderEllipsis = (side: string) => (
+    <span key={`ellipsis-${side}`} className="page-numbers dots">…</span>
+  );
+
+  const WINDOW = 5;
+  let pageButtons: React.ReactNode[];
+
+  if (totalPages <= WINDOW + 2) {
+    pageButtons = Array.from({ length: totalPages }, (_, i) => i + 1).map(renderPageButton);
+  } else {
+    let start = currentPage - Math.floor(WINDOW / 2);
+    let end = start + WINDOW - 1;
+
+    if (start <= 1) {
+      start = 2;
+      end = start + WINDOW - 1;
+    }
+    if (end >= totalPages) {
+      end = totalPages - 1;
+      start = end - WINDOW + 1;
+    }
+
+    const windowPages = Array.from({ length: WINDOW }, (_, i) => start + i);
+    const hasLeftEllipsis = start > 2;
+    const hasRightEllipsis = end < totalPages - 1;
+
+    pageButtons = [
+      renderPageButton(1),
+      ...(hasLeftEllipsis ? [renderEllipsis("left")] : []),
+      ...windowPages.map(renderPageButton),
+      ...(hasRightEllipsis ? [renderEllipsis("right")] : []),
+      renderPageButton(totalPages),
+    ];
+  }
+
   return (
     <div className="pagination-container">
       <nav className="navigation pagination" aria-label="Pagination">
         <div className="nav-links">
           {currentPage > 1 && (
             <Link href={buildHref(currentPage - 1)} className="prev page-numbers" aria-label="Previous page">
-              <button type="button" className="pagination-arrow left-arrow" aria-hidden="true">
+              <span className="pagination-arrow left-arrow" aria-hidden="true">
                 {ARROW_SVG}
-              </button>
+              </span>
             </Link>
           )}
 
-          {totalPages <= 3 ? (
-            Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <span
-                key={page}
-                className={`page-numbers page-number${page === currentPage ? " current" : ""}`}
-              >
-                {page}
-              </span>
-            ))
-          ) : (
-            <>
-              <span className="page-numbers page-number current">
-                {currentPage}
-              </span>
-              {[currentPage + 1, currentPage + 2]
-                .filter((p) => p <= totalPages)
-                .map((page) => (
-                  <Link key={page} href={buildHref(page)} className="page-numbers page-number">
-                    {page}
-                  </Link>
-                ))}
-              {currentPage + 2 < totalPages && (
-                <>
-                  <span className="page-numbers dots">…</span>
-                  <Link href={buildHref(totalPages)} className="page-numbers page-number">
-                    {totalPages}
-                  </Link>
-                </>
-              )}
-            </>
-          )}
+          {pageButtons}
 
           {currentPage < totalPages && (
             <Link href={buildHref(currentPage + 1)} className="next page-numbers" aria-label="Next page">
-              <button type="button" className="pagination-arrow right-arrow" aria-hidden="true">
+              <span className="pagination-arrow right-arrow" aria-hidden="true">
                 {ARROW_SVG}
-              </button>
+              </span>
             </Link>
           )}
         </div>
