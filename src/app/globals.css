@@ -1685,7 +1685,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 }
 
 .footer-contact-col {
-  flex-basis: 42%;
+  flex: 1;
 }
 
 .footer-contact-col p {
