@@ -1,12 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { mockArticles, mockFooterData } from "@/lib/mock-data";
+import { mockFooterData } from "@/lib/mock-data";
 import { ArchiveDateLinks } from "@/components/ui/ArchiveDateLinks";
+import type { Article } from "@/types/ui";
 
-const featuredArticles = mockArticles.slice(0, 3);
-const editorPickArticles = mockArticles.slice(3, 6);
-
-function FooterArticleCard({ article }: { article: (typeof mockArticles)[number] }) {
+function FooterArticleCard({ article }: { article: Article }) {
   return (
     <li>
       <div className="footer-post-thumb">
@@ -41,33 +39,42 @@ function FooterArticleCard({ article }: { article: (typeof mockArticles)[number]
   );
 }
 
-export default function Footer() {
+interface FooterProps {
+  featuredArticles: Article[];
+  editorPickArticles: Article[];
+}
+
+export default function Footer({ featuredArticles, editorPickArticles }: FooterProps) {
   return (
     <footer id="colophon" className="site-footer">
       <div id="footer">
         <div className="footer-container">
           <div className="footer-widgets">
-            <div className="footer-column">
-              <div className="footer-widget">
-                <h4 className="footer-widget-title">精选文章</h4>
-                <ul className="footer-posts-list">
-                  {featuredArticles.map((article) => (
-                    <FooterArticleCard key={article.id} article={article} />
-                  ))}
-                </ul>
+            {featuredArticles.length > 0 && (
+              <div className="footer-column">
+                <div className="footer-widget">
+                  <h4 className="footer-widget-title">精选文章</h4>
+                  <ul className="footer-posts-list">
+                    {featuredArticles.map((article) => (
+                      <FooterArticleCard key={article.id} article={article} />
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
+            )}
 
-            <div className="footer-column">
-              <div className="footer-widget">
-                <h4 className="footer-widget-title">编辑推荐</h4>
-                <ul className="footer-posts-list">
-                  {editorPickArticles.map((article) => (
-                    <FooterArticleCard key={article.id} article={article} />
-                  ))}
-                </ul>
+            {editorPickArticles.length > 0 && (
+              <div className="footer-column">
+                <div className="footer-widget">
+                  <h4 className="footer-widget-title">编辑推荐</h4>
+                  <ul className="footer-posts-list">
+                    {editorPickArticles.map((article) => (
+                      <FooterArticleCard key={article.id} article={article} />
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="footer-column">
               <div className="footer-widget">

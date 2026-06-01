@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Article } from "@/lib/mock-data";
+import type { Article } from "@/types/ui";
 import { sanitizeCssUrl } from "@/lib/utils";
 import { ArchiveDateLinks } from "./ArchiveDateLinks";
 

@@ -1,15 +1,18 @@
 import type { ReactNode } from "react";
+import type { Article } from "@/types/ui";
 import Header from "./Header";
 import Footer from "./Footer";
 import WavesBackground from "@/components/ui/WavesBackground";
 import ScrollTopButton from "@/components/ui/ScrollTopButton";
 import YouMayLike from "@/components/ui/YouMayLike";
-import { mockYouMayLikeArticles } from "@/lib/mock-data";
 
 interface SiteLayoutProps {
   children: ReactNode;
   showSidebar?: boolean;
   sidebar?: ReactNode;
+  youMayLikeArticles?: Article[];
+  featuredArticles?: Article[];
+  editorPickArticles?: Article[];
 }
 
 const NAV_ITEMS = [
@@ -27,6 +30,9 @@ export default function SiteLayout({
   children,
   showSidebar = false,
   sidebar,
+  youMayLikeArticles = [],
+  featuredArticles = [],
+  editorPickArticles = [],
 }: SiteLayoutProps) {
   return (
     <div className="flex min-h-screen flex-col">
@@ -43,8 +49,10 @@ export default function SiteLayout({
           )}
         </div>
       </main>
-      <YouMayLike articles={mockYouMayLikeArticles} />
-      <Footer />
+      {youMayLikeArticles.length > 0 && (
+        <YouMayLike articles={youMayLikeArticles} />
+      )}
+      <Footer featuredArticles={featuredArticles} editorPickArticles={editorPickArticles} />
       <ScrollTopButton />
       <WavesBackground />
     </div>

@@ -1,9 +1,12 @@
 "use client";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
-  onPageChange: (page: number) => void;
 }
 
 const ARROW_SVG = (
@@ -21,52 +24,38 @@ const ARROW_SVG = (
   </svg>
 );
 
-export default function Pagination({
-  currentPage,
-  totalPages,
-  onPageChange,
-}: PaginationProps) {
+export default function Pagination({ currentPage, totalPages }: PaginationProps) {
+  const router = useRouter();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
+
   if (totalPages <= 1) return null;
 
-  const goToPage = (page: number) => {
-    onPageChange(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const buildHref = (page: number) => `/?page=${page}`;
 
   return (
     <div className="pagination-container">
       <nav className="navigation pagination" aria-label="Pagination">
         <div className="nav-links">
-          {/* Prev arrow */}
           {currentPage > 1 && (
-            <a
-              className="prev page-numbers"
-              role="button"
-              tabIndex={0}
-              onClick={() => goToPage(currentPage - 1)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") goToPage(currentPage - 1);
-              }}
-              aria-label="Previous page"
-            >
+            <Link href={buildHref(currentPage - 1)} className="prev page-numbers" aria-label="Previous page">
               <button type="button" className="pagination-arrow left-arrow" aria-hidden="true">
                 {ARROW_SVG}
               </button>
-            </a>
+            </Link>
           )}
 
-          {/* Page numbers */}
           {totalPages <= 3 ? (
-            Array.from({ length: totalPages }, (_, i) => i + 1).map(
-              (page) => (
-                <span
-                  key={page}
-                  className={`page-numbers page-number${page === currentPage ? " current" : ""}`}
-                >
-                  {page}
-                </span>
-              ),
-            )
+            Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <span
+                key={page}
+                className={`page-numbers page-number${page === currentPage ? " current" : ""}`}
+              >
+                {page}
+              </span>
+            ))
           ) : (
             <>
               <span className="page-numbers page-number current">
@@ -75,54 +64,27 @@ export default function Pagination({
               {[currentPage + 1, currentPage + 2]
                 .filter((p) => p <= totalPages)
                 .map((page) => (
-                  <span
-                    key={page}
-                    className="page-numbers page-number"
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => goToPage(page)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") goToPage(page);
-                    }}
-                  >
+                  <Link key={page} href={buildHref(page)} className="page-numbers page-number">
                     {page}
-                  </span>
+                  </Link>
                 ))}
               {currentPage + 2 < totalPages && (
                 <>
                   <span className="page-numbers dots">…</span>
-                  <span
-                    className="page-numbers page-number"
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => goToPage(totalPages)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") goToPage(totalPages);
-                    }}
-                  >
+                  <Link href={buildHref(totalPages)} className="page-numbers page-number">
                     {totalPages}
-                  </span>
+                  </Link>
                 </>
               )}
             </>
           )}
 
-          {/* Next arrow */}
           {currentPage < totalPages && (
-            <a
-              className="next page-numbers"
-              role="button"
-              tabIndex={0}
-              onClick={() => goToPage(currentPage + 1)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") goToPage(currentPage + 1);
-              }}
-              aria-label="Next page"
-            >
+            <Link href={buildHref(currentPage + 1)} className="next page-numbers" aria-label="Next page">
               <button type="button" className="pagination-arrow right-arrow" aria-hidden="true">
                 {ARROW_SVG}
               </button>
-            </a>
+            </Link>
           )}
         </div>
       </nav>

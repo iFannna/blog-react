@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import type { Article } from "@/lib/mock-data";
+import type { Article } from "@/types/ui";
 import { ArchiveDateLinks } from "./ArchiveDateLinks";
 
 /* 4-color cycle for category pills */

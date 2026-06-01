@@ -1,17 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
-import {
-  mockArticles,
-  mockCategories,
-  mockTags,
-  developerProfile,
-} from "@/lib/mock-data";
+import type { Article, Category, Tag } from "@/types/ui";
+import { developerProfile } from "@/lib/mock-data";
 import { ArchiveDateLinks } from "@/components/ui/ArchiveDateLinks";
 
-export default function Sidebar() {
-  const popularArticles = mockArticles.slice(0, 4);
-  const featured = popularArticles[0];
-  const smallArticles = popularArticles.slice(1);
+interface SidebarProps {
+  categories: Category[];
+  tags: Tag[];
+  featuredArticles: Article[];
+}
+
+export default function Sidebar({ categories, tags, featuredArticles }: SidebarProps) {
+  const featured = featuredArticles[0];
+  const smallArticles = featuredArticles.slice(1);
 
   return (
     <aside id="secondary" className="sidebar-layout-secondary">
@@ -43,61 +44,63 @@ export default function Sidebar() {
           </div>
         </div>
 
-        <div className="sidebar-widget">
-          <div className="sidebar-widget-title">热点</div>
-          <div className="sidebar-featured-cover">
-            {featured.coverImage ? (
-              <Link href={featured.url} className="relative">
-                <Image src={featured.coverImage} alt={featured.title} fill sizes="(max-width: 1024px) 100vw, 42vw" className="object-cover" />
-              </Link>
-            ) : (
-              <Link href={featured.url}>
-                <span className="sidebar-featured-placeholder cover-placeholder" aria-label="暂无封面">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M5 4.75h14A2.25 2.25 0 0 1 21.25 7v10A2.25 2.25 0 0 1 19 19.25H5A2.25 2.25 0 0 1 2.75 17V7A2.25 2.25 0 0 1 5 4.75Zm0 1.5A.75.75 0 0 0 4.25 7v10c0 .41.34.75.75.75h14a.75.75 0 0 0 .75-.75V7a.75.75 0 0 0-.75-.75H5Zm2.5 2a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm10.25 8.93V17H6.19l3.04-3.28a.75.75 0 0 1 1.08-.03l1.58 1.58 2.78-3.31a.75.75 0 0 1 1.11-.04l1.97 2.13v2.13Z" />
-                  </svg>
-                </span>
-              </Link>
-            )}
-          </div>
-          <Link href={featured.url} className="sidebar-featured-post-title">
-            {featured.title}
-          </Link>
-          <div className="sidebar-featured-post-author">by {featured.authorName}</div>
-          <div className="sidebar-featured-post-date">
-            <ArchiveDateLinks publishTime={featured.publishTime} />
-          </div>
-          <div className="sidebar-small-articles">
-            {smallArticles.map((article) => (
-              <div key={article.id} className="small-article-item">
-                <div className="small-article-thumb">
-                  {article.coverImage ? (
-                    <Link href={article.url} className="relative">
-                      <Image src={article.coverImage} alt={article.title} fill sizes="7.5rem" className="object-cover" />
+        {featured && (
+          <div className="sidebar-widget">
+            <div className="sidebar-widget-title">热点</div>
+            <div className="sidebar-featured-cover">
+              {featured.coverImage ? (
+                <Link href={featured.url} className="relative">
+                  <Image src={featured.coverImage} alt={featured.title} fill sizes="(max-width: 1024px) 100vw, 42vw" className="object-cover" />
+                </Link>
+              ) : (
+                <Link href={featured.url}>
+                  <span className="sidebar-featured-placeholder cover-placeholder" aria-label="暂无封面">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M5 4.75h14A2.25 2.25 0 0 1 21.25 7v10A2.25 2.25 0 0 1 19 19.25H5A2.25 2.25 0 0 1 2.75 17V7A2.25 2.25 0 0 1 5 4.75Zm0 1.5A.75.75 0 0 0 4.25 7v10c0 .41.34.75.75.75h14a.75.75 0 0 0 .75-.75V7a.75.75 0 0 0-.75-.75H5Zm2.5 2a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm10.25 8.93V17H6.19l3.04-3.28a.75.75 0 0 1 1.08-.03l1.58 1.58 2.78-3.31a.75.75 0 0 1 1.11-.04l1.97 2.13v2.13Z" />
+                    </svg>
+                  </span>
+                </Link>
+              )}
+            </div>
+            <Link href={featured.url} className="sidebar-featured-post-title">
+              {featured.title}
+            </Link>
+            <div className="sidebar-featured-post-author">by {featured.authorName}</div>
+            <div className="sidebar-featured-post-date">
+              <ArchiveDateLinks publishTime={featured.publishTime} />
+            </div>
+            <div className="sidebar-small-articles">
+              {smallArticles.map((article) => (
+                <div key={article.id} className="small-article-item">
+                  <div className="small-article-thumb">
+                    {article.coverImage ? (
+                      <Link href={article.url} className="relative">
+                        <Image src={article.coverImage} alt={article.title} fill sizes="7.5rem" className="object-cover" />
+                      </Link>
+                    ) : (
+                      <Link href={article.url}>
+                        <span className="small-article-placeholder cover-placeholder" aria-label="暂无封面">
+                          <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5 4.75h14A2.25 2.25 0 0 1 21.25 7v10A2.25 2.25 0 0 1 19 19.25H5A2.25 2.25 0 0 1 2.75 17V7A2.25 2.25 0 0 1 5 4.75Zm0 1.5A.75.75 0 0 0 4.25 7v10c0 .41.34.75.75.75h14a.75.75 0 0 0 .75-.75V7a.75.75 0 0 0-.75-.75H5Zm2.5 2a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm10.25 8.93V17H6.19l3.04-3.28a.75.75 0 0 1 1.08-.03l1.58 1.58 2.78-3.31a.75.75 0 0 1 1.11-.04l1.97 2.13v2.13Z" />
+                          </svg>
+                        </span>
+                      </Link>
+                    )}
+                  </div>
+                  <div>
+                    <Link href={article.url} className="small-article-title">
+                      {article.title}
                     </Link>
-                  ) : (
-                    <Link href={article.url}>
-                      <span className="small-article-placeholder cover-placeholder" aria-label="暂无封面">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                          <path d="M5 4.75h14A2.25 2.25 0 0 1 21.25 7v10A2.25 2.25 0 0 1 19 19.25H5A2.25 2.25 0 0 1 2.75 17V7A2.25 2.25 0 0 1 5 4.75Zm0 1.5A.75.75 0 0 0 4.25 7v10c0 .41.34.75.75.75h14a.75.75 0 0 0 .75-.75V7a.75.75 0 0 0-.75-.75H5Zm2.5 2a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm10.25 8.93V17H6.19l3.04-3.28a.75.75 0 0 1 1.08-.03l1.58 1.58 2.78-3.31a.75.75 0 0 1 1.11-.04l1.97 2.13v2.13Z" />
-                        </svg>
-                      </span>
-                    </Link>
-                  )}
-                </div>
-                <div>
-                  <Link href={article.url} className="small-article-title">
-                    {article.title}
-                  </Link>
-                  <div className="small-article-author">by {article.authorName}</div>
-                  <div className="small-article-date">
-                    <ArchiveDateLinks publishTime={article.publishTime} />
+                    <div className="small-article-author">by {article.authorName}</div>
+                    <div className="small-article-date">
+                      <ArchiveDateLinks publishTime={article.publishTime} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="sidebar-widget search-widget">
           <div className="sidebar-widget-title">搜索</div>
@@ -111,29 +114,33 @@ export default function Sidebar() {
           </form>
         </div>
 
-        <div className="sidebar-widget">
-          <div className="sidebar-widget-title">分类</div>
-          <ul className="sidebar-category-list">
-            {mockCategories.map((cat) => (
-              <li key={cat.id}>
-                <Link href={`/category/${cat.name}`} className="sidebar-category-link">
-                  {cat.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="sidebar-widget">
-          <div className="sidebar-widget-title">标签</div>
-          <div className="tag-cloud">
-            {mockTags.map((tag) => (
-              <Link key={tag.id} href={`/tag/${tag.name}`} className="sidebar-tag-link">
-                {tag.name}
-              </Link>
-            ))}
+        {categories.length > 0 && (
+          <div className="sidebar-widget">
+            <div className="sidebar-widget-title">分类</div>
+            <ul className="sidebar-category-list">
+              {categories.map((cat) => (
+                <li key={cat.id}>
+                  <Link href={`/category/${cat.name}`} className="sidebar-category-link">
+                    {cat.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
+        )}
+
+        {tags.length > 0 && (
+          <div className="sidebar-widget">
+            <div className="sidebar-widget-title">标签</div>
+            <div className="tag-cloud">
+              {tags.map((tag) => (
+                <Link key={tag.id} href={`/tag/${tag.name}`} className="sidebar-tag-link">
+                  {tag.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="sidebar-widget">
           <div className="sidebar-widget-title">操作</div>
