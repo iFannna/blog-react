@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import type { Article } from "@/types/ui";
 import { ArchiveDateLinks } from "./ArchiveDateLinks";
 
@@ -35,11 +34,11 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
                   <Link href={article.url}>
                     <div className="pyml-slide-bg">
                       {article.coverImage ? (
-                        <Image
+                        <img
                           src={article.coverImage}
                           alt={article.title}
-                          fill
-                          sizes="(max-width: 782px) 100vw, 25vw"
+                          loading="lazy"
+                          decoding="async"
                           className="object-cover"
                         />
                       ) : (
@@ -78,11 +77,13 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
                         <span className="posted-by">
                           {article.authorAvatar && (
                             <span className="author-avatar">
-                              <Image
+                              <img
                                 src={article.authorAvatar}
                                 alt={article.authorName}
                                 width={30}
                                 height={30}
+                                loading="lazy"
+                                decoding="async"
                                 className="rounded-full"
                               />
                             </span>

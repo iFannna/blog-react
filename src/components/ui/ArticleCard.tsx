@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Article } from "@/types/ui";
 import { sanitizeCssUrl } from "@/lib/utils";
 import { ArchiveDateLinks } from "./ArchiveDateLinks";
@@ -22,7 +21,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
       <div className="article-thumb">
         <Link href={article.url} className="article-thumb-link">
           {article.coverImage ? (
-            <Image src={article.coverImage} alt={article.title} fill sizes="(max-width: 1024px) 100vw, 42vw" className="object-cover" />
+            <img src={article.coverImage} alt={article.title} loading="lazy" decoding="async" className="object-cover" />
           ) : (
             <span className="article-thumb-placeholder cover-placeholder" aria-label="暂无封面">
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -62,7 +61,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
           <span className="article-meta-author">
             <span className="article-avatar">
               {article.authorAvatar ? (
-                <Image src={article.authorAvatar} alt={article.authorName} width={40} height={40} className="rounded-full" />
+                <img src={article.authorAvatar} alt={article.authorName} width={40} height={40} loading="lazy" decoding="async" className="rounded-full" />
               ) : (
                 <span className="article-avatar-placeholder">
                   {article.authorName.charAt(0)}

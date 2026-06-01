@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Article, Category, Tag } from "@/types/ui";
 import { developerProfile } from "@/lib/mock-data";
 import { ArchiveDateLinks } from "@/components/ui/ArchiveDateLinks";
@@ -21,7 +20,7 @@ export default function Sidebar({ categories, tags, featuredArticles }: SidebarP
           <div className="sidebar-developer-row">
             <div className="sidebar-developer-avatar">
               {developerProfile.avatar ? (
-                <Image src={developerProfile.avatar} alt={developerProfile.name} width={80} height={80} className="rounded-full" />
+                <img src={developerProfile.avatar} alt={developerProfile.name} width={80} height={80} loading="lazy" decoding="async" className="rounded-full" />
               ) : (
                 <div className="sidebar-developer-avatar-placeholder">
                   {developerProfile.name.charAt(0)}
@@ -50,7 +49,7 @@ export default function Sidebar({ categories, tags, featuredArticles }: SidebarP
             <div className="sidebar-featured-cover">
               {featured.coverImage ? (
                 <Link href={featured.url} className="relative">
-                  <Image src={featured.coverImage} alt={featured.title} fill sizes="(max-width: 1024px) 100vw, 42vw" className="object-cover" />
+                  <img src={featured.coverImage} alt={featured.title} loading="lazy" decoding="async" className="object-cover" />
                 </Link>
               ) : (
                 <Link href={featured.url}>
@@ -75,7 +74,7 @@ export default function Sidebar({ categories, tags, featuredArticles }: SidebarP
                   <div className="small-article-thumb">
                     {article.coverImage ? (
                       <Link href={article.url} className="relative">
-                        <Image src={article.coverImage} alt={article.title} fill sizes="7.5rem" className="object-cover" />
+                        <img src={article.coverImage} alt={article.title} loading="lazy" decoding="async" className="object-cover" />
                       </Link>
                     ) : (
                       <Link href={article.url}>

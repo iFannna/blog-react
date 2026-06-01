@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 // DarkModeToggle uses useTheme
@@ -72,7 +71,7 @@ export default function Header({ navItems }: HeaderProps) {
         <div className="header-container">
           <div className="logo header-element">
             <Link href="/" rel="home" className="logo-inner block leading-none">
-              <Image
+              <img
                 src="https://java-ai-sau.oss-cn-beijing.aliyuncs.com/Blog.png"
                 alt="Blog"
                 width={330}

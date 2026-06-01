@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { mockFooterData } from "@/lib/mock-data";
 import { ArchiveDateLinks } from "@/components/ui/ArchiveDateLinks";
 import type { Article } from "@/types/ui";
@@ -10,11 +9,13 @@ function FooterArticleCard({ article }: { article: Article }) {
       <div className="footer-post-thumb">
         <Link href={article.url}>
           {article.coverImage ? (
-            <Image
+            <img
               src={article.coverImage}
               alt={article.title}
               width={120}
               height={90}
+              loading="lazy"
+              decoding="async"
               className="footer-thumb-img"
             />
           ) : (
