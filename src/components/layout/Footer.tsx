@@ -136,7 +136,7 @@ export default function Footer({ featuredArticles, editorPickArticles }: FooterP
       <div className="copyright-bar">
         <div className="footer-container">
           <div className="copyright-left">
-            <span>Copyright {new Date().getFullYear()} &mdash; {mockFooterData.siteName}.</span>
+            <span>Copyright {new Date().getFullYear()} &mdash; <Link href="/">{mockFooterData.siteName}</Link>.</span>
           </div>
           <div className="copyright-right">
             <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
