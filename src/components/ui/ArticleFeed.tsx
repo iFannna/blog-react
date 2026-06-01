@@ -29,7 +29,6 @@ export default function ArticleFeed({ articles, totalPages, currentPage }: Artic
       )}
 
       {isSparse && <ExploreSection links={mockExploreLinks} variant="sparse" />}
-      {!hasArticles && <ExploreSection links={mockExploreLinks} variant="empty" />}
 
       {totalPages > 1 && (
         <Pagination currentPage={currentPage} totalPages={totalPages} />
