@@ -7,7 +7,6 @@ export const metadata: Metadata = {
     template: "%s | Blog",
   },
   description: "Personal blog",
-  metadataBase: new URL("https://java-ai-sau.oss-cn-beijing.aliyuncs.com"),
   openGraph: {
     type: "website",
     locale: "zh_CN",
