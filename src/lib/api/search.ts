@@ -27,11 +27,26 @@ interface SearchParams {
   size?: number;
 }
 
-/** 全文搜索文章，返回值与 getArticles 一致 */
+interface SearchArticleVO extends ArticleVO {
+  highlight_title?: string;
+  highlight_summary?: string;
+}
+
+interface SearchArticle extends Article {
+  highlightTitle?: string;
+  highlightSummary?: string;
+}
+
+/** 全文搜索文章，返回值包含 highlight 信息 */
 export async function searchArticles(params: SearchParams) {
   const { q, page = 1, size = 10 } = params;
-  const data = await apiClient.get<unknown, PaginatedData<ArticleVO>>("/search", {
+  const data = await apiClient.get<unknown, PaginatedData<SearchArticleVO>>("/search", {
     params: { q, page, size },
   });
-  return { list: data.list.map(mapSearchHitToArticle), total: data.total };
+  const list: SearchArticle[] = data.list.map((vo) => ({
+    ...mapSearchHitToArticle(vo),
+    highlightTitle: vo.highlight_title,
+    highlightSummary: vo.highlight_summary,
+  }));
+  return { list, total: data.total };
 }

@@ -3474,3 +3474,11 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 .explore-card-link:focus-visible {
   text-decoration: underline;
 }
+
+/* Search highlight */
+.article-title em,
+.article-summary em,
+.quote-text em {
+  color: var(--color-primary);
+  font-style: normal;
+}

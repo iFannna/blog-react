@@ -7,17 +7,23 @@ interface ArticleFeedProps {
   totalPages: number;
   currentPage: number;
   basePath?: string;
+  highlightFields?: Record<number, { title?: string; summary?: string }>;
 }
 
-export default function ArticleFeed({ articles, totalPages, currentPage, basePath }: ArticleFeedProps) {
+export default function ArticleFeed({ articles, totalPages, currentPage, basePath, highlightFields }: ArticleFeedProps) {
   return (
     <div className="space-y-6">
       <div className="space-y-6">
         {articles.map((article) =>
           article.type === 2 ? (
-            <QuoteCard key={article.id} article={article} />
+            <QuoteCard key={article.id} article={article} highlightTitle={highlightFields?.[article.id]?.title} />
           ) : (
-            <ArticleCard key={article.id} article={article} />
+            <ArticleCard
+              key={article.id}
+              article={article}
+              highlightTitle={highlightFields?.[article.id]?.title}
+              highlightSummary={highlightFields?.[article.id]?.summary}
+            />
           )
         )}
       </div>

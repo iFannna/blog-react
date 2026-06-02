@@ -28,7 +28,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     console.error("Failed to fetch sidebar data:", error);
   }
 
-  let articlesData = { list: [] as import("@/types/ui").Article[], total: 0 };
+  let articlesData = { list: [] as Awaited<ReturnType<typeof searchArticles>>["list"], total: 0 };
   if (keyword) {
     try {
       articlesData = await searchArticles({ q: keyword, page: currentPage, size: PAGE_SIZE });
@@ -39,6 +39,13 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
   const totalPages = Math.ceil(articlesData.total / PAGE_SIZE);
   const basePath = keyword ? `/search?q=${encodeURIComponent(keyword)}` : "/search";
+
+  // 从搜索结果中提取 highlight 信息
+  const highlightFields = Object.fromEntries(
+    articlesData.list
+      .filter((a) => a.highlightTitle || a.highlightSummary)
+      .map((a) => [a.id, { title: a.highlightTitle, summary: a.highlightSummary }]),
+  );
 
   const displayKeyword = keyword ? keyword.charAt(0).toUpperCase() + keyword.slice(1) : "";
 
@@ -71,6 +78,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           totalPages={totalPages}
           currentPage={currentPage}
           basePath={basePath}
+          highlightFields={highlightFields}
         />
       )}
     </SiteLayout>
