@@ -22,8 +22,8 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
                 itemScope
                 itemType="http://schema.org/ListItem"
               >
-                {index === items.length - 1 || !item.path ? (
-                  <span aria-current="page">
+                {index < items.length - 1 && !item.path ? (
+                  <span>
                     <span itemProp="name">{item.name}</span>
                   </span>
                 ) : (
