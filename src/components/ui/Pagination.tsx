@@ -50,7 +50,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
     <span key={`ellipsis-${side}`} className="page-numbers dots">…</span>
   );
 
-  const WINDOW = 5;
+  const WINDOW = 3;
   let pageButtons: React.ReactNode[];
 
   if (totalPages <= WINDOW + 2) {
