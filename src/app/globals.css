@@ -2506,6 +2506,22 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   background-color: var(--color-primary);
   z-index: 1;
   backface-visibility: hidden;
+  transition: transform cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+}
+
+.quote-post-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -85%;
+  z-index: 2;
+  display: block;
+  width: 50%;
+  height: 100%;
+  opacity: 0.6;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+  transform: skewX(-25deg);
+  transition: opacity 0.3s;
 }
 
 .quote-post-bg-overlay {
@@ -2518,6 +2534,17 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 .article-card-quote:hover .quote-post-bg,
 .article-card-quote:hover .quote-post-bg-overlay {
   opacity: 1;
+}
+
+.article-card-quote:hover .quote-post-bg,
+.article-card-quote:focus-within .quote-post-bg {
+  background-size: cover;
+  transform: scale(1.05);
+}
+
+.article-card-quote:hover .quote-post-bg::before,
+.article-card-quote:focus-within .quote-post-bg::before {
+  animation: shine 1s;
 }
 
 .quote-inner {
