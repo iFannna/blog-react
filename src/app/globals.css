@@ -2971,8 +2971,8 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   font-size: 1.4rem;
   padding-top: 15px;
   padding-bottom: 15px;
-  background: #fff9f3;
-  border-color: #ffe7d2;
+  background: var(--color-warm-bg);
+  border-color: var(--color-warm-border);
   border-style: solid;
   border-top-width: 1px;
   border-bottom-width: 1px;

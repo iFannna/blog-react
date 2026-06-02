@@ -16,7 +16,7 @@ function mapArticleVOToArticle(vo: ArticleVO): Article {
     viewCount: vo.view_count,
     likeCount: vo.like_count,
     commentCount: vo.comment_count,
-    publishTime: vo.publish_at || vo.created_at,
+    publishTime: vo.created_at,
     url: vo.url,
   };
 }
@@ -26,13 +26,16 @@ interface GetArticlesParams {
   size?: number;
   categoryId?: number;
   tagId?: number;
+  year?: number;
+  month?: number;
+  day?: number;
 }
 
-/** 获取已发布文章的分页列表，支持按分类/标签筛选 */
+/** 获取已发布文章的分页列表，支持按分类/标签/时间筛选 */
 export async function getArticles(params: GetArticlesParams = {}) {
-  const { page = 1, size = 10, categoryId, tagId } = params;
+  const { page = 1, size = 10, categoryId, tagId, year, month, day } = params;
   const data = await apiClient.get<unknown, PaginatedData<ArticleVO>>("/article", {
-    params: { page, size, category_id: categoryId, tag_id: tagId },
+    params: { page, size, category_id: categoryId, tag_id: tagId, year, month, day },
   });
   return { list: data.list.map(mapArticleVOToArticle), total: data.total };
 }

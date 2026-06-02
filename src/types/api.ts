@@ -30,7 +30,6 @@ export interface ArticleVO {
   author_name: string;
   author_avatar: string;
   created_at: string;
-  publish_at: string;
   categories: ApiCategory[];
   tags: ApiTag[];
 }
