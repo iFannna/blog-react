@@ -233,10 +233,15 @@ export default function Header({ navItems }: HeaderProps) {
                   </button>
                   <button
                     type="button"
-                    className="search-close"
-                    aria-hidden="true"
-                    role="button"
-                    onClick={closeSearch}
+                    className="search-clear"
+                    aria-label="清空搜索"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (searchInputRef.current) {
+                        searchInputRef.current.value = "";
+                        searchInputRef.current.focus();
+                      }
+                    }}
                   >
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M6.852 7.649L.399 1.195 1.445.149l6.454 6.453L14.352.149l1.047 1.046-6.454 6.454 6.454 6.453-1.047 1.047-6.453-6.454-6.454 6.454-1.046-1.047z" fill="currentColor" fillRule="evenodd" />

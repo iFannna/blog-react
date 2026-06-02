@@ -630,46 +630,46 @@ p {
 
 /* Submit button (arrow) */
 
-.header-widgets .search-container .search-form button:not(.search-close) {
+.header-widgets .search-container .search-form button:not(.search-clear) {
   right: 5.6rem;
   color: var(--color-on-primary);
   background-color: var(--color-primary);
 }
 
-.header-widgets .search-container .search-form button:not(.search-close) svg {
+.header-widgets .search-container .search-form button:not(.search-clear) svg {
   fill: currentColor;
 }
 
 
-.header-widgets .search-container .search-form .search-close {
+.header-widgets .search-container .search-form .search-clear {
   right: 1.6rem;
   background: var(--color-bg-muted);
   border-radius: var(--radius-full);
   color: var(--color-text);
 }
 
-[data-theme="dark"] .header-widgets .search-container .search-form .search-close {
+[data-theme="dark"] .header-widgets .search-container .search-form .search-clear {
   background: rgba(255, 255, 255, 0.9);
   color: rgba(0, 0, 0, 0.85);
 }
 
-.header-widgets .search-container .search-form .search-close svg {
+.header-widgets .search-container .search-form .search-clear svg {
   display: inline-block;
   vertical-align: middle;
 }
 
-.header-widgets .search-container .search-form .search-close svg,
-.header-widgets .search-container .search-form .search-close svg path {
+.header-widgets .search-container .search-form .search-clear svg,
+.header-widgets .search-container .search-form .search-clear svg path {
   transition: var(--transition-primary);
 }
 
-.header-widget .search-container .search-form .search-close:hover svg,
-.header-widget .search-container .search-form .search-close:focus svg {
+.header-widget .search-container .search-form .search-clear:hover svg,
+.header-widget .search-container .search-form .search-clear:focus svg {
   transform: rotate(180deg);
 }
 
-.header-widget .search-container .search-form .search-close:hover svg path,
-.header-widget .search-container .search-form .search-close:focus svg path {
+.header-widget .search-container .search-form .search-clear:hover svg path,
+.header-widget .search-container .search-form .search-clear:focus svg path {
   fill: var(--color-primary);
 }
 
