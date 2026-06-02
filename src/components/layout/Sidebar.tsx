@@ -143,7 +143,7 @@ export default function Sidebar({ categories, tags, featuredArticles }: SidebarP
 
         <div className="sidebar-widget">
           <div className="sidebar-widget-title">操作</div>
-          <ul>
+          <ul className="sidebar-meta-list">
             <li>
               <Link href="/settings" className="sidebar-meta-link">设置</Link>
             </li>

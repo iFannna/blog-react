@@ -1267,6 +1267,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 /* ── Search Widget ── */
 .search-inside-wrapper {
   display: flex;
+  margin-top: 1.4rem;
 }
 
 .search-input {
@@ -1325,6 +1326,10 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 }
 
 /* ── Category Widget ── */
+.sidebar-widget .sidebar-category-list {
+  margin-top: 1.4rem;
+}
+
 .sidebar-category-link {
   display: block;
   position: relative;
@@ -1461,6 +1466,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 
 /* ── Hot Articles: Featured Cover ── */
 .sidebar-featured-cover {
+  margin-top: 1.4rem;
   border: 0.1rem solid rgba(39, 39, 39, 0.75);
   border-radius: 0.8rem;
   box-shadow: 2px 2px 3px 0px rgba(93, 112, 234, 0.1);
@@ -1592,6 +1598,10 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 }
 
 /* ── Meta / Action Links ── */
+.sidebar-widget .sidebar-meta-list {
+  margin-top: 1.4rem;
+}
+
 .sidebar-meta-link {
   display: inline-block;
   position: relative;
