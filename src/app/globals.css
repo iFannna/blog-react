@@ -1602,6 +1602,8 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 .small-article-title:hover,
 .small-article-title:focus-visible {
   color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.1rem;
 }
 
 /* ── Meta / Action Links ── */
@@ -1855,6 +1857,14 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   color: #44464b;
   font-weight: 600;
   overflow: hidden;
+  transition: var(--transition-primary);
+}
+
+.footer-post-title:hover,
+.footer-post-title:focus-visible {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.1rem;
 }
 
 .footer-post-author,
