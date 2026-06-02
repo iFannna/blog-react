@@ -608,7 +608,14 @@ p {
 /* 关闭按钮 */
 .header-widgets .search-container .search-form .search-close {
   right: 1.6rem;
-  background: none;
+  background: var(--color-bg-muted);
+  border-radius: var(--radius-full);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .header-widgets .search-container .search-form .search-close {
+  background: #ffffff;
+  color: #000000;
 }
 
 .header-widgets .search-container .search-form .search-close svg {
