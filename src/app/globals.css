@@ -1532,6 +1532,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 }
 
 .small-article-item {
+  margin-top: 2rem;
   display: grid;
   grid-template-columns: 7.5rem minmax(0, 1fr);
   column-gap: 2rem;
