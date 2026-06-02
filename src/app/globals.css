@@ -2222,7 +2222,8 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   transition: opacity 0.3s;
 }
 
-.article-thumb-link:hover::before {
+.article-thumb-link:hover::before,
+.article-thumb-link:focus-visible::before {
   animation: shine 1s;
 }
 
@@ -2235,7 +2236,8 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   transition: transform cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
 }
 
-.article-thumb-link:hover img {
+.article-thumb-link:hover img,
+.article-thumb-link:focus-visible img {
   transform: scale3d(1.1, 1.1, 1);
 }
 
@@ -2723,7 +2725,8 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   transition: all 0.5s ease;
 }
 
-.pyml-slider-backgrounds a:hover .pyml-slide-bg img {
+.pyml-slider-backgrounds a:hover .pyml-slide-bg img,
+.pyml-slider-backgrounds a:focus-visible .pyml-slide-bg img {
   transform: scale3d(1.1, 1.1, 1);
 }
 
@@ -2743,7 +2746,8 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   transition: opacity 0.3s;
 }
 
-.pyml-slider-backgrounds a:hover .pyml-slide-bg::before {
+.pyml-slider-backgrounds a:hover .pyml-slide-bg::before,
+.pyml-slider-backgrounds a:focus-visible .pyml-slide-bg::before {
   animation: shine 1s;
 }
 
@@ -2790,7 +2794,8 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   transition: color 0.2s ease;
 }
 
-.pyml-slide-item h6 a:hover {
+.pyml-slide-item h6 a:hover,
+.pyml-slide-item h6 a:focus-visible {
   color: var(--color-primary);
   text-decoration: underline;
 }
