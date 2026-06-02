@@ -22,15 +22,9 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
                 itemScope
                 itemType="http://schema.org/ListItem"
               >
-                {index < items.length - 1 && !item.path ? (
-                  <span>
+                <Link href={item.path} itemProp="item">
                     <span itemProp="name">{item.name}</span>
-                  </span>
-                ) : (
-                  <Link href={item.path} itemProp="item">
-                    <span itemProp="name">{item.name}</span>
-                  </Link>
-                )}
+                </Link>
                 <meta itemProp="position" content={String(index + 1)} />
               </li>
             ))}
