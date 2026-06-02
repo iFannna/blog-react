@@ -489,7 +489,7 @@ p {
 /* ── Search Dropdown ── */
 .header-widgets .search-container {
   position: absolute;
-  right: -1.5rem;
+  right: -0.8rem;
   top: 100%;
   z-index: 9;
   border-top-width: 0.2rem;
@@ -530,6 +530,7 @@ p {
   visibility: hidden;
   transform: translateY(0.5rem);
   transition: all 0.2s ease-in-out;
+  margin-top: 2rem;
 }
 
 /* 搜索框显示状态 */
@@ -614,8 +615,8 @@ p {
 }
 
 [data-theme="dark"] .header-widgets .search-container .search-form .search-close {
-  background: #ffffff;
-  color: #000000;
+  background: rgba(255, 255, 255, 0.9);
+  color: rgba(0, 0, 0, 0.85);
 }
 
 .header-widgets .search-container .search-form .search-close svg {
