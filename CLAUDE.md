@@ -9,21 +9,20 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 - **框架**: Next.js 16 (App Router)
 - **语言**: TypeScript (strict)
-- **样式**: Tailwind CSS v4 + CSS 自定义属性 (globals.css)
+- **样式**: CSS 自定义属性 (globals.css)
 - **组件**: 纯 React，不使用 UI 组件库
 ## CSS 架构
 
 ### 设计 Token 体系
 - 所有颜色、间距、圆角、阴影通过 CSS 变量定义在 `globals.css` 的 `:root` 中
-- CSS 变量 → Tailwind `@theme inline` → Tailwind 工具类
 - 暗色模式通过 `[data-theme="dark"]` 覆盖 CSS 变量，不使用 class 切换
 
 ### 样式编写规则
-- 组件布局/结构用 Tailwind 工具类
+- 组件布局/结构用自定义 CSS class
 - 复杂组件样式写在 `globals.css` 中（带注释标注来源）
 - **禁止在组件内使用 `<style>` 标签或内联 style 对象**
-- **禁止硬编码颜色值**，统一使用 `var(--color-*)` 或 Tailwind 颜色工具类
-- **禁止硬编码间距/圆角**，统一使用 CSS 变量或 Tailwind 工具类
+- **禁止硬编码颜色值**，统一使用 `var(--color-*)`
+- **禁止硬编码间距/圆角**，统一使用 CSS 变量
 
 ### rem 基准
 - `html { font-size: 62.5% }` → 1rem = 10px

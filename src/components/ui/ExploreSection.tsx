@@ -15,52 +15,33 @@ export default function ExploreSection({ links, variant }: ExploreSectionProps) 
   const isSparse = variant === "sparse";
 
   return (
-    <section
-      className={`rounded-3xl border border-warm-border bg-warm-bg p-8 ${
-        isSparse ? "mt-12" : ""
-      }`}
-    >
-      {/* Eyebrow */}
-      <p className="mb-3 text-sm font-bold uppercase tracking-wider text-accent">
+    <section className={`explore-section${isSparse ? " explore-section--sparse" : ""}`}>
+      <p className="explore-eyebrow">
         {isSparse ? "Keep Exploring" : "Start Here"}
       </p>
 
-      {/* Title */}
-      <h2
-        className={`text-text leading-tight font-bold ${
-          isSparse
-            ? "text-[clamp(1.5rem,3vw,1.875rem)]"
-            : "text-[clamp(2rem,4vw,2.75rem)]"
-        }`}
-      >
+      <h2 className={`explore-title${isSparse ? " explore-title--sparse" : " explore-title--default"}`}>
         {isSparse
           ? "Discover more across the site"
           : "Welcome — explore to get started"}
       </h2>
 
       {!isSparse && (
-        <p className="mt-4 max-w-[42rem] text-base leading-relaxed text-text-light">
+        <p className="explore-description">
           There are no articles yet. Browse around and check back soon!
         </p>
       )}
 
-      {/* Cards Grid */}
-      <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-3">
+      <div className="explore-grid">
         {links.map((link) => (
-          <div
-            key={link.href}
-            className="flex flex-col gap-3 rounded-[1.125rem] border border-accent/14 bg-bg p-6"
-          >
-            <h3 className="text-xl font-bold leading-snug text-text">
+          <div key={link.href} className="explore-card">
+            <h3 className="explore-card-title">
               {link.title}
             </h3>
-            <p className="flex-1 text-sm leading-relaxed text-text-muted">
+            <p className="explore-card-description">
               {link.description}
             </p>
-            <Link
-              href={link.href}
-              className="self-end text-sm font-bold text-primary transition-[var(--transition-primary)] hover:underline"
-            >
+            <Link href={link.href} className="explore-card-link">
               Visit →
             </Link>
           </div>
