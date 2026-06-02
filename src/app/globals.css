@@ -557,7 +557,7 @@ p {
   outline: none !important;
 }
 
-/* 搜索框隐藏状态 */
+
 .search-container {
   opacity: 0;
   visibility: hidden;
@@ -566,14 +566,14 @@ p {
   margin-top: 2rem;
 }
 
-/* 搜索框显示状态 */
+
 .header-widgets .search-visible .search-container {
   visibility: visible;
   opacity: 1;
   transform: translateY(0);
 }
 
-/* 表单 */
+
 .header-widgets .search-container .search-form {
   display: flex;
   flex-wrap: wrap;
@@ -608,7 +608,7 @@ p {
   color: var(--color-text);
 }
 
-/* 按钮通用样式 */
+
 .header-widgets .search-container .search-form button {
   display: flex;
   flex-wrap: wrap;
@@ -628,7 +628,8 @@ p {
   box-shadow: none;
 }
 
-/* 提交按钮（箭头） */
+/* Submit button (arrow) */
+
 .header-widgets .search-container .search-form button:not(.search-close) {
   right: 5.6rem;
   color: var(--color-on-primary);
@@ -639,7 +640,7 @@ p {
   fill: currentColor;
 }
 
-/* 关闭按钮 */
+
 .header-widgets .search-container .search-form .search-close {
   right: 1.6rem;
   background: var(--color-bg-muted);
@@ -672,7 +673,7 @@ p {
   fill: var(--color-primary);
 }
 
-/* 箭头动画按钮 */
+
 button.animate-arrow {
   -webkit-appearance: none;
   border: none;
@@ -721,7 +722,7 @@ button.animate-arrow {
   transform: translateX(0.6rem);
 }
 
-/* 屏幕阅读器专用文本 */
+
 .screen-reader-text {
   border: 0;
   clip: rect(0.1rem, 0.1rem, 0.1rem, 0.1rem);
@@ -792,7 +793,7 @@ button.animate-arrow {
   margin-right: 0;
 }
 
-/* span 容器 — overflow-y hidden 实现滚动动画 */
+/* overflow-y hidden enables scroll-based animation */
 .social-nav .social-link > span {
   display: flex;
   align-items: center;
@@ -1150,7 +1151,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 .waves-wrapper .waves-circle:nth-child(4) { width: 53px; height: 50px; left: 60%; animation-delay: 18s; }
 .waves-wrapper .waves-circle:nth-child(5) { width: 43px; height: 40px; left: 90%; animation-delay: 1s; }
 
-/* ── View Transitions — 圆形扩散主题切换动画 ── */
+/* ── View Transitions — circular ripple theme switch animation ── */
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -1857,7 +1858,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   border-radius: 0.8rem;
 }
 
-/* ── Cover Placeholder (通用占位符) ── */
+/* ── Cover Placeholder ── */
 .cover-placeholder {
   display: flex;
   align-items: center;
@@ -2937,7 +2938,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   vertical-align: middle;
 }
 
-/* YouMayLike 占位符尺寸 */
+/* YouMayLike placeholder sizing */
 .pyml-placeholder {
   min-height: 22rem;
 }
