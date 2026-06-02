@@ -1275,9 +1275,9 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   border: 0.2rem solid rgba(190, 190, 190, 0.3);
   border-radius: 0.3rem;
   background-color: var(--color-bg);
-  padding: 8px;
+  padding: 0.6rem 1.2rem;
   color: var(--color-text);
-  min-height: 4rem;
+  min-height: 3.6rem;
 }
 
 .search-input::placeholder {
