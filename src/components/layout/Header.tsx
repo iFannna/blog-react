@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -19,6 +19,8 @@ interface HeaderProps {
 export default function Header({ navItems }: HeaderProps) {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const closeMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(false);
@@ -64,6 +66,45 @@ export default function Header({ navItems }: HeaderProps) {
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
   }, [isMobileMenuOpen, closeMobileMenu]);
+
+  // 搜索框相关逻辑
+  const toggleSearch = useCallback(() => {
+    setIsSearchOpen((prev) => !prev);
+  }, []);
+
+  const closeSearch = useCallback(() => {
+    setIsSearchOpen(false);
+  }, []);
+
+  // 搜索框打开时自动聚焦输入框
+  useEffect(() => {
+    if (isSearchOpen && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [isSearchOpen]);
+
+  // 点击外部关闭搜索框
+  useEffect(() => {
+    if (!isSearchOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest(".search-container")) {
+        closeSearch();
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [isSearchOpen, closeSearch]);
+
+  // ESC 键关闭搜索框
+  useEffect(() => {
+    if (!isSearchOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeSearch();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isSearchOpen, closeSearch]);
 
   return (
     <header id="masthead" className="site-header">
@@ -139,13 +180,55 @@ export default function Header({ navItems }: HeaderProps) {
           </nav>
 
           <div className="header-widgets">
-            <div className="header-widget header-widget-all">
+            <div className={`header-widget header-widget-all${isSearchOpen ? " search-visible" : ""}`}>
               <div className="widget-wrapper">
-                <button type="button" className="widget-icon" aria-label="搜索">
+                <button
+                  type="button"
+                  className="widget-icon"
+                  aria-label="搜索"
+                  aria-expanded={isSearchOpen}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleSearch();
+                  }}
+                >
                       <svg className="icon" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 32 32" aria-hidden="true">
                         <path d="M28.962 26.499l-4.938-4.938c1.602-2.002 2.669-4.671 2.669-7.474 0-6.673-5.339-12.012-12.012-12.012S2.669 7.414 2.669 14.087a11.962 11.962 0 0012.012 12.012c2.803 0 5.472-1.068 7.474-2.669l4.938 4.938a1.745 1.745 0 002.469 0 1.745 1.745 0 00-.6-2.869zm-14.281-3.469c-4.938 0-8.943-4.005-8.943-8.943s4.005-8.943 8.943-8.943 8.943 4.005 8.943 8.943-4.005 8.943-8.943 8.943z" />
                       </svg>
                     </button>
+              </div>
+              {/* 搜索弹出框 */}
+              <div className="search-container dropdown-item">
+                <form role="search" aria-label="Site Search" method="get" className="search-form">
+                  <label className="form-label">
+                    <span className="screen-reader-text">Search for:</span>
+                    <input
+                      ref={searchInputRef}
+                      type="search"
+                      className="input-search"
+                      placeholder="Search"
+                      autoComplete="off"
+                      name="s"
+                    />
+                  </label>
+                  <button type="submit" className="animate-arrow right-arrow" aria-hidden="true" role="button" tabIndex={0}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 18">
+                      <path className="arrow-handle" d="M2.511 9.007l7.185-7.221c.407-.409.407-1.071 0-1.48s-1.068-.409-1.476 0L.306 8.259a1.049 1.049 0 000 1.481l7.914 7.952c.407.408 1.068.408 1.476 0s.407-1.07 0-1.479L2.511 9.007z" />
+                      <path className="arrow-bar" fillRule="evenodd" clipRule="evenodd" d="M1 8h28.001a1.001 1.001 0 010 2H1a1 1 0 110-2z" />
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    className="search-close"
+                    aria-hidden="true"
+                    role="button"
+                    onClick={closeSearch}
+                  >
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                      <path d="M6.852 7.649L.399 1.195 1.445.149l6.454 6.453L14.352.149l1.047 1.046-6.454 6.454 6.454 6.453-1.047 1.047-6.453-6.454-6.454 6.454-1.046-1.047z" fill="currentColor" fillRule="evenodd" />
+                    </svg>
+                  </button>
+                </form>
               </div>
             </div>
 
