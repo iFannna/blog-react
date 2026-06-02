@@ -7,6 +7,7 @@ export interface Article {
   coverImage: string | null;
   authorName: string;
   authorAvatar: string;
+  authorId: number;
   categories: ArticleCategory[];
   tags: ArticleTag[];
   viewCount: number;

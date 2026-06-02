@@ -71,7 +71,7 @@ export function ArticleCard({ article, highlightTitle, highlightSummary }: Artic
               )}
             </span>
             <span>
-              By <a href={`/?author=${article.authorName}`} className="article-author-link">{article.authorName}</a>
+              By <Link href={`/author/${article.authorId}`} className="article-author-link">{article.authorName}</Link>
             </span>
           </span>
           <span className="article-meta-date">
