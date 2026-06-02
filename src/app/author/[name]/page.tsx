@@ -60,7 +60,7 @@ export default async function AuthorPage({ params, searchParams }: AuthorPagePro
       editorPickArticles={articlesData.list.slice(3, 6)}
     >
       <h1 className="sr-only">作者: {authorName}</h1>
-      <section className="author-box" itemProp="author" itemScope="itemscope" itemType="http://schema.org/Person">
+      <section className="author-box">
         <div className="author-box-avatar">
           <img
             alt={authorName}
@@ -73,7 +73,7 @@ export default async function AuthorPage({ params, searchParams }: AuthorPagePro
         </div>
         <div className="author-box-meta">
           <div className="h4 author-box-title">About {authorName}</div>
-          <div className="author-box-content" itemProp="description"></div>
+          <div className="author-box-content"></div>
         </div>
       </section>
       <ArticleFeed
