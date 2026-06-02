@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 // DarkModeToggle uses useTheme
 import { useTheme } from "@/lib/useTheme";
@@ -18,6 +18,7 @@ interface HeaderProps {
 
 export default function Header({ navItems }: HeaderProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -199,7 +200,20 @@ export default function Header({ navItems }: HeaderProps) {
               </div>
               {/* 搜索弹出框 */}
               <div className="search-container dropdown-item">
-                <form role="search" aria-label="Site Search" method="get" className="search-form">
+                <form
+                  role="search"
+                  aria-label="Site Search"
+                  className="search-form"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const formData = new FormData(e.currentTarget);
+                    const q = formData.get("s") as string;
+                    if (q?.trim()) {
+                      closeSearch();
+                      router.push(`/search?q=${encodeURIComponent(q.trim())}`);
+                    }
+                  }}
+                >
                   <label className="form-label">
                     <span className="screen-reader-text">Search for:</span>
                     <input

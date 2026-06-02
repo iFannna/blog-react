@@ -41,9 +41,16 @@ export default function Pagination({ currentPage, totalPages, basePath = "" }: P
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;
       }
+      const base = basePath || "/";
+      // 正确处理 basePath 已含 query string 的情况（如 /search?q=xxx）
+      const url = new URL(base, window.location.origin);
+      if (page > 1) {
+        url.searchParams.set("page", String(page));
+      } else {
+        url.searchParams.delete("page");
+      }
+      const href = url.pathname + url.search;
       // scroll: false 阻止 Next.js 自动滚动到顶部，由我们手动 smooth scroll
-      const query = page > 1 ? `?page=${page}` : "";
-      const href = page === 1 ? basePath || "/" : `${basePath}${query}`;
       router.push(href, { scroll: false });
     },
     [currentPage, router, basePath],
