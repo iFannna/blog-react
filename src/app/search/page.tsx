@@ -40,13 +40,15 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const totalPages = Math.ceil(articlesData.total / PAGE_SIZE);
   const basePath = keyword ? `/search?q=${encodeURIComponent(keyword)}` : "/search";
 
+  const displayKeyword = keyword ? keyword.charAt(0).toUpperCase() + keyword.slice(1) : "";
+
   return (
     <SiteLayout
       showSidebar
       breadcrumbs={
         <Breadcrumbs items={[
           { name: "Home", path: "/" },
-          ...(keyword ? [{ name: "Search results", path: `/search?q=${encodeURIComponent(keyword)}` }, { name: keyword, path: "" }] : []),
+          ...(keyword ? [{ name: "Search results", path: `/search?q=${encodeURIComponent(keyword)}` }, { name: displayKeyword, path: "" }] : []),
         ]} />
       }
       sidebar={<Sidebar categories={categories} tags={tags} featuredArticles={articlesData.list.slice(0, 4)} />}
