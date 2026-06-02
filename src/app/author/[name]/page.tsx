@@ -6,26 +6,22 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { getArticles } from "@/lib/api/article";
 import { getCategories } from "@/lib/api/category";
 import { getTags } from "@/lib/api/tag";
-import type { Category, Tag, Article } from "@/types/ui";
+import type { Category, Tag } from "@/types/ui";
 
 const PAGE_SIZE = 10;
 
 export const dynamic = "force-dynamic";
 
 interface AuthorPageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ name: string }>;
   searchParams: Promise<{ page?: string }>;
 }
 
 export default async function AuthorPage({ params, searchParams }: AuthorPageProps) {
-  const { id } = await params;
+  const { name } = await params;
   const { page: pageParam } = await searchParams;
   const currentPage = Number(pageParam) || 1;
-  const authorId = Number(id);
-
-  if (isNaN(authorId)) {
-    notFound();
-  }
+  const authorName = decodeURIComponent(name);
 
   let categories: Category[] = [];
   let tags: Tag[] = [];
@@ -35,9 +31,9 @@ export default async function AuthorPage({ params, searchParams }: AuthorPagePro
     console.error("Failed to fetch categories or tags:", error);
   }
 
-  let articlesData = { list: [] as Article[], total: 0 };
+  let articlesData = { list: [] as import("@/types/ui").Article[], total: 0 };
   try {
-    articlesData = await getArticles({ page: currentPage, size: PAGE_SIZE, authorId });
+    articlesData = await getArticles({ page: currentPage, size: PAGE_SIZE, authorName });
   } catch (error) {
     console.error("Failed to fetch articles by author:", error);
   }
@@ -47,7 +43,6 @@ export default async function AuthorPage({ params, searchParams }: AuthorPagePro
   }
 
   const totalPages = Math.ceil(articlesData.total / PAGE_SIZE);
-  const authorName = articlesData.list[0]?.authorName || "";
 
   return (
     <SiteLayout
@@ -69,7 +64,7 @@ export default async function AuthorPage({ params, searchParams }: AuthorPagePro
         articles={articlesData.list}
         totalPages={totalPages}
         currentPage={currentPage}
-        basePath={`/author/${id}`}
+        basePath={`/author/${name}`}
       />
     </SiteLayout>
   );

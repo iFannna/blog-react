@@ -27,7 +27,7 @@ interface GetArticlesParams {
   size?: number;
   categoryId?: number;
   tagId?: number;
-  authorId?: number;
+  authorName?: string;
   year?: number;
   month?: number;
   day?: number;
@@ -35,9 +35,9 @@ interface GetArticlesParams {
 
 /** 获取已发布文章的分页列表，支持按分类/标签/作者/时间筛选 */
 export async function getArticles(params: GetArticlesParams = {}) {
-  const { page = 1, size = 10, categoryId, tagId, authorId, year, month, day } = params;
+  const { page = 1, size = 10, categoryId, tagId, authorName, year, month, day } = params;
   const data = await apiClient.get<unknown, PaginatedData<ArticleVO>>("/article", {
-    params: { page, size, category_id: categoryId, tag_id: tagId, author_id: authorId, year, month, day },
+    params: { page, size, category_id: categoryId, tag_id: tagId, author_name: authorName, year, month, day },
   });
   return { list: data.list.map(mapArticleVOToArticle), total: data.total };
 }
