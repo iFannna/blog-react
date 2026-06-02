@@ -37,31 +37,31 @@ export default function Pagination({ currentPage, totalPages, basePath = "" }: P
 
   const goToPage = useCallback(
     (page: number) => {
-      if (page === currentPage) return;
+      if (page === currentPage) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
       // scroll: false 阻止 Next.js 自动滚动到顶部，由我们手动 smooth scroll
       const query = page > 1 ? `?page=${page}` : "";
-      router.push(`${basePath}${query}`, { scroll: false });
+      const href = page === 1 ? basePath || "/" : `${basePath}${query}`;
+      router.push(href, { scroll: false });
     },
     [currentPage, router, basePath],
   );
 
   if (totalPages <= 1) return null;
 
-  const renderPageButton = (page: number) =>
-    page === currentPage ? (
-      <span key={page} className="page-numbers page-number current">
-        {page}
-      </span>
-    ) : (
-      <button
-        key={page}
-        type="button"
-        className="page-numbers page-number"
-        onClick={() => goToPage(page)}
-      >
-        {page}
-      </button>
-    );
+  const renderPageButton = (page: number) => (
+    <button
+      key={page}
+      type="button"
+      className={`page-numbers page-number${page === currentPage ? " current" : ""}`}
+      onClick={() => goToPage(page)}
+      aria-current={page === currentPage ? "page" : undefined}
+    >
+      {page}
+    </button>
+  );
 
   const renderEllipsis = (side: string) => (
     <span key={`ellipsis-${side}`} className="page-numbers dots">…</span>
