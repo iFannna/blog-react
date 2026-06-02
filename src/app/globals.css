@@ -1224,7 +1224,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   }
   .sidebar-layout-secondary {
     width: 100%;
-    margin-top: 4rem;
+    margin-top: 8rem;
     margin-bottom: 0;
   }
   .sidebar-widget {
