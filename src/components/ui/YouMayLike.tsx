@@ -90,7 +90,7 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
                           )}
                           <span>
                             By{" "}
-                            <span>{article.authorName}</span>
+                            <a href={`/?author=${article.authorName}`} className="article-author-link">{article.authorName}</a>
                           </span>
                         </span>
                       </span>

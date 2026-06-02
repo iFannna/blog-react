@@ -69,7 +69,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
               )}
             </span>
             <span>
-              By {article.authorName}
+              By <a href={`/?author=${article.authorName}`} className="article-author-link">{article.authorName}</a>
             </span>
           </span>
           <span className="article-meta-date">

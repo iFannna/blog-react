@@ -2338,6 +2338,19 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   color: var(--color-text);
 }
 
+.article-author-link {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-primary);
+}
+
+.article-author-link:hover,
+.article-author-link:focus-visible {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.1rem;
+}
+
 .article-meta > span {
   display: inline-flex;
   align-items: center;
