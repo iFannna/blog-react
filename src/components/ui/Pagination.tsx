@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 interface PaginationProps {
   currentPage: number;
@@ -26,14 +25,25 @@ const ARROW_SVG = (
 
 export default function Pagination({ currentPage, totalPages }: PaginationProps) {
   const router = useRouter();
+  const prevPage = useRef(currentPage);
 
+  // 导航完成后 smooth scroll 到顶部（此时页面保持在原位置，不会被 Next.js 跳到顶部）
   useEffect(() => {
+    if (prevPage.current === currentPage) return;
+    prevPage.current = currentPage;
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
 
-  if (totalPages <= 1) return null;
+  const goToPage = useCallback(
+    (page: number) => {
+      if (page === currentPage) return;
+      // scroll: false 阻止 Next.js 自动滚动到顶部，由我们手动 smooth scroll
+      router.push(`/?page=${page}`, { scroll: false });
+    },
+    [currentPage, router],
+  );
 
-  const buildHref = (page: number) => `/?page=${page}`;
+  if (totalPages <= 1) return null;
 
   const renderPageButton = (page: number) =>
     page === currentPage ? (
@@ -41,9 +51,14 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
         {page}
       </span>
     ) : (
-      <Link key={page} href={buildHref(page)} className="page-numbers page-number">
+      <button
+        key={page}
+        type="button"
+        className="page-numbers page-number"
+        onClick={() => goToPage(page)}
+      >
         {page}
-      </Link>
+      </button>
     );
 
   const renderEllipsis = (side: string) => (
@@ -86,21 +101,31 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
       <nav className="navigation pagination" aria-label="Pagination">
         <div className="nav-links">
           {currentPage > 1 && (
-            <Link href={buildHref(currentPage - 1)} className="prev page-numbers" aria-label="Previous page">
+            <button
+              type="button"
+              className="prev page-numbers"
+              aria-label="Previous page"
+              onClick={() => goToPage(currentPage - 1)}
+            >
               <span className="pagination-arrow left-arrow" aria-hidden="true">
                 {ARROW_SVG}
               </span>
-            </Link>
+            </button>
           )}
 
           {pageButtons}
 
           {currentPage < totalPages && (
-            <Link href={buildHref(currentPage + 1)} className="next page-numbers" aria-label="Next page">
+            <button
+              type="button"
+              className="next page-numbers"
+              aria-label="Next page"
+              onClick={() => goToPage(currentPage + 1)}
+            >
               <span className="pagination-arrow right-arrow" aria-hidden="true">
                 {ARROW_SVG}
               </span>
-            </Link>
+            </button>
           )}
         </div>
       </nav>

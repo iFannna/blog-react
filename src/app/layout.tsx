@@ -39,6 +39,12 @@ export default function RootLayout({
             __html: `(function(){try{var t=localStorage.getItem("darkmode");document.documentElement.setAttribute("data-theme",t==="dark"?"dark":"light")}catch(e){}})()`,
           }}
         />
+        {/* 刷新时恢复滚动位置 */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var k="scroll_pos";var s=sessionStorage.getItem(k);if(s){history.scrollRestoration="manual";document.documentElement.style.visibility="hidden";window.addEventListener("load",function(){window.scrollTo(0,parseInt(s,10));document.documentElement.style.visibility=""})}window.addEventListener("beforeunload",function(){sessionStorage.setItem(k,String(window.scrollY))})})()`,
+          }}
+        />
       </head>
       <body className="min-h-screen antialiased">{children}</body>
     </html>
