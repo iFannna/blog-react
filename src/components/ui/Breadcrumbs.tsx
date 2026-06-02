@@ -14,18 +14,10 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
     <div className="breadcrumbs-bar">
       <div className="breadcrumbs-container">
         <nav aria-label="Breadcrumbs" className="breadcrumb-trail breadcrumbs">
-          <ul className="trail-items" itemScope itemType="http://schema.org/BreadcrumbList">
+          <ul className="trail-items">
             {items.map((item, index) => (
-              <li
-                key={item.path || `${item.name}-${index}`}
-                itemProp="itemListElement"
-                itemScope
-                itemType="http://schema.org/ListItem"
-              >
-                <Link href={item.path} itemProp="item">
-                    <span itemProp="name">{item.name}</span>
-                </Link>
-                <meta itemProp="position" content={String(index + 1)} />
+              <li key={item.path || `${item.name}-${index}`}>
+                <Link href={item.path}>{item.name}</Link>
               </li>
             ))}
           </ul>
