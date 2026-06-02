@@ -21,10 +21,18 @@ function mapArticleVOToArticle(vo: ArticleVO): Article {
   };
 }
 
-/** 获取已发布文章的分页列表 */
-export async function getArticles(page = 1, size = 10) {
+interface GetArticlesParams {
+  page?: number;
+  size?: number;
+  categoryId?: number;
+  tagId?: number;
+}
+
+/** 获取已发布文章的分页列表，支持按分类/标签筛选 */
+export async function getArticles(params: GetArticlesParams = {}) {
+  const { page = 1, size = 10, categoryId, tagId } = params;
   const data = await apiClient.get<unknown, PaginatedData<ArticleVO>>("/article", {
-    params: { page, size },
+    params: { page, size, category_id: categoryId, tag_id: tagId },
   });
   return { list: data.list.map(mapArticleVOToArticle), total: data.total };
 }

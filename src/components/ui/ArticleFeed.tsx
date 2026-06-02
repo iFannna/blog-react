@@ -6,9 +6,10 @@ interface ArticleFeedProps {
   articles: Article[];
   totalPages: number;
   currentPage: number;
+  basePath?: string;
 }
 
-export default function ArticleFeed({ articles, totalPages, currentPage }: ArticleFeedProps) {
+export default function ArticleFeed({ articles, totalPages, currentPage, basePath }: ArticleFeedProps) {
   return (
     <div className="space-y-6">
       <div className="space-y-6">
@@ -22,7 +23,7 @@ export default function ArticleFeed({ articles, totalPages, currentPage }: Artic
       </div>
 
       {totalPages > 1 && (
-        <Pagination currentPage={currentPage} totalPages={totalPages} />
+        <Pagination currentPage={currentPage} totalPages={totalPages} basePath={basePath} />
       )}
     </div>
   );

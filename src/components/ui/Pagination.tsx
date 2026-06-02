@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef } from "react";
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
+  basePath?: string;
 }
 
 const ARROW_SVG = (
@@ -23,7 +24,7 @@ const ARROW_SVG = (
   </svg>
 );
 
-export default function Pagination({ currentPage, totalPages }: PaginationProps) {
+export default function Pagination({ currentPage, totalPages, basePath = "" }: PaginationProps) {
   const router = useRouter();
   const prevPage = useRef(currentPage);
 
@@ -38,9 +39,10 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
     (page: number) => {
       if (page === currentPage) return;
       // scroll: false 阻止 Next.js 自动滚动到顶部，由我们手动 smooth scroll
-      router.push(`/?page=${page}`, { scroll: false });
+      const query = page > 1 ? `?page=${page}` : "";
+      router.push(`${basePath}${query}`, { scroll: false });
     },
-    [currentPage, router],
+    [currentPage, router, basePath],
   );
 
   if (totalPages <= 1) return null;

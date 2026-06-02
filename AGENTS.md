@@ -1,67 +1,48 @@
-# AGENTS.md
+# Blog React — 开发规范
 
-This project references Vue source at:
-`D:\develop\code\project\blog-vue-springboot\vue-blog-project`
+<!-- BEGIN:nextjs-agent-rules -->
+# This is NOT the Next.js you know
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+<!-- END:nextjs-agent-rules -->
 
-## Context
+## 技术栈
 
-We are rebuilding a Vue blog frontend in React (Next.js 16 + Tailwind CSS v4). The goal is pixel-level UI restoration from the Vue source.
+- **框架**: Next.js 16 (App Router)
+- **语言**: TypeScript (strict)
+- **样式**: Tailwind CSS v4 + CSS 自定义属性 (globals.css)
+- **组件**: 纯 React，不使用 UI 组件库
+## CSS 架构
 
-## Source Code Reference
+### 设计 Token 体系
+- 所有颜色、间距、圆角、阴影通过 CSS 变量定义在 `globals.css` 的 `:root` 中
+- CSS 变量 → Tailwind `@theme inline` → Tailwind 工具类
+- 暗色模式通过 `[data-theme="dark"]` 覆盖 CSS 变量，不使用 class 切换
 
-When restoring UI from the Vue project:
+### 样式编写规则
+- 组件布局/结构用 Tailwind 工具类
+- 复杂组件样式写在 `globals.css` 中（带注释标注来源）
+- **禁止在组件内使用 `<style>` 标签或内联 style 对象**
+- **禁止硬编码颜色值**，统一使用 `var(--color-*)` 或 Tailwind 颜色工具类
+- **禁止硬编码间距/圆角**，统一使用 CSS 变量或 Tailwind 工具类
 
-1. **CSS values** — always extract from source files:
-   - `src/assets/styles/vendors/bloglo/core.scss` (10,000+ lines, main theme)
-   - `src/assets/styles/vendors/bloglo/dynamic.scss` (dark mode + responsive)
-   - `src/assets/styles/app/overrides/theme-overrides.scss` (custom overrides)
-   - `src/assets/styles/app/base.scss` (minimal utilities)
-   - Component `<style scoped>` blocks
+### rem 基准
+- `html { font-size: 62.5% }` → 1rem = 10px
+- 所有 rem 值基于此换算
 
-2. **Component structure** — match DOM hierarchy from `.vue` templates
 
-3. **Naming** — strip all vendor prefixes (bloglo-*, wp-*) when translating class names
-
-## Key Design Decisions
-
-- **Dark mode**: `[data-theme="dark"]` attribute on `<html>`, CSS variable overrides
-- **Font base**: `html { font-size: 62.5% }` → 1rem = 10px (same as Vue project)
-- **Container**: max-width 1420px, horizontal padding 5rem
-- **Header**: layout-2 (Logo | Nav flex:1 | Widgets), squarebox nav animation, no separators
-- **Body classes** that affect layout:
-  - `bloglo-header-layout-2` — header structure
-  - `bloglo-menu-animation-squarebox` — nav hover style (background fill + shadow)
-  - `bloglo-header__separators-none` — no widget divider lines
-  - `bloglo-has-sidebar` + `bloglo-sidebar-position__right-sidebar`
-
-## What NOT to do
-
-- Do NOT use screenshots or visual analysis to determine CSS values
-- Do NOT invent CSS values — find them in source code
-- Do NOT add features beyond what exists in the Vue project
-- Do NOT use UI component libraries (MUI, Ant Design, etc.)
-- Do NOT use vendor-prefixed class names (bloglo-*, wp-*)
-
-## Development Workflow
-
-### 编译验证
-
-- 每次修改 CSS/组件代码后，必须清除缓存再验证
-- **清除缓存**: `rm -rf .next`（Turbopack 会缓存 CSS，不清除改动不生效）
-- **验证方式**: 等待 Turbopack 自动编译，用 `curl -s -o /dev/null -w "%{http_code}" http://localhost:3000` 确认页面正常
-- 禁止跳过缓存清除步骤
-
-### 端口和进程管理
-
-- **禁止启动开发服务器**（`npx next dev`）
-- 开发服务器完全由用户手动启动、重启、关闭
-- 需要验证时只使用 `curl` 检查已运行的服务器
-- 如果需要重启服务器，告知用户操作
-
-### 注释规范
+## 注释规范
 
 - **只注释"为什么"，不注释"是什么"** — 代码本身能表达的不需要注释
 - **禁止冗余注释** — `{/* Title */}`、`{/* Widget 1: 搜索框 */}` 等复述代码结构的注释禁止添加
 - **禁止过时注释** — 行号引用、已删除的布局变体名、Vue 残留引用等禁止保留
 - **JSX 注释用中文** — 与用户沟通语言一致
 - **保留有价值的注释** — 解释设计意图、业务逻辑、非显而易见的技术决策的注释保留
+
+
+
+## 编译验证规范
+
+- 开发服务器完全由用户手动管理（启动、重启、关闭）
+- 每次修改 CSS/组件代码后，必须清除缓存（`rm -rf .next`）再验证
+- Turbopack 会缓存 CSS，不清除 `.next` 会导致改动不生效
+- 验证方式：等待用户确认或用 `curl` 检查已运行的服务器

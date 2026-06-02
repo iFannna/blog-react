@@ -13,6 +13,7 @@ interface SiteLayoutProps {
   youMayLikeArticles?: Article[];
   featuredArticles?: Article[];
   editorPickArticles?: Article[];
+  breadcrumbs?: ReactNode;
 }
 
 const NAV_ITEMS = [
@@ -33,10 +34,12 @@ export default function SiteLayout({
   youMayLikeArticles = [],
   featuredArticles = [],
   editorPickArticles = [],
+  breadcrumbs,
 }: SiteLayoutProps) {
   return (
     <div className="flex min-h-screen flex-col">
       <Header navItems={NAV_ITEMS} />
+      {breadcrumbs}
       <main className="flex-1">
         <div className="mx-auto max-w-[1420px] px-[5rem] pb-[5rem]">
           {showSidebar ? (
