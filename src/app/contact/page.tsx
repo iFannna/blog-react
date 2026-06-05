@@ -18,13 +18,12 @@ export default function ContactPage() {
       }
     >
       <div id="primary" className="content-area">
-        <div id="content" className="site-content">
-          <article className="page-entry">
-            <div className="entry-content page-entry-content">
+        <article className="page-entry">
+          <div className="entry-content page-entry-content">
 
-              <div className="page-columns items-top flex-layout">
-                {/* ── Left: Contact info ── */}
-                <div className="page-column items-top page-column--65">
+            <div className="page-columns items-top flex-layout">
+              {/* ── Left: Contact info ── */}
+              <div className="page-column items-top page-column--65">
                   <h6 className="page-heading page-heading-6 text-accent-pink">
                     I&rsquo;d love to hear from you
                   </h6>
@@ -157,7 +156,6 @@ export default function ContactPage() {
             </div>
           </article>
         </div>
-      </div>
     </SiteLayout>
   );
 }

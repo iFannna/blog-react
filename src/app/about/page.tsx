@@ -52,7 +52,6 @@ export default function AboutPage() {
       }
     >
       <div id="primary" className="content-area">
-        <div id="content" className="site-content">
           <article className="page-entry">
             <div className="entry-content page-entry-content">
               {/* ── My story ── */}
@@ -156,7 +155,6 @@ export default function AboutPage() {
             </div>
           </article>
         </div>
-      </div>
     </SiteLayout>
   );
 }
