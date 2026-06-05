@@ -3834,12 +3834,6 @@ html:not([data-theme="dark"]) .author-box {
 }
 
 .contact-form legend {
-  display: table;
-  max-width: 100%;
-  padding-left: 1.6rem;
-  padding-right: 1.6rem;
-  white-space: normal;
-  font-weight: 400;
   color: var(--color-text);
 }
 
@@ -3865,7 +3859,7 @@ html:not([data-theme="dark"]) .author-box {
   display: block;
   width: 100%;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  border: 0.2rem solid rgba(190, 190, 190, 0.3);
+  border: 0.1rem solid #cccccc;
   background-color: var(--color-bg);
   padding: 1.2rem 1.8rem;
   color: #66717f;
