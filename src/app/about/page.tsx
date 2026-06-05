@@ -51,7 +51,7 @@ export default function AboutPage() {
     <SiteLayout>
       <div id="primary" className="content-area">
         <div id="content" className="site-content">
-          <article className="page-entry" itemScope itemType="https://schema.org/CreativeWork">
+          <article className="page-entry">
             <div className="entry-content page-entry-content">
                 {/* ── My story ── */}
                 <div className="page-columns flex-layout">
@@ -59,7 +59,7 @@ export default function AboutPage() {
                     <h6 className="page-heading page-heading-6 text-left" style={{ color: "#c26148" }}>
                       — My story
                     </h6>
-                    <h2 className="page-heading page-heading-2 text-left heading-1">
+                    <h2 className="page-heading page-heading-2 text-left">
                       A passionate blogger and photographer from London.
                     </h2>
                     <p className="text-medium" style={{ color: "#666666" }}>
@@ -89,7 +89,7 @@ export default function AboutPage() {
                     <h6 className="page-heading page-heading-6 text-left" style={{ color: "#c26148" }}>
                       — Get in touch with me
                     </h6>
-                    <h2 className="page-heading page-heading-2 text-left heading-1">
+                    <h2 className="page-heading page-heading-2 text-left">
                       Don't hesitate to say hello
                     </h2>
                     <p className="text-medium" style={{ color: "#666666" }}>

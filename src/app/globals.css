@@ -3558,25 +3558,6 @@ html:not([data-theme="dark"]) .author-box {
 
 /* ── Page Layout ── */
 
-.site-main {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: auto;
-  word-break: break-word;
-}
-
-.site-main > .page-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-}
-
-.content-area {
-  margin-top: 0;
-}
-
 #primary.content-area {
   margin-top: 5rem;
   margin-bottom: 7rem;
@@ -3586,10 +3567,6 @@ html:not([data-theme="dark"]) .author-box {
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: auto;
-}
-
-.site-content {
-  /* wrapper for article content */
 }
 
 /* ── Page Entry (article wrapper) ── */
@@ -3777,13 +3754,6 @@ html:not([data-theme="dark"]) .author-box {
   color: var(--color-text);
 }
 
-.page-heading-1,
-.heading-1 {
-  font-weight: 700;
-  font-size: 4rem;
-  line-height: 1.1;
-}
-
 .page-heading-2 {
   font-weight: 700;
   font-size: 3.6rem;
@@ -3885,10 +3855,6 @@ html:not([data-theme="dark"]) .author-box {
 /* ── Responsive ── */
 
 @media screen and (max-width: 960px) {
-  .site-main > .page-container {
-    display: block;
-  }
-
   #primary.content-area {
     max-width: 100% !important;
     padding-left: 0 !important;
