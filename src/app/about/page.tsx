@@ -1,4 +1,5 @@
 import SiteLayout from "@/components/layout/SiteLayout";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -42,7 +43,14 @@ const SOCIALS = [
 
 export default function AboutPage() {
   return (
-    <SiteLayout>
+    <SiteLayout
+      breadcrumbs={
+        <Breadcrumbs items={[
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ]} />
+      }
+    >
       <div id="primary" className="content-area">
         <div id="content" className="site-content">
           <article className="page-entry">
