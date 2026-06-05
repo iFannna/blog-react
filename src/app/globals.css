@@ -3668,6 +3668,10 @@ html:not([data-theme="dark"]) .author-box {
   width: 100%;
 }
 
+.page-column--full {
+  flex-basis: 100%;
+}
+
 @media (min-width: 782px) {
   .page-columns {
     flex-wrap: nowrap;
@@ -3783,6 +3787,26 @@ html:not([data-theme="dark"]) .author-box {
   line-height: 1.5;
 }
 
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-dim {
+  color: #666666;
+}
+
+[data-theme="dark"] .text-dim {
+  color: #aaaaaa;
+}
+
+.text-17 {
+  font-size: 1.7rem;
+}
+
+.spacer-sm {
+  height: 2rem;
+}
+
 /* ── Social Links ── */
 
 .page-entry-content .social-links {
@@ -3813,6 +3837,42 @@ html:not([data-theme="dark"]) .author-box {
 .social-link-item svg {
   height: 1em;
   width: 1em;
+}
+
+/* Brand colors */
+.social-link-item {
+  background-color: #f0f0f0;
+  color: #444;
+}
+
+.social-link-item.facebook {
+  background-color: #0866ff;
+  color: #fff;
+}
+
+.social-link-item.twitter {
+  background-color: #1da1f2;
+  color: #fff;
+}
+
+.social-link-item.instagram {
+  background-color: #f00075;
+  color: #fff;
+}
+
+.social-link-item.tiktok {
+  background-color: #000;
+  color: #fff;
+}
+
+.social-link-item.behance {
+  background-color: #0757fe;
+  color: #fff;
+}
+
+.social-link-item.youtube {
+  background-color: red;
+  color: #fff;
 }
 
 @media not (prefers-reduced-motion) {
