@@ -23,6 +23,7 @@ const NAV_ITEMS = [
   { href: "/archive", label: "归档" },
   { href: "/guestbook", label: "留言" },
   { href: "/friend-link", label: "友链" },
+  { href: "/typography", label: "排版" },
   { href: "/login", label: "登录" },
   { href: "/register", label: "注册" },
 ];
