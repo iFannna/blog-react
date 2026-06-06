@@ -35,6 +35,21 @@ const components: Components = {
 
   hr: () => <hr className="typo-separator" />,
 
+  // react-markdown 会把 ![](url) 包在 <p> 内，但 img 组件返回 <figure>，
+  // HTML 不允许 <p> 含 <figure>，所以检测到图片时去掉 <p> 包裹
+  // node 是 hast 元素节点，通过它判断 <p> 内是否含 <img>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  p: ({ children, node }: any) => {
+    const hasImg = node?.children?.some(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (c: any) => c.tagName === "img"
+    );
+    if (hasImg) {
+      return <>{children}</>;
+    }
+    return <p>{children}</p>;
+  },
+
   blockquote: ({ children }) => (
     <blockquote className="typo-quote">{children}</blockquote>
   ),
@@ -78,7 +93,6 @@ const components: Components = {
     return <li {...props}>{children}</li>;
   },
 
-  // 任务列表 checkbox
   input: ({ checked }) => {
     if (checked) {
       return (
@@ -98,7 +112,6 @@ const components: Components = {
   ),
 
   pre: ({ children }) => {
-    // 从子 <code> 的 className 提取语言标识
     const codeEl = React.Children.toArray(children).find(
       (child) => React.isValidElement(child) && child.type === "code"
     );
@@ -119,7 +132,6 @@ const components: Components = {
   },
 
   code: ({ className, children, ...props }) => {
-    // 带 language- 或 hljs 类的是代码块内的 code，直接透传
     if (className?.includes("language-") || className?.includes("hljs")) {
       return (
         <code className={className} {...props}>
@@ -127,7 +139,6 @@ const components: Components = {
         </code>
       );
     }
-    // 行内代码
     return (
       <code className="typo-inline-code" {...props}>
         {children}
@@ -140,7 +151,6 @@ interface MarkdownContentProps {
   content: string;
 }
 
-// MarkdownContent 将 markdown 正文渲染为带排版样式的 React 元素
 export default function MarkdownContent({ content }: MarkdownContentProps) {
   return (
     <ReactMarkdown
