@@ -3972,7 +3972,7 @@ html:not([data-theme="dark"]) .author-box {
   font-size: 1.8rem;
   font-weight: 600;
   line-height: 1.72;
-  color: var(--color-text);
+  color: #333333;
 }
 
 .post-nav a {
@@ -4036,24 +4036,14 @@ html:not([data-theme="dark"]) .author-box {
   margin-left: 2rem;
 }
 
-@media screen and (max-width: 599px) {
-  .post-nav {
-    flex-direction: column;
-  }
-
-  .post-nav > div {
-    flex: 0 0 100%;
-  }
-
-  .post-nav .nav-next {
-    margin-top: 2rem;
-  }
-}
-
 @media screen and (max-width: 960px) {
   .post-nav img {
     display: none;
   }
+}
+
+[data-theme="dark"] .post-nav .nav-title {
+  color: var(--color-text);
 }
 
 /* ── Page Columns (replacing wp-block-columns) ── */
