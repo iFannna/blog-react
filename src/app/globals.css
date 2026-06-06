@@ -4153,58 +4153,15 @@ html:not([data-theme="dark"]) .author-box {
 
 /* ── Typography Page Styles ── */
 
-/* Headings — wp-block-heading font sizes + bloglo dynamic-styles */
-.typo-heading-1 {
-  margin-top: 0;
-  margin-bottom: 1.8rem;
-  font-weight: 700;
-  font-size: 4rem;
-  line-height: 1.1;
-  color: #333333;
-}
-
-.typo-heading-2 {
-  margin-top: 0;
-  margin-bottom: 1.8rem;
-  font-weight: 700;
-  font-size: 3.6rem;
-  line-height: 1.2;
-  color: #333333;
-}
-
-.typo-heading-3 {
-  margin-top: 0;
-  margin-bottom: 1.8rem;
-  font-weight: 700;
-  font-size: 2.8rem;
-  line-height: 1.2;
-  color: #333333;
-}
-
-.typo-heading-4 {
-  margin-top: 0;
-  margin-bottom: 1.8rem;
-  font-weight: 700;
-  font-size: 2.4rem;
-  line-height: 1.2;
-  color: #333333;
-}
-
-.typo-heading-5 {
-  margin-top: 0;
-  margin-bottom: 1.8rem;
-  font-weight: 700;
-  font-size: 2rem;
-  line-height: 1.2;
-  color: #333333;
-}
-
+/* Headings — shared reset */
+.typo-heading-1,
+.typo-heading-2,
+.typo-heading-3,
+.typo-heading-4,
+.typo-heading-5,
 .typo-heading-6 {
   margin-top: 0;
   margin-bottom: 1.8rem;
-  font-weight: 600;
-  font-size: 1.8rem;
-  line-height: 1.72;
   color: #333333;
 }
 
@@ -4217,13 +4174,49 @@ html:not([data-theme="dark"]) .author-box {
   color: var(--color-text);
 }
 
-/* Spacer — replaces wp-block-spacer inline style (height:50px) */
+.typo-heading-1 {
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 1.1;
+}
+
+.typo-heading-2 {
+  font-weight: 700;
+  font-size: 3.6rem;
+  line-height: 1.2;
+}
+
+.typo-heading-3 {
+  font-weight: 700;
+  font-size: 2.8rem;
+  line-height: 1.2;
+}
+
+.typo-heading-4 {
+  font-weight: 700;
+  font-size: 2.4rem;
+  line-height: 1.2;
+}
+
+.typo-heading-5 {
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.typo-heading-6 {
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 1.72;
+}
+
+/* Spacer */
 .typo-spacer {
   clear: both;
   height: 5rem;
 }
 
-/* Separator — replaces wp-block-separator:not(.is-style-wide):not(.is-style-dots) */
+/* Separator */
 .typo-separator {
   border: none;
   border-bottom: 2px solid;
@@ -4232,13 +4225,10 @@ html:not([data-theme="dark"]) .author-box {
   margin-right: auto;
   margin-top: 3.2rem;
   margin-bottom: 3.2rem;
-  opacity: 1;
 }
 
-/* Blockquote — replaces wp-block-quote + bloglo-entry blockquote */
+/* Blockquote */
 .typo-quote {
-  box-sizing: border-box;
-  overflow-wrap: break-word;
   padding: 0.8rem 2.4rem;
   border-style: none;
   border-left-style: solid;
@@ -4247,13 +4237,6 @@ html:not([data-theme="dark"]) .author-box {
   border-radius: var(--radius-normal);
   background-color: rgba(0, 0, 0, 0.04);
   font-size: 1.6rem;
-  line-height: inherit;
-}
-
-.typo-quote p {
-  font-size: inherit;
-  line-height: inherit;
-  font-style: normal;
 }
 
 .typo-quote p:first-child {
@@ -4269,7 +4252,7 @@ html:not([data-theme="dark"]) .author-box {
   background-color: rgba(255, 255, 255, 0.04);
 }
 
-/* Lists — list-style for typo variants */
+/* Lists */
 ul.typo-list {
   list-style: disc;
 }
@@ -4278,7 +4261,7 @@ ol.typo-list {
   list-style: decimal;
 }
 
-/* Image alignment — wp-block-image alignleft / alignright */
+/* Image alignment */
 .typo-image-left {
   float: left;
   margin: 0.5em 1em 0.5em 0;
@@ -4286,14 +4269,8 @@ ol.typo-list {
   max-width: 100%;
 }
 
-.typo-image-left img {
-  box-sizing: border-box;
-  height: auto;
-  max-width: 100%;
-  vertical-align: bottom;
-}
-
-.typo-image-left figcaption {
+.typo-image-left figcaption,
+.typo-image-right figcaption {
   display: table-caption;
   caption-side: bottom;
   margin-top: 1.2rem;
@@ -4310,39 +4287,18 @@ ol.typo-list {
   max-width: 100%;
 }
 
-.typo-image-right img {
-  box-sizing: border-box;
-  height: auto;
-  max-width: 100%;
-  vertical-align: bottom;
-}
-
-.typo-image-right figcaption {
-  display: table-caption;
-  caption-side: bottom;
-  margin-top: 1.2rem;
-  margin-bottom: 0;
-  font-size: 1.3rem;
-  text-align: center;
-  color: #212121;
-}
-
 [data-theme="dark"] .typo-image-left figcaption,
 [data-theme="dark"] .typo-image-right figcaption {
   color: var(--color-text-muted);
 }
 
-/* Code block — wp-block-code */
+/* Code block */
 .typo-code-block {
-  display: block;
   border: 1px solid #ccc;
   border-radius: 0.4rem;
-  font-family: Menlo, Consolas, Monaco, "Courier New", monospace;
+  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Menlo, Consolas, monospace;
   padding: 0.8em 1em;
   overflow: auto;
-  page-break-inside: avoid;
-  word-break: break-all;
-  word-wrap: break-word;
   font-size: 1.6rem;
 }
 
@@ -4352,19 +4308,12 @@ ol.typo-list {
 
 .typo-code-block code {
   display: block;
-  direction: ltr;
-  font-family: inherit;
-  overflow-wrap: break-word;
-  text-align: initial;
   white-space: pre-wrap;
   font-size: 90%;
-  padding: 0;
-  background: none;
-  border-radius: 0;
-  color: inherit;
+  font-family: inherit;
 }
 
-/* Font size variants — wp preset font sizes */
+/* Font size variants */
 .typo-font-small {
   font-size: 1.3rem;
 }
@@ -4383,7 +4332,7 @@ ol.typo-list {
   font-size: 4.2rem;
 }
 
-/* Buttons — wp-block-buttons + wp-block-button__link */
+/* Buttons */
 .typo-buttons-row {
   margin-bottom: 1.5rem;
 }
@@ -4396,12 +4345,10 @@ ol.typo-list {
   gap: 0.5em;
 }
 
-/* Filled button — wp-block-button__link defaults: bg #32373c, color #fff */
 .typo-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
   cursor: pointer;
   text-align: center;
   word-break: break-word;
@@ -4413,12 +4360,11 @@ ol.typo-list {
   width: 100%;
   color: #fff;
   background-color: #32373c;
-  border: 0.2rem solid;
+  border: 0.2rem solid #32373c;
   border-radius: 0;
   transition: var(--transition-primary);
 }
 
-/* Filled button hover — bloglo: bg transparent, color inherit, border currentColor */
 .typo-btn:hover,
 .typo-btn:focus-visible {
   color: inherit;
@@ -4426,15 +4372,13 @@ ol.typo-list {
   border-color: currentColor;
 }
 
-/* Outline button — is-style-outline */
 .typo-btn--outline {
   color: currentColor;
   background-color: transparent;
-  border: 0.2rem solid currentColor;
+  border-color: currentColor;
   padding: 0.667em 1.33em;
 }
 
-/* Outline button hover — bloglo: bg secondary, border transparent, color white */
 .typo-btn--outline:hover,
 .typo-btn--outline:focus-visible {
   color: #fff;
@@ -4442,12 +4386,11 @@ ol.typo-list {
   border-color: transparent;
 }
 
-/* Rounded button */
 .typo-btn--rounded {
   border-radius: 10rem;
 }
 
-/* No underline/color override on buttons — must override .content-area a:not(.page-numbers) */
+/* Override .content-area a:not(.page-numbers) which adds underline + primary color */
 .content-area a.typo-btn,
 .page-entry-content a.typo-btn {
   text-decoration: none;
@@ -4482,18 +4425,260 @@ ol.typo-list {
   border-color: transparent;
 }
 
-/* Image alignment clearfix — prevent float bleed */
+/* Image alignment clearfix */
 .page-entry-content::after {
   content: "";
   display: table;
   clear: both;
 }
 
-/* Responsive — stack floated images on small screens */
+/* ── Inline Code ── */
+.typo-inline-code {
+  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Menlo, Consolas, monospace;
+  font-size: 90%;
+  padding: 0.16rem 0.48rem;
+  border-radius: var(--radius-normal);
+  background-color: var(--color-primary-faint);
+  color: var(--color-primary);
+}
+
+/* ── Table ── */
+.typo-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.5rem;
+}
+
+.typo-table th,
+.typo-table td {
+  padding: 1.2rem 1.6rem;
+  text-align: left;
+}
+
+.typo-table thead {
+  border-bottom: 0.2rem solid var(--color-primary);
+}
+
+.typo-table th {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.typo-table tbody tr {
+  border-bottom: 0.1rem solid var(--color-border-faint);
+}
+
+.typo-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.typo-badge {
+  display: inline-block;
+  padding: 0.2rem 0.9rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border-radius: 10rem;
+  line-height: 1.5;
+}
+
+.typo-badge--green {
+  background-color: rgba(52, 188, 104, 0.1);
+  color: #16a34a;
+}
+
+.typo-badge--gray {
+  background-color: rgba(148, 148, 148, 0.1);
+  color: var(--color-text-muted);
+}
+
+.typo-badge--yellow {
+  background-color: rgba(234, 179, 8, 0.1);
+  color: #a16207;
+}
+
+[data-theme="dark"] .typo-badge--green {
+  color: #4ade80;
+}
+
+[data-theme="dark"] .typo-badge--yellow {
+  color: #facc15;
+}
+
+/* ── Task List ── */
+.typo-task-list {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.typo-task-list li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.typo-task-list li:last-child {
+  margin-bottom: 0;
+}
+
+.typo-checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  flex-shrink: 0;
+  border: 0.15rem solid var(--color-border);
+  border-radius: 0.3rem;
+  background-color: var(--color-bg);
+}
+
+.typo-checkbox--checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+[data-theme="dark"] .typo-checkbox {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ── Nested List ── */
+.typo-list .typo-list {
+  margin-top: 0.64rem;
+  margin-bottom: 0;
+}
+
+/* ── Strikethrough ── */
+.typo-quote del,
+.page-entry-content del {
+  text-decoration: line-through;
+  color: var(--color-text-muted);
+}
+
+/* ── Highlight (mark) ── */
+.typo-highlight {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.2rem;
+}
+
+/* ── Nested Blockquote ── */
+.typo-quote .typo-quote {
+  margin-top: 1.6rem;
+}
+
+/* ── Code with Language Label ── */
+.typo-code-wrapper {
+  position: relative;
+}
+
+.typo-code-lang {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.3rem 1rem;
+  font-size: 1.2rem;
+  font-family: inherit;
+  color: var(--color-text-muted);
+  background-color: var(--color-bg-muted);
+  border-bottom-left-radius: 0.4rem;
+  border-top-right-radius: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+/* ── Centered Image ── */
+.typo-image-center {
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 60%;
+}
+
+.typo-image-center img {
+  margin: 0 auto;
+}
+
+.typo-image-center figcaption {
+  margin-top: 1.2rem;
+  margin-bottom: 0;
+  font-size: 1.3rem;
+  text-align: center;
+  color: #212121;
+}
+
+[data-theme="dark"] .typo-image-center figcaption {
+  color: var(--color-text-muted);
+}
+
+/* ── Full Width Image ── */
+.typo-image-fullwidth {
+  width: 100%;
+  margin: 3.2rem 0;
+}
+
+.typo-image-fullwidth img {
+  width: 100%;
+}
+
+.typo-image-fullwidth figcaption {
+  margin-top: 1.2rem;
+  margin-bottom: 0;
+  font-size: 1.3rem;
+  text-align: center;
+  color: #212121;
+}
+
+[data-theme="dark"] .typo-image-fullwidth figcaption {
+  color: var(--color-text-muted);
+}
+
+/* ── Blockquote with Citation ── */
+.typo-quote-footer {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.typo-quote-footer cite {
+  font-style: italic;
+}
+
+/* ── Abbreviation ── */
+.typo-abbr {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 0.15em;
+}
+
+/* ── Keyboard Shortcut ── */
+.typo-kbd {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Menlo, Consolas, monospace;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  border: 0.1rem solid rgba(190, 190, 190, 0.3);
+  border-radius: 10rem;
+}
+
+[data-theme="dark"] .typo-kbd {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Responsive */
 @media screen and (max-width: 599px) {
   .typo-image-left,
   .typo-image-right {
     float: none;
     margin: 2rem auto;
+  }
+
+  .typo-image-center {
+    max-width: 100%;
   }
 }
