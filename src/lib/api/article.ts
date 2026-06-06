@@ -1,6 +1,6 @@
 import apiClient from "./client";
 import type { ArticleVO, PaginatedData } from "@/types/api";
-import type { Article } from "@/types/ui";
+import type { Article, ArticleDetail } from "@/types/ui";
 
 function mapArticleVOToArticle(vo: ArticleVO): Article {
   return {
@@ -40,4 +40,23 @@ export async function getArticles(params: GetArticlesParams = {}) {
     params: { page, size, category_id: categoryId, tag_id: tagId, author_name: authorName, year, month, day },
   });
   return { list: data.list.map(mapArticleVOToArticle), total: data.total };
+}
+
+function mapArticleDetailVO(vo: ArticleVO): ArticleDetail {
+  return {
+    ...mapArticleVOToArticle(vo),
+    content: vo.content,
+    starCount: vo.star_count,
+    shareCount: vo.share_count,
+    commentCount: vo.comment_count,
+    commentStatus: vo.comment_status,
+  };
+}
+
+/** 根据文章 URL 获取文章详情（含正文） */
+export async function getArticleByUrl(url: string) {
+  const data = await apiClient.get<unknown, ArticleVO>("/article/detail", {
+    params: { url },
+  });
+  return mapArticleDetailVO(data);
 }

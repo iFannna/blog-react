@@ -26,6 +26,7 @@ export interface ArticleVO {
   star_count: number;
   comment_count: number;
   share_count: number;
+  comment_status: number;
   author_id: number;
   author_name: string;
   author_avatar: string;

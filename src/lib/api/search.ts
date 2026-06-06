@@ -11,6 +11,7 @@ function mapSearchHitToArticle(vo: ArticleVO): Article {
     coverImage: vo.cover_image,
     authorName: vo.author_name,
     authorAvatar: vo.author_avatar,
+    authorId: vo.author_id,
     categories: (vo.categories || []).map((c) => ({ id: c.id, name: c.name })),
     tags: (vo.tags || []).map((t) => ({ id: t.id, name: t.name })),
     viewCount: vo.view_count,

@@ -2,6 +2,8 @@ import SiteLayout from "@/components/layout/SiteLayout";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import type { Metadata } from "next";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: "About",
   description: "About me",
