@@ -23,6 +23,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - **禁止在组件内使用 `<style>` 标签或内联 style 对象**
 - **禁止硬编码颜色值**，统一使用 `var(--color-*)`
 - **禁止硬编码间距/圆角**，统一使用 CSS 变量
+- **尽量避免使用 `!important`** — 优先通过提高选择器优先级（增加 class 层级、使用 `:not()` 排除）解决样式覆盖问题
 
 ### rem 基准
 - `html { font-size: 62.5% }` → 1rem = 10px

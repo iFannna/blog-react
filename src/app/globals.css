@@ -3858,11 +3858,11 @@ html:not([data-theme="dark"]) .author-box {
   cursor: pointer;
   border: none;
   margin: 0;
-  padding: 0 !important;
+  padding: 0;
   min-height: 0;
   height: auto;
-  background: none !important;
-  box-shadow: none !important;
+  background: none;
+  box-shadow: none;
   font-size: 1.6rem;
   line-height: 1.5;
   font-weight: 500;
