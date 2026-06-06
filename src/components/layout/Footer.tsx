@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { mockFooterData } from "@/lib/mock-data";
+import { articleHref } from "@/lib/utils";
 import { ArchiveDateLinks } from "@/components/ui/ArchiveDateLinks";
 import type { Article } from "@/types/ui";
 
@@ -7,7 +8,7 @@ function FooterArticleCard({ article }: { article: Article }) {
   return (
     <li>
       <div className="footer-post-thumb">
-        <Link href={article.url}>
+        <Link href={articleHref(article.url)}>
           {article.coverImage ? (
             <img
               src={article.coverImage}
@@ -28,7 +29,7 @@ function FooterArticleCard({ article }: { article: Article }) {
         </Link>
       </div>
       <div className="footer-post-content">
-        <Link href={article.url} className="footer-post-title">
+        <Link href={articleHref(article.url)} className="footer-post-title">
           {article.title}
         </Link>
         <div className="footer-post-author">by {article.authorName}</div>

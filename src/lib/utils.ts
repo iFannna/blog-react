@@ -16,3 +16,8 @@ export function formatDate(iso: string) {
 export function sanitizeCssUrl(url: string): string {
   return url.replace(/['";()\\]/g, "");
 }
+
+/** 数据库存储的文章 url 不含 /archive 前缀，前端跳转需要补上 */
+export function articleHref(url: string): string {
+  return `/archive${url}`;
+}

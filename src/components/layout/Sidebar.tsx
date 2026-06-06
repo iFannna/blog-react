@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Article, Category, Tag } from "@/types/ui";
 import { developerProfile } from "@/lib/mock-data";
+import { articleHref } from "@/lib/utils";
 import { ArchiveDateLinks } from "@/components/ui/ArchiveDateLinks";
 import SearchForm from "@/components/ui/SearchForm";
 
@@ -49,11 +50,11 @@ export default function Sidebar({ categories, tags, featuredArticles }: SidebarP
             <div className="sidebar-widget-title">热点</div>
             <div className="sidebar-featured-cover">
               {featured.coverImage ? (
-                <Link href={featured.url} className="relative">
+                <Link href={articleHref(featured.url)} className="relative">
                   <img src={featured.coverImage} alt={featured.title} loading="lazy" decoding="async" className="object-cover" />
                 </Link>
               ) : (
-                <Link href={featured.url}>
+                <Link href={articleHref(featured.url)}>
                   <span className="sidebar-featured-placeholder cover-placeholder" aria-label="暂无封面">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                       <path d="M5 4.75h14A2.25 2.25 0 0 1 21.25 7v10A2.25 2.25 0 0 1 19 19.25H5A2.25 2.25 0 0 1 2.75 17V7A2.25 2.25 0 0 1 5 4.75Zm0 1.5A.75.75 0 0 0 4.25 7v10c0 .41.34.75.75.75h14a.75.75 0 0 0 .75-.75V7a.75.75 0 0 0-.75-.75H5Zm2.5 2a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm10.25 8.93V17H6.19l3.04-3.28a.75.75 0 0 1 1.08-.03l1.58 1.58 2.78-3.31a.75.75 0 0 1 1.11-.04l1.97 2.13v2.13Z" />
@@ -62,7 +63,7 @@ export default function Sidebar({ categories, tags, featuredArticles }: SidebarP
                 </Link>
               )}
             </div>
-            <Link href={featured.url} className="sidebar-featured-post-title">
+            <Link href={articleHref(featured.url)} className="sidebar-featured-post-title">
               {featured.title}
             </Link>
             <div className="sidebar-featured-post-author">by {featured.authorName}</div>
@@ -74,11 +75,11 @@ export default function Sidebar({ categories, tags, featuredArticles }: SidebarP
                 <div key={article.id} className="small-article-item">
                   <div className="small-article-thumb">
                     {article.coverImage ? (
-                      <Link href={article.url} className="relative">
+                      <Link href={articleHref(article.url)} className="relative">
                         <img src={article.coverImage} alt={article.title} loading="lazy" decoding="async" className="object-cover" />
                       </Link>
                     ) : (
-                      <Link href={article.url}>
+                      <Link href={articleHref(article.url)}>
                         <span className="small-article-placeholder cover-placeholder" aria-label="暂无封面">
                           <svg viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M5 4.75h14A2.25 2.25 0 0 1 21.25 7v10A2.25 2.25 0 0 1 19 19.25H5A2.25 2.25 0 0 1 2.75 17V7A2.25 2.25 0 0 1 5 4.75Zm0 1.5A.75.75 0 0 0 4.25 7v10c0 .41.34.75.75.75h14a.75.75 0 0 0 .75-.75V7a.75.75 0 0 0-.75-.75H5Zm2.5 2a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Zm10.25 8.93V17H6.19l3.04-3.28a.75.75 0 0 1 1.08-.03l1.58 1.58 2.78-3.31a.75.75 0 0 1 1.11-.04l1.97 2.13v2.13Z" />
@@ -88,7 +89,7 @@ export default function Sidebar({ categories, tags, featuredArticles }: SidebarP
                     )}
                   </div>
                   <div>
-                    <Link href={article.url} className="small-article-title">
+                    <Link href={articleHref(article.url)} className="small-article-title">
                       {article.title}
                     </Link>
                     <div className="small-article-author">by {article.authorName}</div>

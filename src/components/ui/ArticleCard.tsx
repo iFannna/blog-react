@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Article } from "@/types/ui";
-import { sanitizeCssUrl } from "@/lib/utils";
+import { sanitizeCssUrl, articleHref } from "@/lib/utils";
 import { ArchiveDateLinks } from "./ArchiveDateLinks";
 
 interface ArticleCardProps {
@@ -21,7 +21,7 @@ export function ArticleCard({ article, highlightTitle, highlightSummary }: Artic
   return (
     <article className="article-card">
       <div className="article-thumb">
-        <Link href={article.url} className="article-thumb-link">
+        <Link href={articleHref(article.url)} className="article-thumb-link">
           {article.coverImage ? (
             <img src={article.coverImage} alt={article.title} loading="lazy" decoding="async" className="object-cover" />
           ) : (
@@ -54,7 +54,7 @@ export function ArticleCard({ article, highlightTitle, highlightSummary }: Artic
         </div>
 
         <h4 className="article-title">
-          <Link href={article.url}>
+          <Link href={articleHref(article.url)}>
             {highlightTitle ? <span dangerouslySetInnerHTML={{ __html: highlightTitle }} /> : article.title}
           </Link>
         </h4>
@@ -90,7 +90,7 @@ export function ArticleCard({ article, highlightTitle, highlightSummary }: Artic
         )}
 
         <div className="article-footer">
-          <Link href={article.url} className="article-read-more">
+          <Link href={articleHref(article.url)} className="article-read-more">
             阅读更多
           </Link>
         </div>
@@ -117,7 +117,7 @@ export function QuoteCard({ article, highlightTitle }: QuoteCardProps) {
       />
       <div className="quote-post-bg-overlay" />
 
-      <Link href={article.url} className="quote-inner">
+      <Link href={articleHref(article.url)} className="quote-inner">
         <svg
           width="40"
           height="40"

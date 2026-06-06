@@ -22,6 +22,9 @@ function parseSlug(slug: string[] | undefined): { year?: number; month?: number;
     notFound();
   }
 
+  // 超过 3 段的不是归档列表，交给文章详情页
+  if (slug.length > 3) notFound();
+
   const year = parseInt(slug[0], 10);
   if (isNaN(year) || year < 1970 || year > 9999) notFound();
 

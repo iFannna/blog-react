@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { Article } from "@/types/ui";
+import { articleHref } from "@/lib/utils";
 import { ArchiveDateLinks } from "./ArchiveDateLinks";
 
 /* 4-color cycle for category pills */
@@ -31,7 +32,7 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
             return (
               <div key={article.id} className="pyml-slide-item">
                 <div className="pyml-slider-backgrounds">
-                  <Link href={article.url}>
+                  <Link href={articleHref(article.url)}>
                     <div className="pyml-slide-bg">
                       {article.coverImage ? (
                         <img
@@ -69,7 +70,7 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
 
                 <div className="slide-inner">
                   <h6>
-                    <Link href={article.url}>{article.title}</Link>
+                    <Link href={articleHref(article.url)}>{article.title}</Link>
                   </h6>
                   <div className="entry-meta">
                     <div className="entry-meta-elements">
