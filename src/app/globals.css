@@ -3588,7 +3588,9 @@ html:not([data-theme="dark"]) .author-box {
   margin-bottom: 0;
 }
 
-.page-entry-content p {
+.page-entry-content p,
+.page-entry-content blockquote,
+.page-entry-content pre {
   margin-bottom: 1.5rem;
   margin-top: 1.5rem;
 }
@@ -3598,15 +3600,34 @@ html:not([data-theme="dark"]) .author-box {
   margin-bottom: 2rem;
 }
 
-.page-entry-content ul {
-  list-style: disc;
+.page-entry-content ul,
+.page-entry-content ol {
   margin-left: 4rem;
   margin-bottom: 2rem;
   margin-top: 2rem;
 }
 
-.page-entry-content ul li {
+.page-entry-content ul,
+.page-entry-content ol {
+  list-style: none;
+}
+
+.page-entry-content ul {
+  list-style: disc;
+}
+
+.page-entry-content ol {
+  list-style: decimal;
+}
+
+.page-entry-content ul li,
+.page-entry-content ol li {
   margin-bottom: 0.64rem;
+}
+
+.page-entry-content ul li:last-child,
+.page-entry-content ol li:last-child {
+  margin-bottom: 0;
 }
 
 .page-entry-content a,
@@ -4132,59 +4153,59 @@ html:not([data-theme="dark"]) .author-box {
 
 /* ── Typography Page Styles ── */
 
-/* Headings — matches the reference design font sizes */
+/* Headings — wp-block-heading font sizes + bloglo dynamic-styles */
 .typo-heading-1 {
-  margin-top: 2rem;
-  margin-bottom: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 1.8rem;
   font-weight: 700;
   font-size: 4rem;
   line-height: 1.1;
-  color: var(--color-text);
+  color: #333333;
 }
 
 .typo-heading-2 {
-  margin-top: 2rem;
-  margin-bottom: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 1.8rem;
   font-weight: 700;
   font-size: 3.6rem;
   line-height: 1.2;
-  color: var(--color-text);
+  color: #333333;
 }
 
 .typo-heading-3 {
-  margin-top: 2rem;
-  margin-bottom: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 1.8rem;
   font-weight: 700;
   font-size: 2.8rem;
   line-height: 1.2;
-  color: var(--color-text);
+  color: #333333;
 }
 
 .typo-heading-4 {
-  margin-top: 2.4rem;
-  margin-bottom: 0.8rem;
+  margin-top: 0;
+  margin-bottom: 1.8rem;
   font-weight: 700;
   font-size: 2.4rem;
   line-height: 1.2;
-  color: var(--color-text);
+  color: #333333;
 }
 
 .typo-heading-5 {
-  margin-top: 2.4rem;
-  margin-bottom: 0.8rem;
+  margin-top: 0;
+  margin-bottom: 1.8rem;
   font-weight: 700;
   font-size: 2rem;
   line-height: 1.2;
-  color: var(--color-text);
+  color: #333333;
 }
 
 .typo-heading-6 {
-  margin-top: 2.4rem;
-  margin-bottom: 0.8rem;
+  margin-top: 0;
+  margin-bottom: 1.8rem;
   font-weight: 600;
   font-size: 1.8rem;
   line-height: 1.72;
-  color: var(--color-text);
+  color: #333333;
 }
 
 [data-theme="dark"] .typo-heading-1,
@@ -4196,32 +4217,35 @@ html:not([data-theme="dark"]) .author-box {
   color: var(--color-text);
 }
 
-/* Spacer — replaces wp-block-spacer inline style */
+/* Spacer — replaces wp-block-spacer inline style (height:50px) */
 .typo-spacer {
   clear: both;
-  height: 50px;
+  height: 5rem;
 }
 
-/* Separator — replaces wp-block-separator */
+/* Separator — replaces wp-block-separator:not(.is-style-wide):not(.is-style-dots) */
 .typo-separator {
   border: none;
-  border-bottom: 2px solid var(--color-border);
-  width: 100px;
+  border-bottom: 2px solid;
+  width: 10rem;
   margin-left: auto;
   margin-right: auto;
   margin-top: 3.2rem;
   margin-bottom: 3.2rem;
+  opacity: 1;
 }
 
 /* Blockquote — replaces wp-block-quote + bloglo-entry blockquote */
 .typo-quote {
   box-sizing: border-box;
   overflow-wrap: break-word;
-  margin: 2rem 0;
   padding: 0.8rem 2.4rem;
-  border-left: 0.4rem solid var(--color-primary);
+  border-style: none;
+  border-left-style: solid;
+  border-width: 0.4rem;
+  border-color: var(--color-primary);
   border-radius: var(--radius-normal);
-  background-color: var(--color-primary-faint);
+  background-color: rgba(0, 0, 0, 0.04);
   font-size: 1.6rem;
   line-height: inherit;
 }
@@ -4241,33 +4265,20 @@ html:not([data-theme="dark"]) .author-box {
   margin-bottom: 0;
 }
 
-/* Lists — complements page-entry-content ul/ol */
-.typo-list {
-  box-sizing: border-box;
-  margin-left: 4rem;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+[data-theme="dark"] .typo-quote {
+  background-color: rgba(255, 255, 255, 0.04);
 }
 
-.typo-list li {
-  margin-bottom: 0.64rem;
-}
-
-.typo-list li:last-child {
-  margin-bottom: 0;
-}
-
-/* Unordered list style */
+/* Lists — list-style for typo variants */
 ul.typo-list {
   list-style: disc;
 }
 
-/* Ordered list style */
 ol.typo-list {
   list-style: decimal;
 }
 
-/* Image alignment — replaces wp-block-image alignleft/alignright */
+/* Image alignment — wp-block-image alignleft / alignright */
 .typo-image-left {
   float: left;
   margin: 0.5em 1em 0.5em 0;
@@ -4285,11 +4296,11 @@ ol.typo-list {
 .typo-image-left figcaption {
   display: table-caption;
   caption-side: bottom;
-  margin-top: 0.5em;
-  margin-bottom: 1em;
+  margin-top: 1.2rem;
+  margin-bottom: 0;
   font-size: 1.3rem;
   text-align: center;
-  color: var(--color-text-muted);
+  color: #212121;
 }
 
 .typo-image-right {
@@ -4309,26 +4320,34 @@ ol.typo-list {
 .typo-image-right figcaption {
   display: table-caption;
   caption-side: bottom;
-  margin-top: 0.5em;
-  margin-bottom: 1em;
+  margin-top: 1.2rem;
+  margin-bottom: 0;
   font-size: 1.3rem;
   text-align: center;
+  color: #212121;
+}
+
+[data-theme="dark"] .typo-image-left figcaption,
+[data-theme="dark"] .typo-image-right figcaption {
   color: var(--color-text-muted);
 }
 
-/* Code block — replaces wp-block-code */
+/* Code block — wp-block-code */
 .typo-code-block {
   display: block;
-  border: 1px solid var(--color-border);
+  border: 1px solid #ccc;
   border-radius: 0.4rem;
   font-family: Menlo, Consolas, Monaco, "Courier New", monospace;
   padding: 0.8em 1em;
-  margin: 1.5rem 0;
   overflow: auto;
   page-break-inside: avoid;
   word-break: break-all;
   word-wrap: break-word;
   font-size: 1.6rem;
+}
+
+[data-theme="dark"] .typo-code-block {
+  border-color: var(--color-border);
 }
 
 .typo-code-block code {
@@ -4345,7 +4364,7 @@ ol.typo-list {
   color: inherit;
 }
 
-/* Font size variants — replaces has-small/medium/large/x-large-font-size */
+/* Font size variants — wp preset font sizes */
 .typo-font-small {
   font-size: 1.3rem;
 }
@@ -4356,16 +4375,15 @@ ol.typo-list {
 }
 
 .typo-font-large {
-  font-size: 2.4rem;
+  font-size: 3.6rem;
   line-height: 1.25;
 }
 
 .typo-font-xlarge {
-  font-size: 3.2rem;
-  line-height: 1.2;
+  font-size: 4.2rem;
 }
 
-/* Buttons row layout */
+/* Buttons — wp-block-buttons + wp-block-button__link */
 .typo-buttons-row {
   margin-bottom: 1.5rem;
 }
@@ -4378,7 +4396,7 @@ ol.typo-list {
   gap: 0.5em;
 }
 
-/* Button base — replaces wp-block-button__link */
+/* Filled button — wp-block-button__link defaults: bg #32373c, color #fff */
 .typo-btn {
   display: inline-flex;
   align-items: center;
@@ -4393,13 +4411,14 @@ ol.typo-list {
   padding: 1.2rem 3.2rem;
   min-height: 5rem;
   width: 100%;
-  color: var(--color-on-primary);
-  background-color: var(--color-primary);
-  border: 0.2rem solid var(--color-primary);
+  color: #fff;
+  background-color: #32373c;
+  border: 0.2rem solid;
   border-radius: 0;
   transition: var(--transition-primary);
 }
 
+/* Filled button hover — bloglo: bg transparent, color inherit, border currentColor */
 .typo-btn:hover,
 .typo-btn:focus-visible {
   color: inherit;
@@ -4407,30 +4426,28 @@ ol.typo-list {
   border-color: currentColor;
 }
 
-/* Outline button variant */
+/* Outline button — is-style-outline */
 .typo-btn--outline {
-  color: var(--color-text);
+  color: currentColor;
   background-color: transparent;
   border: 0.2rem solid currentColor;
-  padding-top: 0.667em;
-  padding-bottom: 0.667em;
-  padding-left: 1.33em;
-  padding-right: 1.33em;
+  padding: 0.667em 1.33em;
 }
 
+/* Outline button hover — bloglo: bg secondary, border transparent, color white */
 .typo-btn--outline:hover,
 .typo-btn--outline:focus-visible {
-  color: var(--color-on-primary);
-  background-color: var(--color-primary);
+  color: #fff;
+  background-color: var(--color-secondary);
   border-color: transparent;
 }
 
-/* Rounded button variant */
+/* Rounded button */
 .typo-btn--rounded {
   border-radius: 10rem;
 }
 
-/* Ensure typo-btn inside entry-content has no underline */
+/* No underline on buttons inside entry-content */
 .page-entry-content .typo-btn {
   text-decoration: none;
 }
@@ -4440,14 +4457,14 @@ ol.typo-list {
   text-decoration: none;
 }
 
-/* Image alignment clearfix — prevent float bleed into next sections */
+/* Image alignment clearfix — prevent float bleed */
 .page-entry-content::after {
   content: "";
   display: table;
   clear: both;
 }
 
-/* Responsive image alignment — stack on small screens */
+/* Responsive — stack floated images on small screens */
 @media screen and (max-width: 599px) {
   .typo-image-left,
   .typo-image-right {
