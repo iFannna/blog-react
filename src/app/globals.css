@@ -3757,22 +3757,22 @@ html:not([data-theme="dark"]) .author-box {
 }
 
 .page-entry-content a,
-.content-area a:not(.page-numbers, .post-author-box-link, .post-tags-links a, .article-cat-pill, .archive-date-link, .article-author-link, .post-author-box-name a) {
+.content-area a:not(.page-numbers, .post-author-box-link, .post-tags-links a, .article-cat-pill, .archive-date-link, .article-author-link, .post-author-box-name-link) {
   text-decoration: underline;
   text-underline-offset: 0.1rem;
 }
 
 .page-entry-content a:hover,
 .page-entry-content a:focus,
-.content-area a:not(.page-numbers, .post-author-box-link, .post-tags-links a, .article-cat-pill, .archive-date-link, .article-author-link):hover {
+.content-area a:not(.page-numbers, .post-author-box-link, .post-tags-links a, .article-cat-pill, .archive-date-link, .article-author-link, .post-author-box-name-link):hover {
   text-decoration: none;
 }
 
-.content-area a:not(.page-numbers, .post-author-box-link, .post-tags-links a, .article-cat-pill, .archive-date-link, .article-author-link, .post-author-box-name a) {
+.content-area a:not(.page-numbers, .post-author-box-link, .post-tags-links a, .article-cat-pill, .archive-date-link, .article-author-link, .post-author-box-name-link) {
   color: var(--color-primary);
 }
 
-.content-area a:not(.page-numbers, .post-author-box-link, .post-tags-links a, .article-cat-pill, .archive-date-link, .article-author-link):hover {
+.content-area a:not(.page-numbers, .post-author-box-link, .post-tags-links a, .article-cat-pill, .archive-date-link, .article-author-link, .post-author-box-name-link):hover {
   color: var(--color-text-muted);
 }
 
@@ -3881,15 +3881,15 @@ html:not([data-theme="dark"]) .author-box {
   color: #333333;
 }
 
-.content-area .post-author-box-name a {
-  color: inherit !important;
-  text-decoration: none !important;
+.post-author-box-name-link {
+  color: inherit;
+  text-decoration: none;
 }
 
-.content-area .post-author-box-name a:hover,
-.content-area .post-author-box-name a:focus-visible {
-  color: var(--color-primary) !important;
-  text-decoration: underline !important;
+.post-author-box-name-link:hover,
+.post-author-box-name-link:focus-visible {
+  color: var(--color-primary);
+  text-decoration: underline;
 }
 
 .post-author-box-content {

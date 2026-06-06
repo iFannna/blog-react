@@ -180,7 +180,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </div>
             <div className="post-author-box-meta">
               <div className="post-author-box-name">
-                <Link href={`/author/${article.authorName}`}>
+                <Link href={`/author/${article.authorName}`} className="post-author-box-name-link">
                   {article.authorName}
                 </Link>
               </div>
