@@ -3578,6 +3578,43 @@ html:not([data-theme="dark"]) .author-box {
   clear: both;
 }
 
+/* ── Article Header (detail page) ── */
+
+.post-category {
+  margin-bottom: 0.3rem;
+  font-size: 1.4rem;
+}
+
+.entry-header {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.entry-title {
+  margin: 0;
+  padding: 0;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #333333;
+}
+
+.post-summary {
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  line-height: 1.75;
+  color: #666666;
+}
+
+[data-theme="dark"] .entry-title {
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .post-summary {
+  color: var(--color-text-muted);
+}
+
 .page-entry-content > :first-child,
 .page-column > :first-child {
   margin-top: 0;
@@ -3648,6 +3685,36 @@ html:not([data-theme="dark"]) .author-box {
 
 .content-area a:not(.page-numbers):hover {
   color: var(--color-text-muted);
+}
+
+/* Article header: override base link styles */
+.content-area .post-category .article-cat-pill {
+  color: #fff;
+  text-decoration: none;
+}
+
+.content-area .post-category .article-cat-pill:hover,
+.content-area .post-category .article-cat-pill:focus-visible {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.content-area .article-meta a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.content-area .article-meta a:hover,
+.content-area .article-meta a:focus-visible {
+  text-decoration: none;
+  color: var(--color-primary);
+}
+
+.content-area .article-meta .article-author-link:hover,
+.content-area .article-meta .article-author-link:focus-visible {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.1rem;
 }
 
 /* ── Page Columns (replacing wp-block-columns) ── */
