@@ -159,6 +159,39 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               <ArchiveDateLinks publishTime={article.publishTime} prefix={"Last updated on "} />
             </span>
           </footer>
+
+          {/* 作者信息卡片 */}
+          <section className="post-author-box">
+            <div className="post-author-box-avatar">
+              {article.authorAvatar ? (
+                <img
+                  src={article.authorAvatar}
+                  alt={article.authorName}
+                  width={75}
+                  height={75}
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <span className="post-author-box-avatar-placeholder">
+                  {article.authorName.charAt(0)}
+                </span>
+              )}
+            </div>
+            <div className="post-author-box-meta">
+              <div className="post-author-box-name">
+                <Link href={`/author/${article.authorName}`}>
+                  {article.authorName}
+                </Link>
+              </div>
+              <div className="post-author-box-content" />
+              <div className="post-author-box-more">
+                <Link href={`/author/${article.authorName}`} className="post-author-box-link" role="button">
+                  <span>View All Posts</span>
+                </Link>
+              </div>
+            </div>
+          </section>
         </article>
       </div>
     </SiteLayout>

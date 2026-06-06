@@ -3757,22 +3757,22 @@ html:not([data-theme="dark"]) .author-box {
 }
 
 .page-entry-content a,
-.content-area a:not(.page-numbers) {
+.content-area a:not(.page-numbers, .post-author-box-link, .post-tags-links a) {
   text-decoration: underline;
   text-underline-offset: 0.1rem;
 }
 
 .page-entry-content a:hover,
 .page-entry-content a:focus,
-.content-area a:not(.page-numbers):hover {
+.content-area a:not(.page-numbers, .post-author-box-link, .post-tags-links a):hover {
   text-decoration: none;
 }
 
-.content-area a:not(.page-numbers) {
+.content-area a:not(.page-numbers, .post-author-box-link, .post-tags-links a) {
   color: var(--color-primary);
 }
 
-.content-area a:not(.page-numbers):hover {
+.content-area a:not(.page-numbers, .post-author-box-link, .post-tags-links a):hover {
   color: var(--color-text-muted);
 }
 
@@ -3825,6 +3825,170 @@ html:not([data-theme="dark"]) .author-box {
 .content-area .post-tags-links a:focus-visible {
   color: #fff;
   text-decoration: none;
+}
+
+/* ── Post Author Box ── */
+
+.post-author-box {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 4rem;
+  margin: 3rem auto;
+  border: 0.1rem solid rgba(190, 190, 190, 0.3);
+  border-radius: 0;
+}
+
+.post-author-box-avatar {
+  flex-shrink: 0;
+  flex-grow: 0;
+  align-self: flex-start;
+  margin-right: 2.5rem;
+  min-width: 0;
+  min-height: 0;
+}
+
+.post-author-box-avatar img {
+  display: block;
+  border-radius: 50%;
+}
+
+.post-author-box-avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 50%;
+  background-color: var(--color-bg-muted);
+  font-size: 2.4rem;
+  color: var(--color-text-muted);
+}
+
+.post-author-box-meta {
+  flex-shrink: 1;
+  flex-grow: 0;
+  min-width: 0;
+  min-height: 0;
+}
+
+.post-author-box-name {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #333333;
+}
+
+.post-author-box-name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.post-author-box-name a:hover,
+.post-author-box-name a:focus-visible {
+  color: var(--color-primary);
+}
+
+.post-author-box-content {
+  line-height: 1.6;
+}
+
+.post-author-box-more {
+  margin-top: 1.6rem;
+}
+
+.post-author-box-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 100%;
+  cursor: pointer;
+  border: none;
+  margin: 0;
+  padding: 0 !important;
+  min-height: 0;
+  height: auto;
+  background: none !important;
+  box-shadow: none !important;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #212121;
+  text-decoration: none;
+  transition: color 0.35s ease;
+}
+
+.post-author-box-link span {
+  position: relative;
+  z-index: 2;
+  padding: 0;
+}
+
+.post-author-box-link span::before {
+  content: "";
+  position: absolute;
+  bottom: -0.1rem;
+  left: 0;
+  width: 100%;
+  height: 0.1rem;
+  background-color: #212121;
+  transform-origin: right center;
+  transform: scale(0, 1);
+  transition: transform 0.35s cubic-bezier(0.645, 0.045, 0.355, 1);
+  backface-visibility: hidden;
+  will-change: scale;
+  z-index: 1;
+}
+
+.post-author-box-link:hover,
+.post-author-box-link:focus-visible {
+  color: #1E293B;
+}
+
+.post-author-box-link:hover span::before,
+.post-author-box-link:focus-visible span::before {
+  background-color: #1E293B;
+  transform-origin: left center;
+  transform: scale(1, 1);
+}
+
+[data-theme="dark"] .post-author-box {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .post-author-box-name {
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .post-author-box-link {
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .post-author-box-link span::before {
+  background-color: var(--color-text);
+}
+
+[data-theme="dark"] .post-author-box-link:hover,
+[data-theme="dark"] .post-author-box-link:focus-visible {
+  color: #fff;
+}
+
+[data-theme="dark"] .post-author-box-link:hover span::before,
+[data-theme="dark"] .post-author-box-link:focus-visible span::before {
+  background-color: #fff;
+}
+
+@media screen and (max-width: 599px) {
+  .post-author-box {
+    padding: 2.5rem;
+  }
+
+  .post-author-box-avatar {
+    display: none;
+  }
 }
 
 /* ── Page Columns (replacing wp-block-columns) ── */
