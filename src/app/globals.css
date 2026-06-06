@@ -4447,14 +4447,39 @@ ol.typo-list {
   border-radius: 10rem;
 }
 
-/* No underline on buttons inside entry-content */
-.page-entry-content .typo-btn {
+/* No underline/color override on buttons — must override .content-area a:not(.page-numbers) */
+.content-area a.typo-btn,
+.page-entry-content a.typo-btn {
   text-decoration: none;
+  color: #fff;
+  background-color: #32373c;
+  border: 0.2rem solid #32373c;
 }
 
-.page-entry-content .typo-btn:hover,
-.page-entry-content .typo-btn:focus-visible {
+.content-area a.typo-btn:hover,
+.content-area a.typo-btn:focus-visible,
+.page-entry-content a.typo-btn:hover,
+.page-entry-content a.typo-btn:focus-visible {
   text-decoration: none;
+  color: inherit;
+  background-color: transparent;
+  border-color: currentColor;
+}
+
+.content-area a.typo-btn--outline,
+.page-entry-content a.typo-btn--outline {
+  color: currentColor;
+  background-color: transparent;
+  border: 0.2rem solid currentColor;
+}
+
+.content-area a.typo-btn--outline:hover,
+.content-area a.typo-btn--outline:focus-visible,
+.page-entry-content a.typo-btn--outline:hover,
+.page-entry-content a.typo-btn--outline:focus-visible {
+  color: #fff;
+  background-color: var(--color-secondary);
+  border-color: transparent;
 }
 
 /* Image alignment clearfix — prevent float bleed */
