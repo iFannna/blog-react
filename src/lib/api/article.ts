@@ -1,6 +1,6 @@
 import apiClient from "./client";
-import type { ArticleVO, PaginatedData } from "@/types/api";
-import type { Article, ArticleDetail } from "@/types/ui";
+import type { ArticleVO, PaginatedData, ApiPrevNext } from "@/types/api";
+import type { Article, ArticleDetail, PrevNext } from "@/types/ui";
 
 function mapArticleVOToArticle(vo: ArticleVO): Article {
   return {
@@ -59,4 +59,13 @@ export async function getArticleByUrl(url: string) {
     params: { url },
   });
   return mapArticleDetailVO(data);
+}
+
+/** 根据文章 ID 获取上下篇文章导航 */
+export async function getArticlePrevNext(id: number): Promise<PrevNext> {
+  const data = await apiClient.get<unknown, ApiPrevNext>(`/article/${id}/prev-next`);
+  return {
+    prev: data.prev ? { id: data.prev.id, title: data.prev.title, url: data.prev.url, coverImage: data.prev.cover_image } : null,
+    next: data.next ? { id: data.next.id, title: data.next.title, url: data.next.url, coverImage: data.next.cover_image } : null,
+  };
 }

@@ -4,8 +4,9 @@ import Link from "next/link";
 import SiteLayout from "@/components/layout/SiteLayout";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import MarkdownContent from "@/components/ui/MarkdownContent";
+import PostNav from "@/components/ui/PostNav";
 import { ArchiveDateLinks } from "@/components/ui/ArchiveDateLinks";
-import { getArticleByUrl } from "@/lib/api/article";
+import { getArticleByUrl, getArticlePrevNext } from "@/lib/api/article";
 
 export const dynamic = "force-dynamic";
 
@@ -46,6 +47,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   } catch {
     notFound();
   }
+
+  const prevNext = await getArticlePrevNext(article.id);
 
   return (
     <SiteLayout
@@ -192,6 +195,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               </div>
             </div>
           </section>
+
+          {/* 上下篇文章导航 */}
+          <PostNav prevNext={prevNext} />
         </article>
       </div>
     </SiteLayout>

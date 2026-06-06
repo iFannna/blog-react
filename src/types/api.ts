@@ -50,3 +50,15 @@ export interface ApiTag {
   created_at: string;
   updated_at: string;
 }
+
+export interface ApiNavArticle {
+  id: number;
+  title: string;
+  url: string;
+  cover_image: string;
+}
+
+export interface ApiPrevNext {
+  prev: ApiNavArticle | null;
+  next: ApiNavArticle | null;
+}

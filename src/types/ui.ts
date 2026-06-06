@@ -47,3 +47,17 @@ export interface Tag {
   id: number;
   name: string;
 }
+
+/** 文章导航项（上一篇/下一篇） */
+export interface NavArticle {
+  id: number;
+  title: string;
+  url: string;
+  coverImage: string;
+}
+
+/** 上下篇文章导航 */
+export interface PrevNext {
+  prev: NavArticle | null;
+  next: NavArticle | null;
+}
