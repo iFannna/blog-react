@@ -4162,6 +4162,7 @@ html:not([data-theme="dark"]) .author-box {
 .typo-heading-6 {
   margin-top: 0;
   margin-bottom: 1.8rem;
+  font-weight: 700;
   color: #333333;
 }
 
@@ -4175,31 +4176,26 @@ html:not([data-theme="dark"]) .author-box {
 }
 
 .typo-heading-1 {
-  font-weight: 700;
   font-size: 4rem;
   line-height: 1.1;
 }
 
 .typo-heading-2 {
-  font-weight: 700;
   font-size: 3.6rem;
   line-height: 1.2;
 }
 
 .typo-heading-3 {
-  font-weight: 700;
   font-size: 2.8rem;
   line-height: 1.2;
 }
 
 .typo-heading-4 {
-  font-weight: 700;
   font-size: 2.4rem;
   line-height: 1.2;
 }
 
 .typo-heading-5 {
-  font-weight: 700;
   font-size: 2rem;
   line-height: 1.2;
 }
@@ -4461,15 +4457,10 @@ ol.typo-list {
 
 .typo-table th {
   font-weight: 600;
-  color: var(--color-text);
 }
 
 .typo-table tbody tr {
   border-bottom: 0.1rem solid var(--color-border-faint);
-}
-
-.typo-table tbody tr:last-child {
-  border-bottom: none;
 }
 
 .typo-badge {
@@ -4597,22 +4588,6 @@ ol.typo-list {
   max-width: 60%;
 }
 
-.typo-image-center img {
-  margin: 0 auto;
-}
-
-.typo-image-center figcaption {
-  margin-top: 1.2rem;
-  margin-bottom: 0;
-  font-size: 1.3rem;
-  text-align: center;
-  color: #212121;
-}
-
-[data-theme="dark"] .typo-image-center figcaption {
-  color: var(--color-text-muted);
-}
-
 /* ── Full Width Image ── */
 .typo-image-fullwidth {
   width: 100%;
@@ -4623,6 +4598,7 @@ ol.typo-list {
   width: 100%;
 }
 
+.typo-image-center figcaption,
 .typo-image-fullwidth figcaption {
   margin-top: 1.2rem;
   margin-bottom: 0;
@@ -4631,6 +4607,7 @@ ol.typo-list {
   color: #212121;
 }
 
+[data-theme="dark"] .typo-image-center figcaption,
 [data-theme="dark"] .typo-image-fullwidth figcaption {
   color: var(--color-text-muted);
 }
@@ -4640,10 +4617,6 @@ ol.typo-list {
   margin-top: 1rem;
   font-size: 1.4rem;
   color: var(--color-text-muted);
-  font-style: italic;
-}
-
-.typo-quote-footer cite {
   font-style: italic;
 }
 
