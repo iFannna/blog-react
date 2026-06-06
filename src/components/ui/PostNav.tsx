@@ -16,12 +16,9 @@ export default function PostNav({ prevNext }: { prevNext: PrevNext }) {
             <div className="nav-content">
               {prev.coverImage && (
                 <img
-                  width={75}
-                  height={75}
                   src={prev.coverImage}
                   alt={prev.title}
                   loading="lazy"
-                  decoding="async"
                 />
               )}
               <span>{prev.title}</span>
@@ -37,12 +34,9 @@ export default function PostNav({ prevNext }: { prevNext: PrevNext }) {
               <span>{next.title}</span>
               {next.coverImage && (
                 <img
-                  width={75}
-                  height={75}
                   src={next.coverImage}
                   alt={next.title}
                   loading="lazy"
-                  decoding="async"
                 />
               )}
             </div>

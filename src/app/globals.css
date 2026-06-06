@@ -3663,7 +3663,8 @@ html:not([data-theme="dark"]) .author-box {
   transition: var(--transition-primary);
 }
 
-.post-tags-links a:hover {
+.post-tags-links a:hover,
+.post-tags-links a:focus-visible {
   background-color: var(--color-primary);
   color: #fff;
   border-color: transparent;
@@ -3982,7 +3983,8 @@ html:not([data-theme="dark"]) .author-box {
   transition: var(--transition-primary);
 }
 
-.post-nav a:hover {
+.post-nav a:hover,
+.post-nav a:focus-visible {
   color: var(--color-primary);
   text-decoration: underline;
   text-underline-offset: 0.1rem;
