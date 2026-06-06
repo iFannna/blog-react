@@ -18,13 +18,6 @@ const CHECK_SVG = (
   </svg>
 );
 
-/** 检测子元素中是否包含 checkbox input（用于判断任务列表） */
-function isTaskList(children: React.ReactNode): boolean {
-  return React.Children.toArray(children).some(
-    (child) => React.isValidElement(child) && child.type === "input"
-  );
-}
-
 const components: Components = {
   h1: ({ children }) => <h1 className="typo-heading-1">{children}</h1>,
   h2: ({ children }) => <h2 className="typo-heading-2">{children}</h2>,
@@ -73,27 +66,7 @@ const components: Components = {
     </ol>
   ),
 
-  li: ({ children, ...props }) => {
-    const childArray = React.Children.toArray(children);
-    const hasCheckbox = childArray.some(
-      (child) => React.isValidElement(child) && child.type === "input"
-    );
-    if (hasCheckbox) {
-      const checkboxes = childArray.filter(
-        (child) => React.isValidElement(child) && child.type === "input"
-      );
-      const textContent = childArray.filter(
-        (child) => !(React.isValidElement(child) && child.type === "input")
-      );
-      return (
-        <li {...props}>
-          {checkboxes}
-          <span>{textContent}</span>
-        </li>
-      );
-    }
-    return <li {...props}>{children}</li>;
-  },
+  li: ({ children, ...props }) => <li {...props}>{children}</li>,
 
   input: ({ checked }) => {
     if (checked) {

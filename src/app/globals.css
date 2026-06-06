@@ -4296,6 +4296,7 @@ ol.typo-list {
   padding: 0.8em 1em;
   overflow: auto;
   font-size: 1.6rem;
+  font-variant-ligatures: none;
 }
 
 [data-theme="dark"] .typo-code-block {
@@ -4766,7 +4767,9 @@ ol.typo-list {
   color: #f85149;
 }
 
-/* Task list override for page-entry-content base styles */
+/* ── Typo overrides for .page-entry-content base styles ── */
+
+/* Task list: no markers, no left margin */
 .page-entry-content ul.typo-task-list,
 .page-entry-content ul.contains-task-list {
   list-style: none !important;
@@ -4780,4 +4783,14 @@ ol.typo-list {
 
 .page-entry-content li.task-list-item::marker {
   content: none !important;
+}
+
+/* Code wrapper gets the spacing */
+.page-entry-content .typo-code-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+/* Inline code: no underline */
+.page-entry-content code.typo-inline-code {
+  text-decoration: none;
 }
