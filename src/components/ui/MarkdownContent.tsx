@@ -54,15 +54,17 @@ const components: Components = {
     <blockquote className="typo-quote">{children}</blockquote>
   ),
 
-  ul: ({ children, ...props }) => {
-    if (isTaskList(children)) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ul: ({ children, node }: any) => {
+    // remark-gfm 会给 task list 的 <li> 添加 class="task-list-item"
+    const isTask = node?.children?.some(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (c: any) => c.properties?.className?.includes("task-list-item")
+    );
+    if (isTask) {
       return <ul className="typo-task-list">{children}</ul>;
     }
-    return (
-      <ul className="typo-list" {...props}>
-        {children}
-      </ul>
-    );
+    return <ul className="typo-list">{children}</ul>;
   },
 
   ol: ({ children, ...props }) => (

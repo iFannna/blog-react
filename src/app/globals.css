@@ -4443,6 +4443,7 @@ ol.typo-list {
   width: 100%;
   border-collapse: collapse;
   font-size: 1.5rem;
+  margin: 1.5rem 0;
 }
 
 .typo-table th,
@@ -4496,20 +4497,23 @@ ol.typo-list {
 }
 
 /* ── Task List ── */
-.typo-task-list {
+.typo-task-list,
+.contains-task-list {
   list-style: none;
   margin-left: 0;
   padding-left: 0;
 }
 
-.typo-task-list li {
+.typo-task-list li,
+.contains-task-list li {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-bottom: 0.8rem;
 }
 
-.typo-task-list li:last-child {
+.typo-task-list li:last-child,
+.contains-task-list li:last-child {
   margin-bottom: 0;
 }
 
@@ -4763,8 +4767,17 @@ ol.typo-list {
 }
 
 /* Task list override for page-entry-content base styles */
-.page-entry-content ul.typo-task-list {
-  list-style: none;
+.page-entry-content ul.typo-task-list,
+.page-entry-content ul.contains-task-list {
+  list-style: none !important;
   margin-left: 0;
   padding-left: 0;
+}
+
+.page-entry-content li.task-list-item {
+  list-style: none !important;
+}
+
+.page-entry-content li.task-list-item::marker {
+  content: none !important;
 }
