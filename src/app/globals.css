@@ -3776,57 +3776,6 @@ html:not([data-theme="dark"]) .author-box {
   color: var(--color-text-muted);
 }
 
-/* Article header: override base link styles */
-.content-area .post-category .article-cat-pill {
-  color: #fff;
-  text-decoration: none;
-}
-
-.content-area .post-category .article-cat-pill:hover,
-.content-area .post-category .article-cat-pill:focus-visible {
-  color: #fff;
-  text-decoration: underline;
-}
-
-.content-area .article-meta a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.content-area .article-meta a:hover,
-.content-area .article-meta a:focus-visible {
-  text-decoration: none;
-  color: var(--color-primary);
-}
-
-.content-area .last-updated a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.content-area .last-updated a:hover,
-.content-area .last-updated a:focus-visible {
-  color: var(--color-primary);
-}
-
-.content-area .article-meta .article-author-link:hover,
-.content-area .article-meta .article-author-link:focus-visible {
-  color: var(--color-primary);
-  text-decoration: underline;
-  text-underline-offset: 0.1rem;
-}
-
-.content-area .post-tags-links a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.content-area .post-tags-links a:hover,
-.content-area .post-tags-links a:focus-visible {
-  color: #fff;
-  text-decoration: none;
-}
-
 /* ── Post Author Box ── */
 
 .post-author-box {
