@@ -128,6 +128,12 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             <p className="post-summary">{article.summary}</p>
           )}
 
+          {article.coverImage && (
+            <figure className="post-cover">
+              <img src={article.coverImage} alt={article.title} loading="lazy" decoding="async" />
+            </figure>
+          )}
+
           {/* 文章正文 */}
           <div className="entry-content page-entry-content">
             <MarkdownContent content={article.content} />

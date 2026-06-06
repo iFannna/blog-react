@@ -3581,7 +3581,7 @@ html:not([data-theme="dark"]) .author-box {
 /* ── Article Header (detail page) ── */
 
 .post-category {
-  margin-bottom: 0.3rem;
+  margin-bottom: 2rem;
   font-size: 1.4rem;
 }
 
@@ -3613,6 +3613,15 @@ html:not([data-theme="dark"]) .author-box {
 
 [data-theme="dark"] .post-summary {
   color: var(--color-text-muted);
+}
+
+.post-cover {
+  margin: 4rem 0;
+}
+
+.post-cover img {
+  width: 100%;
+  object-fit: cover;
 }
 
 .page-entry-content > :first-child,
