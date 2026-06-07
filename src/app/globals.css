@@ -4849,18 +4849,16 @@ ol.typo-list {
 .typo-table td {
   padding: 1.2rem 1.6rem;
   text-align: left;
-}
-
-.typo-table thead {
-  border-bottom: 0.2rem solid var(--color-primary);
+  border: 0.1rem solid #ccc;
 }
 
 .typo-table th {
   font-weight: 600;
 }
 
-.typo-table tbody tr {
-  border-bottom: 0.1rem solid var(--color-border-faint);
+[data-theme="dark"] .typo-table th,
+[data-theme="dark"] .typo-table td {
+  border-color: var(--color-border);
 }
 
 .typo-badge {
