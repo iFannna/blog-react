@@ -41,7 +41,7 @@ export default function RootLayout({
         {/* 刷新时恢复滚动位置 */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){var k="scroll_pos";var s=sessionStorage.getItem(k);if(s){history.scrollRestoration="manual";document.documentElement.style.visibility="hidden";window.addEventListener("load",function(){window.scrollTo(0,parseInt(s,10));document.documentElement.style.visibility=""})}window.addEventListener("beforeunload",function(){sessionStorage.setItem(k,String(window.scrollY))})})()`,
+            __html: `(function(){var k="scroll_pos";var s=sessionStorage.getItem(k);if(s){history.scrollRestoration="manual";document.documentElement.style.visibility="hidden";document.addEventListener("DOMContentLoaded",function(){window.scrollTo(0,parseInt(s,10));document.documentElement.style.visibility=""})}window.addEventListener("beforeunload",function(){sessionStorage.setItem(k,String(window.scrollY))})})()`,
           }}
         />
       </head>

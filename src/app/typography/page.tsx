@@ -329,7 +329,7 @@ export default function TypographyPage() {
             <figure className="typo-image-right">
               <img
                 decoding="async"
-                src="https://www.3forty.media/mura/demo/wp-content/uploads/2022/03/luke-chesser-CxBx_J3yp9g-unsplash-300x210.jpg"
+                src="https://java-ai-sau.oss-cn-beijing.aliyuncs.com/media/image/2026/04/b482211c-135f-426a-b36d-ec519374b6a6.jpg"
                 alt=""
               />
             </figure>
