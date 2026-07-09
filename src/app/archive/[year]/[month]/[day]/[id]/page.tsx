@@ -5,6 +5,7 @@ import SiteLayout from "@/components/layout/SiteLayout";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import MarkdownContent from "@/components/ui/MarkdownContent";
 import PostNav from "@/components/ui/PostNav";
+import ArticleCommentsPanel from "@/components/ui/ArticleCommentsPanel";
 import { ArchiveDateLinks } from "@/components/ui/ArchiveDateLinks";
 import { getArticleByUrl, getArticlePrevNext } from "@/lib/api/article";
 
@@ -198,6 +199,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
           {/* 上下篇文章导航 */}
           <PostNav prevNext={prevNext} />
+
+          {/* 评论区 */}
+          <ArticleCommentsPanel articleId={article.id} commentStatus={article.commentStatus} />
         </article>
       </div>
     </SiteLayout>
