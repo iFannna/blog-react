@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Article, Category, Tag } from "@/types/ui";
 import { developerProfile } from "@/lib/mock-data";
+import { getSiteSetting } from "@/lib/api/site";
 import { articleHref } from "@/lib/utils";
 import { ArchiveDateLinks } from "@/components/ui/ArchiveDateLinks";
 import SearchForm from "@/components/ui/SearchForm";
@@ -11,7 +12,17 @@ interface SidebarProps {
   featuredArticles: Article[];
 }
 
-export default function Sidebar({ categories, tags, featuredArticles }: SidebarProps) {
+// 角色固定文案，不从后端读取
+const DEVELOPER_ROLE = "开发者 & 编辑";
+
+export default async function Sidebar({ categories, tags, featuredArticles }: SidebarProps) {
+  // 开发者信息从站点设置读取，React.cache 在单次请求内与 SiteLayout/generateMetadata 去重
+  const setting = await getSiteSetting().catch(() => null);
+  const developer = {
+    name: setting?.developer_name ?? "",
+    intro: setting?.developer_intro ?? "",
+    avatar: setting?.developer_avatar ?? "",
+  };
   const featured = featuredArticles[0];
   const smallArticles = featuredArticles.slice(1);
 
@@ -21,21 +32,21 @@ export default function Sidebar({ categories, tags, featuredArticles }: SidebarP
         <div className="sidebar-widget">
           <div className="sidebar-developer-row">
             <div className="sidebar-developer-avatar">
-              {developerProfile.avatar ? (
-                <img src={developerProfile.avatar} alt={developerProfile.name} width={80} height={80} loading="lazy" decoding="async" className="rounded-full" />
+              {developer.avatar ? (
+                <img src={developer.avatar} alt={developer.name} width={80} height={80} loading="lazy" decoding="async" className="rounded-full" />
               ) : (
                 <div className="sidebar-developer-avatar-placeholder">
-                  {developerProfile.name.charAt(0)}
+                  {developer.name.charAt(0)}
                 </div>
               )}
             </div>
             <p className="sidebar-developer-info">
-              <strong>{developerProfile.name}</strong>
+              <strong>{developer.name}</strong>
               <br />
-              {developerProfile.role}
+              {DEVELOPER_ROLE}
             </p>
           </div>
-          <p className="sidebar-developer-bio">{developerProfile.bio}</p>
+          <p className="sidebar-developer-bio">{developer.intro}</p>
           <div className="sidebar-tech-list">
             {developerProfile.techStack.map((tech) => (
               <span key={tech.name} className="sidebar-icon-container" title={tech.name}>

@@ -62,3 +62,27 @@ export interface ApiPrevNext {
   prev: ApiNavArticle | null;
   next: ApiNavArticle | null;
 }
+
+/** 后端 SiteSettingVO — 对应 site_setting 表，snake_case 与 Go 结构体一致 */
+export interface SiteSettingVO {
+  id: number;
+  site_name: string;
+  site_desc: string;
+  site_url: string;
+  favicon: string;
+  developer_avatar: string;
+  developer_name: string;
+  developer_intro: string;
+  developer_email: string;
+  developer_phone: string;
+  developer_gitee: string;
+  developer_github: string;
+  developer_stack: string;
+  icp: string;
+  police: string;
+  seo_title: string;
+  seo_description: string;
+  seo_keywords: string;
+  created_at: string;
+  updated_at: string;
+}

@@ -1,5 +1,3 @@
-import type { Article } from "@/types/ui";
-
 export const mockExploreLinks = [
   {
     title: "About Me",
@@ -14,15 +12,12 @@ export const mockExploreLinks = [
   {
     title: "Friend Links",
     description: "Check out blogs from friends and fellow developers.",
-    href: "/friend-link",
+    href: "/friendlink",
   },
 ];
 
+// 仅技术栈仍用 mock：后端 developer_stack 是字符串、结构与图标数组不符，暂不接入
 export const developerProfile = {
-  name: "赵瑾瑜",
-  role: "开发者 & 编辑",
-  bio: "你好！我是赵瑾瑜，一位在读的大学生。该博客使用 Next.js + Spring Boot 独立开发。",
-  avatar: "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/2025/04/312b700a-e1c7-42bf-aa23-5db8dc7121a6.jpg",
   techStack: [
     { name: "Node.js", icon: "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/nodejs.png" },
     { name: "Vue", icon: "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/vue.png" },
@@ -32,14 +27,4 @@ export const developerProfile = {
     { name: "Git", icon: "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/git.png" },
     { name: "Nginx", icon: "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/nginx.png" },
   ],
-};
-
-export const mockFooterData = {
-  siteName: "赵瑾瑜的个人博客",
-  email: "example@email.com",
-  phone: "138****8888",
-  icp: "京ICP备XXXXXXXX号",
-  police: "京公网安备XXXXXXXXXXXX号",
-  guestbookCount: 128,
-  friendLinkCount: 32,
 };

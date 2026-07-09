@@ -1,28 +1,39 @@
 import type { Metadata } from "next";
+import { getSiteSetting } from "@/lib/api/site";
 import "./globals.css";
 
-export const metadata: Metadata = {
-  title: {
-    default: "Blog",
-    template: "%s | Blog",
-  },
-  description: "Personal blog",
-  openGraph: {
-    type: "website",
-    locale: "zh_CN",
-    title: "Blog",
-    description: "Personal blog",
-    siteName: "Blog",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Blog",
-    description: "Personal blog",
-  },
-  icons: {
-    icon: "/icon.svg",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const setting = await getSiteSetting().catch(() => null);
+  const title = setting?.seo_title || setting?.site_name || "Blog";
+  const description = setting?.seo_description || setting?.site_desc || "Personal blog";
+  const keywords = setting?.seo_keywords
+    ? setting.seo_keywords.split(/[,，]/).map((k) => k.trim()).filter(Boolean)
+    : undefined;
+
+  return {
+    title: {
+      default: title,
+      template: `%s | ${title}`,
+    },
+    description,
+    keywords,
+    openGraph: {
+      type: "website",
+      locale: "zh_CN",
+      title,
+      description,
+      siteName: title,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+    icons: {
+      icon: setting?.favicon || "/icon.svg",
+    },
+  };
+}
 
 export default function RootLayout({
   children,

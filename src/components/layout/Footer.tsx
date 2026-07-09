@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { mockFooterData } from "@/lib/mock-data";
 import { articleHref } from "@/lib/utils";
 import { ArchiveDateLinks } from "@/components/ui/ArchiveDateLinks";
 import type { Article } from "@/types/ui";
@@ -44,9 +43,26 @@ function FooterArticleCard({ article }: { article: Article }) {
 interface FooterProps {
   featuredArticles: Article[];
   editorPickArticles: Article[];
+  siteName: string;
+  email: string;
+  phone: string;
+  icp: string;
+  police: string;
+  guestbookCount: number;
+  friendLinkCount: number;
 }
 
-export default function Footer({ featuredArticles, editorPickArticles }: FooterProps) {
+export default function Footer({
+  featuredArticles,
+  editorPickArticles,
+  siteName,
+  email,
+  phone,
+  icp,
+  police,
+  guestbookCount,
+  friendLinkCount,
+}: FooterProps) {
   return (
     <footer id="colophon" className="site-footer">
       <div id="footer">
@@ -86,11 +102,11 @@ export default function Footer({ featuredArticles, editorPickArticles }: FooterP
                     <ul className="footer-links-list">
                       <li>
                         <Link href="/guestbook">留言板</Link>
-                        <span className="footer-link-count">{mockFooterData.guestbookCount}</span>
+                        <span className="footer-link-count">{guestbookCount}</span>
                       </li>
                       <li>
-                        <Link href="/friend-link">友链</Link>
-                        <span className="footer-link-count">{mockFooterData.friendLinkCount}</span>
+                        <Link href="/friendlink">友链</Link>
+                        <span className="footer-link-count">{friendLinkCount}</span>
                       </li>
                     </ul>
                   </div>
@@ -113,8 +129,8 @@ export default function Footer({ featuredArticles, editorPickArticles }: FooterP
                     <p>
                       <strong>邮箱:</strong>
                       <br />
-                      <Link href={`mailto:${mockFooterData.email}`}>
-                        {mockFooterData.email}
+                      <Link href={`mailto:${email}`}>
+                        {email}
                       </Link>
                     </p>
                   </div>
@@ -122,8 +138,8 @@ export default function Footer({ featuredArticles, editorPickArticles }: FooterP
                     <p>
                       <strong>电话:</strong>
                       <br />
-                      <Link href={`tel:${mockFooterData.phone}`}>
-                        {mockFooterData.phone}
+                      <Link href={`tel:${phone}`}>
+                        {phone}
                       </Link>
                     </p>
                   </div>
@@ -137,17 +153,17 @@ export default function Footer({ featuredArticles, editorPickArticles }: FooterP
       <div className="copyright-bar">
         <div className="footer-container">
           <div className="copyright-left">
-            <span>Copyright {new Date().getFullYear()} &mdash; <Link href="/">{mockFooterData.siteName}</Link>.</span>
+            <span>Copyright {new Date().getFullYear()} &mdash; <Link href="/">{siteName}</Link>.</span>
           </div>
           <div className="copyright-right">
             <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
-              {mockFooterData.icp}
+              {icp}
             </a>
-            {mockFooterData.icp && mockFooterData.police && (
+            {icp && police && (
               <>&nbsp;</>
             )}
             <a href="https://beian.mps.gov.cn/" target="_blank" rel="noopener noreferrer">
-              {mockFooterData.police}
+              {police}
             </a>
           </div>
         </div>
