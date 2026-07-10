@@ -47,7 +47,11 @@ export default async function SiteLayout({
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Header navItems={NAV_ITEMS} />
+      <Header
+        navItems={NAV_ITEMS}
+        github={setting?.developer_github ?? ""}
+        gitee={setting?.developer_gitee ?? ""}
+      />
       {breadcrumbs}
       <main className="flex-1">
         <div className="mx-auto max-w-[1420px] px-[5rem] pb-[5rem]">

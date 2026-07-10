@@ -477,6 +477,11 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
     return Boolean(VIEWER.userId && (VIEWER.isAdmin || VIEWER.userId === item.userId));
   }
 
+  // 评论关闭且无评论时整个评论区不显示
+  if (isCommentClosed && totalComments === 0) {
+    return null;
+  }
+
   return (
     <section className="article-comments">
       <div className="article-comments__heading">
@@ -484,28 +489,29 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
         <p className="article-comments__subtitle">{totalComments} 条讨论</p>
       </div>
 
-      <section className="comment-editor">
-        <h3 className="comment-editor__title">发表评论</h3>
-        <textarea
-          className="comment-editor__input"
-          rows={8}
-          aria-label="发表评论"
-          placeholder={isCommentClosed ? "评论已关闭" : "写下你的评论..."}
-          value={draftComment}
-          disabled={isCommentClosed}
-          onChange={(e) => setDraftComment(e.target.value)}
-        />
-        <div className="comment-editor__actions">
-          <button
-            type="button"
-            className="comment-editor__submit"
-            disabled={submittingComment || isCommentClosed}
-            onClick={publishMockComment}
-          >
-            发表评论
-          </button>
-        </div>
-      </section>
+      {!isCommentClosed && (
+        <section className="comment-editor">
+          <h3 className="comment-editor__title">发表评论</h3>
+          <textarea
+            className="comment-editor__input"
+            rows={8}
+            aria-label="发表评论"
+            placeholder="写下你的评论..."
+            value={draftComment}
+            onChange={(e) => setDraftComment(e.target.value)}
+          />
+          <div className="comment-editor__actions">
+            <button
+              type="button"
+              className="comment-editor__submit"
+              disabled={submittingComment}
+              onClick={publishMockComment}
+            >
+              发表评论
+            </button>
+          </div>
+        </section>
+      )}
 
       {comments.length > 0 ? (
         <>
