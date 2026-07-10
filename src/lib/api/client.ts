@@ -8,7 +8,10 @@ export class ApiError extends Error {
   }
 }
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+// server 端直连后端；client 端走 Next 反向代理（next.config rewrites: /api/* → 后端），避免浏览器 CORS
+const API_BASE = typeof window === "undefined"
+  ? (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080")
+  : "/api";
 
 const apiClient = axios.create({
   baseURL: API_BASE,

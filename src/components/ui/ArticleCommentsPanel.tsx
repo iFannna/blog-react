@@ -1,16 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import {
-  mockCommentList,
-  mockReplyMap,
-  mockViewer,
-  DEFAULT_AVATAR,
-  type MockComment,
-  type MockReply,
-} from "@/lib/mock-data";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { getComments, getCommentReplies } from "@/lib/api/comment";
+import { mockViewer, DEFAULT_AVATAR } from "@/lib/mock-data";
+import type { CommentVO, ReplyVO } from "@/types/api";
 
 const COMMENTS_PAGE_SIZE = 10;
+const REPLIES_PAGE_SIZE = 100;
 
 // mock 阶段固定为已登录访客，接后端时换成真实用户态
 const VIEWER = {
@@ -59,42 +55,42 @@ interface ArticleCommentsPanelProps {
   commentStatus?: number;
 }
 
-// 评论数据归一化，统一默认值
-function normalizeComment(item: MockComment): CommentItem {
+// 评论数据归一化（公开接口不带 liked/canDelete，默认 false）
+function normalizeComment(item: CommentVO): CommentItem {
   return {
     id: item.id,
-    userId: item.userId,
-    authorName: item.authorName || "游客",
-    authorAvatar: item.authorAvatar || DEFAULT_AVATAR,
+    userId: item.user_id,
+    authorName: item.author_name || "游客",
+    authorAvatar: item.author_avatar || DEFAULT_AVATAR,
     content: item.content,
-    likeCount: item.likeCount,
-    liked: item.liked,
-    replyCount: item.replyCount,
-    canDelete: item.canDelete,
-    createTime: item.createTime,
-    previewReply: item.previewReplyContent
+    likeCount: item.like_count,
+    liked: false,
+    replyCount: item.reply_count,
+    canDelete: false,
+    createTime: item.created_at,
+    previewReply: item.preview_reply_content
       ? {
-          authorName: item.previewReplyAuthorName || "游客",
-          content: item.previewReplyContent,
+          authorName: item.preview_reply_author_name || "游客",
+          content: item.preview_reply_content,
           likeCount: 0,
-          createTime: item.createTime,
+          createTime: item.created_at,
         }
       : null,
   };
 }
 
-function normalizeReply(item: MockReply): ReplyItem {
+function normalizeReply(item: ReplyVO): ReplyItem {
   return {
     id: item.id,
-    userId: item.userId,
-    authorName: item.authorName || "游客",
-    authorAvatar: item.authorAvatar || DEFAULT_AVATAR,
-    replyToName: item.replyToName || "游客",
+    userId: item.user_id,
+    authorName: item.author_name || "游客",
+    authorAvatar: item.author_avatar || DEFAULT_AVATAR,
+    replyToName: item.reply_to_name || "游客",
     content: item.content,
-    likeCount: item.likeCount,
-    liked: item.liked,
-    canDelete: item.canDelete,
-    createTime: item.createTime,
+    likeCount: item.like_count,
+    liked: false,
+    canDelete: false,
+    createTime: item.created_at,
   };
 }
 
@@ -130,10 +126,22 @@ function nextMockId() {
   return mockIdSeed;
 }
 
+// 评论本地排序：hot 按点赞（同点赞按时间倒序），time 按时间倒序
+function sortComments(list: CommentItem[], mode: "hot" | "time") {
+  return [...list].sort((a, b) => {
+    if (mode === "hot" && b.likeCount !== a.likeCount) {
+      return b.likeCount - a.likeCount;
+    }
+    return getTimeValue(b.createTime) - getTimeValue(a.createTime);
+  });
+}
+
 export default function ArticleCommentsPanel({ articleId, commentStatus }: ArticleCommentsPanelProps) {
   const [comments, setComments] = useState<CommentItem[]>([]);
   const [sortMode, setSortMode] = useState<"hot" | "time">("hot");
   const [totalComments, setTotalComments] = useState(0);
+  const [nextCommentPage, setNextCommentPage] = useState(1);
+  const [commentsLoading, setCommentsLoading] = useState(false);
   const [activeMenuKey, setActiveMenuKey] = useState("");
   const [expandedCommentIds, setExpandedCommentIds] = useState<number[]>([]);
   const [loadedRepliesMap, setLoadedRepliesMap] = useState<Record<number, ReplyItem[]>>({});
@@ -150,27 +158,51 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
   const isCommentClosed = commentStatus === 0;
   const hasMoreComments = comments.length < totalComments;
 
-  // 排序后的评论快照，用于加载（mock 阶段直接基于 mockCommentList 排序）
-  const sortedMockComments = useMemo(() => {
-    const list = [...mockCommentList].map(normalizeComment);
-    return list.sort((a, b) => {
-      if (sortMode === "hot") {
-        if (b.likeCount !== a.likeCount) return b.likeCount - a.likeCount;
+  // 加载评论（真实接口，结果按 sortMode 本地排序）
+  const loadComments = useCallback(
+    async (reset: boolean) => {
+      if (!articleId) return;
+      // 仅"加载更多"防重入；切换文章(reset)必须放行，否则上一页 loading 时新文章评论不会加载
+      if (!reset && commentsLoading) return;
+      const page = reset ? 1 : nextCommentPage;
+      setCommentsLoading(true);
+      try {
+        const data = await getComments({ articleId, page, size: COMMENTS_PAGE_SIZE });
+        const rows = data.list.map(normalizeComment);
+        setTotalComments(data.total);
+        setNextCommentPage(page + 1);
+        setComments((prev) => {
+          const base = reset ? [] : prev;
+          const merged = reset
+            ? rows
+            : [...base, ...rows.filter((r) => !base.some((c) => c.id === r.id))];
+          return sortComments(merged, sortMode);
+        });
+        if (reset) {
+          setActiveMenuKey("");
+          setExpandedCommentIds([]);
+          setLoadedRepliesMap({});
+          setActiveReplyTarget(null);
+          setReplyDraftMap({});
+        }
+      } catch (error) {
+        console.error("加载评论失败:", error);
+        if (reset) {
+          setComments([]);
+          setTotalComments(0);
+        }
+      } finally {
+        setCommentsLoading(false);
       }
-      return getTimeValue(b.createTime) - getTimeValue(a.createTime);
-    });
-  }, [sortMode]);
+    },
+    [articleId, commentsLoading, nextCommentPage, sortMode],
+  );
 
-  // 初次加载 / 切换排序时重置评论列表
+  // 文章切换时重新加载评论
   useEffect(() => {
-    setComments(sortedMockComments);
-    setTotalComments(sortedMockComments.length);
-    setActiveMenuKey("");
-    setExpandedCommentIds([]);
-    setLoadedRepliesMap({});
-    setActiveReplyTarget(null);
-    setReplyDraftMap({});
-  }, [sortedMockComments]);
+    loadComments(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [articleId]);
 
   // 点击空白处关闭更多菜单
   useEffect(() => {
@@ -186,8 +218,8 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
   // 滚动到底部加载更多（mock 数据不足一页时不会触发，逻辑保留给接后端）
   const loadMoreComments = useCallback(() => {
     if (!hasMoreComments) return;
-    // 接后端时在此请求下一页并追加；mock 阶段无更多数据
-  }, [hasMoreComments]);
+    loadComments(false);
+  }, [hasMoreComments, loadComments]);
 
   useEffect(() => {
     const node = loadMoreRef.current;
@@ -223,15 +255,20 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
     return Object.prototype.hasOwnProperty.call(loadedRepliesMap, commentId);
   }
 
-  // mock：从 mockReplyMap 取回复并归一化
-  function loadReplies(comment: CommentItem) {
+  // 加载回复（真实接口）
+  async function loadReplies(comment: CommentItem) {
     if (hasLoadedReplies(comment.id)) return;
-    const raw = mockReplyMap[comment.id] || [];
-    setLoadedRepliesMap((prev) => ({ ...prev, [comment.id]: raw.map(normalizeReply) }));
+    try {
+      const data = await getCommentReplies(comment.id, 1, REPLIES_PAGE_SIZE);
+      const replies = data.list.map(normalizeReply);
+      setLoadedRepliesMap((prev) => ({ ...prev, [comment.id]: replies }));
+    } catch (error) {
+      console.error("加载回复失败:", error);
+    }
   }
 
-  function ensureRepliesVisible(comment: CommentItem) {
-    loadReplies(comment);
+  async function ensureRepliesVisible(comment: CommentItem) {
+    await loadReplies(comment);
     if (!isExpanded(comment.id)) {
       setExpandedCommentIds((prev) => [...prev, comment.id]);
     }
@@ -243,6 +280,13 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
       return;
     }
     ensureRepliesVisible(comment);
+  }
+
+  // 切换排序：本地重排已加载评论（后端不支持 sort）
+  function selectSortMode(mode: "hot" | "time") {
+    if (sortMode === mode) return;
+    setSortMode(mode);
+    setComments((prev) => sortComments(prev, mode));
   }
 
   function getExpandedReplies(comment: CommentItem): ReplyItem[] {
@@ -273,7 +317,7 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
     setReplyDraftMap((prev) => ({ ...prev, [commentId]: value }));
   }
 
-  function openReplyEditor(comment: CommentItem, reply: ReplyItem | null = null) {
+  async function openReplyEditor(comment: CommentItem, reply: ReplyItem | null = null) {
     if (isCommentClosed) return;
     const nextTarget: ReplyTarget = {
       commentId: comment.id,
@@ -288,7 +332,7 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
       setActiveReplyTarget(null);
       return;
     }
-    if (comment.replyCount) ensureRepliesVisible(comment);
+    if (comment.replyCount) await ensureRepliesVisible(comment);
     setActiveReplyTarget(nextTarget);
   }
 
@@ -315,7 +359,7 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
     setComments((prev) => [newComment, ...prev]);
     setTotalComments((prev) => prev + 1);
     setDraftComment("");
-    setSortMode("time");
+    selectSortMode("time");
     setSubmittingComment(false);
   }
 
@@ -441,14 +485,14 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
           <button
             type="button"
             className={`article-comments__sort-button${sortMode === "hot" ? " active" : ""}`}
-            onClick={() => setSortMode("hot")}
+            onClick={() => selectSortMode("hot")}
           >
             最热
           </button>
           <button
             type="button"
             className={`article-comments__sort-button${sortMode === "time" ? " active" : ""}`}
-            onClick={() => setSortMode("time")}
+            onClick={() => selectSortMode("time")}
           >
             最新
           </button>

@@ -86,3 +86,34 @@ export interface SiteSettingVO {
   created_at: string;
   updated_at: string;
 }
+
+/** 后端 CommentVO — 评论列表项，snake_case 与 Go 结构体一致 */
+export interface CommentVO {
+  id: number;
+  article_id: number;
+  user_id: number;
+  content: string;
+  like_count: number;
+  status: number;
+  author_name: string;
+  author_avatar: string;
+  reply_count: number;
+  preview_reply_content: string;
+  preview_reply_author_name: string;
+  created_at: string;
+}
+
+/** 后端 ReplyVO — 评论回复列表项 */
+export interface ReplyVO {
+  id: number;
+  comment_id: number;
+  user_id: number;
+  reply_to_user_id: number | null;
+  content: string;
+  like_count: number;
+  status: number;
+  author_name: string;
+  author_avatar: string;
+  reply_to_name: string;
+  created_at: string;
+}
