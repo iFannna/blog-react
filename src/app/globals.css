@@ -4053,7 +4053,7 @@ html:not([data-theme="dark"]) .author-box {
   color: var(--color-text);
 }
 
-/* ── Page Columns (replacing wp-block-columns) ── */
+/* ── Page Columns ── */
 
 .page-columns {
   display: flex;
@@ -5200,69 +5200,61 @@ ol.typo-list {
 
 .article-comments {
   margin-top: 8rem;
-  padding: 3rem;
-  border: 0.1rem solid #cccccc;
-  border-radius: 0;
-}
-
-.article-comments__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.6rem;
-  margin-bottom: 2.4rem;
 }
 
 .article-comments__heading {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
+  margin: 0 0 4rem;
+  text-align: center;
 }
 
-.article-comments__title {
+.article-comments__title,
+.comment-editor__title {
   margin: 0;
   color: var(--color-secondary);
-  font-size: 2.2rem;
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .article-comments__subtitle {
-  margin: 0;
-  color: var(--color-comment-muted);
-  font-size: 1.45rem;
+  margin: 0.6rem 0 0;
+  color: var(--color-text);
+  font-size: 1.6rem;
 }
 
-.article-comments__sort {
+.comment-sortbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.8rem;
+}
+
+.comment-sortbar__label,
+.comment-sortbar__toggle {
+  color: var(--color-text-muted);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.comment-sortbar__toggle {
   display: inline-flex;
-  gap: 0.8rem;
-  flex-wrap: wrap;
-}
-
-.article-comments__sort-button {
-  display: inline-block;
-  padding: 8px 25px 7px;
-  background-color: transparent;
-  border-radius: 10rem;
-  border: 1px solid rgba(39, 39, 39, 0.75);
-  letter-spacing: 0.25px;
-  line-height: 1.2;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #333333;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  background: transparent;
+  padding: 0;
   cursor: pointer;
-  transition: var(--transition-primary);
 }
 
-.article-comments__sort-button.active {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: #fff;
+.comment-sortbar__icon {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .comment-editor {
-  margin-bottom: 3rem;
+  margin-bottom: 8rem;
 }
 
-.comment-editor__avatar img,
 .comment-card__avatar img,
 .comment-reply__avatar img,
 .comment-inline-editor__avatar img {
@@ -5272,7 +5264,6 @@ ol.typo-list {
   border-radius: 50%;
 }
 
-.comment-editor__avatar,
 .comment-card__avatar {
   width: 4.5rem;
   height: 4.5rem;
@@ -5288,68 +5279,44 @@ ol.typo-list {
   height: 3.8rem;
 }
 
-.comment-editor__panel {
-  min-width: 0;
-}
-
-.comment-editor__head {
-  display: flex;
-  align-items: center;
-  gap: 1.6rem;
-  min-width: 0;
-  margin-bottom: 1rem;
-}
-
-.comment-editor__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem 1.2rem;
-  align-items: center;
-  min-width: 0;
-  margin-bottom: 0;
-  color: var(--color-comment-muted);
-  font-size: 1.8rem;
+.comment-editor__title {
+  margin: 0 0 2.4rem;
+  text-align: center;
 }
 
 .comment-editor__input {
   display: block;
   width: 100%;
-  min-height: 12rem;
+  min-height: 19.2rem;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  border: 0.1rem solid #cccccc;
+  border: 0.2rem solid rgba(190, 190, 190, 0.3);
   background-color: var(--color-bg);
-  padding: 1.2rem 1.8rem;
+  padding: 0.9rem 1.6rem;
   color: #66717f;
-  border-radius: 0;
-  line-height: 1.3;
+  border-radius: var(--radius-normal);
+  line-height: 1.5;
   outline: none;
   resize: vertical;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: var(--transition-primary);
 }
 
 .comment-editor__input:focus {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 1px var(--color-primary), 0 1px 2px rgba(0, 0, 0, 0.15);
+  border-bottom-color: var(--color-primary);
   color: var(--color-text);
   outline: none;
 }
 
 .comment-editor__actions {
   display: flex;
-  align-items: center;
   justify-content: flex-end;
-  gap: 1.2rem;
-  margin-top: 1.2rem;
-  width: 100%;
-  color: var(--color-comment-muted);
-  font-size: 1.3rem;
+  margin-top: 1em;
 }
 
 .comment-card__toggle {
   border: none;
   border-radius: 999px;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-comment-muted);
   cursor: pointer;
   padding: 0.9rem 1.6rem;
 }
@@ -5360,9 +5327,7 @@ ol.typo-list {
 }
 
 .comment-card {
-  padding-top: 2.2rem;
-  padding-bottom: 2.2rem;
-  border-top: 0.1rem solid #cccccc;
+  padding: 2.2rem 0;
 }
 
 .comment-card__body {
@@ -5470,10 +5435,6 @@ ol.typo-list {
   color: var(--color-primary);
 }
 
-.comment-card__toggle {
-  color: var(--color-comment-muted);
-}
-
 .comment-replies {
   display: grid;
   gap: 1.6rem;
@@ -5522,9 +5483,6 @@ ol.typo-list {
   grid-template-columns: 3.8rem minmax(0, 1fr) auto;
   gap: 1.4rem;
   align-items: center;
-}
-
-.comment-inline-editor__row {
   min-width: 0;
 }
 
@@ -5577,7 +5535,37 @@ ol.typo-list {
   transition: var(--transition-primary);
 }
 
-.comment-editor__submit,
+.comment-editor__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5rem;
+  padding: 1rem 3.2rem;
+  font-family: "Plus Jakarta Sans", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 1.8rem;
+  line-height: 1.6;
+  color: var(--color-on-primary);
+  background-color: var(--color-primary);
+  border: 0.1rem solid var(--color-primary);
+  border-radius: 7px;
+  box-shadow: 0 10px 18px 0 var(--color-primary-glow);
+  cursor: pointer;
+  transition: var(--transition-primary);
+}
+
+.comment-editor__submit:hover,
+.comment-editor__submit:focus-visible {
+  color: var(--color-on-primary);
+  background-color: var(--color-primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px 0 var(--color-primary-subtle);
+}
+
+.comment-editor__submit:active {
+  transform: translateY(0);
+}
+
 .comment-inline-editor__submit {
   background-color: var(--color-primary);
   color: var(--color-on-primary);
@@ -5592,8 +5580,6 @@ ol.typo-list {
   transition: all 0.15s ease-in-out;
 }
 
-.comment-editor__submit:hover,
-.comment-editor__submit:focus-visible,
 .comment-inline-editor__submit:hover,
 .comment-inline-editor__submit:focus-visible {
   background-color: var(--color-primary-light);
@@ -5655,35 +5641,24 @@ ol.typo-list {
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-.article-comments__empty {
-  padding: 2.4rem 0 0.6rem;
-  color: var(--color-comment-muted);
-}
-
 .article-comments__load-sentinel {
   width: 100%;
   height: 1px;
 }
 
 /* Comment panel — dark mode */
-[data-theme="dark"] .article-comments {
-  border-color: rgba(255, 255, 255, 0.15);
-}
-
 [data-theme="dark"] .article-comments__title,
 [data-theme="dark"] .comment-card__author strong,
 [data-theme="dark"] .comment-reply__author strong {
   color: #f5f5f5;
 }
 
-[data-theme="dark"] .article-comments__subtitle,
 [data-theme="dark"] .comment-card__author,
 [data-theme="dark"] .comment-reply__author,
 [data-theme="dark"] .comment-card__footer,
 [data-theme="dark"] .comment-reply__footer,
 [data-theme="dark"] .comment-editor__actions,
-[data-theme="dark"] .comment-editor__meta,
-[data-theme="dark"] .article-comments__empty {
+[data-theme="dark"] .comment-editor__meta {
   color: rgba(255, 255, 255, 0.62);
 }
 
@@ -5708,10 +5683,6 @@ ol.typo-list {
   background: rgba(255, 255, 255, 0.03);
 }
 
-[data-theme="dark"] .comment-card {
-  border-top-color: rgba(255, 255, 255, 0.15);
-}
-
 [data-theme="dark"] .comment-card__content,
 [data-theme="dark"] .comment-reply__content,
 [data-theme="dark"] .comment-reply__preview-content,
@@ -5722,18 +5693,6 @@ ol.typo-list {
 
 [data-theme="dark"] .comment-inline-editor__prefix {
   color: rgba(255, 255, 255, 0.62);
-}
-
-[data-theme="dark"] .article-comments__sort-button {
-  background-color: transparent;
-  border: 0.1rem solid rgba(190, 190, 190, 0.3);
-  color: #ffffff;
-}
-
-[data-theme="dark"] .article-comments__sort-button.active {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-  color: #fff;
 }
 
 [data-theme="dark"] .comment-reply__preview-name {
@@ -5755,11 +5714,6 @@ ol.typo-list {
 
 /* Comment panel — responsive */
 @media (max-width: 768px) {
-  .article-comments {
-    margin-top: 8rem;
-    padding: 2rem 1.6rem;
-  }
-
   .comment-card,
   .comment-reply,
   .comment-inline-editor__row {

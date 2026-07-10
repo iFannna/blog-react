@@ -277,6 +277,10 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
   function toggleReplies(comment: CommentItem) {
     if (isExpanded(comment.id)) {
       setExpandedCommentIds((prev) => prev.filter((id) => id !== comment.id));
+      // 收起回复时关闭该评论的内联回复编辑器
+      if (activeReplyTarget?.commentId === comment.id) {
+        setActiveReplyTarget(null);
+      }
       return;
     }
     ensureRepliesVisible(comment);
@@ -475,68 +479,53 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
 
   return (
     <section className="article-comments">
-      <header className="article-comments__header">
-        <div className="article-comments__heading">
-          <h3 className="article-comments__title">评论</h3>
-          <p className="article-comments__subtitle">{totalComments} 条讨论</p>
-        </div>
-
-        <div className="article-comments__sort">
-          <button
-            type="button"
-            className={`article-comments__sort-button${sortMode === "hot" ? " active" : ""}`}
-            onClick={() => selectSortMode("hot")}
-          >
-            最热
-          </button>
-          <button
-            type="button"
-            className={`article-comments__sort-button${sortMode === "time" ? " active" : ""}`}
-            onClick={() => selectSortMode("time")}
-          >
-            最新
-          </button>
-        </div>
-      </header>
+      <div className="article-comments__heading">
+        <h3 className="article-comments__title">评论</h3>
+        <p className="article-comments__subtitle">{totalComments} 条讨论</p>
+      </div>
 
       <section className="comment-editor">
-        <div className="comment-editor__panel">
-          <div className="comment-editor__head">
-            <div className="comment-editor__avatar">
-              <img src={VIEWER.avatar} alt={VIEWER.nickname} />
-            </div>
-            <div className="comment-editor__meta">
-              <strong>{VIEWER.nickname}</strong>
-              <span>留言</span>
-            </div>
-          </div>
-
-          <textarea
-            className="comment-editor__input"
-            rows={4}
-            aria-label="留言"
-            placeholder={isCommentClosed ? "评论已关闭" : "写下你的评论..."}
-            value={draftComment}
-            disabled={isCommentClosed}
-            onChange={(e) => setDraftComment(e.target.value)}
-          />
-
-          <div className="comment-editor__actions">
-            <button
-              type="button"
-              className="comment-editor__submit"
-              disabled={submittingComment || isCommentClosed}
-              onClick={publishMockComment}
-            >
-              发表评论
-            </button>
-          </div>
+        <h3 className="comment-editor__title">发表评论</h3>
+        <textarea
+          className="comment-editor__input"
+          rows={8}
+          aria-label="发表评论"
+          placeholder={isCommentClosed ? "评论已关闭" : "写下你的评论..."}
+          value={draftComment}
+          disabled={isCommentClosed}
+          onChange={(e) => setDraftComment(e.target.value)}
+        />
+        <div className="comment-editor__actions">
+          <button
+            type="button"
+            className="comment-editor__submit"
+            disabled={submittingComment || isCommentClosed}
+            onClick={publishMockComment}
+          >
+            发表评论
+          </button>
         </div>
       </section>
 
       {comments.length > 0 ? (
-        <div className="comment-list">
-          {comments.map((comment) => {
+        <>
+          <div className="comment-sortbar">
+            <span className="comment-sortbar__label">
+              {sortMode === "hot" ? "热门评论" : "最新评论"}
+            </span>
+            <button
+              type="button"
+              className="comment-sortbar__toggle"
+              onClick={() => selectSortMode(sortMode === "hot" ? "time" : "hot")}
+            >
+              <svg className="comment-sortbar__icon" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+              {sortMode === "hot" ? "按热度" : "按时间"}
+            </button>
+          </div>
+          <div className="comment-list">
+            {comments.map((comment) => {
             const replyPreview = getReplyPreview(comment);
             return (
               <article key={comment.id} className="comment-card">
@@ -763,10 +752,9 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
               </article>
             );
           })}
-        </div>
-      ) : (
-        <div className="article-comments__empty">还没有评论，来说两句吧</div>
-      )}
+          </div>
+        </>
+      ) : null}
 
       {comments.length > 0 && hasMoreComments && (
         <div ref={loadMoreRef} className="article-comments__load-sentinel" />
