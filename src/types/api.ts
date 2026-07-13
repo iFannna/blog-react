@@ -16,7 +16,9 @@ export interface ArticleVO {
   id: number;
   type: number;
   title: string;
-  url: string;
+  year: number;
+  month: number;
+  day: number;
   summary: string;
   content: string;
   cover_image: string | null;
@@ -54,7 +56,9 @@ export interface ApiTag {
 export interface ApiNavArticle {
   id: number;
   title: string;
-  url: string;
+  year: number;
+  month: number;
+  day: number;
   cover_image: string;
 }
 

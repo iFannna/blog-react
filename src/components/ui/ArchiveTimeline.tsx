@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { articleHref, formatDate } from "@/lib/utils";
+import { articleHref } from "@/lib/utils";
 import type { Article } from "@/types/ui";
 
 const MONTH_PAGE = 20;
@@ -133,13 +133,13 @@ export default function ArchiveTimeline({ yearGroups }: { yearGroups: YearGroup[
                         <div className="archive-acc-month__inner">
                           <ul className="archive-entries">
                             {mg.articles.slice(0, shown).map((a) => {
-                              const { monthNumber, day } = formatDate(a.publishTime);
+                              const monthNumber = a.month, day = a.day;
                               return (
                                 <li key={a.id} className="archive-entry">
                                   <span className="archive-entry__date">
                                     {String(monthNumber).padStart(2, "0")}/{String(day).padStart(2, "0")}
                                   </span>
-                                  <Link href={articleHref(a.url)} className="archive-entry__title">
+                                  <Link href={articleHref(a)} className="archive-entry__title">
                                     {a.title}
                                   </Link>
                                 </li>

@@ -14,7 +14,9 @@ export interface Article {
   likeCount: number;
   commentCount: number;
   publishTime: string;
-  url: string;
+  year: number;
+  month: number;
+  day: number;
 }
 
 export interface ArticleCategory {
@@ -52,7 +54,9 @@ export interface Tag {
 export interface NavArticle {
   id: number;
   title: string;
-  url: string;
+  year: number;
+  month: number;
+  day: number;
   coverImage: string;
 }
 

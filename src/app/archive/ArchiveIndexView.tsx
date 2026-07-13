@@ -3,7 +3,6 @@ import SiteLayout from "@/components/layout/SiteLayout";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import ArchiveTimeline from "@/components/ui/ArchiveTimeline";
 import { getArticles } from "@/lib/api/article";
-import { formatDate } from "@/lib/utils";
 import type { Article } from "@/types/ui";
 
 const PAGE_SIZE = 50;
@@ -40,7 +39,7 @@ async function fetchAllArticles(): Promise<{ list: Article[]; total: number }> {
 function groupByYearMonth(articles: Article[]): YearGroup[] {
   const byYear = new Map<number, Map<number, Article[]>>();
   for (const a of articles) {
-    const { year, monthNumber } = formatDate(a.publishTime);
+    const year = a.year, monthNumber = a.month;
     let byMonth = byYear.get(year);
     if (!byMonth) {
       byMonth = new Map();
@@ -73,8 +72,15 @@ function groupByYearMonth(articles: Article[]): YearGroup[] {
 export default async function ArchiveIndexView() {
   const { list: articles, total: totalCount } = await fetchAllArticles();
   const yearGroups = groupByYearMonth(articles);
-  const latestMs = articles.reduce((m, a) => Math.max(m, +new Date(a.publishTime)), 0);
-  const latest = latestMs ? formatDate(new Date(latestMs).toISOString()) : null;
+  let latest: { year: number; month: number; day: number } | null = null;
+  let latestMs = 0;
+  for (const a of articles) {
+    const ms = +new Date(a.publishTime);
+    if (ms > latestMs) {
+      latestMs = ms;
+      latest = { year: a.year, month: a.month, day: a.day };
+    }
+  }
 
   const breadcrumbItems = [
     { name: "Home", path: "/" },
@@ -93,7 +99,7 @@ export default async function ArchiveIndexView() {
           <h1 className="page-heading-2">归档</h1>
           {totalCount > 0 && latest && (
             <p className="archive-header__meta">
-              共 {totalCount} 篇 · 跨越 {yearGroups.length} 年 · 最近更新于 {latest.year} 年 {latest.monthNumber} 月 {latest.day} 日
+              共 {totalCount} 篇 · 跨越 {yearGroups.length} 年 · 最近更新于 {latest.year} 年 {latest.month} 月 {latest.day} 日
             </p>
           )}
         </header>

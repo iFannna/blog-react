@@ -12,7 +12,7 @@ export default function PostNav({ prevNext }: { prevNext: PrevNext }) {
       {prev && (
         <div className="nav-previous">
           <h6 className="nav-title">Previous Post</h6>
-          <Link href={articleHref(prev.url)} rel="prev">
+          <Link href={articleHref(prev)} rel="prev">
             <div className="nav-content">
               {prev.coverImage && (
                 <img
@@ -29,7 +29,7 @@ export default function PostNav({ prevNext }: { prevNext: PrevNext }) {
       {next && (
         <div className="nav-next">
           <h6 className="nav-title">Next Post</h6>
-          <Link href={articleHref(next.url)} rel="next">
+          <Link href={articleHref(next)} rel="next">
             <div className="nav-content">
               <span>{next.title}</span>
               {next.coverImage && (

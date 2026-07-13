@@ -18,7 +18,9 @@ function mapSearchHitToArticle(vo: ArticleVO): Article {
     likeCount: vo.like_count,
     commentCount: vo.comment_count,
     publishTime: vo.created_at,
-    url: vo.url,
+    year: vo.year,
+    month: vo.month,
+    day: vo.day,
   };
 }
 

@@ -32,7 +32,7 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
             return (
               <div key={article.id} className="pyml-slide-item">
                 <div className="pyml-slider-backgrounds">
-                  <Link href={articleHref(article.url)}>
+                  <Link href={articleHref(article)}>
                     <div className="pyml-slide-bg">
                       {article.coverImage ? (
                         <img
@@ -70,7 +70,7 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
 
                 <div className="slide-inner">
                   <h6>
-                    <Link href={articleHref(article.url)}>{article.title}</Link>
+                    <Link href={articleHref(article)}>{article.title}</Link>
                   </h6>
                   <div className="entry-meta">
                     <div className="entry-meta-elements">
@@ -96,7 +96,7 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
                         </span>
                       </span>
                       <span>
-                        <ArchiveDateLinks publishTime={article.publishTime} />
+                        <ArchiveDateLinks year={article.year} month={article.month} day={article.day} />
                       </span>
                     </div>
                   </div>

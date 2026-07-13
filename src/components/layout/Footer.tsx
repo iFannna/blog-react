@@ -7,7 +7,7 @@ function FooterArticleCard({ article }: { article: Article }) {
   return (
     <li>
       <div className="footer-post-thumb">
-        <Link href={articleHref(article.url)}>
+        <Link href={articleHref(article)}>
           {article.coverImage ? (
             <img
               src={article.coverImage}
@@ -28,12 +28,12 @@ function FooterArticleCard({ article }: { article: Article }) {
         </Link>
       </div>
       <div className="footer-post-content">
-        <Link href={articleHref(article.url)} className="footer-post-title">
+        <Link href={articleHref(article)} className="footer-post-title">
           {article.title}
         </Link>
         <div className="footer-post-author">by {article.authorName}</div>
         <div className="footer-post-date">
-          <ArchiveDateLinks publishTime={article.publishTime} />
+          <ArchiveDateLinks year={article.year} month={article.month} day={article.day} />
         </div>
       </div>
     </li>

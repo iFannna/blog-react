@@ -18,7 +18,9 @@ function mapArticleVOToArticle(vo: ArticleVO): Article {
     likeCount: vo.like_count,
     commentCount: vo.comment_count,
     publishTime: vo.created_at,
-    url: vo.url,
+    year: vo.year,
+    month: vo.month,
+    day: vo.day,
   };
 }
 
@@ -53,10 +55,10 @@ function mapArticleDetailVO(vo: ArticleVO): ArticleDetail {
   };
 }
 
-/** 根据文章 URL 获取文章详情（含正文） */
-export async function getArticleByUrl(url: string) {
-  const data = await apiClient.get<unknown, ArticleVO>("/article/detail", {
-    params: { url },
+/** 根据 ID + 发布日期获取文章详情（含正文），日期用于校验 created_at 契合 */
+export async function getArticleById(id: number, year: number, month: number, day: number) {
+  const data = await apiClient.get<unknown, ArticleVO>(`/article/${id}`, {
+    params: { year, month, day },
   });
   return mapArticleDetailVO(data);
 }
@@ -65,7 +67,7 @@ export async function getArticleByUrl(url: string) {
 export async function getArticlePrevNext(id: number): Promise<PrevNext> {
   const data = await apiClient.get<unknown, ApiPrevNext>(`/article/${id}/prev-next`);
   return {
-    prev: data.prev ? { id: data.prev.id, title: data.prev.title, url: data.prev.url, coverImage: data.prev.cover_image } : null,
-    next: data.next ? { id: data.next.id, title: data.next.title, url: data.next.url, coverImage: data.next.cover_image } : null,
+    prev: data.prev ? { id: data.prev.id, title: data.prev.title, year: data.prev.year, month: data.prev.month, day: data.prev.day, coverImage: data.prev.cover_image } : null,
+    next: data.next ? { id: data.next.id, title: data.next.title, year: data.next.year, month: data.next.month, day: data.next.day, coverImage: data.next.cover_image } : null,
   };
 }

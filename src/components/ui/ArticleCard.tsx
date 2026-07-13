@@ -21,7 +21,7 @@ export function ArticleCard({ article, highlightTitle, highlightSummary }: Artic
   return (
     <article className="article-card">
       <div className="article-thumb">
-        <Link href={articleHref(article.url)} className="article-thumb-link">
+        <Link href={articleHref(article)} className="article-thumb-link">
           {article.coverImage ? (
             <img src={article.coverImage} alt={article.title} loading="lazy" decoding="async" className="object-cover" />
           ) : (
@@ -54,7 +54,7 @@ export function ArticleCard({ article, highlightTitle, highlightSummary }: Artic
         </div>
 
         <h4 className="article-title">
-          <Link href={articleHref(article.url)}>
+          <Link href={articleHref(article)}>
             {highlightTitle ? <span dangerouslySetInnerHTML={{ __html: highlightTitle }} /> : article.title}
           </Link>
         </h4>
@@ -79,7 +79,7 @@ export function ArticleCard({ article, highlightTitle, highlightSummary }: Artic
             <svg className="article-meta-icon" viewBox="0 0 29.36 29.36" aria-hidden="true">
               <path d="M14.68 0a14.68 14.68 0 1014.68 14.68A14.64 14.64 0 0014.68 0zm0 26.69a12 12 0 1112-12 12 12 0 01-12 12zm5.87-10.54L16 13.88V6.67a1.25 1.25 0 00-1.33-1.33 1.26 1.26 0 00-1.34 1.33v8a1.28 1.28 0 00.81 1.2l5.33 2.67c.14.13.27.13.54.13a1.28 1.28 0 001.2-.8 1.41 1.41 0 00-.67-1.73z" />
             </svg>
-            <ArchiveDateLinks publishTime={article.publishTime} />
+            <ArchiveDateLinks year={article.year} month={article.month} day={article.day} />
           </span>
         </div>
 
@@ -90,7 +90,7 @@ export function ArticleCard({ article, highlightTitle, highlightSummary }: Artic
         )}
 
         <div className="article-footer">
-          <Link href={articleHref(article.url)} className="article-read-more">
+          <Link href={articleHref(article)} className="article-read-more">
             阅读更多
           </Link>
         </div>
@@ -117,7 +117,7 @@ export function QuoteCard({ article, highlightTitle }: QuoteCardProps) {
       />
       <div className="quote-post-bg-overlay" />
 
-      <Link href={articleHref(article.url)} className="quote-inner">
+      <Link href={articleHref(article)} className="quote-inner">
         <svg
           width="40"
           height="40"

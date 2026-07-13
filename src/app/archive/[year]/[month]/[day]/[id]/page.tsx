@@ -7,7 +7,8 @@ import MarkdownContent from "@/components/ui/MarkdownContent";
 import PostNav from "@/components/ui/PostNav";
 import ArticleCommentsPanel from "@/components/ui/ArticleCommentsPanel";
 import { ArchiveDateLinks } from "@/components/ui/ArchiveDateLinks";
-import { getArticleByUrl, getArticlePrevNext } from "@/lib/api/article";
+import { getArticleById, getArticlePrevNext } from "@/lib/api/article";
+import { articleHref } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -28,7 +29,7 @@ export async function generateMetadata({
   const { year, month, day, id } = await params;
 
   try {
-    const article = await getArticleByUrl(`/${year}/${month}/${day}/${id}`);
+    const article = await getArticleById(Number(id), Number(year), Number(month), Number(day));
     return {
       title: article.title,
       description: article.summary || undefined,
@@ -40,11 +41,10 @@ export async function generateMetadata({
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { year, month, day, id } = await params;
-  const url = `/${year}/${month}/${day}/${id}`;
 
   let article;
   try {
-    article = await getArticleByUrl(url);
+    article = await getArticleById(Number(id), Number(year), Number(month), Number(day));
   } catch {
     notFound();
   }
@@ -61,7 +61,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             { name: year, path: `/archive/${year}` },
             { name: month, path: `/archive/${year}/${month}` },
             { name: day, path: `/archive/${year}/${month}/${day}` },
-            { name: article.title, path: `/archive${article.url}` },
+            { name: article.title, path: articleHref(article) },
           ]}
         />
       }
@@ -117,7 +117,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               <svg className="article-meta-icon" viewBox="0 0 29.36 29.36" aria-hidden="true">
                 <path d="M14.68 0a14.68 14.68 0 1014.68 14.68A14.64 14.64 0 0014.68 0zm0 26.69a12 12 0 1112-12 12 12 0 01-12 12zm5.87-10.54L16 13.88V6.67a1.25 1.25 0 00-1.33-1.33 1.26 1.26 0 00-1.34 1.33v8a1.28 1.28 0 00.81 1.2l5.33 2.67c.14.13.27.13.54.13a1.28 1.28 0 001.2-.8 1.41 1.41 0 00-.67-1.73z" />
               </svg>
-              <ArchiveDateLinks publishTime={article.publishTime} />
+              <ArchiveDateLinks year={article.year} month={article.month} day={article.day} />
             </span>
             <span className="post-comment-link">
               <span className="article-meta-divider" />
@@ -160,7 +160,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
                 <path d="M4.004 23.429h5.339c.4 0 .667-.133.934-.4L24.958 8.348a1.29 1.29 0 000-1.868l-5.339-5.339a1.29 1.29 0 00-1.868 0L3.07 15.822c-.267.267-.4.534-.4.934v5.339c0 .801.534 1.335 1.335 1.335zm1.335-6.139L18.685 3.944l3.47 3.47L8.809 20.76h-3.47v-3.47zm22.688 10.143H4.004c-.801 0-1.335.534-1.335 1.335s.534 1.335 1.335 1.335h24.023c.801 0 1.335-.534 1.335-1.335s-.534-1.335-1.335-1.335z" />
               </svg>
-              <ArchiveDateLinks publishTime={article.publishTime} prefix={"Last updated on "} />
+              <ArchiveDateLinks year={article.year} month={article.month} day={article.day} prefix={"Last updated on "} />
             </span>
           </footer>
 
