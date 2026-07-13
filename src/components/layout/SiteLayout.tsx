@@ -19,9 +19,9 @@ interface SiteLayoutProps {
 
 const NAV_ITEMS = [
   { href: "/", label: "首页" },
+  { href: "/archive", label: "归档" },
   { href: "/about", label: "关于" },
   { href: "/contact", label: "联系" },
-  { href: "/archive", label: "归档" },
   { href: "/guestbook", label: "留言" },
   { href: "/friendlink", label: "友链" },
   { href: "/typography", label: "排版" },

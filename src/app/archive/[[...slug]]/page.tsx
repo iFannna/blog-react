@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import ArchiveIndexView from "@/app/archive/ArchiveIndexView";
 import SiteLayout from "@/components/layout/SiteLayout";
 import Sidebar from "@/components/layout/Sidebar";
 import ArticleFeed from "@/components/ui/ArticleFeed";
@@ -53,6 +54,12 @@ function parseSlug(slug: string[] | undefined): { year?: number; month?: number;
 
 export default async function ArchivePage({ params, searchParams }: ArchivePageProps) {
   const { slug } = await params;
+
+  // 空 slug → 归档索引聚合页（密度带 + 年份卡）
+  if (!slug || slug.length === 0) {
+    return <ArchiveIndexView />;
+  }
+
   const { page: pageParam } = await searchParams;
   const currentPage = Number(pageParam) || 1;
 
