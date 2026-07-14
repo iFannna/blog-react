@@ -8,17 +8,19 @@ import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "@/lib/useTheme";
 
 interface NavItem {
-  href: string;
+  href?: string;
   label: string;
+  children?: NavItem[];
 }
 
 interface HeaderProps {
   navItems: NavItem[];
+  mobileNavItems: NavItem[];
   github?: string;
   gitee?: string;
 }
 
-export default function Header({ navItems, github, gitee }: HeaderProps) {
+export default function Header({ navItems, mobileNavItems, github, gitee }: HeaderProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -33,9 +35,61 @@ export default function Header({ navItems, github, gitee }: HeaderProps) {
     setIsMobileMenuOpen((prev) => !prev);
   }, []);
 
+  // 多级菜单固定态:click 父级锁定展开，再点或路由变化/点外部收起
+  const [fixedKeys, setFixedKeys] = useState<Set<string>>(new Set());
+  const toggleFixed = useCallback((key: string) => {
+    setFixedKeys((prev) => {
+      // 取消:点已固定的项 → 关闭它及其子孙
+      if (prev.has(key)) {
+        return new Set([...prev].filter((k) => k !== key && !k.startsWith(`${key}/`)));
+      }
+      // 固定:开启该项 + 全部祖先（祖先不固定会因父级 hover 移出而连带塌掉）
+      const ancestors: string[] = [];
+      key.split("/").reduce<string>((acc, part) => {
+        const path = acc ? `${acc}/${part}` : part;
+        ancestors.push(path);
+        return path;
+      }, "");
+      const parent = ancestors.length > 1 ? ancestors[ancestors.length - 2] : "";
+      // 同级互斥:清除同 parent 下其他分支及其子孙
+      const next = new Set<string>(ancestors);
+      prev.forEach((k) => {
+        if (ancestors.includes(k)) return;
+        const inParent = parent ? k.startsWith(`${parent}/`) : !k.includes("/");
+        if (inParent) return;
+        next.add(k);
+      });
+      return next;
+    });
+  }, []);
+  const clearFixed = useCallback(() => setFixedKeys(new Set()), []);
+
   useEffect(() => {
     closeMobileMenu();
-  }, [pathname, closeMobileMenu]);
+    clearFixed();
+  }, [pathname, closeMobileMenu, clearFixed]);
+
+  // 点击导航外部收起固定的子菜单
+  useEffect(() => {
+    if (fixedKeys.size === 0) return;
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest(".primary-nav") && !target.closest(".mobile-navigation")) {
+        clearFixed();
+      }
+    };
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, [fixedKeys, clearFixed]);
+
+  // 切到桌面端时关闭移动菜单,清掉 state 与全屏遮罩
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1024) setIsMobileMenuOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -143,16 +197,15 @@ export default function Header({ navItems, github, gitee }: HeaderProps) {
 
           <nav
             className="mobile-navigation"
-            style={{ display: isMobileMenuOpen ? "block" : "none" }}
             aria-label="移动端导航"
           >
             <ul className="menu">
-              {navItems.map((item) => {
+              {mobileNavItems.map((item) => {
                 const isActive = pathname === item.href;
                 return (
                   <li key={item.href}>
                     <Link
-                      href={item.href}
+                      href={item.href || "#"}
                       className={isActive ? "active" : ""}
                       onClick={closeMobileMenu}
                     >
@@ -166,19 +219,12 @@ export default function Header({ navItems, github, gitee }: HeaderProps) {
 
           <nav className="primary-nav">
             <ul className="menu">
-              {navItems.map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className={`nav-link ${isActive ? "active" : ""}`}
-                    >
-                      <span>{item.label}</span>
-                    </Link>
-                  </li>
-                );
-              })}
+              <MenuList
+                items={navItems}
+                fixedKeys={fixedKeys}
+                toggleFixed={toggleFixed}
+                pathname={pathname}
+              />
             </ul>
           </nav>
 
@@ -321,5 +367,71 @@ function DarkModeToggle() {
     >
       <span className="darkmode-face" aria-hidden="true" />
     </button>
+  );
+}
+
+interface MenuListProps {
+  items: NavItem[];
+  fixedKeys: Set<string>;
+  toggleFixed: (key: string) => void;
+  pathname: string;
+  onLeafClick?: () => void;
+  parentId?: string;
+}
+
+// 递归渲染多级菜单:父级 button 切换固定展开,叶子 Link 跳转
+function MenuList({ items, fixedKeys, toggleFixed, pathname, onLeafClick, parentId = "" }: MenuListProps) {
+  return (
+    <>
+      {items.map((item) => {
+        const key = parentId ? `${parentId}/${item.label}` : item.label;
+        const hasChildren = !!item.children?.length;
+        const isFixed = fixedKeys.has(key);
+        const liClass = `menu-item${hasChildren ? " menu-has-children" : ""}${isFixed ? " is-fixed" : ""}`;
+        return (
+          <li key={key} className={liClass}>
+            {hasChildren ? (
+              <button
+                type="button"
+                className={`submenu-toggle${isFixed ? " is-active" : ""}`}
+                aria-expanded={isFixed}
+                onClick={() => toggleFixed(key)}
+              >
+                <span>{item.label}</span>
+                <ChevronIcon />
+              </button>
+            ) : (
+              <Link
+                href={item.href || "#"}
+                className={`nav-link${!parentId && pathname === item.href ? " active" : ""}`}
+                onClick={onLeafClick}
+              >
+                <span>{item.label}</span>
+              </Link>
+            )}
+            {hasChildren && (
+              <ul className="sub-menu">
+                <MenuList
+                  items={item.children!}
+                  fixedKeys={fixedKeys}
+                  toggleFixed={toggleFixed}
+                  pathname={pathname}
+                  onLeafClick={onLeafClick}
+                  parentId={key}
+                />
+              </ul>
+            )}
+          </li>
+        );
+      })}
+    </>
+  );
+}
+
+function ChevronIcon() {
+  return (
+    <svg className="submenu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M24.958 10.483a1.29 1.29 0 00-1.868 0l-7.074 7.074-7.074-7.074c-.534-.534-1.335-.534-1.868 0s-.534 1.335 0 1.868l8.008 8.008c.267.267.667.4.934.4s.667-.133.934-.4l8.008-8.008a1.29 1.29 0 000-1.868z" />
+    </svg>
   );
 }
