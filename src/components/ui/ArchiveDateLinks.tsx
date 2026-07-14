@@ -15,15 +15,14 @@ interface ArchiveDateLinksProps {
 export function ArchiveDateLinks({ year, month, day, prefix }: ArchiveDateLinksProps) {
   const mm = String(month).padStart(2, "0");
   const dd = String(day).padStart(2, "0");
-
+  // 三个 Link 直接相邻，日期分隔符（空格 / ", "）由 CSS ::before 注入（用 nbsp），
+  // 不依赖 JSX 文本空格 —— 避免 flex 容器吞空白、white-space 折叠等导致空格反复丢失
   return (
-    <>
-      {prefix}{prefix && " "}
+    <span className="archive-date-links">
+      {prefix}
       <Link className="archive-date-link" href={`/archive/${year}/${mm}`}>{MONTHS[month - 1]}</Link>
-      <span className="archive-date-separator" aria-hidden="true">{" "}</span>
       <Link className="archive-date-link" href={`/archive/${year}/${mm}/${dd}`}>{day}</Link>
-      <span className="archive-date-separator" aria-hidden="true">{", "}</span>
       <Link className="archive-date-link" href={`/archive/${year}`}>{year}</Link>
-    </>
+    </span>
   );
 }

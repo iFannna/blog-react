@@ -2472,6 +2472,18 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   color: var(--color-primary);
 }
 
+/* Date separators are injected via CSS content (nbsp) so they survive flex item
+   blockification and white-space collapsing — never rely on JSX text spaces between the links */
+.archive-date-links {
+  white-space: nowrap;
+}
+.archive-date-links .archive-date-link + .archive-date-link::before {
+  content: "\00a0";
+}
+.archive-date-links .archive-date-link:last-child::before {
+  content: ",\00a0";
+}
+
 .article-summary {
   margin-top: 1.6rem;
   margin-bottom: 0;
