@@ -2229,9 +2229,6 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
     flex-wrap: nowrap;
     align-items: stretch;
   }
-  .article-thumb-link {
-    aspect-ratio: unset;
-  }
 }
 
 .article-thumb {
@@ -2261,7 +2258,19 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   width: 100%;
   position: relative;
   overflow: hidden;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
+}
+
+/* Desktop cover is a fixed 4:3. This block is intentionally placed AFTER the base
+   .article-thumb / .article-thumb-link rules: same specificity, so source order
+   decides, and the base align-self: stretch / aspect-ratio: 16/9 must not win. */
+@media (min-width: 768px) {
+  .article-thumb {
+    align-self: center;
+  }
+  .article-thumb-link {
+    aspect-ratio: 4 / 3;
+  }
 }
 
 .article-thumb-link::before {
@@ -2289,13 +2298,19 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 0.8rem;
+  /* No border-radius here: corner rounding is clipped by the ancestor
+     .article-thumb (overflow: hidden + border-radius). A radius on the img
+     itself leaves transparent corners that, while the hover scale tweens,
+     fall inside the clip box and expose the white card background. */
+  transform: translateZ(0.1rem);
+  backface-visibility: hidden;
+  will-change: transform;
   transition: transform cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
 }
 
 .article-thumb-link:hover img,
 .article-thumb-link:focus-visible img {
-  transform: scale3d(1.1, 1.1, 1);
+  transform: scale3d(1.1, 1.1, 1) translateZ(0.1rem);
 }
 
 .article-thumb-placeholder {
