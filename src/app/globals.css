@@ -5598,54 +5598,15 @@ ol.typo-list {
   height: 1.8rem;
 }
 
-.comment-more__menu {
-  position: absolute;
-  top: calc(100% + 1rem);
+/* comment-more 菜单复用通用 .sub-menu;右对齐 + 条件渲染即展开（无 hover 隐藏态） */
+.comment-more .sub-menu {
   right: 0;
-  z-index: 998;
-  min-width: 23rem;
-  padding: 0.5rem 0;
-  background-color: var(--color-bg);
-  border: 0 solid rgba(190, 190, 190, 0.3);
-  border-top: 0.2rem solid var(--color-primary);
-  border-radius: 0 0 0.3rem 0.3rem;
-  box-shadow: 0 1.5rem 3rem -0.5rem rgba(0, 0, 0, 0.07);
-  line-height: 1.5;
-  text-align: left;
-  font-size: 1.6rem;
-  animation: comment-menu-fade-in 0.25s ease;
-}
-
-@keyframes comment-menu-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(1rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.comment-more__menu button {
-  display: block;
-  width: 100%;
-  padding: 1.2rem 1.62rem;
-  border: none;
-  background: transparent;
-  color: var(--color-secondary);
-  font-size: 1.6rem;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.5;
-  text-align: left;
-  cursor: pointer;
-  transition: var(--transition-primary);
-}
-
-.comment-more__menu button:hover {
-  color: #232323;
-  background-color: rgba(0, 0, 0, 0.05);
+  left: auto;
+  top: calc(100% + 1rem);
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  pointer-events: auto;
 }
 
 .article-comments__load-sentinel {
@@ -5669,13 +5630,6 @@ ol.typo-list {
   color: rgba(255, 255, 255, 0.62);
 }
 
-[data-theme="dark"] .comment-more__menu {
-  background-color: var(--color-bg);
-  border-color: rgba(255, 255, 255, 0.15);
-  border-top-color: var(--color-primary);
-  box-shadow: 0 1.5rem 3rem -0.5rem rgba(0, 0, 0, 0.45);
-}
-
 [data-theme="dark"] .comment-editor__input {
   border-color: rgba(255, 255, 255, 0.15);
   color: var(--color-text);
@@ -5693,8 +5647,7 @@ ol.typo-list {
 [data-theme="dark"] .comment-card__content,
 [data-theme="dark"] .comment-reply__content,
 [data-theme="dark"] .comment-reply__preview-content,
-[data-theme="dark"] .comment-inline-editor__input,
-[data-theme="dark"] .comment-more__menu button {
+[data-theme="dark"] .comment-inline-editor__input {
   color: rgba(255, 255, 255, 0.82);
 }
 
@@ -5712,11 +5665,6 @@ ol.typo-list {
 
 [data-theme="dark"] .comment-card__action.is-liked {
   color: var(--color-primary);
-}
-
-[data-theme="dark"] .comment-more__menu button:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #fff;
 }
 
 /* Comment panel — responsive */
@@ -5773,11 +5721,6 @@ ol.typo-list {
 
   .comment-inline-editor__avatar {
     display: none;
-  }
-
-  .comment-more__menu {
-    left: auto;
-    right: 0;
   }
 }
 

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getComments, getCommentReplies } from "@/lib/api/comment";
+import { useDropdownMenu, MenuList, type MenuItem } from "@/components/ui/DropdownMenu";
 import { mockViewer, DEFAULT_AVATAR } from "@/lib/mock-data";
 import type { CommentVO, ReplyVO } from "@/types/api";
 
@@ -142,7 +143,8 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
   const [totalComments, setTotalComments] = useState(0);
   const [nextCommentPage, setNextCommentPage] = useState(1);
   const [commentsLoading, setCommentsLoading] = useState(false);
-  const [activeMenuKey, setActiveMenuKey] = useState("");
+  // 评论「更多」下拉菜单(点外部收起、同级互斥)
+  const { openKeys, toggle, clear } = useDropdownMenu(".article-comments");
   const [expandedCommentIds, setExpandedCommentIds] = useState<number[]>([]);
   const [loadedRepliesMap, setLoadedRepliesMap] = useState<Record<number, ReplyItem[]>>({});
   const [activeReplyTarget, setActiveReplyTarget] = useState<ReplyTarget | null>(null);
@@ -179,7 +181,7 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
           return sortComments(merged, sortMode);
         });
         if (reset) {
-          setActiveMenuKey("");
+          clear();
           setExpandedCommentIds([]);
           setLoadedRepliesMap({});
           setActiveReplyTarget(null);
@@ -204,17 +206,6 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [articleId]);
 
-  // 点击空白处关闭更多菜单
-  useEffect(() => {
-    function handleDocumentClick(event: MouseEvent) {
-      const target = event.target as HTMLElement;
-      if (target.closest(".comment-more")) return;
-      setActiveMenuKey("");
-    }
-    document.addEventListener("click", handleDocumentClick);
-    return () => document.removeEventListener("click", handleDocumentClick);
-  }, []);
-
   // 滚动到底部加载更多（mock 数据不足一页时不会触发，逻辑保留给接后端）
   const loadMoreComments = useCallback(() => {
     if (!hasMoreComments) return;
@@ -237,15 +228,6 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
     observerRef.current = observer;
     return () => observer.disconnect();
   }, [hasMoreComments, comments.length, loadMoreComments]);
-
-  function getMenuKey(type: string, commentId: number, replyId: number | null = null) {
-    return [type, commentId, replyId].filter(Boolean).join("-");
-  }
-
-  function toggleMenu(type: string, commentId: number, replyId: number | null = null) {
-    const nextKey = getMenuKey(type, commentId, replyId);
-    setActiveMenuKey((prev) => (prev === nextKey ? "" : nextKey));
-  }
 
   function isExpanded(commentId: number) {
     return expandedCommentIds.includes(commentId);
@@ -423,7 +405,7 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
   }
 
   function reportItem(itemType: "comment" | "reply") {
-    setActiveMenuKey("");
+    clear();
     // mock：仅提示，接后端时调用举报接口
     console.log(`[mock] 举报${itemType === "reply" ? "回复" : "评论"}`);
   }
@@ -445,7 +427,7 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
       return next;
     });
     if (activeReplyTarget?.commentId === commentId) setActiveReplyTarget(null);
-    setActiveMenuKey("");
+    clear();
   }
 
   function deleteReply(commentId: number, replyId: number) {
@@ -469,7 +451,7 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
         targetName: target?.authorName ?? "游客",
       });
     }
-    setActiveMenuKey("");
+    clear();
   }
 
   function canDelete(item: { canDelete: boolean; userId: number }) {
@@ -552,7 +534,8 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
                         type="button"
                         className="comment-more__button"
                         aria-label="更多操作"
-                        onClick={() => toggleMenu("comment", comment.id)}
+                        aria-expanded={openKeys.has(`comment-${comment.id}`)}
+                        onClick={() => toggle(`comment-${comment.id}`)}
                       >
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                           <circle cx="5" cy="12" r="1.8" fill="currentColor" />
@@ -560,17 +543,21 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
                           <circle cx="19" cy="12" r="1.8" fill="currentColor" />
                         </svg>
                       </button>
-                      {activeMenuKey === getMenuKey("comment", comment.id) && (
-                        <div className="comment-more__menu">
-                          <button type="button" onClick={() => reportItem("comment")}>
-                            举报
-                          </button>
-                          {canDelete(comment) && (
-                            <button type="button" onClick={() => deleteComment(comment.id)}>
-                              删除
-                            </button>
-                          )}
-                        </div>
+                      {openKeys.has(`comment-${comment.id}`) && (
+                        <ul className="sub-menu">
+                          <MenuList
+                            items={[
+                              { label: "举报", onClick: () => reportItem("comment") },
+                              ...(canDelete(comment)
+                                ? [{ label: "删除", onClick: () => deleteComment(comment.id) }]
+                                : []),
+                            ] as MenuItem[]}
+                            openKeys={openKeys}
+                            toggle={toggle}
+                            parentId={`comment-${comment.id}`}
+                            onLeafClick={clear}
+                          />
+                        </ul>
                       )}
                     </div>
                   </div>
@@ -647,7 +634,8 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
                                     type="button"
                                     className="comment-more__button"
                                     aria-label="更多操作"
-                                    onClick={() => toggleMenu("reply", comment.id, reply.id)}
+                                    aria-expanded={openKeys.has(`reply-${comment.id}-${reply.id}`)}
+                                    onClick={() => toggle(`reply-${comment.id}-${reply.id}`)}
                                   >
                                     <svg viewBox="0 0 24 24" aria-hidden="true">
                                       <circle cx="5" cy="12" r="1.8" fill="currentColor" />
@@ -655,20 +643,21 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
                                       <circle cx="19" cy="12" r="1.8" fill="currentColor" />
                                     </svg>
                                   </button>
-                                  {activeMenuKey === getMenuKey("reply", comment.id, reply.id) && (
-                                    <div className="comment-more__menu">
-                                      <button type="button" onClick={() => reportItem("reply")}>
-                                        举报
-                                      </button>
-                                      {canDelete(reply) && (
-                                        <button
-                                          type="button"
-                                          onClick={() => deleteReply(comment.id, reply.id)}
-                                        >
-                                          删除
-                                        </button>
-                                      )}
-                                    </div>
+                                  {openKeys.has(`reply-${comment.id}-${reply.id}`) && (
+                                    <ul className="sub-menu">
+                                      <MenuList
+                                        items={[
+                                          { label: "举报", onClick: () => reportItem("reply") },
+                                          ...(canDelete(reply)
+                                            ? [{ label: "删除", onClick: () => deleteReply(comment.id, reply.id) }]
+                                            : []),
+                                        ] as MenuItem[]}
+                                        openKeys={openKeys}
+                                        toggle={toggle}
+                                        parentId={`reply-${comment.id}-${reply.id}`}
+                                        onLeafClick={clear}
+                                      />
+                                    </ul>
                                   )}
                                 </div>
                               </div>
