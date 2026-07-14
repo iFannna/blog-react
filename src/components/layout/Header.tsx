@@ -44,8 +44,8 @@ export default function Header({ navItems, mobileNavItems, github, gitee }: Head
           return {
             ...item,
             children: [
-              { label: "右侧边栏", onClick: () => { setSidebarLayout("right"); clear(); } },
-              { label: "左侧边栏", onClick: () => { setSidebarLayout("left"); clear(); } },
+              { label: "侧边栏居右", onClick: () => { setSidebarLayout("right"); clear(); } },
+              { label: "侧边栏居左", onClick: () => { setSidebarLayout("left"); clear(); } },
               { label: "无侧边栏", onClick: () => { setSidebarLayout("none"); clear(); } },
             ],
           };
