@@ -295,14 +295,6 @@ export default function Header({ navItems, mobileNavItems, github, gitee }: Head
                 </nav>
               </div>
             </div>
-
-            <div className="header-widget header-widget__button header-widget-hide-mobile-tablet">
-              <div className="widget-wrapper">
-                <Link href="/subscribe" className="subscribe-btn">
-                  <span>订阅</span>
-                </Link>
-              </div>
-            </div>
           </div>
         </div>
       </div>

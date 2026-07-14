@@ -359,13 +359,6 @@ p {
   }
 }
 
-/* hidden on phones + tablets ≤768px */
-@media (max-width: 768px) {
-  .header-widget-hide-mobile-tablet {
-    display: none !important;
-  }
-}
-
 @media (max-width: 768px) {
   /* header container padding shrink (Vue core.scss line 7887) */
   .header-container {
@@ -492,12 +485,6 @@ p {
 /* First widget extra left margin */
 .header-widgets .header-widget:first-child {
   margin-left: 1.8rem;
-}
-
-/* Button widget gets more padding */
-.header-widget__button {
-  padding-left: 1.6rem;
-  padding-right: 1.6rem;
 }
 
 /* Last widget no right padding */
@@ -853,40 +840,6 @@ button.animate-arrow {
   height: 100%;
   display: flex;
   align-items: center;
-}
-
-/* ── Subscribe Button ── */
-.subscribe-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 4rem;
-  padding: 0.8rem 2.4rem;
-  font-family: "Plus Jakarta Sans", Helvetica, Arial, sans-serif;
-  font-size: 1.62rem;
-  font-weight: 500;
-  line-height: 1.8;
-  color: var(--color-on-primary);
-  background-color: var(--color-primary);
-  border: 0.1rem solid var(--color-primary);
-  border-radius: 7px;
-  box-shadow: 0 10px 18px 0 var(--color-primary-glow);
-  transition: var(--transition-primary);
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-}
-
-.subscribe-btn:hover,
-.subscribe-btn:focus-visible {
-  color: var(--color-on-primary);
-  background-color: var(--color-primary-light);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 18px 0 var(--color-primary-subtle);
-}
-
-.subscribe-btn:active {
-  transform: translateY(0);
 }
 
 /* ── Hamburger ── */
