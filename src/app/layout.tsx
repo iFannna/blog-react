@@ -49,6 +49,12 @@ export default function RootLayout({
             __html: `(function(){try{var t=localStorage.getItem("darkmode");document.documentElement.setAttribute("data-theme",t==="dark"?"dark":"light")}catch(e){}})()`,
           }}
         />
+        {/* 桌面端侧边栏布局防闪：渲染前同步读取，避免首屏右侧再跳变 */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var l=localStorage.getItem("sidebar-layout");if(l){document.documentElement.setAttribute("data-sidebar-layout",l)}}catch(e){}})()`,
+          }}
+        />
         {/* 刷新时恢复滚动位置 */}
         <script
           dangerouslySetInnerHTML={{

@@ -1165,6 +1165,25 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   margin-bottom: 7rem;
 }
 
+/* Desktop-only sidebar layout switching (right default / left / none), driven by
+   <html data-sidebar-layout>. Mobile (<=960px) collapses to block regardless. */
+@media (min-width: 961px) {
+  [data-sidebar-layout="left"] .sidebar-layout {
+    flex-direction: row-reverse;
+  }
+  [data-sidebar-layout="left"] .sidebar-layout-primary {
+    padding-right: 0;
+    padding-left: 3.5rem;
+  }
+  [data-sidebar-layout="none"] .sidebar-layout-secondary {
+    display: none;
+  }
+  [data-sidebar-layout="none"] .sidebar-layout-primary {
+    max-width: 100%;
+    padding-right: 0;
+  }
+}
+
 .sidebar-inner {
   position: sticky;
   top: 2rem;
@@ -1446,28 +1465,6 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   margin-top: 1.6rem;
   font-size: 1.6rem;
   color: inherit;
-}
-
-.sidebar-tech-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5em;
-  margin-top: 2rem;
-}
-
-.sidebar-icon-container {
-  display: inline-block;
-  margin: 0 4px;
-  transition: transform 0.3s ease;
-}
-
-.sidebar-icon-container:hover {
-  transform: scale(1.1);
-}
-
-.sidebar-icon-container img {
-  width: 24px;
-  height: 24px;
 }
 
 /* ── Hot Articles: Featured Cover ── */

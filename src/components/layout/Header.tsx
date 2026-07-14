@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 // DarkModeToggle uses useTheme
 import { useTheme } from "@/lib/useTheme";
 import { useDropdownMenu, MenuList, type MenuItem } from "@/components/ui/DropdownMenu";
+import { setSidebarLayout } from "@/lib/sidebar-layout";
 
 interface HeaderProps {
   navItems: MenuItem[];
@@ -32,6 +33,27 @@ export default function Header({ navItems, mobileNavItems, github, gitee }: Head
 
   // 桌面多级菜单显隐(点外部收起)
   const { openKeys, toggle, clear } = useDropdownMenu(".primary-nav");
+
+  // 「排版」改为布局开关子菜单（右/左/无侧边栏）。子项需 client onClick，
+  // 故在 Client 端为 SiteLayout 传入的占位「排版」节点注入 children。
+  // 排版嵌套在「其他」下，需递归处理
+  const navItemsWithLayout = useMemo<MenuItem[]>(() => {
+    const inject = (items: MenuItem[]): MenuItem[] =>
+      items.map((item) => {
+        if (item.label === "排版") {
+          return {
+            ...item,
+            children: [
+              { label: "右侧边栏", onClick: () => { setSidebarLayout("right"); clear(); } },
+              { label: "左侧边栏", onClick: () => { setSidebarLayout("left"); clear(); } },
+              { label: "无侧边栏", onClick: () => { setSidebarLayout("none"); clear(); } },
+            ],
+          };
+        }
+        return item.children ? { ...item, children: inject(item.children) } : item;
+      });
+    return inject(navItems);
+  }, [navItems, clear]);
 
   useEffect(() => {
     closeMobileMenu();
@@ -176,7 +198,7 @@ export default function Header({ navItems, mobileNavItems, github, gitee }: Head
           <nav className="primary-nav">
             <ul className="menu">
               <MenuList
-                items={navItems}
+                items={navItemsWithLayout}
                 openKeys={openKeys}
                 toggle={toggle}
                 pathname={pathname}

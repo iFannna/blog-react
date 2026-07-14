@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { Article, Category, Tag } from "@/types/ui";
-import { developerProfile } from "@/lib/mock-data";
 import { getSiteSetting } from "@/lib/api/site";
 import { articleHref } from "@/lib/utils";
 import { ArchiveDateLinks } from "@/components/ui/ArchiveDateLinks";
@@ -47,13 +46,6 @@ export default async function Sidebar({ categories, tags, featuredArticles }: Si
             </p>
           </div>
           <p className="sidebar-developer-bio">{developer.intro}</p>
-          <div className="sidebar-tech-list">
-            {developerProfile.techStack.map((tech) => (
-              <span key={tech.name} className="sidebar-icon-container" title={tech.name}>
-                <img src={tech.icon} alt={tech.name} />
-              </span>
-            ))}
-          </div>
         </div>
 
         {featured && (

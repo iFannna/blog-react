@@ -66,7 +66,7 @@ export default async function SiteLayout({
             { href: `/author/${developerName}`, label: "作者" },
           ],
         },
-        { href: "/typography", label: "排版" },
+        { label: "排版" },
         { href: "/login", label: "登录" },
         { href: "/register", label: "注册" },
       ],
