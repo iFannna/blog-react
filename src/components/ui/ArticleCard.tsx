@@ -23,7 +23,7 @@ export function ArticleCard({ article, highlightTitle, highlightSummary }: Artic
       <div className="article-thumb">
         <Link href={articleHref(article)} className="article-thumb-link">
           {article.coverImage ? (
-            <img src={article.coverImage} alt={article.title} loading="lazy" decoding="async" className="object-cover" />
+            <img src={article.coverImage} alt={article.title} loading="lazy" decoding="async" />
           ) : (
             <span className="article-thumb-placeholder cover-placeholder" aria-label="暂无封面">
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -63,7 +63,7 @@ export function ArticleCard({ article, highlightTitle, highlightSummary }: Artic
           <span className="article-meta-author">
             <span className="article-avatar">
               {article.authorAvatar ? (
-                <img src={article.authorAvatar} alt={article.authorName} width={40} height={40} loading="lazy" decoding="async" className="rounded-full" />
+                <img src={article.authorAvatar} alt={article.authorName} width={40} height={40} loading="lazy" decoding="async" />
               ) : (
                 <span className="article-avatar-placeholder">
                   {article.authorName.charAt(0)}

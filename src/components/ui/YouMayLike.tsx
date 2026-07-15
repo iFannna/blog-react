@@ -40,7 +40,7 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
                           alt={article.title}
                           loading="lazy"
                           decoding="async"
-                          className="object-cover"
+                         
                         />
                       ) : (
                         <span className="pyml-placeholder cover-placeholder" aria-label="暂无封面">
@@ -85,7 +85,7 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
                                 height={30}
                                 loading="lazy"
                                 decoding="async"
-                                className="rounded-full"
+                               
                               />
                             </span>
                           )}

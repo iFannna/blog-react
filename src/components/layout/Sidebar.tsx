@@ -32,7 +32,7 @@ export default async function Sidebar({ categories, tags, featuredArticles }: Si
           <div className="sidebar-developer-row">
             <div className="sidebar-developer-avatar">
               {developer.avatar ? (
-                <img src={developer.avatar} alt={developer.name} width={80} height={80} loading="lazy" decoding="async" className="rounded-full" />
+                <img src={developer.avatar} alt={developer.name} width={80} height={80} loading="lazy" decoding="async" />
               ) : (
                 <div className="sidebar-developer-avatar-placeholder">
                   {developer.name.charAt(0)}
@@ -53,8 +53,8 @@ export default async function Sidebar({ categories, tags, featuredArticles }: Si
             <div className="sidebar-widget-title">热点</div>
             <div className="sidebar-featured-cover">
               {featured.coverImage ? (
-                <Link href={articleHref(featured)} className="relative">
-                  <img src={featured.coverImage} alt={featured.title} loading="lazy" decoding="async" className="object-cover" />
+                <Link href={articleHref(featured)}>
+                  <img src={featured.coverImage} alt={featured.title} loading="lazy" decoding="async" />
                 </Link>
               ) : (
                 <Link href={articleHref(featured)}>
@@ -78,8 +78,8 @@ export default async function Sidebar({ categories, tags, featuredArticles }: Si
                 <div key={article.id} className="small-article-item">
                   <div className="small-article-thumb">
                     {article.coverImage ? (
-                      <Link href={articleHref(article)} className="relative">
-                        <img src={article.coverImage} alt={article.title} loading="lazy" decoding="async" className="object-cover" />
+                      <Link href={articleHref(article)}>
+                        <img src={article.coverImage} alt={article.title} loading="lazy" decoding="async" />
                       </Link>
                     ) : (
                       <Link href={articleHref(article)}>

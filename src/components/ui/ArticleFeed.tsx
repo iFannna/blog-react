@@ -12,8 +12,8 @@ interface ArticleFeedProps {
 
 export default function ArticleFeed({ articles, totalPages, currentPage, basePath, highlightFields }: ArticleFeedProps) {
   return (
-    <div className="space-y-6">
-      <div className="space-y-6">
+    <div className="article-feed">
+      <div className="article-feed">
         {articles.map((article) =>
           article.type === 2 ? (
             <QuoteCard key={article.id} article={article} highlightTitle={highlightFields?.[article.id]?.title} />

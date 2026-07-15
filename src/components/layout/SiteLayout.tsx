@@ -81,7 +81,7 @@ export default async function SiteLayout({
   ];
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="site-root">
       <Header
         navItems={navItems}
         mobileNavItems={mobileNavItems}
@@ -89,8 +89,8 @@ export default async function SiteLayout({
         gitee={setting?.developer_gitee ?? ""}
       />
       {breadcrumbs}
-      <main className="flex-1">
-        <div className="mx-auto max-w-[1420px] px-[5rem] pb-[5rem]">
+      <main className="site-main">
+        <div className="site-main-container">
           {showSidebar ? (
             <div className="sidebar-layout">
               <div className="sidebar-layout-primary">{children}</div>

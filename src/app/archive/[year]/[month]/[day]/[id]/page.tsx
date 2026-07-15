@@ -100,7 +100,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                     height={30}
                     loading="lazy"
                     decoding="async"
-                    className="rounded-full"
+                   
                   />
                 ) : (
                   <span className="article-avatar-placeholder">

@@ -146,7 +146,7 @@ export default function Header({ navItems, mobileNavItems, github, gitee }: Head
       <div id="header-inner">
         <div className="header-container">
           <div className="logo header-element">
-            <Link href="/" rel="home" className="logo-inner block leading-none">
+            <Link href="/" rel="home" className="logo-inner">
               <img
                 src="https://java-ai-sau.oss-cn-beijing.aliyuncs.com/Blog.png"
                 alt="Blog"
@@ -296,7 +296,7 @@ export default function Header({ navItems, mobileNavItems, github, gitee }: Head
             <div className="header-widget header-widget-socials header-widget-hide-mobile">
               <div className="widget-wrapper">
                 <nav className="social-nav minimal-fill is-large" aria-label="社交链接">
-                  <ul className="flex items-center">
+                  <ul>
                     <li>
                       <a href={github || "#"} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="GitHub">
                         <span className="github-social-icon" />
