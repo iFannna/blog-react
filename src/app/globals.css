@@ -1018,45 +1018,46 @@ button.animate-arrow {
   margin-right: 0;
 }
 
-/* overflow-y hidden enables scroll-based animation */
+/* Single image, two pseudo-element copies with the original gap (::before on
+   top, ::after 225% below); hover swaps them — same spacing & animation, one URL */
 .social-nav .social-link > span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  color: inherit;
-  font-weight: 400;
-  overflow-y: hidden;
-  transition: var(--transition-primary);
-}
-
-.social-nav .social-link .icon {
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
+  display: block;
+  width: 2rem;
   height: 2rem;
-  width: auto;
-  padding-left: 0.2rem;
-  padding-right: 0.2rem;
-  opacity: 1;
-  will-change: transform;
-  transition: transform 0.22s;
+  overflow: hidden;
+  position: relative;
 }
-
-.social-nav .social-link .bottom-icon {
+.social-nav .social-link > span::before,
+.social-nav .social-link > span::after {
+  content: "";
   position: absolute;
-  transform: translate3d(0, 225%, 0);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: 2rem;
+  background-repeat: no-repeat;
+  background-position: center;
   transition: transform 0.22s;
 }
-
-.social-nav .social-link:hover .icon:not(.bottom-icon),
-.social-nav .social-link:focus-visible .icon:not(.bottom-icon) {
+.social-nav .social-link > span::after {
+  transform: translateY(225%);
+}
+.social-nav .social-link:hover > span::before,
+.social-nav .social-link:focus-visible > span::before {
   transform: translateY(-225%);
 }
-
-.social-nav .social-link:hover .bottom-icon,
-.social-nav .social-link:focus-visible .bottom-icon {
+.social-nav .social-link:hover > span::after,
+.social-nav .social-link:focus-visible > span::after {
   transform: translateY(0);
+}
+.github-social-icon::before,
+.github-social-icon::after {
+  background-image: url("https://java-ai-sau.oss-cn-beijing.aliyuncs.com/github.png");
+}
+.gitee-social-icon::before,
+.gitee-social-icon::after {
+  background-image: url("https://java-ai-sau.oss-cn-beijing.aliyuncs.com/gitee.png");
 }
 
 /* Widget wrapper — from core.scss */
@@ -1241,7 +1242,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 
 /* Dark mode sun state (from dynamic.scss) */
 [data-theme="dark"] .darkmode-face {
-  --size: 1.375em;
+  --size: 1.8rem;
   --ray-size: calc(var(--size) * -0.4);
   --offset-orthogonal: calc(var(--size) * 0.65);
   --offset-diagonal: calc(var(--size) * 0.45);

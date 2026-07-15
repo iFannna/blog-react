@@ -299,18 +299,12 @@ export default function Header({ navItems, mobileNavItems, github, gitee }: Head
                   <ul className="flex items-center">
                     <li>
                       <a href={github || "#"} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="GitHub">
-                        <span>
-                          <img src="https://java-ai-sau.oss-cn-beijing.aliyuncs.com/github.png" width="32" height="32" className="icon github-social-icon" alt="" />
-                          <img src="https://java-ai-sau.oss-cn-beijing.aliyuncs.com/github.png" width="32" height="32" className="icon bottom-icon github-social-icon" alt="" />
-                        </span>
+                        <span className="github-social-icon" />
                       </a>
                     </li>
                     <li>
                       <a href={gitee || "#"} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Gitee">
-                        <span>
-                          <img src="https://java-ai-sau.oss-cn-beijing.aliyuncs.com/gitee.png" width="32" height="32" className="icon" alt="" />
-                          <img src="https://java-ai-sau.oss-cn-beijing.aliyuncs.com/gitee.png" width="32" height="32" className="icon bottom-icon" alt="" />
-                        </span>
+                        <span className="gitee-social-icon" />
                       </a>
                     </li>
                   </ul>
