@@ -62,6 +62,14 @@ src/
 - 禁止冗余注释（复述代码结构）、过时注释（行号引用、已删除的布局变体名）
 - 解释设计意图、业务逻辑、非显而易见技术决策的注释保留
 
+## Git 提交约定
+
+- 格式：conventional commits，`type: subject`
+- type 取 feat / fix / style / refactor / chore / docs 之一
+- subject 英文、祈使句、小写开头、不加句号
+- 不带 scope：`feat: add ...` 而非 `feat(auth): add ...`
+- 只写 subject 一行，不带 body
+
 ## 编译验证
 
 - 开发服务器完全由用户手动管理（启动/重启/关闭）
