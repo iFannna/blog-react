@@ -3410,8 +3410,14 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   padding: 0 5rem 5rem;
 }
 @media (max-width: 960px) {
-  .site-main-container {
+  .site-main-container,
+  .header-container,
+  .pyml-slider-container,
+  .footer-container,
+  .breadcrumbs-bar > .breadcrumbs-container {
     max-width: 100%;
+  }
+  .site-main-container {
     padding-left: 5rem;
     padding-right: 5rem;
   }
