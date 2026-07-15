@@ -18,7 +18,7 @@ Next.js 16 (App Router) 博客前端。TypeScript strict，样式用 CSS 自定�
 ## 常用命令
 
 ```bash
-npm run dev     # 开发服务器（脚本内含 rimraf .next，每次启动自动清缓存）
+npm run dev     # 开发服务器
 npm run build   # 生产构建
 npm run start   # 启动构建产物
 npm run lint    # ESLint
@@ -55,23 +55,29 @@ src/
 - 尽量不用 `!important`，优先提高选择器特异性（加 class 层级、用 `:not()`）
 - `html { font-size: 62.5% }` → 1rem = 10px，所有 rem 基于此换算
 
+### 单位约定
+
+- 布局尺寸、间距 → rem（1rem = 10px）；超大（接近视口）→ vw/vh
+- 跟字号成比例的内边距 → em
+- 全屏/视口 → vh/vw（移动端优先 dvh/svh）
+- 像素精确的细节（边框、细线、图标、阴影）→ px
+- 小数一位优先；两位及以上需判断（0.667 、0.375、1.25 等数学正常可留；）；禁止四位小数
+
 ## 注释约定
 
-- 只注释「为什么」，不注释「是什么」(代码自身能表达的不写)
-- JSX 注释用中文，CSS 注释用英文
+- 只注释「为什么」，不注释「是什么」
+- JSX 注释用中文，CSS 注释用英文且只用来划分组件块
 - 禁止冗余注释、过时注释
-- 解释设计意图、业务逻辑、非显而易见技术决策的注释保留
 
 ## Git 提交约定
 
 - 格式：conventional commits，`type: subject`
-- type 取 feat / fix / style / refactor / chore / docs 之一
+- type 取 feat / fix / style / refactor / chore / docs 
 - subject 英文、祈使句、小写开头、不加句号
-- 不带 scope：`feat: add ...` 而非 `feat(auth): add ...`
-- 只写 subject 一行，不带 body
+- 不带 scope
+- 不带 body
 
 ## 编译验证
 
-- 开发服务器完全由用户手动管理（启动/重启/关闭）
-- 改 CSS 或组件后必须 `rm -rf .next` 再验证（Turbopack 会缓存 CSS，不清则改动不生效）
-- 验证方式：等用户确认，或用 `curl` 检查已运行的服务
+- 前端开发服务器完全由用户手动管理，不占用端口
+- 改完需要验证服务是否正常运行，若无法正常运行则修改只能正常运行
