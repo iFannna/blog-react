@@ -99,7 +99,7 @@
   justify-content: center;
   gap: 2rem;
   min-height: 100vh;
-  padding: 4rem 2rem;
+  padding: 4rem 1.5rem;
   background: radial-gradient(circle at 50% 0%, var(--color-primary-subtle), var(--color-bg) 65%);
 }
 .auth-back {
@@ -115,7 +115,7 @@
 }
 .auth-card {
   width: 100%;
-  max-width: 46rem;
+  max-width: 45rem;
   padding: 4rem;
   background-color: var(--color-bg);
   border-radius: var(--radius-normal);
@@ -306,15 +306,6 @@
   margin: 0 0 2rem;
   font-size: 1.6rem;
   color: var(--color-success);
-}
-
-@media (max-width: 540px) {
-  .auth-card {
-    padding: 3rem 2rem;
-  }
-  .auth-title {
-    font-size: 2.2rem;
-  }
 }
 
 /* ── Tailwind Theme Extension ── */
