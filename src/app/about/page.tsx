@@ -58,7 +58,7 @@ export default function AboutPage() {
             <div className="entry-content page-entry-content">
               {/* ── My story ── */}
               <div className="page-columns flex-layout">
-                <div className="page-column page-column--full">
+                <div className="page-column is-full">
                   <h6 className="page-heading page-heading-6 text-left text-accent">
                     — My story
                   </h6>
@@ -86,7 +86,7 @@ export default function AboutPage() {
 
               {/* ── Get in touch ── */}
               <div className="page-columns items-top flex-layout">
-                <div className="page-column items-top page-column--full">
+                <div className="page-column items-top is-full">
                   <div className="page-spacer spacer-sm" />
 
                   <h6 className="page-heading page-heading-6 text-left text-accent">

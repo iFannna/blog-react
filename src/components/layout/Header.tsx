@@ -159,7 +159,7 @@ export default function Header({ navItems, mobileNavItems, github, gitee }: Head
           <span className="mobile-nav header-element">
             <button
               type="button"
-              className={`hamburger hamburger--spin${isMobileMenuOpen ? " is-active" : ""}`}
+              className={`hamburger is-spin${isMobileMenuOpen ? " is-active" : ""}`}
               aria-label={isMobileMenuOpen ? "关闭菜单" : "打开菜单"}
               aria-expanded={isMobileMenuOpen}
               onClick={(e) => {
@@ -293,9 +293,9 @@ export default function Header({ navItems, mobileNavItems, github, gitee }: Head
               </div>
             </div>
 
-            <div className="header-widget header-widget__socials header-widget-hide-mobile">
+            <div className="header-widget header-widget-socials header-widget-hide-mobile">
               <div className="widget-wrapper">
-                <nav className="social-nav minimal-fill social-nav--large" aria-label="社交链接">
+                <nav className="social-nav minimal-fill is-large" aria-label="社交链接">
                   <ul className="flex items-center">
                     <li>
                       <a href={github || "#"} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="GitHub">

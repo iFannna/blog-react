@@ -53,7 +53,7 @@ export default function ScrollTopButton() {
     <button
       id="scroll-top"
       type="button"
-      className={`scroll-top ${visible ? "scroll-top--visible" : ""}`}
+      className={`scroll-top ${visible ? "is-visible" : ""}`}
       tabIndex={visible ? 0 : -1}
       aria-label="回到顶部"
       title="回到顶部"

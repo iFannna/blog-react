@@ -97,18 +97,18 @@ export default function ArchiveTimeline({ yearGroups }: { yearGroups: YearGroup[
 
             <button
               type="button"
-              className="archive-acc-year__head"
+              className="archive-acc-year-head"
               onClick={() => toggleYear(yg.year)}
               aria-expanded={yearOpen}
             >
-              <span className="archive-acc-year__num">{yg.year}</span>
-              <span className="archive-acc-year__leader" />
-              <span className="archive-acc-year__count">{yg.count} 篇</span>
-              <span className="archive-acc-year__icon" aria-hidden="true" />
+              <span className="archive-acc-year-num">{yg.year}</span>
+              <span className="archive-acc-year-leader" />
+              <span className="archive-acc-year-count">{yg.count} 篇</span>
+              <span className="archive-acc-year-icon" aria-hidden="true" />
             </button>
 
-            <div className="archive-acc-year__body">
-              <div className="archive-acc-year__inner">
+            <div className="archive-acc-year-body">
+              <div className="archive-acc-year-inner">
                 {yg.months.map((mg) => {
                   const mm = String(mg.month).padStart(2, "0");
                   const key = `${yg.year}-${mg.month}`;
@@ -119,27 +119,27 @@ export default function ArchiveTimeline({ yearGroups }: { yearGroups: YearGroup[
                     <div key={mg.month} className={`archive-acc-month${monthOpen ? " is-open" : ""}`}>
                       <button
                         type="button"
-                        className="archive-acc-month__head"
+                        className="archive-acc-month-head"
                         onClick={() => toggleMonth(key)}
                         aria-expanded={monthOpen}
                       >
-                        <span className="archive-acc-month__label">{mm} 月</span>
-                        <span className="archive-acc-month__leader" />
-                        <span className="archive-acc-month__count">{mg.articles.length} 篇</span>
-                        <span className="archive-acc-month__icon" aria-hidden="true" />
+                        <span className="archive-acc-month-label">{mm} 月</span>
+                        <span className="archive-acc-month-leader" />
+                        <span className="archive-acc-month-count">{mg.articles.length} 篇</span>
+                        <span className="archive-acc-month-icon" aria-hidden="true" />
                       </button>
 
-                      <div className="archive-acc-month__pane">
-                        <div className="archive-acc-month__inner">
+                      <div className="archive-acc-month-pane">
+                        <div className="archive-acc-month-inner">
                           <ul className="archive-entries">
                             {mg.articles.slice(0, shown).map((a) => {
                               const monthNumber = a.month, day = a.day;
                               return (
                                 <li key={a.id} className="archive-entry">
-                                  <span className="archive-entry__date">
+                                  <span className="archive-entry-date">
                                     {String(monthNumber).padStart(2, "0")}/{String(day).padStart(2, "0")}
                                   </span>
-                                  <Link href={articleHref(a)} className="archive-entry__title">
+                                  <Link href={articleHref(a)} className="archive-entry-title">
                                     {a.title}
                                   </Link>
                                 </li>

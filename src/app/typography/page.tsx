@@ -401,14 +401,14 @@ add_action( 'after_setup_theme', 'theme_setup' );
               </div>
               <div className="page-column">
                 <div className="typo-buttons-group">
-                  <a className="typo-btn typo-btn--outline" style={{ borderRadius: 0 }}>
+                  <a className="typo-btn is-outline" style={{ borderRadius: 0 }}>
                     Outline Button
                   </a>
                 </div>
               </div>
               <div className="page-column">
                 <div className="typo-buttons-group">
-                  <a className="typo-btn typo-btn--rounded">
+                  <a className="typo-btn is-rounded">
                     Rounded Button
                   </a>
                 </div>
@@ -459,31 +459,31 @@ add_action( 'after_setup_theme', 'theme_setup' );
                   <td>Jane Cooper</td>
                   <td>Developer</td>
                   <td>jane@example.com</td>
-                  <td><span className="typo-badge typo-badge--green">Active</span></td>
+                  <td><span className="typo-badge is-green">Active</span></td>
                 </tr>
                 <tr>
                   <td>Floyd Miles</td>
                   <td>Designer</td>
                   <td>floyd@example.com</td>
-                  <td><span className="typo-badge typo-badge--gray">Inactive</span></td>
+                  <td><span className="typo-badge is-gray">Inactive</span></td>
                 </tr>
                 <tr>
                   <td>Ronald Richards</td>
                   <td>Manager</td>
                   <td>ronald@example.com</td>
-                  <td><span className="typo-badge typo-badge--green">Active</span></td>
+                  <td><span className="typo-badge is-green">Active</span></td>
                 </tr>
                 <tr>
                   <td>Marvin McKinney</td>
                   <td>Writer</td>
                   <td>marvin@example.com</td>
-                  <td><span className="typo-badge typo-badge--yellow">Pending</span></td>
+                  <td><span className="typo-badge is-yellow">Pending</span></td>
                 </tr>
                 <tr>
                   <td>Jenny Wilson</td>
                   <td>Editor</td>
                   <td>jenny@example.com</td>
-                  <td><span className="typo-badge typo-badge--green">Active</span></td>
+                  <td><span className="typo-badge is-green">Active</span></td>
                 </tr>
               </tbody>
             </table>
@@ -499,7 +499,7 @@ add_action( 'after_setup_theme', 'theme_setup' );
 
             <ul className="typo-task-list">
               <li>
-                <span className="typo-checkbox typo-checkbox--checked">
+                <span className="typo-checkbox is-checked">
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                     <path d="M2 6L5 9L10 3" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -507,7 +507,7 @@ add_action( 'after_setup_theme', 'theme_setup' );
                 <span>Create a new project</span>
               </li>
               <li>
-                <span className="typo-checkbox typo-checkbox--checked">
+                <span className="typo-checkbox is-checked">
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                     <path d="M2 6L5 9L10 3" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>

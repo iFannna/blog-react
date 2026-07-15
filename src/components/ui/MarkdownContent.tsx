@@ -71,7 +71,7 @@ const components: Components = {
   input: ({ checked }) => {
     if (checked) {
       return (
-        <span className="typo-checkbox typo-checkbox--checked">{CHECK_SVG}</span>
+        <span className="typo-checkbox is-checked">{CHECK_SVG}</span>
       );
     }
     return <span className="typo-checkbox" />;

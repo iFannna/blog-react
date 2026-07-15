@@ -466,26 +466,26 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
 
   return (
     <section className="article-comments">
-      <div className="article-comments__heading">
-        <h3 className="article-comments__title">评论</h3>
-        <p className="article-comments__subtitle">{totalComments} 条讨论</p>
+      <div className="article-comments-heading">
+        <h3 className="article-comments-title">评论</h3>
+        <p className="article-comments-subtitle">{totalComments} 条讨论</p>
       </div>
 
       {!isCommentClosed && (
         <section className="comment-editor">
-          <h3 className="comment-editor__title">发表评论</h3>
+          <h3 className="comment-editor-title">发表评论</h3>
           <textarea
-            className="comment-editor__input"
+            className="comment-editor-input"
             rows={8}
             aria-label="发表评论"
             placeholder="写下你的评论..."
             value={draftComment}
             onChange={(e) => setDraftComment(e.target.value)}
           />
-          <div className="comment-editor__actions">
+          <div className="comment-editor-actions">
             <button
               type="button"
-              className="comment-editor__submit"
+              className="comment-editor-submit"
               disabled={submittingComment}
               onClick={publishMockComment}
             >
@@ -498,15 +498,15 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
       {comments.length > 0 ? (
         <>
           <div className="comment-sortbar">
-            <span className="comment-sortbar__label">
+            <span className="comment-sortbar-label">
               {sortMode === "hot" ? "热门评论" : "最新评论"}
             </span>
             <button
               type="button"
-              className="comment-sortbar__toggle"
+              className="comment-sortbar-toggle"
               onClick={() => selectSortMode(sortMode === "hot" ? "time" : "hot")}
             >
-              <svg className="comment-sortbar__icon" viewBox="0 0 16 16" aria-hidden="true">
+              <svg className="comment-sortbar-icon" viewBox="0 0 16 16" aria-hidden="true">
                 <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
               </svg>
               {sortMode === "hot" ? "按热度" : "按时间"}
@@ -517,13 +517,13 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
             const replyPreview = getReplyPreview(comment);
             return (
               <article key={comment.id} className="comment-card">
-                <div className="comment-card__body">
-                  <div className="comment-card__top">
-                    <div className="comment-card__meta">
-                      <div className="comment-card__avatar">
+                <div className="comment-card-body">
+                  <div className="comment-card-top">
+                    <div className="comment-card-meta">
+                      <div className="comment-card-avatar">
                         <img src={comment.authorAvatar} alt={comment.authorName} />
                       </div>
-                      <div className="comment-card__author">
+                      <div className="comment-card-author">
                         <strong>{comment.authorName}</strong>
                         <span>{formatCommentTime(comment.createTime)}</span>
                       </div>
@@ -532,7 +532,7 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
                     <div className="comment-more" onClick={(e) => e.stopPropagation()}>
                       <button
                         type="button"
-                        className="comment-more__button"
+                        className="comment-more-button"
                         aria-label="更多操作"
                         aria-expanded={openKeys.has(`comment-${comment.id}`)}
                         onClick={() => toggle(`comment-${comment.id}`)}
@@ -562,12 +562,12 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
                     </div>
                   </div>
 
-                  <p className="comment-card__content">{comment.content}</p>
+                  <p className="comment-card-content">{comment.content}</p>
 
-                  <div className="comment-card__footer">
+                  <div className="comment-card-footer">
                     <button
                       type="button"
-                      className={`comment-card__action${comment.liked ? " is-liked" : ""}`}
+                      className={`comment-card-action${comment.liked ? " is-liked" : ""}`}
                       onClick={() => likeComment(comment)}
                     >
                       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -582,7 +582,7 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
                     {comment.replyCount > 0 && (
                       <button
                         type="button"
-                        className="comment-card__action comment-card__toggle"
+                        className="comment-card-action comment-card-toggle"
                         onClick={() => toggleReplies(comment)}
                       >
                         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -599,7 +599,7 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
                     )}
                     <button
                       type="button"
-                      className="comment-card__action"
+                      className="comment-card-action"
                       onClick={() => openReplyEditor(comment)}
                     >
                       <svg viewBox="0 0 16 16" aria-hidden="true">
@@ -618,12 +618,12 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
                       {isExpanded(comment.id)
                         ? getExpandedReplies(comment).map((reply) => (
                             <article key={reply.id} className="comment-reply">
-                              <div className="comment-reply__top">
-                                <div className="comment-reply__meta">
-                                  <div className="comment-reply__avatar">
+                              <div className="comment-reply-top">
+                                <div className="comment-reply-meta">
+                                  <div className="comment-reply-avatar">
                                     <img src={reply.authorAvatar} alt={reply.authorName} />
                                   </div>
-                                  <div className="comment-reply__author">
+                                  <div className="comment-reply-author">
                                     <strong>{reply.authorName}</strong>
                                     <span>{formatCommentTime(reply.createTime)}</span>
                                   </div>
@@ -632,7 +632,7 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
                                 <div className="comment-more" onClick={(e) => e.stopPropagation()}>
                                   <button
                                     type="button"
-                                    className="comment-more__button"
+                                    className="comment-more-button"
                                     aria-label="更多操作"
                                     aria-expanded={openKeys.has(`reply-${comment.id}-${reply.id}`)}
                                     onClick={() => toggle(`reply-${comment.id}-${reply.id}`)}
@@ -662,16 +662,16 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
                                 </div>
                               </div>
 
-                              <div className="comment-reply__body">
-                                <p className="comment-reply__content">
-                                  <span className="comment-reply__target">@{reply.replyToName}</span>
+                              <div className="comment-reply-body">
+                                <p className="comment-reply-content">
+                                  <span className="comment-reply-target">@{reply.replyToName}</span>
                                   {reply.content}
                                 </p>
 
-                                <div className="comment-reply__footer">
+                                <div className="comment-reply-footer">
                                   <button
                                     type="button"
-                                    className={`comment-card__action${reply.liked ? " is-liked" : ""}`}
+                                    className={`comment-card-action${reply.liked ? " is-liked" : ""}`}
                                     onClick={() => likeReply(comment.id, reply)}
                                   >
                                     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -685,7 +685,7 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
                                   </button>
                                   <button
                                     type="button"
-                                    className="comment-card__action"
+                                    className="comment-card-action"
                                     onClick={() => openReplyEditor(comment, reply)}
                                   >
                                     <svg viewBox="0 0 16 16" aria-hidden="true">
@@ -702,9 +702,9 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
                             </article>
                           ))
                         : replyPreview && (
-                            <article className="comment-reply comment-reply--preview">
-                              <p className="comment-reply__preview-content">
-                                <span className="comment-reply__preview-name">
+                            <article className="comment-reply is-preview">
+                              <p className="comment-reply-preview-content">
+                                <span className="comment-reply-preview-name">
                                   {replyPreview.authorName}：
                                 </span>
                                 {replyPreview.content}
@@ -714,17 +714,17 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
 
                       {isReplyEditorVisible(comment.id) && activeReplyTarget && (
                         <div className="comment-inline-editor">
-                          <div className="comment-inline-editor__row">
-                            <div className="comment-inline-editor__avatar">
+                          <div className="comment-inline-editor-row">
+                            <div className="comment-inline-editor-avatar">
                               <img src={VIEWER.avatar} alt={VIEWER.nickname} />
                             </div>
-                            <div className="comment-inline-editor__input-shell">
-                              <span className="comment-inline-editor__prefix">
+                            <div className="comment-inline-editor-input-shell">
+                              <span className="comment-inline-editor-prefix">
                                 回复 {activeReplyTarget.targetName}：
                               </span>
                               <input
                                 type="text"
-                                className="comment-inline-editor__input"
+                                className="comment-inline-editor-input"
                                 aria-label={`回复 ${activeReplyTarget.targetName}`}
                                 value={getReplyDraft(comment.id)}
                                 onChange={(e) => updateReplyDraft(comment.id, e.target.value)}
@@ -732,7 +732,7 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
                             </div>
                             <button
                               type="button"
-                              className="comment-inline-editor__submit"
+                              className="comment-inline-editor-submit"
                               disabled={replySubmittingMap[comment.id]}
                               onClick={() => publishMockReply(comment)}
                             >
@@ -752,7 +752,7 @@ export default function ArticleCommentsPanel({ articleId, commentStatus }: Artic
       ) : null}
 
       {comments.length > 0 && hasMoreComments && (
-        <div ref={loadMoreRef} className="article-comments__load-sentinel" />
+        <div ref={loadMoreRef} className="article-comments-load-sentinel" />
       )}
     </section>
   );

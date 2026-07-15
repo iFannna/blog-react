@@ -103,7 +103,7 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
                 <label className="auth-label" htmlFor="auth-nickname">昵称</label>
                 <input
                   id="auth-nickname"
-                  className={`auth-input${errors.nickname ? " auth-input--error" : ""}`}
+                  className={`auth-input${errors.nickname ? " is-error" : ""}`}
                   type="text"
                   value={nickname}
                   onChange={(e) => setNickname(e.target.value)}
@@ -118,7 +118,7 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
               <label className="auth-label" htmlFor="auth-username">用户名</label>
               <input
                 id="auth-username"
-                className={`auth-input${errors.username ? " auth-input--error" : ""}`}
+                className={`auth-input${errors.username ? " is-error" : ""}`}
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -132,7 +132,7 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
               <label className="auth-label" htmlFor="auth-password">密码</label>
               <input
                 id="auth-password"
-                className={`auth-input${errors.password ? " auth-input--error" : ""}`}
+                className={`auth-input${errors.password ? " is-error" : ""}`}
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

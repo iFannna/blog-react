@@ -15,12 +15,12 @@ export default function ExploreSection({ links, variant }: ExploreSectionProps) 
   const isSparse = variant === "sparse";
 
   return (
-    <section className={`explore-section${isSparse ? " explore-section--sparse" : ""}`}>
+    <section className={`explore-section${isSparse ? " is-sparse" : ""}`}>
       <p className="explore-eyebrow">
         {isSparse ? "Keep Exploring" : "Start Here"}
       </p>
 
-      <h2 className={`explore-title${isSparse ? " explore-title--sparse" : " explore-title--default"}`}>
+      <h2 className={`explore-title${isSparse ? " is-sparse" : " is-default"}`}>
         {isSparse
           ? "Discover more across the site"
           : "Welcome — explore to get started"}

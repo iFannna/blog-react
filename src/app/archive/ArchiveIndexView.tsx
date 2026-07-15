@@ -98,7 +98,7 @@ export default async function ArchiveIndexView() {
         <header className="archive-header">
           <h1 className="page-heading-2">归档</h1>
           {totalCount > 0 && latest && (
-            <p className="archive-header__meta">
+            <p className="archive-header-meta">
               共 {totalCount} 篇 · 跨越 {yearGroups.length} 年 · 最近更新于 {latest.year} 年 {latest.month} 月 {latest.day} 日
             </p>
           )}
@@ -106,9 +106,9 @@ export default async function ArchiveIndexView() {
 
         {totalCount === 0 ? (
           <div className="sidebar-widget archive-empty">
-            <div className="sidebar-widget-title archive-empty__title">还没有内容</div>
-            <p className="archive-empty__text">这个博客暂时没有可归档的文章。</p>
-            <Link href="/" className="archive-empty__link">返回首页 →</Link>
+            <div className="sidebar-widget-title archive-empty-title">还没有内容</div>
+            <p className="archive-empty-text">这个博客暂时没有可归档的文章。</p>
+            <Link href="/" className="archive-empty-link">返回首页 →</Link>
           </div>
         ) : (
           <ArchiveTimeline yearGroups={yearGroups} />

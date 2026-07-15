@@ -24,7 +24,7 @@ export default function ContactPage() {
           <div className="entry-content page-entry-content">
             <div className="page-columns items-top flex-layout">
               {/* ── Left: Contact info ── */}
-              <div className="page-column items-top page-column--65">
+              <div className="page-column items-top page-column-wide">
                 <h6 className="page-heading page-heading-6 text-accent-pink">
                   I&rsquo;d love to hear from you
                 </h6>
@@ -60,7 +60,7 @@ export default function ContactPage() {
               </div>
 
               {/* ── Right: Contact form ── */}
-              <div className="page-column items-top page-column--49">
+              <div className="page-column items-top page-column-narrow">
                 <p>
                   Feel free to&nbsp;<strong>send a message</strong>, just fill the form below
                   and&nbsp;<strong>i will reply you shortly</strong>!
