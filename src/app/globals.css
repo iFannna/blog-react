@@ -14,16 +14,13 @@
   /* Brand */
   --color-primary: #fc6668;
   --color-primary-light: #fd7d7f;
-  --color-primary-dark: #e55557;
   --color-primary-glow: rgba(252, 102, 104, 0.27);
   --color-primary-subtle: rgba(252, 102, 104, 0.09);
-  --color-primary-faint: rgba(252, 102, 104, 0.04);
   --color-accent: #c26148;
 
   /* Text */
   --color-text: #212121;
   --color-text-muted: #757575;
-  --color-text-light: #949494;
   --color-text-placeholder: #c2c2c2;
   --color-on-primary: #ffffff;
 
@@ -68,7 +65,6 @@
 [data-theme="dark"] {
   --color-text: #ffffff;
   --color-text-muted: #949494;
-  --color-text-light: #757575;
   --color-text-placeholder: #666666;
 
   --color-bg: #333333;
@@ -1635,7 +1631,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   height: 7rem;
   border-radius: 50%;
   background-color: var(--color-bg-muted);
-  color: var(--color-text-light);
+  color: var(--color-text-muted);
   font-size: 2.4rem;
   font-weight: 600;
 }
@@ -3407,7 +3403,7 @@ body {
   max-width: 42rem;
   font-size: 1rem;
   line-height: 1.625;
-  color: var(--color-text-light);
+  color: var(--color-text-muted);
 }
 
 .explore-grid {
@@ -4745,7 +4741,7 @@ ol.typo-list {
   font-size: 90%;
   padding: 0.16rem 0.48rem;
   border-radius: var(--radius-normal);
-  background-color: var(--color-primary-faint);
+  background-color: var(--color-primary-subtle);
   color: var(--color-primary);
 }
 
@@ -5738,7 +5734,7 @@ ol.typo-list {
 
 .archive-acc-month-count {
   font-size: 1.3rem;
-  color: var(--color-text-light);
+  color: var(--color-text-muted);
 }
 
 .archive-acc-month-icon {
@@ -5746,8 +5742,8 @@ ol.typo-list {
   display: inline-block;
   width: 0.7rem;
   height: 0.7rem;
-  border-right: 0.18rem solid var(--color-text-light);
-  border-bottom: 0.18rem solid var(--color-text-light);
+  border-right: 0.18rem solid var(--color-text-muted);
+  border-bottom: 0.18rem solid var(--color-text-muted);
   transform: rotate(-45deg);
   transition: var(--transition-primary);
 }
@@ -5790,7 +5786,7 @@ ol.typo-list {
   min-width: 4rem;
   font-family: "JetBrains Mono", Menlo, Consolas, monospace;
   font-size: 1.3rem;
-  color: var(--color-text-light);
+  color: var(--color-text-muted);
 }
 
 .archive-entry-title {
@@ -5808,7 +5804,7 @@ ol.typo-list {
   padding: 1.5rem 0 0.5rem;
   text-align: center;
   font-size: 1.3rem;
-  color: var(--color-text-light);
+  color: var(--color-text-muted);
 }
 
 /* Empty state */
