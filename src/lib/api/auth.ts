@@ -21,3 +21,8 @@ export async function register(req: {
 }): Promise<void> {
   await apiClient.post<unknown, unknown>("/register", req);
 }
+
+// 登出：后端黑名单 access token + 删 refresh。需要 Bearer token，由请求拦截器带上。
+export async function logout(): Promise<void> {
+  await apiClient.get("/logout");
+}

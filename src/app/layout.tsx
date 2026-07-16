@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getSiteSetting } from "@/lib/api/site";
 import MessageContainer from "@/components/ui/MessageContainer";
+import { AuthProvider } from "@/lib/useAuth";
 import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -64,8 +65,10 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {children}
-        <MessageContainer />
+        <AuthProvider>
+          {children}
+          <MessageContainer />
+        </AuthProvider>
       </body>
     </html>
   );

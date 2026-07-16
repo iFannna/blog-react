@@ -63,7 +63,6 @@ interface MessageItemProps {
 
 function MessageItem({ instance, position, onHeight }: MessageItemProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [entered, setEntered] = useState(false);
   const [hovered, setHovered] = useState(false);
 
   // Measure height so the stack can position subsequent toasts.
@@ -76,14 +75,6 @@ function MessageItem({ instance, position, onHeight }: MessageItemProps) {
     ro.observe(el);
     return () => ro.disconnect();
   }, [instance.id, onHeight]);
-
-  // Enter: paint the is-enter state first, then drop it next frame.
-  useEffect(() => {
-    const raf = requestAnimationFrame(() =>
-      requestAnimationFrame(() => setEntered(true)),
-    );
-    return () => cancelAnimationFrame(raf);
-  }, []);
 
   // Leave: remove the instance once the animation has played out.
   useEffect(() => {
@@ -99,7 +90,7 @@ function MessageItem({ instance, position, onHeight }: MessageItemProps) {
     return () => clearTimeout(t);
   }, [instance.duration, instance.closing, instance.id, hovered]);
 
-  const phaseClass = instance.closing ? "is-leave" : entered ? "" : "is-enter";
+  const phaseClass = instance.closing ? "is-leave" : "";
   const className = [
     "message",
     `is-${instance.type}`,

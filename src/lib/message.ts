@@ -67,7 +67,7 @@ export interface MessageFn {
 }
 
 const DEFAULT_DURATION = 3000;
-const DEFAULT_OFFSET = 1.6;
+const DEFAULT_OFFSET = 5;
 const DEFAULT_PLACEMENT: MessagePlacement = "top";
 const BASE_Z_INDEX = 2003;
 const LEAVE_MS = 400;

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getAccessToken } from "@/lib/auth";
 
 /** 后端 code !== 0 时的业务错误 */
 export class ApiError extends Error {
@@ -17,6 +18,15 @@ const apiClient = axios.create({
   baseURL: API_BASE,
   timeout: 10_000,
   headers: { "Content-Type": "application/json" },
+});
+
+// 给需要鉴权的请求带上 access token（仅客户端；SSR 无 token，公开数据不带）
+apiClient.interceptors.request.use((config) => {
+  const token = getAccessToken();
+  if (token) {
+    config.headers.set("Authorization", `Bearer ${token}`);
+  }
+  return config;
 });
 
 apiClient.interceptors.response.use(

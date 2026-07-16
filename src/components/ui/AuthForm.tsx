@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { login, register } from "@/lib/api/auth";
 import { ApiError } from "@/lib/api/client";
+import { message } from "@/lib/message";
+import { useAuth } from "@/lib/useAuth";
 
 type Mode = "login" | "register";
 
@@ -25,15 +27,38 @@ const isLoginMode = (mode: Mode) => mode === "login";
 // 登录/注册共用表单：字段校验 + 提交 + 错误/成功态 + 互相切换
 export default function AuthForm({ mode, redirect }: AuthFormProps) {
   const router = useRouter();
+  const { signIn } = useAuth();
   const [nickname, setNickname] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
   const [agreed, setAgreed] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
-  const [formError, setFormError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
+
+  // 输入任意内容即清除当前字段的错误提示
+  function clearFieldError(field: keyof FieldErrors) {
+    setErrors((prev) => {
+      if (!(field in prev)) return prev;
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+  }
+
+  // 回车键：非最后一个文本输入框时跳转到下一个输入框，最后一个则提交表单
+  function handleFieldKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key !== "Enter") return;
+    const form = e.currentTarget.form;
+    if (!form) return;
+    const textInputs = form.querySelectorAll<HTMLInputElement>('input[type="text"], input[type="password"]');
+    const idx = Array.prototype.indexOf.call(textInputs, e.currentTarget);
+    if (idx >= 0 && idx < textInputs.length - 1) {
+      e.preventDefault();
+      textInputs[idx + 1].focus();
+    }
+  }
 
   // 字段校验：注册需满足后端 binding 长度，登录仅校验非空
   function validate(): FieldErrors {
@@ -59,7 +84,6 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setFormError("");
     setSuccessMsg("");
     const fieldErrors = validate();
     setErrors(fieldErrors);
@@ -69,16 +93,22 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
     try {
       if (isLoginMode(mode)) {
         const result = await login(username, password);
-        // 记住我：勾选存 localStorage（持久），否则 sessionStorage（关闭标签即失效）
-        // 本次仅落库 access_token，全站登录态整合（axios 拦截器/Context）留后续阶段
-        (remember ? localStorage : sessionStorage).setItem("access_token", result.access_token);
+        signIn(
+          {
+            accessToken: result.access_token,
+            userId: result.user_id,
+            username: result.username,
+          },
+          remember,
+        );
+        message.success("登录成功");
         router.push(redirect || "/");
       } else {
         await register({ username, password, nickname: nickname.trim() });
         setSuccessMsg("注册成功，请登录");
       }
     } catch (err) {
-      setFormError(err instanceof ApiError ? err.message : "操作失败，请稍后重试");
+      message.error(err instanceof ApiError ? err.message : "操作失败，请稍后重试");
     } finally {
       setSubmitting(false);
     }
@@ -96,8 +126,6 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
           </div>
         ) : (
           <form className="auth-form" onSubmit={handleSubmit} noValidate>
-            {formError && <div className="auth-form-error" role="alert">{formError}</div>}
-
             {!isLoginMode(mode) && (
               <div className="auth-field">
                 <label className="auth-label" htmlFor="auth-nickname">昵称</label>
@@ -106,7 +134,8 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
                   className={`auth-input${errors.nickname ? " is-error" : ""}`}
                   type="text"
                   value={nickname}
-                  onChange={(e) => setNickname(e.target.value)}
+                  onChange={(e) => { setNickname(e.target.value); clearFieldError("nickname"); }}
+                  onKeyDown={handleFieldKeyDown}
                   autoComplete="nickname"
                   disabled={submitting}
                 />
@@ -121,7 +150,8 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
                 className={`auth-input${errors.username ? " is-error" : ""}`}
                 type="text"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => { setUsername(e.target.value); clearFieldError("username"); }}
+                onKeyDown={handleFieldKeyDown}
                 autoComplete="username"
                 disabled={submitting}
               />
@@ -135,7 +165,8 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
                 className={`auth-input${errors.password ? " is-error" : ""}`}
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => { setPassword(e.target.value); clearFieldError("password"); }}
+                onKeyDown={handleFieldKeyDown}
                 autoComplete={isLoginMode(mode) ? "current-password" : "new-password"}
                 disabled={submitting}
               />
@@ -157,11 +188,11 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
               </div>
             ) : (
               <div className="auth-agreement-wrap">
-                <label className="auth-agreement">
+                <div className="auth-agreement">
                   <input
                     type="checkbox"
                     checked={agreed}
-                    onChange={(e) => setAgreed(e.target.checked)}
+                    onChange={(e) => { setAgreed(e.target.checked); clearFieldError("agreement"); }}
                   />
                   <span>
                     我已阅读并同意{" "}
@@ -170,7 +201,7 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
                     和{" "}
                     <Link href="/privacy" className="auth-agreement-link">隐私政策</Link>
                   </span>
-                </label>
+                </div>
                 <p className="auth-field-error">{errors.agreement ?? ""}</p>
               </div>
             )}
