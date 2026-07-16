@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getSiteSetting } from "@/lib/api/site";
+import MessageContainer from "@/components/ui/MessageContainer";
 import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -62,7 +63,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <MessageContainer />
+      </body>
     </html>
   );
 }
