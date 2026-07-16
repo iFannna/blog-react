@@ -6025,50 +6025,50 @@ ol.typo-list {
   transition: opacity 0.3s, transform 0.4s, top 0.4s, bottom 0.4s;
 }
 
-.message--primary {
+.message.is-primary {
   color: var(--color-msg-primary);
   background-color: var(--color-msg-primary-bg);
   border-color: var(--color-msg-primary-border);
 }
 
-.message--success {
+.message.is-success {
   color: var(--color-msg-success);
   background-color: var(--color-msg-success-bg);
   border-color: var(--color-msg-success-border);
 }
 
-.message--info {
+.message.is-info {
   color: var(--color-msg-info);
   background-color: var(--color-msg-info-bg);
   border-color: var(--color-msg-info-border);
 }
 
-.message--warning {
+.message.is-warning {
   color: var(--color-msg-warning);
   background-color: var(--color-msg-warning-bg);
   border-color: var(--color-msg-warning-border);
 }
 
-.message--error {
+.message.is-error {
   color: var(--color-msg-error);
   background-color: var(--color-msg-error-bg);
   border-color: var(--color-msg-error-border);
 }
 
-.message__icon {
+.message-icon {
   flex-shrink: 0;
   width: 1em;
   height: 1em;
   color: inherit;
 }
 
-.message__content {
+.message-content {
   margin: 0;
   padding: 0;
   overflow-wrap: break-word;
 }
 
-.message__close {
+.message-close {
   flex-shrink: 0;
   width: 1.6rem;
   height: 1.6rem;
@@ -6081,11 +6081,11 @@ ol.typo-list {
   transition: color 0.2s;
 }
 
-.message__close:hover {
+.message-close:hover {
   color: var(--color-msg-close-hover);
 }
 
-.message__close svg {
+.message-close svg {
   display: block;
   width: 100%;
   height: 100%;

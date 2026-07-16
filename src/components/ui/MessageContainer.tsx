@@ -102,7 +102,7 @@ function MessageItem({ instance, position, onHeight }: MessageItemProps) {
   const phaseClass = instance.closing ? "is-leave" : entered ? "" : "is-enter";
   const className = [
     "message",
-    `message--${instance.type}`,
+    `is-${instance.type}`,
     position.horizontalClass,
     position.verticalClass,
     phaseClass,
@@ -124,14 +124,14 @@ function MessageItem({ instance, position, onHeight }: MessageItemProps) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <svg className="message__icon" viewBox="0 0 1024 1024" aria-hidden="true">
+      <svg className="message-icon" viewBox="0 0 1024 1024" aria-hidden="true">
         <path fill="currentColor" d={ICON_PATHS[instance.type]} />
       </svg>
-      <p className="message__content">{instance.content}</p>
+      <p className="message-content">{instance.content}</p>
       {instance.showClose && (
         <button
           type="button"
-          className="message__close"
+          className="message-close"
           aria-label="关闭"
           onClick={() => closeMessage(instance.id)}
         >
