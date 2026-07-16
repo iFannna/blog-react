@@ -186,15 +186,6 @@
   line-height: 1.1;
   color: var(--color-danger);
 }
-.auth-form-error {
-  margin: 0 0 1rem;
-  padding: 1.2rem;
-  font-size: 1.4rem;
-  text-align: center;
-  color: var(--color-danger);
-  border: 0.1rem solid var(--color-danger);
-  border-radius: var(--radius-normal);
-}
 .auth-form-row {
   display: flex;
   align-items: center;
@@ -342,6 +333,7 @@ html {
   box-sizing: border-box;
   -moz-tab-size: 4;
   tab-size: 4;
+  scrollbar-gutter: stable;
 }
 
 hr {
@@ -3278,6 +3270,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   fill: var(--color-on-primary);
 }
 
+
 /* Responsive: global rem scale */
 @media (max-width: 768px) {
   html {
@@ -6006,7 +5999,7 @@ ol.typo-list {
 /* Message */
 .message {
   --message-tx: 0%;
-  --message-ty: 0%;
+  --message-slide: -100%;
   box-sizing: border-box;
   position: fixed;
   display: flex;
@@ -6014,15 +6007,16 @@ ol.typo-list {
   gap: 0.8rem;
   width: max-content;
   max-width: calc(100% - 3.2rem);
-  padding: 1.1rem 1.5rem;
+  padding: 1.2rem 1.5rem;
   font-size: 1.4rem;
   line-height: 1;
   color: var(--color-msg-info);
   background-color: var(--color-msg-info-bg);
   border: 0.1rem solid var(--color-msg-info-border);
   border-radius: 0.4rem;
-  transform: translate(var(--message-tx), var(--message-ty));
-  transition: opacity 0.3s, transform 0.4s, top 0.4s, bottom 0.4s;
+  transform: translate(var(--message-tx), 0);
+  transition: top 0.4s, bottom 0.4s;
+  animation: message-enter 0.3s ease both;
 }
 
 .message.is-primary {
@@ -6057,8 +6051,8 @@ ol.typo-list {
 
 .message-icon {
   flex-shrink: 0;
-  width: 1em;
-  height: 1em;
+  width: 1.1em;
+  height: 1.1em;
   color: inherit;
 }
 
@@ -6106,18 +6100,33 @@ ol.typo-list {
 }
 
 /* Enter/leave */
-.message.is-enter,
 .message.is-leave {
-  opacity: 0;
+  animation: message-leave 0.4s ease both;
 }
 
-.message.is-top.is-enter,
-.message.is-top.is-leave {
-  --message-ty: -100%;
+.message.is-bottom {
+  --message-slide: 100%;
 }
 
-.message.is-bottom.is-enter,
-.message.is-bottom.is-leave {
-  --message-ty: 100%;
+@keyframes message-enter {
+  from {
+    opacity: 0;
+    transform: translate(var(--message-tx), var(--message-slide));
+  }
+  to {
+    opacity: 1;
+    transform: translate(var(--message-tx), 0);
+  }
+}
+
+@keyframes message-leave {
+  from {
+    opacity: 1;
+    transform: translate(var(--message-tx), 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(var(--message-tx), var(--message-slide));
+  }
 }
 
