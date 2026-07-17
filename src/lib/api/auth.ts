@@ -17,9 +17,15 @@ export function login(username: string, password: string): Promise<LoginResult> 
 export async function register(req: {
   username: string;
   password: string;
-  nickname: string;
+  email: string;
+  verify_code: string;
 }): Promise<void> {
   await apiClient.post<unknown, unknown>("/register", req);
+}
+
+// 发送邮箱验证码。后端接口待实现，当前返回模拟成功。
+export async function sendVerifyCode(email: string): Promise<void> {
+  await apiClient.post<unknown, unknown>("/send-verify-code", { email });
 }
 
 // 登出：后端黑名单 access token + 删 refresh。需要 Bearer token，由请求拦截器带上。

@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useRef, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { login, register } from "@/lib/api/auth";
+import { login, register, sendVerifyCode } from "@/lib/api/auth";
 import { ApiError } from "@/lib/api/client";
 import { message } from "@/lib/message";
 import { useAuth } from "@/lib/useAuth";
@@ -16,11 +16,13 @@ interface AuthFormProps {
 }
 
 interface FieldErrors {
-  nickname?: string;
   username?: string;
   password?: string;
-  agreement?: string;
+  email?: string;
+  verifyCode?: string;
 }
+
+const CODE_COUNTDOWN = 60;
 
 const isLoginMode = (mode: Mode) => mode === "login";
 
@@ -28,14 +30,17 @@ const isLoginMode = (mode: Mode) => mode === "login";
 export default function AuthForm({ mode, redirect }: AuthFormProps) {
   const router = useRouter();
   const { signIn } = useAuth();
-  const [nickname, setNickname] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [verifyCode, setVerifyCode] = useState("");
   const [remember, setRemember] = useState(false);
-  const [agreed, setAgreed] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
+  const [codeSending, setCodeSending] = useState(false);
+  const [codeCountdown, setCodeCountdown] = useState(0);
+  const countdownRef = useRef<ReturnType<typeof setInterval>>(null);
 
   // 输入任意内容即清除当前字段的错误提示
   function clearFieldError(field: keyof FieldErrors) {
@@ -52,7 +57,7 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
     if (e.key !== "Enter") return;
     const form = e.currentTarget.form;
     if (!form) return;
-    const textInputs = form.querySelectorAll<HTMLInputElement>('input[type="text"], input[type="password"]');
+    const textInputs = form.querySelectorAll<HTMLInputElement>('input[type="text"], input[type="password"], input[type="email"]');
     const idx = Array.prototype.indexOf.call(textInputs, e.currentTarget);
     if (idx >= 0 && idx < textInputs.length - 1) {
       e.preventDefault();
@@ -60,24 +65,60 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
     }
   }
 
-  // 字段校验：注册需满足后端 binding 长度，登录仅校验非空
+  // 邮箱失焦时校验格式，有内容但格式不对则提示
+  function handleEmailBlur() {
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setErrors((prev) => ({ ...prev, email: "邮箱格式不正确" }));
+    }
+  }
+  async function handleSendCode() {
+    if (codeCountdown > 0) return;
+    if (!email) {
+      setErrors((prev) => ({ ...prev, email: "请先输入邮箱" }));
+      return;
+    }
+    setCodeSending(true);
+    try {
+      await sendVerifyCode(email);
+      message.success("验证码已发送");
+      setCodeCountdown(CODE_COUNTDOWN);
+      countdownRef.current = setInterval(() => {
+        setCodeCountdown((n) => {
+          if (n <= 1) {
+            if (countdownRef.current) clearInterval(countdownRef.current);
+            return 0;
+          }
+          return n - 1;
+        });
+      }, 1000);
+    } catch (err) {
+      message.error(err instanceof ApiError ? err.message : "发送失败，请稍后重试");
+    } finally {
+      setCodeSending(false);
+    }
+  }
+
+  // 字段校验：登录仅校验非空；注册校验邮箱 + 密码 + 验证码
   function validate(): FieldErrors {
     const e: FieldErrors = {};
-    if (!username) {
-      e.username = "请输入用户名";
-    } else if (!isLoginMode(mode) && (username.length < 3 || username.length > 32)) {
-      e.username = "用户名长度需为 3-32 位";
+    if (isLoginMode(mode)) {
+      if (!username) {
+        e.username = "请输入用户名或邮箱";
+      }
+    } else {
+      if (!email) {
+        e.email = "请输入邮箱";
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        e.email = "邮箱格式不正确";
+      }
+      if (!verifyCode) {
+        e.verifyCode = "请输入验证码";
+      }
     }
     if (!password) {
       e.password = "请输入密码";
     } else if (!isLoginMode(mode) && (password.length < 6 || password.length > 32)) {
       e.password = "密码长度需为 6-32 位";
-    }
-    if (!isLoginMode(mode) && !nickname.trim()) {
-      e.nickname = "请输入昵称";
-    }
-    if (!isLoginMode(mode) && !agreed) {
-      e.agreement = "请阅读并同意服务条款和隐私政策";
     }
     return e;
   }
@@ -104,7 +145,8 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
         message.success("登录成功");
         router.push(redirect || "/");
       } else {
-        await register({ username, password, nickname: nickname.trim() });
+        // 注册以邮箱作为用户名
+        await register({ username: email, password, email, verify_code: verifyCode });
         setSuccessMsg("注册成功，请登录");
       }
     } catch (err) {
@@ -113,6 +155,54 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
       setSubmitting(false);
     }
   }
+
+  const renderLoginExtra = () => (
+    <div className="auth-form-row">
+      <label className="auth-remember">
+        <input
+          type="checkbox"
+          checked={remember}
+          onChange={(e) => setRemember(e.target.checked)}
+        />
+        记住我
+      </label>
+      {/* 找回密码页待实现 */}
+      <Link href="/forgot-password" className="auth-forgot">忘记密码？</Link>
+    </div>
+  );
+
+  const renderRegisterExtra = () => (
+    <>
+      <div className="auth-field">
+        <label className="auth-label" htmlFor="auth-verify-code">验证码</label>
+        <div className="auth-verify-row">
+          <input
+            id="auth-verify-code"
+            className={`auth-input${errors.verifyCode ? " is-error" : ""}`}
+            type="text"
+            value={verifyCode}
+            onChange={(e) => { setVerifyCode(e.target.value); clearFieldError("verifyCode"); }}
+            onKeyDown={handleFieldKeyDown}
+            autoComplete="one-time-code"
+            disabled={submitting}
+          />
+          <button
+            type="button"
+            className="auth-verify-btn"
+            disabled={codeCountdown > 0 || codeSending || submitting}
+            onClick={handleSendCode}
+          >
+            {codeSending
+              ? "发送中…"
+              : codeCountdown > 0
+                ? `${codeCountdown}s 后重试`
+                : "获取验证码"}
+          </button>
+        </div>
+        <p className="auth-field-error">{errors.verifyCode ?? ""}</p>
+      </div>
+    </>
+  );
 
   return (
     <div className="auth-page">
@@ -126,37 +216,38 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
           </div>
         ) : (
           <form className="auth-form" onSubmit={handleSubmit} noValidate>
-            {!isLoginMode(mode) && (
+            {isLoginMode(mode) ? (
               <div className="auth-field">
-                <label className="auth-label" htmlFor="auth-nickname">昵称</label>
+                <label className="auth-label" htmlFor="auth-username">用户名/邮箱</label>
                 <input
-                  id="auth-nickname"
-                  className={`auth-input${errors.nickname ? " is-error" : ""}`}
+                  id="auth-username"
+                  className={`auth-input${errors.username ? " is-error" : ""}`}
                   type="text"
-                  value={nickname}
-                  onChange={(e) => { setNickname(e.target.value); clearFieldError("nickname"); }}
+                  value={username}
+                  onChange={(e) => { setUsername(e.target.value); clearFieldError("username"); }}
                   onKeyDown={handleFieldKeyDown}
-                  autoComplete="nickname"
+                  autoComplete="username"
                   disabled={submitting}
                 />
-                <p className="auth-field-error">{errors.nickname ?? ""}</p>
+                <p className="auth-field-error">{errors.username ?? ""}</p>
+              </div>
+            ) : (
+              <div className="auth-field">
+                <label className="auth-label" htmlFor="auth-email">邮箱</label>
+                <input
+                  id="auth-email"
+                  className={`auth-input${errors.email ? " is-error" : ""}`}
+                  type="email"
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value); clearFieldError("email"); }}
+                  onBlur={handleEmailBlur}
+                  onKeyDown={handleFieldKeyDown}
+                  autoComplete="email"
+                  disabled={submitting}
+                />
+                <p className="auth-field-error">{errors.email ?? ""}</p>
               </div>
             )}
-
-            <div className="auth-field">
-              <label className="auth-label" htmlFor="auth-username">用户名</label>
-              <input
-                id="auth-username"
-                className={`auth-input${errors.username ? " is-error" : ""}`}
-                type="text"
-                value={username}
-                onChange={(e) => { setUsername(e.target.value); clearFieldError("username"); }}
-                onKeyDown={handleFieldKeyDown}
-                autoComplete="username"
-                disabled={submitting}
-              />
-              <p className="auth-field-error">{errors.username ?? ""}</p>
-            </div>
 
             <div className="auth-field">
               <label className="auth-label" htmlFor="auth-password">密码</label>
@@ -173,38 +264,7 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
               <p className="auth-field-error">{errors.password ?? ""}</p>
             </div>
 
-            {isLoginMode(mode) ? (
-              <div className="auth-form-row">
-                <label className="auth-remember">
-                  <input
-                    type="checkbox"
-                    checked={remember}
-                    onChange={(e) => setRemember(e.target.checked)}
-                  />
-                  记住我
-                </label>
-                {/* 找回密码页待实现 */}
-                <Link href="/forgot-password" className="auth-forgot">忘记密码？</Link>
-              </div>
-            ) : (
-              <div className="auth-agreement-wrap">
-                <div className="auth-agreement">
-                  <input
-                    type="checkbox"
-                    checked={agreed}
-                    onChange={(e) => { setAgreed(e.target.checked); clearFieldError("agreement"); }}
-                  />
-                  <span>
-                    我已阅读并同意{" "}
-                    {/* 服务条款 / 隐私政策页待实现 */}
-                    <Link href="/terms" className="auth-agreement-link">服务条款</Link>{" "}
-                    和{" "}
-                    <Link href="/privacy" className="auth-agreement-link">隐私政策</Link>
-                  </span>
-                </div>
-                <p className="auth-field-error">{errors.agreement ?? ""}</p>
-              </div>
-            )}
+            {isLoginMode(mode) ? renderLoginExtra() : renderRegisterExtra()}
 
             <button type="submit" className="auth-submit" disabled={submitting}>
               {submitting ? (isLoginMode(mode) ? "登录中…" : "注册中…") : (isLoginMode(mode) ? "登录" : "注册")}

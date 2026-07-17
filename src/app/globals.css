@@ -115,7 +115,7 @@
 .auth-back {
   display: block;
   width: fit-content;
-  margin: 2rem auto 0;
+  margin: 1rem auto 0;
   font-size: 1.4rem;
   color: var(--color-text-muted);
   text-decoration: none;
@@ -141,7 +141,7 @@
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 }
 .auth-field {
   display: flex;
@@ -183,6 +183,33 @@
   font-size: 1.4rem;
   line-height: 1.1;
   color: var(--color-danger);
+}
+.auth-verify-row {
+  display: flex;
+  gap: 0.8rem;
+}
+.auth-verify-row .auth-input {
+  flex: 1;
+}
+.auth-verify-btn {
+  flex-shrink: 0;
+  padding: 1.2rem 1.6rem;
+  font-size: 1.4rem;
+  color: var(--color-primary);
+  background-color: var(--color-bg);
+  border: 0.2rem solid var(--color-primary);
+  border-radius: var(--radius-normal);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s, background-color 0.2s;
+}
+.auth-verify-btn:hover:not(:disabled) {
+  color: var(--color-on-primary);
+  background-color: var(--color-primary);
+}
+.auth-verify-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 .auth-form-row {
   display: flex;
