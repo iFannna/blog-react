@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAccessToken } from "@/lib/auth";
+import { getAccessToken, refreshAccessToken, clearStoredAuth } from "@/lib/auth";
 
 /** 后端 code !== 0 时的业务错误 */
 export class ApiError extends Error {
@@ -29,6 +29,18 @@ apiClient.interceptors.request.use((config) => {
   return config;
 });
 
+// 并发 401 去重：同时多个请求 401 时只刷新一次 token，其余排队复用结果
+let refreshPromise: Promise<string | null> | null = null;
+
+function refreshTokenOnce(): Promise<string | null> {
+  if (!refreshPromise) {
+    refreshPromise = refreshAccessToken().finally(() => {
+      refreshPromise = null;
+    });
+  }
+  return refreshPromise;
+}
+
 apiClient.interceptors.response.use(
   (response) => {
     const body = response.data;
@@ -42,7 +54,28 @@ apiClient.interceptors.response.use(
 
     return body;
   },
-  (error) => {
+  async (error) => {
+    // 401 → 用 refresh_token 换新 access_token 后重试（仅一次，避免死循环）
+    const originalRequest = error.config as typeof error.config & { _retry?: boolean };
+    if (
+      error.response?.status === 401 &&
+      originalRequest &&
+      !originalRequest._retry
+    ) {
+      originalRequest._retry = true;
+      const newToken = await refreshTokenOnce();
+      if (newToken) {
+        originalRequest.headers.set("Authorization", `Bearer ${newToken}`);
+        return apiClient(originalRequest);
+      }
+      // 刷新失败：清登录态，跳转登录页
+      if (typeof window !== "undefined") {
+        clearStoredAuth();
+        window.location.href = "/login";
+      }
+      return Promise.reject(error);
+    }
+
     const message =
       error.code === "ECONNABORTED"
         ? "Request timed out"
