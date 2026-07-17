@@ -8,9 +8,13 @@ export interface LoginResult {
   refresh_token: string;
 }
 
-// 用户登录
-export function login(username: string, password: string): Promise<LoginResult> {
-  return apiClient.post<unknown, LoginResult>("/login", { username, password });
+// 用户登录。captcha_verify_param 为前端人机验证凭证（后端未配置验证码时忽略）
+export function login(username: string, password: string, captchaVerifyParam: string): Promise<LoginResult> {
+  return apiClient.post<unknown, LoginResult>("/login", {
+    username,
+    password,
+    captcha_verify_param: captchaVerifyParam,
+  });
 }
 
 // 用户注册（后端返回 data: null）
@@ -23,9 +27,12 @@ export async function register(req: {
   await apiClient.post<unknown, unknown>("/register", req);
 }
 
-// 发送邮箱验证码。后端接口待实现，当前返回模拟成功。
-export async function sendVerifyCode(email: string): Promise<void> {
-  await apiClient.post<unknown, unknown>("/send-verify-code", { email });
+// 发送邮箱验证码。captcha_verify_param 为前端人机验证凭证
+export async function sendVerifyCode(email: string, captchaVerifyParam: string): Promise<void> {
+  await apiClient.post<unknown, unknown>("/send-verify-code", {
+    email,
+    captcha_verify_param: captchaVerifyParam,
+  });
 }
 
 // 登出：后端黑名单 access token + 删 refresh。需要 Bearer token，由请求拦截器带上。
