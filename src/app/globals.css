@@ -209,7 +209,6 @@
 }
 .auth-verify-btn:disabled {
   opacity: 0.5;
-  cursor: not-allowed;
 }
 .auth-form-row {
   display: flex;

@@ -37,7 +37,6 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
   const [remember, setRemember] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
-  const [successMsg, setSuccessMsg] = useState("");
   const [codeSending, setCodeSending] = useState(false);
   const [codeCountdown, setCodeCountdown] = useState(0);
   const countdownRef = useRef<ReturnType<typeof setInterval>>(null);
@@ -71,10 +70,24 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
       setErrors((prev) => ({ ...prev, email: "邮箱格式不正确" }));
     }
   }
+
+  // 密码失焦时校验长度，有内容但长度不对则提示（仅注册模式）
+  function handlePasswordBlur() {
+    if (!isLoginMode(mode) && password && (password.length < 6 || password.length > 32)) {
+      setErrors((prev) => ({ ...prev, password: "密码长度需为 6-32 位" }));
+    }
+  }
+
+  // 验证码失焦时校验格式，有内容但不是 6 位数字则提示
+  function handleVerifyCodeBlur() {
+    if (verifyCode && !/^\d{6}$/.test(verifyCode)) {
+      setErrors((prev) => ({ ...prev, verifyCode: "请输入有效验证码" }));
+    }
+  }
   async function handleSendCode() {
     if (codeCountdown > 0) return;
     if (!email) {
-      setErrors((prev) => ({ ...prev, email: "请先输入邮箱" }));
+      setErrors((prev) => ({ ...prev, email: "请输入邮箱" }));
       return;
     }
     setCodeSending(true);
@@ -113,6 +126,8 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
       }
       if (!verifyCode) {
         e.verifyCode = "请输入验证码";
+      } else if (!/^\d{6}$/.test(verifyCode)) {
+        e.verifyCode = "请输入有效验证码";
       }
     }
     if (!password) {
@@ -125,7 +140,6 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSuccessMsg("");
     const fieldErrors = validate();
     setErrors(fieldErrors);
     if (Object.keys(fieldErrors).length > 0) return;
@@ -147,7 +161,8 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
       } else {
         // 注册以邮箱作为用户名
         await register({ username: email, password, email, verify_code: verifyCode });
-        setSuccessMsg("注册成功，请登录");
+        message.success("注册成功");
+        router.push("/login");
       }
     } catch (err) {
       message.error(err instanceof ApiError ? err.message : "操作失败，请稍后重试");
@@ -174,14 +189,14 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
   const renderRegisterExtra = () => (
     <>
       <div className="auth-field">
-        <label className="auth-label" htmlFor="auth-verify-code">验证码</label>
+        <span className="auth-label">验证码</span>
         <div className="auth-verify-row">
           <input
-            id="auth-verify-code"
             className={`auth-input${errors.verifyCode ? " is-error" : ""}`}
             type="text"
             value={verifyCode}
             onChange={(e) => { setVerifyCode(e.target.value); clearFieldError("verifyCode"); }}
+            onBlur={handleVerifyCodeBlur}
             onKeyDown={handleFieldKeyDown}
             autoComplete="one-time-code"
             disabled={submitting}
@@ -209,68 +224,59 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
       <div className="auth-card">
         <h1 className="auth-title">{isLoginMode(mode) ? "登录" : "注册"}</h1>
 
-        {successMsg ? (
-          <div className="auth-success">
-            <p>{successMsg}</p>
-            <Link href="/login" className="auth-link">前往登录</Link>
-          </div>
-        ) : (
-          <form className="auth-form" onSubmit={handleSubmit} noValidate>
-            {isLoginMode(mode) ? (
-              <div className="auth-field">
-                <label className="auth-label" htmlFor="auth-username">用户名/邮箱</label>
-                <input
-                  id="auth-username"
-                  className={`auth-input${errors.username ? " is-error" : ""}`}
-                  type="text"
-                  value={username}
-                  onChange={(e) => { setUsername(e.target.value); clearFieldError("username"); }}
-                  onKeyDown={handleFieldKeyDown}
-                  autoComplete="username"
-                  disabled={submitting}
-                />
-                <p className="auth-field-error">{errors.username ?? ""}</p>
-              </div>
-            ) : (
-              <div className="auth-field">
-                <label className="auth-label" htmlFor="auth-email">邮箱</label>
-                <input
-                  id="auth-email"
-                  className={`auth-input${errors.email ? " is-error" : ""}`}
-                  type="email"
-                  value={email}
-                  onChange={(e) => { setEmail(e.target.value); clearFieldError("email"); }}
-                  onBlur={handleEmailBlur}
-                  onKeyDown={handleFieldKeyDown}
-                  autoComplete="email"
-                  disabled={submitting}
-                />
-                <p className="auth-field-error">{errors.email ?? ""}</p>
-              </div>
-            )}
-
+        <form className="auth-form" onSubmit={handleSubmit} noValidate>
+          {isLoginMode(mode) ? (
             <div className="auth-field">
-              <label className="auth-label" htmlFor="auth-password">密码</label>
+              <span className="auth-label">用户名/邮箱</span>
               <input
-                id="auth-password"
-                className={`auth-input${errors.password ? " is-error" : ""}`}
-                type="password"
-                value={password}
-                onChange={(e) => { setPassword(e.target.value); clearFieldError("password"); }}
+                className={`auth-input${errors.username ? " is-error" : ""}`}
+                type="text"
+                value={username}
+                onChange={(e) => { setUsername(e.target.value); clearFieldError("username"); }}
                 onKeyDown={handleFieldKeyDown}
-                autoComplete={isLoginMode(mode) ? "current-password" : "new-password"}
+                autoComplete="username"
                 disabled={submitting}
               />
-              <p className="auth-field-error">{errors.password ?? ""}</p>
+              <p className="auth-field-error">{errors.username ?? ""}</p>
             </div>
+          ) : (
+            <div className="auth-field">
+              <span className="auth-label">邮箱</span>
+              <input
+                className={`auth-input${errors.email ? " is-error" : ""}`}
+                type="email"
+                value={email}
+                onChange={(e) => { setEmail(e.target.value); clearFieldError("email"); }}
+                onBlur={handleEmailBlur}
+                onKeyDown={handleFieldKeyDown}
+                autoComplete="email"
+                disabled={submitting}
+              />
+              <p className="auth-field-error">{errors.email ?? ""}</p>
+            </div>
+          )}
 
-            {isLoginMode(mode) ? renderLoginExtra() : renderRegisterExtra()}
+          <div className="auth-field">
+            <span className="auth-label">密码</span>
+            <input
+              className={`auth-input${errors.password ? " is-error" : ""}`}
+              type="password"
+              value={password}
+              onChange={(e) => { setPassword(e.target.value); clearFieldError("password"); }}
+              onBlur={handlePasswordBlur}
+              onKeyDown={handleFieldKeyDown}
+              autoComplete={isLoginMode(mode) ? "current-password" : "new-password"}
+              disabled={submitting}
+            />
+            <p className="auth-field-error">{errors.password ?? ""}</p>
+          </div>
 
-            <button type="submit" className="auth-submit" disabled={submitting}>
-              {submitting ? (isLoginMode(mode) ? "登录中…" : "注册中…") : (isLoginMode(mode) ? "登录" : "注册")}
-            </button>
-          </form>
-        )}
+          {isLoginMode(mode) ? renderLoginExtra() : renderRegisterExtra()}
+
+          <button type="submit" className="auth-submit" disabled={submitting}>
+            {submitting ? (isLoginMode(mode) ? "登录中…" : "注册中…") : (isLoginMode(mode) ? "登录" : "注册")}
+          </button>
+        </form>
 
         <p className="auth-footer">
           {isLoginMode(mode) ? (
