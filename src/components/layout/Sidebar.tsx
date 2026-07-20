@@ -4,6 +4,7 @@ import { getSiteSetting } from "@/lib/api/site";
 import { articleHref } from "@/lib/utils";
 import { ArchiveDateLinks } from "@/components/ui/ArchiveDateLinks";
 import SearchForm from "@/components/ui/SearchForm";
+import SidebarOperations from "@/components/ui/SidebarOperations";
 
 interface SidebarProps {
   categories: Category[];
@@ -139,20 +140,7 @@ export default async function Sidebar({ categories, tags, featuredArticles }: Si
           </div>
         )}
 
-        <div className="sidebar-widget">
-          <div className="sidebar-widget-title">操作</div>
-          <ul className="sidebar-meta-list">
-            <li>
-              <Link href="/settings" className="sidebar-meta-link">设置</Link>
-            </li>
-            <li>
-              <Link href="/login" className="sidebar-meta-link">登录</Link>
-            </li>
-            <li>
-              <Link href="/register" className="sidebar-meta-link">注册</Link>
-            </li>
-          </ul>
-        </div>
+        <SidebarOperations />
       </div>
     </aside>
   );

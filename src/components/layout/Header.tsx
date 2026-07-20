@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 // DarkModeToggle uses useTheme
 import { useTheme } from "@/lib/useTheme";
+import { useAuth } from "@/lib/useAuth";
 import { useDropdownMenu, MenuList, type MenuItem } from "@/components/ui/DropdownMenu";
 import { setSidebarLayout } from "@/lib/sidebar-layout";
 
@@ -33,6 +34,13 @@ export default function Header({ navItems, mobileNavItems, github, gitee }: Head
 
   // 桌面多级菜单显隐(点外部收起)
   const { openKeys, toggle, clear } = useDropdownMenu(".primary-nav");
+  const { isAuthenticated, signOut } = useAuth();
+
+  const handleSignOut = useCallback(() => {
+    signOut();
+    clear();
+    closeMobileMenu();
+  }, [signOut, clear, closeMobileMenu]);
 
   // 「排版」改为布局开关子菜单（右/左/无侧边栏）。子项需 client onClick，
   // 故在 Client 端为 SiteLayout 传入的占位「排版」节点注入 children。
@@ -50,10 +58,23 @@ export default function Header({ navItems, mobileNavItems, github, gitee }: Head
             ],
           };
         }
+        if (isAuthenticated) {
+          if (item.label === "登录") return { href: "/settings", label: "设置" };
+          if (item.label === "注册") return { label: "退出", onClick: handleSignOut };
+        }
         return item.children ? { ...item, children: inject(item.children) } : item;
       });
     return inject(navItems);
-  }, [navItems, clear]);
+  }, [navItems, clear, isAuthenticated, handleSignOut]);
+
+  const mobileNavItemsAuth = useMemo<MenuItem[]>(() =>
+    mobileNavItems.map((item) => {
+      if (!isAuthenticated) return item;
+      if (item.label === "登录") return { href: "/settings", label: "设置" };
+      if (item.label === "注册") return { label: "退出", onClick: handleSignOut };
+      return item;
+    }),
+  [mobileNavItems, isAuthenticated, handleSignOut]);
 
   useEffect(() => {
     closeMobileMenu();
@@ -178,14 +199,17 @@ export default function Header({ navItems, mobileNavItems, github, gitee }: Head
             aria-label="移动端导航"
           >
             <ul className="menu">
-              {mobileNavItems.map((item) => {
+              {mobileNavItemsAuth.map((item) => {
                 const isActive = pathname === item.href;
                 return (
-                  <li key={item.href}>
+                  <li key={item.label}>
                     <Link
                       href={item.href || "#"}
                       className={isActive ? "active" : ""}
-                      onClick={closeMobileMenu}
+                      onClick={(e) => {
+                        item.onClick?.();
+                        closeMobileMenu();
+                      }}
                     >
                       <span>{item.label}</span>
                     </Link>
