@@ -36,6 +36,8 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
   const countdownRef = useRef<ReturnType<typeof setInterval>>(null);
   const captchaRef = useRef<AliyunCaptchaInstance | null>(null);
   const loginBtnRef = useRef<HTMLButtonElement>(null);
+  // 缓存最近一次通过人机验证的邮箱与凭证，同邮箱复用以避免重复弹窗
+  const lastVerifiedRef = useRef<{ email: string; param: string } | null>(null);
 
   // 每帧同步最新表单值到 ref，供 SDK 挂载时刻注册的 success 回调读取
   const stateRef = useRef({ username, password, email, remember, codeCountdown });
@@ -69,6 +71,8 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
       setErrors((prev) => ({ ...prev, email: !e ? "请输入邮箱" : "邮箱格式不正确" }));
       return;
     }
+    // 缓存本次验证对应的邮箱与凭证，同邮箱后续点击复用（不论业务成功/失败均不弹窗）
+    lastVerifiedRef.current = { email: e, param: captchaVerifyParam };
     setCodeSending(true);
     try {
       await sendVerifyCode(e, captchaVerifyParam);
@@ -145,6 +149,17 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
     if (codeCountdown > 0) return;
     if (!email) { setErrors((prev) => ({ ...prev, email: "请输入邮箱" })); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setErrors((prev) => ({ ...prev, email: "邮箱格式不正确" })); return; }
+    const cached = lastVerifiedRef.current;
+    if (cached && cached.email === email) {
+      // 同邮箱已通过人机验证（不论上次业务是否成功），复用缓存凭证，不再弹窗
+      sendCodeViaCaptcha(cached.param);
+      return;
+    }
+    // 换邮箱：清缓存并刷新 SDK，弹出新的验证
+    if (cached) {
+      lastVerifiedRef.current = null;
+      captchaRef.current?.refresh();
+    }
     captchaRef.current?.show();
   }
 
