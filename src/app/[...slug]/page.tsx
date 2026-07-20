@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function NotFound() {
+export default function CatchAllNotFound() {
   return (
     <div className="not-found-page">
       <h1 className="not-found-code">404</h1>
