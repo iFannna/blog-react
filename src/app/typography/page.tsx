@@ -1,5 +1,5 @@
-import SiteLayout from "@/components/layout/SiteLayout";
-import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import SiteLayout from "@/components/layout/site-layout";
+import Breadcrumbs from "@/components/common/breadcrumbs";
 import type { Metadata } from "next";
 
 export const dynamic = "force-static";
@@ -194,7 +194,7 @@ export default function TypographyPage() {
             <blockquote className="typo-quote">
               <p>
                 Twenty years from now you will be more disappointed by the{" "}
-                <strong>things that you didn't do</strong>{" "}
+                <strong>things that you didn&apos;t do</strong>{" "}
                 than by the ones you did do — Mark Twain
               </p>
             </blockquote>
@@ -207,7 +207,7 @@ export default function TypographyPage() {
             <blockquote className="typo-quote">
               <p>
                 Twenty years from now you will be more disappointed by the{" "}
-                <strong>things that you didn't do</strong>{" "}
+                <strong>things that you didn&apos;t do</strong>{" "}
                 than by the ones you did do — Mark Twain
               </p>
             </blockquote>
@@ -220,7 +220,7 @@ export default function TypographyPage() {
             <blockquote className="typo-quote">
               <p>
                 Twenty years from now you will be more disappointed by the{" "}
-                <strong>things that you didn't do</strong>{" "}
+                <strong>things that you didn&apos;t do</strong>{" "}
                 than by the ones you did do — Mark Twain
               </p>
             </blockquote>
@@ -233,7 +233,7 @@ export default function TypographyPage() {
             <blockquote className="typo-quote">
               <p>
                 Twenty years from now you will be more disappointed by the{" "}
-                <strong>things that you didn't do</strong>{" "}
+                <strong>things that you didn&apos;t do</strong>{" "}
                 than by the ones you did do — MARK TWAIN
               </p>
             </blockquote>
@@ -253,7 +253,7 @@ export default function TypographyPage() {
             <blockquote className="typo-quote">
               <p>
                 Twenty years from now you will be more disappointed by the{" "}
-                <strong>things that you didn't do</strong>{" "}
+                <strong>things that you didn&apos;t do</strong>{" "}
                 than by the ones you did do — MARK TWAIN
               </p>
             </blockquote>
@@ -575,7 +575,7 @@ add_action( 'after_setup_theme', 'theme_setup' );
             {/* ── 6. 上标 / 下标 ── */}
             <h3 className="typo-heading-3">Superscript &amp; Subscript</h3>
             <p>
-              Einstein's famous equation is E = mc<sup>2</sup>. Water is composed
+              Einstein&apos;s famous equation is E = mc<sup>2</sup>. Water is composed
               of H<sub>2</sub>O. The chemical formula for sulfuric acid is
               H<sub>2</sub>SO<sub>4</sub>.
             </p>
@@ -605,7 +605,7 @@ add_action( 'after_setup_theme', 'theme_setup' );
             <blockquote className="typo-quote">
               <p>
                 Twenty years from now you will be more disappointed by the{" "}
-                <strong>things that you didn't do</strong>{" "}
+                <strong>things that you didn&apos;t do</strong>{" "}
                 than by the ones you did do.
               </p>
               <blockquote className="typo-quote">
@@ -672,8 +672,8 @@ greet('World');`}</code>
 
             <blockquote className="typo-quote">
               <p>
-                The only way to do great work is to love what you do. If you haven't
-                found it yet, keep looking. Don't settle.
+                The only way to do great work is to love what you do. If you haven&apos;t
+                found it yet, keep looking. Don&apos;t settle.
               </p>
               <footer className="typo-quote-footer">
                 — <cite>Steve Jobs</cite>, Stanford Commencement Address, 2005

@@ -1,13 +1,13 @@
 import { notFound } from "next/navigation";
-import ArchiveIndexView from "@/app/archive/ArchiveIndexView";
-import SiteLayout from "@/components/layout/SiteLayout";
-import Sidebar from "@/components/layout/Sidebar";
-import ArticleFeed from "@/components/ui/ArticleFeed";
-import Breadcrumbs from "@/components/ui/Breadcrumbs";
-import { getArticles } from "@/lib/api/article";
-import { getCategories } from "@/lib/api/category";
-import { getTags } from "@/lib/api/tag";
-import type { Category, Tag } from "@/types/ui";
+import ArchiveIndexView from "@/components/article/archive-index-view";
+import SiteLayout from "@/components/layout/site-layout";
+import Sidebar from "@/components/layout/sidebar";
+import ArticleFeed from "@/components/article/article-feed";
+import Breadcrumbs from "@/components/common/breadcrumbs";
+import { getArticles } from "@/services/article";
+import { getCategories } from "@/services/category";
+import { getTags } from "@/services/tag";
+import type { Category, Tag } from "@/types/models";
 
 const PAGE_SIZE = 10;
 
@@ -73,7 +73,7 @@ export default async function ArchivePage({ params, searchParams }: ArchivePageP
     console.error("Failed to fetch categories or tags:", error);
   }
 
-  let articlesData = { list: [] as import("@/types/ui").Article[], total: 0 };
+  let articlesData = { list: [] as import("@/types/models").Article[], total: 0 };
   try {
     articlesData = await getArticles({
       page: currentPage,

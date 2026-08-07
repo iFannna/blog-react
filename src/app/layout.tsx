@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { getSiteSetting } from "@/lib/api/site";
-import MessageContainer from "@/components/ui/MessageContainer";
-import { AuthProvider } from "@/lib/useAuth";
+import { getSiteSetting } from "@/services/site";
+import MessageContainer from "@/components/common/message-container";
+import { AuthProvider } from "@/hooks/auth";
 import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {

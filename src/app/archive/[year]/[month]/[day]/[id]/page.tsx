@@ -1,14 +1,14 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import SiteLayout from "@/components/layout/SiteLayout";
-import Breadcrumbs from "@/components/ui/Breadcrumbs";
-import MarkdownContent from "@/components/ui/MarkdownContent";
-import PostNav from "@/components/ui/PostNav";
-import ArticleCommentsPanel from "@/components/ui/ArticleCommentsPanel";
-import { ArchiveDateLinks } from "@/components/ui/ArchiveDateLinks";
-import { getArticleById, getArticlePrevNext } from "@/lib/api/article";
-import { articleHref } from "@/lib/utils";
+import SiteLayout from "@/components/layout/site-layout";
+import Breadcrumbs from "@/components/common/breadcrumbs";
+import MarkdownContent from "@/components/article/markdown-content";
+import PostNav from "@/components/article/post-navigation";
+import ArticleCommentsPanel from "@/components/article/article-comments-panel";
+import { ArchiveDateLinks } from "@/components/article/archive-date-links";
+import { getArticleById, getArticlePrevNext } from "@/services/article";
+import { articleHref } from "@/utils/article";
 
 export const dynamic = "force-dynamic";
 

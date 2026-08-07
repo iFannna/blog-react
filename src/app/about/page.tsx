@@ -1,5 +1,5 @@
-import SiteLayout from "@/components/layout/SiteLayout";
-import Breadcrumbs from "@/components/ui/Breadcrumbs";
+import SiteLayout from "@/components/layout/site-layout";
+import Breadcrumbs from "@/components/common/breadcrumbs";
 import type { Metadata } from "next";
 
 export const dynamic = "force-static";
@@ -93,7 +93,7 @@ export default function AboutPage() {
                     — Get in touch with me
                   </h6>
                   <h2 className="page-heading page-heading-2 text-left">
-                    Don't hesitate to say hello
+                    Don&apos;t hesitate to say hello
                   </h2>
                   <p className="text-medium text-dim">
                     Add your contact information. Lorem ipsum dolor sit amet, consectetur adipiscing elit
