@@ -9,6 +9,8 @@
     "lint": "eslint",
     "build:theme": "node scripts/build-element-theme.mjs",
     "build:icons": "node scripts/build-element-icons.mjs",
+    "build:overview-icons": "node scripts/build-overview-icons.mjs",
+    "check:overview-icons": "node scripts/check-overview-icons.mjs",
     "check:coverage": "node scripts/check-coverage.mjs"
   },
   "dependencies": {

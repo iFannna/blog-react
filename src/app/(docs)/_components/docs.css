@@ -26,6 +26,7 @@ html {
   --docs-sidebar-link-active: #409eff;
   --docs-sidebar-link-hover-bg: rgba(64, 158, 255, 0.06);
   --docs-sidebar-link-active-bg: rgba(64, 158, 255, 0.1);
+  --docs-on-primary: #ffffff;
   --docs-group-title-color: #303133;
 
   --docs-example-border: #dcdfe6;
@@ -579,23 +580,89 @@ html.dark .docs-shell {
   color: var(--docs-sidebar-link-active);
 }
 
-/* Component overview grid */
+/* Component overview */
+
+.docs-overview-search {
+  position: sticky;
+  top: var(--docs-header-h);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1.2rem;
+  border: 1px solid var(--docs-example-border);
+  border-radius: 0.4rem;
+  background-color: var(--docs-example-bg);
+}
+
+.docs-overview-search-icon {
+  flex: none;
+  width: 1.4rem;
+  height: 1.4rem;
+  color: var(--docs-text-secondary);
+}
+
+.docs-overview-search-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--docs-text);
+  font-family: inherit;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+}
+
+.docs-overview-search-input::placeholder {
+  color: var(--docs-toc-color);
+}
 
 .docs-overview-group {
-  margin-bottom: 3.2rem;
+  margin-top: 3.2rem;
+}
+
+.docs-overview-group-head {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.docs-overview-group-head h2 {
+  margin: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+  font-size: 2rem;
+  line-height: 1.4;
+  color: var(--docs-text);
+}
+
+.docs-overview-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.6rem;
+  border-radius: 1rem;
+  background-color: var(--docs-sidebar-link-active);
+  color: var(--docs-on-primary);
+  font-size: 1.2rem;
+  line-height: 1;
 }
 
 .docs-overview-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  gap: 1.2rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(28rem, 100%), 1fr));
+  gap: 1.6rem;
+  margin-top: 1.6rem;
 }
 
 .docs-overview-card {
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.6rem;
+  flex-direction: column;
+  overflow: hidden;
   border: 1px solid var(--docs-example-border);
   border-radius: 0.4rem;
   background-color: var(--docs-example-bg);
@@ -609,9 +676,45 @@ html.dark .docs-shell {
   box-shadow: 0 0 0.6rem rgba(64, 158, 255, 0.2);
 }
 
+.docs-overview-card-title {
+  overflow: hidden;
+  padding: 0.8rem 1.2rem;
+  border-bottom: 1px solid var(--docs-example-border);
+  color: var(--docs-text-secondary);
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 2.4rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.docs-overview-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 280 / 180;
+}
+
+.docs-overview-card-icon svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.docs-overview-card-todo {
+  color: var(--docs-toc-color);
+  font-size: 1.4rem;
+}
+
 .docs-overview-card.is-todo {
   opacity: 0.5;
   pointer-events: none;
+}
+
+.docs-overview-empty {
+  padding: 4.8rem 2.4rem;
+  text-align: center;
+  color: var(--docs-text-secondary);
 }
 
 /* Placeholder for components that are planned but not yet built */
