@@ -27,6 +27,8 @@ export interface TagProps {
   round?: boolean;
   className?: string;
   style?: CSSProperties;
+  /** 原生 title，对应官方 Vue 组件的 attrs 透传 */
+  title?: string;
   children?: ReactNode;
   /** 关闭时触发 */
   onClose?: (event: MouseEvent<HTMLButtonElement>) => void;
@@ -48,6 +50,7 @@ export function ElTag({
   round = false,
   className,
   style,
+  title,
   children,
   onClose,
   onClick,
@@ -83,6 +86,7 @@ export function ElTag({
     <span
       className={classes}
       style={{ ...style, backgroundColor: color || undefined }}
+      title={title}
       onClick={onClick}
     >
       <span className="el-tag__content">{children}</span>

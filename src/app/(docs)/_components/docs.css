@@ -42,6 +42,9 @@ html {
   --docs-header-bg: rgba(255, 255, 255, 0.9);
   --docs-toc-color: #909399;
 
+  --docs-switch-bg: #f2f2f2;
+  --docs-switch-icon-bg: #141414;
+
   --docs-font: Inter, "Helvetica Neue", Helvetica, "PingFang SC",
     "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, Arial, sans-serif;
   --docs-font-mono: "JetBrains Mono", source-code-pro, Menlo, Monaco, Consolas,
@@ -67,6 +70,8 @@ html.dark .docs-shell {
 
   --docs-header-bg: rgba(20, 20, 20, 0.9);
   --docs-toc-color: #a3a6ad;
+
+  --docs-switch-bg: #2c2c2c;
 }
 
 /* Header — 官方 .navbar / .navbar-wrapper：高 55px、sticky、毛玻璃、底部 1px 分隔线 */
@@ -92,12 +97,26 @@ html.dark .docs-shell {
   height: 100%;
 }
 
+/* Official .logo-container: 28px logo inside a fixed 128px link, version tag right after */
+.docs-header__logo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
 .docs-header__logo a {
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--docs-text);
-  text-decoration: none;
-  white-space: nowrap;
+  display: block;
+  width: 12.8rem;
+  height: 2.8rem;
+}
+
+.docs-header__logo img {
+  position: relative;
+  height: 100%;
+}
+
+.dark .docs-header__logo img {
+  filter: drop-shadow(2px 2px 6px var(--el-color-primary));
 }
 
 .docs-header__content {
@@ -105,6 +124,37 @@ html.dark .docs-shell {
   align-items: center;
   justify-content: flex-end;
   flex: 1 1 auto;
+}
+
+/* Official .theme-toggler-content: 24px tall flex box with 12px left inset */
+.docs-header__theme {
+  display: flex;
+  align-items: center;
+  height: 2.4rem;
+  margin-left: 1.2rem;
+}
+
+/* Official theme switch: muted track (--bg-color-mute), muted border, 14px thumb */
+.docs-header__theme .el-switch__core {
+  --el-switch-on-color: var(--docs-switch-bg);
+  --el-switch-off-color: var(--docs-switch-bg);
+  --el-switch-border-color: var(--docs-example-border);
+}
+
+.docs-header__theme .el-switch__core .el-switch__action {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+/* Official .dark-icon / .light-icon */
+.docs-header__theme .dark-icon {
+  color: var(--docs-text-secondary);
+  background-color: var(--docs-switch-icon-bg);
+  border-radius: 50%;
+}
+
+.docs-header__theme .light-icon {
+  color: var(--docs-text-secondary);
 }
 
 .docs-header__link {
