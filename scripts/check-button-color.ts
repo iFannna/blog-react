@@ -1,4 +1,4 @@
-import { tint, darken, isDark } from "../src/components/ui/button/color.ts";
+import { tint, darken, isDark } from "../src/components/element-plus/button/color.ts";
 
 /**
  * color.ts 的验证。

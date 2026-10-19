@@ -1,0 +1,1094 @@
+/*
+ * Element Plus docs site replica
+ *
+ * All metrics are measured from element-plus.org/zh-CN/component and matched exactly.
+ * Colors follow the official docs theme, not the blog's brand palette, so that
+ * side-by-side comparison works. Dark mode rides on html.dark (same switch as EP).
+ */
+
+/*
+ * 文档站自有根字号：本文件所有 rem 均按 1rem = 10px 标定（数值与官方 px 一一对应）。
+ * 文档站有独立根布局，不再继承博客 globals.css，故基准字号在这里自行声明。
+ */
+html {
+  font-size: 62.5%;
+}
+
+.docs-shell {
+  /* 官方 .sidebar 实测宽 338px（含 48px 左右内边距，内部链接区 242px） */
+  --docs-sidebar-w: 33.8rem;
+  --docs-aside-w: 31.2rem;
+  --docs-header-h: 5.5rem;
+  /* 内容区距侧边栏的左内边距，官方为 64px */
+  --docs-content-pad-left: 6.4rem;
+
+  --docs-sidebar-link-color: #606266;
+  --docs-sidebar-link-active: #409eff;
+  --docs-sidebar-link-hover-bg: rgba(64, 158, 255, 0.06);
+  --docs-sidebar-link-active-bg: rgba(64, 158, 255, 0.1);
+  --docs-group-title-color: #303133;
+
+  --docs-example-border: #dcdfe6;
+  --docs-example-bg: #ffffff;
+  --docs-source-bg: #f5f7fa;
+  --docs-source-control-color: #909399;
+  --docs-code-inline-bg: #f5f7fa;
+
+  --docs-text: #303133;
+  --docs-text-secondary: #606266;
+  --docs-h2-color: #606266;
+
+  --docs-header-bg: rgba(255, 255, 255, 0.9);
+  --docs-toc-color: #909399;
+
+  --docs-font: Inter, "Helvetica Neue", Helvetica, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, Arial, sans-serif;
+  --docs-font-mono: "JetBrains Mono", source-code-pro, Menlo, Monaco, Consolas,
+    "Courier New", monospace;
+
+  font-family: var(--docs-font);
+  color: var(--docs-text);
+}
+
+html.dark .docs-shell {
+  --docs-sidebar-link-color: #cfd3dc;
+  --docs-group-title-color: #e5eaf3;
+
+  --docs-example-border: #4c4d4f;
+  --docs-example-bg: #1d1e1f;
+  --docs-source-bg: #1d1e1f;
+  --docs-source-control-color: #a3a6ad;
+  --docs-code-inline-bg: #262727;
+
+  --docs-text: #e5eaf3;
+  --docs-text-secondary: #cfd3dc;
+  --docs-h2-color: #e5eaf3;
+
+  --docs-header-bg: rgba(20, 20, 20, 0.9);
+  --docs-toc-color: #a3a6ad;
+}
+
+/* Header — 官方 .navbar / .navbar-wrapper：高 55px、sticky、毛玻璃、底部 1px 分隔线 */
+
+.docs-header {
+  position: sticky;
+  top: 0;
+  z-index: 12;
+}
+
+.docs-header__wrapper {
+  height: var(--docs-header-h);
+  padding: 0 4.8rem;
+  border-bottom: 1px solid var(--docs-example-border);
+  background-color: var(--docs-header-bg);
+  backdrop-filter: saturate(0.5) blur(4px);
+}
+
+.docs-header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.docs-header__logo a {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--docs-text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.docs-header__content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1 1 auto;
+}
+
+.docs-header__link {
+  display: block;
+  padding: 0 1.2rem;
+  border-bottom: 2px solid transparent;
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: calc(var(--docs-header-h) - 2px);
+  color: var(--docs-text);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.docs-header__link:hover {
+  color: var(--docs-sidebar-link-active);
+}
+
+.docs-header__link.is-active {
+  border-bottom-color: var(--docs-sidebar-link-active);
+}
+
+/* Three-column shell
+
+ * 官方结构是 main 用 padding-left 让出侧边栏宽度，侧边栏自身绝对定位贴左边缘，
+ * 内容与右侧目录在 main 的剩余空间里左右分布，整体铺满视口。
+ * 这里保持同样的几何：三栏 flex 排布，总宽即视口宽，不留居中留白。
+ */
+
+.docs-layout {
+  display: flex;
+  /* 关键：不能用 align-items: flex-start。
+     那会把 .docs-aside 压成内容高度，里面的 sticky 目录就没有可吸附的滚动区间，
+     表现为目录跟着页面一起滚走。改为默认的 stretch，让 aside 撑满整列高度。 */
+  min-height: calc(100vh - var(--docs-header-h));
+}
+
+/* Right TOC — 官方 .toc-wrapper 宽 312px，内层 sticky 在 top 87px */
+
+.docs-aside {
+  flex: 0 0 var(--docs-aside-w);
+  width: var(--docs-aside-w);
+  padding: 0 4.8rem 0 6.4rem;
+  box-sizing: border-box;
+}
+
+/* 标题锚点，对应官方 VitePress 的 .header-anchor
+ * # 由 ::before 生成，默认 opacity: 0，悬停标题时淡入。
+ * 绝对定位到标题左侧的负 margin 处，不影响正文排版。
+ */
+
+.docs-content h1,
+.docs-content h2,
+.docs-content h3,
+.docs-content h4,
+.docs-content h5,
+.docs-content h6 {
+  position: relative;
+}
+
+.docs-anchor {
+  position: absolute;
+  margin-top: 0.125em;
+  margin-left: -0.87em;
+  padding-right: 0.23em;
+  font-size: 0.85em;
+  font-weight: 400;
+  color: var(--docs-sidebar-link-active);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.docs-anchor::before {
+  content: "#";
+}
+
+.docs-content :is(h1, h2, h3, h4, h5, h6):hover .docs-anchor,
+.docs-anchor:focus {
+  opacity: 1;
+}
+
+.docs-anchor:hover {
+  text-decoration: none;
+}
+
+/* 目录标题 */
+
+.docs-toc {
+  position: sticky;
+  top: 8.7rem;
+  width: 20rem;
+  max-height: calc(100vh - 8.7rem - 3.2rem);
+  padding: 0 0.3rem 3rem;
+  margin-bottom: 3.2rem;
+  overflow-y: auto;
+}
+
+.docs-toc__heading {
+  margin: 0 0 0.8rem;
+  padding-left: 1.4rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--docs-text-secondary);
+}
+
+/* 对应官方 .el-anchor：定位上下文，marker 在其中绝对定位 */
+.docs-toc__anchor {
+  position: relative;
+}
+
+/* 对应官方 .el-anchor__marker：跟随当前项的蓝色滑块。
+   位置由 inline style 的 top 驱动，过渡写在 CSS 上；
+   未定位到任何标题时保持 opacity: 0 */
+.docs-toc__marker {
+  position: absolute;
+  left: 0;
+  top: 0.8rem;
+  width: 0.4rem;
+  height: 1.4rem;
+  border-radius: 0.4rem;
+  background-color: var(--docs-sidebar-link-active);
+  opacity: 0;
+  transition: top 0.25s ease-in-out, opacity 0.25s;
+}
+
+/* 对应官方 .el-anchor__list，左内边距 14px 形成缩进 */
+.docs-toc__list {
+  padding-left: 1.4rem;
+}
+
+.docs-toc__link {
+  display: block;
+  padding: 0.4rem 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 2.2rem;
+  color: var(--docs-toc-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+/* 三级标题再缩进一层，对应官方嵌套的 .el-anchor__list。
+   用双类选择器提高特异性，避免与 .docs-toc__link 的 padding 简写顺序竞争 */
+.docs-toc__link.docs-toc__link--h3 {
+  padding-left: 1.4rem;
+}
+
+.docs-toc__link:hover,
+.docs-toc__link.is-active {
+  color: var(--docs-sidebar-link-active);
+}
+
+/* Sidebar */
+
+.docs-sidebar {
+  position: sticky;
+  /* 顶栏是 sticky 的，侧边栏要从它下方开始固定 */
+  top: var(--docs-header-h);
+  flex: 0 0 var(--docs-sidebar-w);
+  width: var(--docs-sidebar-w);
+  height: calc(100vh - var(--docs-header-h));
+  overflow-y: auto;
+  /* 官方 .sidebar 四边均为 48px 内边距 */
+  padding: 4.8rem;
+  box-sizing: border-box;
+}
+
+.docs-sidebar-group {
+  margin-bottom: 2.4rem;
+}
+
+.docs-sidebar-group__title {
+  margin: 0 0 0.8rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 2.4rem;
+  color: var(--docs-group-title-color);
+}
+
+.docs-sidebar-link {
+  display: block;
+  padding: 1rem 1.6rem;
+  border-radius: 0.8rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 2rem;
+  color: var(--docs-sidebar-link-color);
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.docs-sidebar-link:hover {
+  background-color: var(--docs-sidebar-link-hover-bg);
+}
+
+.docs-sidebar-link.is-active {
+  color: var(--docs-sidebar-link-active);
+  background-color: var(--docs-sidebar-link-active-bg);
+  font-weight: 600;
+}
+
+.docs-sidebar-link.is-todo {
+  opacity: 0.45;
+}
+
+/* Content column */
+
+.docs-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  /* 官方内容区无 max-width，随视口伸缩；左内边距 64px 与侧边栏拉开距离 */
+  padding: 3.2rem 0 9.6rem var(--docs-content-pad-left);
+}
+
+.docs-content h1 {
+  margin: 0 0 2rem;
+  font-size: 3.2rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--docs-text);
+}
+
+.docs-content h2 {
+  display: flex;
+  align-items: center;
+  margin: 3.6rem 0 2rem;
+  padding-bottom: 0.48rem;
+  border-bottom: 1px solid var(--docs-example-border);
+  font-size: 2.64rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--docs-h2-color);
+}
+
+.docs-content h3 {
+  margin: 2.4rem 0 1.2rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--docs-text);
+}
+
+.docs-content p {
+  margin: 1.6rem 0;
+  font-size: 1.6rem;
+  line-height: 1.7;
+  color: var(--docs-text);
+}
+
+.docs-content a {
+  color: var(--docs-sidebar-link-active);
+  text-decoration: none;
+}
+
+.docs-content a:hover {
+  text-decoration: underline;
+}
+
+.docs-content ul,
+.docs-content ol {
+  margin: 1.6rem 0;
+  padding-left: 2.4rem;
+  font-size: 1.6rem;
+  line-height: 1.7;
+}
+
+.docs-content li {
+  margin: 0.4rem 0;
+}
+
+/* Inline code — official: bg #f5f7fa, padding 2.4px 8px, radius 4px */
+
+.docs-content :not(pre) > code {
+  padding: 0.24rem 0.8rem;
+  border-radius: 0.4rem;
+  background-color: var(--docs-code-inline-bg);
+  font-family: var(--docs-font-mono);
+  font-size: 1.4rem;
+  color: var(--docs-text);
+}
+
+/* API type badges: enum carries a detail button, primitives are plain code */
+
+.docs-content .api-typing {
+  margin-right: 0.4rem;
+}
+
+.docs-api-typing {
+  display: inline-flex;
+  align-items: center;
+}
+
+.docs-api-typing__trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.4rem;
+  padding: 0.4rem;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: var(--docs-source-control-color);
+  font-size: 1.4rem;
+}
+
+.docs-api-typing__details {
+  display: inline-block;
+  max-width: 60rem;
+  padding: 0.24rem 0.8rem;
+  border-radius: 0.4rem;
+  background-color: var(--docs-source-bg);
+  font-family: var(--docs-font-mono);
+  font-size: 1.3rem;
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* Tables — official: th/td padding 8.4px 14px, row border-bottom */
+
+.docs-content table {
+  width: 100%;
+  margin: 2rem 0;
+  border-collapse: collapse;
+  font-size: 1.4rem;
+}
+
+.docs-content th {
+  padding: 0.84rem 1.4rem;
+  border-bottom: 1px solid var(--docs-example-border);
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.docs-content td {
+  padding: 0.84rem 1.4rem;
+  border-bottom: 1px solid var(--docs-example-border);
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+/* Demo block — official .example */
+
+.docs-example {
+  border: 1px solid var(--docs-example-border);
+  border-radius: 0.4rem;
+}
+
+.docs-example + .docs-example {
+  margin-top: 2rem;
+}
+
+.docs-example__showcase {
+  padding: 2.4rem;
+  border-radius: 0.4rem;
+  background-color: var(--docs-example-bg);
+}
+
+.docs-example__source {
+  position: relative;
+  border-radius: 0 0 0.4rem 0.4rem;
+  background-color: var(--docs-source-bg);
+}
+
+/* Collapsed state clips the code to a few lines, same as official has-fold */
+.docs-example__source.is-folded {
+  max-height: 12rem;
+  overflow: hidden;
+}
+
+.docs-example__source .docs-example__pre {
+  margin: 0;
+  padding: 2rem 0;
+  overflow-x: auto;
+  font-family: var(--docs-font-mono);
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
+.docs-example__source .docs-example__pre code {
+  display: block;
+  padding: 0 2rem;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.docs-example__lang {
+  position: absolute;
+  top: 0.6rem;
+  right: 5.6rem;
+  font-family: var(--docs-font-mono);
+  font-size: 1.2rem;
+  color: var(--docs-source-control-color);
+}
+
+.docs-example__copy {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.8rem;
+  padding: 0.2rem 0.6rem;
+  border: 0;
+  border-radius: 0.4rem;
+  background: none;
+  cursor: pointer;
+  font-family: var(--docs-font-mono);
+  font-size: 1.2rem;
+  color: var(--docs-source-control-color);
+}
+
+.docs-example__copy:hover {
+  color: var(--docs-sidebar-link-active);
+}
+
+.docs-example__control {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: -1px;
+  padding: 1.2rem 0;
+  border-top: 1px solid var(--docs-example-border);
+  background-color: var(--docs-example-bg);
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: var(--docs-source-control-color);
+}
+
+.docs-example__control:hover {
+  color: var(--docs-sidebar-link-active);
+}
+
+/* Callout blocks: tip / warning / danger, matching official custom-block */
+
+.docs-callout {
+  margin: 2rem 0;
+  padding: 0.8rem 1.6rem;
+  border-left: 0.5rem solid transparent;
+  border-radius: 0.4rem;
+  font-size: 1.6rem;
+}
+
+.docs-callout--tip {
+  border-left-color: #409eff;
+  background-color: rgba(64, 158, 255, 0.1);
+}
+
+.docs-callout--warning {
+  border-left-color: #e6a23c;
+  background-color: rgba(230, 162, 60, 0.1);
+}
+
+.docs-callout--danger {
+  border-left-color: #f56c6c;
+  background-color: rgba(245, 108, 108, 0.1);
+}
+
+.docs-callout p {
+  margin: 0.8rem 0;
+}
+
+/* Version badge used as ^(2.2.0) in official docs */
+
+.docs-version-tag {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0 0.6rem;
+  border: 1px solid var(--docs-sidebar-link-active);
+  border-radius: 0.4rem;
+  font-size: 1.2rem;
+  color: var(--docs-sidebar-link-active);
+}
+
+/* Component overview grid */
+
+.docs-overview-group {
+  margin-bottom: 3.2rem;
+}
+
+.docs-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: 1.2rem;
+}
+
+.docs-overview-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.6rem;
+  border: 1px solid var(--docs-example-border);
+  border-radius: 0.4rem;
+  background-color: var(--docs-example-bg);
+  color: var(--docs-text);
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.docs-overview-card:hover {
+  border-color: var(--docs-sidebar-link-active);
+  box-shadow: 0 0 0.6rem rgba(64, 158, 255, 0.2);
+}
+
+.docs-overview-card.is-todo {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Placeholder for components that are planned but not yet built */
+
+.docs-placeholder {
+  padding: 4.8rem 2.4rem;
+  border: 1px dashed var(--docs-example-border);
+  border-radius: 0.4rem;
+  text-align: center;
+  color: var(--docs-text-secondary);
+}
+
+/* 文档示例专用：演示 Card 的 bodyClass 追加类名的效果 */
+.docs-card-demo-body {
+  background-color: var(--docs-source-bg);
+}
+
+/* Custom loading spinner used by the button loading example */
+
+.docs-custom-loading {
+  display: inline-flex;
+  align-items: center;
+}
+
+.docs-custom-loading__circular {
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-right: 0.6rem;
+  animation: docs-loading-rotate 2s linear infinite;
+}
+
+.docs-custom-loading__path {
+  animation: docs-loading-dash 1.5s ease-in-out infinite;
+  stroke-dasharray: 90, 150;
+  stroke-dashoffset: 0;
+  stroke-width: 2;
+  stroke: var(--el-button-text-color);
+  stroke-linecap: round;
+}
+
+@keyframes docs-loading-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes docs-loading-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -40px;
+  }
+
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -120px;
+  }
+}
+
+@media (width <= 1280px) {
+  .docs-aside {
+    display: none;
+  }
+}
+
+@media (width <= 1024px) {
+  .docs-header__wrapper {
+    padding: 0 1.6rem;
+  }
+
+  .docs-layout {
+    padding: 0 1.6rem;
+  }
+
+  .docs-sidebar {
+    display: none;
+  }
+}
+
+/* Border / Radius / Shadow examples (docs/examples/border) */
+
+/* 官方示例用的是 <table>，会被正文表格规则（.docs-content table）命中：
+   撑满宽度、单元格加下边框、字体 14px。这里用更高特异性还原示例本身的外观。
+   父级前缀同时保证不依赖本文件里的规则顺序。 */
+.docs-content table.demo-border {
+  width: auto;
+  margin: 0;
+  border-collapse: separate;
+  font-size: 1.6rem;
+}
+
+.docs-content table.demo-border th,
+.docs-content table.demo-border td {
+  padding: 1px;
+  border: 0;
+  white-space: normal;
+}
+
+.demo-border .text {
+  width: 15%;
+}
+
+.demo-border .line {
+  width: 70%;
+}
+
+.demo-border .line div {
+  width: 100%;
+  height: 0;
+  border-top: 1px solid var(--el-border-color);
+}
+
+.demo-border .line .dashed {
+  border-top: 2px dashed var(--el-border-color);
+}
+
+.demo-radius .title {
+  margin: 1rem 0;
+  font-size: 1.8rem;
+  color: var(--el-text-color-regular);
+}
+
+.demo-radius .value {
+  margin: 1rem 0;
+  font-size: 1.6rem;
+  color: var(--el-text-color-primary);
+}
+
+.demo-radius .radius {
+  width: 70%;
+  height: 4rem;
+  margin-top: 2rem;
+  border: 1px solid var(--el-border-color);
+  border-radius: 0;
+}
+
+.demo-radius .radius--small {
+  border-radius: var(--el-border-radius-small);
+}
+
+.demo-radius .radius--base {
+  border-radius: var(--el-border-radius-base);
+}
+
+.demo-radius .radius--round {
+  border-radius: var(--el-border-radius-round);
+}
+
+/* 官方用 uno 的 flex justify-between items-center flex-wrap 写在根节点上 */
+.demo-shadow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 官方 w="46" 即 11.5rem，在官方 16px 基准下为 184px，本项目 1rem=10px 故为 18.4rem */
+.demo-shadow__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 18.4rem;
+  margin: auto;
+}
+
+/* 官方 w="30" h="30" 即 7.5rem，在官方 16px 基准下为 120px，本项目换算为 12rem */
+.demo-shadow__box {
+  width: 12rem;
+  height: 12rem;
+  margin: 0.8rem;
+  box-shadow: var(--el-box-shadow);
+}
+
+.demo-shadow__box--light {
+  box-shadow: var(--el-box-shadow-light);
+}
+
+.demo-shadow__box--lighter {
+  box-shadow: var(--el-box-shadow-lighter);
+}
+
+.demo-shadow__box--dark {
+  box-shadow: var(--el-box-shadow-dark);
+}
+
+/* 官方 p="y-4" 即上下各 1.6rem */
+.demo-shadow-text {
+  padding: 1.6rem 0;
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+
+/* 官方 text="xs" 把变量名缩到 12px；选择器需压过 .docs-content :not(pre) > code 的 14px */
+.docs-content :not(pre) > code.demo-shadow__var {
+  font-size: 1.2rem;
+}
+
+/* Color page palettes (docs/en-US/component/color.md + globals/{main,secondary,neutral}-color.vue) */
+
+/* Metrics copied from the official docs build: the scoped style in color.md covers
+   only part of the rules, the rest live in the UnoCSS bundle, so both are mirrored here. */
+.demo-color-box {
+  position: relative;
+  box-sizing: border-box;
+  height: 11.2rem;
+  padding: 2rem;
+  margin: 0.8rem 0;
+  border-radius: var(--el-border-radius-base);
+  color: var(--el-color-white);
+  font-size: 1.4rem;
+}
+
+/* Official value line uses UnoCSS `text="xs"` = 12px font / 16px line-height. */
+.demo-color-box .value {
+  margin-top: 2px;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+}
+
+.demo-color-box .bg-color-sub {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4rem;
+}
+
+/* Six levels fill the strip edge to edge; the official writes `100 / 6` inline. */
+.demo-color-box .bg-color-sub .bg-blue-sub-item,
+.demo-color-box .bg-color-sub .bg-secondary-sub-item {
+  display: inline-block;
+  width: calc(100% / 6);
+  height: 100%;
+  cursor: pointer;
+  transition: all var(--el-transition-duration);
+}
+
+.demo-color-box .bg-color-sub .bg-blue-sub-item:first-child,
+.demo-color-box .bg-color-sub .bg-secondary-sub-item:first-child {
+  border-radius: 0 0 0 var(--el-border-radius-base);
+}
+
+.demo-color-box .bg-color-sub .bg-blue-sub-item:hover,
+.demo-color-box .bg-color-sub .bg-secondary-sub-item:hover {
+  box-shadow: var(--el-box-shadow);
+}
+
+.demo-color-box-lite {
+  color: var(--el-text-color-primary);
+}
+
+/* UnoCSS `bg-transparent`: transparency checkerboard, one tile per 20px.
+   The tile colour is the fixed helper grey (#f4f4f5, #292929 in dark), not a theme var. */
+.demo-color-box.bg-transparent {
+  background-color: transparent;
+  background-image: linear-gradient(45deg, #f4f4f5 25%, transparent 25%),
+    linear-gradient(135deg, #f4f4f5 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #f4f4f5 75%),
+    linear-gradient(135deg, transparent 75%, #f4f4f5 75%);
+  background-position: 0 0, 10px 0, 10px -10px, 0 10px;
+  background-size: 20px 20px;
+}
+
+html.dark .demo-color-box.bg-transparent {
+  background-image: linear-gradient(45deg, #292929 25%, transparent 25%),
+    linear-gradient(135deg, #292929 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #292929 75%),
+    linear-gradient(135deg, transparent 75%, #292929 75%);
+}
+
+/*
+ * Palette swatches. The official page paints every box with an inline `:style`, which
+ * this project forbids (inline style objects are banned), so each swatch gets a
+ * modifier class that reads the same CSS variable. Var names are listed in
+ * src/components/element-plus/examples/color/index.tsx.
+ */
+.demo-color-box--primary {
+  background: var(--el-color-primary);
+}
+
+.demo-color-box--success {
+  background: var(--el-color-success);
+}
+
+.demo-color-box--warning {
+  background: var(--el-color-warning);
+}
+
+.demo-color-box--danger {
+  background: var(--el-color-danger);
+}
+
+.demo-color-box--info {
+  background: var(--el-color-info);
+}
+
+.demo-color-box--primary-dark-2 { background: var(--el-color-primary-dark-2); }
+.demo-color-box--primary-light-3 { background: var(--el-color-primary-light-3); }
+.demo-color-box--primary-light-5 { background: var(--el-color-primary-light-5); }
+.demo-color-box--primary-light-7 { background: var(--el-color-primary-light-7); }
+.demo-color-box--primary-light-8 { background: var(--el-color-primary-light-8); }
+.demo-color-box--primary-light-9 { background: var(--el-color-primary-light-9); }
+
+.demo-color-box--success-dark-2 { background: var(--el-color-success-dark-2); }
+.demo-color-box--success-light-3 { background: var(--el-color-success-light-3); }
+.demo-color-box--success-light-5 { background: var(--el-color-success-light-5); }
+.demo-color-box--success-light-7 { background: var(--el-color-success-light-7); }
+.demo-color-box--success-light-8 { background: var(--el-color-success-light-8); }
+.demo-color-box--success-light-9 { background: var(--el-color-success-light-9); }
+
+.demo-color-box--warning-dark-2 { background: var(--el-color-warning-dark-2); }
+.demo-color-box--warning-light-3 { background: var(--el-color-warning-light-3); }
+.demo-color-box--warning-light-5 { background: var(--el-color-warning-light-5); }
+.demo-color-box--warning-light-7 { background: var(--el-color-warning-light-7); }
+.demo-color-box--warning-light-8 { background: var(--el-color-warning-light-8); }
+.demo-color-box--warning-light-9 { background: var(--el-color-warning-light-9); }
+
+.demo-color-box--danger-dark-2 { background: var(--el-color-danger-dark-2); }
+.demo-color-box--danger-light-3 { background: var(--el-color-danger-light-3); }
+.demo-color-box--danger-light-5 { background: var(--el-color-danger-light-5); }
+.demo-color-box--danger-light-7 { background: var(--el-color-danger-light-7); }
+.demo-color-box--danger-light-8 { background: var(--el-color-danger-light-8); }
+.demo-color-box--danger-light-9 { background: var(--el-color-danger-light-9); }
+
+.demo-color-box--info-dark-2 { background: var(--el-color-info-dark-2); }
+.demo-color-box--info-light-3 { background: var(--el-color-info-light-3); }
+.demo-color-box--info-light-5 { background: var(--el-color-info-light-5); }
+.demo-color-box--info-light-7 { background: var(--el-color-info-light-7); }
+.demo-color-box--info-light-8 { background: var(--el-color-info-light-8); }
+.demo-color-box--info-light-9 { background: var(--el-color-info-light-9); }
+
+/* Neutral swatches: the official ones set the background to the variable itself, so
+   these keep the value visible instead of the box colouring the text. */
+.demo-color-box--text-primary {
+  background: var(--el-text-color-primary);
+  color: var(--el-bg-color);
+}
+
+.demo-color-box--text-regular {
+  background: var(--el-text-color-regular);
+  color: var(--el-bg-color);
+}
+
+.demo-color-box--text-secondary {
+  background: var(--el-text-color-secondary);
+  color: var(--el-bg-color);
+}
+
+.demo-color-box--text-placeholder {
+  background: var(--el-text-color-placeholder);
+  color: var(--el-bg-color);
+}
+
+.demo-color-box--text-disabled {
+  background: var(--el-text-color-disabled);
+  color: var(--el-bg-color);
+}
+
+.demo-color-box--border-darker { background: var(--el-border-color-darker); }
+.demo-color-box--border-dark { background: var(--el-border-color-dark); }
+.demo-color-box--border-base { background: var(--el-border-color); }
+.demo-color-box--border-light { background: var(--el-border-color-light); }
+.demo-color-box--border-lighter { background: var(--el-border-color-lighter); }
+.demo-color-box--border-extra-light { background: var(--el-border-color-extra-light); }
+
+.demo-color-box--fill-darker { background: var(--el-fill-color-darker); }
+.demo-color-box--fill-dark { background: var(--el-fill-color-dark); }
+.demo-color-box--fill-base { background: var(--el-fill-color); }
+.demo-color-box--fill-light { background: var(--el-fill-color-light); }
+.demo-color-box--fill-lighter { background: var(--el-fill-color-lighter); }
+.demo-color-box--fill-extra-light { background: var(--el-fill-color-extra-light); }
+.demo-color-box--fill-blank { background: var(--el-fill-color-blank); }
+
+.demo-color-box--black { background: var(--el-color-black); }
+
+.demo-color-box--white {
+  background: var(--el-color-white);
+  color: var(--el-text-color-primary);
+}
+
+.demo-color-box--bg-base { background: var(--el-bg-color); }
+.demo-color-box--bg-page { background: var(--el-bg-color-page); }
+.demo-color-box--bg-overlay { background: var(--el-bg-color-overlay); }
+
+/* Swatches that sit on a light background need the box outline, same as the official.
+   Darker / Dark / Base Border stay borderless on the official page. */
+.demo-color-box--border-light,
+.demo-color-box--border-lighter,
+.demo-color-box--border-extra-light,
+.demo-color-box--fill-blank,
+.demo-color-box--bg-base,
+.demo-color-box--bg-page,
+.demo-color-box--bg-overlay,
+.demo-color-box--white {
+  border: 1px solid var(--el-border-color-light);
+}
+
+/* Typography page examples (docs/components/typography)
+
+ * 官方字号表示例用 <table> 且逐行内联 style，会被正文表格规则命中，
+ * 这里用更高特异性还原本来的外观：不加下边框、字号 16px。
+ * 字体截图则沿用官方 scoped style 的 220x174、第 3 张去掉右边距。
+ * 行高示例在当前线上版本没有任何样式，img 按原始尺寸 474x114 渲染，
+ * 下方 <ul> 吃 VitePress 默认列表样式（padding-left 40px），这里显式写回该值。
+ */
+.docs-content table.demo-typo-size {
+  width: auto;
+  margin: 0;
+  border-collapse: separate;
+  font-size: 1.6rem;
+  /* 官方表格继承 body 的 1.4 行高，正文默认的 1.6 会让行高变大 */
+  line-height: 1.4;
+}
+
+.docs-content table.demo-typo-size td {
+  padding: 1px;
+  border: 0;
+  white-space: nowrap;
+  /* 官方 td 继承 body 的 1.4 行高，正文默认的 1.6 会让每行高出 3px 左右 */
+  line-height: 1.4;
+}
+
+/* 官方每个字号行内联 font-size: var(--el-font-size-*)，
+   这里用同名的行修饰类把变量落回样式表。 */
+.demo-typo-size__row--extra-small { font-size: var(--el-font-size-extra-small); }
+.demo-typo-size__row--small { font-size: var(--el-font-size-small); }
+.demo-typo-size__row--base { font-size: var(--el-font-size-base); }
+.demo-typo-size__row--medium { font-size: var(--el-font-size-medium); }
+.demo-typo-size__row--large { font-size: var(--el-font-size-large); }
+.demo-typo-size__row--extra-large { font-size: var(--el-font-size-extra-large); }
+
+.demo-term-box__img {
+  width: 220px;
+  height: 174px;
+  margin: 0 24px 24px 0;
+}
+
+/* 官方示例框继承文档正文的 16px / 1.4 行高，行内图片的基线间隙随之确定；
+   本页示例区没有字号规则，需显式写回才能与官方逐像素对齐 */
+.demo-term-box,
+.demo-typo-lineheight {
+  font-size: 1.6rem;
+  line-height: 1.4;
+}
+
+/* 官方 img:nth-of-type(3) 去掉右边距，首行三张正好占满 */
+.demo-term-box__img--last {
+  margin-right: 0;
+}
+
+/* 官方行高列表吃的是浏览器默认的 ul 缩进 40px 且 li 无外边距，
+   这里用 .docs-content 前缀盖过正文列表规则，才能与官方逐像素对齐 */
+.docs-content .lineH-right {
+  padding-left: 4rem;
+}
+
+.docs-content .lineH-right li {
+  margin: 0;
+}
+
+/* 字体图与行高图各备明暗两张，与官方按 isDark 换图的效果一致 */
+.demo-term-box__img.is-dark,
+.lineH-left.is-dark {
+  display: none;
+}
+
+html.dark .demo-term-box__img.is-light,
+html.dark .lineH-left.is-light {
+  display: none;
+}
+
+html.dark .demo-term-box__img.is-dark,
+html.dark .lineH-left.is-dark {
+  display: inline;
+}

@@ -31,11 +31,13 @@ npm run lint    # ESLint
 ```
 src/
 ├── app/                # App Router 页面与布局（globals.css 也在此）
-│   ├── archive/        # 归档：索引 + 日期浏览 ([[...slug]]) + 文章详情 ([year]/[month]/[day]/[id])
-│   └── ...             # category / tag / author / search / about / contact / typography
+│   ├── (blog)/         # 博客路由：archive / category / tag / author / search / ...
+│   └── (docs)/         # 文档站路由
+│       ├── _components/                   # 文档站基建（DemoBlock / 侧边栏 / 目录等，不参与路由）
+│       └── docs/element-plus/components/  # 组件文档页，URL /docs/element-plus/components/<slug>
 ├── components/
-│   ├── layout/         # 站点结构（Header / Footer / Sidebar / SiteLayout）
-│   └── ui/             # 可复用 UI 组件
+│   ├── blog/           # 博客自有组件（layout / article / common / auth / site）
+│   └── element-plus/   # Element Plus 复刻组件；examples/ 为文档示例
 ├── lib/
 │   ├── api/            # 后端 API 客户端（article / category / tag / search / site / comment / client）
 │   ├── utils.ts        # 工具函数

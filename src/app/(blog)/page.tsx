@@ -1,6 +1,6 @@
-import SiteLayout from "@/components/layout/site-layout";
-import Sidebar from "@/components/layout/sidebar";
-import ArticleFeed from "@/components/article/article-feed";
+import SiteLayout from "@/components/blog/layout/site-layout";
+import Sidebar from "@/components/blog/layout/sidebar";
+import ArticleFeed from "@/components/blog/article/article-feed";
 import { getArticles } from "@/services/article";
 import { getCategories } from "@/services/category";
 import { getTags } from "@/services/tag";

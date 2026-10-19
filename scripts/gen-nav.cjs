@@ -11,7 +11,7 @@ const d = JSON.parse(
 
 const have = new Set(
   fs
-    .readdirSync(`${ROOT}/src/app/(docs)/components`, { withFileTypes: true })
+    .readdirSync(`${ROOT}/src/app/(docs)/docs/element-plus/components`, { withFileTypes: true })
     .filter((e) => e.isDirectory())
     .map((e) => e.name),
 );
@@ -66,7 +66,7 @@ const out = `/**
  */
 
 export interface DocNavItem {
-  /** 路由末段，对应 /components/[slug] */
+  /** 路由末段，对应 /docs/element-plus/components/[slug] */
   slug: string;
   /** 官方侧边栏里的英文标题 */
   title: string;
@@ -91,5 +91,5 @@ export function findNavItem(slug: string) {
 }
 `;
 
-fs.writeFileSync(`${ROOT}/src/app/(docs)/components/nav-config.ts`, out, "utf8");
+fs.writeFileSync(`${ROOT}/src/app/(docs)/_components/nav-config.ts`, out, "utf8");
 console.log("written");

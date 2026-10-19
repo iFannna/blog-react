@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import SiteLayout from "@/components/layout/site-layout";
-import Breadcrumbs from "@/components/common/breadcrumbs";
-import MarkdownContent from "@/components/article/markdown-content";
-import PostNav from "@/components/article/post-navigation";
-import ArticleCommentsPanel from "@/components/article/article-comments-panel";
-import { ArchiveDateLinks } from "@/components/article/archive-date-links";
+import SiteLayout from "@/components/blog/layout/site-layout";
+import Breadcrumbs from "@/components/blog/common/breadcrumbs";
+import MarkdownContent from "@/components/blog/article/markdown-content";
+import PostNav from "@/components/blog/article/post-navigation";
+import ArticleCommentsPanel from "@/components/blog/article/article-comments-panel";
+import { ArchiveDateLinks } from "@/components/blog/article/archive-date-links";
 import { getArticleById, getArticlePrevNext } from "@/services/article";
 import { articleHref } from "@/utils/article";
 

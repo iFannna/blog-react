@@ -24,11 +24,11 @@ const EP =
 
 const COMPONENT_JSON = `${EP}/docs/.vitepress/crowdin/en-US/pages/component.json`;
 const EXAMPLES_DIR = `${EP}/docs/examples`;
-const PAGES_DIR = `${ROOT}/src/app/(docs)/components`;
-const UI_DIR = `${ROOT}/src/components/ui`;
+const PAGES_DIR = `${ROOT}/src/app/(docs)/docs/element-plus/components`;
+const UI_DIR = `${ROOT}/src/components/element-plus`;
 const ICONS_DIR = `${UI_DIR}/icons`;
 const BARREL = `${UI_DIR}/index.ts`;
-const NAV = `${PAGES_DIR}/nav-config.ts`;
+const NAV = `${ROOT}/src/app/(docs)/_components/nav-config.ts`;
 
 const read = (file) => readFileSync(file, "utf8");
 const listDirs = (dir) =>

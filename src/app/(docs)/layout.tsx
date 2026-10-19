@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
-import { ElMessageContainer } from "@/components/ui/message";
-import { ElMessageBoxContainer } from "@/components/ui/message-box";
-import { ElNotificationContainer } from "@/components/ui/notification";
-import { ElLoadingContainer } from "@/components/ui/loading";
-import { ElConfigProvider } from "@/components/ui/config-provider";
-import { zhCn } from "@/components/ui/config-provider/locales";
+import { ElMessageContainer } from "@/components/element-plus/message";
+import { ElMessageBoxContainer } from "@/components/element-plus/message-box";
+import { ElNotificationContainer } from "@/components/element-plus/notification";
+import { ElLoadingContainer } from "@/components/element-plus/loading";
+import { ElConfigProvider } from "@/components/element-plus/config-provider";
+import { zhCn } from "@/components/element-plus/config-provider/locales";
 import "@/styles/element-plus/index.css";
 import "@/styles/element-plus/dark.css";
-import "../(docs)/components/docs.css";
+import "./_components/docs.css";
 
 /**
  * 文档站的独立根布局。

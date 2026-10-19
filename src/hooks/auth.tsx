@@ -11,7 +11,7 @@ import {
 import { usePathname } from "next/navigation";
 import { clearStoredAuth, getStoredAuth, setStoredAuth, type StoredAuth } from "@/services/storage";
 import { logout as apiLogout } from "@/services/auth";
-import { message } from "@/components/ui/message";
+import { message } from "@/components/element-plus/message";
 
 interface AuthUser {
   userId: number;

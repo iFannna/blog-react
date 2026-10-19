@@ -1,5 +1,5 @@
 import { getSiteSetting } from "@/services/site";
-import SettingsClient from "@/components/site/settings-panel";
+import SettingsClient from "@/components/blog/site/settings-panel";
 
 // 服务端组件：预先获取站点标题与开发者头像，传给客户端交互组件
 export default async function SettingsPage() {

@@ -18,7 +18,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ICONS_SOURCE =
   process.env.EP_ICONS_SOURCE ||
   resolve(__dirname, "../node_modules/@element-plus/icons-vue/dist/index.js");
-const OUT_DIR = resolve(__dirname, "../src/components/ui/icons");
+const OUT_DIR = resolve(__dirname, "../src/components/element-plus/icons");
 
 function parseIcons(source) {
   const blocks = new Map();

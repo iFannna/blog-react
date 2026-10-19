@@ -8,7 +8,7 @@ import {
   calculateValidatedDateRange,
   formatDate,
   getCellDate,
-} from "../src/components/ui/calendar/date-utils.ts";
+} from "../src/components/element-plus/calendar/date-utils.ts";
 
 const date = (year: number, month: number, day: number) => new Date(year, month - 1, day);
 

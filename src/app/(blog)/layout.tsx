@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { getSiteSetting } from "@/services/site";
-import { ElMessageContainer } from "@/components/ui/message";
-import { ElMessageBoxContainer } from "@/components/ui/message-box";
-import { ElNotificationContainer } from "@/components/ui/notification";
-import { ElLoadingContainer } from "@/components/ui/loading";
-import { ElConfigProvider } from "@/components/ui/config-provider";
-import { zhCn } from "@/components/ui/config-provider/locales";
+import { ElMessageContainer } from "@/components/element-plus/message";
+import { ElMessageBoxContainer } from "@/components/element-plus/message-box";
+import { ElNotificationContainer } from "@/components/element-plus/notification";
+import { ElLoadingContainer } from "@/components/element-plus/loading";
+import { ElConfigProvider } from "@/components/element-plus/config-provider";
+import { zhCn } from "@/components/element-plus/config-provider/locales";
 import { AuthProvider } from "@/hooks/auth";
 import "../globals.css";
 
