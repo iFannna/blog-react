@@ -6,10 +6,17 @@
     "dev": "rimraf .next && next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:theme": "node scripts/build-element-theme.mjs",
+    "build:icons": "node scripts/build-element-icons.mjs",
+    "check:coverage": "node scripts/check-coverage.mjs"
   },
   "dependencies": {
+    "@ctrl/tinycolor": "^3.6.1",
+    "@popperjs/core": "^2.11.8",
+    "async-validator": "^4.2.5",
     "axios": "^1.16.1",
+    "dayjs": "^1.11.20",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",
@@ -18,12 +25,14 @@
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
+    "@element-plus/icons-vue": "2.3.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "rimraf": "^6.1.3",
+    "sass": "^1.105.1",
     "typescript": "^5"
   }
 }

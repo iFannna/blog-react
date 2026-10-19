@@ -1,0 +1,89 @@
+import type { Metadata } from "next";
+import { getSiteSetting } from "@/services/site";
+import { ElMessageContainer } from "@/components/ui/message";
+import { ElMessageBoxContainer } from "@/components/ui/message-box";
+import { ElNotificationContainer } from "@/components/ui/notification";
+import { ElLoadingContainer } from "@/components/ui/loading";
+import { ElConfigProvider } from "@/components/ui/config-provider";
+import { zhCn } from "@/components/ui/config-provider/locales";
+import { AuthProvider } from "@/hooks/auth";
+import "../globals.css";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const setting = await getSiteSetting().catch(() => null);
+  const title = setting?.seo_title || setting?.site_name || "Blog";
+  const description = setting?.seo_description || setting?.site_desc || "Personal blog";
+  const keywords = setting?.seo_keywords
+    ? setting.seo_keywords.split(/[,，]/).map((k) => k.trim()).filter(Boolean)
+    : undefined;
+
+  return {
+    title: {
+      default: title,
+      template: `%s | ${title}`,
+    },
+    description,
+    keywords,
+    openGraph: {
+      type: "website",
+      locale: "zh_CN",
+      title,
+      description,
+      siteName: title,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+    icons: {
+      icon: setting?.favicon || "/icon.svg",
+    },
+  };
+}
+
+/**
+ * 博客的根布局，只承载博客路由（(blog) 组）。
+ *
+ * 文档站 (/components) 走 (docs) 组自己的根布局，不加载这里的 globals.css，
+ * 从而与博客全局样式彻底隔离。
+ */
+export default function BlogRootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="zh-CN" suppressHydrationWarning>
+      <head>
+        {/* 防止暗色主题闪白：在渲染前同步读取 localStorage 设置 data-theme 与 html.dark */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("darkmode");var d=t==="dark";var r=document.documentElement;r.setAttribute("data-theme",d?"dark":"light");if(d)r.classList.add("dark")}catch(e){}})()`,
+          }}
+        />
+        {/* 桌面端侧边栏布局防闪 */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var l=localStorage.getItem("sidebar-layout");if(l){document.documentElement.setAttribute("data-sidebar-layout",l)}}catch(e){}})()`,
+          }}
+        />
+      </head>
+      <body>
+        <AuthProvider>
+          {/*
+            博客侧同样下发中文语言包：MessageBox / Message 等命令式组件
+            读的是模块级全局配置，没有 Provider 会回落到官方默认英文。
+          */}
+          <ElConfigProvider locale={zhCn}>
+            {children}
+            <ElMessageContainer />
+            <ElMessageBoxContainer />
+            <ElNotificationContainer />
+            <ElLoadingContainer />
+          </ElConfigProvider>
+        </AuthProvider>
+      </body>
+    </html>
+  );
+}

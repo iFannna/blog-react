@@ -1,0 +1,13 @@
+import type { SVGProps } from "react";
+
+export function Management(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1024 1024"
+      {...props}
+    >
+      <path fill="currentColor" d="M576 128v288l96-96 96 96V128h128v768H320V128zm-448 0h128v768H128z" />
+    </svg>
+  );
+}

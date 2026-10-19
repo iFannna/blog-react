@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { initAliyunCaptcha, type AliyunCaptchaInstance } from "@/services/captcha";
 import { login, register, sendVerifyCode } from "@/services/auth";
 import { ApiError } from "@/services/http";
-import { message } from "@/stores/message";
+import { message } from "@/components/ui/message";
 import { useAuth } from "@/hooks/auth";
 
 type Mode = "login" | "register";

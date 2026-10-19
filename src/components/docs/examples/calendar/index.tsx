@@ -1,0 +1,59 @@
+"use client";
+
+import { useRef, useState } from "react";
+import { ElButton, ElButtonGroup } from "@/components/ui/button";
+import { ElCalendar, type CalendarDateType, type CalendarRef } from "@/components/ui/calendar";
+import { ElRadio, ElRadioGroup } from "@/components/ui/radio";
+import { ElConfigProvider, en } from "@/components/ui/config-provider";
+import { Check } from "@/components/ui/icons";
+import type { ReactNode } from "react";
+
+export function CalendarExampleLocale({ children }: { children: ReactNode }) {
+  return <ElConfigProvider locale={en}>{children}</ElConfigProvider>;
+}
+
+export function CalendarBasic() {
+  const [value, setValue] = useState(new Date());
+  return <ElCalendar value={value} onChange={setValue} />;
+}
+
+export function CalendarController() {
+  const [controllerType, setControllerType] = useState<"select" | "button">("select");
+  const [value, setValue] = useState(new Date());
+  return <>
+    <ElRadioGroup value={controllerType} onChange={(next) => setControllerType(next as "select" | "button")}>
+      <ElRadio value="select" button>select</ElRadio>
+      <ElRadio value="button" button>button</ElRadio>
+    </ElRadioGroup>
+    <ElCalendar value={value} onChange={setValue} controllerType={controllerType} />
+  </>;
+}
+
+export function CalendarCustomize() {
+  return <ElCalendar renderDateCell={(data) => (
+    <p className={data.isSelected ? "is-selected" : ""}>
+      {data.day.split("-").slice(1).join("-")}
+      {data.isSelected && <Check width="1em" height="1em" />}
+    </p>
+  )} />;
+}
+
+export function CalendarRange() {
+  return <ElCalendar range={[new Date(2019, 2, 4), new Date(2019, 2, 24)]} />;
+}
+
+export function CalendarHeader() {
+  const calendar = useRef<CalendarRef>(null);
+  const selectDate = (type: CalendarDateType) => calendar.current?.selectDate(type);
+  return <ElCalendar ref={calendar} renderHeader={(date) => <>
+    <span>Custom header content</span>
+    <span>{date}</span>
+    <ElButtonGroup>
+      <ElButton size="small" onClick={() => selectDate("prev-year")}>Previous Year</ElButton>
+      <ElButton size="small" onClick={() => selectDate("prev-month")}>Previous Month</ElButton>
+      <ElButton size="small" onClick={() => selectDate("today")}>Today</ElButton>
+      <ElButton size="small" onClick={() => selectDate("next-month")}>Next Month</ElButton>
+      <ElButton size="small" onClick={() => selectDate("next-year")}>Next Year</ElButton>
+    </ElButtonGroup>
+  </>} />;
+}

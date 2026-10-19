@@ -6,7 +6,10 @@ const STORAGE_KEY = "darkmode";
 const themeListeners = new Set<() => void>();
 
 function applyTheme(isDark: boolean) {
-  document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
+  const root = document.documentElement;
+  root.setAttribute("data-theme", isDark ? "dark" : "light");
+  // Element Plus 的暗色变量挂在 html.dark 上，与博客的 data-theme 两套并存
+  root.classList.toggle("dark", isDark);
 }
 
 function getStoredTheme() {

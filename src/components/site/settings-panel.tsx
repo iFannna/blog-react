@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useAuth } from "@/hooks/auth";
-import { message } from "@/stores/message";
+import { message } from "@/components/ui/message";
 
 /* 左侧导航：分「账户」「内容」两组，纯文字无图标；item 可带 children 形成多级菜单 */
 type NavItem = { key: string; label: string; children?: { key: string; label: string }[] };
