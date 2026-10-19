@@ -50,9 +50,6 @@ function getTocSnapshot(): TocItem[] {
   return tocSnapshot;
 }
 
-/** 目录只在挂载时读取一次，不需要订阅外部变化。 */
-const subscribeToc = () => () => {};
-
 /**
  * 与官方文档站传入 el-anchor 的参数一致
  * （docs/.vitepress/vitepress/components/doc-content/vp-table-of-content.vue）：
@@ -68,6 +65,21 @@ const SCROLL_DURATION = 300;
  * 滚动到最顶部时不选中任何项，marker 因此隐藏。
  */
 const SELECT_SCROLL_TOP = false;
+
+/**
+ * 目录挂在布局里，路由切换时组件不会重新挂载，
+ * 因此要监听正文 DOM：新页面的标题替换进来后重新读取快照。
+ * 未变化的快照引用不变，useSyncExternalStore 会直接跳过多余渲染。
+ */
+function subscribeToc(onChange: () => void) {
+  const container = document.querySelector(".docs-content");
+  if (!container) return () => {};
+
+  const observer = new MutationObserver(() => onChange());
+  observer.observe(container, { childList: true, subtree: true });
+
+  return () => observer.disconnect();
+}
 
 /**
  * 对应官方 docs 的右侧目录（.toc-content / el-anchor）。
@@ -101,6 +113,11 @@ export default function DocsAside() {
    *   两者相减即「标题滚到视口 190px 处」时切换高亮。
    */
   useEffect(() => {
+    // 切换页面时中止上一次未完成的目录跳转动画，避免把新页面滚走
+    cancelScrollRef.current?.();
+    cancelScrollRef.current = null;
+    isScrollingRef.current = false;
+
     if (items.length === 0) return;
 
     const headings = items
