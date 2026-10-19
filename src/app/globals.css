@@ -5878,28 +5878,6 @@ ol.typo-list {
   color: var(--color-text-muted);
 }
 
-/* Empty state */
-.archive-empty {
-  text-align: center;
-  padding: 4rem 2.5rem;
-}
-
-.archive-empty-text {
-  margin: 1rem 0 2rem;
-  font-size: 1.6rem;
-  color: var(--color-text-muted);
-}
-
-.archive-empty-link {
-  font-weight: 600;
-  color: var(--color-primary);
-  transition: var(--transition-primary);
-}
-
-.archive-empty-link:hover {
-  opacity: 0.8;
-}
-
 @media (max-width: 768px) {
   .archive-year-watermark {
     font-size: 11rem;

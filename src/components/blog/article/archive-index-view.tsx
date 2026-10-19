@@ -1,4 +1,3 @@
-import Link from "next/link";
 import SiteLayout from "@/components/blog/layout/site-layout";
 import Breadcrumbs from "@/components/blog/common/breadcrumbs";
 import ArchiveTimeline from "@/components/blog/article/archive-timeline";
@@ -104,15 +103,7 @@ export default async function ArchiveIndexView() {
           )}
         </header>
 
-        {totalCount === 0 ? (
-          <div className="sidebar-widget archive-empty">
-            <div className="sidebar-widget-title archive-empty-title">还没有内容</div>
-            <p className="archive-empty-text">这个博客暂时没有可归档的文章。</p>
-            <Link href="/" className="archive-empty-link">返回首页 →</Link>
-          </div>
-        ) : (
-          <ArchiveTimeline yearGroups={yearGroups} />
-        )}
+        <ArchiveTimeline yearGroups={yearGroups} />
       </section>
     </SiteLayout>
   );
