@@ -723,6 +723,10 @@ html.dark .docs-shell {
 }
 
 .docs-overview-card {
+  /* Official icons live inside el-card, which rebinds the blank fill to the card
+     background (bg-color-overlay = #1d1e1f in dark) instead of the page colour. */
+  --el-card-bg-color: var(--docs-example-bg);
+  --el-fill-color-blank: var(--el-card-bg-color);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -731,12 +735,18 @@ html.dark .docs-shell {
   background-color: var(--docs-example-bg);
   color: var(--docs-text);
   text-decoration: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  /* Official overview turns the card transition off entirely */
+  transition: none;
 }
 
+/* Official el-card shadow="hover": only the shadow changes, border stays put */
 .docs-overview-card:hover {
-  border-color: var(--docs-sidebar-link-active);
-  box-shadow: 0 0 0.6rem rgba(64, 158, 255, 0.2);
+  box-shadow: var(--el-box-shadow-light);
+}
+
+/* Beat the generic .docs-content a:hover underline; official card titles have none */
+.docs-content a.docs-overview-card:hover {
+  text-decoration: none;
 }
 
 .docs-overview-card-title {
