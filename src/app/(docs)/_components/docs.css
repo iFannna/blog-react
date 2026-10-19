@@ -583,6 +583,10 @@ html.dark .docs-shell {
 /* Component overview */
 
 .docs-overview-search {
+  --el-input-border-color: var(--el-border-color);
+  --el-input-hover-border-color: var(--el-border-color-hover);
+  --el-input-focus-border-color: var(--el-color-primary);
+
   position: sticky;
   top: var(--docs-header-h);
   z-index: 10;
@@ -590,9 +594,18 @@ html.dark .docs-shell {
   align-items: center;
   gap: 0.8rem;
   padding: 0.8rem 1.2rem;
-  border: 1px solid var(--docs-example-border);
   border-radius: 0.4rem;
-  background-color: var(--docs-example-bg);
+  background-color: var(--el-fill-color-blank);
+  box-shadow: 0 0 0 1px var(--el-input-border-color) inset;
+  transition: var(--el-transition-box-shadow);
+}
+
+.docs-overview-search:hover {
+  box-shadow: 0 0 0 1px var(--el-input-hover-border-color) inset;
+}
+
+.docs-overview-search:focus-within {
+  box-shadow: 0 0 0 1px var(--el-input-focus-border-color) inset;
 }
 
 .docs-overview-search-icon {
