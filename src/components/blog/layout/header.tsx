@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 // DarkModeToggle uses useTheme
 import { useTheme } from "@/hooks/theme";
 import { useAuth } from "@/hooks/auth";
-import { useDropdownMenu, MenuList, type MenuItem } from "@/components/blog/common/dropdown-menu";
+import { useDropdownMenu, MenuList, type MenuItem } from "@/components/blog/common/dropdown";
 import { setSidebarLayout } from "@/stores/layout";
 
 interface HeaderProps {

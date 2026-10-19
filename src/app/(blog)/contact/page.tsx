@@ -1,5 +1,5 @@
 import SiteLayout from "@/components/blog/layout/site-layout";
-import Breadcrumbs from "@/components/blog/common/breadcrumbs";
+import Breadcrumbs from "@/components/blog/common/breadcrumb";
 import type { Metadata } from "next";
 
 export const dynamic = "force-static";

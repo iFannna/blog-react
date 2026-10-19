@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 import type { Article } from "@/types/models";
 import Header from "./header";
 import Footer from "./footer";
-import WavesBackground from "@/components/blog/common/waves-background";
-import ScrollTopButton from "@/components/blog/common/scroll-top-button";
+import WavesBackground from "@/components/blog/common/background";
+import ScrollTopButton from "@/components/blog/common/backtop";
 import YouMayLike from "@/components/blog/article/related-articles";
 import { getSiteSetting, getGuestbookCount, getFriendLinkCount } from "@/services/site";
 import { getCategories } from "@/services/category";
@@ -45,7 +45,7 @@ export default async function SiteLayout({
     getCategories().catch(() => []),
     getTags().catch(() => []),
   ]);
-  // 「其他」下拉:归档(分类/标签/作者)、排版、登录、注册;分类/标签为动态数据
+  // 「其他」下拉:归档(分类/标签/作者)、排版、文档、登录、注册;分类/标签为动态数据
   const developerName = setting?.developer_name || "Admin";
   const navItems = [
     ...NAV_ITEMS,
@@ -67,6 +67,10 @@ export default async function SiteLayout({
           ],
         },
         { label: "排版" },
+        {
+          label: "文档",
+          children: [{ href: "/docs/element-plus/components", label: "Element Plus" }],
+        },
         { href: "/login", label: "登录" },
         { href: "/register", label: "注册" },
       ],

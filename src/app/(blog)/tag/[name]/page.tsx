@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import SiteLayout from "@/components/blog/layout/site-layout";
 import Sidebar from "@/components/blog/layout/sidebar";
 import ArticleFeed from "@/components/blog/article/article-feed";
-import Breadcrumbs from "@/components/blog/common/breadcrumbs";
+import Breadcrumbs from "@/components/blog/common/breadcrumb";
 import { getArticles } from "@/services/article";
 import { getCategories } from "@/services/category";
 import { getTags } from "@/services/tag";

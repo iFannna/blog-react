@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteLayout from "@/components/blog/layout/site-layout";
-import Breadcrumbs from "@/components/blog/common/breadcrumbs";
+import Breadcrumbs from "@/components/blog/common/breadcrumb";
 import MarkdownContent from "@/components/blog/article/markdown-content";
 import PostNav from "@/components/blog/article/post-navigation";
 import ArticleCommentsPanel from "@/components/blog/article/article-comments-panel";

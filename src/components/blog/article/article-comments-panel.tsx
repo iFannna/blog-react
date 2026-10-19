@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getComments, getCommentReplies } from "@/services/article";
-import { useDropdownMenu, MenuList, type MenuItem } from "@/components/blog/common/dropdown-menu";
+import { useDropdownMenu, MenuList, type MenuItem } from "@/components/blog/common/dropdown";
 import { mockViewer, DEFAULT_AVATAR } from "@/utils/mock";
 import type { CommentVO, ReplyVO } from "@/types/api";
 

@@ -1,5 +1,5 @@
 import SiteLayout from "@/components/blog/layout/site-layout";
-import Breadcrumbs from "@/components/blog/common/breadcrumbs";
+import Breadcrumbs from "@/components/blog/common/breadcrumb";
 import ArchiveTimeline from "@/components/blog/article/archive-timeline";
 import { getArticles } from "@/services/article";
 import type { Article } from "@/types/models";
