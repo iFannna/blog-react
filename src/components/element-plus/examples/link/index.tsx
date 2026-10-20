@@ -6,16 +6,27 @@ import { Edit } from "@/components/element-plus/icons";
 
 const stack = { display: "flex", flexDirection: "column", gap: "1.2rem", alignItems: "flex-start" } as const;
 
-const TYPES = ["default", "primary", "success", "warning", "danger", "info"] as const;
-
 export function LinkBasic() {
   return (
     <div style={stack}>
-      {TYPES.map((type) => (
-        <ElLink key={type} type={type} href="#">
-          {type} 链接
-        </ElLink>
-      ))}
+      <ElLink type="default" href="#">
+        default 链接
+      </ElLink>
+      <ElLink type="primary" href="#">
+        primary 链接
+      </ElLink>
+      <ElLink type="success" href="#">
+        success 链接
+      </ElLink>
+      <ElLink type="warning" href="#">
+        warning 链接
+      </ElLink>
+      <ElLink type="danger" href="#">
+        danger 链接
+      </ElLink>
+      <ElLink type="info" href="#">
+        info 链接
+      </ElLink>
     </div>
   );
 }
@@ -23,11 +34,24 @@ export function LinkBasic() {
 export function LinkDisabled() {
   return (
     <div style={stack}>
-      {TYPES.map((type) => (
-        <ElLink key={type} type={type} href="#" disabled>
-          {type} 链接
-        </ElLink>
-      ))}
+      <ElLink type="default" href="#" disabled>
+        default 链接
+      </ElLink>
+      <ElLink type="primary" href="#" disabled>
+        primary 链接
+      </ElLink>
+      <ElLink type="success" href="#" disabled>
+        success 链接
+      </ElLink>
+      <ElLink type="warning" href="#" disabled>
+        warning 链接
+      </ElLink>
+      <ElLink type="danger" href="#" disabled>
+        danger 链接
+      </ElLink>
+      <ElLink type="info" href="#" disabled>
+        info 链接
+      </ElLink>
     </div>
   );
 }

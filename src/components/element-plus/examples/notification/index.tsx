@@ -43,61 +43,124 @@ export function NotificationBasic() {
   );
 }
 
-const TYPES = [
-  { label: "Primary", type: "primary" },
-  { label: "Success", type: "success" },
-  { label: "Warning", type: "warning" },
-  { label: "Info", type: "info" },
-  { label: "Error", type: "error" },
-] as const;
-
 export function NotificationDifferentTypes() {
   return (
     <div style={row}>
-      {TYPES.map(({ label, type }) => (
-        <ElButton
-          key={type}
-          plain
-          onClick={() =>
-            notification({
-              title: label,
-              message: `This is a ${type} message`,
-              type,
-            })
-          }
-        >
-          {label}
-        </ElButton>
-      ))}
+      <ElButton
+        plain
+        onClick={() =>
+          notification({
+            title: "Primary",
+            message: "This is a primary message",
+            type: "primary",
+          })
+        }
+      >
+        Primary
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          notification({
+            title: "Success",
+            message: "This is a success message",
+            type: "success",
+          })
+        }
+      >
+        Success
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          notification({
+            title: "Warning",
+            message: "This is a warning message",
+            type: "warning",
+          })
+        }
+      >
+        Warning
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          notification({
+            title: "Info",
+            message: "This is a info message",
+            type: "info",
+          })
+        }
+      >
+        Info
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          notification({
+            title: "Error",
+            message: "This is a error message",
+            type: "error",
+          })
+        }
+      >
+        Error
+      </ElButton>
     </div>
   );
 }
 
-const POSITIONS = [
-  { label: "Top Right", position: "top-right" },
-  { label: "Bottom Right", position: "bottom-right" },
-  { label: "Bottom Left", position: "bottom-left" },
-  { label: "Top Left", position: "top-left" },
-] as const;
-
 export function NotificationPositioning() {
   return (
     <div style={row}>
-      {POSITIONS.map(({ label, position }) => (
-        <ElButton
-          key={position}
-          plain
-          onClick={() =>
-            notification({
-              title: "Custom Position",
-              message: `I'm at the ${position.replace("-", " ")} corner`,
-              position,
-            })
-          }
-        >
-          {label}
-        </ElButton>
-      ))}
+      <ElButton
+        plain
+        onClick={() =>
+          notification({
+            title: "Custom Position",
+            message: "I'm at the top right corner",
+            position: "top-right",
+          })
+        }
+      >
+        Top Right
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          notification({
+            title: "Custom Position",
+            message: "I'm at the bottom right corner",
+            position: "bottom-right",
+          })
+        }
+      >
+        Bottom Right
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          notification({
+            title: "Custom Position",
+            message: "I'm at the bottom left corner",
+            position: "bottom-left",
+          })
+        }
+      >
+        Bottom Left
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          notification({
+            title: "Custom Position",
+            message: "I'm at the top left corner",
+            position: "top-left",
+          })
+        }
+      >
+        Top Left
+      </ElButton>
     </div>
   );
 }

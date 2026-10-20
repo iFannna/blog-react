@@ -15,20 +15,20 @@ export const metadata: Metadata = {
 };
 
 const SOURCES = {
-  basic: `const sizeList = [50, "small", undefined, "large"];
-
-<ElRow>
+  basic: `<ElRow>
   <ElCol lg={12} md={12}>
     <div>circle</div>
-    {sizeList.map((size) => (
-      <ElAvatar key={size} size={size} src={IMG} alt="avatar" />
-    ))}
+    <ElAvatar size={50} src={IMG} alt="avatar" />
+    <ElAvatar size="small" src={IMG} alt="avatar" />
+    <ElAvatar src={IMG} alt="avatar" />
+    <ElAvatar size="large" src={IMG} alt="avatar" />
   </ElCol>
   <ElCol lg={12} md={12}>
     <div>square</div>
-    {sizeList.map((size) => (
-      <ElAvatar key={size} size={size} shape="square" src={IMG} alt="avatar" />
-    ))}
+    <ElAvatar size={50} shape="square" src={IMG} alt="avatar" />
+    <ElAvatar size="small" shape="square" src={IMG} alt="avatar" />
+    <ElAvatar shape="square" src={IMG} alt="avatar" />
+    <ElAvatar size="large" shape="square" src={IMG} alt="avatar" />
   </ElCol>
 </ElRow>`,
 
@@ -40,18 +40,26 @@ const SOURCES = {
   <img src={IMG} alt="avatar" />
 </ElAvatar>`,
 
-  fit: `const fits = ["fill", "contain", "cover", "none", "scale-down"];
-
-{fits.map((fit) => (
-  <ElAvatar
-    key={fit}
-    shape="square"
-    size={100}
-    fit={fit}
-    src={IMG}
-    alt="avatar"
-  />
-))}`,
+  fit: `<div>
+  <span>fill</span>
+  <ElAvatar shape="square" size={100} fit="fill" src={IMG} alt="avatar" />
+</div>
+<div>
+  <span>contain</span>
+  <ElAvatar shape="square" size={100} fit="contain" src={IMG} alt="avatar" />
+</div>
+<div>
+  <span>cover</span>
+  <ElAvatar shape="square" size={100} fit="cover" src={IMG} alt="avatar" />
+</div>
+<div>
+  <span>none</span>
+  <ElAvatar shape="square" size={100} fit="none" src={IMG} alt="avatar" />
+</div>
+<div>
+  <span>scale-down</span>
+  <ElAvatar shape="square" size={100} fit="scale-down" src={IMG} alt="avatar" />
+</div>`,
 
   group: `const avatars = Array.from({ length: 5 }, (_, index) => (
   <ElAvatar key={index} src={IMG} alt="avatar" />

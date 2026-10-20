@@ -62,21 +62,20 @@ const divider = {
 } as const;
 
 export function AvatarBasic() {
-  const sizeList = [50, "small", undefined, "large"] as const;
-
   const renderSizes = (shape?: "circle" | "square") => (
     <div style={basicRow}>
-      {sizeList.map((size, index) => (
-        <div
-          key={index}
-          style={{
-            ...basicBlock,
-            ...(index < sizeList.length - 1 ? divider : {}),
-          }}
-        >
-          <ElAvatar size={size} shape={shape} src={IMG} alt="avatar" />
-        </div>
-      ))}
+      <div style={{ ...basicBlock, ...divider }}>
+        <ElAvatar size={50} shape={shape} src={IMG} alt="avatar" />
+      </div>
+      <div style={{ ...basicBlock, ...divider }}>
+        <ElAvatar size="small" shape={shape} src={IMG} alt="avatar" />
+      </div>
+      <div style={{ ...basicBlock, ...divider }}>
+        <ElAvatar shape={shape} src={IMG} alt="avatar" />
+      </div>
+      <div style={basicBlock}>
+        <ElAvatar size="large" shape={shape} src={IMG} alt="avatar" />
+      </div>
     </div>
   );
 
@@ -124,22 +123,58 @@ export function AvatarFallback() {
 }
 
 export function AvatarFit() {
-  const fits = ["fill", "contain", "cover", "none", "scale-down"] as const;
-
   return (
     <div style={fitRow}>
-      {fits.map((fit) => (
-        <div key={fit} style={fitBlock}>
-          <span style={subTitle}>{fit}</span>
-          <ElAvatar
-            shape="square"
-            size={100}
-            fit={fit}
-            src={WIDE_IMG}
-            alt="avatar"
-          />
-        </div>
-      ))}
+      <div style={fitBlock}>
+        <span style={subTitle}>fill</span>
+        <ElAvatar
+          shape="square"
+          size={100}
+          fit="fill"
+          src={WIDE_IMG}
+          alt="avatar"
+        />
+      </div>
+      <div style={fitBlock}>
+        <span style={subTitle}>contain</span>
+        <ElAvatar
+          shape="square"
+          size={100}
+          fit="contain"
+          src={WIDE_IMG}
+          alt="avatar"
+        />
+      </div>
+      <div style={fitBlock}>
+        <span style={subTitle}>cover</span>
+        <ElAvatar
+          shape="square"
+          size={100}
+          fit="cover"
+          src={WIDE_IMG}
+          alt="avatar"
+        />
+      </div>
+      <div style={fitBlock}>
+        <span style={subTitle}>none</span>
+        <ElAvatar
+          shape="square"
+          size={100}
+          fit="none"
+          src={WIDE_IMG}
+          alt="avatar"
+        />
+      </div>
+      <div style={fitBlock}>
+        <span style={subTitle}>scale-down</span>
+        <ElAvatar
+          shape="square"
+          size={100}
+          fit="scale-down"
+          src={WIDE_IMG}
+          alt="avatar"
+        />
+      </div>
     </div>
   );
 }

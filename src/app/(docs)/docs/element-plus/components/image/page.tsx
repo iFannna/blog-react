@@ -16,11 +16,26 @@ import {
 export const metadata: Metadata = { title: "Image 图片" };
 
 const SOURCES = {
-  basic: `const fits = ["fill", "contain", "cover", "none", "scale-down"] as const;
-
-{fits.map((fit) => (
-  <ElImage key={fit} src={url} fit={fit} style={{ width: 100, height: 100 }} />
-))}`,
+  basic: `<div>
+  <span>fill</span>
+  <ElImage src={url} fit="fill" style={{ width: 100, height: 100 }} />
+</div>
+<div>
+  <span>contain</span>
+  <ElImage src={url} fit="contain" style={{ width: 100, height: 100 }} />
+</div>
+<div>
+  <span>cover</span>
+  <ElImage src={url} fit="cover" style={{ width: 100, height: 100 }} />
+</div>
+<div>
+  <span>none</span>
+  <ElImage src={url} fit="none" style={{ width: 100, height: 100 }} />
+</div>
+<div>
+  <span>scale-down</span>
+  <ElImage src={url} fit="scale-down" style={{ width: 100, height: 100 }} />
+</div>`,
 
   placeholder: `<ElImage src={src} />
 

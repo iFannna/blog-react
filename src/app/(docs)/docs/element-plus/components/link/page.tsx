@@ -14,13 +14,19 @@ export const metadata: Metadata = {
 };
 
 const SOURCES = {
-  basic: `{["default", "primary", "success", "warning", "danger", "info"].map((type) => (
-  <ElLink key={type} type={type} href="#">{type} 链接</ElLink>
-))}`,
+  basic: `<ElLink type="default" href="#">default 链接</ElLink>
+<ElLink type="primary" href="#">primary 链接</ElLink>
+<ElLink type="success" href="#">success 链接</ElLink>
+<ElLink type="warning" href="#">warning 链接</ElLink>
+<ElLink type="danger" href="#">danger 链接</ElLink>
+<ElLink type="info" href="#">info 链接</ElLink>`,
 
-  disabled: `{["default", "primary", "success", "warning", "danger", "info"].map((type) => (
-  <ElLink key={type} type={type} href="#" disabled>{type} 链接</ElLink>
-))}`,
+  disabled: `<ElLink type="default" href="#" disabled>default 链接</ElLink>
+<ElLink type="primary" href="#" disabled>primary 链接</ElLink>
+<ElLink type="success" href="#" disabled>success 链接</ElLink>
+<ElLink type="warning" href="#" disabled>warning 链接</ElLink>
+<ElLink type="danger" href="#" disabled>danger 链接</ElLink>
+<ElLink type="info" href="#" disabled>info 链接</ElLink>`,
 
   underline: `<ElLink type="primary" underline="always" href="#">always 始终显示下划线</ElLink>
 <ElLink type="primary" underline="hover" href="#">hover 悬停显示下划线</ElLink>

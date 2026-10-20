@@ -27,29 +27,61 @@ notification({
   duration: 0,
 });`,
 
-  differentTypes: `{["primary", "success", "warning", "info", "error"].map((type) => (
-  <ElButton
-    key={type}
-    onClick={() => notification({ title: type, message: \`This is a \${type} message\`, type })}
-  >
-    {type}
-  </ElButton>
-))}`,
+  differentTypes: `<ElButton
+  plain
+  onClick={() => notification({ title: "Primary", message: "This is a primary message", type: "primary" })}
+>
+  Primary
+</ElButton>
+<ElButton
+  plain
+  onClick={() => notification({ title: "Success", message: "This is a success message", type: "success" })}
+>
+  Success
+</ElButton>
+<ElButton
+  plain
+  onClick={() => notification({ title: "Warning", message: "This is a warning message", type: "warning" })}
+>
+  Warning
+</ElButton>
+<ElButton
+  plain
+  onClick={() => notification({ title: "Info", message: "This is a info message", type: "info" })}
+>
+  Info
+</ElButton>
+<ElButton
+  plain
+  onClick={() => notification({ title: "Error", message: "This is a error message", type: "error" })}
+>
+  Error
+</ElButton>`,
 
-  positioning: `{["top-right", "bottom-right", "bottom-left", "top-left"].map((position) => (
-  <ElButton
-    key={position}
-    onClick={() =>
-      notification({
-        title: "Custom Position",
-        message: \`I'm at the \${position.replace("-", " ")} corner\`,
-        position,
-      })
-    }
-  >
-    {position}
-  </ElButton>
-))}`,
+  positioning: `<ElButton
+  plain
+  onClick={() => notification({ title: "Custom Position", message: "I'm at the top right corner", position: "top-right" })}
+>
+  Top Right
+</ElButton>
+<ElButton
+  plain
+  onClick={() => notification({ title: "Custom Position", message: "I'm at the bottom right corner", position: "bottom-right" })}
+>
+  Bottom Right
+</ElButton>
+<ElButton
+  plain
+  onClick={() => notification({ title: "Custom Position", message: "I'm at the bottom left corner", position: "bottom-left" })}
+>
+  Bottom Left
+</ElButton>
+<ElButton
+  plain
+  onClick={() => notification({ title: "Custom Position", message: "I'm at the top left corner", position: "top-left" })}
+>
+  Top Left
+</ElButton>`,
 
   offsetting: `notification.success({
   title: "Success",

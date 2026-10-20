@@ -14,11 +14,42 @@ import {
 export const metadata: Metadata = { title: "Popover 弹出框" };
 
 const SOURCES = {
-  placement: `{PLACEMENTS.map((p) => (
-  <ElPopover key={p} title="Title" content={\`\${p} prompts info\`} placement={p}>
-    <ElButton>{p}</ElButton>
-  </ElPopover>
-))}`,
+  placement: `<ElPopover title="Title" content="top-start prompts info" placement="top-start">
+  <ElButton>top-start</ElButton>
+</ElPopover>
+<ElPopover title="Title" content="top prompts info" placement="top">
+  <ElButton>top</ElButton>
+</ElPopover>
+<ElPopover title="Title" content="top-end prompts info" placement="top-end">
+  <ElButton>top-end</ElButton>
+</ElPopover>
+<ElPopover title="Title" content="left-start prompts info" placement="left-start">
+  <ElButton>left-start</ElButton>
+</ElPopover>
+<ElPopover title="Title" content="right-start prompts info" placement="right-start">
+  <ElButton>right-start</ElButton>
+</ElPopover>
+<ElPopover title="Title" content="left prompts info" placement="left">
+  <ElButton>left</ElButton>
+</ElPopover>
+<ElPopover title="Title" content="right prompts info" placement="right">
+  <ElButton>right</ElButton>
+</ElPopover>
+<ElPopover title="Title" content="left-end prompts info" placement="left-end">
+  <ElButton>left-end</ElButton>
+</ElPopover>
+<ElPopover title="Title" content="right-end prompts info" placement="right-end">
+  <ElButton>right-end</ElButton>
+</ElPopover>
+<ElPopover title="Title" content="bottom-start prompts info" placement="bottom-start">
+  <ElButton>bottom-start</ElButton>
+</ElPopover>
+<ElPopover title="Title" content="bottom prompts info" placement="bottom">
+  <ElButton>bottom</ElButton>
+</ElPopover>
+<ElPopover title="Title" content="bottom-end prompts info" placement="bottom-end">
+  <ElButton>bottom-end</ElButton>
+</ElPopover>`,
 
   basicUsage: `<ElPopover placement="top-start" title="Title" width={200} trigger="hover" content="this is content...">
   <ElButton>Hover to activate</ElButton>

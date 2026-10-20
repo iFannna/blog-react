@@ -12,11 +12,42 @@ import {
 export const metadata: Metadata = { title: "Popconfirm 气泡确认框" };
 
 const SOURCES = {
-  placement: `{PLACEMENTS.map((p) => (
-  <ElPopconfirm key={p} title={\`\${p} prompts info\`} placement={p}>
-    <ElButton style={{ width: 110 }}>{p}</ElButton>
-  </ElPopconfirm>
-))}`,
+  placement: `<ElPopconfirm title="top-start prompts info" placement="top-start">
+  <ElButton style={{ width: 110 }}>top-start</ElButton>
+</ElPopconfirm>
+<ElPopconfirm title="top prompts info" placement="top">
+  <ElButton style={{ width: 110 }}>top</ElButton>
+</ElPopconfirm>
+<ElPopconfirm title="top-end prompts info" placement="top-end">
+  <ElButton style={{ width: 110 }}>top-end</ElButton>
+</ElPopconfirm>
+<ElPopconfirm title="left-start prompts info" placement="left-start">
+  <ElButton style={{ width: 110 }}>left-start</ElButton>
+</ElPopconfirm>
+<ElPopconfirm title="right-start prompts info" placement="right-start">
+  <ElButton style={{ width: 110 }}>right-start</ElButton>
+</ElPopconfirm>
+<ElPopconfirm title="left prompts info" placement="left">
+  <ElButton style={{ width: 110 }}>left</ElButton>
+</ElPopconfirm>
+<ElPopconfirm title="right prompts info" placement="right">
+  <ElButton style={{ width: 110 }}>right</ElButton>
+</ElPopconfirm>
+<ElPopconfirm title="left-end prompts info" placement="left-end">
+  <ElButton style={{ width: 110 }}>left-end</ElButton>
+</ElPopconfirm>
+<ElPopconfirm title="right-end prompts info" placement="right-end">
+  <ElButton style={{ width: 110 }}>right-end</ElButton>
+</ElPopconfirm>
+<ElPopconfirm title="bottom-start prompts info" placement="bottom-start">
+  <ElButton style={{ width: 110 }}>bottom-start</ElButton>
+</ElPopconfirm>
+<ElPopconfirm title="bottom prompts info" placement="bottom">
+  <ElButton style={{ width: 110 }}>bottom</ElButton>
+</ElPopconfirm>
+<ElPopconfirm title="bottom-end prompts info" placement="bottom-end">
+  <ElButton style={{ width: 110 }}>bottom-end</ElButton>
+</ElPopconfirm>`,
 
   basicUsage: `<ElPopconfirm title="Are you sure to delete this?">
   <ElButton>Delete</ElButton>

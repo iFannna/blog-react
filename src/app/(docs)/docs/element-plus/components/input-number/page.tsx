@@ -40,17 +40,29 @@ const SOURCES = {
 <ElInputNumber value={num2} onChange={setNum2} />
 <ElInputNumber value={num3} onChange={setNum3} size="small" />`,
 
-  controlled: `{sizes.map((size) => (
-  <ElInputNumber
-    key={size ?? "default"}
-    value={num}
-    onChange={setNum}
-    min={1}
-    max={10}
-    controlsPosition="right"
-    size={size}
-  />
-))}`,
+  controlled: `<ElInputNumber
+  value={num}
+  onChange={setNum}
+  min={1}
+  max={10}
+  controlsPosition="right"
+  size="large"
+/>
+<ElInputNumber
+  value={num}
+  onChange={setNum}
+  min={1}
+  max={10}
+  controlsPosition="right"
+/>
+<ElInputNumber
+  value={num}
+  onChange={setNum}
+  min={1}
+  max={10}
+  controlsPosition="right"
+  size="small"
+/>`,
 
   custom: `<ElInputNumber value={num} onChange={setNum} />
 <ElInputNumber

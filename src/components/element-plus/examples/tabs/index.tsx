@@ -31,22 +31,22 @@ function TabContent({ children }: { children: ReactNode }) {
   return <div style={contentStyle}>{children}</div>;
 }
 
-const TABS = [
-  { label: "User", name: "first", content: "User" },
-  { label: "Config", name: "second", content: "Config" },
-  { label: "Role", name: "third", content: "Role" },
-  { label: "Task", name: "fourth", content: "Task" },
-];
-
 export function TabsBasic() {
   const [active, setActive] = useState<string | number>("first");
   return (
     <ElTabs value={active} onChange={setActive}>
-      {TABS.map((tab) => (
-        <ElTabPane key={tab.name} name={tab.name} label={tab.label}>
-          <TabContent>{tab.content}</TabContent>
-        </ElTabPane>
-      ))}
+      <ElTabPane name="first" label="User">
+        <TabContent>User</TabContent>
+      </ElTabPane>
+      <ElTabPane name="second" label="Config">
+        <TabContent>Config</TabContent>
+      </ElTabPane>
+      <ElTabPane name="third" label="Role">
+        <TabContent>Role</TabContent>
+      </ElTabPane>
+      <ElTabPane name="fourth" label="Task">
+        <TabContent>Task</TabContent>
+      </ElTabPane>
     </ElTabs>
   );
 }
@@ -55,11 +55,18 @@ export function TabsCard() {
   const [active, setActive] = useState<string | number>("first");
   return (
     <ElTabs value={active} onChange={setActive} type="card">
-      {TABS.map((tab) => (
-        <ElTabPane key={tab.name} name={tab.name} label={tab.label}>
-          <TabContent>{tab.content}</TabContent>
-        </ElTabPane>
-      ))}
+      <ElTabPane name="first" label="User">
+        <TabContent>User</TabContent>
+      </ElTabPane>
+      <ElTabPane name="second" label="Config">
+        <TabContent>Config</TabContent>
+      </ElTabPane>
+      <ElTabPane name="third" label="Role">
+        <TabContent>Role</TabContent>
+      </ElTabPane>
+      <ElTabPane name="fourth" label="Task">
+        <TabContent>Task</TabContent>
+      </ElTabPane>
     </ElTabs>
   );
 }
@@ -67,11 +74,18 @@ export function TabsCard() {
 export function TabsBorderCard() {
   return (
     <ElTabs type="border-card">
-      {TABS.map((tab) => (
-        <ElTabPane key={tab.name} label={tab.label}>
-          <TabContent>{tab.content}</TabContent>
-        </ElTabPane>
-      ))}
+      <ElTabPane label="User">
+        <TabContent>User</TabContent>
+      </ElTabPane>
+      <ElTabPane label="Config">
+        <TabContent>Config</TabContent>
+      </ElTabPane>
+      <ElTabPane label="Role">
+        <TabContent>Role</TabContent>
+      </ElTabPane>
+      <ElTabPane label="Task">
+        <TabContent>Task</TabContent>
+      </ElTabPane>
     </ElTabs>
   );
 }
@@ -219,15 +233,34 @@ export function TabsDefaultValue() {
   const [active, setActive] = useState<string | number>();
   return (
     <ElTabs defaultValue="third" onChange={setActive}>
-      {TABS.map((tab) => (
-        <ElTabPane key={tab.name} name={tab.name} label={tab.label}>
-          <TabContent>
-            default-value: third
-            <br />
-            active: {active ?? ""}
-          </TabContent>
-        </ElTabPane>
-      ))}
+      <ElTabPane name="first" label="User">
+        <TabContent>
+          default-value: third
+          <br />
+          active: {active ?? ""}
+        </TabContent>
+      </ElTabPane>
+      <ElTabPane name="second" label="Config">
+        <TabContent>
+          default-value: third
+          <br />
+          active: {active ?? ""}
+        </TabContent>
+      </ElTabPane>
+      <ElTabPane name="third" label="Role">
+        <TabContent>
+          default-value: third
+          <br />
+          active: {active ?? ""}
+        </TabContent>
+      </ElTabPane>
+      <ElTabPane name="fourth" label="Task">
+        <TabContent>
+          default-value: third
+          <br />
+          active: {active ?? ""}
+        </TabContent>
+      </ElTabPane>
     </ElTabs>
   );
 }

@@ -5,7 +5,6 @@ import { ElInputNumber } from "@/components/element-plus/input-number";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { ElSpace } from "@/components/element-plus/space";
 import { ArrowDown, ArrowUp, Minus, Plus } from "@/components/element-plus/icons";
-import type { ComponentSize } from "@/components/element-plus/button/types";
 
 const row = {
   display: "flex",
@@ -63,20 +62,31 @@ export function InputNumberSize() {
 
 export function InputNumberControlled() {
   const [num, setNum] = useState<number | null>(1);
-  const sizes: (ComponentSize | undefined)[] = ["large", undefined, "small"];
   return (
     <div style={row}>
-      {sizes.map((size) => (
-        <ElInputNumber
-          key={size ?? "default"}
-          value={num}
-          onChange={setNum}
-          min={1}
-          max={10}
-          controlsPosition="right"
-          size={size}
-        />
-      ))}
+      <ElInputNumber
+        value={num}
+        onChange={setNum}
+        min={1}
+        max={10}
+        controlsPosition="right"
+        size="large"
+      />
+      <ElInputNumber
+        value={num}
+        onChange={setNum}
+        min={1}
+        max={10}
+        controlsPosition="right"
+      />
+      <ElInputNumber
+        value={num}
+        onChange={setNum}
+        min={1}
+        max={10}
+        controlsPosition="right"
+        size="small"
+      />
     </div>
   );
 }

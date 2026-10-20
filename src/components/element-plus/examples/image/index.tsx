@@ -85,15 +85,28 @@ const DEMONSTRATION_STYLE: CSSProperties = {
 const IMAGE_BOX_STYLE: CSSProperties = { width: 100, height: 100 };
 
 export function ImageBasic() {
-  const fits = ["fill", "contain", "cover", "none", "scale-down"] as const;
   return (
     <div>
-      {fits.map((fit) => (
-        <div key={fit} style={EQUAL_BLOCK_STYLE}>
-          <span style={DEMONSTRATION_STYLE}>{fit}</span>
-          <ElImage src={URL} fit={fit} style={IMAGE_BOX_STYLE} />
-        </div>
-      ))}
+      <div style={EQUAL_BLOCK_STYLE}>
+        <span style={DEMONSTRATION_STYLE}>fill</span>
+        <ElImage src={URL} fit="fill" style={IMAGE_BOX_STYLE} />
+      </div>
+      <div style={EQUAL_BLOCK_STYLE}>
+        <span style={DEMONSTRATION_STYLE}>contain</span>
+        <ElImage src={URL} fit="contain" style={IMAGE_BOX_STYLE} />
+      </div>
+      <div style={EQUAL_BLOCK_STYLE}>
+        <span style={DEMONSTRATION_STYLE}>cover</span>
+        <ElImage src={URL} fit="cover" style={IMAGE_BOX_STYLE} />
+      </div>
+      <div style={EQUAL_BLOCK_STYLE}>
+        <span style={DEMONSTRATION_STYLE}>none</span>
+        <ElImage src={URL} fit="none" style={IMAGE_BOX_STYLE} />
+      </div>
+      <div style={EQUAL_BLOCK_STYLE}>
+        <span style={DEMONSTRATION_STYLE}>scale-down</span>
+        <ElImage src={URL} fit="scale-down" style={IMAGE_BOX_STYLE} />
+      </div>
     </div>
   );
 }

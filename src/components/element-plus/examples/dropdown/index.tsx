@@ -43,14 +43,13 @@ function Actions() {
 }
 
 function IconActions() {
-  const icons = [<Plus key="1" />, <CirclePlusFilled key="2" />, <CirclePlus key="3" />, <Check key="4" />, <CircleCheck key="5" />];
   return (
     <ElDropdownMenu>
-      {icons.map((icon, index) => (
-        <ElDropdownItem key={index} icon={icon}>
-          Action {index + 1}
-        </ElDropdownItem>
-      ))}
+      <ElDropdownItem icon={<Plus />}>Action 1</ElDropdownItem>
+      <ElDropdownItem icon={<CirclePlusFilled />}>Action 2</ElDropdownItem>
+      <ElDropdownItem icon={<CirclePlus />}>Action 3</ElDropdownItem>
+      <ElDropdownItem icon={<Check />}>Action 4</ElDropdownItem>
+      <ElDropdownItem icon={<CircleCheck />}>Action 5</ElDropdownItem>
     </ElDropdownMenu>
   );
 }

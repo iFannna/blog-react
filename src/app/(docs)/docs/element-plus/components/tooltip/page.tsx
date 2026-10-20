@@ -18,11 +18,42 @@ import {
 export const metadata: Metadata = { title: "Tooltip 文字提示" };
 
 const SOURCES = {
-  basic: `{PLACEMENTS.map((p) => (
-  <ElTooltip key={p} content={\`placement: \${p}\`} placement={p}>
-    <ElButton>{p}</ElButton>
-  </ElTooltip>
-))}`,
+  basic: `<ElTooltip content="placement: top-start" placement="top-start">
+  <ElButton>top-start</ElButton>
+</ElTooltip>
+<ElTooltip content="placement: top" placement="top">
+  <ElButton>top</ElButton>
+</ElTooltip>
+<ElTooltip content="placement: top-end" placement="top-end">
+  <ElButton>top-end</ElButton>
+</ElTooltip>
+<ElTooltip content="placement: left-start" placement="left-start">
+  <ElButton>left-start</ElButton>
+</ElTooltip>
+<ElTooltip content="placement: right-start" placement="right-start">
+  <ElButton>right-start</ElButton>
+</ElTooltip>
+<ElTooltip content="placement: left" placement="left">
+  <ElButton>left</ElButton>
+</ElTooltip>
+<ElTooltip content="placement: right" placement="right">
+  <ElButton>right</ElButton>
+</ElTooltip>
+<ElTooltip content="placement: left-end" placement="left-end">
+  <ElButton>left-end</ElButton>
+</ElTooltip>
+<ElTooltip content="placement: right-end" placement="right-end">
+  <ElButton>right-end</ElButton>
+</ElTooltip>
+<ElTooltip content="placement: bottom-start" placement="bottom-start">
+  <ElButton>bottom-start</ElButton>
+</ElTooltip>
+<ElTooltip content="placement: bottom" placement="bottom">
+  <ElButton>bottom</ElButton>
+</ElTooltip>
+<ElTooltip content="placement: bottom-end" placement="bottom-end">
+  <ElButton>bottom-end</ElButton>
+</ElTooltip>`,
 
   theme: `<ElTooltip content="Top center" placement="top">
   <ElButton>Dark</ElButton>

@@ -17,13 +17,17 @@ export const metadata: Metadata = {
 };
 
 const SOURCES = {
-  basic: `{ITEMS.map((item) => (
-  <ElTag key={item.label} type={item.type}>{item.label}</ElTag>
-))}`,
+  basic: `<ElTag type="primary">Tag 1</ElTag>
+<ElTag type="success">Tag 2</ElTag>
+<ElTag type="info">Tag 3</ElTag>
+<ElTag type="warning">Tag 4</ElTag>
+<ElTag type="danger">Tag 5</ElTag>`,
 
-  closable: `{ITEMS.map((item) => (
-  <ElTag key={item.label} type={item.type} closable>{item.label}</ElTag>
-))}`,
+  closable: `<ElTag type="primary" closable>Tag 1</ElTag>
+<ElTag type="success" closable>Tag 2</ElTag>
+<ElTag type="info" closable>Tag 3</ElTag>
+<ElTag type="warning" closable>Tag 4</ElTag>
+<ElTag type="danger" closable>Tag 5</ElTag>`,
 
   dynamic: `const [tags, setTags] = useState(["Tag 1", "Tag 2", "Tag 3"]);
 const [inputVisible, setInputVisible] = useState(false);
@@ -60,26 +64,52 @@ const handleConfirm = () => {
 <ElTag>Default</ElTag>
 <ElTag size="small">Small</ElTag>`,
 
-  effect: `{EFFECTS.map(({ effect, label }) => (
-  <div key={effect}>
-    <span>{label}</span>
-    {ITEMS.map((item) => (
-      <ElTag key={item.label} type={item.type} effect={effect}>
-        {item.label}
-      </ElTag>
-    ))}
-  </div>
-))}`,
+  effect: `<div>
+  <span>Dark</span>
+  <ElTag type="primary" effect="dark">Tag 1</ElTag>
+  <ElTag type="success" effect="dark">Tag 2</ElTag>
+  <ElTag type="info" effect="dark">Tag 3</ElTag>
+  <ElTag type="warning" effect="dark">Tag 4</ElTag>
+  <ElTag type="danger" effect="dark">Tag 5</ElTag>
+</div>
+<div>
+  <span>Light</span>
+  <ElTag type="primary" effect="light">Tag 1</ElTag>
+  <ElTag type="success" effect="light">Tag 2</ElTag>
+  <ElTag type="info" effect="light">Tag 3</ElTag>
+  <ElTag type="warning" effect="light">Tag 4</ElTag>
+  <ElTag type="danger" effect="light">Tag 5</ElTag>
+</div>
+<div>
+  <span>Plain</span>
+  <ElTag type="primary" effect="plain">Tag 1</ElTag>
+  <ElTag type="success" effect="plain">Tag 2</ElTag>
+  <ElTag type="info" effect="plain">Tag 3</ElTag>
+  <ElTag type="warning" effect="plain">Tag 4</ElTag>
+  <ElTag type="danger" effect="plain">Tag 5</ElTag>
+</div>`,
 
-  round: `{EFFECTS.map(({ effect }) => (
-  <div key={effect}>
-    {ITEMS.map((item) => (
-      <ElTag key={item.label} type={item.type} effect={effect} round>
-        {item.label}
-      </ElTag>
-    ))}
-  </div>
-))}`,
+  round: `<div>
+  <ElTag type="primary" effect="dark" round>Tag 1</ElTag>
+  <ElTag type="success" effect="dark" round>Tag 2</ElTag>
+  <ElTag type="info" effect="dark" round>Tag 3</ElTag>
+  <ElTag type="warning" effect="dark" round>Tag 4</ElTag>
+  <ElTag type="danger" effect="dark" round>Tag 5</ElTag>
+</div>
+<div>
+  <ElTag type="primary" effect="light" round>Tag 1</ElTag>
+  <ElTag type="success" effect="light" round>Tag 2</ElTag>
+  <ElTag type="info" effect="light" round>Tag 3</ElTag>
+  <ElTag type="warning" effect="light" round>Tag 4</ElTag>
+  <ElTag type="danger" effect="light" round>Tag 5</ElTag>
+</div>
+<div>
+  <ElTag type="primary" effect="plain" round>Tag 1</ElTag>
+  <ElTag type="success" effect="plain" round>Tag 2</ElTag>
+  <ElTag type="info" effect="plain" round>Tag 3</ElTag>
+  <ElTag type="warning" effect="plain" round>Tag 4</ElTag>
+  <ElTag type="danger" effect="plain" round>Tag 5</ElTag>
+</div>`,
 
   checkable: `<ElCheckTag checked>已选中</ElCheckTag>
 <ElCheckTag checked={checked} onCheckedChange={setChecked}>

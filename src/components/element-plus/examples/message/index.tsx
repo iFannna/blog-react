@@ -35,26 +35,47 @@ export function MessageBasic() {
   );
 }
 
-const TYPES = [
-  { label: "Primary", type: "primary" },
-  { label: "Success", type: "success" },
-  { label: "Warning", type: "warning" },
-  { label: "Info", type: "info" },
-  { label: "Error", type: "error" },
-] as const;
-
 export function MessageDifferentTypes() {
   return (
     <div style={row}>
-      {TYPES.map(({ label, type }) => (
-        <ElButton
-          key={type}
-          plain
-          onClick={() => message({ message: `This is a ${type} message.`, type })}
-        >
-          {label}
-        </ElButton>
-      ))}
+      <ElButton
+        plain
+        onClick={() =>
+          message({ message: "This is a primary message.", type: "primary" })
+        }
+      >
+        Primary
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          message({ message: "This is a success message.", type: "success" })
+        }
+      >
+        Success
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          message({ message: "This is a warning message.", type: "warning" })
+        }
+      >
+        Warning
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() => message({ message: "This is a info message.", type: "info" })}
+      >
+        Info
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          message({ message: "This is a error message.", type: "error" })
+        }
+      >
+        Error
+      </ElButton>
     </div>
   );
 }
@@ -62,17 +83,58 @@ export function MessageDifferentTypes() {
 export function MessagePlain() {
   return (
     <div style={row}>
-      {TYPES.map(({ label, type }) => (
-        <ElButton
-          key={type}
-          plain
-          onClick={() =>
-            message({ message: `This is a ${type} message.`, type, plain: true })
-          }
-        >
-          {label}
-        </ElButton>
-      ))}
+      <ElButton
+        plain
+        onClick={() =>
+          message({
+            message: "This is a primary message.",
+            type: "primary",
+            plain: true,
+          })
+        }
+      >
+        Primary
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          message({
+            message: "This is a success message.",
+            type: "success",
+            plain: true,
+          })
+        }
+      >
+        Success
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          message({
+            message: "This is a warning message.",
+            type: "warning",
+            plain: true,
+          })
+        }
+      >
+        Warning
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          message({ message: "This is a info message.", type: "info", plain: true })
+        }
+      >
+        Info
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          message({ message: "This is a error message.", type: "error", plain: true })
+        }
+      >
+        Error
+      </ElButton>
     </div>
   );
 }
@@ -80,17 +142,66 @@ export function MessagePlain() {
 export function MessageClosable() {
   return (
     <div style={row}>
-      {TYPES.map(({ label, type }) => (
-        <ElButton
-          key={type}
-          plain
-          onClick={() =>
-            message({ message: `This is a ${type} message.`, type, showClose: true })
-          }
-        >
-          {label}
-        </ElButton>
-      ))}
+      <ElButton
+        plain
+        onClick={() =>
+          message({
+            message: "This is a primary message.",
+            type: "primary",
+            showClose: true,
+          })
+        }
+      >
+        Primary
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          message({
+            message: "This is a success message.",
+            type: "success",
+            showClose: true,
+          })
+        }
+      >
+        Success
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          message({
+            message: "This is a warning message.",
+            type: "warning",
+            showClose: true,
+          })
+        }
+      >
+        Warning
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          message({
+            message: "This is a info message.",
+            type: "info",
+            showClose: true,
+          })
+        }
+      >
+        Info
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() =>
+          message({
+            message: "This is a error message.",
+            type: "error",
+            showClose: true,
+          })
+        }
+      >
+        Error
+      </ElButton>
       <ElButton
         plain
         onClick={() =>
@@ -140,37 +251,95 @@ export function MessageGrouping() {
   );
 }
 
-const PLACEMENTS = [
-  { label: "Top", placement: "top", type: "success" },
-  { label: "Top Left", placement: "top-left", type: "info" },
-  { label: "Top Right", placement: "top-right", type: "primary" },
-  { label: "Bottom", placement: "bottom", type: "warning" },
-  { label: "Bottom Left", placement: "bottom-left", type: "warning" },
-  { label: "Bottom Right", placement: "bottom-right", type: "error" },
-] as const;
-
 export function MessagePlacement() {
   const counters = useRef<Record<string, number>>({});
 
   return (
     <div style={row}>
-      {PLACEMENTS.map(({ label, placement, type }) => (
-        <ElButton
-          key={placement}
-          plain
-          onClick={() => {
-            const count = (counters.current[placement] ?? 0) + 1;
-            counters.current[placement] = count;
-            message({
-              message: `This is a message from the ${placement} ${count}`,
-              type,
-              placement,
-            });
-          }}
-        >
-          {label}
-        </ElButton>
-      ))}
+      <ElButton
+        plain
+        onClick={() => {
+          const count = (counters.current.top ?? 0) + 1;
+          counters.current.top = count;
+          message({
+            message: `This is a message from the top ${count}`,
+            type: "success",
+            placement: "top",
+          });
+        }}
+      >
+        Top
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() => {
+          const count = (counters.current["top-left"] ?? 0) + 1;
+          counters.current["top-left"] = count;
+          message({
+            message: `This is a message from the top-left ${count}`,
+            type: "info",
+            placement: "top-left",
+          });
+        }}
+      >
+        Top Left
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() => {
+          const count = (counters.current["top-right"] ?? 0) + 1;
+          counters.current["top-right"] = count;
+          message({
+            message: `This is a message from the top-right ${count}`,
+            type: "primary",
+            placement: "top-right",
+          });
+        }}
+      >
+        Top Right
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() => {
+          const count = (counters.current.bottom ?? 0) + 1;
+          counters.current.bottom = count;
+          message({
+            message: `This is a message from the bottom ${count}`,
+            type: "warning",
+            placement: "bottom",
+          });
+        }}
+      >
+        Bottom
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() => {
+          const count = (counters.current["bottom-left"] ?? 0) + 1;
+          counters.current["bottom-left"] = count;
+          message({
+            message: `This is a message from the bottom-left ${count}`,
+            type: "warning",
+            placement: "bottom-left",
+          });
+        }}
+      >
+        Bottom Left
+      </ElButton>
+      <ElButton
+        plain
+        onClick={() => {
+          const count = (counters.current["bottom-right"] ?? 0) + 1;
+          counters.current["bottom-right"] = count;
+          message({
+            message: `This is a message from the bottom-right ${count}`,
+            type: "error",
+            placement: "bottom-right",
+          });
+        }}
+      >
+        Bottom Right
+      </ElButton>
     </div>
   );
 }
