@@ -1,105 +1,9 @@
 import type { Metadata } from "next";
-import DemoBlock from "../../../../_components/DemoBlock";
 import { Heading } from "../../../../_components/Heading";
 import DocsContent from "../../../../_components/DocsContent";
 import { ColorMain, ColorSecondary, ColorNeutral } from "@/components/element-plus/examples/color";
 
 export const metadata: Metadata = { title: "Color 色彩" };
-
-/**
- * 官方 md 没有 :::demo（三块色板由 ClientOnly 直接挂全局组件），
- * 所以这里按「展示块」建 source，而不是按示例目录。
- */
-const SOURCES = {
-  main: `<ElRow gutter={12}>
-  <ElCol span={10} xs={{ span: 12 }}>
-    <div className="demo-color-box demo-color-box--primary">
-      Brand Color
-      <div className="value">#409EFF</div>
-      {/* 6 档深浅，宽 100% / 6，点击复制变量 */}
-      <div className="bg-color-sub demo-color-box--primary">
-        {["dark-2", "light-3", "light-5", "light-7", "light-8", "light-9"].map((level) => (
-          <div
-            key={level}
-            className={\`bg-blue-sub-item demo-color-box--primary-\${level}\`}
-            onClick={() => copyColor(\`--el-color-primary-\${level}\`)}
-          />
-        ))}
-      </div>
-    </div>
-  </ElCol>
-</ElRow>`,
-
-  secondary: `<ElRow gutter={12}>
-  {["success", "warning", "danger", "info"].map((type) => (
-    <ElCol span={6} xs={{ span: 12 }} key={type}>
-      <div className={\`demo-color-box demo-color-box--\${type}\`}>
-        {type}
-        <div className="value">{colorValue[type]}</div>
-        <div className="bg-color-sub">
-          {["dark-2", "light-3", "light-5", "light-7", "light-8", "light-9"].map((level) => (
-            <div
-              key={level}
-              className={\`bg-secondary-sub-item demo-color-box--\${type}-\${level}\`}
-              onClick={() => copyColor(\`--el-color-\${type}-\${level}\`)}
-            />
-          ))}
-        </div>
-      </div>
-    </ElCol>
-  ))}
-</ElRow>`,
-
-  neutral: `<ElRow gutter={12}>
-  <ElCol span={6} xs={{ span: 12 }}>
-    {textColors.map((c) => (
-      <div className="demo-color-box demo-color-box--text-..." key={c.varName}>
-        {c.name}
-        <div className="value">{c.value}</div>
-      </div>
-    ))}
-  </ElCol>
-
-  <ElCol span={6} xs={{ span: 12 }}>
-    {borderColors.map((c) => (
-      <div className="demo-color-box demo-color-box-lite demo-color-box--border-..." key={c.varName}>
-        {c.name}
-        <div className="value">{c.value}</div>
-      </div>
-    ))}
-  </ElCol>
-
-  <ElCol span={6} xs={{ span: 12 }}>
-    {fillColors.map((c) => (
-      <div className="demo-color-box demo-color-box-lite demo-color-box--fill-..." key={c.varName}>
-        {c.name}
-        <div className="value">{c.value}</div>
-      </div>
-    ))}
-  </ElCol>
-
-  <ElCol span={6} xs={{ span: 12 }}>
-    <div className="demo-color-box demo-color-box--black">
-      Basic Black
-      <div className="value">#000000</div>
-    </div>
-    <div className="demo-color-box demo-color-box--white">
-      Basic White
-      <div className="value">#FFFFFF</div>
-    </div>
-    <div className="demo-color-box demo-color-box-lite bg-transparent">
-      Transparent
-      <div className="value">Transparent</div>
-    </div>
-    {backgroundColors.map((c) => (
-      <div className="demo-color-box demo-color-box-lite demo-color-box--bg-..." key={c.varName}>
-        {c.name}
-        <div className="value">{c.value}</div>
-      </div>
-    ))}
-  </ElCol>
-</ElRow>`,
-};
 
 const API_MD = `
 ## Color 规范
@@ -166,25 +70,19 @@ export default function ColorPage() {
 
       <Heading level={2}>主色</Heading>
       <p>Element Plus 默认的主题色是明亮、友好的蓝色。</p>
-      <DemoBlock source={SOURCES.main}>
-        <ColorMain />
-      </DemoBlock>
+      <ColorMain />
 
       <Heading level={2}>辅助色</Heading>
       <p>
         除了主颜色外，您需要在不同的场景中使用不同的场景颜色 (例如，危险的颜色表示危险的操作)
       </p>
-      <DemoBlock source={SOURCES.secondary}>
-        <ColorSecondary />
-      </DemoBlock>
+      <ColorSecondary />
 
       <Heading level={2}>中性色</Heading>
       <p>
         中性色用于文本、背景和边框颜色。通过运用不同的中性色，来表现层次结构。
       </p>
-      <DemoBlock source={SOURCES.neutral}>
-        <ColorNeutral />
-      </DemoBlock>
+      <ColorNeutral />
 
       <Heading level={2}>源代码</Heading>
       <p>

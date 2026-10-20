@@ -7,21 +7,25 @@ const manifest: DemoManifest = {
     load: () => import("@/components/element-plus/examples/icon"),
     exportName: "IconSimple",
     sourceFile: `${dir}/index.tsx`,
+    plain: true,
   },
   "icon/combined": {
     load: () => import("@/components/element-plus/examples/icon"),
     exportName: "IconCombined",
     sourceFile: `${dir}/index.tsx`,
+    plain: true,
   },
   "icon/direct": {
     load: () => import("@/components/element-plus/examples/icon"),
     exportName: "IconDirect",
     sourceFile: `${dir}/index.tsx`,
+    plain: true,
   },
   "icon/collection": {
     load: () => import("@/components/element-plus/examples/icon"),
     exportName: "IconCollection",
     sourceFile: `${dir}/index.tsx`,
+    plain: true,
   },
 };
 

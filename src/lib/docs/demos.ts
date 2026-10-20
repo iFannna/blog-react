@@ -10,6 +10,7 @@ export interface LoadedDemo {
   Component: ComponentType;
   source: string;
   lang: DemoLang;
+  plain: boolean;
 }
 
 const manifestCache = new Map<string, Promise<DemoManifest | undefined>>();
@@ -191,7 +192,8 @@ export async function loadDemo(
 
   return {
     Component,
-    source: readDemoSource(entry),
+    source: entry.plain ? "" : readDemoSource(entry),
     lang: entry.lang ?? "tsx",
+    plain: entry.plain ?? false,
   };
 }

@@ -127,7 +127,7 @@ export function IconCollection() {
   };
 
   return (
-    <div className={styles.collection}>
+    <div>
       <div className={styles.switchRow}>
         <ElSwitch
           checked={copyIcon}

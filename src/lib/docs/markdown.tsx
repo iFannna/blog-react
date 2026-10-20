@@ -377,6 +377,22 @@ export default async function DocsMarkdown({
 
         const Demo = demo.Component;
 
+        if (demo.plain) {
+          return (
+            <Fragment key={`demo-${index}`}>
+              {block.description && (
+                <div className="docs-example__desc">
+                  <MarkdownBody
+                    markdown={block.description}
+                    components={components}
+                  />
+                </div>
+              )}
+              <Demo />
+            </Fragment>
+          );
+        }
+
         return (
           <DemoBlock
             key={`demo-${index}`}

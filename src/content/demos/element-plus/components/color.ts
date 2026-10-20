@@ -7,16 +7,19 @@ const manifest: DemoManifest = {
     load: () => import("@/components/element-plus/examples/color"),
     exportName: "ColorMain",
     sourceFile: `${dir}/index.tsx`,
+    plain: true,
   },
   "color/secondary": {
     load: () => import("@/components/element-plus/examples/color"),
     exportName: "ColorSecondary",
     sourceFile: `${dir}/index.tsx`,
+    plain: true,
   },
   "color/neutral": {
     load: () => import("@/components/element-plus/examples/color"),
     exportName: "ColorNeutral",
     sourceFile: `${dir}/index.tsx`,
+    plain: true,
   },
 };
 

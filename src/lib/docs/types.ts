@@ -85,6 +85,8 @@ export interface DemoEntry {
   /** 相对项目根目录，用于读取源码 */
   sourceFile: string;
   lang?: DemoLang;
+  /** 纯展示：不渲染 DemoBlock 外框、操作栏和源码面板 */
+  plain?: boolean;
 }
 
 export type DemoManifest = Record<string, DemoEntry>;

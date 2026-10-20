@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import * as AllIcons from "@/components/element-plus/icons";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import DemoBlock from "../../../../_components/DemoBlock";
 import DocsContent from "../../../../_components/DocsContent";
 import { Heading } from "../../../../_components/Heading";
 import {
@@ -88,9 +87,7 @@ export default function IconPage() {
 
 :::`}
       />
-      <DemoBlock source={`<ElIcon><Edit /></ElIcon>`}>
-        <IconSimple />
-      </DemoBlock>
+      <IconSimple />
 
       <Heading level={2}>结合 el-icon 使用</Heading>
       <p>
@@ -100,14 +97,10 @@ export default function IconPage() {
         通过添加额外的类名 is-loading，你的图标就可以在 2
         秒内旋转 360 度，当然你也可以自己改写想要的动画。
       </p>
-      <DemoBlock source={`<ElIcon><Edit /></ElIcon>`}>
-        <IconCombined />
-      </DemoBlock>
+      <IconCombined />
 
       <Heading level={2}>直接使用 SVG 图标</Heading>
-      <DemoBlock source={`<Edit />`}>
-        <IconDirect />
-      </DemoBlock>
+      <IconDirect />
 
       <Heading level={2}>图标集合</Heading>
       <DocsContent
