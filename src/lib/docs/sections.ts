@@ -105,14 +105,14 @@ export const ELEMENT_PLUS_HEADER: DocsHeaderConfig = {
     kind: "image",
     src: "/images/element-plus-logo.svg",
     alt: "Element Plus Logo",
-    href: "/docs/element-plus/components/overview",
+    href: "/docs/zh-CN/element-plus/components/overview",
   },
   badge: { text: "2.14.6", title: "latest version" },
   links: [
     {
       text: "组件",
-      href: "/docs/element-plus/components/overview",
-      activePrefix: "/docs/element-plus/components",
+      href: "/docs/zh-CN/element-plus/components/overview",
+      activePrefix: "/docs/zh-CN/element-plus/components",
     },
     {
       text: "官方文档",

@@ -24,7 +24,7 @@ export default function DocsLayout({
   children,
   header = ELEMENT_PLUS_HEADER,
   nav = DOC_NAV,
-  basePath = "/docs/element-plus/components",
+  basePath = "/docs/zh-CN/element-plus/components",
   locale,
 }: DocsLayoutProps) {
   const shell = (

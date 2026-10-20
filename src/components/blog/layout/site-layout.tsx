@@ -69,7 +69,12 @@ export default async function SiteLayout({
         { label: "排版" },
         {
           label: "文档",
-          children: [{ href: "/docs/element-plus/components", label: "Element Plus" }],
+          children: [
+            {
+              href: "/docs/zh-CN/element-plus/components/overview",
+              label: "Element Plus",
+            },
+          ],
         },
         { href: "/login", label: "登录" },
         { href: "/register", label: "注册" },

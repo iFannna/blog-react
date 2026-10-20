@@ -213,6 +213,11 @@ export function getSectionNav(locale: DocLocale, section: string): DocsNavGroup[
 }
 
 export function getFirstDocPath(locale: DocLocale, section: string): string | undefined {
+  // Overview 是手写页面，不在 Markdown 导航里，组件文档入口固定落到总览
+  if (section === "element-plus") {
+    return `/docs/${locale}/element-plus/components/overview`;
+  }
+
   const [firstGroup] = getSectionNav(locale, section);
   const first = firstGroup?.items[0];
 

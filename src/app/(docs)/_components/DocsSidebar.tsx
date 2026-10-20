@@ -25,7 +25,7 @@ const MIN_THUMB_SIZE = 20;
  * 尺寸和位置才能与官方逐像素一致，而不是简单地按比例估算。
  */
 export default function DocsSidebar({
-  basePath = "/docs/element-plus/components",
+  basePath = "/docs/zh-CN/element-plus/components",
   groups = DOC_NAV,
 }: DocsSidebarProps) {
   const pathname = usePathname();
