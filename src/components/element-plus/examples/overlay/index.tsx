@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ElTooltip } from "@/components/element-plus/tooltip";
+import {
+  ElTooltip,
+  type TooltipExpose,
+} from "@/components/element-plus/tooltip";
 import { ElPopover } from "@/components/element-plus/popover";
 import { ElPopconfirm } from "@/components/element-plus/popconfirm";
 import { ElButton } from "@/components/element-plus/button";
@@ -147,12 +150,15 @@ function useVirtualTrigger() {
 
 export function TooltipVirtualTrigger() {
   const [visible, setVisible] = useState(false);
+  const tooltipRef = useRef<TooltipExpose>(null);
   const { positionRef, virtualRef } = useVirtualTrigger();
 
-  // 官方 demo 监听 document 的 mousemove，让浮层跟随光标
+  // 官方 demo 监听 document 的 mousemove，让浮层跟随光标。
+  // React 侧没有 Vue 的响应式追踪，需要显式通知 popper 重新定位。
   useEffect(() => {
     const handler = (event: MouseEvent) => {
       positionRef.current = { x: event.clientX, y: event.clientY };
+      tooltipRef.current?.updatePopper();
     };
     document.addEventListener("mousemove", handler);
     return () => document.removeEventListener("mousemove", handler);
@@ -161,6 +167,7 @@ export function TooltipVirtualTrigger() {
   return (
     <>
       <ElTooltip
+        ref={tooltipRef}
         visible={visible}
         content="Bottom center"
         placement="bottom"
@@ -174,18 +181,18 @@ export function TooltipVirtualTrigger() {
   );
 }
 
+const SINGLETON_POPPER_OPTIONS = {
+  modifiers: [
+    {
+      name: "computeStyles",
+      options: { adaptive: false, enabled: false },
+    },
+  ],
+};
+
 export function TooltipSingleton() {
   const [visible, setVisible] = useState(false);
-  const anchorRef = useRef({ x: 0, y: 0, width: 0, height: 0 });
-  const [virtualRef] = useState(() => ({
-    getBoundingClientRect: () =>
-      new DOMRect(
-        anchorRef.current.x,
-        anchorRef.current.y,
-        anchorRef.current.width,
-        anchorRef.current.height,
-      ),
-  }));
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   return (
     <>
@@ -193,15 +200,7 @@ export function TooltipSingleton() {
         {[1, 2, 3].map((i) => (
           <ElButton
             key={i}
-            onMouseOver={(event) => {
-              const rect = event.currentTarget.getBoundingClientRect();
-              anchorRef.current = {
-                x: rect.x,
-                y: rect.y,
-                width: rect.width,
-                height: rect.height,
-              };
-            }}
+            onMouseOver={(event) => setAnchorEl(event.currentTarget)}
             onClick={() => setVisible((value) => !value)}
           >
             Click to open tooltip
@@ -211,8 +210,9 @@ export function TooltipSingleton() {
       <ElTooltip
         visible={visible}
         virtualTriggering
-        virtualRef={virtualRef}
+        virtualRef={anchorEl}
         popperClass="singleton-tooltip"
+        popperOptions={SINGLETON_POPPER_OPTIONS}
         content={<span>Some content</span>}
       />
     </>
@@ -235,10 +235,7 @@ export function TooltipControlled() {
 
 export function TooltipAnimations() {
   return (
-    <ElTooltip
-      content="I am an el-tooltip"
-      transition="el-zoom-in-top"
-    >
+    <ElTooltip content="I am an el-tooltip" transition="slide-fade">
       <ElButton>trigger me</ElButton>
     </ElTooltip>
   );

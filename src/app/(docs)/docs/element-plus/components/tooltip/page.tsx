@@ -82,12 +82,23 @@ const SOURCES = {
 </ElTooltip>`,
 
   virtualTrigger: `const [visible, setVisible] = useState(false);
+const tooltipRef = useRef<TooltipExpose>(null);
 const position = useRef({ x: 0, y: 0 });
 const virtualRef = useRef({
   getBoundingClientRect: () => new DOMRect(position.current.x, position.current.y, 0, 0),
 });
 
+useEffect(() => {
+  const handler = (event: MouseEvent) => {
+    position.current = { x: event.clientX, y: event.clientY };
+    tooltipRef.current?.updatePopper();
+  };
+  document.addEventListener("mousemove", handler);
+  return () => document.removeEventListener("mousemove", handler);
+}, []);
+
 <ElTooltip
+  ref={tooltipRef}
   visible={visible}
   content="Bottom center"
   placement="bottom"
@@ -98,12 +109,29 @@ const virtualRef = useRef({
 />
 <ElButton onClick={() => setVisible((v) => !v)}>test</ElButton>`,
 
-  singleton: `{/* 三个按钮共用一个 Tooltip，鼠标移入时更新 virtualRef */}
+  singleton: `const [visible, setVisible] = useState(false);
+const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+{[1, 2, 3].map((i) => (
+  <ElButton
+    key={i}
+    onMouseOver={(event) => setAnchorEl(event.currentTarget)}
+    onClick={() => setVisible((v) => !v)}
+  >
+    Click to open tooltip
+  </ElButton>
+))}
+
 <ElTooltip
   visible={visible}
   virtualTriggering
-  virtualRef={virtualRef.current}
+  virtualRef={anchorEl}
   popperClass="singleton-tooltip"
+  popperOptions={{
+    modifiers: [
+      { name: "computeStyles", options: { adaptive: false, enabled: false } },
+    ],
+  }}
   content={<span>Some content</span>}
 />`,
 
@@ -115,7 +143,7 @@ const virtualRef = useRef({
   </ElButton>
 </ElTooltip>`,
 
-  animations: `<ElTooltip content="I am an el-tooltip" transition="el-zoom-in-top">
+  animations: `<ElTooltip content="I am an el-tooltip" transition="slide-fade">
   <ElButton>trigger me</ElButton>
 </ElTooltip>`,
 
@@ -144,6 +172,7 @@ const API_MD = `
 | show-arrow | 是否显示箭头 | ^[boolean] | true |
 | offset | 与触发元素的距离 | ^[number] | 12 |
 | fallback-placements | 翻转时的兜底方位列表 | ^[array] | — |
+| popper-options | popper.js 参数 | ^[object] | {} |
 | popper-class | 提示内容的类名 | ^[string] | — |
 | popper-style | 提示内容的样式 | ^[object] | — |
 | enterable | 鼠标是否可进入提示内容 | ^[boolean] | true |
@@ -173,6 +202,7 @@ const API_MD = `
 | toggle() | 切换显隐 |
 | onOpen() | 按 showAfter 延迟显示 |
 | onClose(delay?) | 按 hideAfter 延迟隐藏，传 0 立即隐藏 |
+| updatePopper() | 重新计算浮层位置 |
 | popperRef | 浮层根节点 |
 `;
 

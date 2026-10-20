@@ -31,3 +31,29 @@
   background: linear-gradient(45deg, #b2e68d, #bce689);
   right: 0;
 }
+
+/* Official singleton.vue: slide the shared popper between anchors */
+:global(.singleton-tooltip) {
+  transition: transform 0.3s var(--el-transition-function-fast-bezier);
+}
+
+/* 与单例模式一致：用 popper 的 transform 过渡做整体滑入 */
+:global(.slide-fade-enter-active) {
+  transition: transform 0.3s var(--el-transition-function-fast-bezier);
+}
+
+:global(.slide-fade-enter-from) {
+  transform: translate(0, 0);
+}
+
+/* 离场保留位移 + 淡出 */
+:global(.slide-fade-leave-active) {
+  transition:
+    transform 0.8s cubic-bezier(1, 0.5, 0.8, 1),
+    opacity 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+:global(.slide-fade-leave-to) {
+  transform: translateX(120px);
+  opacity: 0;
+}

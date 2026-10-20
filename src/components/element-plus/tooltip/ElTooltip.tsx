@@ -19,7 +19,11 @@ import {
 } from "react";
 import { ElPopperContent } from "../popper/ElPopperContent";
 import { ElPopperArrow } from "../popper/ElPopperArrow";
-import type { PopperPlacement, PopperEffect } from "../popper/use-popper";
+import type {
+  PopperCoreConfig,
+  PopperPlacement,
+  PopperEffect,
+} from "../popper/use-popper";
 
 /** 同时支持回调 ref 与对象 ref。 */
 function assignRef<T>(ref: Ref<T>, value: T | null) {
@@ -49,6 +53,8 @@ export interface TooltipExpose {
   hide: () => void;
   /** 切换显隐 */
   toggle: () => void;
+  /** 重新计算浮层位置，虚拟触发时可主动调用 */
+  updatePopper: () => void;
   /** 浮层根节点 */
   popperRef: HTMLDivElement | null;
 }
@@ -82,6 +88,8 @@ export interface TooltipProps {
   offset?: number;
   /** 翻转时的兜底方位列表，透传给 popper 的 flip 修饰符 */
   fallbackPlacements?: PopperPlacement[];
+  /** popper.js 的原始配置 */
+  popperOptions?: PopperCoreConfig["popperOptions"];
   /** 提示内容的自定义类名 */
   popperClass?: string;
   /** 提示内容的样式 */
@@ -120,9 +128,32 @@ export interface TooltipProps {
   children?: ReactElement;
 }
 
-type TransitionPhase = "enter-from" | "enter" | "leave" | null;
+type TransitionPhase =
+  | "enter-from"
+  | "enter"
+  | "leave-from"
+  | "leave"
+  | null;
 
-const LEAVE_DURATION_MS = 300;
+/** 读取元素当前 transition 的最长 duration + delay，单位毫秒。 */
+function getTransitionDurationMs(el: HTMLElement | null) {
+  if (!el) return 0;
+
+  const style = getComputedStyle(el);
+  const toMs = (value: string) => {
+    const num = parseFloat(value);
+    if (Number.isNaN(num)) return 0;
+    return value.trim().endsWith("ms") ? num : num * 1000;
+  };
+
+  const durations = style.transitionDuration.split(",");
+  const delays = style.transitionDelay.split(",");
+
+  return durations.reduce((max, duration, index) => {
+    const delay = delays[index % delays.length] ?? "0s";
+    return Math.max(max, toMs(duration) + toMs(delay));
+  }, 0);
+}
 
 /**
  * 对应官方 ElTooltip。
@@ -180,6 +211,7 @@ export const ElTooltip = forwardRef<TooltipExpose, TooltipProps>(
       showArrow = true,
       offset = 12,
       fallbackPlacements,
+      popperOptions,
       popperClass,
       popperStyle,
       enterable = true,
@@ -220,6 +252,7 @@ export const ElTooltip = forwardRef<TooltipExpose, TooltipProps>(
     const showTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const autoCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const wasDisabledRef = useRef(disabled);
 
     const contentId = useId();
 
@@ -311,6 +344,7 @@ export const ElTooltip = forwardRef<TooltipExpose, TooltipProps>(
         show: showImmediately,
         hide: hideImmediately,
         toggle,
+        updatePopper: () => updateRef.current?.(),
         get popperRef() {
           return popperRef.current;
         },
@@ -321,9 +355,19 @@ export const ElTooltip = forwardRef<TooltipExpose, TooltipProps>(
     // 卸载时清掉所有定时器
     useEffect(() => clearTimers, [clearTimers]);
 
+    // 对应官方 watch(disabled)：切换到禁用时立即关闭，重新启用不会自动弹出
+    useEffect(() => {
+      if (disabled && !wasDisabledRef.current && visible) {
+        clearTimers();
+        setVisible(false);
+      }
+      wasDisabledRef.current = disabled;
+    }, [disabled, visible, clearTimers, setVisible]);
+
     /**
-     * 浮层过渡。打开时强制开启 enter-from 再移除；
-     * 关闭时若 persistent 则只隐藏，否则保留 DOM 播放离场动画。
+     * 浮层过渡。与 Vue Transition 的类名时序一致：
+     * enter-from → enter；leave-from → leave。
+     * 关闭时保持挂载，等离场过渡结束后再卸载。
      */
     useEffect(() => {
       if (visible) {
@@ -336,11 +380,9 @@ export const ElTooltip = forwardRef<TooltipExpose, TooltipProps>(
         const raf = requestAnimationFrame(() => {
           frame = requestAnimationFrame(() => setPhase("enter"));
         });
-        const timer = setTimeout(() => setPhase(null), LEAVE_DURATION_MS);
         return () => {
           cancelAnimationFrame(raf);
           if (frame) cancelAnimationFrame(frame);
-          clearTimeout(timer);
         };
       }
 
@@ -351,14 +393,33 @@ export const ElTooltip = forwardRef<TooltipExpose, TooltipProps>(
         return;
       }
 
-      setPhase("leave");
-      const timer = setTimeout(() => {
-        mountedRef.current = false;
-        setMounted(false);
-        setPhase(null);
-      }, LEAVE_DURATION_MS);
-      return () => clearTimeout(timer);
+      setPhase("leave-from");
+      let frame = 0;
+      const raf = requestAnimationFrame(() => {
+        frame = requestAnimationFrame(() => setPhase("leave"));
+      });
+      return () => {
+        cancelAnimationFrame(raf);
+        if (frame) cancelAnimationFrame(frame);
+      };
     }, [visible, persistent]);
+
+    // 过渡时长交给 CSS 决定，兼容自定义 transition 的任意时长
+    useEffect(() => {
+      if (phase !== "enter" && phase !== "leave") return;
+
+      const timer = setTimeout(() => {
+        if (phase === "leave") {
+          mountedRef.current = false;
+          setMounted(false);
+          setPhase(null);
+        } else {
+          setPhase(null);
+        }
+      }, getTransitionDurationMs(popperRef.current));
+
+      return () => clearTimeout(timer);
+    }, [phase]);
 
     // 服务端渲染时没有 HTMLElement，构造函数本身也要先判存在
     const virtualElement =
@@ -531,26 +592,31 @@ export const ElTooltip = forwardRef<TooltipExpose, TooltipProps>(
     const phaseClasses = [
       phase === "enter-from" &&
         `${transition}-enter-active ${transition}-enter-from`,
-      phase === "enter" && `${transition}-enter-active`,
-      phase === "leave" && `${transition}-leave-active ${transition}-leave-to`,
+      phase === "enter" && `${transition}-enter-active ${transition}-enter-to`,
+      phase === "leave-from" &&
+        `${transition}-leave-active ${transition}-leave-from`,
+      phase === "leave" &&
+        `${transition}-leave-active ${transition}-leave-to`,
     ]
       .filter(Boolean)
       .join(" ");
 
     // 离场期间依然需要显示浮层，等过渡结束再由 mounted 卸载
-    const contentVisible = visible || phase === "leave";
+    const contentVisible =
+      visible || phase === "leave-from" || phase === "leave";
 
     return (
       <>
         {child}
 
-        {hasContent && (mounted || contentVisible) && (
+        {hasContent && mounted && (
           <ElPopperContent
             referenceEl={referenceEl}
             placement={placement}
             effect={effect}
             offset={offset}
             fallbackPlacements={fallbackPlacements}
+            popperOptions={popperOptions}
             popperClass={popperClass}
             popperStyle={popperStyle}
             zIndex={zIndex}
@@ -560,7 +626,7 @@ export const ElTooltip = forwardRef<TooltipExpose, TooltipProps>(
             teleported={teleported}
             appendTo={appendTo}
             persistent={persistent}
-            visible={contentVisible}
+            visible={contentVisible || (mounted && !persistent)}
             ariaLabel={ariaLabel}
             ariaHidden={!visible}
             onMouseEnter={handleContentEnter}
