@@ -5,31 +5,13 @@ import { usePathname } from "next/navigation";
 import { ElTag } from "@/components/element-plus/tag";
 import { ElSwitch } from "@/components/element-plus/switch";
 import { useTheme } from "@/hooks/theme";
-
-/** 与官方文档站顶栏展示的版本号保持一致 */
-const ELEMENT_PLUS_VERSION = "2.14.6";
-
-/**
- * activePrefix 是对应的路由段：指南与资源暂未实现，
- * 因此当前只可能命中「组件」这一项。
- */
-const NAV_ITEMS = [
-  {
-    text: "指南",
-    href: "/docs/element-plus/components/overview",
-    activePrefix: "/docs/element-plus/guide",
-  },
-  {
-    text: "组件",
-    href: "/docs/element-plus/components/overview",
-    activePrefix: "/docs/element-plus/components",
-  },
-  {
-    text: "资源",
-    href: "/docs/element-plus/components/overview",
-    activePrefix: "/docs/element-plus/resource",
-  },
-];
+import { ELEMENT_PLUS_HEADER, LOCALE_LABELS } from "@/lib/docs/sections";
+import {
+  DOC_LOCALES,
+  type DocLocale,
+  type DocsHeaderConfig,
+} from "@/lib/docs/types";
+import { useDocsMessages } from "./DocsI18nProvider";
 
 /**
  * 官方开关用的是 Material 的 light_mode / dark_mode 图标，
@@ -63,6 +45,7 @@ function DarkIcon() {
  */
 function ThemeToggle() {
   const { isDarkMode, toggleTheme } = useTheme();
+  const t = useDocsMessages();
 
   return (
     <div className="docs-header__theme">
@@ -71,58 +54,121 @@ function ThemeToggle() {
         onCheckedChange={() => toggleTheme()}
         activeActionIcon={<DarkIcon />}
         inactiveActionIcon={<LightIcon />}
-        ariaLabel={isDarkMode ? "切换到亮色模式" : "切换到暗色模式"}
+        ariaLabel={isDarkMode ? t.switchToLight : t.switchToDark}
       />
     </div>
   );
 }
 
+function localeHref(pathname: string, locale: DocLocale): string {
+  if (!/^\/docs\/(?:zh-CN|en-US)(?:\/|$)/.test(pathname)) {
+    return `/docs/${locale}`;
+  }
+
+  return pathname.replace(/^\/docs\/(?:zh-CN|en-US)(?=\/|$)/, `/docs/${locale}`);
+}
+
+interface DocsHeaderProps {
+  config?: DocsHeaderConfig;
+  /** 传入时才显示语言切换器；旧的 Element Plus 页面尚未迁移 */
+  locale?: DocLocale;
+}
+
 /**
  * 对应官方 docs 的顶栏：sticky 定位、毛玻璃背景、底部 1px 分隔线。
- * 官方的搜索框与多语言切换依赖 Algolia 与 i18n，
- * 本复刻的文档站只服务于本仓库，故不引入。
  */
-export default function DocsHeader() {
+export default function DocsHeader({
+  config = ELEMENT_PLUS_HEADER,
+  locale,
+}: DocsHeaderProps) {
   const pathname = usePathname();
+  const t = useDocsMessages();
 
   return (
     <header className="docs-header">
       <div className="docs-header__wrapper">
         <div className="docs-header__container">
           <div className="docs-header__logo">
-            <Link href="/docs/element-plus/components/overview" aria-label="Element Plus">
-              <img
-                src="/images/element-plus-logo.svg"
-                alt="Element Plus Logo"
-              />
-            </Link>
-            <ElTag type="primary" size="small" round title="latest version">
-              {ELEMENT_PLUS_VERSION}
-            </ElTag>
+            {config.logo.kind === "image" ? (
+              <Link href={config.logo.href} aria-label={config.logo.alt}>
+                <img src={config.logo.src} alt={config.logo.alt ?? ""} />
+              </Link>
+            ) : (
+              <Link className="docs-header__logo-text" href={config.logo.href}>
+                {config.logo.text}
+              </Link>
+            )}
+            {config.badge && (
+              <ElTag
+                type="primary"
+                size="small"
+                round
+                title={config.badge.title}
+              >
+                {config.badge.text}
+              </ElTag>
+            )}
           </div>
 
           <div className="docs-header__content">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.text}
-                href={item.href}
-                className={
-                  pathname.startsWith(item.activePrefix)
-                    ? "docs-header__link is-active"
-                    : "docs-header__link"
-                }
+            {config.links.map((item) => {
+              const isActive = item.activePrefix
+                ? pathname.startsWith(item.activePrefix)
+                : pathname === item.href;
+              const className = isActive
+                ? "docs-header__link is-active"
+                : "docs-header__link";
+
+              if (item.external) {
+                return (
+                  <a
+                    key={item.text}
+                    className={className}
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {item.text}
+                  </a>
+                );
+              }
+
+              return (
+                <Link key={item.text} className={className} href={item.href}>
+                  {item.text}
+                </Link>
+              );
+            })}
+
+            {locale && (
+              <div
+                className="docs-header__locale"
+                role="group"
+                aria-label={t.switchLanguage}
               >
-                {item.text}
-              </Link>
-            ))}
-            <a
-              className="docs-header__link"
-              href="https://element-plus.org/zh-CN/component/overview"
-              target="_blank"
-              rel="noreferrer"
-            >
-              官方文档
-            </a>
+                {DOC_LOCALES.map((item) => (
+                  <Link
+                    key={item}
+                    href={localeHref(pathname, item)}
+                    className={
+                      item === locale
+                        ? "docs-header__locale-link is-active"
+                        : "docs-header__locale-link"
+                    }
+                    onClick={() => {
+                      try {
+                        localStorage.setItem("docs-locale", item);
+                      } catch {
+                        // 隐私模式下 localStorage 不可用，仅影响下次默认语言
+                      }
+                    }}
+                  >
+                    {LOCALE_LABELS[item]}
+                  </Link>
+                ))}
+              </div>
+            )}
+
             <ThemeToggle />
           </div>
         </div>

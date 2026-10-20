@@ -8,6 +8,7 @@ import {
   useSyncExternalStore,
 } from "react";
 import { animateScrollTo } from "./scroll";
+import { useDocsMessages } from "./DocsI18nProvider";
 
 interface TocItem {
   id: string;
@@ -91,6 +92,7 @@ function subscribeToc(onChange: () => void) {
  * 这里改为挂载后扫描 .docs-content 里的 h2/h3，补上锚点 id。
  */
 export default function DocsAside() {
+  const t = useDocsMessages();
   const items = useSyncExternalStore(
     subscribeToc,
     getTocSnapshot,
@@ -265,7 +267,7 @@ export default function DocsAside() {
   return (
     <aside className="docs-aside">
       <nav className="docs-toc">
-        <h3 className="docs-toc__heading">目录</h3>
+        <h3 className="docs-toc__heading">{t.tocTitle}</h3>
         <div className="docs-toc__anchor">
           <div className="docs-toc__marker" />
           <div className="docs-toc__list" ref={listRef}>

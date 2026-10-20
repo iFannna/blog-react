@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { isValidElement, type ReactNode } from "react";
 
 interface HeadingProps {
   /** 标题层级 */
@@ -12,6 +12,9 @@ interface HeadingProps {
 function toText(node: ReactNode): string {
   if (typeof node === "string" || typeof node === "number") return String(node);
   if (Array.isArray(node)) return node.map(toText).join("");
+  if (isValidElement(node)) {
+    return toText((node.props as { children?: ReactNode }).children);
+  }
   return "";
 }
 

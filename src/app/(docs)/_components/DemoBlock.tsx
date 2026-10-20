@@ -4,13 +4,17 @@ import { Fragment, useRef, useState, type ReactNode } from "react";
 import { ElTooltip } from "@/components/element-plus/tooltip";
 import { message } from "@/components/element-plus/message";
 import { CaretTop } from "@/components/element-plus/icons";
+import type { DemoLang } from "@/lib/docs/types";
 import type { HighlightToken } from "./highlight";
+import { useDocsMessages } from "./DocsI18nProvider";
 
 interface DemoBlockProps {
   /** 示例说明，对应官方 :::demo 后面那行文字 */
   description?: ReactNode;
   /** 展示的源码文本 */
   source: string;
+  /** 源码语言；旧页面展示的是官方 Vue 示例 */
+  lang?: DemoLang;
   /** 实际渲染的示例 */
   children: ReactNode;
 }
@@ -53,8 +57,10 @@ function CodeIcon() {
 export default function DemoBlock({
   description,
   source,
+  lang = "vue",
   children,
 }: DemoBlockProps) {
+  const t = useDocsMessages();
   const [expanded, setExpanded] = useState(false);
   const [tokens, setTokens] = useState<HighlightToken[][] | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -66,7 +72,7 @@ export default function DemoBlock({
     highlightStarted.current = true;
 
     void import("./highlight")
-      .then(({ highlightVue }) => highlightVue(source))
+      .then(({ highlight }) => highlight(source, lang))
       .then(setTokens)
       .catch(() => {
         highlightStarted.current = false;
@@ -75,15 +81,15 @@ export default function DemoBlock({
 
   const handleCopy = async () => {
     if (!navigator.clipboard) {
-      message.error("当前浏览器不支持自动复制！");
+      message.error(t.copyUnsupported);
       return;
     }
 
     try {
       await navigator.clipboard.writeText(source);
-      message.success("已复制！");
+      message.success(t.copied);
     } catch (error) {
-      message.error(error instanceof Error ? error.message : "复制失败");
+      message.error(error instanceof Error ? error.message : t.copyFailed);
     }
   };
 
@@ -97,7 +103,7 @@ export default function DemoBlock({
       ?.focus();
   };
 
-  const sourceLabel = expanded ? "隐藏源代码" : "查看源代码";
+  const sourceLabel = expanded ? t.hideSource : t.viewSource;
 
   return (
     <div className="docs-example" ref={rootRef}>
@@ -110,7 +116,7 @@ export default function DemoBlock({
 
       <div className="docs-example__op-btns">
         <ElTooltip
-          content="复制代码"
+          content={t.copyCode}
           showArrow={false}
           trigger={["hover", "focus"]}
           triggerKeys={[]}
@@ -118,7 +124,7 @@ export default function DemoBlock({
           <button
             type="button"
             className="docs-example__op-btn"
-            aria-label="复制代码"
+            aria-label={t.copyCode}
             onClick={handleCopy}
           >
             <FileCopyIcon />
@@ -192,7 +198,7 @@ export default function DemoBlock({
           }}
         >
           <CaretTop width={16} height={16} aria-hidden="true" />
-          <span>隐藏源代码</span>
+          <span>{t.hideSource}</span>
         </div>
       )}
     </div>
