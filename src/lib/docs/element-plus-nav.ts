@@ -27,7 +27,8 @@ export function getElementPlusSectionNav(locale: DocLocale): DocsNavGroup[] {
           undefined;
 
       return {
-        title: item.title,
+        // 中文站用官方「英文 + 中文」标题，英文站只保留英文
+        title: locale === "zh-CN" ? (item.titleZh ?? item.title) : item.title,
         href: migrated
           ? `/docs/${locale}/element-plus/${COMPONENT_SLUG}/${item.slug}`
           : `/docs/element-plus/${COMPONENT_SLUG}/${item.slug}`,

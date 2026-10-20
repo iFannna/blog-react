@@ -16,6 +16,11 @@ function getGroupTitle(title: string, locale: DocLocale): string {
   return locale === "zh-CN" ? title : title.split(" ")[0];
 }
 
+/** 中文页面用官方「英文 + 中文」标题，英文页面只保留英文 */
+function getItemTitle(item: DocNavItem, locale: DocLocale): string {
+  return locale === "zh-CN" ? (item.titleZh ?? item.title) : item.title;
+}
+
 export function OverviewContent({ locale }: { locale: DocLocale }) {
   const [query, setQuery] = useState("");
   const searchRef = useRef<HTMLInputElement>(null);
@@ -34,11 +39,16 @@ export function OverviewContent({ locale }: { locale: DocLocale }) {
         return {
           title,
           items: keyword
-            ? group.items.filter(
-                (item) =>
+            ? group.items.filter((item) => {
+                const haystack = [item.title, item.titleZh]
+                  .filter(Boolean)
+                  .join(" ")
+                  .toLowerCase();
+                return (
                   title.toLowerCase().includes(keyword) ||
-                  item.title.toLowerCase().includes(keyword),
-              )
+                  haystack.includes(keyword)
+                );
+              })
             : group.items,
         };
       })
@@ -94,7 +104,9 @@ function OverviewCard({
 
   const content = (
     <>
-      <span className="docs-overview-card-title">{item.title}</span>
+      <span className="docs-overview-card-title">
+        {getItemTitle(item, locale)}
+      </span>
       <span className="docs-overview-card-icon" aria-hidden="true">
         {Icon ? (
           <Icon />

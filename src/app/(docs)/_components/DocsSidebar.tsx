@@ -183,6 +183,8 @@ export default function DocsSidebar({
                 const href = item.href ?? `${basePath}/${item.slug}`;
                 const key = href ?? item.title;
                 const isActive = pathname === href;
+                // 旧版路由没有 locale，直接取导航中文标题；新版已在上层按 locale 解析
+                const title = item.titleZh ?? item.title;
 
                 const classes = [
                   "docs-sidebar-link",
@@ -196,14 +198,14 @@ export default function DocsSidebar({
                 if (!item.done) {
                   return (
                     <span className={classes} key={key}>
-                      {item.title}
+                      {title}
                     </span>
                   );
                 }
 
                 return (
                   <Link className={classes} href={href} key={key}>
-                    {item.title}
+                    {title}
                   </Link>
                 );
               })}
