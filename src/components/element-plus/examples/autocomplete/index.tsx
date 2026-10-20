@@ -25,7 +25,7 @@ const demoBlock = {
 } as const;
 
 const demoTitle = {
-  fontSize: "1.4rem",
+  fontSize: "0.875rem",
   color: "var(--el-text-color-secondary)",
   minHeight: "2.5em",
   display: "flex",

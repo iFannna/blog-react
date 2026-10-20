@@ -20,7 +20,7 @@ function Footer({
   confirmText?: string;
 }) {
   return (
-    <div style={{ display: "flex", justifyContent: "flex-end", gap: "1.2rem" }}>
+    <div style={{ display: "flex", justifyContent: "flex-end", gap: "0.75rem" }}>
       <ElButton onClick={cancel}>Cancel</ElButton>
       <ElButton type="primary" onClick={confirm}>
         {confirmText}
@@ -102,15 +102,15 @@ export function DialogCustomizationContent() {
           />
         }
       >
-        <div style={{ display: "grid", gap: "1.4rem" }}>
-          <label style={{ display: "flex", alignItems: "center", gap: "1.2rem" }}>
+        <div style={{ display: "grid", gap: "0.875rem" }}>
+          <label style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
             <span style={{ width: 140 }}>Promotion name</span>
             <ElInput
               value={form.name}
               onChange={(value) => setForm((current) => ({ ...current, name: value }))}
             />
           </label>
-          <label style={{ display: "flex", alignItems: "center", gap: "1.2rem" }}>
+          <label style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
             <span style={{ width: 140 }}>Zones</span>
             <ElSelect
               value={form.region}

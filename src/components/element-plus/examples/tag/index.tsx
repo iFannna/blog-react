@@ -9,13 +9,13 @@ import { ElInput, type InputExpose } from "@/components/element-plus/input";
 const row = {
   display: "flex",
   flexWrap: "wrap",
-  gap: "0.8rem",
+  gap: "0.5rem",
 } as const;
 
 const column = {
   display: "flex",
   flexDirection: "column",
-  gap: "1.6rem",
+  gap: "1rem",
 } as const;
 
 export function TagBasic() {
@@ -77,7 +77,7 @@ export function TagClosableDynamic() {
           ref={inputRef}
           value={inputValue}
           size="small"
-          style={{ width: "10rem" }}
+          style={{ width: "6.25rem" }}
           onChange={(value) => setInputValue(value)}
           onKeyDown={(event) => {
             if (event.key === "Enter") handleConfirm();

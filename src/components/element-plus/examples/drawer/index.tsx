@@ -160,15 +160,15 @@ export function DrawerCustomizationContent() {
             .catch(() => {});
         }}
       >
-        <div style={{ display: "grid", gap: "1.4rem" }}>
-          <label style={{ display: "flex", alignItems: "center", gap: "0.8rem" }}>
+        <div style={{ display: "grid", gap: "0.875rem" }}>
+          <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
             <span style={{ width: 80 }}>Name</span>
             <ElInput
               value={form.name}
               onChange={(value) => setForm((current) => ({ ...current, name: value }))}
             />
           </label>
-          <label style={{ display: "flex", alignItems: "center", gap: "0.8rem" }}>
+          <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
             <span style={{ width: 80 }}>Area</span>
             <ElSelect
               value={form.region}
@@ -184,7 +184,7 @@ export function DrawerCustomizationContent() {
             />
           </label>
         </div>
-        <div style={{ marginTop: "2rem", display: "flex", gap: "1.2rem" }}>
+        <div style={{ marginTop: "1.25rem", display: "flex", gap: "0.75rem" }}>
           <ElButton
             onClick={() => {
               setLoading(false);
@@ -316,7 +316,7 @@ export function DrawerModal() {
         modal={false}
         modalPenetrable
         footer={
-          <div style={{ display: "flex", justifyContent: "flex-end", gap: "1.2rem" }}>
+          <div style={{ display: "flex", justifyContent: "flex-end", gap: "0.75rem" }}>
             <ElButton onClick={() => setVisible(false)}>Cancel</ElButton>
             <ElButton type="primary" onClick={() => setVisible(false)}>
               Confirm

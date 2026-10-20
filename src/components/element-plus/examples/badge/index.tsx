@@ -9,13 +9,13 @@ import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { CaretBottom, Message, Share } from "@/components/element-plus/icons";
 
 const item = {
-  marginTop: "1rem",
-  marginRight: "3rem",
+  marginTop: "0.625rem",
+  marginRight: "1.875rem",
 } as const;
 
 const itemWide = {
-  marginTop: "1rem",
-  marginRight: "4rem",
+  marginTop: "0.625rem",
+  marginRight: "2.5rem",
 } as const;
 
 const dropdownLink = {
@@ -25,18 +25,18 @@ const dropdownLink = {
 } as const;
 
 const mark = {
-  marginLeft: "0.8rem",
+  marginLeft: "0.5rem",
 } as const;
 
 const dropdown = {
-  marginTop: "1.76rem",
+  marginTop: "1.1rem",
 } as const;
 
 const customContent = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  gap: "0.4rem",
+  gap: "0.25rem",
 } as const;
 
 export function BadgeBasic() {

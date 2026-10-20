@@ -51,7 +51,7 @@ const stack: CSSProperties = {
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
-  gap: "1.6rem",
+  gap: "1rem",
 };
 
 export function SegmentedBasic() {
@@ -108,8 +108,8 @@ export function SegmentedCustomDirection() {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: "0.8rem",
-                padding: direction === "horizontal" ? "0.8rem" : undefined,
+                gap: "0.5rem",
+                padding: direction === "horizontal" ? "0.5rem" : undefined,
               }}
             >
               <ElIcon size={20}>
@@ -189,8 +189,8 @@ export function SegmentedCustomContent() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: "0.8rem",
-              padding: "0.8rem",
+              gap: "0.5rem",
+              padding: "0.5rem",
             }}
           >
             <ElIcon size={20}>

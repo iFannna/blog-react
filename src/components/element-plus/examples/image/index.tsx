@@ -62,7 +62,7 @@ const SRC_LIST = [
 const PREVIEW_URL = SRC_LIST[0];
 
 const EQUAL_BLOCK_STYLE: CSSProperties = {
-  padding: "3rem 0",
+  padding: "1.875rem 0",
   textAlign: "center",
   borderRight: "solid 1px var(--el-border-color)",
   display: "inline-block",

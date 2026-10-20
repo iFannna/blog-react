@@ -20,7 +20,7 @@ const treeWidth: CSSProperties = { maxWidth: "600px" };
 const stackStyle: CSSProperties = {
   display: "flex",
   flexDirection: "column",
-  gap: "0.8rem",
+  gap: "0.5rem",
 };
 
 interface DemoTree {

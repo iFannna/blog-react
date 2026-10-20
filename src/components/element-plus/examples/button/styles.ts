@@ -1,6 +1,6 @@
 /*
  * 官方 button 示例里 .button-example / .button-row 与 unocss 工具类的等价物。
- * 官方 docs 根字号 16px，本地 1rem = 10px，间距按 ×1.6 换算。
+ * 官方 docs 根字号 16px，本地同为 16px，数值与官方一致。
  */
 
 import styles from "./button.module.css";

@@ -14,7 +14,7 @@ import "./_components/docs.css";
  *
  * 与博客共用同一个 Next app，但两条路由各自带根布局，互不引入对方的全局样式：
  * 这里只加载 Element Plus 的 theme-chalk 产物与 docs.css，
- * 因此博客 globals.css 的元素 reset、body 字体字号、1rem=10px 基准都不会命中文档页。
+ * 因此博客 globals.css 的元素 reset、body 字体字号、1rem=16px 基准都不会命中文档页。
  *
  * 根部套一层 ConfigProvider 下发中文语言包，否则分页 / 表格空数据 / MessageBox
  * 等内置文案会回落到官方默认的英文。

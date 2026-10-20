@@ -36,7 +36,7 @@ const SOURCES = {
 
 <ElLink type="primary" href="#">
   右侧图标
-  <ElIcon style={{ marginLeft: "0.4rem" }}><Edit /></ElIcon>
+  <ElIcon style={{ marginLeft: "0.25rem" }}><Edit /></ElIcon>
 </ElLink>`,
 };
 

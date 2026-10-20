@@ -3,13 +3,13 @@
 .stack {
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 1rem;
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.6rem;
+  gap: 1rem;
   align-items: center;
 }
 
@@ -26,7 +26,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 1.6rem;
+  margin-bottom: 1rem;
 }
 
 .flexRowLast {
@@ -36,14 +36,14 @@
 }
 
 .mb16 {
-  margin-bottom: 1.6rem;
+  margin-bottom: 1rem;
 }
 
 /* 官方 demo 的段落是 0 0 16px（首段无上外边距） */
 .demoP {
-  margin: 0 0 1.6rem;
+  margin: 0 0 1rem;
 }
 
 .mb8 {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
 }

@@ -16,7 +16,7 @@
 }
 
 /*
- * 文档站自有根字号：本文件所有 rem 均按 1rem = 10px 标定（数值与官方 px 一一对应）。
+ * 文档站自有根字号：本文件所有 rem 均按 1rem = 16px 标定（数值与官方 px 一一对应）。
  * 文档站有独立根布局，不再继承博客 globals.css，故基准字号与元素 reset 在这里自行声明。
  */
 html {
@@ -27,7 +27,7 @@ html {
   --docs-font-mono: "JetBrains Mono", source-code-pro, Menlo, Monaco, Consolas,
     "Courier New", monospace;
 
-  font-size: 62.5%;
+  font-size: 100%;
   line-height: 1.4;
   font-family: var(--docs-font);
   font-weight: 400;
@@ -65,9 +65,9 @@ textarea {
 
 body {
   margin: 0;
-  min-width: 32rem;
+  min-width: 20rem;
   min-height: 100vh;
-  font-size: 1.6rem;
+  font-size: 1rem;
   line-height: 1.4;
   color: var(--el-text-color-primary);
   background-color: var(--el-bg-color);
@@ -109,10 +109,10 @@ html.dark ::-webkit-scrollbar-thumb:hover {
 
 .docs-shell {
   /* 官方 --vp-sidebar-width-small：1440–1679px 为 234px，再加 32px 内边距 */
-  --docs-sidebar-w: 26.6rem;
+  --docs-sidebar-w: 16.625rem;
   /* 官方 toc-wrapper：64 + 200 + 32（≥1680 时右侧 48） */
-  --docs-aside-w: 29.6rem;
-  --docs-header-h: 5.5rem;
+  --docs-aside-w: 18.5rem;
+  --docs-header-h: 3.4375rem;
 
   --docs-sidebar-link-color: #606266;
   --docs-sidebar-link-active: #409eff;
@@ -175,7 +175,7 @@ html.dark .docs-shell {
 .docs-header__wrapper {
   height: var(--docs-header-h);
   /* 官方 .navbar-wrapper：24px → 32px（≥768）→ 48px（≥1680） */
-  padding: 0 2.4rem;
+  padding: 0 1.5rem;
   border-bottom: 1px solid var(--docs-example-border);
   background-color: var(--docs-header-bg);
   backdrop-filter: saturate(0.5) blur(4px);
@@ -197,8 +197,8 @@ html.dark .docs-shell {
 
 .docs-header__logo a {
   display: block;
-  width: 12.8rem;
-  height: 2.8rem;
+  width: 8rem;
+  height: 1.75rem;
 }
 
 .docs-header__logo img {
@@ -221,8 +221,8 @@ html.dark .docs-shell {
 .docs-header__theme {
   display: flex;
   align-items: center;
-  height: 2.4rem;
-  margin-left: 1.2rem;
+  height: 1.5rem;
+  margin-left: 0.75rem;
 }
 
 /* Official theme switch: muted track (--bg-color-mute), muted border, 14px thumb */
@@ -233,8 +233,8 @@ html.dark .docs-shell {
 }
 
 .docs-header__theme .el-switch__core .el-switch__action {
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 0.875rem;
+  height: 0.875rem;
 }
 
 /* Official .dark-icon / .light-icon */
@@ -250,9 +250,9 @@ html.dark .docs-shell {
 
 .docs-header__link {
   display: block;
-  padding: 0 1.2rem;
+  padding: 0 0.75rem;
   border-bottom: 2px solid transparent;
-  font-size: 1.4rem;
+  font-size: 0.875rem;
   font-weight: 500;
   line-height: calc(var(--docs-header-h) - 2px);
   color: var(--docs-text);
@@ -289,7 +289,7 @@ html.dark .docs-shell {
 .docs-aside {
   flex: 0 0 var(--docs-aside-w);
   width: var(--docs-aside-w);
-  padding: calc(var(--docs-header-h) + 6.4rem) 3.2rem 0 6.4rem;
+  padding: calc(var(--docs-header-h) + 4rem) 2rem 0 4rem;
 }
 
 /* 标题锚点，对应官方 VitePress 的 .header-anchor
@@ -336,11 +336,11 @@ html.dark .docs-shell {
 
 .docs-toc {
   position: sticky;
-  top: 8.7rem;
-  width: 20rem;
-  height: calc(100vh - 8.7rem);
-  padding: 0 0.3rem 3rem;
-  margin-bottom: 3.2rem;
+  top: 5.4375rem;
+  width: 12.5rem;
+  height: calc(100vh - 5.4375rem);
+  padding: 0 0.1875rem 1.875rem;
+  margin-bottom: 2rem;
   overflow-y: auto;
   /* 官方 toc-content 用 scrollbar-width: none 隐藏原生滚动条 */
   scrollbar-width: none;
@@ -352,10 +352,10 @@ html.dark .docs-shell {
 
 .docs-toc__heading {
   margin: 0;
-  padding-left: 1.4rem;
-  font-size: 1.2rem;
+  padding-left: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  line-height: 3rem;
+  line-height: 1.875rem;
   color: var(--docs-text-secondary);
   text-transform: uppercase;
 }
@@ -371,10 +371,10 @@ html.dark .docs-shell {
 .docs-toc__marker {
   position: absolute;
   left: 0;
-  top: 0.8rem;
-  width: 0.4rem;
-  height: 1.4rem;
-  border-radius: 0.4rem;
+  top: 0.5rem;
+  width: 0.25rem;
+  height: 0.875rem;
+  border-radius: 0.25rem;
   background-color: var(--docs-sidebar-link-active);
   opacity: 0;
   transition: top 0.25s ease-in-out, opacity 0.25s;
@@ -382,15 +382,15 @@ html.dark .docs-shell {
 
 /* 对应官方 .el-anchor__list，左内边距 14px 形成缩进 */
 .docs-toc__list {
-  padding-left: 1.4rem;
+  padding-left: 0.875rem;
 }
 
 .docs-toc__link {
   display: block;
-  padding: 0.4rem 0;
-  font-size: 1.2rem;
+  padding: 0.25rem 0;
+  font-size: 0.75rem;
   font-weight: 500;
-  line-height: 2.2rem;
+  line-height: 1.375rem;
   color: var(--docs-toc-color);
   text-decoration: none;
   transition: color 0.3s;
@@ -399,7 +399,7 @@ html.dark .docs-shell {
 /* 三级标题再缩进一层，对应官方嵌套的 .el-anchor__list。
    用双类选择器提高特异性，避免与 .docs-toc__link 的 padding 简写顺序竞争 */
 .docs-toc__link.docs-toc__link--h3 {
-  padding-left: 1.4rem;
+  padding-left: 0.875rem;
 }
 
 .docs-toc__link:hover,
@@ -425,7 +425,7 @@ html.dark .docs-shell {
   width: var(--docs-sidebar-w);
   height: calc(100vh - var(--docs-header-h));
   /* 官方 .sidebar 四边内边距 48px（<1680 时左右 32px） */
-  padding: 4.8rem 3.2rem;
+  padding: 3rem 2rem;
   overflow: hidden;
 }
 
@@ -483,24 +483,24 @@ html.dark .docs-shell {
 }
 
 .docs-sidebar-group {
-  margin-bottom: 2.4rem;
+  margin-bottom: 1.5rem;
 }
 
 .docs-sidebar-group__title {
-  margin: 0 0 0.8rem;
-  font-size: 1.6rem;
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
   font-weight: 700;
-  line-height: 2.4rem;
+  line-height: 1.5rem;
   color: var(--docs-group-title-color);
 }
 
 .docs-sidebar-link {
   display: block;
-  padding: 1rem 1.6rem;
-  border-radius: 0.8rem;
-  font-size: 1.3rem;
+  padding: 0.625rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.8125rem;
   font-weight: 500;
-  line-height: 2rem;
+  line-height: 1.25rem;
   color: var(--docs-sidebar-link-color);
   text-decoration: none;
   transition: background-color 0.2s;
@@ -529,33 +529,33 @@ html.dark .docs-shell {
   /* 官方 .doc-content-wrapper：<768 为 32px 24px，≥768 为 48px 32px，
      ≥1440 为 64px 0 48px 64px。
      ≥960 时正文还要再让出 page-content 的 55px 顶部留白，标题才会落在官方位置 */
-  padding: 3.2rem 2.4rem;
+  padding: 2rem 1.5rem;
 }
 
 @media (width >= 768px) {
   .docs-content {
-    padding: 4.8rem 3.2rem;
+    padding: 3rem 2rem;
   }
 }
 
 @media (width >= 960px) {
   .docs-content {
-    padding-top: calc(var(--docs-header-h) + 4.8rem);
+    padding-top: calc(var(--docs-header-h) + 3rem);
   }
 }
 
 @media (width >= 1440px) {
   .docs-content {
-    padding: calc(var(--docs-header-h) + 6.4rem) 0 4.8rem 6.4rem;
+    padding: calc(var(--docs-header-h) + 4rem) 0 3rem 4rem;
   }
 }
 
 .docs-content h1 {
   display: flex;
   align-items: center;
-  margin: 0 0 3.2rem;
+  margin: 0 0 2rem;
   /* 官方基础 h1 为 1.9rem / ≥480px 为 2.2rem（按 16px 根字号即 30.4 / 35.2px） */
-  font-size: 3.04rem;
+  font-size: 1.9rem;
   font-weight: 600;
   line-height: 1.25;
   color: var(--docs-h2-color);
@@ -563,16 +563,16 @@ html.dark .docs-shell {
 
 @media (width >= 480px) {
   .docs-content h1 {
-    font-size: 3.52rem;
+    font-size: 2.2rem;
   }
 }
 
 .docs-content h2 {
   display: flex;
   align-items: center;
-  margin: 3.6rem 0 2rem;
-  padding-bottom: 0.48rem;
-  font-size: 2.64rem;
+  margin: 2.25rem 0 1.25rem;
+  padding-bottom: 0.3rem;
+  font-size: 1.65rem;
   font-weight: 600;
   line-height: 1.25;
   color: var(--docs-h2-color);
@@ -581,8 +581,8 @@ html.dark .docs-shell {
 .docs-content h3 {
   display: flex;
   align-items: center;
-  margin: 3.2rem 0 0;
-  font-size: 2.16rem;
+  margin: 2rem 0 0;
+  font-size: 1.35rem;
   font-weight: 600;
   line-height: 1.25;
   color: var(--docs-h2-color);
@@ -590,14 +590,14 @@ html.dark .docs-shell {
 
 /* API 分组标题紧跟 h2 时，官方把间距收紧到 24px */
 .docs-content h2 + h3 {
-  margin-top: 2.4rem;
+  margin-top: 1.5rem;
 }
 
 .docs-content h4 {
   display: flex;
   align-items: center;
   margin: 0;
-  font-size: 1.84rem;
+  font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.25;
   color: var(--docs-h2-color);
@@ -608,7 +608,7 @@ html.dark .docs-shell {
   display: flex;
   align-items: center;
   margin: 0;
-  font-size: 1.6rem;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.25;
   color: var(--docs-h2-color);
@@ -617,7 +617,7 @@ html.dark .docs-shell {
 /* Same zero-specificity rule as the official bare `p`/`a` selectors, so
    component styles such as `.el-link` or `.el-message__content` win. */
 :where(.docs-content) :where(p) {
-  margin: 1.6rem 0;
+  margin: 1rem 0;
   line-height: 1.7;
 }
 
@@ -636,7 +636,7 @@ html.dark .docs-shell {
    `.el-menu { margin: 0; padding-left: 0 }` win. Keep our selectors zero-specificity
    while staying scoped to docs pages; indent comes from the UA default (40px). */
 :where(.docs-content) :where(ul, ol) {
-  margin: 1.6rem 0;
+  margin: 1rem 0;
   line-height: 1.7;
 }
 
@@ -652,18 +652,18 @@ html.dark .docs-shell {
 /* Inline code — official: bg #f5f7fa, padding 2.4px 8px, radius 4px */
 
 .docs-content :not(pre) > code {
-  padding: 0.24rem 0.8rem;
-  border-radius: 0.4rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.25rem;
   background-color: var(--docs-code-inline-bg);
   font-family: var(--docs-font-mono);
-  font-size: 1.4rem;
+  font-size: 0.875rem;
   color: var(--docs-text);
 }
 
 /* API type badges: enum carries a detail button, primitives are plain code */
 
 .docs-content .api-typing {
-  margin-right: 0.4rem;
+  margin-right: 0.25rem;
 }
 
 .docs-api-typing {
@@ -673,35 +673,35 @@ html.dark .docs-shell {
 
 /* Element Plus docs stylesheet adds this spacing; theme-chalk does not. */
 :where(.docs-content) .el-radio-group {
-  margin-right: 1.2rem;
+  margin-right: 0.75rem;
 }
 
 /* Official trigger is `<el-button text>` plus UnoCSS p-2 text-4 (8px / 16px). */
 .docs-api-typing__trigger {
-  padding: 0.8rem;
-  font-size: 1.6rem;
+  padding: 0.5rem;
+  font-size: 1rem;
 }
 
 /* Official tooltip content: `<div class="m-1" style="max-width: 600px"><code>` */
 .docs-api-typing__details {
-  max-width: 60rem;
-  margin: 0.4rem;
+  max-width: 37.5rem;
+  margin: 0.25rem;
 }
 
 .docs-api-typing__details code {
-  padding: 0.24rem 0.8rem;
-  border-radius: 0.4rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.25rem;
   background-color: var(--docs-api-typing-bg);
   color: var(--docs-api-typing-color);
   font-family: var(--docs-font-mono);
-  font-size: 1.4rem;
-  line-height: 2rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 /* Markdown tables mirror official .vp-table > table. Never target bare
    `.docs-content table`: it would also hit ElTable / calendar internals. */
 .docs-table {
-  margin: 0 0 4.5rem;
+  margin: 0 0 2.8125rem;
   overflow: auto hidden;
 }
 
@@ -710,14 +710,14 @@ html.dark .docs-shell {
   margin: 0;
   border-collapse: collapse;
   background-color: var(--el-bg-color);
-  font-size: 1.4rem;
+  font-size: 0.875rem;
   line-height: 1.5;
 }
 
 .docs-table > table th,
 .docs-table > table td {
-  max-width: 25rem;
-  padding: 0.84rem 1.4rem;
+  max-width: 15.625rem;
+  padding: 0.525rem 0.875rem;
   border-bottom: 1px solid var(--docs-example-border);
   line-height: 1.5;
   white-space: pre-wrap;
@@ -745,17 +745,17 @@ html.dark .docs-shell {
 
 .docs-example {
   border: 1px solid var(--docs-example-border);
-  border-radius: 0.4rem;
+  border-radius: 0.25rem;
 }
 
 .docs-example + .docs-example {
-  margin-top: 2rem;
+  margin-top: 1.25rem;
 }
 
 /* Official vp-demo description sits above the bordered example: text-sm with my-4 */
 .docs-example__desc {
-  margin: 1.6rem 0;
-  font-size: 1.4rem;
+  margin: 1rem 0;
+  font-size: 0.875rem;
   line-height: 1.7;
   color: var(--docs-text);
 }
@@ -768,8 +768,8 @@ html.dark .docs-shell {
 
 .docs-example__showcase {
   margin: 0.5px;
-  padding: 2.4rem;
-  border-radius: 0.4rem;
+  padding: 1.5rem;
+  border-radius: 0.25rem;
   background-color: var(--docs-example-bg);
 }
 
@@ -784,15 +784,15 @@ html.dark .docs-shell {
   align-items: center;
   justify-content: flex-end;
   box-sizing: border-box;
-  height: 4rem;
-  padding: 0.8rem;
+  height: 2.5rem;
+  padding: 0.5rem;
 }
 
 .docs-example__op-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin: 0 0.8rem;
+  margin: 0 0.5rem;
   padding: 0;
   border: 0;
   background: none;
@@ -816,7 +816,7 @@ html.dark .docs-shell {
 .docs-example__source {
   display: grid;
   grid-template-rows: 0fr;
-  border-radius: 0 0 0.4rem 0.4rem;
+  border-radius: 0 0 0.25rem 0.25rem;
   background-color: var(--docs-source-bg);
   transition: grid-template-rows 0.3s ease;
 }
@@ -832,10 +832,10 @@ html.dark .docs-shell {
 
 .docs-example__pre {
   margin: 0;
-  padding: 2rem 2.4rem;
+  padding: 1.25rem 1.5rem;
   overflow-x: auto;
   font-family: var(--docs-font-mono);
-  font-size: 1.4rem;
+  font-size: 0.875rem;
   line-height: 1.6;
 }
 
@@ -861,12 +861,12 @@ html.dark .docs-shell {
 .docs-example__fold-btn {
   position: absolute;
   top: 50%;
-  left: -2rem;
+  left: -1.25rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 1rem;
+  height: 1rem;
   padding: 0;
   border: none;
   background: transparent;
@@ -904,10 +904,10 @@ html.dark .docs-shell {
 
 .docs-example__fold-placeholder {
   display: inline-block;
-  margin-left: 0.6rem;
-  padding: 0 0.6rem;
+  margin-left: 0.375rem;
+  padding: 0 0.375rem;
   border: none;
-  border-radius: 0.4rem;
+  border-radius: 0.25rem;
   background-color: var(--el-fill-color);
   color: var(--el-text-color-secondary);
   font: inherit;
@@ -947,19 +947,19 @@ html.dark .docs-shell {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  height: 4.4rem;
+  height: 2.75rem;
   margin-top: -1px;
   border-top: 1px solid var(--docs-example-border);
-  border-radius: 0 0 0.4rem 0.4rem;
+  border-radius: 0 0 0.25rem 0.25rem;
   background-color: var(--docs-example-bg);
   color: var(--docs-source-control-color);
   cursor: pointer;
-  font-size: 1.4rem;
+  font-size: 0.875rem;
   animation: docs-example-fade-in 0.3s;
 }
 
 .docs-example__float-control span {
-  margin-left: 1rem;
+  margin-left: 0.625rem;
 }
 
 .docs-example__float-control:hover {
@@ -979,11 +979,11 @@ html.dark .docs-shell {
 /* Callout blocks: tip / warning / danger, matching official custom-block */
 
 .docs-callout {
-  margin: 2rem 0;
-  padding: 0.8rem 1.6rem;
-  border-left: 0.5rem solid transparent;
-  border-radius: 0.4rem;
-  font-size: 1.6rem;
+  margin: 1.25rem 0;
+  padding: 0.5rem 1rem;
+  border-left: 0.3125rem solid transparent;
+  border-radius: 0.25rem;
+  font-size: 1rem;
 }
 
 .docs-callout--tip {
@@ -1002,8 +1002,8 @@ html.dark .docs-shell {
 }
 
 .docs-callout p {
-  margin: 1.6rem 0;
-  font-size: 1.44rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
   line-height: 1.7;
 }
 
@@ -1016,7 +1016,7 @@ html.dark .docs-shell {
 }
 
 .docs-content details summary {
-  font-size: 1.8rem;
+  font-size: 1.125rem;
   font-weight: 600;
 }
 
@@ -1036,12 +1036,12 @@ html.dark .docs-shell {
 .docs-version-tag {
   display: inline-block;
   box-sizing: border-box;
-  margin-left: 0.4rem;
-  padding: 0 0.7rem;
+  margin-left: 0.25rem;
+  padding: 0 0.4375rem;
   border: 1px solid var(--docs-sidebar-link-active);
-  border-radius: 1rem;
-  font-size: 1.2rem;
-  line-height: 1.8rem;
+  border-radius: 0.625rem;
+  font-size: 0.75rem;
+  line-height: 1.125rem;
   color: var(--docs-sidebar-link-active);
 }
 
@@ -1082,9 +1082,9 @@ html.dark .docs-version-tag--a11y {
   z-index: 10;
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  padding: 0.8rem 1.2rem;
-  border-radius: 0.4rem;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
   background-color: var(--el-fill-color-blank);
   box-shadow: 0 0 0 1px var(--el-input-border-color) inset;
   transition: var(--el-transition-box-shadow);
@@ -1100,8 +1100,8 @@ html.dark .docs-version-tag--a11y {
 
 .docs-overview-search-icon {
   flex: none;
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 0.875rem;
+  height: 0.875rem;
   color: var(--docs-text-secondary);
 }
 
@@ -1114,8 +1114,8 @@ html.dark .docs-version-tag--a11y {
   background: transparent;
   color: var(--docs-text);
   font-family: inherit;
-  font-size: 1.4rem;
-  line-height: 2.4rem;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
 }
 
 .docs-overview-search-input::placeholder {
@@ -1123,20 +1123,20 @@ html.dark .docs-version-tag--a11y {
 }
 
 .docs-overview-group {
-  margin-top: 3.2rem;
+  margin-top: 2rem;
 }
 
 .docs-overview-group-head {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.5rem;
 }
 
 .docs-overview-group-head h2 {
   margin: 0;
   padding-bottom: 0;
   border-bottom: 0;
-  font-size: 2rem;
+  font-size: 1.25rem;
   line-height: 1.4;
   color: var(--docs-text);
 }
@@ -1145,21 +1145,21 @@ html.dark .docs-version-tag--a11y {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 2rem;
-  height: 2rem;
-  padding: 0 0.6rem;
-  border-radius: 1rem;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.375rem;
+  border-radius: 0.625rem;
   background-color: var(--docs-sidebar-link-active);
   color: var(--docs-on-primary);
-  font-size: 1.2rem;
+  font-size: 0.75rem;
   line-height: 1;
 }
 
 .docs-overview-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(28rem, 100%), 1fr));
-  gap: 1.6rem;
-  margin-top: 1.6rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(17.5rem, 100%), 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 .docs-overview-card {
@@ -1171,7 +1171,7 @@ html.dark .docs-version-tag--a11y {
   flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--docs-example-border);
-  border-radius: 0.4rem;
+  border-radius: 0.25rem;
   background-color: var(--docs-example-bg);
   color: var(--docs-text);
   text-decoration: none;
@@ -1191,12 +1191,12 @@ html.dark .docs-version-tag--a11y {
 
 .docs-overview-card-title {
   overflow: hidden;
-  padding: 0.8rem 1.2rem;
+  padding: 0.5rem 0.75rem;
   border-bottom: 1px solid var(--docs-example-border);
   color: var(--docs-text-secondary);
-  font-size: 1.4rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  line-height: 2.4rem;
+  line-height: 1.5rem;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -1216,7 +1216,7 @@ html.dark .docs-version-tag--a11y {
 
 .docs-overview-card-todo {
   color: var(--docs-toc-color);
-  font-size: 1.4rem;
+  font-size: 0.875rem;
 }
 
 .docs-overview-card.is-todo {
@@ -1225,7 +1225,7 @@ html.dark .docs-version-tag--a11y {
 }
 
 .docs-overview-empty {
-  padding: 4.8rem 2.4rem;
+  padding: 3rem 1.5rem;
   text-align: center;
   color: var(--docs-text-secondary);
 }
@@ -1233,9 +1233,9 @@ html.dark .docs-version-tag--a11y {
 /* Placeholder for components that are planned but not yet built */
 
 .docs-placeholder {
-  padding: 4.8rem 2.4rem;
+  padding: 3rem 1.5rem;
   border: 1px dashed var(--docs-example-border);
-  border-radius: 0.4rem;
+  border-radius: 0.25rem;
   text-align: center;
   color: var(--docs-text-secondary);
 }
@@ -1253,9 +1253,9 @@ html.dark .docs-version-tag--a11y {
 }
 
 .docs-custom-loading__circular {
-  width: 1.8rem;
-  height: 1.8rem;
-  margin-right: 0.6rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-right: 0.375rem;
   animation: docs-loading-rotate 2s linear infinite;
 }
 
@@ -1293,7 +1293,7 @@ html.dark .docs-version-tag--a11y {
 
 @media (width >= 768px) {
   .docs-header__wrapper {
-    padding: 0 3.2rem;
+    padding: 0 2rem;
   }
 }
 
@@ -1314,20 +1314,20 @@ html.dark .docs-version-tag--a11y {
 /* 官方 ≥1680：侧边栏 290 + 48，目录右侧 48，顶栏 48 */
 @media (width >= 1680px) {
   .docs-shell {
-    --docs-sidebar-w: 33.8rem;
-    --docs-aside-w: 31.2rem;
+    --docs-sidebar-w: 21.125rem;
+    --docs-aside-w: 19.5rem;
   }
 
   .docs-sidebar {
-    padding: 4.8rem;
+    padding: 3rem;
   }
 
   .docs-aside {
-    padding-right: 4.8rem;
+    padding-right: 3rem;
   }
 
   .docs-header__wrapper {
-    padding: 0 4.8rem;
+    padding: 0 3rem;
   }
 }
 
@@ -1340,7 +1340,7 @@ html.dark .docs-version-tag--a11y {
   width: auto;
   margin: 0;
   border-collapse: separate;
-  font-size: 1.6rem;
+  font-size: 1rem;
 }
 
 .docs-content table.demo-border th,
@@ -1369,21 +1369,21 @@ html.dark .docs-version-tag--a11y {
 }
 
 .demo-radius .title {
-  margin: 1rem 0;
-  font-size: 1.8rem;
+  margin: 0.625rem 0;
+  font-size: 1.125rem;
   color: var(--el-text-color-regular);
 }
 
 .demo-radius .value {
-  margin: 1rem 0;
-  font-size: 1.6rem;
+  margin: 0.625rem 0;
+  font-size: 1rem;
   color: var(--el-text-color-primary);
 }
 
 .demo-radius .radius {
   width: 70%;
-  height: 4rem;
-  margin-top: 2rem;
+  height: 2.5rem;
+  margin-top: 1.25rem;
   border: 1px solid var(--el-border-color);
   border-radius: 0;
 }
@@ -1408,21 +1408,21 @@ html.dark .docs-version-tag--a11y {
   justify-content: space-between;
 }
 
-/* 官方 w="46" 即 11.5rem，在官方 16px 基准下为 184px，本项目 1rem=10px 故为 18.4rem */
+/* 官方 w="46" 即 11.5rem（16px 基准下为 184px） */
 .demo-shadow__item {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 18.4rem;
+  width: 11.5rem;
   margin: auto;
 }
 
-/* 官方 w="30" h="30" 即 7.5rem，在官方 16px 基准下为 120px，本项目换算为 12rem */
+/* 官方 w="30" h="30" 即 7.5rem（16px 基准下为 120px） */
 .demo-shadow__box {
-  width: 12rem;
-  height: 12rem;
-  margin: 0.8rem;
+  width: 7.5rem;
+  height: 7.5rem;
+  margin: 0.5rem;
   box-shadow: var(--el-box-shadow);
 }
 
@@ -1438,16 +1438,16 @@ html.dark .docs-version-tag--a11y {
   box-shadow: var(--el-box-shadow-dark);
 }
 
-/* 官方 p="y-4" 即上下各 1.6rem */
+/* 官方 p="y-4" 即上下各 1rem */
 .demo-shadow-text {
-  padding: 1.6rem 0;
-  font-size: 1.4rem;
-  line-height: 2rem;
+  padding: 1rem 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 /* 官方 text="xs" 把变量名缩到 12px；选择器需压过 .docs-content :not(pre) > code 的 14px */
 .docs-content :not(pre) > code.demo-shadow__var {
-  font-size: 1.2rem;
+  font-size: 0.75rem;
 }
 
 /* Color page palettes (docs/en-US/component/color.md + globals/{main,secondary,neutral}-color.vue) */
@@ -1457,19 +1457,19 @@ html.dark .docs-version-tag--a11y {
 .demo-color-box {
   position: relative;
   box-sizing: border-box;
-  height: 11.2rem;
-  padding: 2rem;
-  margin: 0.8rem 0;
+  height: 7rem;
+  padding: 1.25rem;
+  margin: 0.5rem 0;
   border-radius: var(--el-border-radius-base);
   color: var(--el-color-white);
-  font-size: 1.4rem;
+  font-size: 0.875rem;
 }
 
 /* Official value line uses UnoCSS `text="xs"` = 12px font / 16px line-height. */
 .demo-color-box .value {
   margin-top: 2px;
-  font-size: 1.2rem;
-  line-height: 1.6rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .demo-color-box .bg-color-sub {
@@ -1477,7 +1477,7 @@ html.dark .docs-version-tag--a11y {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 4rem;
+  height: 2.5rem;
 }
 
 /* Six levels fill the strip edge to edge; the official writes `100 / 6` inline. */
@@ -1662,7 +1662,7 @@ html.dark .demo-color-box.bg-transparent {
   width: auto;
   margin: 0;
   border-collapse: separate;
-  font-size: 1.6rem;
+  font-size: 1rem;
   /* 官方表格继承 body 的 1.4 行高，正文默认的 1.6 会让行高变大 */
   line-height: 1.4;
 }
@@ -1694,7 +1694,7 @@ html.dark .demo-color-box.bg-transparent {
    本页示例区没有字号规则，需显式写回才能与官方逐像素对齐 */
 .demo-term-box,
 .demo-typo-lineheight {
-  font-size: 1.6rem;
+  font-size: 1rem;
   line-height: 1.4;
 }
 
@@ -1706,7 +1706,7 @@ html.dark .demo-color-box.bg-transparent {
 /* 官方行高列表吃的是浏览器默认的 ul 缩进 40px 且 li 无外边距，
    这里用 .docs-content 前缀盖过正文列表规则，才能与官方逐像素对齐 */
 .docs-content .lineH-right {
-  padding-left: 4rem;
+  padding-left: 2.5rem;
 }
 
 .docs-content .lineH-right li {
@@ -1733,10 +1733,10 @@ html.dark .lineH-left.is-dark {
 
 .docs-header__logo a.docs-header__logo-text {
   width: auto;
-  padding-right: 0.8rem;
-  font-size: 1.8rem;
+  padding-right: 0.5rem;
+  font-size: 1.125rem;
   font-weight: 600;
-  line-height: 2.8rem;
+  line-height: 1.75rem;
   color: var(--docs-text);
   text-decoration: none;
   white-space: nowrap;
@@ -1746,8 +1746,8 @@ html.dark .lineH-left.is-dark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 2.4rem;
-  margin-left: 1.2rem;
+  height: 1.5rem;
+  margin-left: 0.75rem;
   padding: 0;
   border: 0;
   background: none;
@@ -1767,28 +1767,28 @@ html.dark .lineH-left.is-dark {
 }
 
 .docs-header__locale-toggle svg {
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .docs-code-block {
-  margin: 1.6rem 0;
-  padding: 2rem 0;
+  margin: 1rem 0;
+  padding: 1.25rem 0;
   overflow-x: auto;
-  border-radius: 0.8rem;
+  border-radius: 0.5rem;
   background-color: var(--docs-code-block-bg);
   font-family: var(--docs-font-mono);
-  font-size: 1.6rem;
-  line-height: 2.24rem;
+  font-size: 1rem;
+  line-height: 1.4rem;
 }
 
 .docs-code-block code {
   display: block;
-  padding: 0 2.4rem;
+  padding: 0 1.5rem;
   background: none;
   color: var(--docs-code-block-color);
   font-family: inherit;
-  font-size: 1.4rem;
+  font-size: 0.875rem;
 }
 
 .docs-code-block span {
@@ -1805,21 +1805,21 @@ html.dark .docs-code-block span {
 }
 
 .docs-callout__title {
-  margin: 0 0 1.6rem;
+  margin: 0 0 1rem;
   font-weight: 700;
 }
 
 .docs-callout__title p {
   margin: 0;
-  font-size: 1.6rem;
+  font-size: 1rem;
 }
 
 /* 官方 vp-page-nav：单行「箭头 + 标题」，左右各占 50% */
 .docs-pager {
   display: flex;
   justify-content: space-between;
-  margin-top: 4.8rem;
-  padding-top: 2.4rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--docs-example-border);
 }
 
@@ -1832,12 +1832,12 @@ html.dark .docs-code-block span {
 
 .docs-pager__prev {
   justify-content: flex-start;
-  padding-right: 1.2rem;
+  padding-right: 0.75rem;
 }
 
 .docs-pager__next {
   justify-content: flex-end;
-  padding-left: 1.2rem;
+  padding-left: 0.75rem;
 }
 
 .docs-pager__link {
@@ -1845,8 +1845,8 @@ html.dark .docs-code-block span {
   justify-content: center;
   align-items: center;
   max-width: 100%;
-  height: 2.4rem;
-  font-size: 1.4rem;
+  height: 1.5rem;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--docs-sidebar-link-active);
   text-decoration: none;
@@ -1867,37 +1867,37 @@ html.dark .docs-code-block span {
 
 .docs-pager .docs-pager__icon {
   flex-shrink: 0;
-  font-size: 1.2rem;
+  font-size: 0.75rem;
   color: var(--docs-text);
   transform: translateY(1px);
 }
 
 .docs-pager__prev .docs-pager__icon {
-  margin-right: 0.4rem;
+  margin-right: 0.25rem;
 }
 
 .docs-pager__next .docs-pager__icon {
-  margin-left: 0.4rem;
+  margin-left: 0.25rem;
 }
 
 .docs-fallback-notice {
-  margin-bottom: 2.4rem;
-  padding: 0.8rem 1.6rem;
-  border-left: 0.5rem solid #e6a23c;
-  border-radius: 0.4rem;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 1rem;
+  border-left: 0.3125rem solid #e6a23c;
+  border-radius: 0.25rem;
   background-color: rgba(230, 162, 60, 0.1);
-  font-size: 1.4rem;
+  font-size: 0.875rem;
 }
 
 .docs-missing-demo {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8rem;
-  margin: 2rem 0;
-  padding: 1.6rem;
+  gap: 0.5rem;
+  margin: 1.25rem 0;
+  padding: 1rem;
   border: 1px dashed var(--docs-example-border);
-  border-radius: 0.4rem;
-  font-size: 1.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
   color: var(--docs-text-secondary);
 }
 
@@ -1905,7 +1905,7 @@ html.dark .docs-code-block span {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1.2rem;
+  gap: 0.75rem;
 }
 
 /* Icon demos */
@@ -1913,17 +1913,17 @@ html.dark .docs-code-block span {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 2.4rem;
+  gap: 1.5rem;
 }
 
 .demo-icon-row--large {
-  font-size: 2rem;
+  font-size: 1.25rem;
 }
 
 .demo-icon-stack {
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 1rem;
 }
 
 .demo-icon-button__icon {
@@ -1937,27 +1937,27 @@ html.dark .docs-code-block span {
 .demo-icon-inline {
   width: 1em;
   height: 1em;
-  margin-right: 0.8rem;
+  margin-right: 0.5rem;
 }
 
 .demo-icon-collection {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-  gap: 1.2rem;
-  margin: 2rem 0;
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  gap: 0.75rem;
+  margin: 1.25rem 0;
 }
 
 .demo-icon-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.8rem;
-  padding: 1.6rem 0.8rem;
+  gap: 0.5rem;
+  padding: 1rem 0.5rem;
   border: 1px solid var(--docs-example-border);
-  border-radius: 0.4rem;
+  border-radius: 0.25rem;
 }
 
 .demo-icon-item__name {
-  font-size: 1.2rem;
+  font-size: 0.75rem;
   color: var(--docs-text-secondary);
 }

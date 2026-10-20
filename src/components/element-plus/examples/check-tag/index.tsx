@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ElCheckTag, type CheckTagType } from "@/components/element-plus/check-tag";
 
-const row = { display: "flex", gap: "1.2rem", flexWrap: "wrap" as const };
+const row = { display: "flex", gap: "0.75rem", flexWrap: "wrap" as const };
 
 export function CheckTagBasic() {
   const [checked, setChecked] = useState(true);

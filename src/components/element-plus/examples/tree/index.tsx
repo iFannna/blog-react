@@ -18,14 +18,14 @@ const treeWidth: CSSProperties = { maxWidth: "600px" };
 const row: CSSProperties = {
   display: "flex",
   flexWrap: "wrap",
-  gap: "0.4rem",
-  marginTop: "0.8rem",
+  gap: "0.25rem",
+  marginTop: "0.5rem",
 };
 
 const stack: CSSProperties = {
   display: "flex",
   flexDirection: "column",
-  gap: "0.8rem",
+  gap: "0.5rem",
 };
 
 interface BasicTree {
@@ -369,8 +369,8 @@ const customNodeStyle: CSSProperties = {
   flex: 1,
   alignItems: "center",
   justifyContent: "space-between",
-  fontSize: "1.4rem",
-  paddingRight: "0.8rem",
+  fontSize: "0.875rem",
+  paddingRight: "0.5rem",
 };
 
 export function TreeCustomizedNode() {

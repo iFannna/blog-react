@@ -116,9 +116,9 @@ export default function IconPage() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(12rem, 1fr))",
-          gap: "1.2rem",
-          margin: "2rem 0",
+          gridTemplateColumns: "repeat(auto-fill, minmax(7.5rem, 1fr))",
+          gap: "0.75rem",
+          margin: "1.25rem 0",
         }}
       >
         {ICONS.map((name) => (
@@ -128,10 +128,10 @@ export default function IconPage() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: "0.8rem",
-              padding: "1.6rem 0.8rem",
+              gap: "0.5rem",
+              padding: "1rem 0.5rem",
               border: "1px solid var(--docs-example-border)",
-              borderRadius: "0.4rem",
+              borderRadius: "0.25rem",
             }}
           >
             {/* 图标 svg 自身没有尺寸，靠 ElIcon 提供的 1em 撑开，
@@ -139,7 +139,7 @@ export default function IconPage() {
             <ElIcon size={24}>
               <IconByName name={name} />
             </ElIcon>
-            <span style={{ fontSize: "1.2rem", color: "var(--docs-text-secondary)" }}>
+            <span style={{ fontSize: "0.75rem", color: "var(--docs-text-secondary)" }}>
               {name}
             </span>
           </div>

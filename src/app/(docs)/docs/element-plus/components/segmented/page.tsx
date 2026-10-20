@@ -43,7 +43,7 @@ const [size, setSize] = useState("default");
   size={size}
 >
   {(item) => (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.8rem" }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
       <ElIcon size={20}>
         <FruitIcon name={item.icon} />
       </ElIcon>
@@ -79,7 +79,7 @@ const options = [
 
 <ElSegmented value={value} onChange={setValue} options={options}>
   {(item) => (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.8rem", padding: "0.8rem" }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem", padding: "0.5rem" }}>
       <ElIcon size={20}>
         <item.icon />
       </ElIcon>

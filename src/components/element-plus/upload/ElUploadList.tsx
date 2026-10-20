@@ -76,7 +76,7 @@ export function ElUploadList({
   };
 
   const progressStyle: CSSProperties | undefined =
-    listType === "picture-card" ? undefined : { marginTop: "0.5rem" };
+    listType === "picture-card" ? undefined : { marginTop: "0.3125rem" };
 
   return (
     <ul className={containerClasses}>

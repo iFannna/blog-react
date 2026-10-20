@@ -3,14 +3,14 @@
 import { useState } from "react";
 import { ElInputOtp } from "@/components/element-plus/input-otp";
 
-const stack = { display: "flex", flexDirection: "column", gap: "2rem" } as const;
-const typeWrap = { display: "flex", flexDirection: "column", gap: "1.2rem" } as const;
+const stack = { display: "flex", flexDirection: "column", gap: "1.25rem" } as const;
+const typeWrap = { display: "flex", flexDirection: "column", gap: "0.75rem" } as const;
 const label = {
-  margin: "0 0 0.8rem",
-  fontSize: "1.4rem",
+  margin: "0 0 0.5rem",
+  fontSize: "0.875rem",
   color: "var(--el-text-color-secondary)",
 } as const;
-const valueText = { marginTop: "2rem" } as const;
+const valueText = { marginTop: "1.25rem" } as const;
 
 export function InputOtpBasic() {
   const [otp, setOtp] = useState("123");

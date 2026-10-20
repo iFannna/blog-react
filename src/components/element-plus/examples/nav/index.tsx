@@ -8,7 +8,7 @@ import { ElTabs, ElTabPane } from "@/components/element-plus/tabs";
 import { ArrowRight } from "@/components/element-plus/icons";
 import type { CollapseActiveName } from "@/components/element-plus/collapse";
 
-const stack = { display: "flex", flexDirection: "column", gap: "1.6rem" } as const;
+const stack = { display: "flex", flexDirection: "column", gap: "1rem" } as const;
 
 export function BreadcrumbBasic() {
   return (
@@ -77,7 +77,7 @@ export function StepsBasic() {
   const [active, setActive] = useState(1);
   return (
     <div style={stack}>
-      <div style={{ display: "flex", gap: "0.8rem" }}>
+      <div style={{ display: "flex", gap: "0.5rem" }}>
         <button type="button" onClick={() => setActive((a) => Math.max(0, a - 1))}>
           上一步
         </button>
