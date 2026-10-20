@@ -89,9 +89,7 @@ export function MenuBasic() {
             <ElMenuItem index="2-4-3">item three</ElMenuItem>
           </ElSubMenu>
         </ElSubMenu>
-        <ElMenuItem index="3" disabled>
-          Info
-        </ElMenuItem>
+        <ElMenuItem index="3" disabled>Info</ElMenuItem>
         <ElMenuItem index="4">Orders</ElMenuItem>
       </ElMenu>
 
@@ -117,9 +115,7 @@ export function MenuBasic() {
             <ElMenuItem index="2-4-3">item three</ElMenuItem>
           </ElSubMenu>
         </ElSubMenu>
-        <ElMenuItem index="3" disabled>
-          Info
-        </ElMenuItem>
+        <ElMenuItem index="3" disabled>Info</ElMenuItem>
         <ElMenuItem index="4">Orders</ElMenuItem>
       </ElMenu>
     </>
@@ -289,9 +285,7 @@ export function MenuPopperOffset() {
           <ElMenuItem index="3-4-3">item three</ElMenuItem>
         </ElSubMenu>
       </ElSubMenu>
-      <ElMenuItem index="4" disabled>
-        Info
-      </ElMenuItem>
+      <ElMenuItem index="4" disabled>Info</ElMenuItem>
       <ElMenuItem index="5">Orders</ElMenuItem>
     </ElMenu>
   );

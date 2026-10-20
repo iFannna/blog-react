@@ -254,9 +254,7 @@ export function MentionForm() {
         />
       </ElFormItem>
       <ElFormItem>
-        <ElButton type="primary" onClick={submit}>
-          Submit
-        </ElButton>
+        <ElButton type="primary" onClick={submit}>Submit</ElButton>
         <ElButton onClick={() => formRef.current?.resetFields()}>Reset</ElButton>
       </ElFormItem>
       {result && <p style={resultStyle}>{result}</p>}

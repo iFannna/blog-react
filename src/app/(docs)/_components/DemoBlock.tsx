@@ -1,11 +1,12 @@
 "use client";
 
-import { Fragment, useRef, useState, type ReactNode } from "react";
+import { useMemo, useRef, useState, type ReactNode } from "react";
 import { ElTooltip } from "@/components/element-plus/tooltip";
 import { message } from "@/components/element-plus/message";
 import { CaretTop } from "@/components/element-plus/icons";
 import type { DemoLang } from "@/lib/docs/types";
 import type { HighlightToken } from "./highlight";
+import { computeFoldRegions } from "./code-fold";
 import { useDocsMessages } from "./DocsI18nProvider";
 
 interface DemoBlockProps {
@@ -20,6 +21,8 @@ interface DemoBlockProps {
 }
 
 /* 官方底栏用的是 Remix 图标（i-ri-file-copy-line / i-ri-code-line），与 Element Plus 图标集不同 */
+
+const EMPTY_FOLDED: ReadonlySet<number> = new Set();
 
 function FileCopyIcon() {
   return (
@@ -51,6 +54,28 @@ function CodeIcon() {
   );
 }
 
+/** 官方源码面板的折叠箭头：展开朝下，折叠后旋转 -90° 朝右 */
+function FoldChevron() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="12"
+      height="12"
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M4 6l4 4 4-4"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 /**
  * 对应官方 docs 的 vp-demo：上方渲染示例，底栏提供复制代码与查看/隐藏源代码。
  */
@@ -63,8 +88,49 @@ export default function DemoBlock({
   const t = useDocsMessages();
   const [expanded, setExpanded] = useState(false);
   const [tokens, setTokens] = useState<HighlightToken[][] | null>(null);
+  // 折叠状态与源码绑定，路由切换复用实例时不会沿用上一份源码的行下标
+  const [foldState, setFoldState] = useState<{
+    source: string;
+    regions: ReadonlySet<number>;
+  }>(() => ({ source, regions: EMPTY_FOLDED }));
+  const foldedRegions =
+    foldState.source === source ? foldState.regions : EMPTY_FOLDED;
   const rootRef = useRef<HTMLDivElement>(null);
   const highlightStarted = useRef(false);
+
+  const sourceLines = useMemo(() => source.split("\n"), [source]);
+  const foldRegions = useMemo(
+    () => computeFoldRegions(sourceLines),
+    [sourceLines],
+  );
+  const foldEnds = useMemo(
+    () => new Map(foldRegions.map(({ start, end }) => [start, end])),
+    [foldRegions],
+  );
+  // 外层折叠时内层起始行也一起隐藏；展开外层后内层仍按自己的状态保持折叠
+  const hiddenLines = useMemo(() => {
+    const hidden = new Set<number>();
+
+    for (const { start, end } of foldRegions) {
+      if (!foldedRegions.has(start)) continue;
+      for (let line = start + 1; line <= end; line++) hidden.add(line);
+    }
+
+    return hidden;
+  }, [foldRegions, foldedRegions]);
+
+  const toggleFold = (start: number) => {
+    setFoldState((current) => {
+      const regions = new Set(
+        current.source === source ? current.regions : EMPTY_FOLDED,
+      );
+
+      if (regions.has(start)) regions.delete(start);
+      else regions.add(start);
+
+      return { source, regions };
+    });
+  };
 
   // Shiki 体积不小，悬停/聚焦源码按钮时再按需加载，展开时通常已就绪
   const startHighlight = () => {
@@ -162,22 +228,65 @@ export default function DemoBlock({
               : "docs-example__source"
           }
           aria-hidden={!expanded}
+          inert={!expanded}
         >
           <div className="docs-example__source-inner">
             <pre className="docs-example__pre">
               <code className="docs-example__code">
-                {tokens
-                  ? tokens.map((line, lineIndex) => (
-                      <Fragment key={lineIndex}>
-                        {line.map((token, tokenIndex) => (
-                          <span key={tokenIndex} style={token.style}>
-                            {token.content}
-                          </span>
-                        ))}
-                        {lineIndex < tokens.length - 1 && "\n"}
-                      </Fragment>
-                    ))
-                  : source}
+                {Array.from(
+                  {
+                    length: Math.max(tokens?.length ?? 0, sourceLines.length),
+                  },
+                  (_, lineIndex) => {
+                    const end = foldEnds.get(lineIndex);
+                    const folded = foldedRegions.has(lineIndex);
+                    const classes = ["docs-example__line"];
+
+                    if (hiddenLines.has(lineIndex)) classes.push("is-hidden");
+                    if (folded) classes.push("is-folded");
+
+                    return (
+                      <span className={classes.join(" ")} key={lineIndex}>
+                        {tokens?.[lineIndex]
+                          ? tokens[lineIndex].map((token, tokenIndex) => (
+                              <span key={tokenIndex} style={token.style}>
+                                {token.content}
+                              </span>
+                            ))
+                          : (sourceLines[lineIndex] ?? "")}
+                        {end !== undefined && (
+                          <>
+                            <button
+                              type="button"
+                              className="docs-example__fold-btn"
+                              aria-expanded={!folded}
+                              aria-label={
+                                folded ? t.unfoldCodeRegion : t.foldCodeRegion
+                              }
+                              onClick={() => toggleFold(lineIndex)}
+                            >
+                              <FoldChevron />
+                            </button>
+                            {folded && (
+                              <button
+                                type="button"
+                                className="docs-example__fold-placeholder"
+                                title={(
+                                  end - lineIndex === 1
+                                    ? t.foldedLine
+                                    : t.foldedLines
+                                ).replace("{lines}", String(end - lineIndex))}
+                                onClick={() => toggleFold(lineIndex)}
+                              >
+                                ⋯
+                              </button>
+                            )}
+                          </>
+                        )}
+                      </span>
+                    );
+                  },
+                )}
               </code>
             </pre>
           </div>

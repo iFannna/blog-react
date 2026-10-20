@@ -26,9 +26,7 @@ export function TourBasic() {
 
       <ElSpace>
         <ElButton id="tour-basic-1">Upload</ElButton>
-        <ElButton id="tour-basic-2" type="primary">
-          Save
-        </ElButton>
+        <ElButton id="tour-basic-2" type="primary">Save</ElButton>
         <ElButton id="tour-basic-3" icon={<MoreFilled />} />
       </ElSpace>
 
@@ -69,9 +67,7 @@ export function TourNonModal() {
 
       <ElSpace>
         <ElButton id="tour-non-modal-1">Upload</ElButton>
-        <ElButton id="tour-non-modal-2" type="primary">
-          Save
-        </ElButton>
+        <ElButton id="tour-non-modal-2" type="primary">Save</ElButton>
         <ElButton id="tour-non-modal-3" icon={<MoreFilled />} />
       </ElSpace>
 
@@ -141,9 +137,7 @@ export function TourMask() {
 
       <ElSpace>
         <ElButton id="tour-mask-1">Upload</ElButton>
-        <ElButton id="tour-mask-2" type="primary">
-          Save
-        </ElButton>
+        <ElButton id="tour-mask-2" type="primary">Save</ElButton>
         <ElButton id="tour-mask-3" icon={<MoreFilled />} />
       </ElSpace>
 
@@ -195,9 +189,7 @@ export function TourIndicator() {
 
       <ElSpace>
         <ElButton id="tour-indicator-1">Upload</ElButton>
-        <ElButton id="tour-indicator-2" type="primary">
-          Save
-        </ElButton>
+        <ElButton id="tour-indicator-2" type="primary">Save</ElButton>
         <ElButton id="tour-indicator-3" icon={<MoreFilled />} />
       </ElSpace>
 
@@ -243,9 +235,7 @@ export function TourTarget() {
 
       <ElSpace>
         <ElButton id="tour-target-1">Upload</ElButton>
-        <ElButton id="tour-target-2" type="primary">
-          Save
-        </ElButton>
+        <ElButton id="tour-target-2" type="primary">Save</ElButton>
         <ElButton id="tour-target-3" icon={<MoreFilled />} />
       </ElSpace>
 

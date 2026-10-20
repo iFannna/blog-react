@@ -559,9 +559,7 @@ export function SelectV2CustomFooter() {
               <ElButton type="primary" size="small" onClick={onConfirm}>
                 confirm
               </ElButton>
-              <ElButton size="small" onClick={clear}>
-                cancel
-              </ElButton>
+              <ElButton size="small" onClick={clear}>cancel</ElButton>
             </div>
           </div>
         )

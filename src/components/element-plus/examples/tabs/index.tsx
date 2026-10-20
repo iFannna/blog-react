@@ -207,9 +207,7 @@ export function TabsCustomizedTrigger() {
   return (
     <div>
       <div style={{ marginBottom: 20 }}>
-        <ElButton size="small" onClick={addTab}>
-          add tab
-        </ElButton>
+        <ElButton size="small" onClick={addTab}>add tab</ElButton>
       </div>
       <ElTabs
         value={active}

@@ -53,9 +53,7 @@ export function PageHeaderComplete() {
         extra={
           <div style={flexRow}>
             <ElButton>Print</ElButton>
-            <ElButton type="primary" style={{ marginLeft: 8 }}>
-              Edit
-            </ElButton>
+            <ElButton type="primary" style={{ marginLeft: 8 }}>Edit</ElButton>
           </div>
         }
       >
@@ -131,9 +129,7 @@ export function PageHeaderAdditionalSections() {
       extra={
         <div style={flexRow}>
           <ElButton>Print</ElButton>
-          <ElButton type="primary" style={{ marginLeft: 8 }}>
-            Edit
-          </ElButton>
+          <ElButton type="primary" style={{ marginLeft: 8 }}>Edit</ElButton>
         </div>
       }
     />

@@ -15,18 +15,10 @@ export function TextBasic() {
   return (
     <div>
       <ElText style={spaced}>Default</ElText>
-      <ElText type="primary" style={spaced}>
-        Primary
-      </ElText>
-      <ElText type="success" style={spaced}>
-        Success
-      </ElText>
-      <ElText type="info" style={spaced}>
-        Info
-      </ElText>
-      <ElText type="warning" style={spaced}>
-        Warning
-      </ElText>
+      <ElText type="primary" style={spaced}>Primary</ElText>
+      <ElText type="success" style={spaced}>Success</ElText>
+      <ElText type="info" style={spaced}>Info</ElText>
+      <ElText type="warning" style={spaced}>Warning</ElText>
       <ElText type="danger">Danger</ElText>
     </div>
   );
@@ -35,9 +27,7 @@ export function TextBasic() {
 export function TextSizes() {
   return (
     <div>
-      <ElText size="large" style={spaced}>
-        Large
-      </ElText>
+      <ElText size="large" style={spaced}>Large</ElText>
       <ElText style={spaced}>Default</ElText>
       <ElText size="small">Small</ElText>
     </div>
@@ -99,15 +89,11 @@ export function TextOverride() {
       <ElText tag="i">Italic</ElText>
       <ElText>
         This is
-        <ElText tag="sub" size="small">
-          subscript
-        </ElText>
+        <ElText tag="sub" size="small">subscript</ElText>
       </ElText>
       <ElText>
         This is
-        <ElText tag="sup" size="small">
-          superscript
-        </ElText>
+        <ElText tag="sup" size="small">superscript</ElText>
       </ElText>
       <ElText tag="ins">Inserted</ElText>
       <ElText tag="del">Deleted</ElText>

@@ -177,9 +177,7 @@ export function DateTimePickerDefaultTime() {
   return (
     <div style={containerStyle}>
       <div style={blockStyle}>
-        <span style={demonstrationStyle}>
-          Start and end date time 12:00:00
-        </span>
+        <span style={demonstrationStyle}>Start and end date time 12:00:00</span>
         <ElDatePicker
           value={value1}
           onChange={setValue1}

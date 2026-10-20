@@ -736,7 +736,7 @@ html.dark .docs-shell {
 
 .docs-example__pre {
   margin: 0;
-  padding: 2rem;
+  padding: 2rem 2.4rem;
   overflow-x: auto;
   font-family: var(--docs-font-mono);
   font-size: 1.4rem;
@@ -748,6 +748,85 @@ html.dark .docs-shell {
   background: none;
   font-family: inherit;
   font-size: inherit;
+}
+
+/* Indentation folding — official .code-line / .code-fold-* */
+
+.docs-example__line {
+  display: block;
+  position: relative;
+  min-height: 1lh;
+}
+
+.docs-example__line.is-hidden {
+  display: none;
+}
+
+.docs-example__fold-btn {
+  position: absolute;
+  top: 50%;
+  left: -2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--docs-source-control-color);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(-50%);
+  transition:
+    opacity 0.2s,
+    color 0.2s;
+}
+
+.docs-example__fold-btn svg {
+  transition: transform 0.2s;
+}
+
+.docs-example__fold-btn:hover {
+  color: var(--docs-text);
+}
+
+.docs-example__fold-btn:focus-visible {
+  border-radius: 2px;
+  outline: 1px solid var(--docs-sidebar-link-active);
+  opacity: 1;
+}
+
+.docs-example__pre:hover .docs-example__fold-btn,
+.docs-example__line.is-folded .docs-example__fold-btn {
+  opacity: 1;
+}
+
+.docs-example__line.is-folded .docs-example__fold-btn svg {
+  transform: rotate(-90deg);
+}
+
+.docs-example__fold-placeholder {
+  display: inline-block;
+  margin-left: 0.6rem;
+  padding: 0 0.6rem;
+  border: none;
+  border-radius: 0.4rem;
+  background-color: var(--el-fill-color);
+  color: var(--el-text-color-secondary);
+  font: inherit;
+  line-height: inherit;
+  cursor: pointer;
+  user-select: none;
+}
+
+.docs-example__fold-placeholder:hover {
+  background-color: var(--el-fill-color-dark);
+  color: var(--el-text-color-primary);
+}
+
+.docs-example__fold-placeholder:focus-visible {
+  outline: 1px solid var(--docs-sidebar-link-active);
 }
 
 /* Shiki tokens carry --shiki-light / --shiki-dark inline variables */

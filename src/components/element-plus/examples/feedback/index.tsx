@@ -131,12 +131,8 @@ export function MessageBoxUseVnodeWithActionHandlers() {
               <p style={{ marginBottom: 8 }}>
                 Custom buttons with MessageBox action handlers
               </p>
-              <ElButton type="primary" onClick={confirm}>
-                Resolve
-              </ElButton>
-              <ElButton type="danger" onClick={cancel}>
-                Reject
-              </ElButton>
+              <ElButton type="primary" onClick={confirm}>Resolve</ElButton>
+              <ElButton type="danger" onClick={cancel}>Reject</ElButton>
               <ElButton onClick={close}>Close</ElButton>
             </div>
           ),

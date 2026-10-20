@@ -580,9 +580,7 @@ export function PopconfirmCustomize() {
       onCancel={() => setClicked(true)}
       actions={({ confirm, cancel }) => (
         <>
-          <ElButton size="small" onClick={cancel}>
-            No!
-          </ElButton>
+          <ElButton size="small" onClick={cancel}>No!</ElButton>
           <ElButton
             type="danger"
             size="small"

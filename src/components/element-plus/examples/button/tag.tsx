@@ -7,9 +7,7 @@ export default function ButtonTag() {
   return (
     <div style={exampleRow}>
       <ElButton>button</ElButton>
-      <ElButton tag="div" role="button" tabIndex={0}>
-        div
-      </ElButton>
+      <ElButton tag="div" role="button" tabIndex={0}>div</ElButton>
       <ElButton
         type="primary"
         tag="a"

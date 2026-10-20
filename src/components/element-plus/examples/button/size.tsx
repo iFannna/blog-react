@@ -21,13 +21,9 @@ export default function ButtonSize() {
       </div>
 
       <div style={exampleRow}>
-        <ElButton size="large" round>
-          Large
-        </ElButton>
+        <ElButton size="large" round>Large</ElButton>
         <ElButton round>Default</ElButton>
-        <ElButton size="small" round>
-          Small
-        </ElButton>
+        <ElButton size="small" round>Small</ElButton>
         <ElButton size="large" icon={<Search />} round>
           Search
         </ElButton>

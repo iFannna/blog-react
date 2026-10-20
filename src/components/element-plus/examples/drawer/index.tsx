@@ -79,12 +79,8 @@ export function DrawerBasicUsage() {
         }
       >
         <ElRadioGroup value={radio} onChange={(value) => setRadio(String(value))}>
-          <ElRadio value="Option 1" size="large">
-            Option 1
-          </ElRadio>
-          <ElRadio value="Option 2" size="large">
-            Option 2
-          </ElRadio>
+          <ElRadio value="Option 1" size="large">Option 1</ElRadio>
+          <ElRadio value="Option 2" size="large">Option 2</ElRadio>
         </ElRadioGroup>
       </ElDrawer>
     </div>
@@ -266,18 +262,10 @@ export function DrawerResizable() {
           setVisible(true);
         }}
       >
-        <ElRadio value="ttb" button>
-          top
-        </ElRadio>
-        <ElRadio value="rtl" button>
-          right
-        </ElRadio>
-        <ElRadio value="btt" button>
-          bottom
-        </ElRadio>
-        <ElRadio value="ltr" button>
-          left
-        </ElRadio>
+        <ElRadio value="ttb" button>top</ElRadio>
+        <ElRadio value="rtl" button>right</ElRadio>
+        <ElRadio value="btt" button>bottom</ElRadio>
+        <ElRadio value="ltr" button>left</ElRadio>
       </ElRadioGroup>
       <ElDrawer
         visible={visible}

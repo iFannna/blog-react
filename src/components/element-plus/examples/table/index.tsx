@@ -91,9 +91,7 @@ export function TableFixedColumn() {
       <ElTableColumn prop="zip" label="Zip" width="120" />
       <ElTableColumn fixed="right" label="Operations" minWidth="120">
         {() => (
-          <ElButton link type="primary" size="small">
-            Detail
-          </ElButton>
+          <ElButton link type="primary" size="small">Detail</ElButton>
         )}
       </ElTableColumn>
     </ElTable>

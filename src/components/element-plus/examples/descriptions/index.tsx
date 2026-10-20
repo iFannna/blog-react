@@ -67,9 +67,7 @@ export function DescriptionsRowspan() {
         <ElDescriptionsItem label="产品">云服务</ElDescriptionsItem>
         <ElDescriptionsItem label="状态">运行中</ElDescriptionsItem>
         <ElDescriptionsItem label="规格">2 核 4G</ElDescriptionsItem>
-        <ElDescriptionsItem label="备注" span={2}>
-          跨两列
-        </ElDescriptionsItem>
+        <ElDescriptionsItem label="备注" span={2}>跨两列</ElDescriptionsItem>
         <ElDescriptionsItem label="地域">华东</ElDescriptionsItem>
       </ElDescriptions>
     </div>
@@ -85,12 +83,8 @@ export function DescriptionsCustomStyle() {
       <ElDescriptionsItem label="手机号" align="center">
         18100000000
       </ElDescriptionsItem>
-      <ElDescriptionsItem label="居住地" align="center">
-        苏州市
-      </ElDescriptionsItem>
-      <ElDescriptionsItem label="备注" labelAlign="right">
-        学校
-      </ElDescriptionsItem>
+      <ElDescriptionsItem label="居住地" align="center">苏州市</ElDescriptionsItem>
+      <ElDescriptionsItem label="备注" labelAlign="right">学校</ElDescriptionsItem>
       <ElDescriptionsItem label="联系地址" labelAlign="right">
         江苏省苏州市吴中区吴中大道 1188 号
       </ElDescriptionsItem>

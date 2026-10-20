@@ -140,12 +140,8 @@ export function DropdownCommandEvent() {
           <ElDropdownItem command="a">Action 1</ElDropdownItem>
           <ElDropdownItem command="b">Action 2</ElDropdownItem>
           <ElDropdownItem command="c">Action 3</ElDropdownItem>
-          <ElDropdownItem command="d" disabled>
-            Action 4
-          </ElDropdownItem>
-          <ElDropdownItem command="e" divided>
-            Action 5
-          </ElDropdownItem>
+          <ElDropdownItem command="d" disabled>Action 4</ElDropdownItem>
+          <ElDropdownItem command="e" divided>Action 5</ElDropdownItem>
         </ElDropdownMenu>
       }
     >

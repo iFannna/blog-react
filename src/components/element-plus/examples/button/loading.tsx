@@ -24,9 +24,7 @@ export default function ButtonLoading() {
   return (
     <div style={exampleStack}>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
-        <ElButton type="primary" loading>
-          Loading
-        </ElButton>
+        <ElButton type="primary" loading>Loading</ElButton>
         <ElButton type="primary" loadingIcon={<ElIcon><Eleme /></ElIcon>} loading>
           Loading
         </ElButton>

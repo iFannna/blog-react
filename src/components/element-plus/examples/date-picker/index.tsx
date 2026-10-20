@@ -434,9 +434,7 @@ export function DatePickerSinglePanel() {
   return (
     <div style={containerStyle}>
       <div style={widthBlockStyle}>
-        <span style={{ ...demonstrationStyle, width: "100%" }}>
-          date range
-        </span>
+        <span style={{ ...demonstrationStyle, width: "100%" }}>date range</span>
         <ElDatePicker
           value={value1}
           onChange={setValue1}
@@ -456,9 +454,7 @@ export function DatePickerSinglePanel() {
         />
       </div>
       <div style={{ ...widthBlockStyle, borderRight: "none" }}>
-        <span style={{ ...demonstrationStyle, width: "100%" }}>
-          year range
-        </span>
+        <span style={{ ...demonstrationStyle, width: "100%" }}>year range</span>
         <ElDatePicker
           value={value3}
           onChange={setValue3}
@@ -799,9 +795,7 @@ export function DatePickerCustomIcon() {
           />
         </div>
         <div style={separatedStyle}>
-          <div style={{ ...demonstrationStyle, width: "100%" }}>
-            date range
-          </div>
+          <div style={{ ...demonstrationStyle, width: "100%" }}>date range</div>
           <ElDatePicker
             value={value2}
             onChange={setValue2}
@@ -833,9 +827,7 @@ export function DatePickerCustomIcon() {
           />
         </div>
         <div style={separatedStyle}>
-          <div style={{ ...demonstrationStyle, width: "100%" }}>
-            year range
-          </div>
+          <div style={{ ...demonstrationStyle, width: "100%" }}>year range</div>
           <ElDatePicker
             value={value4}
             onChange={setValue4}

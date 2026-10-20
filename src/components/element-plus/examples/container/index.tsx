@@ -68,13 +68,9 @@ export function ContainerBasic() {
 export function ContainerAsideMain() {
   return (
     <ElContainer>
-      <ElAside width="200px" style={asideStyle}>
-        Aside
-      </ElAside>
+      <ElAside width="200px" style={asideStyle}>Aside</ElAside>
       <ElMain style={mainStyle}>Main</ElMain>
-      <ElAside width="200px" style={asideStyle}>
-        Aside
-      </ElAside>
+      <ElAside width="200px" style={asideStyle}>Aside</ElAside>
     </ElContainer>
   );
 }
@@ -82,9 +78,7 @@ export function ContainerAsideMain() {
 export function ContainerAside() {
   return (
     <ElContainer>
-      <ElAside width="200px" style={asideStyle}>
-        Aside
-      </ElAside>
+      <ElAside width="200px" style={asideStyle}>Aside</ElAside>
       <ElContainer>
         <ElHeader style={headerStyle}>Header</ElHeader>
         <ElMain style={mainStyle}>Main</ElMain>
@@ -96,9 +90,7 @@ export function ContainerAside() {
 export function ContainerAsideWithFooter() {
   return (
     <ElContainer>
-      <ElAside width="200px" style={asideStyle}>
-        Aside
-      </ElAside>
+      <ElAside width="200px" style={asideStyle}>Aside</ElAside>
       <ElContainer>
         <ElHeader style={headerStyle}>Header</ElHeader>
         <ElMain style={mainStyle}>Main</ElMain>
@@ -113,9 +105,7 @@ export function ContainerHeaderAside() {
     <ElContainer>
       <ElHeader style={headerStyle}>Header</ElHeader>
       <ElContainer>
-        <ElAside width="200px" style={asideStyle}>
-          Aside
-        </ElAside>
+        <ElAside width="200px" style={asideStyle}>Aside</ElAside>
         <ElMain style={mainStyle}>Main</ElMain>
       </ElContainer>
     </ElContainer>
@@ -127,9 +117,7 @@ export function ContainerNested() {
     <ElContainer>
       <ElHeader style={headerStyle}>Header</ElHeader>
       <ElContainer>
-        <ElAside width="200px" style={asideStyle}>
-          Aside
-        </ElAside>
+        <ElAside width="200px" style={asideStyle}>Aside</ElAside>
         <ElContainer>
           <ElMain style={mainStyle}>Main</ElMain>
           <ElFooter style={footerStyle}>Footer</ElFooter>

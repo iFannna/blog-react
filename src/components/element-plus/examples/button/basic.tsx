@@ -18,59 +18,29 @@ export default function ButtonBasic() {
 
       <div style={exampleRow}>
         <ElButton plain>Plain</ElButton>
-        <ElButton type="primary" plain>
-          Primary
-        </ElButton>
-        <ElButton type="success" plain>
-          Success
-        </ElButton>
-        <ElButton type="info" plain>
-          Info
-        </ElButton>
-        <ElButton type="warning" plain>
-          Warning
-        </ElButton>
-        <ElButton type="danger" plain>
-          Danger
-        </ElButton>
+        <ElButton type="primary" plain>Primary</ElButton>
+        <ElButton type="success" plain>Success</ElButton>
+        <ElButton type="info" plain>Info</ElButton>
+        <ElButton type="warning" plain>Warning</ElButton>
+        <ElButton type="danger" plain>Danger</ElButton>
       </div>
 
       <div style={exampleRow}>
         <ElButton round>Round</ElButton>
-        <ElButton type="primary" round>
-          Primary
-        </ElButton>
-        <ElButton type="success" round>
-          Success
-        </ElButton>
-        <ElButton type="info" round>
-          Info
-        </ElButton>
-        <ElButton type="warning" round>
-          Warning
-        </ElButton>
-        <ElButton type="danger" round>
-          Danger
-        </ElButton>
+        <ElButton type="primary" round>Primary</ElButton>
+        <ElButton type="success" round>Success</ElButton>
+        <ElButton type="info" round>Info</ElButton>
+        <ElButton type="warning" round>Warning</ElButton>
+        <ElButton type="danger" round>Danger</ElButton>
       </div>
 
       <div style={exampleRow}>
         <ElButton dashed>Dashed</ElButton>
-        <ElButton type="primary" dashed>
-          Primary
-        </ElButton>
-        <ElButton type="success" dashed>
-          Success
-        </ElButton>
-        <ElButton type="info" dashed>
-          Info
-        </ElButton>
-        <ElButton type="warning" dashed>
-          Warning
-        </ElButton>
-        <ElButton type="danger" dashed>
-          Danger
-        </ElButton>
+        <ElButton type="primary" dashed>Primary</ElButton>
+        <ElButton type="success" dashed>Success</ElButton>
+        <ElButton type="info" dashed>Info</ElButton>
+        <ElButton type="warning" dashed>Warning</ElButton>
+        <ElButton type="danger" dashed>Danger</ElButton>
       </div>
 
       <div style={exampleRow}>

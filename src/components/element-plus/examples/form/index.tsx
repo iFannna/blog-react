@@ -192,9 +192,7 @@ export function FormValidation() {
         />
       </ElFormItem>
       <ElFormItem>
-        <ElButton type="primary" onClick={submit}>
-          Create
-        </ElButton>
+        <ElButton type="primary" onClick={submit}>Create</ElButton>
         <ElButton onClick={() => formRef.current?.resetFields()}>Reset</ElButton>
       </ElFormItem>
       {result && <p style={{ color: "var(--el-color-info)" }}>{result}</p>}
@@ -504,9 +502,7 @@ export function FormCustomValidation() {
         />
       </ElFormItem>
       <ElFormItem>
-        <ElButton type="primary" onClick={submit}>
-          Submit
-        </ElButton>
+        <ElButton type="primary" onClick={submit}>Submit</ElButton>
         <ElButton onClick={() => formRef.current?.resetFields()}>
           Reset
         </ElButton>
@@ -608,9 +604,7 @@ export function FormFormItems() {
       ))}
 
       <ElFormItem>
-        <ElButton type="primary" onClick={submit}>
-          Submit
-        </ElButton>
+        <ElButton type="primary" onClick={submit}>Submit</ElButton>
         <ElButton onClick={addDomain}>New domain</ElButton>
         <ElButton onClick={() => formRef.current?.resetFields()}>
           Reset
@@ -656,9 +650,7 @@ export function FormNumberValidate() {
         />
       </ElFormItem>
       <ElFormItem>
-        <ElButton type="primary" onClick={submit}>
-          Submit
-        </ElButton>
+        <ElButton type="primary" onClick={submit}>Submit</ElButton>
         <ElButton onClick={() => formRef.current?.resetFields()}>
           Reset
         </ElButton>

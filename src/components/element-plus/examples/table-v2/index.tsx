@@ -165,9 +165,7 @@ const cellTemplatingColumns: TableV2Column[] = [
     cellRenderer: () => (
       <>
         <ElButton size="small">Edit</ElButton>
-        <ElButton size="small" type="danger">
-          Delete
-        </ElButton>
+        <ElButton size="small" type="danger">Delete</ElButton>
       </>
     ),
   },
@@ -377,9 +375,7 @@ const rowClassColumns: TableV2Column[] = [
     cellRenderer: () => (
       <>
         <ElButton size="small">Edit</ElButton>
-        <ElButton size="small" type="danger">
-          Delete
-        </ElButton>
+        <ElButton size="small" type="danger">Delete</ElButton>
       </>
     ),
   },
@@ -659,12 +655,8 @@ export function TableV2Filter() {
                             paddingTop: 8,
                           }}
                         >
-                          <ElButton text onClick={onFilter}>
-                            Confirm
-                          </ElButton>
-                          <ElButton text onClick={onReset}>
-                            Reset
-                          </ElButton>
+                          <ElButton text onClick={onFilter}>Confirm</ElButton>
+                          <ElButton text onClick={onReset}>Reset</ElButton>
                         </div>
                       </div>
                     }
@@ -1104,9 +1096,7 @@ const dynamicHeightColumns: TableV2Column[] = [
     cellRenderer: () => (
       <>
         <ElButton size="small">Edit</ElButton>
-        <ElButton size="small" type="danger">
-          Delete
-        </ElButton>
+        <ElButton size="small" type="danger">Delete</ElButton>
       </>
     ),
   },

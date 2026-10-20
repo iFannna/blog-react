@@ -7,6 +7,10 @@ export interface DocsMessages {
   copyUnsupported: string;
   viewSource: string;
   hideSource: string;
+  foldCodeRegion: string;
+  unfoldCodeRegion: string;
+  foldedLine: string;
+  foldedLines: string;
   previous: string;
   next: string;
   missingDemo: string;
@@ -26,6 +30,10 @@ export const DOCS_MESSAGES: Record<DocLocale, DocsMessages> = {
     copyUnsupported: "当前浏览器不支持自动复制！",
     viewSource: "查看源代码",
     hideSource: "隐藏源代码",
+    foldCodeRegion: "折叠代码区域",
+    unfoldCodeRegion: "展开代码区域",
+    foldedLine: "已折叠 {lines} 行",
+    foldedLines: "已折叠 {lines} 行",
     previous: "上一篇",
     next: "下一篇",
     missingDemo: "该示例尚未提供",
@@ -43,6 +51,10 @@ export const DOCS_MESSAGES: Record<DocLocale, DocsMessages> = {
     copyUnsupported: "Clipboard is not available in this browser.",
     viewSource: "View source",
     hideSource: "Hide source",
+    foldCodeRegion: "Fold code region",
+    unfoldCodeRegion: "Unfold code region",
+    foldedLine: "{lines} line",
+    foldedLines: "{lines} lines",
     previous: "Previous",
     next: "Next",
     missingDemo: "This demo is not available yet",

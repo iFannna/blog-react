@@ -34,21 +34,11 @@ export function TagBasic() {
 export function TagClosable() {
   return (
     <div style={row}>
-      <ElTag type="primary" closable>
-        Tag 1
-      </ElTag>
-      <ElTag type="success" closable>
-        Tag 2
-      </ElTag>
-      <ElTag type="info" closable>
-        Tag 3
-      </ElTag>
-      <ElTag type="warning" closable>
-        Tag 4
-      </ElTag>
-      <ElTag type="danger" closable>
-        Tag 5
-      </ElTag>
+      <ElTag type="primary" closable>Tag 1</ElTag>
+      <ElTag type="success" closable>Tag 2</ElTag>
+      <ElTag type="info" closable>Tag 3</ElTag>
+      <ElTag type="warning" closable>Tag 4</ElTag>
+      <ElTag type="danger" closable>Tag 5</ElTag>
     </div>
   );
 }
@@ -120,57 +110,27 @@ export function TagEffect() {
     <div style={column}>
       <div style={row}>
         <span>Dark</span>
-        <ElTag type="primary" effect="dark">
-          Tag 1
-        </ElTag>
-        <ElTag type="success" effect="dark">
-          Tag 2
-        </ElTag>
-        <ElTag type="info" effect="dark">
-          Tag 3
-        </ElTag>
-        <ElTag type="warning" effect="dark">
-          Tag 4
-        </ElTag>
-        <ElTag type="danger" effect="dark">
-          Tag 5
-        </ElTag>
+        <ElTag type="primary" effect="dark">Tag 1</ElTag>
+        <ElTag type="success" effect="dark">Tag 2</ElTag>
+        <ElTag type="info" effect="dark">Tag 3</ElTag>
+        <ElTag type="warning" effect="dark">Tag 4</ElTag>
+        <ElTag type="danger" effect="dark">Tag 5</ElTag>
       </div>
       <div style={row}>
         <span>Light</span>
-        <ElTag type="primary" effect="light">
-          Tag 1
-        </ElTag>
-        <ElTag type="success" effect="light">
-          Tag 2
-        </ElTag>
-        <ElTag type="info" effect="light">
-          Tag 3
-        </ElTag>
-        <ElTag type="warning" effect="light">
-          Tag 4
-        </ElTag>
-        <ElTag type="danger" effect="light">
-          Tag 5
-        </ElTag>
+        <ElTag type="primary" effect="light">Tag 1</ElTag>
+        <ElTag type="success" effect="light">Tag 2</ElTag>
+        <ElTag type="info" effect="light">Tag 3</ElTag>
+        <ElTag type="warning" effect="light">Tag 4</ElTag>
+        <ElTag type="danger" effect="light">Tag 5</ElTag>
       </div>
       <div style={row}>
         <span>Plain</span>
-        <ElTag type="primary" effect="plain">
-          Tag 1
-        </ElTag>
-        <ElTag type="success" effect="plain">
-          Tag 2
-        </ElTag>
-        <ElTag type="info" effect="plain">
-          Tag 3
-        </ElTag>
-        <ElTag type="warning" effect="plain">
-          Tag 4
-        </ElTag>
-        <ElTag type="danger" effect="plain">
-          Tag 5
-        </ElTag>
+        <ElTag type="primary" effect="plain">Tag 1</ElTag>
+        <ElTag type="success" effect="plain">Tag 2</ElTag>
+        <ElTag type="info" effect="plain">Tag 3</ElTag>
+        <ElTag type="warning" effect="plain">Tag 4</ElTag>
+        <ElTag type="danger" effect="plain">Tag 5</ElTag>
       </div>
     </div>
   );
@@ -180,55 +140,25 @@ export function TagRound() {
   return (
     <div style={column}>
       <div style={row}>
-        <ElTag type="primary" effect="dark" round>
-          Tag 1
-        </ElTag>
-        <ElTag type="success" effect="dark" round>
-          Tag 2
-        </ElTag>
-        <ElTag type="info" effect="dark" round>
-          Tag 3
-        </ElTag>
-        <ElTag type="warning" effect="dark" round>
-          Tag 4
-        </ElTag>
-        <ElTag type="danger" effect="dark" round>
-          Tag 5
-        </ElTag>
+        <ElTag type="primary" effect="dark" round>Tag 1</ElTag>
+        <ElTag type="success" effect="dark" round>Tag 2</ElTag>
+        <ElTag type="info" effect="dark" round>Tag 3</ElTag>
+        <ElTag type="warning" effect="dark" round>Tag 4</ElTag>
+        <ElTag type="danger" effect="dark" round>Tag 5</ElTag>
       </div>
       <div style={row}>
-        <ElTag type="primary" effect="light" round>
-          Tag 1
-        </ElTag>
-        <ElTag type="success" effect="light" round>
-          Tag 2
-        </ElTag>
-        <ElTag type="info" effect="light" round>
-          Tag 3
-        </ElTag>
-        <ElTag type="warning" effect="light" round>
-          Tag 4
-        </ElTag>
-        <ElTag type="danger" effect="light" round>
-          Tag 5
-        </ElTag>
+        <ElTag type="primary" effect="light" round>Tag 1</ElTag>
+        <ElTag type="success" effect="light" round>Tag 2</ElTag>
+        <ElTag type="info" effect="light" round>Tag 3</ElTag>
+        <ElTag type="warning" effect="light" round>Tag 4</ElTag>
+        <ElTag type="danger" effect="light" round>Tag 5</ElTag>
       </div>
       <div style={row}>
-        <ElTag type="primary" effect="plain" round>
-          Tag 1
-        </ElTag>
-        <ElTag type="success" effect="plain" round>
-          Tag 2
-        </ElTag>
-        <ElTag type="info" effect="plain" round>
-          Tag 3
-        </ElTag>
-        <ElTag type="warning" effect="plain" round>
-          Tag 4
-        </ElTag>
-        <ElTag type="danger" effect="plain" round>
-          Tag 5
-        </ElTag>
+        <ElTag type="primary" effect="plain" round>Tag 1</ElTag>
+        <ElTag type="success" effect="plain" round>Tag 2</ElTag>
+        <ElTag type="info" effect="plain" round>Tag 3</ElTag>
+        <ElTag type="warning" effect="plain" round>Tag 4</ElTag>
+        <ElTag type="danger" effect="plain" round>Tag 5</ElTag>
       </div>
     </div>
   );

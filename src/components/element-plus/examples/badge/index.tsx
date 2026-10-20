@@ -125,9 +125,7 @@ export function BadgeCustomize() {
 export function BadgeDot() {
   return (
     <div style={row}>
-      <ElBadge isDot style={item}>
-        查询
-      </ElBadge>
+      <ElBadge isDot style={item}>查询</ElBadge>
       <ElBadge isDot style={item}>
         <ElButton icon={<Share />} type="primary" />
       </ElBadge>

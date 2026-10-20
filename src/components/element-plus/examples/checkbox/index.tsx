@@ -19,9 +19,7 @@ export function CheckboxBasic() {
   const [checked, setChecked] = useState(false);
   return (
     <div style={stack}>
-      <ElCheckbox checked={checked} onCheckedChange={setChecked}>
-        选项
-      </ElCheckbox>
+      <ElCheckbox checked={checked} onCheckedChange={setChecked}>选项</ElCheckbox>
     </div>
   );
 }
@@ -30,9 +28,7 @@ export function CheckboxDisabled() {
   return (
     <div style={stack}>
       <ElCheckbox>未选中</ElCheckbox>
-      <ElCheckbox checked disabled>
-        选中且禁用
-      </ElCheckbox>
+      <ElCheckbox checked disabled>选中且禁用</ElCheckbox>
       <ElCheckbox disabled>禁用</ElCheckbox>
     </div>
   );
@@ -145,12 +141,8 @@ export function CheckboxBorder() {
     <div style={stack}>
       <div style={row}>
         <ElCheckbox border>选项一</ElCheckbox>
-        <ElCheckbox border checked>
-          选项二
-        </ElCheckbox>
-        <ElCheckbox border disabled>
-          选项三
-        </ElCheckbox>
+        <ElCheckbox border checked>选项二</ElCheckbox>
+        <ElCheckbox border disabled>选项三</ElCheckbox>
       </div>
     </div>
   );
