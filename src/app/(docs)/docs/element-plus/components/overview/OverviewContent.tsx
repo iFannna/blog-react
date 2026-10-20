@@ -96,7 +96,11 @@ function OverviewCard({ item }: { item: DocNavItem }) {
   return (
     <Link
       className={className}
-      href={`/docs/element-plus/components/${item.slug}`}
+      href={
+        item.slug === "overview"
+          ? "/docs/element-plus/components/overview"
+          : `/docs/zh-CN/element-plus/components/${item.slug}`
+      }
     >
       {content}
     </Link>

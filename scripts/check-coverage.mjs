@@ -25,6 +25,7 @@ const EP =
 const COMPONENT_JSON = `${EP}/docs/.vitepress/crowdin/en-US/pages/component.json`;
 const EXAMPLES_DIR = `${EP}/docs/examples`;
 const PAGES_DIR = `${ROOT}/src/app/(docs)/docs/element-plus/components`;
+const CONTENT_DIR = `${ROOT}/src/content/docs`;
 const UI_DIR = `${ROOT}/src/components/element-plus`;
 const ICONS_DIR = `${UI_DIR}/icons`;
 const BARREL = `${UI_DIR}/index.ts`;
@@ -41,6 +42,29 @@ const listVue = (dir) =>
   existsSync(dir)
     ? readdirSync(dir).filter((file) => file.endsWith(".vue"))
     : [];
+
+/** 统计 Markdown 里带示例路径的 :::demo 容器。 */
+function countMarkdownDemos(source) {
+  let count = 0;
+  let inside = false;
+
+  for (const line of source.split(/\r?\n/)) {
+    if (!inside) {
+      if (/^:::demo\b/.test(line)) inside = true;
+      continue;
+    }
+    if (line.trim() === ":::") {
+      inside = false;
+      continue;
+    }
+    if (/^[\w-]+\/[\w-]+$/.test(line.trim())) {
+      count += 1;
+      inside = false;
+    }
+  }
+
+  return count;
+}
 
 /** 文档页 slug 与组件目录不一致的特例。 */
 const DIR_OVERRIDES = {
@@ -81,7 +105,10 @@ for (const [group, config] of Object.entries(componentJson)) {
   for (const item of config.children || []) {
     const slug = item.link.slice(1);
     const pageFile = `${PAGES_DIR}/${slug}/page.tsx`;
-    const page = existsSync(pageFile);
+    const zhFile = `${CONTENT_DIR}/zh-CN/element-plus/components/${slug}.md`;
+    const enFile = `${CONTENT_DIR}/en-US/element-plus/components/${slug}.md`;
+    const markdownPage = existsSync(zhFile) || existsSync(enFile);
+    const page = markdownPage || existsSync(pageFile);
 
     const dir = DIR_OVERRIDES[slug] || slug;
     const barrel = STYLE_PAGES.has(slug) ? null : hasBarrel(dir);
@@ -90,9 +117,11 @@ for (const [group, config] of Object.entries(componentJson)) {
 
     const officialDir = `${EXAMPLES_DIR}/${slug}`;
     const officialDemos = listVue(officialDir).length;
-    const reactDemos = page
-      ? (read(pageFile).match(/<DemoBlock/g) || []).length
-      : 0;
+    const reactDemos = markdownPage
+      ? countMarkdownDemos(read(existsSync(zhFile) ? zhFile : enFile))
+      : existsSync(pageFile)
+        ? (read(pageFile).match(/<DemoBlock/g) || []).length
+        : 0;
     const demosComparable = !NO_OFFICIAL_DEMOS.has(slug) && officialDemos > 0;
     const demosOk = demosComparable ? reactDemos >= officialDemos : null;
 

@@ -106,101 +106,105 @@ export default function DemoBlock({
   const sourceLabel = expanded ? t.hideSource : t.viewSource;
 
   return (
-    <div className="docs-example" ref={rootRef}>
-      <div className="docs-example__showcase">
-        {description && <div className="docs-example__desc">{description}</div>}
-        {children}
-      </div>
+    <>
+      {/* 官方 vp-demo 把说明放在 .example 容器之前，而不是展示区内 */}
+      {description && <div className="docs-example__desc">{description}</div>}
 
-      <div className="docs-example__divider" />
+      <div className="docs-example" ref={rootRef}>
+        <div className="docs-example__showcase">{children}</div>
 
-      <div className="docs-example__op-btns">
-        <ElTooltip
-          content={t.copyCode}
-          showArrow={false}
-          trigger={["hover", "focus"]}
-          triggerKeys={[]}
-        >
-          <button
-            type="button"
-            className="docs-example__op-btn"
-            aria-label={t.copyCode}
-            onClick={handleCopy}
+        <div className="docs-example__divider" />
+
+        <div className="docs-example__op-btns">
+          <ElTooltip
+            content={t.copyCode}
+            showArrow={false}
+            trigger={["hover", "focus"]}
+            triggerKeys={[]}
           >
-            <FileCopyIcon />
-          </button>
-        </ElTooltip>
+            <button
+              type="button"
+              className="docs-example__op-btn"
+              aria-label={t.copyCode}
+              onClick={handleCopy}
+            >
+              <FileCopyIcon />
+            </button>
+          </ElTooltip>
 
-        <ElTooltip
-          content={sourceLabel}
-          showArrow={false}
-          trigger={["hover", "focus"]}
-          triggerKeys={[]}
+          <ElTooltip
+            content={sourceLabel}
+            showArrow={false}
+            trigger={["hover", "focus"]}
+            triggerKeys={[]}
+          >
+            <button
+              type="button"
+              className="docs-example__op-btn docs-example__op-btn--source"
+              aria-label={sourceLabel}
+              aria-expanded={expanded}
+              onPointerEnter={startHighlight}
+              onFocus={startHighlight}
+              onClick={() => {
+                startHighlight();
+                setExpanded((value) => !value);
+              }}
+            >
+              <CodeIcon />
+            </button>
+          </ElTooltip>
+        </div>
+
+        <div
+          className={
+            expanded
+              ? "docs-example__source is-expanded"
+              : "docs-example__source"
+          }
+          aria-hidden={!expanded}
         >
-          <button
-            type="button"
-            className="docs-example__op-btn docs-example__op-btn--source"
-            aria-label={sourceLabel}
-            aria-expanded={expanded}
-            onPointerEnter={startHighlight}
-            onFocus={startHighlight}
-            onClick={() => {
-              startHighlight();
-              setExpanded((value) => !value);
+          <div className="docs-example__source-inner">
+            <pre className="docs-example__pre">
+              <code className="docs-example__code">
+                {tokens
+                  ? tokens.map((line, lineIndex) => (
+                      <Fragment key={lineIndex}>
+                        {line.map((token, tokenIndex) => (
+                          <span key={tokenIndex} style={token.style}>
+                            {token.content}
+                          </span>
+                        ))}
+                        {lineIndex < tokens.length - 1 && "\n"}
+                      </Fragment>
+                    ))
+                  : source}
+              </code>
+            </pre>
+          </div>
+        </div>
+
+        {expanded && (
+          <div
+            className="docs-example__float-control"
+            role="button"
+            tabIndex={0}
+            onClick={() => hideSource(false)}
+            onKeyDown={(event) => {
+              if (
+                event.key === "Enter" ||
+                event.key === " " ||
+                event.key === "NumpadEnter"
+              ) {
+                event.preventDefault();
+                hideSource(true);
+              }
             }}
           >
-            <CodeIcon />
-          </button>
-        </ElTooltip>
+            <CaretTop width={16} height={16} aria-hidden="true" />
+            <span>{t.hideSource}</span>
+          </div>
+        )}
       </div>
-
-      <div
-        className={
-          expanded ? "docs-example__source is-expanded" : "docs-example__source"
-        }
-        aria-hidden={!expanded}
-      >
-        <div className="docs-example__source-inner">
-          <pre className="docs-example__pre">
-            <code className="docs-example__code">
-              {tokens
-                ? tokens.map((line, lineIndex) => (
-                    <Fragment key={lineIndex}>
-                      {line.map((token, tokenIndex) => (
-                        <span key={tokenIndex} style={token.style}>
-                          {token.content}
-                        </span>
-                      ))}
-                      {lineIndex < tokens.length - 1 && "\n"}
-                    </Fragment>
-                  ))
-                : source}
-            </code>
-          </pre>
-        </div>
-      </div>
-
-      {expanded && (
-        <div
-          className="docs-example__float-control"
-          role="button"
-          tabIndex={0}
-          onClick={() => hideSource(false)}
-          onKeyDown={(event) => {
-            if (
-              event.key === "Enter" ||
-              event.key === " " ||
-              event.key === "NumpadEnter"
-            ) {
-              event.preventDefault();
-              hideSource(true);
-            }
-          }}
-        >
-          <CaretTop width={16} height={16} aria-hidden="true" />
-          <span>{t.hideSource}</span>
-        </div>
-      )}
-    </div>
+    </>
   );
 }

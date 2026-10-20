@@ -1,0 +1,125 @@
+---
+title: "Message 消息提示"
+description: "常用于主动操作后的反馈提示。"
+group: 反馈组件
+order: 50
+---
+
+# Message 消息提示
+
+常用于主动操作后的反馈提示。
+
+## 基础用法
+
+:::demo 直接调用 `message(...)` 即可弹出，参数可以是字符串或 ReactNode；无需在 JSX 中声明。
+
+message/basic
+
+:::
+
+## 不同类型
+
+:::demo 通过 `type` 设置 `primary`、`success`、 `warning`、`info`、`error`。
+
+message/different-types
+
+:::
+
+## 朴素样式
+
+:::demo 设置 `plain` 使用浅色背景的朴素样式。
+
+message/plain
+
+:::
+
+## 可关闭
+
+:::demo 设置 `showClose` 显示关闭按钮；`duration` 为 `0` 时不会自动关闭。
+
+message/closable
+
+:::
+
+## 使用 HTML 片段
+
+:::demo 设置 `dangerouslyUseHTMLString` 后 `message` 会按 HTML 渲染。
+
+message/raw-html
+
+:::
+
+## 合并消息
+
+:::demo 设置 `grouping` 后，相同内容的消息会合并并显示数量徽标。
+
+message/grouping
+
+:::
+
+## 位置
+
+:::demo 通过 `placement` 设置消息出现的位置，共 6 个方位， 同一位置的消息会自动堆叠。
+
+message/placement
+
+:::
+
+## Message API
+
+使用前需在应用根部渲染容器组件 `<ElMessageContainer />`（本站已全局挂载）。
+
+### Message 方法
+
+| 方法 | 说明 | 参数 |
+| --- | --- | --- |
+| message(options) | 显示消息 | ^[string] / ^[MessageOptions] |
+| message.primary(options) | 主要消息 | 同上 |
+| message.success(options) | 成功消息 | 同上 |
+| message.info(options) | 信息消息 | 同上 |
+| message.warning(options) | 警告消息 | 同上 |
+| message.error(options) | 错误消息 | 同上 |
+| message.closeAll() | 关闭全部消息 | — |
+
+每个方法返回一个 `{ close: () => void }` 句柄，可手动关闭该条消息。
+
+### MessageOptions
+
+| 属性名 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| message | 消息文字，支持字符串、ReactNode 或返回 ReactNode 的函数 | ^[ReactNode] / ^[Function] | — |
+| type | 消息类型 | ^[enum]`'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | info |
+| duration | 显示时长（毫秒），0 表示不自动关闭 | ^[number] | 3000 |
+| show-close | 是否显示关闭按钮 | ^[boolean] | false |
+| plain | 是否使用朴素样式 | ^[boolean] | false |
+| offset | 距视口边缘的距离（**px**） | ^[number] | 16 |
+| placement | 位置 | ^[enum]`'top' \| 'top-left' \| 'top-right' \| 'bottom' \| 'bottom-left' \| 'bottom-right'` | top |
+| icon | 自定义图标 | ^[ReactNode] | — |
+| dangerously-use-HTML-string | 是否以 HTML 片段渲染 | ^[boolean] | false |
+| grouping | 相同内容是否合并为一条并显示数量徽标 | ^[boolean] | false |
+| append-to | 挂载容器，默认 body | ^[string] / ^[HTMLElement] | — |
+| custom-class | 自定义类名 | ^[string] | — |
+| z-index | 层级 | ^[number] | — |
+| on-close | 关闭时的回调 | ^[Function]`() => void` | — |
+
+## 与 Vue 版 API 的差异
+
+| 官方 Vue | React | 说明 |
+| --- | --- | --- |
+| 命令式挂载（createVNode + render） | 模块级 store + `useSyncExternalStore` | 用法一致，需要在根部渲染容器 |
+| `ElMessage(options)` / `this.$message` | `message(options)` | 直接调用函数 |
+| `<slot>` / VNode | `message` 支持 ReactNode 与函数 | 函数形式可延迟求值 |
+| `message.closeAll()` | 同名方法 | — |
+
+**实现说明**：
+
+- 类名、结构、样式全部使用官方的 `el-message` 体系，
+  含 `el-message--{type}`、`is-closable`、`is-plain`、`is-bottom` 与水平方位类
+- 堆叠算法与官方 `getOffsetOrSpace` 等价：
+  同一位置下首个用 `offset`，后续每个是「前一个的底边 + 16px」
+- 悬停时暂停自动关闭倒计时，移开后重新计时
+- 按 <kbd>Esc</kbd> 关闭全部消息
+- `grouping` 开启后相同内容合并，并在关闭时正确递减计数
+- 图标沿用官方 `TypeComponentsMap`（primary 与 info 共用 InfoFilled）
+
+**注意**：`offset` 单位是 **px**（官方如此），与博客原有实现使用 rem 不同。

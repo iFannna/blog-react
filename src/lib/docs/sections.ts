@@ -4,7 +4,7 @@ import type {
   DocsSectionConfig,
 } from "./types";
 
-/** 已接入通用 Markdown 管线的 section；Element Plus 旧页面暂不在此列 */
+/** 已接入通用 Markdown 管线的 section；Element Plus 旧页面按批次迁入 */
 export const DOC_SECTIONS: DocsSectionConfig[] = [
   {
     id: "notes",
@@ -14,6 +14,15 @@ export const DOC_SECTIONS: DocsSectionConfig[] = [
       "en-US": "Architecture, engineering practices and study notes.",
     },
     order: 10,
+  },
+  {
+    id: "element-plus",
+    titles: { "zh-CN": "Element Plus", "en-US": "Element Plus" },
+    descriptions: {
+      "zh-CN": "Element Plus 组件文档。",
+      "en-US": "Element Plus component documentation.",
+    },
+    order: 20,
   },
 ];
 
@@ -55,6 +64,49 @@ export function getDocsHeaderConfig(locale: DocLocale): DocsHeaderConfig {
       {
         text: zh ? "官方文档" : "Official Docs",
         href: "https://element-plus.org/zh-CN/component/overview",
+        external: true,
+      },
+    ],
+  };
+}
+
+/**
+ * 迁入通用管线的 Element Plus 页面使用带语言切换的顶栏；
+ * 旧版中文页面仍使用下方写死中文的 ELEMENT_PLUS_HEADER。
+ */
+export function getElementPlusHeaderConfig(locale: DocLocale): DocsHeaderConfig {
+  const zh = locale === "zh-CN";
+  const base = `/docs/${locale}/element-plus`;
+
+  return {
+    logo: {
+      kind: "image",
+      src: "/images/element-plus-logo.svg",
+      alt: "Element Plus Logo",
+      href: base,
+    },
+    badge: { text: "2.14.6", title: "latest version" },
+    links: [
+      {
+        text: zh ? "指南" : "Guide",
+        href: "/docs/element-plus/components/overview",
+        activePrefix: "/docs/element-plus/guide",
+      },
+      {
+        text: zh ? "组件" : "Components",
+        href: base,
+        activePrefix: base,
+      },
+      {
+        text: zh ? "资源" : "Resources",
+        href: "/docs/element-plus/components/overview",
+        activePrefix: "/docs/element-plus/resource",
+      },
+      {
+        text: zh ? "官方文档" : "Official Docs",
+        href: zh
+          ? "https://element-plus.org/zh-CN/component/overview"
+          : "https://element-plus.org/en-US/component/overview",
         external: true,
       },
     ],

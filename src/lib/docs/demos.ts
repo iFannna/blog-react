@@ -39,17 +39,109 @@ function resolveProjectFile(relativePath: string): string {
   return absolute;
 }
 
+/**
+ * 一文件多示例时只展示对应导出，避免源码面板铺满整个 index；
+ * 默认导出的独立示例文件仍展示完整文件。
+ */
+function extractExportSource(source: string, exportName: string): string {
+  const match = new RegExp(
+    `export\\s+(?:async\\s+)?(?:function|const|let|var)\\s+${exportName}\\b`,
+  ).exec(source);
+  if (!match) return source;
+
+  const start = match.index;
+  const bodyStart = source.indexOf("{", start);
+  if (bodyStart === -1) return source;
+
+  let depth = 0;
+  let state: "code" | "single" | "double" | "template" | "line" | "block" =
+    "code";
+
+  for (let i = bodyStart; i < source.length; i++) {
+    const char = source[i];
+    const next = source[i + 1];
+
+    if (state === "line") {
+      if (char === "\n") state = "code";
+      continue;
+    }
+
+    if (state === "block") {
+      if (char === "*" && next === "/") {
+        state = "code";
+        i++;
+      }
+      continue;
+    }
+
+    if (state === "single" || state === "double" || state === "template") {
+      if (char === "\\") {
+        i++;
+      } else if (
+        (state === "single" && char === "'") ||
+        (state === "double" && char === '"') ||
+        (state === "template" && char === "`")
+      ) {
+        state = "code";
+      }
+      continue;
+    }
+
+    if (char === "/" && next === "/") {
+      state = "line";
+      i++;
+      continue;
+    }
+
+    if (char === "/" && next === "*") {
+      state = "block";
+      i++;
+      continue;
+    }
+
+    if (char === "'") {
+      state = "single";
+      continue;
+    }
+
+    if (char === '"') {
+      state = "double";
+      continue;
+    }
+
+    if (char === "`") {
+      state = "template";
+      continue;
+    }
+
+    if (char === "{") {
+      depth++;
+    } else if (char === "}") {
+      depth--;
+      if (depth === 0) return source.slice(start, i + 1);
+    }
+  }
+
+  return source;
+}
+
 export function readDemoSource(entry: DemoEntry): string {
   const absolute = resolveProjectFile(entry.sourceFile);
-  const cached = sourceCache.get(absolute);
+  const cacheKey = `${absolute}#${entry.exportName ?? "default"}`;
+  const cached = sourceCache.get(cacheKey);
   if (cached !== undefined && process.env.NODE_ENV === "production") return cached;
 
   if (!fs.existsSync(absolute)) {
     throw new Error(`演示源码不存在: ${entry.sourceFile}`);
   }
 
-  const source = fs.readFileSync(absolute, "utf8");
-  if (process.env.NODE_ENV === "production") sourceCache.set(absolute, source);
+  const raw = fs.readFileSync(absolute, "utf8");
+  const source =
+    entry.exportName && entry.exportName !== "default"
+      ? extractExportSource(raw, entry.exportName)
+      : raw;
+
+  if (process.env.NODE_ENV === "production") sourceCache.set(cacheKey, source);
   return source;
 }
 

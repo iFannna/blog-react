@@ -1,0 +1,46 @@
+import type { DemoManifest } from "@/lib/docs/types";
+
+const manifest: DemoManifest = {
+  "container/layout-hm": {
+    load: () => import("@/components/element-plus/examples/container"),
+    exportName: "ContainerHeaderMain",
+    sourceFile: "src/components/element-plus/examples/container/index.tsx",
+  },
+  "container/layout-hmf": {
+    load: () => import("@/components/element-plus/examples/container"),
+    exportName: "ContainerBasic",
+    sourceFile: "src/components/element-plus/examples/container/index.tsx",
+  },
+  "container/layout-am": {
+    load: () => import("@/components/element-plus/examples/container"),
+    exportName: "ContainerAsideMain",
+    sourceFile: "src/components/element-plus/examples/container/index.tsx",
+  },
+  "container/layout-ham": {
+    load: () => import("@/components/element-plus/examples/container"),
+    exportName: "ContainerAside",
+    sourceFile: "src/components/element-plus/examples/container/index.tsx",
+  },
+  "container/layout-hamf": {
+    load: () => import("@/components/element-plus/examples/container"),
+    exportName: "ContainerAsideWithFooter",
+    sourceFile: "src/components/element-plus/examples/container/index.tsx",
+  },
+  "container/layout-ahm": {
+    load: () => import("@/components/element-plus/examples/container"),
+    exportName: "ContainerHeaderAside",
+    sourceFile: "src/components/element-plus/examples/container/index.tsx",
+  },
+  "container/layout-ahmf": {
+    load: () => import("@/components/element-plus/examples/container"),
+    exportName: "ContainerNested",
+    sourceFile: "src/components/element-plus/examples/container/index.tsx",
+  },
+  "container/example": {
+    load: () => import("@/components/element-plus/examples/container"),
+    exportName: "ContainerExample",
+    sourceFile: "src/components/element-plus/examples/container/index.tsx",
+  },
+};
+
+export default manifest;

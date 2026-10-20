@@ -383,7 +383,6 @@ html.dark .docs-shell {
   align-items: center;
   margin: 3.6rem 0 2rem;
   padding-bottom: 0.48rem;
-  border-bottom: 1px solid var(--docs-example-border);
   font-size: 2.64rem;
   font-weight: 600;
   line-height: 1.25;
@@ -505,6 +504,20 @@ html.dark .docs-shell {
 
 .docs-example + .docs-example {
   margin-top: 2rem;
+}
+
+/* Official vp-demo description sits above the bordered example: text-sm with my-4 */
+.docs-example__desc {
+  margin: 1.6rem 0;
+  font-size: 1.4rem;
+  line-height: 1.7;
+  color: var(--docs-text);
+}
+
+.docs-example__desc p {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
 }
 
 .docs-example__showcase {
@@ -1461,4 +1474,58 @@ html.dark .docs-code-block span {
   flex-wrap: wrap;
   align-items: center;
   gap: 1.2rem;
+}
+
+/* Icon demos */
+.demo-icon-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.demo-icon-row--large {
+  font-size: 2rem;
+}
+
+.demo-icon-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.demo-icon-button__icon {
+  vertical-align: middle;
+}
+
+.demo-icon-button__text {
+  vertical-align: middle;
+}
+
+.demo-icon-inline {
+  width: 1em;
+  height: 1em;
+  margin-right: 0.8rem;
+}
+
+.demo-icon-collection {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 1.2rem;
+  margin: 2rem 0;
+}
+
+.demo-icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.6rem 0.8rem;
+  border: 1px solid var(--docs-example-border);
+  border-radius: 0.4rem;
+}
+
+.demo-icon-item__name {
+  font-size: 1.2rem;
+  color: var(--docs-text-secondary);
 }
