@@ -5,14 +5,15 @@ import { ElInput } from "@/components/element-plus/input";
 import { ElSelect } from "@/components/element-plus/select";
 import type { SelectValue } from "@/components/element-plus/select";
 import { ElButton } from "@/components/element-plus/button";
+import "./input-demo.module.css";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { Calendar, CloseBold, Lock, Search, Unlock } from "@/components/element-plus/icons";
 
-const stack = { display: "flex", flexDirection: "column", gap: "1rem" } as const;
+const stack = { display: "flex", flexDirection: "column", gap: "16px" } as const;
 const row = {
   display: "flex",
   flexWrap: "wrap",
-  gap: "1rem",
+  gap: "16px",
   alignItems: "center",
 } as const;
 const width240 = { width: 240 } as const;
@@ -139,80 +140,96 @@ export function InputWordLimit() {
   const [text, setText] = useState("");
   const [textarea, setTextarea] = useState("");
   return (
-    <div style={stack}>
-      <div style={row}>
-        <ElInput
-          value={text}
-          onChange={setText}
-          style={width240}
-          maxlength={10}
-          showWordLimit
-          placeholder="请输入"
-        />
-        <ElInput
-          value={text}
-          onChange={setText}
-          style={width240}
-          maxlength={10}
-          showWordLimit
-          wordLimitPosition="outside"
-          placeholder="请输入"
-        />
-      </div>
-      <div style={spacer} />
-      <div style={row}>
-        <ElInput
-          value={textarea}
-          onChange={setTextarea}
-          style={width240}
-          maxlength={30}
-          showWordLimit
-          placeholder="请输入"
-          type="textarea"
-        />
-        <ElInput
-          value={textarea}
-          onChange={setTextarea}
-          style={width240}
-          maxlength={30}
-          showWordLimit
-          wordLimitPosition="outside"
-          placeholder="请输入"
-          type="textarea"
-        />
-      </div>
-    </div>
+    <>
+      <ElInput
+        value={text}
+        onChange={setText}
+        style={width240}
+        maxlength={10}
+        showWordLimit
+        placeholder="请输入"
+      />
+      <ElInput
+        value={text}
+        onChange={setText}
+        style={{ ...width240, marginLeft: 16 }}
+        maxlength={10}
+        showWordLimit
+        wordLimitPosition="outside"
+        placeholder="请输入"
+      />
+      <div style={{ margin: "20px 0" }} />
+      <ElInput
+        value={textarea}
+        onChange={setTextarea}
+        style={width240}
+        maxlength={30}
+        showWordLimit
+        placeholder="请输入"
+        type="textarea"
+      />
+      <ElInput
+        value={textarea}
+        onChange={setTextarea}
+        style={{ ...width240, marginLeft: 16 }}
+        maxlength={30}
+        showWordLimit
+        wordLimitPosition="outside"
+        placeholder="请输入"
+        type="textarea"
+      />
+    </>
   );
 }
 
 export function InputIcons() {
   return (
-    <div style={stack}>
-      <span>使用属性</span>
-      <div style={row}>
-        <ElInput style={width240} placeholder="选择日期" suffixIcon={<Calendar />} />
-        <ElInput style={width240} placeholder="请输入" prefixIcon={<Search />} />
+    <div style={{ width: "100%" }}>
+      <div style={{ marginBottom: 24 }}>
+        <span
+          style={{
+            display: "block",
+            marginBottom: 16,
+            color: "var(--el-text-color-regular)",
+          }}
+        >
+          使用属性
+        </span>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
+          <ElInput style={width240} placeholder="选择日期" suffixIcon={<Calendar />} />
+          <ElInput style={width240} placeholder="请输入" prefixIcon={<Search />} />
+        </div>
       </div>
-      <span>使用插槽</span>
-      <div style={row}>
-        <ElInput
-          style={width240}
-          placeholder="选择日期"
-          suffix={
-            <ElIcon className="el-input__icon">
-              <Calendar />
-            </ElIcon>
-          }
-        />
-        <ElInput
-          style={width240}
-          placeholder="请输入"
-          prefix={
-            <ElIcon className="el-input__icon">
-              <Search />
-            </ElIcon>
-          }
-        />
+      <div style={{ marginBottom: 24 }}>
+        <span
+          style={{
+            display: "block",
+            marginBottom: 16,
+            color: "var(--el-text-color-regular)",
+          }}
+        >
+          使用插槽
+        </span>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
+          <ElInput
+            style={width240}
+            placeholder="选择日期"
+            suffix={
+              <ElIcon className="el-input__icon">
+                <Calendar />
+              </ElIcon>
+            }
+          />
+          <ElInput
+            style={width240}
+            placeholder="请输入"
+            prefix={
+              <ElIcon className="el-input__icon">
+                <Search />
+              </ElIcon>
+            }
+          />
+        </div>
       </div>
     </div>
   );
@@ -250,7 +267,7 @@ export function InputAutoSizingTextarea() {
   const [textarea1, setTextarea1] = useState("");
   const [textarea2, setTextarea2] = useState("");
   return (
-    <div style={stack}>
+    <>
       <ElInput
         value={textarea1}
         onChange={setTextarea1}
@@ -259,7 +276,7 @@ export function InputAutoSizingTextarea() {
         type="textarea"
         placeholder="请输入"
       />
-      <div style={spacer} />
+      <div style={{ margin: "20px 0" }} />
       <ElInput
         value={textarea2}
         onChange={setTextarea2}
@@ -268,7 +285,7 @@ export function InputAutoSizingTextarea() {
         type="textarea"
         placeholder="请输入"
       />
-    </div>
+    </>
   );
 }
 
@@ -303,7 +320,7 @@ export function InputCountGraphemes() {
   const [text, setText] = useState("😀😁");
   const [textarea, setTextarea] = useState("😀😁");
   return (
-    <div style={stack}>
+    <>
       <ElInput
         value={text}
         onChange={setText}
@@ -323,7 +340,7 @@ export function InputCountGraphemes() {
         placeholder="请输入"
         type="textarea"
       />
-    </div>
+    </>
   );
 }
 
@@ -341,54 +358,64 @@ export function InputMixedInput() {
   const [select, setSelect] = useState<SelectValue>("");
 
   return (
-    <div style={stack}>
-      <ElInput
-        value={input1}
-        onChange={setInput1}
-        style={{ maxWidth: 600 }}
-        placeholder="请输入"
-        prepend="Http://"
-      />
-      <ElInput
-        value={input2}
-        onChange={setInput2}
-        style={{ maxWidth: 600 }}
-        placeholder="请输入"
-        append=".com"
-      />
-      <ElInput
-        value={input3}
-        onChange={setInput3}
-        style={{ maxWidth: 600 }}
-        placeholder="请输入"
-        prepend={
-          <ElSelect
-            value={select}
-            onChange={setSelect}
-            options={SELECT_OPTIONS}
-            placeholder="选择"
-            style={{ width: 115 }}
-          />
-        }
-        append={<ElButton icon={<Search />} />}
-      />
-      <ElInput
-        value={input4}
-        onChange={setInput4}
-        style={{ maxWidth: 600 }}
-        placeholder="请输入"
-        prepend={<ElButton icon={<Search />} />}
-        append={
-          <ElSelect
-            value={select}
-            onChange={setSelect}
-            options={SELECT_OPTIONS}
-            placeholder="选择"
-            style={{ width: 115 }}
-          />
-        }
-      />
-    </div>
+    <>
+      <div>
+        <ElInput
+          value={input1}
+          onChange={setInput1}
+          style={{ maxWidth: 600 }}
+          placeholder="请输入"
+          prepend="Http://"
+        />
+      </div>
+      <div style={{ marginTop: 16 }}>
+        <ElInput
+          value={input2}
+          onChange={setInput2}
+          style={{ maxWidth: 600 }}
+          placeholder="请输入"
+          append=".com"
+        />
+      </div>
+      <div style={{ marginTop: 16 }}>
+        <ElInput
+          className="input-with-select"
+          value={input3}
+          onChange={setInput3}
+          style={{ maxWidth: 600 }}
+          placeholder="请输入"
+          prepend={
+            <ElSelect
+              value={select}
+              onChange={setSelect}
+              options={SELECT_OPTIONS}
+              placeholder="选择"
+              style={{ width: 115 }}
+            />
+          }
+          append={<ElButton icon={<Search />} />}
+        />
+      </div>
+      <div style={{ marginTop: 16 }}>
+        <ElInput
+          className="input-with-select"
+          value={input4}
+          onChange={setInput4}
+          style={{ maxWidth: 600 }}
+          placeholder="请输入"
+          prepend={<ElButton icon={<Search />} />}
+          append={
+            <ElSelect
+              value={select}
+              onChange={setSelect}
+              options={SELECT_OPTIONS}
+              placeholder="选择"
+              style={{ width: 115 }}
+            />
+          }
+        />
+      </div>
+    </>
   );
 }
 

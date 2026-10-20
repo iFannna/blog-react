@@ -33,11 +33,27 @@ tabs/border-card
 
 :::
 
+## 标签位置
+
+:::demo 通过 `tabPosition` 设置标签位置，支持 top / right / bottom / left。
+
+tabs/tab-position
+
+:::
+
 ## 自定义标签
 
 :::demo 通过 `label` 传入自定义节点，可以在标签中加入图标等内容。
 
 tabs/custom-tab
+
+:::
+
+## 动态增减标签
+
+:::demo `editable` 同时启用新增与关闭；`onEdit` 统一接收增删事件。
+
+tabs/dynamic-tabs
 
 :::
 
@@ -62,22 +78,6 @@ tabs/customized-trigger
 :::demo 未传 `value` 时，可通过 `defaultValue` 指定初始选中的面板。
 
 tabs/default-value
-
-:::
-
-## 动态增减标签
-
-:::demo `editable` 同时启用新增与关闭；`onEdit` 统一接收增删事件。
-
-tabs/dynamic-tabs
-
-:::
-
-## 标签位置
-
-:::demo 通过 `tabPosition` 设置标签位置，支持 top / right / bottom / left。
-
-tabs/tab-position
 
 :::
 

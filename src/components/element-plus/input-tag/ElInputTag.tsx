@@ -269,8 +269,6 @@ export const ElInputTag = forwardRef<InputTagExpose, InputTagProps>(
     const calculatorRef = useRef<HTMLSpanElement>(null);
     const dropIndicatorRef = useRef<HTMLDivElement>(null);
     const tagTooltipRef = useRef<TooltipExpose>(null);
-    // 拖拽包裹节点的引用表，官方用 .el-tag:nth-child(n) 定位，这里用 ref 表更稳
-    const tagRefs = useRef<(HTMLElement | null)[]>([]);
 
     // 组合输入期间（中文输入法）不处理按键与分隔符，避免把拼音拆成标签
     const isComposingRef = useRef(false);
@@ -550,7 +548,9 @@ export const ElInputTag = forwardRef<InputTagExpose, InputTagProps>(
 
     // --- 拖拽，对应官方 useDragTag ---
 
-    const getTagElement = (index: number) => tagRefs.current[index] ?? null;
+    // 官方把拖拽属性直接挂在 .el-tag 上，这里同样从容器里取标签节点
+    const getTagElement = (index: number) =>
+      innerRef.current?.querySelectorAll<HTMLElement>(".el-tag")[index] ?? null;
 
     const handleDragStart = useCallback(
       (event: DragEvent<HTMLElement>, index: number) => {
@@ -777,7 +777,23 @@ export const ElInputTag = forwardRef<InputTagExpose, InputTagProps>(
       typeof children === "function" ? children(item, index) : children ?? item;
 
     const renderTag = (item: string, index: number) => {
-      const tagNode = (
+      // 官方把 draggable 与拖拽事件直接放在 el-tag 元素上，不能再包一层
+      // span，否则行盒会被撑高 1px 以上。
+      const dragProps =
+        closable && draggable
+          ? {
+              draggable: true,
+              onDragStart: (event: DragEvent<HTMLSpanElement>) =>
+                handleDragStart(event, index),
+              onDragOver: (event: DragEvent<HTMLSpanElement>) =>
+                handleDragOver(event, index),
+              onDragEnd: handleDragEnd,
+              onDrop: (event: DragEvent<HTMLSpanElement>) =>
+                event.stopPropagation(),
+            }
+          : {};
+
+      return (
         <ElTag
           size={tagSizeResolved}
           closable={closable}
@@ -786,29 +802,10 @@ export const ElInputTag = forwardRef<InputTagExpose, InputTagProps>(
           disableTransitions
           style={tagStyle}
           onClose={() => handleRemoveTag(index)}
+          {...dragProps}
         >
           {renderTagContent(item, index)}
         </ElTag>
-      );
-
-      // 未开启拖拽时直接渲染标签，保持与官方一致的 DOM 层级
-      if (!(closable && draggable)) return tagNode;
-
-      return (
-        <span
-          key={index}
-          draggable
-          data-input-tag-drag=""
-          ref={(node) => {
-            tagRefs.current[index] = node;
-          }}
-          onDragStart={(event) => handleDragStart(event, index)}
-          onDragOver={(event) => handleDragOver(event, index)}
-          onDragEnd={handleDragEnd}
-          onDrop={(event) => event.stopPropagation()}
-        >
-          {tagNode}
-        </span>
       );
     };
 

@@ -217,11 +217,6 @@ export const ElSubMenu = forwardRef<HTMLLIElement, SubMenuProps>(
     useEffect(() => clearShowTimer, [clearShowTimer]);
     useEffect(() => clearHideTimer, [clearHideTimer]);
 
-    // 展开状态变化后，菜单需要重新计算激活态与横向省略号截断位置
-    useEffect(() => {
-      actions?.triggerResize();
-    }, [opened, actions]);
-
     const subMenuPopperOffset = popperOffset ?? props?.popperOffset ?? 6;
     const subMenuPopperClass = popperClass ?? props?.popperClass;
     const subMenuPopperStyle = popperStyle ?? props?.popperStyle;
@@ -284,9 +279,17 @@ export const ElSubMenu = forwardRef<HTMLLIElement, SubMenuProps>(
       className,
     );
 
-    // 省略号子菜单的图标是 More，不参与展开旋转
+    // 省略号子菜单同时保留 More 与（隐藏的）箭头节点，与官方 DOM 一致
     const titleIcon = hideOnEllipsis ? (
-      <ElIcon className="el-sub-menu__icon-more">{ellipsisIcon}</ElIcon>
+      <>
+        <ElIcon className="el-sub-menu__icon-more">{ellipsisIcon}</ElIcon>
+        <ElIcon
+          className="el-sub-menu__icon-arrow"
+          style={{ transform: arrowTransform }}
+        >
+          {arrowIcon}
+        </ElIcon>
+      </>
     ) : (
       <ElIcon
         className="el-sub-menu__icon-arrow"
@@ -369,7 +372,7 @@ export const ElSubMenu = forwardRef<HTMLLIElement, SubMenuProps>(
           }
         >
           <div
-            className="el-sub-menu__title"
+            className="el-sub-menu__title el-tooltip__trigger el-tooltip__trigger"
             onClick={handleClick}
             onMouseEnter={() => handleMouseenter()}
             onMouseLeave={() => handleMouseleave()}

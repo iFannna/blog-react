@@ -13,7 +13,7 @@ const manifest: DemoManifest = {
   },
   "statistic/card": {
     load: () => import("@/components/element-plus/examples/statistic"),
-    exportName: "StatisticFormatter",
+    exportName: "StatisticCard",
     sourceFile: "src/components/element-plus/examples/statistic/index.tsx",
   },
 };

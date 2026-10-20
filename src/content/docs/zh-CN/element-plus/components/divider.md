@@ -25,19 +25,19 @@ divider/custom-content
 
 :::
 
-## 垂直分割
-
-:::demo 设置 `direction="vertical"` 可以设置为垂直分割线， 常用于行内元素之间。
-
-divider/vertical-divider
-
-:::
-
 ## 自定义样式
 
 :::demo 通过 `borderStyle` 属性设置分割线的样式。
 
 divider/line-dashed
+
+:::
+
+## 垂直分割
+
+:::demo 设置 `direction="vertical"` 可以设置为垂直分割线， 常用于行内元素之间。
+
+divider/vertical-divider
 
 :::
 

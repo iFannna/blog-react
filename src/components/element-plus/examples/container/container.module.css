@@ -1,0 +1,33 @@
+/* Official scoped styles from docs/examples/container/example.vue plus the
+   docs-site reset that removes the default ul margins inside el-menu */
+.layoutDemo :global(.el-header) {
+  position: relative;
+  background-color: var(--el-color-primary-light-7);
+  color: var(--el-text-color-primary);
+}
+
+.layoutDemo :global(.el-aside) {
+  color: var(--el-text-color-primary);
+  background: var(--el-color-primary-light-8);
+}
+
+.layoutDemo :global(.el-menu) {
+  border-right: none;
+}
+
+.layoutDemo :global(.el-menu ul) {
+  margin: 0;
+  padding: 0;
+}
+
+.layoutDemo :global(.el-main) {
+  padding: 0;
+}
+
+.toolbar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  right: 20px;
+}

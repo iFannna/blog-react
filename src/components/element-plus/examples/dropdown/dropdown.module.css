@@ -1,0 +1,65 @@
+/* 对应官方 demo scoped 样式 */
+
+.link {
+  cursor: pointer;
+  color: var(--el-color-primary);
+  display: flex;
+  align-items: center;
+}
+
+.linkPlain {
+  display: flex;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.columns :global(.el-col) {
+  border-radius: 4px;
+}
+
+.gap4 {
+  gap: 16px;
+}
+
+.ml15 {
+  margin-left: 15px;
+}
+
+.mr30 {
+  margin-right: 30px;
+}
+
+.demonstration {
+  display: block;
+  color: var(--el-text-color-secondary);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.methods {
+  font-size: 14px;
+}
+
+.methods p {
+  margin: 0;
+}
+
+.showButton {
+  margin: 15px;
+}
+
+.virtualCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.virtualCard :global(.card-body) {
+  flex-grow: 0;
+}

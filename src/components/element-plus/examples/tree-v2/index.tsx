@@ -13,6 +13,8 @@ import type {
   TreeV2Expose,
 } from "@/components/element-plus/tree-v2";
 
+import treeV2Styles from "./tree-v2.module.css";
+
 /** 对应官方示例里的 style="max-width: 600px"。 */
 const treeWidth: CSSProperties = { maxWidth: "600px" };
 
@@ -302,6 +304,7 @@ export function TreeV2CustomNode() {
 export function TreeV2CustomNodeClass() {
   return (
     <ElTreeV2
+      className={treeV2Styles.nodeClassScope}
       style={treeWidth}
       data={penultimateData}
       showCheckbox
@@ -352,10 +355,10 @@ export function TreeV2Filter() {
   const [query, setQuery] = useState("");
 
   return (
-    <div style={stackStyle}>
+    <>
       <ElInput
         value={query}
-        style={{ width: "240px" }}
+        style={{ width: "240px", display: "inline-flex" }}
         placeholder="Please enter keyword"
         onChange={(value) => {
           setQuery(value);
@@ -372,7 +375,7 @@ export function TreeV2Filter() {
         }
         height={200}
       />
-    </div>
+    </>
   );
 }
 

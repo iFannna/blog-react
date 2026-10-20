@@ -10,10 +10,25 @@ import { ElSwitch } from "@/components/element-plus/switch";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { CaretRight, InfoFilled } from "@/components/element-plus/icons";
 
-const itemText = [
-  "与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念。",
-  "在界面中一致：所有元素和结构应保持一致，比如设计风格、图标和文本、元素的位置等。",
-  "反馈及时：通过界面样式和交互效果让用户清晰感知自己的操作。",
+const consistencyText = [
+  "Consistent with real life: in line with the process and logic of real life, and comply with languages and habits that the users are used to;",
+  "Consistent within interface: all elements should be consistent, such as: design style, icons and texts, position of elements, etc.",
+];
+
+const feedbackText = [
+  "Operation feedback: enable the users to clearly perceive their operations by style updates and interactive effects;",
+  "Visual feedback: reflect current state by updating or rearranging elements of the page.",
+];
+
+const efficiencyText = [
+  "Simplify the process: keep operating process simple and intuitive;",
+  "Definite and clear: enunciate your intentions clearly so that the users can quickly understand and make decisions;",
+  "Easy to identify: the interface should be straightforward, which helps the users to identify and frees them from memorizing and recalling.",
+];
+
+const controllability = (advice: string) => [
+  `Decision making: giving ${advice} about operations is acceptable, but do not make decisions for the users;`,
+  "Controlled consequences: users should be granted the freedom to operate, including canceling, aborting or terminating current operation.",
 ];
 
 const titleWrapperStyle: CSSProperties = {
@@ -27,6 +42,10 @@ const customIconStyle: CSSProperties = {
   color: "var(--el-color-primary)",
 };
 
+function renderTexts(texts: string[]) {
+  return texts.map((text) => <div key={text}>{text}</div>);
+}
+
 export function CollapseBasic() {
   const [activeNames, setActiveNames] = useState<CollapseActiveName[]>(["1"]);
 
@@ -37,23 +56,17 @@ export function CollapseBasic() {
         setActiveNames(Array.isArray(value) ? value : [value])
       }
     >
-      <ElCollapseItem title="一致性 Consistency" name="1">
-        {itemText.map((text) => (
-          <div key={text}>{text}</div>
-        ))}
+      <ElCollapseItem title="Consistency" name="1">
+        {renderTexts(consistencyText)}
       </ElCollapseItem>
-      <ElCollapseItem title="反馈 Feedback" name="2">
-        <div>操作反馈：通过样式更新与交互效果让用户感知操作结果。</div>
-        <div>视觉反馈：通过更新或重排页面元素反映当前状态。</div>
+      <ElCollapseItem title="Feedback" name="2">
+        {renderTexts(feedbackText)}
       </ElCollapseItem>
-      <ElCollapseItem title="效率 Efficiency" name="3">
-        <div>简化流程：保持操作流程简单、直观。</div>
-        <div>清晰明确：清楚地表达意图，帮助用户快速理解决策。</div>
-        <div>易于识别：界面应当直接，减少用户的记忆负担。</div>
+      <ElCollapseItem title="Efficiency" name="3">
+        {renderTexts(efficiencyText)}
       </ElCollapseItem>
-      <ElCollapseItem title="可控性 Controllability" name="4">
-        <div>决策建议：可以给用户操作建议，但不能代替用户决策。</div>
-        <div>结果可控：用户应能自由取消、中止或终止当前操作。</div>
+      <ElCollapseItem title="Controllability" name="4">
+        {renderTexts(controllability("advice"))}
       </ElCollapseItem>
     </ElCollapse>
   );
@@ -70,22 +83,17 @@ export function CollapseAccordion() {
         setActiveName(Array.isArray(value) ? (value[0] ?? "") : value)
       }
     >
-      <ElCollapseItem title="一致性 Consistency" name="1">
-        {itemText.map((text) => (
-          <div key={text}>{text}</div>
-        ))}
+      <ElCollapseItem title="Consistency" name="1">
+        {renderTexts(consistencyText)}
       </ElCollapseItem>
-      <ElCollapseItem title="反馈 Feedback" name="2">
-        <div>操作反馈：通过样式更新与交互效果让用户感知操作结果。</div>
-        <div>视觉反馈：通过更新或重排页面元素反映当前状态。</div>
+      <ElCollapseItem title="Feedback" name="2">
+        {renderTexts(feedbackText)}
       </ElCollapseItem>
-      <ElCollapseItem title="效率 Efficiency" name="3">
-        <div>简化流程：保持操作流程简单、直观。</div>
-        <div>清晰明确：清楚地表达意图，帮助用户快速理解决策。</div>
+      <ElCollapseItem title="Efficiency" name="3">
+        {renderTexts(efficiencyText)}
       </ElCollapseItem>
-      <ElCollapseItem title="可控性 Controllability" name="4">
-        <div>决策建议：可以给用户操作建议，但不能代替用户决策。</div>
-        <div>结果可控：用户应能自由取消、中止或终止当前操作。</div>
+      <ElCollapseItem title="Controllability" name="4">
+        {renderTexts(controllability("advices"))}
       </ElCollapseItem>
     </ElCollapse>
   );
@@ -97,29 +105,26 @@ export function CollapseIconPosition() {
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center", marginBottom: 16 }}>
-        <span style={{ marginRight: 16 }}>expand icon position:</span>
+        <span style={{ marginRight: 16 }}>expand icon position: </span>
         <ElSwitch
           value={position}
           activeValue="right"
           inactiveValue="left"
           activeText="right"
           inactiveText="left"
+          style={{ "--el-switch-off-color": "#88b8fe" } as CSSProperties}
           onChange={(value) => setPosition(value as "left" | "right")}
         />
       </div>
       <ElCollapse expandIconPosition={position}>
-        <ElCollapseItem title="一致性 Consistency" name="1">
-          {itemText.map((text) => (
-            <div key={text}>{text}</div>
-          ))}
+        <ElCollapseItem title="Consistency" name="1">
+          {renderTexts(consistencyText)}
         </ElCollapseItem>
-        <ElCollapseItem title="反馈 Feedback" name="2">
-          <div>操作反馈：通过样式更新与交互效果让用户感知操作结果。</div>
-          <div>视觉反馈：通过更新或重排页面元素反映当前状态。</div>
+        <ElCollapseItem title="Feedback" name="2">
+          {renderTexts(feedbackText)}
         </ElCollapseItem>
-        <ElCollapseItem title="效率 Efficiency" name="3">
-          <div>简化流程：保持操作流程简单、直观。</div>
-          <div>清晰明确：清楚地表达意图，帮助用户快速理解决策。</div>
+        <ElCollapseItem title="Efficiency" name="3">
+          {renderTexts(efficiencyText)}
         </ElCollapseItem>
       </ElCollapse>
     </div>
@@ -136,13 +141,11 @@ export function CollapseCustomIcon() {
         setActiveNames(Array.isArray(value) ? value : [value])
       }
     >
-      <ElCollapseItem title="一致性 Consistency" name="1" icon={<CaretRight />}>
-        {itemText.map((text) => (
-          <div key={text}>{text}</div>
-        ))}
+      <ElCollapseItem title="Consistency" name="1" icon={<CaretRight />}>
+        {renderTexts(consistencyText)}
       </ElCollapseItem>
       <ElCollapseItem
-        title="反馈 Feedback"
+        title="Feedback"
         name="2"
         icon={({ isActive }) => (
           <span style={customIconStyle}>
@@ -150,17 +153,13 @@ export function CollapseCustomIcon() {
           </span>
         )}
       >
-        <div>操作反馈：通过样式更新与交互效果让用户感知操作结果。</div>
-        <div>视觉反馈：通过更新或重排页面元素反映当前状态。</div>
+        {renderTexts(feedbackText)}
       </ElCollapseItem>
-      <ElCollapseItem title="效率 Efficiency" name="3">
-        <div>简化流程：保持操作流程简单、直观。</div>
-        <div>清晰明确：清楚地表达意图，帮助用户快速理解决策。</div>
-        <div>易于识别：界面应当直接，减少用户的记忆负担。</div>
+      <ElCollapseItem title="Efficiency" name="3">
+        {renderTexts(efficiencyText)}
       </ElCollapseItem>
-      <ElCollapseItem title="可控性 Controllability" name="4">
-        <div>决策建议：可以给用户操作建议，但不能代替用户决策。</div>
-        <div>结果可控：用户应能自由取消、中止或终止当前操作。</div>
+      <ElCollapseItem title="Controllability" name="4">
+        {renderTexts(controllability("advices"))}
       </ElCollapseItem>
     </ElCollapse>
   );
@@ -185,21 +184,16 @@ export function CollapseCustomTitle() {
           </div>
         )}
       >
-        {itemText.map((text) => (
-          <div key={text}>{text}</div>
-        ))}
+        {renderTexts(consistencyText)}
       </ElCollapseItem>
       <ElCollapseItem title="Feedback" name="2">
-        <div>操作反馈：通过样式更新与交互效果让用户感知操作结果。</div>
-        <div>视觉反馈：通过更新或重排页面元素反映当前状态。</div>
+        {renderTexts(feedbackText)}
       </ElCollapseItem>
       <ElCollapseItem title="Efficiency" name="3">
-        <div>简化流程：保持操作流程简单、直观。</div>
-        <div>清晰明确：清楚地表达意图，帮助用户快速理解决策。</div>
+        {renderTexts(efficiencyText)}
       </ElCollapseItem>
       <ElCollapseItem title="Controllability" name="4">
-        <div>决策建议：可以给用户操作建议，但不能代替用户决策。</div>
-        <div>结果可控：用户应能自由取消、中止或终止当前操作。</div>
+        {renderTexts(controllability("advices"))}
       </ElCollapseItem>
     </ElCollapse>
   );
@@ -223,7 +217,7 @@ export function CollapsePreventCollapsing() {
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center", marginBottom: 16 }}>
-        <span style={{ marginRight: 16 }}>before collapse return:</span>
+        <span style={{ marginRight: 16 }}>before collapse return: </span>
         <ElSwitch
           checked={before}
           activeText="true"
@@ -240,22 +234,17 @@ export function CollapsePreventCollapsing() {
         }
         beforeCollapse={beforeCollapse}
       >
-        <ElCollapseItem title="一致性 Consistency" name="1">
-          {itemText.map((text) => (
-            <div key={text}>{text}</div>
-          ))}
+        <ElCollapseItem title="Consistency" name="1">
+          {renderTexts(consistencyText)}
         </ElCollapseItem>
-        <ElCollapseItem title="反馈 Feedback" name="2">
-          <div>操作反馈：通过样式更新与交互效果让用户感知操作结果。</div>
-          <div>视觉反馈：通过更新或重排页面元素反映当前状态。</div>
+        <ElCollapseItem title="Feedback" name="2">
+          {renderTexts(feedbackText)}
         </ElCollapseItem>
-        <ElCollapseItem title="效率 Efficiency" name="3">
-          <div>简化流程：保持操作流程简单、直观。</div>
-          <div>清晰明确：清楚地表达意图，帮助用户快速理解决策。</div>
+        <ElCollapseItem title="Efficiency" name="3">
+          {renderTexts(efficiencyText)}
         </ElCollapseItem>
-        <ElCollapseItem title="可控性 Controllability" name="4">
-          <div>决策建议：可以给用户操作建议，但不能代替用户决策。</div>
-          <div>结果可控：用户应能自由取消、中止或终止当前操作。</div>
+        <ElCollapseItem title="Controllability" name="4">
+          {renderTexts(controllability("advices"))}
         </ElCollapseItem>
       </ElCollapse>
     </div>

@@ -1,11 +1,15 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, type HTMLAttributes, type ReactNode } from "react";
 import { ElDropdown } from "@/components/element-plus/dropdown/ElDropdown";
 import { ElDropdownMenu } from "@/components/element-plus/dropdown/ElDropdownMenu";
 import { ElDropdownItem } from "@/components/element-plus/dropdown/ElDropdownItem";
 import type { DropdownExpose } from "@/components/element-plus/dropdown/ElDropdown";
 import { ElButton } from "@/components/element-plus/button";
+import { ElCard } from "@/components/element-plus/card";
+import { ElCol } from "@/components/element-plus/row/ElCol";
+import { ElRow } from "@/components/element-plus/row/ElRow";
+import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { message } from "@/components/element-plus/message";
 import {
   ArrowDown,
@@ -15,22 +19,21 @@ import {
   CirclePlusFilled,
   Plus,
 } from "@/components/element-plus/icons";
+import styles from "./dropdown.module.css";
 
-const row = {
-  display: "flex",
-  gap: "1.6rem",
-  flexWrap: "wrap" as const,
-  alignItems: "center",
-};
+function DropdownLink({
+  children,
+  ...rest
+}: { children: ReactNode } & HTMLAttributes<HTMLSpanElement>) {
+  // 官方插槽内容由 ElOnlyChild 合并触发器事件/role/tabindex，这里需要透传
+  return (
+    <span {...rest} className={`el-dropdown-link ${styles.link}`}>
+      {children}
+    </span>
+  );
+}
 
-const linkStyle = {
-  cursor: "pointer",
-  color: "var(--el-color-primary)",
-  display: "flex",
-  alignItems: "center",
-};
-
-function Actions() {
+function Actions({ dividedLast = false }: { dividedLast?: boolean }) {
   return (
     <ElDropdownMenu>
       <ElDropdownItem>Action 1</ElDropdownItem>
@@ -38,6 +41,7 @@ function Actions() {
       <ElDropdownItem>Action 3</ElDropdownItem>
       <ElDropdownItem disabled>Action 4</ElDropdownItem>
       <ElDropdownItem divided>Action 5</ElDropdownItem>
+      {dividedLast && <ElDropdownItem divided>Action 6</ElDropdownItem>}
     </ElDropdownMenu>
   );
 }
@@ -57,76 +61,94 @@ function IconActions() {
 export function DropdownBasicUsage() {
   return (
     <ElDropdown menu={<Actions />}>
-      <span style={linkStyle}>
+      <DropdownLink>
         Dropdown List
-        <ArrowDown style={{ marginLeft: 6 }} />
-      </span>
+        <ElIcon className="el-icon--right">
+          <ArrowDown />
+        </ElIcon>
+      </DropdownLink>
     </ElDropdown>
   );
 }
 
 export function DropdownPlacements() {
   return (
-    <div style={row}>
-      {(["top-start", "top", "top-end", "bottom-start", "bottom", "bottom-end"] as const).map(
-        (placement) => (
-          <ElDropdown key={placement} placement={placement} menu={<Actions />}>
-            <ElButton>{placement}</ElButton>
-          </ElDropdown>
-        ),
-      )}
+    <div className={`${styles.row} ${styles.gap4}`}>
+      {([
+        ["top-start", "topStart"],
+        ["top", "top"],
+        ["top-end", "topEnd"],
+        ["bottom-start", "bottomStart"],
+        ["bottom", "bottom"],
+        ["bottom-end", "bottomEnd"],
+      ] as const).map(([placement, label]) => (
+        <ElDropdown key={placement} placement={placement} menu={<Actions />}>
+          <ElButton>{label}</ElButton>
+        </ElDropdown>
+      ))}
     </div>
   );
 }
 
 export function DropdownTriggeringElement() {
   return (
-    <div style={row}>
+    <div className={styles.row}>
       <ElDropdown menu={<Actions />}>
         <ElButton type="primary">
           Dropdown List
-          <ArrowDown style={{ marginLeft: 6 }} />
+          <ElIcon className="el-icon--right">
+            <ArrowDown />
+          </ElIcon>
         </ElButton>
       </ElDropdown>
       <ElDropdown
         splitButton
         type="primary"
+        className={styles.ml15}
         onButtonClick={() => message("button click")}
         menu={<Actions />}
       >
-        <span>Dropdown List</span>
+        <>Dropdown List</>
       </ElDropdown>
     </div>
   );
 }
 
 export function DropdownHowToTrigger() {
+  const triggers = [
+    ["hover", "hover to trigger"],
+    ["click", "click to trigger"],
+    ["contextmenu", "right click to trigger"],
+  ] as const;
+
   return (
-    <div style={row}>
-      {(["hover", "click", "contextmenu"] as const).map((trigger) => (
-        <div key={trigger} style={{ display: "grid", gap: "1.2rem" }}>
-          <span style={{ color: "var(--el-text-color-secondary)", fontSize: 14 }}>
-            {trigger} to trigger
-          </span>
+    <ElRow className={styles.columns}>
+      {triggers.map(([trigger, label]) => (
+        <ElCol key={trigger} span={8}>
+          <span className={styles.demonstration}>{label}</span>
           <ElDropdown trigger={trigger} menu={<IconActions />}>
-            <span style={linkStyle}>
+            <span className={`el-dropdown-link ${styles.linkPlain}`}>
               Dropdown List
-              <ArrowDown style={{ marginLeft: 6 }} />
+              <ElIcon className="el-icon--right">
+                <ArrowDown />
+              </ElIcon>
             </span>
           </ElDropdown>
-        </div>
+        </ElCol>
       ))}
-    </div>
+    </ElRow>
   );
 }
 
 export function DropdownMenuHidingBehavior() {
   return (
-    <ElDropdown hideOnClick={false} menu={<Actions />}>
-      <span style={linkStyle}>
+    <ElDropdown hideOnClick={false} menu={<Actions dividedLast />}>
+      <DropdownLink>
         Dropdown List
-        <ArrowDown style={{ marginLeft: 6 }} />
-      </span>
+        <ElIcon className="el-icon--right">
+          <ArrowDown />
+        </ElIcon>
+      </DropdownLink>
     </ElDropdown>
   );
 }
@@ -145,10 +167,12 @@ export function DropdownCommandEvent() {
         </ElDropdownMenu>
       }
     >
-      <span style={linkStyle}>
+      <DropdownLink>
         Dropdown List
-        <ArrowDown style={{ marginLeft: 6 }} />
-      </span>
+        <ElIcon className="el-icon--right">
+          <ArrowDown />
+        </ElIcon>
+      </DropdownLink>
     </ElDropdown>
   );
 }
@@ -156,47 +180,59 @@ export function DropdownCommandEvent() {
 export function DropdownMethods() {
   const dropdownRef = useRef<DropdownExpose | null>(null);
   return (
-    <div style={{ display: "grid", gap: "1.4rem" }}>
-      <p style={{ margin: 0 }}>
-        open(close) the Dropdown list2 will close(open) the Dropdown List1.
-      </p>
-      <div style={row}>
-        <ElButton onClick={() => dropdownRef.current?.handleOpen()}>show</ElButton>
-        <ElDropdown ref={dropdownRef} trigger="contextmenu" menu={<Actions />}>
-          <span style={linkStyle}>Dropdown List1</span>
-        </ElDropdown>
-        <ElDropdown
-          trigger="contextmenu"
-          menu={<Actions />}
-          onVisibleChange={(visible) => {
-            if (visible) dropdownRef.current?.handleClose();
-            else dropdownRef.current?.handleOpen();
-          }}
-        >
-          <span style={linkStyle}>Dropdown List2</span>
-        </ElDropdown>
+    <>
+      <div className={styles.methods}>
+        <p>open(close) the Dropdown list2 will close(open) the Dropdown List1.</p>
       </div>
-    </div>
+      <div className={styles.showButton}>
+        <ElButton onClick={() => dropdownRef.current?.handleOpen()}>show</ElButton>
+      </div>
+      <ElDropdown
+        ref={dropdownRef}
+        trigger="contextmenu"
+        className={styles.mr30}
+        menu={<Actions />}
+      >
+        <span className={`el-dropdown-link ${styles.link}`}>Dropdown List1</span>
+      </ElDropdown>
+      <ElDropdown
+        trigger="contextmenu"
+        menu={<Actions />}
+        onVisibleChange={(visible) => {
+          if (visible) dropdownRef.current?.handleClose();
+          else dropdownRef.current?.handleOpen();
+        }}
+      >
+        <span className={`el-dropdown-link ${styles.link}`}>Dropdown List2</span>
+      </ElDropdown>
+    </>
   );
 }
 
 export function DropdownSizes() {
   return (
-    <div style={row}>
-      {(["large", "default", "small"] as const).map((size) => (
-        <ElDropdown
-          key={size}
-          size={size === "default" ? undefined : size}
-          splitButton
-          type="primary"
-          menu={<Actions />}
-        >
-          <span>
-            {size === "default" ? "Default" : size === "large" ? "Large" : "Small"}
-          </span>
-        </ElDropdown>
-      ))}
-    </div>
+    <>
+      <ElDropdown size="large" splitButton type="primary" menu={<Actions />}>
+        <>Large</>
+      </ElDropdown>
+      <ElDropdown
+        splitButton
+        type="primary"
+        className={styles.ml15}
+        menu={<Actions />}
+      >
+        <>Default</>
+      </ElDropdown>
+      <ElDropdown
+        size="small"
+        splitButton
+        type="primary"
+        className={styles.ml15}
+        menu={<Actions />}
+      >
+        <>Small</>
+      </ElDropdown>
+    </>
   );
 }
 
@@ -211,15 +247,6 @@ export function DropdownVirtualTrigger() {
   return (
     <>
       <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: 200,
-          border: "1px dashed var(--el-border-color)",
-          borderRadius: 4,
-          cursor: "context-menu",
-        }}
         onClick={() => dropdownRef.current?.handleClose()}
         onContextMenu={(event) => {
           const { clientX, clientY } = event;
@@ -228,7 +255,9 @@ export function DropdownVirtualTrigger() {
           dropdownRef.current?.handleOpen();
         }}
       >
-        Right click
+        <ElCard className={styles.virtualCard} bodyClass="card-body">
+          Right click
+        </ElCard>
       </div>
       <ElDropdown
         ref={dropdownRef}

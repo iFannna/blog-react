@@ -1,9 +1,15 @@
 "use client";
 
-import { useEffect, useId, useRef, type ReactNode } from "react";
+import {
+  useEffect,
+  useId,
+  useRef,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 import { ElRadio } from "./ElRadio";
 import { RadioGroupContext, type RadioValue } from "./context";
-import { useFormItem } from "../form/use-form";
+import { useFormItem, useFormItemInputId } from "../form/use-form";
 import type { ComponentSize } from "../button/types";
 
 export interface RadioGroupProps {
@@ -32,6 +38,7 @@ export interface RadioGroupProps {
   /** 渲染形态，对应官方 type */
   type?: "radio" | "button";
   className?: string;
+  style?: CSSProperties;
   children?: ReactNode;
 }
 
@@ -57,9 +64,11 @@ export function ElRadioGroup({
   optionProps,
   type = "radio",
   className,
+  style,
   children,
 }: RadioGroupProps) {
   const alias = { ...DEFAULT_OPTION_PROPS, ...optionProps };
+  const { inputId } = useFormItemInputId({ id, ariaLabel });
   // 官方未传 name 时会生成一个组内共用的 name，保证浏览器原生单选组语义
   const generatedName = useId();
   const resolvedName = name ?? generatedName;
@@ -101,8 +110,9 @@ export function ElRadioGroup({
       }}
     >
       <div
-        id={id}
+        id={inputId}
         className={classes}
+        style={style}
         role="radiogroup"
         aria-label={ariaLabel}
       >

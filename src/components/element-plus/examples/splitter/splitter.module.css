@@ -1,0 +1,4 @@
+/* Official demos use the mb-2 utility (0.5rem = 8px) on the switch */
+.switch {
+  margin-bottom: 8px;
+}

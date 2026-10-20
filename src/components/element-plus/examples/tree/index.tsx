@@ -11,13 +11,15 @@ import type {
 import { ElButton } from "@/components/element-plus/button";
 import { ElInput } from "@/components/element-plus/input";
 
+import treeStyles from "./tree.module.css";
+
 /** 各示例共用的「限宽 600px」，对应官方示例里的 style="max-width: 600px"。 */
 const treeWidth: CSSProperties = { maxWidth: "600px" };
 
 const row: CSSProperties = {
   display: "flex",
   flexWrap: "wrap",
-  gap: "0.8rem",
+  gap: "0.4rem",
   marginTop: "0.8rem",
 };
 
@@ -308,7 +310,7 @@ export function TreeChecking() {
         props={defaultProps}
       />
 
-      <div style={row}>
+      <div className={treeStyles.buttonRow} style={row}>
         <ElButton onClick={() => console.log(tree?.getCheckedNodes(false, false))}>
           get by node
         </ElButton>
@@ -420,8 +422,8 @@ export function TreeCustomizedNode() {
   };
 
   return (
-    <div style={stack}>
-      <p>Using render-content</p>
+    <div>
+      <p className={treeStyles.firstParagraph}>Using render-content</p>
       <ElTree
         onReady={setRenderTree}
         style={treeWidth}
@@ -432,7 +434,7 @@ export function TreeCustomizedNode() {
         expandOnClickNode={false}
         renderContent={renderContent}
       />
-      <p>Using scoped slot</p>
+      <p className={treeStyles.paragraph}>Using scoped slot</p>
       <ElTree
         onReady={setSlotTree}
         style={treeWidth}
@@ -505,6 +507,7 @@ const penultimateData: TreeNodeData[] = [
 export function TreeCustomNodeClass() {
   return (
     <ElTree
+      className={treeStyles.nodeClassScope}
       style={treeWidth}
       data={penultimateData}
       showCheckbox
@@ -527,14 +530,14 @@ export function TreeFiltering() {
   const [filterText, setFilterText] = useState("");
 
   return (
-    <div style={stack}>
+    <>
       <ElInput
         value={filterText}
         onChange={(value) => {
           setFilterText(value);
           tree?.filter(value);
         }}
-        style={{ width: "240px" }}
+        style={{ width: "240px", marginBottom: 8, display: "inline-flex" }}
         placeholder="Filter keyword"
       />
       <ElTree
@@ -548,7 +551,7 @@ export function TreeFiltering() {
           return String(data.label).includes(String(value));
         }}
       />
-    </div>
+    </>
   );
 }
 

@@ -19,14 +19,16 @@ const SOURCES = {
   locale: `const [lang, setLang] = useState<"zh-cn" | "en">("zh-cn");
 const locale = lang === "zh-cn" ? zhCn : en;
 
-<ElButton onClick={() => setLang((v) => (v === "zh-cn" ? "en" : "zh-cn"))}>
-  切换语言
+<ElButton
+  style={{ marginBottom: "8px" }}
+  onClick={() => setLang((v) => (v === "zh-cn" ? "en" : "zh-cn"))}
+>
+  Switch Language
 </ElButton>
+<br />
 
 <ElConfigProvider locale={locale}>
-  <ElTable data={[]}>
-    <ElTableColumn prop="name" label="Name" />
-  </ElTable>
+  <ElTable data={[]} style={{ marginBottom: "4px" }} />
   <ElPagination total={100} />
 </ElConfigProvider>`,
 
@@ -64,9 +66,16 @@ const config = useMemo(() => ({ shadow }), [shadow]);
   draggable: false,
   overflow: false,
 });
+const [enableTransition, setEnableTransition] = useState(false);
+const [isObjectTransition, setIsObjectTransition] = useState(false);
 
-<ElConfigProvider dialog={config}>
-  <ElDialog visible={visible} onVisibleChange={setVisible} title="Dialog Title">
+<ElConfigProvider dialog={dialogConfig}>
+  <ElDialog
+    visible={visible}
+    onVisibleChange={setVisible}
+    title="Dialog Title"
+    destroyOnClose
+  >
     Dialog Content
   </ElDialog>
 </ElConfigProvider>`,
@@ -77,13 +86,23 @@ const config = useMemo(() => ({ shadow }), [shadow]);
   <ElButton onClick={() => message("This is a message from bottom.")}>OPEN</ElButton>
 </ElConfigProvider>`,
 
-  emptyValues: `const [value, setValue] = useState<string | null | undefined>("");
+  emptyValues: `const [value1, setValue1] = useState<string | null | undefined>("");
+const [value2, setValue2] = useState<string | null | undefined>("");
 
 {/* 空值集合用 [undefined, null]（空字符串是有意义的值），清空后写回 null */}
 <ElConfigProvider valueOnClear={null} emptyValues={[undefined, null]}>
   <ElSelect
-    value={value ?? undefined}
-    onChange={setValue}
+    value={value1 ?? undefined}
+    onChange={setValue1}
+    clearable
+    placeholder="Select"
+    options={options}
+    style={{ width: "240px" }}
+  />
+  <ElSelectV2
+    value={value2 ?? undefined}
+    onChange={setValue2}
+    valueOnClear={() => undefined}
     clearable
     placeholder="Select"
     options={options}
@@ -299,6 +318,12 @@ export default function ConfigProviderPage() {
       <DemoBlock source={SOURCES.table}>
         <ConfigProviderTable />
       </DemoBlock>
+
+      <Heading level={2}>实验性功能</Heading>
+      <p>
+        在本节中，您可以学习如何使用 Config Provider 来提供实验性功能。现在，我们还没有添加任何实验性功能，
+        但在未来的规划中，我们将添加一些实验性功能。您可以使用此配置来管理这些功能。
+      </p>
 
       <DocsContent source={API_MD} />
     </>

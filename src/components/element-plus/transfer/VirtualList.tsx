@@ -16,8 +16,11 @@ const CACHE = 2;
 const SCROLLBAR_MIN_SIZE = 20;
 /** 官方固定尺寸列表的滚动条宽度。 */
 const SCROLLBAR_SIZE = 6;
-/** 官方 makeThumbStyle 的 translate 单位是 px（与 el-scrollbar 的百分比不同）。 */
-const GAP = 4;
+/**
+ * 官方 startGap 默认 0、endGap 默认 2（track 上下各留 2px 靠定位实现），
+ * 因此参与计算的 GAP 是 2，而不是 4。
+ */
+const GAP = 2;
 
 export interface TransferVirtualListProps<T> {
   data: T[];
@@ -149,12 +152,13 @@ export function TransferVirtualList<T>({
     borderRadius: 4,
   };
 
-  const thumbStyle: CSSProperties = {
-    width: "100%",
-    height: Number.isFinite(thumbSize) ? thumbSize : "100%",
-    display: Number.isFinite(thumbSize) ? undefined : "none",
-    transform: `translateY(${traveled}px)`,
-  };
+  const thumbStyle: CSSProperties = Number.isFinite(thumbSize)
+    ? {
+        width: "100%",
+        height: thumbSize,
+        transform: `translateY(${traveled}px)`,
+      }
+    : { display: "none" };
 
   /** 官方 onScrollbarScroll：把滑块位移换算成列表偏移。 */
   const handleBarScroll = useCallback(

@@ -14,46 +14,64 @@ export function CalendarExampleLocale({ children }: { children: ReactNode }) {
 
 export function CalendarBasic() {
   const [value, setValue] = useState(new Date());
-  return <ElCalendar value={value} onChange={setValue} />;
+  return (
+    <CalendarExampleLocale>
+      <ElCalendar value={value} onChange={setValue} />
+    </CalendarExampleLocale>
+  );
 }
 
 export function CalendarController() {
   const [controllerType, setControllerType] = useState<"select" | "button">("select");
   const [value, setValue] = useState(new Date());
-  return <>
-    <ElRadioGroup value={controllerType} onChange={(next) => setControllerType(next as "select" | "button")}>
-      <ElRadio value="select" button>select</ElRadio>
-      <ElRadio value="button" button>button</ElRadio>
-    </ElRadioGroup>
-    <ElCalendar value={value} onChange={setValue} controllerType={controllerType} />
-  </>;
+  return (
+    <CalendarExampleLocale>
+      <ElRadioGroup value={controllerType} onChange={(next) => setControllerType(next as "select" | "button")}>
+        <ElRadio value="select" button>select</ElRadio>
+        <ElRadio value="button" button>button</ElRadio>
+      </ElRadioGroup>
+      <ElCalendar value={value} onChange={setValue} controllerType={controllerType} />
+    </CalendarExampleLocale>
+  );
 }
 
 export function CalendarCustomize() {
-  return <ElCalendar renderDateCell={(data) => (
-    <p className={data.isSelected ? "is-selected" : ""}>
-      {data.day.split("-").slice(1).join("-")}
-      {data.isSelected && <Check width="1em" height="1em" />}
-    </p>
-  )} />;
+  return (
+    <CalendarExampleLocale>
+      <ElCalendar renderDateCell={(data) => (
+        <p className={data.isSelected ? "is-selected" : ""}>
+          {data.day.split("-").slice(1).join("-")}
+          {data.isSelected && <Check width="1em" height="1em" />}
+        </p>
+      )} />
+    </CalendarExampleLocale>
+  );
 }
 
 export function CalendarRange() {
-  return <ElCalendar range={[new Date(2019, 2, 4), new Date(2019, 2, 24)]} />;
+  return (
+    <CalendarExampleLocale>
+      <ElCalendar range={[new Date(2019, 2, 4), new Date(2019, 2, 24)]} />
+    </CalendarExampleLocale>
+  );
 }
 
 export function CalendarHeader() {
   const calendar = useRef<CalendarRef>(null);
   const selectDate = (type: CalendarDateType) => calendar.current?.selectDate(type);
-  return <ElCalendar ref={calendar} renderHeader={(date) => <>
-    <span>Custom header content</span>
-    <span>{date}</span>
-    <ElButtonGroup>
-      <ElButton size="small" onClick={() => selectDate("prev-year")}>Previous Year</ElButton>
-      <ElButton size="small" onClick={() => selectDate("prev-month")}>Previous Month</ElButton>
-      <ElButton size="small" onClick={() => selectDate("today")}>Today</ElButton>
-      <ElButton size="small" onClick={() => selectDate("next-month")}>Next Month</ElButton>
-      <ElButton size="small" onClick={() => selectDate("next-year")}>Next Year</ElButton>
-    </ElButtonGroup>
-  </>} />;
+  return (
+    <CalendarExampleLocale>
+      <ElCalendar ref={calendar} renderHeader={(date) => <>
+        <span>Custom header content</span>
+        <span>{date}</span>
+        <ElButtonGroup>
+          <ElButton size="small" onClick={() => selectDate("prev-year")}>Previous Year</ElButton>
+          <ElButton size="small" onClick={() => selectDate("prev-month")}>Previous Month</ElButton>
+          <ElButton size="small" onClick={() => selectDate("today")}>Today</ElButton>
+          <ElButton size="small" onClick={() => selectDate("next-month")}>Next Month</ElButton>
+          <ElButton size="small" onClick={() => selectDate("next-year")}>Next Year</ElButton>
+        </ElButtonGroup>
+      </>} />
+    </CalendarExampleLocale>
+  );
 }

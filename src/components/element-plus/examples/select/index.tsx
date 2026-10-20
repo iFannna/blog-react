@@ -14,16 +14,14 @@ import type { ComponentSize } from "@/components/element-plus/button/types";
 
 const row = {
   display: "flex",
-  gap: "1.2rem",
+  gap: 16,
   flexWrap: "wrap" as const,
   alignItems: "center",
 };
 
-const column = {
+const wrap = {
   display: "flex",
-  flexDirection: "column" as const,
-  gap: "0.8rem",
-  margin: "1.6rem",
+  flexWrap: "wrap" as const,
 };
 
 const BASIC_OPTIONS: SelectOptionType[] = [
@@ -189,8 +187,8 @@ export function SelectMultiple() {
   const [value4, setValue4] = useState<SelectValue>([]);
 
   return (
-    <div style={row}>
-      <div style={column}>
+    <>
+      <div style={{ margin: 16 }}>
         <p>default</p>
         <ElSelect
           value={value1}
@@ -201,7 +199,7 @@ export function SelectMultiple() {
           style={{ width: 240 }}
         />
       </div>
-      <div style={column}>
+      <div style={{ margin: 16 }}>
         <p>use collapse-tags</p>
         <ElSelect
           value={value2}
@@ -213,7 +211,7 @@ export function SelectMultiple() {
           style={{ width: 240 }}
         />
       </div>
-      <div style={column}>
+      <div style={{ margin: 16 }}>
         <p>use collapse-tags-tooltip</p>
         <ElSelect
           value={value3}
@@ -226,7 +224,7 @@ export function SelectMultiple() {
           style={{ width: 240 }}
         />
       </div>
-      <div style={column}>
+      <div style={{ margin: 16 }}>
         <p>use max-collapse-tags</p>
         <ElSelect
           value={value4}
@@ -240,7 +238,7 @@ export function SelectMultiple() {
           style={{ width: 240 }}
         />
       </div>
-    </div>
+    </>
   );
 }
 
@@ -280,9 +278,9 @@ export function SelectRemoteSearch() {
   };
 
   return (
-    <div style={row}>
-      <div style={column}>
-        <p>default</p>
+    <div style={wrap}>
+      <div style={{ margin: 16 }}>
+        <p style={{ marginTop: 0 }}>default</p>
         <ElSelect
           value={value}
           onChange={setValue}
@@ -297,8 +295,8 @@ export function SelectRemoteSearch() {
           style={{ width: 240 }}
         />
       </div>
-      <div style={column}>
-        <p>use remote-show-suffix</p>
+      <div style={{ margin: 16 }}>
+        <p style={{ marginTop: 0 }}>use remote-show-suffix</p>
         <ElSelect
           value={value}
           onChange={setValue}
@@ -614,9 +612,9 @@ export function SelectCustomLoading() {
   );
 
   return (
-    <div style={row}>
-      <div style={column}>
-        <p>loading icon1</p>
+    <div style={wrap}>
+      <div style={{ margin: 16 }}>
+        <p style={{ marginTop: 0 }}>loading icon1</p>
         <ElSelect
           value={value}
           onChange={setValue}
@@ -632,8 +630,8 @@ export function SelectCustomLoading() {
           style={{ width: 240 }}
         />
       </div>
-      <div style={column}>
-        <p>loading icon2</p>
+      <div style={{ margin: 16 }}>
+        <p style={{ marginTop: 0 }}>loading icon2</p>
         <ElSelect
           value={value}
           onChange={setValue}
@@ -706,7 +704,7 @@ export function SelectValueKey() {
       : undefined;
 
   return (
-    <div style={column}>
+    <div style={{ margin: 16 }}>
       <ElSelect
         value={value}
         onChange={setValue}

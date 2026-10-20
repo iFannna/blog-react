@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ElTimeSelect } from "@/components/element-plus/time-select";
 
-const row = { display: "flex", gap: "1.2rem", flexWrap: "wrap" as const };
+const row = { display: "flex", gap: 16, flexWrap: "wrap" as const };
 
 /** 对应官方 time-select/basic。 */
 export function TimeSelectBasic() {

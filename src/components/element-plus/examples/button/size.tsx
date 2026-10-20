@@ -2,12 +2,12 @@
 
 import { ElButton } from "@/components/element-plus/button";
 import { Search } from "@/components/element-plus/icons";
-import { exampleRow, exampleStack } from "./styles";
+import { flexRow, flexRowLast } from "./styles";
 
 export default function ButtonSize() {
   return (
-    <div style={exampleStack}>
-      <div style={exampleRow}>
+    <>
+      <div className={flexRow}>
         <ElButton size="large">Large</ElButton>
         <ElButton>Default</ElButton>
         <ElButton size="small">Small</ElButton>
@@ -20,7 +20,7 @@ export default function ButtonSize() {
         </ElButton>
       </div>
 
-      <div style={exampleRow}>
+      <div className={flexRow}>
         <ElButton size="large" round>Large</ElButton>
         <ElButton round>Default</ElButton>
         <ElButton size="small" round>Small</ElButton>
@@ -35,11 +35,11 @@ export default function ButtonSize() {
         </ElButton>
       </div>
 
-      <div style={exampleRow}>
+      <div className={flexRowLast}>
         <ElButton icon={<Search />} size="large" circle aria-label="search" />
         <ElButton icon={<Search />} circle aria-label="search" />
         <ElButton icon={<Search />} size="small" circle aria-label="search" />
       </div>
-    </div>
+    </>
   );
 }

@@ -1,11 +1,12 @@
 "use client";
 
-import { useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { useRef, useState } from "react";
 import { ElTabs, ElTabPane, type TabPosition } from "@/components/element-plus/tabs";
 import { ElButton } from "@/components/element-plus/button";
 import { ElRadio, ElRadioGroup } from "@/components/element-plus/radio";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { Calendar, Select } from "@/components/element-plus/icons";
+import styles from "./tabs.module.css";
 
 interface EditableTab {
   title: string;
@@ -13,40 +14,14 @@ interface EditableTab {
   content: string;
 }
 
-// 对应官方 demo 的 .demo-tabs > .el-tabs__content 样式
-const contentStyle: CSSProperties = {
-  padding: 32,
-  color: "var(--el-text-color-regular)",
-  fontSize: 32,
-  fontWeight: 600,
-};
-
-const labelStyle: CSSProperties = {
-  display: "inline-flex",
-  alignItems: "center",
-  gap: 4,
-};
-
-function TabContent({ children }: { children: ReactNode }) {
-  return <div style={contentStyle}>{children}</div>;
-}
-
 export function TabsBasic() {
   const [active, setActive] = useState<string | number>("first");
   return (
-    <ElTabs value={active} onChange={setActive}>
-      <ElTabPane name="first" label="User">
-        <TabContent>User</TabContent>
-      </ElTabPane>
-      <ElTabPane name="second" label="Config">
-        <TabContent>Config</TabContent>
-      </ElTabPane>
-      <ElTabPane name="third" label="Role">
-        <TabContent>Role</TabContent>
-      </ElTabPane>
-      <ElTabPane name="fourth" label="Task">
-        <TabContent>Task</TabContent>
-      </ElTabPane>
+    <ElTabs value={active} onChange={setActive} className={styles.demoTabs}>
+      <ElTabPane name="first" label="User">User</ElTabPane>
+      <ElTabPane name="second" label="Config">Config</ElTabPane>
+      <ElTabPane name="third" label="Role">Role</ElTabPane>
+      <ElTabPane name="fourth" label="Task">Task</ElTabPane>
     </ElTabs>
   );
 }
@@ -54,19 +29,11 @@ export function TabsBasic() {
 export function TabsCard() {
   const [active, setActive] = useState<string | number>("first");
   return (
-    <ElTabs value={active} onChange={setActive} type="card">
-      <ElTabPane name="first" label="User">
-        <TabContent>User</TabContent>
-      </ElTabPane>
-      <ElTabPane name="second" label="Config">
-        <TabContent>Config</TabContent>
-      </ElTabPane>
-      <ElTabPane name="third" label="Role">
-        <TabContent>Role</TabContent>
-      </ElTabPane>
-      <ElTabPane name="fourth" label="Task">
-        <TabContent>Task</TabContent>
-      </ElTabPane>
+    <ElTabs value={active} onChange={setActive} type="card" className={styles.demoTabs}>
+      <ElTabPane name="first" label="User">User</ElTabPane>
+      <ElTabPane name="second" label="Config">Config</ElTabPane>
+      <ElTabPane name="third" label="Role">Role</ElTabPane>
+      <ElTabPane name="fourth" label="Task">Task</ElTabPane>
     </ElTabs>
   );
 }
@@ -74,28 +41,20 @@ export function TabsCard() {
 export function TabsBorderCard() {
   return (
     <ElTabs type="border-card">
-      <ElTabPane label="User">
-        <TabContent>User</TabContent>
-      </ElTabPane>
-      <ElTabPane label="Config">
-        <TabContent>Config</TabContent>
-      </ElTabPane>
-      <ElTabPane label="Role">
-        <TabContent>Role</TabContent>
-      </ElTabPane>
-      <ElTabPane label="Task">
-        <TabContent>Task</TabContent>
-      </ElTabPane>
+      <ElTabPane label="User">User</ElTabPane>
+      <ElTabPane label="Config">Config</ElTabPane>
+      <ElTabPane label="Role">Role</ElTabPane>
+      <ElTabPane label="Task">Task</ElTabPane>
     </ElTabs>
   );
 }
 
 export function TabsCustomLabel() {
   return (
-    <ElTabs type="border-card">
+    <ElTabs type="border-card" className={styles.demoTabs}>
       <ElTabPane
         label={
-          <span className="custom-tabs-label" style={labelStyle}>
+          <span className="custom-tabs-label">
             <ElIcon>
               <Calendar />
             </ElIcon>
@@ -103,17 +62,11 @@ export function TabsCustomLabel() {
           </span>
         }
       >
-        <TabContent>Route</TabContent>
+        Route
       </ElTabPane>
-      <ElTabPane label="Config">
-        <TabContent>Config</TabContent>
-      </ElTabPane>
-      <ElTabPane label="Role">
-        <TabContent>Role</TabContent>
-      </ElTabPane>
-      <ElTabPane label="Task">
-        <TabContent>Task</TabContent>
-      </ElTabPane>
+      <ElTabPane label="Config">Config</ElTabPane>
+      <ElTabPane label="Role">Role</ElTabPane>
+      <ElTabPane label="Task">Task</ElTabPane>
     </ElTabs>
   );
 }
@@ -159,6 +112,7 @@ export function TabsCustomAddIcon() {
       type="card"
       editable
       onEdit={handleEdit}
+      className={styles.demoTabs}
       addIcon={
         <ElIcon>
           <Select />
@@ -167,7 +121,7 @@ export function TabsCustomAddIcon() {
     >
       {tabs.map((tab) => (
         <ElTabPane key={tab.name} name={tab.name} label={tab.title}>
-          <TabContent>{tab.content}</TabContent>
+          {tab.content}
         </ElTabPane>
       ))}
     </ElTabs>
@@ -215,10 +169,11 @@ export function TabsCustomizedTrigger() {
         type="card"
         closable
         onTabRemove={removeTab}
+        className={styles.demoTabs}
       >
         {tabs.map((tab) => (
           <ElTabPane key={tab.name} name={tab.name} label={tab.title}>
-            <TabContent>{tab.content}</TabContent>
+            {tab.content}
           </ElTabPane>
         ))}
       </ElTabs>
@@ -230,34 +185,30 @@ export function TabsCustomizedTrigger() {
 export function TabsDefaultValue() {
   const [active, setActive] = useState<string | number>();
   return (
-    <ElTabs defaultValue="third" onChange={setActive}>
+    <ElTabs
+      defaultValue="third"
+      onChange={setActive}
+      className={styles.demoTabs}
+    >
       <ElTabPane name="first" label="User">
-        <TabContent>
-          default-value: third
-          <br />
-          active: {active ?? ""}
-        </TabContent>
+        default-value: third
+        <br />
+        active: {active ?? ""}
       </ElTabPane>
       <ElTabPane name="second" label="Config">
-        <TabContent>
-          default-value: third
-          <br />
-          active: {active ?? ""}
-        </TabContent>
+        default-value: third
+        <br />
+        active: {active ?? ""}
       </ElTabPane>
       <ElTabPane name="third" label="Role">
-        <TabContent>
-          default-value: third
-          <br />
-          active: {active ?? ""}
-        </TabContent>
+        default-value: third
+        <br />
+        active: {active ?? ""}
       </ElTabPane>
       <ElTabPane name="fourth" label="Task">
-        <TabContent>
-          default-value: third
-          <br />
-          active: {active ?? ""}
-        </TabContent>
+        default-value: third
+        <br />
+        active: {active ?? ""}
       </ElTabPane>
     </ElTabs>
   );
@@ -304,10 +255,11 @@ export function TabsDynamic() {
       type="card"
       editable
       onEdit={handleEdit}
+      className={styles.demoTabs}
     >
       {tabs.map((tab) => (
         <ElTabPane key={tab.name} name={tab.name} label={tab.title}>
-          <TabContent>{tab.content}</TabContent>
+          {tab.content}
         </ElTabPane>
       ))}
     </ElTabs>
@@ -317,33 +269,28 @@ export function TabsDynamic() {
 export function TabsPosition() {
   const [position, setPosition] = useState<TabPosition>("left");
   return (
-    <div>
-      <div style={{ marginBottom: 30 }}>
-        <ElRadioGroup
-          type="button"
-          value={position}
-          onChange={(value) => setPosition(value as TabPosition)}
-        >
-          <ElRadio value="top">top</ElRadio>
-          <ElRadio value="right">right</ElRadio>
-          <ElRadio value="bottom">bottom</ElRadio>
-          <ElRadio value="left">left</ElRadio>
-        </ElRadioGroup>
-      </div>
-      <ElTabs tabPosition={position} style={{ height: 200 }}>
-        <ElTabPane label="User">
-          <TabContent>User</TabContent>
-        </ElTabPane>
-        <ElTabPane label="Config">
-          <TabContent>Config</TabContent>
-        </ElTabPane>
-        <ElTabPane label="Role">
-          <TabContent>Role</TabContent>
-        </ElTabPane>
-        <ElTabPane label="Task">
-          <TabContent>Task</TabContent>
-        </ElTabPane>
+    <>
+      <ElRadioGroup
+        type="button"
+        value={position}
+        onChange={(value) => setPosition(value as TabPosition)}
+        className={styles.positionRadio}
+      >
+        <ElRadio value="top">top</ElRadio>
+        <ElRadio value="right">right</ElRadio>
+        <ElRadio value="bottom">bottom</ElRadio>
+        <ElRadio value="left">left</ElRadio>
+      </ElRadioGroup>
+      <ElTabs
+        tabPosition={position}
+        style={{ height: 200 }}
+        className={styles.demoTabs}
+      >
+        <ElTabPane label="User">User</ElTabPane>
+        <ElTabPane label="Config">Config</ElTabPane>
+        <ElTabPane label="Role">Role</ElTabPane>
+        <ElTabPane label="Task">Task</ElTabPane>
       </ElTabs>
-    </div>
+    </>
   );
 }

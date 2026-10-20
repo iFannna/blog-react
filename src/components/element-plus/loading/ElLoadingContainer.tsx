@@ -14,17 +14,27 @@ import {
 /** 官方默认 spinner：一个由 CSS 动画驱动旋转的 svg 圆环。 */
 function DefaultSpinner() {
   return (
-    <svg className="circular" viewBox="25 25 50 50">
-      <circle className="path" cx="50" cy="50" r="20" fill="none" />
+    <svg className="circular" viewBox="0 0 50 50">
+      <circle className="path" cx="25" cy="25" r="20" fill="none" />
     </svg>
   );
 }
 
 function LoadingMask({ instance }: { instance: LoadingState }) {
-  const { background, spinner, text, customClass, closing, zIndex } = instance;
+  const {
+    background,
+    spinner,
+    svgViewBox,
+    text,
+    customClass,
+    closing,
+    zIndex,
+    fullscreen,
+  } = instance;
 
   const classes = [
     "el-loading-mask",
+    fullscreen && "is-fullscreen",
     customClass,
     closing && "el-loading-fade-leave-active",
   ]
@@ -32,7 +42,8 @@ function LoadingMask({ instance }: { instance: LoadingState }) {
     .join(" ");
 
   const style: CSSProperties = {
-    zIndex,
+    // 与官方一致：只有全屏遮罩才写内联层级，普通遮罩用样式表里的 2000
+    ...(fullscreen && zIndex !== undefined ? { zIndex } : {}),
     ...(background ? { backgroundColor: background } : {}),
   };
 
@@ -43,7 +54,11 @@ function LoadingMask({ instance }: { instance: LoadingState }) {
       <div className="el-loading-spinner">
         {isCustomSpinner ? (
           // spinner 传字符串时，官方把它当作 svg 字符串渲染
-          <svg className="circular" viewBox="25 25 50 50" dangerouslySetInnerHTML={{ __html: spinner }} />
+          <svg
+            className="circular"
+            viewBox={svgViewBox || "0 0 50 50"}
+            dangerouslySetInnerHTML={{ __html: spinner }}
+          />
         ) : (
           <DefaultSpinner />
         )}

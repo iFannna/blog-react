@@ -10,6 +10,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import { getGlobalConfig, translate } from "../config-provider/context";
 import { en } from "../config-provider/locales";
+import { nextZIndex } from "../config-provider/use-z-index";
 
 export type MessageBoxType = "primary" | "success" | "info" | "warning" | "error";
 export type MessageBoxAction = "confirm" | "cancel" | "close";
@@ -237,7 +238,6 @@ export const MESSAGE_BOX_DEFAULTS = {
 export const LEAVE_DURATION_MS = 300;
 
 let seed = 1;
-let zIndexSeed = 2001;
 let instances: MessageBoxState[] = [];
 const EMPTY: MessageBoxState[] = [];
 
@@ -535,7 +535,7 @@ export function createMessageBox(options: MessageBoxOptions): MessageBoxPromise 
     roundButton: options.roundButton ?? false,
     appendTo: options.appendTo,
     callback: options.callback,
-    zIndex: options.zIndex ?? zIndexSeed++,
+    zIndex: options.zIndex ?? nextZIndex(getGlobalConfig()?.zIndex),
     beforeClose: options.beforeClose,
     boxType:
       options.boxType ?? (options.showInput ? "prompt" : "alert"),

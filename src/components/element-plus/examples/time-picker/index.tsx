@@ -2,6 +2,7 @@
 
 import { type CSSProperties, useState } from "react";
 import { ElTimePicker } from "@/components/element-plus/time-picker";
+import styles from "./time-picker.module.css";
 
 /** 官方示例用 .example-basic .el-date-editor { margin: 8px } 撑开间距，这里改为根节点上的 margin。 */
 const pickerStyle: CSSProperties = { margin: 8 };
@@ -82,7 +83,7 @@ export function TimePickerRange() {
   ]);
 
   return (
-    <div className="demo-range">
+    <div className={styles.demoRange}>
       <ElTimePicker
         value={value1}
         onChange={(next) => setValue1(next as [Date, Date])}

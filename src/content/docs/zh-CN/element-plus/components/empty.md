@@ -17,9 +17,17 @@ empty/basic-usage
 
 :::
 
-## 自定义尺寸
+## 自定义图片
 
-:::demo 通过 `imageSize` 属性设置插图宽度，数字按 px 处理。
+:::demo 通过设置 `image` 属性传入图片 URL。
+
+empty/custom-image
+
+:::
+
+## 图片尺寸
+
+:::demo 通过使用 `image-size` 属性来控制图片大小。
 
 empty/image-size
 
@@ -27,19 +35,33 @@ empty/image-size
 
 ## 底部内容
 
-:::demo 传入 `children` 会在底部渲染操作区。
+:::demo 使用默认插槽可在底部插入内容。
 
 empty/bottom-content
 
 :::
 
-## 自定义插图
+## 自定义样式
 
-:::demo 通过 `image` 属性传入自定义插图地址。
+您可以为 empty 组件设置自定义样式。使用 css/scss 语言来更改全局或局部颜色。我们设置了一些全局颜色变量：
+`--el-empty-fill-color-0`、`--el-empty-fill-color-1`、`--el-empty-fill-color-2`、……、`--el-empty-fill-color-9`。
+您可以使用类似 `:root { --el-empty-fill-color-0: red; --el-empty-fill-color-1: blue; }` 等变量。
+但通常，如果你想要更改样式，你需要更改所有颜色，因为这些颜色是一个组合。
 
-empty/custom-image
+### 默认变量
 
-:::
+| 变量 | 颜色 |
+| --- | --- |
+| --el-empty-fill-color-0 | var(--el-color-white) |
+| --el-empty-fill-color-1 | #fcfcfd |
+| --el-empty-fill-color-2 | #f8f9fb |
+| --el-empty-fill-color-3 | #f7f8fc |
+| --el-empty-fill-color-4 | #eeeff3 |
+| --el-empty-fill-color-5 | #edeef2 |
+| --el-empty-fill-color-6 | #e9ebef |
+| --el-empty-fill-color-7 | #e5e7e9 |
+| --el-empty-fill-color-8 | #e0e3e9 |
+| --el-empty-fill-color-9 | #d5d7de |
 
 ## Empty API
 

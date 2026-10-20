@@ -15,6 +15,7 @@ import { ElDropdownMenu } from "@/components/element-plus/dropdown/ElDropdownMen
 import { ElDropdownItem } from "@/components/element-plus/dropdown/ElDropdownItem";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { Menu, Message, Setting } from "@/components/element-plus/icons";
+import styles from "./container.module.css";
 
 const headerStyle = {
   display: "flex",
@@ -136,10 +137,10 @@ const tableData = Array.from({ length: 20 }, () => ({
 /** 官方 example.vue：完整应用布局，侧边菜单 + 顶栏 + 表格主区 */
 export function ContainerExample() {
   return (
-    <ElContainer style={{ height: 500 }}>
-      <ElAside width="200px" style={{ background: "var(--el-color-primary-light-8)" }}>
+    <ElContainer className={styles.layoutDemo} style={{ height: 500 }}>
+      <ElAside width="200px">
         <ElScrollbar>
-          <ElMenu defaultOpeneds={["1", "3"]} style={{ borderRight: "none" }}>
+          <ElMenu defaultOpeneds={["1", "3"]}>
             <ElSubMenu
               index="1"
               title={
@@ -158,7 +159,7 @@ export function ContainerExample() {
               <ElMenuItemGroup title="Group 2">
                 <ElMenuItem index="1-3">Option 3</ElMenuItem>
               </ElMenuItemGroup>
-              <ElSubMenu index="1-4" title="Option 4">
+              <ElSubMenu index="1-4" title="Option4">
                 <ElMenuItem index="1-4-1">Option 4-1</ElMenuItem>
               </ElSubMenu>
             </ElSubMenu>
@@ -211,22 +212,8 @@ export function ContainerExample() {
       </ElAside>
 
       <ElContainer>
-        <ElHeader
-          style={{
-            ...headerStyle,
-            justifyContent: "flex-end",
-            fontSize: 12,
-          }}
-        >
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "100%",
-              paddingRight: 20,
-            }}
-          >
+        <ElHeader style={{ textAlign: "right", fontSize: 12 }}>
+          <div className={styles.toolbar}>
             <ElDropdown
               menu={
                 <ElDropdownMenu>
@@ -246,7 +233,7 @@ export function ContainerExample() {
           </div>
         </ElHeader>
 
-        <ElMain style={{ padding: 0 }}>
+        <ElMain>
           <ElScrollbar>
             <ElTable data={tableData}>
               <ElTableColumn prop="date" label="Date" width={140} />

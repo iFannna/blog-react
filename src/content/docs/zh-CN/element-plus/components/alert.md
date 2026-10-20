@@ -11,7 +11,9 @@ order: 10
 
 ## 基础用法
 
-:::demo 页面中的非浮层元素，不会自动消失。设置 `type` 属性指定主题。
+Alert 组件不属于浮层元素，不会自动消失或关闭。
+
+:::demo Alert 组件提供5种类型，由 `type` 属性指定，默认值为 `info`。`primary` 已被添加到 2.9.11。
 
 alert/basic
 
@@ -19,7 +21,9 @@ alert/basic
 
 ## 主题
 
-:::demo Alert 组件提供了两种主题，通过 `effect` 属性来设置。
+Alert 组件提供了两个不同的主题：`light` 和 `dark`。
+
+:::demo 通过设置 `effect` 属性来改变主题，默认为 `light`。
 
 alert/theme
 
@@ -27,23 +31,19 @@ alert/theme
 
 ## 自定义关闭按钮
 
-:::demo 通过 `closeText` 属性自定义关闭按钮为文字。
+你可以自定义关闭按钮为文字或其他符号。
+
+:::demo 你可以设置 Alert 组件是否为可关闭状态，关闭按钮的内容以及关闭时的回调函数同样可以定制。`closable` 属性决定 Alert 组件是否可关闭，该属性接受一个 Boolean，默认为 `true`。你可以设置 `close-text` 属性来代替右侧的关闭图标，需要注意的是 `close-text` 必须是一个字符串。当 Alert 组件被关闭时会触发 `close` 事件。
 
 alert/close-button
 
 :::
 
-## 带有辅助性文字介绍
+## 使用图标
 
-:::demo 通过 `description` 属性设置辅助性文字。传入后标题会变为大字号。
+你可以通过为 Alert 组件添加图标来提高可读性。
 
-alert/description
-
-:::
-
-## 带有图标
-
-:::demo 设置 `showIcon` 属性显示对应类型的图标。
+:::demo 通过设置 `show-icon` 属性来显示 Alert 的 icon，这能更有效地向用户展示你的显示意图。或者你可以使用 `icon` slot 自定义 icon 内容。
 
 alert/icon
 
@@ -51,15 +51,27 @@ alert/icon
 
 ## 文字居中
 
-:::demo 使用 `center` 属性让文字水平居中。
+使用 `center` 属性来让文字水平居中。
+
+:::demo
 
 alert/center
 
 :::
 
-## 可关闭的提示
+## 文字描述
 
-:::demo 设置 `closable` 属性（默认开启）可以关闭提示， `onClose` 回调中决定是否从列表中移除。
+为 Alert 组件添加一个更加详细的描述来使用户了解更多信息。
+
+:::demo 除了必填的 `title` 属性外，你可以设置 `description` 属性来帮助你更好地介绍，我们称之为辅助性文字。辅助性文字只能存放文本内容，当内容超出长度限制时会自动换行显示。
+
+alert/description
+
+:::
+
+## 带图标和描述
+
+:::demo 在最后, 这是一个带有图标和描述的例子。
 
 alert/icon-description
 
@@ -67,38 +79,29 @@ alert/icon-description
 
 ## Alert API
 
-### Alert Attributes
+### 属性
 
-| 属性名 | 说明 | 类型 | 默认值 |
+| 名称 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| title | 标题 | ^[string] / ^[ReactNode] | — |
-| type | 主题类型 | ^[enum]`'primary' \| 'success' \| 'warning' \| 'error' \| 'info'` | info |
-| description | 描述文字，传入后标题与描述纵向排列 | ^[string] / ^[ReactNode] | — |
-| closable | 是否可关闭 | ^[boolean] | true |
-| close-text | 自定义关闭按钮文案，传入后替换 × 图标 | ^[string] | — |
-| show-icon | 是否显示图标 | ^[boolean] | false |
-| center | 内容是否居中 | ^[boolean] | false |
-| effect | 主题 | ^[enum]`'light' \| 'dark'` | light |
+| title | Alert 标题。 | ^[string] | — |
+| type | Alert 类型。 | ^[enum]`'primary' \| 'success' \| 'warning' \| 'error' \| 'info'` | info |
+| description | 描述性文本 | ^[string] | — |
+| closable | 是否可以关闭 | ^[boolean] | true |
+| center | 文字是否居中 | ^[boolean] | false |
+| close-text | 自定义关闭按钮文本 | ^[string] | — |
+| show-icon | 是否显示类型图标 | ^[boolean] | false |
+| effect | 主题样式 | ^[enum]`'light' \| 'dark'` | light |
 
-### Alert Events
+### Events
 
-| 事件名 | 说明 | 参数 |
+| 名称 | 描述 | 类型 |
 | --- | --- | --- |
-| onClose | 关闭时触发 | ^[Function]`(event: MouseEvent) => void` |
+| close | 关闭 Alert 时触发的事件 | ^[Function]`(event: MouseEvent) => void` |
 
-### Alert Slots
+### Slots
 
-| 插槽名 | 说明 | React 写法 |
-| --- | --- | --- |
-| default | 描述文字 | `description` |
-| title | 标题内容 | `title` |
-| icon | 自定义图标 | `icon` |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `type` | 同 | 官方含 `primary`，无 `default` |
-
-**实现说明**：官方用 `v-show` 控制显隐并在组件内维护 `visible`，
-React 侧沿用该职责：`onClose` 触发时先卸载自身，使用方无需额外维护显隐状态。
+| 名称 | 描述 |
+| --- | --- |
+| default | Alert 内容描述 |
+| title | 标题的内容 |
+| icon <span class="docs-version-tag">2.9.7</span> | icon 的内容 |

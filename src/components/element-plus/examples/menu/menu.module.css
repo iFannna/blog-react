@@ -1,0 +1,15 @@
+/* 官方文档全局样式：demo 内 radio-group 与栅格列有额外间距/圆角 */
+:global(.el-radio-group).radioGroup {
+  margin-right: 12px;
+  margin-bottom: 20px;
+}
+
+.columns :global(.el-col) {
+  border-radius: 4px;
+}
+
+/* 官方 docs 全局 `li > ul` margin reset 本地缺失，嵌套菜单列表会多出 16px 外边距 */
+:global(.docs-content) :global(.el-menu li > ul),
+:global(.docs-content) :global(.el-menu li > ol) {
+  margin: 0;
+}

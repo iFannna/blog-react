@@ -7,6 +7,8 @@
  */
 
 import type { ReactNode } from "react";
+import { getGlobalConfig } from "../config-provider/context";
+import { nextZIndex } from "../config-provider/use-z-index";
 import type { ProgressProps } from "../progress";
 
 export type NotificationType = "primary" | "success" | "info" | "warning" | "error";
@@ -90,7 +92,6 @@ export const NOTIFICATION_DEFAULTS = {
 export const LEAVE_DURATION_MS = 300;
 
 let seed = 1;
-let zIndexSeed = 2001;
 let instances: NotificationState[] = [];
 const EMPTY: NotificationState[] = [];
 
@@ -176,7 +177,7 @@ const Notification = (options?: string | NotificationOptions) => {
     dangerouslyUseHTMLString: opts.dangerouslyUseHTMLString ?? false,
     appendTo: opts.appendTo,
     customClass: opts.customClass,
-    zIndex: opts.zIndex ?? zIndexSeed++,
+    zIndex: opts.zIndex ?? nextZIndex(getGlobalConfig()?.zIndex),
     onClick: opts.onClick,
     onClose: opts.onClose,
     closing: false,

@@ -16,7 +16,12 @@ import { ElCheckboxGroup, ElCheckbox } from "@/components/element-plus/checkbox"
 import { ElRadioGroup, ElRadio } from "@/components/element-plus/radio";
 import { ElButton } from "@/components/element-plus/button";
 import { ElAlert } from "@/components/element-plus/alert";
+import { ElSpace } from "@/components/element-plus/space";
 import { ElRow, ElCol } from "@/components/element-plus/row";
+import { ElDatePicker } from "@/components/element-plus/date-picker";
+import { ElTimePicker } from "@/components/element-plus/time-picker";
+import { ElSelectV2 } from "@/components/element-plus/select-v2";
+import { ElSegmented } from "@/components/element-plus/segmented";
 
 const formStyle = { maxWidth: 600 };
 
@@ -24,6 +29,8 @@ export function FormBasic() {
   const [form, setForm] = useState({
     name: "",
     region: "",
+    date1: null as Date | null,
+    date2: null as Date | null,
     delivery: false,
     type: [] as string[],
     resource: "",
@@ -49,6 +56,28 @@ export function FormBasic() {
           ]}
         />
       </ElFormItem>
+      <ElFormItem label="Activity time">
+        <ElCol span={11}>
+          <ElDatePicker
+            value={form.date1}
+            onChange={(v) => patch({ date1: v as Date | null })}
+            type="date"
+            placeholder="Pick a date"
+            style={{ width: "100%" }}
+          />
+        </ElCol>
+        <ElCol span={2} style={{ textAlign: "center" }}>
+          <span style={{ color: "var(--el-text-color-secondary)" }}>-</span>
+        </ElCol>
+        <ElCol span={11}>
+          <ElTimePicker
+            value={form.date2}
+            onChange={(v) => patch({ date2: v as Date | null })}
+            placeholder="Pick a time"
+            style={{ width: "100%" }}
+          />
+        </ElCol>
+      </ElFormItem>
       <ElFormItem label="Instant delivery">
         <ElSwitch
           checked={form.delivery}
@@ -60,13 +89,16 @@ export function FormBasic() {
           value={form.type}
           onChange={(v) => patch({ type: v as string[] })}
         >
-          {["Online activities", "Promotion activities", "Offline activities"].map(
-            (item) => (
-              <ElCheckbox key={item} value={item}>
-                {item}
-              </ElCheckbox>
-            ),
-          )}
+          {[
+            "Online activities",
+            "Promotion activities",
+            "Offline activities",
+            "Simple brand exposure",
+          ].map((item) => (
+            <ElCheckbox key={item} value={item}>
+              {item}
+            </ElCheckbox>
+          ))}
         </ElCheckboxGroup>
       </ElFormItem>
       <ElFormItem label="Resources">
@@ -97,7 +129,11 @@ export function FormBasic() {
 }
 
 export function FormInline() {
-  const [form, setForm] = useState({ user: "", region: "" });
+  const [form, setForm] = useState({
+    user: "",
+    region: "",
+    date: null as Date | null,
+  });
   const patch = (patchValue: Partial<typeof form>) =>
     setForm((prev) => ({ ...prev, ...patchValue }));
 
@@ -108,6 +144,7 @@ export function FormInline() {
           value={form.user}
           onChange={(v) => patch({ user: v })}
           placeholder="Approved by"
+          style={{ width: 220 }}
           clearable
         />
       </ElFormItem>
@@ -116,11 +153,21 @@ export function FormInline() {
           value={form.region}
           onChange={(v) => patch({ region: String(v) })}
           placeholder="Activity zone"
+          style={{ width: 220 }}
           clearable
           options={[
             { value: "shanghai", label: "Zone one" },
             { value: "beijing", label: "Zone two" },
           ]}
+        />
+      </ElFormItem>
+      <ElFormItem label="Activity time">
+        <ElDatePicker
+          value={form.date}
+          onChange={(v) => patch({ date: v as Date | null })}
+          type="date"
+          placeholder="Pick a date"
+          clearable
         />
       </ElFormItem>
       <ElFormItem>
@@ -143,9 +190,75 @@ const RULES: FormRules = {
   ],
 };
 
+const VALIDATION_RULES: FormRules = {
+  name: [
+    { required: true, message: "Please input Activity name", trigger: "blur" },
+    { min: 3, max: 5, message: "Length should be 3 to 5", trigger: "blur" },
+  ],
+  region: [
+    { required: true, message: "Please select Activity zone", trigger: "change" },
+  ],
+  count: [
+    { required: true, message: "Please select Activity count", trigger: "change" },
+  ],
+  date1: [
+    {
+      type: "date",
+      required: true,
+      message: "Please pick a date",
+      trigger: "change",
+    },
+  ],
+  date2: [
+    {
+      type: "date",
+      required: true,
+      message: "Please pick a time",
+      trigger: "change",
+    },
+  ],
+  location: [
+    { required: true, message: "Please select a location", trigger: "change" },
+  ],
+  type: [
+    {
+      type: "array",
+      required: true,
+      message: "Please select at least one activity type",
+      trigger: "change",
+    },
+  ],
+  resource: [
+    {
+      required: true,
+      message: "Please select activity resource",
+      trigger: "change",
+    },
+  ],
+  desc: [
+    { required: true, message: "Please input activity form", trigger: "blur" },
+  ],
+};
+
+const VALIDATION_OPTIONS = Array.from({ length: 10000 }).map((_, idx) => ({
+  value: `${idx + 1}`,
+  label: `${idx + 1}`,
+}));
+
 export function FormValidation() {
   const formRef = useRef<FormExpose>(null);
-  const [form, setForm] = useState({ name: "Hello", region: "", desc: "" });
+  const [form, setForm] = useState({
+    name: "Hello",
+    region: "",
+    count: "",
+    date1: null as Date | null,
+    date2: null as Date | null,
+    delivery: false,
+    location: "",
+    type: [] as string[],
+    resource: "",
+    desc: "",
+  });
   const [result, setResult] = useState("");
 
   const patch = (patchValue: Partial<typeof form>) =>
@@ -164,7 +277,7 @@ export function FormValidation() {
     <ElForm
       ref={formRef}
       model={form}
-      rules={RULES}
+      rules={VALIDATION_RULES}
       labelWidth="auto"
       style={formStyle}
       // resetFields 在 React 里把还原后的 model 交回使用方
@@ -184,6 +297,84 @@ export function FormValidation() {
           ]}
         />
       </ElFormItem>
+      <ElFormItem label="Activity count" prop="count">
+        <ElSelectV2
+          value={form.count}
+          onChange={(v) => patch({ count: String(v ?? "") })}
+          placeholder="Activity count"
+          options={VALIDATION_OPTIONS}
+        />
+      </ElFormItem>
+      <ElFormItem label="Activity time" required>
+        <ElCol span={11}>
+          <ElFormItem prop="date1">
+            <ElDatePicker
+              value={form.date1}
+              onChange={(v) => patch({ date1: v as Date | null })}
+              type="date"
+              aria-label="Pick a date"
+              placeholder="Pick a date"
+              style={{ width: "100%" }}
+            />
+          </ElFormItem>
+        </ElCol>
+        <ElCol span={2} style={{ textAlign: "center" }}>
+          <span style={{ color: "var(--el-text-color-secondary)" }}>-</span>
+        </ElCol>
+        <ElCol span={11}>
+          <ElFormItem prop="date2">
+            <ElTimePicker
+              value={form.date2}
+              onChange={(v) => patch({ date2: v as Date | null })}
+              aria-label="Pick a time"
+              placeholder="Pick a time"
+              style={{ width: "100%" }}
+            />
+          </ElFormItem>
+        </ElCol>
+      </ElFormItem>
+      <ElFormItem label="Instant delivery" prop="delivery">
+        <ElSwitch
+          checked={form.delivery}
+          onCheckedChange={(v) => patch({ delivery: v })}
+        />
+      </ElFormItem>
+      <ElFormItem label="Activity location" prop="location">
+        <ElSegmented
+          value={form.location}
+          onChange={(v) => patch({ location: String(v) })}
+          options={["Home", "Company", "School"]}
+        />
+      </ElFormItem>
+      <ElFormItem label="Activity type" prop="type">
+        <ElCheckboxGroup
+          value={form.type}
+          onChange={(v) => patch({ type: v as string[] })}
+        >
+          {[
+            "Online activities",
+            "Promotion activities",
+            "Offline activities",
+            "Simple brand exposure",
+          ].map((item) => (
+            <ElCheckbox key={item} value={item}>
+              {item}
+            </ElCheckbox>
+          ))}
+        </ElCheckboxGroup>
+      </ElFormItem>
+      <ElFormItem label="Resources" prop="resource">
+        <ElRadioGroup
+          value={form.resource}
+          onChange={(v) => patch({ resource: String(v) })}
+        >
+          {["Sponsorship", "Venue"].map((item) => (
+            <ElRadio key={item} value={item}>
+              {item}
+            </ElRadio>
+          ))}
+        </ElRadioGroup>
+      </ElFormItem>
       <ElFormItem label="Activity form" prop="desc">
         <ElInput
           type="textarea"
@@ -193,7 +384,9 @@ export function FormValidation() {
       </ElFormItem>
       <ElFormItem>
         <ElButton type="primary" onClick={submit}>Create</ElButton>
-        <ElButton onClick={() => formRef.current?.resetFields()}>Reset</ElButton>
+        <ElButton onClick={() => formRef.current?.resetFields()}>
+          Reset
+        </ElButton>
       </ElFormItem>
       {result && <p style={{ color: "var(--el-color-info)" }}>{result}</p>}
     </ElForm>
@@ -201,8 +394,12 @@ export function FormValidation() {
 }
 
 export function FormAlignment() {
-  const [labelPosition, setLabelPosition] = useState<"left" | "right" | "top">("right");
-  const [itemLabelPosition, setItemLabelPosition] = useState<"" | "left" | "right" | "top">("");
+  const [labelPosition, setLabelPosition] = useState<"left" | "right" | "top">(
+    "right",
+  );
+  const [itemLabelPosition, setItemLabelPosition] = useState<
+    "" | "left" | "right" | "top"
+  >("");
   const [form, setForm] = useState({ name: "", region: "", type: "" });
   const patch = (patchValue: Partial<typeof form>) =>
     setForm((prev) => ({ ...prev, ...patchValue }));
@@ -215,30 +412,31 @@ export function FormAlignment() {
       style={formStyle}
     >
       <ElFormItem label="Form Align" labelPosition="right">
-        <div style={{ display: "flex", gap: 8 }}>
-          {(["left", "right", "top"] as const).map((p) => (
-            <ElButton
-              key={p}
-              type={labelPosition === p ? "primary" : "default"}
-              onClick={() => setLabelPosition(p)}
-            >
-              {p}
-            </ElButton>
-          ))}
-        </div>
+        <ElRadioGroup
+          value={labelPosition}
+          onChange={(v) =>
+            setLabelPosition(v as "left" | "right" | "top")
+          }
+          ariaLabel="label position"
+        >
+          <ElRadio button value="left">Left</ElRadio>
+          <ElRadio button value="right">Right</ElRadio>
+          <ElRadio button value="top">Top</ElRadio>
+        </ElRadioGroup>
       </ElFormItem>
       <ElFormItem label="Form Item Align" labelPosition="right">
-        <div style={{ display: "flex", gap: 8 }}>
-          {(["", "left", "right", "top"] as const).map((p) => (
-            <ElButton
-              key={p || "empty"}
-              type={itemLabelPosition === p ? "primary" : "default"}
-              onClick={() => setItemLabelPosition(p)}
-            >
-              {p || "Empty"}
-            </ElButton>
-          ))}
-        </div>
+        <ElRadioGroup
+          value={itemLabelPosition}
+          onChange={(v) =>
+            setItemLabelPosition(v as "" | "left" | "right" | "top")
+          }
+          ariaLabel="item label position"
+        >
+          <ElRadio button value="">Empty</ElRadio>
+          <ElRadio button value="left">Left</ElRadio>
+          <ElRadio button value="right">Right</ElRadio>
+          <ElRadio button value="top">Top</ElRadio>
+        </ElRadioGroup>
       </ElFormItem>
       <ElFormItem label="Name" labelPosition={itemLabelPosition}>
         <ElInput value={form.name} onChange={(v) => patch({ name: v })} />
@@ -255,34 +453,51 @@ export function FormAlignment() {
 
 export function FormSizeControl() {
   const [size, setSize] = useState<"large" | "default" | "small">("default");
-  const [labelPosition, setLabelPosition] = useState<"left" | "right" | "top">("right");
-  const [form, setForm] = useState({ name: "", region: "" });
+  const [labelPosition, setLabelPosition] = useState<"left" | "right" | "top">(
+    "right",
+  );
+  const [form, setForm] = useState({
+    name: "",
+    region: "",
+    date1: null as Date | null,
+    date2: null as Date | null,
+    delivery: false,
+    type: [] as string[],
+    resource: "",
+    desc: "",
+  });
   const patch = (patchValue: Partial<typeof form>) =>
     setForm((prev) => ({ ...prev, ...patchValue }));
 
   return (
-    <div>
-      <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
-        {(["large", "default", "small"] as const).map((s) => (
-          <ElButton
-            key={s}
-            type={size === s ? "primary" : "default"}
-            onClick={() => setSize(s)}
-          >
-            {s}
-          </ElButton>
-        ))}
-        {(["left", "right", "top"] as const).map((p) => (
-          <ElButton
-            key={p}
-            type={labelPosition === p ? "primary" : "default"}
-            onClick={() => setLabelPosition(p)}
-          >
-            {p}
-          </ElButton>
-        ))}
+    <>
+      <div>
+        <ElRadioGroup
+          value={size}
+          onChange={(v) =>
+            setSize(v as "large" | "default" | "small")
+          }
+          ariaLabel="size control"
+          style={{ marginRight: 12 }}
+        >
+          <ElRadio button value="large">large</ElRadio>
+          <ElRadio button value="default">default</ElRadio>
+          <ElRadio button value="small">small</ElRadio>
+        </ElRadioGroup>
+        <ElRadioGroup
+          value={labelPosition}
+          onChange={(v) =>
+            setLabelPosition(v as "left" | "right" | "top")
+          }
+          ariaLabel="position control"
+          style={{ marginRight: 12 }}
+        >
+          <ElRadio button value="left">Left</ElRadio>
+          <ElRadio button value="right">Right</ElRadio>
+          <ElRadio button value="top">Top</ElRadio>
+        </ElRadioGroup>
       </div>
-
+      <br />
       <ElForm
         model={form}
         size={size}
@@ -304,22 +519,63 @@ export function FormSizeControl() {
             ]}
           />
         </ElFormItem>
+        <ElFormItem label="Activity time">
+          <ElCol span={11}>
+            <ElDatePicker
+              value={form.date1}
+              onChange={(v) => patch({ date1: v as Date | null })}
+              type="date"
+              aria-label="Pick a date"
+              placeholder="Pick a date"
+              style={{ width: "100%" }}
+            />
+          </ElCol>
+          <ElCol
+            span={1}
+            style={{ margin: "0 8px", textAlign: "center" }}
+          >
+            -
+          </ElCol>
+          <ElCol span={11}>
+            <ElTimePicker
+              value={form.date2}
+              onChange={(v) => patch({ date2: v as Date | null })}
+              aria-label="Pick a time"
+              placeholder="Pick a time"
+              style={{ width: "100%" }}
+            />
+          </ElCol>
+        </ElFormItem>
+        <ElFormItem label="Activity type">
+          <ElCheckboxGroup
+            value={form.type}
+            onChange={(v) => patch({ type: v as string[] })}
+          >
+            <ElCheckbox button value="Online activities" name="type">
+              Online activities
+            </ElCheckbox>
+            <ElCheckbox button value="Promotion activities" name="type">
+              Promotion activities
+            </ElCheckbox>
+          </ElCheckboxGroup>
+        </ElFormItem>
+        <ElFormItem label="Resources">
+          <ElRadioGroup
+            value={form.resource}
+            onChange={(v) => patch({ resource: String(v) })}
+          >
+            <ElRadio border value="Sponsor">Sponsor</ElRadio>
+            <ElRadio border value="Venue">Venue</ElRadio>
+          </ElRadioGroup>
+        </ElFormItem>
         <ElFormItem>
-          <ElRow gutter={20}>
-            <ElCol span={12}>
-              <ElButton type="primary">Create</ElButton>
-            </ElCol>
-            <ElCol span={12}>
-              <ElButton>Cancel</ElButton>
-            </ElCol>
-          </ElRow>
+          <ElButton type="primary">Create</ElButton>
+          <ElButton>Cancel</ElButton>
         </ElFormItem>
       </ElForm>
-    </div>
+    </>
   );
 }
-
-const alertGapStyle = { marginBottom: 16 };
 
 export function FormAccessibility() {
   const [form, setForm] = useState({
@@ -337,52 +593,56 @@ export function FormAccessibility() {
       model={form}
       style={formStyle}
     >
-      <div style={alertGapStyle}>
+      <ElSpace fill>
         <ElAlert
           type="info"
           showIcon
           closable={false}
-          title={'"Full Name" label is automatically attached to the input:'}
+          description={<>&quot;Full Name&quot; label is automatically attached to the input:</>}
         />
-      </div>
-      <ElFormItem label="Full Name">
-        <ElInput
-          value={form.fullName}
-          onChange={(v) => patch({ fullName: v })}
-        />
-      </ElFormItem>
+        <ElFormItem label="Full Name">
+          <ElInput
+            value={form.fullName}
+            onChange={(v) => patch({ fullName: v })}
+          />
+        </ElFormItem>
+      </ElSpace>
 
-      <div style={alertGapStyle}>
+      <ElSpace fill>
         <ElAlert
           type="info"
           showIcon
           closable={false}
-          title={'"Your Information" serves as a label for the group of inputs.'}
           description={
-            'You must specify labels on the individual inputs. Placeholders are not replacements for using the "label" attribute.'
+            <>
+              &quot;Your Information&quot; serves as a label for the group of inputs.{" "}
+              <br />
+              You must specify labels on the individal inputs. Placeholders are
+              not replacements for using the &quot;label&quot; attribute.
+            </>
           }
         />
-      </div>
-      <ElFormItem label="Your Information">
-        <ElRow gutter={20}>
-          <ElCol span={12}>
-            <ElInput
-              aria-label="First Name"
-              placeholder="First Name"
-              value={form.firstName}
-              onChange={(v) => patch({ firstName: v })}
-            />
-          </ElCol>
-          <ElCol span={12}>
-            <ElInput
-              aria-label="Last Name"
-              placeholder="Last Name"
-              value={form.lastName}
-              onChange={(v) => patch({ lastName: v })}
-            />
-          </ElCol>
-        </ElRow>
-      </ElFormItem>
+        <ElFormItem label="Your Information">
+          <ElRow gutter={20}>
+            <ElCol span={12}>
+              <ElInput
+                aria-label="First Name"
+                placeholder="First Name"
+                value={form.firstName}
+                onChange={(v) => patch({ firstName: v })}
+              />
+            </ElCol>
+            <ElCol span={12}>
+              <ElInput
+                aria-label="Last Name"
+                placeholder="Last Name"
+                value={form.lastName}
+                onChange={(v) => patch({ lastName: v })}
+              />
+            </ElCol>
+          </ElRow>
+        </ElFormItem>
+      </ElSpace>
     </ElForm>
   );
 }

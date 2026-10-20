@@ -146,6 +146,13 @@ export function ElTreeNode({
           paddingLeft: `${(node.level - 1) * indent}px`,
           height: `${itemSize}px`,
         }}
+        // 官方在 checkbox 根节点上 @click.stop；ElCheckbox 只把 onClick 透传给
+        // input，label 的冒泡仍会触发节点的展开/选中，因此在内容层拦截一次。
+        onClick={(event) => {
+          if ((event.target as HTMLElement).closest(".el-checkbox")) {
+            event.stopPropagation();
+          }
+        }}
       >
         <ElIcon
           className={expandIconClasses}
@@ -162,7 +169,6 @@ export function ElTreeNode({
             indeterminate={indeterminate}
             disabled={disabled}
             onCheckedChange={(value) => onCheck?.(node, value)}
-            onClick={(event) => event.stopPropagation()}
           />
         )}
         <ElTreeNodeContent

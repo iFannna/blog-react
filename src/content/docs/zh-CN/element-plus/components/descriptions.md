@@ -33,9 +33,9 @@ descriptions/vertical-list
 
 :::
 
-## 跨列 / 跨行
+## 跨行
 
-:::demo 通过 `span` 让单元格跨列，`rowspan` 跨行。
+:::demo
 
 descriptions/rowspan
 
@@ -43,7 +43,7 @@ descriptions/rowspan
 
 ## 自定义样式
 
-:::demo 通过 `labelWidth`、`align`、`labelAlign` 调整标签宽度与对齐方式。
+:::demo
 
 descriptions/customized-style
 

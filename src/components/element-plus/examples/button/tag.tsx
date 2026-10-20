@@ -1,11 +1,10 @@
 "use client";
 
 import { ElButton } from "@/components/element-plus/button";
-import { exampleRow } from "./styles";
 
 export default function ButtonTag() {
   return (
-    <div style={exampleRow}>
+    <>
       <ElButton>button</ElButton>
       <ElButton tag="div" role="button" tabIndex={0}>div</ElButton>
       <ElButton
@@ -17,6 +16,6 @@ export default function ButtonTag() {
       >
         a
       </ElButton>
-    </div>
+    </>
   );
 }

@@ -1,0 +1,31 @@
+/* Official customized-node demo paragraphs use docs typography margins */
+.firstParagraph {
+  margin: 0 0 16px;
+}
+
+.paragraph {
+  margin: 16px 0;
+}
+
+/* Official checking-tree demo uses !ml-0, cancelling adjacent button margin */
+.buttonRow :global(.el-button + .el-button) {
+  margin-left: 0;
+}
+
+/* Official custom-node-class demo scoped styles */
+.nodeClassScope :global(.is-penultimate) > :global(.el-tree-node__content) :global(.el-tree-node__label) {
+  color: #626aef;
+}
+
+.nodeClassScope :global(.is-penultimate) > :global(.el-tree-node__children) > div {
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.nodeClassScope :global(.is-penultimate) > :global(.el-tree-node__children) > div:not(:first-child) :global(.el-tree-node__content) {
+  padding-left: 0 !important;
+}
+
+.nodeClassScope :global(.is-penultimate) > :global(.el-tree-node__children) > div :global(.el-tree-node__content) {
+  padding-right: 16px;
+}

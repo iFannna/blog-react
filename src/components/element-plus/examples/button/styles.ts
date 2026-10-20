@@ -1,17 +1,13 @@
 /*
- * 官方 button 示例里 .button-example / .button-row 的等价物，
- * 样式抄自 docs/examples/button/basic.vue 的 scoped style。
+ * 官方 button 示例里 .button-example / .button-row 与 unocss 工具类的等价物。
+ * 官方 docs 根字号 16px，本地 1rem = 10px，间距按 ×1.6 换算。
  */
 
-export const exampleStack = {
-  display: "flex",
-  flexDirection: "column",
-  gap: "1rem",
-} as const;
+import styles from "./button.module.css";
 
-export const exampleRow = {
-  display: "flex",
-  flexWrap: "wrap",
-  gap: "1rem",
-  alignItems: "center",
-} as const;
+export const exampleStack = styles.stack;
+export const exampleRow = styles.row;
+export const flexRow = styles.flexRow;
+export const flexRowLast = styles.flexRowLast;
+export const mb16 = styles.mb16;
+export const mb8 = styles.mb8;

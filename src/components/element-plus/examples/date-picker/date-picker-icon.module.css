@@ -1,0 +1,42 @@
+/* 官方 custom-icon 示例：6 列网格，上排两个宽块，下排三个窄块 */
+:global(.date-picker-icon-demo) {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+:global(.date-picker-icon-demo .icon-block) {
+  padding: 24px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: solid 1px var(--el-border-color);
+  border-bottom: solid 1px var(--el-border-color);
+}
+
+:global(.date-picker-icon-demo .icon-block:nth-child(1)),
+:global(.date-picker-icon-demo .icon-block:nth-child(2)) {
+  grid-column: span 3;
+}
+
+:global(.date-picker-icon-demo .icon-block:nth-child(2)) {
+  border-right: none;
+}
+
+:global(.date-picker-icon-demo .icon-block:nth-child(3)),
+:global(.date-picker-icon-demo .icon-block:nth-child(4)),
+:global(.date-picker-icon-demo .icon-block:nth-child(5)) {
+  grid-column: span 2;
+  border-bottom: none;
+}
+
+:global(.date-picker-icon-demo .icon-block:nth-child(5)) {
+  border-right: none;
+}
+
+:global(.date-picker-icon-demo .icon-block .el-date-editor) {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+}

@@ -1,0 +1,13 @@
+/* Avatar demo styles from the official example's unscoped <style>. */
+.avatarUploader :global(.el-upload) {
+  border: 1px dashed var(--el-border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--el-transition-duration-fast);
+}
+
+.avatarUploader :global(.el-upload:hover) {
+  border-color: var(--el-color-primary);
+}

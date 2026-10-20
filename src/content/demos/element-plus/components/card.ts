@@ -6,19 +6,19 @@ const manifest: DemoManifest = {
     exportName: "CardBasic",
     sourceFile: "src/components/element-plus/examples/card/index.tsx",
   },
-  "card/shadow": {
-    load: () => import("@/components/element-plus/examples/card"),
-    exportName: "CardShadow",
-    sourceFile: "src/components/element-plus/examples/card/index.tsx",
-  },
   "card/simple": {
     load: () => import("@/components/element-plus/examples/card"),
-    exportName: "CardSlots",
+    exportName: "CardSimple",
     sourceFile: "src/components/element-plus/examples/card/index.tsx",
   },
   "card/with-images": {
     load: () => import("@/components/element-plus/examples/card"),
-    exportName: "CardBodyStyle",
+    exportName: "CardWithImages",
+    sourceFile: "src/components/element-plus/examples/card/index.tsx",
+  },
+  "card/shadow": {
+    load: () => import("@/components/element-plus/examples/card"),
+    exportName: "CardShadow",
     sourceFile: "src/components/element-plus/examples/card/index.tsx",
   },
 };

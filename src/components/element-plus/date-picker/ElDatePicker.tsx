@@ -139,6 +139,7 @@ export const ElDatePicker = ({
   const isDatesPicker = type === "dates";
   const isMonthsPicker = type === "months";
   const isYearsPicker = type === "years";
+  const isQuartersPicker = type === "quarters";
   // 对应官方 isTimeLikePicker：datetime / datetimerange 用时钟图标
   const isTimeLikePicker = type.includes("time");
 
@@ -260,7 +261,12 @@ export const ElDatePicker = ({
     if (userInput !== null) return userInput;
     if (valueIsEmpty) return "";
     if (formattedValue) {
-      if (isDatesPicker || isMonthsPicker || isYearsPicker) {
+      if (
+        isDatesPicker ||
+        isMonthsPicker ||
+        isYearsPicker ||
+        isQuartersPicker
+      ) {
         return (formattedValue as string[]).join(", ");
       }
       return formattedValue as string | [string, string];
@@ -273,6 +279,7 @@ export const ElDatePicker = ({
     isDatesPicker,
     isMonthsPicker,
     isYearsPicker,
+    isQuartersPicker,
     formatToString,
   ]);
 
@@ -621,7 +628,8 @@ export const ElDatePicker = ({
   );
 
   return (
-    <div ref={rootRef} className="el-date-picker" style={style}>
+    // 官方没有额外的选择器外壳；display: contents 只保留 React 的定位节点
+    <div ref={rootRef} style={{ display: "contents", ...style }}>
       <ElTooltip
         content={panel}
         placement={placement}
@@ -645,6 +653,7 @@ export const ElDatePicker = ({
         {isRangeInput ? (
           <div
             className={rangeClasses}
+            style={style}
             onMouseDown={onMouseDownInput}
             onMouseEnter={onMouseEnter}
             onMouseLeave={() => setHovering(false)}
@@ -710,58 +719,67 @@ export const ElDatePicker = ({
             </ElIcon>
           </div>
         ) : (
-          <ElInput
-            id={inputId}
-            className={singleClasses}
-            value={(displayValue as string) ?? ""}
-            name={name as string}
-            size={size}
-            disabled={pickerDisabled}
-            placeholder={placeholder}
-            readOnly={
-              !editable ||
-              !!readonly ||
-              isDatesPicker ||
-              isMonthsPicker ||
-              isYearsPicker ||
-              type === "week"
-            }
-            aria-label={ariaLabel}
-            tabIndex={Number(tabindex)}
-            containerRole="combobox"
-            prefix={
-              <ElIcon
-                className="el-input__icon"
-                onMouseDown={(event) => {
-                  // 官方在图标上 prevent 后手动触发，避免输入框先失焦
-                  event.preventDefault();
-                  onMouseDownInput(event);
-                }}
-              >
-                {triggerIcon}
-              </ElIcon>
-            }
-            suffix={
-              showClearBtn ? (
+          // Tooltip 的 trigger ref 不能直接指向 ElInput 的 imperative handle；
+          // display: contents 让节点不参与布局，避免撑宽或破坏居中
+          <div style={{ display: "contents" }}>
+            <ElInput
+              id={inputId}
+              className={singleClasses}
+              style={style}
+              value={(displayValue as string) ?? ""}
+              name={name as string}
+              size={size}
+              disabled={pickerDisabled}
+              placeholder={placeholder}
+              readOnly={
+                !editable ||
+                !!readonly ||
+                isDatesPicker ||
+                isMonthsPicker ||
+                isYearsPicker ||
+                isQuartersPicker ||
+                type === "week"
+              }
+              aria-label={ariaLabel}
+              tabIndex={Number(tabindex)}
+              containerRole="combobox"
+              prefix={
                 <ElIcon
-                  className="el-input__icon clear-icon"
-                  onMouseDown={(event) => event.preventDefault()}
-                  onClick={onClearClick}
+                  className="el-input__icon"
+                  onMouseDown={(event) => {
+                    // 官方在图标上 prevent 后手动触发，避免输入框先失焦
+                    event.preventDefault();
+                    onMouseDownInput(event);
+                  }}
                 >
-                  {clearIcon ?? <CircleClose />}
+                  {triggerIcon}
                 </ElIcon>
-              ) : undefined
-            }
-            onChange={onUserInput}
-            onValueChange={() => handleChange()}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            onKeyDown={handleKeydown}
-            onMouseDown={onMouseDownInput}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={() => setHovering(false)}
-            validateEvent={validateEvent}
-          />
+              }
+              suffix={
+                showClearBtn ? (
+                  <ElIcon
+                    className="el-input__icon clear-icon"
+                    onMouseDown={(event) => event.preventDefault()}
+                    onClick={onClearClick}
+                  >
+                    {clearIcon ?? <CircleClose />}
+                  </ElIcon>
+                ) : (
+                  // 官方即使没有清空按钮也保留空的 suffix 容器
+                  <></>
+                )
+              }
+              onChange={onUserInput}
+              onValueChange={() => handleChange()}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              onKeyDown={handleKeydown}
+              onMouseDown={onMouseDownInput}
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={() => setHovering(false)}
+              validateEvent={validateEvent}
+            />
+          </div>
         )}
       </ElTooltip>
     </div>

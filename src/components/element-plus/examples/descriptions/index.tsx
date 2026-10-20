@@ -1,92 +1,270 @@
 "use client";
 
+import { useState, type ReactNode } from "react";
 import {
   ElDescriptions,
   ElDescriptionsItem,
 } from "@/components/element-plus/descriptions";
 import { ElButton } from "@/components/element-plus/button";
+import { ElRadio } from "@/components/element-plus/radio/ElRadio";
+import { ElRadioGroup } from "@/components/element-plus/radio/ElRadioGroup";
+import { ElTag } from "@/components/element-plus/tag";
+import { ElIcon } from "@/components/element-plus/icon/ElIcon";
+import { ElImage } from "@/components/element-plus/image";
+import {
+  Iphone,
+  Location,
+  OfficeBuilding,
+  Tickets,
+  User,
+} from "@/components/element-plus/icons";
+import styles from "./descriptions.module.css";
+
+type DemoSize = "large" | "default" | "small";
+
+const ICON_MARGIN: Record<DemoSize, number> = {
+  large: 8,
+  default: 6,
+  small: 4,
+};
+
+const BLOCK_MARGIN: Record<DemoSize, number> = {
+  large: 32,
+  default: 28,
+  small: 24,
+};
+
+const AVATAR =
+  "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png";
 
 export function DescriptionsBasic() {
   return (
-    <ElDescriptions title="用户信息" extra={<ElButton size="small">操作</ElButton>}>
-      <ElDescriptionsItem label="用户名">kooriookami</ElDescriptionsItem>
-      <ElDescriptionsItem label="手机号">18100000000</ElDescriptionsItem>
-      <ElDescriptionsItem label="居住地">苏州市</ElDescriptionsItem>
-      <ElDescriptionsItem label="备注">学校</ElDescriptionsItem>
-      <ElDescriptionsItem label="联系地址">江苏省苏州市吴中区吴中大道 1188 号</ElDescriptionsItem>
+    <ElDescriptions title="User Info">
+      <ElDescriptionsItem label="Username">kooriookami</ElDescriptionsItem>
+      <ElDescriptionsItem label="Telephone">18100000000</ElDescriptionsItem>
+      <ElDescriptionsItem label="Place">Suzhou</ElDescriptionsItem>
+      <ElDescriptionsItem label="Remarks">
+        <ElTag size="small">School</ElTag>
+      </ElDescriptionsItem>
+      <ElDescriptionsItem label="Address">
+        No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
+      </ElDescriptionsItem>
     </ElDescriptions>
   );
 }
 
-export function DescriptionsSizes() {
+function iconLabel(icon: ReactNode, text: string, size: DemoSize) {
   return (
-    <div style={{ display: "grid", gap: "2.4rem" }}>
-      <ElDescriptions title="large" border size="large">
-        <ElDescriptionsItem label="用户名">kooriookami</ElDescriptionsItem>
-        <ElDescriptionsItem label="手机号">18100000000</ElDescriptionsItem>
-        <ElDescriptionsItem label="居住地">苏州市</ElDescriptionsItem>
-      </ElDescriptions>
-      <ElDescriptions title="default" border size="default">
-        <ElDescriptionsItem label="用户名">kooriookami</ElDescriptionsItem>
-        <ElDescriptionsItem label="手机号">18100000000</ElDescriptionsItem>
-        <ElDescriptionsItem label="居住地">苏州市</ElDescriptionsItem>
-      </ElDescriptions>
-      <ElDescriptions title="small" border size="small">
-        <ElDescriptionsItem label="用户名">kooriookami</ElDescriptionsItem>
-        <ElDescriptionsItem label="手机号">18100000000</ElDescriptionsItem>
-        <ElDescriptionsItem label="居住地">苏州市</ElDescriptionsItem>
-      </ElDescriptions>
+    <div className={styles.cellItem}>
+      <ElIcon style={{ marginRight: ICON_MARGIN[size] }}>{icon}</ElIcon>
+      {text}
     </div>
   );
 }
 
-export function DescriptionsVertical() {
+export function DescriptionsSizes() {
+  const [size, setSize] = useState<DemoSize>("default");
+
   return (
-    <ElDescriptions title="垂直列表" direction="vertical" border>
-      <ElDescriptionsItem label="用户名">kooriookami</ElDescriptionsItem>
-      <ElDescriptionsItem label="手机号">18100000000</ElDescriptionsItem>
-      <ElDescriptionsItem label="居住地">苏州市</ElDescriptionsItem>
-      <ElDescriptionsItem label="备注">
-        <ElButton size="small">编辑</ElButton>
-      </ElDescriptionsItem>
-      <ElDescriptionsItem label="联系地址">江苏省苏州市吴中区吴中大道 1188 号</ElDescriptionsItem>
-    </ElDescriptions>
+    <>
+      <ElRadioGroup
+        value={size}
+        onChange={(value) => setSize(value as DemoSize)}
+        style={{ marginRight: 12 }}
+      >
+        <ElRadio value="large" label="Large" />
+        <ElRadio value="default" label="Default" />
+        <ElRadio value="small" label="Small" />
+      </ElRadioGroup>
+
+      <ElDescriptions
+        title="With border"
+        column={3}
+        size={size}
+        border
+        style={{ marginTop: 20 }}
+        extra={<ElButton type="primary">Operation</ElButton>}
+      >
+        <ElDescriptionsItem label={iconLabel(<User />, "Username", size)}>
+          kooriookami
+        </ElDescriptionsItem>
+        <ElDescriptionsItem label={iconLabel(<Iphone />, "Telephone", size)}>
+          18100000000
+        </ElDescriptionsItem>
+        <ElDescriptionsItem label={iconLabel(<Location />, "Place", size)}>
+          Suzhou
+        </ElDescriptionsItem>
+        <ElDescriptionsItem label={iconLabel(<Tickets />, "Remarks", size)}>
+          <ElTag size="small">School</ElTag>
+        </ElDescriptionsItem>
+        <ElDescriptionsItem
+          label={iconLabel(<OfficeBuilding />, "Address", size)}
+        >
+          No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
+        </ElDescriptionsItem>
+      </ElDescriptions>
+
+      <ElDescriptions
+        title="Without border"
+        column={3}
+        size={size}
+        style={{ marginTop: BLOCK_MARGIN[size] }}
+        extra={<ElButton type="primary">Operation</ElButton>}
+      >
+        <ElDescriptionsItem label="Username">kooriookami</ElDescriptionsItem>
+        <ElDescriptionsItem label="Telephone">18100000000</ElDescriptionsItem>
+        <ElDescriptionsItem label="Place">Suzhou</ElDescriptionsItem>
+        <ElDescriptionsItem label="Remarks">
+          <ElTag size="small">School</ElTag>
+        </ElDescriptionsItem>
+        <ElDescriptionsItem label="Address">
+          No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
+        </ElDescriptionsItem>
+      </ElDescriptions>
+    </>
+  );
+}
+
+export function DescriptionsVertical() {
+  const [size, setSize] = useState<DemoSize>("default");
+
+  const items = [
+    <ElDescriptionsItem key="username" label="Username">
+      kooriookami
+    </ElDescriptionsItem>,
+    <ElDescriptionsItem key="telephone" label="Telephone">
+      18100000000
+    </ElDescriptionsItem>,
+    <ElDescriptionsItem key="place" label="Place" span={2}>
+      Suzhou
+    </ElDescriptionsItem>,
+    <ElDescriptionsItem key="remarks" label="Remarks">
+      <ElTag size="small">School</ElTag>
+    </ElDescriptionsItem>,
+    <ElDescriptionsItem key="address" label="Address">
+      No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
+    </ElDescriptionsItem>,
+  ];
+
+  return (
+    <>
+      <ElRadioGroup
+        value={size}
+        onChange={(value) => setSize(value as DemoSize)}
+        style={{ marginRight: 12 }}
+      >
+        <ElRadio value="large" label="Large" />
+        <ElRadio value="default" label="Default" />
+        <ElRadio value="small" label="Small" />
+      </ElRadioGroup>
+
+      <ElDescriptions
+        title="Vertical list with border"
+        direction="vertical"
+        column={4}
+        size={size}
+        border
+        style={{ marginTop: 20 }}
+      >
+        {items}
+      </ElDescriptions>
+
+      <ElDescriptions
+        title="Vertical list without border"
+        direction="vertical"
+        column={4}
+        size={size}
+        style={{ marginTop: BLOCK_MARGIN[size] }}
+      >
+        {items}
+      </ElDescriptions>
+    </>
   );
 }
 
 export function DescriptionsRowspan() {
   return (
-    <div style={{ display: "grid", gap: "2.4rem" }}>
-      <ElDescriptions title="带边框" border column={2}>
-        <ElDescriptionsItem label="产品">云服务</ElDescriptionsItem>
-        <ElDescriptionsItem label="状态">运行中</ElDescriptionsItem>
-        <ElDescriptionsItem label="规格">2 核 4G</ElDescriptionsItem>
-        <ElDescriptionsItem label="地域">华东</ElDescriptionsItem>
+    <>
+      <ElDescriptions title="Width horizontal list" border>
+        <ElDescriptionsItem
+          rowspan={2}
+          width={140}
+          label="Photo"
+          align="center"
+        >
+          <ElImage
+            src={AVATAR}
+            style={{ width: 100, height: 100 }}
+            fit="fill"
+          />
+        </ElDescriptionsItem>
+        <ElDescriptionsItem label="Username">kooriookami</ElDescriptionsItem>
+        <ElDescriptionsItem label="Telephone">18100000000</ElDescriptionsItem>
+        <ElDescriptionsItem label="Place">Suzhou</ElDescriptionsItem>
+        <ElDescriptionsItem label="Remarks">
+          <ElTag size="small">School</ElTag>
+        </ElDescriptionsItem>
+        <ElDescriptionsItem label="Address">
+          No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
+        </ElDescriptionsItem>
       </ElDescriptions>
-      <ElDescriptions border>
-        <ElDescriptionsItem label="产品">云服务</ElDescriptionsItem>
-        <ElDescriptionsItem label="状态">运行中</ElDescriptionsItem>
-        <ElDescriptionsItem label="规格">2 核 4G</ElDescriptionsItem>
-        <ElDescriptionsItem label="备注" span={2}>跨两列</ElDescriptionsItem>
-        <ElDescriptionsItem label="地域">华东</ElDescriptionsItem>
+
+      <ElDescriptions
+        title="Width vertical list"
+        direction="vertical"
+        border
+        style={{ marginTop: 20 }}
+      >
+        <ElDescriptionsItem
+          rowspan={2}
+          width={140}
+          label="Photo"
+          align="center"
+        >
+          <ElImage
+            src={AVATAR}
+            style={{ width: 100, height: 100 }}
+            fit="fill"
+          />
+        </ElDescriptionsItem>
+        <ElDescriptionsItem label="Username">kooriookami</ElDescriptionsItem>
+        <ElDescriptionsItem label="Telephone">18100000000</ElDescriptionsItem>
+        <ElDescriptionsItem label="Place">Suzhou</ElDescriptionsItem>
+        <ElDescriptionsItem label="Remarks">
+          <ElTag size="small">School</ElTag>
+        </ElDescriptionsItem>
+        <ElDescriptionsItem label="Address">
+          No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
+        </ElDescriptionsItem>
       </ElDescriptions>
-    </div>
+    </>
   );
 }
 
 export function DescriptionsCustomStyle() {
   return (
-    <ElDescriptions title="自定义样式" border column={3} labelWidth="120px">
-      <ElDescriptionsItem label="用户名" align="center">
+    <ElDescriptions title="Customized style list" column={3} border>
+      <ElDescriptionsItem
+        label="Username"
+        labelAlign="right"
+        align="center"
+        labelClassName={styles.myLabel}
+        className={styles.myContent}
+        width="150px"
+      >
         kooriookami
       </ElDescriptionsItem>
-      <ElDescriptionsItem label="手机号" align="center">
+      <ElDescriptionsItem label="Telephone" labelAlign="right" align="center">
         18100000000
       </ElDescriptionsItem>
-      <ElDescriptionsItem label="居住地" align="center">苏州市</ElDescriptionsItem>
-      <ElDescriptionsItem label="备注" labelAlign="right">学校</ElDescriptionsItem>
-      <ElDescriptionsItem label="联系地址" labelAlign="right">
-        江苏省苏州市吴中区吴中大道 1188 号
+      <ElDescriptionsItem label="Place" labelAlign="right" align="center">
+        Suzhou
+      </ElDescriptionsItem>
+      <ElDescriptionsItem label="Remarks" labelAlign="right" align="center">
+        <ElTag size="small">School</ElTag>
+      </ElDescriptionsItem>
+      <ElDescriptionsItem label="Address" labelAlign="right" align="center">
+        No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
       </ElDescriptionsItem>
     </ElDescriptions>
   );

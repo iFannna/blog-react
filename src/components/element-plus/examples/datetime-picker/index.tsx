@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useState, type CSSProperties, type ReactNode } from "react";
 
+import { ElConfigProvider, en } from "@/components/element-plus/config-provider";
 import { ElDatePicker } from "@/components/element-plus/date-picker";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { CaretLeft, CaretRight } from "@/components/element-plus/icons";
@@ -37,7 +38,7 @@ const demonstrationStyle: CSSProperties = {
   marginBottom: 20,
 };
 
-export function DateTimePickerBasic() {
+function DateTimePickerBasicDemo() {
   const [value1, setValue1] = useState<DateModelValue>(null);
   const [value2, setValue2] = useState<DateModelValue>(null);
   const [value3, setValue3] = useState<DateModelValue>(null);
@@ -98,7 +99,7 @@ export function DateTimePickerBasic() {
   );
 }
 
-export function DateTimePickerRange() {
+function DateTimePickerRangeDemo() {
   const [value1, setValue1] = useState<DateModelValue>([
     new Date(2000, 10, 10, 10, 10),
     new Date(2000, 10, 11, 10, 10),
@@ -164,7 +165,7 @@ export function DateTimePickerRange() {
   );
 }
 
-export function DateTimePickerDefaultTime() {
+function DateTimePickerDefaultTimeDemo() {
   const [value1, setValue1] = useState<DateModelValue>(null);
   const [value2, setValue2] = useState<DateModelValue>(null);
 
@@ -204,7 +205,7 @@ export function DateTimePickerDefaultTime() {
   );
 }
 
-export function DateTimePickerFormats() {
+function DateTimePickerFormatsDemo() {
   const [value1, setValue1] = useState<DateModelValue>(null);
   const [value2, setValue2] = useState<DateModelValue>(null);
   const [value3, setValue3] = useState<DateModelValue>(null);
@@ -250,7 +251,7 @@ export function DateTimePickerFormats() {
   );
 }
 
-export function DateTimePickerPanelFormats() {
+function DateTimePickerPanelFormatsDemo() {
   const [value1, setValue1] = useState<DateModelValue>(null);
   const [value2, setValue2] = useState<DateModelValue>(null);
 
@@ -292,7 +293,7 @@ export function DateTimePickerPanelFormats() {
   );
 }
 
-export function DateTimePickerSinglePanel() {
+function DateTimePickerSinglePanelDemo() {
   const [value1, setValue1] = useState<DateModelValue>(null);
 
   return (
@@ -357,7 +358,7 @@ const customIcons = {
   ),
 };
 
-export function DateTimePickerCustomIcon() {
+function DateTimePickerCustomIconDemo() {
   const [value1, setValue1] = useState<DateModelValue>(null);
   const [value2, setValue2] = useState<DateModelValue>(null);
 
@@ -402,3 +403,21 @@ export function DateTimePickerCustomIcon() {
     </div>
   );
 }
+
+/** 官方文档 demo 运行在 en 语言环境，与站点正文语言无关。 */
+function withEn(Component: () => ReactNode) {
+  return function Demo() {
+    return (
+      <ElConfigProvider locale={en}>
+        <Component />
+      </ElConfigProvider>
+    );
+  };
+}
+export const DateTimePickerBasic = withEn(DateTimePickerBasicDemo);
+export const DateTimePickerRange = withEn(DateTimePickerRangeDemo);
+export const DateTimePickerDefaultTime = withEn(DateTimePickerDefaultTimeDemo);
+export const DateTimePickerFormats = withEn(DateTimePickerFormatsDemo);
+export const DateTimePickerPanelFormats = withEn(DateTimePickerPanelFormatsDemo);
+export const DateTimePickerSinglePanel = withEn(DateTimePickerSinglePanelDemo);
+export const DateTimePickerCustomIcon = withEn(DateTimePickerCustomIconDemo);

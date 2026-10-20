@@ -9,6 +9,7 @@ import { ElDivider } from "@/components/element-plus/divider";
 import { ElDialog } from "@/components/element-plus/dialog";
 import { ElLink } from "@/components/element-plus/link";
 import { ElSelect } from "@/components/element-plus/select";
+import { ElSelectV2 } from "@/components/element-plus/select-v2";
 import { ElPagination } from "@/components/element-plus/pagination";
 import { ElRadio, ElRadioGroup } from "@/components/element-plus/radio";
 import { ElSwitch } from "@/components/element-plus/switch";
@@ -22,8 +23,15 @@ import type {
   TableConfigContext,
 } from "@/components/element-plus/config-provider";
 
-const row = { display: "flex", gap: "1.2rem", flexWrap: "wrap" as const, alignItems: "center" };
-const column = { display: "flex", flexDirection: "column" as const, gap: "0.4rem", width: "150px" };
+/** 官方 demo 的 flex gap 以 16px 基准：gap-4 = 16px，gap-2 = 8px，gap-1 = 4px。 */
+const row16 = { display: "flex", gap: "16px", alignItems: "center" };
+const row8 = { display: "flex", gap: "8px", alignItems: "center" };
+const column = {
+  display: "flex",
+  flexDirection: "column" as const,
+  gap: "4px",
+  flexBasis: "150px",
+};
 const fullWidth = { width: "100%" as const };
 
 /** 语言切换：ConfigProvider 的 locale 同时作用于分页与表格的内置文案。 */
@@ -33,14 +41,15 @@ export function ConfigProviderLocale() {
 
   return (
     <div>
-      <ElButton onClick={() => setLang((v) => (v === "zh-cn" ? "en" : "zh-cn"))}>
-        切换语言
+      <ElButton
+        style={{ marginBottom: "8px" }}
+        onClick={() => setLang((v) => (v === "zh-cn" ? "en" : "zh-cn"))}
+      >
+        Switch Language
       </ElButton>
-      <ElDivider />
+      <br />
       <ElConfigProvider locale={locale}>
-        <ElTable data={[]} style={{ marginBottom: "1rem" }}>
-          <ElTableColumn prop="name" label="Name" />
-        </ElTable>
+        <ElTable data={[]} style={{ marginBottom: "4px" }} />
         <ElPagination total={100} />
       </ElConfigProvider>
     </div>
@@ -62,7 +71,7 @@ export function ConfigProviderButton() {
 
   return (
     <div>
-      <div style={row}>
+      <div>
         <ElCheckbox
           checked={config.autoInsertSpace}
           onCheckedChange={(v) => setConfig((c) => ({ ...c, autoInsertSpace: v }))}
@@ -97,7 +106,7 @@ export function ConfigProviderButton() {
           value={config.type ?? "default"}
           onChange={(v) => setConfig((c) => ({ ...c, type: v as ButtonConfigContext["type"] }))}
           options={buttonTypes.map((t) => ({ value: t, label: t }))}
-          style={{ maxWidth: "150px" }}
+          style={{ maxWidth: "150px", marginLeft: "20px" }}
         />
       </div>
       <ElDivider />
@@ -120,7 +129,7 @@ export function ConfigProviderLink() {
 
   return (
     <div>
-      <div style={row}>
+      <div style={row16}>
         <div style={column}>
           <span>Type:</span>
           <ElSelect
@@ -154,20 +163,22 @@ export function ConfigProviderCard() {
   const config = useMemo(() => ({ shadow }), [shadow]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+    <div>
       Shadow:
-      <ElRadioGroup
-        value={shadow}
-        onChange={(v) => setShadow(v as "always" | "hover" | "never")}
-      >
-        <ElRadio value="always" label="always" />
-        <ElRadio value="hover" label="hover" />
-        <ElRadio value="never" label="never" />
-      </ElRadioGroup>
-      <ElDivider />
-      <ElConfigProvider card={config}>
-        <ElCard>Card desu!</ElCard>
-      </ElConfigProvider>
+      <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        <ElRadioGroup
+          value={shadow}
+          onChange={(v) => setShadow(v as "always" | "hover" | "never")}
+        >
+          <ElRadio value="always" label="always" />
+          <ElRadio value="hover" label="hover" />
+          <ElRadio value="never" label="never" />
+        </ElRadioGroup>
+        <ElDivider />
+        <ElConfigProvider card={config}>
+          <ElCard>Card desu!</ElCard>
+        </ElConfigProvider>
+      </div>
     </div>
   );
 }
@@ -180,17 +191,39 @@ export function ConfigProviderDialog() {
     overflow: false,
   });
   const [visible, setVisible] = useState(false);
+  const [enableTransition, setEnableTransition] = useState(false);
+  const [isObjectTransition, setIsObjectTransition] = useState(false);
+
+  const dialogConfig = useMemo<DialogConfigContext>(
+    () => ({
+      ...config,
+      // 官方对象形态的过渡依赖 Vue 过渡钩子，React 侧仅透传字符串类名
+      transition: enableTransition
+        ? isObjectTransition
+          ? undefined
+          : "dialog-bounce"
+        : undefined,
+    }),
+    [config, enableTransition, isObjectTransition],
+  );
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1.2rem" }}>
-      <div style={row}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "16px",
+        justifyContent: "center",
+      }}
+    >
+      <div style={row8}>
         <ElSwitch
           checked={config.alignCenter ?? false}
           onCheckedChange={(v) => setConfig((c) => ({ ...c, alignCenter: v }))}
           activeText="alignCenter"
         />
       </div>
-      <div style={row}>
+      <div style={row16}>
         <ElSwitch
           checked={config.draggable ?? false}
           onCheckedChange={(v) => setConfig((c) => ({ ...c, draggable: v }))}
@@ -203,16 +236,49 @@ export function ConfigProviderDialog() {
           activeText="overflow"
         />
       </div>
-      <div style={row}>
+      <div style={row8}>
+        <ElSwitch
+          checked={enableTransition}
+          onCheckedChange={setEnableTransition}
+          activeText="enable transition"
+        />
+        <ElSwitch
+          checked={isObjectTransition}
+          disabled={!enableTransition}
+          onCheckedChange={setIsObjectTransition}
+          activeText="transition: object"
+          inactiveText="transition: string"
+        />
+      </div>
+      <div style={row8}>
         <ElButton type="primary" size="small" onClick={() => setVisible(true)}>
           Open Dialog
         </ElButton>
       </div>
-      <ElConfigProvider dialog={config}>
-        <ElDialog visible={visible} onVisibleChange={setVisible} title="Dialog Title">
+      <ElConfigProvider dialog={dialogConfig}>
+        <ElDialog
+          visible={visible}
+          onVisibleChange={setVisible}
+          title="Dialog Title"
+          destroyOnClose
+        >
           Dialog Content
         </ElDialog>
       </ElConfigProvider>
+      {enableTransition && (
+        <div style={{ fontSize: "12px", opacity: 0.7 }}>
+          {isObjectTransition ? (
+            <div>
+              Using JavaScript controlled animation:{" "}
+              <code>{JSON.stringify({ css: false })}</code>
+            </div>
+          ) : (
+            <div>
+              Using string transition name: <code>dialog-bounce</code>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -231,7 +297,8 @@ export function ConfigProviderMessage() {
 /** empty-values / value-on-clear：清空后写回指定值。 */
 export function ConfigProviderEmptyValues() {
   // 初始值为空字符串：空值集合设为 [undefined, null] 后，空字符串是有意义的值
-  const [value, setValue] = useState<string | number | null | undefined>("");
+  const [value1, setValue1] = useState<string | number | null | undefined>("");
+  const [value2, setValue2] = useState<string | number | null | undefined>("");
 
   const options = [
     { value: "", label: "All" },
@@ -242,17 +309,33 @@ export function ConfigProviderEmptyValues() {
     { value: "Option5", label: "Option5" },
   ];
 
+  const handleChange = (v: unknown) => {
+    if (v === null || v === undefined) {
+      message.info(`The clear value is: ${v}`);
+    }
+  };
+
   return (
     <ElConfigProvider valueOnClear={null} emptyValues={[undefined, null]}>
-      <div style={row}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "16px", alignItems: "center" }}>
         <ElSelect
-          value={value ?? undefined}
+          value={value1 ?? undefined}
           onChange={(v) => {
-            setValue(v as string);
-            if (v === null || v === undefined) {
-              message.info(`The clear value is: ${v}`);
-            }
+            setValue1(v as string);
+            handleChange(v);
           }}
+          clearable
+          placeholder="Select"
+          options={options}
+          style={{ width: "240px" }}
+        />
+        <ElSelectV2
+          value={value2 ?? undefined}
+          onChange={(v) => {
+            setValue2(v as string);
+            handleChange(v);
+          }}
+          valueOnClear={() => undefined}
           clearable
           placeholder="Select"
           options={options}
@@ -274,11 +357,12 @@ export function ConfigProviderTable() {
     { date: "2016-05-04", name: "Aleyna Kutzner", address: "Lohrbergstr. 86c, Süd Lilli, Saarland" },
     { date: "2016-05-03", name: "Helen Jacobi", address: "760 A Street, South Frankfield, Illinois" },
     { date: "2016-05-02", name: "Brandon Deckert", address: "Arnold-Ohletz-Str. 41a, Alt Malinascheid, Thüringen" },
+    { date: "2016-05-01", name: "Margie Smith", address: "23618 Windsor Drive, West Ricardoview, Idaho" },
   ];
 
   return (
     <div>
-      <div style={row}>
+      <div>
         <ElCheckbox
           checked={config.showOverflowTooltip}
           onCheckedChange={(v) => setConfig((c) => ({ ...c, showOverflowTooltip: v }))}
@@ -294,7 +378,7 @@ export function ConfigProviderTable() {
             { value: "dark", label: "dark" },
             { value: "light", label: "light" },
           ]}
-          style={{ maxWidth: "150px" }}
+          style={{ maxWidth: "150px", marginLeft: "20px" }}
         />
       </div>
       <ElDivider />

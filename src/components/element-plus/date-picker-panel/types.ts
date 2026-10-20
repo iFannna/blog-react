@@ -14,6 +14,8 @@ export type DatePickerType =
   | "years"
   | "month"
   | "months"
+  | "quarter"
+  | "quarters"
   | "date"
   | "dates"
   | "week"
@@ -21,6 +23,7 @@ export type DatePickerType =
   | "datetimerange"
   | "daterange"
   | "monthrange"
+  | "quarterrange"
   | "yearrange";
 
 export type DateCellType =

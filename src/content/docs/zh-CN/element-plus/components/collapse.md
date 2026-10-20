@@ -11,7 +11,9 @@ order: 60
 
 ## 基础用法
 
-:::demo 可同时展开多个面板，`value` 为数组。
+可同时展开多个面板，面板之间不影响。
+
+:::demo
 
 collapse/basic
 
@@ -19,39 +21,55 @@ collapse/basic
 
 ## 手风琴效果
 
-:::demo 每次只能展开一个面板，通过 `accordion` 开启。
+每次只能展开一个面板。
+
+:::demo 通过 `accordion` 属性来设置是否以手风琴模式显示。
 
 collapse/accordion
 
 :::
 
-## 自定义图标位置
+## 自定义面板标题
 
-:::demo 通过 `expandIconPosition` 设置展开图标的位置。
+除了可以通过 `title` 属性以外，还可以通过具名 `slot` 来实现自定义面板的标题内容，以实现增加图标等效果。
 
-collapse/custom-icon-position
+:::tip
 
-:::
-
-## 自定义图标
-
-:::demo 通过 `icon` 传入节点或函数；函数参数包含当前 `isActive` 状态。
-
-collapse/custom-icon
+从版本 `2.9.10` 开始， `title` 插槽提供一个 `isActive` 属性，显示当前折叠项是否活跃。
 
 :::
 
-## 自定义标题
-
-:::demo `title` 支持函数形式，可根据 `isActive` 渲染不同内容。
+:::demo
 
 collapse/customization
 
 :::
 
+## 自定义图标
+
+除了使用 `icon` 属性外，您还可以自定义面板项目图标，从而添加自定义内容。
+
+:::demo
+
+collapse/custom-icon
+
+:::
+
+## 自定义图标位置
+
+使用 `expand-icon-position` 属性，您可以自定义图标位置。
+
+:::demo
+
+collapse/custom-icon-position
+
+:::
+
 ## 阻止折叠
 
-:::demo `beforeCollapse` 返回 Promise 时，等待结果再决定是否切换。
+设置 `beforeChange` 属性，若返回 `false` 或者返回 `Promise` 且被 reject ，则停止切换。
+
+:::demo
 
 collapse/prevent-collapsing
 

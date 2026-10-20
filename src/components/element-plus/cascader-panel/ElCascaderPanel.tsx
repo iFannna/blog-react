@@ -232,21 +232,23 @@ export function ElCascaderPanel({
   };
 
   useImperativeHandle(ref, () => ({
-
     menus: controller.menus,
     checkedNodes: controller.checkedNodes,
     getFlattedNodes: (leafOnly: boolean) =>
       controller.getFlattedNodes(leafOnly),
     getCheckedNodes: (leafOnly: boolean) => controller.getCheckedNodes(leafOnly),
-    clearCheckedNodes: () =>
-      controller.clearCheckedNodes({ onChange, onExpandChange }),
-    calculateCheckedValue: () =>
-      controller.calculateCheckedValue({ onChange }),
-    handleCheckChange: (node: Node, checked: boolean, emitClose?: boolean) =>
+    clearCheckedNodes: () => {
+      controller.clearCheckedNodes({ onChange, onExpandChange });
+    },
+    calculateCheckedValue: () => {
+      controller.calculateCheckedValue({ onChange });
+    },
+    handleCheckChange: (node: Node, checked: boolean, emitClose?: boolean) => {
       controller.handleCheckChange(node, checked, emitClose, {
         onChange,
         onClose,
-      }),
+      });
+    },
     scrollToExpandingNode,
     loadLazyRootNodes: () => controller.loadLazyRootNodes(),
   }));
@@ -267,11 +269,12 @@ export function ElCascaderPanel({
     },
     expandNode: (node, silent) =>
       controller.expandNode(node, silent, { onExpandChange }),
-    handleCheckChange: (node, checked, emitClose) =>
+    handleCheckChange: (node, checked, emitClose) => {
       controller.handleCheckChange(node, checked, emitClose, {
         onChange,
         onClose,
-      }),
+      });
+    },
   };
 
   return (

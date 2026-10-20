@@ -163,9 +163,11 @@ export function useTourFloating({
       fn: ({ state }: { state: State }) => {
         const overflow = detectOverflow(state);
         const overWidth = Math.max(overflow.left, overflow.right, 0);
-        return {
-          data: { maxWidth: state.rects.popper.width - overWidth },
-        } as unknown as State;
+        // popper 会把 modifier 的返回值当成新的 state，这里只写 modifiersData，
+        // 不能 return，否则后续 modifier 拿到的 state 会缺少 orderedModifiers。
+        state.modifiersData.overflow = {
+          maxWidth: state.rects.popper.width - overWidth,
+        };
       },
       data: {},
     } as unknown as AnyModifier;
@@ -178,17 +180,19 @@ export function useTourFloating({
      * popper 的 update 是防抖的，直接读 instance.state 会拿到上一轮结果；
      * 首次结果用 onFirstUpdate 拿，后续结果统一从 write 阶段的 tourState 读取。
      */
-    const readState = (instance: Instance) => {
-      const popperStyle = instance.state.styles.popper as unknown as Record<string, string>;
+    // popper 的 onFirstUpdate 回调参数是 State，而 tourState 中间件拿到的是
+    // Instance，这里统一收敛为 State，避免首次打开时读不到定位结果。
+    const readState = (state: State) => {
+      const popperStyle = state.styles.popper as unknown as Record<string, string>;
       setPopperStyles({
         position: popperStyle.position,
         top: popperStyle.top,
         left: popperStyle.left,
         transform: popperStyle.transform,
       });
-      setAttributes(instance.state.attributes.popper as unknown as Record<string, string>);
+      setAttributes(state.attributes.popper as unknown as Record<string, string>);
 
-      const arrowData = instance.state.modifiersData.arrow as
+      const arrowData = state.modifiersData.arrow as
         | { x?: number; y?: number }
         | undefined;
       // 两个坐标都为空（例如无箭头）时置 null，避免写入空对象触发多余渲染
@@ -196,7 +200,7 @@ export function useTourFloating({
         arrowData && (arrowData.x != null || arrowData.y != null) ? arrowData : null,
       );
 
-      const overflowData = instance.state.modifiersData.overflow as
+      const overflowData = state.modifiersData.overflow as
         | { maxWidth?: number }
         | undefined;
       setMaxWidth(overflowData?.maxWidth ?? null);
@@ -217,7 +221,7 @@ export function useTourFloating({
         requiresIfExists: ["computeStyles"],
         fn: ({ instance }: { instance: Instance }) => {
           // 首次计算结果由 onFirstUpdate 消费，避免重复触发一轮渲染
-          if (hasRead) readState(instance);
+          if (hasRead) readState(instance.state);
           else hasRead = true;
         },
         data: {},
@@ -235,8 +239,13 @@ export function useTourFloating({
 
     instanceRef.current = instance;
 
-    // 目标移动 / 尺寸变化时跟随，对应官方 autoUpdate
-    const onScrollOrResize = () => void instance.update();
+    // 目标移动 / 尺寸变化时跟随，对应官方 autoUpdate。
+    // createPopper 的首次 setOptions 是异步的，orderedModifiers 尚未就绪时
+    // 调用 update 会让 popper 在 forceUpdate 里读到 undefined。
+    const safeUpdate = () => {
+      if (instance.state.orderedModifiers) void instance.update();
+    };
+    const onScrollOrResize = () => safeUpdate();
     window.addEventListener("scroll", onScrollOrResize, true);
     window.addEventListener("resize", onScrollOrResize);
 
@@ -251,7 +260,9 @@ export function useTourFloating({
   // 挖孔矩形变化（滚动 / 目标移动 / gap 变化）后重算定位
   useEffect(() => {
     gapRectRef.current = gapRect;
-    void instanceRef.current?.update();
+    if (instanceRef.current?.state.orderedModifiers) {
+      void instanceRef.current.update();
+    }
   }, [gapRect]);
 
   /** 对应官方 contentStyle：无参考元素时固定在屏幕中央。 */

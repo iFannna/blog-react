@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ElCard } from "@/components/element-plus/card";
 import { ElColorPickerPanel } from "@/components/element-plus/color-picker-panel";
 import { ElDivider } from "@/components/element-plus/divider";
@@ -49,9 +49,23 @@ export function ColorPickerPanelPredefinedColor() {
 
 export function ColorPickerPanelBorder() {
   const [color, setColor] = useState<string | null>("#ff6900");
+  const [isNarrow, setIsNarrow] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // 官方 demo 在容器窄于 815px 时把竖分隔线换成横线
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new ResizeObserver(([entry]) => {
+      setIsNarrow(entry.contentRect.width < 815);
+    });
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div>
+    <div ref={containerRef}>
       <div style={{ textAlign: "center" }}>No border:</div>
       <ElDivider />
       <div
@@ -59,7 +73,7 @@ export function ColorPickerPanelBorder() {
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
-          gap: "1rem",
+          gap: "16px",
         }}
       >
         <div style={{ padding: "20px" }}>
@@ -69,7 +83,10 @@ export function ColorPickerPanelBorder() {
             onChange={setColor}
           />
         </div>
-        <ElDivider style={{ height: "auto" }} direction="vertical" />
+        <ElDivider
+          style={{ height: "auto" }}
+          direction={isNarrow ? "horizontal" : "vertical"}
+        />
         <ElCard>
           <ElColorPickerPanel
             value={color}
@@ -90,7 +107,7 @@ export function ColorPickerPanelDisabled() {
       value={color}
       disabled
       showAlpha
-      predefine={PREDEFINE_COLORS}
+      predefine={PREDEFINE_COLORS.slice(0, 7)}
       onChange={setColor}
     />
   );

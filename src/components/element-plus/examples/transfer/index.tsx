@@ -100,7 +100,13 @@ export function TransferCustomizable() {
   };
 
   const footer = (
-    <ElButton className="transfer-footer" size="small">Operation</ElButton>
+    <ElButton
+      className="transfer-footer"
+      size="small"
+      style={{ marginLeft: 15, padding: "6px 5px" }}
+    >
+      Operation
+    </ElButton>
   );
 
   return (

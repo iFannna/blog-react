@@ -25,27 +25,11 @@ menu/basic
 
 :::
 
-## 折叠
-
-:::demo 纵向菜单可以折叠。
-
-menu/collapse
-
-:::
-
 ## 左右分布
 
 :::demo 可以将菜单项分布到左右两侧。
 
 menu/left-and-right
-
-:::
-
-## 浮层偏移
-
-:::demo 子菜单设置 `popperOffset` 后会覆盖菜单的  `popperOffset`。
-
-menu/popper-offset
 
 :::
 
@@ -58,6 +42,22 @@ menu/popper-offset
 :::demo
 
 menu/vertical
+
+:::
+
+## 折叠
+
+:::demo 纵向菜单可以折叠。
+
+menu/collapse
+
+:::
+
+## 浮层偏移
+
+:::demo 子菜单设置 `popperOffset` 后会覆盖菜单的  `popperOffset`。
+
+menu/popper-offset
 
 :::
 

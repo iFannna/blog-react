@@ -510,7 +510,7 @@ export const ElFormItem = forwardRef<FormItemExpose, FormItemProps>(
 
     const rootClasses = [
       "el-form-item",
-      `el-form-item--${itemSizeResolved || "default"}`,
+      itemSizeResolved && `el-form-item--${itemSizeResolved}`,
       validateState === "error" && "is-error",
       validateState === "validating" && "is-validating",
       validateState === "success" && "is-success",

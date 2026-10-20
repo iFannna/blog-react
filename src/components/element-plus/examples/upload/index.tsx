@@ -15,25 +15,15 @@ import { ElDialog } from "@/components/element-plus/dialog";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { Delete, Download, Plus, UploadFilled, ZoomIn } from "@/components/element-plus/icons";
 import { message } from "@/components/element-plus/message";
+import styles from "./upload.module.css";
 import { MessageBox } from "@/components/element-plus/message-box";
 
 const ACTION = "https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15";
 
 /**
- * 官方示例用 <style scoped> 定义 .avatar-uploader / .avatar-uploader-icon，
- * 本项目禁止 <style> 标签与新增 docs.css 规则，改为等值的样式对象。
+ * 官方示例用 <style> 定义 .avatar-uploader .el-upload 的虚线边框；
+ * 组件根节点只能透传 style 到外层，故用 CSS Module 命中内层 .el-upload。
  */
-const avatarUploaderStyle: CSSProperties = {
-  display: "inline-block",
-  border: "1px dashed var(--el-border-color)",
-  borderRadius: 6,
-  cursor: "pointer",
-  position: "relative",
-  overflow: "hidden",
-  transition: "var(--el-transition-duration-fast)",
-  lineHeight: 0,
-};
-
 const avatarIconStyle: CSSProperties = {
   fontSize: 28,
   color: "#8c939d",
@@ -133,7 +123,7 @@ export function UploadLimitCover() {
       autoUpload={false}
       trigger={<ElButton type="primary">select file</ElButton>}
       tip={
-        <div className="el-upload__tip" style={{ color: "var(--el-color-danger)" }}>
+        <div className="el-upload__tip" style={{ color: "#f87171" }}>
           limit 1 file, new file will cover the old file
         </div>
       }
@@ -165,8 +155,7 @@ export function UploadAvatar() {
 
   return (
     <ElUpload
-      className="avatar-uploader"
-      style={avatarUploaderStyle}
+      className={`avatar-uploader ${styles.avatarUploader}`}
       action={ACTION}
       showFileList={false}
       onSuccess={handleAvatarSuccess}
@@ -190,7 +179,7 @@ const PHOTO_WALL_FILES: UploadUserFile[] = [
   },
   {
     name: "plant-1.png",
-    url: "/images/plant-1.png",
+    url: "https://element-plus.org/images/plant-1.png",
   },
   {
     name: "food.jpeg",
@@ -198,7 +187,7 @@ const PHOTO_WALL_FILES: UploadUserFile[] = [
   },
   {
     name: "plant-2.png",
-    url: "/images/plant-2.png",
+    url: "https://element-plus.org/images/plant-2.png",
   },
   {
     name: "food.jpeg",
@@ -206,7 +195,7 @@ const PHOTO_WALL_FILES: UploadUserFile[] = [
   },
   {
     name: "figure-1.png",
-    url: "/images/figure-1.png",
+    url: "https://element-plus.org/images/figure-1.png",
   },
   {
     name: "food.jpeg",
@@ -214,7 +203,7 @@ const PHOTO_WALL_FILES: UploadUserFile[] = [
   },
   {
     name: "figure-2.png",
-    url: "/images/figure-2.png",
+    url: "https://element-plus.org/images/figure-2.png",
   },
 ];
 

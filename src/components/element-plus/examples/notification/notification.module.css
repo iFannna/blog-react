@@ -1,0 +1,11 @@
+/* Official demos use a flex-wrap row; the utility !ml-0 cancels the sibling margin */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.row > :global(.el-button) + :global(.el-button) {
+  margin-left: 0;
+}

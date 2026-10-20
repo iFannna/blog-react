@@ -12,6 +12,7 @@
  */
 
 import { getGlobalConfig } from "../config-provider/context";
+import { nextZIndex } from "../config-provider/use-z-index";
 import type { MessageConfigContext } from "../config-provider/types";
 
 export type MessageType = "primary" | "success" | "info" | "warning" | "error";
@@ -110,7 +111,6 @@ export interface MessageFn {
 }
 
 let seed = 1;
-let zIndexSeed = 2003;
 let instances: MessageInstance[] = [];
 const EMPTY: MessageInstance[] = [];
 
@@ -234,7 +234,7 @@ const message: MessageFn = (options) => {
     plain: opts.plain ?? globalMessageConfig.plain ?? false,
     offset: opts.offset ?? globalMessageConfig.offset ?? DEFAULT_OFFSET,
     placement,
-    zIndex: opts.zIndex ?? zIndexSeed++,
+    zIndex: opts.zIndex ?? nextZIndex(getGlobalConfig()?.zIndex),
     repeatNum: 1,
     appendTo: opts.appendTo,
     closing: false,

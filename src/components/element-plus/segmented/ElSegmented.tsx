@@ -136,7 +136,23 @@ export function ElSegmented({
     const selectedItem = root.querySelector<HTMLElement>(".is-selected");
     const selectedInput = root.querySelector<HTMLElement>(".is-selected input");
     if (!selectedItem || !selectedInput) {
-      setSelectedStyle({ display: "none" });
+      // 官方无选中项时把滑动块尺寸归零；仅 display:none 会保留 CSS 里的
+      // 默认 10px 宽度，computed style 与官方不一致。
+      setSelectedStyle(
+        direction === "vertical"
+          ? {
+              display: "none",
+              width: "100%",
+              height: 0,
+              transform: "translateY(0px)",
+            }
+          : {
+              display: "none",
+              width: 0,
+              height: 0,
+              transform: "translateX(0px)",
+            },
+      );
       setFocusVisible(false);
       return;
     }
@@ -198,9 +214,11 @@ export function ElSegmented({
     };
   }, []);
 
+  // 官方只在 activeElement 变化后重算；每帧无条件测量会在 FormItem
+  // 自动宽度这类持续布局变化中反复 setState。
   useLayoutEffect(() => {
     updateRef.current();
-  });
+  }, [value, direction]);
 
   // 无选项时官方 v-if 不渲染任何内容
   if (options.length === 0) return null;

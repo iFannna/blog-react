@@ -1,9 +1,19 @@
 "use client";
 
-import { createElement, useEffect, useRef, type ReactNode } from "react";
+import {
+  createElement,
+  useEffect,
+  useRef,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 import { ElCheckbox } from "./ElCheckbox";
 import { CheckboxGroupContext } from "./CheckboxGroupContext";
-import { useFormDisabled, useFormItem } from "../form/use-form";
+import {
+  useFormDisabled,
+  useFormItem,
+  useFormItemInputId,
+} from "../form/use-form";
 import type { CheckboxValueType, ComponentSize } from "./context";
 
 export interface CheckboxGroupProps {
@@ -38,6 +48,8 @@ export interface CheckboxGroupProps {
   /** 渲染形态，对应官方 type */
   type?: "checkbox" | "button";
   className?: string;
+  /** 根节点内联样式，对应官方 attrs 透传（transfer 的 v-show 需要） */
+  style?: CSSProperties;
   children?: ReactNode;
 }
 
@@ -65,9 +77,11 @@ export function ElCheckboxGroup({
   optionProps,
   type = "checkbox",
   className,
+  style,
   children,
 }: CheckboxGroupProps) {
   const alias = { ...DEFAULT_OPTION_PROPS, ...optionProps };
+  const { inputId } = useFormItemInputId({ id, ariaLabel });
   // 官方在 group 层解析 Form 的 disabled，再下发给组内所有 Checkbox
   const resolvedDisabled = useFormDisabled(disabled);
 
@@ -118,7 +132,13 @@ export function ElCheckboxGroup({
     >
       {createElement(
         tag,
-        { id, className: classes, role: "group", "aria-label": ariaLabel },
+        {
+          id: inputId,
+          className: classes,
+          style,
+          role: "group",
+          "aria-label": ariaLabel,
+        },
         children ?? optionNodes,
       )}
     </CheckboxGroupContext.Provider>

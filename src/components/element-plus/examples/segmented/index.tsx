@@ -79,12 +79,14 @@ export function SegmentedCustomDirection() {
   );
 
   return (
-    <div style={stack}>
+    <div>
       <ElSegmented
         value={size}
         onChange={(v) => setSize(v as ComponentSize)}
         options={["large", "default", "small"]}
+        style={{ marginBottom: 16 }}
       />
+      <br />
       <ElSegmented
         value={direction}
         onChange={(v) => setDirection(v as "horizontal" | "vertical")}
@@ -92,7 +94,9 @@ export function SegmentedCustomDirection() {
           { label: "Horizontal", value: "horizontal" },
           { label: "Vertical", value: "vertical" },
         ]}
+        style={{ marginBottom: 16 }}
       />
+      <br />
       <ElSegmented
         value={value}
         onChange={(v) => setValue(v as string)}

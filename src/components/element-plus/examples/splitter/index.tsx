@@ -3,6 +3,7 @@
 import { useState, type CSSProperties, type ReactNode } from "react";
 import { ElSplitter, ElSplitterPanel } from "@/components/element-plus/splitter";
 import { ElSwitch } from "@/components/element-plus/switch";
+import styles from "./splitter.module.css";
 
 /** 官方示例统一给外层盒子一个固定高度和阴影，这里保持一致。 */
 const container: CSSProperties = {
@@ -16,8 +17,6 @@ const panelContent: CSSProperties = {
   justifyContent: "center",
   height: "100%",
 };
-
-const switchRow: CSSProperties = { marginBottom: 8 };
 
 /** 对应官方示例里的 .demo-panel */
 function DemoPanel({ children }: { children?: ReactNode }) {
@@ -59,15 +58,14 @@ export function SplitterCollapsible() {
 
   return (
     <div>
-      <div style={switchRow}>
-        <ElSwitch
-          checked={isCollapsible}
-          onCheckedChange={setIsCollapsible}
-          activeText="enable"
-          inactiveText="disable"
-          inlinePrompt
-        />
-      </div>
+      <ElSwitch
+        className={styles.switch}
+        checked={isCollapsible}
+        onCheckedChange={setIsCollapsible}
+        activeText="enable"
+        inactiveText="disable"
+        inlinePrompt
+      />
       <div style={container}>
         <ElSplitter>
           <ElSplitterPanel collapsible={isCollapsible} min="50">
@@ -100,15 +98,14 @@ export function SplitterDisableDrag() {
 
   return (
     <div>
-      <div style={switchRow}>
-        <ElSwitch
-          checked={resizable}
-          onCheckedChange={setResizable}
-          activeText="enable"
-          inactiveText="disable"
-          inlinePrompt
-        />
-      </div>
+      <ElSwitch
+        className={styles.switch}
+        checked={resizable}
+        onCheckedChange={setResizable}
+        activeText="enable"
+        inactiveText="disable"
+        inlinePrompt
+      />
       <div style={container}>
         <ElSplitter>
           <ElSplitterPanel>

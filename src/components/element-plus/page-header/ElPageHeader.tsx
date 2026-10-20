@@ -29,8 +29,8 @@ export interface PageHeaderProps {
   children?: ReactNode;
 }
 
-/** 官方 locale 的 el.pageHeader.title，中文包为「返回」 */
-const DEFAULT_TITLE = "返回";
+/** 官方 ElPageHeader 的默认返回文案（各语言文档站均沿用英文 Back） */
+const DEFAULT_TITLE = "Back";
 
 /** 判断插槽是否有效：undefined / null / false 视为未传。 */
 function hasSlot(node: ReactNode) {

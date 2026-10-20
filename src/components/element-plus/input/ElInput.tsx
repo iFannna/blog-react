@@ -194,23 +194,29 @@ export const ElInput = forwardRef<InputExpose, InputProps>(function ElInput(
 
   // --- 原生值同步 ---
 
+  // rAF 里调用 setNativeInputValue 时闭包可能还停在旧 value 上，
+  // 会把上一次的值写回 DOM；用 ref 始终读到最近一次提交的受控值。
+  const nativeInputValueRef = useRef(nativeInputValue);
+
   const setNativeInputValue = useCallback(() => {
     const el = element();
     if (!el) return;
 
-    const formatted = formatter ? formatter(nativeInputValue) : nativeInputValue;
+    const value = nativeInputValueRef.current;
+    const formatted = formatter ? formatter(value) : value;
     if (el.value === formatted || type === "file") return;
 
     el.value = formatted;
-  }, [nativeInputValue, formatter, type, element]);
+  }, [formatter, type, element]);
 
   /**
    * 官方全程手动写 el.value 而不是绑定 value，以保住输入法组合与光标位置。
    * React 里同样在布局阶段同步，等价于官方 onMounted + watch(nativeInputValue)。
    */
   useIsomorphicLayoutEffect(() => {
+    nativeInputValueRef.current = nativeInputValue;
     setNativeInputValue();
-  }, [setNativeInputValue, isTextarea, type]);
+  }, [nativeInputValue, setNativeInputValue, isTextarea, type]);
 
   // 记录光标，供 formatter 改写值后恢复
   const selectionRef = useRef<{

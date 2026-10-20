@@ -10,13 +10,6 @@ import { ElTable, ElTableColumn } from "@/components/element-plus/table";
 import { MessageBox } from "@/components/element-plus/message-box";
 import { CircleCloseFilled } from "@/components/element-plus/icons";
 
-const row = {
-  display: "flex",
-  gap: "1.2rem",
-  flexWrap: "wrap" as const,
-  alignItems: "center",
-};
-
 export function DrawerBasicUsage() {
   const [direction, setDirection] = useState<DrawerDirection>("rtl");
   const [visible, setVisible] = useState(false);
@@ -24,24 +17,22 @@ export function DrawerBasicUsage() {
   const [radio, setRadio] = useState("Option 1");
 
   return (
-    <div style={{ display: "grid", gap: "1.2rem" }}>
-      <div style={row}>
-        <ElRadioGroup
-          value={direction}
-          onChange={(value) => setDirection(value as DrawerDirection)}
-        >
-          <ElRadio value="ltr">left to right</ElRadio>
-          <ElRadio value="rtl">right to left</ElRadio>
-          <ElRadio value="ttb">top to bottom</ElRadio>
-          <ElRadio value="btt">bottom to top</ElRadio>
-        </ElRadioGroup>
-        <ElButton type="primary" onClick={() => setVisible(true)}>
-          open
-        </ElButton>
-        <ElButton type="primary" onClick={() => setVisible2(true)}>
-          with footer
-        </ElButton>
-      </div>
+    <>
+      <ElRadioGroup
+        value={direction}
+        onChange={(value) => setDirection(value as DrawerDirection)}
+      >
+        <ElRadio value="ltr">left to right</ElRadio>
+        <ElRadio value="rtl">right to left</ElRadio>
+        <ElRadio value="ttb">top to bottom</ElRadio>
+        <ElRadio value="btt">bottom to top</ElRadio>
+      </ElRadioGroup>
+      <ElButton type="primary" style={{ marginLeft: 28 }} onClick={() => setVisible(true)}>
+        open
+      </ElButton>
+      <ElButton type="primary" style={{ marginLeft: 16 }} onClick={() => setVisible2(true)}>
+        with footer
+      </ElButton>
 
       <ElDrawer
         visible={visible}
@@ -83,7 +74,7 @@ export function DrawerBasicUsage() {
           <ElRadio value="Option 2" size="large">Option 2</ElRadio>
         </ElRadioGroup>
       </ElDrawer>
-    </div>
+    </>
   );
 }
 
@@ -129,14 +120,12 @@ export function DrawerCustomizationContent() {
 
   return (
     <>
-      <div style={row}>
-        <ElButton text onClick={() => setTableVisible(true)}>
-          Open Drawer with nested table
-        </ElButton>
-        <ElButton text onClick={() => setFormVisible(true)}>
-          Open Drawer with nested form
-        </ElButton>
-      </div>
+      <ElButton text onClick={() => setTableVisible(true)}>
+        Open Drawer with nested table
+      </ElButton>
+      <ElButton text onClick={() => setFormVisible(true)}>
+        Open Drawer with nested form
+      </ElButton>
 
       <ElDrawer
         visible={tableVisible}
@@ -251,10 +240,10 @@ export function DrawerCustomizationHeader() {
 }
 
 export function DrawerResizable() {
-  const [direction, setDirection] = useState<DrawerDirection>("rtl");
+  const [direction, setDirection] = useState<DrawerDirection>();
   const [visible, setVisible] = useState(false);
   return (
-    <div style={{ display: "grid", gap: "1.2rem" }}>
+    <>
       <ElRadioGroup
         value={direction}
         onChange={(value) => {
@@ -275,7 +264,7 @@ export function DrawerResizable() {
       >
         This is drawer content.
       </ElDrawer>
-    </div>
+    </>
   );
 }
 

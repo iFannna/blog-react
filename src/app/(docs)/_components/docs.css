@@ -6,15 +6,55 @@
  * side-by-side comparison works. Dark mode rides on html.dark (same switch as EP).
  */
 
+/* 官方文档站从 Google Fonts 加载 Inter；本地自托管同一份可变字体，避免离线时回退到 Arial */
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter-latin.woff2") format("woff2");
+}
+
 /*
  * 文档站自有根字号：本文件所有 rem 均按 1rem = 10px 标定（数值与官方 px 一一对应）。
  * 文档站有独立根布局，不再继承博客 globals.css，故基准字号与元素 reset 在这里自行声明。
  */
 html {
+  --docs-font: Inter, "Helvetica Neue", Helvetica, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, Arial, sans-serif;
+  --docs-font-fallback: "Helvetica Neue", Helvetica, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, Arial, sans-serif;
+  --docs-font-mono: "JetBrains Mono", source-code-pro, Menlo, Monaco, Consolas,
+    "Courier New", monospace;
+
   font-size: 62.5%;
   line-height: 1.4;
-  font-family: var(--el-font-family);
+  font-family: var(--docs-font);
+  font-weight: 400;
   text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Tooltip content is teleported to <body>, outside .docs-shell */
+  --docs-api-typing-color: #0c61c9;
+  --docs-api-typing-bg: #f5f7fa;
+}
+
+html.dark {
+  --docs-api-typing-color: var(--el-color-primary);
+  --docs-api-typing-bg: rgba(64, 158, 255, 0.1);
+}
+
+/* 官方 VitePress reset：表单控件默认不继承页面字体，缺这条会让按钮/输入框回退到 Arial */
+button,
+input,
+optgroup,
+select,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
 }
 
 *,
@@ -85,6 +125,8 @@ html.dark ::-webkit-scrollbar-thumb:hover {
   --docs-source-bg: #f5f7fa;
   --docs-source-control-color: #909399;
   --docs-code-inline-bg: #f5f7fa;
+  --docs-code-block-bg: #f5f7fa;
+  --docs-code-block-color: #67676c;
 
   --docs-text: #303133;
   --docs-text-secondary: #606266;
@@ -95,11 +137,6 @@ html.dark ::-webkit-scrollbar-thumb:hover {
 
   --docs-switch-bg: #f2f2f2;
   --docs-switch-icon-bg: #141414;
-
-  --docs-font: Inter, "Helvetica Neue", Helvetica, "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, Arial, sans-serif;
-  --docs-font-mono: "JetBrains Mono", source-code-pro, Menlo, Monaco, Consolas,
-    "Courier New", monospace;
 
   font-family: var(--docs-font);
   color: var(--docs-text);
@@ -114,10 +151,12 @@ html.dark .docs-shell {
   --docs-source-bg: #1d1e1f;
   --docs-source-control-color: #a3a6ad;
   --docs-code-inline-bg: #262727;
+  --docs-code-block-bg: #262727;
+  --docs-code-block-color: #98989f;
 
   --docs-text: #e5eaf3;
   --docs-text-secondary: #cfd3dc;
-  --docs-h2-color: #e5eaf3;
+  --docs-h2-color: #cfd3dc;
 
   --docs-header-bg: rgba(20, 20, 20, 0.9);
   --docs-toc-color: #a3a6ad;
@@ -519,7 +558,7 @@ html.dark .docs-shell {
   font-size: 3.04rem;
   font-weight: 600;
   line-height: 1.25;
-  color: var(--docs-text);
+  color: var(--docs-h2-color);
 }
 
 @media (width >= 480px) {
@@ -540,38 +579,74 @@ html.dark .docs-shell {
 }
 
 .docs-content h3 {
-  margin: 2.4rem 0 1.2rem;
-  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  margin: 3.2rem 0 0;
+  font-size: 2.16rem;
   font-weight: 600;
-  color: var(--docs-text);
+  line-height: 1.25;
+  color: var(--docs-h2-color);
 }
 
-.docs-content p {
-  margin: 1.6rem 0;
+/* API 分组标题紧跟 h2 时，官方把间距收紧到 24px */
+.docs-content h2 + h3 {
+  margin-top: 2.4rem;
+}
+
+.docs-content h4 {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 1.84rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--docs-h2-color);
+}
+
+.docs-content h5,
+.docs-content h6 {
+  display: flex;
+  align-items: center;
+  margin: 0;
   font-size: 1.6rem;
-  line-height: 1.7;
-  color: var(--docs-text);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--docs-h2-color);
 }
 
-.docs-content a {
+/* Same zero-specificity rule as the official bare `p`/`a` selectors, so
+   component styles such as `.el-link` or `.el-message__content` win. */
+:where(.docs-content) :where(p) {
+  margin: 1.6rem 0;
+  line-height: 1.7;
+}
+
+:where(.docs-content) :where(a) {
   color: var(--docs-sidebar-link-active);
   text-decoration: none;
+  /* Official bare `a` rule; component classes that set weight still win. */
+  font-weight: 500;
 }
 
-.docs-content a:hover {
+:where(.docs-content) :where(a:hover) {
   text-decoration: underline;
 }
 
-.docs-content ul,
-.docs-content ol {
+/* Official uses bare `p, ol, ul` (zero specificity), so component resets such as
+   `.el-menu { margin: 0; padding-left: 0 }` win. Keep our selectors zero-specificity
+   while staying scoped to docs pages; indent comes from the UA default (40px). */
+:where(.docs-content) :where(ul, ol) {
   margin: 1.6rem 0;
-  padding-left: 2.4rem;
-  font-size: 1.6rem;
   line-height: 1.7;
 }
 
-.docs-content li {
-  margin: 0.4rem 0;
+:where(.docs-content) :where(li) {
+  margin: 0;
+}
+
+.docs-content strong,
+.docs-content b {
+  font-weight: 600;
 }
 
 /* Inline code — official: bg #f5f7fa, padding 2.4px 8px, radius 4px */
@@ -596,53 +671,74 @@ html.dark .docs-shell {
   align-items: center;
 }
 
-.docs-api-typing__trigger {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 0.4rem;
-  padding: 0.4rem;
-  border: 0;
-  background: none;
-  cursor: pointer;
-  color: var(--docs-source-control-color);
-  font-size: 1.4rem;
+/* Element Plus docs stylesheet adds this spacing; theme-chalk does not. */
+:where(.docs-content) .el-radio-group {
+  margin-right: 1.2rem;
 }
 
+/* Official trigger is `<el-button text>` plus UnoCSS p-2 text-4 (8px / 16px). */
+.docs-api-typing__trigger {
+  padding: 0.8rem;
+  font-size: 1.6rem;
+}
+
+/* Official tooltip content: `<div class="m-1" style="max-width: 600px"><code>` */
 .docs-api-typing__details {
-  display: inline-block;
   max-width: 60rem;
+  margin: 0.4rem;
+}
+
+.docs-api-typing__details code {
   padding: 0.24rem 0.8rem;
   border-radius: 0.4rem;
-  background-color: var(--docs-source-bg);
+  background-color: var(--docs-api-typing-bg);
+  color: var(--docs-api-typing-color);
   font-family: var(--docs-font-mono);
-  font-size: 1.3rem;
-  white-space: normal;
-  word-break: break-word;
-}
-
-/* Tables — official: th/td padding 8.4px 14px, row border-bottom */
-
-.docs-content table {
-  width: 100%;
-  margin: 2rem 0;
-  border-collapse: collapse;
   font-size: 1.4rem;
+  line-height: 2rem;
 }
 
-.docs-content th {
+/* Markdown tables mirror official .vp-table > table. Never target bare
+   `.docs-content table`: it would also hit ElTable / calendar internals. */
+.docs-table {
+  margin: 0 0 4.5rem;
+  overflow: auto hidden;
+}
+
+.docs-table > table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  background-color: var(--el-bg-color);
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+
+.docs-table > table th,
+.docs-table > table td {
+  max-width: 25rem;
   padding: 0.84rem 1.4rem;
   border-bottom: 1px solid var(--docs-example-border);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.docs-table > table td {
+  vertical-align: top;
+}
+
+.docs-table > table th {
   font-weight: 700;
   text-align: left;
-  white-space: nowrap;
 }
 
-.docs-content td {
-  padding: 0.84rem 1.4rem;
-  border-bottom: 1px solid var(--docs-example-border);
-  vertical-align: top;
-  line-height: 1.6;
+/* Official API tables put attribute names and descriptions in different fonts */
+.docs-table > table tbody tr td:first-child {
+  font-family: var(--docs-font-mono);
+}
+
+.docs-table > table tbody tr td:nth-child(2) {
+  font-family: var(--docs-font-fallback);
 }
 
 /* Demo block — official .example */
@@ -906,18 +1002,26 @@ html.dark .docs-shell {
 }
 
 .docs-callout p {
-  margin: 0.8rem 0;
+  margin: 1.6rem 0;
+  font-size: 1.44rem;
+  line-height: 1.7;
+}
+
+.docs-callout > p:last-child {
+  margin-bottom: 0;
 }
 
 /* Version badge used as ^(2.2.0) in official docs */
 
 .docs-version-tag {
   display: inline-block;
+  box-sizing: border-box;
   margin-left: 0.4rem;
-  padding: 0 0.6rem;
+  padding: 0 0.7rem;
   border: 1px solid var(--docs-sidebar-link-active);
-  border-radius: 0.4rem;
+  border-radius: 1rem;
   font-size: 1.2rem;
+  line-height: 1.8rem;
   color: var(--docs-sidebar-link-active);
 }
 
@@ -1624,20 +1728,22 @@ html.dark .lineH-left.is-dark {
 
 .docs-code-block {
   margin: 1.6rem 0;
-  padding: 1.6rem 2rem;
+  padding: 2rem 0;
   overflow-x: auto;
-  border-radius: 0.4rem;
-  background-color: var(--docs-source-bg);
+  border-radius: 0.8rem;
+  background-color: var(--docs-code-block-bg);
   font-family: var(--docs-font-mono);
-  font-size: 1.4rem;
-  line-height: 1.6;
+  font-size: 1.6rem;
+  line-height: 2.24rem;
 }
 
 .docs-code-block code {
   display: block;
+  padding: 0 2.4rem;
   background: none;
+  color: var(--docs-code-block-color);
   font-family: inherit;
-  font-size: inherit;
+  font-size: 1.4rem;
 }
 
 .docs-code-block span {
@@ -1654,11 +1760,13 @@ html.dark .docs-code-block span {
 }
 
 .docs-callout__title {
-  font-weight: 600;
+  margin: 0 0 1.6rem;
+  font-weight: 700;
 }
 
 .docs-callout__title p {
-  margin: 0.8rem 0 0;
+  margin: 0;
+  font-size: 1.6rem;
 }
 
 .docs-pager {

@@ -1,121 +1,126 @@
 "use client";
 
-import { useState } from "react";
+import { Bell } from "@/components/element-plus/icons";
 import { ElAlert } from "@/components/element-plus/alert";
 
-const stack = { display: "flex", flexDirection: "column", gap: "1.2rem" } as const;
+/** 官方 demo 统一用 600px 宽容器，Alert 之间 20px 的间隔写在各元素上。 */
+const box = { maxWidth: 600 } as const;
+const gap = { marginTop: 20 } as const;
 
 export function AlertBasic() {
   return (
-    <div style={stack}>
-      <ElAlert title="成功提示的文案" type="success" />
-      <ElAlert title="消息提示的文案" type="info" />
-      <ElAlert title="警告提示的文案" type="warning" />
-      <ElAlert title="错误提示的文案" type="error" />
+    <div style={box}>
+      <ElAlert title="Primary alert" type="primary" />
+      <ElAlert title="Success alert" type="success" style={gap} />
+      <ElAlert title="Info alert" type="info" style={gap} />
+      <ElAlert title="Warning alert" type="warning" style={gap} />
+      <ElAlert title="Error alert" type="error" style={gap} />
     </div>
   );
 }
 
 export function AlertTheme() {
   return (
-    <div style={stack}>
-      <ElAlert title="成功提示的文案" type="success" effect="dark" />
-      <ElAlert title="消息提示的文案" type="info" effect="dark" />
-      <ElAlert title="警告提示的文案" type="warning" effect="dark" />
-      <ElAlert title="错误提示的文案" type="error" effect="dark" />
+    <div style={box}>
+      <ElAlert title="Primary alert" type="primary" effect="dark" />
+      <ElAlert title="Success alert" type="success" effect="dark" style={gap} />
+      <ElAlert title="Info alert" type="info" effect="dark" style={gap} />
+      <ElAlert title="Warning alert" type="warning" effect="dark" style={gap} />
+      <ElAlert title="Error alert" type="error" effect="dark" style={gap} />
     </div>
   );
 }
 
 export function AlertCustomClose() {
-  const [visible, setVisible] = useState(true);
   return (
-    <div style={stack}>
-      {visible && (
-        <ElAlert
-          title="自定义关闭按钮"
-          type="info"
-          closeText="知道了"
-          onClose={() => setVisible(false)}
-        />
-      )}
-      {!visible && (
-        <button
-          type="button"
-          onClick={() => setVisible(true)}
-          style={{
-            alignSelf: "flex-start",
-            padding: "0.4rem 1rem",
-            border: "1px solid #dcdfe6",
-            borderRadius: "0.4rem",
-            background: "#fff",
-            cursor: "pointer",
-          }}
-        >
-          重置
-        </button>
-      )}
-    </div>
-  );
-}
-
-export function AlertDescription() {
-  return (
-    <div style={stack}>
-      <ElAlert
-        title="带辅助性文字介绍"
-        type="success"
-        description="这是一段辅助性文字，用于补充说明。"
-        showIcon
-      />
-      <ElAlert
-        title="带图标与描述"
-        type="warning"
-        description="这是一段辅助性文字。"
-        showIcon
-      />
+    <div style={box}>
+      <ElAlert title="Unclosable alert" type="success" closable={false} />
+      <ElAlert title="Customized close text" type="info" closeText="Gotcha" style={gap} />
+      <ElAlert title="Alert with callback" type="warning" style={gap} />
     </div>
   );
 }
 
 export function AlertIcon() {
   return (
-    <div style={stack}>
-      <ElAlert title="显示图标" type="success" showIcon />
-      <ElAlert title="显示图标" type="info" showIcon />
-      <ElAlert title="显示图标" type="warning" showIcon />
-      <ElAlert title="显示图标" type="error" showIcon />
+    <div style={box}>
+      <ElAlert title="Primary alert" type="primary" showIcon />
+      <ElAlert title="Success alert" type="success" showIcon style={gap} />
+      <ElAlert title="Info alert" type="info" showIcon style={gap} />
+      <ElAlert title="Warning alert" type="warning" showIcon style={gap} />
+      <ElAlert title="Error alert" type="error" showIcon style={gap} />
+      <ElAlert
+        title="Error alert with custom icon"
+        type="error"
+        showIcon
+        icon={<Bell />}
+        style={gap}
+      />
     </div>
   );
 }
 
 export function AlertCenter() {
   return (
-    <div style={stack}>
-      <ElAlert title="文字居中" type="success" center showIcon />
+    <div style={box}>
+      <ElAlert title="Primary alert" type="primary" center showIcon />
+      <ElAlert title="Success alert" type="success" center showIcon style={gap} />
+      <ElAlert title="Info alert" type="info" center showIcon style={gap} />
+      <ElAlert title="Warning alert" type="warning" center showIcon style={gap} />
+      <ElAlert title="Error alert" type="error" center showIcon style={gap} />
+    </div>
+  );
+}
+
+export function AlertDescription() {
+  return (
+    <div style={box}>
       <ElAlert
-        title="文字居中"
-        type="info"
-        description="辅助性文字也居中显示。"
-        center
-        showIcon
+        title="With description"
+        type="success"
+        description="This is a description."
       />
     </div>
   );
 }
 
-export function AlertClosable() {
-  const [items, setItems] = useState(["提示一", "提示二", "提示三"]);
+export function AlertIconDescription() {
   return (
-    <div style={stack}>
-      {items.map((title) => (
-        <ElAlert
-          key={title}
-          title={title}
-          onClose={() => setItems(items.filter((t) => t !== title))}
-        />
-      ))}
-      {items.length === 0 && <span>已全部关闭</span>}
+    <div style={box}>
+      <ElAlert
+        title="Primary alert"
+        type="primary"
+        description="More text description"
+        showIcon
+      />
+      <ElAlert
+        title="Success alert"
+        type="success"
+        description="More text description"
+        showIcon
+        style={gap}
+      />
+      <ElAlert
+        title="Info alert"
+        type="info"
+        description="More text description"
+        showIcon
+        style={gap}
+      />
+      <ElAlert
+        title="Warning alert"
+        type="warning"
+        description="More text description"
+        showIcon
+        style={gap}
+      />
+      <ElAlert
+        title="Error alert"
+        type="error"
+        description="More text description"
+        showIcon
+        style={gap}
+      />
     </div>
   );
 }

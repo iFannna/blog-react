@@ -9,7 +9,7 @@ import { ArrowDown, ArrowUp, Minus, Plus } from "@/components/element-plus/icons
 const row = {
   display: "flex",
   flexWrap: "wrap",
-  gap: "1.2rem",
+  gap: 16,
   alignItems: "center",
 } as const;
 

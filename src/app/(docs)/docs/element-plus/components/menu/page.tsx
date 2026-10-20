@@ -323,25 +323,10 @@ export default function MenuPage() {
         <MenuBasic />
       </DemoBlock>
 
-      <Heading level={2}>折叠</Heading>
-      <p>纵向菜单可以折叠。</p>
-      <DemoBlock source={SOURCES.collapse}>
-        <MenuCollapse />
-      </DemoBlock>
-
       <Heading level={2}>左右分布</Heading>
       <p>可以将菜单项分布到左右两侧。</p>
       <DemoBlock source={SOURCES.leftAndRight}>
         <MenuLeftAndRight />
-      </DemoBlock>
-
-      <Heading level={2}>浮层偏移</Heading>
-      <p>
-        子菜单设置 <code>popperOffset</code> 后会覆盖菜单的{" "}
-        <code>popperOffset</code>。
-      </p>
-      <DemoBlock source={SOURCES.popperOffset}>
-        <MenuPopperOffset />
       </DemoBlock>
 
       <Heading level={2}>侧边栏</Heading>
@@ -352,6 +337,21 @@ export default function MenuPage() {
       </p>
       <DemoBlock source={SOURCES.vertical}>
         <MenuVertical />
+      </DemoBlock>
+
+      <Heading level={2}>折叠</Heading>
+      <p>纵向菜单可以折叠。</p>
+      <DemoBlock source={SOURCES.collapse}>
+        <MenuCollapse />
+      </DemoBlock>
+
+      <Heading level={2}>浮层偏移</Heading>
+      <p>
+        子菜单设置 <code>popperOffset</code> 后会覆盖菜单的{" "}
+        <code>popperOffset</code>。
+      </p>
+      <DemoBlock source={SOURCES.popperOffset}>
+        <MenuPopperOffset />
       </DemoBlock>
 
       <DocsContent source={API_MD} />

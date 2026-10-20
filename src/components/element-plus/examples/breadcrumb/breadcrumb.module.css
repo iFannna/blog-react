@@ -1,0 +1,5 @@
+/* 官方文档 .doc-content a 会统一成 inline-flex，这里只作用于示例内的链接 */
+.link {
+  display: inline-flex;
+  align-items: center;
+}

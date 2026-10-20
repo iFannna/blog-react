@@ -57,20 +57,31 @@ const mountedConfigs = new Map<
  *
  * 子组件的 effect 先于父组件执行，卸载时子组件的清理又先于父组件，
  * 因此不能用「最后一次写入」决定快照；按深度取最深层，与挂载/卸载顺序无关。
- * 同层多个 Provider 时后者胜出，与官方「最后挂载者覆盖」一致。
+ *
+ * 同层多个 Provider 时按挂载顺序合并：文档页把每个 demo 渲染在同一个 React
+ * 树里，而官方每个 demo 是独立的 Vue 应用，两者的 globalConfig 互不干扰。
+ * 若同层只取最后一个，后面的 demo（如 table）会把前面 demo 下发的 message /
+ * locale 配置覆盖成 undefined，命令式 message() 就读不到配置了。
  */
 function publishDeepest() {
   let deepestDepth = -1;
-  let deepestConfig: ConfigProviderContext | undefined;
 
-  for (const { depth, config } of mountedConfigs.values()) {
-    if (depth >= deepestDepth) {
-      deepestDepth = depth;
-      deepestConfig = config;
-    }
+  for (const { depth } of mountedConfigs.values()) {
+    if (depth > deepestDepth) deepestDepth = depth;
   }
 
-  globalConfigSnapshot = deepestConfig;
+  if (deepestDepth < 0) {
+    globalConfigSnapshot = undefined;
+    return;
+  }
+
+  let merged: ConfigProviderContext = {};
+
+  for (const { depth, config } of mountedConfigs.values()) {
+    if (depth === deepestDepth) merged = mergeConfig(merged, config);
+  }
+
+  globalConfigSnapshot = merged;
 }
 
 /** 供 ElConfigProvider 在挂载/更新时写入。 */

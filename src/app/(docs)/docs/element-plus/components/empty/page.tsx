@@ -14,18 +14,15 @@ export const metadata: Metadata = {
 };
 
 const SOURCES = {
-  basic: `<ElEmpty />
-<ElEmpty description="自定义描述文字" />`,
+  basic: `<ElEmpty description="description" />`,
 
-  size: `<ElEmpty imageSize={80} />
-<ElEmpty imageSize={140} />
-<ElEmpty imageSize="10rem" />`,
+  customImage: `<ElEmpty image="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" />`,
 
-  bottom: `<ElEmpty description="暂无内容，请先创建">
-  <ElButton type="primary">立即创建</ElButton>
+  size: `<ElEmpty imageSize={200} />`,
+
+  bottom: `<ElEmpty>
+  <ElButton type="primary">Button</ElButton>
 </ElEmpty>`,
-
-  customImage: `<ElEmpty image="/custom.svg" description="使用自定义插图" />`,
 };
 
 const API_MD = `
@@ -74,7 +71,15 @@ export default function EmptyPage() {
         <EmptyBasic />
       </DemoBlock>
 
-      <Heading level={2}>自定义尺寸</Heading>
+      <Heading level={2}>自定义插图</Heading>
+      <p>
+        通过 <code>image</code> 属性传入自定义插图地址。
+      </p>
+      <DemoBlock source={SOURCES.customImage}>
+        <EmptyCustomImage />
+      </DemoBlock>
+
+      <Heading level={2}>插图尺寸</Heading>
       <p>
         通过 <code>imageSize</code> 属性设置插图宽度，数字按 px 处理。
       </p>
@@ -88,14 +93,6 @@ export default function EmptyPage() {
       </p>
       <DemoBlock source={SOURCES.bottom}>
         <EmptyBottom />
-      </DemoBlock>
-
-      <Heading level={2}>自定义插图</Heading>
-      <p>
-        通过 <code>image</code> 属性传入自定义插图地址。
-      </p>
-      <DemoBlock source={SOURCES.customImage}>
-        <EmptyCustomImage />
       </DemoBlock>
 
       <DocsContent source={API_MD} />

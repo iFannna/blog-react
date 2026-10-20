@@ -12,27 +12,54 @@ export const metadata: Metadata = {
 };
 
 const SOURCES = {
-  basic: `{["primary", "success", "warning", "error"].map((icon) => (
-  <ElResult
-    key={icon}
-    icon={icon}
-    title={\`\${icon} 提示\`}
-    subTitle="请根据提示进行后续操作"
-    extra={<ElButton type="primary">返回</ElButton>}
-  />
-))}
-<ElResult
-  icon="info"
-  title="信息提示"
-  subTitle={<p>使用插槽自定义副标题</p>}
-  extra={<ElButton type="primary">返回</ElButton>}
-/>`,
+  basic: `<ElRow>
+  <ElCol sm={12} lg={6} xl={4}>
+    <ElResult
+      icon="primary"
+      title="Primary Tip"
+      subTitle="Please follow the instructions"
+      extra={<ElButton type="primary">Back</ElButton>}
+    />
+  </ElCol>
+  <ElCol sm={12} lg={6} xl={4}>
+    <ElResult
+      icon="success"
+      title="Success Tip"
+      subTitle="Please follow the instructions"
+      extra={<ElButton type="primary">Back</ElButton>}
+    />
+  </ElCol>
+  <ElCol sm={12} lg={6} xl={4}>
+    <ElResult
+      icon="warning"
+      title="Warning Tip"
+      subTitle="Please follow the instructions"
+      extra={<ElButton type="primary">Back</ElButton>}
+    />
+  </ElCol>
+  <ElCol sm={12} lg={6} xl={4}>
+    <ElResult
+      icon="error"
+      title="Error Tip"
+      subTitle="Please follow the instructions"
+      extra={<ElButton type="primary">Back</ElButton>}
+    />
+  </ElCol>
+  <ElCol sm={12} lg={6} xl={4}>
+    <ElResult
+      icon="info"
+      title="Info Tip"
+      subTitle={<p>Using slot as subtitle</p>}
+      extra={<ElButton type="primary">Back</ElButton>}
+    />
+  </ElCol>
+</ElRow>`,
 
   customIcon: `<ElResult
   title="404"
-  subTitle="抱歉，请求出错"
-  customIcon={<img src={CUSTOM_ICON} alt="" />}
-  extra={<ElButton type="primary">返回</ElButton>}
+  subTitle="Sorry, request error"
+  customIcon={<img src={hamburgerUrl} alt="" />}
+  extra={<ElButton type="primary">Back</ElButton>}
 />`,
 };
 

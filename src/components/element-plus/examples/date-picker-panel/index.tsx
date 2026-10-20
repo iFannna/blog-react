@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import { ElCard } from "@/components/element-plus/card";
+import { ElConfigProvider, en } from "@/components/element-plus/config-provider";
 import { ElDatePickerPanel } from "@/components/element-plus/date-picker-panel";
 import { ElDivider } from "@/components/element-plus/divider";
 import { ElSelect } from "@/components/element-plus/select";
@@ -24,10 +25,11 @@ const DATE_PICKER_TYPES: DatePickerType[] = [
   "datetimerange",
   "daterange",
   "monthrange",
+  "quarterrange",
   "yearrange",
 ];
 
-export function DatePickerPanelBasic() {
+function DatePickerPanelBasicDemo() {
   const [value, setValue] = useState<DateModelValue>(null);
 
   return (
@@ -37,13 +39,13 @@ export function DatePickerPanelBasic() {
   );
 }
 
-export function DatePickerPanelAllTypes() {
+function DatePickerPanelAllTypesDemo() {
   const [type, setType] = useState<DatePickerType>("date");
   const [date, setDate] = useState<DateModelValue>(null);
 
   return (
     <div>
-      <div style={{ display: "flex", gap: "1rem" }}>
+      <div style={{ display: "flex", gap: "16px" }}>
         <div
           style={{
             display: "flex",
@@ -74,11 +76,25 @@ export function DatePickerPanelAllTypes() {
   );
 }
 
-export function DatePickerPanelBorder() {
+function DatePickerPanelBorderDemo() {
   const [value, setValue] = useState<DateModelValue>(null);
+  const [isNarrow, setIsNarrow] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // 官方 demo 在容器窄于 815px 时把竖分隔线换成横线
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new ResizeObserver(([entry]) => {
+      setIsNarrow(entry.contentRect.width < 815);
+    });
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div>
+    <div ref={containerRef}>
       <div style={{ textAlign: "center" }}>No border:</div>
       <ElDivider />
       <div
@@ -96,7 +112,10 @@ export function DatePickerPanelBorder() {
             border={false}
           />
         </div>
-        <ElDivider style={{ height: "auto" }} direction="vertical" />
+        <ElDivider
+          style={{ height: "auto" }}
+          direction={isNarrow ? "horizontal" : "vertical"}
+        />
         <ElCard>
           <ElDatePickerPanel
             value={value}
@@ -109,7 +128,7 @@ export function DatePickerPanelBorder() {
   );
 }
 
-export function DatePickerPanelDisabled() {
+function DatePickerPanelDisabledDemo() {
   const [value, setValue] = useState<DateModelValue>(null);
   const [disabled, setDisabled] = useState(true);
 
@@ -135,3 +154,18 @@ export function DatePickerPanelDisabled() {
     </div>
   );
 }
+
+/** 官方文档 demo 运行在 en 语言环境，与站点正文语言无关。 */
+function withEn(Component: () => ReactNode) {
+  return function Demo() {
+    return (
+      <ElConfigProvider locale={en}>
+        <Component />
+      </ElConfigProvider>
+    );
+  };
+}
+export const DatePickerPanelBasic = withEn(DatePickerPanelBasicDemo);
+export const DatePickerPanelAllTypes = withEn(DatePickerPanelAllTypesDemo);
+export const DatePickerPanelBorder = withEn(DatePickerPanelBorderDemo);
+export const DatePickerPanelDisabled = withEn(DatePickerPanelDisabledDemo);

@@ -33,6 +33,14 @@ checkbox/grouping
 
 :::
 
+## 数据化选项
+
+:::demo 通过 `options` 直接渲染选项数组，并用 `optionProps` 指定 `value`、`label`、`disabled` 的字段别名。
+
+checkbox/options
+
+:::
+
 ## indeterminate 状态
 
 :::demo `indeterminate` 属性用以表示 checkbox 的不确定状态， 一般用于实现全选的效果。
@@ -46,14 +54,6 @@ checkbox/intermediate
 :::demo 使用 `min` 和 `max` 属性限制选中的数量， 达到上限后未选中项自动禁用，达到下限后已选中项不可取消。
 
 checkbox/limitation
-
-:::
-
-## 数据化选项
-
-:::demo 通过 `options` 直接渲染选项数组，并用 `optionProps` 指定 `value`、`label`、`disabled` 的字段别名。
-
-checkbox/options
 
 :::
 

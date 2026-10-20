@@ -1,0 +1,10 @@
+/* 官方 detailed-view.vue 的 demo 级全局样式，仅作用于当前示例 */
+.detailedView :global(.el-table-v2__row-depth-0) {
+  height: 50px;
+}
+
+.detailedView :global(.el-table-v2__cell-text) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

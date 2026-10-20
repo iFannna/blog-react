@@ -82,6 +82,9 @@ export function ElBadge({
     backgroundColor: color,
     marginRight: addUnit(-offsetX),
     marginTop: addUnit(offsetY),
+    // 官方文档站 reset 了 sup 的默认上标对齐与行高，徽章位置依赖这两项
+    lineHeight: 0,
+    verticalAlign: "baseline",
     ...badgeStyle,
   };
 

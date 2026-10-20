@@ -6,8 +6,8 @@ import { exampleRow, exampleStack } from "./styles";
 
 export default function ButtonBasic() {
   return (
-    <div style={exampleStack}>
-      <div style={exampleRow}>
+    <div className={exampleStack}>
+      <div className={exampleRow}>
         <ElButton>Default</ElButton>
         <ElButton type="primary">Primary</ElButton>
         <ElButton type="success">Success</ElButton>
@@ -16,7 +16,7 @@ export default function ButtonBasic() {
         <ElButton type="danger">Danger</ElButton>
       </div>
 
-      <div style={exampleRow}>
+      <div className={exampleRow}>
         <ElButton plain>Plain</ElButton>
         <ElButton type="primary" plain>Primary</ElButton>
         <ElButton type="success" plain>Success</ElButton>
@@ -25,7 +25,7 @@ export default function ButtonBasic() {
         <ElButton type="danger" plain>Danger</ElButton>
       </div>
 
-      <div style={exampleRow}>
+      <div className={exampleRow}>
         <ElButton round>Round</ElButton>
         <ElButton type="primary" round>Primary</ElButton>
         <ElButton type="success" round>Success</ElButton>
@@ -34,7 +34,7 @@ export default function ButtonBasic() {
         <ElButton type="danger" round>Danger</ElButton>
       </div>
 
-      <div style={exampleRow}>
+      <div className={exampleRow}>
         <ElButton dashed>Dashed</ElButton>
         <ElButton type="primary" dashed>Primary</ElButton>
         <ElButton type="success" dashed>Success</ElButton>
@@ -43,7 +43,7 @@ export default function ButtonBasic() {
         <ElButton type="danger" dashed>Danger</ElButton>
       </div>
 
-      <div style={exampleRow}>
+      <div className={exampleRow}>
         <ElButton icon={<Search />} circle aria-label="search" />
         <ElButton type="primary" icon={<Edit />} circle aria-label="edit" />
         <ElButton type="success" icon={<Check />} circle aria-label="check" />

@@ -2,21 +2,24 @@ import type { Metadata } from "next";
 import DemoBlock from "../../../../_components/DemoBlock";
 import { Heading } from "../../../../_components/Heading";
 import DocsContent from "../../../../_components/DocsContent";
-import { BreadcrumbBasic, BreadcrumbIcon } from "@/components/element-plus/examples/nav";
+import { BreadcrumbBasic, BreadcrumbIcon } from "@/components/element-plus/examples/breadcrumb";
 
 export const metadata: Metadata = { title: "Breadcrumb 面包屑" };
 
 const SOURCES = {
   basic: `<ElBreadcrumb separator="/">
-  <ElBreadcrumbItem>首页</ElBreadcrumbItem>
-  <ElBreadcrumbItem>活动管理</ElBreadcrumbItem>
+  <ElBreadcrumbItem to="/">首页</ElBreadcrumbItem>
+  <ElBreadcrumbItem>
+    <a href="/">活动管理</a>
+  </ElBreadcrumbItem>
   <ElBreadcrumbItem>活动列表</ElBreadcrumbItem>
   <ElBreadcrumbItem>活动详情</ElBreadcrumbItem>
 </ElBreadcrumb>`,
 
   icon: `<ElBreadcrumb separatorIcon={<ArrowRight />}>
   <ElBreadcrumbItem to="/">首页</ElBreadcrumbItem>
-  <ElBreadcrumbItem to="/list">活动管理</ElBreadcrumbItem>
+  <ElBreadcrumbItem>活动管理</ElBreadcrumbItem>
+  <ElBreadcrumbItem>活动列表</ElBreadcrumbItem>
   <ElBreadcrumbItem>活动详情</ElBreadcrumbItem>
 </ElBreadcrumb>`,
 };

@@ -19,7 +19,7 @@ import type {
 const row = {
   display: "flex",
   flexWrap: "wrap",
-  gap: "1rem",
+  gap: 16,
   alignItems: "center",
 } as const;
 
@@ -27,6 +27,11 @@ const column = {
   display: "flex",
   flexDirection: "column",
 } as const;
+
+const wrap = {
+  display: "flex",
+  flexWrap: "wrap" as const,
+};
 
 const initials = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
 
@@ -133,12 +138,12 @@ export function SelectV2Clearable() {
   const [value2, setValue2] = useState<string>();
 
   return (
-    <div style={row}>
+    <>
       <ElSelectV2
         value={value1}
         options={baseOptions}
         placeholder="Please select"
-        style={{ width: 240 }}
+        style={{ width: 240, marginRight: 16, verticalAlign: "middle" }}
         multiple
         clearable
         onChange={(next) => setValue1(asArray(next))}
@@ -147,11 +152,11 @@ export function SelectV2Clearable() {
         value={value2}
         options={baseOptions}
         placeholder="Please select"
-        style={{ width: 240 }}
+        style={{ width: 240, verticalAlign: "middle" }}
         clearable
         onChange={(next) => setValue2(next as string)}
       />
-    </div>
+    </>
   );
 }
 
@@ -237,13 +242,13 @@ export function SelectV2Disabled() {
   }));
 
   return (
-    <div style={row}>
+    <>
       <ElSelectV2
         value={value}
         filterable
         options={options}
         placeholder="Please select"
-        style={{ width: 240 }}
+        style={{ width: 240, marginRight: 16, verticalAlign: "middle" }}
         multiple
         onChange={(next) => setValue(asArray(next))}
       />
@@ -253,11 +258,11 @@ export function SelectV2Disabled() {
         filterable
         options={options}
         placeholder="Please select"
-        style={{ width: 240 }}
+        style={{ width: 240, verticalAlign: "middle" }}
         multiple
         onChange={(next) => setValue(asArray(next))}
       />
-    </div>
+    </>
   );
 }
 
@@ -302,12 +307,12 @@ export function SelectV2AllowCreate() {
 
   return (
     <div style={{ flex: "auto" }}>
-      <div style={row}>
+      <div>
         <ElSelectV2
           value={value1}
           options={baseOptions}
           placeholder="Please select"
-          style={{ width: 240 }}
+          style={{ width: 240, marginRight: 16, verticalAlign: "middle" }}
           allowCreate
           defaultFirstOption
           filterable
@@ -319,7 +324,7 @@ export function SelectV2AllowCreate() {
           value={value2}
           options={baseOptions}
           placeholder="Please select"
-          style={{ width: 240 }}
+          style={{ width: 240, verticalAlign: "middle" }}
           allowCreate
           defaultFirstOption
           filterable
@@ -335,7 +340,7 @@ export function SelectV2AllowCreate() {
           value={value3}
           options={baseOptions}
           placeholder="Please select"
-          style={{ width: 240 }}
+          style={{ width: 240, marginRight: 16, verticalAlign: "middle" }}
           allowCreate
           defaultFirstOption
           filterable
@@ -372,9 +377,9 @@ export function SelectV2RemoteSearch() {
   };
 
   return (
-    <div style={row}>
+    <div style={wrap}>
       <div style={{ margin: 16 }}>
-        <p>default</p>
+        <p style={{ marginTop: 0 }}>default</p>
         <ElSelectV2
           value={value}
           style={{ width: 240 }}
@@ -390,7 +395,7 @@ export function SelectV2RemoteSearch() {
         />
       </div>
       <div style={{ margin: 16 }}>
-        <p>use remote-show-suffix</p>
+        <p style={{ marginTop: 0 }}>use remote-show-suffix</p>
         <ElSelectV2
           value={value}
           style={{ width: 240 }}
@@ -439,9 +444,9 @@ export function SelectV2CustomLoading() {
   );
 
   return (
-    <div style={row}>
+    <div style={wrap}>
       <div style={{ margin: 16 }}>
-        <p>loading icon1</p>
+        <p style={{ marginTop: 0 }}>loading icon1</p>
         <ElSelectV2
           value={value}
           multiple
@@ -458,7 +463,7 @@ export function SelectV2CustomLoading() {
         />
       </div>
       <div style={{ margin: 16 }}>
-        <p>loading icon2</p>
+        <p style={{ marginTop: 0 }}>loading icon2</p>
         <ElSelectV2
           value={value}
           multiple

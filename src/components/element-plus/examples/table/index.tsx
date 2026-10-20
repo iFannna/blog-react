@@ -1,18 +1,23 @@
 "use client";
 
-import { useRef, useState, type CSSProperties } from "react";
+import { useRef, useState, type CSSProperties, type ReactNode } from "react";
 import {
   ElTable,
   ElTableColumn,
   type DefaultRow,
   type TableExpose,
-  type TableSortOrder,
 } from "@/components/element-plus/table";
 import { ElButton } from "@/components/element-plus/button";
+import { ElIcon } from "@/components/element-plus/icon/ElIcon";
+import { ElPopover } from "@/components/element-plus/popover";
+import { Timer } from "@/components/element-plus/icons";
 import { ElInput } from "@/components/element-plus/input";
 import { ElLink } from "@/components/element-plus/link";
+import { ElSwitch } from "@/components/element-plus/switch";
 import { ElRadio, ElRadioGroup } from "@/components/element-plus/radio";
 import { ElTag } from "@/components/element-plus/tag";
+
+import tableStyles from "./table.module.css";
 
 interface User {
   id: number | string;
@@ -32,13 +37,38 @@ interface User {
 }
 
 const tableData: User[] = [
-  { id: 1, date: "2016-05-03", name: "Tom", state: "California", city: "Los Angeles", address: "No. 189, Grove St, Los Angeles", zip: "CA 90036", amount1: 120, amount2: 45, amount3: 33 },
-  { id: 2, date: "2016-05-02", name: "Tom", state: "California", city: "Los Angeles", address: "No. 189, Grove St, Los Angeles", zip: "CA 90036", amount1: 80, amount2: 12, amount3: 9 },
-  { id: 3, date: "2016-05-04", name: "Tom", state: "California", city: "Los Angeles", address: "No. 189, Grove St, Los Angeles", zip: "CA 90036", amount1: 200, amount2: 60, amount3: 40 },
-  { id: 4, date: "2016-05-01", name: "Tom", state: "California", city: "Los Angeles", address: "No. 189, Grove St, Los Angeles", zip: "CA 90036", amount1: 30, amount2: 20, amount3: 10 },
+  { id: 1, date: "2016-05-03", name: "Tom", state: "California", city: "Los Angeles", address: "No. 189, Grove St, Los Angeles", zip: "CA 90036", amount1: 120, amount2: 45, amount3: 33, tag: "Home" },
+  { id: 2, date: "2016-05-02", name: "Tom", state: "California", city: "Los Angeles", address: "No. 189, Grove St, Los Angeles", zip: "CA 90036", amount1: 80, amount2: 12, amount3: 9, tag: "Office" },
+  { id: 3, date: "2016-05-04", name: "Tom", state: "California", city: "Los Angeles", address: "No. 189, Grove St, Los Angeles", zip: "CA 90036", amount1: 200, amount2: 60, amount3: 40, tag: "Home" },
+  { id: 4, date: "2016-05-01", name: "Tom", state: "California", city: "Los Angeles", address: "No. 189, Grove St, Los Angeles", zip: "CA 90036", amount1: 30, amount2: 20, amount3: 10, tag: "Office" },
 ];
 
 const fullWidth = { width: "100%" as const };
+
+const wideTableData: User[] = [
+  { id: 1, date: "2016-05-03", name: "Tom", state: "California", city: "Los Angeles", address: "No. 189, Grove St, Los Angeles", zip: "CA 90036", amount1: 0, amount2: 0, amount3: 0 },
+  { id: 2, date: "2016-05-02", name: "Tom", state: "California", city: "Los Angeles", address: "No. 189, Grove St, Los Angeles", zip: "CA 90036", amount1: 0, amount2: 0, amount3: 0 },
+  { id: 3, date: "2016-05-04", name: "Tom", state: "California", city: "Los Angeles", address: "No. 189, Grove St, Los Angeles", zip: "CA 90036", amount1: 0, amount2: 0, amount3: 0 },
+  { id: 4, date: "2016-05-01", name: "Tom", state: "California", city: "Los Angeles", address: "No. 189, Grove St, Los Angeles", zip: "CA 90036", amount1: 0, amount2: 0, amount3: 0 },
+  { id: 5, date: "2016-05-08", name: "Tom", state: "California", city: "Los Angeles", address: "No. 189, Grove St, Los Angeles", zip: "CA 90036", amount1: 0, amount2: 0, amount3: 0 },
+  { id: 6, date: "2016-05-06", name: "Tom", state: "California", city: "Los Angeles", address: "No. 189, Grove St, Los Angeles", zip: "CA 90036", amount1: 0, amount2: 0, amount3: 0 },
+  { id: 7, date: "2016-05-07", name: "Tom", state: "California", city: "Los Angeles", address: "No. 189, Grove St, Los Angeles", zip: "CA 90036", amount1: 0, amount2: 0, amount3: 0 },
+];
+
+const overflowData: User[] = [
+  { id: 1, date: "2016-05-04", name: "Aleyna Kutzner", address: "Lohrbergstr. 86c, Süd Lilli, Saarland", state: "", city: "", zip: "", amount1: 0, amount2: 0, amount3: 0 },
+  { id: 2, date: "2016-05-03", name: "Helen Jacobi", address: "760 A Street, South Frankfield, Illinois", state: "", city: "", zip: "", amount1: 0, amount2: 0, amount3: 0 },
+  { id: 3, date: "2016-05-02", name: "Brandon Deckert", address: "Arnold-Ohletz-Str. 41a, Alt Malinascheid, Thüringen", state: "", city: "", zip: "", amount1: 0, amount2: 0, amount3: 0 },
+  { id: 4, date: "2016-05-01", name: "Margie Smith", address: "23618 Windsor Drive, West Ricardoview, Idaho", state: "", city: "", zip: "", amount1: 0, amount2: 0, amount3: 0 },
+];
+
+const productData: User[] = [
+  { id: "12987122", date: "", name: "Tom", address: "", state: "", city: "", zip: "", amount1: 234, amount2: 3.2, amount3: 10 },
+  { id: "12987123", date: "", name: "Tom", address: "", state: "", city: "", zip: "", amount1: 165, amount2: 4.43, amount3: 12 },
+  { id: "12987124", date: "", name: "Tom", address: "", state: "", city: "", zip: "", amount1: 324, amount2: 1.9, amount3: 9 },
+  { id: "12987125", date: "", name: "Tom", address: "", state: "", city: "", zip: "", amount1: 621, amount2: 2.2, amount3: 17 },
+  { id: "12987126", date: "", name: "Tom", address: "", state: "", city: "", zip: "", amount1: 539, amount2: 4.1, amount3: 15 },
+];
 
 export function TableBasic() {
   return (
@@ -72,7 +102,7 @@ export function TableBorder() {
 
 export function TableFixedHeader() {
   return (
-    <ElTable data={[...tableData, ...tableData, ...tableData]} height="250" style={fullWidth}>
+    <ElTable data={wideTableData} height="250" style={fullWidth}>
       <ElTableColumn prop="date" label="Date" width="180" />
       <ElTableColumn prop="name" label="Name" width="180" />
       <ElTableColumn prop="address" label="Address" />
@@ -91,7 +121,10 @@ export function TableFixedColumn() {
       <ElTableColumn prop="zip" label="Zip" width="120" />
       <ElTableColumn fixed="right" label="Operations" minWidth="120">
         {() => (
-          <ElButton link type="primary" size="small">Detail</ElButton>
+          <>
+            <ElButton link type="primary" size="small">Detail</ElButton>
+            <ElButton link type="primary" size="small">Edit</ElButton>
+          </>
         )}
       </ElTableColumn>
     </ElTable>
@@ -100,7 +133,7 @@ export function TableFixedColumn() {
 
 export function TableGroupHeader() {
   return (
-    <ElTable data={tableData} style={fullWidth}>
+    <ElTable data={wideTableData} border style={fullWidth}>
       <ElTableColumn prop="date" label="Date" width="150" />
       <ElTableColumn label="Delivery Info">
         <ElTableColumn prop="name" label="Name" width="120" />
@@ -108,6 +141,7 @@ export function TableGroupHeader() {
           <ElTableColumn prop="state" label="State" width="120" />
           <ElTableColumn prop="city" label="City" width="120" />
           <ElTableColumn prop="address" label="Address" />
+          <ElTableColumn prop="zip" label="Zip" width="120" />
         </ElTableColumn>
       </ElTableColumn>
     </ElTable>
@@ -115,27 +149,25 @@ export function TableGroupHeader() {
 }
 
 export function TableSort() {
-  const [order, setOrder] = useState<TableSortOrder | null>("descending");
   return (
     <ElTable
       data={tableData}
       defaultSort={{ prop: "date", order: "descending" }}
       style={fullWidth}
-      onSortChange={(data) => setOrder(data.order)}
     >
       <ElTableColumn prop="date" label="Date" sortable width="180" />
       <ElTableColumn prop="name" label="Name" width="180" />
-      <ElTableColumn prop="address" label="Address" />
-      <ElTableColumn label="当前排序" width="120">
-        {() => order ?? "无"}
-      </ElTableColumn>
+      <ElTableColumn
+        prop="address"
+        label="Address"
+        formatter={(row) => (row as User).address}
+      />
     </ElTable>
   );
 }
 
 export function TableSingleSelect() {
   const tableRef = useRef<TableExpose>(null);
-  const [current, setCurrent] = useState<User | null>(null);
 
   return (
     <>
@@ -144,7 +176,6 @@ export function TableSingleSelect() {
         data={tableData}
         highlightCurrentRow
         style={fullWidth}
-        onCurrentChange={(row) => setCurrent(row as User | null)}
       >
         <ElTableColumn type="index" width="50" />
         <ElTableColumn prop="date" label="Date" width="120" />
@@ -156,9 +187,6 @@ export function TableSingleSelect() {
           Select second row
         </ElButton>
         <ElButton onClick={() => tableRef.current?.setCurrentRow()}>Clear selection</ElButton>
-        <span style={{ marginLeft: 12 }}>
-          当前行：{current ? current.name : "无"}
-        </span>
       </div>
     </>
   );
@@ -166,18 +194,11 @@ export function TableSingleSelect() {
 
 export function TableMultiSelect() {
   const tableRef = useRef<TableExpose>(null);
-  const [selected, setSelected] = useState<User[]>([]);
   const selectable = (row: User) => ![1, 2].includes(Number(row.id));
 
   return (
     <>
-      <ElTable
-        ref={tableRef}
-        data={tableData}
-        rowKey="id"
-        style={fullWidth}
-        onSelectionChange={(rows) => setSelected(rows as User[])}
-      >
+      <ElTable ref={tableRef} data={wideTableData} rowKey="id" style={fullWidth}>
         <ElTableColumn type="selection" selectable={selectable} width="55" />
         <ElTableColumn prop="date" label="Date" width="120" />
         <ElTableColumn prop="name" label="Name" width="120" />
@@ -186,38 +207,96 @@ export function TableMultiSelect() {
       <div style={{ marginTop: 20 }}>
         <ElButton
           onClick={() => {
-            [tableData[1], tableData[2]].forEach((row) =>
+            [wideTableData[1], wideTableData[2]].forEach((row) =>
               tableRef.current?.toggleRowSelection(row),
             );
           }}
         >
-          切换二三行
+          Toggle selection status of second and third rows
         </ElButton>
-        <ElButton onClick={() => tableRef.current?.toggleAllSelection()}>全选切换</ElButton>
-        <ElButton onClick={() => tableRef.current?.clearSelection()}>清空选择</ElButton>
-        <span style={{ marginLeft: 12 }}>已选 {selected.length} 行</span>
+        <ElButton
+          onClick={() => {
+            [wideTableData[1], wideTableData[2]].forEach((row) =>
+              tableRef.current?.toggleRowSelection(row, false, true),
+            );
+          }}
+        >
+          Toggle selection status based on selectable
+        </ElButton>
+        <ElButton onClick={() => tableRef.current?.clearSelection()}>Clear selection</ElButton>
       </div>
     </>
   );
 }
 
+interface FamilyUser extends User {
+  family: User[];
+}
+
+const family = [
+  { id: 1, date: "", name: "Jerry", state: "California", city: "San Francisco", address: "3650 21st St, San Francisco", zip: "CA 94114", amount1: 0, amount2: 0, amount3: 0 },
+  { id: 2, date: "", name: "Spike", state: "California", city: "San Francisco", address: "3650 21st St, San Francisco", zip: "CA 94114", amount1: 0, amount2: 0, amount3: 0 },
+  { id: 3, date: "", name: "Tyke", state: "California", city: "San Francisco", address: "3650 21st St, San Francisco", zip: "CA 94114", amount1: 0, amount2: 0, amount3: 0 },
+];
+
+const expandableData: FamilyUser[] = wideTableData.map((row) => ({
+  ...row,
+  city: "San Francisco",
+  address: "3650 21st St, San Francisco",
+  zip: "CA 94114",
+  family,
+}));
+
 export function TableExpandable() {
+  const [parentBorder, setParentBorder] = useState(false);
+  const [childBorder, setChildBorder] = useState(false);
+  const [preserveExpanded, setPreserveExpanded] = useState(false);
+
   return (
-    <ElTable
-      data={tableData}
-      style={fullWidth}
-      renderExpanded={({ row }) => (
-        <div style={{ padding: 12 }}>
-          <p style={{ margin: "0 0 8px" }}>State: {(row as User).state}</p>
-          <p style={{ margin: "0 0 8px" }}>City: {(row as User).city}</p>
-          <p style={{ margin: 0 }}>Address: {(row as User).address}</p>
-        </div>
-      )}
-    >
-      <ElTableColumn type="expand" />
-      <ElTableColumn prop="date" label="Date" />
-      <ElTableColumn prop="name" label="Name" />
-    </ElTable>
+    <div>
+      <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+        <span>switch parent border:</span>
+        <ElSwitch
+          checked={parentBorder}
+          onCheckedChange={setParentBorder}
+        />
+        <span>switch child border:</span>
+        <ElSwitch checked={childBorder} onCheckedChange={setChildBorder} />
+        <span>preserve expanded:</span>
+        <ElSwitch
+          checked={preserveExpanded}
+          onCheckedChange={setPreserveExpanded}
+        />
+      </div>
+      <ElTable
+        data={expandableData}
+        border={parentBorder}
+        style={fullWidth}
+        renderExpanded={({ row }) => {
+          const familyRow = row as FamilyUser;
+          return (
+            <div style={{ padding: 16 }}>
+              <p style={{ margin: "0 0 8px" }}>State: {familyRow.state}</p>
+              <p style={{ margin: "0 0 8px" }}>City: {familyRow.city}</p>
+              <p style={{ margin: "0 0 8px" }}>Address: {familyRow.address}</p>
+              <p style={{ margin: "0 0 8px" }}>Zip: {familyRow.zip}</p>
+              <h3>Family</h3>
+              <ElTable data={familyRow.family} border={childBorder}>
+                <ElTableColumn prop="name" label="Name" />
+                <ElTableColumn prop="state" label="State" />
+                <ElTableColumn prop="city" label="City" />
+                <ElTableColumn prop="address" label="Address" />
+                <ElTableColumn prop="zip" label="Zip" />
+              </ElTable>
+            </div>
+          );
+        }}
+      >
+        <ElTableColumn type="expand" />
+        <ElTableColumn prop="date" label="Date" />
+        <ElTableColumn prop="name" label="Name" />
+      </ElTable>
+    </div>
   );
 }
 
@@ -225,16 +304,47 @@ export function TableCustomColumn() {
   return (
     <ElTable data={tableData} style={fullWidth}>
       <ElTableColumn label="Date" width="180">
-        {({ row }) => <span>{(row as User).date}</span>}
+        {({ row }) => (
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <ElIcon>
+              <Timer />
+            </ElIcon>
+            <span style={{ marginLeft: 10 }}>{(row as User).date}</span>
+          </div>
+        )}
       </ElTableColumn>
       <ElTableColumn label="Name" width="180">
-        {({ row }) => <strong>{(row as User).name}</strong>}
+        {({ row }) => (
+          <ElPopover
+            effect="light"
+            trigger="hover"
+            placement="top"
+            width="auto"
+            content={
+              <>
+                <div>name: {(row as User).name}</div>
+                <div>address: {(row as User).address}</div>
+              </>
+            }
+          >
+            <ElTag>{(row as User).name}</ElTag>
+          </ElPopover>
+        )}
       </ElTableColumn>
       <ElTableColumn label="Operations">
         {({ row }) => (
-          <ElButton size="small" onClick={() => console.log("edit", row)}>
-            Edit
-          </ElButton>
+          <>
+            <ElButton size="small" onClick={() => console.log("edit", row)}>
+              Edit
+            </ElButton>
+            <ElButton
+              size="small"
+              type="danger"
+              onClick={() => console.log("delete", row)}
+            >
+              Delete
+            </ElButton>
+          </>
         )}
       </ElTableColumn>
     </ElTable>
@@ -266,7 +376,7 @@ export function TableWithStatus() {
 
 export function TableOverflowTooltip() {
   return (
-    <ElTable data={tableData} style={fullWidth}>
+    <ElTable data={overflowData} style={fullWidth}>
       <ElTableColumn type="selection" width="55" />
       <ElTableColumn label="Date" width="120">
         {({ row }) => <span>{(row as User).date}</span>}
@@ -285,7 +395,7 @@ export function TableOverflowTooltip() {
 
 export function TableFixedColumnAndHeader() {
   return (
-    <ElTable data={tableData} height="250" style={fullWidth}>
+    <ElTable data={wideTableData} height="250" style={fullWidth}>
       <ElTableColumn fixed prop="date" label="Date" width="150" />
       <ElTableColumn prop="name" label="Name" width="120" />
       <ElTableColumn prop="state" label="State" width="120" />
@@ -343,16 +453,15 @@ export function TableFixedHeaderFluid() {
 }
 
 export function TableFixedGroupHeader() {
+  // 线上文档该示例当前实际渲染的是 fixed column + header 组合（与官方源码不一致）。
   return (
-    <ElTable data={tableData} height="250" style={fullWidth}>
-      <ElTableColumn prop="date" label="Date" />
-      <ElTableColumn prop="name" label="Name" />
+    <ElTable data={wideTableData} height="250" style={fullWidth}>
+      <ElTableColumn fixed prop="date" label="Date" width="150" />
+      <ElTableColumn prop="name" label="Name" width="120" />
+      <ElTableColumn prop="state" label="State" width="120" />
+      <ElTableColumn prop="city" label="City" width="320" />
+      <ElTableColumn prop="address" label="Address" width="600" />
       <ElTableColumn prop="zip" label="Zip" />
-      <ElTableColumn label="Address Info" fixed="right">
-        <ElTableColumn prop="state" label="State" />
-        <ElTableColumn prop="city" label="City" />
-        <ElTableColumn prop="address" label="Address" minWidth="200" />
-      </ElTableColumn>
     </ElTable>
   );
 }
@@ -378,7 +487,7 @@ export function TableFilter() {
       <ElButton onClick={() => tableRef.current?.clearFilter()}>
         reset all filters
       </ElButton>
-      <ElTable ref={tableRef} rowKey="date" data={tableData} style={{ ...fullWidth, marginTop: 12 }}>
+      <ElTable ref={tableRef} rowKey="date" data={tableData} style={fullWidth}>
         <ElTableColumn
           prop="date"
           label="Date"
@@ -403,7 +512,10 @@ export function TableFilter() {
           filterPlacement="bottom-end"
         >
           {({ row }) => (
-            <ElTag type={(row as User).tag === "Home" ? "primary" : "success"}>
+            <ElTag
+              type={(row as User).tag === "Home" ? "primary" : "success"}
+              disableTransitions
+            >
               {(row as User).tag}
             </ElTag>
           )}
@@ -415,7 +527,11 @@ export function TableFilter() {
 
 export function TableCustomHeader() {
   const [search, setSearch] = useState("");
-  const filteredData = tableData.filter(
+  const headerData = tableData.map((row, index) => ({
+    ...row,
+    name: ["Tom", "John", "Morgan", "Jessy"][index],
+  }));
+  const filteredData = headerData.filter(
     (row) => !search || row.name.toLowerCase().includes(search.toLowerCase()),
   );
 
@@ -453,26 +569,44 @@ export function TableCustomHeader() {
   );
 }
 
+const treeRow = (id: number, date: string): User => ({
+  id,
+  date,
+  name: "wangxiaohu",
+  state: "",
+  city: "",
+  address: "No. 189, Grove St, Los Angeles",
+  zip: "",
+  amount1: 0,
+  amount2: 0,
+  amount3: 0,
+});
+
 const treeData: User[] = [
-  { ...tableData[1], id: 1, date: "2016-05-02" },
-  { ...tableData[2], id: 2, date: "2016-05-04" },
+  treeRow(1, "2016-05-02"),
+  treeRow(2, "2016-05-04"),
   {
-    ...tableData[3],
-    id: 3,
-    date: "2016-05-01",
-    children: [
-      { ...tableData[0], id: 31, date: "2016-05-01" },
-      { ...tableData[1], id: 32, date: "2016-05-01" },
-    ],
+    ...treeRow(3, "2016-05-01"),
+    children: [treeRow(31, "2016-05-01"), treeRow(32, "2016-05-01"), treeRow(33, "2016-05-01")],
   },
-  { ...tableData[0], id: 4, date: "2016-05-03" },
+  treeRow(4, "2016-05-03"),
+];
+
+const treeAndLazyData: User[] = [
+  treeRow(1, "2016-05-02"),
+  treeRow(2, "2016-05-04"),
+  {
+    ...treeRow(3, "2016-05-01"),
+    children: [treeRow(31, "2016-05-01"), treeRow(32, "2016-05-01")],
+  },
+  treeRow(4, "2016-05-03"),
 ];
 
 const lazyData: User[] = [
-  { ...tableData[1], id: 1, date: "2016-05-02" },
-  { ...tableData[2], id: 2, date: "2016-05-04" },
-  { ...tableData[3], id: 3, date: "2016-05-01", hasChildren: true },
-  { ...tableData[0], id: 4, date: "2016-05-03" },
+  treeRow(1, "2016-05-02"),
+  treeRow(2, "2016-05-04"),
+  { ...treeRow(3, "2016-05-01"), hasChildren: true },
+  treeRow(4, "2016-05-03"),
 ];
 
 export function TableTreeAndLazy() {
@@ -482,17 +616,14 @@ export function TableTreeAndLazy() {
     resolve: (data: DefaultRow[]) => void,
   ) => {
     window.setTimeout(() => {
-      resolve([
-        { ...tableData[0], id: 31, date: "2016-05-01", name: "wangxiaohu" },
-        { ...tableData[1], id: 32, date: "2016-05-01", name: "wangxiaohu" },
-      ]);
+      resolve([treeRow(31, "2016-05-01"), treeRow(32, "2016-05-01")]);
     }, 1000);
   };
 
   return (
     <div>
       <ElTable
-        data={treeData}
+        data={treeAndLazyData}
         rowKey="id"
         border
         defaultExpandAll
@@ -699,7 +830,7 @@ export function TableTooltipFormatter() {
       >
         {({ row }) =>
           (row as TooltipRow).tags.map((tag) => (
-            <ElTag key={tag} type="primary" style={{ marginRight: 5 }}>
+            <ElTag key={tag} type="primary" className={tableStyles.tagItem}>
               {tag}
             </ElTag>
           ))
@@ -722,32 +853,48 @@ export function TableTooltipFormatter() {
 export function TableSummary() {
   const getSummaries = (param: { columns: unknown[]; data: unknown[] }) => {
     const { columns, data } = param;
-    const sums: string[] = [];
+    const sums: ReactNode[] = [];
     columns.forEach((_column, index) => {
       if (index === 0) {
-        sums[index] = "Total Cost";
+        sums[index] = <div style={{ textDecoration: "underline" }}>Total Cost</div>;
         return;
       }
-      const values = (data as User[]).map((item) => item[`amount${index}` as keyof User]);
-      const total = values.reduce<number>((prev, curr) => prev + Number(curr ?? 0), 0);
-      sums[index] = Number.isNaN(total) ? "" : `$${total}`;
+      const property = (columns[index] as { property?: string }).property;
+      const values = (data as User[]).map((item) =>
+        Number(item[property as keyof User]),
+      );
+      if (values.some((value) => Number.isNaN(value))) {
+        sums[index] = "N/A";
+        return;
+      }
+      sums[index] = `$ ${values.reduce((prev, curr) => prev + curr, 0)}`;
     });
     return sums;
   };
 
   return (
-    <ElTable
-      data={tableData}
-      border
-      showSummary
-      summaryMethod={getSummaries}
-      style={fullWidth}
-    >
-      <ElTableColumn prop="id" label="ID" width="180" />
-      <ElTableColumn prop="name" label="Name" />
-      <ElTableColumn prop="amount1" label="Cost 1 ($)" />
-      <ElTableColumn prop="amount2" label="Cost 2 ($)" />
-      <ElTableColumn prop="amount3" label="Cost 3 ($)" />
-    </ElTable>
+    <>
+      <ElTable data={productData} border showSummary style={fullWidth}>
+        <ElTableColumn prop="id" label="ID" width="180" />
+        <ElTableColumn prop="name" label="Name" />
+        <ElTableColumn prop="amount1" label="Amount 1" sortable />
+        <ElTableColumn prop="amount2" label="Amount 2" sortable />
+        <ElTableColumn prop="amount3" label="Amount 3" sortable />
+      </ElTable>
+      <ElTable
+        data={productData}
+        border
+        height="200"
+        showSummary
+        summaryMethod={getSummaries}
+        style={{ ...fullWidth, marginTop: 20 }}
+      >
+        <ElTableColumn prop="id" label="ID" width="180" />
+        <ElTableColumn prop="name" label="Name" />
+        <ElTableColumn prop="amount1" label="Cost 1 ($)" />
+        <ElTableColumn prop="amount2" label="Cost 2 ($)" />
+        <ElTableColumn prop="amount3" label="Cost 3 ($)" />
+      </ElTable>
+    </>
   );
 }

@@ -49,6 +49,14 @@ date-picker/year-range
 
 :::
 
+## Quarter Range
+
+:::demo 支持选择季度范围。范围模式下左右面板默认联动，可通过 `unlinkPanels` 取消联动。
+
+date-picker/quarter-range
+
+:::
+
 ## 单面板
 
 :::demo 范围选择器默认显示两个面板，通过 `singlePanel` 只显示一个面板。
@@ -104,6 +112,12 @@ date-picker/custom-content
 date-picker/custom-icon
 
 :::
+
+## 国际化
+
+由于 Element Plus 的默认语言为英语，如果你需要设置其它的语言，请参考国际化文档。
+
+要注意的是：日期相关的文字（月份，每一周的第一天等等）也都是通过国际化来配置的。
 
 ## DatePicker API
 

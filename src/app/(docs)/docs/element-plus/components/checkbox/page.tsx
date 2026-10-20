@@ -201,6 +201,15 @@ export default function CheckboxPage() {
         <CheckboxGroupDemo />
       </DemoBlock>
 
+      <Heading level={2}>数据化选项</Heading>
+      <p>
+        通过 <code>options</code> 直接渲染选项数组，并用 <code>optionProps</code>
+        指定 <code>value</code>、<code>label</code>、<code>disabled</code> 的字段别名。
+      </p>
+      <DemoBlock source={SOURCES.options}>
+        <CheckboxOptions />
+      </DemoBlock>
+
       <Heading level={2}>indeterminate 状态</Heading>
       <p>
         <code>indeterminate</code> 属性用以表示 checkbox 的不确定状态，
@@ -217,15 +226,6 @@ export default function CheckboxPage() {
       </p>
       <DemoBlock source={SOURCES.minMax}>
         <CheckboxMinMax />
-      </DemoBlock>
-
-      <Heading level={2}>数据化选项</Heading>
-      <p>
-        通过 <code>options</code> 直接渲染选项数组，并用 <code>optionProps</code>
-        指定 <code>value</code>、<code>label</code>、<code>disabled</code> 的字段别名。
-      </p>
-      <DemoBlock source={SOURCES.options}>
-        <CheckboxOptions />
       </DemoBlock>
 
       <Heading level={2}>按钮样式</Heading>

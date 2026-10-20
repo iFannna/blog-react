@@ -3,6 +3,7 @@
 import {
   createContext,
   useContext,
+  type KeyboardEvent,
   type ReactNode,
 } from "react";
 
@@ -10,6 +11,8 @@ import {
 export interface DropdownContextValue {
   /** 点击菜单项时调用，负责执行命令并关闭菜单 */
   handleItemClick: (command: unknown, disabled?: boolean) => void;
+  /** 菜单根节点的键盘导航，对应官方 roving focus group + menu keydown */
+  handleMenuKeyDown?: (event: KeyboardEvent<HTMLUListElement>) => void;
   /** 当前高亮的项 id，供键盘导航使用 */
   activeItemId?: string;
   setActiveItemId?: (id: string) => void;

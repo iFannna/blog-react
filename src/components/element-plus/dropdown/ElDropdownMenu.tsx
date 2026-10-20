@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { useDropdownContext } from "./context";
 
 export interface DropdownMenuProps {
   className?: string;
@@ -16,9 +17,15 @@ export interface DropdownMenuProps {
  */
 export function ElDropdownMenu({ className, children }: DropdownMenuProps) {
   const classes = ["el-dropdown-menu", className].filter(Boolean).join(" ");
+  const ctx = useDropdownContext();
 
   return (
-    <ul className={classes} role="menu">
+    <ul
+      className={classes}
+      role="menu"
+      tabIndex={-1}
+      onKeyDown={ctx?.handleMenuKeyDown}
+    >
       {children}
     </ul>
   );

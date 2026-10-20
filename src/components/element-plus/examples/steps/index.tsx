@@ -8,18 +8,24 @@ import { Edit, Picture, Upload, UploadFilled } from "@/components/element-plus/i
 const stepsStyle = { maxWidth: 600 } as const;
 
 export function StepsBasic() {
+  // 线上 2.11 首屏三步均为完成态，但内部计数从 0 开始：
+  // 首次点击后第二步进入 process，之后按 1 → 2 → 3 → 0 循环
   const [active, setActive] = useState(0);
+  const [interacted, setInteracted] = useState(false);
 
   return (
     <div>
-      <ElSteps active={active} finishStatus="success" style={stepsStyle}>
+      <ElSteps active={interacted ? active : 3} finishStatus="success" style={stepsStyle}>
         <ElStep title="Step 1" />
         <ElStep title="Step 2" />
         <ElStep title="Step 3" />
       </ElSteps>
       <ElButton
         style={{ marginTop: 12 }}
-        onClick={() => setActive((current) => (current > 2 ? 0 : current + 1))}
+        onClick={() => {
+          setInteracted(true);
+          setActive((current) => (current > 2 ? 0 : current + 1));
+        }}
       >
         Next step
       </ElButton>
@@ -29,7 +35,7 @@ export function StepsBasic() {
 
 export function StepsCentered() {
   return (
-    <ElSteps active={2} alignCenter style={stepsStyle}>
+    <ElSteps active={3} alignCenter style={stepsStyle}>
       <ElStep title="Step 1" description="Some description" />
       <ElStep title="Step 2" description="Some description" />
       <ElStep title="Step 3" description="Some description" />
@@ -40,12 +46,12 @@ export function StepsCentered() {
 export function StepsSimple() {
   return (
     <div>
-      <ElSteps active={1} simple space={200} style={{ ...stepsStyle, marginBottom: 16 }}>
+      <ElSteps active={3} simple style={{ ...stepsStyle, marginBottom: 16 }}>
         <ElStep title="Step 1" icon={<Edit />} />
         <ElStep title="Step 2" icon={<UploadFilled />} />
         <ElStep title="Step 3" icon={<Picture />} />
       </ElSteps>
-      <ElSteps active={1} simple finishStatus="success" style={stepsStyle}>
+      <ElSteps active={3} simple finishStatus="success" style={stepsStyle}>
         <ElStep title="Step 1" />
         <ElStep title="Step 2" />
         <ElStep title="Step 3" />
@@ -57,7 +63,7 @@ export function StepsSimple() {
 export function StepsVertical() {
   return (
     <div style={{ height: 300, maxWidth: 600 }}>
-      <ElSteps active={1} direction="vertical">
+      <ElSteps active={3} direction="vertical">
         <ElStep title="Step 1" />
         <ElStep title="Step 2" />
         <ElStep title="Step 3" />
@@ -68,7 +74,7 @@ export function StepsVertical() {
 
 export function StepsWithDescription() {
   return (
-    <ElSteps active={1} style={stepsStyle}>
+    <ElSteps active={3} style={stepsStyle}>
       <ElStep title="Step 1" description="Some description" />
       <ElStep title="Step 2" description="Some description" />
       <ElStep title="Step 3" description="Some description" />
@@ -78,7 +84,7 @@ export function StepsWithDescription() {
 
 export function StepsWithIcon() {
   return (
-    <ElSteps active={1} style={stepsStyle}>
+    <ElSteps active={3} style={stepsStyle}>
       <ElStep title="Step 1" icon={<Edit />} />
       <ElStep title="Step 2" icon={<Upload />} />
       <ElStep title="Step 3" icon={<Picture />} />
@@ -88,22 +94,15 @@ export function StepsWithIcon() {
 
 export function StepsWithStatus() {
   return (
-    <div>
-      <ElSteps
-        active={1}
-        space={200}
-        finishStatus="success"
-        style={{ ...stepsStyle, marginBottom: 24 }}
-      >
-        <ElStep title="Done" />
-        <ElStep title="Processing" />
-        <ElStep title="Step 3" />
-      </ElSteps>
-      <ElSteps active={1} processStatus="error" style={stepsStyle}>
-        <ElStep title="Done" />
-        <ElStep title="Error" />
-        <ElStep title="Step 3" />
-      </ElSteps>
-    </div>
+    <ElSteps
+      active={3}
+      space={200}
+      finishStatus="success"
+      style={stepsStyle}
+    >
+      <ElStep title="Done" />
+      <ElStep title="Processing" />
+      <ElStep title="Step 3" />
+    </ElSteps>
   );
 }

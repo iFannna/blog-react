@@ -33,7 +33,7 @@ const manifest: DemoManifest = {
   },
   "alert/icon-description": {
     load: () => import("@/components/element-plus/examples/alert"),
-    exportName: "AlertClosable",
+    exportName: "AlertIconDescription",
     sourceFile: "src/components/element-plus/examples/alert/index.tsx",
   },
 };

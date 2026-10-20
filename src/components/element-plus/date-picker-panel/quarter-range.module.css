@@ -1,0 +1,4 @@
+/* 官方 quarterrange 与 monthrange 同宽 */
+:global(.el-date-editor--quarterrange) {
+  --el-date-editor-width: 300px;
+}

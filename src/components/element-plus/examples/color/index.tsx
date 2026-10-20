@@ -2,6 +2,7 @@
 
 import { ElRow, ElCol } from "@/components/element-plus/row";
 import { message } from "@/components/element-plus/message";
+import styles from "./color.module.css";
 
 /**
  * 官方三个示例组件（main/secondary/neutral-color.vue）都在运行时读取
@@ -88,115 +89,121 @@ async function copyColor(varName: string) {
 /** 主色卡：底色 + 6 档深浅子色条，对应官方 main-color.vue */
 export function ColorMain() {
   return (
-    <ElRow gutter={12}>
-      <ElCol span={10} xs={{ span: 12 }}>
-        <div className={PRIMARY.boxClass}>
-          {PRIMARY.name}
-          <div className="value">{PRIMARY.value}</div>
-          {/* 子色条自身也铺主色，深色档位叠上去才有官方那种厚度 */}
-          <div className="bg-color-sub demo-color-box--primary">
-            {COLOR_LEVELS.map((level) => (
-              <div
-                key={level}
-                className={`${PRIMARY.subClass} demo-color-box--primary-${level}`}
-                onClick={() => copyColor(`${PRIMARY.subPrefix}${level}`)}
-              />
-            ))}
+    <div className={styles.fullBleed}>
+      <ElRow gutter={12}>
+        <ElCol span={10} xs={{ span: 12 }}>
+          <div className={PRIMARY.boxClass}>
+            {PRIMARY.name}
+            <div className="value">{PRIMARY.value}</div>
+            {/* 子色条自身也铺主色，深色档位叠上去才有官方那种厚度 */}
+            <div className="bg-color-sub demo-color-box--primary">
+              {COLOR_LEVELS.map((level) => (
+                <div
+                  key={level}
+                  className={`${PRIMARY.subClass} demo-color-box--primary-${level}`}
+                  onClick={() => copyColor(`${PRIMARY.subPrefix}${level}`)}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      </ElCol>
-    </ElRow>
+        </ElCol>
+      </ElRow>
+    </div>
   );
 }
 
 /** 场景色卡：success / warning / danger / info，对应官方 secondary-colors.vue */
 export function ColorSecondary() {
   return (
-    <ElRow gutter={12}>
-      {SECONDARY.map((color) => (
-        <ElCol span={6} xs={{ span: 12 }} key={color.name}>
-          <div className={color.boxClass}>
-            {color.name}
-            <div className="value">{color.value}</div>
-            <div className="bg-color-sub">
-              {COLOR_LEVELS.map((level) => (
-                <div
-                  key={level}
-                  className={`${color.subClass} demo-color-box--${color.name.toLowerCase()}-${level}`}
-                  onClick={() => copyColor(`${color.subPrefix}${level}`)}
-                />
-              ))}
+    <div className={styles.fullBleed}>
+      <ElRow gutter={12}>
+        {SECONDARY.map((color) => (
+          <ElCol span={6} xs={{ span: 12 }} key={color.name}>
+            <div className={color.boxClass}>
+              {color.name}
+              <div className="value">{color.value}</div>
+              <div className="bg-color-sub">
+                {COLOR_LEVELS.map((level) => (
+                  <div
+                    key={level}
+                    className={`${color.subClass} demo-color-box--${color.name.toLowerCase()}-${level}`}
+                    onClick={() => copyColor(`${color.subPrefix}${level}`)}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        </ElCol>
-      ))}
-    </ElRow>
+          </ElCol>
+        ))}
+      </ElRow>
+    </div>
   );
 }
 
 /** 中性色卡：文字 / 边框 / 填充 / 背景四列，对应官方 neutral-color.vue */
 export function ColorNeutral() {
   return (
-    <ElRow gutter={12}>
-      <ElCol span={6} xs={{ span: 12 }}>
-        {TEXT_COLORS.map((color) => (
-          <div
-            className={`demo-color-box demo-color-box-other demo-color-box--text-${color.name.split(" ")[0].toLowerCase()}`}
-            key={color.varName}
-          >
-            {color.name}
-            <div className="value">{color.value}</div>
-          </div>
-        ))}
-      </ElCol>
+    <div className={styles.fullBleed}>
+      <ElRow gutter={12}>
+        <ElCol span={6} xs={{ span: 12 }}>
+          {TEXT_COLORS.map((color) => (
+            <div
+              className={`demo-color-box demo-color-box-other demo-color-box--text-${color.name.split(" ")[0].toLowerCase()}`}
+              key={color.varName}
+            >
+              {color.name}
+              <div className="value">{color.value}</div>
+            </div>
+          ))}
+        </ElCol>
 
-      <ElCol span={6} xs={{ span: 12 }}>
-        {BORDER_COLORS.map((color) => (
-          <div
-            className={`demo-color-box demo-color-box-lite demo-color-box-other demo-color-box--border-${color.name.split(" ")[0].toLowerCase()}`}
-            key={color.varName}
-          >
-            {color.name}
-            <div className="value">{color.value}</div>
-          </div>
-        ))}
-      </ElCol>
+        <ElCol span={6} xs={{ span: 12 }}>
+          {BORDER_COLORS.map((color) => (
+            <div
+              className={`demo-color-box demo-color-box-lite demo-color-box-other demo-color-box--border-${color.name.split(" ")[0].toLowerCase()}`}
+              key={color.varName}
+            >
+              {color.name}
+              <div className="value">{color.value}</div>
+            </div>
+          ))}
+        </ElCol>
 
-      <ElCol span={6} xs={{ span: 12 }}>
-        {FILL_COLORS.map((color) => (
-          <div
-            className={`demo-color-box demo-color-box-lite demo-color-box-other demo-color-box--fill-${color.name.split(" ")[0].toLowerCase()}`}
-            key={color.varName}
-          >
-            {color.name}
-            <div className="value">{color.value}</div>
-          </div>
-        ))}
-      </ElCol>
+        <ElCol span={6} xs={{ span: 12 }}>
+          {FILL_COLORS.map((color) => (
+            <div
+              className={`demo-color-box demo-color-box-lite demo-color-box-other demo-color-box--fill-${color.name.split(" ")[0].toLowerCase()}`}
+              key={color.varName}
+            >
+              {color.name}
+              <div className="value">{color.value}</div>
+            </div>
+          ))}
+        </ElCol>
 
-      <ElCol span={6} xs={{ span: 12 }}>
-        <div className="demo-color-box demo-color-box-other demo-color-box--black">
-          Basic Black
-          <div className="value">#000000</div>
-        </div>
-        <div className="demo-color-box demo-color-box-other demo-color-box--white">
-          Basic White
-          <div className="value">#FFFFFF</div>
-        </div>
-        <div className="demo-color-box demo-color-box-lite bg-transparent">
-          Transparent
-          <div className="value">Transparent</div>
-        </div>
-        {BACKGROUND_COLORS.map((color) => (
-          <div
-            className={`demo-color-box demo-color-box-lite demo-color-box--bg-${color.name.split(" ")[0].toLowerCase()}`}
-            key={color.varName}
-          >
-            {color.name}
-            <div className="value">{color.value}</div>
+        <ElCol span={6} xs={{ span: 12 }}>
+          <div className="demo-color-box demo-color-box-other demo-color-box--black">
+            Basic Black
+            <div className="value">#000000</div>
           </div>
-        ))}
-      </ElCol>
-    </ElRow>
+          <div className="demo-color-box demo-color-box-other demo-color-box--white">
+            Basic White
+            <div className="value">#FFFFFF</div>
+          </div>
+          <div className="demo-color-box demo-color-box-lite bg-transparent">
+            Transparent
+            <div className="value">Transparent</div>
+          </div>
+          {BACKGROUND_COLORS.map((color) => (
+            <div
+              className={`demo-color-box demo-color-box-lite demo-color-box--bg-${color.name.split(" ")[0].toLowerCase()}`}
+              key={color.varName}
+            >
+              {color.name}
+              <div className="value">{color.value}</div>
+            </div>
+          ))}
+        </ElCol>
+      </ElRow>
+    </div>
   );
 }

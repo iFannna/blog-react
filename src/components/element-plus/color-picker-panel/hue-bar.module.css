@@ -1,0 +1,26 @@
+/* 共享样式里的色相条渐变多了显式 0%/50%/100% 停靠点，与官方计算值不一致 */
+:global(.el-color-hue-slider .el-color-hue-slider__bar) {
+  background-image: linear-gradient(
+    to right,
+    rgb(255, 0, 0),
+    rgb(255, 255, 0) 17%,
+    rgb(0, 255, 0) 33%,
+    rgb(0, 255, 255),
+    rgb(0, 0, 255) 67%,
+    rgb(255, 0, 255) 83%,
+    rgb(255, 0, 0)
+  );
+}
+
+:global(.el-color-hue-slider.is-vertical .el-color-hue-slider__bar) {
+  background-image: linear-gradient(
+    to bottom,
+    rgb(255, 0, 0),
+    rgb(255, 255, 0) 17%,
+    rgb(0, 255, 0) 33%,
+    rgb(0, 255, 255),
+    rgb(0, 0, 255) 67%,
+    rgb(255, 0, 255) 83%,
+    rgb(255, 0, 0)
+  );
+}

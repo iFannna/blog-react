@@ -1,0 +1,4 @@
+/* Official scoped style from docs/examples/link/*.vue */
+.links > :global(.el-link) {
+  margin-right: 8px;
+}

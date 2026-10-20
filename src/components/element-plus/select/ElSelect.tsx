@@ -589,7 +589,7 @@ export const ElSelect = forwardRef<SelectExpose, SelectProps>(
                 <ElIcon
                   className={[
                     "el-select__caret",
-                    "el-input__icon",
+                    "el-select__icon",
                     iconReverse,
                   ]
                     .filter(Boolean)
@@ -602,7 +602,7 @@ export const ElSelect = forwardRef<SelectExpose, SelectProps>(
 
               {showClearBtn && (
                 <ElIcon
-                  className="el-select__caret el-input__icon el-select__clear"
+                  className="el-select__caret el-select__icon el-select__clear"
                   onClick={(event) => {
                     event.preventDefault();
                     event.stopPropagation();
@@ -616,7 +616,6 @@ export const ElSelect = forwardRef<SelectExpose, SelectProps>(
               {validateState && needStatusIcon && (
                 <ElIcon
                   className={[
-                    "el-input__icon",
                     "el-input__validateIcon",
                     validateState === "validating" && "is-loading",
                   ]

@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore, type CSSProperties } from "react";
 import { useTranslator } from "../config-provider/context";
+import "./hue-bar.module.css";
 import { useSlider } from "./use-slider";
 import type Color from "./color";
 

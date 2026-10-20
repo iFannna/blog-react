@@ -1,7 +1,11 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useState, type CSSProperties, type ReactNode } from "react";
 
+import "./date-picker-demo.module.css";
+import "./date-picker-icon.module.css";
+
+import { ElConfigProvider, en } from "@/components/element-plus/config-provider";
 import { ElDatePicker } from "@/components/element-plus/date-picker";
 import { ElRadio, ElRadioGroup } from "@/components/element-plus/radio";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
@@ -20,7 +24,7 @@ const containerStyle: CSSProperties = {
 };
 
 const blockStyle: CSSProperties = {
-  padding: "1.5rem 0",
+  padding: "24px 0",
   textAlign: "center",
   borderRight: "solid 1px var(--el-border-color)",
   flex: 1,
@@ -36,7 +40,7 @@ const demonstrationStyle: CSSProperties = {
   display: "block",
   color: "var(--el-text-color-secondary)",
   fontSize: 14,
-  marginBottom: "1rem",
+  marginBottom: "16px",
 };
 
 const centerBlockStyle: CSSProperties = {
@@ -52,7 +56,7 @@ const sizeOptions: Array<"large" | "default" | "small"> = [
   "small",
 ];
 
-export function DatePickerEnterDate() {
+function DatePickerEnterDateDemo() {
   const [size, setSize] = useState<"large" | "default" | "small">("default");
   const [value1, setValue1] = useState<DateModelValue>(null);
   const [value2, setValue2] = useState<DateModelValue>(null);
@@ -81,19 +85,18 @@ export function DatePickerEnterDate() {
 
   return (
     <>
-      <div style={{ marginBottom: 16 }}>
-        <ElRadioGroup
-          value={size}
-          aria-label="size control"
-          onChange={(next) => setSize(next as "large" | "default" | "small")}
-        >
-          {sizeOptions.map((item) => (
-            <ElRadio key={item} value={item} button>
-              {item}
-            </ElRadio>
-          ))}
-        </ElRadioGroup>
-      </div>
+      <ElRadioGroup
+        value={size}
+        aria-label="size control"
+        className="date-picker-radio-group"
+        onChange={(next) => setSize(next as "large" | "default" | "small")}
+      >
+        {sizeOptions.map((item) => (
+          <ElRadio key={item} value={item} button>
+            {item}
+          </ElRadio>
+        ))}
+      </ElRadioGroup>
       <div style={containerStyle}>
         <div style={blockStyle}>
           <span style={demonstrationStyle}>Default</span>
@@ -122,13 +125,15 @@ export function DatePickerEnterDate() {
   );
 }
 
-export function DatePickerOtherMeasurements() {
-  const [value1, setValue1] = useState<DateModelValue>(null);
-  const [value2, setValue2] = useState<DateModelValue>(null);
-  const [value3, setValue3] = useState<DateModelValue>(null);
-  const [value4, setValue4] = useState<DateModelValue>(null);
-  const [value5, setValue5] = useState<DateModelValue>(null);
-  const [value6, setValue6] = useState<DateModelValue>(null);
+function DatePickerOtherMeasurementsDemo() {
+  const [week, setWeek] = useState<DateModelValue>(null);
+  const [dates, setDates] = useState<DateModelValue>(null);
+  const [year, setYear] = useState<DateModelValue>(null);
+  const [years, setYears] = useState<DateModelValue>(null);
+  const [month, setMonth] = useState<DateModelValue>(null);
+  const [months, setMonths] = useState<DateModelValue>(null);
+  const [quarter, setQuarter] = useState<DateModelValue>(null);
+  const [quarters, setQuarters] = useState<DateModelValue>(null);
 
   const containerBlockStyle: CSSProperties = {
     flex: 1,
@@ -136,84 +141,92 @@ export function DatePickerOtherMeasurements() {
     borderRight: "solid 1px var(--el-border-color)",
   };
 
+  const innerBlockStyle: CSSProperties = {
+    padding: "24px 0",
+    textAlign: "center",
+  };
+
+  const separatedBlockStyle: CSSProperties = {
+    ...innerBlockStyle,
+    borderTop: "solid 1px var(--el-border-color)",
+  };
+
   return (
     <div style={containerStyle}>
       <div style={containerBlockStyle}>
-        <div style={{ ...blockStyle, borderRight: "none" }}>
+        <div style={innerBlockStyle}>
           <span style={demonstrationStyle}>Week</span>
           <ElDatePicker
-            value={value1}
-            onChange={setValue1}
+            value={week}
+            onChange={setWeek}
             type="week"
             format="[Week] ww"
             placeholder="Pick a week"
           />
         </div>
-        <div
-          style={{
-            ...blockStyle,
-            borderRight: "none",
-            borderTop: "solid 1px var(--el-border-color)",
-          }}
-        >
-          <span style={demonstrationStyle}>Dates</span>
-          <ElDatePicker
-            value={value2}
-            onChange={setValue2}
-            type="dates"
-            placeholder="Pick one or more dates"
-          />
-        </div>
-      </div>
-      <div style={containerBlockStyle}>
-        <div style={{ ...blockStyle, borderRight: "none" }}>
+        <div style={separatedBlockStyle}>
           <span style={demonstrationStyle}>Year</span>
           <ElDatePicker
-            value={value3}
-            onChange={setValue3}
+            value={year}
+            onChange={setYear}
             type="year"
             placeholder="Pick a year"
           />
         </div>
-        <div
-          style={{
-            ...blockStyle,
-            borderRight: "none",
-            borderTop: "solid 1px var(--el-border-color)",
-          }}
-        >
-          <span style={demonstrationStyle}>Years</span>
-          <ElDatePicker
-            value={value4}
-            onChange={setValue4}
-            type="years"
-            placeholder="Pick one or more years"
-          />
-        </div>
-      </div>
-      <div style={{ ...containerBlockStyle, borderRight: "none" }}>
-        <div style={{ ...blockStyle, borderRight: "none" }}>
+        <div style={separatedBlockStyle}>
           <span style={demonstrationStyle}>Month</span>
           <ElDatePicker
-            value={value5}
-            onChange={setValue5}
+            value={month}
+            onChange={setMonth}
             type="month"
             placeholder="Pick a month"
           />
         </div>
-        <div
-          style={{
-            ...blockStyle,
-            borderRight: "none",
-            borderTop: "solid 1px var(--el-border-color)",
-          }}
-        >
+        <div style={separatedBlockStyle}>
+          <span style={demonstrationStyle}>Quarter</span>
+          <ElDatePicker
+            value={quarter}
+            onChange={setQuarter}
+            type="quarter"
+            placeholder="Pick a quarter"
+          />
+        </div>
+      </div>
+      <div style={{ ...containerBlockStyle, borderRight: "none" }}>
+        <div style={innerBlockStyle}>
+          <span style={demonstrationStyle}>Dates</span>
+          <ElDatePicker
+            value={dates}
+            onChange={setDates}
+            type="dates"
+            placeholder="Pick one or more dates"
+          />
+        </div>
+        <div style={separatedBlockStyle}>
+          <span style={demonstrationStyle}>Years</span>
+          <ElDatePicker
+            value={years}
+            onChange={setYears}
+            type="years"
+            placeholder="Pick one or more years"
+          />
+        </div>
+        <div style={separatedBlockStyle}>
           <span style={demonstrationStyle}>Months</span>
           <ElDatePicker
-            value={value6}
-            onChange={setValue6}
+            value={months}
+            onChange={setMonths}
             type="months"
             placeholder="Pick one or more months"
+          />
+        </div>
+        <div style={separatedBlockStyle}>
+          <span style={demonstrationStyle}>Quarters</span>
+          <ElDatePicker
+            value={quarters}
+            onChange={setQuarters}
+            type="quarters"
+            placeholder="Pick one or more quarters"
           />
         </div>
       </div>
@@ -221,7 +234,7 @@ export function DatePickerOtherMeasurements() {
   );
 }
 
-export function DatePickerDateRange() {
+function DatePickerDateRangeDemo() {
   const [size, setSize] = useState<"large" | "default" | "small">("default");
   const [value1, setValue1] = useState<DateModelValue>(null);
   const [value2, setValue2] = useState<DateModelValue>(null);
@@ -263,19 +276,18 @@ export function DatePickerDateRange() {
 
   return (
     <>
-      <div style={{ marginBottom: 16 }}>
-        <ElRadioGroup
-          value={size}
-          aria-label="size control"
-          onChange={(next) => setSize(next as "large" | "default" | "small")}
-        >
-          {sizeOptions.map((item) => (
-            <ElRadio key={item} value={item} button>
-              {item}
-            </ElRadio>
-          ))}
-        </ElRadioGroup>
-      </div>
+      <ElRadioGroup
+        value={size}
+        aria-label="size control"
+        className="date-picker-radio-group"
+        onChange={(next) => setSize(next as "large" | "default" | "small")}
+      >
+        {sizeOptions.map((item) => (
+          <ElRadio key={item} value={item} button>
+            {item}
+          </ElRadio>
+        ))}
+      </ElRadioGroup>
       <div style={containerStyle}>
         <div style={wideBlockStyle}>
           <span style={demonstrationStyle}>Default</span>
@@ -308,7 +320,7 @@ export function DatePickerDateRange() {
   );
 }
 
-export function DatePickerMonthRange() {
+function DatePickerMonthRangeDemo() {
   const [value1, setValue1] = useState<DateModelValue>(null);
   const [value2, setValue2] = useState<DateModelValue>(null);
 
@@ -363,7 +375,7 @@ export function DatePickerMonthRange() {
   );
 }
 
-export function DatePickerYearRange() {
+function DatePickerYearRangeDemo() {
   const [value1, setValue1] = useState<DateModelValue>(null);
   const [value2, setValue2] = useState<DateModelValue>(null);
 
@@ -421,10 +433,76 @@ export function DatePickerYearRange() {
   );
 }
 
-export function DatePickerSinglePanel() {
+
+function DatePickerQuarterRangeDemo() {
+  const [value1, setValue1] = useState<DateModelValue>(null);
+  const [value2, setValue2] = useState<DateModelValue>(null);
+
+  const shortcuts: DateShortcut[] = [
+    {
+      text: "This quarter",
+      value: () => {
+        const now = new Date();
+        const quarter = Math.floor(now.getMonth() / 3);
+        const start = new Date(now.getFullYear(), quarter * 3, 1);
+        return [start, now];
+      },
+    },
+    {
+      text: "Last 4 quarters",
+      value: () => {
+        const end = new Date();
+        const start = new Date();
+        start.setMonth(start.getMonth() - 12);
+        return [start, end];
+      },
+    },
+    {
+      text: "Next 8 quarters",
+      value: () => {
+        const start = new Date();
+        const end = new Date();
+        end.setMonth(end.getMonth() + 24);
+        return [start, end];
+      },
+    },
+  ];
+
+  return (
+    <div style={containerStyle}>
+      <div style={blockStyle}>
+        <span style={demonstrationStyle}>Default</span>
+        <ElDatePicker
+          value={value1}
+          onChange={setValue1}
+          type="quarterrange"
+          rangeSeparator="To"
+          startPlaceholder="Start quarter"
+          endPlaceholder="End quarter"
+        />
+      </div>
+      <div style={lastBlockStyle}>
+        <span style={demonstrationStyle}>With quick options</span>
+        <ElDatePicker
+          value={value2}
+          onChange={setValue2}
+          type="quarterrange"
+          unlinkPanels
+          rangeSeparator="To"
+          startPlaceholder="Start quarter"
+          endPlaceholder="End quarter"
+          shortcuts={shortcuts}
+        />
+      </div>
+    </div>
+  );
+}
+
+function DatePickerSinglePanelDemo() {
   const [value1, setValue1] = useState<DateModelValue>(null);
   const [value2, setValue2] = useState<DateModelValue>(null);
   const [value3, setValue3] = useState<DateModelValue>(null);
+  const [value4, setValue4] = useState<DateModelValue>(null);
 
   const widthBlockStyle: CSSProperties = {
     ...centerBlockStyle,
@@ -432,7 +510,7 @@ export function DatePickerSinglePanel() {
   };
 
   return (
-    <div style={containerStyle}>
+    <div style={containerStyle} className="single-panels">
       <div style={widthBlockStyle}>
         <span style={{ ...demonstrationStyle, width: "100%" }}>date range</span>
         <ElDatePicker
@@ -453,7 +531,7 @@ export function DatePickerSinglePanel() {
           singlePanel
         />
       </div>
-      <div style={{ ...widthBlockStyle, borderRight: "none" }}>
+      <div style={widthBlockStyle}>
         <span style={{ ...demonstrationStyle, width: "100%" }}>year range</span>
         <ElDatePicker
           value={value3}
@@ -462,11 +540,22 @@ export function DatePickerSinglePanel() {
           singlePanel
         />
       </div>
+      <div style={{ ...widthBlockStyle, borderRight: "none" }}>
+        <span style={{ ...demonstrationStyle, width: "100%" }}>
+          quarter range
+        </span>
+        <ElDatePicker
+          value={value4}
+          onChange={setValue4}
+          type="quarterrange"
+          singlePanel
+        />
+      </div>
     </div>
   );
 }
 
-export function DatePickerDefaultValue() {
+function DatePickerDefaultValueDemo() {
   const [value1, setValue1] = useState<DateModelValue>(null);
   const [value2, setValue2] = useState<DateModelValue>(null);
 
@@ -497,7 +586,7 @@ export function DatePickerDefaultValue() {
   );
 }
 
-export function DatePickerFormats() {
+function DatePickerFormatsDemo() {
   const [value1, setValue1] = useState<DateModelValue>(null);
   const [value2, setValue2] = useState<DateModelValue>(null);
   const [value3, setValue3] = useState<DateModelValue>(null);
@@ -549,7 +638,7 @@ export function DatePickerFormats() {
   );
 }
 
-export function DatePickerDefaultTime() {
+function DatePickerDefaultTimeDemo() {
   const [value, setValue] = useState<DateModelValue>(null);
   const [defaultTime] = useState<[Date, Date]>([
     new Date(2000, 1, 1, 0, 0, 0),
@@ -558,8 +647,10 @@ export function DatePickerDefaultTime() {
 
   return (
     <div style={containerStyle}>
-      <div style={{ ...blockStyle, flex: 1 }}>
-        <p>Component value：{String(value ?? "")}</p>
+      <div style={{ ...blockStyle, flex: 1, padding: "30px 0", borderRight: "none" }}>
+        <p style={{ margin: "0 0 16px" }}>
+          Component value：{String(value ?? "")}
+        </p>
         <ElDatePicker
           value={value}
           onChange={setValue}
@@ -574,12 +665,12 @@ export function DatePickerDefaultTime() {
   );
 }
 
-export function DatePickerCustomPrefix() {
+function DatePickerCustomPrefixDemo() {
   const [value1, setValue1] = useState<DateModelValue>(null);
 
   return (
     <div style={containerStyle}>
-      <div style={{ ...blockStyle, padding: "30px 0" }}>
+      <div style={{ ...blockStyle, padding: "30px 0", borderRight: "none" }}>
         <span style={{ ...demonstrationStyle, marginBottom: 20 }}>
           set prefix-icon
         </span>
@@ -588,7 +679,7 @@ export function DatePickerCustomPrefix() {
           onChange={setValue1}
           type="date"
           placeholder="Pick a day"
-          prefixIcon={<p>pre</p>}
+          prefixIcon={<p style={{ margin: 0, lineHeight: "23.8px" }}>pre</p>}
         />
       </div>
     </div>
@@ -605,13 +696,14 @@ const holidays = [
   "2021-10-07",
 ];
 
-export function DatePickerCustomContent() {
+function DatePickerCustomContentDemo() {
   const [value, setValue] = useState<DateModelValue>("2021-10-29");
   const [month, setMonth] = useState<DateModelValue>(null);
   const [year, setYear] = useState<DateModelValue>(null);
+  const [quarter, setQuarter] = useState<DateModelValue>(null);
 
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
       <ElDatePicker
         value={value}
         onChange={setValue}
@@ -693,6 +785,22 @@ export function DatePickerCustomContent() {
           </div>
         )}
       />
+      <ElDatePicker
+        value={quarter}
+        onChange={setQuarter}
+        type="quarter"
+        placeholder="Pick a quarter"
+        renderCell={(cell) => (
+          <div
+            className="el-date-table-cell"
+            style={cell.isCurrent ? { color: "#626aef" } : undefined}
+          >
+            <span className="el-date-table-cell__text">
+              Q{(cell.text ?? 0) + 1}
+            </span>
+          </div>
+        )}
+      />
     </div>
   );
 }
@@ -744,116 +852,107 @@ const customIcons = {
   ),
 };
 
-export function DatePickerCustomIcon() {
+function DatePickerCustomIconDemo() {
   const [value1, setValue1] = useState<DateModelValue>(null);
   const [value2, setValue2] = useState<DateModelValue>(null);
   const [value3, setValue3] = useState<DateModelValue>(null);
   const [value4, setValue4] = useState<DateModelValue>(null);
-
-  const containerInnerStyle: CSSProperties = {
-    flex: 1,
-    minWidth: 400,
-    borderRight: "solid 1px var(--el-border-color)",
-    display: "flex",
-    flexDirection: "column",
-  };
-
-  const iconBlockStyle: CSSProperties = {
-    padding: "1.5rem 0",
-    textAlign: "center",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  };
-
-  const separatedStyle: CSSProperties = {
-    ...iconBlockStyle,
-    borderTop: "solid 1px var(--el-border-color)",
-  };
-
-  const iconContainerStyle: CSSProperties = {
-    display: "flex",
-    width: "100%",
-    padding: 0,
-    flexWrap: "wrap",
-    gap: 1,
-  };
+  const [value5, setValue5] = useState<DateModelValue>(null);
 
   return (
-    <div style={iconContainerStyle}>
-      <div style={containerInnerStyle}>
-        <div style={iconBlockStyle}>
-          <div style={{ ...demonstrationStyle, width: "100%" }}>date</div>
-          <ElDatePicker
-            value={value1}
-            onChange={setValue1}
-            type="date"
-            placeholder="Pick a day"
-            format="YYYY/MM/DD"
-            valueFormat="YYYY-MM-DD"
-            {...customIcons}
-          />
-        </div>
-        <div style={separatedStyle}>
-          <div style={{ ...demonstrationStyle, width: "100%" }}>date range</div>
-          <ElDatePicker
-            value={value2}
-            onChange={setValue2}
-            type="daterange"
-            startPlaceholder="Start date"
-            endPlaceholder="End date"
-            format="YYYY/MM/DD"
-            valueFormat="YYYY-MM-DD"
-            unlinkPanels
-            {...customIcons}
-          />
-        </div>
+    <div className="date-picker-icon-demo">
+      <div className="icon-block">
+        <div style={{ ...demonstrationStyle, width: "100%" }}>date</div>
+        <ElDatePicker
+          value={value1}
+          onChange={setValue1}
+          type="date"
+          placeholder="Pick a day"
+          format="YYYY/MM/DD"
+          valueFormat="YYYY-MM-DD"
+          {...customIcons}
+        />
       </div>
-      <div style={{ ...containerInnerStyle, borderRight: "none" }}>
-        <div style={iconBlockStyle}>
-          <div style={{ ...demonstrationStyle, width: "100%" }}>
-            month range
-          </div>
-          <ElDatePicker
-            value={value3}
-            onChange={setValue3}
-            type="monthrange"
-            startPlaceholder="Start date"
-            endPlaceholder="End date"
-            format="YYYY/MM/DD"
-            valueFormat="YYYY-MM-DD"
-            unlinkPanels
-            {...customIcons}
-          />
+      <div className="icon-block">
+        <div style={{ ...demonstrationStyle, width: "100%" }}>date range</div>
+        <ElDatePicker
+          value={value2}
+          onChange={setValue2}
+          type="daterange"
+          startPlaceholder="Start date"
+          endPlaceholder="End date"
+          format="YYYY/MM/DD"
+          valueFormat="YYYY-MM-DD"
+          unlinkPanels
+          {...customIcons}
+        />
+      </div>
+      <div className="icon-block">
+        <div style={{ ...demonstrationStyle, width: "100%" }}>
+          month range
         </div>
-        <div style={separatedStyle}>
-          <div style={{ ...demonstrationStyle, width: "100%" }}>year range</div>
-          <ElDatePicker
-            value={value4}
-            onChange={setValue4}
-            type="yearrange"
-            rangeSeparator="To"
-            startPlaceholder="Start Year"
-            endPlaceholder="End Year"
-            {...customIcons}
-          />
+        <ElDatePicker
+          value={value3}
+          onChange={setValue3}
+          type="monthrange"
+          startPlaceholder="Start date"
+          endPlaceholder="End date"
+          format="YYYY/MM/DD"
+          valueFormat="YYYY-MM-DD"
+          unlinkPanels
+          {...customIcons}
+        />
+      </div>
+      <div className="icon-block">
+        <div style={{ ...demonstrationStyle, width: "100%" }}>year range</div>
+        <ElDatePicker
+          value={value4}
+          onChange={setValue4}
+          type="yearrange"
+          rangeSeparator="To"
+          startPlaceholder="Start Year"
+          endPlaceholder="End Year"
+          {...customIcons}
+        />
+      </div>
+      <div className="icon-block">
+        <div style={{ ...demonstrationStyle, width: "100%" }}>
+          quarter range
         </div>
+        <ElDatePicker
+          value={value5}
+          onChange={setValue5}
+          type="quarterrange"
+          rangeSeparator="To"
+          startPlaceholder="Start quarter"
+          endPlaceholder="End quarter"
+          {...customIcons}
+        />
       </div>
     </div>
   );
 }
 
-export const DATE_PICKER_TYPES: DatePickerType[] = [
-  "year",
-  "years",
-  "month",
-  "months",
-  "date",
-  "dates",
-  "week",
-  "datetime",
-  "datetimerange",
-  "daterange",
-  "monthrange",
-  "yearrange",
-];
+/** 官方文档 demo 运行在 en 语言环境，与站点正文语言无关。 */
+function withEn(Component: () => ReactNode) {
+  return function Demo() {
+    return (
+      <ElConfigProvider locale={en}>
+        <Component />
+      </ElConfigProvider>
+    );
+  };
+}
+export const DatePickerEnterDate = withEn(DatePickerEnterDateDemo);
+export const DatePickerOtherMeasurements = withEn(DatePickerOtherMeasurementsDemo);
+export const DatePickerDateRange = withEn(DatePickerDateRangeDemo);
+export const DatePickerMonthRange = withEn(DatePickerMonthRangeDemo);
+export const DatePickerYearRange = withEn(DatePickerYearRangeDemo);
+export const DatePickerQuarterRange = withEn(DatePickerQuarterRangeDemo);
+export const DatePickerSinglePanel = withEn(DatePickerSinglePanelDemo);
+export const DatePickerDefaultValue = withEn(DatePickerDefaultValueDemo);
+export const DatePickerFormats = withEn(DatePickerFormatsDemo);
+export const DatePickerDefaultTime = withEn(DatePickerDefaultTimeDemo);
+export const DatePickerCustomPrefix = withEn(DatePickerCustomPrefixDemo);
+export const DatePickerCustomContent = withEn(DatePickerCustomContentDemo);
+export const DatePickerCustomIcon = withEn(DatePickerCustomIconDemo);

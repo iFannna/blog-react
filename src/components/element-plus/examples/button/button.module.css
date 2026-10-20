@@ -1,0 +1,49 @@
+/* Equivalents of the official button demo scoped styles / unocss utilities */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  align-items: center;
+}
+
+.row > * {
+  margin: 0;
+}
+
+/* Element Plus 的 `.el-button + .el-button` 是 0,2,0，需更高特异性才能抵消 */
+.row > :global(.el-button + .el-button) {
+  margin-left: 0;
+}
+
+.flexRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1.6rem;
+}
+
+.flexRowLast {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.mb16 {
+  margin-bottom: 1.6rem;
+}
+
+/* 官方 demo 的段落是 0 0 16px（首段无上外边距） */
+.demoP {
+  margin: 0 0 1.6rem;
+}
+
+.mb8 {
+  margin-bottom: 0.8rem;
+}

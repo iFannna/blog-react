@@ -161,8 +161,6 @@ export const ElMenu = forwardRef<MenuExpose, MenuProps>(function ElMenu(
   );
   const [activeIndex, setActiveIndex] = useState(defaultActive);
   const [registry, setRegistry] = useState(EMPTY_REGISTRY);
-  // 顶层节点注册、尺寸变化时递增，驱动横向 ellipsis 重新测量
-  const [resizeSignal, setResizeSignal] = useState(0);
 
   const isMenuPopup = mode === "horizontal" || (mode === "vertical" && collapse);
 
@@ -210,28 +208,27 @@ export const ElMenu = forwardRef<MenuExpose, MenuProps>(function ElMenu(
   const propsRef = useRef(props);
   propsRef.current = props;
 
+  // 注册只写 ref 并打脏标记；真正的 state 同步由下方 useLayoutEffect 统一完成。
+  // 不能在这里 setState：子项挂载会触发横向省略号重算，重算又会移动子项，
+  // 形成「挂载 -> 重算 -> 再挂载」的死循环。
   const addMenuItem = useRef((item: MenuItemRegistered) => {
     itemsRef.current[item.index] = item;
     dirtyRef.current = true;
-    setResizeSignal((value) => value + 1);
   }).current;
 
   const removeMenuItem = useRef((item: MenuItemRegistered) => {
     delete itemsRef.current[item.index];
     dirtyRef.current = true;
-    setResizeSignal((value) => value + 1);
   }).current;
 
   const addSubMenu = useRef((item: MenuItemRegistered) => {
     subMenusRef.current[item.index] = item;
     dirtyRef.current = true;
-    setResizeSignal((value) => value + 1);
   }).current;
 
   const removeSubMenu = useRef((item: MenuItemRegistered) => {
     delete subMenusRef.current[item.index];
     dirtyRef.current = true;
-    setResizeSignal((value) => value + 1);
   }).current;
 
   /**
@@ -286,8 +283,6 @@ export const ElMenu = forwardRef<MenuExpose, MenuProps>(function ElMenu(
     onSelectRef.current?.(item.index, item.indexPath, item);
   }).current;
 
-  const triggerResize = useRef(() => setResizeSignal((value) => value + 1)).current;
-
   // defaultActive 变化时同步激活项，对应官方对 default-active 的 watch。
   // 未注册的索引视为空，避免高亮到一个不存在的项。
   const prevDefaultActive = useRef(defaultActive);
@@ -337,12 +332,11 @@ export const ElMenu = forwardRef<MenuExpose, MenuProps>(function ElMenu(
 
   const ellipsisEnabled = mode === "horizontal" && ellipsis;
 
-  const { sliceIndex } = useHorizontalEllipsis({
+  const { sliceIndex, handleResize: triggerResize } = useHorizontalEllipsis({
     enabled: ellipsisEnabled,
     menuRef,
     moreSlotRef,
     childCount: topIndexes.length,
-    dep: resizeSignal,
   });
 
   useImperativeHandle(
@@ -469,30 +463,22 @@ export const ElMenu = forwardRef<MenuExpose, MenuProps>(function ElMenu(
     sliceIndex === -1 ? childArray : childArray.slice(0, sliceIndex);
   const moreChildren = sliceIndex === -1 ? [] : childArray.slice(sliceIndex);
 
-  // 省略号槽位固定插在末尾；即使当前不显示也保持挂载，便于测量其宽度。
-  // 纵向模式没有省略号，直接不渲染这个节点，保持与官方一致的 DOM。
-  const ellipsisSlot = mode === "horizontal" && (
-    <li
-      ref={moreSlotRef}
-      data-menu-ellipsis="true"
-      style={
-        sliceIndex === -1
-          ? { display: "none" }
-          : { display: "flex", width: "max-content", maxWidth: "100%" }
-      }
-    >
-      {moreChildren.length > 0 && (
-        <ElSubMenu
-          index={MORE_SUB_MENU_INDEX}
-          hideArrow
-          hideOnEllipsis
-          ellipsisIcon={ellipsisIcon ?? <More />}
-        >
-          {moreChildren}
-        </ElSubMenu>
-      )}
-    </li>
-  );
+  // 省略号子菜单直接作为 ul 的子节点渲染：ElSubMenu 本身就是 li，
+  // 再包一层 li 会造成非法的 li 嵌套（React 水合报错）。
+  // 未截断时不渲染，与官方一致；首次测量用默认宽度兜底。
+  const ellipsisSlot = mode === "horizontal" &&
+    sliceIndex !== -1 &&
+    moreChildren.length > 0 && (
+      <ElSubMenu
+        ref={moreSlotRef}
+        index={MORE_SUB_MENU_INDEX}
+        hideArrow
+        hideOnEllipsis
+        ellipsisIcon={ellipsisIcon ?? <More />}
+      >
+        {moreChildren}
+      </ElSubMenu>
+    );
 
   // 纵向模式默认包一层收起过渡容器；key 随 collapse 变化，与官方一致重挂载。
   // 过渡容器渲染的就是 ul.el-menu 本身，DOM 与官方一致（无额外包裹节点）。

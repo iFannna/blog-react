@@ -7,119 +7,131 @@ order: 50
 
 # Message 消息提示
 
-常用于主动操作后的反馈提示。
+常用于主动操作后的反馈提示。与 Notification 的区别是后者更多用于系统级通知的被动提醒。
 
 ## 基础用法
 
-:::demo 直接调用 `message(...)` 即可弹出，参数可以是字符串或 ReactNode；无需在 JSX 中声明。
+默认情况下在顶部显示并在 3 秒后消失。您可以使用 `placement` 属性控制位置。
+
+:::demo Message 在配置上与 Notification 非常类似，所以部分 options 在此不做详尽解释。文末有 options 列表，可以结合 Notification 的文档理解它们。Element Plus 注册了一个全局的 `$message` 方法用于调用。Message 可以接收一个字符串或一个 VNode 作为参数，它会被显示为正文内容。
 
 message/basic
 
 :::
 
-## 不同类型
+## 不同状态
 
-:::demo 通过 `type` 设置 `primary`、`success`、 `warning`、`info`、`error`。
+Used to show the feedback of Primary, Success, Warning, Info and Error activities.
+
+:::demo 当需要自定义更多属性时，Message 也可以接收一个对象为参数。比如，设置 `type` 字段可以定义不同的状态，默认为 `info`。此时正文内容以 `message` 的值传入。同时，我们也为 Message 的各种 type 注册了方法，可以在不传入 `type` 字段的情况下直接调用。`primary` 已被添加到 2.9.11。
 
 message/different-types
 
 :::
 
-## 朴素样式
+## Plain
 
-:::demo 设置 `plain` 使用浅色背景的朴素样式。
+设置 `plain` 为 plain 背景。
+
+:::demo
 
 message/plain
 
 :::
 
-## 可关闭
+## 可关闭的消息提示
 
-:::demo 设置 `showClose` 显示关闭按钮；`duration` 为 `0` 时不会自动关闭。
+可以添加关闭按钮。
+
+:::demo 默认的 Message 是不可以被人工关闭的。如果你需要手动关闭功能，你可以把 `showClose` 设置为 `true`。此外，和 Notification 一样，Message 拥有可控的 `duration`，默认的关闭时间为 3000 毫秒，当把这个属性的值设置为 `0` 便表示该消息不会被自动关闭。
 
 message/closable
 
 :::
 
-## 使用 HTML 片段
+## 使用 HTML 片段作为正文内容
 
-:::demo 设置 `dangerouslyUseHTMLString` 后 `message` 会按 HTML 渲染。
+`message` 还支持使用 HTML 字符串作为正文内容。
+
+:::demo 将 `dangerouslyUseHTMLString` 属性设置为 `true`，`message` 就会被当作 HTML 片段处理。
 
 message/raw-html
 
 :::
 
-## 合并消息
+:::danger WARNING
+`message` 属性虽然支持传入 HTML 片段，但是在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 XSS 攻击。因此在 `dangerouslyUseHTMLString` 打开的情况下，请确保 `message` 的内容是可信的，永远不要将用户提交的内容赋值给 `message` 属性。
 
-:::demo 设置 `grouping` 后，相同内容的消息会合并并显示数量徽标。
+:::
+
+## 分组消息合并
+
+合并相同内容的消息。
+
+:::demo 设置 `grouping` 为 `true`，内容相同的 message 将被合并。
 
 message/grouping
 
 :::
 
-## 位置
+## Placement
 
-:::demo 通过 `placement` 设置消息出现的位置，共 6 个方位， 同一位置的消息会自动堆叠。
+控制消息出现的位置。消息可以显示在查看端口的顶部（默认）或其他位置。
+
+:::demo
 
 message/placement
 
 :::
 
-## Message API
+## 全局方法
 
-使用前需在应用根部渲染容器组件 `<ElMessageContainer />`（本站已全局挂载）。
+Element Plus 为 `app.config.globalProperties` 添加了全局方法 `$message`。因此在 Vue 实例中你可以使用当前页面中的调用方式调用 Message。本站以模块方式导出 `message`，在任意客户端组件中直接调用即可。
+
+## 单独引用
+
+```ts
+import { message } from "@/components/element-plus/message";
+```
+
+此时调用方法为 `message(options)`。我们也为每个 type 定义了各自的方法，如 `message.success(options)`。并且可以调用 `message.closeAll()` 手动关闭所有实例。
+
+## 应用程序上下文继承
+
+现在 Message 接受一条 `context` 作为消息构造器的第二个参数，允许你将当前应用的上下文注入到 Message 中，这将允许你继承应用程序的所有属性。
+
+你可以像这样使用它：
+
+:::tip TIP
+如果你全局注册了 Message 容器，它将自动继承应用的上下文环境。
+
+:::
+
+## API
+
+### Message 配置项
+
+| 名称 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| message | 消息文字 | ^[string] / ^[VNode] / ^[Function] | '' |
+| type | 消息类型 | ^[enum] | info |
+| plain <span class="docs-version-tag">2.6.3</span> | 是否纯色 | ^[boolean] | false |
+| icon | 自定义图标，该属性会覆盖 type 的图标。 | ^[string] / ^[Component] | — |
+| dangerouslyUseHTMLString | 是否将 message 属性作为 HTML 片段处理 | ^[boolean] | false |
+| customClass | 自定义类名 | ^[string] | '' |
+| duration | 显示时间，单位为毫秒。设为 0 则不会自动关闭 | ^[number] | 3000 |
+| showClose | 是否显示关闭按钮 | ^[boolean] | false |
+| onClose | 关闭时的回调函数，参数为被关闭的 message 实例 | ^[Function] | — |
+| offset | 设置到视口边缘的距离（当位置为 'top' 时为顶部，当位置为 'bottom' 时为底部） | ^[number] | 16 |
+| placement <span class="docs-version-tag">2.11.0</span> | 消息放置位置 | ^[enum] | top |
+| appendTo | 设置 message 的根元素，默认为 document.body | ^[CSSSelector] / ^[HTMLElement] | — |
+| grouping | 合并内容相同的消息，不支持 VNode 类型的消息 | ^[boolean] | false |
+| repeatNum | 重复次数，类似于 Badge。当和 grouping 属性一起使用时作为初始数量使用 | ^[number] | 1 |
 
 ### Message 方法
 
-| 方法 | 说明 | 参数 |
+调用 Message 或 `this.$message` 会返回当前 Message 的实例。如果需要手动关闭实例，可以调用它的 `close` 方法。
+
+| 名称 | 描述 | 类型 |
 | --- | --- | --- |
-| message(options) | 显示消息 | ^[string] / ^[MessageOptions] |
-| message.primary(options) | 主要消息 | 同上 |
-| message.success(options) | 成功消息 | 同上 |
-| message.info(options) | 信息消息 | 同上 |
-| message.warning(options) | 警告消息 | 同上 |
-| message.error(options) | 错误消息 | 同上 |
-| message.closeAll() | 关闭全部消息 | — |
-
-每个方法返回一个 `{ close: () => void }` 句柄，可手动关闭该条消息。
-
-### MessageOptions
-
-| 属性名 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| message | 消息文字，支持字符串、ReactNode 或返回 ReactNode 的函数 | ^[ReactNode] / ^[Function] | — |
-| type | 消息类型 | ^[enum]`'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | info |
-| duration | 显示时长（毫秒），0 表示不自动关闭 | ^[number] | 3000 |
-| show-close | 是否显示关闭按钮 | ^[boolean] | false |
-| plain | 是否使用朴素样式 | ^[boolean] | false |
-| offset | 距视口边缘的距离（**px**） | ^[number] | 16 |
-| placement | 位置 | ^[enum]`'top' \| 'top-left' \| 'top-right' \| 'bottom' \| 'bottom-left' \| 'bottom-right'` | top |
-| icon | 自定义图标 | ^[ReactNode] | — |
-| dangerously-use-HTML-string | 是否以 HTML 片段渲染 | ^[boolean] | false |
-| grouping | 相同内容是否合并为一条并显示数量徽标 | ^[boolean] | false |
-| append-to | 挂载容器，默认 body | ^[string] / ^[HTMLElement] | — |
-| custom-class | 自定义类名 | ^[string] | — |
-| z-index | 层级 | ^[number] | — |
-| on-close | 关闭时的回调 | ^[Function]`() => void` | — |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| 命令式挂载（createVNode + render） | 模块级 store + `useSyncExternalStore` | 用法一致，需要在根部渲染容器 |
-| `ElMessage(options)` / `this.$message` | `message(options)` | 直接调用函数 |
-| `<slot>` / VNode | `message` 支持 ReactNode 与函数 | 函数形式可延迟求值 |
-| `message.closeAll()` | 同名方法 | — |
-
-**实现说明**：
-
-- 类名、结构、样式全部使用官方的 `el-message` 体系，
-  含 `el-message--{type}`、`is-closable`、`is-plain`、`is-bottom` 与水平方位类
-- 堆叠算法与官方 `getOffsetOrSpace` 等价：
-  同一位置下首个用 `offset`，后续每个是「前一个的底边 + 16px」
-- 悬停时暂停自动关闭倒计时，移开后重新计时
-- 按 <kbd>Esc</kbd> 关闭全部消息
-- `grouping` 开启后相同内容合并，并在关闭时正确递减计数
-- 图标沿用官方 `TypeComponentsMap`（primary 与 info 共用 InfoFilled）
-
-**注意**：`offset` 单位是 **px**（官方如此），与博客原有实现使用 rem 不同。
+| close | 关闭当前的 Message | ^[Function] |

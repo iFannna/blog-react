@@ -59,7 +59,9 @@ const customActivities: CustomActivity[] = [
   },
 ];
 
-const cardBody = { margin: "0 0 4px" } as const;
+// 官方文档正文排版：标题无外边距，段落仅保留 16px 上间距
+const cardTitle = { margin: 0 } as const;
+const cardBody = { margin: "16px 0 0" } as const;
 const timelineSpacing: CSSProperties = { marginTop: 16 };
 
 export function TimelineBasic() {
@@ -79,13 +81,13 @@ export function TimelineCenter() {
     <ElTimeline>
       <ElTimelineItem center timestamp="2018/4/12" placement="top">
         <ElCard>
-          <h4 style={cardBody}>Update Github template</h4>
+          <h4 style={cardTitle}>Update Github template</h4>
           <p style={cardBody}>Tom committed 2018/4/12 20:46</p>
         </ElCard>
       </ElTimelineItem>
       <ElTimelineItem timestamp="2018/4/3" placement="top">
         <ElCard>
-          <h4 style={cardBody}>Update Github template</h4>
+          <h4 style={cardTitle}>Update Github template</h4>
           <p style={cardBody}>Tom committed 2018/4/3 20:46</p>
         </ElCard>
       </ElTimelineItem>
@@ -129,7 +131,7 @@ export function TimelineCustomTimestamp() {
       ].map((item) => (
         <ElTimelineItem key={item.timestamp} timestamp={item.timestamp} placement="top">
           <ElCard>
-            <h4 style={cardBody}>Update Github template</h4>
+            <h4 style={cardTitle}>Update Github template</h4>
             <p style={cardBody}>{item.name}</p>
           </ElCard>
         </ElTimelineItem>

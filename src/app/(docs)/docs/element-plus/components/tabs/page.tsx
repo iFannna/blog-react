@@ -260,12 +260,28 @@ export default function TabsPage() {
         <TabsBorderCard />
       </DemoBlock>
 
+      <Heading level={2}>标签位置</Heading>
+      <p>
+        通过 <code>tabPosition</code> 设置标签位置，支持 top / right / bottom / left。
+      </p>
+      <DemoBlock source={SOURCES.position}>
+        <TabsPosition />
+      </DemoBlock>
+
       <Heading level={2}>自定义标签</Heading>
       <p>
         通过 <code>label</code> 传入自定义节点，可以在标签中加入图标等内容。
       </p>
       <DemoBlock source={SOURCES.customLabel}>
         <TabsCustomLabel />
+      </DemoBlock>
+
+      <Heading level={2}>动态增减标签</Heading>
+      <p>
+        <code>editable</code> 同时启用新增与关闭；<code>onEdit</code> 统一接收增删事件。
+      </p>
+      <DemoBlock source={SOURCES.dynamic}>
+        <TabsDynamic />
       </DemoBlock>
 
       <Heading level={2}>自定义新增按钮图标</Heading>
@@ -290,22 +306,6 @@ export default function TabsPage() {
       </p>
       <DemoBlock source={SOURCES.defaultValue}>
         <TabsDefaultValue />
-      </DemoBlock>
-
-      <Heading level={2}>动态增减标签</Heading>
-      <p>
-        <code>editable</code> 同时启用新增与关闭；<code>onEdit</code> 统一接收增删事件。
-      </p>
-      <DemoBlock source={SOURCES.dynamic}>
-        <TabsDynamic />
-      </DemoBlock>
-
-      <Heading level={2}>标签位置</Heading>
-      <p>
-        通过 <code>tabPosition</code> 设置标签位置，支持 top / right / bottom / left。
-      </p>
-      <DemoBlock source={SOURCES.position}>
-        <TabsPosition />
       </DemoBlock>
 
       <DocsContent source={API_MD} />

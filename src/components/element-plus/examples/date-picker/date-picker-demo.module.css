@@ -1,0 +1,9 @@
+/* 官方 single-panel 示例把所有范围输入框统一为 300px */
+:global(.single-panels .el-date-editor) {
+  width: 300px;
+}
+
+/* 官方示例的 radio 组直接带 mb-4，不额外包一层 div */
+:global(.date-picker-radio-group) {
+  margin-bottom: 16px;
+}

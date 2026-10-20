@@ -831,7 +831,7 @@ export const ElTimePicker = ({
   );
 
   return (
-    <div ref={rootRef} className="el-time-picker" style={style}>
+    <div ref={rootRef} style={{ display: "contents" }}>
       <ElTooltip
         content={
           <div ref={popperRef} id={panelId}>
@@ -859,6 +859,7 @@ export const ElTimePicker = ({
         {isRange ? (
           <div
             className={rangeClasses}
+            style={style}
             onMouseDown={onMouseDownInput}
             onMouseEnter={() => {
               if (readonly || pickerDisabled) return;
@@ -931,9 +932,13 @@ export const ElTimePicker = ({
             </ElIcon>
           </div>
         ) : (
+          // Tooltip 的 trigger ref 需要真实 DOM 节点；直接挂在 ElInput 上会拿到
+          // imperative handle，触发 popper 反复更新。display: contents 不参与布局。
+          <div style={{ display: "contents" }}>
           <ElInput
             id={inputId}
             className={singleClasses}
+            style={style}
             value={(displayValue as string) ?? ""}
             name={name as string}
             size={size}
@@ -957,7 +962,9 @@ export const ElTimePicker = ({
                 >
                   {clearIcon ?? <CircleClose />}
                 </ElIcon>
-              ) : undefined
+              ) : (
+                <></>
+              )
             }
             onChange={onUserInput}
             onFocus={handleFocus}
@@ -971,6 +978,7 @@ export const ElTimePicker = ({
             onMouseLeave={() => setHovering(false)}
             validateEvent={false}
           />
+          </div>
         )}
       </ElTooltip>
     </div>

@@ -5,7 +5,7 @@ import DocsContent from "../../../../_components/DocsContent";
 import {
   StatisticBasic,
   StatisticCountdown,
-  StatisticFormatter,
+  StatisticCard,
 } from "@/components/element-plus/examples/statistic";
 
 export const metadata: Metadata = { title: "Statistic 统计组件" };
@@ -162,7 +162,7 @@ export default function StatisticPage() {
         <code>value</code> 为非数字时原样显示。
       </p>
       <DemoBlock source={SOURCES.formatter}>
-        <StatisticFormatter />
+        <StatisticCard />
       </DemoBlock>
 
       <DocsContent source={API_MD} />

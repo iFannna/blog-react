@@ -9,12 +9,6 @@ import { ElSlider } from "@/components/element-plus/slider";
 import { ElSwitch } from "@/components/element-plus/switch";
 import { ElDivider } from "@/components/element-plus/divider";
 
-const cardHeader: CSSProperties = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-};
-
 const alignmentBox: CSSProperties = {
   width: 240,
   marginBottom: 20,
@@ -30,7 +24,7 @@ function renderCards(count: number, width?: number) {
       key={index}
       style={width ? { width } : undefined}
       header={
-        <div style={cardHeader}>
+        <div className="card-header">
           <span>Card name</span>
           <ElButton text>Operation button</ElButton>
         </div>

@@ -163,11 +163,7 @@ export const ElMention = forwardRef<MentionExpose, MentionProps>(
   const [visible, setVisible] = useState(false);
   const [hoveringIndex, setHoveringIndex] = useState(-1);
   const [mentionCtx, setMentionCtx] = useState<MentionCtx | undefined>();
-  const [cursorStyle, setCursorStyle] = useState<CSSProperties>({
-    position: "absolute",
-    width: 0,
-    height: 0,
-  });
+  const [cursorStyle, setCursorStyle] = useState<CSSProperties>({});
   const [popperEl, setPopperEl] = useState<HTMLDivElement | null>(null);
 
   // 事件处理器需要同步读到最新值，而 state 更新有延迟，故另存 ref
@@ -521,13 +517,6 @@ export const ElMention = forwardRef<MentionExpose, MentionProps>(
     [popperEl, setVisibleBoth],
   );
 
-  // 挂载后量一次光标，保证锚点在未聚焦时也落在正确位置
-  useEffect(() => {
-    syncCursor();
-    // 仅挂载与 type 切换时需要
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [type]);
-
   useImperativeHandle(
     ref,
     () => ({
@@ -598,43 +587,43 @@ export const ElMention = forwardRef<MentionExpose, MentionProps>(
         aria-haspopup={dropdownVisible ? "listbox" : undefined}
       />
 
-      <div
-        ref={setPopperEl}
-        className={popperClasses}
-        style={popperStyleMerged}
-        // 常驻挂载、用 hidden 切换，保证 aria-controls 指向的列表节点始终存在
-        hidden={!dropdownVisible}
-        tabIndex={-1}
-        data-popper-placement={showArrow ? resolvedPlacement : undefined}
-        // 阻止默认行为以免输入框失焦导致下拉先被卸载、选项点击丢失
-        onMouseDown={(event) => event.preventDefault()}
-      >
-        {/* 箭头由 popper 定位于浮层边缘中线上，这里按 10px 宽做水平居中 */}
-        {showArrow && (
-          <ElPopperArrow style={{ position: "absolute", left: "calc(50% - 5px)" }} />
-        )}
-        <ElMentionDropdown
-          ref={dropdownRef}
-          options={filteredOptions}
-          loading={loading}
-          disabled={disabledValue}
-          contentId={contentId}
-          ariaLabel={restProps["aria-label"]}
-          hoveringIndex={hoveringIndex}
-          onHoveringChange={(index) => {
-            hoveringIndexRef.current = index;
-            setHoveringIndex(index);
-          }}
-          onSelect={handleSelect}
-          onRootClick={() => getInputEl()?.focus()}
-          labelSlot={labelSlot}
-          loadingSlot={loadingSlot}
-          headerSlot={headerSlot}
-          footerSlot={footerSlot}
-        />
-      </div>
+      {dropdownVisible && (
+        <div
+          ref={setPopperEl}
+          className={popperClasses}
+          style={popperStyleMerged}
+          tabIndex={-1}
+          data-popper-placement={showArrow ? resolvedPlacement : undefined}
+          // 阻止默认行为以免输入框失焦导致下拉先被卸载、选项点击丢失
+          onMouseDown={(event) => event.preventDefault()}
+        >
+          {/* 箭头由 popper 定位于浮层边缘中线上，这里按 10px 宽做水平居中 */}
+          {showArrow && (
+            <ElPopperArrow style={{ position: "absolute", left: "calc(50% - 5px)" }} />
+          )}
+          <ElMentionDropdown
+            ref={dropdownRef}
+            options={filteredOptions}
+            loading={loading}
+            disabled={disabledValue}
+            contentId={contentId}
+            ariaLabel={restProps["aria-label"]}
+            hoveringIndex={hoveringIndex}
+            onHoveringChange={(index) => {
+              hoveringIndexRef.current = index;
+              setHoveringIndex(index);
+            }}
+            onSelect={handleSelect}
+            onRootClick={() => getInputEl()?.focus()}
+            labelSlot={labelSlot}
+            loadingSlot={loadingSlot}
+            headerSlot={headerSlot}
+            footerSlot={footerSlot}
+          />
+        </div>
+      )}
 
-      <div style={cursorStyle} />
+      <div className="el-tooltip__trigger" style={cursorStyle} />
     </div>
   );
   },

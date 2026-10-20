@@ -1,21 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { notification } from "@/components/element-plus/notification";
 import { Loading } from "@/components/element-plus/loading";
 import { ElButton } from "@/components/element-plus/button";
 import { ElSwitch } from "@/components/element-plus/switch";
-
-const row = {
-  display: "flex",
-  gap: "1.2rem",
-  flexWrap: "wrap" as const,
-  alignItems: "center",
-};
+import { ElTable, ElTableColumn } from "@/components/element-plus/table";
+import styles from "./notification.module.css";
 
 export function NotificationBasic() {
   return (
-    <div style={row}>
+    <div className={styles.row}>
       <ElButton
         plain
         onClick={() =>
@@ -45,7 +40,7 @@ export function NotificationBasic() {
 
 export function NotificationDifferentTypes() {
   return (
-    <div style={row}>
+    <div className={styles.row}>
       <ElButton
         plain
         onClick={() =>
@@ -112,7 +107,7 @@ export function NotificationDifferentTypes() {
 
 export function NotificationPositioning() {
   return (
-    <div style={row}>
+    <div className={styles.row}>
       <ElButton
         plain
         onClick={() =>
@@ -206,7 +201,7 @@ function DynamicSwitch() {
 
 export function NotificationUseVnode() {
   return (
-    <div style={row}>
+    <div className={styles.row}>
       <ElButton
         plain
         onClick={() =>
@@ -249,20 +244,20 @@ export function NotificationProgressBar() {
   };
 
   return (
-    <div style={row}>
+    <>
       <ElButton plain onClick={() => open()}>
         Default
       </ElButton>
-      <ElButton plain onClick={() => open("success")}>
+      <ElButton plain type="success" onClick={() => open("success")}>
         Success
       </ElButton>
-      <ElButton plain onClick={() => open("warning")}>
+      <ElButton plain type="warning" onClick={() => open("warning")}>
         Warning
       </ElButton>
-      <ElButton plain onClick={() => open("error")}>
+      <ElButton plain type="danger" onClick={() => open("error")}>
         Error
       </ElButton>
-      <ElButton plain onClick={() => open("info")}>
+      <ElButton plain type="info" onClick={() => open("info")}>
         Info
       </ElButton>
       <ElButton
@@ -300,7 +295,7 @@ export function NotificationProgressBar() {
       >
         No pause on hover
       </ElButton>
-    </div>
+    </>
   );
 }
 
@@ -322,81 +317,83 @@ export function NotificationNoClose() {
 }
 
 // Loading 页面的演示历史上放在此文件，保留导出以免破坏既有引用
-export function LoadingBasic() {
+const loadingTableData = [
+  {
+    date: "2016-05-02",
+    name: "John Smith",
+    address: "No.1518,  Jinshajiang Road, Putuo District",
+  },
+  {
+    date: "2016-05-04",
+    name: "John Smith",
+    address: "No.1518,  Jinshajiang Road, Putuo District",
+  },
+  {
+    date: "2016-05-01",
+    name: "John Smith",
+    address: "No.1518,  Jinshajiang Road, Putuo District",
+  },
+];
+
+const loadingSvg = `<path class="path" d="M 30 15 L 28 17 M 25.61 25.61 A 15 15, 0, 0, 1, 15 30 A 15 15, 0, 1, 1, 27.99 7.5 L 15 15" style="stroke-width: 4px; fill: rgba(0, 0, 0, 0)"/>`;
+
+function LoadingTable() {
   return (
-    <div style={{ display: "grid", gap: "1.2rem" }}>
-      <div style={row}>
-        <ElButton
-          onClick={() => {
-            const loading = Loading.service({ text: "加载中...", background: "rgba(0,0,0,0.3)" });
-            setTimeout(() => loading.close(), 2000);
-          }}
-        >
-          全屏 2 秒
-        </ElButton>
-        <ElButton
-          onClick={() => {
-            const loading = Loading.service({ target: "#loading-box", text: "局部加载" });
-            setTimeout(() => loading.close(), 2000);
-          }}
-        >
-          局部 2 秒
-        </ElButton>
-      </div>
-      <div
-        id="loading-box"
-        style={{
-          height: 160,
-          border: "1px solid var(--docs-example-border)",
-          borderRadius: 4,
-          display: "grid",
-          placeItems: "center",
-          color: "var(--docs-text-secondary)",
-        }}
-      >
-        局部 Loading 的目标容器
-      </div>
+    <ElTable data={loadingTableData}>
+      <ElTableColumn property="date" label="Date" width={180} />
+      <ElTableColumn property="name" label="Name" width={180} />
+      <ElTableColumn property="address" label="Address" />
+    </ElTable>
+  );
+}
+
+export function LoadingBasic() {
+  const tableRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!tableRef.current) return;
+    const instance = Loading.service({ target: tableRef.current });
+    return () => instance.close();
+  }, []);
+
+  return (
+    <div ref={tableRef} style={{ width: "100%" }}>
+      <LoadingTable />
     </div>
   );
 }
 
 export function LoadingCustomization() {
+  const firstRef = useRef<HTMLDivElement>(null);
+  const secondRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!firstRef.current || !secondRef.current) return;
+    const first = Loading.service({
+      target: firstRef.current,
+      text: "Loading...",
+      spinner: loadingSvg,
+      svgViewBox: "-10, -10, 50, 50",
+      background: "rgba(122, 122, 122, 0.8)",
+    });
+    const second = Loading.service({
+      target: secondRef.current,
+      spinner: loadingSvg,
+      customClass: "custom-loading-svg",
+    });
+    return () => {
+      first.close();
+      second.close();
+    };
+  }, []);
+
   return (
-    <div style={{ display: "grid", gap: "1.2rem" }}>
-      <div style={row}>
-        <ElButton
-          onClick={() => {
-            const loading = Loading.service({ target: "#loading-custom-box", text: "加载中..." });
-            setTimeout(() => loading.close(), 2000);
-          }}
-        >
-          自定义文案
-        </ElButton>
-        <ElButton
-          onClick={() => {
-            const loading = Loading.service({
-              target: "#loading-custom-box",
-              text: "带背景色",
-              background: "rgba(64, 158, 255, 0.2)",
-            });
-            setTimeout(() => loading.close(), 2000);
-          }}
-        >
-          自定义背景色
-        </ElButton>
+    <div style={{ width: "100%" }}>
+      <div ref={firstRef} style={{ width: "100%" }}>
+        <LoadingTable />
       </div>
-      <div
-        id="loading-custom-box"
-        style={{
-          height: 160,
-          border: "1px solid var(--docs-example-border)",
-          borderRadius: 4,
-          display: "grid",
-          placeItems: "center",
-          color: "var(--docs-text-secondary)",
-        }}
-      >
-        自定义 Loading 的目标容器
+      <div ref={secondRef} style={{ width: "100%" }}>
+        <LoadingTable />
       </div>
     </div>
   );
@@ -404,23 +401,29 @@ export function LoadingCustomization() {
 
 export function LoadingFullscreen() {
   return (
-    <div style={row}>
+    <>
       <ElButton
+        type="primary"
         onClick={() => {
-          const loading = Loading.service({ fullscreen: true, text: "全屏加载中..." });
+          const loading = Loading.service({ fullscreen: true, lock: true });
           setTimeout(() => loading.close(), 2000);
         }}
       >
-        全屏加载
+        As a directive
       </ElButton>
       <ElButton
+        type="primary"
         onClick={() => {
-          const loading = Loading.service({ fullscreen: true, lock: true, text: "锁定滚动" });
+          const loading = Loading.service({
+            lock: true,
+            text: "Loading",
+            background: "rgba(0, 0, 0, 0.7)",
+          });
           setTimeout(() => loading.close(), 2000);
         }}
       >
-        全屏加载并锁定滚动
+        As a service
       </ElButton>
-    </div>
+    </>
   );
 }

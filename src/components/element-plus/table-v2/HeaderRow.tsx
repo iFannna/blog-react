@@ -3,6 +3,7 @@
 import type { CSSProperties, ReactNode } from "react";
 
 import { HeaderCellRenderer } from "./renderers/HeaderCell";
+import { ns } from "./utils";
 
 import type {
   Column,
@@ -89,7 +90,11 @@ export function HeaderRow<T>({
   }
 
   return (
-    <div className={className} style={style} role="row">
+    <div
+      className={[ns.e("header-row"), className].filter(Boolean).join(" ")}
+      style={style}
+      role="row"
+    >
       {cells}
     </div>
   );

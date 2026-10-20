@@ -4,28 +4,24 @@ import { useState } from "react";
 import { ElAnchor, ElAnchorLink } from "@/components/element-plus/anchor";
 import { ElAffix } from "@/components/element-plus/affix";
 import { ElRow, ElCol } from "@/components/element-plus/row";
+import styles from "./anchor.module.css";
 
-/**
- * 官方示例的 href 由 locale 生成（如 #basic-usage），指向文档页自身章节。
- * 本页章节 id 与官方保持一致（见 page.tsx 里 Heading 的显式 id），
- * 因此这里的 href 与官方示例完全相同。
- */
 export function AnchorBasic() {
   return (
-    <ElAnchor offset={70}>
-      <ElAnchorLink href="#basic-usage">基础用法</ElAnchorLink>
-      <ElAnchorLink href="#horizontal-mode">水平模式</ElAnchorLink>
-      <ElAnchorLink href="#scroll-container">滚动容器</ElAnchorLink>
+    <ElAnchor className={styles.anchor} offset={70}>
+      <ElAnchorLink href="#基础用法">基础用法</ElAnchorLink>
+      <ElAnchorLink href="#水平模式">水平模式</ElAnchorLink>
+      <ElAnchorLink href="#滚动容器">滚动容器</ElAnchorLink>
       <ElAnchorLink
-        href="#change"
+        href="#anchor-api"
         subLink={
           <>
-            <ElAnchorLink href="#underline">下划线类型</ElAnchorLink>
-            <ElAnchorLink href="#affix">固定模式</ElAnchorLink>
+            <ElAnchorLink href="#anchor-attributes">Anchor Attributes</ElAnchorLink>
+            <ElAnchorLink href="#anchor-events">Anchor Events</ElAnchorLink>
           </>
         }
       >
-        锚点链接变化
+        Anchor API
       </ElAnchorLink>
     </ElAnchor>
   );
@@ -33,10 +29,10 @@ export function AnchorBasic() {
 
 export function AnchorHorizontal() {
   return (
-    <ElAnchor offset={70} direction="horizontal">
-      <ElAnchorLink href="#basic-usage">基础用法</ElAnchorLink>
-      <ElAnchorLink href="#horizontal-mode">水平模式</ElAnchorLink>
-      <ElAnchorLink href="#scroll-container">滚动容器</ElAnchorLink>
+    <ElAnchor className={styles.anchor} offset={70} direction="horizontal">
+      <ElAnchorLink href="#基础用法">基础用法</ElAnchorLink>
+      <ElAnchorLink href="#水平模式">水平模式</ElAnchorLink>
+      <ElAnchorLink href="#滚动容器">滚动容器</ElAnchorLink>
     </ElAnchor>
   );
 }
@@ -46,30 +42,29 @@ export function AnchorScroll() {
   const [containerEl, setContainerEl] = useState<HTMLDivElement | null>(null);
 
   return (
-    <div style={{ position: "relative" }}>
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          zIndex: 1,
-          width: "70%",
-          height: 30,
-          background: "var(--el-text-color-primary)",
-          color: "var(--el-bg-color)",
-        }}
-      >
-        固定顶部区块
-      </div>
-      <ElRow>
+    <div>
+      <ElRow className={styles.scrollRow}>
         <ElCol span={18}>
+          <div
+            style={{
+              height: 30,
+              width: "70%",
+              background: "#000",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              color: "#fff",
+            }}
+          >
+            Fixed Top Block
+          </div>
           <div ref={setContainerEl} style={{ height: 300, overflowY: "auto" }}>
             <div
               id="part1"
               style={{
                 height: 300,
+                background: "rgba(255, 0, 0, 0.02)",
                 marginTop: 30,
-                background: "var(--el-color-danger-light-9)",
               }}
             >
               part1
@@ -78,8 +73,8 @@ export function AnchorScroll() {
               id="part2"
               style={{
                 height: 300,
+                background: "rgba(0, 255, 0, 0.02)",
                 marginTop: 30,
-                background: "var(--el-color-success-light-9)",
               }}
             >
               part2
@@ -88,8 +83,8 @@ export function AnchorScroll() {
               id="part3"
               style={{
                 height: 300,
+                background: "rgba(0, 0, 255, 0.02)",
                 marginTop: 30,
-                background: "var(--el-color-primary-light-9)",
               }}
             >
               part3
@@ -97,18 +92,21 @@ export function AnchorScroll() {
           </div>
         </ElCol>
         <ElCol span={6}>
-          <ElAnchor
-            container={containerEl}
-            direction="vertical"
-            type="default"
-            offset={30}
-            // 官方示例在此阻止默认跳转，本组件与官方一致不做 preventDefault
-            onClick={(event) => event.preventDefault()}
-          >
-            <ElAnchorLink href="#part1" title="part1" />
-            <ElAnchorLink href="#part2" title="part2" />
-            <ElAnchorLink href="#part3" title="part3" />
-          </ElAnchor>
+          <div className="vp-raw">
+            <ElAnchor
+              className={styles.anchor}
+              container={containerEl}
+              direction="vertical"
+              type="default"
+              offset={30}
+              // 官方示例在此阻止默认跳转
+              onClick={(event) => event.preventDefault()}
+            >
+              <ElAnchorLink href="#part1" title="part1" />
+              <ElAnchorLink href="#part2" title="part2" />
+              <ElAnchorLink href="#part3" title="part3" />
+            </ElAnchor>
+          </div>
         </ElCol>
       </ElRow>
     </div>
@@ -118,24 +116,25 @@ export function AnchorScroll() {
 export function AnchorChange() {
   return (
     <ElAnchor
+      className={styles.anchor}
       offset={70}
       onChange={(href) => {
         console.log("anchor change:", href);
       }}
     >
-      <ElAnchorLink href="#basic-usage">基础用法</ElAnchorLink>
-      <ElAnchorLink href="#horizontal-mode">水平模式</ElAnchorLink>
-      <ElAnchorLink href="#scroll-container">滚动容器</ElAnchorLink>
+      <ElAnchorLink href="#基础用法">基础用法</ElAnchorLink>
+      <ElAnchorLink href="#水平模式">水平模式</ElAnchorLink>
+      <ElAnchorLink href="#滚动容器">滚动容器</ElAnchorLink>
       <ElAnchorLink
-        href="#change"
+        href="#anchor-api"
         subLink={
           <>
-            <ElAnchorLink href="#underline">下划线类型</ElAnchorLink>
-            <ElAnchorLink href="#affix">固定模式</ElAnchorLink>
+            <ElAnchorLink href="#anchor-attributes">Anchor Attributes</ElAnchorLink>
+            <ElAnchorLink href="#anchor-events">Anchor Events</ElAnchorLink>
           </>
         }
       >
-        锚点链接变化
+        Anchor API
       </ElAnchorLink>
     </ElAnchor>
   );
@@ -143,20 +142,20 @@ export function AnchorChange() {
 
 export function AnchorUnderline() {
   return (
-    <ElAnchor type="underline" offset={70}>
-      <ElAnchorLink href="#basic-usage">基础用法</ElAnchorLink>
-      <ElAnchorLink href="#horizontal-mode">水平模式</ElAnchorLink>
-      <ElAnchorLink href="#scroll-container">滚动容器</ElAnchorLink>
+    <ElAnchor className={styles.anchor} type="underline" offset={70}>
+      <ElAnchorLink href="#基础用法">基础用法</ElAnchorLink>
+      <ElAnchorLink href="#水平模式">水平模式</ElAnchorLink>
+      <ElAnchorLink href="#滚动容器">滚动容器</ElAnchorLink>
       <ElAnchorLink
-        href="#change"
+        href="#anchor-api"
         subLink={
           <>
-            <ElAnchorLink href="#underline">下划线类型</ElAnchorLink>
-            <ElAnchorLink href="#affix">固定模式</ElAnchorLink>
+            <ElAnchorLink href="#anchor-attributes">Anchor Attributes</ElAnchorLink>
+            <ElAnchorLink href="#anchor-events">Anchor Events</ElAnchorLink>
           </>
         }
       >
-        锚点链接变化
+        Anchor API
       </ElAnchorLink>
     </ElAnchor>
   );
@@ -165,20 +164,24 @@ export function AnchorUnderline() {
 export function AnchorAffix() {
   return (
     <ElAffix offset={60}>
-      <ElAnchor offset={70} style={{ width: 300 }}>
-        <ElAnchorLink href="#basic-usage">基础用法</ElAnchorLink>
-        <ElAnchorLink href="#horizontal-mode">水平模式</ElAnchorLink>
-        <ElAnchorLink href="#scroll-container">滚动容器</ElAnchorLink>
+      <ElAnchor
+        className={styles.anchor}
+        offset={70}
+        style={{ width: 300 }}
+      >
+        <ElAnchorLink href="#基础用法">基础用法</ElAnchorLink>
+        <ElAnchorLink href="#水平模式">水平模式</ElAnchorLink>
+        <ElAnchorLink href="#滚动容器">滚动容器</ElAnchorLink>
         <ElAnchorLink
-          href="#change"
+          href="#anchor-api"
           subLink={
             <>
-              <ElAnchorLink href="#underline">下划线类型</ElAnchorLink>
-              <ElAnchorLink href="#affix">固定模式</ElAnchorLink>
+              <ElAnchorLink href="#anchor-attributes">Anchor Attributes</ElAnchorLink>
+              <ElAnchorLink href="#anchor-events">Anchor Events</ElAnchorLink>
             </>
           }
         >
-          锚点链接变化
+          Anchor API
         </ElAnchorLink>
       </ElAnchor>
     </ElAffix>

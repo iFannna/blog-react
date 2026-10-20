@@ -4,35 +4,44 @@ import {
   isValidElement,
   type ReactNode,
 } from "react";
+import { ElButton } from "@/components/element-plus/button/ElButton";
+import { ElTooltip } from "@/components/element-plus/tooltip/ElTooltip";
 
 /**
  * 官方 API 表格里的类型标记：
  *   ^[boolean]              -> <code>boolean</code>
  *   ^[enum]`'a' | 'b'`      -> <code class="api-typing">enum</code> + 提示按钮
  * 官方靠 VitePress 把这些注册成全局组件，这里在渲染前做文本替换。
- *
- * 提示按钮用 title 承载详情：服务端组件不引入客户端 Tooltip。
- * 交互弱于官方但信息完整。
  */
 export function renderApiTyping(type: string, details?: string) {
-  if (!details) return <code>{type}</code>;
-
   return (
     <span className="docs-api-typing">
       <code className="api-typing">{type}</code>
-      <button
-        className="docs-api-typing__trigger"
-        type="button"
-        title={details}
-        aria-label={`Type details: ${details}`}
-      >
-        <svg width="14" height="14" viewBox="0 0 1024 1024" aria-hidden="true">
-          <path
-            fill="currentColor"
-            d="M512 64a448 448 0 1 1 0 896 448 448 0 0 1 0-896m0 832a384 384 0 0 0 384-384 384 384 0 0 0-384-384 384 384 0 0 0-384 384 384 384 0 0 0 384 384m0-472a40 40 0 0 1 40 40v200a40 40 0 0 1-80 0V464a40 40 0 0 1 40-40m0-152a48 48 0 1 1 0 96 48 48 0 0 1 0-96"
+      {details ? (
+        <ElTooltip
+          content={
+            <div className="docs-api-typing__details">
+              <code>{details}</code>
+            </div>
+          }
+          effect="light"
+          trigger="click"
+        >
+          <ElButton
+            text
+            className="docs-api-typing__trigger"
+            aria-label="Type details"
+            icon={
+              <svg viewBox="0 0 1024 1024" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M512 64a448 448 0 1 1 0 896 448 448 0 0 1 0-896m0 832a384 384 0 0 0 0-768 384 384 0 0 0 0 768m48-176a48 48 0 1 1-96 0 48 48 0 0 1 96 0m-48-464a32 32 0 0 1 32 32v288a32 32 0 0 1-64 0V288a32 32 0 0 1 32-32"
+                />
+              </svg>
+            }
           />
-        </svg>
-      </button>
+        </ElTooltip>
+      ) : null}
     </span>
   );
 }

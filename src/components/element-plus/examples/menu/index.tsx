@@ -13,6 +13,7 @@ import { ElRadioGroup } from "@/components/element-plus/radio/ElRadioGroup";
 import { ElRow } from "@/components/element-plus/row/ElRow";
 import { ElCol } from "@/components/element-plus/row/ElCol";
 import { ArrowDown, Document, House, Menu, Setting } from "@/components/element-plus/icons";
+import styles from "./menu.module.css";
 
 /** 官方示例里 .el-menu-vertical-demo 的实测尺寸（200x400）。 */
 const VERTICAL_STYLE = { width: 200, minHeight: 400 };
@@ -135,9 +136,13 @@ export function MenuLeftAndRight() {
       textColor="#303133"
       onSelect={(index) => setActiveIndex(index)}
     >
-      {/* 官方示例首项是 logo 图，这里用等宽文本占位，靠 margin-right: auto 撑开 */}
+      {/* 官方示例用 logo 图撑开首项，margin-right: auto 把其余项推到右侧 */}
       <ElMenuItem index="0" style={{ marginRight: "auto" }}>
-        Element Plus
+        <img
+          style={{ width: 100 }}
+          src="/images/element-plus-logo.svg"
+          alt="Element logo"
+        />
       </ElMenuItem>
       <ElMenuItem index="1">Processing Center</ElMenuItem>
       <ElSubMenu index="2" title="Workspace">
@@ -159,7 +164,7 @@ export function MenuVertical() {
   const [activeIndex, setActiveIndex] = useState("2");
 
   return (
-    <ElRow className="tac">
+    <ElRow className={`tac ${styles.columns}`}>
       <ElCol span={12}>
         <h5 style={{ marginBottom: 8 }}>Default colors</h5>
         <ElMenu
@@ -195,16 +200,15 @@ export function MenuCollapse() {
 
   return (
     <>
-      <div style={{ marginBottom: 20 }}>
-        <ElRadioGroup
-          value={isCollapse}
-          onChange={(value) => setIsCollapse(Boolean(value))}
-          type="button"
-        >
-          <ElRadio value={false} label="expand" />
-          <ElRadio value={true} label="collapse" />
-        </ElRadioGroup>
-      </div>
+      <ElRadioGroup
+        value={isCollapse}
+        onChange={(value) => setIsCollapse(Boolean(value))}
+        type="button"
+        className={styles.radioGroup}
+      >
+        <ElRadio value={false} label="expand" />
+        <ElRadio value={true} label="collapse" />
+      </ElRadioGroup>
 
       <ElMenu
         defaultActive="2"

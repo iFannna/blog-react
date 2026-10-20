@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import "@/components/element-plus/cascader/cascader-menu.module.css";
 
 import { ElButton } from "@/components/element-plus/button";
 import { ElCascader } from "@/components/element-plus/cascader";
@@ -12,18 +13,23 @@ import { ElTag } from "@/components/element-plus/tag";
 import type { Tag } from "@/components/element-plus/cascader-panel";
 import type { CascaderOption, CascaderValue } from "@/components/element-plus/cascader-panel";
 
-const stack = { display: "flex", flexDirection: "column", gap: "1rem" } as const;
-const section = {
-  display: "flex",
-  flexDirection: "column",
-  gap: "0.5rem",
-  marginBottom: "1rem",
-} as const;
+const stack = { display: "block" } as const;
+const section = { margin: "16px" } as const;
+const demoParagraph = { margin: "0 0 16px" } as const;
 const row = {
   display: "flex",
   flexWrap: "wrap",
-  gap: "1rem",
+  gap: "16px",
   alignItems: "center",
+} as const;
+const checkStack = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+} as const;
+const sectionRow = {
+  display: "flex",
+  flexWrap: "wrap",
 } as const;
 
 const OPTIONS: CascaderOption[] = [
@@ -180,11 +186,11 @@ export function CascaderBasic() {
   return (
     <div style={stack}>
       <div style={section}>
-        <p>Child options expand when clicked (default)</p>
+        <p style={demoParagraph}>Child options expand when clicked (default)</p>
         <ElCascader value={value} options={OPTIONS} onChange={setValue} />
       </div>
       <div style={section}>
-        <p>Child options expand when hovered</p>
+        <p style={demoParagraph}>Child options expand when hovered</p>
         <ElCascader
           value={value}
           options={OPTIONS}
@@ -240,11 +246,11 @@ export function CascaderMultipleSelection() {
   return (
     <div style={stack}>
       <div style={section}>
-        <p>Display all tags (default)</p>
+        <p style={demoParagraph}>Display all tags (default)</p>
         <ElCascader options={OPTIONS} props={{ multiple: true }} clearable />
       </div>
       <div style={section}>
-        <p>Collapse tags</p>
+        <p style={demoParagraph}>Collapse tags</p>
         <ElCascader
           options={OPTIONS}
           props={{ multiple: true }}
@@ -253,7 +259,7 @@ export function CascaderMultipleSelection() {
         />
       </div>
       <div style={section}>
-        <p>Collapse tags tooltip</p>
+        <p style={demoParagraph}>Collapse tags tooltip</p>
         <ElCascader
           options={OPTIONS}
           props={{ multiple: true }}
@@ -263,7 +269,7 @@ export function CascaderMultipleSelection() {
         />
       </div>
       <div style={section}>
-        <p>Max Collapse Tags</p>
+        <p style={demoParagraph}>Max Collapse Tags</p>
         <ElCascader
           options={OPTIONS}
           props={{ multiple: true }}
@@ -296,7 +302,7 @@ export function CascaderAnyLevel() {
   return (
     <div style={stack}>
       <div style={section}>
-        <p>Select any level of options (Single selection)</p>
+        <p style={demoParagraph}>Select any level of options (Single selection)</p>
         <ElCascader
           options={OPTIONS}
           props={{ checkStrictly: true }}
@@ -304,7 +310,7 @@ export function CascaderAnyLevel() {
         />
       </div>
       <div style={section}>
-        <p>Select any level of options (Multiple selection)</p>
+        <p style={demoParagraph}>Select any level of options (Multiple selection)</p>
         <ElCascader
           options={OPTIONS}
           props={{ multiple: true, checkStrictly: true }}
@@ -350,7 +356,7 @@ export function CascaderFilterable() {
   return (
     <div style={stack}>
       <div style={section}>
-        <p>Filterable (Single selection)</p>
+        <p style={demoParagraph}>Filterable (Single selection)</p>
         <ElCascader
           placeholder="Try searchingL Guide"
           options={OPTIONS}
@@ -358,7 +364,7 @@ export function CascaderFilterable() {
         />
       </div>
       <div style={section}>
-        <p>Filterable (Multiple selection)</p>
+        <p style={demoParagraph}>Filterable (Multiple selection)</p>
         <ElCascader
           placeholder="Try searchingL Guide"
           options={OPTIONS}
@@ -483,8 +489,8 @@ function getTopLevelLabels(data: Tag[]) {
 
 export function CascaderCustomTag() {
   return (
-    <div style={stack}>
-      <p>Using slots allows for more flexible control over the display.</p>
+    <div style={section}>
+      <p style={demoParagraph}>Using slots allows for more flexible control over the display.</p>
       <ElCascader
         options={TAG_OPTIONS}
         props={{ multiple: true }}
@@ -499,7 +505,7 @@ export function CascaderCustomTag() {
           </>
         )}
       />
-      <p>Display top-level tags only</p>
+      <p style={{ margin: "16px 0" }}>Display top-level tags only</p>
       <ElCascader
         options={TAG_OPTIONS}
         props={{ multiple: true }}
@@ -586,7 +592,7 @@ export function CascaderShowCheckedStrategy() {
   return (
     <div style={stack}>
       <div style={section}>
-        <p>Strategy: child (default, show all selected child nodes)</p>
+        <p style={demoParagraph}>Strategy: child (default, show all selected child nodes)</p>
         <ElCascader
           value={value1}
           options={STRATEGY_OPTIONS}
@@ -597,7 +603,7 @@ export function CascaderShowCheckedStrategy() {
         />
       </div>
       <div style={section}>
-        <p>
+        <p style={demoParagraph}>
           Strategy: parent (show only parent nodes when all children are
           selected)
         </p>
@@ -620,16 +626,16 @@ export function CascaderCheckOnClickNode() {
   const [value2, setValue2] = useState<CascaderValue>();
 
   return (
-    <div style={stack}>
+    <div style={checkStack}>
       <ElSwitch
         checked={showPrefix}
         activeText="show prefix"
         inactiveText="hide prefix"
         onCheckedChange={setShowPrefix}
       />
-      <div style={row}>
+      <div style={sectionRow}>
         <div style={section}>
-          <p>checkStrictly | Single mode</p>
+          <p style={demoParagraph}>checkStrictly | Single mode</p>
           <ElCascader
             value={value}
             options={OPTIONS}
@@ -643,7 +649,7 @@ export function CascaderCheckOnClickNode() {
           />
         </div>
         <div style={section}>
-          <p>Multiple mode</p>
+          <p style={demoParagraph}>Multiple mode</p>
           <ElCascader
             value={value2}
             options={OPTIONS}
@@ -703,9 +709,9 @@ export function CascaderCustomHeaderFooter() {
   };
 
   return (
-    <div style={row}>
-      <div style={section}>
-        <p>Custom header content</p>
+    <div style={{ display: "flex" }}>
+      <div style={{ flex: 1, textAlign: "center" }}>
+        <p style={demoParagraph}>Custom header content</p>
         <ElCascader
           value={value}
           popperClass="cascader-custom-header"
@@ -724,8 +730,14 @@ export function CascaderCustomHeaderFooter() {
           onChange={handleChange}
         />
       </div>
-      <div style={section}>
-        <p>Custom footer content</p>
+      <div
+        style={{
+          flex: 1,
+          textAlign: "center",
+          borderLeft: "1px solid var(--el-border-color)",
+        }}
+      >
+        <p style={demoParagraph}>Custom footer content</p>
         <ElCascader
           value={value}
           options={HEADER_FOOTER_OPTIONS}

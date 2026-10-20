@@ -19,13 +19,13 @@ import { Edit } from "@/components/element-plus/icons";
 const demoFlex = {
   display: "flex",
   flexWrap: "wrap",
-  gap: "2rem",
+  gap: "32px",
 } as const;
 
 const demoBlock = {
   display: "flex",
   flexDirection: "column",
-  gap: "0.5rem",
+  gap: "8px",
 } as const;
 
 const demoTitle = {
@@ -106,7 +106,7 @@ export function AutocompleteBasic() {
           fetchSuggestions={querySearch}
           clearable
           placeholder="Please Input"
-          style={{ width: 240 }}
+          style={{ width: 200 }}
           onSelect={handleSelect}
         />
       </div>
@@ -119,7 +119,7 @@ export function AutocompleteBasic() {
           triggerOnFocus={false}
           clearable
           placeholder="Please Input"
-          style={{ width: 240 }}
+          style={{ width: 200 }}
           onSelect={handleSelect}
         />
       </div>
@@ -137,7 +137,6 @@ export function AutocompleteTemplate() {
       fetchSuggestions={querySearch}
       popperClass="my-autocomplete"
       placeholder="Please input"
-      style={{ width: 240 }}
       onSelect={handleSelect}
       suffix={
         <ElIcon className="el-input__icon" onClick={() => console.log("click")}>
@@ -168,7 +167,6 @@ export function AutocompleteRemoteSearch() {
       onChange={setState}
       fetchSuggestions={querySearchAsync}
       placeholder="Please input"
-      style={{ width: 240 }}
       onSelect={handleSelect}
     />
   );
@@ -222,7 +220,7 @@ export function AutocompleteCustomLoading() {
           onChange={setState1}
           fetchSuggestions={querySearchAsync}
           placeholder="Please input"
-          style={{ width: 240 }}
+          style={{ width: 200 }}
           onSelect={handleSelect}
           loading={<LoadingRing />}
         />
@@ -234,7 +232,7 @@ export function AutocompleteCustomLoading() {
           onChange={setState2}
           fetchSuggestions={querySearchAsync}
           placeholder="Please input"
-          style={{ width: 240 }}
+          style={{ width: 200 }}
           onSelect={handleSelect}
           loading={<LoadingDots />}
         />
@@ -252,7 +250,7 @@ export function AutocompleteCustomHeaderFooter() {
   return (
     <div style={{ display: "flex" }}>
       <div style={{ flex: 1, textAlign: "center" }}>
-        <p>Custom header content</p>
+        <p style={{ margin: "0 0 16px" }}>Custom header content</p>
         <ElAutocomplete
           value={headerState}
           onChange={setHeaderState}
@@ -270,7 +268,7 @@ export function AutocompleteCustomHeaderFooter() {
           borderLeft: "1px solid var(--el-border-color)",
         }}
       >
-        <p>Custom footer content</p>
+        <p style={{ margin: "0 0 16px" }}>Custom footer content</p>
         <ElAutocomplete
           ref={footerRef}
           value={footerState}

@@ -1,0 +1,12 @@
+/* Official color demos sit directly in the article flow; cancel the local demo frame padding */
+.fullBleed {
+  width: calc(100% + 4.8rem);
+  margin-left: -2.4rem;
+  margin-right: -2.4rem;
+}
+
+/* Official UnoCSS hover:shadow uses the Tailwind default shadow, not --el-box-shadow */
+.fullBleed :global(.demo-color-box .bg-color-sub > div:hover) {
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0),
+    0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}

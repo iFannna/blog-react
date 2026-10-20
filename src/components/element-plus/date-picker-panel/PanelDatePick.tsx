@@ -30,6 +30,10 @@ import {
   type BasicMonthTableExpose,
 } from "./BasicMonthTable";
 import {
+  BasicQuarterTable,
+  type BasicQuarterTableExpose,
+} from "./BasicQuarterTable";
+import {
   BasicYearTable,
   type BasicYearTableExpose,
 } from "./BasicYearTable";
@@ -49,6 +53,7 @@ import {
 import type { BasicDateTableExpose } from "./BasicDateTable";
 import type { MonthTablePickValue } from "./BasicMonthTable";
 import type { YearTablePickValue } from "./BasicYearTable";
+import type { QuarterTablePickValue } from "./BasicQuarterTable";
 import type { Dayjs } from "./dayjs";
 import type {
   DateCell,
@@ -64,7 +69,7 @@ import type {
   GetDisabledSeconds,
 } from "../time-picker/types";
 
-type CurrentView = "date" | "month" | "year";
+type CurrentView = "date" | "month" | "year" | "quarter";
 type SelectionMode =
   | "date"
   | "dates"
@@ -72,7 +77,9 @@ type SelectionMode =
   | "month"
   | "months"
   | "year"
-  | "years";
+  | "years"
+  | "quarter"
+  | "quarters";
 
 export interface PanelDatePickProps {
   type: DatePickerType;
@@ -120,6 +127,8 @@ const selectionViews: Record<SelectionMode, CurrentView> = {
   months: "month",
   year: "year",
   years: "year",
+  quarter: "quarter",
+  quarters: "quarter",
 };
 
 function extractFirst(value?: Dayjs | Dayjs[]) {
@@ -215,7 +224,16 @@ export function PanelDatePick({
 
   const selectionMode = useMemo<SelectionMode>(() => {
     if (
-      ["week", "month", "months", "year", "years", "dates"].includes(type)
+      [
+        "week",
+        "month",
+        "months",
+        "year",
+        "years",
+        "dates",
+        "quarter",
+        "quarters",
+      ].includes(type)
     ) {
       return type as SelectionMode;
     }
@@ -226,7 +244,8 @@ export function PanelDatePick({
     () =>
       selectionMode === "dates" ||
       selectionMode === "months" ||
-      selectionMode === "years",
+      selectionMode === "years" ||
+      selectionMode === "quarters",
     [selectionMode],
   );
 
@@ -319,7 +338,10 @@ export function PanelDatePick({
   const isChangeToNowRef = useRef(false);
   const isShortcutRef = useRef(false);
   const currentViewRef = useRef<
-    BasicDateTableExpose | BasicYearTableExpose | BasicMonthTableExpose
+    | BasicDateTableExpose
+    | BasicYearTableExpose
+    | BasicMonthTableExpose
+    | BasicQuarterTableExpose
   >(null);
   const timeWrapperRef = useRef<HTMLSpanElement>(null);
   const initializedRef = useRef(false);
@@ -487,6 +509,20 @@ export function PanelDatePick({
       setInnerDate,
       setCurrentView,
     ],
+  );
+
+  const handleQuarterPick = useCallback(
+    (value: QuarterTablePickValue, keepOpen?: boolean) => {
+      if (typeof value === "object" && !Array.isArray(value)) return;
+      if (selectionMode === "quarter") {
+        const newDate = innerDate.startOf("year").month((value as number) * 3);
+        setInnerDate(newDate);
+        emitPick(newDate, false);
+      } else if (selectionMode === "quarters") {
+        emitPick(value as Dayjs[], keepOpen);
+      }
+    },
+    [selectionMode, innerDate, emitPick, setInnerDate],
   );
 
   const handleYearPick = useCallback(
@@ -760,10 +796,12 @@ export function PanelDatePick({
     const showDateFooter = showTime || selectionMode === "dates";
     const showYearFooter = selectionMode === "years";
     const showMonthFooter = selectionMode === "months";
+    const showQuarterFooter = selectionMode === "quarters";
     return (
       (showDateFooter && currentView === "date") ||
       (showYearFooter && currentView === "year") ||
-      (showMonthFooter && currentView === "month")
+      (showMonthFooter && currentView === "month") ||
+      (showQuarterFooter && currentView === "quarter")
     );
   }, [showTime, selectionMode, currentView]);
 
@@ -838,6 +876,7 @@ export function PanelDatePick({
         ? `${startYear} ${yearTranslation} - ${startYear + 9} ${yearTranslation}`
         : `${startYear} - ${startYear + 9}`;
     }
+    if (currentView === "quarter") return `${year} `;
     return `${year} ${yearTranslation}`;
   }, [currentView, year, t]);
 
@@ -934,7 +973,9 @@ export function PanelDatePick({
           <div
             className={[
               "el-date-picker__header",
-              (currentView === "year" || currentView === "month") &&
+              (currentView === "year" ||
+                currentView === "month" ||
+                currentView === "quarter") &&
                 "el-date-picker__header--bordered",
             ]
               .filter(Boolean)
@@ -1065,6 +1106,23 @@ export function PanelDatePick({
                 renderCell={renderCell}
                 onPick={(value, keepOpen) =>
                   handleYearPick(value, keepOpen)
+                }
+              />
+            )}
+            {currentView === "quarter" && (
+              <BasicQuarterTable
+                ref={currentViewRef as Ref<BasicQuarterTableExpose>}
+                selectionMode={
+                  selectionMode === "quarters" ? "quarters" : "quarter"
+                }
+                date={innerDate}
+                parsedValue={parsedValue}
+                disabledDate={disabledDate}
+                disabled={dateDisabled}
+                cellClassName={cellClassName}
+                renderCell={renderCell}
+                onPick={(value, keepOpen) =>
+                  handleQuarterPick(value, keepOpen)
                 }
               />
             )}

@@ -5,8 +5,8 @@ import { exampleRow, exampleStack } from "./styles";
 
 export default function ButtonDisabled() {
   return (
-    <div style={exampleStack}>
-      <div style={exampleRow}>
+    <div className={exampleStack}>
+      <div className={exampleRow}>
         <ElButton disabled>Default</ElButton>
         <ElButton type="primary" disabled>Primary</ElButton>
         <ElButton type="success" disabled>Success</ElButton>
@@ -15,7 +15,7 @@ export default function ButtonDisabled() {
         <ElButton type="danger" disabled>Danger</ElButton>
       </div>
 
-      <div style={exampleRow}>
+      <div className={exampleRow}>
         <ElButton plain disabled>Plain</ElButton>
         <ElButton type="primary" plain disabled>Primary</ElButton>
         <ElButton type="success" plain disabled>Success</ElButton>

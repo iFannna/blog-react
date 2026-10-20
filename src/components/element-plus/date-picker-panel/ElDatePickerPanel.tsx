@@ -17,6 +17,7 @@ import {
 import { PanelDatePick } from "./PanelDatePick";
 import { PanelDateRange } from "./PanelDateRange";
 import { PanelMonthRange } from "./PanelMonthRange";
+import { PanelQuarterRange } from "./PanelQuarterRange";
 import { PanelYearRange } from "./PanelYearRange";
 import { formatter, parseDate, valueEquals } from "./utils";
 
@@ -184,6 +185,10 @@ export function ElDatePickerPanel({
 
   if (type === "monthrange") {
     return <PanelMonthRange ref={panelRef} {...commonProps} />;
+  }
+
+  if (type === "quarterrange") {
+    return <PanelQuarterRange ref={panelRef} {...commonProps} />;
   }
 
   if (type === "yearrange") {

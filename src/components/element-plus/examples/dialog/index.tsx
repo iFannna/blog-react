@@ -8,13 +8,7 @@ import { ElSelect } from "@/components/element-plus/select";
 import { ElTable, ElTableColumn } from "@/components/element-plus/table";
 import { MessageBox } from "@/components/element-plus/message-box";
 import { CircleCloseFilled } from "@/components/element-plus/icons";
-
-const row = {
-  display: "flex",
-  gap: "1.2rem",
-  flexWrap: "wrap" as const,
-  alignItems: "center",
-};
+import styles from "./dialog.module.css";
 
 function Footer({
   cancel,
@@ -79,7 +73,7 @@ export function DialogCustomizationContent() {
 
   return (
     <>
-      <div style={row}>
+      <div className={styles.row}>
         <ElButton plain onClick={() => setTableVisible(true)}>
           Open a Table nested Dialog
         </ElButton>
@@ -304,7 +298,7 @@ export function DialogDraggableDialog() {
   const [customVisible, setCustomVisible] = useState(false);
   return (
     <>
-      <div style={row}>
+      <div className={styles.rowGap1}>
         <ElButton plain onClick={() => setVisible(true)}>
           Open a draggable Dialog
         </ElButton>
@@ -421,34 +415,58 @@ export function DialogModal() {
   );
 }
 
+const objectTransitionConfig = {
+  name: "dialog-custom-object",
+  appear: true,
+  mode: "out-in",
+  duration: 500,
+};
+
 export function DialogCustomAnimation() {
   const [visible, setVisible] = useState(false);
-  const [transition, setTransition] = useState("dialog-fade");
-  const [label, setLabel] = useState("fade");
+  const [animation, setAnimation] = useState("fade");
+  const [isObjectConfig, setIsObjectConfig] = useState(false);
 
-  const open = (next: string, name: string) => {
-    setTransition(next);
-    setLabel(name);
+  const open = (type: string) => {
+    setAnimation(type);
+    setIsObjectConfig(false);
     setVisible(true);
   };
 
+  const openWithObject = () => {
+    setAnimation("object-config");
+    setIsObjectConfig(true);
+    setVisible(true);
+  };
+
+  const transition = isObjectConfig
+    ? "dialog-custom-object"
+    : `dialog-${animation}`;
+
   return (
     <>
-      <div style={row}>
-        <ElButton plain onClick={() => open("dialog-fade", "fade")}>
+      <div>
+        <ElButton plain onClick={() => open("fade")}>
           Default
         </ElButton>
-        <ElButton plain onClick={() => open("el-fade-in-linear", "linear")}>
-          Linear
+        <ElButton plain onClick={() => open("scale")}>
+          Scale
         </ElButton>
-        <ElButton plain onClick={() => open("el-fade-in", "fade-in")}>
-          Fade in
+        <ElButton plain onClick={() => open("slide")}>
+          Slide
+        </ElButton>
+        <ElButton plain onClick={() => open("bounce")}>
+          Bounce
+        </ElButton>
+        <ElButton plain onClick={openWithObject}>
+          Object Config
         </ElButton>
       </div>
       <ElDialog
         visible={visible}
         onVisibleChange={setVisible}
-        title={`${label} Animation Dialog`}
+        className="custom-transition-dialog"
+        title={`${animation} Animation Dialog`}
         width="30%"
         transition={transition}
         footer={
@@ -458,8 +476,23 @@ export function DialogCustomAnimation() {
           />
         }
       >
-        <p>Current animation: {label}</p>
-        <p>This dialog demonstrates the {label} animation effect.</p>
+        <div>
+          <p>
+            Current animation: <strong>{animation}</strong>
+          </p>
+          <p>
+            This dialog demonstrates the {animation} animation effect.
+          </p>
+          {isObjectConfig && (
+            <p>
+              <strong>Using object configuration:</strong>
+              <br />
+              <code className={styles.code}>
+                {JSON.stringify(objectTransitionConfig, null, 2)}
+              </code>
+            </p>
+          )}
+        </div>
       </ElDialog>
     </>
   );

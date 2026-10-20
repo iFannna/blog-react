@@ -208,7 +208,7 @@ export function ElTabs({
     const sizeDir = isVertical ? "Y" : "X";
     const position = isVertical ? "Top" : "Left";
 
-    const offset = activeTab[`offset${position}`];
+    let offset = activeTab[`offset${position}`];
     let tabSize = activeTab[`client${sizeName === "width" ? "Width" : "Height"}`];
 
     const styles = window.getComputedStyle(activeTab);
@@ -216,6 +216,8 @@ export function ElTabs({
       tabSize -=
         Number.parseFloat(styles.paddingLeft) +
         Number.parseFloat(styles.paddingRight);
+      // 官方激活条对齐文字起点，而非 tab 元素的左边缘
+      offset += Number.parseFloat(styles.paddingLeft);
     }
 
     const next = {
@@ -279,19 +281,38 @@ export function ElTabs({
     .filter(Boolean)
     .join(" ");
 
-  const headerClasses = ["el-tabs__header", isVertical ? "is-vertical" : ""].filter(Boolean).join(" ");
+  // 与官方类名一致：纵向额外加 el-tabs__header-vertical，并始终带 is-<position>
+  const headerClasses = [
+    "el-tabs__header",
+    isVertical && "el-tabs__header-vertical",
+    `is-${tabPosition}`,
+  ]
+    .filter(Boolean)
+    .join(" ");
+  const navWrapClasses = ["el-tabs__nav-wrap", `is-${tabPosition}`].join(" ");
+  const navClasses = [
+    "el-tabs__nav",
+    `is-${tabPosition}`,
+    stretch && !isVertical && "is-stretch",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div className={rootClasses} style={style}>
       <div className={headerClasses}>
-        <div className="el-tabs__nav-wrap" ref={navRef}>
+        <div className={navWrapClasses} ref={navRef}>
           <div className="el-tabs__nav-scroll">
             <div
-              className="el-tabs__nav"
+              className={navClasses}
               role="tablist"
               aria-orientation={isVertical ? "vertical" : "horizontal"}
               onKeyDown={handleNavKeyDown}
-              style={stretch && !isVertical ? { display: "flex" } : undefined}
+              style={{
+                // 官方 navStyle 始终写入 translate，滚动偏移为 0 时即 identity matrix
+                transform: `translate${isVertical ? "Y" : "X"}(-0px)`,
+                ...(stretch && !isVertical ? { display: "flex" } : {}),
+              }}
             >
               {/* 激活条：仅非 card 类型渲染 */}
               {!isCard && (
@@ -358,35 +379,35 @@ export function ElTabs({
                 );
               })}
 
-              {(addable || editable) && (
-                <div
-                  className={[
-                    "el-tabs__new-tab",
-                    isVertical && "el-tabs__new-tab-vertical",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
-                  role="button"
-                  tabIndex={0}
-                  aria-label="添加选项卡"
-                  onClick={handleTabAdd}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter" || event.key === " ") {
-                      event.preventDefault();
-                      handleTabAdd();
-                    }
-                  }}
-                >
-                  {addIcon ?? (
-                    <ElIcon className="is-icon-plus">
-                      <Plus />
-                    </ElIcon>
-                  )}
-                </div>
-              )}
             </div>
           </div>
         </div>
+        {(addable || editable) && (
+          <div
+            className={[
+              "el-tabs__new-tab",
+              isVertical && "el-tabs__new-tab-vertical",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            role="button"
+            tabIndex={0}
+            aria-label="添加选项卡"
+            onClick={handleTabAdd}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                handleTabAdd();
+              }
+            }}
+          >
+            {addIcon ?? (
+              <ElIcon className="is-icon-plus">
+                <Plus />
+              </ElIcon>
+            )}
+          </div>
+        )}
       </div>
 
       <div className="el-tabs__content">

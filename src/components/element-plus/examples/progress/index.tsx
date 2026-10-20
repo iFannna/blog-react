@@ -1,100 +1,277 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ElProgress } from "@/components/element-plus/progress";
-import { ElButton } from "@/components/element-plus/button";
+import { ElButton, ElButtonGroup } from "@/components/element-plus/button";
+import { Check, Minus, Plus } from "@/components/element-plus/icons";
 
-const stack = { display: "flex", flexDirection: "column", gap: "1.6rem" } as const;
-const row = {
-  display: "flex",
-  alignItems: "center",
-  gap: "2rem",
-  flexWrap: "wrap",
-} as const;
+const lineStyle = { marginBottom: 15, maxWidth: 600 } as const;
+const line = { maxWidth: 600 } as const;
+const circleStyle = { marginRight: 15 } as const;
+const row = { display: "flex", alignItems: "center", flexWrap: "wrap" } as const;
+
+const COLORS = [
+  { color: "#f56c6c", percentage: 20 },
+  { color: "#e6a23c", percentage: 40 },
+  { color: "#5cb87a", percentage: 60 },
+  { color: "#1989fa", percentage: 80 },
+  { color: "#6f7ad3", percentage: 100 },
+];
+
+const format = (percentage: number) =>
+  percentage === 100 ? "Full" : `${percentage}%`;
 
 export function ProgressBasic() {
   return (
-    <div style={stack}>
-      <ElProgress percentage={50} />
-      <ElProgress percentage={70} />
-      <ElProgress percentage={90} />
+    <div>
+      <ElProgress percentage={50} style={lineStyle} />
+      <ElProgress percentage={100} format={format} style={lineStyle} />
+      <ElProgress percentage={100} status="success" style={lineStyle} />
+      <ElProgress percentage={100} status="warning" style={lineStyle} />
+      <ElProgress percentage={50} status="exception" style={lineStyle} />
     </div>
   );
 }
 
 export function ProgressTextInside() {
   return (
-    <div style={stack}>
-      <ElProgress percentage={60} textInside strokeWidth={20} />
-      <ElProgress percentage={80} textInside strokeWidth={24} />
-    </div>
-  );
-}
-
-export function ProgressCustomText() {
-  return (
-    <div style={stack}>
-      <ElProgress percentage={70} format={(p) => `进度 ${p}%`} />
-      <ElProgress percentage={100} format={() => "完成"} />
+    <div>
+      <ElProgress textInside strokeWidth={26} percentage={70} style={lineStyle} />
+      <ElProgress
+        textInside
+        strokeWidth={24}
+        percentage={100}
+        status="success"
+        style={lineStyle}
+      />
+      <ElProgress
+        textInside
+        strokeWidth={22}
+        percentage={80}
+        status="warning"
+        style={lineStyle}
+      />
+      <ElProgress
+        textInside
+        strokeWidth={20}
+        percentage={50}
+        status="exception"
+        style={lineStyle}
+      />
     </div>
   );
 }
 
 export function ProgressColor() {
-  return (
-    <div style={stack}>
-      <ElProgress percentage={80} color="#626aef" />
-      <ElProgress
-        percentage={70}
-        color={[
-          { color: "#f56c6c", percentage: 20 },
-          { color: "#e6a23c", percentage: 40 },
-          { color: "#5cb87a", percentage: 60 },
-          { color: "#1989fa", percentage: 80 },
-        ]}
-      />
-      <ElProgress percentage={50} color={(p) => (p < 60 ? "#f56c6c" : "#5cb87a")} />
-    </div>
-  );
-}
+  const [percentage, setPercentage] = useState(20);
 
-export function ProgressStriped() {
+  const customColorMethod = (value: number) => {
+    if (value < 30) return "#909399";
+    if (value < 70) return "#e6a23c";
+    return "#67c23a";
+  };
+
+  const increase = () => setPercentage((value) => Math.min(value + 10, 100));
+  const decrease = () => setPercentage((value) => Math.max(value - 10, 0));
+
   return (
-    <div style={stack}>
-      <ElProgress percentage={40} striped />
-      <ElProgress percentage={60} striped stripedFlow />
+    <div>
+      <ElProgress percentage={percentage} color="#409eff" style={lineStyle} />
+      <ElProgress
+        percentage={percentage}
+        color={customColorMethod}
+        style={lineStyle}
+      />
+      <ElProgress percentage={percentage} color={COLORS} style={lineStyle} />
+      <ElProgress percentage={percentage} color={COLORS} style={lineStyle} />
+      <ElButtonGroup>
+        <ElButton icon={<Minus />} onClick={decrease} />
+        <ElButton icon={<Plus />} onClick={increase} />
+      </ElButtonGroup>
     </div>
   );
 }
 
 export function ProgressCircle() {
   return (
-    <div style={row}>
-      <ElProgress type="circle" percentage={0} />
-      <ElProgress type="circle" percentage={25} />
-      <ElProgress type="circle" percentage={75} />
-      <ElProgress type="circle" percentage={100} status="success" />
+    <div>
+      <ElProgress type="circle" percentage={0} style={circleStyle} />
+      <ElProgress type="circle" percentage={25} style={circleStyle} />
+      <ElProgress
+        type="circle"
+        percentage={100}
+        status="success"
+        style={circleStyle}
+      />
+      <ElProgress
+        type="circle"
+        percentage={70}
+        status="warning"
+        style={circleStyle}
+      />
+      <ElProgress
+        type="circle"
+        percentage={50}
+        status="exception"
+        style={circleStyle}
+      />
     </div>
   );
 }
 
 export function ProgressDashboard() {
+  const [percentage, setPercentage] = useState(10);
+  const [percentage2, setPercentage2] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setPercentage2((value) => (value % 100) + 10);
+    }, 500);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const increase = () => setPercentage((value) => Math.min(value + 10, 100));
+  const decrease = () => setPercentage((value) => Math.max(value - 10, 0));
+
   return (
-    <div style={row}>
-      <ElProgress type="dashboard" percentage={0} />
-      <ElProgress type="dashboard" percentage={30} />
-      <ElProgress type="dashboard" percentage={60} strokeWidth={12} />
-      <ElProgress type="dashboard" percentage={100} status="warning" />
+    <div>
+      <ElProgress
+        type="dashboard"
+        percentage={percentage}
+        color={COLORS}
+      />
+      <ElProgress
+        type="dashboard"
+        percentage={percentage2}
+        color={COLORS}
+      />
+      <div>
+        <ElButtonGroup>
+          <ElButton icon={<Minus />} onClick={decrease} />
+          <ElButton icon={<Plus />} onClick={increase} />
+        </ElButtonGroup>
+      </div>
+    </div>
+  );
+}
+
+export function ProgressCustomText() {
+  return (
+    <div>
+      <ElProgress percentage={50} style={lineStyle}>
+        {() => <ElButton text>Content</ElButton>}
+      </ElProgress>
+      <ElProgress
+        textInside
+        strokeWidth={20}
+        percentage={50}
+        status="exception"
+        style={lineStyle}
+      >
+        {() => <span>Content</span>}
+      </ElProgress>
+      <ElProgress
+        type="circle"
+        percentage={100}
+        status="success"
+        style={circleStyle}
+      >
+        {() => <ElButton type="success" icon={<Check />} circle />}
+      </ElProgress>
+      <ElProgress type="dashboard" percentage={80}>
+        {(value) => (
+          <>
+            <span
+              style={{ display: "block", marginTop: 10, fontSize: 28 }}
+            >
+              {value}%
+            </span>
+            <span
+              style={{ display: "block", marginTop: 10, fontSize: 12 }}
+            >
+              Progressing
+            </span>
+          </>
+        )}
+      </ElProgress>
     </div>
   );
 }
 
 export function ProgressIndeterminate() {
-  const [loading, setLoading] = useState(true);
   return (
-    <div style={stack}>
-      <ElProgress percentage={loading ? 100 : 50} indeterminate={loading} duration={2} />
-      <ElButton onClick={() => setLoading((v) => !v)}>切换</ElButton>
+    <div>
+      <ElProgress percentage={50} indeterminate style={lineStyle} />
+      <ElProgress
+        percentage={100}
+        format={format}
+        indeterminate
+        style={lineStyle}
+      />
+      <ElProgress
+        percentage={100}
+        status="success"
+        indeterminate
+        duration={5}
+        style={lineStyle}
+      />
+      <ElProgress
+        percentage={100}
+        status="warning"
+        indeterminate
+        duration={1}
+        style={lineStyle}
+      />
+      <ElProgress
+        percentage={50}
+        status="exception"
+        indeterminate
+        style={lineStyle}
+      />
+    </div>
+  );
+}
+
+export function ProgressStriped() {
+  const [percentage, setPercentage] = useState(70);
+  const duration = Math.floor(percentage / 10);
+
+  const increase = () => setPercentage((value) => Math.min(value + 10, 100));
+  const decrease = () => setPercentage((value) => Math.max(value - 10, 0));
+
+  return (
+    <div style={line}>
+      <ElProgress percentage={50} strokeWidth={15} striped style={lineStyle} />
+      <ElProgress
+        percentage={30}
+        strokeWidth={15}
+        status="warning"
+        striped
+        stripedFlow
+        style={lineStyle}
+      />
+      <ElProgress
+        percentage={100}
+        strokeWidth={15}
+        status="success"
+        striped
+        stripedFlow
+        duration={10}
+        style={lineStyle}
+      />
+      <ElProgress
+        percentage={percentage}
+        strokeWidth={15}
+        status="exception"
+        striped
+        stripedFlow
+        duration={duration}
+        style={lineStyle}
+      />
+      <ElButtonGroup>
+        <ElButton icon={<Minus />} onClick={decrease} />
+        <ElButton icon={<Plus />} onClick={increase} />
+      </ElButtonGroup>
     </div>
   );
 }

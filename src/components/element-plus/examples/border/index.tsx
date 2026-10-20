@@ -1,6 +1,7 @@
 "use client";
 
 import { ElRow, ElCol } from "@/components/element-plus/row";
+import styles from "./border.module.css";
 
 /**
  * 对应官方 radius.vue 的 radiusGroup。
@@ -54,7 +55,7 @@ export function BorderRadius() {
   return (
     <ElRow gutter={12} className="demo-radius">
       {radiusGroup.map((radius) => (
-        <ElCol span={6} xs={{ span: 12 }} key={radius.name}>
+        <ElCol className={styles.col} span={6} xs={{ span: 12 }} key={radius.name}>
           <div className="title">{radius.name}</div>
           <div className="value">
             <code>border-radius: {radius.value}</code>

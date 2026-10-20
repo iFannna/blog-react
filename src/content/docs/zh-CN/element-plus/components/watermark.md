@@ -103,6 +103,5 @@ watermark/custom
 
 - 无。官方的全部 props（`width` / `height` / `rotate` / `z-index` / `image` / `content` /
   `font` / `gap` / `offset`）与 default 插槽均已实现，DOM 结构与绘制算法与官方源码逐行对应。
-- 文档站的「Custom configuration」示例中，官方用 `el-color-picker` 的 `show-alpha` 取色。
-  本项目尚未复刻 ColorPicker，示例里改用可输入 rgba 字符串的 `ElInput` 代替，
-  并在明暗模式切换时把颜色重置为对应的默认值（等价官方 `watch(isDark)` 的行为）。
+- 文档站的「Custom configuration」示例中，官方用 `el-color-picker` 的 `show-alpha` 取色，
+  本项目同样使用 `ElColorPicker` 并开启 `showAlpha`。

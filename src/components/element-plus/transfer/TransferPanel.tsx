@@ -143,9 +143,12 @@ export function TransferPanel({
   useEffect(() => {
     const prev = prevCheckedRef.current;
 
-    // 首轮官方的 watch 不触发
+    // 官方 immediate watch 把 defaultChecked 写进 checked 时，会因值变化触发
+    // checked watch，把初始勾选同步给父级；React 的初始 state 不产生变化，
+    // 因此这里补一次上报（否则 moved 按钮初始为禁用）。
     if (prev === null) {
       prevCheckedRef.current = checked;
+      if (checked.length > 0) onCheckedChange(checked);
       return;
     }
     // 父级重渲染会让本 effect 重跑，勾选内容没变时不能误报；
@@ -228,7 +231,19 @@ export function TransferPanel({
     );
     if (!el) return;
 
-    const update = () => setListHeight(el.getBoundingClientRect().height);
+    // 官方 useElementSize 默认取 content-box，需要扣掉上下 padding/边框，
+    // 否则虚拟列表会多渲染一行。
+    const update = () => {
+      const rect = el.getBoundingClientRect();
+      const cs = getComputedStyle(el);
+      setListHeight(
+        rect.height -
+          parseFloat(cs.paddingTop) -
+          parseFloat(cs.paddingBottom) -
+          parseFloat(cs.borderTopWidth) -
+          parseFloat(cs.borderBottomWidth),
+      );
+    };
     update();
 
     const observer = new ResizeObserver(update);
@@ -281,24 +296,21 @@ export function TransferPanel({
           />
         )}
 
-        {/* ElCheckboxGroup 不收 style，v-show 的隐藏落在列表容器上 */}
-        <div
+        <ElCheckboxGroup
+          // 官方把列表类名直接挂在 checkbox-group 根节点上（v-show 也在同一节点）
           className={[
             "el-transfer-panel__list",
             filterable && "is-filterable",
           ]
             .filter(Boolean)
             .join(" ")}
-          // 等价于官方指令 v-show：隐藏但保留在 DOM 中
           style={listHidden ? { display: "none" } : undefined}
+          value={checked}
+          onChange={(value: CheckboxValueType[]) => {
+            checkChangeByUser.current = true;
+            setChecked(value as TransferKey[]);
+          }}
         >
-          <ElCheckboxGroup
-            value={checked}
-            onChange={(value: CheckboxValueType[]) => {
-              checkChangeByUser.current = true;
-              setChecked(value as TransferKey[]);
-            }}
-          >
             {virtualScroll ? (
               <TransferVirtualList
                 data={filteredData}
@@ -318,8 +330,7 @@ export function TransferPanel({
                 </Fragment>
               ))
             )}
-          </ElCheckboxGroup>
-        </div>
+        </ElCheckboxGroup>
 
         <div
           className="el-transfer-panel__empty"

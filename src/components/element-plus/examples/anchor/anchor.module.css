@@ -1,0 +1,9 @@
+/* 官方文档全局 .doc-content a 会作用到 demo 内锚点链接，这里补齐 */
+.anchor :global(.el-anchor__link) {
+  font-weight: 500;
+  align-items: center;
+}
+
+.scrollRow :global(.el-col) {
+  border-radius: 4px;
+}

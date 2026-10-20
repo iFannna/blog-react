@@ -1,15 +1,21 @@
 "use client";
 
 import { ElDivider } from "@/components/element-plus/divider";
+import { ElIcon } from "@/components/element-plus/icon/ElIcon";
+import { StarFilled } from "@/components/element-plus/icons";
 
 export function DividerBasic() {
   return (
     <div>
-      <span>白日依山尽</span>
+      <span>
+        I sit at my window this morning where the world like a passer-by stops
+        for a moment, nods to me and goes.
+      </span>
       <ElDivider />
-      <span>黄河入海流</span>
-      <ElDivider />
-      <span>欲穷千里目</span>
+      <span>
+        There little thoughts are the rustle of leaves; they have their whisper
+        of joy in my mind.
+      </span>
     </div>
   );
 }
@@ -17,36 +23,47 @@ export function DividerBasic() {
 export function DividerText() {
   return (
     <div>
-      <span>上方内容</span>
-      <ElDivider contentPosition="left">左对齐</ElDivider>
-      <span>中间内容</span>
-      <ElDivider contentPosition="center">居中</ElDivider>
-      <span>下方内容</span>
-      <ElDivider contentPosition="right">右对齐</ElDivider>
+      <span>What you are you do not see, what you see is your shadow. </span>
+      <ElDivider contentPosition="left">Rabindranath Tagore</ElDivider>
+      <span>
+        My wishes are fools, they shout across thy song, my Master. Let me but
+        listen.
+      </span>
+      <ElDivider>
+        <ElIcon>
+          <StarFilled />
+        </ElIcon>
+      </ElDivider>
+      <span>I cannot choose the best. The best chooses me.</span>
+      <ElDivider contentPosition="right">Rabindranath Tagore</ElDivider>
     </div>
   );
 }
 
 export function DividerVertical() {
   return (
-    <div style={{ display: "flex", alignItems: "center", height: 40 }}>
-      <span>左</span>
+    <div>
+      <span>Rain</span>
       <ElDivider direction="vertical" />
-      <span>中</span>
-      <ElDivider direction="vertical" />
-      <span>右</span>
+      <span>Home</span>
+      <ElDivider direction="vertical" borderStyle="dashed" />
+      <span>Grass</span>
     </div>
   );
 }
 
 export function DividerBorderStyle() {
   return (
-    <div>
-      {(["solid", "dashed", "dotted", "double"] as const).map((style) => (
-        <div key={style}>
-          <ElDivider borderStyle={style}>{style}</ElDivider>
-        </div>
-      ))}
-    </div>
+    <>
+      <div>
+        <span>What language is thine, O sea?</span>
+        <ElDivider borderStyle="dashed" />
+        <span>The language of eternal question.</span>
+      </div>
+      <ElDivider borderStyle="dotted" />
+      <span>What language is thy answer, O sky?</span>
+      <ElDivider borderStyle="double" />
+      <span>The language of eternal silence.</span>
+    </>
   );
 }

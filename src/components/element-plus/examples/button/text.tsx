@@ -1,13 +1,14 @@
 "use client";
 
 import { ElButton } from "@/components/element-plus/button";
-import { exampleRow } from "./styles";
+import styles from "./button.module.css";
+import { mb16 } from "./styles";
 
 export default function ButtonText() {
   return (
-    <div>
-      <p>Basic text button</p>
-      <div style={exampleRow}>
+    <>
+      <p className={styles.demoP}>Basic text button</p>
+      <div className={mb16}>
         <ElButton text>plain</ElButton>
         <ElButton type="primary" text>primary</ElButton>
         <ElButton type="success" text>success</ElButton>
@@ -16,8 +17,8 @@ export default function ButtonText() {
         <ElButton type="danger" text>danger</ElButton>
       </div>
 
-      <p>Background color always on</p>
-      <div style={exampleRow}>
+      <p className={styles.demoP}>Background color always on</p>
+      <div className={mb16}>
         <ElButton text bg>plain</ElButton>
         <ElButton type="primary" text bg>primary</ElButton>
         <ElButton type="success" text bg>success</ElButton>
@@ -26,8 +27,8 @@ export default function ButtonText() {
         <ElButton type="danger" text bg>danger</ElButton>
       </div>
 
-      <p>Disabled text button</p>
-      <div style={exampleRow}>
+      <p className={styles.demoP}>Disabled text button</p>
+      <div>
         <ElButton text disabled>plain</ElButton>
         <ElButton type="primary" text disabled>primary</ElButton>
         <ElButton type="success" text disabled>success</ElButton>
@@ -35,6 +36,6 @@ export default function ButtonText() {
         <ElButton type="warning" text disabled>warning</ElButton>
         <ElButton type="danger" text disabled>danger</ElButton>
       </div>
-    </div>
+    </>
   );
 }

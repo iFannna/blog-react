@@ -17,27 +17,19 @@ steps/basic
 
 :::
 
+## 状态
+
+:::demo `finishStatus` 与 `processStatus` 控制已完成与进行中步骤的状态， 支持 success 与 error。
+
+steps/with-status
+
+:::
+
 ## 居中对齐
 
 :::demo 设置 `alignCenter` 让标题与描述居中。
 
 steps/centered
-
-:::
-
-## 简洁风格
-
-:::demo 设置 `simple` 应用简洁样式，可通过 `space` 指定间距。
-
-steps/simple
-
-:::
-
-## 纵向步骤条
-
-:::demo 设置 `direction="vertical"` 纵向排列，容器需有确定高度。
-
-steps/vertical
 
 :::
 
@@ -57,11 +49,19 @@ steps/with-icon
 
 :::
 
-## 状态
+## 纵向步骤条
 
-:::demo `finishStatus` 与 `processStatus` 控制已完成与进行中步骤的状态， 支持 success 与 error。
+:::demo 设置 `direction="vertical"` 纵向排列，容器需有确定高度。
 
-steps/with-status
+steps/vertical
+
+:::
+
+## 简洁风格
+
+:::demo 设置 `simple` 应用简洁样式，可通过 `space` 指定间距。
+
+steps/simple
 
 :::
 

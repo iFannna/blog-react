@@ -4,9 +4,9 @@ import { Heading } from "../../../../_components/Heading";
 import DocsContent from "../../../../_components/DocsContent";
 import {
   CardBasic,
-  CardBodyStyle,
   CardShadow,
-  CardSlots,
+  CardSimple,
+  CardWithImages,
 } from "@/components/element-plus/examples/card";
 
 export const metadata: Metadata = {
@@ -14,40 +14,29 @@ export const metadata: Metadata = {
 };
 
 const SOURCES = {
-  basic: `<ElCard header="卡片标题">
-  <p>卡片内容</p>
+  basic: `<ElCard style={{ maxWidth: 480 }} header={<span>Card name</span>} footer="Footer content">
+  <p>List item 1</p>
+  <p>List item 2</p>
+  <p>List item 3</p>
+  <p>List item 4</p>
 </ElCard>`,
 
-  shadow: `<ElCard header="always" shadow="always">
-  <p>总是显示阴影</p>
-</ElCard>
-
-<ElCard header="hover" shadow="hover">
-  <p>鼠标悬停时显示阴影</p>
-</ElCard>
-
-<ElCard header="never" shadow="never">
-  <p>从不显示阴影</p>
+  simple: `<ElCard style={{ maxWidth: 480 }}>
+  <p>List item 1</p>
+  <p>List item 2</p>
+  <p>List item 3</p>
+  <p>List item 4</p>
 </ElCard>`,
 
-  slots: `<ElCard
-  header={<span style={{ fontWeight: 700 }}>自定义头部</span>}
-  footer={<span style={{ color: "#909399" }}>自定义页脚</span>}
->
-  <p>头部与页脚都传入节点</p>
-</ElCard>
-
-<ElCard>
-  <p>只有内容区，无头部页脚</p>
+  withImages: `<ElCard style={{ maxWidth: 480 }} header="Yummy hamburger">
+  <img src={hamburgerUrl} style={{ width: "100%" }} />
 </ElCard>`,
 
-  bodyStyle: `<ElCard header="自定义内容区样式" bodyStyle={{ padding: "3rem", textAlign: "center" }}>
-  <p>bodyStyle 加大内边距</p>
-</ElCard>
-
-<ElCard header="自定义类名" bodyClass="docs-card-demo-body">
-  <p>bodyClass 追加类名</p>
-</ElCard>`,
+  shadow: `<div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
+  <ElCard style={{ width: 480 }} shadow="always">Always</ElCard>
+  <ElCard style={{ width: 480 }} shadow="hover">Hover</ElCard>
+  <ElCard style={{ width: 480 }} shadow="never">Never</ElCard>
+</div>`,
 };
 
 const API_MD = `
@@ -99,6 +88,20 @@ export default function CardPage() {
         <CardBasic />
       </DemoBlock>
 
+      <Heading level={2}>简单卡片</Heading>
+      <p>可以省略头部区域。</p>
+      <DemoBlock source={SOURCES.simple}>
+        <CardSimple />
+      </DemoBlock>
+
+      <Heading level={2}>带图片</Heading>
+      <p>
+        通过 <code>bodyStyle</code> 属性定义内容区样式，可以展示更丰富的内容。
+      </p>
+      <DemoBlock source={SOURCES.withImages}>
+        <CardWithImages />
+      </DemoBlock>
+
       <Heading level={2}>阴影效果</Heading>
       <p>
         通过 <code>shadow</code> 属性设置卡片阴影出现的时机，
@@ -106,25 +109,6 @@ export default function CardPage() {
       </p>
       <DemoBlock source={SOURCES.shadow}>
         <CardShadow />
-      </DemoBlock>
-
-      <Heading level={2}>头部与页脚</Heading>
-      <p>
-        <code>header</code> 与 <code>footer</code> 都接受节点，可传入自定义结构。
-        不传时不渲染对应区域。
-      </p>
-      <DemoBlock source={SOURCES.slots}>
-        <CardSlots />
-      </DemoBlock>
-
-      <Heading level={2}>自定义样式</Heading>
-      <p>
-        通过 <code>bodyStyle</code> 设置内容区样式，
-        <code>bodyClass</code> / <code>headerClass</code> / <code>footerClass</code>
-        追加自定义类名。
-      </p>
-      <DemoBlock source={SOURCES.bodyStyle}>
-        <CardBodyStyle />
       </DemoBlock>
 
       <DocsContent source={API_MD} />

@@ -1,0 +1,27 @@
+/* Official placement demos: fixed 600px box, rows rely on the default 12px sibling margin */
+.placement {
+  width: 600px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.center {
+  justify-content: center;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+/* Official popover basic demo: Tailwind m-2 on each reference button */
+.m2 {
+  margin: 8px;
+}
+
+.m2 + .m2 {
+  margin-left: 8px;
+}

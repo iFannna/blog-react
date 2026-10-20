@@ -1,21 +1,24 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { ElSkeleton, ElSkeletonItem } from "@/components/element-plus/skeleton";
 import { ElButton } from "@/components/element-plus/button";
 import { ElCard } from "@/components/element-plus/card";
 import { ElSpace } from "@/components/element-plus/space";
 import { ElSwitch } from "@/components/element-plus/switch";
 
-const currentDate = new Date().toDateString();
-const switchRow = { marginBottom: 16 } as const;
-const cardImage = { width: "100%", display: "block" } as const;
-const cardFooter = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  marginTop: 8,
-} as const;
+const cardImage = {} as const;
+const cardFooter = {} as const;
+
+/** 官方 demo 在客户端取当前日期；放到挂载后计算，避免 SSR 与固定时钟不一致。 */
+function useCurrentDate() {
+  const [date, setDate] = useState("");
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 挂载后再取当前日期，避免 SSR 水合不一致
+    setDate(new Date().toDateString());
+  }, []);
+  return date;
+}
 
 export function SkeletonBasic() {
   return (
@@ -26,9 +29,8 @@ export function SkeletonBasic() {
         style={
           { "--el-skeleton-circle-size": "100px" } as CSSProperties
         }
-      >
-        <ElSkeletonItem variant="circle" />
-      </ElSkeleton>
+        template={<ElSkeletonItem variant="circle" />}
+      />
     </div>
   );
 }
@@ -42,7 +44,7 @@ export function SkeletonAnimation() {
 }
 
 /** 官方 customized-template：图片 + 两行文案的骨架 */
-function cardSkeletonTemplate() {
+function customizedSkeletonTemplate() {
   return (
     <>
       <ElSkeletonItem
@@ -68,12 +70,39 @@ function cardSkeletonTemplate() {
 
 export function SkeletonTemplate() {
   return (
-    <ElSkeleton style={{ width: 240 }} template={cardSkeletonTemplate()} />
+    <ElSkeleton style={{ width: 240 }} template={customizedSkeletonTemplate()} />
+  );
+}
+
+/** 官方 loading-state 等示例：h3 标题 + 带 16px 间距的文案行 */
+function cardSkeletonTemplate(imageHeight = 240) {
+  return (
+    <>
+      <ElSkeletonItem
+        variant="image"
+        style={{ width: 240, height: imageHeight }}
+      />
+      <div style={{ padding: 14 }}>
+        <ElSkeletonItem variant="h3" style={{ width: "50%" }} />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginTop: 16,
+            height: 16,
+          }}
+        >
+          <ElSkeletonItem variant="text" style={{ marginRight: 16 }} />
+          <ElSkeletonItem variant="text" style={{ width: "30%" }} />
+        </div>
+      </div>
+    </>
   );
 }
 
 /** 加载完成后的卡片真实内容 */
-function CardContent({ title }: { title: string }) {
+function CardContent({ title, date }: { title: string; date: string }) {
   return (
     <ElCard bodyStyle={{ padding: 0, marginBottom: 1 }}>
       <img
@@ -84,7 +113,7 @@ function CardContent({ title }: { title: string }) {
       <div style={{ padding: 14 }}>
         <span>{title}</span>
         <div style={cardFooter}>
-          <div>{currentDate}</div>
+          <div>{date}</div>
           <ElButton text>operation button</ElButton>
         </div>
       </div>
@@ -100,7 +129,7 @@ function LoadingSwitch({
   onToggle: (checked: boolean) => void;
 }) {
   return (
-    <div style={switchRow}>
+    <div>
       <label style={{ marginRight: 16 }}>Switch Loading</label>
       <ElSwitch checked={loading} onCheckedChange={onToggle} />
     </div>
@@ -109,6 +138,7 @@ function LoadingSwitch({
 
 export function SkeletonLoading() {
   const [loading, setLoading] = useState(true);
+  const currentDate = useCurrentDate();
 
   return (
     <ElSpace direction="vertical" alignment="flex-start">
@@ -119,7 +149,7 @@ export function SkeletonLoading() {
         animated
         template={cardSkeletonTemplate()}
       >
-        <CardContent title="Delicious hamburger" />
+        <CardContent title="Delicious hamburger" date={currentDate} />
       </ElSkeleton>
     </ElSpace>
   );
@@ -171,6 +201,7 @@ const multiTemplate = (
 
 export function SkeletonData() {
   const [loading, setLoading] = useState(false);
+  const currentDate = useCurrentDate();
 
   const reload = () => {
     setLoading(true);
@@ -215,6 +246,7 @@ export function SkeletonData() {
 
 export function SkeletonAvoidBouncing() {
   const [loading, setLoading] = useState(false);
+  const currentDate = useCurrentDate();
 
   return (
     <ElSpace direction="vertical" alignment="flex-start">
@@ -224,9 +256,9 @@ export function SkeletonAvoidBouncing() {
         loading={loading}
         animated
         throttle={500}
-        template={cardSkeletonTemplate()}
+        template={cardSkeletonTemplate(265)}
       >
-        <CardContent title="Delicious hamburger" />
+        <CardContent title="Delicious hamburger" date={currentDate} />
       </ElSkeleton>
     </ElSpace>
   );
@@ -234,6 +266,7 @@ export function SkeletonAvoidBouncing() {
 
 export function SkeletonInitialLoading() {
   const [loading, setLoading] = useState(true);
+  const currentDate = useCurrentDate();
 
   return (
     <ElSpace direction="vertical" alignment="flex-start">
@@ -243,9 +276,9 @@ export function SkeletonInitialLoading() {
         loading={loading}
         animated
         throttle={{ leading: 500, initVal: true }}
-        template={cardSkeletonTemplate()}
+        template={cardSkeletonTemplate(265)}
       >
-        <CardContent title="Delicious hamburger" />
+        <CardContent title="Delicious hamburger" date={currentDate} />
       </ElSkeleton>
     </ElSpace>
   );
@@ -253,6 +286,7 @@ export function SkeletonInitialLoading() {
 
 export function SkeletonLeadingTrailing() {
   const [loading, setLoading] = useState(false);
+  const currentDate = useCurrentDate();
 
   return (
     <ElSpace direction="vertical" alignment="flex-start">
@@ -262,9 +296,9 @@ export function SkeletonLeadingTrailing() {
         loading={loading}
         animated
         throttle={{ leading: 500, trailing: 500, initVal: true }}
-        template={cardSkeletonTemplate()}
+        template={cardSkeletonTemplate(265)}
       >
-        <CardContent title="Delicious hamburger" />
+        <CardContent title="Delicious hamburger" date={currentDate} />
       </ElSkeleton>
     </ElSpace>
   );

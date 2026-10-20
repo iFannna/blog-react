@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ElTooltip } from "@/components/element-plus/tooltip";
 import { ElPopover } from "@/components/element-plus/popover";
 import { ElPopconfirm } from "@/components/element-plus/popconfirm";
@@ -8,73 +8,56 @@ import { ElButton } from "@/components/element-plus/button";
 import { ElTable, ElTableColumn } from "@/components/element-plus/table";
 import { ElAvatar } from "@/components/element-plus/avatar";
 import { InfoFilled } from "@/components/element-plus/icons";
-
-const row = {
-  display: "flex",
-  gap: "1.2rem",
-  flexWrap: "wrap" as const,
-  alignItems: "center",
-};
-
-const virtualStyles = {
-  content: {
-    display: "grid",
-    placeItems: "center",
-    height: 200,
-    border: "1px dashed var(--el-border-color)",
-    borderRadius: 4,
-    cursor: "context-menu",
-  },
-};
+import styles from "./overlay.module.css";
 
 /** 官方 basic.vue：12 个方向分五排展示 */
 export function TooltipBasic() {
   return (
-    <div style={{ display: "grid", gap: "1rem", width: "100%", maxWidth: 600 }}>
-      <div style={{ ...row, justifyContent: "center" }}>
-        <ElTooltip content="placement: top-start" placement="top-start">
-          <ElButton style={{ width: 110 }}>top-start</ElButton>
+    <div className={styles.placement}>
+      <div className={`${styles.row} ${styles.center}`}>
+        <ElTooltip content="Top Left prompts info" placement="top-start">
+          <ElButton>top-start</ElButton>
         </ElTooltip>
-        <ElTooltip content="placement: top" placement="top">
-          <ElButton style={{ width: 110 }}>top</ElButton>
+        <ElTooltip content="Top Center prompts info" placement="top">
+          <ElButton>top</ElButton>
         </ElTooltip>
-        <ElTooltip content="placement: top-end" placement="top-end">
-          <ElButton style={{ width: 110 }}>top-end</ElButton>
-        </ElTooltip>
-      </div>
-      <div style={{ ...row, justifyContent: "space-between" }}>
-        <ElTooltip content="placement: left-start" placement="left-start">
-          <ElButton style={{ width: 110 }}>left-start</ElButton>
-        </ElTooltip>
-        <ElTooltip content="placement: right-start" placement="right-start">
-          <ElButton style={{ width: 110 }}>right-start</ElButton>
+        <ElTooltip content="Top Right prompts info" placement="top-end">
+          <ElButton>top-end</ElButton>
         </ElTooltip>
       </div>
-      <div style={{ ...row, justifyContent: "space-between" }}>
-        <ElTooltip content="placement: left" placement="left">
-          <ElButton style={{ width: 110 }}>left</ElButton>
+      <div className={`${styles.row} ${styles.between}`}>
+        <ElTooltip content="Left Top prompts info" placement="left-start">
+          <ElButton>left-start</ElButton>
         </ElTooltip>
-        <ElTooltip content="placement: right" placement="right">
-          <ElButton style={{ width: 110 }}>right</ElButton>
-        </ElTooltip>
-      </div>
-      <div style={{ ...row, justifyContent: "space-between" }}>
-        <ElTooltip content="placement: left-end" placement="left-end">
-          <ElButton style={{ width: 110 }}>left-end</ElButton>
-        </ElTooltip>
-        <ElTooltip content="placement: right-end" placement="right-end">
-          <ElButton style={{ width: 110 }}>right-end</ElButton>
+        <ElTooltip content="Right Top prompts info" placement="right-start">
+          <ElButton>right-start</ElButton>
         </ElTooltip>
       </div>
-      <div style={{ ...row, justifyContent: "center" }}>
-        <ElTooltip content="placement: bottom-start" placement="bottom-start">
-          <ElButton style={{ width: 110 }}>bottom-start</ElButton>
+      <div className={`${styles.row} ${styles.between}`}>
+        <ElTooltip content="Left Center prompts info" placement="left">
+          <ElButton style={{ margin: "12px 0" }}>left</ElButton>
         </ElTooltip>
-        <ElTooltip content="placement: bottom" placement="bottom">
-          <ElButton style={{ width: 110 }}>bottom</ElButton>
+        <ElTooltip content="Right Center prompts info" placement="right">
+          <ElButton>right</ElButton>
         </ElTooltip>
-        <ElTooltip content="placement: bottom-end" placement="bottom-end">
-          <ElButton style={{ width: 110 }}>bottom-end</ElButton>
+      </div>
+      <div className={`${styles.row} ${styles.between}`}>
+        <ElTooltip content="Left Bottom prompts info" placement="left-end">
+          <ElButton>left-end</ElButton>
+        </ElTooltip>
+        <ElTooltip content="Right Bottom prompts info" placement="right-end">
+          <ElButton>right-end</ElButton>
+        </ElTooltip>
+      </div>
+      <div className={`${styles.row} ${styles.center}`}>
+        <ElTooltip content="Bottom Left prompts info" placement="bottom-start">
+          <ElButton>bottom-start</ElButton>
+        </ElTooltip>
+        <ElTooltip content="Bottom Center prompts info" placement="bottom">
+          <ElButton>bottom</ElButton>
+        </ElTooltip>
+        <ElTooltip content="Bottom Right prompts info" placement="bottom-end">
+          <ElButton>bottom-end</ElButton>
         </ElTooltip>
       </div>
     </div>
@@ -83,7 +66,7 @@ export function TooltipBasic() {
 
 export function TooltipTheme() {
   return (
-    <div style={row}>
+    <>
       <ElTooltip content="Top center" placement="top">
         <ElButton>Dark</ElButton>
       </ElTooltip>
@@ -95,11 +78,12 @@ export function TooltipTheme() {
         effect="customized"
         popperStyle={{
           background: "linear-gradient(90deg, rgb(159, 229, 151), rgb(204, 229, 129))",
+          padding: "6px 12px",
         }}
       >
         <ElButton>Customized theme</ElButton>
       </ElTooltip>
-    </div>
+    </>
   );
 }
 
@@ -165,13 +149,17 @@ export function TooltipVirtualTrigger() {
   const [visible, setVisible] = useState(false);
   const { positionRef, virtualRef } = useVirtualTrigger();
 
+  // 官方 demo 监听 document 的 mousemove，让浮层跟随光标
+  useEffect(() => {
+    const handler = (event: MouseEvent) => {
+      positionRef.current = { x: event.clientX, y: event.clientY };
+    };
+    document.addEventListener("mousemove", handler);
+    return () => document.removeEventListener("mousemove", handler);
+  }, [positionRef]);
+
   return (
-    <div
-      style={virtualStyles.content}
-      onMouseMove={(event) => {
-        positionRef.current = { x: event.clientX, y: event.clientY };
-      }}
-    >
+    <>
       <ElTooltip
         visible={visible}
         content="Bottom center"
@@ -182,7 +170,7 @@ export function TooltipVirtualTrigger() {
         virtualRef={virtualRef}
       />
       <ElButton onClick={() => setVisible((value) => !value)}>test</ElButton>
-    </div>
+    </>
   );
 }
 
@@ -200,24 +188,26 @@ export function TooltipSingleton() {
   }));
 
   return (
-    <div style={row}>
-      {[1, 2, 3].map((i) => (
-        <ElButton
-          key={i}
-          onMouseOver={(event) => {
-            const rect = event.currentTarget.getBoundingClientRect();
-            anchorRef.current = {
-              x: rect.x,
-              y: rect.y,
-              width: rect.width,
-              height: rect.height,
-            };
-          }}
-          onClick={() => setVisible((value) => !value)}
-        >
-          Click to open tooltip
-        </ElButton>
-      ))}
+    <>
+      <div>
+        {[1, 2, 3].map((i) => (
+          <ElButton
+            key={i}
+            onMouseOver={(event) => {
+              const rect = event.currentTarget.getBoundingClientRect();
+              anchorRef.current = {
+                x: rect.x,
+                y: rect.y,
+                width: rect.width,
+                height: rect.height,
+              };
+            }}
+            onClick={() => setVisible((value) => !value)}
+          >
+            Click to open tooltip
+          </ElButton>
+        ))}
+      </div>
       <ElTooltip
         visible={visible}
         virtualTriggering
@@ -225,7 +215,7 @@ export function TooltipSingleton() {
         popperClass="singleton-tooltip"
         content={<span>Some content</span>}
       />
-    </div>
+    </>
   );
 }
 
@@ -272,50 +262,50 @@ export function TooltipAppendTo() {
 /** 官方 placement.vue：12 个方向 */
 export function PopoverPlacement() {
   return (
-    <div style={{ display: "grid", gap: "1rem", width: "100%", maxWidth: 600 }}>
-      <div style={{ ...row, justifyContent: "center" }}>
-        <ElPopover title="Title" content="top-start prompts info" placement="top-start">
+    <div className={styles.placement}>
+      <div className={`${styles.row} ${styles.center}`}>
+        <ElPopover title="Title" content="Top Left prompts info" placement="top-start">
           <ElButton>top-start</ElButton>
         </ElPopover>
-        <ElPopover title="Title" content="top prompts info" placement="top">
+        <ElPopover title="Title" content="Top Center prompts info" placement="top">
           <ElButton>top</ElButton>
         </ElPopover>
-        <ElPopover title="Title" content="top-end prompts info" placement="top-end">
+        <ElPopover title="Title" content="Top Right prompts info" placement="top-end">
           <ElButton>top-end</ElButton>
         </ElPopover>
       </div>
-      <div style={{ ...row, justifyContent: "space-between" }}>
-        <ElPopover title="Title" content="left-start prompts info" placement="left-start">
+      <div className={`${styles.row} ${styles.between}`}>
+        <ElPopover title="Title" content="Left Top prompts info" placement="left-start">
           <ElButton>left-start</ElButton>
         </ElPopover>
-        <ElPopover title="Title" content="right-start prompts info" placement="right-start">
+        <ElPopover title="Title" content="Right Top prompts info" placement="right-start">
           <ElButton>right-start</ElButton>
         </ElPopover>
       </div>
-      <div style={{ ...row, justifyContent: "space-between" }}>
-        <ElPopover title="Title" content="left prompts info" placement="left">
-          <ElButton>left</ElButton>
+      <div className={`${styles.row} ${styles.between}`}>
+        <ElPopover title="Title" content="Left Center prompts info" placement="left">
+          <ElButton style={{ margin: "12px 0" }}>left</ElButton>
         </ElPopover>
-        <ElPopover title="Title" content="right prompts info" placement="right">
+        <ElPopover title="Title" content="Right Center prompts info" placement="right">
           <ElButton>right</ElButton>
         </ElPopover>
       </div>
-      <div style={{ ...row, justifyContent: "space-between" }}>
-        <ElPopover title="Title" content="left-end prompts info" placement="left-end">
+      <div className={`${styles.row} ${styles.between}`}>
+        <ElPopover title="Title" content="Left Bottom prompts info" placement="left-end">
           <ElButton>left-end</ElButton>
         </ElPopover>
-        <ElPopover title="Title" content="right-end prompts info" placement="right-end">
+        <ElPopover title="Title" content="Right Bottom prompts info" placement="right-end">
           <ElButton>right-end</ElButton>
         </ElPopover>
       </div>
-      <div style={{ ...row, justifyContent: "center" }}>
-        <ElPopover title="Title" content="bottom-start prompts info" placement="bottom-start">
+      <div className={`${styles.row} ${styles.center}`}>
+        <ElPopover title="Title" content="Bottom Left prompts info" placement="bottom-start">
           <ElButton>bottom-start</ElButton>
         </ElPopover>
-        <ElPopover title="Title" content="bottom prompts info" placement="bottom">
+        <ElPopover title="Title" content="Bottom Center prompts info" placement="bottom">
           <ElButton>bottom</ElButton>
         </ElPopover>
-        <ElPopover title="Title" content="bottom-end prompts info" placement="bottom-end">
+        <ElPopover title="Title" content="Bottom Right prompts info" placement="bottom-end">
           <ElButton>bottom-end</ElButton>
         </ElPopover>
       </div>
@@ -326,7 +316,7 @@ export function PopoverPlacement() {
 export function PopoverBasicUsage() {
   const [visible, setVisible] = useState(false);
   return (
-    <div style={row}>
+    <>
       <ElPopover
         placement="top-start"
         title="Title"
@@ -334,7 +324,7 @@ export function PopoverBasicUsage() {
         trigger="hover"
         content="this is content, this is content, this is content"
       >
-        <ElButton>Hover to activate</ElButton>
+        <ElButton className={styles.m2}>Hover to activate</ElButton>
       </ElPopover>
       <ElPopover
         placement="bottom"
@@ -343,7 +333,7 @@ export function PopoverBasicUsage() {
         trigger="click"
         content="this is content, this is content, this is content"
       >
-        <ElButton>Click to activate</ElButton>
+        <ElButton className={styles.m2}>Click to activate</ElButton>
       </ElPopover>
       <ElPopover
         placement="right"
@@ -352,7 +342,7 @@ export function PopoverBasicUsage() {
         trigger="focus"
         content="this is content, this is content, this is content"
       >
-        <ElButton>Focus to activate</ElButton>
+        <ElButton className={styles.m2}>Focus to activate</ElButton>
       </ElPopover>
       <ElPopover
         title="Title"
@@ -360,7 +350,7 @@ export function PopoverBasicUsage() {
         trigger="contextmenu"
         content="this is content, this is content, this is content"
       >
-        <ElButton>contextmenu to activate</ElButton>
+        <ElButton className={styles.m2}>contextmenu to activate</ElButton>
       </ElPopover>
       <ElPopover
         visible={visible}
@@ -369,11 +359,11 @@ export function PopoverBasicUsage() {
         width={200}
         content="this is content, this is content, this is content"
       >
-        <ElButton onClick={() => setVisible((value) => !value)}>
+        <ElButton className={styles.m2} onClick={() => setVisible((value) => !value)}>
           Manual to activate
         </ElButton>
       </ElPopover>
-    </div>
+    </>
   );
 }
 
@@ -404,7 +394,7 @@ const gridData = [
 
 export function PopoverNestedInformation() {
   return (
-    <div style={row}>
+    <div style={{ display: "flex", alignItems: "center" }}>
       <ElPopover
         placement="right"
         width={400}
@@ -417,7 +407,7 @@ export function PopoverNestedInformation() {
           </ElTable>
         }
       >
-        <ElButton>Click to activate</ElButton>
+        <ElButton style={{ marginRight: 16 }}>Click to activate</ElButton>
       </ElPopover>
 
       <ElPopover
@@ -510,51 +500,51 @@ export function PopoverDirectiveUsage() {
 
 export function PopconfirmPlacement() {
   return (
-    <div style={{ display: "grid", gap: "1rem", width: "100%", maxWidth: 600 }}>
-      <div style={{ ...row, justifyContent: "center" }}>
-        <ElPopconfirm title="top-start prompts info" placement="top-start">
-          <ElButton style={{ width: 110 }}>top-start</ElButton>
+    <div className={styles.placement}>
+      <div className={`${styles.row} ${styles.center}`}>
+        <ElPopconfirm title="Top Left prompts info" placement="top-start">
+          <ElButton>top-start</ElButton>
         </ElPopconfirm>
-        <ElPopconfirm title="top prompts info" placement="top">
-          <ElButton style={{ width: 110 }}>top</ElButton>
+        <ElPopconfirm title="Top Center prompts info" placement="top">
+          <ElButton>top</ElButton>
         </ElPopconfirm>
-        <ElPopconfirm title="top-end prompts info" placement="top-end">
-          <ElButton style={{ width: 110 }}>top-end</ElButton>
-        </ElPopconfirm>
-      </div>
-      <div style={{ ...row, justifyContent: "space-between" }}>
-        <ElPopconfirm title="left-start prompts info" placement="left-start">
-          <ElButton style={{ width: 110 }}>left-start</ElButton>
-        </ElPopconfirm>
-        <ElPopconfirm title="right-start prompts info" placement="right-start">
-          <ElButton style={{ width: 110 }}>right-start</ElButton>
+        <ElPopconfirm title="Top Right prompts info" placement="top-end">
+          <ElButton>top-end</ElButton>
         </ElPopconfirm>
       </div>
-      <div style={{ ...row, justifyContent: "space-between" }}>
-        <ElPopconfirm title="left prompts info" placement="left">
-          <ElButton style={{ width: 110 }}>left</ElButton>
+      <div className={`${styles.row} ${styles.between}`}>
+        <ElPopconfirm title="Left Top prompts info" placement="left-start">
+          <ElButton>left-start</ElButton>
         </ElPopconfirm>
-        <ElPopconfirm title="right prompts info" placement="right">
-          <ElButton style={{ width: 110 }}>right</ElButton>
-        </ElPopconfirm>
-      </div>
-      <div style={{ ...row, justifyContent: "space-between" }}>
-        <ElPopconfirm title="left-end prompts info" placement="left-end">
-          <ElButton style={{ width: 110 }}>left-end</ElButton>
-        </ElPopconfirm>
-        <ElPopconfirm title="right-end prompts info" placement="right-end">
-          <ElButton style={{ width: 110 }}>right-end</ElButton>
+        <ElPopconfirm title="Right Top prompts info" placement="right-start">
+          <ElButton>right-start</ElButton>
         </ElPopconfirm>
       </div>
-      <div style={{ ...row, justifyContent: "center" }}>
-        <ElPopconfirm title="bottom-start prompts info" placement="bottom-start">
-          <ElButton style={{ width: 110 }}>bottom-start</ElButton>
+      <div className={`${styles.row} ${styles.between}`}>
+        <ElPopconfirm title="Left Center prompts info" placement="left">
+          <ElButton style={{ margin: "12px 0" }}>left</ElButton>
         </ElPopconfirm>
-        <ElPopconfirm title="bottom prompts info" placement="bottom">
-          <ElButton style={{ width: 110 }}>bottom</ElButton>
+        <ElPopconfirm title="Right Center prompts info" placement="right">
+          <ElButton>right</ElButton>
         </ElPopconfirm>
-        <ElPopconfirm title="bottom-end prompts info" placement="bottom-end">
-          <ElButton style={{ width: 110 }}>bottom-end</ElButton>
+      </div>
+      <div className={`${styles.row} ${styles.between}`}>
+        <ElPopconfirm title="Left Bottom prompts info" placement="left-end">
+          <ElButton>left-end</ElButton>
+        </ElPopconfirm>
+        <ElPopconfirm title="Right Bottom prompts info" placement="right-end">
+          <ElButton>right-end</ElButton>
+        </ElPopconfirm>
+      </div>
+      <div className={`${styles.row} ${styles.center}`}>
+        <ElPopconfirm title="Bottom Left prompts info" placement="bottom-start">
+          <ElButton>bottom-start</ElButton>
+        </ElPopconfirm>
+        <ElPopconfirm title="Bottom Center prompts info" placement="bottom">
+          <ElButton>bottom</ElButton>
+        </ElPopconfirm>
+        <ElPopconfirm title="Bottom Right prompts info" placement="bottom-end">
+          <ElButton>bottom-end</ElButton>
         </ElPopconfirm>
       </div>
     </div>
@@ -598,21 +588,15 @@ export function PopconfirmCustomize() {
 }
 
 export function PopconfirmTriggerEvent() {
-  const [event, setEvent] = useState("等待操作");
   return (
-    <div style={row}>
-      <ElPopconfirm
-        confirmButtonText="Yes"
-        cancelButtonText="No"
-        icon={<InfoFilled />}
-        iconColor="#626AEF"
-        title="Are you sure to delete this?"
-        onConfirm={() => setEvent("confirm!")}
-        onCancel={() => setEvent("cancel!")}
-      >
-        <ElButton>Delete</ElButton>
-      </ElPopconfirm>
-      <span>{event}</span>
-    </div>
+    <ElPopconfirm
+      confirmButtonText="Yes"
+      cancelButtonText="No"
+      icon={<InfoFilled />}
+      iconColor="#626AEF"
+      title="Are you sure to delete this?"
+    >
+      <ElButton>Delete</ElButton>
+    </ElPopconfirm>
   );
 }

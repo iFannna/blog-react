@@ -4,106 +4,158 @@ import { useState } from "react";
 import { ElCheckbox, ElCheckboxGroup } from "@/components/element-plus/checkbox";
 import type { CheckboxValueType } from "@/components/element-plus/checkbox";
 
-const stack = { display: "flex", flexDirection: "column", gap: "1rem" } as const;
-const row = {
-  display: "flex",
-  flexWrap: "wrap",
-  gap: "1rem",
-  alignItems: "center",
-} as const;
-
-const CITIES = ["上海", "北京", "广州", "深圳"];
-const ALL = ["上海", "北京", "广州", "深圳"];
+const CITIES = ["Shanghai", "Beijing", "Guangzhou", "Shenzhen"];
+const ALL = ["Shanghai", "Beijing", "Guangzhou", "Shenzhen"];
 
 export function CheckboxBasic() {
-  const [checked, setChecked] = useState(false);
+  const [checked1, setChecked1] = useState(true);
+  const [checked2, setChecked2] = useState(false);
+  const [checked3, setChecked3] = useState(false);
+  const [checked4, setChecked4] = useState(false);
+  const [checked5, setChecked5] = useState(false);
+  const [checked6, setChecked6] = useState(false);
+
   return (
-    <div style={stack}>
-      <ElCheckbox checked={checked} onCheckedChange={setChecked}>选项</ElCheckbox>
-    </div>
+    <>
+      <div>
+        <ElCheckbox checked={checked1} onCheckedChange={setChecked1} label="Option 1" size="large" />
+        <ElCheckbox checked={checked2} onCheckedChange={setChecked2} label="Option 2" size="large" />
+      </div>
+      <div style={{ margin: "8px 0" }}>
+        <ElCheckbox checked={checked3} onCheckedChange={setChecked3} label="Option 1" />
+        <ElCheckbox checked={checked4} onCheckedChange={setChecked4} label="Option 2" />
+      </div>
+      <div style={{ marginTop: 8 }}>
+        <ElCheckbox checked={checked5} onCheckedChange={setChecked5} label="Option 1" size="small" />
+        <ElCheckbox checked={checked6} onCheckedChange={setChecked6} label="Option 2" size="small" />
+      </div>
+    </>
   );
 }
 
 export function CheckboxDisabled() {
   return (
-    <div style={stack}>
-      <ElCheckbox>未选中</ElCheckbox>
-      <ElCheckbox checked disabled>选中且禁用</ElCheckbox>
-      <ElCheckbox disabled>禁用</ElCheckbox>
-    </div>
+    <>
+      <ElCheckbox disabled>Disabled</ElCheckbox>
+      <ElCheckbox checked>Not disabled</ElCheckbox>
+    </>
   );
 }
 
 export function CheckboxGroupDemo() {
-  const [checked, setChecked] = useState<CheckboxValueType[]>(["上海"]);
+  const [checked, setChecked] = useState<CheckboxValueType[]>([
+    "Value selected and disabled",
+    "Value A",
+  ]);
   return (
-    <div style={stack}>
-      <ElCheckboxGroup value={checked} onChange={setChecked}>
-        {CITIES.map((city) => (
-          <ElCheckbox key={city} value={city} label={city} />
-        ))}
-      </ElCheckboxGroup>
-    </div>
+    <ElCheckboxGroup value={checked} onChange={setChecked}>
+      <ElCheckbox label="Option A" value="Value A" />
+      <ElCheckbox label="Option B" value="Value B" />
+      <ElCheckbox label="Option C" value="Value C" />
+      <ElCheckbox label="disabled" value="Value disabled" disabled />
+      <ElCheckbox
+        label="selected and disabled"
+        value="Value selected and disabled"
+        disabled
+      />
+    </ElCheckboxGroup>
   );
 }
 
 export function CheckboxIndeterminate() {
-  const [checked, setChecked] = useState<CheckboxValueType[]>(["上海", "北京"]);
-
-  const isAll = checked.length === ALL.length;
-  const isIndeterminate = checked.length > 0 && !isAll;
+  const [checked, setChecked] = useState<CheckboxValueType[]>([
+    "Shanghai",
+    "Beijing",
+  ]);
+  const [checkAll, setCheckAll] = useState(false);
+  const [indeterminate, setIndeterminate] = useState(true);
 
   return (
-    <div style={stack}>
+    <>
       <ElCheckbox
-        checked={isAll}
-        indeterminate={isIndeterminate}
-        onCheckedChange={(value) => setChecked(value ? [...ALL] : [])}
+        checked={checkAll}
+        indeterminate={indeterminate}
+        onCheckedChange={(value) => {
+          setCheckAll(value);
+          setChecked(value ? [...ALL] : []);
+          setIndeterminate(false);
+        }}
       >
-        全选
+        Check all
       </ElCheckbox>
-      <ElCheckboxGroup value={checked} onChange={setChecked}>
+      <ElCheckboxGroup
+        value={checked}
+        onChange={(value) => {
+          const count = value.length;
+          setCheckAll(count === ALL.length);
+          setIndeterminate(count > 0 && count < ALL.length);
+          setChecked(value);
+        }}
+      >
         {ALL.map((city) => (
           <ElCheckbox key={city} value={city} label={city} />
         ))}
       </ElCheckboxGroup>
-    </div>
+    </>
   );
 }
 
 export function CheckboxMinMax() {
-  const [checked, setChecked] = useState<CheckboxValueType[]>(["上海", "北京"]);
+  const [checked, setChecked] = useState<CheckboxValueType[]>([
+    "Shanghai",
+    "Beijing",
+  ]);
   return (
-    <div style={stack}>
-      <ElCheckboxGroup value={checked} onChange={setChecked} min={1} max={2}>
-        {CITIES.map((city) => (
-          <ElCheckbox key={city} value={city} label={city} />
-        ))}
-      </ElCheckboxGroup>
-    </div>
+    <ElCheckboxGroup value={checked} onChange={setChecked} min={1} max={2}>
+      {CITIES.map((city) => (
+        <ElCheckbox key={city} value={city} label={city} />
+      ))}
+    </ElCheckboxGroup>
   );
 }
 
 export function CheckboxButton() {
-  const [checked, setChecked] = useState<CheckboxValueType[]>(["上海"]);
+  const [group1, setGroup1] = useState<CheckboxValueType[]>(["Shanghai"]);
+  const [group2, setGroup2] = useState<CheckboxValueType[]>(["Shanghai"]);
+  const [group3, setGroup3] = useState<CheckboxValueType[]>(["Shanghai"]);
+  const [group4] = useState<CheckboxValueType[]>(["Shanghai"]);
+
   return (
-    <div style={stack}>
-      <ElCheckboxGroup value={checked} onChange={setChecked} type="button">
-        {CITIES.map((city) => (
-          <ElCheckbox key={city} value={city} label={city} />
-        ))}
-      </ElCheckboxGroup>
-      <ElCheckboxGroup
-        value={["上海"]}
-        onChange={() => {}}
-        type="button"
-        fill="#626aef"
-        textColor="#fff"
-      >
-        <ElCheckbox value="上海" label="上海" />
-        <ElCheckbox value="北京" label="北京" />
-      </ElCheckboxGroup>
-    </div>
+    <>
+      <div>
+        <ElCheckboxGroup value={group1} onChange={setGroup1} size="large" type="button">
+          {CITIES.map((city) => (
+            <ElCheckbox key={city} value={city} label={city} />
+          ))}
+        </ElCheckboxGroup>
+      </div>
+      <div style={{ marginTop: 24 }}>
+        <ElCheckboxGroup value={group2} onChange={setGroup2} type="button">
+          {CITIES.map((city) => (
+            <ElCheckbox key={city} value={city} label={city} />
+          ))}
+        </ElCheckboxGroup>
+      </div>
+      <div style={{ marginTop: 24 }}>
+        <ElCheckboxGroup value={group3} onChange={setGroup3} size="small" type="button">
+          {CITIES.map((city) => (
+            <ElCheckbox
+              key={city}
+              value={city}
+              label={city}
+              disabled={city === "Beijing"}
+            />
+          ))}
+        </ElCheckboxGroup>
+      </div>
+      <div style={{ marginTop: 24 }}>
+        <ElCheckboxGroup value={group4} onChange={() => {}} size="small" disabled type="button">
+          {CITIES.map((city) => (
+            <ElCheckbox key={city} value={city} label={city} />
+          ))}
+        </ElCheckboxGroup>
+      </div>
+    </>
   );
 }
 
@@ -137,13 +189,34 @@ export function CheckboxOptions() {
 }
 
 export function CheckboxBorder() {
+  const [checked1, setChecked1] = useState(true);
+  const [checked2, setChecked2] = useState(false);
+  const [checked3, setChecked3] = useState(false);
+  const [checked4, setChecked4] = useState(true);
+  const [group1, setGroup1] = useState<CheckboxValueType[]>(["Value1"]);
+
   return (
-    <div style={stack}>
-      <div style={row}>
-        <ElCheckbox border>选项一</ElCheckbox>
-        <ElCheckbox border checked>选项二</ElCheckbox>
-        <ElCheckbox border disabled>选项三</ElCheckbox>
+    <>
+      <div>
+        <ElCheckbox checked={checked1} onCheckedChange={setChecked1} label="Option1" size="large" border />
+        <ElCheckbox checked={checked2} onCheckedChange={setChecked2} label="Option2" size="large" border />
       </div>
-    </div>
+      <div style={{ marginTop: 16 }}>
+        <ElCheckbox checked={checked3} onCheckedChange={setChecked3} label="Option1" border />
+        <ElCheckbox checked={checked4} onCheckedChange={setChecked4} label="Option2" border />
+      </div>
+      <div style={{ marginTop: 16 }}>
+        <ElCheckboxGroup value={group1} onChange={setGroup1} size="small">
+          <ElCheckbox label="Option1" value="Value1" border />
+          <ElCheckbox label="Option2" value="Value2" border />
+        </ElCheckboxGroup>
+      </div>
+      <div style={{ marginTop: 16 }}>
+        <ElCheckboxGroup value={group1} onChange={() => {}} size="small">
+          <ElCheckbox label="Option1" value="Value1" border disabled />
+          <ElCheckbox label="Option2" value="Value2" border disabled />
+        </ElCheckboxGroup>
+      </div>
+    </>
   );
 }

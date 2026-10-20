@@ -80,9 +80,10 @@ export function ElSteps({
     }
   }, [active, onChange]);
 
+  // 官方简洁模式只输出 el-steps--simple，不再叠加方向类
   const classes = [
     "el-steps",
-    `el-steps--${direction}`,
+    !simple && `el-steps--${direction}`,
     simple && "el-steps--simple",
     className,
   ]
@@ -192,17 +193,6 @@ export function ElStep({
     icon ? "is-icon" : "is-text",
   ].join(" ");
 
-  // 官方 calcProgress：仅 process / wait 保持 0，其余状态铺满连接线
-  const lineCompleted =
-    currentStatus !== "wait" && currentStatus !== processStatus;
-  const lineStyle = {
-    transitionDelay: "0ms",
-    borderWidth: lineCompleted && !isSimple ? "1px" : 0,
-    ...(isVertical
-      ? { height: `${lineCompleted ? 100 : 0}%` }
-      : { width: `${lineCompleted ? 100 : 0}%` }),
-  } as CSSProperties;
-
   // 官方 style：按 space 或均分计算 flexBasis，最后一项横向限宽
   const stepStyle: CSSProperties = {
     flexBasis:
@@ -221,10 +211,10 @@ export function ElStep({
   return (
     <div className={containerClasses} style={stepStyle}>
       <div className={headClasses}>
-        {/* 连接线：最后一步不画 */}
-        {(stepCount === undefined || index < stepCount - 1) && !isSimple && (
+        {/* 与官方一致：连接线进度由 CSS 控制，组件不写内联宽高 */}
+        {!isSimple && (
           <div className="el-step__line">
-            <i className="el-step__line-inner" style={lineStyle} />
+            <i className="el-step__line-inner" />
           </div>
         )}
 

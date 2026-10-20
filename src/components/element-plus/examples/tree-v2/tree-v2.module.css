@@ -1,0 +1,5 @@
+/* Official custom-node-class demo scoped style */
+.nodeClassScope :global(.is-penultimate) :global(.el-tree-node__label) {
+  color: #626aef;
+  font-weight: 600;
+}

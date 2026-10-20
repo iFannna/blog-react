@@ -1,0 +1,14 @@
+/* Official layout demos apply these rules globally via plain <style> blocks */
+
+.col {
+  border-radius: 4px;
+}
+
+.rowBg {
+  padding: 10px 0;
+  background-color: #f9fafc;
+}
+
+:global(html.dark) .rowBg {
+  background-color: #18191a;
+}

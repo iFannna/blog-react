@@ -3,17 +3,11 @@
 import { useRef } from "react";
 import { message } from "@/components/element-plus/message";
 import { ElButton } from "@/components/element-plus/button";
-
-const row = {
-  display: "flex",
-  gap: "1.2rem",
-  flexWrap: "wrap" as const,
-  alignItems: "center",
-};
+import styles from "./message.module.css";
 
 export function MessageBasic() {
   return (
-    <div style={row}>
+    <div className={styles.row}>
       <ElButton plain onClick={() => message("This is a message.")}>
         Show message
       </ElButton>
@@ -37,7 +31,7 @@ export function MessageBasic() {
 
 export function MessageDifferentTypes() {
   return (
-    <div style={row}>
+    <div className={styles.row}>
       <ElButton
         plain
         onClick={() =>
@@ -82,7 +76,7 @@ export function MessageDifferentTypes() {
 
 export function MessagePlain() {
   return (
-    <div style={row}>
+    <div className={styles.row}>
       <ElButton
         plain
         onClick={() =>
@@ -141,7 +135,7 @@ export function MessagePlain() {
 
 export function MessageClosable() {
   return (
-    <div style={row}>
+    <div className={styles.row}>
       <ElButton
         plain
         onClick={() =>
@@ -255,7 +249,7 @@ export function MessagePlacement() {
   const counters = useRef<Record<string, number>>({});
 
   return (
-    <div style={row}>
+    <div className={styles.row}>
       <ElButton
         plain
         onClick={() => {

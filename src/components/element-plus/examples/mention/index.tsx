@@ -180,7 +180,7 @@ export function MentionWhole() {
     (MOCK_DATA[prefix] || []).includes(pattern);
 
   return (
-    <div>
+    <>
       <ElMention
         value={value1}
         onChange={setValue1}
@@ -201,12 +201,11 @@ export function MentionWhole() {
         style={mentionStyle}
         placeholder="input @ to mention people, # to mention tag"
       />
-    </div>
+    </>
   );
 }
 
 const formStyle = { maxWidth: 600 };
-const resultStyle = { color: "var(--el-color-info)" } as const;
 
 const RULES: FormRules = {
   name: [{ required: true, message: "Please input name", trigger: "blur" }],
@@ -216,7 +215,6 @@ const RULES: FormRules = {
 export function MentionForm() {
   const formRef = useRef<FormExpose>(null);
   const [form, setForm] = useState({ name: "", desc: "" });
-  const [result, setResult] = useState("");
 
   const patch = (patchValue: Partial<typeof form>) =>
     setForm((prev) => ({ ...prev, ...patchValue }));
@@ -224,9 +222,9 @@ export function MentionForm() {
   const submit = async () => {
     try {
       const ok = await formRef.current!.validate();
-      setResult(ok ? "submit!" : "not valid");
-    } catch {
-      setResult("error submit!");
+      console.log(ok ? "submit!" : "not valid");
+    } catch (fields) {
+      console.log("error submit!", fields);
     }
   };
 
@@ -257,7 +255,6 @@ export function MentionForm() {
         <ElButton type="primary" onClick={submit}>Submit</ElButton>
         <ElButton onClick={() => formRef.current?.resetFields()}>Reset</ElButton>
       </ElFormItem>
-      {result && <p style={resultStyle}>{result}</p>}
     </ElForm>
   );
 }

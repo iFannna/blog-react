@@ -27,7 +27,7 @@ table/striped
 
 ## 带边框表格
 
-:::demo
+:::demo 默认情况下，Table 组件是不具有竖直方向的边框的，如果需要，可以使用 `border` 属性，把该属性设置为 true 即可启用。
 
 table/with-border
 

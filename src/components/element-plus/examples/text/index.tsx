@@ -7,51 +7,54 @@ import { ElButton } from "@/components/element-plus/button";
 import { ElRow } from "@/components/element-plus/row";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { Bell, ElementPlus } from "@/components/element-plus/icons";
-
-const spaced = { marginRight: 8 } as const;
-const truncateBox = { width: 150, marginBottom: 8 } as const;
+import styles from "./text.module.css";
 
 export function TextBasic() {
   return (
-    <div>
-      <ElText style={spaced}>Default</ElText>
-      <ElText type="primary" style={spaced}>Primary</ElText>
-      <ElText type="success" style={spaced}>Success</ElText>
-      <ElText type="info" style={spaced}>Info</ElText>
-      <ElText type="warning" style={spaced}>Warning</ElText>
-      <ElText type="danger">Danger</ElText>
-    </div>
+    <>
+      <ElText className={styles.mx1}>Default</ElText>
+      <ElText className={styles.mx1} type="primary">Primary</ElText>
+      <ElText className={styles.mx1} type="success">Success</ElText>
+      <ElText className={styles.mx1} type="info">Info</ElText>
+      <ElText className={styles.mx1} type="warning">Warning</ElText>
+      <ElText className={styles.mx1} type="danger">Danger</ElText>
+    </>
   );
 }
 
 export function TextSizes() {
   return (
-    <div>
-      <ElText size="large" style={spaced}>Large</ElText>
-      <ElText style={spaced}>Default</ElText>
-      <ElText size="small">Small</ElText>
-    </div>
+    <>
+      <ElText className={styles.mx1} size="large">Large</ElText>
+      <ElText className={styles.mx1}>Default</ElText>
+      <ElText className={styles.mx1} size="small">Small</ElText>
+    </>
   );
 }
 
 export function TextTruncated() {
   return (
-    <div>
-      <div style={truncateBox}>
-        <ElText truncated>Self element set width 100px</ElText>
-      </div>
-      <div style={truncateBox}>
-        <ElRow>
-          <ElText truncated>Squeezed by parent element</ElText>
-        </ElRow>
-      </div>
-      <ElText lineClamp={2}>
-        The -webkit-line-clamp CSS property
-        <br />
-        allows limiting of the contents of
-        <br />a block to the specified number of lines.
+    <>
+      <ElText className={`${styles.w150} ${styles.mb2}`} truncated>
+        Self element set width 100px
       </ElText>
-    </div>
+      <ElRow className={`${styles.row} ${styles.w150}`}>
+        <ElText truncated>Squeezed by parent element</ElText>
+      </ElRow>
+      <ElRow className={styles.row}>
+        <ElText lineClamp={2}>
+          The -webkit-line-clamp CSS property
+          <br />
+          allows limiting of the contents of
+          <br />a block to the specified number of lines.
+        </ElText>
+      </ElRow>
+      <ElRow>
+        <ElText className={styles.w150} truncated>
+          Show tooltip only when the text is truncated
+        </ElText>
+      </ElRow>
+    </>
   );
 }
 
@@ -61,19 +64,19 @@ export function TextMixed() {
       <ElText>
         <ElIcon>
           <ElementPlus />
-        </ElIcon>
+        </ElIcon>{" "}
         Element-Plus
       </ElText>
       <ElRow>
         <ElText>Rate</ElText>
-        <ElRate style={{ marginLeft: 4 }} />
+        <ElRate className={styles.ml1} />
       </ElRow>
       <ElText>
-        This is text mixed icon
+        This is text mixed icon{" "}
         <ElIcon>
           <Bell />
         </ElIcon>
-        and component
+        {" "}and component{" "}
         <ElButton>Button</ElButton>
       </ElText>
     </ElSpace>
@@ -88,12 +91,12 @@ export function TextOverride() {
       <ElText tag="b">Bold</ElText>
       <ElText tag="i">Italic</ElText>
       <ElText>
-        This is
-        <ElText tag="sub" size="small">subscript</ElText>
+        This is{" "}
+        <ElText tag="sub" size="small" className={styles.sub}>subscript</ElText>
       </ElText>
       <ElText>
-        This is
-        <ElText tag="sup" size="small">superscript</ElText>
+        This is{" "}
+        <ElText tag="sup" size="small" className={styles.sup}>superscript</ElText>
       </ElText>
       <ElText tag="ins">Inserted</ElText>
       <ElText tag="del">Deleted</ElText>

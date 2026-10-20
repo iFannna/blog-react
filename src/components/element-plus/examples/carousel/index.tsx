@@ -14,10 +14,8 @@ const demonstration: CSSProperties = {
   color: "var(--el-text-color-secondary)",
 };
 
-const stack: CSSProperties = {
-  display: "flex",
-  flexDirection: "column",
-  gap: "1.6rem",
+const centered: CSSProperties = {
+  textAlign: "center",
 };
 
 /** 官方示例统一用奇偶项交替底色，第 1 项为浅蓝灰 */
@@ -49,8 +47,8 @@ const FOUR = [1, 2, 3, 4];
 
 export function CarouselBasic() {
   return (
-    <div style={stack}>
-      <div>
+    <div>
+      <div style={centered}>
         <span style={demonstration}>
           Switch when indicator is hovered (default)
         </span>
@@ -63,7 +61,7 @@ export function CarouselBasic() {
         </ElCarousel>
       </div>
 
-      <div>
+      <div style={{ ...centered, marginTop: 16 }}>
         <span style={demonstration}>Switch when indicator is clicked</span>
         <ElCarousel trigger="click" height="150px">
           {FOUR.map((item) => (
@@ -79,8 +77,8 @@ export function CarouselBasic() {
 
 export function CarouselMotionBlur() {
   return (
-    <div style={stack}>
-      <div>
+    <div>
+      <div style={centered}>
         <span style={demonstration}>Motion blur the switch (default)</span>
         <ElCarousel height="200px" motionBlur>
           {FOUR.map((item) => (
@@ -136,7 +134,7 @@ const AUTO_HEIGHT_ITEMS = [100, 200, 300];
 
 export function CarouselAutoHeight() {
   return (
-    <div style={{ height: 300 }}>
+    <div style={{ height: 300, ...centered }}>
       <span style={demonstration}>
         each carousel-item has a different height
       </span>
@@ -170,8 +168,8 @@ export function CarouselCard() {
 
 export function CarouselVertical() {
   return (
-    <div style={stack}>
-      <p style={{ ...demonstration, textAlign: "center" }}>
+    <div>
+      <p style={{ ...demonstration, textAlign: "center", marginTop: 0 }}>
         normal vertical layout
       </p>
       <ElCarousel height="200px" direction="vertical" autoplay={false}>

@@ -5,10 +5,10 @@ import DocsContent from "../../../../_components/DocsContent";
 import {
   AlertBasic,
   AlertCenter,
-  AlertClosable,
   AlertCustomClose,
   AlertDescription,
   AlertIcon,
+  AlertIconDescription,
   AlertTheme,
 } from "@/components/element-plus/examples/alert";
 
@@ -17,53 +17,55 @@ export const metadata: Metadata = {
 };
 
 const SOURCES = {
-  basic: `<ElAlert title="成功提示的文案" type="success" />
-<ElAlert title="消息提示的文案" type="info" />
-<ElAlert title="警告提示的文案" type="warning" />
-<ElAlert title="错误提示的文案" type="error" />`,
+  basic: `<div style={{ maxWidth: 600 }}>
+  <ElAlert title="Primary alert" type="primary" />
+  <ElAlert title="Success alert" type="success" style={{ marginTop: 20 }} />
+  <ElAlert title="Info alert" type="info" style={{ marginTop: 20 }} />
+  <ElAlert title="Warning alert" type="warning" style={{ marginTop: 20 }} />
+  <ElAlert title="Error alert" type="error" style={{ marginTop: 20 }} />
+</div>`,
 
-  theme: `<ElAlert title="成功提示的文案" type="success" effect="dark" />
-<ElAlert title="消息提示的文案" type="info" effect="dark" />
-<ElAlert title="警告提示的文案" type="warning" effect="dark" />
-<ElAlert title="错误提示的文案" type="error" effect="dark" />`,
+  theme: `<ElAlert title="Primary alert" type="primary" effect="dark" />
+<ElAlert title="Success alert" type="success" effect="dark" />
+<ElAlert title="Info alert" type="info" effect="dark" />
+<ElAlert title="Warning alert" type="warning" effect="dark" />
+<ElAlert title="Error alert" type="error" effect="dark" />`,
 
-  customClose: `const [visible, setVisible] = useState(true);
+  customClose: `<ElAlert title="Unclosable alert" type="success" closable={false} />
+<ElAlert title="Customized close text" type="info" closeText="Gotcha" />
+<ElAlert title="Alert with callback" type="warning" onClose={handleClose} />`,
 
-{visible && (
-  <ElAlert
-    title="自定义关闭按钮"
-    type="info"
-    closeText="知道了"
-    onClose={() => setVisible(false)}
-  />
-)}`,
+  icon: `<ElAlert title="Primary alert" type="primary" showIcon />
+<ElAlert title="Success alert" type="success" showIcon />
+<ElAlert title="Info alert" type="info" showIcon />
+<ElAlert title="Warning alert" type="warning" showIcon />
+<ElAlert title="Error alert" type="error" showIcon />
+<ElAlert title="Error alert with custom icon" type="error" showIcon icon={<Bell />} />`,
+
+  center: `<ElAlert title="Primary alert" type="primary" center showIcon />
+<ElAlert title="Success alert" type="success" center showIcon />
+<ElAlert title="Info alert" type="info" center showIcon />
+<ElAlert title="Warning alert" type="warning" center showIcon />
+<ElAlert title="Error alert" type="error" center showIcon />`,
 
   description: `<ElAlert
-  title="带辅助性文字介绍"
+  title="With description"
   type="success"
-  description="这是一段辅助性文字，用于补充说明。"
-  showIcon
+  description="This is a description."
 />`,
 
-  icon: `<ElAlert title="显示图标" type="success" showIcon />
-<ElAlert title="显示图标" type="info" showIcon />
-<ElAlert title="显示图标" type="warning" showIcon />
-<ElAlert title="显示图标" type="error" showIcon />`,
-
-  center: `<ElAlert title="文字居中" type="success" center showIcon />
+  iconDescription: `<ElAlert
+  title="Primary alert"
+  type="primary"
+  description="More text description"
+  showIcon
+/>
 <ElAlert
-  title="文字居中"
-  type="info"
-  description="辅助性文字也居中显示。"
-  center
+  title="Success alert"
+  type="success"
+  description="More text description"
   showIcon
 />`,
-
-  closable: `const [items, setItems] = useState(["提示一", "提示二", "提示三"]);
-
-{items.map((title) => (
-  <ElAlert key={title} title={title} onClose={() => setItems(items.filter((t) => t !== title))} />
-))}`,
 };
 
 const API_MD = `
@@ -113,60 +115,62 @@ export default function AlertPage() {
       <p>用于页面中展示重要的提示信息。</p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>
-        页面中的非浮层元素，不会自动消失。设置 <code>type</code> 属性指定主题。
-      </p>
-      <DemoBlock source={SOURCES.basic}>
+      <p>Alert 组件不属于浮层元素，不会自动消失或关闭。</p>
+      <DemoBlock
+        source={SOURCES.basic}
+        description="Alert 组件提供5种类型，由 type 属性指定，默认值为 info。primary 已被添加到 2.9.11。"
+      >
         <AlertBasic />
       </DemoBlock>
 
       <Heading level={2}>主题</Heading>
-      <p>
-        Alert 组件提供了两种主题，通过 <code>effect</code> 属性来设置。
-      </p>
-      <DemoBlock source={SOURCES.theme}>
+      <p>Alert 组件提供了两个不同的主题：light 和 dark。</p>
+      <DemoBlock
+        source={SOURCES.theme}
+        description="通过设置 effect 属性来改变主题，默认为 light。"
+      >
         <AlertTheme />
       </DemoBlock>
 
       <Heading level={2}>自定义关闭按钮</Heading>
-      <p>
-        通过 <code>closeText</code> 属性自定义关闭按钮为文字。
-      </p>
-      <DemoBlock source={SOURCES.customClose}>
+      <p>你可以自定义关闭按钮为文字或其他符号。</p>
+      <DemoBlock
+        source={SOURCES.customClose}
+        description="你可以设置 Alert 组件是否为可关闭状态，关闭按钮的内容以及关闭时的回调函数。closable 属性决定组件是否可关闭，默认 true。close-text 属性用于替换默认的 × 符号。"
+      >
         <AlertCustomClose />
       </DemoBlock>
 
-      <Heading level={2}>带有辅助性文字介绍</Heading>
-      <p>
-        通过 <code>description</code> 属性设置辅助性文字。传入后标题会变为大字号。
-      </p>
-      <DemoBlock source={SOURCES.description}>
-        <AlertDescription />
-      </DemoBlock>
-
-      <Heading level={2}>带有图标</Heading>
-      <p>
-        设置 <code>showIcon</code> 属性显示对应类型的图标。
-      </p>
-      <DemoBlock source={SOURCES.icon}>
+      <Heading level={2}>使用图标</Heading>
+      <p>你可以通过为 Alert 组件添加图标来提高可读性。</p>
+      <DemoBlock
+        source={SOURCES.icon}
+        description="通过设置 show-icon 属性来显示 Alert 的 icon，这能更有效地向用户展示你的提示。或者使用 icon 插槽来自定义图标。"
+      >
         <AlertIcon />
       </DemoBlock>
 
       <Heading level={2}>文字居中</Heading>
-      <p>
-        使用 <code>center</code> 属性让文字水平居中。
-      </p>
+      <p>使用 center 属性来让文字水平居中。</p>
       <DemoBlock source={SOURCES.center}>
         <AlertCenter />
       </DemoBlock>
 
-      <Heading level={2}>可关闭的提示</Heading>
-      <p>
-        设置 <code>closable</code> 属性（默认开启）可以关闭提示，
-        <code>onClose</code> 回调中决定是否从列表中移除。
-      </p>
-      <DemoBlock source={SOURCES.closable}>
-        <AlertClosable />
+      <Heading level={2}>文字描述</Heading>
+      <p>为 Alert 组件添加一个更加详细的描述来使用户了解更多信息。</p>
+      <DemoBlock
+        source={SOURCES.description}
+        description="除了必填的 title 属性外，你可以设置 description 属性来帮助你更好地介绍 Alert 组件。描述只能存放文本，并会自动换行。"
+      >
+        <AlertDescription />
+      </DemoBlock>
+
+      <Heading level={2}>带图标和描述</Heading>
+      <DemoBlock
+        source={SOURCES.iconDescription}
+        description="在最后, 这是一个带有图标和描述的例子。"
+      >
+        <AlertIconDescription />
       </DemoBlock>
 
       <DocsContent source={API_MD} />

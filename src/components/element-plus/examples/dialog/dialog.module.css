@@ -1,0 +1,89 @@
+/* Official demos use a flex-wrap row; the utility !ml-0 cancels the sibling margin */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.row > :global(.el-button) + :global(.el-button) {
+  margin-left: 0;
+}
+
+/* 官方向量工具类 gap-1（4px） */
+.rowGap1 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.rowGap1 > :global(.el-button) + :global(.el-button) {
+  margin-left: 0;
+}
+
+.code {
+  background: var(--el-bg-color-page);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: block;
+  margin-top: 8px;
+}
+
+/* Scale Animation */
+:global(.dialog-scale-enter-active),
+:global(.dialog-scale-leave-active),
+:global(.dialog-scale-enter-active .el-dialog),
+:global(.dialog-scale-leave-active .el-dialog) {
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+:global(.dialog-scale-enter-from),
+:global(.dialog-scale-leave-to) {
+  opacity: 0;
+}
+
+:global(.dialog-scale-enter-from .el-dialog),
+:global(.dialog-scale-leave-to .el-dialog) {
+  transform: scale(0.5);
+  opacity: 0;
+}
+
+/* Slide Animation */
+:global(.dialog-slide-enter-active),
+:global(.dialog-slide-leave-active),
+:global(.dialog-slide-enter-active .el-dialog),
+:global(.dialog-slide-leave-active .el-dialog) {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+:global(.dialog-slide-enter-from),
+:global(.dialog-slide-leave-to) {
+  opacity: 0;
+}
+
+:global(.dialog-slide-enter-from .el-dialog),
+:global(.dialog-slide-leave-to .el-dialog) {
+  transform: translateY(-100px);
+  opacity: 0;
+}
+
+/* Bounce Animation */
+:global(.dialog-bounce-enter-active),
+:global(.dialog-bounce-leave-active),
+:global(.dialog-bounce-enter-active .el-dialog),
+:global(.dialog-bounce-leave-active .el-dialog) {
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+:global(.dialog-bounce-enter-from),
+:global(.dialog-bounce-leave-to) {
+  opacity: 0;
+}
+
+:global(.dialog-bounce-enter-from .el-dialog),
+:global(.dialog-bounce-leave-to .el-dialog) {
+  transform: scale(0.3) translateY(-50px);
+  opacity: 0;
+}

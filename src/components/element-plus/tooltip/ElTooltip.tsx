@@ -133,6 +133,36 @@ const LEAVE_DURATION_MS = 300;
  * - 关闭时先播 leave-to，过渡结束才卸载（persistent 则始终保留 DOM）
  * - 虚拟触发时把参照物直接交给 popper，不要求真实子元素
  */
+/**
+ * 与官方 mergeProps 一致：子元素自带的同名事件先执行，再执行触发器事件。
+ * React 的 cloneElement 会直接覆盖同名 prop，受控 demo 里子元素自己的
+ * onMouseEnter 正因此被吞掉，必须手动合并。
+ */
+function mergeTriggerProps(
+  child: ReactElement,
+  triggerProps: Record<string, unknown>,
+): Record<string, unknown> {
+  const childProps = child.props as Record<string, unknown>;
+  const merged = { ...triggerProps };
+
+  for (const key of Object.keys(triggerProps)) {
+    const triggerHandler = triggerProps[key];
+    const childHandler = childProps[key];
+    if (
+      key.startsWith("on") &&
+      typeof triggerHandler === "function" &&
+      typeof childHandler === "function"
+    ) {
+      merged[key] = (...args: unknown[]) => {
+        (childHandler as (...args: unknown[]) => void)(...args);
+        (triggerHandler as (...args: unknown[]) => void)(...args);
+      };
+    }
+  }
+
+  return merged;
+}
+
 export const ElTooltip = forwardRef<TooltipExpose, TooltipProps>(
   function ElTooltip(
     {
@@ -470,7 +500,7 @@ export const ElTooltip = forwardRef<TooltipExpose, TooltipProps>(
     const child =
       isValidElement(children) && !virtualTriggering
         ? cloneElement(children as ReactElement<Record<string, unknown>>, {
-            ...triggerProps,
+            ...mergeTriggerProps(children, triggerProps),
             ref: (node: HTMLElement | null) => setTriggerEl(node),
           })
         : children;

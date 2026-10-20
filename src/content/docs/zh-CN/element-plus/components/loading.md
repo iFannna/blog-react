@@ -9,69 +9,115 @@ order: 40
 
 加载数据时显示动效。
 
-## 容器内加载
+## 区域加载
 
-:::demo 传入 `target` 可把遮罩显示在指定容器内，默认覆盖整个页面。
+在需要的时候展示加载动画，防止页面失去响应提高用户体验（例如表格）。
+
+:::demo Element Plus 提供了两种调用 Loading 的方法：指令和服务。对于自定义指令 `v-loading`，只需要绑定 `boolean` 值即可。默认状况下，Loading 遮罩会插入到绑定元素的子节点。通过添加 `body` 修饰符，可以使遮罩插入至 Dom 中的 `body` 上。
 
 loading/basic
 
 :::
 
-## 自定义
+## 自定义加载中组件内容
 
-:::demo 通过 `text` 设置加载文案，`background` 设置遮罩背景色。
+你可以自定义加载中组件的文字，图标，以及背景颜色。
+
+:::demo 在绑定了 `v-loading` 指令的元素上添加 `element-loading-text` 属性，其值会被渲染为加载文案，并显示在加载图标的下方。类似地，`element-loading-spinner`、`element-loading-background` 和 `element-loading-svg` 属性分别用来设定 svg 图标、背景色值、加载图标。
 
 loading/customization
 
 :::
 
-## 全屏加载
+:::danger WARNING
+虽然 `element-loading-spinner` / `element-loading-svg` 属性支持传入的 HTML 片段，但是动态在网站上渲染任意的 HTML 是非常危险的，因为很容易导致 XSS 攻击。请确保 `element-loading-spinner` / `element-loading-svg` 的内容是可信的，不要将用户提交的内容赋值给 `element-loading-spinner` / `element-loading-svg` 属性。
 
-:::demo `fullscreen` 让遮罩铺满视口；`lock` 可同时锁定页面滚动。
+:::
+
+## 让加载组件铺满整个屏幕
+
+加载数据时显示全屏动画。
+
+:::demo 当使用指令方式时，全屏遮罩需要添加 `fullscreen` 修饰符（遮罩会插入至 body 上）此时若需要锁定屏幕的滚动，可以使用 `lock` 修饰符；当使用服务方式时，遮罩默认即为全屏，无需额外设置。
 
 loading/fullscreen
 
 :::
 
-## Loading API
+## 以服务的方式来调用
 
-需在应用根部渲染 `<ElLoadingContainer />`。
+Loading 还可以以服务的方式调用。你可以像这样引入 Loading 服务：
 
-### Loading 方法
+```ts
+import { Loading } from "@/components/element-plus/loading";
+```
 
-| 方法 | 说明 | 返回 |
-| --- | --- | --- |
-| Loading.service(options) | 启动加载 | ^[object]`{ close, target }` |
-| Loading.closeAll() | 关闭全部 | — |
+在你需要的时候通过下面的方式调用：
 
-`service` 返回的实例上 `close()` 可关闭本次加载；`target` 为解析后的目标元素。
+```ts
+Loading.service(options);
+```
 
-### LoadingOptions
+其中 `options` 参数为 Loading 的配置项，具体见下表。`LoadingService` 会返回一个 Loading 实例，可通过调用该实例的 `close` 方法来关闭它：
 
-| 属性名 | 说明 | 类型 | 默认值 |
+```ts
+const loadingInstance = Loading.service(options);
+setTimeout(() => {
+  // Loading should be closed asynchronously
+  loadingInstance.close();
+});
+```
+
+需要注意的是，以服务的方式调用的全屏 Loading 是单例的。若在前一个全屏 Loading 关闭前再次调用全屏 Loading，并不会创建一个新的 Loading 实例，而是返回现有全屏 Loading 的实例：
+
+```ts
+const loadingInstance1 = Loading.service({ fullscreen: true });
+const loadingInstance2 = Loading.service({ fullscreen: true });
+console.log(loadingInstance1 === loadingInstance2); // true
+```
+
+此时调用它们中任意一个的 `close` 方法都能关闭这个全屏 Loading。
+
+本站以 React 命令式 API 提供 Loading，无需通过 `app.config.globalProperties` 注册全局方法。
+
+## 应用程序上下文
+
+现在 Loading 接受一条 `context` 作为消息构造器的第二个参数，允许你将当前应用的上下文注入到 Loading 中，这将允许你继承应用程序的所有属性。
+
+你可以像这样使用它：
+
+:::tip TIP
+如果你全局注册了 Loading 容器，它将自动继承应用的上下文环境。
+
+:::
+
+## API
+
+### 配置项
+
+| 名称 | 说明 | 类型 | 默认 |
 | --- | --- | --- | --- |
-| target | 目标元素，字符串经 querySelector 解析 | ^[HTMLElement] / ^[string] | document.body |
-| fullscreen | 是否全屏 | ^[boolean] | false |
-| lock | 全屏时锁定页面滚动 | ^[boolean] | false |
-| text | 加载文案 | ^[string] | — |
+| target | Loading 需要覆盖的 DOM 节点。可传入一个 DOM 对象或字符串；若传入字符串，则会将其作为参数传入 document.querySelector 以获取到对应 DOM 节点 | ^[string] / ^[HTMLElement] | document.body |
+| body | 同 v-loading 指令中的 body 修饰符 | ^[boolean] | false |
+| fullscreen | 同 v-loading 指令中的 fullscreen 修饰符 | ^[boolean] | true |
+| lock | 同 v-loading 指令中的 lock 修饰符 | ^[boolean] | false |
+| text | 显示在加载图标下方的加载文案 | ^[string] / ^[VNode] / ^[array] | — |
+| spinner | 自定义加载图标类名 | ^[string] | — |
 | background | 遮罩背景色 | ^[string] | — |
-| spinner | 自定义图标 svg 字符串 | ^[boolean] / ^[string] | — |
-| custom-class | 自定义类名 | ^[string] | — |
-| z-index | 层级 | ^[number] | — |
-| before-close | 关闭前钩子，返回 false 阻止 | ^[Function]`() => boolean` | — |
-| closed | 完全关闭后的回调 | ^[Function]`() => void` | — |
+| customClass | Loading 的自定义类名 | ^[string] | — |
+| svg | 自定义 SVG 元素覆盖默认加载器 | ^[string] | — |
+| svgViewBox | 设置用于加载 svg 元素的 viewBox 属性 | ^[string] | — |
+| beforeClose <span class="docs-version-tag">2.7.8</span> | Loading 关闭之前执行的函数。如果此函数返回 false，关闭过程将被中止。反之，loading 将被关闭。 | ^[Function] | — |
+| closed <span class="docs-version-tag">2.7.8</span> | Loading 完全关闭后触发的函数 | ^[Function] | — |
 
-## 与 Vue 版 API 的差异
+### 指令
 
-| 官方 Vue | React | 说明 |
+| 名称 | 说明 | 类型 |
 | --- | --- | --- |
-| `v-loading` 指令 | `Loading.service` | React 无指令，统一走命令式 API |
-| 命令式挂载 Vue 实例 | 模块级 store + 容器组件 | 需在根部渲染 `<ElLoadingContainer />` |
-| 全屏 Loading 单例 | 每次调用都是独立实例 | 通过引用计数协调定位类 |
-| `svg` / `svgViewBox` | `spinner` | 传入 svg 字符串即可替换图标 |
-
-**实现说明**：用 createPortal 把遮罩渲染进目标元素；引用计数用 `loading-number` 属性维护
-（与官方一致），叠加多个时只有最后一个关闭才摘掉定位类。
-
-**未实现的官方能力**：`v-loading` 指令及其 `element-loading-*` 属性。
-命令式 API 不传 `target` 时即覆盖 body，因此无需官方的 `body` 选项。
+| v-loading | 是否显示动画 | ^[boolean] / ^[LoadingOptions] |
+| element-loading-text | 显示在加载图标下方的加载文案 | ^[string] |
+| element-loading-spinner | 自定义加载图标 | ^[string] |
+| element-loading-svg | 自定义加载图标 (与 element-loading-spinner 相同) | ^[string] |
+| element-loading-svg-view-box | 设置用于加载 svg 元素的 viewBox 属性 | ^[string] |
+| element-loading-background | 背景遮罩的颜色 | ^[string] |
+| element-loading-custom-class | loading 的自定义类名 | ^[string] |

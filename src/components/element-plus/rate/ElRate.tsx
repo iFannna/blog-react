@@ -1,7 +1,9 @@
 "use client";
 
 import {
+  cloneElement,
   forwardRef,
+  isValidElement,
   useImperativeHandle,
   useMemo,
   useRef,
@@ -119,11 +121,28 @@ function getValueFromMap<T>(
     matchedValue) as T;
 }
 
-/** 解析图标 prop：函数按组件渲染，其余（字符串或节点）原样作为 children 渲染 */
-function renderIconContent(icon: IconPropType | undefined): ReactNode {
+/**
+ * 解析图标 prop。官方把 v-show 的 display 与 decimal--box 类直接打在图标组件
+ * 渲染出的 svg 上；这里同样把 props 透传给组件 / 已有元素，避免额外包一层
+ * span 改变 DOM 结构。非元素节点才退回 span 包裹。
+ */
+function renderIconContent(
+  icon: IconPropType | undefined,
+  props?: SVGProps<SVGSVGElement>,
+): ReactNode {
   if (typeof icon === "function") {
     const Comp = icon as ComponentType<SVGProps<SVGSVGElement>>;
-    return <Comp />;
+    return <Comp {...props} />;
+  }
+  if (isValidElement(icon)) {
+    return cloneElement(icon as React.ReactElement<SVGProps<SVGSVGElement>>, props);
+  }
+  if (props) {
+    return (
+      <span className={props.className} style={props.style}>
+        {icon as ReactNode}
+      </span>
+    );
   }
   return icon as ReactNode;
 }
@@ -424,22 +443,22 @@ export const ElRate = forwardRef<RateExpose, RateProps>(function ElRate(
                 .join(" ")}
             >
               {/* 三种图标互斥显示：小数图标优先，其次实心/空心 */}
-              <span
-                style={{ display: !isDecimal && item <= currentValue ? undefined : "none" }}
-              >
-                {renderIconContent(activeComponent)}
-              </span>
-              <span
-                style={{ display: !isDecimal && item > currentValue ? undefined : "none" }}
-              >
-                {renderIconContent(voidComponent)}
-              </span>
-              <span
-                className="el-rate__decimal--box"
-                style={{ display: isDecimal ? undefined : "none" }}
-              >
-                {renderIconContent(voidComponent)}
-              </span>
+              {renderIconContent(activeComponent, {
+                style: {
+                  display:
+                    !isDecimal && item <= currentValue ? undefined : "none",
+                },
+              })}
+              {renderIconContent(voidComponent, {
+                style: {
+                  display:
+                    !isDecimal && item > currentValue ? undefined : "none",
+                },
+              })}
+              {renderIconContent(voidComponent, {
+                className: "el-rate__decimal--box",
+                style: { display: isDecimal ? undefined : "none" },
+              })}
               <ElIcon
                 className="el-rate__icon el-rate__decimal"
                 style={{ ...decimalStyle, display: isDecimal ? undefined : "none" }}

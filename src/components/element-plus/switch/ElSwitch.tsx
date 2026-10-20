@@ -2,7 +2,6 @@
 
 import {
   useEffect,
-  useId,
   useRef,
   type CSSProperties,
   type MouseEvent,
@@ -10,7 +9,7 @@ import {
 } from "react";
 import { ElIcon } from "../icon/ElIcon";
 import { Loading } from "../icons";
-import { useFormItem } from "../form/use-form";
+import { useFormItem, useFormItemInputId } from "../form/use-form";
 import { addUnit } from "../utils";
 import type { ComponentSize } from "../button/types";
 
@@ -108,9 +107,7 @@ export function ElSwitch({
   inactiveContent,
   beforeChange,
 }: SwitchProps) {
-  const generatedId = useId();
-
-  const inputId = id ?? generatedId;
+  const { inputId } = useFormItemInputId({ id, ariaLabel });
 
   // 传了 activeValue/inactiveValue 即为自定义值模式，与官方一致
   const isCustomValueMode =

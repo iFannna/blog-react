@@ -105,32 +105,52 @@ export function ElDescriptions({
     cells.push({ ...props, key: child.key ?? index });
   });
 
-  // 按 column 分行：累加 span，满 column 换行
+  // 按 column 分行，逐行对齐官方 description.vue 的 getRows：
+  // rowspan 会把后续行占用的列数提前计入 totalSpan，最后一项补满整行
   const rows: CellData[][] = [];
   let current: CellData[] = [];
-  let used = 0;
+  let count = column;
+  let totalSpan = 0;
+  const rowspanTemp: number[] = [];
 
-  for (const cell of cells) {
-    const span = Math.min(cell.span ?? 1, column);
-    if (used + span > column) {
-      // 上一行用 span 撑满
-      if (current.length > 0) {
-        const last = current[current.length - 1];
-        last.span = (last.span ?? 1) + (column - used);
+  cells.forEach((cell, index) => {
+    const span = cell.span ?? 1;
+    const rowspan = cell.rowspan ?? 1;
+    const rowNo = rows.length;
+    rowspanTemp[rowNo] ||= 0;
+
+    if (rowspan > 1) {
+      for (let i = 1; i < rowspan; i++) {
+        rowspanTemp[rowNo + i] ||= 0;
+        rowspanTemp[rowNo + i]++;
+        totalSpan++;
       }
-      rows.push(current);
-      current = [];
-      used = 0;
     }
-    current.push({ ...cell, span });
-    used += span;
-  }
+    if (rowspanTemp[rowNo] > 0) {
+      count -= rowspanTemp[rowNo];
+      rowspanTemp[rowNo] = 0;
+    }
+    if (index < cells.length - 1) {
+      totalSpan += span > count ? count : span;
+    }
 
-  if (current.length > 0) {
-    const last = current[current.length - 1];
-    last.span = (last.span ?? 1) + (column - used);
-    rows.push(current);
-  }
+    if (index === cells.length - 1) {
+      const lastSpan = column - (totalSpan % column);
+      current.push({ ...cell, span: lastSpan });
+      rows.push(current);
+      return;
+    }
+
+    if (span < count) {
+      count -= span;
+      current.push({ ...cell });
+    } else {
+      current.push({ ...cell, span: span > count ? count : span });
+      rows.push(current);
+      count = column;
+      current = [];
+    }
+  });
 
   const rootClasses = [
     "el-descriptions",
@@ -156,47 +176,55 @@ export function ElDescriptions({
 
   const alignClass = (value?: string) => (value ? `is-${value}` : "");
 
-  const renderLabelCell = (cell: CellData) => (
-    <td
-      key={`label-${String(cell.key)}`}
-      className={[
-        "el-descriptions__cell",
-        "el-descriptions__label",
-        border && "is-bordered-label",
-        isVertical && "is-vertical-label",
-        alignClass(cell.labelAlign ?? cell.align),
-        cell.labelClassName,
-      ]
-        .filter(Boolean)
-        .join(" ")}
-      style={cellStyle(cell, "label")}
-      colSpan={isVertical ? cell.span : 1}
-      rowSpan={isVertical ? 1 : cell.rowspan}
-    >
-      {cell.label}
-    </td>
-  );
+  const renderLabelCell = (cell: CellData) => {
+    // 官方 vertical 布局用 th 渲染标签列，无边框时因此自带 700 字重
+    const LabelTag = isVertical ? "th" : "td";
+    const span = cell.span ?? 1;
+    return (
+      <LabelTag
+        key={`label-${String(cell.key)}`}
+        className={[
+          "el-descriptions__cell",
+          "el-descriptions__label",
+          border && "is-bordered-label",
+          isVertical && "is-vertical-label",
+          alignClass(cell.labelAlign ?? cell.align),
+          cell.labelClassName,
+        ]
+          .filter(Boolean)
+          .join(" ")}
+        style={cellStyle(cell, "label")}
+        colSpan={isVertical ? span : 1}
+        rowSpan={isVertical ? 1 : (cell.rowspan ?? 1)}
+      >
+        {cell.label}
+      </LabelTag>
+    );
+  };
 
-  const renderContentCell = (cell: CellData) => (
-    <td
-      key={`content-${String(cell.key)}`}
-      className={[
-        "el-descriptions__cell",
-        "el-descriptions__content",
-        border && "is-bordered-content",
-        isVertical && "is-vertical-content",
-        alignClass(cell.align),
-        cell.className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
-      style={cellStyle(cell, "content")}
-      colSpan={isVertical ? cell.span : border ? cell.span! * 2 - 1 : cell.span}
-      rowSpan={isVertical ? (cell.rowspan ?? 1) * 2 - 1 : cell.rowspan}
-    >
-      {cell.children}
-    </td>
-  );
+  const renderContentCell = (cell: CellData) => {
+    const span = cell.span ?? 1;
+    return (
+      <td
+        key={`content-${String(cell.key)}`}
+        className={[
+          "el-descriptions__cell",
+          "el-descriptions__content",
+          border && "is-bordered-content",
+          isVertical && "is-vertical-content",
+          alignClass(cell.align),
+          cell.className,
+        ]
+          .filter(Boolean)
+          .join(" ")}
+        style={cellStyle(cell, "content")}
+        colSpan={isVertical ? span : border ? span * 2 - 1 : span}
+        rowSpan={isVertical ? (cell.rowspan ?? 1) * 2 - 1 : (cell.rowspan ?? 1)}
+      >
+        {cell.children}
+      </td>
+    );
+  };
 
   return (
     <div className={rootClasses} style={style}>

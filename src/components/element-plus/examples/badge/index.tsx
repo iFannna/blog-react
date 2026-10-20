@@ -13,12 +13,9 @@ const item = {
   marginRight: "3rem",
 } as const;
 
-const row = {
-  display: "flex",
-  alignItems: "center",
-  gap: "3.2rem",
-  flexWrap: "wrap",
+const itemWide = {
   marginTop: "1rem",
+  marginRight: "4rem",
 } as const;
 
 const dropdownLink = {
@@ -31,6 +28,10 @@ const mark = {
   marginLeft: "0.8rem",
 } as const;
 
+const dropdown = {
+  marginTop: "1.76rem",
+} as const;
+
 const customContent = {
   display: "flex",
   alignItems: "center",
@@ -40,73 +41,77 @@ const customContent = {
 
 export function BadgeBasic() {
   return (
-    <div style={row}>
-      <ElBadge value={12} style={item}>
-        <ElButton>评论</ElButton>
+    <>
+      <ElBadge value={12} className="item" style={item}>
+        <ElButton>comments</ElButton>
       </ElBadge>
-      <ElBadge value={3} style={item}>
-        <ElButton>回复</ElButton>
+      <ElBadge value={3} className="item" style={item}>
+        <ElButton>replies</ElButton>
       </ElBadge>
-      <ElBadge value={1} type="primary" style={item}>
-        <ElButton>评论</ElButton>
+      <ElBadge value={1} type="primary" className="item" style={item}>
+        <ElButton>comments</ElButton>
       </ElBadge>
-      <ElBadge value={2} type="warning" style={item}>
-        <ElButton>回复</ElButton>
+      <ElBadge value={2} type="warning" className="item" style={item}>
+        <ElButton>replies</ElButton>
       </ElBadge>
-      <ElBadge value={1} color="green" style={item}>
-        <ElButton>自定义背景</ElButton>
+      <ElBadge value={1} color="green" className="item" style={item}>
+        <ElButton>custom background</ElButton>
       </ElBadge>
+      <span
+        style={{ ...dropdown, display: "inline-flex", verticalAlign: "top" }}
+      >
       <ElDropdown
         trigger="click"
         menu={
           <ElDropdownMenu>
             <ElDropdownItem>
-              评论
-              <ElBadge value={12} style={mark} />
+              comments
+              <ElBadge value={12} className="mark" style={mark} />
             </ElDropdownItem>
             <ElDropdownItem>
-              回复
-              <ElBadge value={3} style={mark} />
+              replies
+              <ElBadge value={3} className="mark" style={mark} />
             </ElDropdownItem>
           </ElDropdownMenu>
         }
       >
         <span style={dropdownLink}>
-          点我
+          Click Me
           <ElIcon className="el-icon--right">
             <CaretBottom />
           </ElIcon>
         </span>
       </ElDropdown>
-    </div>
+      </span>
+    </>
   );
 }
 
 export function BadgeMax() {
   return (
-    <div style={row}>
-      <ElBadge value={200} max={99} style={item}>
-        <ElButton>评论</ElButton>
+    <>
+      <ElBadge value={200} max={99} className="item" style={itemWide}>
+        <ElButton>comments</ElButton>
       </ElBadge>
-      <ElBadge value={100} max={10} style={item}>
-        <ElButton>回复</ElButton>
+      <ElBadge value={100} max={10} className="item" style={itemWide}>
+        <ElButton>replies</ElButton>
       </ElBadge>
-    </div>
+    </>
   );
 }
 
 export function BadgeCustomize() {
   return (
-    <div style={row}>
-      <ElBadge value="new" style={item}>
-        <ElButton>评论</ElButton>
+    <>
+      <ElBadge value="new" className="item" style={itemWide}>
+        <ElButton>comments</ElButton>
       </ElBadge>
-      <ElBadge value="hot" style={item}>
-        <ElButton>回复</ElButton>
+      <ElBadge value="hot" className="item" style={itemWide}>
+        <ElButton>replies</ElButton>
       </ElBadge>
       <ElBadge
         value={99}
-        style={item}
+        className="item" style={itemWide}
         content={(value) => (
           <div style={customContent}>
             <ElIcon>
@@ -116,29 +121,27 @@ export function BadgeCustomize() {
           </div>
         )}
       >
-        <ElButton>分享</ElButton>
+        <ElButton>share</ElButton>
       </ElBadge>
-    </div>
+    </>
   );
 }
 
 export function BadgeDot() {
   return (
-    <div style={row}>
-      <ElBadge isDot style={item}>查询</ElBadge>
-      <ElBadge isDot style={item}>
+    <>
+      <ElBadge isDot className="item" style={itemWide}>query</ElBadge>
+      <ElBadge isDot className="item" style={itemWide}>
         <ElButton icon={<Share />} type="primary" />
       </ElBadge>
-    </div>
+    </>
   );
 }
 
 export function BadgeOffset() {
   return (
-    <div style={row}>
-      <ElBadge value={1} offset={[10, 5]} style={item}>
-        <ElButton>偏移</ElButton>
-      </ElBadge>
-    </div>
+    <ElBadge value={1} offset={[10, 5]} className="item" style={item}>
+      <ElButton> offset</ElButton>
+    </ElBadge>
   );
 }

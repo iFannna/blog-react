@@ -1,0 +1,8 @@
+/* 文档正文的 ul 规则会命中内嵌级联面板，按官方菜单值还原 */
+:global(.docs-content .el-cascader-menu__list) {
+  margin: 0;
+  padding: 6px 0;
+  font-size: 14px;
+  line-height: 1.7;
+  list-style: none;
+}

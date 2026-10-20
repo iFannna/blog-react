@@ -7,11 +7,13 @@ order: 80
 
 # Popconfirm 气泡确认框
 
-点击元素，弹出气泡样式的确认框。
+点击某个元素弹出一个简单的气泡确认框。
 
-## 弹出位置
+## 展示位置
 
-:::demo `placement` 决定弹出方向，共 12 个方位。
+Popconfirm 提供 9 种展示位置。
+
+:::demo 使用 `title` 属性来设置点击参考元素时显示的信息。由 `placement` 属性决定 Popconfirm 的位置。该属性值格式为：`[方向]-[对齐位置]`，可供选择的四个方向分别是 `top`、`left`、`right`、`bottom`，可供选择的三种对齐方式分别是 `start`、`end`、`null`，默认的对齐方式为 `null`。以 `placement="left-end"` 为例，气泡确认框会显示在悬停元素的左侧，且提示信息的底部与悬停元素的底部对齐。
 
 popconfirm/placement
 
@@ -19,94 +21,72 @@ popconfirm/placement
 
 ## 基础用法
 
-:::demo 只需传入 `title`，确认与取消按钮会自动渲染并关闭气泡。
+Popconfirm 的属性与 Popover 很类似，因此对于重复属性，请参考 Popover 的文档，在此文档中不做详尽解释。
+
+:::demo 在 Popconfirm 中，只有 `title` 属性可用，`content` 属性会被忽略。
 
 popconfirm/basic-usage
 
 :::
 
-## 自定义
+## 自定义弹出框的内容
 
-:::demo 可自定义按钮文案与类型、图标、颜色和宽度；通过 `actions` 渲染函数可以完全接管按钮区域。
+可以在 Popconfirm 中自定义内容。
+
+:::demo
 
 popconfirm/customize
 
 :::
 
-## 触发事件
+## 多种让 Popconfirm 出现的方法
 
-:::demo `onConfirm`、`onCancel` 接收点击事件，可据此更新业务状态。
+点击按钮触发事件。
+
+:::demo
 
 popconfirm/trigger-event
 
 :::
 
-## Popconfirm API
+## API
 
-### Popconfirm Attributes
+### Attributes
 
-| 属性名 | 说明 | 类型 | 默认值 |
+| 属性名 | 说明 | 类型 | 默认 |
 | --- | --- | --- | --- |
-| title | 标题 | ^[string] / ^[ReactNode] | — |
-| effect | 主题 | ^[enum]`'dark' \| 'light'` | light |
-| confirm-button-text | 确认按钮文案 | ^[string] | 确定 |
-| cancel-button-text | 取消按钮文案 | ^[string] | 取消 |
-| confirm-button-type | 确认按钮类型 | ^[enum]`'primary' \| 'success' \| 'warning' \| 'danger' \| 'info' \| 'text'` | primary |
-| cancel-button-type | 取消按钮类型 | ^[enum]`同上` | text |
-| icon | 自定义图标 | ^[ReactNode] | QuestionFilled |
-| icon-color | 图标颜色 | ^[string] | #f90 |
-| hide-icon | 是否隐藏图标 | ^[boolean] | false |
-| hide-after | 隐藏延迟（毫秒） | ^[number] | 200 |
-| teleported | 是否挂载到 appendTo | ^[boolean] | true |
-| persistent | 不可见时是否保留 DOM | ^[boolean] | false |
-| width | 宽度（最小 150px） | ^[string] / ^[number] | 150 |
-| placement | 弹出位置 | ^[string] | bottom |
-| trigger | 触发方式，默认 click | ^[enum] / ^[array] | click |
-| visible | 受控显示状态 | ^[boolean] | — |
-| show-after | 显示延迟（毫秒） | ^[number] | 0 |
-| popper-class | 弹层类名 | ^[string] | — |
-| append-to | 挂载目标 | ^[string] / ^[HTMLElement] | — |
-| virtual-triggering | 是否启用虚拟触发 | ^[boolean] | false |
-| virtual-ref | 虚拟触发参照物 | ^[HTMLElement] / ^[object] | — |
-| z-index | 层级 | ^[number] | — |
+| title | 标题 | ^[string] | — |
+| effect <span class="docs-version-tag">2.11.2</span> | Tooltip 主题，内置了 dark / light 两种 | ^[enum] / ^[string] | light |
+| confirm-button-text | 确认按钮文字 | ^[string] | — |
+| cancel-button-text | 取消按钮文字 | ^[string] | — |
+| confirm-button-type | 确认按钮类型 | ^[enum] | primary |
+| cancel-button-type | 取消按钮类型 | ^[enum] | text |
+| icon | 自定义图标 | ^[string] / ^[Component] | QuestionFilled |
+| icon-color | Icon 颜色 | ^[string] | #f90 |
+| hide-icon | 是否隐藏 Icon | ^[boolean] | false |
+| hide-after | 关闭时的延迟 | ^[number] | 200 |
+| teleported | 是否将 popover 的下拉列表插入至 body 元素 | ^[boolean] | true |
+| persistent | 当 popover 组件长时间不触发且 persistent 属性设置为 false 时，popover 将会被删除 | ^[boolean] | false |
+| width | 弹层宽度，最小宽度 150px | ^[string] / ^[number] | 150 |
+| tooltip | 继承自 Tooltip 的所有属性，但不包括：popper-class、popper-style、fallback-placements | — | — |
 
-其余 Tooltip 属性（除 `popper-class`、`popper-style`、`fallback-placements`）同样可用。
+### Events
 
-### Popconfirm Events
-
-| 事件名 | 说明 | 参数 |
+| 事件名 | 说明 | 类型 |
 | --- | --- | --- |
-| onConfirm | 点击确认按钮 | ^[Function]`(event: MouseEvent) => void` |
-| onCancel | 点击取消按钮 | ^[Function]`(event: MouseEvent) => void` |
-| onVisibleChange | 显隐状态变化 | ^[Function]`(visible: boolean) => void` |
+| confirm | 点击确认按钮时触发 | ^[Function] |
+| cancel | 点击取消按钮时触发 | ^[Function] |
 
-### Popconfirm Slots
+### Slots
 
-| 插槽名 | 说明 | React 写法 |
+| 插槽名 | 说明 | 类型 |
 | --- | --- | --- |
-| reference | 触发元素 | `children` |
-| actions | 自定义底部按钮区，参数为 `{ confirm, cancel }` | `actions` 渲染函数 |
+| reference | 触发 Popconfirm 显示的 HTML 元素 | — |
+| actions <span class="docs-version-tag">2.8.1</span> | 页脚的内容 | ^[object] |
 
-### Popconfirm Exposes
+### 暴露
 
-| 方法 | 说明 |
-| --- | --- |
-| hide() | 立即隐藏 |
-| show() | 立即显示 |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
+| 方法名 | 详情 | Type |
 | --- | --- | --- |
-| `<slot name="reference">` | 直接包住触发元素 | — |
-| `<slot name="actions">` | `actions` 渲染函数 | 参数 `{ confirm, cancel }` 一致 |
-| `popperRef` | 未导出 | 需要时通过 Tooltip 层获取 |
-| 未导出 `show()` | 导出 `show()` | 便于受控场景主动展示 |
-
-**实现说明**：官方是 ElTooltip 的包装，固定 `popperClass="el-popover"`，
-并把 `fallbackPlacements` 限定为 `['bottom', 'top', 'right', 'left']`
-—— 翻转时只在四个主方向间切换，不使用 -start / -end 变体。
-默认文案「确定」「取消」取自官方中文语言包。
-
-点击确认或取消后组件会自动关闭（对应官方 `onConfirm` / `onCancel`
-后调用 hide 的行为）；`trigger` 默认 click，但可按需改为 hover / focus 等。
+| popperRef <span class="docs-version-tag">2.10.7</span> | el-popper 组件实例 | ^[object] |
+| hide <span class="docs-version-tag">2.10.7</span> | hide popconfirm | ^[Function] |

@@ -1,0 +1,4 @@
+/* 官方 range 示例显式把分隔符改为 content-box，本地全局 reset 是 border-box。 */
+.demoRange :global(.el-date-editor .el-range-separator) {
+  box-sizing: content-box;
+}

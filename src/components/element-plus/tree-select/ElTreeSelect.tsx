@@ -4,6 +4,7 @@ import {
   useCallback,
   useEffect,
   useId,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -11,6 +12,7 @@ import {
   type FocusEvent,
   type ReactNode,
 } from "react";
+import { createPortal } from "react-dom";
 import { ElTree } from "../tree";
 import {
   escapeStringRegexp,
@@ -183,6 +185,13 @@ export function ElTreeSelect(props: TreeSelectProps) {
   const [tree, setTree] = useState<TreeInstance | null>(null);
 
   const rootRef = useRef<HTMLDivElement>(null);
+  const popperRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+  const [popperPosition, setPopperPosition] = useState<CSSProperties>({
+    top: 0,
+    left: 0,
+    width: 0,
+  });
   const inputRef = useRef<HTMLInputElement>(null);
   // combobox 必须关联弹层；官方 select 也有同样的 aria-controls 关系
   const listboxId = useId();
@@ -355,6 +364,33 @@ export function ElTreeSelect(props: TreeSelectProps) {
     return count;
   }, [treeData, inputValue, effectiveFilterNodeMethod, getByProp, tree]);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- 仅挂载后置位，用于区分 SSR 与客户端
+  useEffect(() => setMounted(true), []);
+
+  /** 官方 Popper 挂到 body 并用 fixed 定位；这里按触发器 rect 同步。 */
+  const updatePopperPosition = useCallback(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const rect = root.getBoundingClientRect();
+    setPopperPosition({
+      top: rect.bottom + 12,
+      left: rect.left,
+      width: rect.width,
+    });
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!open) return;
+    updatePopperPosition();
+    const handler = () => updatePopperPosition();
+    window.addEventListener("resize", handler);
+    window.addEventListener("scroll", handler, true);
+    return () => {
+      window.removeEventListener("resize", handler);
+      window.removeEventListener("scroll", handler, true);
+    };
+  }, [open, updatePopperPosition]);
+
   // 对应官方 watch(() => props.data) + filterable：数据变化后按当前关键词重新过滤
   useEffect(() => {
     if (!filterable || !tree) return;
@@ -386,7 +422,11 @@ export function ElTreeSelect(props: TreeSelectProps) {
   useEffect(() => {
     if (!open) return;
     const onDocMouseDown = (event: MouseEvent) => {
-      if (!rootRef.current?.contains(event.target as Node)) {
+      const target = event.target as Node;
+      if (
+        !rootRef.current?.contains(target) &&
+        !popperRef.current?.contains(target)
+      ) {
         setOpen(false);
         setIsFocused(false);
       }
@@ -725,14 +765,72 @@ export function ElTreeSelect(props: TreeSelectProps) {
     .filter(Boolean)
     .join(" ");
 
-  return (
+  const popper = (
     <div
-      ref={rootRef}
-      className={rootClasses}
-      style={style}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
+      ref={popperRef}
+      className={popperClasses}
+      // 官方 popper 通过 Teleport 挂到 body，用 fixed 跟随触发器
+      style={{
+        ...popperPosition,
+        position: "fixed",
+        zIndex: 2001,
+        display: open ? undefined : "none",
+      }}
     >
+        <div className={dropdownClasses}>
+          <ElScrollbar
+            id={listboxId}
+            tag="ul"
+            wrapClass="el-select-dropdown__wrap"
+            viewClass="el-select-dropdown__list"
+            role="listbox"
+            ariaOrientation="vertical"
+          >
+            <ElTree
+              {...restTreeProps}
+              props={treeOptionPropsForTree}
+              data={treeData}
+              // 官方 nodeKey = nodeKey || valueKey || 'value'，value-key 也参与节点寻址
+              nodeKey={valuePropName}
+              showCheckbox={showCheckbox}
+              checkStrictly={checkStrictly}
+              checkOnClickNode={checkOnClickNode}
+              // 展开/收起统一由 handleNodeClick 负责，避免与 ElTree 内建逻辑重复触发
+              expandOnClickNode={false}
+              lazy={lazy}
+              load={load}
+              defaultExpandedKeys={mergedExpandedKeys}
+              renderContent={renderNode}
+              filterNodeMethod={effectiveFilterNodeMethod}
+              // 空态统一由下拉层承担（官方 tree-select 场景下树的 empty-block 恒不渲染）
+              onNodeClick={handleNodeClick}
+              onCheck={handleCheck}
+              onNodeExpand={onNodeExpandStable}
+              onReady={(instance) => {
+                setTree(instance);
+                onReady?.(instance);
+              }}
+            />
+          </ElScrollbar>
+
+          {visibleNodeCount === 0 && (
+            <div className="el-select-dropdown__empty">
+              <span>{resolvedEmptyText}</span>
+            </div>
+          )}
+        </div>
+    </div>
+  );
+
+  return (
+    <>
+      <div
+        ref={rootRef}
+        className={rootClasses}
+        style={style}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+      >
       <div
         className={[
           "el-select__wrapper",
@@ -740,6 +838,9 @@ export function ElTreeSelect(props: TreeSelectProps) {
           isHovering && !isFocused && "is-hovering",
           filterable && "is-filterable",
           selectDisabled && "is-disabled",
+          // 官方 ElTooltip 会给触发器补上这两个类
+          "el-tooltip__trigger",
+          "el-tooltip__trigger",
         ]
           .filter(Boolean)
           .join(" ")}
@@ -823,6 +924,14 @@ export function ElTreeSelect(props: TreeSelectProps) {
                 else if (remoteMethod) remoteMethod(next);
               }}
             />
+            {filterable && (
+              <span
+                aria-hidden="true"
+                className="el-select__input-calculator"
+              >
+                {inputValue}
+              </span>
+            )}
           </div>
 
           {showPlaceholder && (
@@ -876,66 +985,11 @@ export function ElTreeSelect(props: TreeSelectProps) {
           )}
         </div>
       </div>
-
-      <div
-        className={popperClasses}
-        // 未走 Popper，用绝对定位跟随触发器；收起时保留挂载以维持树的展开与勾选态
-        style={{
-          position: "absolute",
-          top: "calc(100% + 12px)",
-          left: 0,
-          width: "100%",
-          zIndex: 2001,
-          display: open ? undefined : "none",
-        }}
-      >
-        <div className={dropdownClasses}>
-          <ElScrollbar
-            id={listboxId}
-            tag="ul"
-            wrapClass="el-select-dropdown__wrap"
-            viewClass="el-select-dropdown__list"
-            role="listbox"
-            ariaOrientation="vertical"
-          >
-            <ElTree
-              {...restTreeProps}
-              props={treeOptionPropsForTree}
-              data={treeData}
-              // 官方 nodeKey = nodeKey || valueKey || 'value'，value-key 也参与节点寻址
-              nodeKey={valuePropName}
-              showCheckbox={showCheckbox}
-              checkStrictly={checkStrictly}
-              checkOnClickNode={checkOnClickNode}
-              // 展开/收起统一由 handleNodeClick 负责，避免与 ElTree 内建逻辑重复触发
-              expandOnClickNode={false}
-              lazy={lazy}
-              load={load}
-              defaultExpandedKeys={mergedExpandedKeys}
-              renderContent={renderNode}
-              filterNodeMethod={effectiveFilterNodeMethod}
-              // 空态统一由下拉层承担（官方 tree-select 场景下树的 empty-block 恒不渲染）
-              onNodeClick={handleNodeClick}
-              onCheck={handleCheck}
-              onNodeExpand={onNodeExpandStable}
-              onReady={(instance) => {
-                setTree(instance);
-                onReady?.(instance);
-              }}
-            />
-          </ElScrollbar>
-
-          {visibleNodeCount === 0 && (
-            <div className="el-select-dropdown__empty">
-              <span>{resolvedEmptyText}</span>
-            </div>
-          )}
-        </div>
       </div>
-    </div>
+      {mounted ? createPortal(popper, document.body) : null}
+    </>
   );
 }
-
 /** 树节点的 click 回调类型，取自 ElTree 的 props。 */
 type TreeClickHandler = NonNullable<TreeProps["onNodeClick"]>;
 /** 树节点的 check 回调类型。 */

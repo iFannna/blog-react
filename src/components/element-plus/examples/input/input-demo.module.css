@@ -1,0 +1,4 @@
+/* 官方 mixed-input 示例把 prepend 背景改回空白填充色 */
+:global(.input-with-select .el-input-group__prepend) {
+  background-color: var(--el-fill-color-blank);
+}

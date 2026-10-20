@@ -15,6 +15,7 @@ import { ElAutoResizer } from "@/components/element-plus/auto-resizer";
 import { ElButton } from "@/components/element-plus/button";
 import { ElCheckbox } from "@/components/element-plus/checkbox";
 import { ElEmpty } from "@/components/element-plus/empty";
+import { ElFormItem } from "@/components/element-plus/form";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { Filter, Loading, Timer } from "@/components/element-plus/icons";
 import { ElInput } from "@/components/element-plus/input";
@@ -34,10 +35,15 @@ import type {
 import { ElTag } from "@/components/element-plus/tag";
 import { ElTooltip } from "@/components/element-plus/tooltip";
 
+import tableV2Styles from "./table-v2.module.css";
+
 const resizerWrapperStyle: CSSProperties = { height: 400 };
 
 const rowHoverBackground = "var(--el-color-primary-light-9)";
 const dangerBackground = "var(--el-color-danger-light-9)";
+// 官方 demo 用 Tailwind 的 bg-blue-200 / bg-red-100，本地没有对应工具类。
+const rowClassBlueBackground = "#bfdbfe";
+const rowClassDangerBackground = "#fee2e2";
 
 const generateColumns = (
   length = 10,
@@ -389,8 +395,8 @@ const rowClassGetter = ({ rowIndex }: { rowIndex: number }) => {
 
 // 项目里没有 Tailwind，rowClass 之外再用 cellProps 把同样的配色落到内联样式
 const rowClassCellProps = ({ rowIndex }: { rowIndex: number }) => {
-  if (rowIndex % 10 === 5) return { style: { backgroundColor: dangerBackground } };
-  if (rowIndex % 10 === 0) return { style: { backgroundColor: rowHoverBackground } };
+  if (rowIndex % 10 === 5) return { style: { backgroundColor: rowClassDangerBackground } };
+  if (rowIndex % 10 === 0) return { style: { backgroundColor: rowClassBlueBackground } };
   return {};
 };
 
@@ -417,15 +423,8 @@ const stickySourceData = generateData(stickyColumns, 200);
 const stickyRowClass = ({ rowIndex }: { rowIndex: number }) =>
   rowIndex < 0 || (rowIndex + 1) % 5 === 0 ? "sticky-row" : "";
 
-const stickyCellProps = ({ rowIndex }: { rowIndex: number }) =>
-  rowIndex < 0
-    ? {
-        style: {
-          backgroundColor: "var(--el-color-primary-light-5)",
-          fontWeight: "bold",
-        },
-      }
-    : {};
+// 官方示例的 fixed-header-row 样式选择器拼写有误，线上实际不生效；
+// 这里不额外加背景/字重，保持与线上渲染一致。
 
 export function TableV2StickyRows() {
   const [stickyIndex, setStickyIndex] = useState(0);
@@ -438,7 +437,6 @@ export function TableV2StickyRows() {
       data={tableData}
       fixedData={fixedData}
       rowClass={stickyRowClass}
-      cellProps={stickyCellProps}
       width={700}
       height={400}
       fixed
@@ -1054,12 +1052,17 @@ const textList = [shortText, midText, longText];
 
 const dynamicHeightData: TableV2Row[] = (() => {
   const random = createRandom(2024);
-  return Array.from({ length: 200 }).map((_, index) => ({
-    id: `random-${index + 1}`,
-    name: "Tom",
-    date: "2016-05-03",
-    description: textList[Math.floor(random() * textList.length)],
-  }));
+  return Array.from({ length: 200 })
+    .map((_, index) => ({
+      id: `random-${index + 1}`,
+      name: "Tom",
+      date: "2016-05-03",
+      description: textList[Math.floor(random() * textList.length)],
+    }))
+    // 官方 comparator 对同名项恒返回 -1，稳定排序后数组整体逆序
+    .sort((left, right) =>
+      String(left.name) > String(right.name) ? 1 : -1,
+    );
 })();
 
 const dynamicHeightColumns: TableV2Column[] = [
@@ -1167,15 +1170,17 @@ const renderDetailRow = ({ cells, rowData }: TableV2RowSlotProps) => {
 
 export function TableV2DetailedView() {
   return (
-    <ElTableV2
-      columns={detailColumns}
-      data={detailData}
-      estimatedRowHeight={50}
-      expandColumnKey={String(detailColumns[0].key)}
-      width={700}
-      height={400}
-      rowRenderer={renderDetailRow}
-    />
+    <div className={tableV2Styles.detailedView}>
+      <ElTableV2
+        columns={detailColumns}
+        data={detailData}
+        estimatedRowHeight={50}
+        expandColumnKey={String(detailColumns[0].key)}
+        width={700}
+        height={400}
+        rowRenderer={renderDetailRow}
+      />
+    </div>
   );
 }
 
@@ -1287,23 +1292,13 @@ export function TableV2ManualScroll() {
 
   return (
     <>
-      <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 16 }}>
-        <label style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ fontSize: 14 }}>Scroll pixels</span>
-          <ElInput
-            value={scrollDelta}
-            onChange={setScrollDelta}
-            style={{ width: 120 }}
-          />
-        </label>
-        <label style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ fontSize: 14 }}>Scroll rows</span>
-          <ElInput
-            value={scrollRows}
-            onChange={setScrollRows}
-            style={{ width: 120 }}
-          />
-        </label>
+      <div style={{ display: "flex", alignItems: "center", marginBottom: 16 }}>
+        <ElFormItem label="Scroll pixels" style={{ marginRight: 16 }}>
+          <ElInput value={scrollDelta} onChange={setScrollDelta} />
+        </ElFormItem>
+        <ElFormItem label="Scroll rows">
+          <ElInput value={scrollRows} onChange={setScrollRows} />
+        </ElFormItem>
       </div>
 
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>

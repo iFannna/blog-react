@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState, type CSSProperties, type ReactNode } from "react";
 import { ElIcon } from "../icon/ElIcon";
 import {
   CircleCloseFilled,
@@ -40,6 +40,8 @@ export interface AlertProps {
   /** 主题 */
   effect?: AlertEffect;
   className?: string;
+  /** 对应官方透传到根节点的 style */
+  style?: CSSProperties;
   /** 关闭时触发，对应官方 close 事件 */
   onClose?: (event: React.MouseEvent<HTMLElement>) => void;
   /** 自定义图标，对应官方 icon 插槽 */
@@ -62,6 +64,7 @@ export function ElAlert({
   center = false,
   effect = "light",
   className,
+  style,
   onClose,
   icon,
 }: AlertProps) {
@@ -89,7 +92,7 @@ export function ElAlert({
   };
 
   return (
-    <div className={classes} role="alert">
+    <div className={classes} style={style} role="alert">
       {showIcon && (
         <ElIcon className={hasDesc ? "el-alert__icon is-big" : "el-alert__icon"}>
           {icon ?? TYPE_ICONS[type]}

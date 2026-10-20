@@ -32,6 +32,7 @@ export interface HeaderRenderContext<T extends DefaultRow> {
 export interface BodyRenderContext<T extends DefaultRow> {
   ns: string;
   tableSize: string;
+  tooltipEffect?: "dark" | "light";
   tooltipFormatter?: (data: { row: T; column: TableColumnCtx<T>; cellValue: unknown }) => ReactNode;
   store: {
     states: {
@@ -99,11 +100,15 @@ export function renderBodyCellContent<T extends DefaultRow>(options: {
   } = options;
 
   if (column.type !== "default") {
-    return renderForcedCell(
-      column.type,
-      "cell",
-      { row, column, $index, expanded },
-      { store: ctx.store as never, ns: ctx.ns },
+    return (
+      <div className="cell">
+        {renderForcedCell(
+          column.type,
+          "cell",
+          { row, column, $index, expanded },
+          { store: ctx.store as never, ns: ctx.ns },
+        )}
+      </div>
     );
   }
 
@@ -130,6 +135,7 @@ export function renderBodyCellContent<T extends DefaultRow>(options: {
       }}
       cellValue={readCellValue(row, column.property)}
       tableFormatter={ctx.tooltipFormatter}
+      tooltipEffect={ctx.tooltipEffect}
     >
       {prefix}
       {children}
@@ -150,6 +156,7 @@ function CellWithOverflowTooltip<T extends DefaultRow>({
   cellStyle,
   cellValue,
   tableFormatter,
+  tooltipEffect,
   children,
 }: {
   row: T;
@@ -157,6 +164,7 @@ function CellWithOverflowTooltip<T extends DefaultRow>({
   cellStyle: CSSProperties;
   cellValue: unknown;
   tableFormatter?: (data: { row: T; column: TableColumnCtx<T>; cellValue: unknown }) => ReactNode;
+  tooltipEffect?: "dark" | "light";
   children: ReactNode;
 }) {
   const [visible, setVisible] = useState(false);
@@ -194,7 +202,7 @@ function CellWithOverflowTooltip<T extends DefaultRow>({
         if (!next) setVisible(false);
       }}
       placement="top"
-      effect="dark"
+      effect={tooltipEffect ?? "dark"}
       showAfter={0}
       hideAfter={0}
       content={hasFormattedContent ? formattedContent : overflowText}

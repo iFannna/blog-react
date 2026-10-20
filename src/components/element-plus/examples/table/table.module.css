@@ -1,0 +1,4 @@
+/* Official tooltip-formatter demo scoped style: adjacent tags own the gap */
+.tagItem + .tagItem {
+  margin-left: 5px;
+}

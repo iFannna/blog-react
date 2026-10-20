@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Fragment,
   useEffect,
   useRef,
   useState,
@@ -133,7 +134,7 @@ export function ElSkeleton({
   return (
     <div className={classes} style={style}>
       {Array.from({ length: count }, (_, index) => (
-        <div key={index}>{template ?? defaultTemplate}</div>
+        <Fragment key={index}>{template ?? defaultTemplate}</Fragment>
       ))}
     </div>
   );

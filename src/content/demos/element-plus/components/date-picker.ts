@@ -26,6 +26,11 @@ const manifest: DemoManifest = {
     exportName: "DatePickerYearRange",
     sourceFile: "src/components/element-plus/examples/date-picker/index.tsx",
   },
+  "date-picker/quarter-range": {
+    load: () => import("@/components/element-plus/examples/date-picker"),
+    exportName: "DatePickerQuarterRange",
+    sourceFile: "src/components/element-plus/examples/date-picker/index.tsx",
+  },
   "date-picker/single-panel": {
     load: () => import("@/components/element-plus/examples/date-picker"),
     exportName: "DatePickerSinglePanel",

@@ -7,11 +7,11 @@ order: 90
 
 # Popover 弹出框
 
-点击或悬停在元素上时弹出的气泡卡片。
+## 展示位置
 
-## 弹出位置
+Popover 弹出框提供 9 种展示位置。
 
-:::demo 通过 `placement` 设置弹出位置，共 12 个方向。
+:::demo 使用 `content` 属性来设置悬停时显示的信息。由 `placement` 属性决定 Popover 弹出框的位置。该属性值格式为：`[方向]-[对齐位置]`，可供选择的四个方向分别是 `top`、`left`、`right`、`bottom`，可供选择的三种对齐方式分别是 `start`、`end`、`null`，默认的对齐方式为 `null`。以 `placement="left-end"` 为例，Popover 弹出框会显示在悬停元素的左侧，且提示信息的底部与悬停元素的底部对齐。
 
 popover/placement
 
@@ -19,7 +19,9 @@ popover/placement
 
 ## 基础用法
 
-:::demo 支持 hover / click / focus / contextmenu 与受控显隐，默认 `trigger` 为 click、`effect` 为 light。
+Popover 是在 ElTooltip 基础上开发出来的。因此对于重复属性，请参考 Tooltip 的文档，在此文档中不做详尽解释。
+
+:::demo `trigger` 属性被用来决定 popover 的触发方式，支持的触发方式：`hover`、`click`、`focus` 或 `contextmenu`。如果你想手动控制它，可以设置 `visible` 属性。
 
 popover/basic-usage
 
@@ -27,15 +29,24 @@ popover/basic-usage
 
 ## 虚拟触发
 
-:::demo `virtualTriggering` 让弹层挂在任意元素旁，而不是必须包住触发元素。
+像 Tooltip 一样，Popover 可以由虚拟元素触发，这个功能就很适合使用在触发元素和展示内容元素是分开的场景。通常我们使用 reference 来放置我们的触发元素，用 `virtualRef` API，您可以任意设置您的触发元素，但注意到触发元素应该是接受 mouse 和 keyboard 事件的元素。
+
+:::danger WARNING
+`v-popover` 将被废弃，请使用 `virtual-ref` 作为替代。
+
+:::
+
+:::demo
 
 popover/virtual-triggering
 
 :::
 
-## 嵌套信息
+## 内容可扩展
 
-:::demo `content` 可以放表格、头像等复杂内容，`width` 控制宽度。
+可以在 Popover 中嵌套其它组件，以下为嵌套表格的例子。
+
+:::demo 利用插槽取代 `content` 属性。
 
 popover/nested-information
 
@@ -43,74 +54,76 @@ popover/nested-information
 
 ## 嵌套操作
 
-:::demo 使用受控模式在弹层内放置按钮，实现二次确认之类的操作。
+当然，你还可以嵌套操作，它比使用 dialog 更加轻量。
+
+:::demo
 
 popover/nested-operation
 
 :::
 
-## 指令式用法
+## 指令
 
-:::demo 配合 `virtualTriggering` 与 `persistent`， 可以像官方 `v-popover` 指令一样把弹层绑定到元素上。
+您可以使用指令性方式弹出窗口，但这种方法不再推荐，因为这使得应用程序变得复杂，您可以参考虚拟触发来实现一样的效果。
+
+:::demo
 
 popover/directive-usage
 
 :::
 
-## Popover API
+## API
 
-### Popover Attributes
+### Attributes
 
-| 属性名 | 说明 | 类型 | 默认值 |
+| 属性名 | 说明 | 类型 | Default |
 | --- | --- | --- | --- |
-| title | 标题 | ^[string] / ^[ReactNode] | — |
-| content | 内容 | ^[string] / ^[ReactNode] | — |
+| trigger | popover 触发方式，在受控模式下无效。 | ^[enum] / ^[array] | hover |
+| trigger-keys <span class="docs-version-tag">2.9.8</span> | 当通过鼠标点击使触发元素获得焦点时，可以定义一组键盘按键代码，通过键盘控制气泡框的显示，在受控模式下无效。 | ^[Array] | ['Enter','Space'] |
+| title | 标题 | ^[string] | — |
+| effect | Tooltip 主题，Element Plus 内置了 dark / light 两种主题 | ^[enum] / ^[string] | light |
+| content | 显示的内容，也可以通过写入默认插槽修改显示内容 | ^[string] | '' |
 | width | 宽度 | ^[string] / ^[number] | 150 |
-| placement | 弹出位置 | ^[string] | bottom |
-| effect | 主题 | ^[enum]`'dark' \| 'light'` | light |
-| trigger | 触发方式 | ^[enum] / ^[array] | click |
-| trigger-keys | 键盘触发键 | ^[array] | — |
-| visible | 受控显示状态 | ^[boolean] | — |
-| show-after / hide-after | 显示 / 隐藏延迟 | ^[number] | 0 / 200 |
-| disabled | 是否禁用 | ^[boolean] | false |
-| show-arrow | 是否显示箭头 | ^[boolean] | true |
-| offset | 与触发元素的距离 | ^[number] | 12 |
-| enterable | 鼠标是否可进入弹出内容 | ^[boolean] | true |
-| popper-class / popper-style | 弹层类名 / 样式 | ^[string] / ^[object] | — |
-| teleported | 是否挂载到 appendTo | ^[boolean] | true |
-| append-to | 挂载目标 | ^[string] / ^[HTMLElement] | — |
-| persistent | 不可见时是否保留 DOM | ^[boolean] | true |
-| transition | 过渡动画名 | ^[string] | el-fade-in-linear |
-| virtual-triggering | 虚拟触发 | ^[boolean] | false |
-| virtual-ref | 虚拟触发参照物 | ^[HTMLElement] / ^[object] | — |
-| z-index | 层级 | ^[number] | — |
+| placement | 出现位置 | ^[enum] | bottom |
+| disabled | Popover 是否可用 | ^[boolean] | false |
+| visible | Popover 是否显示 | ^[boolean] / ^[null] | null |
+| offset | 浮层偏移量，Popover 是在 Tooltip 基础上开发的，Popover 的 offset 是 undefined，但 Tooltip 的 offset 是 12 | ^[number] | undefined |
+| transition | 定义渐变动画，默认是 el-fade-in-linear | ^[string] | — |
+| show-arrow | 是否显示 Tooltip 箭头，欲了解更多信息，请参考 ElPopper | ^[boolean] | true |
+| popper-options | popper.js 的参数 | ^[object] | {modifiers: [{name: 'computeStyles',options: {gpuAcceleration: false}}]} |
+| popper-class | 为 popper 添加类名 | ^[string] | — |
+| popper-style | 为 popper 自定义样式 | ^[string] / ^[object] | — |
+| show-after | 延迟显示时间（以毫秒为单位），在受控模式下无效。 | ^[number] | 0 |
+| hide-after | 消失延迟时间（以毫秒为单位），在受控模式下无效。 | ^[number] | 200 |
+| auto-close | 隐藏提示框的超时时间（以毫秒为单位），在受控模式下无效。 | ^[number] | 0 |
+| tabindex | Popover 组件的 tabindex | ^[number] / ^[string] | 0 |
+| teleported | 是否将 popover 的下拉列表插入至 body 元素 | ^[boolean] | true |
+| append-to <span class="docs-version-tag">2.8.4</span> | 指示 Tooltip 的内容将附加在哪一个网页元素上 | ^[CSSSelector] / ^[HTMLElement] | body |
+| persistent | 当 popover 组件长时间不触发且 persistent 属性设置为 false 时，popover 将会被删除 | ^[boolean] | true |
+| virtual-triggering | 是否启用虚拟触发器 | ^[boolean] | — |
+| virtual-ref | 代表 tooltip 所要附加的参照元素 | ^[HTMLElement] | — |
+| tooltip | 继承自 Tooltip 的所有属性 | — | — |
 
-### Popover Events
+### Slots
 
-| 事件名 | 说明 | 参数 |
+| 插槽名 | 说明 | Type |
 | --- | --- | --- |
-| onVisibleChange | 显隐状态变化 | ^[Function]`(visible: boolean) => void` |
-| onBeforeEnter | 进入动画前 | ^[Function]`() => void` |
-| onAfterEnter | 进入动画后 | ^[Function]`() => void` |
-| onBeforeLeave | 离开动画前 | ^[Function]`() => void` |
-| onAfterLeave | 离开动画后 | ^[Function]`() => void` |
+| default | 弹出框的内容，2.13.4 及之后版本可以接收 hide 参数。 | ^[object] |
+| reference | 触发弹出框的 HTML 元素，只接受单个根元素。 | - |
 
-### Popover Exposes
+### Events
 
-| 方法 | 说明 |
-| --- | --- |
-| show() | 立即显示 |
-| hide() | 立即隐藏 |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
+| 事件名 | 说明 | 类型 |
 | --- | --- | --- |
-| `<slot name="reference">` | 直接包住触发元素 | — |
-| `<slot>` | `content` 属性 | 传节点 |
-| `v-popover` 指令 | `virtualTriggering` + `virtualRef` | 用元素 ref 作为参照物 |
+| show | 显示时触发 | ^[Function] |
+| before-enter | 显示动画播放前触发 | ^[Function] |
+| after-enter | 显示动画播放完毕后触发 | ^[Function] |
+| hide | 隐藏时触发 | ^[Function] |
+| before-leave | 隐藏动画播放前触发 | ^[Function] |
+| after-leave | 隐藏动画播放完毕后触发 | ^[Function] |
 
-**实现说明**：Popover 本质是 Tooltip 的包装，与官方一致：
-默认 `effect` 为 light、`trigger` 为 click；popperClass 为
-`el-popover` + 用户类名 +（有 content 时）`el-popover--plain`，
-`--plain` 去掉默认内边距，让内容自己控制留白。
+### Exposes
+
+| 名称 | 详情 | Type |
+| --- | --- | --- |
+| hide | 隐藏 popover | ^[Function] |

@@ -119,8 +119,13 @@ export function BasicDateTable({
     };
   }, [date]);
 
+  const singleParsedValue = Array.isArray(parsedValue)
+    ? undefined
+    : parsedValue;
+
   const cellMatchesDate = useCallback(
-    (cell: DateCell, value: Dayjs) =>
+    (cell: DateCell, value?: Dayjs) =>
+      !!value &&
       dayjs(value)
         .locale(lang)
         .isSame(date.date(Number(cell.text)), "day"),
@@ -131,8 +136,8 @@ export function BasicDateTable({
     (cell: DateCell) =>
       selectionMode === "date" &&
       isNormalDay(cell.type) &&
-      cellMatchesDate(cell, parsedValue as Dayjs),
-    [selectionMode, cellMatchesDate, parsedValue],
+      cellMatchesDate(cell, singleParsedValue),
+    [selectionMode, cellMatchesDate, singleParsedValue],
   );
 
   const isWeekActive = useCallback(
@@ -217,7 +222,7 @@ export function BasicDateTable({
         cell.isCurrent =
           selectionMode === "date" &&
           isNormalDay(cell.type) &&
-          cellMatchesDate(cell, parsedValue as Dayjs);
+          cellMatchesDate(cell, singleParsedValue);
         cell.disabled = disabledDate?.(cellDate);
         cell.customClass = cellClassName?.(cellDate);
         if (shouldIncrement) count += 1;

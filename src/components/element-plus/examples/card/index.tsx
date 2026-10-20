@@ -2,62 +2,67 @@
 
 import { ElCard } from "@/components/element-plus/card";
 
-const grid = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(24rem, 1fr))",
-  gap: "1.6rem",
-} as const;
+const HAMBURGER =
+  "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png";
+
+const listStyle = { margin: 0 } as const;
+
+const listItemStyle = (index: number) => ({
+  ...listStyle,
+  marginBottom: index < 3 ? 16 : 0,
+});
 
 export function CardBasic() {
   return (
-    <div style={grid}>
-      <ElCard header="卡片标题">
-        <p style={{ margin: 0 }}>卡片内容</p>
-      </ElCard>
-    </div>
+    <ElCard
+      style={{ maxWidth: 480 }}
+      header={
+        <div className="card-header">
+          <span>Card name</span>
+        </div>
+      }
+      footer="Footer content"
+    >
+      {[1, 2, 3, 4].map((item) => (
+        <p key={item} style={listItemStyle(item - 1)}>
+          {`List item ${item}`}
+        </p>
+      ))}
+    </ElCard>
+  );
+}
+
+export function CardSimple() {
+  return (
+    <ElCard style={{ maxWidth: 480 }}>
+      {[1, 2, 3, 4].map((item) => (
+        <p key={item} style={listItemStyle(item - 1)}>
+          {`List item ${item}`}
+        </p>
+      ))}
+    </ElCard>
+  );
+}
+
+export function CardWithImages() {
+  return (
+    <ElCard style={{ maxWidth: 480 }} header="Yummy hamburger">
+      <img src={HAMBURGER} style={{ width: "100%" }} alt="" />
+    </ElCard>
   );
 }
 
 export function CardShadow() {
   return (
-    <div style={grid}>
-      <ElCard header="always" shadow="always">
-        <p style={{ margin: 0 }}>总是显示阴影</p>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
+      <ElCard style={{ width: 480 }} shadow="always">
+        Always
       </ElCard>
-      <ElCard header="hover" shadow="hover">
-        <p style={{ margin: 0 }}>鼠标悬停时显示阴影</p>
+      <ElCard style={{ width: 480 }} shadow="hover">
+        Hover
       </ElCard>
-      <ElCard header="never" shadow="never">
-        <p style={{ margin: 0 }}>从不显示阴影</p>
-      </ElCard>
-    </div>
-  );
-}
-
-export function CardSlots() {
-  return (
-    <div style={grid}>
-      <ElCard
-        header={<span style={{ fontWeight: 700 }}>自定义头部</span>}
-        footer={<span style={{ color: "#909399" }}>自定义页脚</span>}
-      >
-        <p style={{ margin: 0 }}>头部与页脚都传入节点</p>
-      </ElCard>
-      <ElCard>
-        <p style={{ margin: 0 }}>只有内容区，无头部页脚</p>
-      </ElCard>
-    </div>
-  );
-}
-
-export function CardBodyStyle() {
-  return (
-    <div style={grid}>
-      <ElCard header="自定义内容区样式" bodyStyle={{ padding: "3rem", textAlign: "center" }}>
-        <p style={{ margin: 0 }}>bodyStyle 加大内边距</p>
-      </ElCard>
-      <ElCard header="自定义类名" bodyClass="docs-card-demo-body">
-        <p style={{ margin: 0 }}>bodyClass 追加类名</p>
+      <ElCard style={{ width: 480 }} shadow="never">
+        Never
       </ElCard>
     </div>
   );

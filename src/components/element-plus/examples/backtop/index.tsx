@@ -1,31 +1,24 @@
 "use client";
 
 import { ElBacktop } from "@/components/element-plus/backtop";
-import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import { Star } from "@/components/element-plus/icons";
+import styles from "./backtop.module.css";
 
 export function BacktopBasic() {
   return (
-    <div style={{ height: 300 }}>
-      <p style={{ color: "var(--docs-text-secondary)" }}>
-        向下滚动页面，超过 200px 后右下角会出现回到顶部按钮。
-      </p>
-      <ElBacktop />
-    </div>
+    <>
+      Scroll down to see the bottom-right button.
+      <ElBacktop right={100} bottom={100} />
+    </>
   );
 }
 
 export function BacktopCustom() {
   return (
-    <div style={{ height: 300 }}>
-      <p style={{ color: "var(--docs-text-secondary)" }}>
-        自定义内容为 40px * 40px 的区域。
-      </p>
-      <ElBacktop right={80} bottom={80}>
-        <ElIcon style={{ fontSize: 20 }}>
-          <Star />
-        </ElIcon>
+    <>
+      Scroll down to see the bottom-right button.
+      <ElBacktop bottom={100}>
+        <div className={styles.customContent}>UP</div>
       </ElBacktop>
-    </div>
+    </>
   );
 }

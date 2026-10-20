@@ -73,6 +73,10 @@ config-provider/table
 
 :::
 
+## 实验性功能
+
+在本节中，您可以学习如何使用 Config Provider 来提供实验性功能。现在，我们还没有添加任何实验性功能，但在未来的规划中，我们将添加一些实验性功能。您可以使用此配置来管理这些功能。
+
 ## Config Provider API
 
 ### Config Provider Attributes

@@ -12,9 +12,7 @@ const blockStyle = {
 const labelStyle = { marginRight: "16px" } as const;
 
 const sizeRowStyle = {
-  display: "flex",
   alignItems: "center",
-  gap: "16px",
 } as const;
 
 export function ColorPickerBasic() {
@@ -76,8 +74,17 @@ export function ColorPickerSizes() {
 
   return (
     <div style={sizeRowStyle}>
-      <ElColorPicker value={color} size="large" onChange={setColor} />
-      <ElColorPicker value={color} onChange={setColor} />
+      <ElColorPicker
+        value={color}
+        size="large"
+        onChange={setColor}
+        style={{ marginRight: 16 }}
+      />
+      <ElColorPicker
+        value={color}
+        onChange={setColor}
+        style={{ marginRight: 16 }}
+      />
       <ElColorPicker value={color} size="small" onChange={setColor} />
     </div>
   );

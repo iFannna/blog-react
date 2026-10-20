@@ -154,28 +154,21 @@ export default function StepsPage() {
         <StepsBasic />
       </DemoBlock>
 
+      <Heading level={2}>状态</Heading>
+      <p>
+        <code>finishStatus</code> 与 <code>processStatus</code> 控制已完成与进行中步骤的状态，
+        支持 success 与 error。
+      </p>
+      <DemoBlock source={SOURCES.withStatus}>
+        <StepsWithStatus />
+      </DemoBlock>
+
       <Heading level={2}>居中对齐</Heading>
       <p>
         设置 <code>alignCenter</code> 让标题与描述居中。
       </p>
       <DemoBlock source={SOURCES.centered}>
         <StepsCentered />
-      </DemoBlock>
-
-      <Heading level={2}>简洁风格</Heading>
-      <p>
-        设置 <code>simple</code> 应用简洁样式，可通过 <code>space</code> 指定间距。
-      </p>
-      <DemoBlock source={SOURCES.simple}>
-        <StepsSimple />
-      </DemoBlock>
-
-      <Heading level={2}>纵向步骤条</Heading>
-      <p>
-        设置 <code>direction=&quot;vertical&quot;</code> 纵向排列，容器需有确定高度。
-      </p>
-      <DemoBlock source={SOURCES.vertical}>
-        <StepsVertical />
       </DemoBlock>
 
       <Heading level={2}>带描述</Heading>
@@ -190,13 +183,20 @@ export default function StepsPage() {
         <StepsWithIcon />
       </DemoBlock>
 
-      <Heading level={2}>状态</Heading>
+      <Heading level={2}>纵向步骤条</Heading>
       <p>
-        <code>finishStatus</code> 与 <code>processStatus</code> 控制已完成与进行中步骤的状态，
-        支持 success 与 error。
+        设置 <code>direction=&quot;vertical&quot;</code> 纵向排列，容器需有确定高度。
       </p>
-      <DemoBlock source={SOURCES.withStatus}>
-        <StepsWithStatus />
+      <DemoBlock source={SOURCES.vertical}>
+        <StepsVertical />
+      </DemoBlock>
+
+      <Heading level={2}>简洁风格</Heading>
+      <p>
+        设置 <code>simple</code> 应用简洁样式，可通过 <code>space</code> 指定间距。
+      </p>
+      <DemoBlock source={SOURCES.simple}>
+        <StepsSimple />
       </DemoBlock>
 
       <DocsContent source={API_MD} />

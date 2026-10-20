@@ -1,0 +1,12 @@
+.cellItem {
+  display: flex;
+  align-items: center;
+}
+
+.myLabel {
+  background: var(--el-color-success-light-9) !important;
+}
+
+.myContent {
+  background: var(--el-color-danger-light-9);
+}

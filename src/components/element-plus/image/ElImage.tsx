@@ -195,6 +195,14 @@ export const ElImage = forwardRef<ImageExpose, ImageProps>(
       loading !== "eager" && ((!supportLoading && loading === "lazy") || lazy);
 
     const loadImage = useCallback(() => {
+      // 空 src 在官方会进入 error 分支；浏览器不会为空 src 触发 error 事件，
+      // 这里直接落到失败态，避免一直停在占位层
+      if (!src) {
+        setIsLoading(false);
+        setHasLoadError(true);
+        setImageSrc(undefined);
+        return;
+      }
       setIsLoading(true);
       setHasLoadError(false);
       setImageSrc(src);

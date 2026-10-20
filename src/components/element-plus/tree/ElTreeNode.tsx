@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { ElIcon } from "../icon/ElIcon";
 import { CaretRight, Loading } from "../icons";
 import { ElCheckbox } from "../checkbox";
+import { ElText } from "../text";
 import { CollapseTransition } from "./collapse-transition";
 import { getNodeKey as getNodeKeyUtil, handleCurrentChange } from "./utils";
 import { useTreeScope } from "./context";
@@ -169,7 +170,11 @@ function ElTreeNodeInner({ node }: ElTreeNodeProps) {
     ? props.renderContent({ node, data: node.data, store })
     : props.children
       ? props.children({ node, data: node.data, store })
-      : <span className="el-tree-node__label">{node.label}</span>;
+      : (
+        <ElText tag="span" truncated className="el-tree-node__label">
+          {node.label}
+        </ElText>
+      );
 
   const rootClasses = [
     "el-tree-node",

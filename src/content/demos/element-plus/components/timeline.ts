@@ -6,9 +6,9 @@ const manifest: DemoManifest = {
     exportName: "TimelineBasic",
     sourceFile: "src/components/element-plus/examples/timeline/index.tsx",
   },
-  "timeline/center": {
+  "timeline/mode": {
     load: () => import("@/components/element-plus/examples/timeline"),
-    exportName: "TimelineCenter",
+    exportName: "TimelineMode",
     sourceFile: "src/components/element-plus/examples/timeline/index.tsx",
   },
   "timeline/custom-node": {
@@ -21,9 +21,9 @@ const manifest: DemoManifest = {
     exportName: "TimelineCustomTimestamp",
     sourceFile: "src/components/element-plus/examples/timeline/index.tsx",
   },
-  "timeline/mode": {
+  "timeline/center": {
     load: () => import("@/components/element-plus/examples/timeline"),
-    exportName: "TimelineMode",
+    exportName: "TimelineCenter",
     sourceFile: "src/components/element-plus/examples/timeline/index.tsx",
   },
   "timeline/reverse": {

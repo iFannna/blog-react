@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 /**
  * 测量一组顶层菜单项的宽度，算出横向菜单应该截断到第几项。
@@ -32,8 +32,6 @@ interface Options {
   moreSlotRef: React.RefObject<HTMLLIElement | null>;
   /** 顶层元素子节点数量，用于把省略号槽位排除在测量之外 */
   childCount: number;
-  /** 变化后重新测量的依赖（展开项、激活项、折叠态等） */
-  dep: unknown;
 }
 
 /** 对应官方 calcMenuItemWidth：自身宽度 + 左右外边距。 */
@@ -53,19 +51,22 @@ export function useHorizontalEllipsis({
   menuRef,
   moreSlotRef,
   childCount,
-  dep,
 }: Options): EllipsisResult {
   const [sliceIndex, setSliceIndex] = useState(-1);
   const [recalcToken, setRecalcToken] = useState(0);
-  // 省略号宽度跨测量保留：收起时它被 display: none 藏起来量不到，
-  // 退回上一次量到的真实值（首帧则用官方的 64 兜底）
+  // 省略号宽度跨测量保留：首次渲染还没有省略号节点，用官方默认值兜底
   const moreWidthRef = useRef(DEFAULT_MORE_ITEM_WIDTH);
 
-  const handleResize = () => {
+  /**
+   * 先恢复完整列表再测量。测量必须基于未截断的 DOM，
+   * 否则每轮都会把「省略号节点」当成普通项，截断数在两拍之间来回跳变。
+   * 因此这个方法同时承担重置与触发两件事。
+   */
+  const handleResize = useCallback(() => {
     if (!enabled) return;
     setSliceIndex(-1);
     setRecalcToken((value) => value + 1);
-  };
+  }, [enabled]);
 
   useEffect(() => {
     if (!enabled) return;
@@ -80,8 +81,15 @@ export function useHorizontalEllipsis({
 
     const children = Array.from(menu.childNodes)
       .filter((node): node is HTMLElement => node.nodeType === 1)
-      // 省略号槽位排在最后，按顶层项数量截断即可把它排除
+      // 省略号节点排在最后，按顶层项数量截断即可把它排除
       .slice(0, childCount);
+
+    // 仍在截断态说明这次测量发生在旧 DOM 上，先展开再重测
+    if (children.length < childCount) {
+      setSliceIndex(-1);
+      setRecalcToken((value) => value + 1);
+      return;
+    }
 
     const menuStyle = getComputedStyle(menu);
     const paddingLeft = Number.parseInt(menuStyle.paddingLeft, 10);
@@ -100,13 +108,13 @@ export function useHorizontalEllipsis({
       }
     });
 
-    // 第一拍已在渲染中展开全部项，这里如果算出的结果没变化就不再 setState，
-    // 避免「测量 -> 截断 -> 又测量」来回抖动
+    // 全部放得下用 -1 表示，与官方 sliceIndex 的语义保持一致
     const resolved = nextSliceIndex === children.length ? -1 : nextSliceIndex;
     setSliceIndex((current) => (current === resolved ? current : resolved));
-  }, [enabled, childCount, recalcToken, dep, menuRef, moreSlotRef]);
+  }, [enabled, childCount, recalcToken, menuRef, moreSlotRef]);
 
-  // 宽度变化时重新测量
+  // 只有菜单自身尺寸变化时才重新测量；内容增减（截断导致的重挂载）
+  // 不能反过来触发测量，否则会和截断结果形成死循环。
   useEffect(() => {
     if (!enabled) return;
     const menu = menuRef.current;
@@ -115,10 +123,9 @@ export function useHorizontalEllipsis({
     const observer = new ResizeObserver(() => handleResize());
     observer.observe(menu);
     return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [enabled, menuRef]);
+  }, [enabled, menuRef, handleResize]);
 
-  // 首帧与依赖变化后各测一次
+  // 首帧挂载后测一次
   useEffect(() => {
     if (!enabled) return;
     const frame = requestAnimationFrame(() => setRecalcToken((v) => v + 1));

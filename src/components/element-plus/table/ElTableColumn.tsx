@@ -60,7 +60,7 @@ export function ElTableColumn<T extends DefaultRow = DefaultRow>({
   filteredValue,
   filterMethod,
   tooltipFormatter,
-  index = 0,
+  index,
   children,
   renderHeader,
 }: TableColumnProps<T> & {
@@ -131,7 +131,13 @@ export function ElTableColumn<T extends DefaultRow = DefaultRow>({
       width: parsedWidth ?? starts.width,
       minWidth: parsedMinWidth ?? starts.minWidth ?? 80,
       align: align ? `is-${align}` : "",
-      headerAlign: headerAlign ? `is-${headerAlign}` : undefined,
+      // 官方 realHeaderAlign：未显式设置 headerAlign 时沿用 align，
+      // 例如 align="right" 的列其表头输入框也右对齐。
+      headerAlign: headerAlign
+        ? `is-${headerAlign}`
+        : align
+          ? `is-${align}`
+          : undefined,
       sortable: !!sortable,
       sortMethod,
       sortBy,

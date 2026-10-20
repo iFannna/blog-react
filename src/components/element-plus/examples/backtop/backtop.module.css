@@ -1,0 +1,9 @@
+.customContent {
+  width: 100%;
+  height: 100%;
+  background-color: var(--el-bg-color-overlay);
+  box-shadow: var(--el-box-shadow-lighter);
+  color: #1989fa;
+  line-height: 40px;
+  text-align: center;
+}

@@ -75,6 +75,12 @@ function MarkdownBody({ markdown }: { markdown: string }) {
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
       components={{
+        // 官方用 .vp-table 包裹表格，提供底部间距与横向滚动
+        table: ({ children }) => (
+          <div className="docs-table">
+            <table>{children}</table>
+          </div>
+        ),
         // 表格单元格里的类型标记需要还原
         td: ({ children }) => <td>{transformChildren(children)}</td>,
         th: ({ children }) => <th>{transformChildren(children)}</th>,

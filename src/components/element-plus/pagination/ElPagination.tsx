@@ -1,6 +1,14 @@
 "use client";
 
-import { useMemo, useState, type CSSProperties, type ReactNode } from "react";
+import {
+  cloneElement,
+  isValidElement,
+  useMemo,
+  useState,
+  type CSSProperties,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 import { ElIcon } from "../icon/ElIcon";
 import { ArrowLeft, ArrowRight, CaretLeft, CaretRight, MoreFilled } from "../icons";
 import { ElSelect, type SelectOption } from "../select/ElSelect";
@@ -143,10 +151,10 @@ export function ElPagination({
 
   if (hideOnSinglePage && pageCount <= 1) return null;
 
+  const resolvedSize = small ? "small" : (size ?? "default");
   const rootClasses = [
     "el-pagination",
-    (small || size === "small") && "el-pagination--small",
-    size === "large" && "el-pagination--large",
+    `el-pagination--${resolvedSize}`,
     background && "is-background",
     disabled && "is-disabled",
     className,
@@ -222,91 +230,154 @@ export function ElPagination({
 
       case "pager":
         return (
-          <div className="el-pager" key={`${keyPrefix}-pager`}>
-            <button
-              type="button"
-              className={["number", currentPage === 1 && "is-active"]
+          <ul className="el-pager" key={`${keyPrefix}-pager`}>
+            <li
+              className={[
+                "number",
+                currentPage === 1 && "is-active",
+                disabled && "is-disabled",
+              ]
                 .filter(Boolean)
                 .join(" ")}
-              disabled={disabled}
-              onClick={() => setPage(1)}
+              aria-disabled={disabled || undefined}
+              tabIndex={0}
+              onClick={() => !disabled && setPage(1)}
+              onKeyDown={(event) => {
+                if (disabled) return;
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setPage(1);
+                }
+              }}
             >
               1
-            </button>
+            </li>
 
             {showPrevMore && (
-              <button
-                type="button"
-                className="more btn-quickprev"
-                disabled={disabled}
-                onClick={() => setPage(currentPage - pagerCount + 2)}
+              <li
+                className={[
+                  "more",
+                  "btn-quickprev",
+                  "el-icon",
+                  disabled && "is-disabled",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                aria-disabled={disabled || undefined}
+                tabIndex={0}
+                onClick={() => !disabled && setPage(currentPage - pagerCount + 2)}
+                onKeyDown={(event) => {
+                  if (disabled) return;
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    setPage(currentPage - pagerCount + 2);
+                  }
+                }}
               >
-                <ElIcon>
-                  <MoreFilled />
-                </ElIcon>
-              </button>
+                <MoreFilled />
+              </li>
             )}
 
             {pagers.map((page) => (
-              <button
-                type="button"
+              <li
                 key={page}
-                className={["number", currentPage === page && "is-active"]
+                className={[
+                  "number",
+                  currentPage === page && "is-active",
+                  disabled && "is-disabled",
+                ]
                   .filter(Boolean)
                   .join(" ")}
-                disabled={disabled}
-                onClick={() => setPage(page)}
+                aria-disabled={disabled || undefined}
+                tabIndex={0}
+                onClick={() => !disabled && setPage(page)}
+                onKeyDown={(event) => {
+                  if (disabled) return;
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    setPage(page);
+                  }
+                }}
               >
                 {page}
-              </button>
+              </li>
             ))}
 
             {showNextMore && (
-              <button
-                type="button"
-                className="more btn-quicknext"
-                disabled={disabled}
-                onClick={() => setPage(currentPage + pagerCount - 2)}
+              <li
+                className={[
+                  "more",
+                  "btn-quicknext",
+                  "el-icon",
+                  disabled && "is-disabled",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                aria-disabled={disabled || undefined}
+                tabIndex={0}
+                onClick={() => !disabled && setPage(currentPage + pagerCount - 2)}
+                onKeyDown={(event) => {
+                  if (disabled) return;
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    setPage(currentPage + pagerCount - 2);
+                  }
+                }}
               >
-                <ElIcon>
-                  <MoreFilled />
-                </ElIcon>
-              </button>
+                <MoreFilled />
+              </li>
             )}
 
             {pageCount > 1 && (
-              <button
-                type="button"
-                className={["number", currentPage === pageCount && "is-active"]
+              <li
+                className={[
+                  "number",
+                  currentPage === pageCount && "is-active",
+                  disabled && "is-disabled",
+                ]
                   .filter(Boolean)
                   .join(" ")}
-                disabled={disabled}
-                onClick={() => setPage(pageCount)}
+                aria-disabled={disabled || undefined}
+                tabIndex={0}
+                onClick={() => !disabled && setPage(pageCount)}
+                onKeyDown={(event) => {
+                  if (disabled) return;
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    setPage(pageCount);
+                  }
+                }}
               >
                 {pageCount}
-              </button>
+              </li>
             )}
-          </div>
+          </ul>
         );
 
       case "jumper":
         return (
           <span className="el-pagination__jump" key={`${keyPrefix}-jumper`}>
             <span className="el-pagination__goto">{t("el.pagination.goto")}</span>
-            <input
-              type="number"
-              className="el-pagination__editor el-input__inner"
-              value={jumperValue}
-              disabled={disabled}
-              aria-label={t("el.pagination.page")}
-              onChange={(event) => setJumperValue(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key !== "Enter") return;
-                const page = Number.parseInt(jumperValue, 10);
-                if (!Number.isNaN(page)) setPage(page);
-                setJumperValue("");
-              }}
-            />
+            <div
+              className={`el-input el-input--${resolvedSize} el-pagination__editor is-in-pagination`}
+            >
+              <div className="el-input__wrapper">
+                <input
+                  type="number"
+                  className="el-input__inner"
+                  value={jumperValue}
+                  disabled={disabled}
+                  aria-label={t("el.pagination.page")}
+                  onChange={(event) => setJumperValue(event.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key !== "Enter") return;
+                    const page = Number.parseInt(jumperValue, 10);
+                    if (!Number.isNaN(page)) setPage(page);
+                    setJumperValue("");
+                  }}
+                />
+              </div>
+            </div>
             <span className="el-pagination__classifier">
               {t("el.pagination.pageClassifier")}
             </span>
@@ -318,9 +389,29 @@ export function ElPagination({
     }
   };
 
+  // 官方会给首尾布局项加 is-first / is-last，用于抵消按钮自带的左右外边距
+  const withPosition = (node: ReactNode, first: boolean, last: boolean) => {
+    if (!isValidElement(node)) return node;
+    const element = node as ReactElement<{ className?: string }>;
+    const className = [
+      element.props.className,
+      first && "is-first",
+      last && "is-last",
+    ]
+      .filter(Boolean)
+      .join(" ");
+    return cloneElement(element, { className });
+  };
+
   return (
     <div className={rootClasses} style={style}>
-      {leftParts.map((part) => renderPart(part, "l"))}
+      {leftParts.map((part, index) =>
+        withPosition(
+          renderPart(part, "l"),
+          index === 0,
+          rightParts.length === 0 && index === leftParts.length - 1,
+        ),
+      )}
       {rightParts.length > 0 && (
         <div className="el-pagination__rightwrapper">
           {rightParts.map((part) => renderPart(part, "r"))}

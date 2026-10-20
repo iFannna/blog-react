@@ -6,13 +6,7 @@ import { message } from "@/components/element-plus/message";
 import { ElButton } from "@/components/element-plus/button";
 import { ElSwitch } from "@/components/element-plus/switch";
 import { Delete } from "@/components/element-plus/icons";
-
-const row = {
-  display: "flex",
-  gap: "1.2rem",
-  flexWrap: "wrap" as const,
-  alignItems: "center",
-};
+import styles from "./feedback.module.css";
 
 export function MessageBoxAlert() {
   return (
@@ -89,7 +83,7 @@ function DynamicSwitch() {
 
 export function MessageBoxUseVnode() {
   return (
-    <div style={row}>
+    <div className={styles.row}>
       <ElButton
         plain
         onClick={() =>
@@ -304,7 +298,7 @@ export function MessageBoxCustomizedIcon() {
 
 export function MessageBoxDraggable() {
   return (
-    <div style={row}>
+    <div className={styles.row}>
       <ElButton
         plain
         onClick={() => {

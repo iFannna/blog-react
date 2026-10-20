@@ -9,6 +9,7 @@ import { ElTag } from "@/components/element-plus/tag";
 import { ElDescriptions, ElDescriptionsItem } from "@/components/element-plus/descriptions";
 import { notification } from "@/components/element-plus/notification";
 import { ArrowLeft } from "@/components/element-plus/icons";
+import styles from "./page-header.module.css";
 
 const AVATAR_IMG =
   "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png";
@@ -26,7 +27,14 @@ const subtitleStyle: CSSProperties = {
   marginRight: 8,
   color: "var(--el-text-color-regular)",
 };
-const mainStyle: CSSProperties = { marginTop: 16, fontSize: 14, fontWeight: 700 };
+const mainStyle: CSSProperties = {
+  marginTop: 16,
+  marginBottom: 0,
+  fontSize: 14,
+  fontWeight: 700,
+  // unocss text-sm 的默认行高为 20px
+  lineHeight: "20px",
+};
 
 export function PageHeaderComplete() {
   return (
@@ -37,7 +45,7 @@ export function PageHeaderComplete() {
           <ElBreadcrumb separator="/">
             <ElBreadcrumbItem to="./page-header.html">homepage</ElBreadcrumbItem>
             <ElBreadcrumbItem>
-              <a href="./page-header.html">route 1</a>
+              <a className={styles.link} href="./page-header.html">route 1</a>
             </ElBreadcrumbItem>
             <ElBreadcrumbItem>route 2</ElBreadcrumbItem>
           </ElBreadcrumb>
@@ -53,19 +61,20 @@ export function PageHeaderComplete() {
         extra={
           <div style={flexRow}>
             <ElButton>Print</ElButton>
-            <ElButton type="primary" style={{ marginLeft: 8 }}>Edit</ElButton>
+            <ElButton type="primary">Edit</ElButton>
           </div>
         }
       >
         <ElDescriptions column={3} size="small" style={{ marginTop: 16 }}>
-          <ElDescriptionsItem label="Username">kooriookami</ElDescriptionsItem>
-          <ElDescriptionsItem label="Telephone">18100000000</ElDescriptionsItem>
+          {/* 官方模板换行会把首尾空白压成一个空格，文本宽度按此渲染 */}
+          <ElDescriptionsItem label="Username">{" "}kooriookami{" "}</ElDescriptionsItem>
+          <ElDescriptionsItem label="Telephone">{" "}18100000000{" "}</ElDescriptionsItem>
           <ElDescriptionsItem label="Place">Suzhou</ElDescriptionsItem>
           <ElDescriptionsItem label="Remarks">
             <ElTag size="small">School</ElTag>
           </ElDescriptionsItem>
           <ElDescriptionsItem label="Address">
-            No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
+            {" "}No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province{" "}
           </ElDescriptionsItem>
         </ElDescriptions>
         <p style={{ ...mainStyle, fontWeight: 400 }}>
@@ -105,7 +114,7 @@ export function PageHeaderBreadcrumb() {
         <ElBreadcrumb separator="/">
           <ElBreadcrumbItem to="./page-header.html">homepage</ElBreadcrumbItem>
           <ElBreadcrumbItem>
-            <a href="./page-header.html">route 1</a>
+            <a className={styles.link} href="./page-header.html">route 1</a>
           </ElBreadcrumbItem>
           <ElBreadcrumbItem>route 2</ElBreadcrumbItem>
         </ElBreadcrumb>
@@ -129,7 +138,7 @@ export function PageHeaderAdditionalSections() {
       extra={
         <div style={flexRow}>
           <ElButton>Print</ElButton>
-          <ElButton type="primary" style={{ marginLeft: 8 }}>Edit</ElButton>
+          <ElButton type="primary">Edit</ElButton>
         </div>
       }
     />

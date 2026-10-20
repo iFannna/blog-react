@@ -1,0 +1,28 @@
+/* 对应官方 demo 的 .demo-tabs > .el-tabs__content 局部样式 */
+/* 官方文档全局样式：demo 内 radio-group 右侧留 12px、底部留 30px */
+:global(.el-radio-group).positionRadio {
+  margin-right: 12px;
+  margin-bottom: 30px;
+}
+
+.demoTabs > :global(.el-tabs__content) {
+  padding: 32px;
+  color: #6b778c;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.demoTabs :global(.custom-tabs-label) :global(.el-icon) {
+  vertical-align: middle;
+}
+
+.demoTabs :global(.custom-tabs-label) span {
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+/* 官方 tab-position 示例对左右布局的内容区撑满高度 */
+.demoTabs:global(.el-tabs--left) > :global(.el-tabs__content),
+.demoTabs:global(.el-tabs--right) > :global(.el-tabs__content) {
+  height: 100%;
+}

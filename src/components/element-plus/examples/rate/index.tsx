@@ -7,7 +7,6 @@ import {
   ChatLineRound,
   ChatRound,
 } from "@/components/element-plus/icons";
-import type { ComponentSize } from "@/components/element-plus/button/types";
 
 const blockBase: CSSProperties = {
   padding: "30px 0",
@@ -29,13 +28,6 @@ const labelStyle: CSSProperties = {
   marginBottom: 20,
 };
 
-const row: CSSProperties = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "flex-start",
-  gap: "0.8rem",
-};
-
 export function RateBasic() {
   const [value1, setValue1] = useState(0);
   const [value2, setValue2] = useState(0);
@@ -46,7 +38,7 @@ export function RateBasic() {
         <span style={labelStyle}>Default</span>
         <ElRate value={value1} onChange={setValue1} />
       </div>
-      <div style={{ ...blockBase, verticalAlign: "top" }}>
+      <div style={blockBase}>
         <span style={labelStyle}>Color for different levels</span>
         <ElRate
           value={value2}
@@ -61,11 +53,13 @@ export function RateBasic() {
 export function RateSizes() {
   const [value, setValue] = useState(0);
   return (
-    <div style={row}>
-      {(["large", "default", "small"] as ComponentSize[]).map((size) => (
-        <ElRate key={size} value={value} onChange={setValue} size={size} />
-      ))}
-    </div>
+    <>
+      <ElRate value={value} onChange={setValue} size="large" />
+      <br />
+      <ElRate value={value} onChange={setValue} size="default" />
+      <br />
+      <ElRate value={value} onChange={setValue} size="small" />
+    </>
   );
 }
 

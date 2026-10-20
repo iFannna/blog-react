@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { ElScrollbar, type ScrollbarDirection, type ScrollbarExpose } from "@/components/element-plus/scrollbar";
 import { ElButton } from "@/components/element-plus/button";
 import { ElSlider } from "@/components/element-plus/slider";
+import styles from "./scrollbar.module.css";
 
 /** 官方示例统一用 .scrollbar-demo-item 做条目，这里用等价的内联样式。 */
 const itemStyle: React.CSSProperties = {
@@ -95,6 +96,7 @@ export function ScrollbarManual() {
       </ElScrollbar>
 
       <ElSlider
+        className={styles.slider}
         value={value}
         max={max}
         onChange={(next) => {

@@ -4,11 +4,20 @@ import { ElAvatar, ElAvatarGroup } from "@/components/element-plus/avatar";
 import { ElCol, ElRow } from "@/components/element-plus/row";
 import { UserFilled } from "@/components/element-plus/icons";
 
-const IMG =
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' fill='%23409eff'/%3E%3C/svg%3E";
+const CIRCLE_URL =
+  "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png";
 
-const WIDE_IMG =
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='80'%3E%3Crect width='120' height='80' fill='%23409eff'/%3E%3Ccircle cx='60' cy='40' r='24' fill='%23fff'/%3E%3C/svg%3E";
+const SQUARE_URL =
+  "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png";
+
+const TYPES_URL =
+  "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png";
+
+const FALLBACK_URL =
+  "https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png";
+
+const FIT_URL =
+  "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg";
 
 const subTitle = {
   marginBottom: "10px",
@@ -16,8 +25,18 @@ const subTitle = {
   color: "var(--el-text-color-secondary)",
 } as const;
 
+const basicRowStyle = {
+  textAlign: "center",
+} as const;
+
 const basicCol = {
   textAlign: "center",
+  borderRadius: 4,
+} as const;
+
+const basicColDivider = {
+  ...basicCol,
+  borderRight: "1px solid var(--el-border-color)",
 } as const;
 
 const basicRow = {
@@ -46,15 +65,14 @@ const fitRow = {
 } as const;
 
 const fitBlock = {
-  flex: 1,
+  flex: "1",
+  flexGrow: 0,
   display: "flex",
   flexDirection: "column",
 } as const;
 
-const groupStack = {
-  display: "flex",
-  flexDirection: "column",
-  gap: "1.6rem",
+const groupBlock = {
+  margin: 16,
 } as const;
 
 const divider = {
@@ -62,32 +80,32 @@ const divider = {
 } as const;
 
 export function AvatarBasic() {
-  const renderSizes = (shape?: "circle" | "square") => (
+  const renderSizes = (shape?: "circle" | "square", src = CIRCLE_URL) => (
     <div style={basicRow}>
       <div style={{ ...basicBlock, ...divider }}>
-        <ElAvatar size={50} shape={shape} src={IMG} alt="avatar" />
+        <ElAvatar size={50} shape={shape} src={src} alt="avatar" />
       </div>
       <div style={{ ...basicBlock, ...divider }}>
-        <ElAvatar size="small" shape={shape} src={IMG} alt="avatar" />
+        <ElAvatar size="small" shape={shape} src={src} alt="avatar" />
       </div>
       <div style={{ ...basicBlock, ...divider }}>
-        <ElAvatar shape={shape} src={IMG} alt="avatar" />
+        <ElAvatar shape={shape} src={src} alt="avatar" />
       </div>
       <div style={basicBlock}>
-        <ElAvatar size="large" shape={shape} src={IMG} alt="avatar" />
+        <ElAvatar size="large" shape={shape} src={src} alt="avatar" />
       </div>
     </div>
   );
 
   return (
-    <ElRow>
-      <ElCol lg={12} md={12} style={basicCol}>
-        <div style={subTitle}>circle</div>
-        {renderSizes()}
+    <ElRow style={basicRowStyle}>
+      <ElCol lg={12} md={12} style={basicColDivider}>
+        <div style={{ ...subTitle, textAlign: "center" }}>circle</div>
+        {renderSizes("circle", CIRCLE_URL)}
       </ElCol>
       <ElCol lg={12} md={12} style={basicCol}>
-        <div style={subTitle}>square</div>
-        {renderSizes("square")}
+        <div style={{ ...subTitle, textAlign: "center" }}>square</div>
+        {renderSizes("square", SQUARE_URL)}
       </ElCol>
     </ElRow>
   );
@@ -100,7 +118,7 @@ export function AvatarTypes() {
         <ElAvatar icon={<UserFilled />} />
       </div>
       <div style={{ ...typeBlock, ...divider }}>
-        <ElAvatar src={IMG} alt="avatar" />
+        <ElAvatar src={TYPES_URL} alt="avatar" />
       </div>
       <div style={typeBlock}>
         <ElAvatar>user</ElAvatar>
@@ -111,14 +129,16 @@ export function AvatarTypes() {
 
 export function AvatarFallback() {
   return (
-    <ElAvatar
-      size={60}
-      src="https://empty"
-      onError={() => true}
-      alt="avatar"
-    >
-      <img src={IMG} alt="avatar" />
-    </ElAvatar>
+    <div>
+      <ElAvatar
+        size={60}
+        src="https://empty"
+        onError={() => true}
+        alt="avatar"
+      >
+        <img src={FALLBACK_URL} alt="avatar" />
+      </ElAvatar>
+    </div>
   );
 }
 
@@ -131,7 +151,7 @@ export function AvatarFit() {
           shape="square"
           size={100}
           fit="fill"
-          src={WIDE_IMG}
+          src={FIT_URL}
           alt="avatar"
         />
       </div>
@@ -141,7 +161,7 @@ export function AvatarFit() {
           shape="square"
           size={100}
           fit="contain"
-          src={WIDE_IMG}
+          src={FIT_URL}
           alt="avatar"
         />
       </div>
@@ -151,7 +171,7 @@ export function AvatarFit() {
           shape="square"
           size={100}
           fit="cover"
-          src={WIDE_IMG}
+          src={FIT_URL}
           alt="avatar"
         />
       </div>
@@ -161,7 +181,7 @@ export function AvatarFit() {
           shape="square"
           size={100}
           fit="none"
-          src={WIDE_IMG}
+          src={FIT_URL}
           alt="avatar"
         />
       </div>
@@ -171,7 +191,7 @@ export function AvatarFit() {
           shape="square"
           size={100}
           fit="scale-down"
-          src={WIDE_IMG}
+          src={FIT_URL}
           alt="avatar"
         />
       </div>
@@ -181,20 +201,20 @@ export function AvatarFit() {
 
 export function AvatarGroupDemo() {
   const avatars = Array.from({ length: 5 }, (_, index) => (
-    <ElAvatar key={index} src={IMG} alt="avatar" />
+    <ElAvatar key={index} src={CIRCLE_URL} alt="avatar" />
   ));
 
   return (
-    <div style={groupStack}>
-      <div>
+    <>
+      <div style={groupBlock}>
         <p>default</p>
         <ElAvatarGroup>{avatars}</ElAvatarGroup>
       </div>
-      <div>
+      <div style={groupBlock}>
         <p>use collapse-avatars</p>
         <ElAvatarGroup collapseAvatars>{avatars}</ElAvatarGroup>
       </div>
-      <div>
+      <div style={groupBlock}>
         <p>use collapse-class and collapse-style</p>
         <ElAvatarGroup
           collapseAvatars
@@ -207,13 +227,13 @@ export function AvatarGroupDemo() {
           {avatars}
         </ElAvatarGroup>
       </div>
-      <div>
+      <div style={groupBlock}>
         <p>use max-collapse-avatars</p>
         <ElAvatarGroup collapseAvatars maxCollapseAvatars={3}>
           {avatars}
         </ElAvatarGroup>
       </div>
-      <div>
+      <div style={groupBlock}>
         <p>use collapse-avatars-tooltip</p>
         <ElAvatarGroup
           collapseAvatars
@@ -223,6 +243,6 @@ export function AvatarGroupDemo() {
           {avatars}
         </ElAvatarGroup>
       </div>
-    </div>
+    </>
   );
 }

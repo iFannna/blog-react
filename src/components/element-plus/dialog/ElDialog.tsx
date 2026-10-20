@@ -179,8 +179,8 @@ export function ElDialog({
   destroyOnClose = false,
   openDelay = 0,
   closeDelay = 0,
-  draggable = false,
-  overflow = false,
+  draggable: draggableProp,
+  overflow: overflowProp,
   trapFocus = true,
   headerAriaLevel = 2,
   transition,
@@ -211,6 +211,9 @@ export function ElDialog({
   const resolvedAlignCenter =
     alignCenter ?? globalDialogConfig?.alignCenter ?? false;
   const resolvedTransition = transition ?? globalDialogConfig?.transition ?? "dialog-fade";
+  // 与官方 use-dialog 一致：draggable / overflow 同样支持 ConfigProvider 全局配置
+  const draggable = draggableProp ?? globalDialogConfig?.draggable ?? false;
+  const overflow = overflowProp ?? globalDialogConfig?.overflow ?? false;
 
   const titleId = useId();
   const bodyId = useId();

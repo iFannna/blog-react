@@ -1,7 +1,6 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import { ElIcon } from "../icon/ElIcon";
 import { PictureFilled } from "../icons";
 
 export type SkeletonVariant =
@@ -37,11 +36,7 @@ export function ElSkeletonItem({
 
   return (
     <div className={classes} style={style}>
-      {variant === "image" && (
-        <ElIcon>
-          <PictureFilled />
-        </ElIcon>
-      )}
+      {variant === "image" && <PictureFilled />}
     </div>
   );
 }

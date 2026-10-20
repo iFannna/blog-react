@@ -573,7 +573,13 @@ export function useTableStore<T extends DefaultRow>(props: TableProps<T>) {
       if (!column) return false;
 
       column.order = order;
-      applySort(column, prop, order);
+      // 官方 changeSortCondition：order 为 null 时清空排序列，恢复原始顺序，
+      // 而不是继续按 null 走 orderBy（那会退化成升序）。
+      if (order === null) {
+        applySort(null, null, null);
+      } else {
+        applySort(column, prop, order);
+      }
 
       if (!init && !silent) {
         props.onSortChange?.({ column, prop, order });

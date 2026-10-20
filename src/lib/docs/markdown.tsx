@@ -228,11 +228,16 @@ function createComponents(
         {transformVersionTags(children)}
       </Heading>
     ),
+    table: ({ children }: { children?: ReactNode }) => (
+      <div className="docs-table">
+        <table>{children}</table>
+      </div>
+    ),
     td: ({ children }: { children?: ReactNode }) => (
-      <td>{transformChildren(children)}</td>
+      <td>{transformVersionTags(transformChildren(children))}</td>
     ),
     th: ({ children }: { children?: ReactNode }) => (
-      <th>{transformChildren(children)}</th>
+      <th>{transformVersionTags(transformChildren(children))}</th>
     ),
     p: ({ children }: { children?: ReactNode }) => (
       <p>{transformVersionTags(children)}</p>

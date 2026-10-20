@@ -27,6 +27,11 @@ export default function FormLabelWrap({
   const elRef = useRef<HTMLDivElement>(null);
   const measuredRef = useRef(0);
   const registeredRef = useRef(false);
+  // Form 每次渲染都会生成新的 context 对象；清理时不能依赖它，否则一次更新就会把
+  // 已注册的宽度全部摘掉，autoLabelWidth 永远停在初始值。
+  const formRef = useRef(form);
+  // eslint-disable-next-line react-hooks/refs -- 渲染期同步最新 form，卸载清理时读取
+  formRef.current = form;
 
   const getLabelWidth = () => {
     const first = elRef.current?.firstElementChild;
@@ -61,9 +66,9 @@ export default function FormLabelWrap({
   useEffect(
     () => () => {
       if (!isAutoWidth || !registeredRef.current) return;
-      form?.deregisterLabelWidth(measuredRef.current);
+      formRef.current?.deregisterLabelWidth(measuredRef.current);
     },
-    [form, isAutoWidth],
+    [isAutoWidth],
   );
 
   useEffect(() => {

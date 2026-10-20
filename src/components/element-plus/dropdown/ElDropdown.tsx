@@ -1,13 +1,16 @@
 "use client";
 
 import {
+  cloneElement,
   forwardRef,
   useCallback,
+  useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
   useState,
   type CSSProperties,
+  type KeyboardEvent,
   type ReactElement,
 } from "react";
 import { ElTooltip } from "../tooltip/ElTooltip";
@@ -168,21 +171,162 @@ export const ElDropdown = forwardRef<DropdownExpose, DropdownProps>(
     );
 
     const popperRef = useRef<HTMLDivElement | null>(null);
+    const rootRef = useRef<HTMLDivElement | null>(null);
+    // 键盘打开菜单时由触发键决定焦点落在第一项还是最后一项，此时不再自动聚焦菜单根节点
+    const keyboardFocusRef = useRef(false);
+
+    /** 对应官方 focusElement(trigger)：关闭后焦点回到触发器 */
+    const focusTrigger = useCallback(() => {
+      const root = rootRef.current;
+      if (!root) return;
+      const target =
+        root.querySelector<HTMLElement>(".el-dropdown-link") ??
+        root.querySelector<HTMLElement>("[role='button']") ??
+        root;
+      target.focus({ preventScroll: true });
+    }, []);
+
+    /** 菜单项集合，对应官方 roving focus collection（跳过禁用项） */
+    const getMenuItems = useCallback(
+      () =>
+        Array.from(
+          popperRef.current?.querySelectorAll<HTMLElement>(
+            ".el-dropdown-menu__item:not(.is-disabled)",
+          ) ?? [],
+        ),
+      [],
+    );
+
+    const focusMenuItem = useCallback(
+      (index: number) => {
+        const items = getMenuItems();
+        if (!items.length) return;
+        const target = ((index % items.length) + items.length) % items.length;
+        items[target].focus({ preventScroll: true });
+      },
+      [getMenuItems],
+    );
+
+    /** 对应官方 ElDropdownMenu 的 roving focus：上下切换、回车触发、Esc/Tab 关闭 */
+    const handleMenuKeyDown = useCallback(
+      (event: KeyboardEvent<HTMLUListElement>) => {
+        const items = Array.from(
+          event.currentTarget.querySelectorAll<HTMLElement>(
+            ".el-dropdown-menu__item:not(.is-disabled)",
+          ),
+        );
+        const active = document.activeElement as HTMLElement | null;
+        const index = active ? items.indexOf(active) : -1;
+
+        switch (event.key) {
+          case "ArrowDown":
+            event.preventDefault();
+            if (items.length) items[(index + 1) % items.length].focus({ preventScroll: true });
+            break;
+          case "ArrowUp":
+            event.preventDefault();
+            if (items.length) {
+              items[(index < 0 ? items.length - 1 : index - 1 + items.length) % items.length].focus({
+                preventScroll: true,
+              });
+            }
+            break;
+          case "Enter":
+          case " ":
+          case "Spacebar": {
+            const item = active?.closest<HTMLElement>(".el-dropdown-menu__item");
+            if (item && event.currentTarget.contains(item)) {
+              event.preventDefault();
+              event.stopPropagation();
+              item.click();
+            }
+            break;
+          }
+          case "Escape":
+            event.preventDefault();
+            event.stopPropagation();
+            setVisible(false);
+            focusTrigger();
+            break;
+          case "Tab":
+            setVisible(false);
+            break;
+        }
+      },
+      [focusTrigger, setVisible],
+    );
+
+    /** 触发器键盘行为：与官方 triggerKeys 一致，ArrowDown/Enter/Space 打开，Esc 关闭 */
+    const handleRootKeyDown = useCallback(
+      (event: KeyboardEvent<HTMLDivElement>) => {
+        if (disabled) return;
+        // 浮层内容通过 portal 渲染，React 事件仍会冒泡到触发器，菜单内的按键交给菜单处理
+        if (popperRef.current?.contains(event.target as Node)) return;
+
+        if (!visible) {
+          if (
+            event.key === "ArrowDown" ||
+            event.key === "ArrowUp" ||
+            event.key === "Enter" ||
+            event.key === " " ||
+            event.key === "Spacebar"
+          ) {
+            event.preventDefault();
+            keyboardFocusRef.current = true;
+            setVisible(true);
+            const target = event.key === "ArrowUp" ? -1 : 0;
+            window.setTimeout(() => focusMenuItem(target), 0);
+          }
+          return;
+        }
+
+        if (event.key === "Escape") {
+          event.preventDefault();
+          setVisible(false);
+          focusTrigger();
+        } else if (event.key === "ArrowDown") {
+          event.preventDefault();
+          focusMenuItem(0);
+        } else if (event.key === "ArrowUp") {
+          event.preventDefault();
+          focusMenuItem(-1);
+        }
+      },
+      [disabled, visible, setVisible, focusMenuItem, focusTrigger],
+    );
+
+    // 官方 show 时把焦点移到菜单内容（focusOnTarget），键盘打开时由触发键决定落点
+    useEffect(() => {
+      if (!visible) return;
+      if (keyboardFocusRef.current) {
+        keyboardFocusRef.current = false;
+        return;
+      }
+      const id = window.requestAnimationFrame(() => {
+        popperRef.current
+          ?.querySelector<HTMLElement>(".el-dropdown-menu")
+          ?.focus({ preventScroll: true });
+      });
+      return () => window.cancelAnimationFrame(id);
+    }, [visible]);
 
     const handleItemClick = useCallback(
       (command: unknown, itemDisabled?: boolean) => {
         if (itemDisabled) return;
         onCommand?.(command);
         // 对应官方 hideOnClick
-        if (hideOnClick) setVisible(false);
+        if (hideOnClick) {
+          setVisible(false);
+          focusTrigger();
+        }
       },
-      [onCommand, hideOnClick, setVisible],
+      [onCommand, hideOnClick, setVisible, focusTrigger],
     );
 
     // 每次渲染都换新对象会让菜单项全部重渲染，这里按依赖缓存
     const contextValue = useMemo(
-      () => ({ handleItemClick }),
-      [handleItemClick],
+      () => ({ handleItemClick, handleMenuKeyDown }),
+      [handleItemClick, handleMenuKeyDown],
     );
 
     const classes = [
@@ -228,13 +372,21 @@ export const ElDropdown = forwardRef<DropdownExpose, DropdownProps>(
           </ElIcon>
         </ElButton>
       </ElButtonGroup>
-    ) : (
-      children
-    );
+    ) : children ? (
+      // 官方 ElOnlyChild 会把 role/tabindex 合并到触发元素上
+      cloneElement(children as ReactElement<Record<string, unknown>>, {
+        tabIndex: tabindex,
+        role: "button",
+      })
+    ) : undefined;
 
     return (
       <DropdownContext.Provider value={contextValue}>
-        <div className={classes} tabIndex={tabindex}>
+        <div
+          ref={rootRef}
+          className={classes}
+          onKeyDown={handleRootKeyDown}
+        >
           <ElTooltip
             content={
               <div ref={popperRef} style={menuStyle}>

@@ -74,6 +74,7 @@ export const ElTable = forwardRef<TableExpose, TableProps>(function ElTable(
     tableLayout = "fixed" as TableLayoutKind,
     scrollbarAlwaysOn = false,
     showOverflowTooltip,
+    tooltipEffect: tooltipEffectProp,
     tooltipFormatter,
     treeProps,
     lazy = false,
@@ -148,13 +149,14 @@ export const ElTable = forwardRef<TableExpose, TableProps>(function ElTable(
 
   const { states } = store;
 
-  const { tableRef, bodyWidth, scrollX, widthVersion, doLayout } =
+  const { tableRef, bodyWidth, scrollX, scrollY, widthVersion, doLayout } =
     useTableLayout({
       columns: states.columns,
       fixedColumns: states.fixedColumns,
       rightFixedColumns: states.rightFixedColumns,
       fit,
     });
+  const [scrollPosition, setScrollPosition] = useState<"left" | "middle" | "right">("left");
 
   // 表头行结构由列树换算得到，分组表头时会有多行
   const columnRows = useMemo(
@@ -165,6 +167,9 @@ export const ElTable = forwardRef<TableExpose, TableProps>(function ElTable(
   );
 
   const hasExpandColumn = states.columns.some((column) => column.type === "expand");
+  const isGroup = states.originColumnTree.some(
+    (column) => (column.children?.length ?? 0) > 0,
+  );
   const isEmpty = states.data.length === 0;
   // 树形缩进与展开按钮只挂在第一个普通列上（官方 firstDefaultColumnIndex）
   const firstDefaultColumnIndex = states.columns.findIndex(
@@ -205,6 +210,8 @@ export const ElTable = forwardRef<TableExpose, TableProps>(function ElTable(
   const globalTableConfig = useGlobalConfig("table");
   const resolvedShowOverflowTooltip =
     showOverflowTooltip ?? globalTableConfig?.showOverflowTooltip;
+  const resolvedTooltipEffect =
+    tooltipEffectProp ?? globalTableConfig?.tooltipEffect ?? "dark";
 
   const contextValue: TableContextValue = useMemo(
     () => ({
@@ -428,14 +435,17 @@ export const ElTable = forwardRef<TableExpose, TableProps>(function ElTable(
     `el-table--${tableSizeClass}`,
     fit && "el-table--fit",
     stripe && "el-table--striped",
-    border && "el-table--border",
+    (border || isGroup) && "el-table--border",
+    isGroup && "el-table--group",
     maxHeight && "el-table--fluid-height",
     scrollX && "el-table--scrollable-x",
+    scrollY && "el-table--scrollable-y",
     !border && "el-table--enable-row-hover",
     (states.data.length !== 0 || states.data.length < 100) &&
       "el-table--enable-row-transition",
     showSummary && "has-footer",
     `el-table--layout-${tableLayout}`,
+    scrollX ? `is-scrolling-${scrollPosition}` : "is-scrolling-none",
     className,
   ]
     .filter(Boolean)
@@ -538,8 +548,40 @@ export const ElTable = forwardRef<TableExpose, TableProps>(function ElTable(
     th.style.cursor = rect.right - event.clientX <= 8 ? "col-resize" : "";
   };
 
-  const renderHeader = (extraClass?: string) => (
-    <thead className={["el-table__header", extraClass].filter(Boolean).join(" ")}>
+  /**
+   * 对应官方 handleSortClick：点击表头或排序图标时按 sortOrders 循环
+   * （默认 ascending → descending → null）。点击已激活的同方向图标会取消排序。
+   */
+  const handleSortClick = (
+    column: TableColumnCtx,
+    event: React.MouseEvent,
+    givenOrder: TableSortOrder | false = false,
+  ) => {
+    event.stopPropagation();
+    if (!column.sortable || !column.property) return;
+
+    const sortOrders = column.sortOrders ?? ["ascending", "descending", null];
+    const toggleOrder = (): TableSortOrder | null => {
+      if (!column.order) return (sortOrders[0] ?? "ascending") as TableSortOrder;
+      const index = sortOrders.indexOf(column.order);
+      return sortOrders[index > sortOrders.length - 2 ? 0 : index + 1] ?? null;
+    };
+
+    const order =
+      column.order === givenOrder
+        ? null
+        : givenOrder || toggleOrder();
+
+    const previous = states.sortingColumn;
+    if (previous && previous !== column) previous.order = null;
+    column.order = order;
+    store.commitSort({ prop: column.property, order });
+  };
+
+  const renderHeader = () => (
+    // 分组表头的表头底色由 `.el-table thead.is-group th` 提供，
+    // 与官方 table-header 的 `ns.is('group', isGroup)` 保持一致。
+    <thead className={isGroup ? "is-group" : undefined}>
       {columnRows.map((subColumns, rowIndex) => (
         <tr
           key={rowIndex}
@@ -563,7 +605,14 @@ export const ElTable = forwardRef<TableExpose, TableProps>(function ElTable(
               aria-sort={column.sortable && column.order ? column.order : undefined}
               className={getHeaderCellClass(rowIndex, cellIndex, subColumns, column)}
               style={getHeaderCellStyle(cellIndex, subColumns, column)}
-              onClick={(event) => onHeaderClick?.(column, event)}
+              onClick={(event) => {
+                if (!column.filters && column.sortable) {
+                  handleSortClick(column, event);
+                } else if (column.filterable && !column.sortable) {
+                  event.stopPropagation();
+                }
+                onHeaderClick?.(column, event);
+              }}
               onMouseDown={(event) => handleHeaderMouseDown(event, column)}
               onMouseMove={(event) => handleHeaderMouseMove(event, column)}
               onMouseOut={(event) => {
@@ -584,30 +633,27 @@ export const ElTable = forwardRef<TableExpose, TableProps>(function ElTable(
                   store: sortStore,
                 })}
                 {column.sortable && (
-                  <span
+                  <button
+                    type="button"
                     className="caret-wrapper"
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      const next: TableSortOrder | null =
-                        column.order === "ascending" ? "descending" : "ascending";
-                      store.commitSort({ prop: column.property, order: next });
-                    }}
+                    aria-label={t("el.table.sortLabel", {
+                      column: column.label || "",
+                    })}
+                    onClick={(event) => handleSortClick(column, event)}
                   >
                     <i
                       className="sort-caret ascending"
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        store.commitSort({ prop: column.property, order: "ascending" });
-                      }}
+                      onClick={(event) =>
+                        handleSortClick(column, event, "ascending")
+                      }
                     />
                     <i
                       className="sort-caret descending"
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        store.commitSort({ prop: column.property, order: "descending" });
-                      }}
+                      onClick={(event) =>
+                        handleSortClick(column, event, "descending")
+                      }
                     />
-                  </span>
+                  </button>
                 )}
                 {column.filterable && (column.filters?.length ?? 0) > 0 && (
                   <TableFilterPanel
@@ -642,7 +688,15 @@ export const ElTable = forwardRef<TableExpose, TableProps>(function ElTable(
     rows.push(
       <tr
         key={$index}
-        className={getRowClass(row, $index, $index).join(" ")}
+        className={[
+          ...getRowClass(row, $index, $index),
+          // store 的层级从 1 开始，官方树形行的 level 从 0 开始
+          states.hasTree &&
+            treeRow &&
+            `el-table__row--level-${treeRow.level - 1}`,
+        ]
+          .filter(Boolean)
+          .join(" ")}
         style={
           typeof rowStyle === "function"
             ? rowStyle({ row: row as never, rowIndex: $index })
@@ -683,8 +737,9 @@ export const ElTable = forwardRef<TableExpose, TableProps>(function ElTable(
                   treeRow &&
                   cellIndex === firstDefaultColumnIndex
                     ? {
-                        indent: treeRow.level * states.indent,
-                        level: treeRow.level,
+                        // 官方 level 从 0 开始，根节点不产生缩进占位
+                        indent: (treeRow.level - 1) * states.indent,
+                        level: treeRow.level - 1,
                         expanded: treeRow.expanded,
                         loading: treeRow.loading,
                         noLazyChildren: treeRow.noLazyChildren,
@@ -694,6 +749,7 @@ export const ElTable = forwardRef<TableExpose, TableProps>(function ElTable(
                 ctx: {
                   ns: "el-table",
                   tableSize,
+                  tooltipEffect: resolvedTooltipEffect,
                   tooltipFormatter,
                   store: bodyStore,
                 },
@@ -704,13 +760,11 @@ export const ElTable = forwardRef<TableExpose, TableProps>(function ElTable(
       </tr>,
     );
 
-    // 展开行：官方同样把展开内容放在紧随其后的一行里，用 display 控制显隐
-    if (hasExpandColumn && (expanded || true)) {
+    // 展开行：官方默认只在展开时创建该行（preserveExpandedContent 关闭），
+    // 未展开的行不渲染内容，避免一次性挂载所有自定义展开节点。
+    if (hasExpandColumn && expanded) {
       rows.push(
-        <tr
-          key={`expanded-${$index}`}
-          style={{ display: expanded ? undefined : "none" }}
-        >
+        <tr key={`expanded-${$index}`}>
           <td
             colSpan={states.columns.length}
             className="el-table__cell el-table__expanded-cell"
@@ -780,7 +834,6 @@ export const ElTable = forwardRef<TableExpose, TableProps>(function ElTable(
       }}
     >
       {renderColgroup()}
-      {!needFixedHeader && showHeader && renderHeader("el-table__body-header")}
       <tbody>
         {states.visibleRows.reduce<ReactNode[]>((acc, item) => {
           acc.push(
@@ -794,7 +847,6 @@ export const ElTable = forwardRef<TableExpose, TableProps>(function ElTable(
           return acc;
         }, [])}
       </tbody>
-      {!needFixedHeader && renderFooter()}
     </table>
   );
 
@@ -805,7 +857,7 @@ export const ElTable = forwardRef<TableExpose, TableProps>(function ElTable(
           {/* 列的配置载体：只注册列，不产出可见 DOM */}
           <div className="hidden-columns">{children}</div>
 
-          {showHeader && needFixedHeader && (
+          {showHeader && (
             <div ref={headerWrapperRef} className="el-table__header-wrapper">
               <table
                 className="el-table__header"
@@ -829,6 +881,15 @@ export const ElTable = forwardRef<TableExpose, TableProps>(function ElTable(
                 if (headerWrapperRef.current) {
                   headerWrapperRef.current.scrollLeft = scrollLeft;
                 }
+                const wrap = tableRef.current?.querySelector(
+                  ".el-table__body-wrapper .el-scrollbar__wrap",
+                );
+                if (wrap) {
+                  if (scrollLeft <= 0) setScrollPosition("left");
+                  else if (scrollLeft + wrap.clientWidth >= wrap.scrollWidth - 1)
+                    setScrollPosition("right");
+                  else setScrollPosition("middle");
+                }
               }}
             >
               {tableBody}
@@ -839,15 +900,29 @@ export const ElTable = forwardRef<TableExpose, TableProps>(function ElTable(
             </ElScrollbar>
           </div>
 
-          {border && (
-            <div
-              ref={resizeProxyRef}
-              className="el-table__column-resize-proxy"
-              style={{ display: resizeVisible ? undefined : "none" }}
-            />
+          {showSummary && (
+            <div className="el-table__footer-wrapper">
+              <table
+                className="el-table__footer"
+                cellSpacing={0}
+                cellPadding={0}
+                style={{ width: bodyWidth ? `${bodyWidth}px` : undefined, tableLayout }}
+              >
+                {renderColgroup()}
+                {renderFooter()}
+              </table>
+            </div>
           )}
-          {border && <div className="el-table__border-left-patch" />}
+
+          {(border || isGroup) && (
+            <div className="el-table__border-left-patch" />
+          )}
         </div>
+        <div
+          ref={resizeProxyRef}
+          className="el-table__column-resize-proxy"
+          style={{ display: resizeVisible ? undefined : "none" }}
+        />
       </div>
     </TableContext.Provider>
   );

@@ -13,38 +13,133 @@ import {
 export const metadata: Metadata = { title: "Descriptions 描述列表" };
 
 const SOURCES = {
-  basic: `<ElDescriptions title="用户信息" extra={<ElButton size="small">操作</ElButton>}>
-  <ElDescriptionsItem label="用户名">kooriookami</ElDescriptionsItem>
-  <ElDescriptionsItem label="手机号">18100000000</ElDescriptionsItem>
-  <ElDescriptionsItem label="居住地">苏州市</ElDescriptionsItem>
-  <ElDescriptionsItem label="备注">学校</ElDescriptionsItem>
-  <ElDescriptionsItem label="联系地址">江苏省苏州市吴中区吴中大道 1188 号</ElDescriptionsItem>
+  basic: `<ElDescriptions title="User Info">
+  <ElDescriptionsItem label="Username">kooriookami</ElDescriptionsItem>
+  <ElDescriptionsItem label="Telephone">18100000000</ElDescriptionsItem>
+  <ElDescriptionsItem label="Place">Suzhou</ElDescriptionsItem>
+  <ElDescriptionsItem label="Remarks">
+    <ElTag size="small">School</ElTag>
+  </ElDescriptionsItem>
+  <ElDescriptionsItem label="Address">
+    No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
+  </ElDescriptionsItem>
 </ElDescriptions>`,
 
-  sizes: `<ElDescriptions title="large" border size="large">
-  <ElDescriptionsItem label="用户名">kooriookami</ElDescriptionsItem>
+  sizes: `<ElRadioGroup value={size} onChange={setSize}>
+  <ElRadio value="large" label="Large" />
+  <ElRadio value="default" label="Default" />
+  <ElRadio value="small" label="Small" />
+</ElRadioGroup>
+
+<ElDescriptions
+  title="With border"
+  column={3}
+  size={size}
+  border
+  extra={<ElButton type="primary">Operation</ElButton>}
+>
+  <ElDescriptionsItem label={iconLabel(<User />, "Username", size)}>
+    kooriookami
+  </ElDescriptionsItem>
+  {/* Telephone / Place / Remarks / Address 同上 */}
 </ElDescriptions>
 
-<ElDescriptions title="default" border size="default" />
-<ElDescriptions title="small" border size="small" />`,
-
-  vertical: `<ElDescriptions title="垂直列表" direction="vertical" border>
-  <ElDescriptionsItem label="用户名">kooriookami</ElDescriptionsItem>
-  <ElDescriptionsItem label="手机号">18100000000</ElDescriptionsItem>
-  <ElDescriptionsItem label="居住地">苏州市</ElDescriptionsItem>
-  <ElDescriptionsItem label="备注"><ElButton size="small">编辑</ElButton></ElDescriptionsItem>
-  <ElDescriptionsItem label="联系地址">江苏省苏州市吴中区吴中大道 1188 号</ElDescriptionsItem>
+<ElDescriptions
+  title="Without border"
+  column={3}
+  size={size}
+  extra={<ElButton type="primary">Operation</ElButton>}
+>
+  <ElDescriptionsItem label="Username">kooriookami</ElDescriptionsItem>
+  <ElDescriptionsItem label="Telephone">18100000000</ElDescriptionsItem>
+  <ElDescriptionsItem label="Place">Suzhou</ElDescriptionsItem>
+  <ElDescriptionsItem label="Remarks">
+    <ElTag size="small">School</ElTag>
+  </ElDescriptionsItem>
+  <ElDescriptionsItem label="Address">
+    No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
+  </ElDescriptionsItem>
 </ElDescriptions>`,
 
-  rowspan: `<ElDescriptions border>
-  <ElDescriptionsItem label="产品">云服务</ElDescriptionsItem>
-  <ElDescriptionsItem label="备注" span={2}>跨两列</ElDescriptionsItem>
-  <ElDescriptionsItem label="地域">华东</ElDescriptionsItem>
+  vertical: `<ElRadioGroup value={size} onChange={setSize}>
+  <ElRadio value="large" label="Large" />
+  <ElRadio value="default" label="Default" />
+  <ElRadio value="small" label="Small" />
+</ElRadioGroup>
+
+<ElDescriptions
+  title="Vertical list with border"
+  direction="vertical"
+  column={4}
+  size={size}
+  border
+>
+  <ElDescriptionsItem label="Username">kooriookami</ElDescriptionsItem>
+  <ElDescriptionsItem label="Telephone">18100000000</ElDescriptionsItem>
+  <ElDescriptionsItem label="Place" span={2}>Suzhou</ElDescriptionsItem>
+  <ElDescriptionsItem label="Remarks">
+    <ElTag size="small">School</ElTag>
+  </ElDescriptionsItem>
+  <ElDescriptionsItem label="Address">
+    No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
+  </ElDescriptionsItem>
+</ElDescriptions>
+
+<ElDescriptions
+  title="Vertical list without border"
+  direction="vertical"
+  column={4}
+  size={size}
+>
+  {/* 同上 */}
 </ElDescriptions>`,
 
-  customStyle: `<ElDescriptions title="自定义样式" border column={3} labelWidth="120px">
-  <ElDescriptionsItem label="用户名" align="center">kooriookami</ElDescriptionsItem>
-  <ElDescriptionsItem label="备注" labelAlign="right">学校</ElDescriptionsItem>
+  rowspan: `<ElDescriptions title="Width horizontal list" border>
+  <ElDescriptionsItem rowspan={2} width={140} label="Photo" align="center">
+    <ElImage
+      src={avatarUrl}
+      style={{ width: 100, height: 100 }}
+      fit="fill"
+    />
+  </ElDescriptionsItem>
+  <ElDescriptionsItem label="Username">kooriookami</ElDescriptionsItem>
+  <ElDescriptionsItem label="Telephone">18100000000</ElDescriptionsItem>
+  <ElDescriptionsItem label="Place">Suzhou</ElDescriptionsItem>
+  <ElDescriptionsItem label="Remarks">
+    <ElTag size="small">School</ElTag>
+  </ElDescriptionsItem>
+  <ElDescriptionsItem label="Address">
+    No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
+  </ElDescriptionsItem>
+</ElDescriptions>
+
+<ElDescriptions title="Width vertical list" direction="vertical" border>
+  {/* 同样的 Photo + 5 个字段，direction 改为 vertical */}
+</ElDescriptions>`,
+
+  customStyle: `<ElDescriptions title="Customized style list" column={3} border>
+  <ElDescriptionsItem
+    label="Username"
+    labelAlign="right"
+    align="center"
+    labelClassName={styles.myLabel}
+    className={styles.myContent}
+    width="150px"
+  >
+    kooriookami
+  </ElDescriptionsItem>
+  <ElDescriptionsItem label="Telephone" labelAlign="right" align="center">
+    18100000000
+  </ElDescriptionsItem>
+  <ElDescriptionsItem label="Place" labelAlign="right" align="center">
+    Suzhou
+  </ElDescriptionsItem>
+  <ElDescriptionsItem label="Remarks" labelAlign="right" align="center">
+    <ElTag size="small">School</ElTag>
+  </ElDescriptionsItem>
+  <ElDescriptionsItem label="Address" labelAlign="right" align="center">
+    No.1188, Wuzhong Avenue, Wuzhong District, Suzhou, Jiangsu Province
+  </ElDescriptionsItem>
 </ElDescriptions>`,
 };
 
@@ -127,19 +222,12 @@ export default function DescriptionsPage() {
         <DescriptionsVertical />
       </DemoBlock>
 
-      <Heading level={2}>跨列 / 跨行</Heading>
-      <p>
-        通过 <code>span</code> 让单元格跨列，<code>rowspan</code> 跨行。
-      </p>
+      <Heading level={2}>跨行</Heading>
       <DemoBlock source={SOURCES.rowspan}>
         <DescriptionsRowspan />
       </DemoBlock>
 
       <Heading level={2}>自定义样式</Heading>
-      <p>
-        通过 <code>labelWidth</code>、<code>align</code>、<code>labelAlign</code>
-        调整标签宽度与对齐方式。
-      </p>
       <DemoBlock source={SOURCES.customStyle}>
         <DescriptionsCustomStyle />
       </DemoBlock>

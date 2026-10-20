@@ -10,13 +10,12 @@ const row = {
   display: "flex",
   flexWrap: "wrap",
   gap: "0.8rem",
-  alignItems: "center",
 } as const;
 
 const column = {
   display: "flex",
   flexDirection: "column",
-  gap: "0.8rem",
+  gap: "1.6rem",
 } as const;
 
 export function TagBasic() {
@@ -88,7 +87,7 @@ export function TagClosableDynamic() {
         />
       ) : (
         <ElButton size="small" onClick={() => setInputVisible(true)}>
-          + 新标签
+          + New Tag
         </ElButton>
       )}
     </div>
@@ -178,15 +177,15 @@ export function TagCheckable() {
   return (
     <div style={column}>
       <div style={row}>
-        <ElCheckTag checked>已选中</ElCheckTag>
+        <ElCheckTag checked>Checked</ElCheckTag>
         <ElCheckTag checked={checked} onCheckedChange={setChecked}>
-          点我切换
+          Toggle me
         </ElCheckTag>
-        <ElCheckTag disabled>禁用</ElCheckTag>
+        <ElCheckTag disabled>Disabled</ElCheckTag>
       </div>
       <div style={row}>
         {(["primary", "success", "info", "warning", "danger"] as const).map(
-          (type) => (
+          (type, index) => (
             <ElCheckTag
               key={type}
               type={type}
@@ -195,7 +194,7 @@ export function TagCheckable() {
                 setTypes((current) => ({ ...current, [type]: next }))
               }
             >
-              Tag
+              Tag {index + 1}
             </ElCheckTag>
           ),
         )}
@@ -207,7 +206,7 @@ export function TagCheckable() {
             setTypes((current) => ({ ...current, disabledSuccess: next }))
           }
         >
-          禁用标签
+          Tag 6
         </ElCheckTag>
       </div>
     </div>

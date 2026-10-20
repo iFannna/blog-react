@@ -9,6 +9,9 @@
  *   loading.close();
  */
 
+import { getGlobalConfig } from "../config-provider/context";
+import { nextZIndex } from "../config-provider/use-z-index";
+
 export interface LoadingOptions {
   /**
    * 需要覆盖的目标元素。传字符串会经 querySelector 解析，
@@ -19,6 +22,8 @@ export interface LoadingOptions {
   background?: string;
   /** 自定义加载图标 */
   spinner?: boolean | string;
+  /** 自定义 spinner 的 svg viewBox，对应官方 svgViewBox */
+  svgViewBox?: string;
   /** 加载文案 */
   text?: string;
   /** 是否全屏 */
@@ -51,7 +56,7 @@ export interface LoadingState extends LoadingOptions {
   resolvedTarget: HTMLElement;
   /** 关闭后是否保留（用于过渡动画） */
   closing: boolean;
-  zIndex: number;
+  zIndex?: number;
   /** 关闭前的 body 原始样式，用于还原 */
   originalBodyOverflow?: string;
   originalBodyPosition?: string;
@@ -60,7 +65,6 @@ export interface LoadingState extends LoadingOptions {
 export const LEAVE_DURATION_MS = 300;
 
 let seed = 1;
-let zIndexSeed = 2001;
 let instances: LoadingState[] = [];
 const EMPTY: LoadingState[] = [];
 
@@ -150,7 +154,9 @@ export function closeAllLoading() {
  */
 export function createLoading(options: LoadingOptions = {}): LoadingInstance {
   const resolvedTarget = resolveTarget(options.target);
-  const isFullscreen = options.fullscreen ?? false;
+  // 与官方一致：未指定 target 时以 body 为目标，且默认按全屏处理
+  const isFullscreen =
+    resolvedTarget === document.body && (options.fullscreen ?? true);
 
   const id = seed++;
 
@@ -159,7 +165,9 @@ export function createLoading(options: LoadingOptions = {}): LoadingInstance {
     id,
     resolvedTarget,
     closing: false,
-    zIndex: options.zIndex ?? zIndexSeed++,
+    zIndex:
+      options.zIndex ??
+      (isFullscreen ? nextZIndex(getGlobalConfig()?.zIndex) : undefined),
     fullscreen: isFullscreen,
   };
 

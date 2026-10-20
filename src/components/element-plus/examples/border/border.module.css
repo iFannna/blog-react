@@ -1,0 +1,4 @@
+/* Official docs site applies a global 4px radius to .el-col */
+.col {
+  border-radius: 4px;
+}

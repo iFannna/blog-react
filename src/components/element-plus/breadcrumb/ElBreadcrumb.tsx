@@ -6,6 +6,7 @@ import {
   type HTMLAttributes,
   type ReactNode,
 } from "react";
+import { ElIcon } from "../icon/ElIcon";
 
 export interface BreadcrumbContextValue {
   separator?: string;
@@ -84,9 +85,9 @@ export function ElBreadcrumbItem({
       </span>
 
       {ctx.separatorIcon ? (
-        <span className="el-breadcrumb__separator" role="presentation">
+        <ElIcon className="el-breadcrumb__separator" role="presentation">
           {ctx.separatorIcon}
-        </span>
+        </ElIcon>
       ) : (
         <span className="el-breadcrumb__separator" role="presentation">
           {ctx.separator}

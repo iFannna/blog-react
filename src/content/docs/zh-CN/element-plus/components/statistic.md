@@ -1,17 +1,17 @@
 ---
 title: "Statistic 统计组件"
-description: "用于展示统计数据，支持数字格式化。"
+description: "显示统计数据。"
 group: 数据展示
 order: 220
 ---
 
 # Statistic 统计组件
 
-用于展示统计数据，支持数字格式化。
+显示统计数据。
 
 ## 基础用法
 
-:::demo 通过 `precision` 控制小数位，`prefix` / `suffix` 添加前后缀，`groupSeparator` 与 `decimalSeparator` 自定义分隔符。
+:::demo
 
 statistic/basic
 
@@ -19,15 +19,15 @@ statistic/basic
 
 ## 倒计时
 
-:::demo `ElCountdown` 以 `value` 为目标时间逐帧计算差值， 用 `format` 控制展示格式；可配合按钮等组件重置目标时间。 格式建议控制在「天」的量级内。
+:::demo
 
 statistic/countdown
 
 :::
 
-## 自定义格式化
+## 统计卡片
 
-:::demo `formatter` 接收原始值并返回任意节点。传入后忽略其它格式化配置。 `value` 为非数字时原样显示。
+:::demo
 
 statistic/card
 

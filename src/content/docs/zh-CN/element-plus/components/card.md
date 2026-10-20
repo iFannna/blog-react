@@ -11,33 +11,41 @@ order: 40
 
 ## 基础用法
 
-:::demo 包含标题、内容、操作区域。通过 `header` 属性设置标题。
+卡片包含标题，内容以及操作区域。
+
+:::demo Card 组件由 `header` `body` 和 `footer` 组成。 `header` 和 `footer` 是可选的，其内容取决于一个具名的 slot。
 
 card/basic
 
 :::
 
-## 阴影效果
+## 简单卡片
 
-:::demo 通过 `shadow` 属性设置卡片阴影出现的时机， 可选值为 `always`、`hover`、`never`。
+卡片可以只有内容区域。
 
-card/shadow
-
-:::
-
-## 头部与页脚
-
-:::demo `header` 与 `footer` 都接受节点，可传入自定义结构。 不传时不渲染对应区域。
+:::demo
 
 card/simple
 
 :::
 
-## 自定义样式
+## 有图片内容的卡片
 
-:::demo 通过 `bodyStyle` 设置内容区样式， `bodyClass` / `headerClass` / `footerClass` 追加自定义类名。
+可配置定义更丰富的内容展示。
+
+:::demo 配置 `body-style` 属性来自定义 `body` 部分的样式。
 
 card/with-images
+
+:::
+
+## 带有阴影效果的卡片
+
+你可以定义什么时候展示卡片的阴影效果。
+
+:::demo 通过 `shadow` 属性设置卡片阴影出现的时机。该属性的值可以是：`always`、`hover` 或 `never`。
+
+card/shadow
 
 :::
 

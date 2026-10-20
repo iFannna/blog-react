@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ElWatermark } from "@/components/element-plus/watermark";
+import { ElColorPicker } from "@/components/element-plus/color-picker";
 import { ElForm, ElFormItem } from "@/components/element-plus/form";
 import { ElInput } from "@/components/element-plus/input";
 import { ElInputNumber } from "@/components/element-plus/input-number";
@@ -18,7 +19,7 @@ const previewStyle = { flex: "auto" };
 const formStyle = {
   width: 330,
   marginLeft: 20,
-  borderLeft: "1px solid var(--el-border-color-lighter)",
+  borderLeft: "1px solid #eee",
   paddingLeft: 20,
 };
 
@@ -57,14 +58,14 @@ export function WatermarkImage() {
     <ElWatermark
       width={130}
       height={30}
-      image="https://element-plus.org/images/element-plus-logo.svg"
+      image="/images/element-plus-logo.svg"
     >
       <div style={containerStyle} />
     </ElWatermark>
   );
 }
 
-/** 官方用 el-color-picker 的 show-alpha 取色，此处用可输入 rgba 的文本框代替。 */
+/** 官方 custom 示例：左侧水印内容，右侧固定宽度配置表单。 */
 export function WatermarkCustom() {
   const { isDarkMode } = useTheme();
   const themeColor = isDarkMode ? DARK_FONT_COLOR : LIGHT_FONT_COLOR;
@@ -80,7 +81,7 @@ export function WatermarkCustom() {
 
   const [content, setContent] = useState("Element Plus");
   const [fontSize, setFontSize] = useState(16);
-  const [zIndex, setZIndex] = useState(9);
+  const [zIndex, setZIndex] = useState(-1);
   const [rotate, setRotate] = useState(-22);
   const [gap, setGap] = useState<[number, number]>([100, 100]);
   // 官方 offset 初始为空元组，这里用 null 表示「未设置」，组件内回退到 gap/2
@@ -103,6 +104,16 @@ export function WatermarkCustom() {
         <div style={previewStyle}>
           <h1>Element Plus</h1>
           <h2>A Vue 3 based component library for designers and developers</h2>
+          <img
+            src="/images/hamburger.png"
+            alt="示例图片"
+            style={{
+              zIndex: 10,
+              width: "100%",
+              maxWidth: 300,
+              position: "relative",
+            }}
+          />
         </div>
       </ElWatermark>
 
@@ -111,7 +122,11 @@ export function WatermarkCustom() {
           <ElInput value={content} onChange={setContent} />
         </ElFormItem>
         <ElFormItem label="Color">
-          <ElInput value={color} onChange={setColor} />
+          <ElColorPicker
+            value={color}
+            showAlpha
+            onChange={(value) => setColor(value ?? "")}
+          />
         </ElFormItem>
         <ElFormItem label="FontSize">
           <ElSlider value={fontSize} onChange={(v) => setFontSize(asNumber(v))} />

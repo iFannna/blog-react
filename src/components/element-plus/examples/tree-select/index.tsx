@@ -65,7 +65,7 @@ export function TreeSelectBasic() {
         style={width}
       />
       <ElDivider />
-      show checkbox:
+      show checkbox:{" "}
       <ElTreeSelect
         value={value}
         onChange={setValue}
@@ -91,7 +91,7 @@ export function TreeSelectCheckStrictly() {
         style={width}
       />
       <ElDivider />
-      show checkbox:
+      show checkbox:{" "}
       <ElTreeSelect
         value={value}
         onChange={setValue}
@@ -102,7 +102,7 @@ export function TreeSelectCheckStrictly() {
         style={width}
       />
       <ElDivider />
-      show checkbox with check-on-click-node:
+      show checkbox with `check-on-click-node`:{" "}
       <ElTreeSelect
         value={value}
         onChange={setValue}
@@ -133,7 +133,7 @@ export function TreeSelectMultiple() {
         style={width}
       />
       <ElDivider />
-      show checkbox:
+      show checkbox:{" "}
       <ElTreeSelect
         value={value}
         onChange={setValue}
@@ -144,7 +144,7 @@ export function TreeSelectMultiple() {
         style={width}
       />
       <ElDivider />
-      show checkbox with check-strictly:
+      show checkbox with `check-strictly`:{" "}
       <ElTreeSelect
         value={valueStrictly}
         onChange={setValueStrictly}
@@ -219,7 +219,7 @@ export function TreeSelectFilterable() {
         style={width}
       />
       <ElDivider />
-      filter method:
+      filter method:{" "}
       <ElTreeSelect
         value={value}
         onChange={setValue}
@@ -229,7 +229,7 @@ export function TreeSelectFilterable() {
         style={width}
       />
       <ElDivider />
-      filter node method:
+      filter node method:{" "}
       <ElTreeSelect
         value={value}
         onChange={setValue}
@@ -261,7 +261,7 @@ export function TreeSelectSlots() {
         )}
       </ElTreeSelect>
       <ElDivider />
-      use render content:
+      use render content:{" "}
       <ElTreeSelect
         value={value}
         onChange={setValue}
@@ -313,7 +313,7 @@ export function TreeSelectLazy() {
         style={width}
       />
       <ElDivider />
-      show lazy load label:
+      show lazy load label:{" "}
       <ElTreeSelect
         value={value2}
         onChange={setValue2}

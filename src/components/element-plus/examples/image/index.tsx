@@ -16,6 +16,7 @@ import {
 } from "@/components/element-plus/image/viewer-icons";
 import { ElButton } from "@/components/element-plus/button";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
+import { ElConfigProvider, en } from "@/components/element-plus/config-provider";
 import {
   Back,
   DArrowRight,
@@ -63,6 +64,8 @@ const SRC_LIST = [
   "https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg",
   "https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg",
 ];
+
+const PREVIEW_URL = SRC_LIST[0];
 
 const EQUAL_BLOCK_STYLE: CSSProperties = {
   padding: "3rem 0",
@@ -145,7 +148,7 @@ export function ImagePlaceholder() {
           style={{ maxWidth: 300, maxHeight: 200, padding: "0 5px" }}
           renderPlaceholder={() => (
             <div style={slotStyle}>
-              加载中
+              Loading
               <span
                 style={{
                   animation: "dot 2s infinite steps(3, start)",
@@ -177,7 +180,6 @@ export function ImageLoadFailed() {
     fontSize: 30,
     height: 200,
     background: "#fff",
-    color: "#000",
   };
 
   const imageStyle: CSSProperties = {
@@ -187,12 +189,13 @@ export function ImageLoadFailed() {
   };
 
   return (
-    <div>
-      <ElImage style={imageStyle} />
+    <ElConfigProvider locale={en}>
+      <div style={{ display: "flex", gap: 8 }}>
+        <ElImage style={imageStyle} />
       <ElImage
         style={imageStyle}
         renderError={() => (
-          <div style={{ ...errorSlotStyle, background: "var(--el-fill-color-light)" }}>
+          <div style={errorSlotStyle}>
             <ElIcon>
               <Picture />
             </ElIcon>
@@ -205,7 +208,7 @@ export function ImageLoadFailed() {
         previewSrcList={srcList}
         showProgress
         renderViewerError={({ activeIndex, src }: ImageViewerErrorScope) => (
-          <div style={errorSlotStyle}>
+          <div style={{ ...errorSlotStyle, color: "#000" }}>
             <ElIcon>
               <Picture />
             </ElIcon>
@@ -223,7 +226,7 @@ export function ImageLoadFailed() {
           urlList={srcList}
           onClose={() => setShowPreview(false)}
           renderViewerError={({ activeIndex, src }: ImageViewerErrorScope) => (
-            <div style={errorSlotStyle}>
+            <div style={{ ...errorSlotStyle, color: "#000" }}>
               <ElIcon>
                 <Picture />
               </ElIcon>
@@ -234,19 +237,24 @@ export function ImageLoadFailed() {
           )}
         />
       )}
-    </div>
+      </div>
+    </ElConfigProvider>
   );
 }
 
 export function ImageLazyLoad() {
   return (
     <div style={{ height: 400, overflowY: "auto" }}>
-      {SRC_LIST.map((url) => (
+      {SRC_LIST.map((url, index) => (
         <ElImage
           key={url}
           src={url}
           lazy
-          style={{ display: "block", minHeight: 200, marginBottom: 10 }}
+          style={{
+            display: "block",
+            minHeight: 200,
+            marginBottom: index < SRC_LIST.length - 1 ? 10 : 0,
+          }}
         />
       ))}
     </div>
@@ -258,7 +266,7 @@ export function ImagePreview() {
     <div>
       <ElImage
         style={IMAGE_BOX_STYLE}
-        src={URL}
+        src={PREVIEW_URL}
         zoomRate={1.2}
         maxScale={7}
         minScale={0.2}
@@ -276,15 +284,15 @@ export function ImageManuallyPreview() {
   const [showPreview, setShowPreview] = useState(false);
 
   return (
-    <div style={{ display: "flex", gap: "1.2rem" }}>
-      <div style={{ display: "grid", gap: "0.8rem" }}>
+    <div style={{ display: "flex", gap: 48 }}>
+      <div style={{ display: "grid", gap: 12 }}>
         <ElButton onClick={() => imageRef.current?.showPreview()}>
           openPreview with showPreview method
         </ElButton>
         <ElImage
           ref={imageRef}
           style={IMAGE_BOX_STYLE}
-          src={URL}
+          src={PREVIEW_URL}
           showProgress
           previewSrcList={SRC_LIST}
           fit="cover"
@@ -329,7 +337,7 @@ export function ImageCustomToolbar() {
     <div>
       <ElImage
         style={IMAGE_BOX_STYLE}
-        src={URL}
+        src={PREVIEW_URL}
         previewSrcList={SRC_LIST}
         fit="cover"
         showProgress
@@ -385,7 +393,7 @@ export function ImageCustomProgress() {
     <div>
       <ElImage
         style={IMAGE_BOX_STYLE}
-        src={URL}
+        src={PREVIEW_URL}
         previewSrcList={SRC_LIST}
         fit="cover"
         renderProgress={({ activeIndex, total }: ImageViewerProgressScope) => (

@@ -396,9 +396,13 @@ export const ElForm = forwardRef<FormExpose, FormProps>(function ElForm(
     [getField, scrollIntoViewOptions],
   );
 
-  // rules 变化时按官方默认行为重新校验一次
+  // 官方 watch(rules) 不是 immediate，挂载时不能立即校验出错误
+  const previousRulesRef = useRef(rules);
   useEffect(() => {
     if (!validateOnRuleChange) return;
+    const changed = previousRulesRef.current !== rules;
+    previousRulesRef.current = rules;
+    if (!changed) return;
     validate().catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rules, validateOnRuleChange]);

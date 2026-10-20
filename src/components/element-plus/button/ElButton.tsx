@@ -1,6 +1,6 @@
 "use client";
 
-import { createElement, type ReactNode } from "react";
+import { createElement, isValidElement, type ReactNode } from "react";
 import { ElIcon } from "../icon/ElIcon";
 import { Loading } from "../icons";
 import { useButton } from "./use-button";
@@ -29,7 +29,10 @@ export function ElButton(props: ButtonProps) {
   let iconNode: ReactNode = null;
 
   if (loading) {
-    iconNode = (
+    // 官方 loading 插槽的内容直接渲染；loading-icon 才包一层 el-icon
+    iconNode = isValidElement(loadingIcon) ? (
+      loadingIcon
+    ) : (
       <ElIcon className="is-loading">
         {loadingIcon ?? <Loading />}
       </ElIcon>

@@ -182,6 +182,12 @@ export default function LayoutPage() {
         <RowGutter />
       </DemoBlock>
 
+      <Heading level={2}>混合布局</Heading>
+      <p>通过不同 span 组合出比例不等的列。</p>
+      <DemoBlock source={SOURCES.hybrid}>
+        <RowHybrid />
+      </DemoBlock>
+
       <Heading level={2}>偏移</Heading>
       <p>
         通过 <code>offset</code> 设置列左侧的间隔格数。
@@ -197,12 +203,6 @@ export default function LayoutPage() {
       </p>
       <DemoBlock source={SOURCES.alignment}>
         <RowJustify />
-      </DemoBlock>
-
-      <Heading level={2}>混合布局</Heading>
-      <p>通过不同 span 组合出比例不等的列。</p>
-      <DemoBlock source={SOURCES.hybrid}>
-        <RowHybrid />
       </DemoBlock>
 
       <Heading level={2}>响应式布局</Heading>

@@ -1,6 +1,12 @@
 "use client";
 
-import { useState, type CSSProperties, type MouseEvent, type ReactNode } from "react";
+import {
+  useState,
+  type CSSProperties,
+  type DragEventHandler,
+  type MouseEvent,
+  type ReactNode,
+} from "react";
 import { ElIcon } from "../icon/ElIcon";
 import { Close } from "../icons";
 import { useTranslator } from "../config-provider/context";
@@ -36,6 +42,12 @@ export interface TagProps {
   onClick?: (event: MouseEvent<HTMLSpanElement>) => void;
   /** 关闭按钮的无障碍标签，缺省取 locale 的 el.tag.close */
   closeLabel?: string;
+  /** 原生 draggable，官方由 attrs 透传；input-tag 拖拽需要 */
+  draggable?: boolean;
+  onDragStart?: DragEventHandler<HTMLSpanElement>;
+  onDragOver?: DragEventHandler<HTMLSpanElement>;
+  onDragEnd?: DragEventHandler<HTMLSpanElement>;
+  onDrop?: DragEventHandler<HTMLSpanElement>;
 }
 
 /** 对应官方 ElTag。关闭动画由 el-zoom-in-center 过渡类实现。 */
@@ -55,6 +67,11 @@ export function ElTag({
   onClose,
   onClick,
   closeLabel,
+  draggable,
+  onDragStart,
+  onDragOver,
+  onDragEnd,
+  onDrop,
 }: TagProps) {
   const [leaving, setLeaving] = useState(false);
   const t = useTranslator();
@@ -88,6 +105,11 @@ export function ElTag({
       style={{ ...style, backgroundColor: color || undefined }}
       title={title}
       onClick={onClick}
+      draggable={draggable}
+      onDragStart={onDragStart}
+      onDragOver={onDragOver}
+      onDragEnd={onDragEnd}
+      onDrop={onDrop}
     >
       <span className="el-tag__content">{children}</span>
       {closable && (

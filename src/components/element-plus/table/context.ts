@@ -155,6 +155,8 @@ export interface TableProps<T extends DefaultRow = DefaultRow> {
   tableLayout?: "fixed" | "auto";
   scrollbarAlwaysOn?: boolean;
   showOverflowTooltip?: boolean;
+  /** 溢出提示主题，缺省回落到 ConfigProvider.table.tooltipEffect */
+  tooltipEffect?: "dark" | "light";
   tooltipFormatter?: (data: { row: T; column: TableColumnCtx<T>; cellValue: unknown }) => ReactNode;
   /** 树形数据：children / hasChildren / checkStrictly */
   treeProps?: TreeProps;
