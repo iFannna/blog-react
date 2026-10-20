@@ -53,8 +53,8 @@ export function getDocsHeaderConfig(locale: DocLocale): DocsHeaderConfig {
       },
       {
         text: "Element Plus",
-        href: "/docs/element-plus/components/overview",
-        activePrefix: "/docs/element-plus",
+        href: `/docs/${locale}/element-plus/components/overview`,
+        activePrefix: `/docs/${locale}/element-plus`,
       },
       {
         text: zh ? "官方文档" : "Official Docs",
@@ -72,30 +72,31 @@ export function getDocsHeaderConfig(locale: DocLocale): DocsHeaderConfig {
 export function getElementPlusHeaderConfig(locale: DocLocale): DocsHeaderConfig {
   const zh = locale === "zh-CN";
   const base = `/docs/${locale}/element-plus`;
+  const overview = `${base}/components/overview`;
 
   return {
     logo: {
       kind: "image",
       src: "/images/element-plus-logo.svg",
       alt: "Element Plus Logo",
-      href: base,
+      href: overview,
     },
     badge: { text: "2.14.6", title: "latest version" },
     links: [
       {
         text: zh ? "指南" : "Guide",
-        href: "/docs/element-plus/components/overview",
-        activePrefix: "/docs/element-plus/guide",
+        href: overview,
+        activePrefix: `${base}/guide`,
       },
       {
         text: zh ? "组件" : "Components",
-        href: base,
-        activePrefix: base,
+        href: overview,
+        activePrefix: `${base}/components`,
       },
       {
         text: zh ? "资源" : "Resources",
-        href: "/docs/element-plus/components/overview",
-        activePrefix: "/docs/element-plus/resource",
+        href: overview,
+        activePrefix: `${base}/resource`,
       },
       {
         text: zh ? "官方文档" : "Official Docs",

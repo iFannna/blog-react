@@ -1,19 +1,9 @@
-import type { Metadata } from "next";
-import { OverviewContent } from "./OverviewContent";
+import { redirect } from "next/navigation";
+import { DEFAULT_DOC_LOCALE } from "@/lib/docs/types";
 
-export const metadata: Metadata = {
-  title: "Overview 组件总览",
-};
+// 静态预渲染会把 redirect() 变成客户端跳转，这里保留服务端 307
+export const dynamic = "force-dynamic";
 
-export default function ComponentsOverview() {
-  return (
-    <>
-      <h1>Overview 组件总览</h1>
-      <p>
-        Element Plus 组件库基于 React 复刻，类名与 CSS 变量沿用官方
-        <code>el-*</code> 约定，样式直接编译自官方 theme-chalk。
-      </p>
-      <OverviewContent />
-    </>
-  );
+export default function LegacyComponentsOverviewPage() {
+  redirect(`/docs/${DEFAULT_DOC_LOCALE}/element-plus/components/overview`);
 }
