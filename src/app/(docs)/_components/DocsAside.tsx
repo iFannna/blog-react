@@ -31,12 +31,30 @@ function getTocSnapshot(): TocItem[] {
     ),
   );
 
+  // 同一页可能出现同名标题（例如正文的 h2 与 API 表的 h3），
+  // 直接拿文本当 id 会撞车，目录的 key 也会重复，这里补递增后缀。
+  const usedIds = new Set<string>();
+
   const items = headings.map((heading) => {
     const text = heading.textContent?.trim() ?? "";
-    if (!heading.id) heading.id = text;
+    let id = heading.id || text;
+
+    if (usedIds.has(id)) {
+      let suffix = 1;
+      while (usedIds.has(`${id}-${suffix}`)) suffix += 1;
+      id = `${id}-${suffix}`;
+    }
+
+    usedIds.add(id);
+    heading.id = id;
+
+    // Heading 组件渲染的永久链接也要指向去重后的 id
+    heading
+      .querySelector<HTMLAnchorElement>(".docs-anchor")
+      ?.setAttribute("href", `#${id}`);
 
     return {
-      id: heading.id,
+      id,
       text,
       level: heading.tagName === "H2" ? (2 as const) : (3 as const),
     };
