@@ -4,7 +4,7 @@
  * 分组与顺序、条目文案、归属组件全部对齐官方
  * docs/.vitepress/crowdin/en-US/pages/component.json。
  * titleZh 取自 zh-CN markdown frontmatter，即官方中文文档的「英文 + 中文」写法。
- * check-tag 在官方 JSON 中缺失，由生成器额外注入到 Data 分组。
+ * check-tag 在官方 JSON 中缺失，手动补充到 Data 分组。
  * done 表示该组件已有对应文档页，缺失的实现会被置灰。
  */
 

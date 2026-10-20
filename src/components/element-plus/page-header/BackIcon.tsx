@@ -3,8 +3,8 @@ import type { SVGProps } from "react";
 /**
  * 内置的 Back 图标，对应官方 @element-plus/icons-vue 的 Back。
  *
- * 图标目录由 scripts/build-element-icons.mjs 生成，Back 尚未纳入其清单，
- * 这里就地内联同一份 path 数据，避免手改生成产物（icons/index.ts）。
+ * 图标目录是已生成的产物，Back 不在其中，这里单独内联同一份 path 数据，
+ * 避免手改 icons/index.ts。
  */
 export function BackIcon(props: SVGProps<SVGSVGElement>) {
   return (

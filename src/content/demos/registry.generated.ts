@@ -1,4 +1,4 @@
-// 由 scripts/gen-demo-registry.mjs 生成，请勿手动修改。
+// 演示注册表，请勿手动修改。
 import type { DemoManifest } from "@/lib/docs/types";
 
 export const demoManifestLoaders: Record<

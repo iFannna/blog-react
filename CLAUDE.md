@@ -20,9 +20,10 @@ Next.js 16 (App Router) 博客前端。TypeScript strict，样式用 CSS 自定�
 ```bash
 npm run dev     # 开发服务器
 npm run build   # 生产构建
-npm run start   # 启动构建产物
 npm run lint    # ESLint
 ```
+
+生产预览未配置 npm script，直接运行 `npx next start`。
 
 类型检查（未配独立 script）：`node node_modules/typescript/bin/tsc --noEmit -p tsconfig.json`
 
