@@ -19,9 +19,9 @@ const SOURCES = {
 
 message({
   message: (
-    <p style={{ lineHeight: 1, fontSize: 14, margin: 0 }}>
+    <span style={{ lineHeight: 1, fontSize: 14 }}>
       Message can be <i style={{ color: "teal" }}>VNode</i>
-    </p>
+    </span>
   ),
 });`,
 
