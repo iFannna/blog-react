@@ -7,43 +7,43 @@ order: 230
 
 # Segmented 分段控制器
 
-显示多个选项，并允许用户从中选择一项。
+用于展示多个选项并允许用户选择其中单个选项。
 
 ## 基础用法
 
-:::demo `value` 为当前选中项的值，通过 `options` 提供选项数据。
+:::demo 设置`v-model`为选项值。
 
 segmented/basic
 
 :::
 
-## 方向
+## 配置方向^(2.8.7)
 
-:::demo 设置 `direction` 为 `vertical` 可切换为纵向排列。
+:::demo 设置 `vertical` 来改变方向。
 
 segmented/custom-direction
 
 :::
 
-## 禁用
+## 禁用状态
 
-:::demo 为 `ElSegmented` 或某个选项设置 `disabled` 可将其禁用。
+:::demo 设置 `disabled` 属性来禁用一些选项。
 
 segmented/disabled
 
 :::
 
-## 自定义字段别名
+## 自定义选项 ^(2.9.8)
 
-:::demo 当 `options` 的数据格式与默认格式不一致时，可用 `optionProps`  指定字段别名。
+:::demo 当您的 `options` 格式不同于默认格式时，可通过 `props` 属性自定义 `options`
 
 segmented/props
 
 :::
 
-## 块级显示
+## Block 分段选择器
 
-:::demo 设置 `block` 为 `true` 可撑满父元素宽度。
+:::demo 设置`block`为`true`以适应父元素的宽度。
 
 segmented/block
 
@@ -51,7 +51,7 @@ segmented/block
 
 ## 自定义内容
 
-:::demo 通过默认插槽渲染自定义内容。
+:::demo 设置 default slot 位来渲染自定义内容。
 
 segmented/custom-content
 
@@ -59,7 +59,7 @@ segmented/custom-content
 
 ## 自定义样式
 
-:::demo 通过 CSS 变量自定义样式。
+:::demo 使用 CSS 变量设置自定义样式。
 
 segmented/custom-style
 

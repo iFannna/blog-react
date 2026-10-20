@@ -13,7 +13,7 @@ order: 40
 
 卡片包含标题，内容以及操作区域。
 
-:::demo Card 组件由 `header` `body` 和 `footer` 组成。 `header` 和 `footer` 是可选的，其内容取决于一个具名的 slot。
+:::demo Card 组件由 `header` `body` 和 `footer`组成。 `header` 和 `footer`是可选的，其内容取决于一个具名的 slot。
 
 card/basic
 

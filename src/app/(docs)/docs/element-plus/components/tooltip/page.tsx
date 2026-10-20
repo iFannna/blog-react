@@ -183,8 +183,14 @@ export default function TooltipPage() {
       <p>常用于展示鼠标 hover 时的提示信息。</p>
 
       <Heading level={2}>基础用法</Heading>
+      <p>在这里我们提供 9 种不同方向的展示方式，可以通过以下完整示例来理解，选择你要的效果。</p>
       <p>
-        通过 <code>placement</code> 设置弹出位置，共 12 个方向。
+        使用 <code>content</code> 属性来决定 <code>hover</code>{" "}
+        时的提示信息。由 <code>placement</code> 属性决定展示效果：{" "}
+        <code>placement</code>属性值为：<code>[方向]-[对齐位置]</code>；四个方向：
+        <code>top</code>、<code>left</code>、<code>right</code>、
+        <code>bottom</code>；三种对齐位置：<code>start</code>, <code>end</code>，默认为空。如{" "}
+        <code>placement=&quot;left-end&quot;</code>，则提示信息出现在目标元素的左侧，且提示信息的底部与目标元素的底部对齐。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <TooltipBasic />
@@ -192,73 +198,141 @@ export default function TooltipPage() {
 
       <Heading level={2}>主题</Heading>
       <p>
-        Tooltip 提供 dark / light 两种主题，也可通过 <code>effect</code> +
-        <code>popperStyle</code> 自定义。
+        Tooltip 组件内置了两个主题：<code>dark</code>和<code>light</code>。
+      </p>
+      <DocsContent
+        source={`:::tip
+
+要使用自定义主题，您必须知道您的工具提示在哪里渲染， 如果您的工具提示被呈现为根元素，您将需要全局设置css规则。
+
+建议您使用自定义主题并同时显示箭头时不使用线性渐变背景颜色。 因为弹出箭头和内容是两个不同的元素， 弹出箭头的样式需要单独设置， 当它到渐变背景颜色时，会看起来很奇怪。
+
+:::`}
+      />
+      <p>
+        通过设置 <code>effect</code> 来修改主题，默认值为 <code>dark</code>.
       </p>
       <DemoBlock source={SOURCES.theme}>
         <TooltipTheme />
       </DemoBlock>
 
-      <Heading level={2}>多行内容</Heading>
+      <Heading level={2}>更多内容的文字提示</Heading>
+      <p>展示多行文本或者是设置文本内容的格式</p>
       <p>
-        <code>content</code> 接受任意节点，可以包含换行等结构。
+        用具名 slot <code>content</code>，替代<code>tooltip</code>中的<code>content</code>属性。
       </p>
       <DemoBlock source={SOURCES.richContent}>
         <TooltipRichContent />
       </DemoBlock>
 
-      <Heading level={2}>高级用法</Heading>
+      <Heading level={2}>高级扩展</Heading>
+      <p>除了这些基本设置外，还有一些属性可以让使用者更好的定制自己的效果：</p>
       <p>
-        通过 <code>disabled</code> 动态关闭提示能力。
+        <code>transition</code> 属性可以定制显隐的动画效果，默认为<code>fade-in-linear</code>。
+      </p>
+      <p>
+        如果需要关闭 <code>tooltip</code> 功能，<code>disabled</code>{" "}
+        属性可以满足这个需求，你只需要将其设置为 <code>true</code>。
+      </p>
+      <p>
+        事实上，Tooltip 是一个基于{" "}
+        <a
+          href="https://github.com/element-plus/element-plus/tree/dev/packages/components/popper"
+          target="_blank"
+          rel="noreferrer"
+        >
+          ElPopper
+        </a>{" "}
+        的扩展，您可以使用 ElPopper 中允许的任何属性。
       </p>
       <DemoBlock source={SOURCES.advancedUsage}>
         <TooltipAdvancedUsage />
       </DemoBlock>
+      <DocsContent
+        source={`:::tip
 
-      <Heading level={2}>HTML 内容</Heading>
-      <p>
-        <code>rawContent</code> 会把字符串当作 HTML 渲染。
-      </p>
+Tooltip 内不支持 \`router-link\` 组件，请使用 \`vm.$router.push\` 代替。
+
+tooltip 内不支持 disabled form 元素，参考 [MDN](https://developer.mozilla.org/en-US/docs/Web/Events/mouseenter)，请在 disabled form 元素外层添加一层包裹元素。
+
+:::`}
+      />
+
+      <Heading level={2} id="显示-html-内容">
+        显示 HTML 内容
+      </Heading>
+      <p>内容属性可以设置为 HTML 字符串。</p>
+      <DocsContent
+        source={`:::warning
+
+\`content\` 属性虽然支持传入 HTML 片段，但是在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 [XSS 攻击](https://en.wikipedia.org/wiki/Cross-site_scripting)。因此在 \`raw-content\` 打开的情况下，请确保 \`content\` 的内容是可信的，**永远不要**将用户提交的内容赋值给 \`content\` 属性。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.htmlContent}>
         <TooltipHtmlContent />
       </DemoBlock>
 
       <Heading level={2}>虚拟触发</Heading>
       <p>
-        <code>virtualTriggering</code> + <code>virtualRef</code> 可以让提示跟随一个
-        提供 <code>getBoundingClientRect</code> 的对象定位，无需真实子元素。
+        有时候我们想把 tooltip
+        的触发元素放在别的地方，而不需要写在一起，这时候就可以使用虚拟触发。
       </p>
+      <DocsContent
+        source={`:::tip
+
+需要注意的是，虚拟触发的 tooltip 是受控组件，因此你必须自己去控制 tooltip 是否显示，**你将无法**通过点击空白处来关闭 tooltip。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.virtualTrigger}>
         <TooltipVirtualTrigger />
       </DemoBlock>
 
-      <Heading level={2}>单例</Heading>
+      <Heading level={2}>单例模式</Heading>
       <p>
-        多个按钮共用一个 Tooltip 实例，鼠标移入按钮时更新虚拟参照物即可。
+        Tooltip 可以作为单例，也就是是说你可以同时有多个触发同一个 tooltip
+        的触发元素，这个功能是在 <code>虚拟触发</code> 的基础上开发的。
       </p>
+      <DocsContent
+        source={`:::tip
+
+已知问题：使用单例模式时，弹出窗口会从意料之外的位置弹出。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.singleton}>
         <TooltipSingleton />
       </DemoBlock>
 
       <Heading level={2}>受控模式</Heading>
       <p>
-        传入 <code>visible</code> 后完全由外部状态控制显隐。
+        Tooltip 可以通过父组件使用 <code>:visible</code> 来控制它的显示与关闭。
       </p>
       <DemoBlock source={SOURCES.controlled}>
         <TooltipControlled />
       </DemoBlock>
 
-      <Heading level={2}>动画</Heading>
+      <Heading level={2}>自定义动画</Heading>
       <p>
-        通过 <code>transition</code> 指定过渡动画名。
+        Tooltip 可以自定义动画，您可以使用 <code>transition</code> 设置所需的动画效果。
       </p>
+      <DocsContent
+        source={`:::tip
+
+过渡效果的更多信息可以在 [Vue 过渡效果](https://vuejs.org/guide/built-ins/transition.html#css-based-transitions) 中找到。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.animations}>
         <TooltipAnimations />
       </DemoBlock>
 
-      <Heading level={2}>挂载到指定容器</Heading>
+      <Heading level={2} id="使用-append-to">
+        使用 <code>append-to</code>
+      </Heading>
       <p>
-        <code>appendTo</code> 指定浮层的挂载目标，可与触发元素自身的层叠上下文配合。
+        您必须等待 DOM 加载后才能使用 <code>targetElement</code>。
       </p>
       <DemoBlock source={SOURCES.appendTo}>
         <TooltipAppendTo />

@@ -148,11 +148,19 @@ export default function PopconfirmPage() {
   return (
     <>
       <h1>Popconfirm 气泡确认框</h1>
-      <p>点击元素，弹出气泡样式的确认框。</p>
+      <p>点击某个元素弹出一个简单的气泡确认框</p>
 
-      <Heading level={2}>弹出位置</Heading>
+      <Heading level={2}>展示位置</Heading>
+      <p>Popconfirm 提供 9 种展示位置。</p>
       <p>
-        <code>placement</code> 决定弹出方向，共 12 个方位。
+        使用 <code>title</code> 属性来设置点击参考元素时显示的信息。由{" "}
+        <code>placement</code> 属性决定 Popconfirm 的位置。该属性值格式为：
+        <code>[方向]-[对齐位置]</code>，可供选择的四个方向分别是
+        <code>top</code>、<code>left</code>、<code>right</code>、
+        <code>bottom</code>，可供选择的三种对齐方式分别是<code>start</code>、
+        <code>end</code>、<code>null</code>，默认的对齐方式为null。以{" "}
+        <code>placement=&quot;left-end&quot;</code>{" "}
+        为例，气泡确认框会显示在悬停元素的左侧，且提示信息的底部与悬停元素的底部对齐。
       </p>
       <DemoBlock source={SOURCES.placement}>
         <PopconfirmPlacement />
@@ -160,25 +168,26 @@ export default function PopconfirmPage() {
 
       <Heading level={2}>基础用法</Heading>
       <p>
-        只需传入 <code>title</code>，确认与取消按钮会自动渲染并关闭气泡。
+        Popconfirm 的属性与 Popover
+        很类似，因此对于重复属性，请参考 Popover
+        的文档，在此文档中不做详尽解释。
+      </p>
+      <p>
+        在 Popconfirm 中，只有 <code>title</code> 属性可用，<code>content</code>{" "}
+        属性会被忽略。
       </p>
       <DemoBlock source={SOURCES.basicUsage}>
         <PopconfirmBasicUsage />
       </DemoBlock>
 
-      <Heading level={2}>自定义</Heading>
-      <p>
-        可自定义按钮文案与类型、图标、颜色和宽度；通过 <code>actions</code>
-        渲染函数可以完全接管按钮区域。
-      </p>
+      <Heading level={2}>自定义弹出框的内容</Heading>
+      <p>可以在 Popconfirm 中自定义内容。</p>
       <DemoBlock source={SOURCES.customize}>
         <PopconfirmCustomize />
       </DemoBlock>
 
-      <Heading level={2}>触发事件</Heading>
-      <p>
-        <code>onConfirm</code>、<code>onCancel</code> 接收点击事件，可据此更新业务状态。
-      </p>
+      <Heading level={2}>多种让 Popconfirm 出现的方法</Heading>
+      <p>点击按钮触发事件</p>
       <DemoBlock source={SOURCES.triggerEvent}>
         <PopconfirmTriggerEvent />
       </DemoBlock>

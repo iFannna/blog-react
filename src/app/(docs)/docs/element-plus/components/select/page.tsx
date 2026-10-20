@@ -397,17 +397,29 @@ export default function SelectPage() {
       <h1>Select 选择器</h1>
       <p>当选项过多时，使用下拉菜单展示并选择内容。</p>
 
+      <DocsContent
+        source={`:::tip
+
+在版本 \`2.5.0\`之后， \`el-select\` 的默认宽度更改为 \`100%\` 当使用内联形式时，宽度将显示异常。为了保持显示正常, 您需要手动配置 \`el-select\` 的宽度 (如: [例子](https://github.com/element-plus/element-plus/issues/15834#issuecomment-1936919229)).
+
+:::`}
+      />
+
       <Heading level={2}>基础用法</Heading>
       <p>
-        <code>value</code> 是当前选中项的值，通过 <code>options</code> 提供选项数据。
+        适用广泛的基础单选 <code>v-model</code> 的值为当前被选中的{" "}
+        <code>el-option</code> 的 value 属性值
       </p>
       <DemoBlock source={SOURCES.basic}>
         <SelectBasic />
       </DemoBlock>
 
-      <Heading level={2}>选项属性</Heading>
+      <Heading level={2} id="Options 属性">
+        Options 属性 <span className="docs-version-tag">2.10.5</span>
+      </Heading>
       <p>
-        通过 <code>props</code> 自定义选项对象中 value、label、disabled 的字段名。
+        <code>el-option</code> 基本用法。您可以通过 <code>props</code> 属性自定义{" "}
+        <code>options</code> 的别名。
       </p>
       <DemoBlock source={SOURCES.options}>
         <SelectOptions />
@@ -415,23 +427,27 @@ export default function SelectPage() {
 
       <Heading level={2}>有禁用选项</Heading>
       <p>
-        在选项中设置 <code>disabled</code> 为 <code>true</code> 可禁用该选项。
+        在 <code>el-option</code> 中，设定 <code>disabled</code> 值为
+        true，即可禁用该选项
       </p>
       <DemoBlock source={SOURCES.disabledOption}>
         <SelectDisabledOption />
       </DemoBlock>
 
       <Heading level={2}>禁用状态</Heading>
+      <p>禁用整个选择器组件</p>
       <p>
-        为 <code>ElSelect</code> 设置 <code>disabled</code> 可禁用整个组件。
+        为 <code>el-select</code> 设置 <code>disabled</code>
+        属性，则整个选择器不可用。
       </p>
       <DemoBlock source={SOURCES.disabled}>
         <SelectDisabled />
       </DemoBlock>
 
       <Heading level={2}>可清空</Heading>
+      <p>您可以使用清除图标来清除选择。</p>
       <p>
-        设置 <code>clearable</code> 后会出现清空图标。
+        为 <code>el-select</code> 设置 <code>clearable</code> 属性，则可将选择器清空。
       </p>
       <DemoBlock source={SOURCES.clearable}>
         <SelectClearable />
@@ -439,110 +455,160 @@ export default function SelectPage() {
 
       <Heading level={2}>尺寸</Heading>
       <p>
-        通过 <code>size</code> 改变尺寸，除默认外还有 <code>large</code>、
-        <code>small</code>。
+        使用 <code>size</code> 属性改变选择器大小。除了默认大小外，还有另外两个选项：{" "}
+        <code>large</code>, <code>small</code>。
       </p>
       <DemoBlock source={SOURCES.size}>
         <SelectSize />
       </DemoBlock>
 
       <Heading level={2}>基础多选</Heading>
+      <p>多选选择器使用 tag 组件来展示已选中的选项。</p>
       <p>
-        设置 <code>multiple</code> 开启多选；<code>collapseTags</code> 折叠标签，
-        <code>collapseTagsTooltip</code> 在悬停时展示全部，
-        <code>maxCollapseTags</code> 控制折叠前展示的数量。
+        为 <code>el-select</code> 设置 <code>multiple</code> 属性即可启用多选，此时{" "}
+        <code>v-model</code>{" "}
+        的值为当前选中值所组成的数组。默认情况下选中值会以 Tag
+        组件的形式展现，你也可以设置 <code>collapse-tags</code>{" "}
+        属性将它们合并为一段文字。您可以使用 <code>collapse-tags-tooltip</code>{" "}
+        属性来启用鼠标悬停折叠文字以显示具体所选值的行为。
       </p>
       <DemoBlock source={SOURCES.multiple}>
         <SelectMultiple />
       </DemoBlock>
 
       <Heading level={2}>自定义模板</Heading>
-      <p>通过 <code>children</code> 渲染函数自定义选项内容。</p>
+      <p>你可以自定义如何来渲染每一个选项。</p>
+      <p>
+        将自定义的 HTML 模板插入 <code>el-option</code> 的 slot 中即可。
+      </p>
       <DemoBlock source={SOURCES.customTemplate}>
         <SelectCustomTemplate />
       </DemoBlock>
 
-      <Heading level={2}>下拉头部</Heading>
-      <p>通过 <code>header</code> 自定义下拉头部，例如全选。</p>
+      <Heading level={2} id="自定义下拉菜单的头部">
+        自定义下拉菜单的头部 <span className="docs-version-tag">2.4.3</span>
+      </Heading>
+      <p>您可以自定义下拉菜单的头部。</p>
+      <p>Use slot to customize the content.</p>
       <DemoBlock source={SOURCES.customHeader}>
         <SelectCustomHeader />
       </DemoBlock>
 
-      <Heading level={2}>下拉底部</Heading>
-      <p>
-        通过 <code>footer</code> 自定义下拉底部，可实现动态添加选项。
-      </p>
+      <Heading level={2} id="自定义下拉菜单的底部">
+        自定义下拉菜单的底部 <span className="docs-version-tag">2.4.3</span>
+      </Heading>
+      <p>您可以自定义下拉菜单的底部。</p>
+      <p>使用slot 自定义内容</p>
       <DemoBlock source={SOURCES.customFooter}>
         <SelectCustomFooter />
       </DemoBlock>
 
-      <Heading level={2}>分组</Heading>
+      <Heading level={2}>将选项进行分组</Heading>
+      <p>你可以为选项进行分组来区分不同的选项</p>
       <p>
-        选项数据的 <code>options</code> 字段用于嵌套子选项，形成分组。
+        使用 <code>el-option-group</code> 对备选项进行分组，它的{" "}
+        <code>label</code> 属性为分组名
       </p>
       <DemoBlock source={SOURCES.grouping}>
         <SelectGrouping />
       </DemoBlock>
 
-      <Heading level={2}>选项过滤</Heading>
+      <Heading level={2}>筛选选项</Heading>
+      <p>可以利用筛选功能快速查找选项。</p>
       <p>
-        设置 <code>filterable</code> 开启搜索，默认按 label 过滤，也可通过
-        <code>filterMethod</code> 自定义。
+        为<code>el-select</code>添加<code>filterable</code>
+        属性即可启用搜索功能。默认情况下，Select 会找出所有 <code>label</code>{" "}
+        属性包含输入值的选项。如果希望使用其他的搜索逻辑，可以通过传入一个{" "}
+        <code>filter-method</code> 来实现。 <code>filter-method</code> 为一个{" "}
+        <code>Function</code>，它会在输入值发生变化时调用，参数为当前输入值。
       </p>
       <DemoBlock source={SOURCES.filterable}>
         <SelectFilterable />
       </DemoBlock>
 
       <Heading level={2}>远程搜索</Heading>
+      <p>输入关键字以从远程服务器中查找数据。</p>
       <p>
-        设置 <code>remote</code> 与 <code>remoteMethod</code> 从服务端加载选项，
-        <code>remoteShowSuffix</code> 控制搜索时是否显示后缀图标。
+        从服务器搜索数据，输入关键字进行查找。为了启用远程搜索，需要将
+        <code>filterable</code>和<code>remote</code>设置为<code>true</code>
+        ，同时传入一个<code>remote-method</code>。 <code>remote-method</code>为一个
+        <code>Function</code>
+        ，它会在输入值发生变化时调用，参数为当前输入值。需要注意的是，如果{" "}
+        <code>el-option</code> 是通过 <code>v-for</code> 指令渲染出来的，此时需要为{" "}
+        <code>el-option</code> 添加 <code>key</code>{" "}
+        属性，且其值需具有唯一性，比如这个例子中的 <code>item.value</code>。
       </p>
       <DemoBlock source={SOURCES.remoteSearch}>
         <SelectRemoteSearch />
       </DemoBlock>
 
-      <Heading level={2}>创建条目</Heading>
+      <Heading level={2}>创建新的选项</Heading>
+      <p>创建并选中未包含在初始选项中的条目。</p>
       <p>
-        设置 <code>allowCreate</code> 允许创建不在选项列表中的条目。
+        通过使用 <code>allow-create</code> 属性，用户可以通过输入框创建新项目。为了使{" "}
+        <code>allow-create</code> 正常工作， <code>filterable</code> 的值必须为{" "}
+        <code>true</code>。本例还使用了 <code>default-first-option</code>{" "}
+        属性，在该属性为 <code>true</code>{" "}
+        的情况下，按下回车就可以选中当前选项列表中的第一个选项，无需使用鼠标或键盘方向键进行定位。
       </p>
       <DemoBlock source={SOURCES.allowCreate}>
         <SelectAllowCreate />
       </DemoBlock>
 
-      <Heading level={2}>使用 value-key</Heading>
+      <Heading level={2}>使用值键 value-key 属性</Heading>
       <p>
-        当选中值是对象时，通过 <code>valueKey</code> 指定唯一标识字段。
+        如果 Select 的绑定值为对象类型，请务必指定 <code>value-key</code>{" "}
+        作为它的唯一性标识。
+      </p>
+      <p>
+        通过使用 <code>value-key</code>{" "}
+        属性，可以正确处理带有重复label的数据。这样虽然<code>label</code>{" "}
+        是重复的，但任可通过 <code>id</code> 来确认唯一性。
       </p>
       <DemoBlock source={SOURCES.valueKey}>
         <SelectValueKey />
       </DemoBlock>
 
-      <Heading level={2}>自定义标签</Heading>
-      <p>通过 <code>tag</code> 渲染函数自定义多选标签。</p>
+      <Heading level={2} id="自定义标签">
+        自定义标签 <span className="docs-version-tag">2.5.0</span>
+      </Heading>
+      <p>您可以自定义标签。</p>
+      <p>
+        将自定义的标签插入 <code>el-select</code> 的 slot 中即可。{" "}
+        <code>collapse-tags</code>, <code>collapse-tags-tooltip</code>,{" "}
+        <code>max-collapse-tags</code> 在此模式下不生效.
+      </p>
       <DemoBlock source={SOURCES.customTag}>
         <SelectCustomTag />
       </DemoBlock>
 
-      <Heading level={2}>自定义加载</Heading>
-      <p>
-        通过 <code>loadingSlot</code> 自定义远程搜索的加载状态内容。
-      </p>
+      <Heading level={2} id="自定义加载">
+        自定义加载 <span className="docs-version-tag">2.5.2</span>
+      </Heading>
+      <p>修改加载区域内容</p>
       <DemoBlock source={SOURCES.customLoading}>
         <SelectCustomLoading />
       </DemoBlock>
 
-      <Heading level={2}>空值</Heading>
+      <Heading level={2} id="空值配置">
+        空值配置 <span className="docs-version-tag">2.7.0</span>
+      </Heading>
       <p>
-        通过 <code>emptyValues</code> 定义空值集合，<code>valueOnClear</code>
-        定义清空后的返回值。
+        若想配置如空字符串为有效值而不是空值，可以配置 <code>empty-values</code> 为{" "}
+        <code>[null, undefined]</code>.
+      </p>
+      <p>
+        如果您想要将清空值更改为 <code>null</code>, 请设置{" "}
+        <code>value-on-clear</code> 为 <code>null</code>
       </p>
       <DemoBlock source={SOURCES.emptyValues}>
         <SelectEmptyValues />
       </DemoBlock>
 
-      <Heading level={2}>自定义标签文案</Heading>
-      <p>通过 <code>label</code> 渲染函数自定义选中值与标签的显示内容。</p>
+      <Heading level={2} id="自定义标签-1">
+        自定义标签 <span className="docs-version-tag">2.7.4</span>
+      </Heading>
+      <p>您可以自定义标签</p>
       <DemoBlock source={SOURCES.customLabel}>
         <SelectCustomLabel />
       </DemoBlock>

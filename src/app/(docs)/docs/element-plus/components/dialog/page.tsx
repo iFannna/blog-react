@@ -209,17 +209,30 @@ export default function DialogPage() {
       <p>在保留当前页面状态的情况下，告知用户并承载相关操作。</p>
 
       <Heading level={2}>基础用法</Heading>
+      <p>Dialog 弹出一个对话框，适合需要定制性更大的场景。</p>
       <p>
-        需要设置 <code>visible</code> 属性来控制对话框的显示与隐藏；
-        <code>beforeClose</code> 可以拦截关闭。
+        需要设置 <code>model-value / v-model</code> 属性，它接收{" "}
+        <code>Boolean</code>，当为 <code>true</code> 时显示 Dialog。 Dialog
+        分为两个部分：<code>body</code> 和 <code>footer</code>，
+        <code>footer</code> 需要具名为 <code>footer</code> 的 <code>slot</code>。{" "}
+        <code>title</code> 属性用于定义标题，它是可选的，默认值为空。最后，本例还展示了{" "}
+        <code>before-close</code> 的用法。
       </p>
       <DemoBlock source={SOURCES.basicUsage}>
         <DialogBasicUsage />
       </DemoBlock>
+      <DocsContent
+        source={`:::tip
+
+\`before-close\` 只会在用户点击关闭按钮或者对话框的遮罩区域时被调用。如果你在 \`footer\` 具名 slot 里添加了用于关闭 Dialog 的按钮，那么可以在按钮的点击回调函数里加入 \`before-close\` 的相关逻辑。
+
+:::`}
+      />
 
       <Heading level={2}>自定义内容</Heading>
       <p>
-        对话框可以承载表格、表单等任意内容，内容区高度超出时滚动。
+        对话框的内容可以是任何东西，甚至是一个表格或表单。此示例显示如何在 Dialog
+        中使用 Element Plus 的表格和表单。
       </p>
       <DemoBlock source={SOURCES.customizationContent}>
         <DialogCustomizationContent />
@@ -227,84 +240,145 @@ export default function DialogPage() {
 
       <Heading level={2}>自定义头部</Heading>
       <p>
-        <code>header</code> 渲染函数接收 <code>close</code>、<code>titleId</code>、
-        <code>titleClass</code>，可在保留可访问性的同时自由排布头部。
+        <code>header</code> 可用于自定义显示标题的区域。为了保持可用性，除了使用此插槽外，使用{" "}
+        <code>title</code> 属性，或使用 <code>titleId</code>{" "}
+        插槽属性来指定哪些元素应该读取为对话框标题。
       </p>
       <DemoBlock source={SOURCES.customizationHeader}>
         <DialogCustomizationHeader />
       </DemoBlock>
 
-      <Heading level={2}>嵌套对话框</Heading>
+      <Heading level={2}>嵌套的对话框</Heading>
       <p>
-        多层对话框通过焦点层栈协调焦点；内层对话框建议设置
-        <code>appendToBody</code>。
+        如果需要在一个 Dialog 内部嵌套另一个 Dialog，需要使用{" "}
+        <code>append-to-body</code> 属性。
+      </p>
+      <p>
+        通常我们不建议使用嵌套对话框。如果你需要在页面上呈现多个对话框，你可以简单地打平它们，以便它们彼此之间是平级关系。如果必须要在一个对话框内展示另一个对话框，可以将内部嵌套的对话框属性{" "}
+        <code>append-to-body</code> 设置为 true，嵌套的对话框将附加到 body
+        而不是其父节点，这样两个对话框都可以被正确地渲染。
       </p>
       <DemoBlock source={SOURCES.nestedDialog}>
         <DialogNestedDialog />
       </DemoBlock>
 
       <Heading level={2}>内容居中</Heading>
+      <p>对话框的内容可以居中。</p>
       <p>
-        <code>center</code> 只会让头部和底部居中，正文需自行处理。
+        将<code>center</code>设置为<code>true</code>即可使标题和底部居中。{" "}
+        <code>center</code>仅影响标题和底部区域。 Dialog
+        的内容是任意的，在一些情况下，内容并不适合居中布局。如果需要内容也水平居中，请自行为其添加
+        CSS 样式。
       </p>
       <DemoBlock source={SOURCES.centeredContent}>
         <DialogCenteredContent />
       </DemoBlock>
+      <DocsContent
+        source={`:::tip
 
-      <Heading level={2}>垂直居中</Heading>
+Dialog 的内容是懒渲染的——在被第一次打开之前，传入的默认 slot 不会被立即渲染到 DOM 上。因此，如果需要执行 DOM 操作，或通过 \`ref\` 获取相应组件，请在 \`open\` 事件回调中进行。
+
+:::`}
+      />
+
+      <Heading level={2}>居中对话框</Heading>
+      <p>从屏幕中心打开对话框。</p>
       <p>
-        <code>alignCenter</code> 让对话框在视口中水平垂直居中。
+        设置 <code>align-center</code> 为 <code>true</code>{" "}
+        使对话框水平垂直居中。由于对话框垂直居中在弹性盒子中，所以<code>top</code>
+        属性将不起作用。
       </p>
       <DemoBlock source={SOURCES.alignCenter}>
         <DialogAlignCenter />
       </DemoBlock>
 
-      <Heading level={2}>关闭后销毁</Heading>
+      <Heading level={2}>关闭时销毁</Heading>
       <p>
-        <code>destroyOnClose</code> 在关闭动画结束后销毁内容，首次打开前也不渲染。
+        启用此功能时，默认栏位下的内容将使用 <code>v-if</code>{" "}
+        指令销毁。当出现性能问题时，可以启用此功能。
+      </p>
+      <p>
+        需要注意的是，当这个属性被启用时，在{" "}
+        <code>transition.beforeEnter</code> 事件卸载前，除了 <code>overlay</code>、
+        <code>header (可选)</code>与<code>footer(可选)</code> ，Dialog
+        内不会有其它任何其它的 DOM 节点存在。
       </p>
       <DemoBlock source={SOURCES.destroyOnClose}>
         <DialogDestroyOnClose />
       </DemoBlock>
 
       <Heading level={2}>可拖拽对话框</Heading>
+      <p>试着拖动一下<code>header</code>部分吧</p>
       <p>
-        设置 <code>draggable</code> 后可拖动头部移动；<code>overflow</code>
-        允许拖出视口。
+        设置<code>draggable</code>属性为<code>true</code>以做到拖拽设置{" "}
+        <code>overflow</code> <span className="docs-version-tag">2.5.4</span> 为{" "}
+        <code>true</code> 可以让拖拽范围超出可视区。
       </p>
       <DemoBlock source={SOURCES.draggableDialog}>
         <DialogDraggableDialog />
       </DemoBlock>
+      <DocsContent
+        source={`:::tip
+
+当 \`modal\` 的值为 false 时，请一定要确保 \`append-to-body\` 属性为 **true**，由于 \`Dialog\` 使用 \`position: relative\` 定位，当外层的遮罩层被移除时，\`Dialog\` 则会根据当前 DOM 上的祖先节点来定位，因此可能造成定位问题。
+
+:::`}
+      />
 
       <Heading level={2}>全屏</Heading>
       <p>
-        <code>fullscreen</code> 让对话框占满整个视口。
+        设置 <code>fullscreen</code> 属性来打开全屏对话框。
       </p>
       <DemoBlock source={SOURCES.fullscreen}>
         <DialogFullscreen />
       </DemoBlock>
+      <DocsContent
+        source={`:::tip
 
-      <Heading level={2}>遮罩</Heading>
+如果 \`fullscreen\` 为 true，则 \`width\`、\`top\` 和 \`draggable\` 属性无效。
+
+:::`}
+      />
+
+      <Heading level={2}>模态框</Heading>
       <p>
-        <code>modal</code> 控制遮罩显示；配合 <code>modalPenetrable</code>
-        可以让点击穿透到页面。
+        将 <code>modal</code> 设置为 <code>false</code> 会隐藏对话框的模态（覆盖层）。
+      </p>
+      <p>
+        从版本 <span className="docs-version-tag">2.10.5</span> 起，新增了{" "}
+        <code>modal-penetrable</code>属性，该属性可设置为“可穿透”（即允许穿透）。
       </p>
       <DemoBlock source={SOURCES.modal}>
         <DialogModal />
       </DemoBlock>
 
-      <Heading level={2}>自定义动画</Heading>
+      <Heading level={2} id="自定义动画">
+        自定义动画 <span className="docs-version-tag">2.10.5</span>
+      </Heading>
       <p>
-        通过 <code>transition</code> 指定过渡动画名。自定义名称需要自行提供对应 CSS。
+        通过 <code>transition</code>{" "}
+        属性自定义对话框动画，该属性可以接受以下任意一种值：
+      </p>
+      <ul>
+        <li>动画名称（字符串）</li>
+        <li>Vue 过渡配置（对象）</li>
+      </ul>
+      <p>
+        示例包括缩放（scale）、滑动（slide）、淡入淡出（fade）、弹跳（bounce）动画，以及带有自定义事件处理器的基于对象的配置。
       </p>
       <DemoBlock source={SOURCES.customAnimation}>
         <DialogCustomAnimation />
       </DemoBlock>
+      <DocsContent
+        source={`:::tip
 
-      <Heading level={2}>事件</Heading>
-      <p>
-        打开 / 关闭全过程都会触发事件，便于与外部状态同步。
-      </p>
+动画类会根据过渡名称动态生成。为了更细致地控制动画行为，你可以明确地定义这些类。详情请参见 [自定义过渡类（custom-transition-classes）](https://vuejs.org/guide/built-ins/transition.html#custom-transition-classes)。
+
+:::`}
+      />
+
+      <Heading level={2}>Events</Heading>
+      <p>打开开发者控制台(ctrl + shift + J)，查看事件的顺序。</p>
       <DemoBlock source={SOURCES.events}>
         <DialogEvents />
       </DemoBlock>

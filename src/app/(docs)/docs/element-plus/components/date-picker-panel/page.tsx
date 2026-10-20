@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import DemoBlock from "../../../../_components/DemoBlock";
 import { Heading } from "../../../../_components/Heading";
 import DocsContent from "../../../../_components/DocsContent";
@@ -158,39 +159,51 @@ DatePickerPanel 是 DatePicker 的核心组件。
 export default function DatePickerPanelPage() {
   return (
     <>
-      <h1>DatePickerPanel 日期选择器面板</h1>
-      <p>DatePickerPanel 是 DatePicker 的核心组件。</p>
+      <h1>
+        DatePickerPane 日期选择器面板{" "}
+        <span className="docs-version-tag docs-version-tag--beta">beta</span>
+      </h1>
+      <p>
+        <code>DatePickerPanel</code>是<code>DatePicker</code>的核心组件。
+      </p>
 
-      <Heading level={2}>输入日期</Heading>
-      <p>以「日」为度量单位的基础日期选择面板。</p>
+      <Heading level={2}>选择某一天</Heading>
+      <p>以”日“为基本单位，基础的日期选择控件</p>
       <DemoBlock source={SOURCES.basic}>
         <DatePickerPanelBasic />
       </DemoBlock>
 
       <Heading level={2}>边框</Heading>
       <p>
-        默认情况下面板带边框，某些场景下不需要边框。例如 DatePicker
-        就不会继承边框。
+        默认情况下，边框是默认的，如果你不想要边框请参考示例。例如，
+        <code>DatePicker</code>不继承<code>border</code>。
       </p>
       <DemoBlock source={SOURCES.border}>
         <DatePickerPanelBorder />
       </DemoBlock>
 
       <Heading level={2}>禁用</Heading>
-      <p>
-        通过 <code>disabled</code> 属性完全禁用日期选择面板。
-      </p>
+      <p>&quot;禁用&quot;属性决定日期选择器是否完全禁用。</p>
       <DemoBlock source={SOURCES.disabled}>
         <DatePickerPanelDisabled />
       </DemoBlock>
 
-      <Heading level={2}>类型</Heading>
+      <Heading level={2}>展示类型</Heading>
       <p>
-        度量单位由 <code>type</code> 属性决定。
+        时间面板的类型由 <code>type</code> 属性指定。
       </p>
       <DemoBlock source={SOURCES.allTypes}>
         <DatePickerPanelAllTypes />
       </DemoBlock>
+
+      <Heading level={2}>本地化</Heading>
+      <p>
+        由于 Element Plus 的默认语言为英语，如果你需要设置其它的语言，请参考
+        <Link href="/zh-CN/guide/i18n">国际化</Link>文档。
+      </p>
+      <p>
+        要注意的是：日期相关的文字（月份，每一周的第一天等等）也都进行了本地化配置。
+      </p>
 
       <DocsContent source={API_MD} />
     </>

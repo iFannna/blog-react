@@ -111,14 +111,15 @@ const API_MD = `
 export default function TimeSelectPage() {
   return (
     <>
-      <h1>TimeSelect 时间选择器</h1>
-      <p>用于选择或输入时间。</p>
-      <p>可用时间范围为 00:00 到 23:59。</p>
+      <h1>TimeSelect 时间选择</h1>
+      <p>用于选择或输入日期</p>
+      <p>可用时间范围是 00:00-23:59</p>
 
       <Heading level={2}>固定时间点</Heading>
+      <p>提供几个固定的时间点供用户选择</p>
       <p>
-        通过 <code>start</code>、<code>end</code>、<code>step</code> 指定起始时间、结束时间与步长，
-        为用户提供一组固定可选时间。
+        使用 <code>el-time-select</code> 标签，然后通过<code>start</code>、
+        <code>end</code>和<code>step</code>指定起始时间，结束时间和步长。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <TimeSelectBasic />
@@ -126,16 +127,27 @@ export default function TimeSelectPage() {
 
       <Heading level={2}>时间格式</Heading>
       <p>
-        使用 <code>format</code> 控制时间格式。
+        使用 <code>format</code> 属性来控制时间格式 (小时以及分钟)。
+      </p>
+      <p>
+        在{" "}
+        <a href="https://day.js.org/docs/zh-CN/display/format">这里</a>{" "}
+        查看 Day.js 支持的 format 参数。
       </p>
       <DemoBlock source={SOURCES.formats}>
         <TimeSelectFormats />
       </DemoBlock>
+      <DocsContent
+        source={`:::warning
+
+请一定要注意传入参数的大小写是否正确
+
+:::`}
+      />
 
       <Heading level={2}>固定时间范围</Heading>
       <p>
-        若先选中起始（或结束）时间，另一个选择器的选项状态会随之变化，通过
-        <code>min-time</code> 与 <code>max-time</code> 联动。
+        如果先选中了开始（或结束）时间，则结束（或开始）时间的状态也将会随之改变。
       </p>
       <DemoBlock source={SOURCES.range}>
         <TimeSelectRange />

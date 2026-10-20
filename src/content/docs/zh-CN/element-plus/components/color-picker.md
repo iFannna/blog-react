@@ -7,19 +7,23 @@ order: 50
 
 # ColorPicker 颜色选择器
 
-用于选择颜色的颜色选择器，支持多种颜色格式。
+用于颜色选择，支持多种格式。
 
 ## 基础用法
 
-:::demo 颜色选择器需要一个字符串类型的绑定值。
+使用 v-model 与 Vue 实例中的一个变量进行双向绑定，绑定的变量需要是字符串类型。
+
+:::demo
 
 color-picker/basic
 
 :::
 
-## 透明度
+## 选择透明度
 
-:::demo 颜色选择器支持选择 alpha 通道。添加 `showAlpha` 属性即可启用透明度选择。
+ColorPicker 支持普通颜色，也支持带 Alpha 通道的颜色，通过`show-alpha`属性即可控制是否支持透明度的选择。要启用 Alpha 选择，只需添加 `show-alpha` 属性。
+
+:::demo
 
 color-picker/alpha
 
@@ -27,7 +31,9 @@ color-picker/alpha
 
 ## 预定义颜色
 
-:::demo 通过 `predefine` 属性可以配置预定义颜色。
+ColorPicker 支持预定义颜色
+
+:::demo
 
 color-picker/predefined-color
 
@@ -35,7 +41,7 @@ color-picker/predefined-color
 
 ## 不同尺寸
 
-:::demo 通过 `size` 属性设置颜色选择器的尺寸。
+:::demo
 
 color-picker/sizes
 

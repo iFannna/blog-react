@@ -161,44 +161,50 @@ export default function CarouselPage() {
   return (
     <>
       <h1>Carousel 走马灯</h1>
-      <p>在有限空间内，循环播放同一类型的图片、文字等内容。</p>
+      <p>在有限空间内，循环播放同一类型的图片、文字等内容</p>
 
       <Heading level={2}>基础用法</Heading>
       <p>
-        将 <code>ElCarousel</code> 与 <code>ElCarouselItem</code> 组合使用即可得到走马灯。
-        幻灯片内容完全可自定义，只需放进 <code>ElCarouselItem</code> 内。默认鼠标移入
-        指示器即切换，将 <code>trigger</code> 设为 <code>click</code> 后只有点击指示器才切换。
+        结合使用 <code>el-carousel</code> 和 <code>el-carousel-item</code>{" "}
+        标签就得到了一个走马灯。每一个页面的内容是完全可定制的，把你想要展示的内容放在{" "}
+        <code>el-carousel-item</code> 标签内。默认情况下，在鼠标 hover
+        底部的指示器时就会触发切换。通过设置 <code>trigger</code> 属性为{" "}
+        <code>click</code>，可以达到点击触发的效果。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <CarouselBasic />
       </DemoBlock>
 
-      <Heading level={2}>
-        动态模糊<span className="docs-version-tag">2.6.0</span>
+      <Heading level={2} id="动态模糊">
+        动态模糊 <span className="docs-version-tag">2.6.0</span>
       </Heading>
+      <p>添加动态模糊以给走马灯注入活力和流畅性。</p>
       <p>
-        开启动态模糊可增强走马灯切换时的动感与流畅度。<code>motionBlur</code> 默认为{" "}
-        <code>false</code>，开启后切换过程会带高斯模糊。
+        启用动态模糊增强了走马灯的活力和流畅性。 <code>motion-blur</code>{" "}
+        的默认值是 <code>false</code>，手动激活此功能即可提供视觉感受上的提升。
       </p>
       <DemoBlock source={SOURCES.motionBlur}>
         <CarouselMotionBlur />
       </DemoBlock>
 
       <Heading level={2}>指示器</Heading>
-      <p>指示器可以显示在走马灯外部。</p>
+      <p>可以将指示器的显示位置设置在容器外部</p>
       <p>
-        <code>indicatorPosition</code> 决定指示器位置：默认在内部，设为{" "}
-        <code>outside</code> 显示在外部，设为 <code>none</code> 则隐藏。
+        <code>indicator-position</code>{" "}
+        属性定义了指示器的位置。默认情况下，它会显示在走马灯内部，设置为{" "}
+        <code>outside</code> 则会显示在外部；设置为 <code>none</code>{" "}
+        则不会显示指示器。
       </p>
       <DemoBlock source={SOURCES.indicator}>
         <CarouselIndicator />
       </DemoBlock>
 
-      <Heading level={2}>箭头</Heading>
-      <p>可以定义箭头显示的时机。</p>
+      <Heading level={2}>切换箭头</Heading>
+      <p>可以设置切换箭头的显示时机</p>
       <p>
-        <code>arrow</code> 决定箭头何时显示：默认鼠标移入走马灯时显示，设为{" "}
-        <code>always</code> 或 <code>never</code> 表示常显或常隐。
+        <code>arrow</code> 属性定义了切换箭头的显示时机。默认情况下，切换箭头只有在鼠标
+        hover 到走马灯上时才会显示。若将 <code>arrow</code> 设置为{" "}
+        <code>always</code>，则会一直显示；设置为 <code>never</code>，则会一直隐藏。
       </p>
       <DemoBlock source={SOURCES.arrows}>
         <CarouselArrows />
@@ -206,27 +212,28 @@ export default function CarouselPage() {
 
       <Heading level={2}>自动高度</Heading>
       <p>
-        当 <code>height</code> 设为 <code>auto</code> 时，走马灯高度会随{" "}
-        <code>ElCarouselItem</code> 的高度自动变化。
+        当 <code>carousel </code>的<code> height</code> 设置为{" "}
+        <code>auto</code>时， <code>carousel</code> 的高度将根据子内容的高度自动设置
       </p>
       <DemoBlock source={SOURCES.autoHeight}>
         <CarouselAutoHeight />
       </DemoBlock>
 
-      <Heading level={2}>卡片化</Heading>
-      <p>当页面足够宽但高度有限时，可以开启卡片化模式。</p>
+      <Heading level={2}>卡片模式</Heading>
+      <p>当页面宽度方向空间空余，但高度方向空间匮乏时，可使用卡片风格</p>
       <p>
-        将 <code>type</code> 设为 <code>card</code> 即可开启。除了外观，卡片化与普通模式
-        最大的区别在于：点击两侧的幻灯片会直接切换走马灯。
+        将 <code>type</code> 属性设置为 <code>card</code>{" "}
+        即可启用卡片模式。从交互上来说，卡片模式和一般模式的最大区别在于，卡片模式可以通过直接点击两侧的幻灯片进行切换。
       </p>
       <DemoBlock source={SOURCES.card}>
         <CarouselCard />
       </DemoBlock>
 
-      <Heading level={2}>垂直方向</Heading>
+      <Heading level={2}>垂直排列</Heading>
       <p>
-        <code>direction</code> 默认为 <code>horizontal</code>，设为 <code>vertical</code>{" "}
-        即可纵向展示。
+        默认情况下，方向 <code>direction</code> 为 水平{" "}
+        <code>horizontal</code>。通过设置 <code>direction</code> 为{" "}
+        <code>vertical</code> 来让走马灯在垂直方向上显示。
       </p>
       <DemoBlock source={SOURCES.vertical}>
         <CarouselVertical />

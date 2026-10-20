@@ -270,12 +270,21 @@ export default function DateTimePickerPage() {
   return (
     <>
       <h1>DateTimePicker 日期时间选择器</h1>
-      <p>在一个选择器中选择日期与时间。</p>
+      <p>在同一个选择器里选择日期和时间</p>
 
-      <Heading level={2}>日期和时间</Heading>
+      <DocsContent
+        source={`:::tip
+
+日期时间选择器来自日期选择器和时间选择器的组合。关于属性的更详细解释，请参阅日期选择器和时间选择器。
+
+:::`}
+      />
+
+      <Heading level={2}>日期和时间点</Heading>
       <p>
-        设置 <code>type=&quot;datetime&quot;</code> 即可同时选择日期与时间，快捷选项的用法与
-        DatePicker 一致。
+        通过设置<code>type</code>属性为<code>datetime</code>
+        ，即可在同一个选择器里同时进行日期和时间的选择。快捷方式的使用方法与 Date
+        Picker 相同。
       </p>
       <DemoBlock source={SOURCES.dateAndTime}>
         <DateTimePickerBasic />
@@ -283,51 +292,77 @@ export default function DateTimePickerPage() {
 
       <Heading level={2}>日期时间格式</Heading>
       <p>
-        通过 <code>format</code> 控制输入框显示格式，通过{" "}
-        <code>valueFormat</code> 控制绑定值格式。默认绑定与返回值均为 Date
-        对象。
+        使用<code>format</code>指定输入框的格式。使用<code>value-format</code>
+        指定绑定值的格式。
       </p>
+      <p>
+        默认情况下，组件接受并返回<code>Date</code>对象。
+      </p>
+      <p>
+        在{" "}
+        <a href="https://day.js.org/docs/en/display/format#list-of-all-available-formats">
+          这里
+        </a>{" "}
+        查看 Day.js 支持的所有格式。
+      </p>
+      <DocsContent
+        source={`:::warning
+
+请一定要注意传入参数的大小写是否正确
+
+:::`}
+      />
       <DemoBlock source={SOURCES.formats}>
         <DateTimePickerFormats />
       </DemoBlock>
 
-      <Heading level={2}>面板中的日期时间格式</Heading>
+      <Heading level={2}>下拉列表中的日期和时间格式</Heading>
       <p>
-        通过 <code>dateFormat</code> 与 <code>timeFormat</code> 控制下拉面板中
-        输入框的显示格式。
+        使用 <code>date-format</code> 和 <code>time-format</code>{" "}
+        控制下拉列表面板输入框中显示的文本格式
       </p>
       <DemoBlock source={SOURCES.panelFormats}>
         <DateTimePickerPanelFormats />
       </DemoBlock>
 
-      <Heading level={2}>日期时间范围</Heading>
+      <Heading level={2}>日期和时间范围</Heading>
       <p>
-        设置 <code>type=&quot;datetimerange&quot;</code> 即可选择日期时间范围。
+        设置<code>type</code>为<code>datetimerange</code>即可选择日期和时间范围
       </p>
       <DemoBlock source={SOURCES.range}>
         <DateTimePickerRange />
       </DemoBlock>
 
-      <Heading level={2}>单面板</Heading>
+      <Heading level={2} id="单个面板">
+        单个面板 <span className="docs-version-tag">2.14.0</span>
+      </Heading>
       <p>
-        范围选择器默认显示两个面板，通过 <code>singlePanel</code>
-        只显示一个面板。
+        默认日期选择器范围有两个面板。如果你想要一个面板设置{" "}
+        <code>single-panel</code> 属性。
       </p>
       <DemoBlock source={SOURCES.singlePanel}>
         <DateTimePickerSinglePanel />
       </DemoBlock>
 
-      <Heading level={2}>范围默认时间</Heading>
+      <Heading level={2}>默认的起始与结束时刻</Heading>
       <p>
-        选择 <code>datetimerange</code> 类型时，默认起止时间均为{" "}
-        <code>00:00:00</code>，可通过 <code>defaultTime</code> 控制。
+        使用<code>datetimerange</code>
+        进行范围选择时，在日期选择面板中选定起始与结束的日期，默认会使用该日期的
+        <code>00:00:00</code>
+        作为起始与结束的时刻；通过选项<code>default-time</code>
+        可以控制选中起始与结束日期时所使用的具体时刻。我们可以使用{" "}
+        <code>default-time</code> 属性来控制它。{" "}
+        <code>default-time</code>
+        接受一个数组，其中第一项控制起始日期的具体时刻，第二项控制结束日期的具体时刻。第一项控制开始日期的时间值，第二项控制结束日期的时间值。
       </p>
       <DemoBlock source={SOURCES.defaultTime}>
         <DateTimePickerDefaultTime />
       </DemoBlock>
 
-      <Heading level={2}>自定义图标</Heading>
-      <p>通过对应 props 自定义导航图标。</p>
+      <Heading level={2} id="自定义图标">
+        自定义图标 <span className="docs-version-tag">2.8.0</span>
+      </Heading>
+      <p>使用插槽自定义图标。</p>
       <DemoBlock source={SOURCES.customIcon}>
         <DateTimePickerCustomIcon />
       </DemoBlock>

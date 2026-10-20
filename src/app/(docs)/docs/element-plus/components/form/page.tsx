@@ -389,32 +389,63 @@ const API_MD = `
 export default function FormPage() {
   return (
     <>
-      <h1>Form 表单组件</h1>
+      <h1>Form 表单</h1>
       <p>
-        由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据。
+        表单包含 <code>input</code>、<code>radio</code>、<code>select</code>、
+        <code>checkbox</code> 等需要用户输入的组件。使用表单，您可以收集、验证和提交数据。
       </p>
+
+      <DocsContent
+        source={`:::tip
+
+Form 组件已经从 2. x 的 Float 布局升级为 Flex 布局。
+
+:::`}
+      />
 
       <Heading level={2}>典型表单</Heading>
       <p>
-        包括各种表单项，比如输入框、选择器、开关、单选框、多选框等。
-        每个 form 组件中都需要 form-item 字段作为输入项的容器。
+        最基础的表单包括各种输入表单项，比如<code>input</code>、<code>select</code>、
+        <code>radio</code>、<code>checkbox</code>等。
       </p>
+      <p>
+        在每一个 <code>form</code> 组件中，你需要一个 <code>form-item</code>{" "}
+        字段作为输入项的容器，用于获取值与验证值。
+      </p>
+      <DocsContent
+        source={`:::tip
+
+[W3C](https://www.w3.org/MarkUp/html-spec/html-spec_8.html#SEC8.2) 标准定义：
+
+当一个表单中只有一个单行文本输入字段时， 浏览器应当将在此字段中按下 Enter （回车键）的行为视为提交表单的请求。 如果希望阻止这一默认行为，可以在 \`<el-form>\` 标签上添加 \`@submit.prevent\`。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.basic}>
         <FormBasic />
       </DemoBlock>
 
       <Heading level={2}>行内表单</Heading>
+      <p>当垂直方向空间受限且表单较简单时，可以在一行内放置表单。</p>
       <p>
-        设置 <code>inline</code> 属性可以让表单域变为行内的表单域。
+        通过设置 <code>inline</code> 属性为 <code>true</code>{" "}
+        可以让表单域变为行内的表单域。
       </p>
       <DemoBlock source={SOURCES.inline}>
         <FormInline />
       </DemoBlock>
 
       <Heading level={2}>对齐方式</Heading>
+      <p>根据你们的设计情况，来选择最佳的标签对齐方式。</p>
       <p>
-        通过 <code>labelPosition</code> 控制标签对齐方式，FormItem 上的同名属性优先级更高；
-        值为空时使用 Form 的 <code>labelPosition</code>。
+        您可以分别设置 <code>el-form-item</code> 的<code>label-position</code>{" "}
+        <span className="docs-version-tag">2.7.7</span>. 如果值为空, 则会使用{" "}
+        <code>el-form</code>的<code>label-position</code>。
+      </p>
+      <p>
+        通过设置 <code>label-position</code> 属性可以改变表单域标签的位置，可选值为{" "}
+        <code>top</code>、<code>left</code>, 当设为 <code>top</code>{" "}
+        时标签会置于表单域的顶部
       </p>
       <DemoBlock source={SOURCES.alignment}>
         <FormAlignment />
@@ -422,45 +453,66 @@ export default function FormPage() {
 
       <Heading level={2}>表单校验</Heading>
       <p>
-        Form 组件提供了表单验证的功能，只需为 <code>rules</code> 属性传入约定的验证规则，
-        并将 <code>FormItem</code> 的 <code>prop</code> 属性设置为需校验的字段名即可。
+        Form 组件允许你验证用户的输入是否符合规范，来帮助你找到和纠正错误。
+      </p>
+      <p>
+        <code>Form</code> 组件提供了表单验证的功能，只需为 <code>rules</code>{" "}
+        属性传入约定的验证规则，并将 <code>form-Item</code> 的 <code>prop</code>{" "}
+        属性设置为需要验证的特殊键值即可。校验规则参见{" "}
+        <a href="https://github.com/yiminghe/async-validator">async-validator</a>
       </p>
       <DemoBlock source={SOURCES.validation}>
         <FormValidation />
       </DemoBlock>
 
       <Heading level={2}>自定义校验规则</Heading>
+      <p>这个例子中展示了如何使用自定义验证规则来完成密码的二次验证。</p>
       <p>
-        本例展示如何自定义校验规则以完成二次密码验证，并用 <code>statusIcon</code>
-        展示校验结果图标。自定义校验回调必须被调用；设置 <code>scrollToError</code>
-        后校验失败会滚动到第一个错误项。
+        本例还使用<code>status-icon</code>属性为输入框添加了表示校验结果的反馈图标。
       </p>
+      <DocsContent
+        source={`:::tip
+
+自定义的校验回调函数必须被调用。校验规则参见 [async-validator](https://github.com/yiminghe/async-validator)
+
+:::`}
+      />
       <DemoBlock source={SOURCES.customValidation}>
         <FormCustomValidation />
       </DemoBlock>
 
-      <Heading level={2}>动态增减表单项</Heading>
+      <Heading level={2}>添加/删除表单项</Heading>
       <p>
-        除了在 Form 上一次性传递所有校验规则外，也可以动态地为单个表单字段传递或删除规则。
+        除了一次通过表单组件上的所有验证规则外. 您也可以动态地通过验证规则或删除单个表单字段的规则。
       </p>
       <DemoBlock source={SOURCES.formItems}>
         <FormFormItems />
       </DemoBlock>
 
-      <Heading level={2}>数字类型校验</Heading>
+      <Heading level={2}>数字类型验证</Heading>
       <p>
-        数字校验需要先把输入值转换为数字，再交给{" "}
-        <code>type: &apos;number&apos;</code> 规则；
-        官方通过 <code>v-model.number</code> 实现，这里在 <code>onChange</code> 中完成转换。
+        数字类型的验证需要在 <code>v-model</code> 处加上 <code>.number</code>{" "}
+        的修饰符，这是 Vue 自身提供的用于将绑定值转化为 number 类型的修饰符。
       </p>
+      <DocsContent
+        source={`:::tip
+
+当一个 \`el-form-item\` 嵌套在另一个 \`el-form-item\` 中时，其标签宽度将为 \`0\`。如果需要可以为 \`el-form-item\` 单独设置 \`label-width\` 属性。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.numberValidate}>
         <FormNumberValidate />
       </DemoBlock>
 
       <Heading level={2}>尺寸控制</Heading>
       <p>
-        Form 中所有组件都会继承 <code>size</code> 属性，FormItem 也支持单独设置
-        <code>size</code> 进行微调。
+        表单中的所有子组件都继承了该表单的 <code>size</code> 属性。同样，form-item
+        也有一个 <code>size</code> 属性。
+      </p>
+      <p>
+        如果希望某个表单项或某个表单组件的尺寸不同于 Form 上的 <code>size</code>{" "}
+        属性，直接为这个表单项或表单组件设置自己的 size 属性即可。
       </p>
       <DemoBlock source={SOURCES.size}>
         <FormSizeControl />
@@ -468,9 +520,12 @@ export default function FormPage() {
 
       <Heading level={2}>无障碍</Heading>
       <p>
-        当 FormItem 内只有一个输入（或关联控件）时，标签会自动关联到该输入；
-        当包含多个输入时，FormItem 会使用 <code>group</code> 角色，
-        此时需要自行通过 <code>aria-label</code> 等属性为每个输入添加辅助标签。
+        当在 <code>el-form-item</code>{" "}
+        内只有一个输入框（或相关的控制部件，如选择或复选框），表单项的标签将自动附加在那个输入框上。如果{" "}
+        <code>el-form-item</code>内有多个 input，则表单项会被设置成{" "}
+        <a href="https://www.w3.org/WAI/standards-guidelines/aria/">WAI-ARIA</a>{" "}
+        <a href="https://www.w3.org/TR/wai-aria/#group">组</a> 的
+        role。在这种情况下，需要手动给每个 input 指定访问标签。
       </p>
       <DemoBlock source={SOURCES.accessibility}>
         <FormAccessibility />

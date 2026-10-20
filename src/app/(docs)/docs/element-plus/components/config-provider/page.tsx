@@ -213,77 +213,69 @@ export default function ConfigProviderPage() {
     <>
       <h1>Config Provider 全局配置</h1>
       <p>
-        Config Provider 用于提供全局配置，让整个应用各处都能访问到这些配置。
-        在 React 版里由 React Context 实现，组件内部通过
-        <code>useGlobalConfig</code> 读取。
+        Config Provider 被用来提供全局的配置选项，让你的配置能够在全局都能够被访问到。
       </p>
 
-      <Heading level={2}>国际化</Heading>
-      <p>
-        通过 <code>locale</code> 提供语言包，即可获得语言切换能力。
-      </p>
+      <Heading level={2} id="i18n-配置">
+        i18n 配置
+      </Heading>
+      <p>通过 Config Provider 来配置多语言，让你的应用可以随时切换语言。</p>
+      <p>使用两个属性来提供 i18n 相关配置</p>
       <DemoBlock source={SOURCES.locale}>
         <ConfigProviderLocale />
       </DemoBlock>
 
-      <Heading level={2}>按钮配置</Heading>
-      <p>
-        <code>button</code> 下的字段会成为按钮的全局默认值，组件自身传入时优先。
-      </p>
+      <Heading level={2}>对按钮进行配置</Heading>
       <DemoBlock source={SOURCES.button}>
         <ConfigProviderButton />
       </DemoBlock>
 
-      <Heading level={2}>链接配置</Heading>
-      <p>
-        <code>link</code> 控制链接的默认类型与下划线时机。
-      </p>
+      <Heading level={2} id="对链接进行配置">
+        对链接进行配置 <span className="docs-version-tag">2.9.11</span>
+      </Heading>
       <DemoBlock source={SOURCES.link}>
         <ConfigProviderLink />
       </DemoBlock>
 
-      <Heading level={2}>卡片配置</Heading>
-      <p>
-        <code>card.shadow</code> 控制卡片阴影的展示时机。
-      </p>
+      <Heading level={2} id="对-card-进行配置">
+        对 Card 进行配置 <span className="docs-version-tag">2.10.5</span>
+      </Heading>
       <DemoBlock source={SOURCES.card}>
         <ConfigProviderCard />
       </DemoBlock>
 
-      <Heading level={2}>对话框配置</Heading>
-      <p>
-        <code>dialog</code> 控制对话框的居中、拖拽与溢出行为。
-      </p>
+      <Heading level={2} id="对-dialog-进行配置">
+        对 Dialog 进行配置 <span className="docs-version-tag">2.10.7</span>
+      </Heading>
       <DemoBlock source={SOURCES.dialog}>
         <ConfigProviderDialog />
       </DemoBlock>
 
-      <Heading level={2}>消息配置</Heading>
-      <p>
-        <code>message</code> 作用于命令式的 <code>message()</code>，
-        例如限制同位置最多显示的条数、统一位置与样式。
-      </p>
+      <Heading level={2}>对消息进行配置</Heading>
       <DemoBlock source={SOURCES.message}>
         <ConfigProviderMessage />
       </DemoBlock>
 
-      <Heading level={2}>空值配置</Heading>
+      <Heading level={2} id="空值配置">
+        空值配置 <span className="docs-version-tag">2.7.0</span>
+      </Heading>
       <p>
-        通过 <code>emptyValues</code> 自定义哪些值算「空」，通过{" "}
-        <code>valueOnClear</code> 指定清空后的返回值。默认空值为{" "}
-        <code>[&quot;&quot;, undefined, null]</code>；若认为空字符串有意义，可写{" "}
-        <code>[undefined, null]</code>。清空返回值默认是 <code>undefined</code>，
-        想得到 <code>undefined</code> 时请传 <code>() =&gt; undefined</code>。
+        设置 <code>empty-values</code> 来配置组件的默认空值。默认值是{" "}
+        <code>[&apos;&apos;, null, undefined]</code>。如果认为空字符串不是一个空值，可以设置成{" "}
+        <code>[undefined, null]</code>。
+      </p>
+      <p>
+        设置 <code>value-on-clear</code> 以设置清空选项的值。组件默认值是{" "}
+        <code>undefined</code>。在日期组件中是 <code>null</code>。如果想设置成{" "}
+        <code>undefined</code>，请使用 <code>() =&gt; undefined</code>。
       </p>
       <DemoBlock source={SOURCES.emptyValues}>
         <ConfigProviderEmptyValues />
       </DemoBlock>
 
-      <Heading level={2}>表格配置</Heading>
-      <p>
-        <code>table.showOverflowTooltip</code> 会作用到所有列，
-        单列显式传 <code>false</code> 可覆盖。
-      </p>
+      <Heading level={2} id="表格配置">
+        表格配置 <span className="docs-version-tag">2.13.3</span>
+      </Heading>
       <DemoBlock source={SOURCES.table}>
         <ConfigProviderTable />
       </DemoBlock>

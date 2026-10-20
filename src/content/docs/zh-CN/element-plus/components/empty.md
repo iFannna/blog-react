@@ -7,11 +7,11 @@ order: 80
 
 # Empty 空状态
 
-空状态时的展示占位图。
+空状态时的占位提示。
 
 ## 基础用法
 
-:::demo 通过 `description` 属性设置描述文字。
+:::demo
 
 empty/basic-usage
 
@@ -43,10 +43,7 @@ empty/bottom-content
 
 ## 自定义样式
 
-您可以为 empty 组件设置自定义样式。使用 css/scss 语言来更改全局或局部颜色。我们设置了一些全局颜色变量：
-`--el-empty-fill-color-0`、`--el-empty-fill-color-1`、`--el-empty-fill-color-2`、……、`--el-empty-fill-color-9`。
-您可以使用类似 `:root { --el-empty-fill-color-0: red; --el-empty-fill-color-1: blue; }` 等变量。
-但通常，如果你想要更改样式，你需要更改所有颜色，因为这些颜色是一个组合。
+您可以为empty组件设置自定义样式。使用 `css/scss` 语言来更改全局或局部颜色。我们设置了一些全局颜色变量：`--el-empty-fill-color-0`、`--el-empty-fill-color-1`、`--el-empty-fill-color-2`、……、`--el-empty-fill-color-9`。您可以使用类似 `:root { --el-empty-fill-color-0: red; --el-empty-fill-color-1: blue; }` 等变量。但通常，如果你想要更改样式，你需要更改所有颜色，因为这些颜色是一个组合。
 
 ### 默认变量
 

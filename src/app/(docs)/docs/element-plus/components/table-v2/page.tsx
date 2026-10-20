@@ -654,181 +654,236 @@ React 版把作用域插槽映射为 render prop，具名插槽映射为 ReactNo
 export default function TableV2Page() {
   return (
     <>
-      <h1>Table V2 虚拟化表格</h1>
-      <p>面向大数据量的虚拟滚动表格，支持固定列、树形数据、动态行高与自定义渲染。</p>
+      <h1>
+        Virtualized Table 虚拟化表格{" "}
+        <span className="docs-version-tag docs-version-tag--beta">beta</span>
+      </h1>
+      <p>
+        在前端开发领域，表格一直都是一个高频出现的组件，尤其是在中后台和数据分析场景。但是，对于{" "}
+        <a href="./table">Table V1</a>来说，当一屏里超过 1000
+        条数据记录时，就会出现卡顿等性能问题，体验不是很好。
+      </p>
+      <p>通过虚拟化表格组件，超大数据渲染将不再是一个头疼的问题。</p>
+      <DocsContent
+        source={`:::tip
+
+该组件**仍在测试中**，生产环境使用可能有风险。若您发现了 bug 或问题，请于 [GitHub](https://github.com/element-plus/element-plus/issues) 报告给我们以便修复。同时，有一些 API 并未在此文档中提及，因为部分还没有开发完全，因此我们不在此提及。
+
+**即使**虚拟化的表格是高效的，但是当数据负载过大时，**网络**和**内存容量**也会成为您应用程序的瓶颈。因此请牢记，虚拟化表格永远不是最完美的解决方案，请考虑数据分页、过滤器等优化方案。
+
+:::`}
+      />
 
       <Heading level={2}>基础用法</Heading>
-      <p>使用 10 列、1000 行数据展示虚拟化表格的基础用法。</p>
+      <p>让我们演示虚拟化表的性能，用10列和1 000行渲染一个基本示例。</p>
       <DemoBlock source={SOURCES.basic}>
         <TableV2Basic />
       </DemoBlock>
 
       <Heading level={2}>自动调整大小</Heading>
       <p>
-        不想手动传 <code>width</code> 与 <code>height</code> 时，可以用{" "}
-        <code>ElAutoResizer</code> 包裹表格，它会自动测量并下发尺寸。
-        请确保它的父节点有固定高度。
+        如果不想手动向表格传递 <code>width</code> 和 <code>height</code>{" "}
+        属性，可以使用 AutoResizer 对表格组件进行封装。这会自动为你更新宽度和高度。
       </p>
+      <p>尝试调整您的浏览器大小来看看它是如何工作的。</p>
+      <DocsContent
+        source={`:::tip
+
+由于 \`AutoResizer\` 组件的默认高度是 100%，所以请确保该组件的父元素**拥有固定的高度值**。或者，您可以通过将 \`style\` 属性传递到 \`AutoResizer\` 来定义它。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.autoResizer}>
         <TableV2AutoResizer />
       </DemoBlock>
 
-      <Heading level={2}>自定义单元格</Heading>
-      <p>通过列的 <code>cellRenderer</code> 按需渲染单元格内容。</p>
+      <Heading level={2}>自定义单元格渲染器</Heading>
+      <p>
+        当然，您可以根据您的需要呈现表格单元格。这是如何自定义您的单元格的简单例子。
+      </p>
       <DemoBlock source={SOURCES.cellTemplating}>
         <TableV2CellTemplating />
       </DemoBlock>
 
-      <Heading level={2}>可选择</Heading>
-      <p>用自定义单元格渲染器实现行选择，表头复选框支持全选与半选。</p>
+      <Heading level={2}>带有选择的表格</Heading>
+      <p>使用自定义的单元格渲染来给表格组件添加选择的能力。</p>
       <DemoBlock source={SOURCES.selection}>
         <TableV2Selection />
       </DemoBlock>
 
-      <Heading level={2}>行内编辑</Heading>
-      <p>与选择行类似，在单元格内切换到输入框即可实现行内编辑。</p>
+      <Heading level={2}>可编辑单元格</Heading>
+      <p>类似上面添加筛选框的方法，我们可以用同样的方法实现可编辑单元格。</p>
       <DemoBlock source={SOURCES.inlineEditing}>
         <TableV2InlineEditing />
       </DemoBlock>
 
-      <Heading level={2}>带状态的行</Heading>
+      <Heading level={2}>带状态的表格</Heading>
       <p>
-        用 <code>rowClass</code> 区分行的状态。示例中每 10 行的第 6 行与第 1
-        行分别使用不同背景。
+        可将表格内容 highlight 显示，方便区分「成功、信息、警告、危险」等内容。
+      </p>
+      <p>
+        要自定义行的外观，请使用 <code>row-class-name</code>{" "}
+        属性。举个例子，每10行会自动添加 <code>bg-blue-200</code> 类名，每5行会添加{" "}
+        <code>bg-red-100</code> 类名。
       </p>
       <DemoBlock source={SOURCES.rowClass}>
         <TableV2RowClass />
       </DemoBlock>
 
-      <Heading level={2}>吸顶行</Heading>
+      <Heading level={2}>表格行的粘性布局</Heading>
       <p>
-        通过 <code>fixedData</code> 可以把行固定在表头下方，并配合滚动事件动态切换。
+        您可以简单地使用 <code>fixed-data</code> 属性来实现将某些行固定到表格的头部。
       </p>
+      <p>您可以根据滚动事件动态设置粘性行，如这个示例所示。</p>
       <DemoBlock source={SOURCES.stickyRows}>
         <TableV2StickyRows />
       </DemoBlock>
 
-      <Heading level={2}>固定列</Heading>
+      <Heading level={2}>固定列表格</Heading>
       <p>
-        把列的 <code>fixed</code> 设为 <code>true</code>（等价于左侧）或{" "}
-        <code>TableV2FixedDir.LEFT</code> / <code>RIGHT</code> 即可固定列。
+        如果您想要有列粘贴左侧或右侧的某种原因。 您可以通过向表中添加特殊属性来实现这一点。
+      </p>
+      <p>
+        您可以设置该行的<code>{" fixed"}</code> 属性为 <code>true</code>{" "}
+        （代表<code>FixedDir.LEFT</code>）、<code>FixedDir.LEFT</code> 或{" "}
+        <code>FixedDir.RIGHT</code>
       </p>
       <DemoBlock source={SOURCES.fixedColumns}>
         <TableV2FixedColumns />
       </DemoBlock>
 
-      <Heading level={2}>分组表头</Heading>
-      <p>
-        通过 <code>headerRenderer</code> 接管整行表头，配合{" "}
-        <code>headerHeight</code> 数组渲染多行分组表头。
-      </p>
+      <Heading level={2}>表头分组</Heading>
+      <p>正如这个示例，通过自定义表头渲染以将表头分组。</p>
+      <DocsContent
+        source={`:::tip
+
+在这种情况下，我们使用了 \`JSX\` 功能，这个功能在playground上不被支持。您可以在本地环境或在线集成开发环境（如 \`codesandbox\` ）中试用它们。
+
+建议您使用 JSX 使用您的表格组件，因为它包含 VNode 操作。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.groupingHeader}>
         <TableV2GroupingHeader />
       </DemoBlock>
 
-      <Heading level={2}>筛选</Heading>
+      <Heading level={2}>过滤器</Heading>
       <p>
-        用 <code>headerCellRenderer</code> 在表头中放置筛选按钮与弹出层，筛选后替换数据源。
+        虚拟表格提供自定义页眉渲染器以创建自定义标题。然后我们可以利用这些来渲染过滤器。
       </p>
       <DemoBlock source={SOURCES.filter}>
         <TableV2Filter />
       </DemoBlock>
 
-      <Heading level={2}>排序</Heading>
-      <p>
-        传 <code>sortBy</code> 控制排序指示器，在 <code>onColumnSort</code>{" "}
-        中更新数据与排序状态。
-      </p>
+      <Heading level={2}>可排序表格</Heading>
+      <p>您可以使用排序状态来对表格进行排序。</p>
       <DemoBlock source={SOURCES.sort}>
         <TableV2Sort />
       </DemoBlock>
 
-      <Heading level={2}>受控排序</Heading>
+      <Heading level={2}>受控的排序</Heading>
       <p>
-        使用 <code>sortState</code> 可以同时维护多列的排序状态。
+        您可以在需要时定义多个可排序的列。请记住，当您在定义了多个可排序的列时， UI
+        可能会显得有些奇怪，因为用户不知道哪一列被排序。
       </p>
       <DemoBlock source={SOURCES.controlledSort}>
         <TableV2ControlledSort />
       </DemoBlock>
 
-      <Heading level={2}>列/行交叉高亮</Heading>
+      <Heading level={2}>高亮显示鼠标悬停单元格</Heading>
       <p>
-        在 <code>cellProps</code> 中监听鼠标事件并高亮当前列，方便在大表格中定位。
+        当处理一个大的列表时，很容易丢失当前行的轨迹和您正在访问的一列。在这种情况下，使用这个功能可能很有帮助。
       </p>
       <DemoBlock source={SOURCES.crossHovering}>
         <TableV2CrossHovering />
       </DemoBlock>
 
-      <Heading level={2}>合并列</Heading>
+      <Heading level={2}>横跨列</Heading>
       <p>
-        虚拟化表格没有原生 <code>table</code> 元素，需要用{" "}
-        <code>rowRenderer</code> 操作单元格节点来实现 colspan。
+        虚拟化表格没有使用内置的 <code>table</code> 元素，故 <code>colspan</code>{" "}
+        和 <code>rowspan</code> 与 <a href="./table">TableV1</a>{" "}
+        比较略有不同。然而，通过定制的行渲染器，这些功能仍然可以实现。在本节中，我们将演示如何实现这一点。
       </p>
       <DemoBlock source={SOURCES.colspan}>
         <TableV2Colspan />
       </DemoBlock>
 
-      <Heading level={2}>合并行</Heading>
-      <p>行合并的思路与列合并类似，只是调整的是单元格高度。</p>
+      <Heading level={2}>纵跨行</Heading>
+      <p>
+        既然我们已经提到了 <a href="#colspan">Colspan</a>，那跨行（row
+        span）也是没有问题的。它与colspan略有不同，但是基本原理是一样的。
+      </p>
       <DemoBlock source={SOURCES.rowspan}>
         <TableV2Rowspan />
       </DemoBlock>
 
-      <Heading level={2}>行列同时合并</Heading>
-      <p>把两种操作放进同一个行渲染器即可同时实现行合并与列合并。</p>
+      <Heading level={2}>同时跨行和跨列</Heading>
+      <p>我们当然可以同时使用横跨列与纵跨行来满足您的业务需求！</p>
       <DemoBlock source={SOURCES.spans}>
         <TableV2Spans />
       </DemoBlock>
 
       <Heading level={2}>树形数据</Heading>
-      <p>
-        指定 <code>expandColumnKey</code> 后，点击箭头即可展开或收起树形节点。
-      </p>
+      <p>虚拟表也可以在树状结构中呈现数据。点击箭头图标，你可以展开或折叠树节点。</p>
       <DemoBlock source={SOURCES.treeData}>
         <TableV2TreeData />
       </DemoBlock>
 
-      <Heading level={2}>动态行高</Heading>
+      <Heading level={2}>动态高度行</Heading>
       <p>
-        传入 <code>estimatedRowHeight</code> 后，表格会测量每行的实际高度。
-        估算值越接近真实高度，滚动体验越平滑。
+        虚拟表能够呈现具有动态高度的行数。如果您正在处理数据并不确定内容大小，
+        此功能对于调整到内容高度的渲染行是理想的。要启用此功能，请传递{" "}
+        <code>estimated-row-height</code>{" "}
+        属性。估计高度越接近实际内容，渲染体验就越顺。
       </p>
+      <DocsContent
+        source={`:::tip
+
+每行高度在渲染过程中动态测量。因此，如果您试图显示大量数据， UI **可能会** 抖动。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.dynamicHeight}>
         <TableV2DynamicHeight />
       </DemoBlock>
 
-      <Heading level={2}>详情视图</Heading>
-      <p>结合动态行高，可以在表格中展示展开后的详情内容。</p>
+      <Heading level={2}>可展开的附加信息</Heading>
+      <p>使用动态高度渲染，您也可以在表格中显示详细的视图。</p>
       <DemoBlock source={SOURCES.detailedView}>
         <TableV2DetailedView />
       </DemoBlock>
 
-      <Heading level={2}>自定义底部</Heading>
-      <p>通过 <code>footer</code> 属性渲染表格底部，并设置 <code>footerHeight</code> 参与高度计算。</p>
+      <Heading level={2}>自定义页脚</Heading>
+      <p>自定义表格 footer， 通常用来展示一些汇总数据和信息。</p>
       <DemoBlock source={SOURCES.footer}>
         <TableV2Footer />
       </DemoBlock>
 
-      <Heading level={2}>自定义空状态</Heading>
-      <p>数据为空时用 <code>empty</code> 属性替换默认空状态。</p>
+      <Heading level={2}>自定义空元素渲染器</Heading>
+      <p>渲染自定义的空元素。</p>
       <DemoBlock source={SOURCES.empty}>
         <TableV2Empty />
       </DemoBlock>
 
-      <Heading level={2}>遮罩层</Heading>
-      <p>用 <code>overlay</code> 属性在表格上方渲染加载遮罩或其他内容。</p>
+      <Heading level={2}>浮动遮罩层</Heading>
+      <p>
+        当您想要显示加载指示器之类的浮动元素，可以通过渲染一个浮动在表格之上的遮罩层来实现。
+      </p>
       <DemoBlock source={SOURCES.overlay}>
         <TableV2Overlay />
       </DemoBlock>
 
       <Heading level={2}>手动滚动</Heading>
-      <p>
-        通过实例的 <code>scrollTo</code> / <code>scrollToTop</code> /{" "}
-        <code>scrollToRow</code> 等方法可以编程式滚动。
-        <code>scrollToRow</code> 的第二个参数为滚动策略，默认值为{" "}
-        <code>auto</code>，可选 <code>smart</code>、<code>center</code>、
-        <code>start</code>、<code>end</code>。
-      </p>
+      <p>使用 Table V2 暴露的方法可以进行手动或编程式的滚动到指定的偏移量或者行。</p>
+      <DocsContent
+        source={`:::tip
+
+\`scrollToRow\` 的第二个参数代表滚动策略，计算了要滚动的位置，其默认值是 \`auto\`。如果你想要滚动到某个特定位置，你可以自己定义战略。可用的选项是 \`"auto" | "center" | "end" | "start" | "smart"\`
+
+\`smart\` 和\`auto\` 之间的区别是， \`auto\` 是 \`smart\` 滚动策略的子集。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.manualScroll}>
         <TableV2ManualScroll />
       </DemoBlock>

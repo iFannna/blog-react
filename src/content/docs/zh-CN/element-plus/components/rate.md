@@ -7,11 +7,13 @@ order: 160
 
 # Rate 评分
 
-用于对事物进行评级操作。
+用于评分
 
 ## 基础用法
 
-:::demo 分为三个等级，默认各级同色。用 `colors` 传入三个元素的数组可 按等级分色，等级边界由 `lowThreshold` 与  `highThreshold` 指定；也可以传对象，键为阈值，值为对应颜色。
+评分默认被分为三个等级，可以利用颜色数组对分数及情感倾向进行分级（默认情况下不区分颜色）。三个等级所对应的颜色用 `colors` 属性设置，而它们对应的两个阈值则通过 `low-threshold` 和 `high-threshold` 设定。
+
+:::demo
 
 rate/basic-usage
 
@@ -19,7 +21,7 @@ rate/basic-usage
 
 ## 尺寸
 
-:::demo 通过 `size` 改变尺寸，除默认外还有 `large`、 `small`。
+:::demo
 
 rate/sizes
 
@@ -27,7 +29,9 @@ rate/sizes
 
 ## 允许半选
 
-:::demo 设置 `allowHalf` 后可以选中半颗星。
+属性 `allow-half` 允许出现半星
+
+:::demo
 
 rate/allow-half
 
@@ -35,7 +39,11 @@ rate/allow-half
 
 ## 辅助文字
 
-:::demo 设置 `showText` 在右侧显示辅助文字，用 `texts`  为不同分值指定文本，数组长度应与 `max` 相同。
+用辅助文字直接地表达对应分数
+
+为组件设置 `show-text` 属性会在右侧显示辅助文字。通过设置 `texts` 可以为每一个分值指定对应的辅助文字。 `texts` 为一个数组，长度应等于最大值 `max`。
+
+:::demo
 
 rate/text
 
@@ -43,15 +51,21 @@ rate/text
 
 ## 可清空
 
-:::demo 设置 `clearable` 后，再次点击当前分值可重置为 0。
+当你再次点击相同的值时，可以将值重置为 `0`。
+
+:::demo
 
 rate/clearable
 
 :::
 
-## 更多图标
+## 更多种类的图标
 
-:::demo 用 `icons` 传入三个元素的数组或对象来自定义图标，配合  `voidIcon` 设置未选中时的图标。
+当有多层评价时，可以用不同类型的图标区分评分层级。
+
+设置`icons`属性可以自定义不同分段的图标。 若传入数组，共有 3 个元素，为 3 个分段所对应的类名；若传入对象，可自定义分段，键名为分段的界限值，键值为对应的类名。本例还使用 `void-icon` 指定了未选中时的图标类名。
+
+:::demo
 
 rate/more-icons
 
@@ -59,7 +73,11 @@ rate/more-icons
 
 ## 只读
 
-:::demo 只读用于展示评分，支持半星。设置 `disabled` 进入只读， `showScore` 在右侧显示分值，`scoreTemplate`  自定义模板，必须包含 `{value}`。
+只读的评分用来展示分数，允许出现半星。
+
+为组件设置 `disabled` 属性表示组件为只读。此时若设置 `show-score`，则会在右侧显示目前的分值。此外，您可以使用属性 `score-template` 来提供评分模板。模板为一个包含了 `{value}` 的字符串，`{value}` 会被替换为当前分值。
+
+:::demo
 
 rate/readonly
 
@@ -67,7 +85,7 @@ rate/readonly
 
 ## 自定义样式
 
-通过 CSS 变量 `--el-rate-void-color`、 `--el-rate-fill-color`、 `--el-rate-disabled-void-color`、 `--el-rate-text-color` 全局或局部改色。
+您可以为 rate 组件设定自定义样式。使用 `css` 或 `scss` 改变全局或局部的颜色。我们设置了一些全局颜色变量：`--el-rate-void-color`、`--el-rate-fill-color`、`--el-rate-disabled-void-color` 和 `--el-rate-text-color`。您可以像这样使用：`:root { --el-rate-void-color: red; --el-rate-fill-color: blue; }`。
 
 ## Rate API
 

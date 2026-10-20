@@ -7,13 +7,13 @@ order: 80
 
 # Popconfirm 气泡确认框
 
-点击某个元素弹出一个简单的气泡确认框。
+点击某个元素弹出一个简单的气泡确认框
 
 ## 展示位置
 
 Popconfirm 提供 9 种展示位置。
 
-:::demo 使用 `title` 属性来设置点击参考元素时显示的信息。由 `placement` 属性决定 Popconfirm 的位置。该属性值格式为：`[方向]-[对齐位置]`，可供选择的四个方向分别是 `top`、`left`、`right`、`bottom`，可供选择的三种对齐方式分别是 `start`、`end`、`null`，默认的对齐方式为 `null`。以 `placement="left-end"` 为例，气泡确认框会显示在悬停元素的左侧，且提示信息的底部与悬停元素的底部对齐。
+:::demo 使用 `title` 属性来设置点击参考元素时显示的信息。由 `placement` 属性决定 Popconfirm 的位置。该属性值格式为：`[方向]-[对齐位置]`，可供选择的四个方向分别是`top`、`left`、`right`、`bottom`，可供选择的三种对齐方式分别是`start`、`end`、`null`，默认的对齐方式为null。以 `placement="left-end"` 为例，气泡确认框会显示在悬停元素的左侧，且提示信息的底部与悬停元素的底部对齐。
 
 popconfirm/placement
 
@@ -41,7 +41,7 @@ popconfirm/customize
 
 ## 多种让 Popconfirm 出现的方法
 
-点击按钮触发事件。
+点击按钮触发事件
 
 :::demo
 

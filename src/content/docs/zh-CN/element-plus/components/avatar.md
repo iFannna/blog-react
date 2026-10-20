@@ -7,11 +7,11 @@ order: 10
 
 # Avatar 头像
 
-用来代表用户或事物，支持图片、图标或字符展示。
+Avatar 组件可以用来代表人物或对象，支持使用图片、图标或者文字作为 Avatar。
 
 ## 基础用法
 
-:::demo 头像支持圆形与方形两种形状，并可通过 `size` 设置尺寸； 数字按 px 处理，也可传入 `small` / `large`。
+:::demo 使用 `shape` 和 `size` 属性来设置 Avatar 的形状和大小。
 
 avatar/basic
 
@@ -19,31 +19,33 @@ avatar/basic
 
 ## 展示类型
 
-:::demo 支持图片、Icon 与字符三种类型，其中 Icon 和字符型可以自定义样式。
+:::demo 支持使用图片，图标或者文字作为 Avatar。
 
 avatar/types
 
 :::
 
-## 加载失败
+## 回退行为
 
-:::demo 图片加载失败时回退到默认插槽内容，可借此展示兜底图片。
+:::demo 图片加载失败时的回退行为。
 
 avatar/fallback
 
 :::
 
-## 图片填充方式
+## 适应容器
 
-:::demo 通过 `fit` 设置图片的 `object-fit`。
+:::demo 当使用图片作为用户头像时，设置该图片如何在容器中展示。与[ object-fit ](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) 属性一致
 
 avatar/fit
 
 :::
 
-## 头像组
+## 头像组 ^(2.13.1)
 
-:::demo 使用 `ElAvatarGroup` 将多个头像组合展示，支持折叠超出的头像， 并可选择悬浮时展示全部被折叠的头像。
+显示为头像组
+
+:::demo 使用标签 `<el-avatar-group>` 来分组您的头像。
 
 avatar/group
 

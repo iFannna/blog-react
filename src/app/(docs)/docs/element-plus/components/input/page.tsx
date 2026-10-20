@@ -318,7 +318,7 @@ export default function InputPage() {
   return (
     <>
       <h1>Input 输入框</h1>
-      <p>通过鼠标或键盘输入字符。</p>
+      <p>通过鼠标或键盘输入字符</p>
 
       <Heading level={2}>基础用法</Heading>
       <DemoBlock source={SOURCES.basic}>
@@ -327,25 +327,28 @@ export default function InputPage() {
 
       <Heading level={2}>禁用状态</Heading>
       <p>
-        通过 <code>disabled</code> 属性指定是否禁用 Input 组件，
-        也可以使用 <code>readOnly</code> 属性指定是否为只读。
+        通过 <code>disabled</code> 属性指定是否禁用 input 组件
       </p>
       <DemoBlock source={SOURCES.disabled}>
         <InputDisabled />
       </DemoBlock>
 
-      <Heading level={2}>可清空</Heading>
+      <Heading level={2}>一键清空</Heading>
       <p>
-        使用 <code>clearable</code> 属性即可得到一个可清空的输入框，
-        textarea 类型同样支持。
+        使用<code>clearable</code>
+        属性即可得到一个可一键清空的输入框在版本{" "}
+        <span className="docs-version-tag">2.13.4</span> 之后，Input 的 textarea
+        类型也支持 clearable 功能。
       </p>
       <DemoBlock source={SOURCES.clearable}>
         <InputClearable />
       </DemoBlock>
 
-      <Heading level={2}>自定义清除图标</Heading>
+      <Heading level={2} id="自定义清除图标">
+        自定义清除图标 <span className="docs-version-tag">2.11.0</span>
+      </Heading>
       <p>
-        通过 <code>clearIcon</code> 属性自定义清除图标。
+        你可以通过<code>clear-icon</code>属性自定义清除图标
       </p>
       <DemoBlock source={SOURCES.clearIcon}>
         <InputClearIcon />
@@ -353,8 +356,8 @@ export default function InputPage() {
 
       <Heading level={2}>格式化</Heading>
       <p>
-        使用 <code>formatter</code> 格式化展示值，通常与 <code>parser</code>{" "}
-        一起使用以还原实际值。
+        在 <code>formatter</code>的情况下显示值，我们通常同时使用{" "}
+        <code>parser</code>
       </p>
       <DemoBlock source={SOURCES.formatter}>
         <InputFormatter />
@@ -362,17 +365,20 @@ export default function InputPage() {
 
       <Heading level={2}>密码框</Heading>
       <p>
-        使用 <code>showPassword</code> 属性即可得到一个可切换显示隐藏的密码框；
-        通过 <code>passwordIcon</code> 可以自定义图标。
+        使用 <code>show-password</code> 属性即可得到一个可切换显示隐藏的密码框自{" "}
+        <span className="docs-version-tag">2.13.6</span> 起，支持使用{" "}
+        <code>password-icon</code> 插槽覆盖默认图标。
       </p>
       <DemoBlock source={SOURCES.password}>
         <InputPassword />
       </DemoBlock>
 
-      <Heading level={2}>带图标</Heading>
+      <Heading level={2}>带图标的输入框</Heading>
+      <p>带有图标标记输入类型</p>
       <p>
-        使用 <code>prefixIcon</code> / <code>suffixIcon</code> 属性添加图标，
-        也可以使用 <code>prefix</code> / <code>suffix</code> 插槽。
+        要在输入框中添加图标，你可以简单地使用 <code>prefix-icon</code> 和{" "}
+        <code>suffix-icon</code> 属性。另外， <code>prefix</code> 和{" "}
+        <code>suffix</code> 命名的插槽也能正常工作。
       </p>
       <DemoBlock source={SOURCES.icons}>
         <InputIcons />
@@ -380,8 +386,11 @@ export default function InputPage() {
 
       <Heading level={2}>文本域</Heading>
       <p>
-        通过 <code>type=&quot;textarea&quot;</code> 切换为原生 textarea，
-        使用 <code>rows</code> 控制高度。
+        用于输入多行文本信息可缩放的输入框。添加 <code>type=&quot;textarea&quot;</code>{" "}
+        属性来将 <code>input</code> 元素转换为原生的 <code>textarea</code> 元素。
+      </p>
+      <p>
+        文本域高度可通过 <code>rows</code> 属性控制
       </p>
       <DemoBlock source={SOURCES.textarea}>
         <InputTextarea />
@@ -389,17 +398,18 @@ export default function InputPage() {
 
       <Heading level={2}>自适应文本域</Heading>
       <p>
-        为 textarea 设置 <code>autosize</code> 属性可让高度随内容自适应，
-        也可以传入 <code>{"{ minRows, maxRows }"}</code> 限定行数范围。
+        设置文字输入类型的 <code>autosize</code>{" "}
+        属性使得根据内容自动调整的高度。你可以给 <code>autosize</code>{" "}
+        提供一个包含有最大和最小高度的对象，让输入框自动调整。
       </p>
       <DemoBlock source={SOURCES.autosize}>
         <InputAutoSizingTextarea />
       </DemoBlock>
 
-      <Heading level={2}>复合输入框</Heading>
+      <Heading level={2}>复合型输入框</Heading>
+      <p>可以在输入框中前置或后置一个元素，通常是标签或按钮。</p>
       <p>
-        使用 <code>prepend</code> / <code>append</code> 在输入框前后放置标签、
-        选择器或按钮等内容。
+        可通过 <code>slot</code> 来指定在 Input 中分发的前置或者后置的内容。
       </p>
       <DemoBlock source={SOURCES.mixed}>
         <InputMixedInput />
@@ -407,8 +417,8 @@ export default function InputPage() {
 
       <Heading level={2}>尺寸</Heading>
       <p>
-        通过 <code>size</code> 属性设置 <code>large</code> /{" "}
-        <code>default</code> / <code>small</code> 尺寸，前后缀图标会同步缩放。
+        使用 <code>size</code> 属性改变输入框大小。除了默认大小外，还有另外两个选项：{" "}
+        <code>large</code>, <code>small</code>。
       </p>
       <DemoBlock source={SOURCES.sizes}>
         <InputSizes />
@@ -416,19 +426,41 @@ export default function InputPage() {
 
       <Heading level={2}>输入长度限制</Heading>
       <p>
-        使用 <code>maxlength</code> 和 <code>minlength</code> 限制输入长度，
-        配合 <code>showWordLimit</code> 显示字数统计；<code>wordLimitPosition</code>{" "}
-        可把统计放到输入框外部。
+        使用 <code>maxlength</code> 和 <code>minlength</code> 属性,
+        来控制输入内容的最大字数和最小字数。&quot;字符数&quot;使用JavaScript字符串长度来衡量。
+        为文本或文本输入类型设置 <code>maxlength</code> prop可以限制输入值的长度。{" "}
+        允许你通过设置 <code>show-word-limit</code> 到 <code>true</code>{" "}
+        来显示剩余字数。从 <span className="docs-version-tag">2.11.5</span>{" "}
+        版本开始，你可以将 <code>word-limit-position</code> 设置为{" "}
+        <code>outside</code>，以在输入框外显示字数统计。
       </p>
       <DemoBlock source={SOURCES.lengthLimit}>
         <InputWordLimit />
       </DemoBlock>
 
-      <Heading level={2}>字素计数</Heading>
+      <Heading level={2} id="计数图形">
+        计数图形 <span className="docs-version-tag">2.13.7</span>
+      </Heading>
       <p>
-        设置 <code>countGraphemes</code> 后按自定义规则计算长度，此时原生{" "}
-        <code>maxlength</code> / <code>minlength</code> 不再生效。
+        设置 <code>count-graphemes</code>{" "}
+        以计算文本长度。如果设置了该属性，则不会使用原生的 <code>maxlength</code> 和{" "}
+        <code>minlength</code>。
       </p>
+      <DocsContent
+        source={`:::tip
+
+**浏览器支持 & 回退策略**
+
+当使用 \`count-graphemes\` prop时，组件使用以下方法：
+
+**主要**: 使用 \`Intl.Segmenter\` API (Chrome 87+, Firefox 125+, Safari 14.1+) 进行适当的图形集群处理。它能够正确处理复杂的表情符号、组合标记和0宽度连接符序列。
+
+**回退**: 旧版浏览器会回退到 \`Array.from()\` 进行基于码点的迭代。请注意，这可能会拆分多码点字形序列（例如，带有肤色修饰符的表情符号）。
+
+在实现自己的 \`count-graphemes\` 函数时，如果需要对复杂的 unicode 字符提供强大的支持，请考虑使用 \`Intl.Segmenter\`。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.countGraphemes}>
         <InputCountGraphemes />
       </DemoBlock>

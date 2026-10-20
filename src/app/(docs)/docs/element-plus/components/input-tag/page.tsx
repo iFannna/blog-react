@@ -191,84 +191,76 @@ export default function InputTagPage() {
   return (
     <>
       <h1>InputTag 标签输入框</h1>
-      <p>InputTag 组件允许用户将输入内容添加为标签。</p>
+      <p>InputTag 组件允许用户添加内容作为标签</p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>按回车键即可把输入内容添加为标签。</p>
+      <p>按Enter回车键添加输入内容为标签</p>
       <DemoBlock source={SOURCES.basic}>
         <InputTagBasic />
       </DemoBlock>
 
-      <Heading level={2}>自定义触发键</Heading>
-      <p>
-        通过 <code>trigger</code> 指定触发新增标签的按键，默认是 <code>Enter</code>。
-      </p>
+      <Heading level={2}>自定义触发器</Heading>
+      <p>您可以自定义用于触发输入标签的键位，默认是Enter 回车键</p>
       <DemoBlock source={SOURCES.trigger}>
         <InputTagTrigger />
       </DemoBlock>
 
-      <Heading level={2}>最多标签数</Heading>
-      <p>
-        用 <code>max</code> 限制可添加的标签数量。
-      </p>
+      <Heading level={2}>最大标签数</Heading>
+      <p>您可以设置可以添加的标签数量限制。</p>
       <DemoBlock source={SOURCES.max}>
         <InputTagMax />
       </DemoBlock>
 
-      <Heading level={2}>折叠标签</Heading>
+      <Heading level={2} id="折叠标签">
+        折叠标签 <span className="docs-version-tag">2.11.0</span>
+      </Heading>
       <p>
-        设置 <code>collapseTags</code> 后多余标签会合并成一段文本；开启{" "}
-        <code>collapseTagsTooltip</code> 后悬停该文本可查看全部标签，
-        但此时 <code>max</code> 会失效。<code>maxCollapseTags</code> 控制保留的标签数。
+        使用折叠标签属性将它们合并成一块文本。您可以使用折叠标签工具提示属性来启用悬停在折叠文本上的行为来显示特定的选定值。使用折叠标签工具提示属性会使最大属性无效。
       </p>
       <DemoBlock source={SOURCES.collapse}>
         <InputTagCollapse />
       </DemoBlock>
 
       <Heading level={2}>禁用状态</Heading>
-      <p>
-        设置 <code>disabled</code> 可禁用整个组件。
-      </p>
+      <p>您可以设置 InputTag 被禁用。</p>
       <DemoBlock source={SOURCES.disabled}>
         <InputTagDisabled />
       </DemoBlock>
 
       <Heading level={2}>可清空</Heading>
-      <p>
-        设置 <code>clearable</code> 后会出现清空按钮。
-      </p>
+      <p>您可以设置是否显示清除按钮。</p>
       <DemoBlock source={SOURCES.clearable}>
         <InputTagClearable />
       </DemoBlock>
 
-      <Heading level={2}>自定义清空图标</Heading>
+      <Heading level={2} id="自定义清除图标">
+        自定义清除图标 <span className="docs-version-tag">2.11.0</span>
+      </Heading>
       <p>
-        通过 <code>clearIcon</code> 自定义清空图标。
+        你可以通过<code>clear-icon</code>属性自定义清除图标
       </p>
       <DemoBlock source={SOURCES.clearIcon}>
         <InputTagClearIcon />
       </DemoBlock>
 
-      <Heading level={2}>可拖拽</Heading>
-      <p>
-        设置 <code>draggable</code> 后标签可拖拽排序。
-      </p>
+      <Heading level={2}>可拖放</Heading>
+      <p>您可以设置是否可以拖动标签。</p>
       <DemoBlock source={SOURCES.draggable}>
         <InputTagDraggable />
       </DemoBlock>
 
-      <Heading level={2}>分隔符</Heading>
-      <p>
-        设置 <code>delimiter</code> 后，输入内容匹配到分隔符即创建标签。
-      </p>
+      <Heading level={2} id="分隔符">
+        分隔符 <span className="docs-version-tag">2.9.9</span>
+      </Heading>
+      <p>当一个分隔符匹配时，您可以添加一个标签。</p>
       <DemoBlock source={SOURCES.delimiter}>
         <InputTagDelimiter />
       </DemoBlock>
 
       <Heading level={2}>尺寸</Heading>
       <p>
-        通过 <code>size</code> 改变尺寸，除默认外还有 <code>large</code>、
-        <code>small</code>。
+        使用 <code>size</code> 属性改变输入框大小。除了默认大小外，还有另外两个选项：{" "}
+        <code>large</code>, <code>small</code>。
       </p>
       <DemoBlock source={SOURCES.size}>
         <InputTagSize />
@@ -276,15 +268,16 @@ export default function InputTagPage() {
 
       <Heading level={2}>自定义标签</Heading>
       <p>
-        通过函数子节点自定义标签内容，等价官方的 <code>tag</code> 作用域插槽。
+        您可以通过<code>tag</code>插槽自定义标签内容。
       </p>
       <DemoBlock source={SOURCES.tag}>
         <InputTagCustomTag />
       </DemoBlock>
 
-      <Heading level={2}>自定义前缀与后缀</Heading>
+      <Heading level={2}>自定义前缀和后缀</Heading>
       <p>
-        通过 <code>prefix</code> 与 <code>suffix</code> 自定义输入框前后内容。
+        您可以通过<code>prefix</code>和 <code>suffix</code> 插槽自定义 InputTag
+        的前缀和后缀。
       </p>
       <DemoBlock source={SOURCES.prefixSuffix}>
         <InputTagPrefixSuffix />

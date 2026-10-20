@@ -7,7 +7,7 @@ order: 20
 
 # Watermark 水印
 
-在页面上添加特定的文字或图案。
+在页面上添加文本或图片等水印信息
 
 ## 基础用法
 
@@ -19,7 +19,7 @@ watermark/basic
 
 ## 多行水印
 
-:::demo 通过 `content` 设置一个字符串数组来指定多行文本水印内容。
+:::demo 使用 `content`设置一个字符串数组来指定多行文本水印内容
 
 watermark/multi-line
 
@@ -27,7 +27,7 @@ watermark/multi-line
 
 ## 图片水印
 
-:::demo 通过 `image` 指定图片地址。为保证图片高清且不被拉伸，请设置 width 和 height，并上传至少两倍的宽高。
+:::demo 通过 `image` 指定图像地址。为了确保图像清晰展示而不是被拉伸，请设置宽度和高度，建议使用至少两倍的宽度和高度的图片来保证显示效果。
 
 watermark/image
 
@@ -35,7 +35,7 @@ watermark/image
 
 ## 自定义配置
 
-:::demo 通过配置自定义参数预览水印效果。
+:::demo 配置自定义参数预览水印效果。
 
 watermark/custom
 

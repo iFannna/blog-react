@@ -112,25 +112,36 @@ export default function BorderPage() {
   return (
     <>
       <h1>Border 边框</h1>
-      <p>我们对组件中使用的边框、圆角与阴影做了统一规范。</p>
+      <p>我们对边框进行统一规范，可用于按钮、卡片、弹窗等组件里。</p>
 
       <Heading level={2}>边框样式</Heading>
-      <p>边框只有实线与虚线两种可选样式。</p>
+      <p>我们提供了以下几种边框样式，以供选择。</p>
       <DemoBlock source={SOURCES.border}>
         <BorderBasic />
       </DemoBlock>
 
       <Heading level={2}>圆角</Heading>
-      <p>通过 CSS 变量选择不同的圆角大小。</p>
+      <p>我们提供了以下几种圆角样式，以供选择。</p>
       <DemoBlock source={SOURCES.radius}>
         <BorderRadius />
       </DemoBlock>
 
       <Heading level={2}>阴影</Heading>
-      <p>通过 CSS 变量选择不同的阴影层次。</p>
+      <p>我们提供了以下几种投影样式，以供选择。</p>
       <DemoBlock source={SOURCES.shadow}>
         <BorderShadow />
       </DemoBlock>
+
+      <Heading level={2}>源代码</Heading>
+      <p>
+        <a
+          href="https://github.com/element-plus/element-plus/blob/dev/docs/en-US/component/border.md"
+          target="_blank"
+          rel="noreferrer"
+        >
+          文档
+        </a>
+      </p>
 
       <DocsContent source={API_MD} />
     </>

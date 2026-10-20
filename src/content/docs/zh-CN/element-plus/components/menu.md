@@ -9,7 +9,9 @@ order: 60
 
 为网站提供导航功能的菜单。
 
-如需覆盖 `el-menu` 的默认高度，可以使用：
+:::tip
+
+如果您想要覆盖el-menu的默认高度, 您可以使用下列CSS
 
 ```css
 .el-menu--horizontal {
@@ -17,45 +19,53 @@ order: 60
 }
 ```
 
+:::
+
 ## 顶栏
 
-:::demo 顶栏菜单可用于多种场景。菜单默认是纵向的，将 `mode` 设为  `horizontal` 即可切换为横向。配合 `ElSubMenu`  可创建二级菜单，并通过 `backgroundColor`、`textColor`  与 `activeTextColor` 自定义配色。
+顶部栏菜单可以在各种场景中使用。
+
+:::demo 导航菜单默认为垂直模式，通过将 mode 属性设置为 horizontal 来使导航菜单变更为水平模式。另外，在菜单中通过 sub-menu 组件可以生成二级菜单。 Menu 还提供了`background-color`、`text-color`和`active-text-color`，分别用于设置菜单的背景色、菜单的文字颜色和当前激活菜单的文字颜色。
 
 menu/basic
 
 :::
 
-## 左右分布
+## 左右
 
-:::demo 可以将菜单项分布到左右两侧。
+您可以将菜单项放置在左边或右边。
+
+:::demo
 
 menu/left-and-right
 
 :::
 
-## 侧边栏
+## 侧栏
 
-带子菜单的纵向菜单。
+垂直菜单，可内嵌子菜单。
 
-使用 `ElMenuItemGroup` 创建菜单分组，分组名称由  `title` 决定。
-
-:::demo
+:::demo 通过 el-menu-item-group 组件可以实现菜单进行分组，分组名可以通过 title 属性直接设定，也可以通过具名 slot 来设定。
 
 menu/vertical
 
 :::
 
-## 折叠
+## Collapse 折叠面板
 
-:::demo 纵向菜单可以折叠。
+垂直导航菜单可以被折叠
+
+:::demo
 
 menu/collapse
 
 :::
 
-## 浮层偏移
+## 弹出层偏移量 ^(2.4.4)
 
-:::demo 子菜单设置 `popperOffset` 后会覆盖菜单的  `popperOffset`。
+当提供了 popperOffset 配置，会覆盖 Menu 的 `popper-offset`.
+
+:::demo
 
 menu/popper-offset
 

@@ -50,14 +50,14 @@ export default function BacktopPage() {
       <p>返回页面顶部的操作按钮。</p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>向下滚动页面即可看到右下角的按钮。</p>
+      <p>通过滑动来查看容器右下角的按钮。</p>
       <DemoBlock source={SOURCES.basic}>
         <BacktopBasic />
       </DemoBlock>
 
-      <Heading level={2}>自定义</Heading>
+      <Heading level={2}>自定义内容</Heading>
       <p>
-        显示区域是 40px * 40px，通过 <code>right</code>、<code>bottom</code> 调整位置。
+        显示区域被固定为 40px * 40px 的区域，其中的内容可支持自定义。
       </p>
       <DemoBlock source={SOURCES.custom}>
         <BacktopCustom />

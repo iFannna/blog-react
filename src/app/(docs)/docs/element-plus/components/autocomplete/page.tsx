@@ -147,45 +147,49 @@ const API_MD = `
 export default function AutocompletePage() {
   return (
     <>
-      <h1>Autocomplete 自动补全</h1>
-      <p>根据当前输入提供推荐的提示项。</p>
+      <h1>自动补全输入框</h1>
+      <p>根据输入内容提供对应的输入建议。</p>
 
       <Heading level={2}>基础用法</Heading>
+      <p>Autocomplete 组件提供输入建议。</p>
       <p>
-        <code>fetchSuggestions</code> 是返回建议的方法，示例中{" "}
-        <code>querySearch(queryString, cb)</code> 准备好数据后通过{" "}
-        <code>cb(data)</code> 返回给 Autocomplete。
+        <code>fetch-suggestions</code> 属性是返回建议输入的方法。在此示例中，{" "}
+        <code>querySearch(queryString, cb)</code> 方法通过 <code>cb(data)</code>{" "}
+        给 Autocomplete 组件返回建议。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <AutocompleteBasic />
       </DemoBlock>
 
       <Heading level={2}>自定义模板</Heading>
+      <p>自定义如何显示输入建议。</p>
       <p>
-        通过 <code>renderItem</code> 自定义建议项的展示，参数为建议对象。
+        使用 <code>scoped slot</code> 自定义输入建议。在这个范围中，你可以使用{" "}
+        <code>item</code> 键来访问当前输入建议对象。
       </p>
       <DemoBlock source={SOURCES.template}>
         <AutocompleteTemplate />
       </DemoBlock>
 
       <Heading level={2}>远程搜索</Heading>
-      <p>从服务端搜索数据，建议项异步返回。</p>
+      <p>从服务端搜索数据。</p>
       <DemoBlock source={SOURCES.remoteSearch}>
         <AutocompleteRemoteSearch />
       </DemoBlock>
 
-      <Heading level={2}>自定义加载</Heading>
-      <p>
-        通过 <code>loading</code> 覆盖加载内容。
-      </p>
+      <Heading level={2} id="自定义加载">
+        自定义加载 <span className="docs-version-tag">2.5.0</span>
+      </Heading>
+      <p>修改加载区域内容</p>
       <DemoBlock source={SOURCES.customLoading}>
         <AutocompleteCustomLoading />
       </DemoBlock>
 
-      <Heading level={2}>自定义头部与底部</Heading>
-      <p>
-        通过 <code>header</code> 与 <code>footer</code> 自定义下拉的头部和底部内容。
-      </p>
+      <Heading level={2} id="自定义头部与底部">
+        自定义头部与底部 <span className="docs-version-tag">2.10.6</span>
+      </Heading>
+      <p>你可以通过插槽来自定义下拉菜单的头部和底部。</p>
+      <p>使用插槽自定义内容。</p>
       <DemoBlock source={SOURCES.customHeaderFooter}>
         <AutocompleteCustomHeaderFooter />
       </DemoBlock>

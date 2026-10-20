@@ -7,7 +7,7 @@ order: 20
 
 # Anchor 锚点
 
-通过锚点，可以快速找到当前页面信息内容的位置。
+通过锚点，您可以很快找到当前页面上信息内容的位置。
 
 ## 基础用法
 
@@ -19,7 +19,15 @@ anchor/basic
 
 ## 水平模式
 
-:::demo 水平方向排列的锚点。水平模式不支持 `sub-link` 插槽。
+水平排列的锚点
+
+:::tip
+
+水平模式不支持`sub-link`槽位
+
+:::
+
+:::demo
 
 anchor/horizontal
 
@@ -27,7 +35,7 @@ anchor/horizontal
 
 ## 滚动容器
 
-:::demo 自定义滚动区域，使用 `offset` 设置锚点滚动偏移量， 监听 `onClick` 并阻止浏览器默认行为即不会改变 history。
+:::demo 自定义滚动区域，使用 `offset` props 可以设置锚点滚动偏移。 监听`link-click`事件并阻止浏览器的默认行为，从而不会更改历史记录。
 
 anchor/scroll
 
@@ -35,7 +43,7 @@ anchor/scroll
 
 ## 锚点链接变化
 
-:::demo 监听锚点链接的变化。
+:::demo 监听锚点链接变化
 
 anchor/change
 
@@ -43,7 +51,7 @@ anchor/change
 
 ## 下划线类型
 
-:::demo 设置 `type="underline"` 切换为下划线类型。
+:::demo 设置`type="underline"`以更改为下划线类型
 
 anchor/underline
 
@@ -51,7 +59,7 @@ anchor/underline
 
 ## 固定模式
 
-:::demo 使用固钉组件将锚点固定在页面内。
+:::demo 使用 affix 组件来固定住页面中的锚点。
 
 anchor/affix
 

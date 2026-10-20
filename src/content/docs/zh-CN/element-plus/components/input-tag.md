@@ -7,35 +7,43 @@ order: 120
 
 # InputTag 标签输入框
 
-InputTag 组件允许用户将输入内容添加为标签。
+InputTag 组件允许用户添加内容作为标签
 
 ## 基础用法
 
-:::demo 按回车键即可把输入内容添加为标签。
+按Enter回车键添加输入内容为标签
+
+:::demo
 
 input-tag/basic
 
 :::
 
-## 自定义触发键
+## 自定义触发器
 
-:::demo 通过 `trigger` 指定触发新增标签的按键，默认是 `Enter`。
+您可以自定义用于触发输入标签的键位，默认是Enter 回车键
+
+:::demo
 
 input-tag/trigger
 
 :::
 
-## 最多标签数
+## 最大标签数
 
-:::demo 用 `max` 限制可添加的标签数量。
+您可以设置可以添加的标签数量限制。
+
+:::demo
 
 input-tag/max
 
 :::
 
-## 折叠标签
+## 折叠标签^(2.11.0)
 
-:::demo 设置 `collapseTags` 后多余标签会合并成一段文本；开启  `collapseTagsTooltip` 后悬停该文本可查看全部标签， 但此时 `max` 会失效。`maxCollapseTags` 控制保留的标签数。
+使用折叠标签属性将它们合并成一块文本。您可以使用折叠标签工具提示属性来启用悬停在折叠文本上的行为来显示特定的选定值。使用折叠标签工具提示属性会使最大属性无效。
+
+:::demo
 
 input-tag/collapse
 
@@ -43,7 +51,9 @@ input-tag/collapse
 
 ## 禁用状态
 
-:::demo 设置 `disabled` 可禁用整个组件。
+您可以设置 InputTag 被禁用。
+
+:::demo
 
 input-tag/disabled
 
@@ -51,31 +61,39 @@ input-tag/disabled
 
 ## 可清空
 
-:::demo 设置 `clearable` 后会出现清空按钮。
+您可以设置是否显示清除按钮。
+
+:::demo
 
 input-tag/clearable
 
 :::
 
-## 自定义清空图标
+## 自定义清除图标^(2.11.0)
 
-:::demo 通过 `clearIcon` 自定义清空图标。
+你可以通过`clear-icon`属性自定义清除图标
+
+:::demo
 
 input-tag/clear-icon
 
 :::
 
-## 可拖拽
+## 可拖放
 
-:::demo 设置 `draggable` 后标签可拖拽排序。
+您可以设置是否可以拖动标签。
+
+:::demo
 
 input-tag/draggable
 
 :::
 
-## 分隔符
+## 分隔符^(2.9.9)
 
-:::demo 设置 `delimiter` 后，输入内容匹配到分隔符即创建标签。
+当一个分隔符匹配时，您可以添加一个标签。
+
+:::demo
 
 input-tag/delimiter
 
@@ -83,7 +101,9 @@ input-tag/delimiter
 
 ## 尺寸
 
-:::demo 通过 `size` 改变尺寸，除默认外还有 `large`、 `small`。
+使用 `size` 属性改变输入框大小。除了默认大小外，还有另外两个选项： `large`, `small`。
+
+:::demo
 
 input-tag/size
 
@@ -91,15 +111,19 @@ input-tag/size
 
 ## 自定义标签
 
-:::demo 通过函数子节点自定义标签内容，等价官方的 `tag` 作用域插槽。
+您可以通过`tag`插槽自定义标签内容。
+
+:::demo
 
 input-tag/tag
 
 :::
 
-## 自定义前缀与后缀
+## 自定义前缀和后缀
 
-:::demo 通过 `prefix` 与 `suffix` 自定义输入框前后内容。
+您可以通过`prefix`和 `suffix` 插槽自定义 InputTag 的前缀和后缀。
+
+:::demo
 
 input-tag/prefix-suffix
 

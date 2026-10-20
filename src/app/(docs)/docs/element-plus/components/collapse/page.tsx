@@ -169,51 +169,66 @@ export default function CollapsePage() {
   return (
     <>
       <h1>Collapse 折叠面板</h1>
-      <p>通过折叠面板收纳内容区域。</p>
+      <p>通过折叠面板收纳内容区域</p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>
-        可同时展开多个面板，<code>value</code> 为数组。
-      </p>
+      <p>可同时展开多个面板，面板之间不影响</p>
       <DemoBlock source={SOURCES.basic}>
         <CollapseBasic />
       </DemoBlock>
 
       <Heading level={2}>手风琴效果</Heading>
+      <p>每次只能展开一个面板</p>
       <p>
-        每次只能展开一个面板，通过 <code>accordion</code> 开启。
+        通过 <code>accordion</code> 属性来设置是否以手风琴模式显示。
       </p>
       <DemoBlock source={SOURCES.accordion}>
         <CollapseAccordion />
       </DemoBlock>
 
-      <Heading level={2}>自定义图标位置</Heading>
+      <Heading level={2}>自定义面板标题</Heading>
       <p>
-        通过 <code>expandIconPosition</code> 设置展开图标的位置。
+        除了可以通过 <code>title</code> 属性以外，还可以通过具名{" "}
+        <code>slot</code> 来实现自定义面板的标题内容，以实现增加图标等效果。
       </p>
-      <DemoBlock source={SOURCES.iconPosition}>
-        <CollapseIconPosition />
+      <DocsContent
+        source={`:::tip
+
+从版本 ^(2.9.10)开始， \`title\` 插槽提供一个 \`isActive\` 属性，显示当前折叠项是否活跃。
+
+:::`}
+      />
+      <DemoBlock source={SOURCES.customization}>
+        <CollapseCustomTitle />
       </DemoBlock>
 
-      <Heading level={2}>自定义图标</Heading>
+      <Heading level={2} id="自定义图标">
+        自定义图标 <span className="docs-version-tag">2.8.3</span>
+      </Heading>
       <p>
-        通过 <code>icon</code> 传入节点或函数；函数参数包含当前 <code>isActive</code> 状态。
+        除了使用 <code>icon</code>{" "}
+        属性外，您还可以自定义面板项目图标，从而添加自定义内容。
       </p>
       <DemoBlock source={SOURCES.customIcon}>
         <CollapseCustomIcon />
       </DemoBlock>
 
-      <Heading level={2}>自定义标题</Heading>
+      <Heading level={2} id="自定义图标位置">
+        自定义图标位置 <span className="docs-version-tag">2.9.10</span>
+      </Heading>
       <p>
-        <code>title</code> 支持函数形式，可根据 <code>isActive</code> 渲染不同内容。
+        使用 <code>expand-icon-position</code> 属性，您可以自定义图标位置。
       </p>
-      <DemoBlock source={SOURCES.customization}>
-        <CollapseCustomTitle />
+      <DemoBlock source={SOURCES.iconPosition}>
+        <CollapseIconPosition />
       </DemoBlock>
 
-      <Heading level={2}>阻止折叠</Heading>
+      <Heading level={2} id="阻止折叠">
+        阻止折叠 <span className="docs-version-tag">2.9.11</span>
+      </Heading>
       <p>
-        <code>beforeCollapse</code> 返回 Promise 时，等待结果再决定是否切换。
+        设置 <code>beforeChange</code> 属性，若返回 false 或者返回{" "}
+        <code>Promise</code> 且被 <code>reject</code> ，则停止切换。
       </p>
       <DemoBlock source={SOURCES.preventCollapsing}>
         <CollapsePreventCollapsing />

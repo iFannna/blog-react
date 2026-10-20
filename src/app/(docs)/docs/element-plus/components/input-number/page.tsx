@@ -143,37 +143,49 @@ export default function InputNumberPage() {
   return (
     <>
       <h1>Input Number 数字输入框</h1>
-      <p>仅允许输入标准的数字值，可定义范围。</p>
+      <p>仅允许输入标准的数字值，可定义范围</p>
 
       <Heading level={2}>基础用法</Heading>
       <p>
-        绑定 <code>value</code> 与 <code>onChange</code> 即可使用，
-        <code>min</code> 与 <code>max</code> 控制可输入的范围。
+        要使用它，只需要在 <code>&lt;el-input-number&gt;</code> 元素中使用{" "}
+        <code>v-model</code> 绑定变量即可，变量的初始值即为默认值。
       </p>
+      <DocsContent
+        source={`:::tip
+
+当输入无效的字符串到输入框时，由于错误，输入值将把 \`NaN\` 导入到上层
+
+:::`}
+      />
       <DemoBlock source={SOURCES.basic}>
         <InputNumberBasic />
       </DemoBlock>
 
       <Heading level={2}>禁用状态</Heading>
       <p>
-        <code>disabled</code> 接受一个 boolean，设为 true 即可禁用整个组件。
+        <code>disabled</code>属性接受一个 <code>Boolean</code>，设置为
+        <code>true</code>
+        即可禁用整个组件。，如果你只需要控制数值在某一范围内，可以设置{" "}
+        <code>min</code> 属性和 <code>max</code> 属性，默认情况下，最小值是{" "}
+        <code>Number.MIN_SAFE_INTEGER</code>。
       </p>
       <DemoBlock source={SOURCES.disabled}>
         <InputNumberDisabled />
       </DemoBlock>
 
-      <Heading level={2}>步长</Heading>
+      <Heading level={2}>步进</Heading>
+      <p>允许定义递增递减的步进控制</p>
       <p>
-        通过 <code>step</code> 属性设置每次改变的步长。
+        设置 <code>step</code> 属性可以控制步长。
       </p>
       <DemoBlock source={SOURCES.steps}>
         <InputNumberSteps />
       </DemoBlock>
 
-      <Heading level={2}>严格步长</Heading>
+      <Heading level={2}>严格步进</Heading>
       <p>
-        <code>stepStrictly</code> 接受一个 boolean，设为 true 后输入值只能是
-        <code>step</code> 的整数倍。
+        <code>step-strictly</code>属性接受一个<code>Boolean</code>
+        。如果这个属性被设置为 <code>true</code>，则只能输入步进的倍数。
       </p>
       <DemoBlock source={SOURCES.stepStrictly}>
         <InputNumberStepStrictly />
@@ -181,17 +193,24 @@ export default function InputNumberPage() {
 
       <Heading level={2}>精度</Heading>
       <p>
-        通过 <code>precision</code> 属性设置数值精度。<code>precision</code> 必须是非负整数，
-        且不能小于 <code>step</code> 的小数位数。
+        设置 <code>precision</code> 属性可以控制数值精度，接收一个{" "}
+        <code>Number</code>。
       </p>
+      <DocsContent
+        source={`:::tip
+
+\`precision\` 的值必须是一个非负整数，并且不能小于 \`step\` 的小数位数。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.precision}>
         <InputNumberPrecision />
       </DemoBlock>
 
-      <Heading level={2}>尺寸</Heading>
+      <Heading level={2}>不同的输入框尺寸</Heading>
       <p>
-        通过 <code>size</code> 属性设置尺寸，除默认外还有 <code>large</code>、
-        <code>small</code>。
+        使用 <code>size</code> 属性额外配置尺寸，可选的尺寸大小为：
+        <code>large</code> 或 <code>small</code>
       </p>
       <DemoBlock source={SOURCES.size}>
         <InputNumberSize />
@@ -199,35 +218,51 @@ export default function InputNumberPage() {
 
       <Heading level={2}>按钮位置</Heading>
       <p>
-        设置 <code>controlsPosition</code> 决定控制按钮的位置，设为
-        <code>right</code> 后按钮固定在右侧。
+        设置 <code>controls-position</code> 属性可以控制按钮位置。
       </p>
       <DemoBlock source={SOURCES.controlled}>
         <InputNumberControlled />
       </DemoBlock>
 
-      <Heading level={2}>自定义图标</Heading>
+      <Heading level={2} id="自定义图标">
+        自定义图标 <span className="docs-version-tag">2.6.3</span>
+      </Heading>
       <p>
-        使用 <code>decreaseIcon</code> 与 <code>increaseIcon</code> 自定义控制按钮的图标。
+        使用 <code>decrease-icon</code> 和 <code>increase-icon</code> 设置自定义图标。
       </p>
       <DemoBlock source={SOURCES.custom}>
         <InputNumberCustom />
       </DemoBlock>
 
-      <Heading level={2}>前缀与后缀</Heading>
-      <p>
-        使用 <code>prefix</code> 与 <code>suffix</code> 为内部输入框添加前后缀。
-      </p>
+      <Heading level={2} id="带前缀和后缀">
+        带前缀和后缀 <span className="docs-version-tag">2.8.4</span>
+      </Heading>
+      <p>使用前缀和标名后缀。</p>
+      <DocsContent
+        source={`:::tip
+
+为了确保精度，输入的数值被限制在 [Number.MIN_SAFE_INTEGER](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER) 到 [Number.MAX_SAFE_INTEGER](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER) 之间。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.withPrefixSuffix}>
         <InputNumberWithPrefixSuffix />
       </DemoBlock>
 
-      <Heading level={2}>格式化</Heading>
+      <Heading level={2} id="Formatter">
+        Formatter <span className="docs-version-tag">2.14.0</span>
+      </Heading>
       <p>
-        设置 <code>formatter</code> 展示格式化后的值，通常与 <code>parser</code> 搭配使用。
-        设置 <code>formatter</code> 后内部输入框的 <code>type</code> 会变为
-        <code>text</code>，允许输入非数字字符；组件内部用 <code>Number.parseFloat</code>
-        解析，解析成功时把数值写回，解析为 NaN 时写入 <code>null</code>。
+        使用 <code>formatter</code> 来显示值，通常会同时配合{" "}
+        <code>parser</code> 一起使用。
+      </p>
+      <p>
+        当设置了 <code>formatter</code> 时，内部输入框的 <code>type</code> 会变为{" "}
+        <code>text</code>，从而允许输入非数字字符。 组件内部使用{" "}
+        <code>Number.parseFloat</code>{" "}
+        处理输入：解析成功时，将解析后的数值写入 <code>model-value</code>
+        ；当解析结果为 <code>NaN</code> 时，将 <code>model-value</code> 设为{" "}
+        <code>null</code>。
       </p>
       <DemoBlock source={SOURCES.formatter}>
         <InputNumberFormatter />

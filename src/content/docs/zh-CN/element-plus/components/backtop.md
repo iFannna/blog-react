@@ -11,15 +11,15 @@ order: 30
 
 ## 基础用法
 
-:::demo 向下滚动页面即可看到右下角的按钮。
+:::demo 通过滑动来查看容器右下角的按钮。
 
 backtop/basic
 
 :::
 
-## 自定义
+## 自定义内容
 
-:::demo 显示区域是 40px * 40px，通过 `right`、`bottom` 调整位置。
+:::demo 显示区域被固定为 40px * 40px 的区域，其中的内容可支持自定义。
 
 backtop/custom
 

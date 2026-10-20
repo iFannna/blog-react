@@ -7,11 +7,13 @@ order: 190
 
 # Tour 漫游式引导
 
-用于分步引导用户了解产品功能的漫游式引导组件。
+用于分步引导用户了解产品功能的气泡组件。用来引导用户并介绍产品
 
 ## 基础用法
 
-:::demo 最基础的用法，通过 `target` 指向每一步的目标元素。
+最简单的用法。
+
+:::demo
 
 tour/basic
 
@@ -19,7 +21,9 @@ tour/basic
 
 ## 非模态
 
-:::demo 使用 `mask=false` 让导览不遮挡页面；此时建议配合  `type="primary"` 强调引导本身。
+使用`:mask="false"`可以将引导变为非模态，同时为了强调引导本身，建议与 type="primary" 组合使用。
+
+:::demo
 
 tour/non-modal
 
@@ -27,7 +31,9 @@ tour/non-modal
 
 ## 位置
 
-:::demo 通过 `placement` 改变引导卡片相对目标的位置，共 12 种；  `target` 为空时卡片显示在屏幕中央。
+改变引导相对于目标的位置，共有 12 种位置可供选择。当 `target` 为空时引导将会展示在正中央。
+
+:::demo
 
 tour/placement
 
@@ -35,7 +41,9 @@ tour/placement
 
 ## 自定义遮罩样式
 
-:::demo `mask` 传对象可自定义遮罩样式与填充色，也可以按步骤单独设置。
+自定义遮罩样式。
+
+:::demo
 
 tour/mask
 
@@ -43,15 +51,19 @@ tour/mask
 
 ## 自定义指示器
 
-:::demo 通过 `indicators` 替换默认的圆点指示器。
+自定义指示器。
+
+:::demo
 
 tour/indicator
 
 :::
 
-## 目标元素
+## 目标
 
-:::demo `target` 支持选择器字符串、元素本身，或返回元素的函数。
+可以传入目标的各种类型的参数。自^(2.5.2)以来支持字符串和函数类型。
+
+:::demo
 
 tour/target
 

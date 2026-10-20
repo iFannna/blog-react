@@ -215,65 +215,86 @@ const API_MD = `
 export default function TreeV2Page() {
   return (
     <>
-      <h1>Tree V2 虚拟化树形控件</h1>
-      <p>面向大数据量的虚拟滚动树形控件。</p>
+      <h1>
+        Tree V2 虚拟化树形控件<span className="docs-version-tag docs-version-tag--beta">beta</span>
+      </h1>
+      <p>不论你的数据量多大，虚拟树都能毫无压力地处理。</p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>基础的树形结构展示。</p>
+      <p>基础的树形结构展示</p>
       <DemoBlock source={SOURCES.basic}>
         <TreeV2Basic />
       </DemoBlock>
 
-      <Heading level={2}>可选择</Heading>
-      <p>用于节点选择。</p>
+      <Heading level={2}>可选择的虚拟树</Heading>
+      <p>适用于需要选择层级时使用。</p>
       <DemoBlock source={SOURCES.selectable}>
         <TreeV2Selectable />
       </DemoBlock>
+      <DocsContent
+        source={`:::warning
+
+在使用 show-checkbox 时，因为 \`check-on-click-leaf\` 默认值为 true， 最后一个树节点可以通过点击节点进行勾选。
+
+:::`}
+      />
 
       <Heading level={2}>禁用复选框</Heading>
+      <p>节点的复选框可以设置为禁用。</p>
       <p>
-        节点的复选框可以单独禁用：在 <code>props</code> 里声明{" "}
-        <code>disabled</code> 字段名，并把节点的该字段设为 <code>true</code>。
+        在示例中，属性在 defaultProps 中声明了 <code>disabled</code>，一些节点被设置为{" "}
+        <code>disabled：true</code>。相应的复选框已禁用，不能点击。
       </p>
       <DemoBlock source={SOURCES.disabled}>
         <TreeV2Disabled />
       </DemoBlock>
 
-      <Heading level={2}>默认展开和默认选中</Heading>
+      <Heading level={2}>默认扩展和默认检查</Heading>
+      <p>树节点可以在初始化阶段被设置为展开或选中。</p>
       <p>
-        用 <code>default-expanded-keys</code> 与{" "}
-        <code>default-checked-keys</code> 设置初始展开与初始勾选的节点。
+        分别通过 <code>default-expanded-keys</code> 和{" "}
+        <code>default-checked-keys</code> 设置默认展开和默认选中的节点。
       </p>
       <DemoBlock source={SOURCES.defaultState}>
         <TreeV2DefaultState />
       </DemoBlock>
 
       <Heading level={2}>自定义节点内容</Heading>
-      <p>节点内容可以自定义，从而加入图标或按钮。</p>
+      <p>节点的内容支持自定义，可以在节点区添加按钮或图标等内容</p>
       <DemoBlock source={SOURCES.customNode}>
         <TreeV2CustomNode />
       </DemoBlock>
 
-      <Heading level={2}>自定义节点类名</Heading>
-      <p>
-        用 <code>props.class</code> 生成节点类名。
-      </p>
+      <Heading level={2} id="自定义节点类">
+        自定义节点类 <span className="docs-version-tag">2.9.0</span>
+      </Heading>
+      <p>节点的类名支持自定义。</p>
       <DemoBlock source={SOURCES.customNodeClass}>
         <TreeV2CustomNodeClass />
       </DemoBlock>
 
-      <Heading level={2}>自定义节点图标</Heading>
+      <Heading level={2} id="自定义图标">
+        自定义图标 <span className="docs-version-tag">2.10.3</span>
+      </Heading>
       <p>
-        节点暴露 <code>expanded</code> 与 <code>isLeaf</code> 属性，可据此渲染不同的图标。
+        您可以自定义不同节点状态的图标。树节点暴露了 <code>expanded</code> 属性和{" "}
+        <code>isLeaf</code>{" "}
+        属性，允许你根据节点的状态动态渲染不同的图标：叶子节点、展开的节点或折叠的节点。
       </p>
       <DemoBlock source={SOURCES.customIcon}>
         <TreeV2CustomIcon />
       </DemoBlock>
 
-      <Heading level={2}>树节点过滤</Heading>
+      <Heading level={2} id="树节点过滤">
+        树节点过滤 <span className="docs-version-tag">2.9.1</span>
+      </Heading>
       <p>
-        调用实例的 <code>filter</code> 方法过滤节点，参数即过滤关键字。
-        该功能需要 <code>filter-method</code>。
+        <code>filter-method</code> 方法只有在版本 <code>2.9.1</code>{" "}
+        之后才能接受第三个参数。树节点是可以被过滤的
+      </p>
+      <p>
+        在需要对节点进行过滤时，调用 Tree 实例的 <code>filter</code>{" "}
+        方法，参数为关键字。需要注意的是，此时需要设置 <code>filter-method</code>，值为过滤函数。
       </p>
       <DemoBlock source={SOURCES.filter}>
         <TreeV2Filter />

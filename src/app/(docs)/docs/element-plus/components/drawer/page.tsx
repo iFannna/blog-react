@@ -200,20 +200,45 @@ export default function DrawerPage() {
   return (
     <>
       <h1>Drawer 抽屉</h1>
-      <p>有些对话框要提供额外的操作，但保留当前页面状态，Drawer 就是这样的组件。</p>
+      <p>
+        有些时候, <code>Dialog</code> 组件并不满足我们的需求, 比如你的表单很长,
+        亦或是你需要临时展示一些文档, <code>Drawer</code> 拥有和{" "}
+        <code>Dialog</code> 几乎相同的 API, 在 UI 上带来不一样的体验.
+      </p>
+      <DocsContent
+        source={`:::tip
+
+在 Vue 3 之后的版本 v-model 可以用于任何一个组件，\`visible.sync\` 已被移除，请使用 \`v-model="visibilityBinding"\` 来控制抽屉组件的显示和隐藏状态。
+
+:::`}
+      />
 
       <Heading level={2}>基础用法</Heading>
+      <p>呼出一个临时的侧边栏, 可以从多个方向呼出</p>
       <p>
-        通过 <code>visible</code> 控制显示；<code>direction</code> 支持四个方向，
-        <code>beforeClose</code> 可以拦截关闭。
+        你必须像 <code>Dialog</code>一样为 <code>Drawer</code> 设置{" "}
+        <code>model-value</code> 属性来控制 <code>Drawer</code>{" "}
+        的显示与隐藏状态，该属性接受一个 <code>boolean</code> 类型。{" "}
+        <code>Drawer</code> 包含三部分: <code>title</code> & <code>body</code> &{" "}
+        <code>footer</code>, 其中 <code>title</code> 是一个具名 slot, 你还可以通过{" "}
+        <code>title</code> 属性来设置标题, 默认情况下它是一个空字符串, 其中{" "}
+        <code>body</code> 部分是 <code>Drawer</code> 组件的主区域,
+        它包含了用户定义的主要内容. footer和title用法一致, 用来显示页脚信息. 当{" "}
+        <code>Drawer</code> 打开时，默认设置是<strong>从右至左</strong>打开{" "}
+        <strong>30%</strong> 浏览器宽度。你可以通过传入对应的 <code>direction</code>{" "}
+        和 <code>size</code> 属性来修改这一默认行为。下面一个示例将展示如何使用{" "}
+        <code>before-close</code> API，更多详细用法请参考页面底部的 API 部分。
       </p>
       <DemoBlock source={SOURCES.basicUsage}>
         <DrawerBasicUsage />
       </DemoBlock>
 
-      <Heading level={2}>无标题</Heading>
+      <Heading level={2}>不添加 Title</Heading>
+      <p>当你不需要标题的时候，你可以将它移除。</p>
       <p>
-        设置 <code>withHeader</code> 为 <code>false</code> 可以移除头部区域。
+        通过设置 <code>with-header</code> 属性为 <strong>false</strong>{" "}
+        来控制是否显示标题。如果你的应用需要具备可访问性，请务必设置好{" "}
+        <code>title</code>。
       </p>
       <DemoBlock source={SOURCES.noTitle}>
         <DrawerNoTitle />
@@ -221,7 +246,8 @@ export default function DrawerPage() {
 
       <Heading level={2}>自定义内容</Heading>
       <p>
-        抽屉内可以放置表格、表单等任意内容。
+        像 <code>Dialog</code> 组件一样，<code>Drawer</code>{" "}
+        也可以用来显示多种不同的交互。
       </p>
       <DemoBlock source={SOURCES.customizationContent}>
         <DrawerCustomizationContent />
@@ -229,16 +255,20 @@ export default function DrawerPage() {
 
       <Heading level={2}>自定义头部</Heading>
       <p>
-        <code>header</code> 渲染函数接收 <code>close</code>、<code>titleId</code>、
-        <code>titleClass</code>，可自由排布头部。
+        <code>header</code> 可用于自定义显示标题的区域。为了保持可用性，除了使用此插槽外，使用{" "}
+        <code>title</code> 属性，或使用 <code>titleId</code>{" "}
+        插槽属性来指定哪些元素应该读取为抽屉标题。
       </p>
       <DemoBlock source={SOURCES.customizationHeader}>
         <DrawerCustomizationHeader />
       </DemoBlock>
 
-      <Heading level={2}>可调整尺寸</Heading>
+      <Heading level={2} id="可调整抽屉">
+        可调整抽屉<span className="docs-version-tag">2.11.0</span>
+      </Heading>
+      <p>尝试拖动边缘部分。</p>
       <p>
-        设置 <code>resizable</code> 后可通过边缘手柄拖拽调整尺寸。
+        设置<code>resizable</code>属性为<code>true</code>以做到拖拽
       </p>
       <DemoBlock source={SOURCES.resizable}>
         <DrawerResizable />
@@ -246,20 +276,42 @@ export default function DrawerPage() {
 
       <Heading level={2}>嵌套抽屉</Heading>
       <p>
-        内层抽屉建议设置 <code>appendToBody</code>，避免层级与焦点问题。
+        你可以像 <code>Dialog</code> 一样拥有多层嵌套的 <code>Drawer</code>
+      </p>
+      <p>
+        如果你需要在不同图层中多个抽屉，你必须设置{" "}
+        <code>append-to-body</code> 属性到 <strong>true</strong>
       </p>
       <DemoBlock source={SOURCES.nestedDrawer}>
         <DrawerNestedDrawer />
       </DemoBlock>
 
-      <Heading level={2}>遮罩</Heading>
+      <Heading level={2}>模态框</Heading>
       <p>
-        <code>modal</code> 控制遮罩显示；配合 <code>modalPenetrable</code>
-        可以让点击穿透到页面。
+        将 <code>modal</code> 设置为 <code>false</code>{" "}
+        将隐藏抽屉的模态层（遮罩层）。
+      </p>
+      <p>
+        从版本 <span className="docs-version-tag">2.11.7</span> 起，新增了{" "}
+        <code>modal-penetrable</code> 属性，该属性可设置为“可穿透”。
       </p>
       <DemoBlock source={SOURCES.modal}>
         <DrawerModal />
       </DemoBlock>
+      <DocsContent
+        source={`:::tip
+
+Drawer 的内容是懒渲染的，即在第一次被打开之前，传入的默认 slot 不会被渲染到 DOM 上。 因此，如果需要执行 DOM 操作，或通过 \`ref\` 获取相应组件，请在 \`open\` 事件回调中进行。
+
+:::`}
+      />
+      <DocsContent
+        source={`:::tip
+
+Drawer 提供了一个名为 \`destroy-on-close\` 的 API，这是一个标志变量，用于指示在 Drawer 关闭后是否销毁其中的子内容。 当你需要每次打开抽屉都要调用 \`mounted\` 生命周期时，可以使用此 API。
+
+:::`}
+      />
 
       <DocsContent source={API_MD} />
     </>

@@ -124,49 +124,59 @@ export default function SliderPage() {
   return (
     <>
       <h1>Slider 滑块</h1>
-      <p>通过拖动滑块在一个固定区间内进行选择。</p>
+      <p>通过拖动滑块在一个固定区间内进行选择</p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>在拖动滑块时，显示当前值。</p>
+      <p>在拖动滑块时，显示当前值</p>
+      <p>通过设置绑定值自定义滑块的初始值</p>
       <DemoBlock source={SOURCES.basic}>
         <SliderBasic />
       </DemoBlock>
 
       <Heading level={2}>离散值</Heading>
+      <p>选项可以是离散的</p>
       <p>
-        选项可以是离散的。设置 <code>step</code> 可以改变步长，
-        设置 <code>showStops</code> 可以显示间断点。
+        改变<code>step</code>的值可以改变步长，通过设置 <code>show-stops</code>{" "}
+        属性可以显示间断点
       </p>
       <DemoBlock source={SOURCES.discreteValues}>
         <SliderDiscreteValues />
       </DemoBlock>
 
-      <Heading level={2}>带输入框的滑块</Heading>
-      <p>设置 <code>showInput</code> 会在右侧显示输入框。</p>
+      <Heading level={2}>带有输入框的滑块</Heading>
+      <p>通过输入框输入来改变当前的值。</p>
+      <p>
+        设置 <code>show-input</code> 属性会在右侧显示一个输入框
+      </p>
       <DemoBlock source={SOURCES.withInput}>
         <SliderWithInput />
       </DemoBlock>
 
-      <Heading level={2}>尺寸</Heading>
+      <Heading level={2}>不同尺寸</Heading>
       <DemoBlock source={SOURCES.sizes}>
         <SliderSizes />
       </DemoBlock>
 
       <Heading level={2}>位置</Heading>
-      <p>可以自定义提示的显示位置。</p>
+      <p>您可以自定义 Tooltip 提示的位置。</p>
       <DemoBlock source={SOURCES.placement}>
         <SliderPlacement />
       </DemoBlock>
 
       <Heading level={2}>范围选择</Heading>
-      <p>支持选择一个范围。</p>
+      <p>你还可以选择一个范围值</p>
+      <p>
+        配置 <code>range</code>{" "}
+        属性以激活范围选择模式，该属性的绑定值是一个数组，由最小边界值和最大边界值组成。
+      </p>
       <DemoBlock source={SOURCES.range}>
         <SliderRange />
       </DemoBlock>
 
       <Heading level={2}>垂直模式</Heading>
       <p>
-        <code>vertical</code> 开启纵向模式，此时必须设置 <code>height</code>。
+        配置 <code>vertical</code> 属性为 <code>true</code>{" "}
+        启用垂直模式。在垂直模式下，必须设置 <code>height</code> 属性。
       </p>
       <DemoBlock source={SOURCES.vertical}>
         <SliderVertical />
@@ -174,15 +184,17 @@ export default function SliderPage() {
 
       <Heading level={2}>显示标记</Heading>
       <p>
-        <code>marks</code> 支持自定义样式与文案。
+        设置 <code>marks</code> 属性可以在滑块上显示标记。
       </p>
       <DemoBlock source={SOURCES.showMarks}>
         <SliderShowMarks />
       </DemoBlock>
 
-      <Heading level={2}>限制取值</Heading>
+      <Heading level={2} id="限制值">
+        限制值 <span className="docs-version-tag">2.13.6</span>
+      </Heading>
       <p>
-        <code>step=&quot;mark&quot;</code> 把取值限制在 <code>marks</code> 上。
+        设置 <code>step=&quot;mark&quot;</code> 以将滑块值限制为刻度。
       </p>
       <DemoBlock source={SOURCES.restrictValue}>
         <SliderRestrictValue />

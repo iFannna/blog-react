@@ -50,39 +50,55 @@ export default function EmptyPage() {
   return (
     <>
       <h1>Empty 空状态</h1>
-      <p>空状态时的展示占位图。</p>
+      <p>空状态时的占位提示。</p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>
-        通过 <code>description</code> 属性设置描述文字。
-      </p>
       <DemoBlock source={SOURCES.basic}>
         <EmptyBasic />
       </DemoBlock>
 
-      <Heading level={2}>自定义插图</Heading>
+      <Heading level={2}>自定义图片</Heading>
       <p>
-        通过 <code>image</code> 属性传入自定义插图地址。
+        通过设置 <code>image</code> 属性传入图片 URL。
       </p>
       <DemoBlock source={SOURCES.customImage}>
         <EmptyCustomImage />
       </DemoBlock>
 
-      <Heading level={2}>插图尺寸</Heading>
+      <Heading level={2}>图片尺寸</Heading>
       <p>
-        通过 <code>imageSize</code> 属性设置插图宽度，数字按 px 处理。
+        通过使用 <code>image-size</code> 属性来控制图片大小。
       </p>
       <DemoBlock source={SOURCES.size}>
         <EmptySize />
       </DemoBlock>
 
       <Heading level={2}>底部内容</Heading>
-      <p>
-        传入 <code>children</code> 会在底部渲染操作区。
-      </p>
+      <p>使用默认插槽可在底部插入内容。</p>
       <DemoBlock source={SOURCES.bottom}>
         <EmptyBottom />
       </DemoBlock>
+
+      <DocsContent
+        source={`## 自定义样式
+
+您可以为empty组件设置自定义样式。使用 \`css/scss\` 语言来更改全局或局部颜色。我们设置了一些全局颜色变量：\`--el-empty-fill-color-0\`、\`--el-empty-fill-color-1\`、\`--el-empty-fill-color-2\`、……、\`--el-empty-fill-color-9\`。您可以使用类似 \`:root { --el-empty-fill-color-0: red; --el-empty-fill-color-1: blue; }\` 等变量。但通常，如果你想要更改样式，你需要更改所有颜色，因为这些颜色是一个组合。
+
+### 默认变量
+
+| 变量 | 颜色 |
+| --- | --- |
+| --el-empty-fill-color-0 | var(--el-color-white) |
+| --el-empty-fill-color-1 | #fcfcfd |
+| --el-empty-fill-color-2 | #f8f9fb |
+| --el-empty-fill-color-3 | #f7f8fc |
+| --el-empty-fill-color-4 | #eeeff3 |
+| --el-empty-fill-color-5 | #edeef2 |
+| --el-empty-fill-color-6 | #e9ebef |
+| --el-empty-fill-color-7 | #e5e7e9 |
+| --el-empty-fill-color-8 | #e0e3e9 |
+| --el-empty-fill-color-9 | #d5d7de |`}
+      />
 
       <DocsContent source={API_MD} />
     </>

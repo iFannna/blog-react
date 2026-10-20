@@ -257,40 +257,50 @@ React 版沿用这一约定：树相关属性见 Tree、下拉相关属性见下
 export default function TreeSelectPage() {
   return (
     <>
-      <h1>TreeSelect 树形选择器</h1>
+      <h1>TreeSelect 树形选择</h1>
       <p>
-        下拉菜单形式的树形选择器，组合了 <code>ElTree</code> 与{" "}
-        <code>ElSelect</code> 的功能。
+        含有下拉菜单的树形选择器，结合了 <code>el-tree</code> 和{" "}
+        <code>el-select</code> 两个组件的功能。
       </p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>用于树形结构的选择器。</p>
+      <p>树状选择器</p>
       <DemoBlock source={SOURCES.basic}>
         <TreeSelectBasic />
       </DemoBlock>
 
-      <Heading level={2}>选择任意一级选项</Heading>
+      <Heading level={2}>选择任意级别</Heading>
       <p>
-        在设置 <code>checkStrictly</code> 属性之后，任意一级都可以选择；
-        否则只能选择叶子节点。使用 <code>showCheckbox</code> 时，
-        <code>checkOnClickNode</code> 默认为 <code>false</code>，
-        即只能通过勾选选中，可以将其设置为 <code>true</code> 后点击节点选中。
-        使用 <code>showCheckbox</code> 时 <code>checkOnClickLeaf</code> 默认为{" "}
-        <code>true</code>，点击叶子节点即可勾选。
+        当属性 <code>check-strictly=true</code>{" "}
+        时，任何节点都可以被选择，否则只有子节点可被选择。
       </p>
+      <DocsContent
+        source={`:::tip
+
+当使用 \`show-checkbox\`时，由于 \`check-on-click-node\` 默认值是 false，这时候只能通过 checkbox 来选中，当然您也可以将其设置成 true，这样点击整个 node 都可以用来完成选择
+
+:::`}
+      />
+      <DocsContent
+        source={`:::warning
+
+在使用 show-checkbox 时，因为 \`check-on-click-leaf\` 默认值为 true， 最后一个树节点可以通过点击节点进行勾选。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.checkStrictly}>
         <TreeSelectCheckStrictly />
       </DemoBlock>
 
       <Heading level={2}>多选</Heading>
-      <p>通过点击或复选框多选。</p>
+      <p>通过点击或复选框选择多个选项。</p>
       <DemoBlock source={SOURCES.multiple}>
         <TreeSelectMultiple />
       </DemoBlock>
 
       <Heading level={2}>禁用选项</Heading>
       <p>
-        在数据里用 <code>disabled</code> 字段禁用选项。
+        使用 disabled 字段禁用选项。
       </p>
       <DemoBlock source={SOURCES.disabled}>
         <TreeSelectDisabled />
@@ -298,9 +308,9 @@ export default function TreeSelectPage() {
 
       <Heading level={2}>可筛选</Heading>
       <p>
-        利用关键字进行筛选，或使用自定义筛选方法。<code>filterMethod</code>{" "}
-        可自定义对数据进行筛选的方法，<code>filterNodeMethod</code>{" "}
-        可自定义对数据节点进行筛选的方法。
+        使用关键字筛选或自定义筛选方法。 <code>filterMethod</code>
+        可以自定义数据筛选的方法， <code>filterNodeMethod</code>
+        可以自定义节点数据筛选的方法。
       </p>
       <DemoBlock source={SOURCES.filterable}>
         <TreeSelectFilterable />
@@ -313,19 +323,28 @@ export default function TreeSelectPage() {
       </DemoBlock>
 
       <Heading level={2}>懒加载</Heading>
-      <p>树节点的懒加载，适用于大数据列表。</p>
+      <p>树节点懒加载，更加适合于数据量大的列表。</p>
       <DemoBlock source={SOURCES.lazy}>
         <TreeSelectLazy />
       </DemoBlock>
 
       <Heading level={2}>使用 node-key 属性</Heading>
       <p>
-        默认情况下 <code>modelValue</code> 查找的是 <code>value</code> 键。
-        对于不同的数据结构，必须提供 <code>nodeKey</code> 才能正常工作。
+        默认情况下，<code>modelValue</code> 会查找 <code>value</code>{" "}
+        键。对于其他数据结构，必须提供 <code>node-key</code> 才能正常工作。
       </p>
       <DemoBlock source={SOURCES.nodeKey}>
         <TreeSelectNodeKey />
       </DemoBlock>
+      <DocsContent
+        source={`:::tip
+
+1. \`node-key\` 在整个树中应该是唯一的。
+2. \`value-key\` 与 \`node-key\` 具有相同的目标。
+3. 与 select 组件相反，tree-select 不能检索对象值。
+
+:::`}
+      />
 
       <DocsContent source={API_MD} />
     </>

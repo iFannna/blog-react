@@ -7,11 +7,11 @@ order: 250
 
 # Upload 上传
 
-上传文件，支持点击或拖拽两种方式。
+通过点击或者拖拽上传文件。
 
 ## 基础用法
 
-:::demo 通过 `trigger` 自定义触发按钮的类型与文案。 `limit` 与 `onExceed` 用于限制最大上传数量并处理超限； `beforeRemove` 里返回被拒绝的 Promise 可中止移除。
+:::demo 通过 `slot` 你可以传入自定义的上传按钮类型和文字提示。可通过设置 `limit` 和 `on-exceed` 来限制上传文件的个数和定义超出限制时的行为。可通过设置 `before-remove` 来阻止文件移除操作。
 
 upload/basic
 
@@ -19,7 +19,7 @@ upload/basic
 
 ## 覆盖前一个文件
 
-:::demo 使用 `limit` 与 `onExceed` 在重新选择文件时自动替换上一个文件。
+:::demo 设置 `limit` 和 `on-exceed` 可以在选中时自动替换上一个文件。
 
 upload/limit-cover
 
@@ -27,7 +27,7 @@ upload/limit-cover
 
 ## 用户头像
 
-:::demo 用 `beforeUpload` 限制上传文件的格式与大小。
+:::demo 在 `before-upload` 钩子中限制用户上传文件的格式和大小。
 
 upload/avatar
 
@@ -35,7 +35,7 @@ upload/avatar
 
 ## 照片墙
 
-:::demo 用 `listType` 改变文件列表的样式。
+:::demo 使用 `list-type` 属性来设定文件列表的样式。
 
 upload/photo-wall
 
@@ -43,7 +43,7 @@ upload/photo-wall
 
 ## 自定义缩略图
 
-:::demo 用 `renderFile` 替换默认的缩略图模板。
+:::demo 使用 `scoped-slot` 属性来改变默认的缩略图模板样式。
 
 upload/custom-thumbnail
 
@@ -51,15 +51,15 @@ upload/custom-thumbnail
 
 ## 图片列表缩略图
 
-:::demo `listType` 设为 `picture` 时列表项左侧展示缩略图。
+:::demo
 
 upload/file-list-with-thumbnail
 
 :::
 
-## 文件列表控制
+## 上传文件列表控制
 
-:::demo 通过 `onChange` 钩子控制上传文件列表。
+:::demo 通过 `on-change` 钩子函数来对上传文件的列表进行控制。
 
 upload/file-list
 
@@ -67,15 +67,17 @@ upload/file-list
 
 ## 拖拽上传
 
-:::demo 把文件拖到指定区域即可上传。
+:::demo 你可以将文件拖拽到特定区域以进行上传。
 
 upload/drag-and-drop
 
 :::
 
-## 上传目录
+## 上传目录 ^(2.13.1)
 
-:::demo 开启 `directory` 后仅能选择文件夹，选中后文件夹内的文件会被扁平化。
+通过 `directory` 属性启用文件夹上传。
+
+:::demo 启用后，只能选择文件夹；选择文件夹后，文件夹内的文件将被扁平化处理。
 
 upload/directory
 
@@ -83,7 +85,7 @@ upload/directory
 
 ## 手动上传
 
-:::demo 设置 `autoUpload` 为 `false` 后，通过 ref 上的  `submit` 手动发起上传。
+:::demo
 
 upload/manual
 

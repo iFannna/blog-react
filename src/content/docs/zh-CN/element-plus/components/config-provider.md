@@ -7,67 +7,73 @@ order: 10
 
 # Config Provider 全局配置
 
-Config Provider 用于提供全局配置，让整个应用各处都能访问到这些配置。 在 React 版里由 React Context 实现，组件内部通过 `useGlobalConfig` 读取。
+Config Provider 被用来提供全局的配置选项，让你的配置能够在全局都能够被访问到。
 
-## 国际化
+## i18n 配置
 
-:::demo 通过 `locale` 提供语言包，即可获得语言切换能力。
+通过 Config Provider 来配置多语言，让你的应用可以随时切换语言。
+
+:::demo 使用两个属性来提供 i18n 相关配置
 
 config-provider/usage
 
 :::
 
-## 按钮配置
+## 对按钮进行配置
 
-:::demo `button` 下的字段会成为按钮的全局默认值，组件自身传入时优先。
+:::demo
 
 config-provider/button
 
 :::
 
-## 链接配置
+## 对链接进行配置 ^(2.9.11)
 
-:::demo `link` 控制链接的默认类型与下划线时机。
+:::demo
 
 config-provider/link
 
 :::
 
-## 卡片配置
+## 对 Card 进行配置 ^(2.10.5)
 
-:::demo `card.shadow` 控制卡片阴影的展示时机。
+:::demo
 
 config-provider/card
 
 :::
 
-## 对话框配置
+## 对 Dialog 进行配置 ^(2.10.7)
 
-:::demo `dialog` 控制对话框的居中、拖拽与溢出行为。
+:::demo
 
 config-provider/dialog
 
 :::
 
-## 消息配置
+## 对消息进行配置
 
-:::demo `message` 作用于命令式的 `message()`， 例如限制同位置最多显示的条数、统一位置与样式。
+:::demo
 
 config-provider/message
 
 :::
 
-## 空值配置
+## 空值配置^(2.7.0)
 
-:::demo 通过 `emptyValues` 自定义哪些值算「空」，通过  `valueOnClear` 指定清空后的返回值。默认空值为  `["", undefined, null]`；若认为空字符串有意义，可写  `[undefined, null]`。清空返回值默认是 `undefined`， 想得到 `undefined` 时请传 `() => undefined`。
+设置 `empty-values` 来配置组件的默认空值。默认值是 `['', null, undefined]`。如果认为空字符串不是一个空值，可以设置成 `[undefined, null]`。
+
+设置 `value-on-clear` 以设置清空选项的值。组件默认值是 `undefined`。在日期组件中是 `null`。如果想设置成 `undefined`，请使用 `() => undefined`。
+
+:::demo
 
 config-provider/empty-values
 
 :::
 
-## 表格配置
+## 表格配置 ^(2.13.3)
 
-:::demo `table.showOverflowTooltip` 会作用到所有列， 单列显式传 `false` 可覆盖。
+:::demo
 
 config-provider/table
 

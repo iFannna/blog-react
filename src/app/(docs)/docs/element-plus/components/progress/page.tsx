@@ -97,27 +97,30 @@ export default function ProgressPage() {
       <h1>Progress 进度条</h1>
       <p>用于展示操作进度，告知用户当前状态和预期。</p>
 
-      <Heading level={2}>线形进度条</Heading>
+      <Heading level={2}>直线进度条</Heading>
       <p>
-        Progress 组件设置 <code>percentage</code> 属性即可，表示进度条对应的百分比。
+        Progress 组件设置 <code>percentage</code>{" "}
+        属性即可，表示进度条对应的百分比。该属性<strong>必填</strong>，并且必须在 <code>0-100</code> 的范围内。你可以通过设置{" "}
+        <code>format</code> 来自定义文字显示的格式。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <ProgressBasic />
       </DemoBlock>
 
-      <Heading level={2}>百分比内显</Heading>
+      <Heading level={2}>进度条内显示百分比标识</Heading>
+      <p>百分比不占用额外空间，适用于文件上传等场景。</p>
       <p>
-        通过 <code>textInside</code> 属性将进度条内的百分比显示在内部，
-        配合 <code>strokeWidth</code> 设置更粗的进度条。
+        Progress 组件可通过 <code>stroke-width</code>{" "}
+        属性更改进度条的高度，并可通过 <code>text-inside</code> 属性来改变进度条内部的文字。
       </p>
       <DemoBlock source={SOURCES.textInside}>
         <ProgressTextInside />
       </DemoBlock>
 
-      <Heading level={2}>自定义颜色</Heading>
+      <Heading level={2}>自定义进度条的颜色</Heading>
       <p>
-        通过 <code>color</code> 属性自定义进度条颜色，
-        支持单色、分段数组与函数三种形式。
+        可以通过 <code>color</code>{" "}
+        属性来设置进度条的颜色。该属性可以接受十六进制颜色值，函数和数组。
       </p>
       <DemoBlock source={SOURCES.color}>
         <ProgressColor />
@@ -125,8 +128,9 @@ export default function ProgressPage() {
 
       <Heading level={2}>环形进度条</Heading>
       <p>
-        设置 <code>type=&quot;circle&quot;</code> 展示环形进度条，
-        <code>width</code> 控制圆环画布尺寸。
+        Progress 组件可通过 <code>type</code>{" "}
+        属性来指定使用环形进度条，在环形进度条中，还可以通过 <code>width</code>{" "}
+        属性来设置其大小。
       </p>
       <DemoBlock source={SOURCES.circle}>
         <ProgressCircle />
@@ -134,23 +138,23 @@ export default function ProgressPage() {
 
       <Heading level={2}>仪表盘形进度条</Heading>
       <p>
-        设置 <code>type=&quot;dashboard&quot;</code> 展示仪表盘形进度条。
+        您也可以指定 <code>type</code> 属性到 <code>dashboard</code>{" "}
+        使用控制面板进度栏。
       </p>
       <DemoBlock source={SOURCES.dashboard}>
         <ProgressDashboard />
       </DemoBlock>
 
-      <Heading level={2}>自定义文字</Heading>
-      <p>
-        通过 <code>format</code> 属性自定义进度条文字内容。
-      </p>
+      <Heading level={2}>自定义内容</Heading>
+      <p>通过默认插槽添加自定义内容。</p>
       <DemoBlock source={SOURCES.customText}>
         <ProgressCustomText />
       </DemoBlock>
 
-      <Heading level={2}>不确定进度</Heading>
+      <Heading level={2}>动画进度条</Heading>
       <p>
-        设置 <code>indeterminate</code> 展示不确定进度，适合无法获知具体进度的场景。
+        使用 <code>indeterminate</code> 属性来设置不确定的进度，{" "}
+        <code>duration</code> 来控制动画持续时间。
       </p>
       <DemoBlock source={SOURCES.indeterminate}>
         <ProgressIndeterminate />
@@ -158,7 +162,8 @@ export default function ProgressPage() {
 
       <Heading level={2}>条纹进度条</Heading>
       <p>
-        通过 <code>striped</code> 显示条纹，<code>stripedFlow</code> 让条纹流动。
+        通过设置 <code>striped</code> 属性获取条纹进度条。也可以使用{" "}
+        <code>striped-flow</code> 属性来使条纹流动起来。 使用<code>duration</code> 属性来控制条纹流动的速度。
       </p>
       <DemoBlock source={SOURCES.striped}>
         <ProgressStriped />

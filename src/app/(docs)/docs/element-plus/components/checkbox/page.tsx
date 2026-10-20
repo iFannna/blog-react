@@ -156,18 +156,41 @@ export default function CheckboxPage() {
       <h1>Checkbox 多选框</h1>
       <p>在一组备选项中进行多选。</p>
 
+      <DocsContent
+        source={`:::warning
+
+\`label\` 作为 \`value\` 来使用已经被 **废弃**, 建议\`label\` 只用来表示展示的文字，这个被废弃的用法**将会在** ^(3.0.0) 版本被移除，请考虑使用新 API 替换.
+
+:::`}
+      />
+      <DocsContent
+        source={`:::tip
+
+新的 API \`value\` 已在 ^(2.6.0) 版本添加，文档中的示例都将使用 \`value\`。如果您使用的版本 **低于** ^(2.6.0) 并且使用 \`checkbox-group\`，请参考：
+
+:::`}
+      />
+
       <Heading level={2}>基础用法</Heading>
       <p>
-        单独使用可以表示两种状态之间的切换，独立使用时用 <code>checked</code> 与
-        <code>onCheckedChange</code>。
+        单独使用可以表示两种状态之间的切换，写在标签中的内容为 checkbox
+        按钮后的介绍。
+      </p>
+      <p>
+        <code>checkbox-group</code>元素能把多个 checkbox 管理为一组，只需要在 Group
+        中使用 <code>v-model</code> 绑定 <code>Array</code> 类型的变量即可。
+        只有一个选项时的默认值类型为 <code>Boolean</code>，当选中时值为
+        <code>true</code>。 <code>el-checkbox</code>
+        标签中的内容将成为复选框按钮之后的描述。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <CheckboxBasic />
       </DemoBlock>
 
       <Heading level={2}>禁用状态</Heading>
+      <p>多选框不可用状态。</p>
       <p>
-        设置 <code>disabled</code> 属性即可禁用。
+        设置 <code>disabled</code> 属性即可。
       </p>
       <DemoBlock source={SOURCES.disabled}>
         <CheckboxDisabled />
@@ -175,53 +198,62 @@ export default function CheckboxPage() {
 
       <Heading level={2}>多选框组</Heading>
       <p>
-        适用于多个勾选框绑定到同一个数组的情景，通过 <code>ElCheckboxGroup</code> 的
-        <code>value</code> 与 <code>onChange</code> 管理选中集合；每个
-        <code>ElCheckbox</code> 用 <code>value</code> 标识自己。
+        适用于多个勾选框绑定到同一个数组的情景，通过是否勾选来表示这一组选项中选中的项。
+      </p>
+      <p>
+        在 <code>el-checkbox</code> 元素中定义 <code>v-model</code>
+        绑定变量，单一的 <code>checkbox</code> 中，默认绑定变量的值会是{" "}
+        <code>Boolean</code>，选中为 <code>true</code>。在{" "}
+        <code>el-checkbox</code> 组件中，<code>value</code> 是选择框的值。
+        如果该组件下没有被传入内容，那么 <code>label</code> 将会作为 checkbox
+        按钮后的介绍。 <code>value</code> 也与数组中的元素值相对应。
+        如果指定的值存在于数组中，就处于选择状态，反之亦然。
       </p>
       <DemoBlock source={SOURCES.group}>
         <CheckboxGroupDemo />
       </DemoBlock>
 
-      <Heading level={2}>数据化选项</Heading>
+      <Heading level={2} id="Options 属性">
+        Options 属性 <span className="docs-version-tag">2.11.2</span>
+      </Heading>
       <p>
-        通过 <code>options</code> 直接渲染选项数组，并用 <code>optionProps</code>
-        指定 <code>value</code>、<code>label</code>、<code>disabled</code> 的字段别名。
+        基础用法 <code>el-checkbox-group</code> 的快捷示例。您可以通过{" "}
+        <code>props</code> 属性自定义 <code>options</code> 的别名。
       </p>
       <DemoBlock source={SOURCES.options}>
         <CheckboxOptions />
       </DemoBlock>
 
-      <Heading level={2}>indeterminate 状态</Heading>
+      <Heading level={2}>中间状态</Heading>
       <p>
-        <code>indeterminate</code> 属性用以表示 checkbox 的不确定状态，
-        一般用于实现全选的效果。
+        <code>indeterminate</code> 属性用以表示 checkbox 的不确定状态，一般用于实现全选的效果
       </p>
       <DemoBlock source={SOURCES.indeterminate}>
         <CheckboxIndeterminate />
       </DemoBlock>
 
-      <Heading level={2}>可选数量限制</Heading>
+      <Heading level={2}>可选项目数量的限制</Heading>
       <p>
-        使用 <code>min</code> 和 <code>max</code> 属性限制选中的数量，
-        达到上限后未选中项自动禁用，达到下限后已选中项不可取消。
+        使用 <code>min</code> 和 <code>max</code> 属性能够限制可以被勾选的项目的数量。
       </p>
       <DemoBlock source={SOURCES.minMax}>
         <CheckboxMinMax />
       </DemoBlock>
 
       <Heading level={2}>按钮样式</Heading>
+      <p>按钮样式的多选组合。</p>
       <p>
-        设置 <code>type=&quot;button&quot;</code> 可渲染为按钮形态，
-        <code>fill</code> 与 <code>textColor</code> 控制选中态配色。
+        只需要把 <code>el-checkbox</code> 元素替换为{" "}
+        <code>el-checkbox-button</code> 元素即可。此外，Element Plus 还提供了
+        <code>size</code>属性。
       </p>
       <DemoBlock source={SOURCES.button}>
         <CheckboxButton />
       </DemoBlock>
 
-      <Heading level={2}>带边框</Heading>
+      <Heading level={2}>带有边框</Heading>
       <p>
-        设置 <code>border</code> 属性可以渲染为带有边框的多选框。
+        设置<code>border</code>属性可以渲染为带有边框的多选框。
       </p>
       <DemoBlock source={SOURCES.border}>
         <CheckboxBorder />

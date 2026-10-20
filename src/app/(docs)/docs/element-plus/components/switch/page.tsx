@@ -157,71 +157,12 @@ export default function SwitchPage() {
 
       <Heading level={2}>基础用法</Heading>
       <p>
-        绑定 <code>checked</code> 与 <code>onCheckedChange</code>，默认值为布尔类型。
+        绑定 <code>v-model</code> 到一个 <code>Boolean</code>{" "}
+        类型的变量。可以使用 <code>--el-switch-on-color</code> 属性与{" "}
+        <code>--el-switch-off-color</code> 属性来设置开关的背景色。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <SwitchBasic />
-      </DemoBlock>
-
-      <Heading level={2}>自定义动作图标</Heading>
-      <p>
-        使用 <code>activeActionIcon</code> 和 <code>inactiveActionIcon</code>
-        设置圆点上的动作图标。
-      </p>
-      <DemoBlock source={SOURCES.customActionIcon}>
-        <SwitchCustomActionIcon />
-      </DemoBlock>
-
-      <Heading level={2}>自定义动作插槽</Heading>
-      <p>
-        官方通过 <code>active-action</code> / <code>inactive-action</code>
-        插槽自定义动作区内容；React 侧对应
-        <code>activeActionContent</code> 与 <code>inactiveActionContent</code>。
-      </p>
-      <DemoBlock source={SOURCES.customActionSlot}>
-        <SwitchCustomActionSlot />
-      </DemoBlock>
-
-      <Heading level={2}>显示图标</Heading>
-      <p>
-        使用 <code>activeIcon</code> 和 <code>inactiveIcon</code> 属性来设置开关的图标。
-      </p>
-      <DemoBlock source={SOURCES.icons}>
-        <SwitchIcons />
-      </DemoBlock>
-
-      <Heading level={2}>禁用状态</Heading>
-      <p>
-        设置 <code>disabled</code> 属性，接受一个 boolean，设置为 true 即可禁用。
-      </p>
-      <DemoBlock source={SOURCES.disabled}>
-        <SwitchDisabled />
-      </DemoBlock>
-
-      <Heading level={2}>扩展的 value 类型</Heading>
-      <p>
-        通过 <code>activeValue</code> 和 <code>inactiveValue</code> 属性，
-        可以自定义开关的值。传入后改用 <code>value</code> 与 <code>onChange</code>。
-      </p>
-      <DemoBlock source={SOURCES.customValue}>
-        <SwitchCustomValue />
-      </DemoBlock>
-
-      <Heading level={2}>加载中</Heading>
-      <p>
-        设置 <code>loading</code> 属性，表示正在加载中。加载状态下开关不可操作。
-      </p>
-      <DemoBlock source={SOURCES.loading}>
-        <SwitchLoading />
-      </DemoBlock>
-
-      <Heading level={2}>切换前的钩子</Heading>
-      <p>
-        设置 <code>beforeChange</code> 属性，在切换前进行判断，
-        返回 false 或 reject 的 Promise 都会阻止切换。
-      </p>
-      <DemoBlock source={SOURCES.beforeChange}>
-        <SwitchBeforeChange />
       </DemoBlock>
 
       <Heading level={2}>尺寸</Heading>
@@ -231,11 +172,91 @@ export default function SwitchPage() {
 
       <Heading level={2}>文字描述</Heading>
       <p>
-        使用 <code>activeText</code> 和 <code>inactiveText</code> 属性来设置开关的文字描述。
-        使用 <code>inlinePrompt</code> 属性可以将文字或图标显示在圆点内部。
+        使用<code>active-text</code>属性与<code>inactive-text</code>
+        属性来设置开关的文字描述。使用 <code>inline-prompt</code>{" "}
+        属性来控制文本是否显示在点内。
+      </p>
+      <p>
+        使用<code>active-text</code>属性与<code>inactive-text</code>
+        属性来设置开关的文字描述。
       </p>
       <DemoBlock source={SOURCES.text}>
         <SwitchText />
+      </DemoBlock>
+
+      <Heading level={2}>显示自定义图标</Heading>
+      <DocsContent
+        source={`:::tip
+
+使用 \`inactive-icon\` 和 \`active-icon\` 属性来添加图标。您可以传递组件名称的字符串（提前注册）或组件本身是一个 SVG Vue 组件。 Element Plus 提供了一套图标，你可以在 [icon](./icon) 找到它们。
+
+:::`}
+      />
+      <p>
+        使用 <code>inactive-icon</code> 和 <code>active-icon</code>{" "}
+        属性来添加图标。使用 <code>inline-prompt</code> 属性来控制图标显示在点内。
+      </p>
+      <DemoBlock source={SOURCES.icons}>
+        <SwitchIcons />
+      </DemoBlock>
+
+      <Heading level={2}>扩展的 value 类型</Heading>
+      <p>
+        你可以设置 <code>active-value</code> 和 <code>inactive-value</code>{" "}
+        属性，它们接受 <code>Boolean</code>、<code>String</code> 或{" "}
+        <code>Number</code> 类型的值。
+      </p>
+      <DemoBlock source={SOURCES.customValue}>
+        <SwitchCustomValue />
+      </DemoBlock>
+
+      <Heading level={2}>禁用状态</Heading>
+      <p>
+        设置<code>disabled</code>属性，接受一个<code>Boolean</code>
+        ，设置<code>true</code>即可禁用。
+      </p>
+      <DemoBlock source={SOURCES.disabled}>
+        <SwitchDisabled />
+      </DemoBlock>
+
+      <Heading level={2}>加载状态</Heading>
+      <p>
+        设置<code>loading</code>属性，接受一个<code>Boolean</code>
+        ，设置<code>true</code>即加载中状态。
+      </p>
+      <DemoBlock source={SOURCES.loading}>
+        <SwitchLoading />
+      </DemoBlock>
+
+      <Heading level={2}>阻止切换</Heading>
+      <p>
+        设置<code>beforeChange</code>属性，若返回 false 或者返回 Promise 且被
+        reject，则停止切换。
+      </p>
+      <DemoBlock source={SOURCES.beforeChange}>
+        <SwitchBeforeChange />
+      </DemoBlock>
+
+      <Heading level={2} id="自定义动作图标">
+        自定义动作图标 <span className="docs-version-tag">2.3.9</span>
+      </Heading>
+      <p>
+        使用 <code>inactive-action-icon</code> 和{" "}
+        <code>active-action-icon</code> 属性来添加图标。
+      </p>
+      <DemoBlock source={SOURCES.customActionIcon}>
+        <SwitchCustomActionIcon />
+      </DemoBlock>
+
+      <Heading level={2} id="自定义操作图标">
+        自定义操作图标 <span className="docs-version-tag">2.4.4</span>
+      </Heading>
+      <p>
+        使用 <code>active-action</code> 和 <code>inactive-action</code>{" "}
+        属性来添加图标。
+      </p>
+      <DemoBlock source={SOURCES.customActionSlot}>
+        <SwitchCustomActionSlot />
       </DemoBlock>
 
       <DocsContent source={API_MD} />

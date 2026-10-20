@@ -142,7 +142,7 @@ export default function ScrollbarPage() {
 
       <Heading level={2}>最大高度</Heading>
       <p>
-        当元素高度超过最大高度时，会出现纵向滚动条。
+        当元素高度超过最大高度，才会显示滚动条。
       </p>
       <DemoBlock source={SOURCES.maxHeight}>
         <ScrollbarMaxHeight />
@@ -150,15 +150,18 @@ export default function ScrollbarPage() {
 
       <Heading level={2}>手动滚动</Heading>
       <p>
-        通过 <code>ref</code> 上的 <code>setScrollTop</code> 等方法可以手动控制滚动位置。
+        通过使用 <code>setScrollTop</code> 与 <code>setScrollLeft</code>{" "}
+        方法，可以手动控制滚动条滚动。
       </p>
       <DemoBlock source={SOURCES.manual}>
         <ScrollbarManual />
       </DemoBlock>
 
-      <Heading level={2}>无限滚动</Heading>
+      <Heading level={2} id="无限滚动">
+        无限滚动 <span className="docs-version-tag">2.10.0</span>
+      </Heading>
       <p>
-        配合 <code>distance</code> 与 <code>onEndReached</code> 可以实现无限滚动加载。
+        <code>end-reached</code> 是在滚动条到达底部时触发的。它可以用作无限滚动。
       </p>
       <DemoBlock source={SOURCES.infinite}>
         <ScrollbarInfinite />

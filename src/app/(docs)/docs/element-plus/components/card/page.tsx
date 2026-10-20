@@ -71,31 +71,34 @@ export default function CardPage() {
       <p>将信息聚合在卡片容器中展示。</p>
 
       <Heading level={2}>基础用法</Heading>
+      <p>卡片包含标题，内容以及操作区域。</p>
       <p>
-        包含标题、内容、操作区域。通过 <code>header</code> 属性设置标题。
+        Card 组件由 <code>header</code> <code>body</code> 和{" "}
+        <code>footer</code>组成。 <code>header</code> 和 <code>footer</code>是可选的，其内容取决于一个具名的 slot。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <CardBasic />
       </DemoBlock>
 
       <Heading level={2}>简单卡片</Heading>
-      <p>可以省略头部区域。</p>
+      <p>卡片可以只有内容区域。</p>
       <DemoBlock source={SOURCES.simple}>
         <CardSimple />
       </DemoBlock>
 
-      <Heading level={2}>带图片</Heading>
+      <Heading level={2}>有图片内容的卡片</Heading>
+      <p>可配置定义更丰富的内容展示。</p>
       <p>
-        通过 <code>bodyStyle</code> 属性定义内容区样式，可以展示更丰富的内容。
+        配置 <code>body-style</code> 属性来自定义 <code>body</code> 部分的样式。
       </p>
       <DemoBlock source={SOURCES.withImages}>
         <CardWithImages />
       </DemoBlock>
 
-      <Heading level={2}>阴影效果</Heading>
+      <Heading level={2}>带有阴影效果的卡片</Heading>
+      <p>你可以定义什么时候展示卡片的阴影效果。</p>
       <p>
-        通过 <code>shadow</code> 属性设置卡片阴影出现的时机，
-        可选值为 <code>always</code>、<code>hover</code>、<code>never</code>。
+        通过 <code>shadow</code> 属性设置卡片阴影出现的时机。该属性的值可以是：<code>always</code>、<code>hover</code> 或 <code>never</code>。
       </p>
       <DemoBlock source={SOURCES.shadow}>
         <CardShadow />

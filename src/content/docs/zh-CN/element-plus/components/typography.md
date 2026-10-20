@@ -40,3 +40,7 @@ font-family:
   Inter, 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
   'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
 ```
+
+## 源代码
+
+[文档](https://github.com/element-plus/element-plus/blob/dev/docs/en-US/component/typography.md)

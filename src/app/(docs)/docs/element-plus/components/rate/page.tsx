@@ -119,39 +119,38 @@ export default function RatePage() {
   return (
     <>
       <h1>Rate 评分</h1>
-      <p>用于对事物进行评级操作。</p>
+      <p>用于评分</p>
 
       <Heading level={2}>基础用法</Heading>
       <p>
-        分为三个等级，默认各级同色。用 <code>colors</code> 传入三个元素的数组可
-        按等级分色，等级边界由 <code>lowThreshold</code> 与{" "}
-        <code>highThreshold</code> 指定；也可以传对象，键为阈值，值为对应颜色。
+        评分默认被分为三个等级，可以利用颜色数组对分数及情感倾向进行分级（默认情况下不区分颜色）。三个等级所对应的颜色用{" "}
+        <code>colors</code> 属性设置，而它们对应的两个阈值则通过{" "}
+        <code>low-threshold</code> 和 <code>high-threshold</code> 设定。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <RateBasic />
       </DemoBlock>
 
       <Heading level={2}>尺寸</Heading>
-      <p>
-        通过 <code>size</code> 改变尺寸，除默认外还有 <code>large</code>、
-        <code>small</code>。
-      </p>
       <DemoBlock source={SOURCES.sizes}>
         <RateSizes />
       </DemoBlock>
 
       <Heading level={2}>允许半选</Heading>
       <p>
-        设置 <code>allowHalf</code> 后可以选中半颗星。
+        属性 <code>allow-half</code> 允许出现半星
       </p>
       <DemoBlock source={SOURCES.allowHalf}>
         <RateAllowHalf />
       </DemoBlock>
 
       <Heading level={2}>辅助文字</Heading>
+      <p>用辅助文字直接地表达对应分数</p>
       <p>
-        设置 <code>showText</code> 在右侧显示辅助文字，用 <code>texts</code>{" "}
-        为不同分值指定文本，数组长度应与 <code>max</code> 相同。
+        为组件设置 <code>show-text</code>{" "}
+        属性会在右侧显示辅助文字。通过设置 <code>texts</code>{" "}
+        可以为每一个分值指定对应的辅助文字。 <code>texts</code>{" "}
+        为一个数组，长度应等于最大值 <code>max</code>。
       </p>
       <DemoBlock source={SOURCES.text}>
         <RateText />
@@ -159,26 +158,32 @@ export default function RatePage() {
 
       <Heading level={2}>可清空</Heading>
       <p>
-        设置 <code>clearable</code> 后，再次点击当前分值可重置为 0。
+        当你再次点击相同的值时，可以将值重置为 <code>0</code>。
       </p>
       <DemoBlock source={SOURCES.clearable}>
         <RateClearable />
       </DemoBlock>
 
-      <Heading level={2}>更多图标</Heading>
+      <Heading level={2}>更多种类的图标</Heading>
+      <p>当有多层评价时，可以用不同类型的图标区分评分层级。</p>
       <p>
-        用 <code>icons</code> 传入三个元素的数组或对象来自定义图标，配合{" "}
-        <code>voidIcon</code> 设置未选中时的图标。
+        设置<code>icons</code>
+        属性可以自定义不同分段的图标。 若传入数组，共有 3 个元素，为 3
+        个分段所对应的类名；若传入对象，可自定义分段，键名为分段的界限值，键值为对应的类名。本例还使用{" "}
+        <code>void-icon</code> 指定了未选中时的图标类名。
       </p>
       <DemoBlock source={SOURCES.moreIcons}>
         <RateMoreIcons />
       </DemoBlock>
 
       <Heading level={2}>只读</Heading>
+      <p>只读的评分用来展示分数，允许出现半星。</p>
       <p>
-        只读用于展示评分，支持半星。设置 <code>disabled</code> 进入只读，
-        <code>showScore</code> 在右侧显示分值，<code>scoreTemplate</code>{" "}
-        自定义模板，必须包含 <code>{"{value}"}</code>。
+        为组件设置 <code>disabled</code> 属性表示组件为只读。此时若设置{" "}
+        <code>show-score</code>，则会在右侧显示目前的分值。此外，您可以使用属性{" "}
+        <code>score-template</code> 来提供评分模板。模板为一个包含了{" "}
+        <code>{"{value}"}</code> 的字符串，<code>{"{value}"}</code>{" "}
+        会被替换为当前分值。
       </p>
       <DemoBlock source={SOURCES.readonly}>
         <RateReadonly />
@@ -186,10 +191,13 @@ export default function RatePage() {
 
       <Heading level={2}>自定义样式</Heading>
       <p>
-        通过 CSS 变量 <code>--el-rate-void-color</code>、
-        <code>--el-rate-fill-color</code>、
-        <code>--el-rate-disabled-void-color</code>、
-        <code>--el-rate-text-color</code> 全局或局部改色。
+        您可以为 rate 组件设定自定义样式。使用 <code>css</code> 或{" "}
+        <code>scss</code> 改变全局或局部的颜色。我们设置了一些全局颜色变量：
+        <code>--el-rate-void-color</code>、<code>--el-rate-fill-color</code>、
+        <code>--el-rate-disabled-void-color</code> 和{" "}
+        <code>--el-rate-text-color</code>。您可以像这样使用：
+        <code>:root {"{ --el-rate-void-color: red; --el-rate-fill-color: blue; }"}</code>
+        。
       </p>
 
       <DocsContent source={API_MD} />

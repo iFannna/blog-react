@@ -129,54 +129,61 @@ export default function StepsPage() {
   return (
     <>
       <h1>Steps 步骤条</h1>
-      <p>引导用户按照流程完成任务的导航条。</p>
+      <p>
+        引导用户按照流程完成任务的分步导航条，可根据实际应用场景设定步骤，步骤不得少于 2 步。
+      </p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>通过按钮推进当前步骤，完成后以 success 状态展示。</p>
+      <p>简单的步骤条。</p>
+      <p>
+        设置 <code>active</code> 属性，接受一个 <code>Number</code>，表明步骤的 index，从 0 开始。需要定宽的步骤条时，设置 <code>space</code> 属性即可，它接受 <code>Number</code>，单位为 <code>px</code>，如果不设置，则为自适应。设置 <code>finish-status</code> 属性可以改变已经完成的步骤的状态。
+      </p>
       <DemoBlock source={SOURCES.basic}>
         <StepsBasic />
       </DemoBlock>
 
-      <Heading level={2}>状态</Heading>
+      <Heading level={2}>含状态的步骤条</Heading>
+      <p>每一步骤显示出该步骤的状态。</p>
       <p>
-        <code>finishStatus</code> 与 <code>processStatus</code> 控制已完成与进行中步骤的状态，
-        支持 success 与 error。
+        也可以使用 <code>title</code> 具名插槽，可以用 <code>slot</code> 的方式来取代属性的设置，在本文档最后的列表中有所有的插槽可供参考。
       </p>
       <DemoBlock source={SOURCES.withStatus}>
         <StepsWithStatus />
       </DemoBlock>
 
-      <Heading level={2}>居中对齐</Heading>
-      <p>
-        设置 <code>alignCenter</code> 让标题与描述居中。
-      </p>
+      <Heading level={2}>居中的步骤条</Heading>
+      <p>标题和描述可以居中。</p>
       <DemoBlock source={SOURCES.centered}>
         <StepsCentered />
       </DemoBlock>
 
-      <Heading level={2}>带描述</Heading>
-      <p>通过 description 为每个步骤补充说明。</p>
+      <Heading level={2}>带描述的步骤栏</Heading>
+      <p>每一步都有描述。</p>
       <DemoBlock source={SOURCES.withDescription}>
         <StepsWithDescription />
       </DemoBlock>
 
-      <Heading level={2}>带图标</Heading>
-      <p>通过 icon 替换默认的序号。</p>
+      <Heading level={2}>带图标的步骤条</Heading>
+      <p>可以在步骤栏中使用各种自定义图标。</p>
+      <p>
+        通过 <code>icon</code> 属性来设置图标，图标的类型可以参考 Icon 组件的文档，除此以外，还能通过具名 <code>slot</code> 来使用自定义的图标。
+      </p>
       <DemoBlock source={SOURCES.withIcon}>
         <StepsWithIcon />
       </DemoBlock>
 
-      <Heading level={2}>纵向步骤条</Heading>
+      <Heading level={2}>垂直的步骤条</Heading>
+      <p>垂直方向的步骤条。</p>
       <p>
-        设置 <code>direction=&quot;vertical&quot;</code> 纵向排列，容器需有确定高度。
+        只需要在 <code>el-steps</code> 元素中设置 <code>direction</code> 属性为 <code>vertical</code> 即可。
       </p>
       <DemoBlock source={SOURCES.vertical}>
         <StepsVertical />
       </DemoBlock>
 
-      <Heading level={2}>简洁风格</Heading>
+      <Heading level={2}>简洁风格的步骤条</Heading>
       <p>
-        设置 <code>simple</code> 应用简洁样式，可通过 <code>space</code> 指定间距。
+        设置 <code>simple</code> 可应用简洁风格，该条件下 <code>align-center</code> / <code>description</code> / <code>direction</code> / <code>space</code> 都将失效。
       </p>
       <DemoBlock source={SOURCES.simple}>
         <StepsSimple />

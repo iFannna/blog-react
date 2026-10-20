@@ -9,25 +9,29 @@ order: 120
 
 用于展示操作进度，告知用户当前状态和预期。
 
-## 线形进度条
+## 直线进度条
 
-:::demo Progress 组件设置 `percentage` 属性即可，表示进度条对应的百分比。
+:::demo Progress 组件设置 `percentage` 属性即可，表示进度条对应的百分比。该属性**必填**，并且必须在 `0-100` 的范围内。你可以通过设置 `format` 来自定义文字显示的格式。
 
 progress/linear-progress-bar
 
 :::
 
-## 百分比内显
+## 进度条内显示百分比标识
 
-:::demo 通过 `textInside` 属性将进度条内的百分比显示在内部， 配合 `strokeWidth` 设置更粗的进度条。
+百分比不占用额外空间，适用于文件上传等场景。
+
+:::demo Progress 组件可通过 `stroke-width` 属性更改进度条的高度，并可通过 `text-inside` 属性来改变进度条内部的文字。
 
 progress/internal-percentage
 
 :::
 
-## 自定义颜色
+## 自定义进度条的颜色
 
-:::demo 通过 `color` 属性自定义进度条颜色， 支持单色、分段数组与函数三种形式。
+可以通过 `color` 属性来设置进度条的颜色。该属性可以接受十六进制颜色值，函数和数组。
+
+:::demo
 
 progress/custom-color
 
@@ -35,7 +39,7 @@ progress/custom-color
 
 ## 环形进度条
 
-:::demo 设置 `type="circle"` 展示环形进度条， `width` 控制圆环画布尺寸。
+:::demo Progress 组件可通过 `type` 属性来指定使用环形进度条，在环形进度条中，还可以通过 `width` 属性来设置其大小。
 
 progress/circular-progress-bar
 
@@ -43,23 +47,25 @@ progress/circular-progress-bar
 
 ## 仪表盘形进度条
 
-:::demo 设置 `type="dashboard"` 展示仪表盘形进度条。
+您也可以指定 `type` 属性到 `dashboard` 使用控制面板进度栏。
+
+:::demo
 
 progress/dashboard-progress-bar
 
 :::
 
-## 自定义文字
+## 自定义内容
 
-:::demo 通过 `format` 属性自定义进度条文字内容。
+:::demo 通过默认插槽添加自定义内容。
 
 progress/customized-content
 
 :::
 
-## 不确定进度
+## 动画进度条
 
-:::demo 设置 `indeterminate` 展示不确定进度，适合无法获知具体进度的场景。
+:::demo 使用 `indeterminate` 属性来设置不确定的进度， `duration` 来控制动画持续时间。
 
 progress/indeterminate-progress
 
@@ -67,7 +73,7 @@ progress/indeterminate-progress
 
 ## 条纹进度条
 
-:::demo 通过 `striped` 显示条纹，`stripedFlow` 让条纹流动。
+:::demo 通过设置 `striped` 属性获取条纹进度条。也可以使用 `striped-flow` 属性来使条纹流动起来。 使用`duration` 属性来控制条纹流动的速度。
 
 progress/striped-progress
 

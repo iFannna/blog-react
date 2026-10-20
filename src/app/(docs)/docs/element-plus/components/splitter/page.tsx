@@ -166,59 +166,54 @@ const API_MD = `
 export default function SplitterPage() {
   return (
     <>
-      <h1>Splitter 分隔面板</h1>
-      <p>
-        自由切分区域，可以水平或垂直方向分隔并拖拽调整各区域的大小。
-      </p>
+      <h1>
+        Splitter 分隔面板{" "}
+        <span className="docs-version-tag docs-version-tag--beta">beta</span>
+      </h1>
+      <p>可将区域水平或垂直分隔，并可自由拖动以调整各个区域的大小。</p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>
-        最基础的用法，不传默认尺寸时各面板自动均分。这里的{" "}
-        <code>size=&quot;30%&quot;</code> 表示首个面板占 30%，第二个面板设了{" "}
-        <code>min=200</code>，拖拽时不会被压到 200px 以下。
-      </p>
+      <p>最基本的用法，如果未传入默认尺寸，将自动平均分配。</p>
       <DemoBlock source={SOURCES.basic}>
         <SplitterBasic />
       </DemoBlock>
 
       <Heading level={2}>垂直布局</Heading>
-      <p>
-        通过 <code>layout=&quot;vertical&quot;</code> 改成垂直方向。
-      </p>
+      <p>使用垂直方向。</p>
       <DemoBlock source={SOURCES.vertical}>
         <SplitterVertical />
       </DemoBlock>
 
       <Heading level={2}>可折叠</Heading>
       <p>
-        配置 <code>collapsible</code> 提供快捷收起能力。可以用{" "}
-        <code>min</code> 阻止收起后通过拖拽再展开。
+        配置 <code>collapsible</code> 可提供快速收缩功能。你可以使用{" "}
+        <code>min</code> 属性来防止折叠后通过拖拽进行扩展。
       </p>
       <DemoBlock source={SOURCES.collapsible}>
         <SplitterCollapsible />
       </DemoBlock>
 
-      <Heading level={2}>禁用拖拽</Heading>
+      <Heading level={2}>禁用拖动</Heading>
       <p>
-        任一面板的 <code>resizable</code> 为 false 时，相邻分隔条都会禁用拖拽。
+        当任一面板禁用 <code>resizable</code> 时，拖拽功能将被禁用。
       </p>
       <DemoBlock source={SOURCES.disableDrag}>
         <SplitterDisableDrag />
       </DemoBlock>
 
-      <Heading level={2}>面板尺寸</Heading>
+      <Heading level={2}>面板大小</Heading>
       <p>
-        <code>size</code> 配合 <code>onSizeChange</code> 即官方的{" "}
-        <code>v-model:size</code>，可以读取面板当前尺寸。
+        <code>v-model:size</code> 可以获取面板的大小。
       </p>
       <DemoBlock source={SOURCES.size}>
         <SplitterSize />
       </DemoBlock>
 
-      <Heading level={2}>懒更新</Heading>
+      <Heading level={2} id="延迟">
+        延迟 <span className="docs-version-tag">2.11.0</span>
+      </Heading>
       <p>
-        开启 <code>lazy</code> 后，拖拽过程中不实时更新面板尺寸，只在拖拽结束
-        后一次性更新。
+        当启用<code>lazy</code>时，面板大小将不会在拖动时实时更新，只能在拖动结束后更新。
       </p>
       <DemoBlock source={SOURCES.lazy}>
         <SplitterLazy />

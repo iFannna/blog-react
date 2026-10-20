@@ -11,7 +11,7 @@ order: 90
 
 Popover 弹出框提供 9 种展示位置。
 
-:::demo 使用 `content` 属性来设置悬停时显示的信息。由 `placement` 属性决定 Popover 弹出框的位置。该属性值格式为：`[方向]-[对齐位置]`，可供选择的四个方向分别是 `top`、`left`、`right`、`bottom`，可供选择的三种对齐方式分别是 `start`、`end`、`null`，默认的对齐方式为 `null`。以 `placement="left-end"` 为例，Popover 弹出框会显示在悬停元素的左侧，且提示信息的底部与悬停元素的底部对齐。
+:::demo 使用 `content` 属性来设置悬停时显示的信息。由 `placement` 属性决定 Popover 弹出框的位置。该属性值格式为：`[方向]-[对齐位置]`，可供选择的四个方向分别是`top`、`left`、`right`、`bottom`，可供选择的三种对齐方式分别是`start`、`end`、`null`，默认的对齐方式为null。以 `placement="left-end"` 为例，Popover 弹出框会显示在悬停元素的左侧，且提示信息的底部与悬停元素的底部对齐。
 
 popover/placement
 
@@ -19,9 +19,9 @@ popover/placement
 
 ## 基础用法
 
-Popover 是在 ElTooltip 基础上开发出来的。因此对于重复属性，请参考 Tooltip 的文档，在此文档中不做详尽解释。
+Popover 是在 `ElTooltip` 基础上开发出来的。因此对于重复属性，请参考 Tooltip 的文档，在此文档中不做详尽解释。
 
-:::demo `trigger` 属性被用来决定 popover 的触发方式，支持的触发方式：`hover`、`click`、`focus` 或 `contextmenu`。如果你想手动控制它，可以设置 `visible` 属性。
+:::demo `trigger` 属性被用来决定 popover 的触发方式，支持的触发方式： `hover`、`click`、`focus` 或 `contextmenu`。如果你想手动控制它，可以设置 `:visible` 属性。
 
 popover/basic-usage
 
@@ -29,9 +29,9 @@ popover/basic-usage
 
 ## 虚拟触发
 
-像 Tooltip 一样，Popover 可以由虚拟元素触发，这个功能就很适合使用在触发元素和展示内容元素是分开的场景。通常我们使用 reference 来放置我们的触发元素，用 `virtualRef` API，您可以任意设置您的触发元素，但注意到触发元素应该是接受 mouse 和 keyboard 事件的元素。
+像 Tooltip一样，Popover 可以由虚拟元素触发，这个功能就很适合使用在触发元素和展示内容元素是分开的场景。通常我们使用 `#reference` 来放置我们的触发元素， 用 `virtual-ref` API，您可以任意设置您的触发元素 但注意到触发元素应该是接受 `mouse` 和 `keyboard` 事件的元素。
 
-:::danger WARNING
+:::warning
 `v-popover` 将被废弃，请使用 `virtual-ref` 作为替代。
 
 :::
@@ -46,7 +46,7 @@ popover/virtual-triggering
 
 可以在 Popover 中嵌套其它组件，以下为嵌套表格的例子。
 
-:::demo 利用插槽取代 `content` 属性。
+:::demo 利用插槽取代 `content` 属性
 
 popover/nested-information
 
@@ -54,7 +54,7 @@ popover/nested-information
 
 ## 嵌套操作
 
-当然，你还可以嵌套操作，它比使用 dialog 更加轻量。
+当然，你还可以嵌套操作，它比使用dialog更加轻量。
 
 :::demo
 
@@ -64,7 +64,7 @@ popover/nested-operation
 
 ## 指令
 
-您可以使用指令性方式弹出窗口，但这种方法不再推荐，因为这使得应用程序变得复杂，您可以参考虚拟触发来实现一样的效果。
+您可以使用指令性方式弹出窗口，但这种方法**不再推荐** ，因为这使得应用程序变得复杂， 您可以参考虚拟触发来实现一样的效果。
 
 :::demo
 

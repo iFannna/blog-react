@@ -180,18 +180,18 @@ export default function TourPage() {
   return (
     <>
       <h1>Tour 漫游式引导</h1>
-      <p>用于分步引导用户了解产品功能的漫游式引导组件。</p>
+      <p>用于分步引导用户了解产品功能的气泡组件。用来引导用户并介绍产品</p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>最基础的用法，通过 <code>target</code> 指向每一步的目标元素。</p>
+      <p>最简单的用法。</p>
       <DemoBlock source={SOURCES.basic}>
         <TourBasic />
       </DemoBlock>
 
       <Heading level={2}>非模态</Heading>
       <p>
-        使用 <code>mask=false</code> 让导览不遮挡页面；此时建议配合{" "}
-        <code>{'type="primary"'}</code> 强调引导本身。
+        使用<code>:mask=&quot;false&quot;</code>可以将引导变为非模态，同时为了强调引导本身，建议与
+        type=&quot;primary&quot; 组合使用。
       </p>
       <DemoBlock source={SOURCES.nonModal}>
         <TourNonModal />
@@ -199,30 +199,28 @@ export default function TourPage() {
 
       <Heading level={2}>位置</Heading>
       <p>
-        通过 <code>placement</code> 改变引导卡片相对目标的位置，共 12 种；{" "}
-        <code>target</code> 为空时卡片显示在屏幕中央。
+        改变引导相对于目标的位置，共有 12 种位置可供选择。当 <code>target</code>{" "}
+        为空时引导将会展示在正中央。
       </p>
       <DemoBlock source={SOURCES.placement}>
         <TourPlacement />
       </DemoBlock>
 
       <Heading level={2}>自定义遮罩样式</Heading>
-      <p>
-        <code>mask</code> 传对象可自定义遮罩样式与填充色，也可以按步骤单独设置。
-      </p>
+      <p>自定义遮罩样式。</p>
       <DemoBlock source={SOURCES.mask}>
         <TourMask />
       </DemoBlock>
 
       <Heading level={2}>自定义指示器</Heading>
-      <p>通过 <code>indicators</code> 替换默认的圆点指示器。</p>
+      <p>自定义指示器。</p>
       <DemoBlock source={SOURCES.indicator}>
         <TourIndicator />
       </DemoBlock>
 
-      <Heading level={2}>目标元素</Heading>
+      <Heading level={2}>目标</Heading>
       <p>
-        <code>target</code> 支持选择器字符串、元素本身，或返回元素的函数。
+        可以传入目标的各种类型的参数。自<span className="docs-version-tag">2.5.2</span>以来支持字符串和函数类型。
       </p>
       <DemoBlock source={SOURCES.target}>
         <TourTarget />

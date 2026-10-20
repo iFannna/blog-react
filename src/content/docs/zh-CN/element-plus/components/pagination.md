@@ -11,23 +11,23 @@ order: 110
 
 ## 基础用法
 
-:::demo 使用 `layout` 配置要显示的组件项，用逗号分隔。
+:::demo 设置`layout`，表示需要显示的内容，用逗号分隔，布局元素会依次显示。分页元素包括：`prev`（跳转到上一页的按钮）、`next`（跳转到下一页的按钮）、`pager`（页码列表）、`jumper`（跳转输入框）、`total`（总条目数）、`sizes`（用于设置每页条数的选择器）以及 `->`（该符号之后的所有元素将被靠右对齐）。
 
 pagination/basic-usage
 
 :::
 
-## 页码数量
+## 设置最大页码按钮数
 
-:::demo 默认超过 7 页时会折叠多余的页码按钮，可用 `pagerCount` 配置。
+:::demo 默认情况下，当总页数超过 7 页时，Pagination 会折叠多余的页码按钮。通过 `pager-count` 属性可以设置最大页码按钮数。
 
 pagination/number-of-pagers
 
 :::
 
-## 带背景色的分页
+## 带有背景色的分页
 
-:::demo 设置 `background` 让按钮带有背景色。
+:::demo 设置`background`属性可以为分页按钮添加背景色。
 
 pagination/background-color
 
@@ -35,23 +35,29 @@ pagination/background-color
 
 ## 小型分页
 
-:::demo 空间有限时可使用 `small`。
+在空间有限的情况下，可以使用简单的小型分页。
+
+:::demo 通过`size`更改大小这是个 `small`的例子
 
 pagination/small-pagination
 
 :::
 
-## 只有一页时隐藏
+## 当只有一页时隐藏分页
 
-:::demo `hideOnSinglePage` 在只有一页时隐藏整个分页。
+当只有一页时，通过设置 `hide-on-single-page` 属性来隐藏分页。
+
+:::demo
 
 pagination/auto-hide-pagination
 
 :::
 
-## 更多元素
+## 附加功能
 
-:::demo `pageSizes` 接受一个整数数组，每个值对应 sizes 下拉中的一个页码选项。
+根据场景需要，可以添加其他功能模块。
+
+:::demo 此示例是一个完整的用例。使用了 `size-change` 和 `current-change` 事件来处理页码大小和当前页变动时候触发的事件。 `page-sizes`接受一个整数类型的数组，数组元素为展示的选择每页显示个数的选项，`[100, 200, 300, 400]` 表示四个选项，每页显示 100 个，200 个，300 个或者 400 个。
 
 pagination/more-elements
 

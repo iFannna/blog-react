@@ -205,8 +205,8 @@ export default function ButtonPage() {
 
       <Heading level={2}>基础用法</Heading>
       <p>
-        使用 <code>type</code>、<code>plain</code>、<code>round</code>、
-        <code>dashed</code> 和 <code>circle</code> 来定义 Button 的样式。
+        使用 <code>type</code>, <code>plain</code>, <code>round</code>,
+        <code>dashed</code> 和 <code>circle</code> 来定义按钮的样式。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <ButtonBasic />

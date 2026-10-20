@@ -7,7 +7,7 @@ order: 130
 
 # InputOtp 一次性密码输入框 ^(beta)
 
-用于输入一次性密码（OTP）。
+用于输入一次性密码
 
 ## 基础用法
 
@@ -19,39 +19,49 @@ input-otp/basic
 
 ## 自定义长度
 
-:::demo 通过 `length` 自定义输入框的数量。
+输入字段长度可以通过设置`length`属性来自定义。
+
+:::demo
 
 input-otp/custom-length
 
 :::
 
-## 类型
+## 展示类型
 
-:::demo 支持三种类型：outlined（默认）、filled、underlined。
+有三种类型可用：`outlined ` （默认）、`filled ` 和 `underlined`。
+
+:::demo
 
 input-otp/types
 
 :::
 
-## 尺寸
+## 调整尺寸
 
-:::demo 支持三种尺寸：`large`、`default`、`small`。
+有三个尺寸可用：`large`、`default` 和 `small`。
+
+:::demo
 
 input-otp/sizes
 
 :::
 
-## 禁用与只读
+## 禁用 & 只读
 
-:::demo 支持 `disabled` 与 `readonly` 状态。
+支持禁用和只读状态。
+
+:::demo
 
 input-otp/disabled
 
 :::
 
-## 掩码
+## 密码模式
 
-:::demo 通过 `mask` 隐藏输入的字符。
+使用 `mask` 属性来隐藏输入字符。
+
+:::demo
 
 input-otp/mask
 
@@ -59,15 +69,19 @@ input-otp/mask
 
 ## 分隔符
 
-:::demo 自定义 OTP 输入框之间的分隔符。
+自定义OTP字段之间的分隔符。
+
+:::demo
 
 input-otp/separator
 
 :::
 
-## 自定义校验
+## 自定义验证
 
-:::demo 通过 `validator` 校验输入的字符，并用 `inputmode` 指定键盘类型。
+设置 `validator` 属性以验证输入字符，并使用 `inputmode` 指定键盘类型。
+
+:::demo
 
 input-otp/validator
 

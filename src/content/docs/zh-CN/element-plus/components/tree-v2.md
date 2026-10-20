@@ -5,37 +5,51 @@ group: 数据展示
 order: 210
 ---
 
-# Tree V2 虚拟化树形控件
+# Tree V2 虚拟化树形控件^(beta)
 
-面向大数据量的虚拟滚动树形控件。
+不论你的数据量多大，虚拟树都能毫无压力地处理。
 
 ## 基础用法
 
-:::demo 基础的树形结构展示。
+基础的树形结构展示
+
+:::demo
 
 tree-v2/basic
 
 :::
 
-## 可选择
+## 可选择的虚拟树
 
-:::demo 用于节点选择。
+适用于需要选择层级时使用。
+
+:::demo
 
 tree-v2/selectable
 
 :::
 
+:::warning
+
+在使用 show-checkbox 时，因为 `check-on-click-leaf` 默认值为 true， 最后一个树节点可以通过点击节点进行勾选。
+
+:::
+
 ## 禁用复选框
 
-:::demo 节点的复选框可以单独禁用：在 `props` 里声明  `disabled` 字段名，并把节点的该字段设为 `true`。
+节点的复选框可以设置为禁用。
+
+:::demo 在示例中，属性在 defaultProps 中声明了 `disabled`，一些节点被设置为 `disabled：true`。相应的复选框已禁用，不能点击。
 
 tree-v2/disabled
 
 :::
 
-## 默认展开和默认选中
+## 默认扩展和默认检查
 
-:::demo 用 `default-expanded-keys` 与  `default-checked-keys` 设置初始展开与初始勾选的节点。
+树节点可以在初始化阶段被设置为展开或选中。
+
+:::demo 分别通过 `default-expanded-keys` 和 `default-checked-keys` 设置默认展开和默认选中的节点。
 
 tree-v2/default-state
 
@@ -43,31 +57,37 @@ tree-v2/default-state
 
 ## 自定义节点内容
 
-:::demo 节点内容可以自定义，从而加入图标或按钮。
+节点的内容支持自定义，可以在节点区添加按钮或图标等内容
+
+:::demo
 
 tree-v2/custom-node
 
 :::
 
-## 自定义节点类名
+## 自定义节点类 ^(2.9.0)
 
-:::demo 用 `props.class` 生成节点类名。
+节点的类名支持自定义。
+
+:::demo
 
 tree-v2/custom-node-class
 
 :::
 
-## 自定义节点图标
+## 自定义图标 ^(2.10.3)
 
-:::demo 节点暴露 `expanded` 与 `isLeaf` 属性，可据此渲染不同的图标。
+:::demo 您可以自定义不同节点状态的图标。树节点暴露了 `expanded` 属性和 `isLeaf` 属性，允许你根据节点的状态动态渲染不同的图标：叶子节点、展开的节点或折叠的节点。
 
 tree-v2/custom-icon
 
 :::
 
-## 树节点过滤
+## 树节点过滤 ^(2.9.1)
 
-:::demo 调用实例的 `filter` 方法过滤节点，参数即过滤关键字。 该功能需要 `filter-method`。
+`filter-method` 方法只有在版本 `2.9.1` 之后才能接受第三个参数。树节点是可以被过滤的
+
+:::demo 在需要对节点进行过滤时，调用 Tree 实例的 `filter` 方法，参数为关键字。需要注意的是，此时需要设置 `filter-method`，值为过滤函数。
 
 tree-v2/filter
 

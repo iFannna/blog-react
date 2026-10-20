@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import DemoBlock from "../../../../_components/DemoBlock";
 import DocsContent from "../../../../_components/DocsContent";
 import { Heading } from "../../../../_components/Heading";
@@ -88,29 +89,50 @@ const API_MD = `
 export default function CalendarPage() {
   return <>
     <h1>Calendar 日历</h1>
-    <p>显示日期。</p>
+    <p>显示日期</p>
 
     <Heading level={2}>基础用法</Heading>
-    <p>设置 <code>value</code> 指定当前显示的月份，不设置时显示当前月份。</p>
+    <p>
+      设置 <code>value</code> 来指定当前显示的月份。如果 <code>value</code>{" "}
+      未指定，则显示当月。 <code>value</code> 支持 <code>v-model</code> 双向绑定。
+    </p>
     <DemoBlock source={SOURCES.basic}><CalendarExampleLocale><CalendarBasic /></CalendarExampleLocale></DemoBlock>
 
-    <Heading level={2}>控制器类型</Heading>
-    <p>通过 <code>controller-type</code> 设置日历头部控制器类型，选择器标签可通过 <code>formatter</code> 自定义。</p>
+    <Heading level={2} id="控制器类型">
+      控制器类型 <span className="docs-version-tag">2.13.1</span>
+    </Heading>
+    <p>
+      您可以设置日历头部的控制器类型。设置 <code>select</code>时，您可以使用{" "}
+      <code>formatter</code> 自定义 <code>label</code>。
+    </p>
     <DemoBlock source={SOURCES.controller}><CalendarExampleLocale><CalendarController /></CalendarExampleLocale></DemoBlock>
 
     <Heading level={2}>自定义内容</Heading>
-    <p>通过 <code>renderDateCell</code> 自定义日历单元格内容。</p>
+    <p>
+      通过设置名为 <code>date-cell</code> 的 <code>scoped-slot</code>{" "}
+      来自定义日历单元格中显示的内容。在 <code>scoped-slot</code> 可以获取到
+      date（当前单元格的日期）, data（包括 type，isSelected，day
+      属性）。详情解释参考下方的 API 文档。
+    </p>
     <DemoBlock source={SOURCES.customize}><CalendarExampleLocale><CalendarCustomize /></CalendarExampleLocale></DemoBlock>
 
     <Heading level={2}>范围</Heading>
-    <p>通过 <code>range</code> 指定显示范围，跨度不能超过两个月。</p>
+    <p>
+      设置 <code>range</code>{" "}
+      属性指定日历的显示范围。开始时间必须是周起始日，结束时间必须是周结束日，且时间跨度不能超过两个月。
+    </p>
     <DemoBlock source={SOURCES.range}><CalendarExampleLocale><CalendarRange /></CalendarExampleLocale></DemoBlock>
 
-    <Heading level={2}>自定义头部</Heading>
+    <Heading level={2}>自定义日历头部</Heading>
     <DemoBlock source={SOURCES.header}><CalendarExampleLocale><CalendarHeader /></CalendarExampleLocale></DemoBlock>
 
-    <Heading level={2}>本地化</Heading>
-    <p>日期标题、星期与控制按钮文案均读取 ConfigProvider 语言包。</p>
+    <Heading level={2}>国际化</Heading>
+    <p>
+      由于 Element Plus 的默认语言为英语，如果你需要设置其它的语言，请参考<Link href="/zh-CN/guide/i18n">国际化</Link>文档。
+    </p>
+    <p>
+      要注意的是：日期相关的文字（月份，每一周的第一天等等）也都是通过国际化来配置的。
+    </p>
 
     <DocsContent source={API_MD} />
   </>;

@@ -274,13 +274,14 @@ export default function UploadPage() {
   return (
     <>
       <h1>Upload 上传</h1>
-      <p>上传文件，支持点击或拖拽两种方式。</p>
+      <p>通过点击或者拖拽上传文件。</p>
 
       <Heading level={2}>基础用法</Heading>
       <p>
-        通过 <code>trigger</code> 自定义触发按钮的类型与文案。
-        <code>limit</code> 与 <code>onExceed</code> 用于限制最大上传数量并处理超限；
-        <code>beforeRemove</code> 里返回被拒绝的 Promise 可中止移除。
+        通过 <code>slot</code> 你可以传入自定义的上传按钮类型和文字提示。可通过设置{" "}
+        <code>limit</code> 和 <code>on-exceed</code>{" "}
+        来限制上传文件的个数和定义超出限制时的行为。可通过设置{" "}
+        <code>before-remove</code> 来阻止文件移除操作。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <UploadBasic />
@@ -288,7 +289,8 @@ export default function UploadPage() {
 
       <Heading level={2}>覆盖前一个文件</Heading>
       <p>
-        使用 <code>limit</code> 与 <code>onExceed</code> 在重新选择文件时自动替换上一个文件。
+        设置 <code>limit</code> 和 <code>on-exceed</code>{" "}
+        可以在选中时自动替换上一个文件。
       </p>
       <DemoBlock source={SOURCES.limitCover}>
         <UploadLimitCover />
@@ -296,7 +298,7 @@ export default function UploadPage() {
 
       <Heading level={2}>用户头像</Heading>
       <p>
-        用 <code>beforeUpload</code> 限制上传文件的格式与大小。
+        在 <code>before-upload</code> 钩子中限制用户上传文件的格式和大小。
       </p>
       <DemoBlock source={SOURCES.avatar}>
         <UploadAvatar />
@@ -304,7 +306,7 @@ export default function UploadPage() {
 
       <Heading level={2}>照片墙</Heading>
       <p>
-        用 <code>listType</code> 改变文件列表的样式。
+        使用 <code>list-type</code> 属性来设定文件列表的样式。
       </p>
       <DemoBlock source={SOURCES.photoWall}>
         <UploadPhotoWall />
@@ -312,47 +314,45 @@ export default function UploadPage() {
 
       <Heading level={2}>自定义缩略图</Heading>
       <p>
-        用 <code>renderFile</code> 替换默认的缩略图模板。
+        使用 <code>scoped-slot</code> 属性来改变默认的缩略图模板样式。
       </p>
       <DemoBlock source={SOURCES.customThumbnail}>
         <UploadCustomThumbnail />
       </DemoBlock>
 
       <Heading level={2}>图片列表缩略图</Heading>
-      <p>
-        <code>listType</code> 设为 <code>picture</code> 时列表项左侧展示缩略图。
-      </p>
       <DemoBlock source={SOURCES.fileListWithThumbnail}>
         <UploadFileListWithThumbnail />
       </DemoBlock>
 
-      <Heading level={2}>文件列表控制</Heading>
+      <Heading level={2}>上传文件列表控制</Heading>
       <p>
-        通过 <code>onChange</code> 钩子控制上传文件列表。
+        通过 <code>on-change</code> 钩子函数来对上传文件的列表进行控制。
       </p>
       <DemoBlock source={SOURCES.fileList}>
         <UploadFileList />
       </DemoBlock>
 
       <Heading level={2}>拖拽上传</Heading>
-      <p>把文件拖到指定区域即可上传。</p>
+      <p>你可以将文件拖拽到特定区域以进行上传。</p>
       <DemoBlock source={SOURCES.dragAndDrop}>
         <UploadDragAndDrop />
       </DemoBlock>
 
-      <Heading level={2}>上传目录</Heading>
+      <Heading level={2} id="上传目录">
+        上传目录 <span className="docs-version-tag">2.13.1</span>
+      </Heading>
       <p>
-        开启 <code>directory</code> 后仅能选择文件夹，选中后文件夹内的文件会被扁平化。
+        通过 <code>directory</code> 属性启用文件夹上传。
+      </p>
+      <p>
+        启用后，只能选择文件夹；选择文件夹后，文件夹内的文件将被扁平化处理。
       </p>
       <DemoBlock source={SOURCES.directory}>
         <UploadDirectory />
       </DemoBlock>
 
       <Heading level={2}>手动上传</Heading>
-      <p>
-        设置 <code>autoUpload</code> 为 <code>false</code> 后，通过 ref 上的{" "}
-        <code>submit</code> 手动发起上传。
-      </p>
       <DemoBlock source={SOURCES.manual}>
         <UploadManual />
       </DemoBlock>

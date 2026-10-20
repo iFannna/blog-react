@@ -7,41 +7,49 @@ order: 40
 
 # Container 布局容器
 
-用于布局的容器组件，方便快速搭建页面的基本结构。
+用于布局的容器组件，方便快速搭建页面的基本结构：
 
-## 上中
+`<el-container>`：外层容器。当子元素中包含 `<el-header>` 或 `<el-footer>` 时，全部子元素会垂直上下排列，否则会水平左右排列。
 
-:::demo `ElHeader` 与 `ElMain` 组合，容器自动纵向排列。
+`<el-header>`：顶栏容器。
+
+`<el-aside>`：侧边栏容器。
+
+`<el-main>`：主要区域容器。
+
+`<el-footer>`：底栏容器。
+
+:::tip
+
+以上组件采用了 flex 布局，使用前请确定目标浏览器是否兼容。此外， `<el-container>`的直接子元素必须是后四个组件中的一个或多个。后四个组件的父元素必须是一个 `<el-container>`
+
+:::
+
+## 常见页面布局
+
+:::demo
 
 container/layout-hm
 
 :::
 
-## 上中下
-
-:::demo 再加入 `ElFooter`。
+:::demo
 
 container/layout-hmf
 
 :::
 
-## 左右
-
-:::demo 容器直接包含 `ElAside` 时自动横向排列，可同时放置两侧边栏。
+:::demo
 
 container/layout-am
 
 :::
 
-## 左侧边栏 + 上中
-
-:::demo 外层横向，内层再嵌套上下结构。
+:::demo
 
 container/layout-ham
 
 :::
-
-## 左侧边栏 + 上中下
 
 :::demo
 
@@ -49,15 +57,11 @@ container/layout-hamf
 
 :::
 
-## 上 + 左侧边栏 + 中
-
 :::demo
 
 container/layout-ahm
 
 :::
-
-## 上 + 左侧边栏 + 中下
 
 :::demo
 
@@ -65,9 +69,9 @@ container/layout-ahmf
 
 :::
 
-## 完整布局
+## 例子
 
-:::demo 侧边菜单、顶栏与内容区组合的完整应用布局，内容区可滚动。
+:::demo
 
 container/example
 

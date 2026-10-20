@@ -7,11 +7,15 @@ order: 50
 
 # Icon 图标
 
-提供了一套常用的图标集合。
+Element Plus 提供了一套常用的图标集合。
 
 ## 基础用法
 
-`ElIcon` 会为内部的 SVG 图标提供尺寸与颜色，图标本身也可以脱离 `ElIcon` 独立使用。
+:::warning
+
+由于 HTML 标准已经定义了一个名为 [menu](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/menu) 的标签，如果你注册的 `Menu` 无法正常工作，则需要使用别名来渲染图标。
+
+:::
 
 :::demo
 
@@ -19,10 +23,11 @@ icon/simple
 
 :::
 
-## 配合 ElIcon 使用
+## 结合 el-icon 使用
 
-`ElIcon` 为原始 SVG 图标提供额外属性：`size` 控制尺寸，`color` 控制颜色，
-加上 `is-loading` 类名可以让图标旋转。
+`el-icon` 为原始的 SVG 图标提供额外的属性，细节如下。
+
+通过添加额外的类名 is-loading，你的图标就可以在 2 秒内旋转 360 度，当然你也可以自己改写想要的动画。
 
 :::demo
 
@@ -32,8 +37,6 @@ icon/combined
 
 ## 直接使用 SVG 图标
 
-图标组件默认不携带尺寸等属性，直接使用时应通过 `width` / `height` 或类名指定大小。
-
 :::demo
 
 icon/direct
@@ -42,7 +45,13 @@ icon/direct
 
 ## 图标集合
 
-以下为官方全部 293 个图标，来自 `@element-plus/icons-vue`，SVG 数据逐字节一致。
+:::tip
+
+只要你安装了 @element-plus/icons-vue，**就可以在任意版本里使用 SVG 图标**。
+
+**您可以点击图标复制代码**
+
+:::
 
 :::demo
 

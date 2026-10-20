@@ -5,13 +5,23 @@ group: 表单组件
 order: 180
 ---
 
-# Select V2 虚拟化选择器
+# Virtualized Select 虚拟化选择器
 
-`Select V2` 使用虚拟列表渲染选项，适用于十万级数据量的下拉选择。 组件对外的 props、事件与插槽与官方保持一致。
+:::tip
+
+这个组件目前在测试当中，如果在使用中发现任何漏洞和问题，请在 [GitHub](https://github.com/element-plus/element-plus/issues) 中提交 issue 以便我们进行处理。
+
+:::
+
+## 背景
+
+在某些使用情况下，单个选择器可能最终加载数万行数据。将这么多的数据渲染至 DOM 中可能会给浏览器带来负担，从而造成性能问题。为了更好的用户和开发者体验，我们决定添加此组件。
 
 ## 基础用法
 
-:::demo 使用虚拟列表渲染一千条选项。
+适用广泛的基础选择器
+
+:::demo
 
 select-v2/basic-usage
 
@@ -19,7 +29,9 @@ select-v2/basic-usage
 
 ## 多选
 
-:::demo 设置 `multiple` 开启多选。
+最基础的多选选择器
+
+:::demo
 
 select-v2/multiple
 
@@ -27,79 +39,111 @@ select-v2/multiple
 
 ## 尺寸
 
-:::demo 通过 `size` 切换大、默认、小三种尺寸。
+使用 `size` 属性改变选择器大小。除了默认大小外，还有另外两个选项： `large`, `small`。
+
+:::demo
 
 select-v2/size
 
 :::
 
-## 隐藏多余标签
+## 隐藏多余标签的多选
 
-:::demo 多选选中项过多时，可通过 `collapseTags` 折叠标签； 配合 `collapseTagsTooltip` 悬停查看全部， `maxCollapseTags` 控制折叠前展示的数量。
+默认情况下选中值会以 Tag 的形式展现，你也可以设置`collapse-tags`属性将它们合并为一段文字。您可以使用 `collapse-tags-tooltip` 属性来启用鼠标悬停折叠文字以显示具体所选值的行为。
+
+:::demo
 
 select-v2/hide-extra-tags
 
 :::
 
-## 可过滤多选
+## 可过滤的多选
 
-:::demo 设置 `filterable` 后可以输入关键词过滤选项。
+当选项太多时，你可以使用 `filterable` 选项来启用过滤功能来找到所需的选项。
+
+:::demo
 
 select-v2/filterable
 
 :::
 
-## 禁用选择器与选项
+## 禁用选择器本身或选项
 
-:::demo 设置 `disabled` 禁用选择器，或在选项上设置 `disabled`。
+您可以选择禁用 Select 或者 Select 中的某个选项。
+
+:::demo
 
 select-v2/disabled
 
 :::
 
-## 选项分组
+## 给选项进行分组
 
-:::demo 在选项对象上提供 `options` 字段即可渲染分组， 组内选项会展平到同一个虚拟列表中。
+只要数据格式满足特定要求，我们就可以按照自己的意愿为选项进行分组。
+
+:::demo
 
 select-v2/grouping
 
 :::
 
-## 可清空
+## 一键清除
 
-:::demo 设置 `clearable` 显示清空图标。
+我们可以同时清除所有选定的选项。此设定也适用于单选。
+
+:::demo
 
 select-v2/clearable
 
 :::
 
-## 自定义选项渲染
+## 自定义选项的渲染模板
 
-:::demo 通过 `children` 渲染函数自定义每个选项的内容。
+我们也可以通过自定义模板来渲染自己想要的选项内容。
+
+:::demo
 
 select-v2/customized-option
 
 :::
 
-## 下拉头部
+## 自定义下拉菜单的头部 ^(2.5.2)
 
-:::demo 通过 `header` 在下拉顶部放置内容，例如全选复选框。
+您可以自定义下拉菜单的头部。
+
+使用slot 自定义内容
+
+:::demo
 
 select-v2/custom-header
 
 :::
 
-## 下拉底部
+## 自定义下拉菜单的底部 ^(2.5.2)
 
-:::demo 通过 `footer` 在下拉底部放置内容，例如新增选项。
+您可以自定义下拉菜单的底部。
+
+使用slot 自定义内容
+
+:::demo
 
 select-v2/custom-footer
 
 :::
 
-## 创建选项
+## 创建临时选项
 
-:::demo 设置 `allowCreate` 与 `filterable`  允许输入并创建新选项；`defaultFirstOption`  让回车选中第一个匹配项。
+创建并选中未包含在初始选项中的条目。
+
+通过使用 `allow-create` 属性，用户可以通过输入框创建新项目。为了使 `allow-create` 正常工作， `filterable` 的值必须为 `true`。本例还使用了 `default-first-option` 属性，在该属性为 `true` 的情况下，按下回车就可以选中当前选项列表中的第一个选项，无需使用鼠标或键盘方向键进行定位。
+
+:::tip
+
+最好在使用 `allow-create` 属性的同时设置 `:reserve-keyword="false"`。
+
+:::
+
+:::demo
 
 select-v2/allow-create
 
@@ -107,63 +151,91 @@ select-v2/allow-create
 
 ## 远程搜索
 
-:::demo 设置 `remote` 与 `remoteMethod`  从服务端获取选项；`remoteShowSuffix`  控制远程模式下是否显示后缀图标。
+输入关键字以从远程服务器中查找数据。
+
+从服务器搜索数据，输入关键字进行查找。为了启用远程搜索，需要将`filterable`和`remote`设置为`true`，同时传入一个`remote-method`。 `remote-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。
+
+:::demo
 
 select-v2/remote-search
 
 :::
 
-## 使用 value-key
+## 使用 value-key 键属性
 
-:::demo 值为对象时，通过 `valueKey`  指定唯一标识字段，组件按该字段比较选项。
+当 `options.value` 是一个对象时，您应该为它设置一个唯一的标识名称
+
+:::tip
+
+在 ^(2.4.0) 之前，`value-key`既用作所选对象的唯一值，也用作`options`中表示值的对应 key。现在 `value-key` 仅作为所选对象的唯一值使用，选项中值的 key 是 `props.value`.
+
+:::
+
+:::demo
 
 select-v2/use-valueKey
 
 :::
 
-## 自定义选项别名
+## 自定义选项 ^(2.4.2)
 
-:::demo 通过 `props` 指定选项对象中 `label` 与  `value` 对应的字段。
+当您的 `options` 格式不同于默认格式 您可以通过 `props` 属性自定义 `options`
+
+:::demo
 
 select-v2/props
 
 :::
 
-## 自定义标签
+## 自定义标签 ^(2.5.0)
 
-:::demo 通过 `tag` 渲染函数完全替换标签内容，`children`  同时自定义选项。
+您可以自定义标签。
+
+将自定义的标签插入 `el-select` 的 slot 中即可。 `collapse-tags`, `collapse-tags-tooltip`, `max-collapse-tags` 在此模式下不生效.
+
+:::demo
 
 select-v2/custom-tag
 
 :::
 
-## 自定义加载内容
+## 自定义加载 ^(2.5.2)
 
-:::demo 通过 `loadingSlot` 自定义加载中的内容。
+修改加载区域内容
+
+:::demo
 
 select-v2/custom-loading
 
 :::
 
-## 空值
+## 空值配置^(2.7.0)
 
-:::demo `emptyValues` 与 `valueOnClear`  控制空值判断和清空后的返回值。
+若想配置如空字符串为有效值而不是空值，可以配置 `empty-values` 为 `[null, undefined]`.
+
+如果您想要将清空值更改为 `null`, 请设置 `value-on-clear` 为 `null`
+
+:::demo
 
 select-v2/empty-values
 
 :::
 
-## 自定义文案
+## 自定义标签 ^(2.7.4)
 
-:::demo 通过 `label` 渲染函数自定义选中值的展示文案。
+您可以自定义标签
+
+:::demo
 
 select-v2/custom-label
 
 :::
 
-## 自定义宽度
+## 自定义宽度 ^(2.9.2)
 
-:::demo `fitInputWidth` 为 `false`  时下拉按内容宽度展开；传数字时固定为该宽度。
+下拉框的宽度默认根据`label`的值计算。如果通过`default slot`自定义下拉框选项，选项中显示的文本可能与`label`的值不相等，从而导致计算错误。在这种情况下，可以通过设置`fit-input-width`属性为一个数字来固定其宽度。
+
+:::demo
 
 select-v2/custom-width
 

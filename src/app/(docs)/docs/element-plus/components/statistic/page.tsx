@@ -123,33 +123,35 @@ export default function StatisticPage() {
   return (
     <>
       <h1>Statistic 统计组件</h1>
-      <p>用于展示统计数据，支持数字格式化。</p>
+      <p>显示统计数据。</p>
 
       <Heading level={2}>基础用法</Heading>
       <p>
-        通过 <code>precision</code> 控制小数位，<code>prefix</code> / <code>suffix</code>
-        添加前后缀，<code>groupSeparator</code> 与 <code>decimalSeparator</code>
-        自定义分隔符。
+        用于突出某个或某组数字时，如统计数值、金额、排名等，数值和标题前后都可以加icon、单位等元素。可以使用{" "}
+        <a href="https://vueuse.org/core/useTransition/" target="_blank" rel="noreferrer">
+          vueuse
+        </a>{" "}
+        实现数值的变化动效
       </p>
       <DemoBlock source={SOURCES.basic}>
         <StatisticBasic />
       </DemoBlock>
 
       <Heading level={2}>倒计时</Heading>
-      <p>
-        <code>ElCountdown</code> 以 <code>value</code> 为目标时间逐帧计算差值，
-        用 <code>format</code> 控制展示格式；可配合按钮等组件重置目标时间。
-        格式建议控制在「天」的量级内。
-      </p>
+      <p>倒计时组件，支持添加其他组件来控制。</p>
       <DemoBlock source={SOURCES.countdown}>
         <StatisticCountdown />
       </DemoBlock>
+      <DocsContent
+        source={`:::tip
 
-      <Heading level={2}>自定义格式化</Heading>
-      <p>
-        <code>formatter</code> 接收原始值并返回任意节点。传入后忽略其它格式化配置。
-        <code>value</code> 为非数字时原样显示。
-      </p>
+在格式化过程中，建议在天数范围内
+
+:::`}
+      />
+
+      <Heading level={2}>统计卡片</Heading>
+      <p>卡片式用法展示，可以自由组合</p>
       <DemoBlock source={SOURCES.formatter}>
         <StatisticCard />
       </DemoBlock>

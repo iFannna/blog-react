@@ -103,44 +103,48 @@ export default function BadgePage() {
       <p>按钮和图标上的数字或状态标记。</p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>
-        通过 <code>value</code> 设置显示值，<code>type</code> 设置徽章类型，
-        <code>color</code> 可自定义背景色。
-      </p>
+      <p>可以用来展示新消息的数量。</p>
+      <p>数量值可接受 Number 或 String。</p>
       <DemoBlock source={SOURCES.basic}>
         <BadgeBasic />
       </DemoBlock>
 
       <Heading level={2}>最大值</Heading>
+      <p>你还可以自定义最大值</p>
       <p>
-        通过 <code>max</code> 属性设置最大值，超出时显示{" "}
-        <code>{"{max}+"}</code>。仅在 <code>value</code> 为数字时生效。
+        由 max 属性定义，接受 Number 值。请注意，仅在值也是 Number 时起作用。
       </p>
       <DemoBlock source={SOURCES.max}>
         <BadgeMax />
       </DemoBlock>
 
-      <Heading level={2}>自定义内容</Heading>
+      <Heading level={2}>自定义显示内容</Heading>
       <p>
-        <code>value</code> 为字符串时可直接显示文本；也可以通过{" "}
-        <code>content</code> 渲染函数自定义徽章内容。
+        你也可以展示除数字以外你想要展示的任何值。或者您可以使用{" "}
+        <code>content</code> 栏位自定义内容。
+      </p>
+      <p>
+        当 value 是 String 时，可以显示自定义文字。或者使用{" "}
+        <code>content</code> 插槽。
       </p>
       <DemoBlock source={SOURCES.customize}>
         <BadgeCustomize />
       </DemoBlock>
 
-      <Heading level={2}>小圆点</Heading>
+      <Heading level={2}>小红点</Heading>
+      <p>通过一个小红点标记来告知用户有新内容。</p>
       <p>
-        通过 <code>isDot</code> 属性设置为小圆点，不显示具体数值。
+        使用 <code>is-dot</code> 属性。是个布尔值。
       </p>
       <DemoBlock source={SOURCES.dot}>
         <BadgeDot />
       </DemoBlock>
 
-      <Heading level={2}>偏移量</Heading>
+      <Heading level={2} id="偏移量">
+        偏移量 <span className="docs-version-tag">2.7.0</span>
+      </Heading>
       <p>
-        通过 <code>offset</code> 属性设置徽标相对于默认位置的偏移，
-        格式为 <code>[left, top]</code>。
+        设置徽章点的偏移，格式是[左，顶部]， 代表状态点从左侧和默认位置顶部的偏移。
       </p>
       <DemoBlock source={SOURCES.offset}>
         <BadgeOffset />

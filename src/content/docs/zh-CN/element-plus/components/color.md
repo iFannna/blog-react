@@ -7,11 +7,11 @@ order: 30
 
 # Color 色彩
 
-Element Plus 使用一组特定的色板，为构建的产品提供一致的外观与观感。
+Element Plus 为了避免视觉传达差异，使用一套特定的调色板来规定颜色，为你所搭建的产品提供一致的外观视觉感受。
 
 ## 主色
 
-Element Plus 的主色是明亮且友好的蓝色。
+Element Plus 默认的主题色是明亮、友好的蓝色。
 
 :::demo
 
@@ -19,9 +19,9 @@ color/main
 
 :::
 
-## 场景色
+## 辅助色
 
-除主色外，不同场景需要使用不同的颜色（例如危险色表示危险操作）。
+除了主颜色外，您需要在不同的场景中使用不同的场景颜色 (例如，危险的颜色表示危险的操作)
 
 :::demo
 
@@ -31,13 +31,17 @@ color/secondary
 
 ## 中性色
 
-中性色用于文字、背景与边框，可以用不同的中性色来表达层次结构。
+中性色用于文本、背景和边框颜色。通过运用不同的中性色，来表现层次结构。
 
 :::demo
 
 color/neutral
 
 :::
+
+## 源代码
+
+[文档](https://github.com/element-plus/element-plus/blob/dev/docs/en-US/component/color.md)
 
 ## Color 规范
 

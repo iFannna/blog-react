@@ -7,59 +7,83 @@ order: 70
 
 # DatePicker 日期选择器
 
-用于选择或输入日期，支持年、月、周、日期、日期时间与范围选择。
+用于选择或输入日期
 
-## 输入日期
+## 选择某一天
 
-:::demo 通过 `type` 属性决定度量单位。通过 `shortcuts` 启用快捷选项，通过 `disabledDate` 禁用日期。
+以”日“为基本单位，基础的日期选择控件
+
+基本单位由 `type` 属性指定。通过 `shortcuts` 配置快捷选项，通过 `disabledDate` 函数，来设置禁用掉的日期。
+
+:::demo
 
 date-picker/enter-date
 
 :::
 
-## 其他度量
+## 其他日期单位
 
-:::demo 扩展标准日期选择器，可以选择周、月、年或多选日期。
+You can choose week, month, year, quarter or multiple dates by extending the standard date picker component.
+
+:::demo
 
 date-picker/other-measurements
 
 :::
 
-## 日期范围
+## 选择一段时间
 
-:::demo 支持选择日期范围。范围模式下左右面板默认联动，可通过  `unlinkPanels` 取消联动。
+你可以通过如下例子来学习如何设置一个日期范围选择器。
+
+在选择日期范围时，默认情况下左右面板会联动。如果希望两个面板各自独立切换当前月份，可以使用 `unlink-panels` 属性解除联动。
+
+:::demo
 
 date-picker/date-range
 
 :::
 
-## 月份范围
+## 选择月份范围
 
-:::demo 支持选择月份范围。范围模式下左右面板默认联动，可通过  `unlinkPanels` 取消联动。
+你当然还可以选择一个月的范围。
+
+在选择月份范围时，默认情况下左右面板会联动。如果希望两个面板各自独立切换当前年份，可以使用 `unlink-panels` 属性解除联动。
+
+:::demo
 
 date-picker/month-range
 
 :::
 
-## 年份范围
+## 年份范围^(2.8.0)
 
-:::demo 支持选择年份范围。范围模式下左右面板默认联动，可通过  `unlinkPanels` 取消联动。
+你可以通过如下例子来学习如何设置一个年份范围选择器。
+
+在选择范围时，默认情况下左右面板会联动。如果希望两个面板各自独立切换当前年份，可以使用 `unlink-panels` 属性解除联动。
+
+:::demo
 
 date-picker/year-range
 
 :::
 
-## Quarter Range
+## Quarter Range ^(2.14.5)
 
-:::demo 支持选择季度范围。范围模式下左右面板默认联动，可通过 `unlinkPanels` 取消联动。
+Picking a quarter range is supported.
+
+在选择范围时，默认情况下左右面板会联动。如果希望两个面板各自独立切换当前年份，可以使用 `unlink-panels` 属性解除联动。
+
+:::demo
 
 date-picker/quarter-range
 
 :::
 
-## 单面板
+## 单个面板 ^(2.14.0)
 
-:::demo 范围选择器默认显示两个面板，通过 `singlePanel` 只显示一个面板。
+默认日期选择器范围有两个面板。如果你想要一个面板设置 `single-panel` 属性。
+
+:::demo
 
 date-picker/single-panel
 
@@ -67,7 +91,11 @@ date-picker/single-panel
 
 ## 默认值
 
-:::demo 未选择日期时默认显示当天日历，可通过 `defaultValue`  指定其他日期。类型为 `daterange` 时，它设置左侧日历。
+日期选择器会在用户未选择任何日期的时候默认展示当天的日期。你也可以使用 `default-value` 来修改这个默认的日期。请注意该值需要是一个可以解析的 `new Date()` 对象。
+
+如果类型是 `daterange`, `default-value` 则会设置左边窗口的默认值。
+
+:::demo
 
 date-picker/default-value
 
@@ -75,23 +103,43 @@ date-picker/default-value
 
 ## 日期格式
 
-:::demo 通过 `format` 控制输入框显示格式，通过  `valueFormat` 控制绑定值格式。默认绑定与返回值均为 Date 对象。
+使用`format`指定输入框的格式。使用 `value-format` 指定绑定值的格式。
+
+默认情况下，组件接受并返回`Date`对象。
+
+在 [这里](https://day.js.org/docs/en/display/format#list-of-all-available-formats) 查看 Day.js 支持的所有格式。
+
+:::warning
+
+请一定要注意传入参数的大小写是否正确
+
+:::
+
+:::demo
 
 date-picker/date-formats
 
 :::
 
-## 范围默认时间
+## 默认显示日期
 
-:::demo 选择日期范围时可以指定起止日期的时间部分。默认均为  `00:00:00`。
+在选择日期范围时，你可以指定起始日期和结束日期的默认时间。
+
+默认情况下，开始日期和结束日期的时间部分都是选择日期当日的 `00:00:00`。通过 `default-time` 可以分别指定开始日期和结束日期的具体时刻。它接受最多两个日期对象的数组。其中第一项控制起始日期的具体时刻，第二项控制结束日期的具体时刻。
+
+:::demo
 
 date-picker/default-time
 
 :::
 
-## 自定义前缀内容
+## 设置自定义前缀的内容
 
-:::demo 通过 `prefixIcon` 自定义前缀内容。
+前缀内容可以被自定义。
+
+当你从其他vue组件或由渲染函数生成的组件中导入组件时, 你可以设置 `prefix-icon` 属性来定制前缀内容
+
+:::demo
 
 date-picker/custom-prefix-icon
 
@@ -99,15 +147,19 @@ date-picker/custom-prefix-icon
 
 ## 自定义内容
 
-:::demo 通过 `renderCell` 自定义单元格内容。自定义内容的结构应与默认结构一致， 否则可能出现样式错位。
+弹出框的内容是可以自定义的，在插槽内你可以获取到当前单元格的数据请注意，自定义内容结构应与默认结构一致，否则可能风格会不一致。
+
+:::demo
 
 date-picker/custom-content
 
 :::
 
-## 自定义图标
+## 自定义图标 ^(2.8.0)
 
-:::demo 通过对应 props 自定义导航图标。
+使用插槽自定义图标。
+
+:::demo
 
 date-picker/custom-icon
 
@@ -115,7 +167,7 @@ date-picker/custom-icon
 
 ## 国际化
 
-由于 Element Plus 的默认语言为英语，如果你需要设置其它的语言，请参考国际化文档。
+由于 Element Plus 的默认语言为英语，如果你需要设置其它的语言，请参考[国际化](/zh-CN/guide/i18n)文档。
 
 要注意的是：日期相关的文字（月份，每一周的第一天等等）也都是通过国际化来配置的。
 

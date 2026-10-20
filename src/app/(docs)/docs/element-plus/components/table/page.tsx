@@ -412,128 +412,216 @@ export default function TablePage() {
 
       <Heading level={2}>基础表格</Heading>
       <p>基础的表格展示用法。</p>
+      <p>
+        当 <code>el-table</code> 元素中注入 <code>data</code> 对象数组后，在{" "}
+        <code>el-table-column</code> 中用 <code>prop</code>{" "}
+        属性来对应对象中的键名即可填入数据，用 <code>label</code>{" "}
+        属性来定义表格的列名。可以使用 <code>width</code> 属性来定义列宽。
+      </p>
       <DemoBlock source={SOURCES.basic}>
         <TableBasic />
       </DemoBlock>
 
       <Heading level={2}>带斑马纹表格</Heading>
+      <p>使用带斑马纹的表格，可以更容易区分出不同行的数据。</p>
       <p>
-        使用带斑马纹的表格，可以更容易区分出不同行的数据。
+        <code>stripe</code> 可以创建带斑马纹的表格。如果 <code>true</code>,
+        表格将会带有斑马纹。
       </p>
       <DemoBlock source={SOURCES.striped}>
         <TableStriped />
       </DemoBlock>
 
       <Heading level={2}>带边框表格</Heading>
+      <p>
+        默认情况下，Table 组件是不具有竖直方向的边框的，如果需要，可以使用{" "}
+        <code>border</code> 属性，把该属性设置为 <code>true</code> 即可启用。
+      </p>
       <DemoBlock source={SOURCES.border}>
         <TableBorder />
       </DemoBlock>
 
       <Heading level={2}>带状态表格</Heading>
-      <p>通过 <code>rowStyle</code> 或 <code>rowClassName</code> 为不同行设置状态样式。</p>
+      <p>
+        可将表格内容 highlight 显示，方便区分「成功、信息、警告、危险」等内容。
+      </p>
+      <p>
+        可以通过指定 Table 组件的 <code>row-class-name</code> 属性来为 Table
+        中的某一行添加 class，这样就可以自定义每一行的样式了。
+      </p>
       <DemoBlock source={SOURCES.withStatus}>
         <TableWithStatus />
       </DemoBlock>
 
-      <Heading level={2}>内容溢出提示</Heading>
+      <Heading level={2}>显示溢出工具提示的表格</Heading>
       <p>
-        给列设置 <code>showOverflowTooltip</code>，内容溢出时 hover 显示完整文本。
+        当内容太长时，它会分成多行。您可以使用 <code>show-overflow-tooltip</code>{" "}
+        将其保留在一行中。
+      </p>
+      <p>
+        属性 show-overflow-tooltip 接受一个布尔值。为 <code>true</code>{" "}
+        时多余的内容会在 hover 时以 tooltip 的形式显示出来。
       </p>
       <DemoBlock source={SOURCES.overflowTooltip}>
         <TableOverflowTooltip />
       </DemoBlock>
 
       <Heading level={2}>固定表头</Heading>
+      <p>纵向内容过多时，可选择固定表头。</p>
       <p>
-        设置 <code>height</code> 属性即可实现固定表头。
+        只要在 <code>el-table</code> 元素中定义了 <code>height</code>{" "}
+        属性，即可实现固定表头的表格，而不需要额外的代码。
       </p>
       <DemoBlock source={SOURCES.fixedHeader}>
         <TableFixedHeader />
       </DemoBlock>
 
       <Heading level={2}>固定列</Heading>
+      <p>横向内容过多时，可选择固定列。</p>
       <p>
-        通过 <code>fixed</code> 属性固定列，横向滚动时该列保持可见。
+        固定列需要使用 <code>fixed</code> 属性，它接受 <code>Boolean</code>
+        值。如果为 <code>true</code>, 列将被左侧固定.
+        它还接受传入字符串，left 或 right，表示左边固定还是右边固定。
       </p>
       <DemoBlock source={SOURCES.fixedColumn}>
         <TableFixedColumn />
       </DemoBlock>
 
       <Heading level={2}>固定列和表头</Heading>
-      <p>同时设置 <code>height</code> 与 <code>fixed</code>，横向、纵向滚动时表头与固定列保持可见。</p>
+      <p>当您有大量数据块放入表中，您可以同时固定表头和列。</p>
+      <p>固定列和表头可以同时使用，只需要将上述两个属性分别设置好即可。</p>
       <DemoBlock source={SOURCES.fixedColumnAndHeader}>
         <TableFixedColumnAndHeader />
       </DemoBlock>
 
-      <Heading level={2}>流体高度表头</Heading>
+      <Heading level={2}>流体高度</Heading>
+      <p>当数据量动态变化时，可以为 Table 设置一个最大高度。</p>
       <p>
-        设置 <code>maxHeight</code> 后，表头随内容高度自适应，数据超出时表体滚动。
+        通过设置 <code>max-height</code> 属性为 <code>el-table</code>{" "}
+        指定最大高度。此时若表格所需的高度大于最大高度，则会显示一个滚动条。
       </p>
       <DemoBlock source={SOURCES.fixedHeaderFluid}>
         <TableFixedHeaderFluid />
       </DemoBlock>
 
-      <Heading level={2}>分组表头</Heading>
-      <p>通过嵌套 ElTableColumn 实现多层表头。</p>
+      <Heading level={2}>多级表头</Heading>
+      <p>数据结构比较复杂的时候，可使用多级表头来展现数据的层次关系。</p>
+      <p>
+        只需要将el-table-column 放置于el-table-column 中，你可以实现组头。
+      </p>
       <DemoBlock source={SOURCES.groupHeader}>
         <TableGroupHeader />
       </DemoBlock>
 
-      <Heading level={2}>固定列与分组表头</Heading>
-      <p>分组表头同样支持 <code>fixed=&quot;right&quot;</code>。</p>
+      <Heading level={2} id="固定表头-1">
+        固定表头
+      </Heading>
+      <p>支持固定群组头</p>
+      <p>
+        组头的属性 <code>fixed</code> 由最外层 <code>el-table-column</code>决定
+      </p>
       <DemoBlock source={SOURCES.fixedGroupHeader}>
         <TableFixedGroupHeader />
       </DemoBlock>
 
       <Heading level={2}>单选</Heading>
+      <p>选择单行数据时使用色块表示。</p>
       <p>
-        设置 <code>highlightCurrentRow</code> 可以高亮当前行。
+        Table 组件提供了单选的支持，只需要配置{" "}
+        <code>highlight-current-row</code> 属性即可实现单选。之后由{" "}
+        <code>current-change</code> 事件来管理选中时触发的事件，它会传入{" "}
+        <code>currentRow</code>，<code>oldCurrentRow</code>。如果需要显示索引，可以增加一列{" "}
+        <code>el-table-column</code>，设置 <code>type</code> 属性为{" "}
+        <code>index</code> 即可显示从 1 开始的索引号。
       </p>
       <DemoBlock source={SOURCES.singleSelect}>
         <TableSingleSelect />
       </DemoBlock>
 
       <Heading level={2}>多选</Heading>
+      <p>你也可以选择多行。</p>
       <p>
-        通过 <code>type=&quot;selection&quot;</code> 的列开启多选。
+        在<span className="docs-version-tag">2.8.3</span> 之后，{" "}
+        <code>toggleRowSelection</code> 支持第三个参数{" "}
+        <code>ignoreSelectable</code> 以确定是否忽略可选属性。
+      </p>
+      <p>
+        实现多选非常简单: 手动添加一个 <code>el-table-column</code>，设{" "}
+        <code>type</code> 属性为 <code>selection</code> 即可；
       </p>
       <DemoBlock source={SOURCES.multiSelect}>
         <TableMultiSelect />
       </DemoBlock>
 
       <Heading level={2}>排序</Heading>
+      <p>对表格进行排序，可快速查找或对比数据。</p>
       <p>
-        设置 <code>sortable</code> 即可对该列排序，配合 <code>defaultSort</code>
-        设置默认排序。
+        在列中设置 <code>sortable</code> 属性即可实现以该列为基准的排序，接受一个{" "}
+        <code>Boolean</code>，默认为 <code>false</code>。可以通过 Table 的{" "}
+        <code>default-sort</code> 属性设置默认的排序列和排序顺序。可以使用{" "}
+        <code>sort-method</code> 或者 <code>sort-by</code>{" "}
+        使用自定义的排序规则。如果需要后端排序，需将 <code>sortable</code> 设置为{" "}
+        <code>custom</code>，同时在 Table 上监听 <code>sort-change</code>{" "}
+        事件，在事件回调中可以获取当前排序的字段名和排序顺序，从而向接口请求排序后的表格数据。在本例中，我们还使用了{" "}
+        <code>formatter</code> 属性，它用于格式化指定列的值，接受一个{" "}
+        <code>Function</code>，会传入两个参数：<code>row</code> 和{" "}
+        <code>column</code>，可以根据自己的需求进行处理。
       </p>
       <DemoBlock source={SOURCES.sort}>
         <TableSort />
       </DemoBlock>
 
       <Heading level={2}>筛选</Heading>
+      <p>对表格进行筛选，可快速查找到自己想看的数据。</p>
       <p>
-        通过 <code>filters</code> 与 <code>filterMethod</code> 开启列筛选，
-        <code>clearFilter</code> 可按列或全部清空。
+        在列中设置 <code>filters</code> 和 <code>filter-method</code>{" "}
+        属性即可开启该列的筛选， filters 是一个数组，<code>filter-method</code>{" "}
+        是一个方法，它用于决定某些数据是否显示，会传入三个参数：<code>value</code>,{" "}
+        <code>row</code> 和 <code>column</code>。
       </p>
       <DemoBlock source={SOURCES.filter}>
         <TableFilter />
       </DemoBlock>
 
       <Heading level={2}>自定义列模板</Heading>
-      <p>通过 <code>children</code> 函数自定义单元格内容。</p>
+      <p>自定义列的显示内容，可组合其他组件使用。</p>
+      <p>
+        通过 <code>slot</code> 可以获取到 row, column, $index 和 store（table
+        内部的状态管理）的数据，用法参考 demo。
+      </p>
       <DemoBlock source={SOURCES.customColumn}>
         <TableCustomColumn />
       </DemoBlock>
 
       <Heading level={2}>自定义表头</Heading>
-      <p>通过 <code>renderHeader</code> 在表头中放置输入框等交互元素。</p>
+      <p>表头支持自定义。</p>
+      <p>
+        通过设置{" "}
+        <a
+          href="https://v3.vuejs.org/guide/component-slots.html"
+          target="_blank"
+          rel="noreferrer"
+        >
+          slot
+        </a>{" "}
+        来自定义表头。
+      </p>
       <DemoBlock source={SOURCES.customHeader}>
         <TableCustomHeader />
       </DemoBlock>
 
       <Heading level={2}>展开行</Heading>
       <p>
-        通过 <code>type=&quot;expand&quot;</code> 的列与 <code>renderExpanded</code> 实现展开行。
+        当行内容过多并且不想显示横向滚动条时，可以使用 Table 展开行功能。
+      </p>
+      <p>
+        在 <span className="docs-version-tag">2.9.7</span> 版本后，新增了{" "}
+        <code>preserve-expanded-content</code>{" "}
+        属性，用于控制折叠时是否在 DOM 中保留已展开的行内容。
+      </p>
+      <p>
+        通过设置 type=&quot;expand&quot; 和 slot 可以开启展开行功能， el-table-column
+        的模板会被渲染成为展开行的内容，展开行可访问的属性与使用自定义列模板时的 slot 相同。
       </p>
       <DemoBlock source={SOURCES.expandable}>
         <TableExpandable />
@@ -541,54 +629,86 @@ export default function TablePage() {
 
       <Heading level={2}>树形数据与懒加载</Heading>
       <p>
-        设置 <code>rowKey</code> 与 <code>treeProps</code> 展示树形数据；配合
-        <code>lazy</code>、<code>load</code> 可异步加载子节点。
+        支持树类型的数据的显示。当 row 中包含 <code>children</code>{" "}
+        字段时，被视为树形数据。渲染嵌套数据需要 prop 的 <code>row-key</code>。此外，子行数据可以异步加载。设置 Table 的<code>lazy</code>属性为 true
+        与加载函数 <code>load</code> 。通过指定 row 中的<code>hasChildren</code>字段来指定哪些行是包含子节点。 <code>children</code> 与<code>hasChildren</code>都可以通过 <code>{"tree-props "}</code>配置。
       </p>
       <DemoBlock source={SOURCES.treeAndLazy}>
         <TableTreeAndLazy />
       </DemoBlock>
 
-      <Heading level={2}>严格树形选择</Heading>
+      <Heading level={2} id="可选择的树形数据">
+        可选择的树形数据<span className="docs-version-tag">2.8.0</span>
+      </Heading>
       <p>
-        <code>treeProps.checkStrictly</code> 为 true 时父子节点选择互不影响。
+        当 <code>treeProps.checkStrictly</code> 为 true，父节点和子节点的选择状态不再关联，
+        也就是说，当选择父节点时，它的子节点将不被选择； 当{" "}
+        <code>treeProps.checkStrictly</code> 是false，父节点和子节点的选择状态将与子节点的选择状态相关联，
+        也就是说，当选择父节点时，将选择其所有子节点。
       </p>
       <DemoBlock source={SOURCES.checkStrictly}>
         <TableCheckStrictly />
       </DemoBlock>
 
-      <Heading level={2}>合计行</Heading>
+      <Heading level={2}>表尾合计行</Heading>
+      <p>若表格展示的是各类数字，可以在表尾显示各列的合计。</p>
       <p>
-        设置 <code>showSummary</code> 与 <code>summaryMethod</code> 显示合计行。
+        将 <code>show-summary</code> 设置为<code>true</code>就会在表格尾部展示合计行。默认情况下，对于合计行，第一列不进行数据求合操作，而是显示「合计」二字（可通过<code>sum-text</code>配置），其余列会将本列所有数值进行求合操作，并显示出来。当然，你也可以定义自己的合计逻辑。使用{" "}
+        <code>summary-method</code>{" "}
+        并传入一个方法，返回一个数组，这个数组中的各项就会显示在合计行的各列中，可以是一个
+        VNode 或 String，具体可以参考本例中的第二个表格。
       </p>
       <DemoBlock source={SOURCES.summary}>
         <TableSummary />
       </DemoBlock>
 
       <Heading level={2}>合并行或列</Heading>
+      <p>多行或多列共用一个数据时，可以合并行或列。</p>
       <p>
-        通过 <code>spanMethod</code> 返回数组或对象，合并指定单元格。
+        通过给 table 传入<code>span-method</code>方法可以实现合并行或列，方法的参数是一个对象，里面包含当前行
+        <code>{" row"}</code>、当前列 <code>{" column"}</code>、当前行号
+        <code>{" rowIndex"}</code>、当前列号 <code>{" columnIndex"}</code>{" "}
+        四个属性。该函数可以返回一个包含两个元素的数组，第一个元素代表{" "}
+        <code>{" rowspan"}</code>，第二个元素代表 <code>{" colspan"}</code>。也可以返回一个键名为<code> rowspan</code> 和<code> colspan</code> 的对象。
       </p>
       <DemoBlock source={SOURCES.span}>
         <TableSpan />
       </DemoBlock>
 
       <Heading level={2}>自定义索引</Heading>
-      <p>给 index 列传入函数即可自定义索引值。</p>
+      <p>
+        自定义 <code>type=index</code> 列的行号。
+      </p>
+      <p>
+        通过给<code>{" type=index"}</code> 的列传入 index
+        属性，可以自定义索引。该属性传入数字时，将作为索引的起始值。也可以传入一个方法，它提供当前行的行号（从{" "}
+        <code>0</code> 开始）作为参数，返回值将作为索引展示。
+      </p>
       <DemoBlock source={SOURCES.customIndex}>
         <TableCustomIndex />
       </DemoBlock>
 
       <Heading level={2}>表格布局</Heading>
       <p>
-        <code>tableLayout</code> 支持 <code>fixed</code> 与 <code>auto</code> 两种布局。
+        通过属性{" "}
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout"
+          target="_blank"
+          rel="noreferrer"
+        >
+          table-layout
+        </a>{" "}
+        可以指定表格中单元格、行和列的布局方式
       </p>
       <DemoBlock source={SOURCES.tableLayout}>
         <TableLayout />
       </DemoBlock>
 
-      <Heading level={2}>Tooltip 格式化</Heading>
+      <Heading level={2} id="tooltip-自定义">
+        Tooltip 自定义 <span className="docs-version-tag">2.9.4</span>
+      </Heading>
       <p>
-        表格级与列级 <code>tooltipFormatter</code> 可自定义溢出提示内容，支持返回 React 节点。
+        您可以使用 <code>tooltip-formatter</code> 自定义 Tooltip 提示内容。
       </p>
       <DemoBlock source={SOURCES.tooltipFormatter}>
         <TableTooltipFormatter />

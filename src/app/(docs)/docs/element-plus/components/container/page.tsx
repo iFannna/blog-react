@@ -169,57 +169,63 @@ export default function ContainerPage() {
   return (
     <>
       <h1>Container 布局容器</h1>
-      <p>用于布局的容器组件，方便快速搭建页面的基本结构。</p>
-
-      <Heading level={2}>上中</Heading>
+      <p>用于布局的容器组件，方便快速搭建页面的基本结构：</p>
       <p>
-        <code>ElHeader</code> 与 <code>ElMain</code> 组合，容器自动纵向排列。
+        <code>&lt;el-container&gt;</code>：外层容器。当子元素中包含{" "}
+        <code>&lt;el-header&gt;</code> 或 <code>&lt;el-footer&gt;</code>{" "}
+        时，全部子元素会垂直上下排列，否则会水平左右排列。
       </p>
+      <p>
+        <code>&lt;el-header&gt;</code>：顶栏容器。
+      </p>
+      <p>
+        <code>&lt;el-aside&gt;</code>：侧边栏容器。
+      </p>
+      <p>
+        <code>&lt;el-main&gt;</code>：主要区域容器。
+      </p>
+      <p>
+        <code>&lt;el-footer&gt;</code>：底栏容器。
+      </p>
+
+      <DocsContent
+        source={`:::tip
+
+以上组件采用了 flex 布局，使用前请确定目标浏览器是否兼容。此外， \`<el-container>\`的直接子元素必须是后四个组件中的一个或多个。后四个组件的父元素必须是一个 \`<el-container>\`
+
+:::`}
+      />
+
+      <Heading level={2}>常见页面布局</Heading>
       <DemoBlock source={SOURCES.headerMain}>
         <ContainerHeaderMain />
       </DemoBlock>
 
-      <Heading level={2}>上中下</Heading>
-      <p>
-        再加入 <code>ElFooter</code>。
-      </p>
       <DemoBlock source={SOURCES.headerMainFooter}>
         <ContainerBasic />
       </DemoBlock>
 
-      <Heading level={2}>左右</Heading>
-      <p>
-        容器直接包含 <code>ElAside</code> 时自动横向排列，可同时放置两侧边栏。
-      </p>
       <DemoBlock source={SOURCES.asideMain}>
         <ContainerAsideMain />
       </DemoBlock>
 
-      <Heading level={2}>左侧边栏 + 上中</Heading>
-      <p>外层横向，内层再嵌套上下结构。</p>
       <DemoBlock source={SOURCES.asideHeaderMain}>
         <ContainerAside />
       </DemoBlock>
 
-      <Heading level={2}>左侧边栏 + 上中下</Heading>
       <DemoBlock source={SOURCES.asideHeaderMainFooter}>
         <ContainerAsideWithFooter />
       </DemoBlock>
 
-      <Heading level={2}>上 + 左侧边栏 + 中</Heading>
       <DemoBlock source={SOURCES.headerAsideMain}>
         <ContainerHeaderAside />
       </DemoBlock>
 
-      <Heading level={2}>上 + 左侧边栏 + 中下</Heading>
       <DemoBlock source={SOURCES.headerAsideMainFooter}>
         <ContainerNested />
       </DemoBlock>
 
-      <Heading level={2}>完整布局</Heading>
-      <p>
-        侧边菜单、顶栏与内容区组合的完整应用布局，内容区可滚动。
-      </p>
+      <Heading level={2}>例子</Heading>
       <DemoBlock source={SOURCES.example}>
         <ContainerExample />
       </DemoBlock>

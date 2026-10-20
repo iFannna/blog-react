@@ -7,11 +7,11 @@ order: 70
 
 # Page Header 页头
 
-如果页面的路径比较简单，推荐使用页头组件而不是面包屑。
+如果页面的路径比较简单，推荐使用页头组件而非面包屑组件。
 
 ## 完整示例
 
-:::demo 页头包含面包屑、图标、标题、内容、右侧操作区与下方主内容。
+:::demo
 
 page-header/complete
 
@@ -19,7 +19,9 @@ page-header/complete
 
 ## 基础用法
 
-:::demo 标准页头，适用于简单场景。通过 `onBack` 监听返回区点击。
+简单场景下的标准页头。
+
+:::demo
 
 page-header/basic
 
@@ -27,7 +29,9 @@ page-header/basic
 
 ## 自定义图标
 
-:::demo 默认图标可能不满足需求，可通过 `icon` 传入自定义图标。
+默认图标可能无法满足您的需求，您可以通过设置`icon`属性来自定义图标，示例如下。
+
+:::demo
 
 page-header/custom-icon
 
@@ -35,31 +39,39 @@ page-header/custom-icon
 
 ## 无图标
 
-:::demo 有时页面元素很多，不想显示图标时，将 `icon` 设为 `""` 即可。
+有时，页面全是元素，您可能不想展示页面上方的图标，您可以设置`icon`属性值为`""`来去除它。
+
+:::demo
 
 page-header/no-icon
 
 :::
 
-## 面包屑
+## 面包屑导航
 
-:::demo 通过 `breadcrumb` 为页头添加面包屑，向用户提供路由信息。
+使用页头组件，您可以通过添加插槽 `breadcrumb` 来设置面包屑路由导航。
+
+:::demo
 
 page-header/breadcrumb
 
 :::
 
-## 附加操作区
+## 额外操作部分
 
-:::demo 页头可以按需扩展，通过 `extra` 添加额外的操作区，实现更丰富的交互。
+头部可能会变得很复杂，您可以在头部添加更多的区块，以允许丰富的交互。
+
+:::demo
 
 page-header/additional-sections
 
 :::
 
-## 主体内容
+## 主要内容
 
-:::demo 有时希望页头下方展示相应内容，可使用 `children`（对应官方 default 插槽）。
+有时我们想让页头显示一些协同响应内容，我们可以使用 `default` 插槽。
+
+:::demo
 
 page-header/main-content
 

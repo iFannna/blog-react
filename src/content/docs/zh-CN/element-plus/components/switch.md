@@ -11,65 +11,9 @@ order: 200
 
 ## 基础用法
 
-:::demo 绑定 `checked` 与 `onCheckedChange`，默认值为布尔类型。
+:::demo 绑定 `v-model` 到一个 `Boolean` 类型的变量。可以使用 `--el-switch-on-color` 属性与 `--el-switch-off-color` 属性来设置开关的背景色。
 
 switch/basic
-
-:::
-
-## 自定义动作图标
-
-:::demo 使用 `activeActionIcon` 和 `inactiveActionIcon` 设置圆点上的动作图标。
-
-switch/custom-action-icon
-
-:::
-
-## 自定义动作插槽
-
-:::demo 官方通过 `active-action` / `inactive-action` 插槽自定义动作区内容；React 侧对应 `activeActionContent` 与 `inactiveActionContent`。
-
-switch/custom-action-slot
-
-:::
-
-## 显示图标
-
-:::demo 使用 `activeIcon` 和 `inactiveIcon` 属性来设置开关的图标。
-
-switch/custom-icons
-
-:::
-
-## 禁用状态
-
-:::demo 设置 `disabled` 属性，接受一个 boolean，设置为 true 即可禁用。
-
-switch/disabled
-
-:::
-
-## 扩展的 value 类型
-
-:::demo 通过 `activeValue` 和 `inactiveValue` 属性， 可以自定义开关的值。传入后改用 `value` 与 `onChange`。
-
-switch/extended-value-types
-
-:::
-
-## 加载中
-
-:::demo 设置 `loading` 属性，表示正在加载中。加载状态下开关不可操作。
-
-switch/loading
-
-:::
-
-## 切换前的钩子
-
-:::demo 设置 `beforeChange` 属性，在切换前进行判断， 返回 false 或 reject 的 Promise 都会阻止切换。
-
-switch/prevent-switching
 
 :::
 
@@ -83,9 +27,73 @@ switch/sizes
 
 ## 文字描述
 
-:::demo 使用 `activeText` 和 `inactiveText` 属性来设置开关的文字描述。 使用 `inlinePrompt` 属性可以将文字或图标显示在圆点内部。
+使用`active-text`属性与`inactive-text`属性来设置开关的文字描述。使用 `inline-prompt` 属性来控制文本是否显示在点内。
+
+:::demo 使用`active-text`属性与`inactive-text`属性来设置开关的文字描述。
 
 switch/text-description
+
+:::
+
+## 显示自定义图标
+
+:::tip
+
+使用 `inactive-icon` 和 `active-icon` 属性来添加图标。您可以传递组件名称的字符串（提前注册）或组件本身是一个 SVG Vue 组件。 Element Plus 提供了一套图标，你可以在 [icon](./icon) 找到它们。
+
+:::
+
+:::demo 使用 `inactive-icon` 和 `active-icon` 属性来添加图标。使用 `inline-prompt` 属性来控制图标显示在点内。
+
+switch/custom-icons
+
+:::
+
+## 扩展的 value 类型
+
+:::demo 你可以设置 `active-value` 和 `inactive-value` 属性，它们接受 `Boolean`、`String` 或 `Number` 类型的值。
+
+switch/extended-value-types
+
+:::
+
+## 禁用状态
+
+:::demo 设置`disabled`属性，接受一个`Boolean`，设置`true`即可禁用。
+
+switch/disabled
+
+:::
+
+## 加载状态
+
+:::demo 设置`loading`属性，接受一个`Boolean`，设置`true`即加载中状态。
+
+switch/loading
+
+:::
+
+## 阻止切换
+
+:::demo 设置`beforeChange`属性，若返回 false 或者返回 Promise 且被 reject，则停止切换。
+
+switch/prevent-switching
+
+:::
+
+## 自定义动作图标 ^(2.3.9)
+
+:::demo 使用 `inactive-action-icon` 和 `active-action-icon` 属性来添加图标。
+
+switch/custom-action-icon
+
+:::
+
+## 自定义操作图标 ^(2.4.4)
+
+:::demo 使用 `active-action` 和 `inactive-action` 属性来添加图标。
+
+switch/custom-action-slot
 
 :::
 

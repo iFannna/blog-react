@@ -7,19 +7,23 @@ order: 210
 
 # TimePicker 时间选择器
 
-用于选择或输入时间。
+用于选择或输入日期
 
-## 任意时间
+## 任意时间点
 
-:::demo 默认可以用鼠标滚轮选择时间，设置 `arrowControl` 后改用上下箭头按钮。
+可以选择任意时间
+
+:::demo 提供了两种交互方式：默认情况下通过鼠标滚轮进行选择，打开`arrow-control`属性则通过界面上的箭头进行选择。
 
 time-picker/basic
 
 :::
 
-## 限制时间范围
+## 限制时间选择范围
 
-:::demo 通过 `disabledHours`、`disabledMinutes`、 `disabledSeconds` 限制可选时间。
+您也可以限制时间选择范围。
+
+:::demo 通过 `disabledHours`，`disabledMinutes` 和 `disabledSeconds` 限制可选时间范围。,
 
 time-picker/basic-range
 
@@ -27,7 +31,9 @@ time-picker/basic-range
 
 ## 任意时间范围
 
-:::demo 添加 `isRange` 即可选择时间范围，范围模式同样支持  `arrowControl`。
+可选择任意的时间范围
+
+:::demo 添加`is-range`属性即可选择时间范围。同样支持 `arrow-control` 属性。
 
 time-picker/range
 

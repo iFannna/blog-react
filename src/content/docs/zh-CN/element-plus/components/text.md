@@ -5,13 +5,15 @@ group: 基础组件
 order: 80
 ---
 
-# Text 文本
+# Text
 
-文本的常见操作，包括类型、尺寸、混排与溢出省略。
+文本的常见操作
 
 ## 基础用法
 
-:::demo 通过 type 设置文本类型。
+由 `type` 属性来选择 Text 的类型。
+
+:::demo
 
 text/basic
 
@@ -19,33 +21,41 @@ text/basic
 
 ## 尺寸
 
-:::demo 通过 size 设置文本尺寸。
+使用 `size` 属性配置尺寸，可选的尺寸大小有: `large`, `default` 或 `small`
+
+:::demo
 
 text/sizes
 
 :::
 
-## 溢出省略
+## 省略
 
-:::demo `truncated` 用于单行省略，`lineClamp` 用于多行省略； 宽度可由自身或父元素约束。
+通过 `truncated` 属性，在文本超过视图或最大宽度设置时展示省略符。通过 `line-clamp` 属性控制多行的样式 Starting from version ^(2.14.6), `isTruncated` is exposed to indicate whether the text is truncated. You can use it to show a tooltip only when truncation occurs.
+
+:::demo
 
 text/truncated
 
 :::
 
-## 混合使用
+## 覆盖
 
-:::demo 文本可与图标、评分、按钮等组件混排。
+使用属性 `tag` 覆盖元素
 
-text/mixed
+:::demo
+
+text/override
 
 :::
 
-## 覆盖标签
+## 混合使用
 
-:::demo 通过 `tag` 渲染为 p / b / i / sub / sup / ins / del / mark 等语义标签。
+混合使用 Text 组件
 
-text/override
+:::demo
+
+text/mixed
 
 :::
 

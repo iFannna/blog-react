@@ -417,161 +417,216 @@ interface SelectV2TagRenderParams {
 export default function SelectV2Page() {
   return (
     <>
-      <h1>Select V2 虚拟化选择器</h1>
+      <h1>Virtualized Select 虚拟化选择器</h1>
+
+      <DocsContent
+        source={`:::tip
+
+这个组件目前在测试当中，如果在使用中发现任何漏洞和问题，请在 [GitHub](https://github.com/element-plus/element-plus/issues) 中提交 issue 以便我们进行处理。
+
+:::`}
+      />
+
+      <Heading level={2}>背景</Heading>
       <p>
-        <code>Select V2</code> 使用虚拟列表渲染选项，适用于十万级数据量的下拉选择。
-        组件对外的 props、事件与插槽与官方保持一致。
+        在某些使用情况下，单个选择器可能最终加载数万行数据。将这么多的数据渲染至 DOM
+        中可能会给浏览器带来负担，从而造成性能问题。为了更好的用户和开发者体验，我们决定添加此组件。
       </p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>使用虚拟列表渲染一千条选项。</p>
+      <p>适用广泛的基础选择器</p>
       <DemoBlock source={SOURCES.basic}>
         <SelectV2BasicUsage />
       </DemoBlock>
 
       <Heading level={2}>多选</Heading>
-      <p>设置 <code>multiple</code> 开启多选。</p>
+      <p>最基础的多选选择器</p>
       <DemoBlock source={SOURCES.multiple}>
         <SelectV2Multiple />
       </DemoBlock>
 
       <Heading level={2}>尺寸</Heading>
-      <p>通过 <code>size</code> 切换大、默认、小三种尺寸。</p>
+      <p>
+        使用 <code>size</code> 属性改变选择器大小。除了默认大小外，还有另外两个选项：{" "}
+        <code>large</code>, <code>small</code>。
+      </p>
       <DemoBlock source={SOURCES.size}>
         <SelectV2Size />
       </DemoBlock>
 
-      <Heading level={2}>隐藏多余标签</Heading>
+      <Heading level={2}>隐藏多余标签的多选</Heading>
       <p>
-        多选选中项过多时，可通过 <code>collapseTags</code> 折叠标签；
-        配合 <code>collapseTagsTooltip</code> 悬停查看全部，
-        <code>maxCollapseTags</code> 控制折叠前展示的数量。
+        默认情况下选中值会以 Tag 的形式展现，你也可以设置<code>collapse-tags</code>
+        属性将它们合并为一段文字。您可以使用 <code>collapse-tags-tooltip</code>{" "}
+        属性来启用鼠标悬停折叠文字以显示具体所选值的行为。
       </p>
       <DemoBlock source={SOURCES.hideExtraTags}>
         <SelectV2HideExtraTags />
       </DemoBlock>
 
-      <Heading level={2}>可过滤多选</Heading>
-      <p>设置 <code>filterable</code> 后可以输入关键词过滤选项。</p>
+      <Heading level={2}>可过滤的多选</Heading>
+      <p>
+        当选项太多时，你可以使用 <code>filterable</code>{" "}
+        选项来启用过滤功能来找到所需的选项。
+      </p>
       <DemoBlock source={SOURCES.filterable}>
         <SelectV2Filterable />
       </DemoBlock>
 
-      <Heading level={2}>禁用选择器与选项</Heading>
-      <p>设置 <code>disabled</code> 禁用选择器，或在选项上设置 <code>disabled</code>。</p>
+      <Heading level={2}>禁用选择器本身或选项</Heading>
+      <p>您可以选择禁用 Select 或者 Select 中的某个选项。</p>
       <DemoBlock source={SOURCES.disabled}>
         <SelectV2Disabled />
       </DemoBlock>
 
-      <Heading level={2}>选项分组</Heading>
-      <p>
-        在选项对象上提供 <code>options</code> 字段即可渲染分组，
-        组内选项会展平到同一个虚拟列表中。
-      </p>
+      <Heading level={2}>给选项进行分组</Heading>
+      <p>只要数据格式满足特定要求，我们就可以按照自己的意愿为选项进行分组。</p>
       <DemoBlock source={SOURCES.grouping}>
         <SelectV2Grouping />
       </DemoBlock>
 
-      <Heading level={2}>可清空</Heading>
-      <p>设置 <code>clearable</code> 显示清空图标。</p>
+      <Heading level={2}>一键清除</Heading>
+      <p>我们可以同时清除所有选定的选项。此设定也适用于单选。</p>
       <DemoBlock source={SOURCES.clearable}>
         <SelectV2Clearable />
       </DemoBlock>
 
-      <Heading level={2}>自定义选项渲染</Heading>
-      <p>通过 <code>children</code> 渲染函数自定义每个选项的内容。</p>
+      <Heading level={2}>自定义选项的渲染模板</Heading>
+      <p>我们也可以通过自定义模板来渲染自己想要的选项内容。</p>
       <DemoBlock source={SOURCES.customizedOption}>
         <SelectV2CustomizedOption />
       </DemoBlock>
 
-      <Heading level={2}>下拉头部</Heading>
-      <p>通过 <code>header</code> 在下拉顶部放置内容，例如全选复选框。</p>
+      <Heading level={2} id="自定义下拉菜单的头部">
+        自定义下拉菜单的头部 <span className="docs-version-tag">2.5.2</span>
+      </Heading>
+      <p>您可以自定义下拉菜单的头部。</p>
+      <p>使用slot 自定义内容</p>
       <DemoBlock source={SOURCES.header}>
         <SelectV2CustomHeader />
       </DemoBlock>
 
-      <Heading level={2}>下拉底部</Heading>
-      <p>通过 <code>footer</code> 在下拉底部放置内容，例如新增选项。</p>
+      <Heading level={2} id="自定义下拉菜单的底部">
+        自定义下拉菜单的底部 <span className="docs-version-tag">2.5.2</span>
+      </Heading>
+      <p>您可以自定义下拉菜单的底部。</p>
+      <p>使用slot 自定义内容</p>
       <DemoBlock source={SOURCES.footer}>
         <SelectV2CustomFooter />
       </DemoBlock>
 
-      <Heading level={2}>创建选项</Heading>
+      <Heading level={2}>创建临时选项</Heading>
+      <p>创建并选中未包含在初始选项中的条目。</p>
       <p>
-        设置 <code>allowCreate</code> 与 <code>filterable</code>{" "}
-        允许输入并创建新选项；<code>defaultFirstOption</code>{" "}
-        让回车选中第一个匹配项。
+        通过使用 <code>allow-create</code> 属性，用户可以通过输入框创建新项目。为了使{" "}
+        <code>allow-create</code> 正常工作， <code>filterable</code> 的值必须为{" "}
+        <code>true</code>。本例还使用了 <code>default-first-option</code>{" "}
+        属性，在该属性为 <code>true</code>{" "}
+        的情况下，按下回车就可以选中当前选项列表中的第一个选项，无需使用鼠标或键盘方向键进行定位。
       </p>
+      <DocsContent
+        source={`:::tip
+
+最好在使用 \`allow-create\` 属性的同时设置 \`:reserve-keyword="false"\`。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.allowCreate}>
         <SelectV2AllowCreate />
       </DemoBlock>
 
       <Heading level={2}>远程搜索</Heading>
+      <p>输入关键字以从远程服务器中查找数据。</p>
       <p>
-        设置 <code>remote</code> 与 <code>remoteMethod</code>{" "}
-        从服务端获取选项；<code>remoteShowSuffix</code>{" "}
-        控制远程模式下是否显示后缀图标。
+        从服务器搜索数据，输入关键字进行查找。为了启用远程搜索，需要将
+        <code>filterable</code>和<code>remote</code>设置为<code>true</code>
+        ，同时传入一个<code>remote-method</code>。 <code>remote-method</code>为一个
+        <code>Function</code>
+        ，它会在输入值发生变化时调用，参数为当前输入值。
       </p>
       <DemoBlock source={SOURCES.remoteSearch}>
         <SelectV2RemoteSearch />
       </DemoBlock>
 
-      <Heading level={2}>使用 value-key</Heading>
+      <Heading level={2}>使用 value-key 键属性</Heading>
       <p>
-        值为对象时，通过 <code>valueKey</code>{" "}
-        指定唯一标识字段，组件按该字段比较选项。
+        当 <code>options.value</code> 是一个对象时，您应该为它设置一个唯一的标识名称
       </p>
+      <DocsContent
+        source={`:::tip
+
+在 ^(2.4.0) 之前，\`value-key\`既用作所选对象的唯一值，也用作\`options\`中表示值的对应 key。现在 \`value-key\` 仅作为所选对象的唯一值使用，选项中值的 key 是 \`props.value\`.
+
+:::`}
+      />
       <DemoBlock source={SOURCES.valueKey}>
         <SelectV2UseValueKey />
       </DemoBlock>
 
-      <Heading level={2}>自定义选项别名</Heading>
+      <Heading level={2} id="自定义选项">
+        自定义选项 <span className="docs-version-tag">2.4.2</span>
+      </Heading>
       <p>
-        通过 <code>props</code> 指定选项对象中 <code>label</code> 与{" "}
-        <code>value</code> 对应的字段。
+        当您的 <code>options</code> 格式不同于默认格式 您可以通过 <code>props</code>{" "}
+        属性自定义 <code>options</code>
       </p>
       <DemoBlock source={SOURCES.props}>
         <SelectV2PropsDemo />
       </DemoBlock>
 
-      <Heading level={2}>自定义标签</Heading>
+      <Heading level={2} id="自定义标签">
+        自定义标签 <span className="docs-version-tag">2.5.0</span>
+      </Heading>
+      <p>您可以自定义标签。</p>
       <p>
-        通过 <code>tag</code> 渲染函数完全替换标签内容，<code>children</code>{" "}
-        同时自定义选项。
+        将自定义的标签插入 <code>el-select</code> 的 slot 中即可。{" "}
+        <code>collapse-tags</code>, <code>collapse-tags-tooltip</code>,{" "}
+        <code>max-collapse-tags</code> 在此模式下不生效.
       </p>
       <DemoBlock source={SOURCES.customTag}>
         <SelectV2CustomTag />
       </DemoBlock>
 
-      <Heading level={2}>自定义加载内容</Heading>
-      <p>
-        通过 <code>loadingSlot</code> 自定义加载中的内容。
-      </p>
+      <Heading level={2} id="自定义加载">
+        自定义加载 <span className="docs-version-tag">2.5.2</span>
+      </Heading>
+      <p>修改加载区域内容</p>
       <DemoBlock source={SOURCES.customLoading}>
         <SelectV2CustomLoading />
       </DemoBlock>
 
-      <Heading level={2}>空值</Heading>
+      <Heading level={2} id="空值配置">
+        空值配置 <span className="docs-version-tag">2.7.0</span>
+      </Heading>
       <p>
-        <code>emptyValues</code> 与 <code>valueOnClear</code>{" "}
-        控制空值判断和清空后的返回值。
+        若想配置如空字符串为有效值而不是空值，可以配置 <code>empty-values</code> 为{" "}
+        <code>[null, undefined]</code>.
+      </p>
+      <p>
+        如果您想要将清空值更改为 <code>null</code>, 请设置{" "}
+        <code>value-on-clear</code> 为 <code>null</code>
       </p>
       <DemoBlock source={SOURCES.emptyValues}>
         <SelectV2EmptyValues />
       </DemoBlock>
 
-      <Heading level={2}>自定义文案</Heading>
-      <p>
-        通过 <code>label</code> 渲染函数自定义选中值的展示文案。
-      </p>
+      <Heading level={2} id="自定义标签-1">
+        自定义标签 <span className="docs-version-tag">2.7.4</span>
+      </Heading>
+      <p>您可以自定义标签</p>
       <DemoBlock source={SOURCES.customLabel}>
         <SelectV2CustomLabel />
       </DemoBlock>
 
-      <Heading level={2}>自定义宽度</Heading>
+      <Heading level={2} id="自定义宽度">
+        自定义宽度 <span className="docs-version-tag">2.9.2</span>
+      </Heading>
       <p>
-        <code>fitInputWidth</code> 为 <code>false</code>{" "}
-        时下拉按内容宽度展开；传数字时固定为该宽度。
+        下拉框的宽度默认根据<code>label</code>的值计算。如果通过
+        <code>default slot</code>
+        自定义下拉框选项，选项中显示的文本可能与<code>label</code>
+        的值不相等，从而导致计算错误。在这种情况下，可以通过设置
+        <code>fit-input-width</code>属性为一个数字来固定其宽度。
       </p>
       <DemoBlock source={SOURCES.customWidth}>
         <SelectV2CustomWidth />

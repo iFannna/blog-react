@@ -264,12 +264,20 @@ export default function ImagePage() {
   return (
     <>
       <h1>Image 图片</h1>
-      <p>除原生 img 特性外，支持懒加载、自定义占位、加载失败占位等。</p>
+      <p>
+        图片容器，在保留所有原生 img 的特性下，支持懒加载，自定义占位、加载失败等
+      </p>
 
       <Heading level={2}>基础用法</Heading>
       <p>
-        通过 <code>fit</code> 指示图片应如何适应容器，同原生{" "}
-        <code>object-fit</code>。
+        可通过<code>fit</code>确定图片如何适应到容器框，同原生{" "}
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit"
+          target="_blank"
+          rel="noreferrer"
+        >
+          object-fit
+        </a>。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <ImageBasic />
@@ -277,7 +285,7 @@ export default function ImagePage() {
 
       <Heading level={2}>占位内容</Heading>
       <p>
-        图片未加载完成时，通过 <code>renderPlaceholder</code> 自定义占位内容。
+        可通过<code>slot = placeholder</code>可自定义占位内容
       </p>
       <DemoBlock source={SOURCES.placeholder}>
         <ImagePlaceholder />
@@ -285,56 +293,68 @@ export default function ImagePage() {
 
       <Heading level={2}>加载失败</Heading>
       <p>
-        图片加载失败时，通过 <code>renderError</code> 自定义失败内容；
-        预览查看器内加载失败用 <code>renderViewerError</code>。
+        通过 <code>slot = error</code> and{" "}
+        <code>slot = viewer-error</code>自定义图像加载错误时的内容。
       </p>
       <DemoBlock source={SOURCES.loadFailed}>
         <ImageLoadFailed />
       </DemoBlock>
 
       <Heading level={2}>懒加载</Heading>
+      <DocsContent
+        source={`:::tip
+
+浏览器原生支持的 \`loading\`属性在 ^(2.2.3)版本加入。 您可以使用 \`loading="lazy"\` 替换之前的\`lazy= true\`。
+
+如果当前浏览器支持原生图片延迟加载，则先使用原生能力，否则将使用滚动监听实现相同效果。
+
+:::`}
+      />
       <p>
-        设置 <code>lazy</code> 开启懒加载。若浏览器支持原生懒加载则优先使用原生，
-        否则通过 <code>IntersectionObserver</code> 实现。可用{" "}
-        <code>scrollContainer</code> 指定滚动容器，缺省为最近的
-        overflow 为 auto 或 scroll 的父容器。
+        可通过<code>lazy</code>开启懒加载功能，当图片滚动到可视范围内才会加载。可通过{" "}
+        <code>scroll-container</code> 来设置滚动容器，若未定义，则为最近一个
+        overflow 值为 auto 或 scroll 的父元素。
       </p>
       <DemoBlock source={SOURCES.lazyLoad}>
         <ImageLazyLoad />
       </DemoBlock>
 
-      <Heading level={2}>大图预览</Heading>
+      <Heading level={2}>图片预览</Heading>
       <p>
-        设置 <code>previewSrcList</code> 允许大图预览，可用 <code>initialIndex</code>{" "}
-        指定初始预览位置，默认 0。
+        可通过 <code>previewSrcList</code> 开启预览大图的功能。你可以通过{" "}
+        <code>initial-index</code> 初始化第一张预览图片的位置。默认初始位置为 0。
       </p>
       <DemoBlock source={SOURCES.imagePreview}>
         <ImagePreview />
       </DemoBlock>
 
-      <Heading level={2}>手动开启预览</Heading>
-      <p>
-        通过 ref 调用 <code>showPreview</code> 手动开启预览，也可受控地直接渲染{" "}
-        <code>ElImageViewer</code>。
-      </p>
+      <Heading level={2} id="手动打开预览">
+        手动打开预览 <span className="docs-version-tag">2.9.4</span>
+      </Heading>
       <DemoBlock source={SOURCES.manuallyPreview}>
         <ImageManuallyPreview />
       </DemoBlock>
 
-      <Heading level={2}>自定义工具栏</Heading>
+      <Heading level={2} id="自定义工具栏">
+        自定义工具栏<span className="docs-version-tag">2.9.4</span>
+      </Heading>
       <p>
-        通过 <code>renderToolbar</code> 自定义工具栏内容，作用域含{" "}
-        <code>actions</code>、<code>prev</code>、<code>next</code>、<code>reset</code>、
-        <code>activeIndex</code>、<code>setActiveItem</code>。
+        可通过 <code>toolbar</code> 插槽自定义工具栏内容，自版本{" "}
+        <span className="docs-version-tag">2.9.7</span> 起，插槽中添加了{" "}
+        <code>setActiveItem</code> 方法，用于根据索引切换图片。
       </p>
       <DemoBlock source={SOURCES.customToolbar}>
         <ImageCustomToolbar />
       </DemoBlock>
 
-      <Heading level={2}>自定义进度</Heading>
+      <Heading level={2} id="自定义进度条">
+        自定义进度条 <span className="docs-version-tag">2.9.4</span>
+      </Heading>
       <p>
-        通过 <code>renderProgress</code> 自定义进度内容，也可用{" "}
-        <code>showProgress</code> 显示默认进度。
+        可通过 <code>show-progress</code>{" "}
+        控制是否在预览图片时显示进度条。自版本{" "}
+        <span className="docs-version-tag">2.9.8</span>{" "}
+        起，进度条会在使用 <code>progress</code> 插槽时显示。
       </p>
       <DemoBlock source={SOURCES.customProgress}>
         <ImageCustomProgress />

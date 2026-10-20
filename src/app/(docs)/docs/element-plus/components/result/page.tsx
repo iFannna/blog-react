@@ -89,22 +89,17 @@ export default function ResultPage() {
   return (
     <>
       <h1>Result 结果</h1>
-      <p>用于反馈一系列操作任务的处理结果。</p>
+      <p>用于对用户的操作结果或者异常状态做反馈。</p>
 
       <Heading level={2}>基础用法</Heading>
       <p>
-        通过 <code>icon</code> 属性设置图标类型，配合 <code>title</code> 与
-        <code>subTitle</code> 展示结果信息。
+        <code>primary</code> 已被添加到<span className="docs-version-tag">2.9.11</span>。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <ResultBasic />
       </DemoBlock>
 
       <Heading level={2}>自定义内容</Heading>
-      <p>
-        <code>customIcon</code> 可以传入任意节点替换默认图标，
-        <code>extra</code> 属性用于在底部添加操作区。
-      </p>
       <DemoBlock source={SOURCES.customIcon}>
         <ResultCustomIcon />
       </DemoBlock>

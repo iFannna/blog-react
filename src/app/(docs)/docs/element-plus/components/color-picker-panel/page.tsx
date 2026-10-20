@@ -101,46 +101,43 @@ const API_MD = `
 export default function ColorPickerPanelPage() {
   return (
     <>
-      <h1>ColorPickerPanel 颜色选择面板</h1>
+      <h1>
+        ColorPickerPanel 颜色选择器面板{" "}
+        <span className="docs-version-tag docs-version-tag--beta">beta</span>
+      </h1>
       <p>
-        <code>ColorPickerPanel</code> 是颜色选择器的核心组件。
+        <code>ColorPickerPanel</code>是<code>ColorPicker</code>的核心组件。
       </p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>颜色选择面板需要一个字符串类型的绑定值。</p>
+      <p>ColorPickerPanel 需要一个字符串类型的变量才能绑定到 v-model。</p>
       <DemoBlock source={SOURCES.basic}>
         <ColorPickerPanelBasic />
       </DemoBlock>
 
-      <Heading level={2}>透明度</Heading>
+      <Heading level={2}>选择透明度</Heading>
       <p>
-        添加 <code>showAlpha</code> 属性即可启用透明度选择。
+        ColorPickerPanel 支持Alpha 通道选择。要激活 Alpha 选择，只需添加{" "}
+        &quot;<code>show-alpha</code>&quot; 属性。
       </p>
       <DemoBlock source={SOURCES.alpha}>
         <ColorPickerPanelAlpha />
       </DemoBlock>
 
       <Heading level={2}>预定义颜色</Heading>
-      <p>
-        通过 <code>predefine</code> 属性可以配置预定义颜色。
-      </p>
+      <p>颜色选择板支持预定义的颜色选项</p>
       <DemoBlock source={SOURCES.predefinedColor}>
         <ColorPickerPanelPredefinedColor />
       </DemoBlock>
 
-      <Heading level={2}>边框</Heading>
-      <p>
-        默认情况下颜色选择面板带有边框，某些场景下可以设置
-        <code>border</code> 为 <code>false</code> 去掉边框。
-      </p>
+      <Heading level={2}>Border 边框</Heading>
+      <p>默认情况下，边框是默认的，如果你不想要边框请参考示例。</p>
       <DemoBlock source={SOURCES.border}>
         <ColorPickerPanelBorder />
       </DemoBlock>
 
-      <Heading level={2}>禁用状态</Heading>
-      <p>
-        <code>disabled</code> 属性决定颜色选择面板是否完全禁用。
-      </p>
+      <Heading level={2}>禁用</Heading>
+      <p>&quot;禁用&quot;属性决定颜色选择器是否完全禁用。</p>
       <DemoBlock source={SOURCES.disabled}>
         <ColorPickerPanelDisabled />
       </DemoBlock>

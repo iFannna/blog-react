@@ -73,37 +73,65 @@ export default function LinkPage() {
   return (
     <>
       <h1>Link 链接</h1>
-      <p>文字超链接。</p>
+      <p>文字超链接</p>
+
+      <DocsContent
+        source={`:::warning 安全警告 \`href\` prop 将会直接渲染到 \`<a>\` 标签内部。如果你传递类似 \`javascript:alert(1)\` 这样的值或恶意 URL，可能会导致 **XSS** 或**开放重定向漏洞**。
+
+在使用前始终验证并净化 URL。例如：
+
+:::`}
+      />
 
       <Heading level={2}>基础用法</Heading>
-      <p>
-        基础的文字链接用法，通过 <code>type</code> 设置类型。
-      </p>
+      <p>基础的文字链接用法。</p>
       <DemoBlock source={SOURCES.basic}>
         <LinkBasic />
       </DemoBlock>
 
       <Heading level={2}>禁用状态</Heading>
-      <p>
-        设置 <code>disabled</code> 属性即可禁用链接。
-      </p>
+      <p>文字链接不可用状态。</p>
       <DemoBlock source={SOURCES.disabled}>
         <LinkDisabled />
       </DemoBlock>
 
       <Heading level={2}>下划线</Heading>
-      <p>
-        通过 <code>underline</code> 属性控制下划线的显示时机。
-      </p>
+      <p>控制下划线是否出现</p>
+      <DocsContent
+        source={`:::warning
+
+属性 \`boolean\` 值 **将在** ^(3.0.0) 版本中被**移除**，请考虑切换至新的 API。
+
+:::
+
+:::tip
+
+从 ^(2.9.9) 开始，你可以使用 \`'always' | 'hover' | 'never'\` 来控制是否显示下划线。文档中的示例将都使用这些值。如果您使用的版本 **低于** ^(2.9.9)，请参考：
+
+:::
+
+\`\`\`vue
+<template>
+  <!-- works before 2.9.9, use 'hover' after, removed in 3.0.0 -->
+  <el-link underline>link</el-link>
+  <!-- works before 2.9.9, use 'never' after, removed in 3.0.0 -->
+  <el-link :underline="false">link</el-link>
+</template>
+\`\`\``}
+      />
       <DemoBlock source={SOURCES.underline}>
         <LinkUnderline />
       </DemoBlock>
 
       <Heading level={2}>图标</Heading>
-      <p>
-        <code>icon</code> 属性在文字左侧显示图标，右侧图标直接写在
-        <code>children</code> 里。
-      </p>
+      <p>带图标的链接</p>
+      <DocsContent
+        source={`:::tip
+
+使用 \`icon\` 属性来为按钮添加图标。您可以传递组件名称的字符串（提前注册）或组件本身是一个 SVG Vue 组件。 Element Plus 提供了一套图标，您可以在 [icon](./icon) 找到它们。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.icon}>
         <LinkIcon />
       </DemoBlock>

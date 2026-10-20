@@ -7,27 +7,33 @@ order: 50
 
 # Dropdown 下拉菜单
 
-向下弹出的菜单列表。
+将动作或菜单折叠到下拉菜单中。
 
 ## 基础用法
 
-:::demo 通过 `menu` 传入菜单，默认鼠标悬停触发；触发元素由 `children` 提供。
+悬停在下拉菜单上以展开更多操作。
+
+:::demo 通过组件 `slot` 来设置下拉触发的元素以及需要通过具名 `slot` 为 `dropdown` 来设置下拉菜单。默认情况下，只需要悬停在触发菜单的元素上即可，无需点击也会显示下拉菜单。
 
 dropdown/basic-usage
 
 :::
 
-## 弹出位置
+## 位置
 
-:::demo 通过 `placement` 设置菜单出现的位置。
+支持 6 个位置。
+
+:::demo 设置 `placement` 属性，使下拉菜单出现在不同位置。
 
 dropdown/placements
 
 :::
 
-## 触发元素
+## 触发对象
 
-:::demo `splitButton` 把按钮分为两半：左半触发 `onButtonClick`，右半展开菜单。
+可使用按钮触发下拉菜单。
+
+:::demo 设置 `split-button` 属性来让触发下拉元素呈现为按钮组，左边是功能按钮，右边是触发下拉菜单的按钮，设置为 `true` 即可。如果你想要在第三和第四个选项之间添加一个分隔符，你只需要为第四个选项添加一个 `divided` 的属性。
 
 dropdown/triggering-element
 
@@ -35,31 +41,39 @@ dropdown/triggering-element
 
 ## 触发方式
 
-:::demo 通过 `trigger` 设置 hover、click 或 contextmenu。
+可以配置点击激活或者悬停激活。
+
+:::demo 将 `trigger` 属性设置为 click 即可，默认为 `hover`。
 
 dropdown/how-to-trigger
 
 :::
 
-## 菜单隐藏行为
+## 菜单隐藏方式
 
-:::demo 默认点击菜单项后关闭；设置 `hideOnClick` 为 `false` 可保持菜单打开。
+可以通过 `hide-on-click` 属性来配置。
+
+:::demo 下拉菜单默认在点击菜单项后会被隐藏，将 hide-on-click 属性设置为 false 可以关闭此功能。
 
 dropdown/menu-hiding-behavior
 
 :::
 
-## Command 事件
+## 指令事件
 
-:::demo 菜单项的 `command` 会传给 `onCommand`， 禁用项不会触发。
+点击菜单项后会触发事件，用户可以通过相应的菜单项 key 进行不同的操作。
+
+:::demo
 
 dropdown/command-event
 
 :::
 
-## Dropdown 方法
+## 下拉方法
 
-:::demo 通过 ref 上的 `handleOpen` / `handleClose` 主动控制菜单。
+您可以手动使用 `手动打开` 或 `手动关闭下拉菜单以打开或关闭`
+
+:::demo
 
 dropdown/dropdown-methods
 
@@ -67,15 +81,19 @@ dropdown/dropdown-methods
 
 ## 尺寸
 
-:::demo 通过 `size` 设置 `large`、`default` 或 `small`。
+Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的尺寸。
+
+:::demo 使用 `size` 属性配置尺寸，可选的尺寸大小有: `large`, `default` 或 `small`
 
 dropdown/sizes
 
 :::
 
-## 虚拟触发
+## 虚拟触发^(2.11.3)
 
-:::demo `virtualTriggering` + `virtualRef` 让菜单出现在任意坐标或元素旁。
+有时候我们想把 dropdown 的触发元素放在别的地方，而不需要写在一起，这时候就可以使用虚拟触发。
+
+:::demo
 
 dropdown/virtual-trigger
 

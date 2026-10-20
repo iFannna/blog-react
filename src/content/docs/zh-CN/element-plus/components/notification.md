@@ -11,7 +11,7 @@ order: 70
 
 ## 基础用法
 
-:::demo Element Plus 注册了 `$notify` 方法并且它接受一个 Object 作为其参数。在最简单的情况下，你可以通过设置 `title` 和 `message` 属性来设置通知的标题和正文内容。默认情况下，通知在 4500 毫秒后自动关闭，但你可以通过设置 `duration` 属性来自定义通知的展示时间。如果你将它设置为 `0`，那么通知将不会自动关闭。需要注意的是 `duration` 接收一个 Number，单位为毫秒。
+:::demo Element Plus 注册了 `$notify` 方法并且它接受一个 Object 作为其参数。在最简单的情况下，你可以通过设置 `title` 和 `message` 属性来设置通知的标题和正文内容。默认情况下，通知在4500毫秒后自动关闭，但你可以通过设置 `duration` 属性来自定义通知的展示时间。如果你将它设置为 `0`，那么通知将不会自动关闭。需要注意的是 `duration` 接收一个 `Number`，单位为毫秒。
 
 notification/basic
 
@@ -21,7 +21,7 @@ notification/basic
 
 We provide five types: primary, success, warning, info and error.
 
-:::demo Element Plus provides five notification types: primary, success, warning, info and error。他们可以设置 `type` 字段来修改，除上述的四个值之外的值会被忽略。同时，我们也为 Notification 的各种 type 注册了单独的方法，可以在不传入 `type` 字段的情况下直接调用。`primary` 已被添加到 2.9.11。
+:::demo Element Plus provides five notification types: `primary`, `success`, `warning`, `info` and `error`. 他们可以设置 `type` 字段来修改，除上述的四个值之外的值会被忽略。同时，我们也为 Notification 的各种 type 注册了单独的方法，可以在不传入 `type` 字段的情况下像 `open3` 和 `open4` 那样直接调用。 `primary` 已被添加到^(2.9.11)。
 
 notification/different-types
 
@@ -29,7 +29,7 @@ notification/different-types
 
 ## 自定义消息弹出的位置
 
-可以让 Notification 从屏幕四角中的任意一角弹出。
+可以让 Notification 从屏幕四角中的任意一角弹出
 
 :::demo 使用 `position` 属性设置 Notification 的弹出位置，支持四个选项：`top-right`、`top-left`、`bottom-right` 和 `bottom-left`，默认为 `top-right`。
 
@@ -51,22 +51,22 @@ notification/offsetting
 
 `message` 支持传入 HTML 字符串来作为正文内容。
 
-:::demo 将 `dangerouslyUseHTMLString` 属性设置为 `true`，`message` 属性就会被当作 HTML 片段处理。
+:::demo 将 `dangerouslyUseHTMLString` 属性设置为 true，`message` 属性就会被当作 HTML 片段处理。
 
 notification/raw-html
 
 :::
 
-:::danger WARNING
-`message` 属性虽然支持传入 HTML 片段，但是在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 XSS 攻击。因此在 `dangerouslyUseHTMLString` 打开的情况下，请确保 `message` 的内容是可信的，永远不要将用户提交的内容赋值给 `message` 属性。
+:::warning
+`message` 属性虽然支持传入 HTML 片段，但是在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 [XSS 攻击](https://en.wikipedia.org/wiki/Cross-site_scripting)。因此在 `dangerouslyUseHTMLString` 打开的情况下，请确保 `message` 的内容是可信的，**永远不要**将用户提交的内容赋值给 `message` 属性。
 
 :::
 
-## 函数形式的 message
+## 函数形式的 message ^(2.9.0)
 
 `message` 可以是 VNode。
 
-在 2.9.0 之后，`message` 支持返回值为 VNode 的函数。
+在^(2.9.0)之后， `message` 支持返回值为 VNode的函数。
 
 :::demo
 
@@ -74,11 +74,11 @@ notification/use-vnode
 
 :::
 
-## 使用进度条
+## 使用进度条 ^(2.14.4)
 
 显示进度条，指示通知自动关闭前的剩余时间。
 
-:::demo 将 `progress` 设为 `true` 即可启用进度条。进度条将显示与 `duration` 匹配的倒计时。向 `progress` 传递一个对象，即可使用 Progress 的选项进行自定义，例如 `color`，该选项会覆盖基于 type 的状态颜色。当 `pauseOnHover` 为 `true`（默认值）时，将鼠标悬停在通知上会同时暂停计时器和进度条。
+:::demo 将 `progress` 设为 `true` 即可启用进度条。进度条将显示与 `duration` 匹配的倒计时。向 `progress` 传递一个对象，即可使用 [Progress](./progress.html#attributes) 的选项进行自定义，例如 `color`，该选项会覆盖基于 `type` 的状态颜色。当 `pauseOnHover` 为 `true`（默认值）时，将鼠标悬停在通知上会同时暂停计时器和进度条。
 
 notification/progress-bar
 
@@ -96,7 +96,7 @@ notification/no-close
 
 ## 全局方法
 
-Element Plus 为 `app.config.globalProperties` 添加了全局方法 `$notify`。因此在 Vue 实例中可以采用本页面中的方式调用 Notification。本站以模块方式导出 `notification`，在任意客户端组件中直接调用即可。
+Element Plus 为 `app.config.globalProperties` 添加了全局方法 `$notify`。因此在 Vue instance 中可以采用本页面中的方式调用 `Notification`。
 
 ## 单独引用
 
@@ -109,16 +109,16 @@ notification({
 });
 ```
 
-你可以在对应的处理函数内调用 `notification(options)` 来呼出通知栏。我们也提前定义了多个 type 的单独调用方法，如 `notification.success(options)`。当你需要关闭页面上所有的通知栏的时候，可以调用 `notification.closeAll()` 来关闭所有的实例。在 2.10.5 版本中，你可以通过调用 `notification.updateOffsets(position)` 手动更新所有通知实例在特定方向上的偏移量。
+你可以在对应的处理函数内调用 `ElNotification(options)` 来呼出通知栏。我们也提前定义了多个 type 的单独调用方法，如 `ElNotification.success(options)`。当你需要关闭页面上所有的通知栏的时候，可以调用 `ElNotification.closeAll()` 来关闭所有的实例。在 ^(2.10.5) 版本中，你可以通过调用 `ElNotification.updateOffsets(position)` 手动更新所有通知实例在特定方向上的偏移量。
 
-## 应用程序上下文继承
+## 应用程序上下文继承 <span className="docs-version-tag">> 2.0.4</span>
 
 现在 Notification 接受一条 `context` 作为消息构造器的第二个参数，允许你将当前应用的上下文注入到 Notification 中，这将允许你继承应用程序的所有属性。
 
 你可以像这样使用它：
 
-:::tip TIP
-如果你全局注册了 Notification 容器，它将自动继承应用的上下文环境。
+:::tip
+如果您全局注册了 ElNotification 组件，它将自动继承应用的上下文环境。
 
 :::
 

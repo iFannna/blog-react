@@ -7,11 +7,11 @@ order: 90
 
 # Image 图片
 
-除原生 img 特性外，支持懒加载、自定义占位、加载失败占位等。
+图片容器，在保留所有原生 img 的特性下，支持懒加载，自定义占位、加载失败等
 
 ## 基础用法
 
-:::demo 通过 `fit` 指示图片应如何适应容器，同原生  `object-fit`。
+:::demo 可通过`fit`确定图片如何适应到容器框，同原生 [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit)。
 
 image/basic-usage
 
@@ -19,7 +19,7 @@ image/basic-usage
 
 ## 占位内容
 
-:::demo 图片未加载完成时，通过 `renderPlaceholder` 自定义占位内容。
+:::demo 可通过`slot = placeholder`可自定义占位内容
 
 image/placeholder
 
@@ -27,7 +27,7 @@ image/placeholder
 
 ## 加载失败
 
-:::demo 图片加载失败时，通过 `renderError` 自定义失败内容； 预览查看器内加载失败用 `renderViewerError`。
+:::demo 通过 `slot = error` and `slot = viewer-error`自定义图像加载错误时的内容。
 
 image/load-failed
 
@@ -35,39 +35,47 @@ image/load-failed
 
 ## 懒加载
 
-:::demo 设置 `lazy` 开启懒加载。若浏览器支持原生懒加载则优先使用原生， 否则通过 `IntersectionObserver` 实现。可用  `scrollContainer` 指定滚动容器，缺省为最近的 overflow 为 auto 或 scroll 的父容器。
+:::tip
+
+浏览器原生支持的 `loading`属性在 ^(2.2.3)版本加入。 您可以使用 `loading="lazy"` 替换之前的`lazy= true`。
+
+如果当前浏览器支持原生图片延迟加载，则先使用原生能力，否则将使用滚动监听实现相同效果。
+
+:::
+
+:::demo 可通过`lazy`开启懒加载功能，当图片滚动到可视范围内才会加载。可通过 `scroll-container` 来设置滚动容器，若未定义，则为最近一个 overflow 值为 auto 或 scroll 的父元素。
 
 image/lazy-load
 
 :::
 
-## 大图预览
+## 图片预览
 
-:::demo 设置 `previewSrcList` 允许大图预览，可用 `initialIndex`  指定初始预览位置，默认 0。
+:::demo 可通过 `previewSrcList` 开启预览大图的功能。你可以通过 `initial-index` 初始化第一张预览图片的位置。默认初始位置为 0。
 
 image/image-preview
 
 :::
 
-## 手动开启预览
+## 手动打开预览 ^(2.9.4)
 
-:::demo 通过 ref 调用 `showPreview` 手动开启预览，也可受控地直接渲染  `ElImageViewer`。
+:::demo
 
 image/manually-preview
 
 :::
 
-## 自定义工具栏
+## 自定义工具栏^(2.9.4)
 
-:::demo 通过 `renderToolbar` 自定义工具栏内容，作用域含  `actions`、`prev`、`next`、`reset`、 `activeIndex`、`setActiveItem`。
+:::demo 可通过 `toolbar` 插槽自定义工具栏内容，自版本 ^(2.9.7) 起，插槽中添加了 `setActiveItem` 方法，用于根据索引切换图片。
 
 image/custom-toolbar
 
 :::
 
-## 自定义进度
+## 自定义进度条 ^(2.9.4)
 
-:::demo 通过 `renderProgress` 自定义进度内容，也可用  `showProgress` 显示默认进度。
+:::demo 可通过 `show-progress` 控制是否在预览图片时显示进度条。自版本 ^(2.9.8) 起，进度条会在使用 `progress` 插槽时显示。
 
 image/custom-progress
 

@@ -247,48 +247,45 @@ export default function MentionPage() {
       <p>用于在输入中提及某人或某事。</p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>
-        最简单的用法。输入 <code>@</code> 触发提及，选项来自 <code>options</code>。
-      </p>
+      <p>最简单的用法。</p>
       <DemoBlock source={SOURCES.basic}>
         <MentionBasic />
       </DemoBlock>
 
-      <Heading level={2}>自定义选项字段</Heading>
+      <Heading level={2} id="Props">
+        Props <span className="docs-version-tag">2.11.3</span>
+      </Heading>
       <p>
-        通过 <code>props</code> 自定义 <code>options</code> 的字段别名。
+        你可以通过 <code>props</code> 属性自定义 <code>options</code> 的别名。
       </p>
       <DemoBlock source={SOURCES.props}>
         <MentionProps />
       </DemoBlock>
 
-      <Heading level={2}>文本域</Heading>
+      <Heading level={2}>Textarea</Heading>
       <p>
-        将输入类型设为 <code>textarea</code>。
+        输入类型可以设置为 <code>textarea</code> 。
       </p>
       <DemoBlock source={SOURCES.textarea}>
         <MentionTextarea />
       </DemoBlock>
 
       <Heading level={2}>自定义标签</Heading>
-      <p>
-        通过 <code>labelSlot</code> 自定义选项内容。
-      </p>
+      <p>使用 &quot;label&quot; 自定义标签。</p>
       <DemoBlock source={SOURCES.label}>
         <MentionLabel />
       </DemoBlock>
 
-      <Heading level={2}>远程加载选项</Heading>
-      <p>
-        异步加载选项。命中前缀时触发 <code>onSearch</code>，配合 <code>loading</code> 显示加载态。
-      </p>
+      <Heading level={2}>加载远程选项</Heading>
+      <p>异步加载选项。</p>
       <DemoBlock source={SOURCES.loading}>
         <MentionLoading />
       </DemoBlock>
 
-      <Heading level={2}>自定义触发字符</Heading>
+      <Heading level={2}>自定义触发字段</Heading>
       <p>
-        通过 <code>prefix</code> 自定义触发字符，默认 <code>@</code>，也支持字符串数组。
+        通过 <code>prefix</code> 属性 自定义触发字段。默认为 <code>@</code>,{" "}
+        <code>Array&lt;string&gt;</code> 。
       </p>
       <DemoBlock source={SOURCES.prefix}>
         <MentionPrefix />
@@ -296,24 +293,28 @@ export default function MentionPage() {
 
       <Heading level={2}>整体删除</Heading>
       <p>
-        设置 <code>whole</code> 为 <code>true</code> 后，按退格会把提及内容作为整体删除；
-        <code>checkIsWhole</code> 可自定义「整词」判定逻辑。
+        将<code>whole</code>属性设置为 <code>true</code>
+        ，当您按下退格键时，此处的 mention 区域将作为一个整体被删除。设置
+        &quot;check-is-whole&quot; 属性来自定义检查逻辑。
       </p>
       <DemoBlock source={SOURCES.whole}>
         <MentionWhole />
       </DemoBlock>
 
-      <Heading level={2}>配合表单</Heading>
+      <Heading level={2}>在表单里使用</Heading>
       <p>
-        与 <code>ElForm</code> 一起使用。
+        与 <code>el-form</code> 一起使用
       </p>
+      <DocsContent
+        source={`:::tip
+
+由于这个组件是基于[\`el-input\`](./input#attributes)派生的，他们的原始属性未被更改，故不在此重复。请跳转查看原组件的相应文档。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.form}>
         <MentionForm />
       </DemoBlock>
-
-      <p>
-        该组件基于 <code>ElInput</code> 开发，输入框原有的属性、事件与插槽均可直接使用，此处不再赘述。
-      </p>
 
       <DocsContent source={API_MD} />
     </>

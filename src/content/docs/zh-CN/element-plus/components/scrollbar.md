@@ -27,7 +27,7 @@ scrollbar/horizontal-scroll
 
 ## 最大高度
 
-:::demo 当元素高度超过最大高度时，会出现纵向滚动条。
+:::demo 当元素高度超过最大高度，才会显示滚动条。
 
 scrollbar/max-height
 
@@ -35,15 +35,15 @@ scrollbar/max-height
 
 ## 手动滚动
 
-:::demo 通过 `ref` 上的 `setScrollTop` 等方法可以手动控制滚动位置。
+:::demo 通过使用 `setScrollTop` 与 `setScrollLeft` 方法，可以手动控制滚动条滚动。
 
 scrollbar/manual-scroll
 
 :::
 
-## 无限滚动
+## 无限滚动^(2.10.0)
 
-:::demo 配合 `distance` 与 `onEndReached` 可以实现无限滚动加载。
+:::demo `end-reached` 是在滚动条到达底部时触发的。它可以用作无限滚动。
 
 scrollbar/infinite-scroll
 

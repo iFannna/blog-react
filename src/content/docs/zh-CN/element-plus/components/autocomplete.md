@@ -5,13 +5,17 @@ group: 表单组件
 order: 10
 ---
 
-# Autocomplete 自动补全
+# 自动补全输入框
 
-根据当前输入提供推荐的提示项。
+根据输入内容提供对应的输入建议。
 
 ## 基础用法
 
-:::demo `fetchSuggestions` 是返回建议的方法，示例中  `querySearch(queryString, cb)` 准备好数据后通过  `cb(data)` 返回给 Autocomplete。
+Autocomplete 组件提供输入建议。
+
+`fetch-suggestions` 属性是返回建议输入的方法。在此示例中， `querySearch(queryString, cb)` 方法通过 `cb(data)` 给 Autocomplete 组件返回建议。
+
+:::demo
 
 autocomplete/autocomplete
 
@@ -19,7 +23,11 @@ autocomplete/autocomplete
 
 ## 自定义模板
 
-:::demo 通过 `renderItem` 自定义建议项的展示，参数为建议对象。
+自定义如何显示输入建议。
+
+使用 `scoped slot` 自定义输入建议。在这个范围中，你可以使用 `item` 键来访问当前输入建议对象。
+
+:::demo
 
 autocomplete/autocomplete-template
 
@@ -27,23 +35,31 @@ autocomplete/autocomplete-template
 
 ## 远程搜索
 
-:::demo 从服务端搜索数据，建议项异步返回。
+从服务端搜索数据。
+
+:::demo
 
 autocomplete/remote-search
 
 :::
 
-## 自定义加载
+## 自定义加载 ^(2.5.0)
 
-:::demo 通过 `loading` 覆盖加载内容。
+修改加载区域内容
+
+:::demo
 
 autocomplete/custom-loading
 
 :::
 
-## 自定义头部与底部
+## 自定义头部与底部 ^(2.10.6)
 
-:::demo 通过 `header` 与 `footer` 自定义下拉的头部和底部内容。
+你可以通过插槽来自定义下拉菜单的头部和底部。
+
+使用插槽自定义内容。
+
+:::demo
 
 autocomplete/custom-header-footer
 

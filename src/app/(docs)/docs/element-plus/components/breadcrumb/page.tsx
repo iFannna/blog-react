@@ -46,11 +46,13 @@ export default function BreadcrumbPage() {
   return (
     <>
       <h1>Breadcrumb 面包屑</h1>
-      <p>显示当前页面的路径，快速返回之前的页面。</p>
+      <p>显示当前页面的路径，快速返回之前的任意页面。</p>
 
       <Heading level={2}>基础用法</Heading>
       <p>
-        通过 <code>separator</code> 设置分隔符，默认 <code>/</code>。
+        在 <code>el-breadcrumb</code> 中使用 <code>el-breadcrumb-item</code>{" "}
+        标签表示从首页开始的每一级。该组件接受一个 <code>String</code>{" "}
+        类型的参数 <code>separator</code>来作为分隔符。默认值为 &apos;/&apos;。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <BreadcrumbBasic />
@@ -58,8 +60,9 @@ export default function BreadcrumbPage() {
 
       <Heading level={2}>图标分隔符</Heading>
       <p>
-        通过 <code>separatorIcon</code> 设置图标分隔符；
-        传入 <code>to</code> 的项会显示为链接样式。
+        通过设置 <code>separator-class</code> 可使用相应的{" "}
+        <code>iconfont</code> 作为分隔符，注意这将使 <code>separator</code>{" "}
+        失效。
       </p>
       <DemoBlock source={SOURCES.icon}>
         <BreadcrumbIcon />

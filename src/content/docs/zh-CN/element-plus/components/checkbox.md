@@ -9,9 +9,25 @@ order: 30
 
 在一组备选项中进行多选。
 
+:::warning
+
+`label` 作为 `value` 来使用已经被 **废弃**, 建议`label` 只用来表示展示的文字，这个被废弃的用法**将会在** ^(3.0.0) 版本被移除，请考虑使用新 API 替换.
+
+:::
+
+:::tip
+
+新的 API `value` 已在 ^(2.6.0) 版本添加，文档中的示例都将使用 `value`。如果您使用的版本 **低于** ^(2.6.0) 并且使用 `checkbox-group`，请参考：
+
+:::
+
 ## 基础用法
 
-:::demo 单独使用可以表示两种状态之间的切换，独立使用时用 `checked` 与 `onCheckedChange`。
+单独使用可以表示两种状态之间的切换，写在标签中的内容为 checkbox 按钮后的介绍。
+
+`checkbox-group`元素能把多个 checkbox 管理为一组，只需要在 Group 中使用 `v-model` 绑定 `Array` 类型的变量即可。只有一个选项时的默认值类型为 `Boolean`，当选中时值为`true`。 `el-checkbox` 标签中的内容将成为复选框按钮之后的描述。
+
+:::demo
 
 checkbox/basic
 
@@ -19,7 +35,11 @@ checkbox/basic
 
 ## 禁用状态
 
-:::demo 设置 `disabled` 属性即可禁用。
+多选框不可用状态。
+
+设置 `disabled` 属性即可。
+
+:::demo
 
 checkbox/disabled
 
@@ -27,31 +47,41 @@ checkbox/disabled
 
 ## 多选框组
 
-:::demo 适用于多个勾选框绑定到同一个数组的情景，通过 `ElCheckboxGroup` 的 `value` 与 `onChange` 管理选中集合；每个 `ElCheckbox` 用 `value` 标识自己。
+适用于多个勾选框绑定到同一个数组的情景，通过是否勾选来表示这一组选项中选中的项。
+
+在 `el-checkbox` 元素中定义 `v-model` 绑定变量，单一的 `checkbox` 中，默认绑定变量的值会是 `Boolean`，选中为 `true`。在 `el-checkbox` 组件中，`value` 是选择框的值。如果该组件下没有被传入内容，那么 `label` 将会作为 checkbox 按钮后的介绍。 `value` 也与数组中的元素值相对应。如果指定的值存在于数组中，就处于选择状态，反之亦然。
+
+:::demo
 
 checkbox/grouping
 
 :::
 
-## 数据化选项
+## Options 属性 ^(2.11.2)
 
-:::demo 通过 `options` 直接渲染选项数组，并用 `optionProps` 指定 `value`、`label`、`disabled` 的字段别名。
+基础用法 `el-checkbox-group` 的快捷示例。您可以通过 `props` 属性自定义 `options` 的别名。
+
+:::demo
 
 checkbox/options
 
 :::
 
-## indeterminate 状态
+## 中间状态
 
-:::demo `indeterminate` 属性用以表示 checkbox 的不确定状态， 一般用于实现全选的效果。
+`indeterminate` 属性用以表示 checkbox 的不确定状态，一般用于实现全选的效果
+
+:::demo
 
 checkbox/intermediate
 
 :::
 
-## 可选数量限制
+## 可选项目数量的限制
 
-:::demo 使用 `min` 和 `max` 属性限制选中的数量， 达到上限后未选中项自动禁用，达到下限后已选中项不可取消。
+使用 `min` 和 `max` 属性能够限制可以被勾选的项目的数量。
+
+:::demo
 
 checkbox/limitation
 
@@ -59,15 +89,21 @@ checkbox/limitation
 
 ## 按钮样式
 
-:::demo 设置 `type="button"` 可渲染为按钮形态， `fill` 与 `textColor` 控制选中态配色。
+按钮样式的多选组合。
+
+只需要把 `el-checkbox` 元素替换为 `el-checkbox-button` 元素即可。此外，Element Plus 还提供了`size`属性。
+
+:::demo
 
 checkbox/button-style
 
 :::
 
-## 带边框
+## 带有边框
 
-:::demo 设置 `border` 属性可以渲染为带有边框的多选框。
+设置`border`属性可以渲染为带有边框的多选框。
+
+:::demo
 
 checkbox/with-border
 

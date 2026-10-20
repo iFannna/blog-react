@@ -158,11 +158,20 @@ export default function PopoverPage() {
   return (
     <>
       <h1>Popover 弹出框</h1>
-      <p>点击或悬停在元素上时弹出的气泡卡片。</p>
 
-      <Heading level={2}>弹出位置</Heading>
+      <Heading level={2}>展示位置</Heading>
+      <p>Popover 弹出框提供 9 种展示位置。</p>
       <p>
-        通过 <code>placement</code> 设置弹出位置，共 12 个方向。
+        使用 <code>content</code> 属性来设置悬停时显示的信息。由{" "}
+        <code>placement</code> 属性决定 Popover
+        弹出框的位置。该属性值格式为：<code>[方向]-[对齐位置]</code>，可供选择的四个方向分别是
+        <code>top</code>、<code>left</code>、<code>right</code>、
+        <code>bottom</code>，可供选择的三种对齐方式分别是<code>start</code>、
+        <code>end</code>、
+        <code>null</code>，默认的对齐方式为null。以{" "}
+        <code>placement=&quot;left-end&quot;</code>{" "}
+        为例，Popover
+        弹出框会显示在悬停元素的左侧，且提示信息的底部与悬停元素的底部对齐。
       </p>
       <DemoBlock source={SOURCES.placement}>
         <PopoverPlacement />
@@ -170,8 +179,15 @@ export default function PopoverPage() {
 
       <Heading level={2}>基础用法</Heading>
       <p>
-        支持 hover / click / focus / contextmenu 与受控显隐，默认
-        <code>trigger</code> 为 click、<code>effect</code> 为 light。
+        Popover 是在 <code>ElTooltip</code>{" "}
+        基础上开发出来的。因此对于重复属性，请参考 Tooltip
+        的文档，在此文档中不做详尽解释。
+      </p>
+      <p>
+        <code>trigger</code> 属性被用来决定 popover
+        的触发方式，支持的触发方式： <code>hover</code>、<code>click</code>、
+        <code>focus</code> 或 <code>contextmenu</code>。如果你想手动控制它，可以设置{" "}
+        <code>:visible</code> 属性。
       </p>
       <DemoBlock source={SOURCES.basicUsage}>
         <PopoverBasicUsage />
@@ -179,32 +195,43 @@ export default function PopoverPage() {
 
       <Heading level={2}>虚拟触发</Heading>
       <p>
-        <code>virtualTriggering</code> 让弹层挂在任意元素旁，而不是必须包住触发元素。
+        像 Tooltip一样，Popover
+        可以由虚拟元素触发，这个功能就很适合使用在触发元素和展示内容元素是分开的场景。通常我们使用{" "}
+        <code>#reference</code> 来放置我们的触发元素， 用{" "}
+        <code>virtual-ref</code> API，您可以任意设置您的触发元素
+        但注意到触发元素应该是接受 <code>mouse</code> 和 <code>keyboard</code>{" "}
+        事件的元素。
       </p>
+      <DocsContent
+        source={`:::warning
+
+\`v-popover\` 将被废弃，请使用 \`virtual-ref\` 作为替代。
+
+:::`}
+      />
       <DemoBlock source={SOURCES.virtualTriggering}>
         <PopoverVirtualTriggering />
       </DemoBlock>
 
-      <Heading level={2}>嵌套信息</Heading>
+      <Heading level={2}>内容可扩展</Heading>
+      <p>可以在 Popover 中嵌套其它组件，以下为嵌套表格的例子。</p>
       <p>
-        <code>content</code> 可以放表格、头像等复杂内容，<code>width</code> 控制宽度。
+        利用插槽取代 <code>content</code> 属性
       </p>
       <DemoBlock source={SOURCES.nestedInformation}>
         <PopoverNestedInformation />
       </DemoBlock>
 
       <Heading level={2}>嵌套操作</Heading>
-      <p>
-        使用受控模式在弹层内放置按钮，实现二次确认之类的操作。
-      </p>
+      <p>当然，你还可以嵌套操作，它比使用dialog更加轻量。</p>
       <DemoBlock source={SOURCES.nestedOperation}>
         <PopoverNestedOperation />
       </DemoBlock>
 
-      <Heading level={2}>指令式用法</Heading>
+      <Heading level={2}>指令</Heading>
       <p>
-        配合 <code>virtualTriggering</code> 与 <code>persistent</code>，
-        可以像官方 <code>v-popover</code> 指令一样把弹层绑定到元素上。
+        您可以使用指令性方式弹出窗口，但这种方法<strong>不再推荐</strong>{" "}
+        ，因为这使得应用程序变得复杂， 您可以参考虚拟触发来实现一样的效果。
       </p>
       <DemoBlock source={SOURCES.directiveUsage}>
         <PopoverDirectiveUsage />

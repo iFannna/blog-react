@@ -7,75 +7,87 @@ order: 90
 
 # Tabs 标签页
 
-分隔内容上有关联的部分。
+分隔内容上有关联但属于不同类别的数据集合。
 
 ## 基础用法
 
-:::demo 基础的、简洁的标签页，点击标签切换内容。
+基础的、简洁的标签页。
+
+:::demo Tabs 组件提供了选项卡功能，默认选中第一个标签页，你也可以通过 `value` 属性来指定当前选中的标签页。
 
 tabs/basic
 
 :::
 
-## 卡片风格
+## 卡片风格的标签
 
-:::demo 设置 `type="card"` 显示卡片风格的标签页。
+你可以设置具有卡片风格的标签。
+
+:::demo 只需要设置 `type` 属性为 `card` 就可以使选项卡改变为标签风格。
 
 tabs/card-style
 
 :::
 
-## 带边框卡片
+## 带有边框的卡片风格
 
-:::demo 设置 `type="border-card"` 显示带边框的卡片标签页。
+你还可以设置标签页为带有边框的卡片
+
+:::demo 将 `type` 设置为 `border-card`。
 
 tabs/border-card
 
 :::
 
-## 标签位置
+## 标签位置的设置
 
-:::demo 通过 `tabPosition` 设置标签位置，支持 top / right / bottom / left。
+可以通过 `tab-position` 设置标签的位置
+
+:::demo 标签一共有四个方向的设置 `tabPosition="left|right|top|bottom"`
 
 tabs/tab-position
 
 :::
 
-## 自定义标签
+## 自定义标签页的内容
 
-:::demo 通过 `label` 传入自定义节点，可以在标签中加入图标等内容。
+可以通过具名插槽来实现自定义标签页的内容
+
+:::demo
 
 tabs/custom-tab
 
 :::
 
-## 动态增减标签
+## 动态增减标签页
 
-:::demo `editable` 同时启用新增与关闭；`onEdit` 统一接收增删事件。
+增减标签页按钮只能在选项卡样式的标签页下使用
+
+:::demo
 
 tabs/dynamic-tabs
 
 :::
 
-## 自定义新增按钮图标
+## 添加按钮自定义图标 ^(2.4.0)
 
-:::demo 通过 `addIcon` 替换默认的加号图标，等价于官方 `add-icon` 插槽。
+:::demo
 
 tabs/customized-add-button-icon
 
 :::
 
-## 自定义触发按钮
+## 增加标签页触发器自定义
 
-:::demo 使用 `closable` 显示关闭按钮，并在外部按钮中触发新增。
+:::demo
 
 tabs/customized-trigger
 
 :::
 
-## 默认值
+## 默认值^(2.11.9)
 
-:::demo 未传 `value` 时，可通过 `defaultValue` 指定初始选中的面板。
+:::demo
 
 tabs/default-value
 

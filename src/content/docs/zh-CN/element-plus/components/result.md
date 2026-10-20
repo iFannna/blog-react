@@ -7,11 +7,11 @@ order: 130
 
 # Result 结果
 
-用于反馈一系列操作任务的处理结果。
+用于对用户的操作结果或者异常状态做反馈。
 
 ## 基础用法
 
-:::demo 通过 `icon` 属性设置图标类型，配合 `title` 与 `subTitle` 展示结果信息。
+:::demo `primary` 已被添加到^(2.9.11)。
 
 result/basic-usage
 
@@ -19,7 +19,7 @@ result/basic-usage
 
 ## 自定义内容
 
-:::demo `customIcon` 可以传入任意节点替换默认图标， `extra` 属性用于在底部添加操作区。
+:::demo
 
 result/customized-content
 

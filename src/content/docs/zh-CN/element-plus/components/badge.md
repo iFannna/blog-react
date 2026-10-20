@@ -11,7 +11,9 @@ order: 20
 
 ## 基础用法
 
-:::demo 通过 `value` 设置显示值，`type` 设置徽章类型， `color` 可自定义背景色。
+可以用来展示新消息的数量。
+
+:::demo 数量值可接受 Number 或 String。
 
 badge/basic
 
@@ -19,31 +21,37 @@ badge/basic
 
 ## 最大值
 
-:::demo 通过 `max` 属性设置最大值，超出时显示  `{max}+`。仅在 `value` 为数字时生效。
+你还可以自定义最大值
+
+:::demo 由 max 属性定义，接受 Number 值。请注意，仅在值也是 Number 时起作用。
 
 badge/max
 
 :::
 
-## 自定义内容
+## 自定义显示内容
 
-:::demo `value` 为字符串时可直接显示文本；也可以通过  `content` 渲染函数自定义徽章内容。
+你也可以展示除数字以外你想要展示的任何值。或者您可以使用 `content` 栏位自定义内容。
+
+:::demo 当 value 是 String 时，可以显示自定义文字。或者使用 `content` 插槽。
 
 badge/customize
 
 :::
 
-## 小圆点
+## 小红点
 
-:::demo 通过 `isDot` 属性设置为小圆点，不显示具体数值。
+通过一个小红点标记来告知用户有新内容。
+
+:::demo 使用 `is-dot` 属性。是个布尔值。
 
 badge/dot
 
 :::
 
-## 偏移量
+## 偏移量 ^(2.7.0)
 
-:::demo 通过 `offset` 属性设置徽标相对于默认位置的偏移， 格式为 `[left, top]`。
+:::demo 设置徽章点的偏移，格式是[左，顶部]， 代表状态点从左侧和默认位置顶部的偏移。
 
 badge/offset
 

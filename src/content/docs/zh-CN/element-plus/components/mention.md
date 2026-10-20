@@ -11,23 +11,29 @@ order: 140
 
 ## 基础用法
 
-:::demo 最简单的用法。输入 `@` 触发提及，选项来自 `options`。
+最简单的用法。
+
+:::demo
 
 mention/basic
 
 :::
 
-## 自定义选项字段
+## Props ^(2.11.3)
 
-:::demo 通过 `props` 自定义 `options` 的字段别名。
+你可以通过 `props` 属性自定义 `options` 的别名。
+
+:::demo
 
 mention/props
 
 :::
 
-## 文本域
+## Textarea
 
-:::demo 将输入类型设为 `textarea`。
+输入类型可以设置为 `textarea` 。
+
+:::demo
 
 mention/textarea
 
@@ -35,23 +41,29 @@ mention/textarea
 
 ## 自定义标签
 
-:::demo 通过 `labelSlot` 自定义选项内容。
+使用 "label" 自定义标签。
+
+:::demo
 
 mention/label
 
 :::
 
-## 远程加载选项
+## 加载远程选项
 
-:::demo 异步加载选项。命中前缀时触发 `onSearch`，配合 `loading` 显示加载态。
+异步加载选项。
+
+:::demo
 
 mention/loading
 
 :::
 
-## 自定义触发字符
+## 自定义触发字段
 
-:::demo 通过 `prefix` 自定义触发字符，默认 `@`，也支持字符串数组。
+通过 `prefix` 属性 自定义触发字段。默认为 `@`, `Array<string>` 。
+
+:::demo
 
 mention/prefix
 
@@ -59,21 +71,29 @@ mention/prefix
 
 ## 整体删除
 
-:::demo 设置 `whole` 为 `true` 后，按退格会把提及内容作为整体删除； `checkIsWhole` 可自定义「整词」判定逻辑。
+将`whole`属性设置为 `true`，当您按下退格键时，此处的 mention 区域将作为一个整体被删除。设置 "check-is-whole" 属性来自定义检查逻辑。
+
+:::demo
 
 mention/whole
 
 :::
 
-## 配合表单
+## 在表单里使用
 
-:::demo 与 `ElForm` 一起使用。
+与 `el-form` 一起使用
+
+:::tip
+
+由于这个组件是基于[`el-input`](./input#attributes)派生的，他们的原始属性未被更改，故不在此重复。请跳转查看原组件的相应文档。
+
+:::
+
+:::demo
 
 mention/form
 
 :::
-
-该组件基于 `ElInput` 开发，输入框原有的属性、事件与插槽均可直接使用，此处不再赘述。
 
 ## Mention API
 

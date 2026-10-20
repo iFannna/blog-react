@@ -150,57 +150,61 @@ export default function SegmentedPage() {
   return (
     <>
       <h1>Segmented 分段控制器</h1>
-      <p>显示多个选项，并允许用户从中选择一项。</p>
+      <p>用于展示多个选项并允许用户选择其中单个选项。</p>
 
       <Heading level={2}>基础用法</Heading>
       <p>
-        <code>value</code> 为当前选中项的值，通过 <code>options</code> 提供选项数据。
+        设置<code>v-model</code>为选项值。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <SegmentedBasic />
       </DemoBlock>
 
-      <Heading level={2}>方向</Heading>
+      <Heading level={2} id="配置方向">
+        配置方向<span className="docs-version-tag">2.8.7</span>
+      </Heading>
       <p>
-        设置 <code>direction</code> 为 <code>vertical</code> 可切换为纵向排列。
+        设置 <code>vertical</code> 来改变方向。
       </p>
       <DemoBlock source={SOURCES.customDirection}>
         <SegmentedCustomDirection />
       </DemoBlock>
 
-      <Heading level={2}>禁用</Heading>
+      <Heading level={2}>禁用状态</Heading>
       <p>
-        为 <code>ElSegmented</code> 或某个选项设置 <code>disabled</code> 可将其禁用。
+        设置 <code>disabled</code> 属性来禁用一些选项。
       </p>
       <DemoBlock source={SOURCES.disabled}>
         <SegmentedDisabled />
       </DemoBlock>
 
-      <Heading level={2}>自定义字段别名</Heading>
+      <Heading level={2} id="自定义选项">
+        自定义选项 <span className="docs-version-tag">2.9.8</span>
+      </Heading>
       <p>
-        当 <code>options</code> 的数据格式与默认格式不一致时，可用 <code>optionProps</code>{" "}
-        指定字段别名。
+        当您的 <code>options</code> 格式不同于默认格式时，可通过 <code>props</code>{" "}
+        属性自定义 <code>options</code>
       </p>
       <DemoBlock source={SOURCES.aliases}>
         <SegmentedAliases />
       </DemoBlock>
 
-      <Heading level={2}>块级显示</Heading>
+      <Heading level={2}>Block 分段选择器</Heading>
       <p>
-        设置 <code>block</code> 为 <code>true</code> 可撑满父元素宽度。
+        设置<code>block</code>为<code>true</code>以适应父元素的宽度。
       </p>
       <DemoBlock source={SOURCES.block}>
         <SegmentedBlock />
       </DemoBlock>
 
       <Heading level={2}>自定义内容</Heading>
-      <p>通过默认插槽渲染自定义内容。</p>
+      <p>设置 default slot 位来渲染自定义内容。</p>
       <DemoBlock source={SOURCES.customContent}>
         <SegmentedCustomContent />
       </DemoBlock>
 
       <Heading level={2}>自定义样式</Heading>
-      <p>通过 CSS 变量自定义样式。</p>
+      <p>使用 CSS 变量设置自定义样式。</p>
       <DemoBlock source={SOURCES.customStyle}>
         <SegmentedCustomStyle />
       </DemoBlock>

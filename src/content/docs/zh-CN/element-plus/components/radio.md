@@ -7,11 +7,27 @@ order: 150
 
 # Radio 单选框
 
-在一组备选项中进行单选。
+在一组备选项中进行单选
+
+:::warning
+
+`label` 作为 `value` 来使用已经被 **废弃**, 建议`label` 只用来表示展示的文字，这个被废弃的用法**将会在** ^(3.0.0) 版本被移除，请考虑使用新 API 替换.
+
+:::
+
+:::tip
+
+新的 API `value` 已在 ^(2.6.0) 版本添加，文档中的示例都将使用 `value`。如果您使用的版本 **低于** ^(2.6.0)，请参考：
+
+:::
 
 ## 基础用法
 
-:::demo 单选框不应该有太多的可选项，如果需要有很多的选项，建议使用 Select 组件。 使用 `ElRadioGroup` 的 `value` 与 `onChange` 管理选中值，`ElRadio` 用 `value` 标识自己。
+单选框不应该有太多的可选项，如果你有很多的可选项你应该使用选择框而不是单选框。
+
+要使用 Radio 组件，只需要设置`v-model`绑定变量，选中意味着变量的值为相应 Radio `value`属性的值， `value`可以是`String`、`Number` 或 `Boolean`。
+
+:::demo
 
 radio/basic-usage
 
@@ -19,39 +35,63 @@ radio/basic-usage
 
 ## 禁用状态
 
-:::demo 设置 `disabled` 属性即可禁用，可以在单个 Radio 上设置， 也可以用 `ElRadioGroup` 的 `disabled` 禁用整组。
+`disabled` 属性可以用来控制单选框的禁用状态。
+
+你只需要为单选框设置 `disabled` 属性就能控制其禁用状态。
+
+:::demo
 
 radio/disabled
 
 :::
 
-## 数据化选项
+## 单选框组
 
-:::demo 通过 `options` 直接渲染选项数组，并用 `optionProps` 指定 `value`、`label`、`disabled` 的字段别名。
+适用于在多个互斥的选项中选择的场景
 
-radio/options
+结合`el-radio-group`元素和子元素`el-radio`可以实现单选组，为 `el-radio-group` 绑定 `v-model`，再为 每一个 `el-radio` 设置好 `label` 属性即可，另外，还可以通过 `change` 事件来响应变化，它会传入一个参数 `value` 来表示改变之后的值。
 
-:::
+:::demo
 
-## 按钮样式
-
-:::demo 设置 `type="button"` 可渲染为按钮形态， `fill` 与 `textColor` 控制选中态配色。
-
-radio/radio-button
+radio/radio-group
 
 :::
 
-## 带边框
+## 带有边框
 
-:::demo 设置 `border` 属性可以渲染为带有边框的单选框。
+设置 `border` 属性为 true 可以渲染为带有边框的单选框。
+
+:::demo
 
 radio/with-borders
 
 :::
 
+## Options 属性 ^(2.11.2)
+
+基础用法 `el-radio-group` 的快捷示例。您可以通过 `props` 属性自定义 `options` 的别名。
+
+:::demo
+
+radio/options
+
+:::
+
+## 单选按钮
+
+带有按钮组视觉效果的单选框
+
+:::demo 只需要把 `el-radio` 元素换成 `el-radio-button` 元素即可， :::demo 您可以使用 `填充` 和 `文本颜色` 设置按钮的样式。
+
+radio/radio-button
+
+:::
+
 ## 尺寸
 
-:::demo 通过 `size` 属性控制尺寸。
+通过 `size` 属性控制尺寸。
+
+:::demo
 
 radio/sizes
 

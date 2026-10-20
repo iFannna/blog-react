@@ -68,29 +68,34 @@ export default function AffixPage() {
   return (
     <>
       <h1>Affix 固钉</h1>
-      <p>将页面元素固定在特定可见区域。</p>
+      <p>将页面元素固定在特定可视区域。</p>
 
       <Heading level={2}>基础用法</Heading>
+      <p>固钉默认固定在页面顶部。</p>
       <p>
-        固钉默认固定在页面顶部。通过 <code>offset</code> 可以改变偏移距离，默认为 0。
+        通过设置 <code>offset</code> 属性来改变吸顶距离，默认值为 0。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <AffixBasic />
       </DemoBlock>
 
-      <Heading level={2}>固定目标容器</Heading>
+      <Heading level={2}>指定容器</Heading>
       <p>
-        设置 <code>target</code> 属性可以让固钉始终留在容器内，超出范围则隐藏。
-        请注意容器不要有滚动条。
+        通过设置 <code>target</code> 属性，让固钉始终保持在容器内，超过范围则隐藏。
       </p>
+      <p>请注意容器避免出现滚动条。</p>
       <DemoBlock source={SOURCES.target}>
         <AffixTarget />
       </DemoBlock>
 
       <Heading level={2}>固定位置</Heading>
       <p>
-        组件提供 <code>top</code> 与 <code>bottom</code> 两种固定位置，
-        通过 <code>position</code> 设置，默认为 <code>top</code>。
+        Affix 组件提供 2 个固定的位置参数 <code>top</code> 和{" "}
+        <code>bottom</code>。
+      </p>
+      <p>
+        通过设置 <code>position</code> 属性来改变固定位置，默认值为{" "}
+        <code>top</code> 。
       </p>
       <DemoBlock source={SOURCES.fixed}>
         <AffixFixed />

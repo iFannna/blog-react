@@ -33,7 +33,7 @@ descriptions/vertical-list
 
 :::
 
-## 跨行
+## 单元格跨行 ^(2.8.1)
 
 :::demo
 

@@ -89,22 +89,26 @@ const API_MD = `
 export default function InfiniteScrollPage() {
   return (
     <>
+      <DocsContent
+        source={`:::warning 废弃的 directive
+
+我们将不再维护这个 directive。会在 ^(3.0.0) **被移除**，请使用 [el-scrollbar infinite scroll](./scrollbar#infinite-scroll) 作为代替。
+
+:::`}
+      />
       <h1>Infinite Scroll 无限滚动</h1>
-      <p>滚动到页面底部时加载更多数据。</p>
+      <p>滚动至底部时，加载更多数据。</p>
 
       <Heading level={2}>基础用法</Heading>
       <p>
-        把 <code>useInfiniteScroll</code> 的 ref 挂到列表上（列表需可滚动），
-        滚动到底部时自动执行 <code>onLoad</code>。
+        在要实现滚动加载的列表上添加<code>v-infinite-scroll</code>
+        ，并赋值相应的加载方法，可实现滚动到底部时自动执行加载方法。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <InfiniteScrollBasic />
       </DemoBlock>
 
       <Heading level={2}>禁用加载</Heading>
-      <p>
-        通过 <code>disabled</code> 控制是否允许继续加载。
-      </p>
       <DemoBlock source={SOURCES.disableLoading}>
         <InfiniteScrollDisableLoading />
       </DemoBlock>

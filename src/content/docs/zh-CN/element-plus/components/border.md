@@ -7,11 +7,11 @@ order: 20
 
 # Border 边框
 
-我们对组件中使用的边框、圆角与阴影做了统一规范。
+我们对边框进行统一规范，可用于按钮、卡片、弹窗等组件里。
 
 ## 边框样式
 
-:::demo 边框只有实线与虚线两种可选样式。
+:::demo 我们提供了以下几种边框样式，以供选择。
 
 border/border
 
@@ -19,7 +19,7 @@ border/border
 
 ## 圆角
 
-:::demo 通过 CSS 变量选择不同的圆角大小。
+:::demo 我们提供了以下几种圆角样式，以供选择。
 
 border/radius
 
@@ -27,11 +27,15 @@ border/radius
 
 ## 阴影
 
-:::demo 通过 CSS 变量选择不同的阴影层次。
+:::demo 我们提供了以下几种投影样式，以供选择。
 
 border/shadow
 
 :::
+
+## 源代码
+
+[文档](https://github.com/element-plus/element-plus/blob/dev/docs/en-US/component/border.md)
 
 ## Border 规范
 

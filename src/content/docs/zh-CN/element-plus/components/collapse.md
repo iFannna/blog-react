@@ -7,11 +7,11 @@ order: 60
 
 # Collapse 折叠面板
 
-通过折叠面板收纳内容区域。
+通过折叠面板收纳内容区域
 
 ## 基础用法
 
-可同时展开多个面板，面板之间不影响。
+可同时展开多个面板，面板之间不影响
 
 :::demo
 
@@ -21,7 +21,7 @@ collapse/basic
 
 ## 手风琴效果
 
-每次只能展开一个面板。
+每次只能展开一个面板
 
 :::demo 通过 `accordion` 属性来设置是否以手风琴模式显示。
 
@@ -35,7 +35,7 @@ collapse/accordion
 
 :::tip
 
-从版本 `2.9.10` 开始， `title` 插槽提供一个 `isActive` 属性，显示当前折叠项是否活跃。
+从版本 ^(2.9.10)开始， `title` 插槽提供一个 `isActive` 属性，显示当前折叠项是否活跃。
 
 :::
 
@@ -45,7 +45,7 @@ collapse/customization
 
 :::
 
-## 自定义图标
+## 自定义图标 ^(2.8.3)
 
 除了使用 `icon` 属性外，您还可以自定义面板项目图标，从而添加自定义内容。
 
@@ -55,7 +55,7 @@ collapse/custom-icon
 
 :::
 
-## 自定义图标位置
+## 自定义图标位置 ^(2.9.10)
 
 使用 `expand-icon-position` 属性，您可以自定义图标位置。
 
@@ -65,9 +65,9 @@ collapse/custom-icon-position
 
 :::
 
-## 阻止折叠
+## 阻止折叠 ^(2.9.11)
 
-设置 `beforeChange` 属性，若返回 `false` 或者返回 `Promise` 且被 reject ，则停止切换。
+设置 `beforeChange` 属性，若返回 false 或者返回 `Promise` 且被 `reject` ，则停止切换。
 
 :::demo
 

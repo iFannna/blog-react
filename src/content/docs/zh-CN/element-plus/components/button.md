@@ -11,7 +11,7 @@ order: 10
 
 ## 基础用法
 
-:::demo 使用 `type`、`plain`、`round`、`dashed` 和 `circle` 来定义 Button 的样式。
+:::demo 使用 `type`, `plain`, `round`, `dashed` 和 `circle` 来定义按钮的样式。
 
 button/basic
 

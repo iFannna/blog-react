@@ -9,17 +9,27 @@ order: 170
 
 当选项过多时，使用下拉菜单展示并选择内容。
 
+:::tip
+
+在版本 `2.5.0`之后， `el-select` 的默认宽度更改为 `100%` 当使用内联形式时，宽度将显示异常。为了保持显示正常, 您需要手动配置 `el-select` 的宽度 (如: [例子](https://github.com/element-plus/element-plus/issues/15834#issuecomment-1936919229)).
+
+:::
+
 ## 基础用法
 
-:::demo `value` 是当前选中项的值，通过 `options` 提供选项数据。
+适用广泛的基础单选 `v-model` 的值为当前被选中的 `el-option` 的 value 属性值
+
+:::demo
 
 select/basic-usage
 
 :::
 
-## 选项属性
+## Options 属性 ^(2.10.5)
 
-:::demo 通过 `props` 自定义选项对象中 value、label、disabled 的字段名。
+`el-option` 基本用法。您可以通过 `props` 属性自定义 `options` 的别名。
+
+:::demo
 
 select/options
 
@@ -27,7 +37,9 @@ select/options
 
 ## 有禁用选项
 
-:::demo 在选项中设置 `disabled` 为 `true` 可禁用该选项。
+在 `el-option` 中，设定 `disabled` 值为 true，即可禁用该选项
+
+:::demo
 
 select/disabled-option
 
@@ -35,7 +47,11 @@ select/disabled-option
 
 ## 禁用状态
 
-:::demo 为 `ElSelect` 设置 `disabled` 可禁用整个组件。
+禁用整个选择器组件
+
+为 `el-select` 设置 `disabled`属性，则整个选择器不可用。
+
+:::demo
 
 select/disabled
 
@@ -43,7 +59,11 @@ select/disabled
 
 ## 可清空
 
-:::demo 设置 `clearable` 后会出现清空图标。
+您可以使用清除图标来清除选择。
+
+为 `el-select` 设置 `clearable` 属性，则可将选择器清空。
+
+:::demo
 
 select/clearable
 
@@ -51,7 +71,9 @@ select/clearable
 
 ## 尺寸
 
-:::demo 通过 `size` 改变尺寸，除默认外还有 `large`、 `small`。
+使用 `size` 属性改变选择器大小。除了默认大小外，还有另外两个选项： `large`, `small`。
+
+:::demo
 
 select/size
 
@@ -59,7 +81,11 @@ select/size
 
 ## 基础多选
 
-:::demo 设置 `multiple` 开启多选；`collapseTags` 折叠标签， `collapseTagsTooltip` 在悬停时展示全部， `maxCollapseTags` 控制折叠前展示的数量。
+多选选择器使用 tag 组件来展示已选中的选项。
+
+为 `el-select` 设置 `multiple` 属性即可启用多选，此时 `v-model` 的值为当前选中值所组成的数组。默认情况下选中值会以 Tag 组件的形式展现，你也可以设置 `collapse-tags` 属性将它们合并为一段文字。您可以使用 `collapse-tags-tooltip` 属性来启用鼠标悬停折叠文字以显示具体所选值的行为。
+
+:::demo
 
 select/multiple
 
@@ -67,39 +93,59 @@ select/multiple
 
 ## 自定义模板
 
-:::demo 通过 `children` 渲染函数自定义选项内容。
+你可以自定义如何来渲染每一个选项。
+
+将自定义的 HTML 模板插入 `el-option` 的 slot 中即可。
+
+:::demo
 
 select/custom-template
 
 :::
 
-## 下拉头部
+## 自定义下拉菜单的头部 ^(2.4.3)
 
-:::demo 通过 `header` 自定义下拉头部，例如全选。
+您可以自定义下拉菜单的头部。
+
+Use slot to customize the content.
+
+:::demo
 
 select/custom-header
 
 :::
 
-## 下拉底部
+## 自定义下拉菜单的底部 ^(2.4.3)
 
-:::demo 通过 `footer` 自定义下拉底部，可实现动态添加选项。
+您可以自定义下拉菜单的底部。
+
+使用slot 自定义内容
+
+:::demo
 
 select/custom-footer
 
 :::
 
-## 分组
+## 将选项进行分组
 
-:::demo 选项数据的 `options` 字段用于嵌套子选项，形成分组。
+你可以为选项进行分组来区分不同的选项
+
+使用 `el-option-group` 对备选项进行分组，它的 `label` 属性为分组名
+
+:::demo
 
 select/grouping
 
 :::
 
-## 选项过滤
+## 筛选选项
 
-:::demo 设置 `filterable` 开启搜索，默认按 label 过滤，也可通过 `filterMethod` 自定义。
+可以利用筛选功能快速查找选项。
+
+为`el-select`添加`filterable`属性即可启用搜索功能。默认情况下，Select 会找出所有 `label` 属性包含输入值的选项。如果希望使用其他的搜索逻辑，可以通过传入一个 `filter-method` 来实现。 `filter-method` 为一个 `Function`，它会在输入值发生变化时调用，参数为当前输入值。
+
+:::demo
 
 select/filterable
 
@@ -107,55 +153,79 @@ select/filterable
 
 ## 远程搜索
 
-:::demo 设置 `remote` 与 `remoteMethod` 从服务端加载选项， `remoteShowSuffix` 控制搜索时是否显示后缀图标。
+输入关键字以从远程服务器中查找数据。
+
+从服务器搜索数据，输入关键字进行查找。为了启用远程搜索，需要将`filterable`和`remote`设置为`true`，同时传入一个`remote-method`。 `remote-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。需要注意的是，如果 `el-option` 是通过 `v-for` 指令渲染出来的，此时需要为 `el-option` 添加 `key` 属性，且其值需具有唯一性，比如这个例子中的 `item.value`。
+
+:::demo
 
 select/remote-search
 
 :::
 
-## 创建条目
+## 创建新的选项
 
-:::demo 设置 `allowCreate` 允许创建不在选项列表中的条目。
+创建并选中未包含在初始选项中的条目。
+
+通过使用 `allow-create` 属性，用户可以通过输入框创建新项目。为了使 `allow-create` 正常工作， `filterable` 的值必须为 `true`。本例还使用了 `default-first-option` 属性，在该属性为 `true` 的情况下，按下回车就可以选中当前选项列表中的第一个选项，无需使用鼠标或键盘方向键进行定位。
+
+:::demo
 
 select/allow-create
 
 :::
 
-## 使用 value-key
+## 使用值键 value-key 属性
 
-:::demo 当选中值是对象时，通过 `valueKey` 指定唯一标识字段。
+如果 Select 的绑定值为对象类型，请务必指定 `value-key` 作为它的唯一性标识。
+
+通过使用 `value-key` 属性，可以正确处理带有重复label的数据。这样虽然`label` 是重复的，但任可通过 `id` 来确认唯一性。
+
+:::demo
 
 select/value-key
 
 :::
 
-## 自定义标签
+## 自定义标签 ^(2.5.0)
 
-:::demo 通过 `tag` 渲染函数自定义多选标签。
+您可以自定义标签。
+
+将自定义的标签插入 `el-select` 的 slot 中即可。 `collapse-tags`, `collapse-tags-tooltip`, `max-collapse-tags` 在此模式下不生效.
+
+:::demo
 
 select/custom-tag
 
 :::
 
-## 自定义加载
+## 自定义加载 ^(2.5.2)
 
-:::demo 通过 `loadingSlot` 自定义远程搜索的加载状态内容。
+修改加载区域内容
+
+:::demo
 
 select/custom-loading
 
 :::
 
-## 空值
+## 空值配置^(2.7.0)
 
-:::demo 通过 `emptyValues` 定义空值集合，`valueOnClear` 定义清空后的返回值。
+若想配置如空字符串为有效值而不是空值，可以配置 `empty-values` 为 `[null, undefined]`.
+
+如果您想要将清空值更改为 `null`, 请设置 `value-on-clear` 为 `null`
+
+:::demo
 
 select/empty-values
 
 :::
 
-## 自定义标签文案
+## 自定义标签 ^(2.7.4)
 
-:::demo 通过 `label` 渲染函数自定义选中值与标签的显示内容。
+您可以自定义标签
+
+:::demo
 
 select/custom-label
 

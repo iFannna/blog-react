@@ -7,19 +7,21 @@ order: 50
 
 # Carousel 走马灯
 
-在有限空间内，循环播放同一类型的图片、文字等内容。
+在有限空间内，循环播放同一类型的图片、文字等内容
 
 ## 基础用法
 
-:::demo 将 `ElCarousel` 与 `ElCarouselItem` 组合使用即可得到走马灯。 幻灯片内容完全可自定义，只需放进 `ElCarouselItem` 内。默认鼠标移入 指示器即切换，将 `trigger` 设为 `click` 后只有点击指示器才切换。
+:::demo 结合使用 `el-carousel` 和 `el-carousel-item` 标签就得到了一个走马灯。每一个页面的内容是完全可定制的，把你想要展示的内容放在 `el-carousel-item` 标签内。默认情况下，在鼠标 hover 底部的指示器时就会触发切换。通过设置 `trigger` 属性为 `click`，可以达到点击触发的效果。
 
 carousel/basic
 
 :::
 
-## 动态模糊2.6.0
+## 动态模糊 ^(2.6.0)
 
-:::demo 开启动态模糊可增强走马灯切换时的动感与流畅度。`motionBlur` 默认为  `false`，开启后切换过程会带高斯模糊。
+添加动态模糊以给走马灯注入活力和流畅性。
+
+:::demo 启用动态模糊增强了走马灯的活力和流畅性。 `motion-blur` 的默认值是 `false`，手动激活此功能即可提供视觉感受上的提升。
 
 carousel/motion-blur
 
@@ -27,23 +29,19 @@ carousel/motion-blur
 
 ## 指示器
 
-指示器可以显示在走马灯外部。
+可以将指示器的显示位置设置在容器外部
 
-`indicatorPosition` 决定指示器位置：默认在内部，设为  `outside` 显示在外部，设为 `none` 则隐藏。
-
-:::demo
+:::demo `indicator-position` 属性定义了指示器的位置。默认情况下，它会显示在走马灯内部，设置为 `outside` 则会显示在外部；设置为 `none` 则不会显示指示器。
 
 carousel/indicator
 
 :::
 
-## 箭头
+## 切换箭头
 
-可以定义箭头显示的时机。
+可以设置切换箭头的显示时机
 
-`arrow` 决定箭头何时显示：默认鼠标移入走马灯时显示，设为  `always` 或 `never` 表示常显或常隐。
-
-:::demo
+:::demo `arrow` 属性定义了切换箭头的显示时机。默认情况下，切换箭头只有在鼠标 hover 到走马灯上时才会显示。若将 `arrow` 设置为 `always`，则会一直显示；设置为 `never`，则会一直隐藏。
 
 carousel/arrows
 
@@ -51,27 +49,25 @@ carousel/arrows
 
 ## 自动高度
 
-:::demo 当 `height` 设为 `auto` 时，走马灯高度会随  `ElCarouselItem` 的高度自动变化。
+:::demo 当 `carousel `的` height` 设置为 `auto`时， `carousel` 的高度将根据子内容的高度自动设置
 
 carousel/auto-height
 
 :::
 
-## 卡片化
+## 卡片模式
 
-当页面足够宽但高度有限时，可以开启卡片化模式。
+当页面宽度方向空间空余，但高度方向空间匮乏时，可使用卡片风格
 
-将 `type` 设为 `card` 即可开启。除了外观，卡片化与普通模式 最大的区别在于：点击两侧的幻灯片会直接切换走马灯。
-
-:::demo
+:::demo 将 `type` 属性设置为 `card` 即可启用卡片模式。从交互上来说，卡片模式和一般模式的最大区别在于，卡片模式可以通过直接点击两侧的幻灯片进行切换。
 
 carousel/card
 
 :::
 
-## 垂直方向
+## 垂直排列
 
-:::demo `direction` 默认为 `horizontal`，设为 `vertical`  即可纵向展示。
+:::demo 默认情况下，方向 `direction` 为 水平 `horizontal`。通过设置 `direction` 为 `vertical` 来让走马灯在垂直方向上显示。
 
 carousel/vertical
 

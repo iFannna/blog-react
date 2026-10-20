@@ -7,59 +7,73 @@ order: 80
 
 # Steps 步骤条
 
-引导用户按照流程完成任务的导航条。
+引导用户按照流程完成任务的分步导航条，可根据实际应用场景设定步骤，步骤不得少于 2 步。
 
 ## 基础用法
 
-:::demo 通过按钮推进当前步骤，完成后以 success 状态展示。
+简单的步骤条。
+
+:::demo 设置 `active` 属性，接受一个 `Number`，表明步骤的 index，从 0 开始。需要定宽的步骤条时，设置 `space` 属性即可，它接受 `Number`，单位为 `px`，如果不设置，则为自适应。设置 `finish-status` 属性可以改变已经完成的步骤的状态。
 
 steps/basic
 
 :::
 
-## 状态
+## 含状态的步骤条
 
-:::demo `finishStatus` 与 `processStatus` 控制已完成与进行中步骤的状态， 支持 success 与 error。
+每一步骤显示出该步骤的状态。
+
+:::demo 也可以使用 `title` 具名插槽，可以用 `slot` 的方式来取代属性的设置，在本文档最后的列表中有所有的插槽可供参考。
 
 steps/with-status
 
 :::
 
-## 居中对齐
+## 居中的步骤条
 
-:::demo 设置 `alignCenter` 让标题与描述居中。
+标题和描述可以居中。
+
+:::demo
 
 steps/centered
 
 :::
 
-## 带描述
+## 带描述的步骤栏
 
-:::demo 通过 description 为每个步骤补充说明。
+每一步都有描述。
+
+:::demo
 
 steps/with-description
 
 :::
 
-## 带图标
+## 带图标的步骤条
 
-:::demo 通过 icon 替换默认的序号。
+可以在步骤栏中使用各种自定义图标。
+
+:::demo 通过 `icon` 属性来设置图标，图标的类型可以参考 Icon 组件的文档，除此以外，还能通过具名 `slot` 来使用自定义的图标。
 
 steps/with-icon
 
 :::
 
-## 纵向步骤条
+## 垂直的步骤条
 
-:::demo 设置 `direction="vertical"` 纵向排列，容器需有确定高度。
+垂直方向的步骤条。
+
+:::demo 只需要在 `el-steps` 元素中设置 `direction` 属性为 `vertical` 即可。
 
 steps/vertical
 
 :::
 
-## 简洁风格
+## 简洁风格的步骤条
 
-:::demo 设置 `simple` 应用简洁样式，可通过 `space` 指定间距。
+设置 `simple` 可应用简洁风格，该条件下 `align-center` / `description` / `direction` / `space` 都将失效。
+
+:::demo
 
 steps/simple
 

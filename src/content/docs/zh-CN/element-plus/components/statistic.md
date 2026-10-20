@@ -11,7 +11,7 @@ order: 220
 
 ## 基础用法
 
-:::demo
+:::demo 用于突出某个或某组数字时，如统计数值、金额、排名等，数值和标题前后都可以加icon、单位等元素。可以使用 [vueuse](https://vueuse.org/core/useTransition/) 实现数值的变化动效
 
 statistic/basic
 
@@ -19,15 +19,21 @@ statistic/basic
 
 ## 倒计时
 
-:::demo
+:::demo 倒计时组件，支持添加其他组件来控制。
 
 statistic/countdown
 
 :::
 
+:::tip
+
+在格式化过程中，建议在天数范围内
+
+:::
+
 ## 统计卡片
 
-:::demo
+:::demo 卡片式用法展示，可以自由组合
 
 statistic/card
 

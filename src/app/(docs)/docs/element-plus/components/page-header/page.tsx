@@ -147,26 +147,23 @@ export default function PageHeaderPage() {
     <>
       <h1>Page Header 页头</h1>
       <p>
-        如果页面的路径比较简单，推荐使用页头组件而不是面包屑。
+        如果页面的路径比较简单，推荐使用页头组件而非面包屑组件。
       </p>
 
       <Heading level={2}>完整示例</Heading>
-      <p>页头包含面包屑、图标、标题、内容、右侧操作区与下方主内容。</p>
       <DemoBlock source={SOURCES.complete}>
         <PageHeaderComplete />
       </DemoBlock>
 
       <Heading level={2}>基础用法</Heading>
-      <p>
-        标准页头，适用于简单场景。通过 <code>onBack</code> 监听返回区点击。
-      </p>
+      <p>简单场景下的标准页头。</p>
       <DemoBlock source={SOURCES.basic}>
         <PageHeaderBasic />
       </DemoBlock>
 
       <Heading level={2}>自定义图标</Heading>
       <p>
-        默认图标可能不满足需求，可通过 <code>icon</code> 传入自定义图标。
+        默认图标可能无法满足您的需求，您可以通过设置<code>icon</code>属性来自定义图标，示例如下。
       </p>
       <DemoBlock source={SOURCES.customIcon}>
         <PageHeaderCustomIcon />
@@ -174,31 +171,33 @@ export default function PageHeaderPage() {
 
       <Heading level={2}>无图标</Heading>
       <p>
-        有时页面元素很多，不想显示图标时，将 <code>icon</code> 设为 <code>&quot;&quot;</code> 即可。
+        有时，页面全是元素，您可能不想展示页面上方的图标，您可以设置<code>icon</code>属性值为<code>&quot;&quot;</code>来去除它。
       </p>
       <DemoBlock source={SOURCES.noIcon}>
         <PageHeaderNoIcon />
       </DemoBlock>
 
-      <Heading level={2}>面包屑</Heading>
+      <Heading level={2}>面包屑导航</Heading>
       <p>
-        通过 <code>breadcrumb</code> 为页头添加面包屑，向用户提供路由信息。
+        使用页头组件，您可以通过添加插槽 <code>breadcrumb</code>{" "}
+        来设置面包屑路由导航。
       </p>
       <DemoBlock source={SOURCES.breadcrumb}>
         <PageHeaderBreadcrumb />
       </DemoBlock>
 
-      <Heading level={2}>附加操作区</Heading>
+      <Heading level={2}>额外操作部分</Heading>
       <p>
-        页头可以按需扩展，通过 <code>extra</code> 添加额外的操作区，实现更丰富的交互。
+        头部可能会变得很复杂，您可以在头部添加更多的区块，以允许丰富的交互。
       </p>
       <DemoBlock source={SOURCES.additionalSections}>
         <PageHeaderAdditionalSections />
       </DemoBlock>
 
-      <Heading level={2}>主体内容</Heading>
+      <Heading level={2}>主要内容</Heading>
       <p>
-        有时希望页头下方展示相应内容，可使用 <code>children</code>（对应官方 default 插槽）。
+        有时我们想让页头显示一些协同响应内容，我们可以使用 <code>default</code>{" "}
+        插槽。
       </p>
       <DemoBlock source={SOURCES.mainContent}>
         <PageHeaderMainContent />

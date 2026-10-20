@@ -7,7 +7,7 @@ order: 100
 
 # Input 输入框
 
-通过鼠标或键盘输入字符。
+通过鼠标或键盘输入字符
 
 ## 基础用法
 
@@ -19,23 +19,29 @@ input/basic
 
 ## 禁用状态
 
-:::demo 通过 `disabled` 属性指定是否禁用 Input 组件， 也可以使用 `readOnly` 属性指定是否为只读。
+通过 `disabled` 属性指定是否禁用 input 组件
+
+:::demo
 
 input/disabled
 
 :::
 
-## 可清空
+## 一键清空
 
-:::demo 使用 `clearable` 属性即可得到一个可清空的输入框， textarea 类型同样支持。
+使用`clearable`属性即可得到一个可一键清空的输入框在版本 ^(2.13.4) 之后，Input 的 textarea 类型也支持 clearable 功能。
+
+:::demo
 
 input/clearable
 
 :::
 
-## 自定义清除图标
+## 自定义清除图标^(2.11.0)
 
-:::demo 通过 `clearIcon` 属性自定义清除图标。
+你可以通过`clear-icon`属性自定义清除图标
+
+:::demo
 
 input/clear-icon
 
@@ -43,7 +49,9 @@ input/clear-icon
 
 ## 格式化
 
-:::demo 使用 `formatter` 格式化展示值，通常与 `parser`  一起使用以还原实际值。
+在 `formatter`的情况下显示值，我们通常同时使用 `parser`
+
+:::demo
 
 input/formatter
 
@@ -51,15 +59,21 @@ input/formatter
 
 ## 密码框
 
-:::demo 使用 `showPassword` 属性即可得到一个可切换显示隐藏的密码框； 通过 `passwordIcon` 可以自定义图标。
+使用 `show-password` 属性即可得到一个可切换显示隐藏的密码框自 ^(2.13.6) 起，支持使用 `password-icon` 插槽覆盖默认图标。
+
+:::demo
 
 input/password
 
 :::
 
-## 带图标
+## 带图标的输入框
 
-:::demo 使用 `prefixIcon` / `suffixIcon` 属性添加图标， 也可以使用 `prefix` / `suffix` 插槽。
+带有图标标记输入类型
+
+要在输入框中添加图标，你可以简单地使用 `prefix-icon` 和 `suffix-icon` 属性。另外， `prefix` 和 `suffix` 命名的插槽也能正常工作。
+
+:::demo
 
 input/with-icon
 
@@ -67,7 +81,11 @@ input/with-icon
 
 ## 文本域
 
-:::demo 通过 `type="textarea"` 切换为原生 textarea， 使用 `rows` 控制高度。
+用于输入多行文本信息可缩放的输入框。添加 `type="textarea"` 属性来将 `input` 元素转换为原生的 `textarea` 元素。
+
+文本域高度可通过 `rows` 属性控制
+
+:::demo
 
 input/textarea
 
@@ -75,15 +93,21 @@ input/textarea
 
 ## 自适应文本域
 
-:::demo 为 textarea 设置 `autosize` 属性可让高度随内容自适应， 也可以传入 `{ minRows, maxRows }` 限定行数范围。
+设置文字输入类型的 `autosize` 属性使得根据内容自动调整的高度。你可以给 `autosize` 提供一个包含有最大和最小高度的对象，让输入框自动调整。
+
+:::demo
 
 input/auto-sizing-textarea
 
 :::
 
-## 复合输入框
+## 复合型输入框
 
-:::demo 使用 `prepend` / `append` 在输入框前后放置标签、 选择器或按钮等内容。
+可以在输入框中前置或后置一个元素，通常是标签或按钮。
+
+可通过 `slot` 来指定在 Input 中分发的前置或者后置的内容。
+
+:::demo
 
 input/mixed-input
 
@@ -91,7 +115,9 @@ input/mixed-input
 
 ## 尺寸
 
-:::demo 通过 `size` 属性设置 `large` /  `default` / `small` 尺寸，前后缀图标会同步缩放。
+使用 `size` 属性改变输入框大小。除了默认大小外，还有另外两个选项： `large`, `small`。
+
+:::demo
 
 input/various-size
 
@@ -99,15 +125,33 @@ input/various-size
 
 ## 输入长度限制
 
-:::demo 使用 `maxlength` 和 `minlength` 限制输入长度， 配合 `showWordLimit` 显示字数统计；`wordLimitPosition`  可把统计放到输入框外部。
+使用 `maxlength` 和 `minlength` 属性, 来控制输入内容的最大字数和最小字数。"字符数"使用JavaScript字符串长度来衡量。 为文本或文本输入类型设置 `maxlength` prop可以限制输入值的长度。 允许你通过设置 `show-word-limit` 到 `true` 来显示剩余字数。从 ^(2.11.5) 版本开始，你可以将 `word-limit-position` 设置为 `outside`，以在输入框外显示字数统计。
+
+:::demo
 
 input/length-limiting
 
 :::
 
-## 字素计数
+## 计数图形^(2.13.7)
 
-:::demo 设置 `countGraphemes` 后按自定义规则计算长度，此时原生  `maxlength` / `minlength` 不再生效。
+设置 `count-graphemes` 以计算文本长度。如果设置了该属性，则不会使用原生的 `maxlength` 和 `minlength`。
+
+:::tip
+
+**浏览器支持 & 回退策略**
+
+当使用 `count-graphemes` prop时，组件使用以下方法：
+
+**主要**: 使用 `Intl.Segmenter` API (Chrome 87+, Firefox 125+, Safari 14.1+) 进行适当的图形集群处理。它能够正确处理复杂的表情符号、组合标记和0宽度连接符序列。
+
+**回退**: 旧版浏览器会回退到 `Array.from()` 进行基于码点的迭代。请注意，这可能会拆分多码点字形序列（例如，带有肤色修饰符的表情符号）。
+
+在实现自己的 `count-graphemes` 函数时，如果需要对复杂的 unicode 字符提供强大的支持，请考虑使用 `Intl.Segmenter`。
+
+:::
+
+:::demo
 
 input/count-graphemes
 

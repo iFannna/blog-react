@@ -13,7 +13,7 @@ order: 10
 
 Alert 组件不属于浮层元素，不会自动消失或关闭。
 
-:::demo Alert 组件提供5种类型，由 `type` 属性指定，默认值为 `info`。`primary` 已被添加到 2.9.11。
+:::demo Alert 组件提供5种类型，由 `type` 属性指定，默认值为 `info`。 `primary` 已被添加到^(2.9.11)。
 
 alert/basic
 
@@ -33,7 +33,7 @@ alert/theme
 
 你可以自定义关闭按钮为文字或其他符号。
 
-:::demo 你可以设置 Alert 组件是否为可关闭状态，关闭按钮的内容以及关闭时的回调函数同样可以定制。`closable` 属性决定 Alert 组件是否可关闭，该属性接受一个 Boolean，默认为 `true`。你可以设置 `close-text` 属性来代替右侧的关闭图标，需要注意的是 `close-text` 必须是一个字符串。当 Alert 组件被关闭时会触发 `close` 事件。
+:::demo 你可以设置 Alert 组件是否为可关闭状态，关闭按钮的内容以及关闭时的回调函数同样可以定制。 `closable` 属性决定 Alert 组件是否可关闭，该属性接受一个 `Boolean`，默认为 `false`。你可以设置 `close-text` 属性来代替右侧的关闭图标，需要注意的是 `close-text` 必须是一个字符串。当 Alert 组件被关闭时会触发 `close` 事件。
 
 alert/close-button
 

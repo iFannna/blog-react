@@ -11,7 +11,7 @@ order: 10
 
 ## 基础用法
 
-:::demo 对不同章节的文本段落进行分割。
+:::demo 对不同段落的文本进行分割。
 
 divider/basic-usage
 
@@ -19,23 +19,23 @@ divider/basic-usage
 
 ## 设置文案
 
-:::demo 可以在分割线上自定义文案和位置，通过 `contentPosition` 设置位置。
+:::demo 可以在分割线上自定义文本内容。
 
 divider/custom-content
 
 :::
 
-## 自定义样式
+## 虚线
 
-:::demo 通过 `borderStyle` 属性设置分割线的样式。
+:::demo 您可以设置分隔符的样式。
 
 divider/line-dashed
 
 :::
 
-## 垂直分割
+## 垂直分隔线
 
-:::demo 设置 `direction="vertical"` 可以设置为垂直分割线， 常用于行内元素之间。
+:::demo
 
 divider/vertical-divider
 

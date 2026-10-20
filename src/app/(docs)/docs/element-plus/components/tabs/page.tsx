@@ -216,74 +216,76 @@ export default function TabsPage() {
   return (
     <>
       <h1>Tabs 标签页</h1>
-      <p>分隔内容上有关联的部分。</p>
+      <p>分隔内容上有关联但属于不同类别的数据集合。</p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>基础的、简洁的标签页，点击标签切换内容。</p>
+      <p>基础的、简洁的标签页。</p>
+      <p>
+        Tabs 组件提供了选项卡功能，默认选中第一个标签页，你也可以通过{" "}
+        <code>value</code> 属性来指定当前选中的标签页。
+      </p>
       <DemoBlock source={SOURCES.basic}>
         <TabsBasic />
       </DemoBlock>
 
-      <Heading level={2}>卡片风格</Heading>
+      <Heading level={2}>卡片风格的标签</Heading>
+      <p>你可以设置具有卡片风格的标签。</p>
       <p>
-        设置 <code>type=&quot;card&quot;</code> 显示卡片风格的标签页。
+        只需要设置 <code>type</code> 属性为 <code>card</code>{" "}
+        就可以使选项卡改变为标签风格。
       </p>
       <DemoBlock source={SOURCES.card}>
         <TabsCard />
       </DemoBlock>
 
-      <Heading level={2}>带边框卡片</Heading>
+      <Heading level={2}>带有边框的卡片风格</Heading>
+      <p>你还可以设置标签页为带有边框的卡片</p>
       <p>
-        设置 <code>type=&quot;border-card&quot;</code> 显示带边框的卡片标签页。
+        将 <code>type</code> 设置为 <code>border-card</code>。
       </p>
       <DemoBlock source={SOURCES.borderCard}>
         <TabsBorderCard />
       </DemoBlock>
 
-      <Heading level={2}>标签位置</Heading>
+      <Heading level={2}>标签位置的设置</Heading>
       <p>
-        通过 <code>tabPosition</code> 设置标签位置，支持 top / right / bottom / left。
+        可以通过 <code>tab-position</code> 设置标签的位置
+      </p>
+      <p>
+        标签一共有四个方向的设置{" "}
+        <code>tabPosition=&quot;left|right|top|bottom&quot;</code>
       </p>
       <DemoBlock source={SOURCES.position}>
         <TabsPosition />
       </DemoBlock>
 
-      <Heading level={2}>自定义标签</Heading>
-      <p>
-        通过 <code>label</code> 传入自定义节点，可以在标签中加入图标等内容。
-      </p>
+      <Heading level={2}>自定义标签页的内容</Heading>
+      <p>可以通过具名插槽来实现自定义标签页的内容</p>
       <DemoBlock source={SOURCES.customLabel}>
         <TabsCustomLabel />
       </DemoBlock>
 
-      <Heading level={2}>动态增减标签</Heading>
-      <p>
-        <code>editable</code> 同时启用新增与关闭；<code>onEdit</code> 统一接收增删事件。
-      </p>
+      <Heading level={2}>动态增减标签页</Heading>
+      <p>增减标签页按钮只能在选项卡样式的标签页下使用</p>
       <DemoBlock source={SOURCES.dynamic}>
         <TabsDynamic />
       </DemoBlock>
 
-      <Heading level={2}>自定义新增按钮图标</Heading>
-      <p>
-        通过 <code>addIcon</code> 替换默认的加号图标，等价于官方 <code>add-icon</code> 插槽。
-      </p>
+      <Heading level={2} id="添加按钮自定义图标">
+        添加按钮自定义图标<span className="docs-version-tag">2.4.0</span>
+      </Heading>
       <DemoBlock source={SOURCES.customAddIcon}>
         <TabsCustomAddIcon />
       </DemoBlock>
 
-      <Heading level={2}>自定义触发按钮</Heading>
-      <p>
-        使用 <code>closable</code> 显示关闭按钮，并在外部按钮中触发新增。
-      </p>
+      <Heading level={2}>增加标签页触发器自定义</Heading>
       <DemoBlock source={SOURCES.customizedTrigger}>
         <TabsCustomizedTrigger />
       </DemoBlock>
 
-      <Heading level={2}>默认值</Heading>
-      <p>
-        未传 <code>value</code> 时，可通过 <code>defaultValue</code> 指定初始选中的面板。
-      </p>
+      <Heading level={2} id="默认值">
+        默认值<span className="docs-version-tag">2.11.9</span>
+      </Heading>
       <DemoBlock source={SOURCES.defaultValue}>
         <TabsDefaultValue />
       </DemoBlock>

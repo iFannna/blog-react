@@ -135,13 +135,32 @@ export default function RadioPage() {
   return (
     <>
       <h1>Radio 单选框</h1>
-      <p>在一组备选项中进行单选。</p>
+      <p>在一组备选项中进行单选</p>
+
+      <DocsContent
+        source={`:::warning
+
+\`label\` 作为 \`value\` 来使用已经被 **废弃**, 建议\`label\` 只用来表示展示的文字，这个被废弃的用法**将会在** ^(3.0.0) 版本被移除，请考虑使用新 API 替换.
+
+:::`}
+      />
+      <DocsContent
+        source={`:::tip
+
+新的 API \`value\` 已在 ^(2.6.0) 版本添加，文档中的示例都将使用 \`value\`。如果您使用的版本 **低于** ^(2.6.0)，请参考：
+
+:::`}
+      />
 
       <Heading level={2}>基础用法</Heading>
       <p>
-        单选框不应该有太多的可选项，如果需要有很多的选项，建议使用 Select 组件。
-        使用 <code>ElRadioGroup</code> 的 <code>value</code> 与 <code>onChange</code>
-        管理选中值，<code>ElRadio</code> 用 <code>value</code> 标识自己。
+        单选框不应该有太多的可选项，如果你有很多的可选项你应该使用选择框而不是单选框。
+      </p>
+      <p>
+        要使用 Radio 组件，只需要设置<code>v-model</code>
+        绑定变量，选中意味着变量的值为相应 Radio <code>value</code>属性的值，{" "}
+        <code>value</code>可以是<code>String</code>、<code>Number</code> 或{" "}
+        <code>Boolean</code>。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <RadioBasic />
@@ -149,37 +168,56 @@ export default function RadioPage() {
 
       <Heading level={2}>禁用状态</Heading>
       <p>
-        设置 <code>disabled</code> 属性即可禁用，可以在单个 Radio 上设置，
-        也可以用 <code>ElRadioGroup</code> 的 <code>disabled</code> 禁用整组。
+        <code>disabled</code> 属性可以用来控制单选框的禁用状态。
+      </p>
+      <p>
+        你只需要为单选框设置 <code>disabled</code> 属性就能控制其禁用状态。
       </p>
       <DemoBlock source={SOURCES.disabled}>
         <RadioDisabled />
       </DemoBlock>
 
-      <Heading level={2}>数据化选项</Heading>
+      <Heading level={2}>单选框组</Heading>
+      <p>适用于在多个互斥的选项中选择的场景</p>
       <p>
-        通过 <code>options</code> 直接渲染选项数组，并用 <code>optionProps</code>
-        指定 <code>value</code>、<code>label</code>、<code>disabled</code> 的字段别名。
+        结合<code>el-radio-group</code>元素和子元素<code>el-radio</code>
+        可以实现单选组，为 <code>el-radio-group</code> 绑定 <code>v-model</code>
+        ，再为 每一个 <code>el-radio</code> 设置好 <code>label</code>{" "}
+        属性即可，另外，还可以通过 <code>change</code>{" "}
+        事件来响应变化，它会传入一个参数 <code>value</code> 来表示改变之后的值。
+      </p>
+      <DemoBlock source={SOURCES.basic}>
+        <RadioBasic />
+      </DemoBlock>
+
+      <Heading level={2}>带有边框</Heading>
+      <p>
+        设置 <code>border</code> 属性为 true 可以渲染为带有边框的单选框。
+      </p>
+      <DemoBlock source={SOURCES.border}>
+        <RadioBorder />
+      </DemoBlock>
+
+      <Heading level={2} id="Options 属性">
+        Options 属性 <span className="docs-version-tag">2.11.2</span>
+      </Heading>
+      <p>
+        基础用法 <code>el-radio-group</code> 的快捷示例。您可以通过{" "}
+        <code>props</code> 属性自定义 <code>options</code> 的别名。
       </p>
       <DemoBlock source={SOURCES.options}>
         <RadioOptions />
       </DemoBlock>
 
-      <Heading level={2}>按钮样式</Heading>
+      <Heading level={2}>单选按钮</Heading>
+      <p>带有按钮组视觉效果的单选框</p>
       <p>
-        设置 <code>type=&quot;button&quot;</code> 可渲染为按钮形态，
-        <code>fill</code> 与 <code>textColor</code> 控制选中态配色。
+        只需要把 <code>el-radio</code> 元素换成 <code>el-radio-button</code>{" "}
+        元素即可， :::demo 您可以使用 <code>填充</code> 和 <code>文本颜色</code>{" "}
+        设置按钮的样式。
       </p>
       <DemoBlock source={SOURCES.button}>
         <RadioButton />
-      </DemoBlock>
-
-      <Heading level={2}>带边框</Heading>
-      <p>
-        设置 <code>border</code> 属性可以渲染为带有边框的单选框。
-      </p>
-      <DemoBlock source={SOURCES.border}>
-        <RadioBorder />
       </DemoBlock>
 
       <Heading level={2}>尺寸</Heading>

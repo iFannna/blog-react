@@ -5,13 +5,19 @@ group: 数据展示
 order: 100
 ---
 
+:::warning 废弃的 directive
+
+我们将不再维护这个 directive。会在 ^(3.0.0) **被移除**，请使用 [el-scrollbar infinite scroll](./scrollbar#infinite-scroll) 作为代替。
+
+:::
+
 # Infinite Scroll 无限滚动
 
-滚动到页面底部时加载更多数据。
+滚动至底部时，加载更多数据。
 
 ## 基础用法
 
-:::demo 把 `useInfiniteScroll` 的 ref 挂到列表上（列表需可滚动）， 滚动到底部时自动执行 `onLoad`。
+:::demo 在要实现滚动加载的列表上添加`v-infinite-scroll`，并赋值相应的加载方法，可实现滚动到底部时自动执行加载方法。
 
 infinite-scroll/basic
 
@@ -19,7 +25,7 @@ infinite-scroll/basic
 
 ## 禁用加载
 
-:::demo 通过 `disabled` 控制是否允许继续加载。
+:::demo
 
 infinite-scroll/disable-loading
 

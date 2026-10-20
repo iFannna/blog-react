@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
 import * as AllIcons from "@/components/element-plus/icons";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
+import DemoBlock from "../../../../_components/DemoBlock";
 import DocsContent from "../../../../_components/DocsContent";
 import { Heading } from "../../../../_components/Heading";
+import {
+  IconCombined,
+  IconDirect,
+  IconSimple,
+} from "@/components/element-plus/examples/icon";
 
 export const metadata: Metadata = {
   title: "Icon 图标",
@@ -72,13 +78,47 @@ export default function IconPage() {
   return (
     <>
       <h1>Icon 图标</h1>
-      <p>提供了一套常用的图标集合。</p>
+      <p>Element Plus 提供了一套常用的图标集合。</p>
+
+      <Heading level={2}>基础用法</Heading>
+      <DocsContent
+        source={`:::warning
+
+由于 HTML 标准已经定义了一个名为 [menu](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/menu) 的标签，如果你注册的 \`Menu\` 无法正常工作，则需要使用别名来渲染图标。
+
+:::`}
+      />
+      <DemoBlock source={`<ElIcon><Edit /></ElIcon>`}>
+        <IconSimple />
+      </DemoBlock>
+
+      <Heading level={2}>结合 el-icon 使用</Heading>
+      <p>
+        <code>el-icon</code> 为原始的 SVG 图标提供额外的属性，细节如下。
+      </p>
+      <p>
+        通过添加额外的类名 is-loading，你的图标就可以在 2
+        秒内旋转 360 度，当然你也可以自己改写想要的动画。
+      </p>
+      <DemoBlock source={`<ElIcon><Edit /></ElIcon>`}>
+        <IconCombined />
+      </DemoBlock>
+
+      <Heading level={2}>直接使用 SVG 图标</Heading>
+      <DemoBlock source={`<Edit />`}>
+        <IconDirect />
+      </DemoBlock>
 
       <Heading level={2}>图标集合</Heading>
-      <p>
-        以下为官方全部 {ICONS.length} 个图标，来自
-        <code>@element-plus/icons-vue</code>，SVG 数据逐字节一致。
-      </p>
+      <DocsContent
+        source={`:::tip
+
+只要你安装了 @element-plus/icons-vue，**就可以在任意版本里使用 SVG 图标**。
+
+**您可以点击图标复制代码**
+
+:::`}
+      />
 
       <div
         style={{

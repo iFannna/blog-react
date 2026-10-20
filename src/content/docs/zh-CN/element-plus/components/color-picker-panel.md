@@ -5,21 +5,25 @@ group: 表单组件
 order: 40
 ---
 
-# ColorPickerPanel 颜色选择面板
+# ColorPickerPanel 颜色选择器面板 ^(beta)
 
-`ColorPickerPanel` 是颜色选择器的核心组件。
+`ColorPickerPanel`是`ColorPicker`的核心组件。
 
 ## 基础用法
 
-:::demo 颜色选择面板需要一个字符串类型的绑定值。
+ColorPickerPanel 需要一个字符串类型的变量才能绑定到 v-model。
+
+:::demo
 
 color-picker-panel/basic
 
 :::
 
-## 透明度
+## 选择透明度
 
-:::demo 添加 `showAlpha` 属性即可启用透明度选择。
+ColorPickerPanel 支持Alpha 通道选择。要激活 Alpha 选择，只需添加 "show-alpha" 属性。
+
+:::demo
 
 color-picker-panel/alpha
 
@@ -27,23 +31,29 @@ color-picker-panel/alpha
 
 ## 预定义颜色
 
-:::demo 通过 `predefine` 属性可以配置预定义颜色。
+颜色选择板支持预定义的颜色选项
+
+:::demo
 
 color-picker-panel/predefined-color
 
 :::
 
-## 边框
+## Border 边框
 
-:::demo 默认情况下颜色选择面板带有边框，某些场景下可以设置 `border` 为 `false` 去掉边框。
+默认情况下，边框是默认的，如果你不想要边框请参考示例。
+
+:::demo
 
 color-picker-panel/border
 
 :::
 
-## 禁用状态
+## 禁用
 
-:::demo `disabled` 属性决定颜色选择面板是否完全禁用。
+"禁用"属性决定颜色选择器是否完全禁用。
+
+:::demo
 
 color-picker-panel/disabled
 

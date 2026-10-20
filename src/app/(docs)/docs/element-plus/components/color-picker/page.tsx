@@ -110,35 +110,33 @@ export default function ColorPickerPage() {
   return (
     <>
       <h1>ColorPicker 颜色选择器</h1>
-      <p>用于选择颜色的颜色选择器，支持多种颜色格式。</p>
+      <p>用于颜色选择，支持多种格式。</p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>颜色选择器需要一个字符串类型的绑定值。</p>
+      <p>
+        使用 v-model 与 Vue 实例中的一个变量进行双向绑定，绑定的变量需要是字符串类型。
+      </p>
       <DemoBlock source={SOURCES.basic}>
         <ColorPickerBasic />
       </DemoBlock>
 
-      <Heading level={2}>透明度</Heading>
+      <Heading level={2}>选择透明度</Heading>
       <p>
-        颜色选择器支持选择 alpha 通道。添加 <code>showAlpha</code>
-        属性即可启用透明度选择。
+        ColorPicker 支持普通颜色，也支持带 Alpha 通道的颜色，通过
+        <code>show-alpha</code>属性即可控制是否支持透明度的选择。要启用 Alpha
+        选择，只需添加 <code>show-alpha</code> 属性。
       </p>
       <DemoBlock source={SOURCES.alpha}>
         <ColorPickerAlpha />
       </DemoBlock>
 
       <Heading level={2}>预定义颜色</Heading>
-      <p>
-        通过 <code>predefine</code> 属性可以配置预定义颜色。
-      </p>
+      <p>ColorPicker 支持预定义颜色</p>
       <DemoBlock source={SOURCES.predefinedColor}>
         <ColorPickerPredefinedColor />
       </DemoBlock>
 
       <Heading level={2}>不同尺寸</Heading>
-      <p>
-        通过 <code>size</code> 属性设置颜色选择器的尺寸。
-      </p>
       <DemoBlock source={SOURCES.sizes}>
         <ColorPickerSizes />
       </DemoBlock>

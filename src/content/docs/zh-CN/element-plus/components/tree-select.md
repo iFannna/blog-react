@@ -5,21 +5,35 @@ group: 表单组件
 order: 240
 ---
 
-# TreeSelect 树形选择器
+# TreeSelect 树形选择
 
-下拉菜单形式的树形选择器，组合了 `ElTree` 与  `ElSelect` 的功能。
+含有下拉菜单的树形选择器，结合了 `el-tree` 和 `el-select` 两个组件的功能。
 
 ## 基础用法
 
-:::demo 用于树形结构的选择器。
+:::demo 树状选择器
 
 tree-select/basic
 
 :::
 
-## 选择任意一级选项
+## 选择任意级别
 
-:::demo 在设置 `checkStrictly` 属性之后，任意一级都可以选择； 否则只能选择叶子节点。使用 `showCheckbox` 时， `checkOnClickNode` 默认为 `false`， 即只能通过勾选选中，可以将其设置为 `true` 后点击节点选中。 使用 `showCheckbox` 时 `checkOnClickLeaf` 默认为  `true`，点击叶子节点即可勾选。
+当属性 `check-strictly=true` 时，任何节点都可以被选择，否则只有子节点可被选择。
+
+:::tip
+
+当使用 `show-checkbox`时，由于 `check-on-click-node` 默认值是 false，这时候只能通过 checkbox 来选中，当然您也可以将其设置成 true，这样点击整个 node 都可以用来完成选择
+
+:::
+
+:::warning
+
+在使用 show-checkbox 时，因为 `check-on-click-leaf` 默认值为 true， 最后一个树节点可以通过点击节点进行勾选。
+
+:::
+
+:::demo
 
 tree-select/check-strictly
 
@@ -27,7 +41,7 @@ tree-select/check-strictly
 
 ## 多选
 
-:::demo 通过点击或复选框多选。
+:::demo 通过点击或复选框选择多个选项。
 
 tree-select/multiple
 
@@ -35,7 +49,7 @@ tree-select/multiple
 
 ## 禁用选项
 
-:::demo 在数据里用 `disabled` 字段禁用选项。
+:::demo 使用 disabled 字段禁用选项。
 
 tree-select/disabled
 
@@ -43,7 +57,7 @@ tree-select/disabled
 
 ## 可筛选
 
-:::demo 利用关键字进行筛选，或使用自定义筛选方法。`filterMethod`  可自定义对数据进行筛选的方法，`filterNodeMethod`  可自定义对数据节点进行筛选的方法。
+:::demo 使用关键字筛选或自定义筛选方法。 `filterMethod`可以自定义数据筛选的方法， `filterNodeMethod`可以自定义节点数据筛选的方法。
 
 tree-select/filterable
 
@@ -59,7 +73,7 @@ tree-select/slots
 
 ## 懒加载
 
-:::demo 树节点的懒加载，适用于大数据列表。
+:::demo 树节点懒加载，更加适合于数据量大的列表。
 
 tree-select/lazy
 
@@ -67,9 +81,17 @@ tree-select/lazy
 
 ## 使用 node-key 属性
 
-:::demo 默认情况下 `modelValue` 查找的是 `value` 键。 对于不同的数据结构，必须提供 `nodeKey` 才能正常工作。
+:::demo 默认情况下，`modelValue` 会查找 `value` 键。对于其他数据结构，必须提供 `node-key` 才能正常工作。
 
 tree-select/node-key
+
+:::
+
+:::tip
+
+1. `node-key` 在整个树中应该是唯一的。
+2. `value-key` 与 `node-key` 具有相同的目标。
+3. 与 select 组件相反，tree-select 不能检索对象值。
 
 :::
 

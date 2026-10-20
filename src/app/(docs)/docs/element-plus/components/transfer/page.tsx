@@ -169,22 +169,29 @@ export default function TransferPage() {
   return (
     <>
       <h1>Transfer 穿梭框</h1>
-      <p>在一组列表中选中内容，移动到另一侧完成选择。</p>
 
       <Heading level={2}>基础用法</Heading>
       <p>
-        通过 <code>data</code> 传数据，每项需有 <code>key</code> 标识、
-        <code>label</code> 显示文本，<code>disabled</code> 可选。
-        <code>value</code> 是右侧列表的 key 数组。
+        Transfer 的数据通过 <code>data</code> 属性传入。数据需要是一个对象数组，每个对象有以下属性：
+        <code>key</code> 为数据的唯一性标识，<code>label</code> 为显示文本，
+        <code>disabled</code> 表示该项数据是否禁止被操作。目标列表中的数据项会同步到绑定至{" "}
+        <code>v-model</code> 的变量，值为数据项的 <code>key</code>{" "}
+        所组成的数组。当然，如果希望在初始状态时目标列表不为空，可以像本例一样为{" "}
+        <code>v-model</code> 绑定的变量赋予一个初始值。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <TransferBasic />
       </DemoBlock>
 
-      <Heading level={2}>可搜索</Heading>
+      <Heading level={2}>可搜索过滤</Heading>
+      <p>在数据很多的情况下，可以对数据进行搜索和过滤。</p>
       <p>
-        设置 <code>filterable</code> 开启搜索；默认按 <code>label</code> 是否包含关键词过滤，
-        也可用 <code>filterMethod</code> 自定义匹配逻辑。
+        设置 <code>filterable</code> 为 <code>true</code>{" "}
+        即可开启搜索模式。默认情况下，若数据项的 <code>label</code>{" "}
+        属性包含搜索关键字，则会在搜索结果中显示。你也可以使用{" "}
+        <code>filter-method</code> 定义自己的搜索逻辑。 <code>filter-method</code>{" "}
+        接收一个方法，当搜索关键字变化时，会将当前的关键字和每个数据项传给该方法。若方法返回{" "}
+        <code>true</code>，则会在搜索结果中显示对应的数据项。
       </p>
       <DemoBlock source={SOURCES.filterable}>
         <TransferFilterable />
@@ -192,36 +199,60 @@ export default function TransferPage() {
 
       <Heading level={2}>自定义</Heading>
       <p>
-        可用 <code>titles</code>、<code>buttonTexts</code>、<code>renderContent</code>、
-        <code>format</code> 自定义标题、按钮文案、数据项渲染与头部统计文案；
-        用 <code>leftFooter</code> / <code>rightFooter</code> 自定义底部内容；
-        用 <code>leftDefaultChecked</code> / <code>rightDefaultChecked</code> 设置初始勾选项。
+        可以对列表标题文案、按钮文案、数据项的渲染函数、列表底部的勾选状态文案、列表底部的内容区等进行自定义。
+      </p>
+      <p>
+        可以使用 <code>titles</code>、<code>button-texts</code>、
+        <code>render-content</code> 和 <code>format</code>{" "}
+        属性分别对列表标题文案、按钮文案、数据项的渲染函数和列表顶部的勾选状态文案进行自定义。数据项的渲染还可以使用{" "}
+        <code>scoped-slot</code> 进行自定义。对于列表底部的内容区，提供了两个具名 slot：
+        <code>left-footer</code> 和 <code>right-footer</code>
+        。此外，如果希望某些数据项在初始化时就被勾选，可以使用{" "}
+        <code>left-default-checked</code> 和 <code>right-default-checked</code>{" "}
+        属性。最后，本例还展示了 <code>change</code>{" "}
+        事件的用法。注意，由于 JSFiddle 不支持 JSX 语法，故该示例无法在 JSFiddle
+        运行。但是在实际的项目中，只要正确地配置了相关依赖，就可以正常运行。
       </p>
       <DemoBlock source={SOURCES.customizable}>
         <TransferCustomizable />
       </DemoBlock>
 
-      <Heading level={2}>自定义空内容</Heading>
+      <Heading level={2} id="自定义空内容">
+        自定义空内容 <span className="docs-version-tag">2.9.0</span>
+      </Heading>
+      <p>您可以自定义列表为空或未找到筛选结果时显示的内容。</p>
       <p>
-        用 <code>leftEmpty</code> / <code>rightEmpty</code> 自定义列表为空或无匹配结果时的内容。
+        使用 <code>left-empty</code> 和 <code>right-empty</code>{" "}
+        插槽来自定义每个面板的空内容。
       </p>
       <DemoBlock source={SOURCES.emptyContent}>
         <TransferEmptyContent />
       </DemoBlock>
 
-      <Heading level={2}>数据项别名</Heading>
+      <Heading level={2}>数据项属性别名</Heading>
       <p>
-        默认从数据项取 <code>key</code>、<code>label</code>、<code>disabled</code>；
-        字段名不同时用 <code>optionProps</code> 声明别名。
+        默认情况下，Transfer 仅能识别数据项中的 <code>key</code>、<code>label</code> 和{" "}
+        <code>disabled</code> 字段。如果你的数据的字段名不同，可以使用{" "}
+        <code>props</code> 属性为它们设置别名。
+      </p>
+      <p>
+        本例中的数据源没有 <code>key</code> 和 <code>label</code>{" "}
+        字段，在功能上与它们相同的字段名为 <code>value</code> 和 <code>desc</code>
+        。因此可以使用<code>props</code> 属性为 <code>key</code> 和 <code>label</code>{" "}
+        设置别名。
       </p>
       <DemoBlock source={SOURCES.propAlias}>
         <TransferPropAlias />
       </DemoBlock>
 
-      <Heading level={2}>虚拟滚动</Heading>
+      <Heading level={2} id="虚拟滚动">
+        虚拟滚动 <span className="docs-version-tag">2.14.3</span>
+      </Heading>
+      <p>当处理大量数据时，您可以启用虚拟滚动以提高性能。</p>
       <p>
-        数据量较大时设置 <code>virtualScroll</code> 开启虚拟滚动，用{" "}
-        <code>itemSize</code> 指定行高（默认 30px）。
+        将 <code>virtual-scroll</code> 设置为 <code>true</code>{" "}
+        以启用虚拟滚动。 您也可以使用 <code>item-size</code>{" "}
+        自定义项的高度。默认项大小为 30px。
       </p>
       <DemoBlock source={SOURCES.virtualScroll}>
         <TransferVirtualScroll />

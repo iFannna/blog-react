@@ -220,64 +220,75 @@ export default function DropdownPage() {
   return (
     <>
       <h1>Dropdown 下拉菜单</h1>
-      <p>向下弹出的菜单列表。</p>
+      <p>将动作或菜单折叠到下拉菜单中。</p>
 
       <Heading level={2}>基础用法</Heading>
+      <p>悬停在下拉菜单上以展开更多操作。</p>
       <p>
-        通过 <code>menu</code> 传入菜单，默认鼠标悬停触发；触发元素由
-        <code>children</code> 提供。
+        通过组件 <code>slot</code> 来设置下拉触发的元素以及需要通过具名{" "}
+        <code>slot</code> 为 <code>dropdown</code>{" "}
+        来设置下拉菜单。默认情况下，只需要悬停在触发菜单的元素上即可，无需点击也会显示下拉菜单。
       </p>
       <DemoBlock source={SOURCES.basicUsage}>
         <DropdownBasicUsage />
       </DemoBlock>
 
-      <Heading level={2}>弹出位置</Heading>
+      <Heading level={2}>位置</Heading>
+      <p>支持 6 个位置。</p>
       <p>
-        通过 <code>placement</code> 设置菜单出现的位置。
+        设置 <code>placement</code> 属性，使下拉菜单出现在不同位置。
       </p>
       <DemoBlock source={SOURCES.placements}>
         <DropdownPlacements />
       </DemoBlock>
 
-      <Heading level={2}>触发元素</Heading>
+      <Heading level={2}>触发对象</Heading>
+      <p>可使用按钮触发下拉菜单。</p>
       <p>
-        <code>splitButton</code> 把按钮分为两半：左半触发
-        <code>onButtonClick</code>，右半展开菜单。
+        设置 <code>split-button</code>{" "}
+        属性来让触发下拉元素呈现为按钮组，左边是功能按钮，右边是触发下拉菜单的按钮，设置为{" "}
+        <code>true</code>{" "}
+        即可。如果你想要在第三和第四个选项之间添加一个分隔符，你只需要为第四个选项添加一个{" "}
+        <code>divided</code> 的属性。
       </p>
       <DemoBlock source={SOURCES.triggeringElement}>
         <DropdownTriggeringElement />
       </DemoBlock>
 
       <Heading level={2}>触发方式</Heading>
+      <p>可以配置点击激活或者悬停激活。</p>
       <p>
-        通过 <code>trigger</code> 设置 hover、click 或 contextmenu。
+        将 <code>trigger</code> 属性设置为 click 即可，默认为{" "}
+        <code>hover</code>。
       </p>
       <DemoBlock source={SOURCES.howToTrigger}>
         <DropdownHowToTrigger />
       </DemoBlock>
 
-      <Heading level={2}>菜单隐藏行为</Heading>
+      <Heading level={2}>菜单隐藏方式</Heading>
       <p>
-        默认点击菜单项后关闭；设置 <code>hideOnClick</code> 为
-        <code>false</code> 可保持菜单打开。
+        可以通过 <code>hide-on-click</code> 属性来配置。
+      </p>
+      <p>
+        下拉菜单默认在点击菜单项后会被隐藏，将 hide-on-click 属性设置为 false
+        可以关闭此功能。
       </p>
       <DemoBlock source={SOURCES.menuHidingBehavior}>
         <DropdownMenuHidingBehavior />
       </DemoBlock>
 
-      <Heading level={2}>Command 事件</Heading>
+      <Heading level={2}>指令事件</Heading>
       <p>
-        菜单项的 <code>command</code> 会传给 <code>onCommand</code>，
-        禁用项不会触发。
+        点击菜单项后会触发事件，用户可以通过相应的菜单项 key 进行不同的操作。
       </p>
       <DemoBlock source={SOURCES.commandEvent}>
         <DropdownCommandEvent />
       </DemoBlock>
 
-      <Heading level={2}>Dropdown 方法</Heading>
+      <Heading level={2}>下拉方法</Heading>
       <p>
-        通过 ref 上的 <code>handleOpen</code> / <code>handleClose</code>
-        主动控制菜单。
+        您可以手动使用 <code>手动打开</code> 或{" "}
+        <code>手动关闭下拉菜单以打开或关闭</code>
       </p>
       <DemoBlock source={SOURCES.methods}>
         <DropdownMethods />
@@ -285,17 +296,21 @@ export default function DropdownPage() {
 
       <Heading level={2}>尺寸</Heading>
       <p>
-        通过 <code>size</code> 设置 <code>large</code>、<code>default</code> 或
-        <code>small</code>。
+        Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的尺寸。
+      </p>
+      <p>
+        使用 <code>size</code> 属性配置尺寸，可选的尺寸大小有:{" "}
+        <code>large</code>, <code>default</code> 或 <code>small</code>
       </p>
       <DemoBlock source={SOURCES.sizes}>
         <DropdownSizes />
       </DemoBlock>
 
-      <Heading level={2}>虚拟触发</Heading>
+      <Heading level={2} id="虚拟触发">
+        虚拟触发<span className="docs-version-tag">2.11.3</span>
+      </Heading>
       <p>
-        <code>virtualTriggering</code> + <code>virtualRef</code>
-        让菜单出现在任意坐标或元素旁。
+        有时候我们想把 dropdown 的触发元素放在别的地方，而不需要写在一起，这时候就可以使用虚拟触发。
       </p>
       <DemoBlock source={SOURCES.virtualTrigger}>
         <DropdownVirtualTrigger />

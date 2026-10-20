@@ -138,7 +138,7 @@ export default function AnchorPage() {
   return (
     <>
       <h1>Anchor 锚点</h1>
-      <p>通过锚点，可以快速找到当前页面信息内容的位置。</p>
+      <p>通过锚点，您可以很快找到当前页面上信息内容的位置。</p>
 
       <Heading level={2} id="basic-usage">
         基础用法
@@ -151,9 +151,14 @@ export default function AnchorPage() {
       <Heading level={2} id="horizontal-mode">
         水平模式
       </Heading>
-      <p>
-        水平方向排列的锚点。水平模式不支持 <code>sub-link</code> 插槽。
-      </p>
+      <p>水平排列的锚点</p>
+      <DocsContent
+        source={`:::tip
+
+水平模式不支持\`sub-link\`槽位
+
+:::`}
+      />
       <DemoBlock source={SOURCES.horizontal}>
         <AnchorHorizontal />
       </DemoBlock>
@@ -162,8 +167,8 @@ export default function AnchorPage() {
         滚动容器
       </Heading>
       <p>
-        自定义滚动区域，使用 <code>offset</code> 设置锚点滚动偏移量，
-        监听 <code>onClick</code> 并阻止浏览器默认行为即不会改变 history。
+        自定义滚动区域，使用 <code>offset</code> props 可以设置锚点滚动偏移。
+        监听<code>link-click</code>事件并阻止浏览器的默认行为，从而不会更改历史记录。
       </p>
       <DemoBlock source={SOURCES.scroll}>
         <AnchorScroll />
@@ -172,7 +177,7 @@ export default function AnchorPage() {
       <Heading level={2} id="change">
         锚点链接变化
       </Heading>
-      <p>监听锚点链接的变化。</p>
+      <p>监听锚点链接变化</p>
       <DemoBlock source={SOURCES.change}>
         <AnchorChange />
       </DemoBlock>
@@ -181,7 +186,7 @@ export default function AnchorPage() {
         下划线类型
       </Heading>
       <p>
-        设置 <code>type=&quot;underline&quot;</code> 切换为下划线类型。
+        设置<code>type=&quot;underline&quot;</code>以更改为下划线类型
       </p>
       <DemoBlock source={SOURCES.underline}>
         <AnchorUnderline />
@@ -190,7 +195,7 @@ export default function AnchorPage() {
       <Heading level={2} id="affix">
         固定模式
       </Heading>
-      <p>使用固钉组件将锚点固定在页面内。</p>
+      <p>使用 affix 组件来固定住页面中的锚点。</p>
       <DemoBlock source={SOURCES.affix}>
         <AnchorAffix />
       </DemoBlock>

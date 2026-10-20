@@ -150,29 +150,33 @@ export default function TimePickerPage() {
   return (
     <>
       <h1>TimePicker 时间选择器</h1>
-      <p>用于选择或输入时间。</p>
+      <p>用于选择或输入日期</p>
 
-      <Heading level={2}>任意时间</Heading>
+      <Heading level={2}>任意时间点</Heading>
+      <p>可以选择任意时间</p>
       <p>
-        默认可以用鼠标滚轮选择时间，设置 <code>arrowControl</code> 后改用上下箭头按钮。
+        提供了两种交互方式：默认情况下通过鼠标滚轮进行选择，打开
+        <code>arrow-control</code>属性则通过界面上的箭头进行选择。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <TimePickerBasic />
       </DemoBlock>
 
-      <Heading level={2}>限制时间范围</Heading>
+      <Heading level={2}>限制时间选择范围</Heading>
+      <p>您也可以限制时间选择范围。</p>
       <p>
-        通过 <code>disabledHours</code>、<code>disabledMinutes</code>、
-        <code>disabledSeconds</code> 限制可选时间。
+        通过 <code>disabledHours</code>，<code>disabledMinutes</code> 和{" "}
+        <code>disabledSeconds</code> 限制可选时间范围。,
       </p>
       <DemoBlock source={SOURCES.basicRange}>
         <TimePickerBasicRange />
       </DemoBlock>
 
       <Heading level={2}>任意时间范围</Heading>
+      <p>可选择任意的时间范围</p>
       <p>
-        添加 <code>isRange</code> 即可选择时间范围，范围模式同样支持{" "}
-        <code>arrowControl</code>。
+        添加<code>is-range</code>属性即可选择时间范围。同样支持{" "}
+        <code>arrow-control</code> 属性。
       </p>
       <DemoBlock source={SOURCES.range}>
         <TimePickerRange />

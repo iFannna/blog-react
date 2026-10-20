@@ -115,8 +115,11 @@ const API_MD = `
 export default function InputOtpPage() {
   return (
     <>
-      <h1>InputOtp 一次性密码输入框 ^(beta)</h1>
-      <p>用于输入一次性密码（OTP）。</p>
+      <h1>
+        InputOtp 一次性密码输入框{" "}
+        <span className="docs-version-tag docs-version-tag--beta">beta</span>
+      </h1>
+      <p>用于输入一次性密码</p>
 
       <Heading level={2}>基础用法</Heading>
       <DemoBlock source={SOURCES.basic}>
@@ -125,51 +128,54 @@ export default function InputOtpPage() {
 
       <Heading level={2}>自定义长度</Heading>
       <p>
-        通过 <code>length</code> 自定义输入框的数量。
+        输入字段长度可以通过设置<code>length</code>属性来自定义。
       </p>
       <DemoBlock source={SOURCES.customLength}>
         <InputOtpCustomLength />
       </DemoBlock>
 
-      <Heading level={2}>类型</Heading>
-      <p>支持三种类型：outlined（默认）、filled、underlined。</p>
+      <Heading level={2}>展示类型</Heading>
+      <p>
+        有三种类型可用：<code>outlined </code> （默认）、<code>filled </code> 和{" "}
+        <code>underlined</code>。
+      </p>
       <DemoBlock source={SOURCES.types}>
         <InputOtpTypes />
       </DemoBlock>
 
-      <Heading level={2}>尺寸</Heading>
+      <Heading level={2}>调整尺寸</Heading>
       <p>
-        支持三种尺寸：<code>large</code>、<code>default</code>、<code>small</code>。
+        有三个尺寸可用：<code>large</code>、<code>default</code> 和{" "}
+        <code>small</code>。
       </p>
       <DemoBlock source={SOURCES.sizes}>
         <InputOtpSizes />
       </DemoBlock>
 
-      <Heading level={2}>禁用与只读</Heading>
-      <p>
-        支持 <code>disabled</code> 与 <code>readonly</code> 状态。
-      </p>
+      <Heading level={2}>禁用 &amp; 只读</Heading>
+      <p>支持禁用和只读状态。</p>
       <DemoBlock source={SOURCES.disabled}>
         <InputOtpDisabled />
       </DemoBlock>
 
-      <Heading level={2}>掩码</Heading>
+      <Heading level={2}>密码模式</Heading>
       <p>
-        通过 <code>mask</code> 隐藏输入的字符。
+        使用 <code>mask</code> 属性来隐藏输入字符。
       </p>
       <DemoBlock source={SOURCES.mask}>
         <InputOtpMask />
       </DemoBlock>
 
       <Heading level={2}>分隔符</Heading>
-      <p>自定义 OTP 输入框之间的分隔符。</p>
+      <p>自定义OTP字段之间的分隔符。</p>
       <DemoBlock source={SOURCES.separator}>
         <InputOtpSeparator />
       </DemoBlock>
 
-      <Heading level={2}>自定义校验</Heading>
+      <Heading level={2}>自定义验证</Heading>
       <p>
-        通过 <code>validator</code> 校验输入的字符，并用 <code>inputmode</code> 指定键盘类型。
+        设置 <code>validator</code> 属性以验证输入字符，并使用{" "}
+        <code>inputmode</code> 指定键盘类型。
       </p>
       <DemoBlock source={SOURCES.validator}>
         <InputOtpValidator />

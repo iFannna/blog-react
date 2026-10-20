@@ -109,16 +109,28 @@ export default function AlertPage() {
       <p>Alert 组件不属于浮层元素，不会自动消失或关闭。</p>
       <DemoBlock
         source={SOURCES.basic}
-        description="Alert 组件提供5种类型，由 type 属性指定，默认值为 info。primary 已被添加到 2.9.11。"
+        description={
+          <>
+            Alert 组件提供5种类型，由 <code>type</code> 属性指定，默认值为{" "}
+            <code>info</code>。 <code>primary</code> 已被添加到
+            <span className="docs-version-tag">2.9.11</span>。
+          </>
+        }
       >
         <AlertBasic />
       </DemoBlock>
 
       <Heading level={2}>主题</Heading>
-      <p>Alert 组件提供了两个不同的主题：light 和 dark。</p>
+      <p>
+        Alert 组件提供了两个不同的主题：<code>light</code> 和 <code>dark</code>。
+      </p>
       <DemoBlock
         source={SOURCES.theme}
-        description="通过设置 effect 属性来改变主题，默认为 light。"
+        description={
+          <>
+            通过设置 <code>effect</code> 属性来改变主题，默认为 <code>light</code>。
+          </>
+        }
       >
         <AlertTheme />
       </DemoBlock>
@@ -127,7 +139,16 @@ export default function AlertPage() {
       <p>你可以自定义关闭按钮为文字或其他符号。</p>
       <DemoBlock
         source={SOURCES.customClose}
-        description="你可以设置 Alert 组件是否为可关闭状态，关闭按钮的内容以及关闭时的回调函数。closable 属性决定组件是否可关闭，默认 true。close-text 属性用于替换默认的 × 符号。"
+        description={
+          <>
+            你可以设置 Alert 组件是否为可关闭状态，关闭按钮的内容以及关闭时的回调函数同样可以定制。{" "}
+            <code>closable</code> 属性决定 Alert 组件是否可关闭，该属性接受一个{" "}
+            <code>Boolean</code>，默认为 <code>false</code>。你可以设置{" "}
+            <code>close-text</code> 属性来代替右侧的关闭图标，需要注意的是{" "}
+            <code>close-text</code> 必须是一个字符串。当 Alert 组件被关闭时会触发{" "}
+            <code>close</code> 事件。
+          </>
+        }
       >
         <AlertCustomClose />
       </DemoBlock>
@@ -136,13 +157,20 @@ export default function AlertPage() {
       <p>你可以通过为 Alert 组件添加图标来提高可读性。</p>
       <DemoBlock
         source={SOURCES.icon}
-        description="通过设置 show-icon 属性来显示 Alert 的 icon，这能更有效地向用户展示你的提示。或者使用 icon 插槽来自定义图标。"
+        description={
+          <>
+            通过设置 <code>show-icon</code> 属性来显示 Alert 的 icon，这能更有效地向用户展示你的显示意图。或者你可以使用{" "}
+            <code>icon</code> slot 自定义 icon 内容。
+          </>
+        }
       >
         <AlertIcon />
       </DemoBlock>
 
       <Heading level={2}>文字居中</Heading>
-      <p>使用 center 属性来让文字水平居中。</p>
+      <p>
+        使用 <code>center</code> 属性来让文字水平居中。
+      </p>
       <DemoBlock source={SOURCES.center}>
         <AlertCenter />
       </DemoBlock>
@@ -151,7 +179,13 @@ export default function AlertPage() {
       <p>为 Alert 组件添加一个更加详细的描述来使用户了解更多信息。</p>
       <DemoBlock
         source={SOURCES.description}
-        description="除了必填的 title 属性外，你可以设置 description 属性来帮助你更好地介绍 Alert 组件。描述只能存放文本，并会自动换行。"
+        description={
+          <>
+            除了必填的 <code>title</code> 属性外，你可以设置{" "}
+            <code>description</code>{" "}
+            属性来帮助你更好地介绍，我们称之为辅助性文字。辅助性文字只能存放文本内容，当内容超出长度限制时会自动换行显示。
+          </>
+        }
       >
         <AlertDescription />
       </DemoBlock>

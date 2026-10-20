@@ -291,52 +291,60 @@ export default function MenuPage() {
     <>
       <h1>Menu 菜单</h1>
       <p>为网站提供导航功能的菜单。</p>
-      <p>
-        如需覆盖 <code>el-menu</code> 的默认高度，可以使用：
-      </p>
-      <pre>
-        <code>{`.el-menu--horizontal {
+      <DocsContent
+        source={`:::tip
+
+如果您想要覆盖el-menu的默认高度, 您可以使用下列CSS
+
+\`\`\`css
+.el-menu--horizontal {
   --el-menu-horizontal-height: 100px;
-}`}</code>
-      </pre>
+}
+\`\`\`
+
+:::`}
+      />
 
       <Heading level={2}>顶栏</Heading>
+      <p>顶部栏菜单可以在各种场景中使用。</p>
       <p>
-        顶栏菜单可用于多种场景。菜单默认是纵向的，将 <code>mode</code> 设为{" "}
-        <code>horizontal</code> 即可切换为横向。配合 <code>ElSubMenu</code>{" "}
-        可创建二级菜单，并通过 <code>backgroundColor</code>、<code>textColor</code>{" "}
-        与 <code>activeTextColor</code> 自定义配色。
+        导航菜单默认为垂直模式，通过将 mode 属性设置为 horizontal
+        来使导航菜单变更为水平模式。另外，在菜单中通过 sub-menu 组件可以生成二级菜单。
+        Menu 还提供了<code>background-color</code>、<code>text-color</code>和<code>active-text-color</code>，分别用于设置菜单的背景色、菜单的文字颜色和当前激活菜单的文字颜色。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <MenuBasic />
       </DemoBlock>
 
-      <Heading level={2}>左右分布</Heading>
-      <p>可以将菜单项分布到左右两侧。</p>
+      <Heading level={2}>左右</Heading>
+      <p>您可以将菜单项放置在左边或右边。</p>
       <DemoBlock source={SOURCES.leftAndRight}>
         <MenuLeftAndRight />
       </DemoBlock>
 
-      <Heading level={2}>侧边栏</Heading>
-      <p>带子菜单的纵向菜单。</p>
+      <Heading level={2}>侧栏</Heading>
+      <p>垂直菜单，可内嵌子菜单。</p>
       <p>
-        使用 <code>ElMenuItemGroup</code> 创建菜单分组，分组名称由{" "}
-        <code>title</code> 决定。
+        通过 el-menu-item-group
+        组件可以实现菜单进行分组，分组名可以通过 title
+        属性直接设定，也可以通过具名 slot 来设定。
       </p>
       <DemoBlock source={SOURCES.vertical}>
         <MenuVertical />
       </DemoBlock>
 
-      <Heading level={2}>折叠</Heading>
-      <p>纵向菜单可以折叠。</p>
+      <Heading level={2}>Collapse 折叠面板</Heading>
+      <p>垂直导航菜单可以被折叠</p>
       <DemoBlock source={SOURCES.collapse}>
         <MenuCollapse />
       </DemoBlock>
 
-      <Heading level={2}>浮层偏移</Heading>
+      <Heading level={2} id="弹出层偏移量">
+        弹出层偏移量<span className="docs-version-tag">2.4.4</span>
+      </Heading>
       <p>
-        子菜单设置 <code>popperOffset</code> 后会覆盖菜单的{" "}
-        <code>popperOffset</code>。
+        当提供了 popperOffset 配置，会覆盖 Menu 的{" "}
+        <code>popper-offset</code>.
       </p>
       <DemoBlock source={SOURCES.popperOffset}>
         <MenuPopperOffset />

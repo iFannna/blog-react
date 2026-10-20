@@ -113,42 +113,50 @@ const API_MD = `
 export default function TextPage() {
   return (
     <>
-      <h1>Text 文本</h1>
-      <p>文本的常见操作，包括类型、尺寸、混排与溢出省略。</p>
+      <h1>Text</h1>
+      <p>文本的常见操作</p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>通过 type 设置文本类型。</p>
+      <p>
+        由 <code>type</code> 属性来选择 Text 的类型。
+      </p>
       <DemoBlock source={SOURCES.basic}>
         <TextBasic />
       </DemoBlock>
 
       <Heading level={2}>尺寸</Heading>
-      <p>通过 size 设置文本尺寸。</p>
+      <p>
+        使用 <code>size</code> 属性配置尺寸，可选的尺寸大小有: <code>large</code>,{" "}
+        <code>default</code> 或 <code>small</code>
+      </p>
       <DemoBlock source={SOURCES.sizes}>
         <TextSizes />
       </DemoBlock>
 
-      <Heading level={2}>溢出省略</Heading>
+      <Heading level={2}>省略</Heading>
       <p>
-        <code>truncated</code> 用于单行省略，<code>lineClamp</code> 用于多行省略；
-        宽度可由自身或父元素约束。
+        通过 <code>truncated</code> 属性，在文本超过视图或最大宽度设置时展示省略符。通过{" "}
+        <code>line-clamp</code> 属性控制多行的样式 Starting from version{" "}
+        <span className="docs-version-tag">2.14.6</span>,{" "}
+        <code>isTruncated</code> is exposed to indicate whether the text is truncated. You
+        can use it to show a tooltip only when truncation occurs.
       </p>
       <DemoBlock source={SOURCES.truncated}>
         <TextTruncated />
       </DemoBlock>
 
-      <Heading level={2}>混合使用</Heading>
-      <p>文本可与图标、评分、按钮等组件混排。</p>
-      <DemoBlock source={SOURCES.mixed}>
-        <TextMixed />
-      </DemoBlock>
-
-      <Heading level={2}>覆盖标签</Heading>
+      <Heading level={2}>覆盖</Heading>
       <p>
-        通过 <code>tag</code> 渲染为 p / b / i / sub / sup / ins / del / mark 等语义标签。
+        使用属性 <code>tag</code> 覆盖元素
       </p>
       <DemoBlock source={SOURCES.override}>
         <TextOverride />
+      </DemoBlock>
+
+      <Heading level={2}>混合使用</Heading>
+      <p>混合使用 Text 组件</p>
+      <DemoBlock source={SOURCES.mixed}>
+        <TextMixed />
       </DemoBlock>
 
       <DocsContent source={API_MD} />

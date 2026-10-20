@@ -5,13 +5,15 @@ group: 表单组件
 order: 60
 ---
 
-# DatePickerPanel 日期选择器面板
+# DatePickerPane 日期选择器面板 ^(beta)
 
-DatePickerPanel 是 DatePicker 的核心组件。
+`DatePickerPanel`是`DatePicker`的核心组件。
 
-## 输入日期
+## 选择某一天
 
-:::demo 以「日」为度量单位的基础日期选择面板。
+以”日“为基本单位，基础的日期选择控件
+
+:::demo
 
 date-picker-panel/basic
 
@@ -19,7 +21,9 @@ date-picker-panel/basic
 
 ## 边框
 
-:::demo 默认情况下面板带边框，某些场景下不需要边框。例如 DatePicker 就不会继承边框。
+默认情况下，边框是默认的，如果你不想要边框请参考示例。例如，`DatePicker`不继承`border`。
+
+:::demo
 
 date-picker-panel/border
 
@@ -27,19 +31,29 @@ date-picker-panel/border
 
 ## 禁用
 
-:::demo 通过 `disabled` 属性完全禁用日期选择面板。
+"禁用"属性决定日期选择器是否完全禁用。
+
+:::demo
 
 date-picker-panel/disabled
 
 :::
 
-## 类型
+## 展示类型
 
-:::demo 度量单位由 `type` 属性决定。
+时间面板的类型由 `type` 属性指定。
+
+:::demo
 
 date-picker-panel/all-types
 
 :::
+
+## 本地化
+
+由于 Element Plus 的默认语言为英语，如果你需要设置其它的语言，请参考[国际化](/zh-CN/guide/i18n)文档。
+
+要注意的是：日期相关的文字（月份，每一周的第一天等等）也都进行了本地化配置。
 
 ## DatePickerPanel API
 

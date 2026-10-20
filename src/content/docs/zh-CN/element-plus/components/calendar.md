@@ -7,19 +7,19 @@ order: 30
 
 # Calendar 日历
 
-显示日期。
+显示日期
 
 ## 基础用法
 
-:::demo 设置 `value` 指定当前显示的月份，不设置时显示当前月份。
+:::demo 设置 `value` 来指定当前显示的月份。如果 `value` 未指定，则显示当月。 `value` 支持 `v-model` 双向绑定。
 
 calendar/basic
 
 :::
 
-## 控制器类型
+## 控制器类型 ^(2.13.1)
 
-:::demo 通过 `controller-type` 设置日历头部控制器类型，选择器标签可通过 `formatter` 自定义。
+:::demo 您可以设置日历头部的控制器类型。设置 `select`时，您可以使用 `formatter` 自定义 `label`。
 
 calendar/controller-type
 
@@ -27,7 +27,7 @@ calendar/controller-type
 
 ## 自定义内容
 
-:::demo 通过 `renderDateCell` 自定义日历单元格内容。
+:::demo 通过设置名为 `date-cell` 的 `scoped-slot` 来自定义日历单元格中显示的内容。在 `scoped-slot` 可以获取到 date（当前单元格的日期）, data（包括 type，isSelected，day 属性）。详情解释参考下方的 API 文档。
 
 calendar/customize
 
@@ -35,13 +35,13 @@ calendar/customize
 
 ## 范围
 
-:::demo 通过 `range` 指定显示范围，跨度不能超过两个月。
+:::demo 设置 `range` 属性指定日历的显示范围。开始时间必须是周起始日，结束时间必须是周结束日，且时间跨度不能超过两个月。
 
 calendar/range
 
 :::
 
-## 自定义头部
+## 自定义日历头部
 
 :::demo
 
@@ -49,9 +49,11 @@ calendar/header
 
 :::
 
-## 本地化
+## 国际化
 
-日期标题、星期与控制按钮文案均读取 ConfigProvider 语言包。
+由于 Element Plus 的默认语言为英语，如果你需要设置其它的语言，请参考[国际化](/zh-CN/guide/i18n)文档。
+
+要注意的是：日期相关的文字（月份，每一周的第一天等等）也都是通过国际化来配置的。
 
 ## Calendar API
 

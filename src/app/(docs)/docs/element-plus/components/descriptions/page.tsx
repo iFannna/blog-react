@@ -213,7 +213,9 @@ export default function DescriptionsPage() {
         <DescriptionsVertical />
       </DemoBlock>
 
-      <Heading level={2}>跨行</Heading>
+      <Heading level={2} id="单元格跨行">
+        单元格跨行 <span className="docs-version-tag">2.8.1</span>
+      </Heading>
       <DemoBlock source={SOURCES.rowspan}>
         <DescriptionsRowspan />
       </DemoBlock>

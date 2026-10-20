@@ -13,14 +13,14 @@ order: 20
 
 Dialog 弹出一个对话框，适合需要定制性更大的场景。
 
-:::demo 需要设置 `visible` 属性，它接收 Boolean，当为 `true` 时显示 Dialog。Dialog 分为两个部分：body 和 footer，footer 需要具名为 footer 的插槽。`title` 属性用于定义标题，它是可选的，默认值为空。最后，本例还展示了 `beforeClose` 的用法。
+:::demo 需要设置 `model-value / v-model` 属性，它接收 `Boolean`，当为 `true` 时显示 Dialog。 Dialog 分为两个部分：`body` 和 `footer`，`footer` 需要具名为 `footer` 的 `slot`。 `title` 属性用于定义标题，它是可选的，默认值为空。最后，本例还展示了 `before-close` 的用法。
 
 dialog/basic-usage
 
 :::
 
-:::tip TIP
-`beforeClose` 只会在用户点击关闭按钮或者对话框的遮罩区域时被调用。如果你在 footer 具名插槽里添加了用于关闭 Dialog 的按钮，那么可以在按钮的点击回调函数里加入 `beforeClose` 的相关逻辑。
+:::tip
+`before-close` 只会在用户点击关闭按钮或者对话框的遮罩区域时被调用。如果你在 `footer` 具名 slot 里添加了用于关闭 Dialog 的按钮，那么可以在按钮的点击回调函数里加入 `before-close` 的相关逻辑。
 
 :::
 
@@ -46,9 +46,9 @@ dialog/customization-header
 
 ## 嵌套的对话框
 
-如果需要在一个 Dialog 内部嵌套另一个 Dialog，需要使用 `appendToBody` 属性。
+如果需要在一个 Dialog 内部嵌套另一个 Dialog，需要使用 `append-to-body` 属性。
 
-:::demo 通常我们不建议使用嵌套对话框。如果你需要在页面上呈现多个对话框，你可以简单地打平它们，以便它们彼此之间是平级关系。如果必须要在一个对话框内展示另一个对话框，可以将内部嵌套的对话框属性 `appendToBody` 设置为 `true`，嵌套的对话框将附加到 body 而不是其父节点，这样两个对话框都可以被正确地渲染。
+:::demo 通常我们不建议使用嵌套对话框。如果你需要在页面上呈现多个对话框，你可以简单地打平它们，以便它们彼此之间是平级关系。如果必须要在一个对话框内展示另一个对话框，可以将内部嵌套的对话框属性 `append-to-body` 设置为 true，嵌套的对话框将附加到 body 而不是其父节点，这样两个对话框都可以被正确地渲染。
 
 dialog/nested-dialog
 
@@ -58,14 +58,14 @@ dialog/nested-dialog
 
 对话框的内容可以居中。
 
-:::demo 将 `center` 设置为 `true` 即可使标题和底部居中。`center` 仅影响标题和底部区域。Dialog 的内容是任意的，在一些情况下，内容并不适合居中布局。如果需要内容也水平居中，请自行为其添加 CSS 样式。
+:::demo 将`center`设置为`true`即可使标题和底部居中。 `center`仅影响标题和底部区域。 Dialog 的内容是任意的，在一些情况下，内容并不适合居中布局。如果需要内容也水平居中，请自行为其添加 CSS 样式。
 
 dialog/centered-content
 
 :::
 
-:::tip TIP
-Dialog 的内容是懒渲染的——在被第一次打开之前，传入的默认插槽不会被立即渲染到 DOM 上。因此，如果需要执行 DOM 操作，或通过 ref 获取相应组件，请在 `open` 事件回调中进行。
+:::tip
+Dialog 的内容是懒渲染的——在被第一次打开之前，传入的默认 slot 不会被立即渲染到 DOM 上。因此，如果需要执行 DOM 操作，或通过 `ref` 获取相应组件，请在 `open` 事件回调中进行。
 
 :::
 
@@ -73,7 +73,7 @@ Dialog 的内容是懒渲染的——在被第一次打开之前，传入的默�
 
 从屏幕中心打开对话框。
 
-:::demo 设置 `alignCenter` 为 `true` 使对话框水平垂直居中。由于对话框垂直居中在弹性盒子中，所以 `top` 属性将不起作用。
+:::demo 设置 `align-center` 为 `true` 使对话框水平垂直居中。由于对话框垂直居中在弹性盒子中，所以`top`属性将不起作用。
 
 dialog/align-center
 
@@ -81,9 +81,9 @@ dialog/align-center
 
 ## 关闭时销毁
 
-启用此功能时，默认栏位下的内容将使用条件渲染销毁。当出现性能问题时，可以启用此功能。
+启用此功能时，默认栏位下的内容将使用 `v-if` 指令销毁。当出现性能问题时，可以启用此功能。
 
-:::demo 需要注意的是，当这个属性被启用时，在过渡动画卸载前，除了 overlay、header（可选）与 footer（可选），Dialog 内不会有其它任何 DOM 节点存在。
+:::demo 需要注意的是，当这个属性被启用时，在 `transition.beforeEnter` 事件卸载前，除了 `overlay`、`header (可选)`与`footer(可选)` ，Dialog 内不会有其它任何其它的 DOM 节点存在。
 
 dialog/destroy-on-close
 
@@ -91,16 +91,16 @@ dialog/destroy-on-close
 
 ## 可拖拽对话框
 
-试着拖动一下 header 部分吧。
+试着拖动一下`header`部分吧
 
-:::demo 设置 `draggable` 属性为 `true` 以做到拖拽。设置 `overflow` 为 `true` 可以让拖拽范围超出可视区。
+:::demo 设置`draggable`属性为`true`以做到拖拽设置 `overflow` ^(2.5.4) 为 `true` 可以让拖拽范围超出可视区。
 
 dialog/draggable-dialog
 
 :::
 
-:::tip TIP
-当 `modal` 的值为 `false` 时，请一定要确保 `appendToBody` 属性为 `true`。由于 Dialog 使用 `position: relative` 定位，当外层的遮罩层被移除时，Dialog 则会根据当前 DOM 上的祖先节点来定位，因此可能造成定位问题。
+:::tip
+当 `modal` 的值为 false 时，请一定要确保 `append-to-body` 属性为 **true**，由于 `Dialog` 使用 `position: relative` 定位，当外层的遮罩层被移除时，`Dialog` 则会根据当前 DOM 上的祖先节点来定位，因此可能造成定位问题。
 
 :::
 
@@ -114,8 +114,8 @@ dialog/fullscreen
 
 :::
 
-:::tip TIP
-如果 `fullscreen` 为 `true`，则 `width`、`top` 和 `draggable` 属性无效。
+:::tip
+如果 `fullscreen` 为 true，则 `width`、`top` 和 `draggable` 属性无效。
 
 :::
 
@@ -123,7 +123,7 @@ dialog/fullscreen
 
 将 `modal` 设置为 `false` 会隐藏对话框的模态（覆盖层）。
 
-从版本 2.10.5 起，新增了 `modalPenetrable` 属性，该属性可设置为“可穿透”（即允许穿透）。
+从版本 ^(2.10.5) 起，新增了 `modal-penetrable`属性，该属性可设置为“可穿透”（即允许穿透）。
 
 :::demo
 
@@ -131,7 +131,7 @@ dialog/modal
 
 :::
 
-## 自定义动画
+## 自定义动画 ^(2.10.5)
 
 通过 `transition` 属性自定义对话框动画，该属性可以接受以下任意一种值：
 
@@ -144,14 +144,14 @@ dialog/custom-animation
 
 :::
 
-:::tip TIP
-动画类会根据过渡名称动态生成。为了更细致地控制动画行为，你可以明确地定义这些类。详情请参见自定义过渡类（custom-transition-classes）。
+:::tip
+动画类会根据过渡名称动态生成。为了更细致地控制动画行为，你可以明确地定义这些类。详情请参见 [自定义过渡类（custom-transition-classes）](https://vuejs.org/guide/built-ins/transition.html#custom-transition-classes)。
 
 :::
 
 ## Events
 
-打开开发者控制台（ctrl + shift + J），查看事件的顺序。
+打开开发者控制台(ctrl + shift + J)，查看事件的顺序。
 
 :::demo
 

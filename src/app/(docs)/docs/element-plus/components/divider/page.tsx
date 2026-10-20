@@ -64,34 +64,26 @@ export default function DividerPage() {
       <p>区隔内容的分割线。</p>
 
       <Heading level={2}>基础用法</Heading>
-      <p>对不同章节的文本段落进行分割。</p>
+      <p>对不同段落的文本进行分割。</p>
       <DemoBlock source={SOURCES.basic}>
         <DividerBasic />
       </DemoBlock>
 
       <Heading level={2}>设置文案</Heading>
-      <p>
-        可以在分割线上自定义文案和位置，通过 <code>contentPosition</code> 设置位置。
-      </p>
+      <p>可以在分割线上自定义文本内容。</p>
       <DemoBlock source={SOURCES.text}>
         <DividerText />
       </DemoBlock>
 
-      <Heading level={2}>垂直分割</Heading>
-      <p>
-        设置 <code>direction=&quot;vertical&quot;</code> 可以设置为垂直分割线，
-        常用于行内元素之间。
-      </p>
-      <DemoBlock source={SOURCES.vertical}>
-        <DividerVertical />
-      </DemoBlock>
-
-      <Heading level={2}>自定义样式</Heading>
-      <p>
-        通过 <code>borderStyle</code> 属性设置分割线的样式。
-      </p>
+      <Heading level={2}>虚线</Heading>
+      <p>您可以设置分隔符的样式。</p>
       <DemoBlock source={SOURCES.borderStyle}>
         <DividerBorderStyle />
+      </DemoBlock>
+
+      <Heading level={2}>垂直分隔线</Heading>
+      <DemoBlock source={SOURCES.vertical}>
+        <DividerVertical />
       </DemoBlock>
 
       <DocsContent source={API_MD} />

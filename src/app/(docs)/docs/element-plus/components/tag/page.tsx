@@ -158,16 +158,18 @@ export default function TagPage() {
 
       <Heading level={2}>基础用法</Heading>
       <p>
-        由 <code>type</code> 属性来选择 Tag 的类型。
+        由 <code>type</code> 属性来选择 tag 的类型。也可以通过{" "}
+        <code>color</code> 属性来自定义背景色。
       </p>
       <DemoBlock source={SOURCES.basic}>
         <TagBasic />
       </DemoBlock>
 
-      <Heading level={2}>可关闭标签</Heading>
+      <Heading level={2}>可移除标签</Heading>
       <p>
-        设置 <code>closable</code> 属性可以定义一个标签是否可移除，
-        移除时触发 <code>onClose</code> 事件。
+        设置 <code>closable</code> 属性可以定义一个标签是否可移除。它接受一个{" "}
+        <code>Boolean</code>。默认的标签移除时会附带渐变动画。如果不想使用，可以设置{" "}
+        <code>disable-transitions</code> 属性，它接受一个 <code>Boolean</code>，<code>true</code> 为关闭。当 Tag 被移除时会触发 <code>close</code> 事件。
       </p>
       <DemoBlock source={SOURCES.closable}>
         <TagClosable />
@@ -175,15 +177,19 @@ export default function TagPage() {
 
       <Heading level={2}>动态编辑标签</Heading>
       <p>
-        动态编辑标签可以通过点击标签关闭按钮后触发的 <code>onClose</code> 事件来实现。
+        动态编辑标签可以通过点击标签关闭按钮后触发的 <code>close</code> 事件来实现。
       </p>
       <DemoBlock source={SOURCES.dynamic}>
         <TagClosableDynamic />
       </DemoBlock>
 
-      <Heading level={2}>尺寸</Heading>
+      <Heading level={2}>不同尺寸</Heading>
       <p>
-        Tag 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的尺寸。
+        Tag 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的按钮尺寸。
+      </p>
+      <p>
+        使用 <code>size</code> 属性来设置额外尺寸, 可选值包括 <code>large</code>,{" "}
+        <code>default</code> 或 <code>small</code>.
       </p>
       <DemoBlock source={SOURCES.sizes}>
         <TagSizes />
@@ -191,25 +197,29 @@ export default function TagPage() {
 
       <Heading level={2}>主题</Heading>
       <p>
-        Tag 组件提供了三种主题，<code>dark</code>、<code>light</code>、
-        <code>plain</code>，通过 <code>effect</code> 属性来设置。
+        Tag 组件提供了三个不同的主题：<code>dark</code>、<code>light</code> 和{" "}
+        <code>plain</code>。
+      </p>
+      <p>
+        通过设置 <code>effect</code> 属性来改变主题，默认为 <code>light</code>。
       </p>
       <DemoBlock source={SOURCES.effect}>
         <TagEffect />
       </DemoBlock>
 
-      <Heading level={2}>圆角</Heading>
-      <p>
-        Tag 组件可以设置 <code>round</code> 属性来让标签变成圆角。
-      </p>
+      <Heading level={2}>圆角标签</Heading>
+      <p>Tag 可以像按钮组件一样变为圆角。</p>
       <DemoBlock source={SOURCES.round}>
         <TagRound />
       </DemoBlock>
 
-      <Heading level={2}>可选中标签</Heading>
+      <Heading level={2}>可选中的标签</Heading>
       <p>
-        使用 <code>ElCheckTag</code> 可以实现可切换选中状态的标签。
+        有时候因为业务需求，我们可能会需要用到类似复选框的标签，但是<strong>按钮式的复选框</strong>的样式又不满足需求，此时我们就可以用到{" "}
+        <code>check-tag</code>组件。您可以在<span className="docs-version-tag">2.5.4</span>中使用 <code>type</code>{" "}
+        属性。
       </p>
+      <p>check-tag 的基础使用方法，check-tag 提供的 API 非常简单。</p>
       <DemoBlock source={SOURCES.checkable}>
         <TagCheckable />
       </DemoBlock>
