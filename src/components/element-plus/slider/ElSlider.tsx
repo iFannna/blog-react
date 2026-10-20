@@ -311,6 +311,9 @@ const SliderButton = forwardRef<SliderButtonExpose, SliderButtonProps>(
     const buttonRef = useRef<HTMLDivElement>(null);
     const [hovering, setHovering] = useState(false);
     const [dragging, setDragging] = useState(false);
+    // window 监听器在 mousedown 时注册，闭包里的 state 不会随重渲染更新，拖拽状态必须走 ref
+    const draggingRef = useRef(false);
+    const hoveringRef = useRef(false);
 
     // 官方把拖拽中间态放在 initData 里，不参与渲染，这里同样用 ref 存放
     const dragRef = useRef({
@@ -322,6 +325,24 @@ const SliderButton = forwardRef<SliderButtonExpose, SliderButtonProps>(
       startPosition: 0,
       newPosition: 0,
     });
+
+    // 保存实际挂到 window 上的函数，避免重渲染时误删正在生效的拖拽监听
+    const dragListenersRef = useRef<{
+      move: (event: MouseEvent | TouchEvent) => void;
+      end: () => void;
+    } | null>(null);
+
+    const removeDragListeners = useCallback(() => {
+      const listeners = dragListenersRef.current;
+      if (!listeners) return;
+
+      window.removeEventListener("mousemove", listeners.move);
+      window.removeEventListener("touchmove", listeners.move);
+      window.removeEventListener("mouseup", listeners.end);
+      window.removeEventListener("touchend", listeners.end);
+      window.removeEventListener("contextmenu", listeners.end);
+      dragListenersRef.current = null;
+    }, []);
 
     // 拖拽中按钮自己的 modelValue 会由父层回传更新，但拖拽位移计算需要本次拖拽的起点值
     const valueRef = useRef(value);
@@ -480,8 +501,7 @@ const SliderButton = forwardRef<SliderButtonExpose, SliderButtonProps>(
 
     const onDragging = useCallback(
       (event: MouseEvent | TouchEvent) => {
-        if (!dragRef.current.isClick && !dragging) return;
-        if (!dragging) return;
+        if (!draggingRef.current) return;
 
         dragRef.current.isClick = false;
         displayTooltip();
@@ -507,11 +527,8 @@ const SliderButton = forwardRef<SliderButtonExpose, SliderButtonProps>(
         dragRef.current.newPosition = dragRef.current.startPosition + diff;
         setPosition(dragRef.current.newPosition);
       },
-      [displayTooltip, dragging, resetSize, setPosition, sliderSizeRef, vertical],
+      [displayTooltip, resetSize, setPosition, sliderSizeRef, vertical],
     );
-
-    // 收尾时要移除自身监听，回调里无法直接引用自己的初始化器，经 ref 取当前函数
-    const onDragEndRef = useRef<() => void>(() => undefined);
 
     const onDragEnd = useCallback(() => {
       /*
@@ -519,36 +536,29 @@ const SliderButton = forwardRef<SliderButtonExpose, SliderButtonProps>(
        * 与官方一致地放到下一个宏任务里收尾。
        */
       window.setTimeout(() => {
+        draggingRef.current = false;
         setDragging(false);
         updateDragging(false);
-        if (!hovering) hideTooltip();
+        if (!hoveringRef.current) hideTooltip();
         const next = dragRef.current.isClick
           ? valueRef.current
           : setPosition(dragRef.current.newPosition);
         emitChange(which, next);
       }, 0);
 
-      window.removeEventListener("mousemove", onDragging);
-      window.removeEventListener("touchmove", onDragging);
-      window.removeEventListener("mouseup", onDragEndRef.current);
-      window.removeEventListener("touchend", onDragEndRef.current);
-      window.removeEventListener("contextmenu", onDragEndRef.current);
+      removeDragListeners();
     }, [
       emitChange,
       hideTooltip,
-      hovering,
-      onDragging,
+      removeDragListeners,
       setPosition,
       updateDragging,
       which,
     ]);
 
-    useLayoutEffect(() => {
-      onDragEndRef.current = onDragEnd;
-    }, [onDragEnd]);
-
     const onDragStart = useCallback(
       (event: MouseEvent | TouchEvent) => {
+        draggingRef.current = true;
         setDragging(true);
         updateDragging(true);
         dragRef.current.isClick = true;
@@ -570,6 +580,8 @@ const SliderButton = forwardRef<SliderButtonExpose, SliderButtonProps>(
         if (disabled) return;
         event.preventDefault();
         onDragStart(event);
+        removeDragListeners();
+        dragListenersRef.current = { move: onDragging, end: onDragEnd };
         window.addEventListener("mousemove", onDragging);
         window.addEventListener("touchmove", onDragging);
         window.addEventListener("mouseup", onDragEnd);
@@ -577,20 +589,11 @@ const SliderButton = forwardRef<SliderButtonExpose, SliderButtonProps>(
         window.addEventListener("contextmenu", onDragEnd);
         buttonRef.current?.focus();
       },
-      [disabled, onDragEnd, onDragStart, onDragging],
+      [disabled, onDragEnd, onDragStart, onDragging, removeDragListeners],
     );
 
     // 卸载时清掉可能残留的全局监听
-    useEffect(
-      () => () => {
-        window.removeEventListener("mousemove", onDragging);
-        window.removeEventListener("touchmove", onDragging);
-        window.removeEventListener("mouseup", onDragEnd);
-        window.removeEventListener("touchend", onDragEnd);
-        window.removeEventListener("contextmenu", onDragEnd);
-      },
-      [onDragEnd, onDragging],
-    );
+    useEffect(() => removeDragListeners, [removeDragListeners]);
 
     useImperativeHandle(ref, () => ({ onButtonDown, onKeyDown, setPosition }), [
       onButtonDown,
@@ -622,20 +625,24 @@ const SliderButton = forwardRef<SliderButtonExpose, SliderButtonProps>(
         aria-orientation={vertical ? "vertical" : "horizontal"}
         aria-disabled={aria.disabled}
         onMouseEnter={() => {
+          hoveringRef.current = true;
           setHovering(true);
           displayTooltip();
         }}
         onMouseLeave={() => {
+          hoveringRef.current = false;
           setHovering(false);
-          if (!dragging) hideTooltip();
+          if (!draggingRef.current) hideTooltip();
         }}
         onMouseDown={(event) => onButtonDown(event.nativeEvent)}
         onTouchStart={(event) => onButtonDown(event.nativeEvent)}
         onFocus={() => {
+          hoveringRef.current = true;
           setHovering(true);
           displayTooltip();
         }}
         onBlur={() => {
+          hoveringRef.current = false;
           setHovering(false);
           hideTooltip();
         }}

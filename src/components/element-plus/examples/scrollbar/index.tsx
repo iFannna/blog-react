@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ElScrollbar, type ScrollbarDirection, type ScrollbarExpose } from "@/components/element-plus/scrollbar";
 import { ElButton } from "@/components/element-plus/button";
 import { ElSlider } from "@/components/element-plus/slider";
@@ -83,11 +83,22 @@ export function ScrollbarInfinite() {
 export function ScrollbarManual() {
   const scrollbarRef = useRef<ScrollbarExpose>(null);
   const [value, setValue] = useState(0);
-  const max = 19 * 70 - 400;
+  const [max, setMax] = useState(0);
+
+  useEffect(() => {
+    const wrap = scrollbarRef.current?.wrapRef.current;
+    if (!wrap) return;
+    setMax(Math.max(0, wrap.scrollHeight - wrap.clientHeight));
+  }, []);
 
   return (
     <>
-      <ElScrollbar ref={scrollbarRef} height="400px" always>
+      <ElScrollbar
+        ref={scrollbarRef}
+        height="400px"
+        always
+        onScroll={({ scrollTop }) => setValue(scrollTop)}
+      >
         {Array.from({ length: 20 }, (_, i) => (
           <p key={i + 1} style={itemStyle}>
             {i + 1}
@@ -95,16 +106,19 @@ export function ScrollbarManual() {
         ))}
       </ElScrollbar>
 
-      <ElSlider
-        className={styles.slider}
-        value={value}
-        max={max}
-        onChange={(next) => {
-          const v = Number(next) || 0;
-          setValue(v);
-          scrollbarRef.current?.setScrollTop(v);
-        }}
-      />
+      {max > 0 && (
+        <ElSlider
+          className={styles.slider}
+          value={value}
+          max={max}
+          formatTooltip={(v) => `${v} px`}
+          onChange={(next) => {
+            const v = Number(next) || 0;
+            setValue(v);
+            scrollbarRef.current?.setScrollTop(v);
+          }}
+        />
+      )}
     </>
   );
 }

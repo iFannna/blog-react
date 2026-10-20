@@ -40,19 +40,34 @@ const SOURCES = {
 
   manual: `const scrollbarRef = useRef<ScrollbarExpose>(null);
 const [value, setValue] = useState(0);
+const [max, setMax] = useState(0);
 
-<ElScrollbar ref={scrollbarRef} height="400px" always>
+useEffect(() => {
+  const wrap = scrollbarRef.current?.wrapRef.current;
+  if (wrap) setMax(wrap.scrollHeight - wrap.clientHeight);
+}, []);
+
+<ElScrollbar
+  ref={scrollbarRef}
+  height="400px"
+  always
+  onScroll={({ scrollTop }) => setValue(scrollTop)}
+>
   {Array.from({ length: 20 }, (_, i) => <p key={i + 1}>{i + 1}</p>)}
 </ElScrollbar>
 
-<ElSlider
-  value={value}
-  max={max}
-  onChange={(next) => {
-    setValue(Number(next) || 0);
-    scrollbarRef.current?.setScrollTop(Number(next) || 0);
-  }}
-/>`,
+{max > 0 && (
+  <ElSlider
+    value={value}
+    max={max}
+    formatTooltip={(v) => \`\${v} px\`}
+    onChange={(next) => {
+      const v = Number(next) || 0;
+      setValue(v);
+      scrollbarRef.current?.setScrollTop(v);
+    }}
+  />
+)}`,
 
   infinite: `const [num, setNum] = useState(30);
 
