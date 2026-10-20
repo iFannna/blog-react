@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef, useState, type ReactNode } from "react";
+import { Fragment, useRef, useState, type ReactNode } from "react";
 import { ElTooltip } from "@/components/element-plus/tooltip";
 import { message } from "@/components/element-plus/message";
 import { CaretTop } from "@/components/element-plus/icons";
+import type { HighlightToken } from "./highlight";
 
 interface DemoBlockProps {
   /** 示例说明，对应官方 :::demo 后面那行文字 */
@@ -55,7 +56,22 @@ export default function DemoBlock({
   children,
 }: DemoBlockProps) {
   const [expanded, setExpanded] = useState(false);
+  const [tokens, setTokens] = useState<HighlightToken[][] | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
+  const highlightStarted = useRef(false);
+
+  // Shiki 体积不小，悬停/聚焦源码按钮时再按需加载，展开时通常已就绪
+  const startHighlight = () => {
+    if (highlightStarted.current) return;
+    highlightStarted.current = true;
+
+    void import("./highlight")
+      .then(({ highlightVue }) => highlightVue(source))
+      .then(setTokens)
+      .catch(() => {
+        highlightStarted.current = false;
+      });
+  };
 
   const handleCopy = async () => {
     if (!navigator.clipboard) {
@@ -120,7 +136,12 @@ export default function DemoBlock({
             className="docs-example__op-btn docs-example__op-btn--source"
             aria-label={sourceLabel}
             aria-expanded={expanded}
-            onClick={() => setExpanded((value) => !value)}
+            onPointerEnter={startHighlight}
+            onFocus={startHighlight}
+            onClick={() => {
+              startHighlight();
+              setExpanded((value) => !value);
+            }}
           >
             <CodeIcon />
           </button>
@@ -135,7 +156,20 @@ export default function DemoBlock({
       >
         <div className="docs-example__source-inner">
           <pre className="docs-example__pre">
-            <code>{source}</code>
+            <code className="docs-example__code">
+              {tokens
+                ? tokens.map((line, lineIndex) => (
+                    <Fragment key={lineIndex}>
+                      {line.map((token, tokenIndex) => (
+                        <span key={tokenIndex} style={token.style}>
+                          {token.content}
+                        </span>
+                      ))}
+                      {lineIndex < tokens.length - 1 && "\n"}
+                    </Fragment>
+                  ))
+                : source}
+            </code>
           </pre>
         </div>
       </div>

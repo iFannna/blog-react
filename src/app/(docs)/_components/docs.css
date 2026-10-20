@@ -587,6 +587,16 @@ html.dark .docs-shell {
   font-size: inherit;
 }
 
+/* Shiki tokens carry --shiki-light / --shiki-dark inline variables */
+
+.docs-example__code span {
+  color: var(--shiki-light, inherit);
+}
+
+[data-theme="dark"] .docs-example__code span {
+  color: var(--shiki-dark, inherit);
+}
+
 /* Official .example-float-control */
 
 .docs-example__float-control {
