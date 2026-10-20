@@ -175,6 +175,26 @@ export default function DocsAside() {
         return;
       }
 
+      // 尾部标题的触发点可能落在文档末尾之外，正常滚动永远到不了；
+      // 把它们压缩进页面最后一段可滚动区间，高亮才会依次经过而不是跳项
+      const firstUnreachable = list.findIndex((item) => item.trigger > maxScroll);
+      if (firstUnreachable !== -1) {
+        const tailCount = list.length - firstUnreachable;
+        const prevTrigger =
+          firstUnreachable > 0 ? list[firstUnreachable - 1].trigger : 0;
+        const tailWindow = Math.max(
+          240,
+          Math.min(480, window.innerHeight * 0.4),
+        );
+        const tailStart = Math.max(prevTrigger, maxScroll - tailWindow);
+        const span = maxScroll - tailStart;
+
+        for (let i = 0; i < tailCount; i += 1) {
+          list[firstUnreachable + i].trigger =
+            tailStart + (span * (i + 1)) / tailCount;
+        }
+      }
+
       for (let i = 0; i < list.length; i++) {
         const item = list[i];
         const next = list[i + 1];
