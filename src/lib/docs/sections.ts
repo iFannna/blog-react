@@ -84,19 +84,9 @@ export function getElementPlusHeaderConfig(locale: DocLocale): DocsHeaderConfig 
     badge: { text: "2.14.6", title: "latest version" },
     links: [
       {
-        text: zh ? "指南" : "Guide",
-        href: overview,
-        activePrefix: `${base}/guide`,
-      },
-      {
         text: zh ? "组件" : "Components",
         href: overview,
         activePrefix: `${base}/components`,
-      },
-      {
-        text: zh ? "资源" : "Resources",
-        href: overview,
-        activePrefix: `${base}/resource`,
       },
       {
         text: zh ? "官方文档" : "Official Docs",
@@ -109,7 +99,7 @@ export function getElementPlusHeaderConfig(locale: DocLocale): DocsHeaderConfig 
   };
 }
 
-/** 与官方文档站顶栏保持一致：logo、版本号、指南/组件/资源入口 */
+/** 与官方文档站顶栏保持一致：logo、版本号、组件入口 */
 export const ELEMENT_PLUS_HEADER: DocsHeaderConfig = {
   logo: {
     kind: "image",
@@ -120,19 +110,9 @@ export const ELEMENT_PLUS_HEADER: DocsHeaderConfig = {
   badge: { text: "2.14.6", title: "latest version" },
   links: [
     {
-      text: "指南",
-      href: "/docs/element-plus/components/overview",
-      activePrefix: "/docs/element-plus/guide",
-    },
-    {
       text: "组件",
       href: "/docs/element-plus/components/overview",
       activePrefix: "/docs/element-plus/components",
-    },
-    {
-      text: "资源",
-      href: "/docs/element-plus/components/overview",
-      activePrefix: "/docs/element-plus/resource",
     },
     {
       text: "官方文档",
