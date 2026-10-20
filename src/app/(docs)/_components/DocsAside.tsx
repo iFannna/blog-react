@@ -36,7 +36,10 @@ function getTocSnapshot(): TocItem[] {
   const usedIds = new Set<string>();
 
   const items = headings.map((heading) => {
-    const text = heading.textContent?.trim() ?? "";
+    // 官方目录里的版本徽标是 0×0 不可见的，这里直接剔除徽标文本
+    const label = heading.cloneNode(true) as HTMLElement;
+    label.querySelectorAll(".docs-version-tag").forEach((tag) => tag.remove());
+    const text = label.textContent?.trim() ?? "";
     let id = heading.id || text;
 
     if (usedIds.has(id)) {

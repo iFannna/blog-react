@@ -19,7 +19,9 @@ button/basic
 
 ## 禁用状态
 
-:::demo 你可以使用 `disabled` 属性来定义按钮是否被禁用。
+你可以使用 `disabled` 属性来定义按钮是否被禁用。
+
+:::demo 使用 `disabled` 属性来控制按钮是否为禁用状态。该属性接受一个 `Boolean` 类型的值。
 
 button/disabled
 
@@ -31,7 +33,7 @@ button/disabled
 
 `type="text"` 已被 **废弃**，将于版本 ^(3.0.0) 时 **移除**，请考虑切换至新的 API。
 
-新的 API `link` 于 ^(2.2.1) 版本时添加，你可以使用 `type` API 设置链接按钮的主题样式。
+新的 API `link` 于 ^(2.2.1) 版本时添加，你可以使用 `type` API 设置链接按钮的主题样式
 
 :::
 
@@ -45,11 +47,13 @@ button/link
 
 :::tip
 
-文字按钮在现在有了全新的设计样式。如果你想要使用老版样式的按钮，可以考虑使用 Link 组件。
+文字按钮在现在有了全新的设计样式。 ^(2.2.0) 如果您想要使用老版样式的按钮，可以考虑使用 [Link](./link) 组件。
 
 API 也已更新，由于 `type` 属性会同时控制按钮的样式，因此我们通过一个新的 API `text: boolean` 来控制文字按钮。
 
 :::
+
+没有边框和背景色的按钮。
 
 :::demo
 
@@ -59,7 +63,9 @@ button/text
 
 ## 图标按钮
 
-:::demo 使用 `icon` 属性来添加图标。你可以使用 `el-icon--right` 让图标显示在文字右侧。
+使用图标为按钮添加更多的含义。你也可以单独使用图标不添加文字来节省显示区域占用。
+
+:::demo 使用 `icon` 属性来为按钮添加图标。您可以在我们的 Icon 组件中找到所需图标。通过向右方添加 `<i>` 标签来添加图标，你也可以使用自定义图标。
 
 button/icon
 
@@ -67,7 +73,11 @@ button/icon
 
 ## 按钮组
 
-:::demo 以按钮组的方式出现，常用于拥有一系列相似操作的情况。`direction` 属性可控制按钮组的排列方向。
+以按钮组的方式出现，常用于多项类似操作。
+
+在 ^(2.11.9) 中，您可以使用 `direction` 属性。
+
+:::demo 使用 `<el-button-group>` 对多个按钮分组。
 
 button/group
 
@@ -75,11 +85,15 @@ button/group
 
 ## 加载状态按钮
 
+点击按钮来加载数据，并向用户反馈加载状态。
+
+通过设置 `loading` 属性为 `true` 来显示加载中状态。
+
 :::tip
 
-你可以使用 `loading` 插槽或 `loadingIcon` 属性自定义你的 loading 图标。
+您可以使用 `loading` 插槽或 `loadingIcon` 属性自定义您的 loading 图标。
 
-**ps: loading 插槽优先级高于 loadingIcon 属性**
+**ps: `loading` 插槽优先级高于 `loadingIcon` 属性**
 
 :::
 
@@ -91,23 +105,33 @@ button/loading
 
 ## 调整尺寸
 
-:::demo 使用 `size` 属性来额外配置尺寸，除了默认值外还提供 `large` 和 `small`。
+除了默认的大小，按钮组件还提供了几种额外的尺寸可供选择，以便适配不同的场景。
+
+:::demo 使用 `size` 属性额外配置尺寸，可使用 `large` 和 `small` 两种值。
 
 button/size
 
 :::
 
-## 自定义标签
+## Tag ^(2.3.4)
 
-:::demo 通过 `tag` 属性将按钮渲染成任意标签，例如 `div` 或 `a`；其余属性会透传到该标签。
+您可以自定义元素标签。例如，按钮，div，路由链接，nuxt链接。
+
+:::demo
 
 button/tag
 
 :::
 
-## 自定义颜色
+## 自定义颜色 ^(beta)
 
-:::demo 通过 `color` 属性自定义按钮颜色，组件会自动计算 hover、active 与禁用态的颜色。
+您可以自定义按钮的颜色。
+
+我们将自动计算按钮处于 hover 和 active 状态时的颜色。
+
+自 ^(2.13.7) 起，`color` 属性也适用于 `link` 和 `text` 按钮。
+
+:::demo
 
 button/custom
 

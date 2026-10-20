@@ -117,15 +117,19 @@ export function transformVersionTags(children: ReactNode): ReactNode {
   return Children.map(children, (child) => {
     if (typeof child !== "string") return child;
 
-    const parts = child.split(/(\^\(\d[\d.]*\))/g);
+    const parts = child.split(/(\^\([A-Za-z0-9][\w.]*\))/g);
     if (parts.length === 1) return child;
 
     return parts.map((part, index) => {
-      const match = part.match(/^\^\((\d[\d.]*)\)$/);
+      const match = part.match(/^\^\(([A-Za-z0-9][\w.]*)\)$/);
       if (match) {
+        const value = match[1];
+        const modifier = /^[A-Za-z]/.test(value)
+          ? ` docs-version-tag--${value.toLowerCase()}`
+          : "";
         return (
-          <span className="docs-version-tag" key={index}>
-            {match[1]}
+          <span className={`docs-version-tag${modifier}`} key={index}>
+            {value}
           </span>
         );
       }

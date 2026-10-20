@@ -13,7 +13,7 @@ function parseCallouts(markdown: string): ReactNode[] {
   const lines = markdown.split("\n");
   const nodes: ReactNode[] = [];
   let buffer: string[] = [];
-  let callout: { type: string; lines: string[] } | null = null;
+  let callout: { type: string; title: string; lines: string[] } | null = null;
   let key = 0;
 
   const flushBuffer = () => {
@@ -24,21 +24,31 @@ function parseCallouts(markdown: string): ReactNode[] {
     buffer = [];
   };
 
+  const flushCallout = () => {
+    if (!callout) return;
+    flushBuffer();
+    nodes.push(
+      <div
+        className={`docs-callout docs-callout--${callout.type}`}
+        key={`callout-${key++}`}
+      >
+        <div className="docs-callout__title">
+          <MarkdownBody
+            markdown={callout.title || callout.type.toUpperCase()}
+          />
+        </div>
+        <MarkdownBody markdown={callout.lines.join("\n")} />
+      </div>,
+    );
+    callout = null;
+  };
+
   for (const line of lines) {
     const open = line.match(/^:::(tip|warning|danger|info)\s*(.*)$/);
 
     if (callout) {
       if (line.trim() === ":::") {
-        flushBuffer();
-        nodes.push(
-          <div
-            className={`docs-callout docs-callout--${callout.type}`}
-            key={`callout-${key++}`}
-          >
-            <MarkdownBody markdown={callout.lines.join("\n")} />
-          </div>,
-        );
-        callout = null;
+        flushCallout();
       } else {
         callout.lines.push(line);
       }
@@ -47,25 +57,14 @@ function parseCallouts(markdown: string): ReactNode[] {
 
     if (open) {
       flushBuffer();
-      callout = { type: open[1], lines: open[2] ? [open[2]] : [] };
+      callout = { type: open[1], title: open[2] ?? "", lines: [] };
       continue;
     }
 
     buffer.push(line);
   }
 
-  if (callout) {
-    flushBuffer();
-    nodes.push(
-      <div
-        className={`docs-callout docs-callout--${callout.type}`}
-        key={`callout-${key++}`}
-      >
-        <MarkdownBody markdown={callout.lines.join("\n")} />
-      </div>,
-    );
-  }
-
+  flushCallout();
   flushBuffer();
   return nodes;
 }

@@ -350,14 +350,12 @@ export default async function DocsMarkdown({
               className={`docs-callout docs-callout--${block.type}`}
               key={`callout-${index}`}
             >
-              {block.title && (
-                <div className="docs-callout__title">
-                  <MarkdownBody
-                    markdown={block.title}
-                    components={components}
-                  />
-                </div>
-              )}
+              <div className="docs-callout__title">
+                <MarkdownBody
+                  markdown={block.title || block.type.toUpperCase()}
+                  components={components}
+                />
+              </div>
               <MarkdownBody
                 markdown={block.markdown}
                 components={components}

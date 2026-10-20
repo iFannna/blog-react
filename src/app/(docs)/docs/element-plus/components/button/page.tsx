@@ -216,6 +216,10 @@ export default function ButtonPage() {
       <p>
         你可以使用 <code>disabled</code> 属性来定义按钮是否被禁用。
       </p>
+      <p>
+        使用 <code>disabled</code> 属性来控制按钮是否为禁用状态。该属性接受一个{" "}
+        <code>Boolean</code> 类型的值。
+      </p>
       <DemoBlock source={SOURCES.disabled}>
         <ButtonDisabled />
       </DemoBlock>
@@ -226,7 +230,7 @@ export default function ButtonPage() {
 
 \`type="text"\` 已被 **废弃**，将于版本 ^(3.0.0) 时 **移除**，请考虑切换至新的 API。
 
-新的 API \`link\` 于 ^(2.2.1) 版本时添加，你可以使用 \`type\` API 设置链接按钮的主题样式。
+新的 API \`link\` 于 ^(2.2.1) 版本时添加，你可以使用 \`type\` API 设置链接按钮的主题样式
 
 :::`}
       />
@@ -238,41 +242,55 @@ export default function ButtonPage() {
       <DocsContent
         source={`:::tip
 
-文字按钮在现在有了全新的设计样式。如果你想要使用老版样式的按钮，可以考虑使用 Link 组件。
+文字按钮在现在有了全新的设计样式。 ^(2.2.0) 如果您想要使用老版样式的按钮，可以考虑使用 [Link](./link) 组件。
 
 API 也已更新，由于 \`type\` 属性会同时控制按钮的样式，因此我们通过一个新的 API \`text: boolean\` 来控制文字按钮。
 
 :::`}
       />
+      <p>没有边框和背景色的按钮。</p>
       <DemoBlock source={SOURCES.text}>
         <ButtonText />
       </DemoBlock>
 
       <Heading level={2}>图标按钮</Heading>
       <p>
-        使用 <code>icon</code> 属性来添加图标。你可以使用
-        <code>el-icon--right</code> 让图标显示在文字右侧。
+        使用图标为按钮添加更多的含义。你也可以单独使用图标不添加文字来节省显示区域占用。
+      </p>
+      <p>
+        使用 <code>icon</code> 属性来为按钮添加图标。您可以在我们的 Icon
+        组件中找到所需图标。通过向右方添加 <code>&lt;i&gt;</code>{" "}
+        标签来添加图标，你也可以使用自定义图标。
       </p>
       <DemoBlock source={SOURCES.icon}>
         <ButtonIcon />
       </DemoBlock>
 
       <Heading level={2}>按钮组</Heading>
+      <p>以按钮组的方式出现，常用于多项类似操作。</p>
       <p>
-        以按钮组的方式出现，常用于拥有一系列相似操作的情况。
-        <code>direction</code> 属性可控制按钮组的排列方向。
+        在 <span className="docs-version-tag">2.11.9</span> 中，您可以使用{" "}
+        <code>direction</code> 属性。
+      </p>
+      <p>
+        使用 <code>&lt;el-button-group&gt;</code> 对多个按钮分组。
       </p>
       <DemoBlock source={SOURCES.group}>
         <ButtonGroupDemo />
       </DemoBlock>
 
       <Heading level={2}>加载状态按钮</Heading>
+      <p>点击按钮来加载数据，并向用户反馈加载状态。</p>
+      <p>
+        通过设置 <code>loading</code> 属性为 <code>true</code>{" "}
+        来显示加载中状态。
+      </p>
       <DocsContent
         source={`:::tip
 
-你可以使用 \`loading\` 插槽或 \`loadingIcon\` 属性自定义你的 loading 图标。
+您可以使用 \`loading\` 插槽或 \`loadingIcon\` 属性自定义您的 loading 图标。
 
-**ps: loading 插槽优先级高于 loadingIcon 属性**
+**ps: \`loading\` 插槽优先级高于 \`loadingIcon\` 属性**
 
 :::`}
       />
@@ -282,26 +300,34 @@ API 也已更新，由于 \`type\` 属性会同时控制按钮的样式，因此
 
       <Heading level={2}>调整尺寸</Heading>
       <p>
-        使用 <code>size</code> 属性来额外配置尺寸，除了默认值外还提供
-        <code>large</code> 和 <code>small</code>。
+        除了默认的大小，按钮组件还提供了几种额外的尺寸可供选择，以便适配不同的场景。
+      </p>
+      <p>
+        使用 <code>size</code> 属性额外配置尺寸，可使用 <code>large</code> 和{" "}
+        <code>small</code> 两种值。
       </p>
       <DemoBlock source={SOURCES.size}>
         <ButtonSize />
       </DemoBlock>
 
-      <Heading level={2}>自定义标签</Heading>
-      <p>
-        通过 <code>tag</code> 属性将按钮渲染成任意标签，
-        例如 <code>div</code> 或 <code>a</code>；其余属性会透传到该标签。
-      </p>
+      <Heading level={2} id="tag">
+        Tag <span className="docs-version-tag">2.3.4</span>
+      </Heading>
+      <p>您可以自定义元素标签。例如，按钮，div，路由链接，nuxt链接。</p>
       <DemoBlock source={SOURCES.tag}>
         <ButtonTag />
       </DemoBlock>
 
-      <Heading level={2}>自定义颜色</Heading>
+      <Heading level={2} id="自定义颜色">
+        自定义颜色{" "}
+        <span className="docs-version-tag docs-version-tag--beta">beta</span>
+      </Heading>
+      <p>您可以自定义按钮的颜色。</p>
+      <p>我们将自动计算按钮处于 hover 和 active 状态时的颜色。</p>
       <p>
-        通过 <code>color</code> 属性自定义按钮颜色，组件会自动计算
-        hover、active 与禁用态的颜色。
+        自 <span className="docs-version-tag">2.13.7</span> 起，
+        <code>color</code> 属性也适用于 <code>link</code> 和 <code>text</code>{" "}
+        按钮。
       </p>
       <DemoBlock source={SOURCES.custom}>
         <ButtonCustom />
