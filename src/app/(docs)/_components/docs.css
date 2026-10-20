@@ -1769,41 +1769,70 @@ html.dark .docs-code-block span {
   font-size: 1.6rem;
 }
 
+/* 官方 vp-page-nav：单行「箭头 + 标题」，左右各占 50% */
 .docs-pager {
   display: flex;
   justify-content: space-between;
-  gap: 1.6rem;
   margin-top: 4.8rem;
   padding-top: 2.4rem;
   border-top: 1px solid var(--docs-example-border);
 }
 
-.docs-pager__link {
+.docs-pager__prev,
+.docs-pager__next {
   display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  min-width: 0;
-  max-width: 45%;
+  flex-shrink: 0;
+  width: 50%;
+}
+
+.docs-pager__prev {
+  justify-content: flex-start;
+  padding-right: 1.2rem;
+}
+
+.docs-pager__next {
+  justify-content: flex-end;
+  padding-left: 1.2rem;
+}
+
+.docs-pager__link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  height: 2.4rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--docs-sidebar-link-active);
   text-decoration: none;
 }
 
-.docs-pager__link--next {
-  margin-left: auto;
-  text-align: right;
+/* 官方全局 a:hover / a:focus */
+.docs-pager__link:hover,
+.docs-pager__link:focus {
+  color: var(--el-color-primary-light-3);
 }
 
-.docs-pager__label {
+.docs-pager__text {
+  display: inline-flex;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.docs-pager .docs-pager__icon {
+  flex-shrink: 0;
   font-size: 1.2rem;
-  color: var(--docs-text-secondary);
+  color: var(--docs-text);
+  transform: translateY(1px);
 }
 
-.docs-pager__title {
-  font-size: 1.4rem;
-  color: var(--docs-sidebar-link-active);
+.docs-pager__prev .docs-pager__icon {
+  margin-right: 0.4rem;
 }
 
-.docs-pager__link:hover .docs-pager__title {
-  text-decoration: underline;
+.docs-pager__next .docs-pager__icon {
+  margin-left: 0.4rem;
 }
 
 .docs-fallback-notice {

@@ -28,7 +28,7 @@ export const DOC_NAV: DocNavGroup[] = [
   {
     title: "Overview 组件总览",
     items: [
-      { slug: "overview", title: "Overview", done: true },
+      { slug: "overview", title: "Overview", titleZh: "Overview 组件总览", done: true },
     ],
   },
   {

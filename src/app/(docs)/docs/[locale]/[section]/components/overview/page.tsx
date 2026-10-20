@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import DocPager from "../../../../../_components/DocPager";
 import { OverviewContent } from "../../../../../_components/OverviewContent";
+import { getElementPlusAdjacentPages } from "@/lib/docs/element-plus-nav";
 import { isDocLocale } from "@/lib/docs/types";
 
 interface OverviewParams {
@@ -43,6 +45,7 @@ export default async function ComponentsOverviewPage({
   if (!isDocLocale(locale) || !isElementPlusOverview(section)) notFound();
 
   const zh = locale === "zh-CN";
+  const adjacent = getElementPlusAdjacentPages(locale, "components/overview");
 
   return (
     <>
@@ -62,6 +65,7 @@ export default async function ComponentsOverviewPage({
         )}
       </p>
       <OverviewContent locale={locale} />
+      <DocPager locale={locale} prev={adjacent.prev} next={adjacent.next} />
     </>
   );
 }

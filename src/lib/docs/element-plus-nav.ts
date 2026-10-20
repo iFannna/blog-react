@@ -2,7 +2,7 @@ import "server-only";
 
 import { DOC_NAV } from "@/app/(docs)/_components/nav-config";
 import { resolveDocPage } from "./content";
-import type { DocLocale, DocsNavGroup } from "./types";
+import type { DocLocale, DocsNavGroup, DocsNavItem } from "./types";
 
 const COMPONENT_SLUG = "components";
 
@@ -36,4 +36,21 @@ export function getElementPlusSectionNav(locale: DocLocale): DocsNavGroup[] {
       };
     }),
   }));
+}
+
+/**
+ * 上下页必须和侧边栏共用同一份导航，否则 overview 等不在 markdown 里的
+ * 手写页面会从序列中缺失，顺序也会退回 frontmatter 的 group/order。
+ */
+export function getElementPlusAdjacentPages(
+  locale: DocLocale,
+  slugPath: string,
+): { prev?: DocsNavItem; next?: DocsNavItem } {
+  const href = `/docs/${locale}/element-plus/${slugPath}`;
+  const flat = getElementPlusSectionNav(locale).flatMap((group) => group.items);
+  const index = flat.findIndex((item) => item.href === href);
+
+  if (index === -1) return {};
+
+  return { prev: flat[index - 1], next: flat[index + 1] };
 }

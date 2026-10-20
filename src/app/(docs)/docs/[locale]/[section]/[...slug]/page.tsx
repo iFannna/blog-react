@@ -8,6 +8,7 @@ import {
   resolveDocPage,
 } from "@/lib/docs/content";
 import { DOCS_MESSAGES } from "@/lib/docs/i18n";
+import { getElementPlusAdjacentPages } from "@/lib/docs/element-plus-nav";
 import DocsMarkdown from "@/lib/docs/markdown";
 import { getDocSection } from "@/lib/docs/sections";
 import { isDocLocale } from "@/lib/docs/types";
@@ -64,7 +65,10 @@ export default async function DocDetailPage({
   if (!resolved) notFound();
 
   const { meta, fallback } = resolved;
-  const adjacent = getAdjacentPages(locale, section, meta.slug);
+  const adjacent =
+    section === "element-plus"
+      ? getElementPlusAdjacentPages(locale, meta.slugPath)
+      : getAdjacentPages(locale, section, meta.slug);
   const messages = DOCS_MESSAGES[locale];
 
   return (
