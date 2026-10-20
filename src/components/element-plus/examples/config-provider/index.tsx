@@ -23,7 +23,6 @@ import type {
   TableConfigContext,
 } from "@/components/element-plus/config-provider";
 
-/** 官方 demo 的 flex gap 以 16px 基准：gap-4 = 16px，gap-2 = 8px，gap-1 = 4px。 */
 const row16 = { display: "flex", gap: "16px", alignItems: "center" };
 const row8 = { display: "flex", gap: "8px", alignItems: "center" };
 const column = {
@@ -34,7 +33,6 @@ const column = {
 };
 const fullWidth = { width: "100%" as const };
 
-/** 语言切换：ConfigProvider 的 locale 同时作用于分页与表格的内置文案。 */
 export function ConfigProviderLocale() {
   const [lang, setLang] = useState<"zh-cn" | "en">("zh-cn");
   const locale = lang === "zh-cn" ? zhCn : en;
@@ -56,7 +54,6 @@ export function ConfigProviderLocale() {
   );
 }
 
-/** button 配置：type / plain / round / text / dashed / autoInsertSpace 从全局下发。 */
 export function ConfigProviderButton() {
   const [config, setConfig] = useState<ButtonConfigContext>({
     autoInsertSpace: true,
@@ -117,7 +114,6 @@ export function ConfigProviderButton() {
   );
 }
 
-/** link 配置：type / underline 从全局下发。 */
 export function ConfigProviderLink() {
   const [config, setConfig] = useState<LinkConfigContext>({
     type: "success",
@@ -157,7 +153,6 @@ export function ConfigProviderLink() {
   );
 }
 
-/** card 配置：shadow 从全局下发。 */
 export function ConfigProviderCard() {
   const [shadow, setShadow] = useState<"always" | "hover" | "never">("always");
   const config = useMemo(() => ({ shadow }), [shadow]);
@@ -183,7 +178,6 @@ export function ConfigProviderCard() {
   );
 }
 
-/** dialog 配置：alignCenter / draggable / overflow 从全局下发。 */
 export function ConfigProviderDialog() {
   const [config, setConfig] = useState<DialogConfigContext>({
     alignCenter: false,
@@ -197,7 +191,6 @@ export function ConfigProviderDialog() {
   const dialogConfig = useMemo<DialogConfigContext>(
     () => ({
       ...config,
-      // 官方对象形态的过渡依赖 Vue 过渡钩子，React 侧仅透传字符串类名
       transition: enableTransition
         ? isObjectTransition
           ? undefined
@@ -283,7 +276,6 @@ export function ConfigProviderDialog() {
   );
 }
 
-/** message 配置：max / plain / placement 从全局下发，作用于命令式的 message()。 */
 export function ConfigProviderMessage() {
   const config = useMemo(() => ({ max: 3, plain: true, placement: "bottom" }), []);
 
@@ -294,9 +286,7 @@ export function ConfigProviderMessage() {
   );
 }
 
-/** empty-values / value-on-clear：清空后写回指定值。 */
 export function ConfigProviderEmptyValues() {
-  // 初始值为空字符串：空值集合设为 [undefined, null] 后，空字符串是有意义的值
   const [value1, setValue1] = useState<string | number | null | undefined>("");
   const [value2, setValue2] = useState<string | number | null | undefined>("");
 
@@ -346,7 +336,6 @@ export function ConfigProviderEmptyValues() {
   );
 }
 
-/** table 配置：showOverflowTooltip / tooltipEffect 从全局下发到所有列。 */
 export function ConfigProviderTable() {
   const [config, setConfig] = useState<TableConfigContext>({
     showOverflowTooltip: true,

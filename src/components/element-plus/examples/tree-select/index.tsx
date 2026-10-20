@@ -195,7 +195,6 @@ export function TreeSelectFilterable() {
   const [value, setValue] = useState<TreeSelectValue | undefined>();
   const [data, setData] = useState<TreeData>(SOURCE_DATA);
 
-  // 官方 filterMethod 由调用方重建 data，这里保持同样的契约
   const filterMethod = (keyword: string) => {
     setData(
       keyword
@@ -245,7 +244,6 @@ export function TreeSelectFilterable() {
 export function TreeSelectSlots() {
   const [value, setValue] = useState<TreeSelectValue | undefined>();
 
-  // 官方 renderContent 拿到 (h, { data }) 返回 VNode，React 侧直接返回节点内容
   const renderContent = ({ data }: { data: Record<string, unknown> }) => (
     <span style={{ color: "#626AEF" }}>{String(data.label)}</span>
   );
@@ -275,7 +273,6 @@ export function TreeSelectSlots() {
 
 let lazyId = 0;
 
-/** 官方 lazy 示例的 load：延时 400ms 返回两个节点，第二个标记为叶子。 */
 const loadLazyNode = (
   node: { isLeaf?: boolean },
   resolve: (data: TreeData) => void,

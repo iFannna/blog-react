@@ -453,7 +453,6 @@ export function TableFixedHeaderFluid() {
 }
 
 export function TableFixedGroupHeader() {
-  // 线上文档该示例当前实际渲染的是 fixed column + header 组合（与官方源码不一致）。
   return (
     <ElTable data={wideTableData} height="250" style={fullWidth}>
       <ElTableColumn fixed prop="date" label="Date" width="150" />

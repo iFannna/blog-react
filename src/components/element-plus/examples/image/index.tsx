@@ -25,12 +25,6 @@ import {
   ZoomIn,
 } from "@/components/element-plus/icons";
 
-/*
- * Right 与 Refresh 两个图标官方图标清单里有、本项目 icons 目录尚未收录，
- * 主控不允许单独改图标生成脚本，这里内联官方同一份 SVG path 供示例使用。
- * 已提报给主控补入生成清单，补入后应改为从 @/components/element-plus/icons 导入。
- */
-
 function Right(props: SVGProps<SVGSVGElement>) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" {...props}>

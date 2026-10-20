@@ -5,7 +5,6 @@ import { ElTimeSelect } from "@/components/element-plus/time-select";
 
 const row = { display: "flex", gap: 16, flexWrap: "wrap" as const };
 
-/** 对应官方 time-select/basic。 */
 export function TimeSelectBasic() {
   const [value, setValue] = useState<string | null>("");
   return (
@@ -21,7 +20,6 @@ export function TimeSelectBasic() {
   );
 }
 
-/** 对应官方 time-select/time-formats。 */
 export function TimeSelectFormats() {
   const [value, setValue] = useState<string | null>("");
   return (
@@ -38,7 +36,6 @@ export function TimeSelectFormats() {
   );
 }
 
-/** 对应官方 time-select/time-range：两个选择器互相用 min-time / max-time 约束。 */
 export function TimeSelectRange() {
   const [startTime, setStartTime] = useState<string | null>("");
   const [endTime, setEndTime] = useState<string | null>("");

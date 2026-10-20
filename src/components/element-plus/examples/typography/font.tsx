@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 
-/** 官方 docs/examples/typography 的字体截图，顺序与官方一致。 */
 const FONT_TERMS = [
   "pingfang",
   "hiragino",
@@ -11,7 +10,6 @@ const FONT_TERMS = [
 
 const IMAGE_BASE = "https://element-plus.org/images/typography";
 
-/** 第 3 张按官方去掉右边距，首行正好排满三张；暗色图同理。 */
 export default function TypographyFont() {
   return (
     <div className="demo-term-box">

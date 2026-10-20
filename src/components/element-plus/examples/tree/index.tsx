@@ -13,7 +13,6 @@ import { ElInput } from "@/components/element-plus/input";
 
 import treeStyles from "./tree.module.css";
 
-/** 各示例共用的「限宽 600px」，对应官方示例里的 style="max-width: 600px"。 */
 const treeWidth: CSSProperties = { maxWidth: "600px" };
 
 const row: CSSProperties = {
@@ -75,7 +74,6 @@ const basicData: BasicTree[] = [
 
 const defaultProps = { children: "children", label: "label" };
 
-/** 官方 basic：基础树形结构。 */
 export function TreeBasic() {
   return (
     <ElTree
@@ -89,7 +87,6 @@ export function TreeBasic() {
   );
 }
 
-/** 官方 accordion：同层只允许展开一个节点。 */
 export function TreeAccordion() {
   return (
     <ElTree
@@ -112,7 +109,6 @@ interface LazyTree {
 
 let zoneCount = 1;
 
-/** 官方 selectable：懒加载 + 复选框，节点数据点击时才拉取。 */
 export function TreeSelectable() {
   const props = { label: "name", children: "zones" };
 
@@ -125,7 +121,6 @@ export function TreeSelectable() {
       onCheckChange={(data, checked, indeterminate) => {
         console.log(data, checked, indeterminate);
       }}
-      // 官方示例的 load 每次点击都会拉数据，这里用随机叶子模拟同样的行为
       load={(node, resolve) => {
         if (node.level === 0) {
           return resolve([{ name: "Root1" }, { name: "Root2" }]);
@@ -146,7 +141,6 @@ export function TreeSelectable() {
   );
 }
 
-/** 官方 custom-leaf：用 isLeaf 提前声明哪些节点是叶子，避免渲染多余的展开箭头。 */
 export function TreeCustomLeaf() {
   const props = { label: "name", children: "zones", isLeaf: "leaf" };
 
@@ -175,7 +169,6 @@ export function TreeCustomLeaf() {
 
 let loadTime = 0;
 
-/** 官方 multiple-times-load：懒加载失败时调用 reject，保持节点状态以便重试。 */
 export function TreeMultipleTimesLoad() {
   const props = { label: "name", children: "zones", isLeaf: "leaf" };
 
@@ -233,7 +226,6 @@ const disabledData: TreeNodeData[] = [
   },
 ];
 
-/** 官方 disabled：节点自身可禁用复选框，需在 props 里声明 disabled 字段名。 */
 export function TreeDisabled() {
   return (
     <ElTree
@@ -278,7 +270,6 @@ const stateData: TreeNodeData[] = [
   },
 ];
 
-/** 官方 default-state：default-expanded-keys / default-checked-keys 需要 node-key。 */
 export function TreeDefaultState() {
   return (
     <ElTree
@@ -293,7 +284,6 @@ export function TreeDefaultState() {
   );
 }
 
-/** 官方 checking-tree：通过实例方法读写勾选态。 */
 export function TreeChecking() {
   const [tree, setTree] = useState<TreeInstance | null>(null);
 
@@ -383,7 +373,6 @@ const customNodeStyle: CSSProperties = {
   paddingRight: "0.8rem",
 };
 
-/** 官方 customized-node：render-content 与作用域插槽两种自定义节点内容的方式。 */
 export function TreeCustomizedNode() {
   const [renderTree, setRenderTree] = useState<TreeInstance | null>(null);
   const [slotTree, setSlotTree] = useState<TreeInstance | null>(null);
@@ -503,7 +492,6 @@ const penultimateData: TreeNodeData[] = [
   },
 ];
 
-/** 官方 custom-node-class：用 props.class 给节点打自定义类名。 */
 export function TreeCustomNodeClass() {
   return (
     <ElTree
@@ -524,7 +512,6 @@ export function TreeCustomNodeClass() {
   );
 }
 
-/** 官方 filtering：调用实例的 filter 方法过滤节点，需要 filter-node-method。 */
 export function TreeFiltering() {
   const [tree, setTree] = useState<TreeInstance | null>(null);
   const [filterText, setFilterText] = useState("");
@@ -593,7 +580,6 @@ const dragData: TreeNodeData[] = [
   },
 ];
 
-/** 官方 draggable：拖拽节点改变父子与顺序，allow-drag / allow-drop 控制可拖可落。 */
 export function TreeDraggable() {
   return (
     <ElTree

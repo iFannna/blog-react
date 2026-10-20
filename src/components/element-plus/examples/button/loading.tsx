@@ -4,7 +4,6 @@ import { ElButton } from "@/components/element-plus/button";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { Eleme } from "@/components/element-plus/icons";
 
-/** 官方第三个示例是自定义 loading 插槽，用一个带动画的 svg 代替默认图标。 */
 function CustomLoading() {
   return (
     <span className="docs-custom-loading">

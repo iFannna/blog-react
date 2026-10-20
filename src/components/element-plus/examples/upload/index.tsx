@@ -20,10 +20,6 @@ import { MessageBox } from "@/components/element-plus/message-box";
 
 const ACTION = "https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15";
 
-/**
- * 官方示例用 <style> 定义 .avatar-uploader .el-upload 的虚线边框；
- * 组件根节点只能透传 style 到外层，故用 CSS Module 命中内层 .el-upload。
- */
 const avatarIconStyle: CSSProperties = {
   fontSize: 28,
   color: "#8c939d",
@@ -38,7 +34,6 @@ const avatarImgStyle: CSSProperties = {
   display: "block",
 };
 
-/** 两个示例里的「上传到服务器」按钮，官方用 ml-3 工具类（margin-left: 12px）。 */
 const gapLeftStyle: CSSProperties = { marginLeft: 12 };
 
 const INITIAL_FILES: UploadUserFile[] = [
@@ -354,7 +349,6 @@ export function UploadFileListWithThumbnail() {
 export function UploadFileList() {
   const [fileList, setFileList] = useState<UploadUserFile[]>(PICTURE_FILES);
 
-  // 官方示例在 on-change 里把列表裁到最近 3 条
   const handleChange: UploadProps["onChange"] = () => {
     setFileList((prev) => prev.slice(-3));
   };

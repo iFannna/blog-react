@@ -3,11 +3,6 @@
 import { ElRow, ElCol } from "@/components/element-plus/row";
 import styles from "./border.module.css";
 
-/**
- * 对应官方 radius.vue 的 radiusGroup。
- * 官方用 useCssVar 读 --el-border-radius-* 的实际值填进 code，
- * 这里直接写死同名的最终值，避免在纯 React 里运行时读 CSS 变量。
- */
 const radiusGroup = [
   { name: "No Radius", type: "", value: '"0px"' },
   { name: "Small Radius", type: "small", value: "2px" },
@@ -15,7 +10,6 @@ const radiusGroup = [
   { name: "Round Radius", type: "round", value: "20px" },
 ];
 
-/** 对应官方 shadow.vue 的 shadowGroup，type 为空串时取 --el-box-shadow */
 const shadowGroup = [
   { name: "Basic Shadow", type: "" },
   { name: "Light Shadow", type: "light" },
@@ -60,7 +54,6 @@ export function BorderRadius() {
           <div className="value">
             <code>border-radius: {radius.value}</code>
           </div>
-          {/* 官方在此处内联 style，这里改为修饰类，空 type 保持 0 圆角 */}
           <div
             className={
               radius.type ? `radius radius--${radius.type}` : "radius"
@@ -77,7 +70,6 @@ export function BorderShadow() {
     <div className="demo-shadow">
       {shadowGroup.map((shadow) => (
         <div className="demo-shadow__item" key={shadow.name}>
-          {/* 同上，官方用内联 box-shadow，这里用修饰类映射同名变量 */}
           <div
             className={
               shadow.type

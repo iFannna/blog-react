@@ -15,10 +15,8 @@ import { ElCol } from "@/components/element-plus/row/ElCol";
 import { ArrowDown, Document, House, Menu, Setting } from "@/components/element-plus/icons";
 import styles from "./menu.module.css";
 
-/** 官方示例里 .el-menu-vertical-demo 的实测尺寸（200x400）。 */
 const VERTICAL_STYLE = { width: 200, minHeight: 400 };
 
-/** 侧边栏的两套配色共用同一份节点；flex 容器内复用需要 element 实例，这里用函数生成。 */
 function renderNavigatorChildren() {
   return (
     <>
@@ -66,7 +64,6 @@ function renderNavigatorChildren() {
   );
 }
 
-/** 基础用法：横向菜单，默认配色与自定义配色各一。 */
 export function MenuBasic() {
   const [activeIndex, setActiveIndex] = useState("1");
   const [activeIndex2, setActiveIndex2] = useState("1");
@@ -123,7 +120,6 @@ export function MenuBasic() {
   );
 }
 
-/** 左右分布：关掉省略号，首项用 margin-right: auto 顶到最左，其余靠右。 */
 export function MenuLeftAndRight() {
   const [activeIndex, setActiveIndex] = useState("1");
 
@@ -136,7 +132,6 @@ export function MenuLeftAndRight() {
       textColor="#303133"
       onSelect={(index) => setActiveIndex(index)}
     >
-      {/* 官方示例用 logo 图撑开首项，margin-right: auto 把其余项推到右侧 */}
       <ElMenuItem index="0" style={{ marginRight: "auto" }}>
         <img
           style={{ width: 100 }}
@@ -159,7 +154,6 @@ export function MenuLeftAndRight() {
   );
 }
 
-/** 侧边栏：纵向菜单 + 菜单分组 + 两套配色。 */
 export function MenuVertical() {
   const [activeIndex, setActiveIndex] = useState("2");
 
@@ -194,7 +188,6 @@ export function MenuVertical() {
   );
 }
 
-/** 收起：单选按钮组切换 collapse，收起后菜单项只留图标并显示 tooltip。 */
 export function MenuCollapse() {
   const [isCollapse, setIsCollapse] = useState(true);
 
@@ -258,7 +251,6 @@ export function MenuCollapse() {
   );
 }
 
-/** 浮层偏移：菜单级 popperOffset 与子菜单级覆盖。 */
 export function MenuPopperOffset() {
   return (
     <ElMenu
@@ -295,7 +287,6 @@ export function MenuPopperOffset() {
   );
 }
 
-/** 收起态的箭头图标替换：对应官方 expand/collapse 图标成对使用的写法。 */
 export function MenuCollapseIcons() {
   const [isCollapse, setIsCollapse] = useState(false);
 

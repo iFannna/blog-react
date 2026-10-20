@@ -5,7 +5,6 @@ import { ElSplitter, ElSplitterPanel } from "@/components/element-plus/splitter"
 import { ElSwitch } from "@/components/element-plus/switch";
 import styles from "./splitter.module.css";
 
-/** 官方示例统一给外层盒子一个固定高度和阴影，这里保持一致。 */
 const container: CSSProperties = {
   height: 250,
   boxShadow: "var(--el-border-color-light) 0px 0px 10px",
@@ -18,7 +17,6 @@ const panelContent: CSSProperties = {
   height: "100%",
 };
 
-/** 对应官方示例里的 .demo-panel */
 function DemoPanel({ children }: { children?: ReactNode }) {
   return <div style={panelContent}>{children}</div>;
 }

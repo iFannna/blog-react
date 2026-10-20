@@ -14,12 +14,6 @@ import styles from "./page-header.module.css";
 const AVATAR_IMG =
   "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png";
 
-/**
- * 官方示例用 unocss 工具类（text-large / font-600 / mr-3 等），
- * 本项目没有 unocss，这里按 presetWind3 的默认值换写成等价内联样式：
- * text-large=18px、text-sm=14px、font-600=600、mr-3=12px、mr-2=8px、
- * mt-4=16px、ml-2=8px。
- */
 const flexRow: CSSProperties = { display: "flex", alignItems: "center" };
 const titleStyle: CSSProperties = { fontSize: 18, fontWeight: 600, marginRight: 12 };
 const subtitleStyle: CSSProperties = {
@@ -32,7 +26,6 @@ const mainStyle: CSSProperties = {
   marginBottom: 0,
   fontSize: 14,
   fontWeight: 700,
-  // unocss text-sm 的默认行高为 20px
   lineHeight: "20px",
 };
 
@@ -66,7 +59,6 @@ export function PageHeaderComplete() {
         }
       >
         <ElDescriptions column={3} size="small" style={{ marginTop: 16 }}>
-          {/* 官方模板换行会把首尾空白压成一个空格，文本宽度按此渲染 */}
           <ElDescriptionsItem label="Username">{" "}kooriookami{" "}</ElDescriptionsItem>
           <ElDescriptionsItem label="Telephone">{" "}18100000000{" "}</ElDescriptionsItem>
           <ElDescriptionsItem label="Place">Suzhou</ElDescriptionsItem>

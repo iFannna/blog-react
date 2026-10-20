@@ -25,7 +25,6 @@ function DropdownLink({
   children,
   ...rest
 }: { children: ReactNode } & HTMLAttributes<HTMLSpanElement>) {
-  // 官方插槽内容由 ElOnlyChild 合并触发器事件/role/tabindex，这里需要透传
   return (
     <span {...rest} className={`el-dropdown-link ${styles.link}`}>
       {children}

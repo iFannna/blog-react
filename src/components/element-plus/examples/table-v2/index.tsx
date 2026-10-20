@@ -41,7 +41,6 @@ const resizerWrapperStyle: CSSProperties = { height: 400 };
 
 const rowHoverBackground = "var(--el-color-primary-light-9)";
 const dangerBackground = "var(--el-color-danger-light-9)";
-// 官方 demo 用 Tailwind 的 bg-blue-200 / bg-red-100，本地没有对应工具类。
 const rowClassBlueBackground = "#bfdbfe";
 const rowClassDangerBackground = "#fee2e2";
 
@@ -73,7 +72,6 @@ const generateData = (
     ),
   );
 
-/** 固定种子的线性同余随机数，避免 SSR 与客户端生成不同数据。 */
 function createRandom(seed: number) {
   let state = seed;
   return () => {
@@ -81,10 +79,6 @@ function createRandom(seed: number) {
     return state / 0x100000000;
   };
 }
-
-/* ------------------------------------------------------------------ *
- * Basic / AutoResizer
- * ------------------------------------------------------------------ */
 
 const basicColumns = generateColumns(10);
 const basicData = generateData(basicColumns, 1000);
@@ -121,10 +115,6 @@ export function TableV2AutoResizer() {
     </div>
   );
 }
-
-/* ------------------------------------------------------------------ *
- * Customize Cell Renderer
- * ------------------------------------------------------------------ */
 
 const cellTemplatingData: TableV2Row[] = Array.from({ length: 200 }).map(
   (_, index) => ({
@@ -188,10 +178,6 @@ export function TableV2CellTemplating() {
     />
   );
 }
-
-/* ------------------------------------------------------------------ *
- * Selection
- * ------------------------------------------------------------------ */
 
 const selectionBaseColumns = generateColumns(10);
 const initialSelectionData = (): TableV2Row[] =>
@@ -257,10 +243,6 @@ export function TableV2Selection() {
     </div>
   );
 }
-
-/* ------------------------------------------------------------------ *
- * Inline editing
- * ------------------------------------------------------------------ */
 
 const inlineEditingBaseColumns = generateColumns(10);
 const initialEditingData = (): TableV2Row[] =>
@@ -331,10 +313,6 @@ export function TableV2InlineEditing() {
   );
 }
 
-/* ------------------------------------------------------------------ *
- * Table with status（row class）
- * ------------------------------------------------------------------ */
-
 const rowClassData: TableV2Row[] = Array.from({ length: 200 }).map(
   (_, index) => ({
     id: `random-id-${index + 1}`,
@@ -393,7 +371,6 @@ const rowClassGetter = ({ rowIndex }: { rowIndex: number }) => {
   return "";
 };
 
-// 项目里没有 Tailwind，rowClass 之外再用 cellProps 把同样的配色落到内联样式
 const rowClassCellProps = ({ rowIndex }: { rowIndex: number }) => {
   if (rowIndex % 10 === 5) return { style: { backgroundColor: rowClassDangerBackground } };
   if (rowIndex % 10 === 0) return { style: { backgroundColor: rowClassBlueBackground } };
@@ -413,18 +390,11 @@ export function TableV2RowClass() {
   );
 }
 
-/* ------------------------------------------------------------------ *
- * Sticky rows
- * ------------------------------------------------------------------ */
-
 const stickyColumns = generateColumns(10);
 const stickySourceData = generateData(stickyColumns, 200);
 
 const stickyRowClass = ({ rowIndex }: { rowIndex: number }) =>
   rowIndex < 0 || (rowIndex + 1) % 5 === 0 ? "sticky-row" : "";
-
-// 官方示例的 fixed-header-row 样式选择器拼写有误，线上实际不生效；
-// 这里不额外加背景/字重，保持与线上渲染一致。
 
 export function TableV2StickyRows() {
   const [stickyIndex, setStickyIndex] = useState(0);
@@ -449,10 +419,6 @@ export function TableV2StickyRows() {
     />
   );
 }
-
-/* ------------------------------------------------------------------ *
- * Fixed columns
- * ------------------------------------------------------------------ */
 
 const fixedColumns = generateColumns(10);
 fixedColumns[0].fixed = true;
@@ -486,10 +452,6 @@ export function TableV2FixedColumns() {
     />
   );
 }
-
-/* ------------------------------------------------------------------ *
- * Grouping header
- * ------------------------------------------------------------------ */
 
 const groupingSourceColumns = generateColumns(15);
 const groupingData = generateData(groupingSourceColumns, 200);
@@ -575,10 +537,6 @@ export function TableV2GroupingHeader() {
     />
   );
 }
-
-/* ------------------------------------------------------------------ *
- * Filter
- * ------------------------------------------------------------------ */
 
 const filterBaseColumns = generateColumns(10);
 const filterColumns = filterBaseColumns.map((column, columnIndex) => ({
@@ -694,10 +652,6 @@ export function TableV2Filter() {
   );
 }
 
-/* ------------------------------------------------------------------ *
- * Sortable / Controlled sort
- * ------------------------------------------------------------------ */
-
 const sortColumns = generateColumns(10, "column-", { width: 150 });
 sortColumns[0].sortable = true;
 
@@ -755,10 +709,6 @@ export function TableV2ControlledSort() {
   );
 }
 
-/* ------------------------------------------------------------------ *
- * Cross hovering
- * ------------------------------------------------------------------ */
-
 const crossHoveringBaseColumns = generateColumns(10);
 const crossHoveringData = generateData(crossHoveringBaseColumns, 200);
 const crossHoveringColumns: TableV2Column[] = [
@@ -801,10 +751,6 @@ export function TableV2CrossHovering() {
     </div>
   );
 }
-
-/* ------------------------------------------------------------------ *
- * Colspan / Rowspan / Both
- * ------------------------------------------------------------------ */
 
 const spanColumns = generateColumns(10);
 const spanData = generateData(spanColumns, 200);
@@ -950,10 +896,6 @@ export function TableV2Spans() {
   );
 }
 
-/* ------------------------------------------------------------------ *
- * Tree data
- * ------------------------------------------------------------------ */
-
 const treeColumns = generateColumns(10).map((column, columnIndex) => {
   let fixed: TableV2FixedDir | undefined;
   if (columnIndex < 2) fixed = TableV2FixedDir.LEFT;
@@ -1040,10 +982,6 @@ export function TableV2TreeData() {
   );
 }
 
-/* ------------------------------------------------------------------ *
- * Dynamic height
- * ------------------------------------------------------------------ */
-
 const longText =
   "Quaerat ipsam necessitatibus eum quibusdam est id voluptatem cumque mollitia.";
 const midText = "Corrupti doloremque a quos vero delectus consequatur.";
@@ -1059,7 +997,6 @@ const dynamicHeightData: TableV2Row[] = (() => {
       date: "2016-05-03",
       description: textList[Math.floor(random() * textList.length)],
     }))
-    // 官方 comparator 对同名项恒返回 -1，稳定排序后数组整体逆序
     .sort((left, right) =>
       String(left.name) > String(right.name) ? 1 : -1,
     );
@@ -1137,10 +1074,6 @@ export function TableV2DynamicHeight() {
   );
 }
 
-/* ------------------------------------------------------------------ *
- * Detail view
- * ------------------------------------------------------------------ */
-
 const detailedText = `Velit sed aspernatur tempora. Natus consequatur officiis dicta vel assumenda.
 Itaque est temporibus minus quis. Ipsum commodiab porro vel voluptas illum.
 Qui quam nulla et dolore autem itaque est.
@@ -1183,10 +1116,6 @@ export function TableV2DetailedView() {
     </div>
   );
 }
-
-/* ------------------------------------------------------------------ *
- * Footer / Empty / Overlay
- * ------------------------------------------------------------------ */
 
 const footerColumns = generateColumns(10);
 const footerData = generateData(footerColumns, 200);
@@ -1277,10 +1206,6 @@ export function TableV2Overlay() {
     />
   );
 }
-
-/* ------------------------------------------------------------------ *
- * Manual scrolling
- * ------------------------------------------------------------------ */
 
 const manualColumns = generateColumns(10);
 const manualData = generateData(manualColumns, 200);

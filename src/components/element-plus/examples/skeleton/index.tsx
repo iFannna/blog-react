@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useState, useSyncExternalStore, type CSSProperties } from "react";
 import { ElSkeleton, ElSkeletonItem } from "@/components/element-plus/skeleton";
 import { ElButton } from "@/components/element-plus/button";
 import { ElCard } from "@/components/element-plus/card";
@@ -10,14 +10,16 @@ import { ElSwitch } from "@/components/element-plus/switch";
 const cardImage = {} as const;
 const cardFooter = {} as const;
 
-/** 官方 demo 在客户端取当前日期；放到挂载后计算，避免 SSR 与固定时钟不一致。 */
+const subscribeDate = () => () => {};
+const getDateSnapshot = () => new Date().toDateString();
+const getServerDateSnapshot = () => "";
+
 function useCurrentDate() {
-  const [date, setDate] = useState("");
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- 挂载后再取当前日期，避免 SSR 水合不一致
-    setDate(new Date().toDateString());
-  }, []);
-  return date;
+  return useSyncExternalStore(
+    subscribeDate,
+    getDateSnapshot,
+    getServerDateSnapshot,
+  );
 }
 
 export function SkeletonBasic() {
@@ -43,7 +45,6 @@ export function SkeletonAnimation() {
   return <ElSkeleton rows={5} animated />;
 }
 
-/** 官方 customized-template：图片 + 两行文案的骨架 */
 function customizedSkeletonTemplate() {
   return (
     <>
@@ -74,7 +75,6 @@ export function SkeletonTemplate() {
   );
 }
 
-/** 官方 loading-state 等示例：h3 标题 + 带 16px 间距的文案行 */
 function cardSkeletonTemplate(imageHeight = 240) {
   return (
     <>
@@ -101,7 +101,6 @@ function cardSkeletonTemplate(imageHeight = 240) {
   );
 }
 
-/** 加载完成后的卡片真实内容 */
 function CardContent({ title, date }: { title: string; date: string }) {
   return (
     <ElCard bodyStyle={{ padding: 0, marginBottom: 1 }}>

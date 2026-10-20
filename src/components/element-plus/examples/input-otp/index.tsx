@@ -6,7 +6,6 @@ import { ElInputOtp } from "@/components/element-plus/input-otp";
 const stack = { display: "flex", flexDirection: "column", gap: "2rem" } as const;
 const typeWrap = { display: "flex", flexDirection: "column", gap: "1.2rem" } as const;
 const label = {
-  // 官方 demo 的 p 依赖文档站全局 reset 去掉默认 margin-top
   margin: "0 0 0.8rem",
   fontSize: "1.4rem",
   color: "var(--el-text-color-secondary)",

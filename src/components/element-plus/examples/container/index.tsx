@@ -134,7 +134,6 @@ const tableData = Array.from({ length: 20 }, () => ({
   address: "No. 189, Grove St, Los Angeles",
 }));
 
-/** 官方 example.vue：完整应用布局，侧边菜单 + 顶栏 + 表格主区 */
 export function ContainerExample() {
   return (
     <ElContainer className={styles.layoutDemo} style={{ height: 500 }}>

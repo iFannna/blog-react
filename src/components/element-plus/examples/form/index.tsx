@@ -280,7 +280,6 @@ export function FormValidation() {
       rules={VALIDATION_RULES}
       labelWidth="auto"
       style={formStyle}
-      // resetFields 在 React 里把还原后的 model 交回使用方
       onModelChange={(next) => setForm(next as typeof form)}
     >
       <ElFormItem label="Activity name" prop="name">
@@ -658,7 +657,6 @@ export function FormCustomValidation() {
   }>({ pass: "", checkPass: "", age: "" });
   const [result, setResult] = useState("");
 
-  // 校验器要保持引用稳定，否则 rules 每次渲染都是新对象，会触发 validateOnRuleChange
   const formValueRef = useRef(form);
   useEffect(() => {
     formValueRef.current = form;
@@ -672,7 +670,6 @@ export function FormCustomValidation() {
       callback(new Error("Please input the age"));
       return;
     }
-    // 官方示例用 1 秒模拟异步远程校验
     window.setTimeout(() => {
       if (!Number.isInteger(value)) {
         callback(new Error("Please input digits"));
@@ -690,7 +687,6 @@ export function FormCustomValidation() {
         callback(new Error("Please input the password"));
         return;
       }
-      // 密码变化时联动校验确认密码
       if (formValueRef.current.checkPass !== "") {
         formRef.current?.validateField("checkPass").catch(() => {});
       }
@@ -755,7 +751,6 @@ export function FormCustomValidation() {
         <ElInput
           value={form.age}
           onChange={(v) => {
-            // 对应官方 v-model.number：能解析成数字时写入 number
             const next = Number.parseFloat(v);
             patch({ age: Number.isNaN(next) ? v : next });
           }}

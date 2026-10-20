@@ -16,7 +16,6 @@ interface Option {
   disabled?: boolean;
 }
 
-/** 官方 basic / customizable / empty-content 共用的 15 条数据生成器。 */
 function generateData(count = 15, disabledEvery = 4): Option[] {
   const data: Option[] = [];
   for (let i = 1; i <= count; i++) {
@@ -29,7 +28,6 @@ function generateData(count = 15, disabledEvery = 4): Option[] {
   return data;
 }
 
-/** 官方示例里 el-transfer 的 text-align 覆盖，等价于 style="text-align: left; display: inline-block"。 */
 const transferStyle: CSSProperties = {
   textAlign: "left",
   display: "inline-block",
@@ -82,7 +80,6 @@ export function TransferFilterable() {
 
 export function TransferCustomizable() {
   const data = generateData();
-  // 两组的初始右侧列表都含 key 1，与官方示例一致
   const [leftValue, setLeftValue] = useState<TransferKey[]>([1]);
   const [rightValue, setRightValue] = useState<TransferKey[]>([1]);
 
@@ -185,7 +182,6 @@ export function TransferEmptyContent() {
 export function TransferPropAlias() {
   const [value, setValue] = useState<TransferKey[]>([]);
 
-  // 数据项没有 key / label，改用 value / desc，经 optionProps 声明别名
   const data = generateData().map((item) => ({
     value: item.key,
     desc: item.label,

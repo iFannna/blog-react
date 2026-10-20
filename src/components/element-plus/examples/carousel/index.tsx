@@ -3,10 +3,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { ElCarousel, ElCarouselItem } from "@/components/element-plus/carousel";
 
-/**
- * 示例里的幻灯片底色与文字色取自官方 demo 的 scoped 样式，
- * 属于演示内容而非组件样式，故按官方原值内联。
- */
 const ITEM_BG_EVEN = "#99a9bf";
 const ITEM_BG_ODD = "#d3dce6";
 
@@ -18,12 +14,10 @@ const centered: CSSProperties = {
   textAlign: "center",
 };
 
-/** 官方示例统一用奇偶项交替底色，第 1 项为浅蓝灰 */
 function itemStyle(index: number): CSSProperties {
   return { backgroundColor: index % 2 === 0 ? ITEM_BG_EVEN : ITEM_BG_ODD };
 }
 
-/** 官方 h3 在各示例里都靠 text-2xl + justify-center 居中，这里统一成 flex 居中 */
 function ItemTitle({ children }: { children: ReactNode }) {
   return (
     <h3

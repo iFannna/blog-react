@@ -313,7 +313,6 @@ export function InputClearIcon() {
   );
 }
 
-/** 按码点计数，与官方示例一致；生产环境可换成 Intl.Segmenter。 */
 const countGraphemes = (value: string) => Array.from(value).length;
 
 export function InputCountGraphemes() {

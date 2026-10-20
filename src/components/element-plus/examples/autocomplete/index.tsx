@@ -11,10 +11,6 @@ import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { ElButton } from "@/components/element-plus/button";
 import { Edit } from "@/components/element-plus/icons";
 
-/*
- * 官方 docs/examples/autocomplete/*.vue 里 .demo-autocomplete / .demo-block /
- * .demo-title 的等价物；这里的演示统一用内联样式表达。
- */
 
 const demoFlex = {
   display: "flex",
@@ -36,13 +32,8 @@ const demoTitle = {
   alignItems: "center",
 } as const;
 
-/**
- * 注意用 type 而非 interface：interface 没有隐式索引签名，
- * 无法赋给 AutocompleteData（Record<string, unknown>[]）。
- */
 type LinkItem = { value: string; link: string };
 
-/** 三条示例共用的数据源，对应官方 loadAll。 */
 function loadAll(): LinkItem[] {
   return [
     { value: "vue", link: "https://github.com/vuejs/vue" },
@@ -57,13 +48,11 @@ function loadAll(): LinkItem[] {
 
 const links = loadAll();
 
-/** 对应官方 createFilter：前缀匹配，忽略大小写。 */
 function createFilter(queryString: string) {
   return (item: LinkItem) =>
     item.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
 }
 
-/** 同步返回建议，对应官方 querySearch。 */
 function querySearch(
   queryString: string,
   cb: AutocompleteFetchSuggestionsCallback,
@@ -74,7 +63,6 @@ function querySearch(
   cb(results);
 }
 
-/** 异步返回建议，对应官方 querySearchAsync。 */
 function useQuerySearchAsync(delay: number) {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -158,7 +146,6 @@ export function AutocompleteTemplate() {
 
 export function AutocompleteRemoteSearch() {
   const [state, setState] = useState<string | number>("");
-  // 官方示例用 3000 * Math.random() 的随机延迟，这里固定 1000ms 便于观察
   const querySearchAsync = useQuerySearchAsync(1000);
 
   return (
@@ -172,7 +159,6 @@ export function AutocompleteRemoteSearch() {
   );
 }
 
-/** 自定义 loading 内容一：带缺口描边的圆环，靠 el-icon 的旋转动画转起来。 */
 function LoadingRing() {
   return (
     <ElIcon className="is-loading">
@@ -191,7 +177,6 @@ function LoadingRing() {
   );
 }
 
-/** 自定义 loading 内容二：四点方阵，作为整体旋转。 */
 function LoadingDots() {
   return (
     <ElIcon className="is-loading">
@@ -208,7 +193,6 @@ function LoadingDots() {
 export function AutocompleteCustomLoading() {
   const [state1, setState1] = useState<string | number>("");
   const [state2, setState2] = useState<string | number>("");
-  // 官方示例用 5000 * Math.random()，这里固定 2000ms
   const querySearchAsync = useQuerySearchAsync(2000);
 
   return (

@@ -3,8 +3,6 @@
 import { useState, type CSSProperties } from "react";
 import { ElSlider, type SliderMarks, type SliderValue } from "@/components/element-plus/slider";
 
-// 官方 demo 的 scoped 样式：block 为 600px 的横向 flex，label 占剩余宽度，
-// slider 固定 70% 并带 12px 左间距。
 const block: CSSProperties = {
   maxWidth: 600,
   display: "flex",

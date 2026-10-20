@@ -59,7 +59,6 @@ const customActivities: CustomActivity[] = [
   },
 ];
 
-// 官方文档正文排版：标题无外边距，段落仅保留 16px 上间距
 const cardTitle = { margin: 0 } as const;
 const cardBody = { margin: "16px 0 0" } as const;
 const timelineSpacing: CSSProperties = { marginTop: 16 };

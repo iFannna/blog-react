@@ -81,7 +81,6 @@ function DatePickerPanelBorderDemo() {
   const [isNarrow, setIsNarrow] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // 官方 demo 在容器窄于 815px 时把竖分隔线换成横线
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -155,7 +154,6 @@ function DatePickerPanelDisabledDemo() {
   );
 }
 
-/** 官方文档 demo 运行在 en 语言环境，与站点正文语言无关。 */
 function withEn(Component: () => ReactNode) {
   return function Demo() {
     return (

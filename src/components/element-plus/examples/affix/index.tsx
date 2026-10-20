@@ -4,7 +4,6 @@ import { type CSSProperties } from "react";
 import { ElAffix } from "@/components/element-plus/affix";
 import { ElButton } from "@/components/element-plus/button";
 
-/** 官方 target 示例用 <style scoped> 定义 .affix-container；本项目禁止 <style> 标签，改为样式对象。 */
 const containerStyle: CSSProperties = {
   textAlign: "center",
   height: 400,

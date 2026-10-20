@@ -48,7 +48,6 @@ export function TagClosableDynamic() {
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<InputExpose | null>(null);
 
-  // 对应官方 nextTick 后聚焦输入框
   useEffect(() => {
     if (inputVisible) inputRef.current?.focus();
   }, [inputVisible]);

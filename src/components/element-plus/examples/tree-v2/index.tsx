@@ -15,7 +15,6 @@ import type {
 
 import treeV2Styles from "./tree-v2.module.css";
 
-/** 对应官方示例里的 style="max-width: 600px"。 */
 const treeWidth: CSSProperties = { maxWidth: "600px" };
 
 const stackStyle: CSSProperties = {
@@ -39,10 +38,6 @@ const defaultProps: TreeOptionProps = {
   children: "children",
 };
 
-/**
- * 官方示例用 Math.random 生成数据；SSR 与客户端各执行一次会导致 hydration 不一致，
- * 这里换成固定种子的线性同余发生器，保证两次结果相同。
- */
 function createSeedRandom(seed: number) {
   let state = seed;
   return () => {
@@ -207,7 +202,6 @@ const penultimateData: DemoTree[] = [
 const customNodeClass = (data: TreeNodeData) =>
   data.isPenultimate ? "is-penultimate" : "";
 
-/** 官方 basic：基础树形结构。 */
 export function TreeV2Basic() {
   return (
     <ElTreeV2
@@ -219,7 +213,6 @@ export function TreeV2Basic() {
   );
 }
 
-/** 官方 selectable：显示复选框。 */
 export function TreeV2Selectable() {
   return (
     <ElTreeV2
@@ -232,7 +225,6 @@ export function TreeV2Selectable() {
   );
 }
 
-/** 官方 disabled：props.disabled 声明禁用字段。 */
 export function TreeV2Disabled() {
   return (
     <ElTreeV2
@@ -245,7 +237,6 @@ export function TreeV2Disabled() {
   );
 }
 
-/** 官方 default-state：初始展开与初始勾选。 */
 export function TreeV2DefaultState() {
   return (
     <ElTreeV2
@@ -260,7 +251,6 @@ export function TreeV2DefaultState() {
   );
 }
 
-/** 官方 custom-node：自定义节点内容。 */
 export function TreeV2CustomNode() {
   return (
     <ElTreeV2
@@ -300,7 +290,6 @@ export function TreeV2CustomNode() {
   );
 }
 
-/** 官方 custom-node-class：用 props.class 生成节点类名。 */
 export function TreeV2CustomNodeClass() {
   return (
     <ElTreeV2
@@ -314,7 +303,6 @@ export function TreeV2CustomNodeClass() {
   );
 }
 
-/** 官方 custom-icon：按展开状态渲染不同图标。 */
 export function TreeV2CustomIcon() {
   return (
     <ElTreeV2
@@ -349,7 +337,6 @@ export function TreeV2CustomIcon() {
   );
 }
 
-/** 官方 filter：调用实例的 filter 方法过滤节点。 */
 export function TreeV2Filter() {
   const treeRef = useRef<TreeV2Expose>(null);
   const [query, setQuery] = useState("");

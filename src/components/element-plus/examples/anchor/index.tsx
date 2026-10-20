@@ -38,7 +38,6 @@ export function AnchorHorizontal() {
 }
 
 export function AnchorScroll() {
-  // 滚动容器必须以元素形式传给 ElAnchor，故用 state 承接 ref 回调
   const [containerEl, setContainerEl] = useState<HTMLDivElement | null>(null);
 
   return (
@@ -99,7 +98,6 @@ export function AnchorScroll() {
               direction="vertical"
               type="default"
               offset={30}
-              // 官方示例在此阻止默认跳转
               onClick={(event) => event.preventDefault()}
             >
               <ElAnchorLink href="#part1" title="part1" />

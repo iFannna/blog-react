@@ -71,7 +71,6 @@ export function TabsCustomLabel() {
   );
 }
 
-/** 自定义新增按钮图标：addIcon 属性等价于官方 add-icon 插槽 */
 export function TabsCustomAddIcon() {
   const [active, setActive] = useState<string | number>("2");
   const nextIndex = useRef(2);
@@ -128,7 +127,6 @@ export function TabsCustomAddIcon() {
   );
 }
 
-/** 外部按钮新增 + tab-remove 关闭 */
 export function TabsCustomizedTrigger() {
   const [active, setActive] = useState<string | number>("2");
   const nextIndex = useRef(2);
@@ -181,7 +179,6 @@ export function TabsCustomizedTrigger() {
   );
 }
 
-/** 非受控 defaultValue：未传 value 时以 defaultValue 作为初始选中项 */
 export function TabsDefaultValue() {
   const [active, setActive] = useState<string | number>();
   return (
@@ -214,7 +211,6 @@ export function TabsDefaultValue() {
   );
 }
 
-/** 可动态增减：editable 同时提供新增按钮与关闭图标，edit 事件统一处理 */
 export function TabsDynamic() {
   const [active, setActive] = useState<string | number>("2");
   const nextIndex = useRef(2);

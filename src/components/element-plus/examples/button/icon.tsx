@@ -15,7 +15,6 @@ export default function ButtonIcon() {
       </ElButton>
       <ElButton type="primary">
         Upload
-        {/* 官方用 el-icon--right 让图标贴到文字右侧 */}
         <ElIcon className="el-icon--right">
           <Upload />
         </ElIcon>

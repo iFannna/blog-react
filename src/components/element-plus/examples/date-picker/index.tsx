@@ -933,7 +933,6 @@ function DatePickerCustomIconDemo() {
   );
 }
 
-/** 官方文档 demo 运行在 en 语言环境，与站点正文语言无关。 */
 function withEn(Component: () => ReactNode) {
   return function Demo() {
     return (

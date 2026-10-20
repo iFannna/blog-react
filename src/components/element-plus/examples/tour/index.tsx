@@ -7,10 +7,6 @@ import { ElSpace } from "@/components/element-plus/space";
 import { MoreFilled } from "@/components/element-plus/icons";
 import { ElTour, ElTourStep } from "@/components/element-plus/tour";
 
-/**
- * ElButton 是普通函数组件、未暴露 ref，示例统一用 id 选择器作为 target，
- * 与官方 target 示例里 "#btn1" 的写法一致。
- */
 const targetBy = (id: string) => () => document.querySelector<HTMLElement>(id);
 
 export function TourBasic() {
@@ -240,19 +236,16 @@ export function TourTarget() {
       </ElSpace>
 
       <ElTour visible={open} onVisibleChange={setOpen}>
-        {/* 选择器字符串 */}
         <ElTourStep
           target="#tour-target-1"
           title="Upload File"
           description="Put you files here."
         />
-        {/* 返回元素的函数 */}
         <ElTourStep
           target={targetBy("#tour-target-2")}
           title="Save"
           description="Save your changes"
         />
-        {/* 返回元素的函数 */}
         <ElTourStep
           target={() => document.querySelector<HTMLElement>("#tour-target-3")}
           title="Other Actions"

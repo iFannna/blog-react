@@ -1,4 +1,3 @@
-/** 字号表与 font.vue 的 fontSizes 一致，写死变量最终值避免运行时读取 CSS 变量。 */
 const FONT_SIZES = [
   { level: "Supplementary text", type: "extra-small", value: "12px" },
   { level: "Body (small)", type: "small", value: "13px" },
@@ -8,7 +7,6 @@ const FONT_SIZES = [
   { level: "Main Title", type: "extra-large", value: "20px" },
 ];
 
-/** 与官方 formatType 一致，把 extra-small 拼成 Extra Small。 */
 function formatType(type: string) {
   return type
     .split("-")
@@ -23,7 +21,6 @@ export default function TypographyConvention() {
         <tr>
           <td>Level</td>
           <td>Font Size</td>
-          {/* color-dark-light 是官方预留但线上未生效的类名，保持原样 */}
           <td className="color-dark-light">Demo</td>
         </tr>
         {FONT_SIZES.map((fontSize) => (

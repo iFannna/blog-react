@@ -101,7 +101,6 @@ const stateItems = states.map((item) => ({
 const asArray = (value: SelectV2Value) =>
   (Array.isArray(value) ? value : []) as string[];
 
-/** 基础用法：一千条选项走虚拟滚动。 */
 export function SelectV2BasicUsage() {
   const [value, setValue] = useState<string>();
 
@@ -116,7 +115,6 @@ export function SelectV2BasicUsage() {
   );
 }
 
-/** 多选。 */
 export function SelectV2Multiple() {
   const [value, setValue] = useState<string[]>([]);
 
@@ -132,7 +130,6 @@ export function SelectV2Multiple() {
   );
 }
 
-/** 可清空，多选与单选各一个。 */
 export function SelectV2Clearable() {
   const [value1, setValue1] = useState<string[]>([]);
   const [value2, setValue2] = useState<string>();
@@ -160,7 +157,6 @@ export function SelectV2Clearable() {
   );
 }
 
-/** 可过滤的多选。 */
 export function SelectV2Filterable() {
   const [value, setValue] = useState<string[]>([]);
 
@@ -177,7 +173,6 @@ export function SelectV2Filterable() {
   );
 }
 
-/** 选项分组，组标题由 flatten 后的 Group 项渲染。 */
 export function SelectV2Grouping() {
   const [value, setValue] = useState<string[]>([]);
 
@@ -208,7 +203,6 @@ export function SelectV2Grouping() {
   );
 }
 
-/** 选项字段别名。 */
 export function SelectV2PropsDemo() {
   const [value, setValue] = useState<string[]>([]);
 
@@ -231,7 +225,6 @@ export function SelectV2PropsDemo() {
   );
 }
 
-/** 禁用与选项禁用。 */
 export function SelectV2Disabled() {
   const [value, setValue] = useState<string[]>([]);
 
@@ -266,7 +259,6 @@ export function SelectV2Disabled() {
   );
 }
 
-/** 三种尺寸。 */
 export function SelectV2Size() {
   const [value, setValue] = useState<string>();
 
@@ -299,7 +291,6 @@ export function SelectV2Size() {
   );
 }
 
-/** 允许创建选项，含 reserve-keyword=false 的对照。 */
 export function SelectV2AllowCreate() {
   const [value1, setValue1] = useState<string[]>([]);
   const [value2, setValue2] = useState<string>();
@@ -354,7 +345,6 @@ export function SelectV2AllowCreate() {
   );
 }
 
-/** 远程搜索，with / without remote-show-suffix。 */
 export function SelectV2RemoteSearch() {
   const [value, setValue] = useState<string[]>([]);
   const [options, setOptions] = useState<typeof stateItems>([]);
@@ -415,7 +405,6 @@ export function SelectV2RemoteSearch() {
   );
 }
 
-/** 自定义加载内容。 */
 export function SelectV2CustomLoading() {
   const [value, setValue] = useState<string[]>([]);
   const [options, setOptions] = useState<typeof stateItems>([]);
@@ -483,7 +472,6 @@ export function SelectV2CustomLoading() {
   );
 }
 
-/** 下拉头部：全选复选框。 */
 export function SelectV2CustomHeader() {
   const [value, setValue] = useState<string[]>([]);
 
@@ -517,7 +505,6 @@ export function SelectV2CustomHeader() {
   );
 }
 
-/** 下拉底部：添加自定义选项。 */
 export function SelectV2CustomFooter() {
   const selectRef = useRef<SelectV2Expose>(null);
   const [value, setValue] = useState<string[]>([]);
@@ -573,7 +560,6 @@ export function SelectV2CustomFooter() {
   );
 }
 
-/** 自定义选项与标签内容。 */
 export function SelectV2CustomizedOption() {
   const [value, setValue] = useState<string[]>([]);
 
@@ -604,7 +590,6 @@ export function SelectV2CustomizedOption() {
   );
 }
 
-/** 完全自定义标签：色块。 */
 export function SelectV2CustomTag() {
   const colors = [
     { value: "#E63415", label: "red" },
@@ -653,7 +638,6 @@ export function SelectV2CustomTag() {
   );
 }
 
-/** 标签折叠的三种配置。 */
 export function SelectV2HideExtraTags() {
   const [value, setValue] = useState<string[]>([]);
   const [value2, setValue2] = useState<string[]>([]);
@@ -704,7 +688,6 @@ export function SelectV2HideExtraTags() {
   );
 }
 
-/** 自定义下拉宽度。 */
 export function SelectV2CustomWidth() {
   const [value, setValue] = useState<string>();
 
@@ -745,7 +728,6 @@ export function SelectV2CustomWidth() {
   );
 }
 
-/** 自定义选中值文案。 */
 export function SelectV2CustomLabel() {
   const [value1, setValue1] = useState<string>("Option 1");
   const [value2, setValue2] = useState<string[]>(["Option 1"]);
@@ -782,7 +764,6 @@ export function SelectV2CustomLabel() {
   );
 }
 
-/** 对象值以 value-key 作为唯一标识。 */
 export function SelectV2UseValueKey() {
   const [value, setValue] = useState<Record<string, unknown>>({
     name: "Option 1",
@@ -809,7 +790,6 @@ export function SelectV2UseValueKey() {
   );
 }
 
-/** 空值集合与清空返回值，清空后提示当前值。 */
 export function SelectV2EmptyValues() {
   const [value, setValue] = useState<string | null>("");
 

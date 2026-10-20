@@ -1,6 +1,5 @@
 const IMAGE_BASE = "https://element-plus.org/images/typography";
 
-/** 行高示例的 4 个档位，对应官方 line-height.vue 的列表文本。 */
 const LINE_HEIGHTS = [
   { value: "1", note: "No line height" },
   { value: "1.3", note: "Compact" },

@@ -3,7 +3,6 @@
 import { useRef, useState, type CSSProperties } from "react";
 import { useInfiniteScroll } from "@/components/element-plus/infinite-scroll";
 
-/** 官方示例用 <style> 定义 .infinite-list；本项目禁止 <style> 标签，改为样式对象。 */
 const listStyle: CSSProperties = {
   height: 300,
   padding: 0,
@@ -28,7 +27,6 @@ const wrapperStyle: CSSProperties = {
   textAlign: "center",
 };
 
-/** 官方 `.list-item + .list-item { margin-top: 10px }`，React 侧按序号补出相邻间距。 */
 const dangerItemStyle: CSSProperties = {
   display: "flex",
   alignItems: "center",
@@ -68,7 +66,6 @@ export function InfiniteScrollDisableLoading() {
   const [loading, setLoading] = useState(false);
   const noMore = count >= 20;
   const disabled = loading || noMore;
-  // 与官方一致：ref 挂在 ul 上，滚动容器是外层可滚动的 wrapper
   const listRef = useRef<HTMLUListElement>(null);
 
   useInfiniteScroll(listRef, {

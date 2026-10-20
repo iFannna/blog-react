@@ -13,7 +13,6 @@ import { ElAvatar } from "@/components/element-plus/avatar";
 import { InfoFilled } from "@/components/element-plus/icons";
 import styles from "./overlay.module.css";
 
-/** 官方 basic.vue：12 个方向分五排展示 */
 export function TooltipBasic() {
   return (
     <div className={styles.placement}>
@@ -153,8 +152,6 @@ export function TooltipVirtualTrigger() {
   const tooltipRef = useRef<TooltipExpose>(null);
   const { positionRef, virtualRef } = useVirtualTrigger();
 
-  // 官方 demo 监听 document 的 mousemove，让浮层跟随光标。
-  // React 侧没有 Vue 的响应式追踪，需要显式通知 popper 重新定位。
   useEffect(() => {
     const handler = (event: MouseEvent) => {
       positionRef.current = { x: event.clientX, y: event.clientY };
@@ -256,7 +253,6 @@ export function TooltipAppendTo() {
   );
 }
 
-/** 官方 placement.vue：12 个方向 */
 export function PopoverPlacement() {
   return (
     <div className={styles.placement}>

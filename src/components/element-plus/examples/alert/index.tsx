@@ -3,7 +3,6 @@
 import { Bell } from "@/components/element-plus/icons";
 import { ElAlert } from "@/components/element-plus/alert";
 
-/** 官方 demo 统一用 600px 宽容器，Alert 之间 20px 的间隔写在各元素上。 */
 const box = { maxWidth: 600 } as const;
 const gap = { marginTop: 20 } as const;
 

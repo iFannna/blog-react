@@ -4,7 +4,6 @@ import { type CSSProperties, useState } from "react";
 import { ElTimePicker } from "@/components/element-plus/time-picker";
 import styles from "./time-picker.module.css";
 
-/** 官方示例用 .example-basic .el-date-editor { margin: 8px } 撑开间距，这里改为根节点上的 margin。 */
 const pickerStyle: CSSProperties = { margin: 8 };
 
 function makeRange(start: number, end: number) {
@@ -13,7 +12,6 @@ function makeRange(start: number, end: number) {
   return result;
 }
 
-/** 官方 time-picker/basic 示例。 */
 export function TimePickerBasic() {
   const [value1, setValue1] = useState<Date | null>(null);
   const [value2, setValue2] = useState<Date | null>(null);
@@ -37,7 +35,6 @@ export function TimePickerBasic() {
   );
 }
 
-/** 官方 time-picker/basic-range 示例：按小时 / 分钟 / 秒分别限制可选范围。 */
 export function TimePickerBasicRange() {
   const [value, setValue] = useState<Date | null>(
     new Date(2016, 9, 10, 18, 30),
@@ -71,7 +68,6 @@ export function TimePickerBasicRange() {
   );
 }
 
-/** 官方 time-picker/range 示例：is-range 选择时间范围。 */
 export function TimePickerRange() {
   const [value1, setValue1] = useState<[Date, Date]>([
     new Date(2016, 9, 10, 8, 40),

@@ -11,7 +11,6 @@ import { ElButton } from "@/components/element-plus/button";
 
 const mentionStyle = { width: 320 };
 
-/** 官方示例里 label 插槽是一个 flex 行：头像 + 6px 左间距的文本。 */
 const labelRowStyle = { display: "flex", alignItems: "center" } as const;
 const labelTextStyle = { marginLeft: 6 } as const;
 
@@ -111,7 +110,6 @@ export function MentionLoading() {
   const [options, setOptions] = useState<MentionOption[]>([]);
   const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
-  // 卸载时清掉未完成的定时器，与官方 onBeforeUnmount 一致
   useEffect(() => () => clearTimeout(timerRef.current), []);
 
   const handleSearch = (pattern: string) => {

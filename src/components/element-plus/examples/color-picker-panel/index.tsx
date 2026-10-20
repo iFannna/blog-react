@@ -52,7 +52,6 @@ export function ColorPickerPanelBorder() {
   const [isNarrow, setIsNarrow] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // 官方 demo 在容器窄于 815px 时把竖分隔线换成横线
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;

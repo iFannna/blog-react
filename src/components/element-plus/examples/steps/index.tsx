@@ -8,8 +8,6 @@ import { Edit, Picture, Upload, UploadFilled } from "@/components/element-plus/i
 const stepsStyle = { maxWidth: 600 } as const;
 
 export function StepsBasic() {
-  // 线上 2.11 首屏三步均为完成态，但内部计数从 0 开始：
-  // 首次点击后第二步进入 process，之后按 1 → 2 → 3 → 0 循环
   const [active, setActive] = useState(0);
   const [interacted, setInteracted] = useState(false);
 
