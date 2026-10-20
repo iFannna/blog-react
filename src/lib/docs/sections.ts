@@ -4,7 +4,7 @@ import type {
   DocsSectionConfig,
 } from "./types";
 
-/** 已接入通用 Markdown 管线的 section；Element Plus 旧页面按批次迁入 */
+/** 已接入通用 Markdown 管线的 section */
 export const DOC_SECTIONS: DocsSectionConfig[] = [
   {
     id: "notes",
@@ -34,7 +34,7 @@ export function getSectionTitle(section: DocsSectionConfig, locale: DocLocale) {
   return section.titles[locale];
 }
 
-/** 通用文档站的顶栏；Element Plus 旧页面仍使用下面的专用配置 */
+/** 通用文档站的顶栏 */
 export function getDocsHeaderConfig(locale: DocLocale): DocsHeaderConfig {
   const zh = locale === "zh-CN";
 
@@ -65,10 +65,7 @@ export function getDocsHeaderConfig(locale: DocLocale): DocsHeaderConfig {
   };
 }
 
-/**
- * 迁入通用管线的 Element Plus 页面使用带语言切换的顶栏；
- * 旧版中文页面仍使用下方写死中文的 ELEMENT_PLUS_HEADER。
- */
+/** Element Plus 页面使用带语言切换的顶栏 */
 export function getElementPlusHeaderConfig(locale: DocLocale): DocsHeaderConfig {
   const zh = locale === "zh-CN";
   const base = `/docs/${locale}/element-plus`;
@@ -98,26 +95,3 @@ export function getElementPlusHeaderConfig(locale: DocLocale): DocsHeaderConfig 
     ],
   };
 }
-
-/** 与官方文档站顶栏保持一致：logo、版本号、组件入口 */
-export const ELEMENT_PLUS_HEADER: DocsHeaderConfig = {
-  logo: {
-    kind: "image",
-    src: "/images/element-plus-logo.svg",
-    alt: "Element Plus Logo",
-    href: "/docs/zh-CN/element-plus/components/overview",
-  },
-  badge: { text: "2.14.6", title: "latest version" },
-  links: [
-    {
-      text: "组件",
-      href: "/docs/zh-CN/element-plus/components/overview",
-      activePrefix: "/docs/zh-CN/element-plus/components",
-    },
-    {
-      text: "官方文档",
-      href: "https://element-plus.org/zh-CN/component/overview",
-      external: true,
-    },
-  ],
-};

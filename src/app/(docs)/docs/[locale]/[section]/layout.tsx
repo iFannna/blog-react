@@ -35,7 +35,6 @@ export default async function DocsSectionLayout({
           ? getElementPlusSectionNav(locale)
           : getSectionNav(locale, section)
       }
-      basePath={`/docs/${locale}/${section}`}
       locale={locale}
     >
       {children}

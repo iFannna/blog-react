@@ -4,12 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { DocsNavGroup } from "@/lib/docs/types";
-import { DOC_NAV } from "./nav-config";
 
 interface DocsSidebarProps {
-  /** 旧版导航条目只有 slug，需要拼上组件路由前缀 */
-  basePath?: string;
-  groups?: DocsNavGroup[];
+  groups: DocsNavGroup[];
 }
 
 /** 官方 bar 的上下各留 2px，滑块高度按这个内高计算 */
@@ -24,10 +21,7 @@ const MIN_THUMB_SIZE = 20;
  * 这里按官方 bar.vue / thumb.vue 的公式计算滑块高度与位移，
  * 尺寸和位置才能与官方逐像素一致，而不是简单地按比例估算。
  */
-export default function DocsSidebar({
-  basePath = "/docs/zh-CN/element-plus/components",
-  groups = DOC_NAV,
-}: DocsSidebarProps) {
+export default function DocsSidebar({ groups }: DocsSidebarProps) {
   const pathname = usePathname();
   const sidebarRef = useRef<HTMLElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -180,11 +174,8 @@ export default function DocsSidebar({
             <section className="docs-sidebar-group" key={group.title}>
               <p className="docs-sidebar-group__title">{group.title}</p>
               {group.items.map((item) => {
-                const href = item.href ?? `${basePath}/${item.slug}`;
-                const key = href ?? item.title;
+                const { href, title } = item;
                 const isActive = pathname === href;
-                // 旧版路由没有 locale，直接取导航中文标题；新版已在上层按 locale 解析
-                const title = item.titleZh ?? item.title;
 
                 const classes = [
                   "docs-sidebar-link",
@@ -197,14 +188,14 @@ export default function DocsSidebar({
                 // 未实现的组件不可点击，避免跳进空页面
                 if (!item.done) {
                   return (
-                    <span className={classes} key={key}>
+                    <span className={classes} key={href}>
                       {title}
                     </span>
                   );
                 }
 
                 return (
-                  <Link className={classes} href={href} key={key}>
+                  <Link className={classes} href={href} key={href}>
                     {title}
                   </Link>
                 );

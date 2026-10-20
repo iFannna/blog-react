@@ -10,12 +10,7 @@ export function isDocLocale(value: string): value is DocLocale {
 
 export interface DocsNavItem {
   title: string;
-  /** 中文站标题（英文 + 中文），旧版导航直接读它 */
-  titleZh?: string;
-  /** 旧版 Element Plus 导航用 slug 拼接 basePath */
-  slug?: string;
-  /** 通用文档直接给绝对路径 */
-  href?: string;
+  href: string;
   done?: boolean;
 }
 

@@ -5,7 +5,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { ElTag } from "@/components/element-plus/tag";
 import { ElSwitch } from "@/components/element-plus/switch";
 import { useTheme } from "@/hooks/theme";
-import { ELEMENT_PLUS_HEADER } from "@/lib/docs/sections";
 import type { DocLocale, DocsHeaderConfig } from "@/lib/docs/types";
 import { useDocsMessages } from "./DocsI18nProvider";
 
@@ -105,16 +104,15 @@ function LocaleToggle({ locale }: { locale: DocLocale }) {
 }
 
 interface DocsHeaderProps {
-  config?: DocsHeaderConfig;
-  /** 传入时才显示语言切换器；旧的 Element Plus 页面尚未迁移 */
-  locale?: DocLocale;
+  config: DocsHeaderConfig;
+  locale: DocLocale;
 }
 
 /**
  * 对应官方 docs 的顶栏：sticky 定位、毛玻璃背景、底部 1px 分隔线。
  */
 export default function DocsHeader({
-  config = ELEMENT_PLUS_HEADER,
+  config,
   locale,
 }: DocsHeaderProps) {
   const pathname = usePathname();
@@ -177,7 +175,7 @@ export default function DocsHeader({
 
             <ThemeToggle />
 
-            {locale && <LocaleToggle locale={locale} />}
+            <LocaleToggle locale={locale} />
           </div>
         </div>
       </div>
