@@ -25,3 +25,9 @@
 .m2 + .m2 {
   margin-left: 8px;
 }
+
+/* Official theme.vue: customized tooltip needs its own arrow background */
+:global(.el-popper.is-customized .el-popper__arrow::before) {
+  background: linear-gradient(45deg, #b2e68d, #bce689);
+  right: 0;
+}

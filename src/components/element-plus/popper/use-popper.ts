@@ -128,6 +128,8 @@ export interface UsePopperOptions extends PopperCoreConfig {
   reference: HTMLElement | null;
   /** 浮层元素 */
   popper: HTMLElement | null;
+  /** 箭头元素，对应官方 arrow 修饰符的 element */
+  arrow?: HTMLElement | null;
 }
 
 /**
@@ -139,6 +141,7 @@ export interface UsePopperOptions extends PopperCoreConfig {
 export function usePopper({
   reference,
   popper,
+  arrow,
   ...config
 }: UsePopperOptions) {
   const instanceRef = useRef<Instance | null>(null);
@@ -153,7 +156,13 @@ export function usePopper({
     attributes: {},
   });
   const options = useMemo(
-    () => buildPopperOptions(config),
+    () => {
+      // 官方 usePopperContent 会追加 arrow 修饰符，否则 popper 不会计算箭头坐标
+      const arrowModifier: LooseModifier[] = arrow
+        ? [{ name: "arrow", options: { element: arrow, padding: 0 } }]
+        : [];
+      return buildPopperOptions(config, arrowModifier);
+    },
     // 逐项列出依赖，避免对象字面量每次重建导致 popper 反复重建
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [
@@ -164,6 +173,7 @@ export function usePopper({
       config.boundariesPadding,
       config.fallbackPlacements,
       config.popperOptions,
+      arrow,
     ],
   );
 

@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  useCallback,
   useEffect,
   useState,
   useMemo,
@@ -15,6 +16,7 @@ import { createPortal } from "react-dom";
 import { usePopper, type PopperCoreConfig, type PopperEffect } from "./use-popper";
 import { useZIndex } from "./use-z-index";
 import { resolveAppendTo } from "./popper-container";
+import { PopperContentContext } from "./popper-context";
 
 export interface PopperContentProps extends PopperCoreConfig {
   /** 触发元素 */
@@ -115,6 +117,15 @@ export function ElPopperContent({
    * 用一个 state 在挂载后触发一次重渲染，把真实元素交给 usePopper。
    */
   const [contentEl, setContentEl] = useState<HTMLDivElement | null>(null);
+  /**
+   * 箭头由子组件 ElPopperArrow 渲染，需要先把节点交回这里，
+   * popper 才能通过 arrow 修饰符计算它沿弹出方向的偏移。
+   */
+  const [arrowEl, setArrowEl] = useState<HTMLElement | null>(null);
+
+  const setArrowRef = useCallback((node: HTMLElement | null) => {
+    setArrowEl(node);
+  }, []);
 
   const { currentZIndex } = useZIndex(zIndexProp);
 
@@ -125,6 +136,7 @@ export function ElPopperContent({
     ...coreConfig,
     reference: referenceEl ?? null,
     popper: contentEl,
+    arrow: arrowEl,
   });
 
   /**
@@ -176,6 +188,14 @@ export function ElPopperContent({
     [pure, effect, popperClass, className],
   );
 
+  const arrowContext = useMemo(
+    () => ({
+      arrowStyle: (styles.arrow ?? {}) as CSSProperties,
+      setArrowRef,
+    }),
+    [styles.arrow, setArrowRef],
+  );
+
   // 官方 contentStyle 的顺序：zIndex → popper 定位 → 用户样式
   const mergedStyle = {
     zIndex: resolvedZIndex,
@@ -209,7 +229,9 @@ export function ElPopperContent({
       onMouseLeave={onMouseLeave}
       {...popperAttributes}
     >
-      {children}
+      <PopperContentContext.Provider value={arrowContext}>
+        {children}
+      </PopperContentContext.Provider>
     </div>
   );
 
