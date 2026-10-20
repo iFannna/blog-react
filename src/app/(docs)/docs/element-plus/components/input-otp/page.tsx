@@ -110,12 +110,6 @@ const API_MD = `
 | focus | 聚焦到指定 OTP 框 | ^[Function]\`(index?: number) => void\` |
 | blur | 让当前聚焦的 OTP 框失焦 | ^[Function]\`() => void\` |
 
-## 未实现的官方能力
-
-- \`separator\` 传 VNode（如官方示例 \`h('span', null, '—')\`）时的动态组件渲染：
-  React 直接接收 ReactNode，语义一致，只是不再有 VNode 概念。
-- \`separator\` 的默认插槽回退链（\`$slots.separator || separators[index]\`）在本实现里
-  拆成 \`separatorSlot\` 与 \`separator\` 两个 prop，提供 \`separatorSlot\` 时优先且始终渲染。
 `;
 
 export default function InputOtpPage() {

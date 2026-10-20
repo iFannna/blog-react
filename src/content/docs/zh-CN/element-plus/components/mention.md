@@ -136,11 +136,3 @@ React 里插槽以 render 函数形式的 props 提供。
 | label | 选项显示文本，省略时显示 value | ^[string] | — |
 | disabled | 是否禁用该项 | ^[boolean] | false |
 | [key: string] | 其它任意字段，供 labelSlot 使用 | ^[any] | — |
-
-## 未实现的官方能力
-
-- 未暴露 `tooltip` 实例：官方通过 defineExpose 暴露 tooltip 实例，React 侧无对应组件实例；`dropdownVisible` 与原生 `input` / `textarea` 已通过 ref 暴露。
-- `popper-options` 仅接收不生效：弹层未走 popper.js，而是按官方「纯定位」路径用光标坐标直接换算位置，因此该属性不会改变定位行为。
-- 未实现弹层的翻转与溢出裁剪：官方由 popper.js 的 flip / preventOverflow 处理，本实现固定贴在光标下方（或在 `placement='top'` 时上方），接近视口边缘时不会自动翻转。
-- 未做过渡动画：官方弹层有 el-fade-in-linear 过渡，本实现直接显隐。
-- 光标定位对复杂排版的还原度有限：镜像 div 方案在 input 场景精确，textarea 中制表符、双向文本等边界情况可能偏移。

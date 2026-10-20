@@ -104,13 +104,6 @@ const SOURCES = {
 const API_MD = `
 ## Color 规范
 
-这不是一个可实例化的组件，官方也没有导出任何 \`<el-color>\`。它是一组命名规范：
-Element Plus 把所有颜色收敛成 \`--el-color-*\` / \`--el-text-color-*\` /
-\`--el-border-color-*\` / \`--el-fill-color-*\` / \`--el-bg-color-*\` CSS 变量，
-任何组件都只引用变量，因此换主题只需改写变量。所以本节没有 Attributes / Events，
-只有变量表与色板。全部变量已在本项目
-\`src/styles/element-plus/index.css\` 的 \`:root\` 中定义，暗色覆盖在 \`dark.css\`。
-
 ### 主色与场景色
 
 | 变量名 | 说明 | 浅色默认值 |

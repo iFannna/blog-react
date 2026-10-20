@@ -139,20 +139,6 @@ const API_MD = `
 | --- | --- |
 | default | 承载水印的容器内容，React 里直接用 \`children\` |
 
-### 实现说明
-
-水印由 canvas 绘制：先在按 align/baseline 对齐的小画布上画出文字或图片，旋转后取外接矩形，
-再按 gap 平铺出可 \`background-repeat\` 的单元，最后把 \`toDataURL()\` 的结果设为绝对定位覆盖层的背景图。
-容器上挂 \`MutationObserver\`，一旦水印节点被删除或被改样式就立即重绘，与官方 \`reRendering\` 逻辑一致。
-绘制用 \`devicePixelRatio\` 放大画布，保证高分屏下不模糊。
-
-## 未实现的官方能力
-
-- 无。官方的全部 props（\`width\` / \`height\` / \`rotate\` / \`z-index\` / \`image\` / \`content\` /
-  \`font\` / \`gap\` / \`offset\`）与 default 插槽均已实现，DOM 结构与绘制算法与官方源码逐行对应。
-- 文档站的「Custom configuration」示例中，官方用 \`el-color-picker\` 的 \`show-alpha\` 取色。
-  本项目尚未复刻 ColorPicker，示例里改用可输入 rgba 字符串的 \`ElInput\` 代替，
-  并在明暗模式切换时把颜色重置为对应的默认值（等价官方 \`watch(isDark)\` 的行为）。
 `;
 
 export default function WatermarkPage() {

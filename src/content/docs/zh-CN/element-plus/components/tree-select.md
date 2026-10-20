@@ -137,18 +137,3 @@ React 版沿用这一约定：树相关属性见 Tree、下拉相关属性见下
 | 名称 | 说明 | 类型 |
 | --- | --- | --- |
 | onReady 下发的实例 | 与 `ElTree` 的实例同构，含 `getCheckedKeys` / `setCheckedKeys` / `filter` / `getNode` 等 | `TreeInstance` |
-
-## 未实现的官方能力
-
-- **未实现** `selectRef` / 依赖 select 实例的方法：官方经 selectRef 暴露 `focus` / `blur` / `selectedLabel`，
-  React 版内部自行渲染 select 外壳、没有 ElSelect 实例，因此这些方法未提供。
-- **未实现** `collapse-tags` / `collapse-tags-tooltip` / `max-collapse-tags`：多选标签固定全部展开，不做「+N」折叠与悬浮提示。
-- **未实现** `max-collapse-tags` 相关的 tagTooltip 与 `tag-type` / `tag-effect` / `tag-style` 自定义：标签固定为 `info` 主题的 light 样式。
-- **未实现** `allow-create` / `filter-method` 的远程重建语义之外的自定义选项创建：官方可创建新条目，这里仅支持重建 data。
-- **未实现** `multiple-limit`：多选没有数量上限。
-- **未实现** `draggable` 相关事件的透传：`onNodeDragStart` / `onNodeDrop` 等已由 ElTree 支持，
-  但本组件未额外接线，直接透传即可，未在文档示例中演示。
-- **未实现** 键盘在树节点间上下导航（官方把方向键事件从 select 转发到树的节点聚焦）：
-  仅支持 ESC 收起、Enter / Space 切换展开。
-- **未实现** `check-descendants` 与 `lazy` 组合下的完整勾选联动细节：`checkDescendants` 已透传给 ElTree，
-  但本组件的 onCheck 映射未针对该组合做特殊处理。

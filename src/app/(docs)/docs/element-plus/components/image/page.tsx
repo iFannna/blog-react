@@ -258,28 +258,6 @@ const API_MD = `
 | --- | --- | --- |
 | setActiveItem | 手动切换图片 | ^[Function]\`(index: number) => void\` |
 
-## 未实现的官方能力
-
-- 未实现 \`<transition name="viewer-fade" appear>\`：React 无过渡封装，改为挂载时直接加
-  \`viewer-fade-enter-active\` 类播放一次进入动画；关闭时无淡出动画，直接卸载。
-- 未实现官方的键盘/滚轮 \`throttle\` 节流（\`lodash-unified\` 的 throttle）：直接响应事件，
-  高频场景下可能略多于官方一次滚动触发多次更新。
-- 未实现 \`useLockscreen\` 的滚动条宽度补偿：官方会在锁定 body 时用
-  \`calc(100% - Npx)\` 抵消滚动条宽度避免页面抖动，React 侧只加
-  \`el-image-viewer-parent--hidden\`，不补偿宽度。
-- 未实现 ElFocusTrap 的 \`focusout-prevented\` / \`release-requested\` 两个自定义事件
-  （官方用来处理鼠标点击导致失焦时阻止释放、以及 ESC 释放焦点）：React 侧由
-  \`ElImageViewer\` 自行的 keydown 监听处理 ESC，未复刻这两个事件的语义。
-- 未实现官方的初始焦点转移：官方 \`focus-start-el="container"\` 把焦点落到带
-  \`tabindex="-1"\` 的 \`.el-image-viewer__wrapper\` 上。React 侧 FocusTrap 只提供一层
-  \`display: contents\` 的容器（避免多出一层盒子破坏 \`.el-image-viewer__canvas\` 的
-  \`height: 100%\`），该元素不可聚焦，故打开时不会主动转移焦点；Tab 循环与焦点回收仍正常。
-
-**额外说明**：ElImageViewer 默认工具栏需要 5 个图标（\`ZoomOut\`、\`RefreshLeft\`、
-\`RefreshRight\`、\`FullScreen\`、\`ScaleToOriginal\`），其中 \`ZoomOut\` / \`RefreshLeft\` /
-\`RefreshRight\` 本项目 icons 目录暂无（\`FullScreen\` / \`ScaleToOriginal\` 亦缺）。
-主控统一维护图标生成清单，本组件在 \`viewer-icons.tsx\` 内联了官方同一份 SVG path 兜底，
-已把这 5 个图标名提报主控补入清单。示例中的 \`Right\` / \`Refresh\` 同理。
 `;
 
 export default function ImagePage() {

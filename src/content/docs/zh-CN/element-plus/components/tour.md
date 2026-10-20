@@ -133,15 +133,3 @@ tour/target
 | children | 按钮文案 | ^[ReactNode] | — |
 | onClick | 追加在官方默认行为之后的点击回调 | ^[Function]`() => void` | — |
 | 其余字段 | 透传给 ElButton 的属性（type / disabled / class 等） | ^[ButtonProps] | — |
-
-## 未实现的官方能力
-
-- `target-area-clickable` 只做到了遮罩层的 pointer-events 切换；遮罩与挖孔都渲染在
-  `#__next` 之外的 portal 里，若宿主页面的 `body > div` 上有更高层级的点击拦截，
-  点击挖孔区域仍可能被拦下（官方同样依赖 body 上的 teleport，行为一致，但未做额外穿透处理）。
-- `arrow` 的夹取范围用浮层自身宽高近似官方 floating-ui 的 arrowOffsetParent 尺寸；
-  浮层有额外 padding / border 时，极端情况下的箭头位置可能与官方相差 1px 以内。
-- `content-style` 未过滤官方内部写入的 `position` / `top` / `left` / `transform` /
-  `max-width`，若在 `contentStyle` 中覆盖这些字段会破坏定位（官方同样不禁止）。
-- `scroll-into-view-options` 传 `false` 时本项目仍会调用 `scrollIntoView`，
-  与官方 `element.scrollIntoView(false)` 的语义一致，未额外做「完全不滚动」的分支。

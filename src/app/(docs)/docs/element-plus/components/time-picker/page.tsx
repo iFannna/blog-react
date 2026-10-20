@@ -144,18 +144,6 @@ const API_MD = `
 | TimeRangePanel | panel-time-range.vue | 范围时间面板 |
 | TimeSpinner | basic-time-spinner.vue | 时 / 分 / 秒三列选择器 |
 
-## 未实现的官方能力
-
-| 官方能力 | 说明 |
-| --- | --- |
-| \\\`popper-options\\\` | 未透传：本项目 popper 的修饰符由 \\\`use-popper\\\` 统一生成，未开放逐组件覆写 |
-| \\\`name\\\` | 范围模式传数组时两个输入框都带；传字符串时仅起始输入框带（官方文档类型为 string，内部却按数组取下标） |
-| 面板过渡动画 / \\\`persistent\\\` | 单点面板用 Tooltip 默认过渡，范围面板为条件渲染，均不含官方 \\\`el-zoom-in-top\\\` / 保留 DOM 行为 |
-| \\\`date-format\\\` / \\\`time-format\\\` | 属于 date-picker 的共用属性，TimePicker 用不到，未声明 |
-| \\\`label\\\` | 官方已废弃，仅作为 \\\`aria-label\\\` 的别名；本实现直接使用 \\\`aria-label\\\`，未再提供废弃入口 |
-| \\\`show-now\\\` / \\\`show-confirm\\\` / \\\`show-footer\\\` | 时间面板没有这些开关，官方也仅 date-picker 使用 |
-| 面板键盘全量行为 | 仅实现方向键（左/右切列、上/下增减）与 Esc/Enter；官方 \\\`handleKeydownInput\\\` 里针对 date-picker 的其余分支未移植 |
-| \\\`Dayjs\\\` 插件生态 | 未引入 dayjs，改用自实现的 \\\`Day\\\` 类，只覆盖 time-picker 用到的 token（HH/mm/ss/hh/A/a/YYYY/MM/DD 等）；\\\`format\\\` 传其它 token 会原样输出 |
 `;
 
 export default function TimePickerPage() {

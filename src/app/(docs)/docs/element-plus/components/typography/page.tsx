@@ -116,14 +116,6 @@ font-family:
   'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
 \`\`\`
 
-## 未实现的官方能力
-
-- 未使用官方 CDN 之外的本地图片：\`public/\` 下没有 typography 目录，
-  图片直接指向 \`https://element-plus.org/images/typography/*.png\`（与 watermark 页同一做法），
-  离线环境下图不显示。
-- 未实现官方 \`term-*-dark.png\` 之外的暗色处理：官方靠 Vue 的 \`isDark\` 响应式切换，
-  这里改为在 \`docs.css\` 用 \`html.dark\` 选择器显示深色图，视觉结果一致但机制不同。
-- 未实现官方的「编辑/复制/运行」示例工具栏与 CodePen：整个文档站统一未做（见其他组件页）。
 `;
 
 /** 与官方 formatType 一致，把 extra-small 拼成 Extra Small。 */

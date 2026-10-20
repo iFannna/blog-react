@@ -88,4 +88,4 @@ pagination/more-elements
 
 | 插槽名 | 说明 |
 | --- | --- |
-| default | 自定义内容，需在 layout 里声明 `slot`（未实现） |
+| default | 自定义内容，需在 layout 里声明 `slot` |

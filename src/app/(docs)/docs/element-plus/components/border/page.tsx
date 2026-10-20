@@ -73,11 +73,6 @@ const SOURCES = {
 const API_MD = `
 ## Border 规范
 
-这不是一个可实例化的组件，而是一组命名规范：官方把边框、圆角、阴影统一收敛为
-CSS 变量，任何组件都直接引用它们。因此本节没有 Attributes / Events，
-只有变量表。全部变量已在本项目 \`src/styles/element-plus/index.css\` 的 \`:root\`
-中定义，暗色覆盖在 \`dark.css\`。
-
 ### Border 变量
 
 | 变量名 | 说明 | 默认值 |

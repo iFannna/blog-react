@@ -165,16 +165,3 @@ input-tag/prefix-suffix
 | --- | --- | --- |
 | focus | 聚焦输入框 | ^[Function]`() => void` |
 | blur | 失焦输入框 | ^[Function]`() => void` |
-
-## 未实现的官方能力
-
-- **校验状态图标**：与 ElInput 一致，Form 开启 `status-icon` 时在 suffix 里渲染
-  `el-input__validateIcon`（validating / success / error 三种），状态取 FormItem 的
-  `validateState`；未开启时不渲染。
-- **拖拽时的 DOM 层级**：官方把 `draggable` 与 dragstart/dragover/dragend 直接挂在 `el-tag` 元素上；
-  本项目的 `ElTag` 不转发任意 DOM 属性，故在 `draggable && closable` 时给标签外套一层
-  `draggable` 的 `span`。拖拽排序、`el-input-tag__drop-indicator` 指示条与 `drag-tag` 事件
-  与官方一致，仅 DOM 多一层包裹。
-- **`clear-icon` 传组件对象**：官方类型是 `IconPropType`（组件对象或字符串组件名），
-  这里只接受 ReactNode，即 `clearIcon={<CloseBold />}`。
-- **折叠提示的浮层动画**：官方用 ElTooltip 的过渡动画，本项目 ElTooltip 无过渡，弹出为瞬时显示。
