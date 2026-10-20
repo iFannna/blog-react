@@ -140,26 +140,6 @@ React 无具名插槽，官方每个插槽对应一个同义 prop：
 | 事件名 | 说明 | 参数 |
 | --- | --- | --- |
 | onBack | 点击左侧返回区时触发 | ^[Function]\`() => void\` |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`icon\` 接收 Vue 组件 | \`icon\` 接收 ReactNode | 渲染进 \`.el-page-header__icon > .el-icon\` |
-| 具名插槽 \`#breadcrumb\` 等 | \`breadcrumb\` / \`iconSlot\` 等同义 prop | React 惯用写法 |
-| \`@back\` 事件 | \`onBack\` 回调 | 语义一致 |
-| \`t('el.pageHeader.title')\` | 内置常量「返回」 | 项目无 i18n，直接取中文包的返回值 |
-
-**实现说明**：DOM 结构与官方逐层一致（\`.el-page-header__header\` / \`__left\` /
-\`__back\` / \`__icon\` / \`__title\` / \`__content\` / \`__extra\` / \`__main\`），
-类名与状态类（\`is-contentful\`、\`--has-breadcrumb\`、\`--has-extra\`）按插槽是否存在条件渲染，
-中间分隔线复用 ElDivider 的竖线形态。
-
-**未实现的官方能力**：
-
-- \`icon\` 的 \`Component\` 类型：官方接受 \`^[string]\` 之外的 Vue 组件对象，React 侧只接受 ReactNode，
-  且未提供通过字符串名从图标库解析图标的能力。
-- 国际化 \`el.pageHeader.title\`：官方经 \`useLocale\` 按语言包取默认标题，本项目固定为中文「返回」。
 `;
 
 export default function PageHeaderPage() {

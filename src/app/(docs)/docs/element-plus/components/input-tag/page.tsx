@@ -185,29 +185,6 @@ const API_MD = `
 | focus | 聚焦输入框 | ^[Function]\`() => void\` |
 | blur | 失焦输入框 | ^[Function]\`() => void\` |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model\` | \`value\` + \`onChange\` | React 惯用写法，清空时回传 \`undefined\` |
-| \`@change\` | \`onChange\` | 与 v-model 合并为同一个回调 |
-| \`tag\` 作用域插槽 | \`children\` 传函数 | JSX 无法用具名插槽，函数子节点等价 |
-| \`prefix\` / \`suffix\` 插槽 | \`prefix\` / \`suffix\` props | 传 ReactNode |
-| \`clear-icon\` 传组件对象 | \`clearIcon\` 传 ReactNode | \`clearIcon={<CloseBold />}\` |
-| \`tabindex\` 默认 0 | \`tabindex\` 默认 0 | 一致 |
-| \`focus\` / \`blur\` expose | \`ref\` 上的 \`focus()\` / \`blur()\` | \`useImperativeHandle\` |
-| 标签由 ElTag 承载 | 复用本项目 \`ElTag\` | 类名与主题行为一致 |
-
-**实现说明**：
-- DOM 结构对齐官方 \`.el-input-tag__wrapper > __inner > __input-wrapper\`，折叠计数用本项目
-  \`ElTooltip\`（placement=bottom、fallback 为 bottom/top/right/left）包 \`.el-input-tag__collapse-tag\`。
-- 分隔符、退格删除、粘贴拆分、组合输入（中文输入法）与 Android 上 Space 走 keyup 的逻辑均按官方实现。
-- 输入框宽度跟随文本：官方用 \`useCalcInputWidth\` + \`.el-input-tag__input-calculator\` 测量，这里用
-  \`ResizeObserver\` 监听同一个测量节点，写入 \`min-width\` 内联样式（与官方写法一致）。
-- 折叠时标签最大宽度按官方公式 \`inner 宽度 - 折叠块宽度 - gap - (gap + 11)\` 计算。
-- 按官方做法手动写 \`input.value\`（不绑定 value 属性），因为受控 value 配 onInput 会触发
-  React 的只读告警。
-
 ## 未实现的官方能力
 
 - **校验状态图标**：与 ElInput 一致，Form 开启 \`status-icon\` 时在 suffix 里渲染

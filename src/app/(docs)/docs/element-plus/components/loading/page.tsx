@@ -55,21 +55,6 @@ const API_MD = `
 | z-index | 层级 | ^[number] | — |
 | before-close | 关闭前钩子，返回 false 阻止 | ^[Function]\`() => boolean\` | — |
 | closed | 完全关闭后的回调 | ^[Function]\`() => void\` | — |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-loading\` 指令 | \`Loading.service\` | React 无指令，统一走命令式 API |
-| 命令式挂载 Vue 实例 | 模块级 store + 容器组件 | 需在根部渲染 \`<ElLoadingContainer />\` |
-| 全屏 Loading 单例 | 每次调用都是独立实例 | 通过引用计数协调定位类 |
-| \`svg\` / \`svgViewBox\` | \`spinner\` | 传入 svg 字符串即可替换图标 |
-
-**实现说明**：用 createPortal 把遮罩渲染进目标元素；引用计数用 \`loading-number\` 属性维护
-（与官方一致），叠加多个时只有最后一个关闭才摘掉定位类。
-
-**未实现的官方能力**：\`v-loading\` 指令及其 \`element-loading-*\` 属性。
-命令式 API 不传 \`target\` 时即覆盖 body，因此无需官方的 \`body\` 选项。
 `;
 
 export default function LoadingPage() {

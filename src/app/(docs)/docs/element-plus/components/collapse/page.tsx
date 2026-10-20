@@ -163,23 +163,6 @@ const API_MD = `
 | title | 自定义标题，参数 \`{ isActive }\` | \`title\` 函数属性 |
 | icon | 自定义图标，参数 \`{ isActive }\` | \`icon\` 函数属性 |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model\` | \`value\` + \`onChange\` | React 惯用写法 |
-| \`<template #title="{ isActive }">\` | \`title\` 函数属性 | 参数结构一致 |
-| \`<template #icon="{ isActive }">\` | \`icon\` 函数属性 | 函数返回值直接渲染，不再包 arrow 容器 |
-| \`expose: activeNames / setActiveNames\` | 暂未提供 | 受控 value 已可完全控制展开项 |
-| 根元素透传 class | 显式 \`className\` | React 侧不展开任意 HTML 属性 |
-
-**实现说明**：
-
-- 手风琴模式收起当前面板时值变为 \`''\`（与官方 setActiveNames 行为一致）
-- 头部为 \`role="button"\`，带 \`aria-expanded\` / \`aria-controls\` / \`aria-labelledby\`，支持 Space / Enter 切换
-- 内容区与官方 \`v-show\` 一致：收起时仅 \`display: none\`，面板内部状态得以保留
-- \`beforeCollapse\` 返回 Promise 时等待结果，reject 视为阻止切换
-- 官方用 \`el-collapse-transition\` 做高度动画，React 侧当前为直接显隐（未复刻过渡动画，类名与结构一致）
 `;
 
 export default function CollapsePage() {

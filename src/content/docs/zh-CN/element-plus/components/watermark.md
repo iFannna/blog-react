@@ -88,17 +88,6 @@ watermark/custom
 容器上挂 `MutationObserver`，一旦水印节点被删除或被改样式就立即重绘，与官方 `reRendering` 逻辑一致。
 绘制用 `devicePixelRatio` 放大画布，保证高分屏下不模糊。
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `v-model`（无） | 无 | 组件无双向绑定，纯受控 props |
-| `<slot />` | `children` | default 插槽即 React children |
-| `gap` 元组 | `gap: [number, number]` | 一致 |
-| `offset` 可选元组 | `offset: (number \| undefined)[]` | 元素为 `undefined` 即按官方未传处理，回退 gap/2 |
-| `font` 对象 | `font: WatermarkFont` | 字段同名同默认值 |
-| `z-index` | `zIndex` | kebab-case 转 camelCase |
-
 ## 未实现的官方能力
 
 - 无。官方的全部 props（`width` / `height` / `rotate` / `z-index` / `image` / `content` /

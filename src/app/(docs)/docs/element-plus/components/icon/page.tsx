@@ -66,12 +66,6 @@ import { Edit } from "@/components/element-plus/icons";
 | size | 图标尺寸，数字补 px | ^[number] / ^[string] | — |
 | color | 图标颜色，落到 --color 变量 | ^[string] | — |
 
-## 与 Vue 版 API 的差异
-
-官方图标包导出的是 Vue 组件，React 侧改为生成同结构的 React 组件，
-\`viewBox\` 与 path 数据与官方逐字节一致。
-
-官方图标包的全部 ${ICONS.length} 个图标均已生成，与官方一致。
 `;
 
 export default function IconPage() {

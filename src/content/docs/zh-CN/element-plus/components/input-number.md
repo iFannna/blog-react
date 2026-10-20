@@ -142,26 +142,3 @@ input-number/formatter
 | --- | --- | --- |
 | focus | 使内部输入框获得焦点 | ^[Function]`() => void` |
 | blur | 使内部输入框失去焦点 | ^[Function]`() => void` |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `model-value` / `v-model` | `value` | React 惯用写法 |
-| `@change` + `update:modelValue` + `@input` | `onChange(currentValue, oldValue)` | 官方三个事件在数值变化时同时触发，React 侧合并为一次回调 |
-| `decrease-icon` 等插槽 | `decreaseIcon` 等 props | 无插槽语法，改用节点属性 |
-| `@blur` / `@focus` | `onBlur` / `onFocus` | 透传内部 ElInput 的焦点事件 |
-| `ref.focus()` / `ref.blur()` | `ref.current.focus()` / `ref.current.blur()` | `ref` 类型为 `InputNumberExpose` |
-
-### 未实现的官方能力
-
-| 能力 | 原因 |
-| --- | --- |
-| `label` 属性（已废弃） | 官方标注 deprecated，等价于 `aria-label`，未实现 |
-| `@input` 事件 | 与 ElInput 一致，输入过程不单独暴露事件，仅 `onChange` 回传解析后的值 |
-
-**实现说明**：数值处理逐行移植官方实现，包含 `toPrecision` / `getPrecision` /
-`ensurePrecision` / `verifyValue` / `setCurrentValue` / `displayValue` /
-`handleInput` / `handleInputChange`，编辑期间用 `userInput` 优先展示，
-失焦或回车后再回写受控值；长按按钮的连续加减按官方 `v-repeat-click`
-的节奏实现（首次立即触发，按住 600ms 后每 100ms 触发一次）。

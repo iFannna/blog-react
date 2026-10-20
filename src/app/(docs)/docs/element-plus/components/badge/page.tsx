@@ -94,17 +94,6 @@ const API_MD = `
 | default | 徽章包裹的内容 | \`children\` |
 | content | 自定义徽章内容，参数为计算后的值 | \`content\` |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`<slot name="content" :value="content">\` | \`content\` 函数 | 参数为计算后的显示值 |
-
-**实现说明**：官方的 \`max\` 截断只在 \`value\` 与 \`max\` **都是数字**时生效，
-否则直接显示 \`value\`。React 侧沿用该判断，因此 \`value="new"\` 会原样显示。
-
-官方的 \`el-zoom-in-center\` 过渡依赖 Vue 的 \`<transition>\`，
-React 侧由 CSS 承载同一动画类名。
 `;
 
 export default function BadgePage() {

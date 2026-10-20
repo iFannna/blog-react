@@ -153,15 +153,6 @@ DatePickerPanel 是 DatePicker 的核心组件。
 | isValidValue | 判断值是否合法 | ^[Function]\`(date: DayOrDays) => boolean\` |
 | parseUserInput | 解析用户输入 | ^[Function]\`(value: UserInput) => DayOrDays \\| null\` |
 | handleClear | 清空面板值 | ^[Function]\`() => void\` |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model\` | \`value\` + \`onChange\` | 受控用法 |
-| 默认插槽 \`#default\` | \`renderCell\` | 作用域插槽改为 render prop |
-| 图标插槽 | \`prevMonthIcon\` 等 props | 具名插槽改为 ReactNode prop |
-| \`ref\` + defineExpose | \`ref\` + \`DatePickerPanelExpose\` | 方法名保持一致 |
 `;
 
 export default function DatePickerPanelPage() {

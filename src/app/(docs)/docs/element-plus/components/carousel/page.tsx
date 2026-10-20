@@ -155,48 +155,6 @@ const API_MD = `
 | name | 项名称，可在 setActiveItem 中代替下标使用 | ^[string] | '' |
 | label | 对应指示器的文本内容 | ^[string] / ^[number] | '' |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`<el-carousel-item>\` 子组件 | 同名 \`ElCarouselItem\` 子组件 | 结构一致，仍用 JSX 子节点书写 |
-| 官方 method 暴露（ref 上的 activeIndex / setActiveItem / prev / next） | \`ref\` + \`CarouselExpose\` | 用 \`useImperativeHandle\` 暴露同名成员 |
-| \`change\` 事件 | \`onChange\` | React 惯用命名 |
-| \`label\` 插槽式指示器内容 | \`label\` 属性 | 只支持官方文档中的文本 label |
-| 官方用 \`useOrderedChildren\` 收集子项顺序 | 按 JSX 子节点顺序索引 | React 元素树本身有序，无需运行时排序 |
-| 官方 \`is-animating\` 由 translateItem 的 oldIndex 精确控制 | 以「新激活项 + 上一激活项」近似 | 见下方实现说明 |
-| \`class\` | \`className\` | React 惯例 |
-
-**实现说明**：DOM 与类名完整对齐官方（\`.el-carousel--horizontal/vertical/card\`、
-\`.el-carousel__container\`、\`.el-carousel__arrow--left/right\`、\`.el-carousel__indicators--*\`、
-\`.el-carousel__indicator--*\`、\`.el-carousel__item--card\`、\`.el-carousel__mask\`）。
-位移 / 缩放由父组件算出后经 \`cloneElement\` 注入子项，等价于官方的 \`items\` 列表 +
-\`translateItem\` 回调；箭头点击与指示器悬停沿用官方 300ms 节流；双项循环（\`loop\` +
-非卡片 + 恰好 2 项）时补一个克隆项，复现官方 \`PlaceholderItem\` 的闭环位移；
-容器主轴尺寸经 \`useLayoutEffect\` + \`ResizeObserver\` 实测后写入 state，与官方
-\`useResizeObserver(root)\` 等价。文案取 \`el.carousel.*\` 的 locale（左/右箭头与
-指示器的 aria-label）。
-
-**未实现的官方能力**：
-
-1. 官方 \`Carousel-Item Slots\` 仅有 \`default\`，React 侧已对齐；不额外支持其它插槽。
-2. 官方 \`is-animating\` 由 \`translateItem(index, activeIndex, oldIndex)\` 里的
-   \`oldIndex\` 决定，即只有「新激活项」和「被替换的旧项」加过渡。React 侧在渲染期
-   拿不到 effect 提交前的旧下标（渲染必须是纯的），故用 \`prevIndexRef\` 记录上一次
-   激活下标来近似。跨格切换时中间项也可能带上 \`is-animating\`，视觉结果与官方一致，
-   但类名集合在极端时序下可能与官方有 1 帧差异。
-3. 官方箭头外层是 \`<transition>\`（\`carousel-arrow-left-enter-from\` 等进场/离场动效），
-   React 侧没有过渡组件，箭头只按 \`v-show\` 的语义切换 \`display\`，无进出场淡入动画。
-   该能力的依赖是「尚未实现的过渡组件」。
-4. 官方 \`setActiveItem\` 传入非法下标时调用 \`debugWarn\` 打印告警；React 侧静默忽略。
-5. 官方 \`label\` 支持作用域插槽渲染任意节点，React 侧仅支持 \`string | number\`。
-6. 官方指示器顺序由 \`useOrderedChildren\` 在运行时按真实 DOM 顺序排序；
-   React 侧直接按 JSX 子节点顺序渲染，动态在中间插入项时顺序天然正确，
-   但若通过 \`key\` 触发 React 之外的 DOM 重排，则不会重新排序。
-7. 官方 \`height="auto"\` 的容器高度由 item 在 \`translateItem\` 里回写；React 侧等价地
-   在激活下标变化后用 \`querySelectorAll\` 取激活项的 \`offsetHeight\`，若激活项自身高度
-   在无重渲染的情况下变化（例如图片加载完成），容器高度不会自动跟随，需外部重渲染触发。
-8. \`ElCarouselItem\` 不接受 \`initial-index\` 之类的独立能力（官方亦无）。
 `;
 
 export default function CarouselPage() {

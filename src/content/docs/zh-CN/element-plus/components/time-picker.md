@@ -104,31 +104,6 @@ time-picker/range
 | TimeRangePanel | panel-time-range.vue | 范围时间面板 |
 | TimeSpinner | basic-time-spinner.vue | 时 / 分 / 秒三列选择器 |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model\` | \`value\` + \`onChange\` | React 惯用写法 |
-| \`change\` 事件 | \`onValueChange\` | 避免与绑定值回调的 \`onChange\` 重名 |
-| \`visible-change\` 事件 | \`onVisibleChange\` | 事件名转驼峰 |
-| \`focus\` / \`blur\` / \`clear\` 事件 | \`onFocus\` / \`onBlur\` / \`onClear\` | 同名透传 |
-| \`ref\` 上的 focus/blur/handleOpen/handleClose | \`ref.handleOpen()\` 等 | React 用 useImperativeHandle |
-| \`disabled-hours\` 等回调里的 \`Dayjs\` 参数 | 自定义 \`Day\` 类 | 本项目未引入 dayjs，见下节说明 |
-| \`prefix-icon\` / \`clear-icon\` 传组件 | 传 \`ReactNode\` | React 无动态组件，直接传元素 |
-| \`change\` 事件参数 | \`onValueChange\` | 与官方一致，为按 value-format 格式化后的绑定值 |
-
-**实现说明**：DOM 结构与官方一致 —— 触发区是 \`.el-date-editor.el-date-editor--time\`
-（范围模式 \`.el-range-editor.el-date-editor--timerange\`），浮层是 \`.el-picker__popper\`
-里的 \`.el-time-panel\` / \`.el-time-range-picker\`。三列选择器复用本项目的 \`ElScrollbar\`，
-滚动位置换算、\`buildTimeList\`、\`makeList\`、available-time 逐级收敛逻辑均与官方逐行对齐。
-
-**与官方的一处行为差异**：官方用 \`useFocusController\` + Tooltip 的延迟 show 处理
-「聚焦打开面板」。react 的 Tooltip 没有这层延迟，本组件改为浮层不绑定任何触发方式、
-完全由自身驱动显隐，并用「mousedown 落在面板内则不处理 blur」等效官方
-\`beforeBlur\` 里 \`isFocusInsideContent\` 的判断。
-
-**未实现的官方能力**：见下节。
-
 ## 未实现的官方能力
 
 | 官方能力 | 说明 |

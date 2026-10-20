@@ -55,18 +55,6 @@ const API_MD = `
 | 插槽名 | 说明 | React 写法 |
 | --- | --- | --- |
 | default | 分割线中间的文字 | \`children\` |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`border-style\` | \`borderStyle\` | JSX 里用驼峰 |
-
-**实现说明**：官方通过 \`ns.cssVar\` 把 \`border-style\` 写成 \`--el-border-style\` 变量，
-由 scss 里的 \`border-top: 1px var(--el-border-color) var(--el-border-style)\` 消费。
-React 侧沿用同一机制，变量名与消费方式完全一致。
-
-竖线形态下不渲染文字区，与官方模板的判断一致。
 `;
 
 export default function DividerPage() {

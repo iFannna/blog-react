@@ -140,20 +140,3 @@ switch/text-description
 | --- | --- | --- |
 | focus | 手动聚焦开关 | ^[Function]`() => void` |
 | checked | 当前是否开启 | ^[boolean] |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `v-model`（布尔） | `checked` + `onCheckedChange` | 未传 activeValue/inactiveValue 时 |
-| `v-model`（自定义值） | `value` + `onChange` | 传了 activeValue/inactiveValue 时 |
-| `@change` / `@input` | `onCheckedChange` / `onChange` | 官方两个事件在同一动作里同时触发，React 侧合并为一个 |
-| `active` / `inactive` 插槽 | `activeContent` / `inactiveContent` | 文字与图标内容 |
-| `active-action` / `inactive-action` 插槽 | `activeActionContent` / `inactiveActionContent` | 圆点动作区内容 |
-| `ref` 暴露的 `focus()` / `checked` | 未实现 | React 侧未提供 imperative handle |
-
-**实现说明**：官方在 modelValue 既不等于 activeValue 也不等于 inactiveValue 时，
-会警告并回退到 inactiveValue。React 侧沿用该回退逻辑但去掉了控制台警告，
-因为 SSR 阶段无法安全输出警告。
-
-`validate-event` 已接入 ElFormItem：当前值变化后触发 `change` 校验。

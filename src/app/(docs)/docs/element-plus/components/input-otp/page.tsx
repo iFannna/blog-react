@@ -110,16 +110,6 @@ const API_MD = `
 | focus | 聚焦到指定 OTP 框 | ^[Function]\`(index?: number) => void\` |
 | blur | 让当前聚焦的 OTP 框失焦 | ^[Function]\`() => void\` |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model\` | \`value\` + \`onChange\` | React 惯用写法 |
-| \`change\` 事件 | \`onValueChange\` | 避免与 React 原生 \`onChange\`（即 input 事件）语义冲突 |
-| \`focus\` / \`blur\` 事件 | \`onFocus\` / \`onBlur\` | 同名，参数为 React 合成事件 |
-| \`separator\` 具名插槽 | \`separatorSlot\` prop | React 无插槽，用函数渲染属性替代 |
-| \`validate-event\` | \`validateEvent\` | 与官方一致，外部改值触发 change 校验、失焦触发 blur 校验 |
-
 ## 未实现的官方能力
 
 - \`separator\` 传 VNode（如官方示例 \`h('span', null, '—')\`）时的动态组件渲染：

@@ -57,16 +57,3 @@ icon/collection
 | --- | --- | --- | --- |
 | size | SVG icon size, size x size | ^[number] / ^[string] | inherit from font size |
 | color | SVG tag's fill attribute | ^[string] | inherit from color |
-
-## Differences from the Vue version
-
-The official icon package exports Vue components. In React, icons are generated from the same SVG sources by `scripts/build-element-icons.mjs` and used directly, without a Vue runtime.
-
-| Vue | React |
-| --- | --- |
-| `import { Edit } from '@element-plus/icons-vue'` | `import { Edit } from "@/components/element-plus/icons"` |
-| Register icons globally with `app.component(name, Icon)` | Import icons on demand or look them up from the `icons` module |
-| `<el-icon :size="24">` | `<ElIcon size={24}>` |
-| `class="is-loading"` | `className="is-loading"` |
-
-Run `npm run build:icons` after upgrading the icon package to regenerate the components.

@@ -62,16 +62,6 @@ const API_MD = `
 | header | 头部内容 | \`header\` |
 | footer | 页脚内容 | \`footer\` |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`<slot name="header">\` | \`header\` 属性 | 接受字符串或节点 |
-| \`<slot name="footer">\` | \`footer\` 属性 | 接受字符串或节点 |
-| \`body-style\` | \`bodyStyle\` | JSX 里用驼峰 |
-
-\`shadow\` 缺省时取 \`ConfigProvider\` 的全局 \`card.shadow\`，再回退到
-\`always\`，与官方一致。
 `;
 
 export default function CardPage() {

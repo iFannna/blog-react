@@ -258,31 +258,6 @@ const API_MD = `
 | --- | --- | --- |
 | setActiveItem | 手动切换图片 | ^[Function]\`(index: number) => void\` |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`<slot name="placeholder">\` | \`renderPlaceholder\` | 无 children 语义的命名插槽改渲染函数 |
-| \`<slot name="error">\` | \`renderError\` | 同上 |
-| \`<slot name="toolbar" v-bind="toolbar">\` | \`renderToolbar(scope)\` | 作用域对象以参数传入 |
-| \`<slot name="progress" v-bind="progress">\` | \`renderProgress(scope)\` | 同上 |
-| \`<slot name="viewer-error" v-bind>\` | \`renderViewerError(scope)\` | 同上 |
-| \`<slot name="viewer">\` | \`viewer\` | 单一默认内容，直接传节点 |
-| \`defineExpose({ showPreview })\` | \`ref\` + \`ImageExpose\` | \`useImperativeHandle\` 暴露同名方法 |
-| 事件 \`load\` / \`error\` / \`switch\` / \`close\` / \`show\` | \`onLoad\` / \`onError\` / \`onSwitch\` / \`onClose\` / \`onShow\` | React 事件命名 |
-| 事件 \`rotate\`（Viewer） | \`onRotate\` | 同上 |
-| \`<teleport :disabled="!teleported">\` | \`teleported\` + \`createPortal\` | 传送目标固定为 body |
-
-**实现说明**：DOM 与官方一致 —— \`.el-image\` 内为 \`.el-image__inner\`（加 \`is-loading\`
-时透明）与 \`.el-image__wrapper\` / \`.el-image__placeholder\` / \`.el-image__error\`；
-预览为 \`.el-image-viewer__wrapper\` 内的 \`__mask\` / \`__close\` / \`__prev\` / \`__next\` /
-\`__actions\` / \`__progress\` / \`__canvas\`。
-缩放 / 旋转 / 拖拽用与官方 \`imgStyle\` 完全相同的换算
-（\`scale(s) rotate(deg) translate(x, y)\`，translate 先按角度旋转坐标系再除以 scale），
-滚轮缩放、方向键、空格切换缩放模式、ESC 关闭、拖拽平移均已实现。
-懒加载优先使用浏览器原生 \`loading\`，不支持时用 \`IntersectionObserver\` 观察视口。
-打开预览时按官方 \`useLockscreen\` 移除 \`el-image-viewer-parent--hidden\` 锁滚动。
-
 ## 未实现的官方能力
 
 - 未实现 \`<transition name="viewer-fade" appear>\`：React 无过渡封装，改为挂载时直接加

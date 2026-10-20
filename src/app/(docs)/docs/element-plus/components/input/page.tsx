@@ -312,29 +312,6 @@ inputRef.current?.focus();
 | autosize | 当前 autosize 配置 | ^[boolean] / ^[object] |
 | isComposing | 是否处于输入法组合输入中 | ^[boolean] |
 | passwordVisible | 密码是否明文显示 | ^[boolean] |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model\` | \`value\` + \`onChange\` | React 惯用写法 |
-| \`model-modifiers\` | \`modelModifiers={{ trim: true }}\` | 显式传对象 |
-| \`@input\` / \`@change\` | \`onChange\` / \`onValueChange\` | 见事件表 |
-| \`resize\` | \`resizable\` | 避开原生同名属性 |
-| 具名插槽 | \`prefix\` / \`suffix\` / \`prepend\` / \`append\` / \`passwordIcon\` 属性 | 直接传 ReactNode |
-| \`defineExpose\` | \`ref\` + \`useImperativeHandle\` | 实例类型为 \`InputExpose\` |
-| \`clear-icon\` 等图标组件 | \`ReactNode\` | 直接传 \`<CircleClose />\` 等元素 |
-| \`input-style\` 支持字符串 / 数组 | \`CSSProperties\` 对象 | React 样式写法 |
-| \`label\`（已废弃） | \`aria-label\` | 使用原生 ARIA 属性 |
-| \`readonly\` / \`autofocus\` | \`readOnly\` / \`autoFocus\` | React 原生属性命名 |
-| \`autocomplete\` / \`inputmode\` | \`autoComplete\` / \`inputMode\` | React 原生属性命名 |
-| \`tabindex\` | \`tabIndex\` | React 中仅接受 number |
-
-说明：
-
-- \`countGraphemes\` 已实现完整截断逻辑：优先使用 \`Intl.Segmenter\` 按字素簇插入，旧环境回退到码点迭代。
-- \`validateEvent\`、\`Form\` / \`FormItem\` 的 \`size\` / \`disabled\` 继承以及校验状态图标（success / error / validating）均已接入。
-- \`validateEvent\` 依赖 \`ElFormItem\` 上下文；脱离表单使用时不会触发校验。
 `;
 
 export default function InputPage() {

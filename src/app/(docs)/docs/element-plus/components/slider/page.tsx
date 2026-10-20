@@ -118,32 +118,6 @@ const API_MD = `
 | 方法名 | 说明 | 类型 |
 | --- | --- | --- |
 | onSliderClick | 按鼠标 / 触摸位置设置值 | ^[Function]\`(event: MouseEvent \\| TouchEvent) => void\` |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model\` | \`value\` + \`onChange\` | React 惯用写法 |
-| \`@input\` 实时事件 | \`onInput\` | 同义 |
-| \`@change\` 拖拽结束 | \`onValueChange\` | \`onChange\` 已占用为 v-model 回调，故另开一个 |
-| \`defineExpose({ onSliderClick })\` | \`ref\` + \`onSliderClick\` | 用 \`useImperativeHandle\` 暴露 |
-| \`label\`（已废弃） | \`ariaLabel\` | 官方亦标注 deprecated |
-
-**实现说明**：
-
-- 坐标换算、\`setPosition\` 的取整（\`fullRangePercentage\` / \`threshold\` 三段判定）、
-  \`step="mark"\` 时取最近 mark、键盘 \`Arrow/Home/End/PageUp/PageDown\`、
-  拖拽结束后一个宏任务收尾防误触发 click，均逐行对齐官方。
-- 提示复用本项目的 \`ElTooltip\`（受控模式），显隐按官方做 50ms 防抖；
-  \`persistent\` 透传给 ElTooltip 决定不可见时是否保留浮层 DOM。
-- \`id\`、\`aria-label\` / \`aria-labelledby\` 与 FormItem 的关联对齐官方：
-  range 模式下 id 落在根节点，非 range 时落在滑块按钮上，并注册到 FormItem。
-- \`validate-event\` 在值变化时调用所在 ElFormItem 的 \`change\` 校验。
-
-**未实现的官方能力**：
-
-- 官方 tooltip 在拖拽中用 \`updatePopper()\` 主动重算定位；本项目 ElTooltip 未暴露该能力，
-  改为依赖拖拽引发的重渲染重新定位，拖拽中提示位置有一帧级误差。
 `;
 
 export default function SliderPage() {

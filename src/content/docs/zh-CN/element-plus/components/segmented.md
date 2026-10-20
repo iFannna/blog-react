@@ -103,21 +103,3 @@ segmented/custom-style
 | 名称 | 说明 | 参数 |
 | --- | --- | --- |
 | children | 自定义选项内容，传入函数即生效 | ^[Function]`(item: SegmentedOption, index: number) => ReactNode` |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `v-model` | `value` + `onChange` | React 惯用写法 |
-| `props` | `optionProps` | 避开 React 内置的 `props` 命名，语义不变 |
-| default 作用域插槽 | `children` 函数 | `(item, index) => ReactNode`，对应官方 `{ item }` |
-| `class` | `className` | React 惯例 |
-
-**实现说明**：DOM 与官网一致（`.el-segmented__group` / `.el-segmented__item-selected`
-/ `.el-segmented__item` / `.el-segmented__item-input` / `.el-segmented__item-label`）。
-滑动选中块的定位照搬官方：量取选中项的 `offsetLeft/offsetWidth`（纵向为
-`offsetTop/offsetHeight`）后用 `transform` 平移，并用 `useLayoutEffect` +
-`ResizeObserver` 在尺寸或选项变化时重算；`:focus-visible` 通过 `focusin/focusout`
-后重算 `matches(':focus-visible')` 得到。
-
-**表单校验**：`validate-event` 已接入 ElFormItem，值变化后触发 `change` 校验。

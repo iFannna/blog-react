@@ -194,21 +194,6 @@ const API_MD = `
 | default | 抽屉内容 | \`children\` |
 | header | 头部内容；替换后 title 不再渲染，但关闭按钮保留 | \`header\` 属性或渲染函数 |
 | footer | 底部内容 | \`footer\` 属性 |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model\` | \`visible\` + \`onVisibleChange\` | React 惯用写法 |
-| \`<slot name="header">\` | \`header\` 属性 / 渲染函数 | 渲染函数提供 \`close\`、\`titleId\`、\`titleClass\` |
-| \`<slot name="footer">\` | \`footer\` 属性 | 传节点 |
-| \`handleClose()\` | 未导出 | 通过受控 \`visible\` 控制显隐 |
-| \`custom-class\`（已废弃） | \`className\` | 与官方 \`class\` 对应 |
-
-**实现说明**：结构与 Dialog 一致，\`.el-overlay\` 内套 \`ElFocusTrap\` 与 \`.el-drawer\`；
-方向决定 size 作用于宽度还是高度；\`resizable\` 通过边缘手柄拖拽，
-支持 \`onResizeStart\` / \`onResize\` / \`onResizeEnd\` 三个事件；
-关闭动画结束后按 \`destroyOnClose\` 卸载内容。
 `;
 
 export default function DrawerPage() {

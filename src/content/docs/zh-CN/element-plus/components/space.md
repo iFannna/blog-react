@@ -117,18 +117,3 @@ space/vnode-type-spacer
 ### Exposes
 
 无。
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `class` | `className` | React 惯用属性名 |
-| `<slot />` | `children` | 每个子节点会各自包一层 `.el-space__item` |
-| `prefix-cls` | 未实现 | 官方用于自定义 item 类名前缀，React 侧无对应场景 |
-
-**实现说明**：
-
-- 间距用 flex 的 `row-gap` / `column-gap` 实现，而非给子项加 margin，因此首尾不会多出空白
-- `wrap` 或 `fill` 且方向为 horizontal 时，横纵间距取同一个值，避免换行后行与行贴在一起
-- 字符串 spacer 会渲染在 `.el-space__item` 之间；节点 spacer 同样参与 flex 布局，节点型分隔符（如垂直 Divider）与官方示例一致
-- `fill` 默认 `fillRatio` 为 100，即每个子项最小宽度占满一行，视觉上是纵向排列的 —— 这与官方行为一致；需要多列时把 `fillRatio` 调小

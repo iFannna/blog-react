@@ -155,19 +155,3 @@ tree-v2/filter
 | --- | --- | --- |
 | default | 自定义节点内容，对应 `children` 函数 | `{ node, data }` |
 | empty | 数据为空时的内容，对应 `empty` 属性 | — |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `ref` 取实例方法 | `ref`（forwardRef） | `useRef<TreeV2Expose>`，方法名与官方一致 |
-| default 作用域插槽 | `children` 函数 | 参数为 `{ node, data }` |
-| empty 插槽 | `empty` 属性 | 传 ReactNode |
-| `icon` 传组件 | `icon` 传 ReactNode 或组件类型 | 两种形态都会渲染在 `.el-icon` 内 |
-
-**实现说明**：DOM 与官方模板一致——`.el-tree`（`role="tree"`）、`.el-tree-virtual-list`、
-`.el-tree-node`（`role="treeitem"`）、`.el-tree-node__content`、`.el-tree-node__expand-icon`、
-`.el-tree-node__label`、`.el-tree__empty-block` / `.el-tree__empty-text`。状态类
-`is-expanded` / `is-current` / `is-focusable` / `is-checked` / `is-leaf` / `is-hidden`
-与官方一一对应。扁平化、过滤（保留祖先路径）、父子联动/半选、手风琴等算法逐行移植官方
-`useTree` / `useCheck` / `useFilter`，渲染层由 Vue reactive 改为 React 状态。

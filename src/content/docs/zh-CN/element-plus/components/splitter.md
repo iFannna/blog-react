@@ -95,20 +95,3 @@ splitter/lazy
 | 事件名 | 说明 | 参数 |
 | --- | --- | --- |
 | onSizeChange | 面板尺寸变化 | ^[Function]`(size: number) => void` |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `v-model:size` | `size` + `onSizeChange` | React 惯用写法 |
-| `layout` | 同名 prop | 一致 |
-| `resize-start` / `resize` / `resize-end` / `collapse` 事件 | `onResizeStart` / `onResize` / `onResizeEnd` / `onCollapse` | 命名转为 React 的 on 前缀 |
-| `start-collapsible` / `end-collapsible` 插槽 | `startCollapsible` / `endCollapsible` prop | 插槽内容作为 prop 传入 |
-| `splitterPanelRef` expose | 未实现 | 面板根 div 可通过原生 `ref` / `id` 拿到 |
-| Splitter 事件第一次 emit 的 sizes | 取拖拽快照 | 与官方 useResize 的 cachePxSizes 语义一致 |
-
-**未实现的官方能力**：
-
-- 未实现 `collapsible` 的对象形态：官方支持 `{ start?: boolean, end?: boolean }` 按方向分别开关收起按钮，这里只支持布尔整体开关。
-- 未实现 `splitterPanelRef` 的组件级 expose（官方 panel 暴露 `splitterPanelRef`）；需要拿到面板 DOM 时直接用普通 DOM 手段获取。
-- 面板的排序在官方依赖子组件渲染顺序，这里按面板首次挂载的顺序还原（同一次渲染内的并列面板顺序按挂载先后）。

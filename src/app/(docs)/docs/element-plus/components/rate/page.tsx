@@ -113,30 +113,6 @@ const API_MD = `
 | --el-rate-fill-color | #f7ba2a |
 | --el-rate-disabled-void-color | var(--el-fill-color) |
 | --el-rate-text-color | var(--el-text-color-primary) |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model\` | \`value\` + \`onChange\` | React 惯用写法 |
-| \`update:modelValue\` 与 \`change\` 两个事件 | 合并为 \`onChange\` | \`onChange\` 对齐官方 \`change\` 的触发条件：只在值确实变化时触发 |
-| \`ref.setCurrentValue()\` | \`ref.current.setCurrentValue()\` | 用 \`useImperativeHandle\` 暴露，需 \`forwardRef\` |
-| \`useFormDisabled\` / \`useFormSize\` | 同名 hook | 与官方一致：组件自身 disabled / size 优先，其次 FormItem、Form、ConfigProvider |
-| \`aria-labelledby\` 关联 FormItem label | 同左 | 位于 FormItem 内且只有一个输入时，用 label 的 id 关联；否则回退 \`aria-label\` |
-| \`icons\` 接受字符串组件名 | 只接受组件或节点 | 无 Vue 的全局组件注册机制 |
-| \`label\` (a11y, 已废弃) | 未实现 | 官方已标记 deprecated |
-
-**实现说明**：分值映射完全照搬官方 \`getValueFromMap\`，带 \`excluded\` 的键
-要求 \`value < key\` 命中，否则 \`value <= key\`；\`.el-rate__decimal--box\`
-与 \`.el-rate__decimal\` 的宽度裁切、\`is-focus-visible\` 的键盘焦点态、
-\`hover\` 的放大态均与官方一致。颜色通过根元素上的
-\`--el-rate-void-color\` / \`--el-rate-disabled-void-color\` / \`--el-rate-fill-color\`
-下发，等价官方 \`rateStyles\` 的 \`cssVarBlock\`。
-
-**未实现的官方能力**：\`label\`（已废弃的 a11y prop）。
-
-**行为差异**：官方在挂载时若 \`modelValue\` 为假值会立刻补抛一次
-\`update:modelValue\`（0），React 用受控 props，无需该同步动作，故未实现。
 `;
 
 export default function RatePage() {

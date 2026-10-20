@@ -156,24 +156,3 @@ dropdown/virtual-trigger
 | --- | --- | --- |
 | default | 菜单项内容 | `children` |
 | icon | 自定义图标，会覆盖 icon 属性 | `icon` 属性 |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `<slot name="dropdown">` | `menu` 属性 | 传 ElDropdownMenu |
-| `@command` | `onCommand` | — |
-| `@click`（分裂按钮） | `onButtonClick` | 语义更明确 |
-| `v-model:visible` | `visible` + `onVisibleChange` | React 惯用写法 |
-| `v-dropdown` 指令 | `virtualTriggering` + `virtualRef` | 用元素 ref 或虚拟矩形 |
-
-**实现说明**：关键参数与官方一致：
-
-- popperClass 为 `el-dropdown__popper` + 用户类名
-- `fallbackPlacements` 限定为 `['bottom', 'top']`（官方在模板里写死）
-- 通过 `pure` 去掉默认内边距，由菜单自己控制
-- hover 触发时使用 `showTimeout` / `hideTimeout`，其它触发方式延迟为 0
-- 浮层动画为 `el-zoom-in-top`
-
-**未实现的官方能力**：`button-props`、`popper-options`、
-菜单的键盘方向键导航（依赖 RovingFocusGroup）。

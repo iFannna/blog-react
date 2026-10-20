@@ -121,12 +121,6 @@ const API_MD = `
 | popper-class / popper-style | 折叠提示的自定义类名与样式 | ^[string] / ^[object] | — |
 | collapse-class / collapse-style | 折叠头像的类名与样式 | ^[string] / ^[object] | — |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`<slot />\` | \`children\` | 默认内容；Fragment 内的头像同样会被展开计数 |
-| \`@error\` | \`onError\` | — |
 `;
 
 export default function AvatarPage() {

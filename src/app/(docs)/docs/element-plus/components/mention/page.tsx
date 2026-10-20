@@ -238,18 +238,6 @@ React 里插槽以 render 函数形式的 props 提供。
 | disabled | 是否禁用该项 | ^[boolean] | false |
 | [key: string] | 其它任意字段，供 labelSlot 使用 | ^[any] | — |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model\` | \`value\` + \`onChange\` | React 惯用写法 |
-| \`@search\` / \`@select\` / \`@whole-remove\` | \`onSearch\` / \`onSelect\` / \`onWholeRemove\` | 事件名改为 onXxx |
-| 具名插槽 \`#label\` / \`#header\` / \`#footer\` / \`#loading\` | \`labelSlot\` / \`headerSlot\` / \`footerSlot\` / \`loadingSlot\` | 插槽改为 render 函数 props |
-| \`filter-option\` | \`filterOption\` | 命名保持一致，仅传参风格为 camelCase |
-| \`check-is-whole\` | \`checkIsWhole\` | camelCase |
-| \`popper-class\` / \`popper-style\` | \`popperClass\` / \`popperStyle\` | camelCase |
-| \`exposes: input / tooltip / dropdownVisible\` | \`ref\` 上的 \`input\` / \`textarea\` / \`dropdownVisible\` | \`input\` 为原生元素而非 el-input 实例；官方 \`tooltip\` 实例无 React 等价物，未暴露 |
-
 ## 未实现的官方能力
 
 - 未暴露 \`tooltip\` 实例：官方通过 defineExpose 暴露 tooltip 实例，React 侧无对应组件实例；\`dropdownVisible\` 与原生 \`input\` / \`textarea\` 已通过 ref 暴露。

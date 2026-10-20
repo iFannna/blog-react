@@ -195,22 +195,6 @@ const API_MD = `
 | --- | --- | --- |
 | default | 自定义按钮组内容 | Button |
 
-## 与 Vue 版 API 的差异
-
-React 版沿用官方的类名、CSS 变量与单位，仅事件与双向绑定改为 React 惯用写法：
-
-| 官方 Vue | React |
-| --- | --- |
-| \`@click\` | \`onClick\` |
-| \`<slot name="loading">\` | \`loadingIcon\` |
-| \`<slot name="icon">\` | \`icon\` |
-| 通过 \`ref\` 调用 \`focus()\` 等方法 | 直接传 \`ref\` 到原生元素 |
-
-其他差异：
-
-- 原生 \`autofocus\` 属性在 React 中写作 \`autoFocus\`。
-- \`native-type="reset"\` 时除浏览器原生重置外，还会调用所在 ElForm 的 \`resetFields()\`。
-- \`tag\` 渲染非 \`button\` 标签时不会下发原生 \`disabled\` / \`type\`，禁用态由 \`onClick\` 拦截，与官方一致。
 `;
 
 export default function ButtonPage() {

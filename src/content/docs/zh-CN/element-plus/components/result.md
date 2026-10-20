@@ -43,19 +43,3 @@ result/customized-content
 | title | 自定义标题 | `title` |
 | sub-title | 自定义副标题 | `subTitle` |
 | extra | 操作区 | `extra` |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `<slot name="extra">` | `extra` 属性 | 传节点 |
-| `<slot name="icon">` | `customIcon` 属性 | 传节点 |
-
-**实现说明**：图标与其配色类名直接落在 `<svg>` 上（与官方一致），
-配对关系为 `icon-primary → InfoFilled`、`icon-success → CircleCheckFilled`、
-`icon-warning → WarningFilled`、`icon-error → CircleCloseFilled`、
-`icon-info → InfoFilled`。
-
-配色与尺寸都来自 theme-chalk 的两条规则：
-`.el-result .icon-{type}` 提供颜色，`.el-result__icon svg` 提供 64px 尺寸。
-因此这两个类名不能改动，否则配色与尺寸会同时丢失。

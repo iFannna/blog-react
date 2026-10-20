@@ -67,21 +67,6 @@ const API_MD = `
 | default | 链接内容 | \`children\` |
 | icon | 图标，显示在文字右侧 | 直接写在 \`children\` 里 |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`underline\` 布尔写法 | 未实现 | 官方标记 3.0 移除，请用 \`'always' \\| 'hover' \\| 'never'\` |
-| \`<slot name="icon">\` | 直接放 children 里 | 左侧图标用 \`icon\` 属性 |
-
-**实现说明**：
-
-- 禁用或未传 \`href\` 时不下发 \`href\` / \`target\` 属性，链接因此不可聚焦、不可点击，
-  与官方的处理一致；禁用时还会 \`preventDefault\` 兜底。
-- \`underline\` 为 \`hover\` 且禁用时不加 \`is-hover-underline\` 类，避免禁用态仍有悬停反馈。
-
-\`type\` / \`underline\` 缺省时取 \`ConfigProvider\` 的全局 \`link\` 配置，
-再分别回退到 \`default\` / \`hover\`，与官方一致。
 `;
 
 export default function LinkPage() {

@@ -200,27 +200,6 @@ const API_MD = `
 | default | 对话框内容 | \`children\` |
 | header | 头部内容；替换后 title 不再渲染，但关闭按钮保留 | \`header\` 属性或渲染函数 |
 | footer | 底部内容 | \`footer\` 属性 |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model\` | \`visible\` + \`onVisibleChange\` | React 惯用写法 |
-| \`<slot name="header">\` | \`header\` 属性 / 渲染函数 | 渲染函数提供 \`close\`、\`titleId\`、\`titleClass\` |
-| \`<slot name="footer">\` | \`footer\` 属性 | 传节点 |
-| \`resetPosition()\` / \`handleClose()\` | 未导出 | 通过受控 \`visible\` 控制显隐 |
-| \`transition\` 支持对象配置 | 仅字符串动画名 | 对象形式的自定义过渡未实现 |
-
-**实现说明**：
-
-- 结构分层与官方一致：\`.el-overlay\`（遮罩）→ \`.el-overlay-dialog\`（铺满视口、承载点击）→ \`ElFocusTrap\` → \`.el-dialog\`
-- 点击遮罩的判定等价于官方 \`useSameTarget\`：**只有 mousedown 与 mouseup 都落在遮罩本身**才算点击遮罩，
-  防止「在对话框内按下、拖到遮罩上松开」误关闭
-- \`destroyOnClose\` 在关闭动画结束后卸载内容；再次打开时重新挂载
-- 嵌套对话框通过焦点层栈协调，内层打开时外层暂停，不会互相抢焦点
-- \`draggable\` 使用 header 作为拖拽手柄；开启 \`overflow\` 后不再限制在视口内
-- 自定义 \`transition\` 需在样式中提供对应的 \`*-enter-from\` / \`*-enter-active\` 等类名，
-  演示使用 theme-chalk 内置的 \`dialog-fade\`、\`el-fade-in-linear\`、\`el-fade-in\`
 `;
 
 export default function DialogPage() {

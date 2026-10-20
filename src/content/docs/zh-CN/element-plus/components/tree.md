@@ -152,7 +152,7 @@ tree/draggable
 
 ### Tree Exposes
 
-命令式方法经 `ref` 或 `onReady` 回调下发（见下方「与 Vue 版 API 的差异」）。
+命令式方法经 `ref` 或 `onReady` 回调下发。
 
 | 方法 | 说明 | 参数 |
 | --- | --- | --- |
@@ -193,27 +193,3 @@ tree/draggable
 | onNodeDragOver | 拖拽悬停某节点时触发 | (draggingNode, dropNode, event) |
 | onNodeDragEnd | 拖拽结束时触发 | (draggingNode, dropNode \| null, dropType, event) |
 | onNodeDrop | 拖拽落下后触发 | (draggingNode, dropNode, dropType, event) |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| 子组件 `<el-tree-node>` | 内部递归渲染 | 官方也只经插槽间接使用，未对外暴露 ElTreeNode 用法 |
-| `render-content` 的 `h` 首参 | 无 | React 不需要渲染函数，回调直接返回 ReactNode |
-| `ref` 取实例方法 | `ref`（forwardRef）或 `onReady` | forwardRef 是首选；`onReady` 是为不方便挂 ref 的场景补的等价通道 |
-| default 作用域插槽 `{ node, data }` | `children` 函数 | 参数为 `{ node, data, store }` |
-| empty 插槽 | `emptySlot` | 传 ReactNode |
-| check / node-click 的第 4 个参数 `nodeInstance` | 不传 | React 无组件实例概念，事件参数为 (data, node, event) |
-| `props.class` 返回对象 | 同样支持 | 字符串与 `{ [k]: boolean }` 两种形态都按官方语义拼类名 |
-
-**实现说明**：DOM 结构、类名、元素层级逐条对齐官方模板（`.el-tree` / `.el-tree-node` /
-`.el-tree-node__content` / `.el-tree-node__expand-icon` / `.el-tree-node__children` /
-`.el-tree__empty-block` / `.el-tree__drop-indicator`），状态类
-（`is-expanded` / `is-current` / `is-checked` / `is-focusable` / `is-dragging` /
-`is-drop-not-allow` / `is-drop-inner`）与官方一一对应。模型层（Node / TreeStore）
-的勾选联动、过滤、懒加载、拖拽算法逐行移植官方源码；驱动方式由 Vue reactive
-改为「节点状态变更 -> store 广播 -> 组件重渲」。
-
-**未实现的官方能力**：`setCheckedNodes` 传入真实 `Node` 实例的场景（本项目对外只承诺
-数据对象形态，与官方文档表格一致）；`ElTreeSelect` 的 `isSelectTree` 短路（属于
-tree-select 组件职责，本篇不涉及）。

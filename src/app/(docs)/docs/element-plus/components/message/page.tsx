@@ -203,28 +203,6 @@ const API_MD = `
 | custom-class | 自定义类名 | ^[string] | — |
 | z-index | 层级 | ^[number] | — |
 | on-close | 关闭时的回调 | ^[Function]\`() => void\` | — |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| 命令式挂载（createVNode + render） | 模块级 store + \`useSyncExternalStore\` | 用法一致，需要在根部渲染容器 |
-| \`ElMessage(options)\` / \`this.$message\` | \`message(options)\` | 直接调用函数 |
-| \`<slot>\` / VNode | \`message\` 支持 ReactNode 与函数 | 函数形式可延迟求值 |
-| \`message.closeAll()\` | 同名方法 | — |
-
-**实现说明**：
-
-- 类名、结构、样式全部使用官方的 \`el-message\` 体系，
-  含 \`el-message--{type}\`、\`is-closable\`、\`is-plain\`、\`is-bottom\` 与水平方位类
-- 堆叠算法与官方 \`getOffsetOrSpace\` 等价：
-  同一位置下首个用 \`offset\`，后续每个是「前一个的底边 + 16px」
-- 悬停时暂停自动关闭倒计时，移开后重新计时
-- 按 <kbd>Esc</kbd> 关闭全部消息
-- \`grouping\` 开启后相同内容合并，并在关闭时正确递减计数
-- 图标沿用官方 \`TypeComponentsMap\`（primary 与 info 共用 InfoFilled）
-
-**注意**：\`offset\` 单位是 **px**（官方如此），与博客原有实现使用 rem 不同。
 `;
 
 export default function MessagePage() {

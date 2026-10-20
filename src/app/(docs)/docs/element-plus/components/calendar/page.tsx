@@ -83,14 +83,6 @@ const API_MD = `
 | selectDate | 切换到指定相对日期 | ^[Function]\`(type: CalendarDateType) => void\` |
 | calculateValidatedDateRange | 根据开始与结束日期计算有效区间 | ^[Function]\`(start: Date, end: Date) => [Date, Date][]\` |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| v-model | value + onChange | React 受控组件惯用写法 |
-| date-cell 插槽 | renderDateCell | 参数数据结构保持一致，日期对象使用原生 Date |
-| header 插槽 | renderHeader | 同时传入 CalendarRef，便于自定义头部直接切换日期 |
-| Dayjs exposes | Date exposes | 项目不引入 dayjs，公开日期统一使用原生 Date |
 `;
 
 export default function CalendarPage() {

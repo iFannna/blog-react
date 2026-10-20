@@ -85,12 +85,3 @@ color-picker/sizes
 | hide | 手动关闭颜色选择器 | ^[Function]`() => void` |
 | focus | 聚焦触发器 | ^[Function]`() => void` |
 | blur | 触发器失焦 | ^[Function]`() => void` |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `v-model` | `value` + `onChange` | 受控用法 |
-| `@change` / `@active-change` | `onChange` / `onActiveChange` | 事件改为 on 前缀 |
-| `ref` + defineExpose | `ref` + `ColorPickerExpose` | 方法名保持一致 |
-| footer 插槽 | 无 | ColorPicker 内部已固定清空与确认按钮 |

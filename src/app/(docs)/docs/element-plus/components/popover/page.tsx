@@ -152,19 +152,6 @@ const API_MD = `
 | --- | --- |
 | show() | 立即显示 |
 | hide() | 立即隐藏 |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`<slot name="reference">\` | 直接包住触发元素 | — |
-| \`<slot>\` | \`content\` 属性 | 传节点 |
-| \`v-popover\` 指令 | \`virtualTriggering\` + \`virtualRef\` | 用元素 ref 作为参照物 |
-
-**实现说明**：Popover 本质是 Tooltip 的包装，与官方一致：
-默认 \`effect\` 为 light、\`trigger\` 为 click；popperClass 为
-\`el-popover\` + 用户类名 +（有 content 时）\`el-popover--plain\`，
-\`--plain\` 去掉默认内边距，让内容自己控制留白。
 `;
 
 export default function PopoverPage() {

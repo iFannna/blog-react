@@ -182,18 +182,6 @@ const API_MD = `
 | z-index | 初始层级 | ^[number] | — |
 | on-close | 关闭时回调 | ^[Function]\`() => void\` | — |
 | on-click | 点击通知时回调 | ^[Function]\`() => void\` | — |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| 命令式挂载 Vue 实例 | 模块级 store + 容器组件 | 需在根部渲染 \`<ElNotificationContainer />\` |
-| \`message\` 支持 VNode / 返回 VNode 的函数 | \`message\` 支持 ReactNode / 返回 ReactNode 的函数 | — |
-| \`progress\` 对象透传给 ElProgress | 同 | 支持 color / status / strokeWidth / type 等 |
-| \`this.$notify\` | \`notification(...)\` | 直接调用函数 |
-
-**实现说明**：同位置堆叠间距 16px（与官方一致）；progress 复用 ElProgress；
-悬停暂停按剩余时长继续，进度条与倒计时同步。
 `;
 
 export default function NotificationPage() {

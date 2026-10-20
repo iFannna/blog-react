@@ -83,20 +83,6 @@ const API_MD = `
 | --- | --- |
 | default | 自定义内容，需在 layout 里声明 \`slot\`（未实现） |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model:current-page\` | \`currentPage\` + \`onCurrentPageChange\` | React 惯用写法 |
-| \`v-model:page-size\` | \`pageSize\` + \`onPageSizeChange\` | React 惯用写法 |
-| \`@current-change\` / \`@size-change\` | 同 v-model 回调 | 不额外提供事件别名 |
-| \`@prev-click\` / \`@next-click\` | 未实现 | — |
-
-**实现说明**：页码折叠算法逐行移植官方 pager 的 pagers computed；\`->\` 之后的元素
-进右对齐区；\`sizes\` 项复用 ElSelect。
-
-**未实现的官方能力**：\`slot\` 布局项、\`prev-click\`/\`next-click\` 事件、
-\`teleported\` 与 \`popper-class\`。
 `;
 
 export default function PaginationPage() {

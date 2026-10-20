@@ -649,24 +649,6 @@ React 版把作用域插槽映射为 render prop，具名插槽映射为 ReactNo
 | headerCellRenderer | 自定义表头单元格渲染函数 | ^[Function]\`(params) => ReactNode\` | — |
 | dataGetter | 自定义取值函数 | ^[Function]\`(params) => T\` | — |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`columns\` 中的 \`cellRenderer\` 返回 VNode | 返回 \`ReactNode\` | 参数形状保持一致 |
-| \`#cell\` / \`#header\` / \`#header-cell\` / \`#row\` 作用域插槽 | \`cellRenderer\` / \`headerRenderer\` / \`headerCellRenderer\` / \`rowRenderer\` render props | 参数对象与官方插槽参数一一对应 |
-| \`#footer\` / \`#empty\` / \`#overlay\` 具名插槽 | \`footer\` / \`empty\` / \`overlay\` ReactNode 属性 | — |
-| \`v-model:expanded-row-keys\` | \`expandedRowKeys\` + \`onExpandedRowsChange\` | 传入 \`expandedRowKeys\` 即为受控 |
-| \`v-model:sort-state\` | \`sortState\` + \`onColumnSort\` | 排序状态完全由使用方维护 |
-| \`row-event-handlers\` 使用 Vue 事件名 | 仍使用 \`onClick\` / \`onContextmenu\` / \`onDblclick\` / \`onMouseenter\` / \`onMouseleave\` | 与官方对象字段名一致，回调参数为 \`{ event, rowData, rowIndex, rowKey }\` |
-| \`ref\` 取实例方法 | \`useRef<TableV2Expose>\`（forwardRef） | 方法名与官方一致 |
-| 列宽拖拽调整 | 未实现 | 官方源码中该能力也未交付，故未提供 \`resizable\` |
-
-**实现说明**：DOM 结构与官方一致——根节点 \`.el-table-v2\` / \`.el-table-v2__root\`，三张网格分别为
-\`.el-table-v2__main\` / \`.el-table-v2__left\` / \`.el-table-v2__right\`，行与单元格类名为
-\`.el-table-v2__row\` / \`.el-table-v2__row-cell\` / \`.el-table-v2__header-cell\` 等。主表负责横向滚动，
-左右固定表仅同步纵向滚动；表头跟随主表横向偏移。动态行高通过渲染后测量 \`getBoundingClientRect\`，
-并调用虚拟网格的 \`resetAfterRowIndex\` 失效缓存；树形数据在展开时拍平并记录 \`depth\`。
 `;
 
 export default function TableV2Page() {

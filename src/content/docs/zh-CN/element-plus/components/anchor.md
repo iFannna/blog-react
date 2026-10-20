@@ -107,30 +107,3 @@ anchor/affix
 | --- | --- | --- |
 | default | 锚点链接的内容，优先于 `title` | `children` |
 | sub-link | 子链接 | `subLink` 属性 |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `change` 事件 | `onChange` | React 里 change 会与原生事件同名，故改为 onChange |
-| `click` 事件 | `onClick` | 同上，加 on 前缀 |
-| `<slot>` 放 AnchorLink 列表 | `children` | 默认插槽即 children |
-| `<template #sub-link>` | `subLink` 属性 | 传入一个 ReactNode |
-| `defineExpose({ scrollTo })` | `ref` + `AnchorExpose` | React 用 `useImperativeHandle` 暴露同样的方法 |
-| `container` 传元素 | 同 | 传 `HTMLElement`；元素尚未挂载时可先传 `null`，就绪后通过 state 更新 |
-
-**实现说明**：DOM 与官方一致 —— `.el-anchor` > `.el-anchor__marker` + `.el-anchor__list`，
-链接为 `.el-anchor__item` > `.el-anchor__link`（激活时加 `.is-active`），
-嵌套时再套一层 `.el-anchor__list`；类名同时输出 `.el-anchor--vertical` / `.el-anchor--horizontal`，
-`type="underline"` 时加 `.el-anchor--underline`。滚动监听与高亮判定逐行对齐官方
-`getCurrentHref`（触发点 = 距容器顶距离 - offset - bound，排序后取区间），
-滚动用 rAF 节流；滑块用 `getBoundingClientRect` 相对根元素定位，写内联 `top` / `left`，
-过渡由 CSS 的 `transition` 承担；点击后调用 `animateScrollTo`（与官方同一套 easeInOutCubic），
-动画期间锁定高亮以免回跳。
-
-**未实现的官方能力**：
-- `onActivated` / `onDeactivated`（`<keep-alive>` 激活钩子）：React 无对应机制。
-- 官方 `click` 事件后不做 `preventDefault`，由使用方自行处理；本实现与官方行为一致，
-  未额外提供内置的「禁止改变 history」开关。
-- 官方通过 `watch(() => slots.default?.())` 感知插槽内容变化来重算滑块位置；
-  本实现改为每次渲染后重算并用序列化签名去重，效果等价但机制不同。

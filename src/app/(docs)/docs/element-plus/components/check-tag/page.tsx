@@ -55,14 +55,6 @@ const API_MD = `
 | --- | --- | --- |
 | default | 标签内容 | \`children\` |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model:checked\` | \`checked\` + \`onCheckedChange\` | React 惯用写法 |
-
-**实现说明**：官方点击时同时派发 \`change\` 与 \`update:checked\` 两个事件，
-React 侧合并为一个 \`onCheckedChange\`。禁用时组件不派发任何事件。
 `;
 
 export default function CheckTagPage() {

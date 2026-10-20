@@ -123,17 +123,3 @@ skeleton/leading-trailing-without-bouncing
 ### Exposes
 
 Skeleton / SkeletonItem 均无 expose。
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `<slot name="template">` | `template` 属性 | 传节点而非插槽 |
-| 自定义 CSS 变量写在 style 字符串 | `style` 对象（自定义属性需断言） | 如 `--el-skeleton-circle-size` |
-
-**实现说明**：
-
-- 官方 `useThrottleRender` 的三种形态全部保留：`0` 直接透传 loading；数字形态在进入加载态时延时显示；对象形态由 `leading` / `trailing` 分别控制进入与退出延时，`initVal` 指定首次渲染的初始值
-- 未传 template 时生成官方默认结构：首行 `is-first`（宽 33%），最后一行且行数大于 1 时加 `is-last`（宽 61%）
-- `count` 会重复渲染 template 或默认结构；传入真实内容时内容整体渲染一次
-- 基础用法中的圆形骨架通过 CSS 变量 `--el-skeleton-circle-size` 控制尺寸，与官方一致

@@ -234,24 +234,6 @@ const API_MD = `
 | confirmButtonDisabled | 确认按钮是否禁用 |
 | doClose() | 关闭消息框 |
 | setConfirmButtonLoading(loading) | 设置确认按钮加载态 |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| 命令式挂载 Vue 实例 | 模块级 store + 容器组件 | 需在根部渲染对应容器 |
-| \`v-model\` / 组件式调用 | \`MessageBox(options)\` | 与官方命令式用法一致 |
-| \`beforeClose(action, instance, done)\` | 同签名 | 兼容旧的两参 \`(action, done)\` 调用 |
-| \`message\` 接收 VNode 或返回 VNode 的函数 | 接收 ReactNode 或返回 ReactNode 的函数 | 函数参数为 \`{ confirm, cancel, close }\` |
-| \`callback\` | 支持 | 传入后 Promise 不再 settle |
-
-**实现说明**：
-
-- MessageBox 的三个快捷方法都支持 \`(message, title, options)\` 签名，
-  与官方一致；prompt 确认前会先过 \`inputPattern\` / \`inputValidator\`，
-  失败留在原地显示错误
-- 自定义按钮或输入框会保持焦点与键盘可操作性，ESC、点击遮罩按选项生效
-- 拖拽以整个消息框为手柄；\`overflow\` 允许拖出视口
 `;
 
 export default function MessageBoxPage() {

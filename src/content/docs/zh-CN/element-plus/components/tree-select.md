@@ -138,28 +138,6 @@ React 版沿用这一约定：树相关属性见 Tree、下拉相关属性见下
 | --- | --- | --- |
 | onReady 下发的实例 | 与 `ElTree` 的实例同构，含 `getCheckedKeys` / `setCheckedKeys` / `filter` / `getNode` 等 | `TreeInstance` |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `v-model` | `value` + `onChange` | React 惯用写法；多选时 value 为数组 |
-| `treeRef` / `selectRef` | `onReady` | React 用回调下发内部 ElTree 实例；select 实例未暴露 |
-| `@visible-change` | `onVisibleChange` | 受控 `visible` 时仍需外部回写 |
-| `@remove-tag` | `onRemoveTag` | 参数为被移除标签的值 |
-| `@focus` / `@blur` | `onFocus` / `onBlur` | 参数为原生焦点事件 |
-| `#default` 作用域插槽 | `children` 函数 prop | `({ node, data, store }) => ReactNode` |
-| `#empty` / `#prefix` / `#tag` 等插槽 | 未实现 | 仅实现 default 插槽 |
-| `teleported` / `append-to` | 未实现 | 浮层就地渲染，不传送到 body |
-| `popper-options` / `fallback-placements` / `show-arrow` | 未实现 | 未接 Popper，绝对定位跟随触发器 |
-| `automatic-dropdown` / `reserve-keyword` | 未实现 | — |
-
-**实现说明**：组件结构对齐官方 2.14 的新版 DOM —— `.el-select > .el-select__wrapper >
-.el-select__selection`，下拉为 `.el-select__popper.el-tree-select__popper >
-.el-select-dropdown > .el-select-dropdown__wrap > .el-select-dropdown__list`，
-树节点内容外层套 `.el-select-dropdown__item`（对应官方 TreeSelectOption）。
-下拉用绝对定位跟随触发器，未走 Popper 的翻转策略，与同目录的 `ElSelect` 保持一致；
-下拉在收起时保留挂载（`display: none`），以维持树的展开与勾选状态。
-
 ## 未实现的官方能力
 
 - **未实现** `selectRef` / 依赖 select 实例的方法：官方经 selectRef 暴露 `focus` / `blur` / `selectedLabel`，

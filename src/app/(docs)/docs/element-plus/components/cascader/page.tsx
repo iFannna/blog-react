@@ -477,16 +477,6 @@ interface CascaderProps {
   showPrefix?: boolean
 }
 \`\`\`
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model\` | \`value\` + \`onChange\` | 受控用法 |
-| \`@change\` / \`@visible-change\` 等 | \`onChange\` / \`onVisibleChange\` 等 | 事件改为 on 前缀 |
-| 默认插槽 / 具名插槽 | \`renderLabel\` / \`renderSuggestionItem\` / \`renderTag\` 等 | 作用域插槽改为 render prop |
-| \`ref\` + defineExpose | \`ref\` + \`CascaderExpose\` | 方法名保持一致 |
-| \`popper-append-to-body\`（已废弃） | 未实现 | 请使用 \`teleported\` |
 `;
 
 export default function CascaderPage() {

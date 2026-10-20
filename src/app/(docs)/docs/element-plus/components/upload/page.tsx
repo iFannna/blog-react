@@ -268,25 +268,6 @@ const API_MD = `
 | clearFiles | 清空文件列表，可按状态过滤 |
 | handleStart | 手动把原始文件加入列表 |
 | handleRemove | 手动移除文件 |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model:file-list\` | \`fileList\` + \`onFileListChange\` | React 惯用受控写法；内部变更（选择 / 成功 / 失败 / 移除）都会回抛最新列表 |
-| 具名插槽 \`trigger\` / \`tip\` / \`file\` | \`trigger\` / \`tip\` / \`renderFile\` props | 插槽参数以函数入参表达 |
-| \`class\` | \`className\` | 落在最外层包裹 div 上 |
-| 通过 \`ref\` 调用导出方法 | \`ref\` 上的 \`UploadExpose\` | \`abort / submit / clearFiles / handleStart / handleRemove\` 同名保留 |
-| \`http-request\` 默认 \`ajaxUpload\` | 同名，且已导出 \`ajaxUpload\` | 可整体替换 |
-
-**实现说明**：组件拆分为 \`ElUpload\`（状态与钩子编排）/ \`ElUploadContent\`（选取、上传、中止）/ \`ElUploadList\`（展示）/ \`ElUploadDragger\`（拖拽），
-与官方分层一致，四个组件均已导出。DOM 结构、类名（\`.el-upload--picture-card\`、\`.el-upload-list--picture\` 等）与官方逐层对齐。
-
-**未实现的官方能力**：
-- \`list-type\` 从 \`text\` 切到 \`picture\`/\`picture-card\` 时，官方会 watch 该 prop 并给已有 \`raw\` 文件补 \`URL.createObjectURL\`，此处未做该补链（切换类型前已入列的文件不会生成缩略图）。
-- 官方 \`ElUploadList\` 用 Vue \`transition-group\` 做列表项进入 / 离开动画，React 版未复刻该过渡（官方 upload.scss 里本就是 \`transition: all 0.5s\` 的静态过渡，视觉差异极小）。
-- 官方 \`ElUploadDragger\` 独立挂载时会抛 \`usage: <el-upload><el-upload-dragger /></el-upload>\` 错误；本项目未做该校验，单独使用 \`ElUploadDragger\` 不会报错（需自行传 \`onFile\`）。
-- 官方 \`ElUploadContent\` 支持通过 \`ref\` 单独调用 \`abort\` / \`upload\`；本项目仅在 \`ElUpload\` 的 ref 上暴露 \`abort / submit / clearFiles / handleStart / handleRemove\`。
 `;
 
 export default function UploadPage() {

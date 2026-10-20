@@ -174,21 +174,6 @@ const API_MD = `
 | onOpen() | 按 showAfter 延迟显示 |
 | onClose(delay?) | 按 hideAfter 延迟隐藏，传 0 立即隐藏 |
 | popperRef | 浮层根节点 |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model:visible\` | \`visible\` + \`onVisibleChange\` | React 惯用写法 |
-| \`<slot name="content">\` | \`content\` 属性 | 传节点或字符串 |
-| \`<slot name="reference">\` / 单个子元素 | 直接包住触发元素 | \`children\` 为触发元素 |
-| \`virtual-ref\` 传模板 ref | \`virtualRef\` 传元素或 \`{ getBoundingClientRect }\` | 支持虚拟定位 |
-
-**实现说明**：定位由 \`@popperjs/core\` 提供（官方 el-popper 用的同一个库），
-\`offset\` / \`flip\` / \`preventOverflow\` 参数逐项对齐官方；
-\`applyStyles\` 关闭，定位结果由组件写内联 style。
-自定义 \`transition\` 需在样式中提供对应的 \`*-enter-from\` / \`*-enter-active\` 等类名，
-演示使用 theme-chalk 内置的 \`el-zoom-in-top\`。
 `;
 
 export default function TooltipPage() {

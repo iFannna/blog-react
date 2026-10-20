@@ -145,19 +145,6 @@ const API_MD = `
 
 Row / Col 均无 expose。
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| 任意 HTML 属性透传 | 仅 \`className\` / \`style\` / \`tag\` | React 组件显式声明 props |
-| Row / Col 均为 Vue 组件 | 同构，类名一致 | 可直接复用 theme-chalk |
-
-**实现说明**：间距用「Row 负 margin + Col 左右 padding（各 gutter/2）」抵消实现，
-因此最左最右两列也能贴齐容器边缘。
-
-- \`justify\` 为 \`start\` 时不加类名（与官方一致，靠 flex 默认值生效）
-- \`offset\` / \`pull\` / \`push\` 仅在大于 0 时输出类名，与官方的 \`isNumber && > 0\` 判断一致
-- \`span\` 默认 24，与官方 col.ts 默认值一致
 `;
 
 export default function LayoutPage() {

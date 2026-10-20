@@ -389,21 +389,6 @@ const API_MD = `
 | options | 分组选项的子选项，字段名可通过 props.options 改写 | ^[array] | — |
 | type | 在内置类型中固定为 \`Group\` 时渲染为分组标题 | ^[string] | — |
 | created | 由 allow-create 生成的临时选项 | ^[boolean] | false |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model\` | \`value\` + \`onChange\` | React 惯用写法 |
-| \`<el-option>\` / \`<el-option-group>\` 插槽式选项 | \`options\` 数组 | 分组用嵌套 \`options\` 表达，也可显式标记 \`type: "Group"\` |
-| \`@change\` 等事件 | \`onChange\` 等回调属性 | 事件名改为 React 属性 |
-| \`#header\` / \`#footer\` / \`#loading\` / \`#empty\` / \`#prefix\` 插槽 | \`header\` / \`footer\` / \`loadingSlot\` / \`empty\` / \`prefix\` 属性 | 传 ReactNode |
-| \`#default\` / \`#label\` / \`#tag\` 作用域插槽 | \`children\` / \`label\` / \`tag\` 渲染函数 | 参数与原插槽一致 |
-| \`ref.focus()\` / \`ref.blur()\` / \`ref.selectedLabel\` | 同名 expose | 通过 \`ref\` 调用 |
-| \`value-key\` 对象值 | 同左 | 选项缺少 value 字段时以选项对象作为值，按 value-key 比较 |
-
-**实现说明**：DOM 结构对齐官方 2.14 的 \`.el-select__wrapper\` / \`.el-select__selection\`
-/ \`.el-select-dropdown__item\`；下拉复用 Tooltip 的定位与翻转策略；选项列表使用虚拟滚动。
 `;
 
 export default function SelectPage() {

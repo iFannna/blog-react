@@ -132,21 +132,3 @@ checkbox/with-border
 | 插槽名 | 说明 | 子标签 |
 | --- | --- | --- |
 | default | 自定义选项内容；不传时按 options 渲染 | Checkbox |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| 独立 `v-model` | `checked` + `onCheckedChange` | 布尔形态 |
-| 组内 `v-model` | group 的 `value` + `onChange` | 数组形态 |
-| `@change` | `onCheckedChange` / group 的 `onChange` | — |
-| group 的 `props`（选项字段别名） | group 的 `optionProps` | 避免与 React 组件 props 混淆 |
-| `true-value` / `false-value` | 未实现 | 见下方说明 |
-| `label` 兼作 value | 需显式传 `value` | 官方 2.x 的兼容行为将在 3.0 移除 |
-
-**未实现的官方能力**（均有官方 deprecation 标记，属 3.0 将移除的行为）：
-
-- `true-value` / `false-value`（及其废弃别名 `true-label` / `false-label`）：官方 3.0 会移除，React 侧不再复刻。
-- 组内 `label` 兼作 `value`：官方同样标记为 3.0 移除，请显式传 `value`。
-
-`validate-event` 已接入 ElFormItem：独立 Checkbox 在 `checked` 变化后、CheckboxGroup 在选中集合变化后触发 `change` 校验。

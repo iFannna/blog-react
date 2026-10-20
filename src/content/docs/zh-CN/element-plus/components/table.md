@@ -332,31 +332,3 @@ table/tooltip-formatter
 | --- | --- | --- |
 | default | 自定义单元格内容，参数 `{ row, column, $index }` | `children` 函数 |
 | header | 自定义表头内容，参数 `{ column, $index }` | `renderHeader` 函数 |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `<el-table-column>` 子节点 | `children` 函数 | 传 `(scope) => ReactNode` |
-| `#default="scope"` 具名插槽 | `children` 函数 | 参数同官方 `scope` |
-| `#header="scope"` | `renderHeader` 属性 | 传函数 |
-| `render-header`（已废弃） | `renderHeader` | 官方亦标注不推荐 |
-| `#empty` / `#append` 插槽 | `empty` / `append` 属性 | 直接传 ReactNode |
-| `<el-table-column>` 嵌套表达分组 | 同样嵌套 | 结构与官方一致 |
-| `filter-icon` / `expand` 插槽 | 未提供 | 筛选图标与展开图标由组件内置 |
-| 单例浮层（表格 tooltip / 筛选面板） | 每单元格/每列独立 ElTooltip | 表现一致，DOM 数量更多 |
-
-**实现说明**：
-
-- 列宽计算逐行对齐官方 `table-layout.ts` 的 `updateColumnsWidth`：带 `width` 的列固定宽度，
-  其余列（flex）平分剩余空间，flex 多列时首列吸收取整误差，与官方算法一致。
-- 固定列的类名与偏移量对齐官方 `util.ts` 的 `isFixedColumn` / `getFixedColumnsClass` /
-  `getFixedColumnOffset`。
-- 表头结构由 `convertToRows` 把列树换算成多行，支持任意层级的分组表头。
-- 排序用官方同款的 `orderBy`（含稳定排序与多字段 `sortBy`）。
-- 筛选先于排序执行；筛选面板多选带确认/重置，单选点击即生效。
-- 树形数据按 `rowKey` 拍平展示，父子选择联动遵循官方 `checkStrictly` 语义；
-  懒加载节点在首次展开时调用 `load`。
-- 溢出提示在单元格 hover 时测量 `scrollWidth`，仅在真正溢出时弹出。
-- 列宽拖拽仅在 `border` 模式且鼠标位于表头右缘时启用，与前后的滚动位置同步表头。
-- 表格滚动容器复用本项目的 `ElScrollbar`。

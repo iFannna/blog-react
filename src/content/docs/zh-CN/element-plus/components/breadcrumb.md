@@ -40,13 +40,3 @@ breadcrumb/icon
 | --- | --- | --- | --- |
 | to | 路由跳转目标，传入后 inner 显示为链接样式 | ^[string] | — |
 | replace | to 模式下是否 replace | ^[boolean] | false |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `to` 走 vue-router | `to` 仅控制样式与 role | React 侧跳转请用 Next 的 Link 自行包裹 |
-| `<slot>` | `children` | — |
-
-**实现说明**：分隔符与图标从父级 context 读取；
-有 `to` 时 inner 加 `is-link` 类，与官方一致。

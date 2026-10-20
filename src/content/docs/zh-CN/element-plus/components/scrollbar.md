@@ -96,28 +96,3 @@ scrollbar/infinite-scroll
 | setScrollTop | 设置距顶部距离 | ^[Function]`(scrollTop: number) => void` |
 | setScrollLeft | 设置距左侧距离 | ^[Function]`(scrollLeft: number) => void` |
 | handleScroll | 处理滚动事件 | ^[Function]`() => void` |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `defineExpose` 的 `wrapRef` | `ScrollbarExpose.wrapRef` | 同样是一个 ref 对象 |
-| `wrap-style` 接受字符串 / 数组 | 只接受 `CSSProperties` 对象 | React 的 style 语义 |
-| `@end-reached` | `onEndReached` | 同义 |
-| `@scroll` | `onScroll` | 同义 |
-
-**实现说明**：
-
-- 滑块尺寸与位移的换算逐行对齐官方 `bar.vue` 的 `update` / `handleScroll`，
-  包括 `offsetHeight² / scrollHeight` 得出原始滑块高度、`ratio` 的二次比例换算、
-  `GAP = 4` 的余量扣除。
-- 拖动与点击轨道的换算对齐官方 `thumb.vue`，含 `offsetRatio` 的实现。
-- `distance > 0` 时的到达判定用官方那套「到达后要等相反方向也到达才允许再次派发」的去抖逻辑。
-- 滑块的显隐（鼠标进出滚动容器）直接改 DOM 的 `display`，与官方 `v-show` 等价，
-  同时避免拖动这种高频操作反复触发 React 渲染。
-
-**未实现的官方能力**：
-
-- 官方的滑块显隐带 `el-scrollbar-fade` 过渡动画；本项目直接切 `display`，没有淡入淡出。
-- 官方 `onActivated` 的 keep-alive 滚动位置恢复：Next.js App Router 没有 keep-alive，
-  该分支无对应场景。

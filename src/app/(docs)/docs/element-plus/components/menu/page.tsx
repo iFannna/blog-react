@@ -284,18 +284,6 @@ interface MenuItemClicked {
   route?: RouteLocationRaw
 }
 \`\`\`
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`default-active\` / \`default-openeds\` | \`defaultActive\` / \`defaultOpeneds\` | 保持非受控语义；\`defaultActive\` 变化时同步激活项 |
-| \`@select\` / \`@open\` / \`@close\` | \`onSelect\` / \`onOpen\` / \`onClose\` | 事件改为 on 前缀 |
-| 默认插槽 | \`children\` | — |
-| \`title\` 具名插槽 | \`title\` prop（ReactNode） | SubMenu、MenuItem、MenuItemGroup 一致 |
-| 图标以组件或字符串传入 | 直接传 \`ReactNode\` | 例如 \`expandOpenIcon={<ArrowDown />}\` |
-| \`ref\` + defineExpose | \`ref\` + \`MenuExpose\` | 方法名保持一致 |
-| \`vue-router\` 模式 | 保留 \`router\` prop，不做实际跳转 | 由业务侧在 \`onSelect\` 中处理导航 |
 `;
 
 export default function MenuPage() {

@@ -113,26 +113,3 @@ transfer/virtual-scroll
 | `TransferDataItem` | `Record<string, any>` |
 | `TransferFormat` | `{ noChecked?: string; hasChecked?: string }` |
 | `TransferPropsAlias` | `{ label?: string; key?: string; disabled?: string }` |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `v-model` | `value` + `onChange` | React 惯用写法 |
-| `props` | `optionProps` | 避开 React 的 props 语义混淆，字段名不变 |
-| `render-content` | `renderContent` | 官方收 `(h, option)`，React 无 h 函数，改为直接返回元素 |
-| 默认作用域插槽 | `children` 函数 | `(option) => ReactNode`，与 `renderContent` 二选一，前者优先 |
-| `left-footer` 等具名插槽 | `leftFooter` 等 props | 传 ReactNode |
-| `change` 事件 | `onChange(next, direction, movedKeys)` | 合并官方 `update:modelValue` 与 `change` |
-| `left-check-change` | `onLeftCheckChange` | 同官方两参形态 |
-| `clearQuery` / 面板 ref | 经 `ref` 暴露；面板 `query` 可读写 | `transferRef.current.clearQuery('left')`、`transferRef.current.leftPanel.current.query` |
-
-**实现说明**：DOM 与官网一致（`.el-transfer__buttons` / `.el-transfer__button` /
-`.el-transfer-panel__header` / `.el-transfer-panel__list` / `.el-transfer-panel__empty` 等）。
-勾选态存在面板内部，每次变化按官方 `useMove` 的三种 `targetOrder` 策略算出新的右侧列表顺序；
-`checkChangeByUser` 的口径照搬官方，程序回写只上报勾选值、不下发 `movedKeys`。
-
-**未实现的官方能力**：
-1. 官方 `el-checkbox-group` 的键盘导航（方向键在组内移动焦点）未实现，依赖 ElCheckboxGroup 补齐。
-2. 虚拟滚动的滚动条只实现竖向拖动与点击跳转，未实现官方 `ElVirtualScrollBar` 的触摸事件分支。
-3. 官方 `el-input` 搜索框的 `filterPlaceholder` 走 locale；本项目 locale 已具备该键，但 UI 上的 clear 图标行为沿用 ElInput 实现。

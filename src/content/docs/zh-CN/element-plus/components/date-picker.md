@@ -193,14 +193,3 @@ date-picker/custom-icon
 | blur | 输入框失焦 | ^[Function]`() => void` |
 | handleOpen | 打开下拉面板 | ^[Function]`() => void` |
 | handleClose | 关闭下拉面板 | ^[Function]`() => void` |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `v-model` | `value` + `onChange` | 受控用法 |
-| `@change` / `@calendar-change` / `@panel-change` | `onValueChange` / `onCalendarChange` / `onPanelChange` | 事件改为 on 前缀 |
-| 默认插槽 `#default` | `renderCell` | 作用域插槽改为 render prop |
-| `range-separator` 插槽 | `separator` | 具名插槽改为 ReactNode prop |
-| prev/next 图标插槽 | `prevMonthIcon` 等 props | 具名插槽改为 ReactNode prop |
-| `ref` + defineExpose | `ref` + `DatePickerExpose` | 方法名保持一致 |

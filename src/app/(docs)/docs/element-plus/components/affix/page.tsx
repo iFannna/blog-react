@@ -62,26 +62,6 @@ const API_MD = `
 | updateRoot | 重新测量 root 尺寸信息 | ^[Function]\`() => void\` |
 
 > 通过 \`ref\` 拿到 expose：\`const ref = useRef<AffixExpose>(null)\`，再调用 \`ref.current?.update()\`。
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`change\` 事件 | \`onChange\` | Vue 的 change 在 React 里会与原生事件同名，故改为 onChange |
-| \`scroll\` 事件 | \`onScroll\` | 同名冲突，加 on 前缀 |
-| \`defineExpose({ update, updateRoot })\` | \`ref\` + \`AffixExpose\` | React 用 \`useImperativeHandle\` 暴露同样的两个方法 |
-| \`<slot name="default">\` | \`children\` | 单一默认插槽 |
-| \`append-to\` 支持选择器 / 元素 | 同 | \`string\` 或 \`HTMLElement\` |
-
-**实现说明**：DOM 与官方一致 —— 外层常驻 \`.el-affix\`，固定时内层加 \`.el-affix--fixed\`
-（\`position: fixed\`），并通过内联 \`top\` / \`bottom\` / \`translateY\` / \`z-index\` 定位；
-\`target\` 模式下用 \`getBoundingClientRect\` 实时计算 \`translateY\` 让元素贴住容器边界。
-滚动容器通过向上查找第一个 \`overflow: auto/scroll/overlay\` 的祖先得到，
-找不到则回落到 \`window\`（与官方 \`getScrollContainer(el, true)\` 一致）。
-
-**未实现的官方能力**：\`teleported\` 默认为 \`false\`，仅当显式传 \`teleported\` 且处于固定态时
-才用 \`createPortal\` 传送到 \`append-to\`；官方的 \`onActivated\` / \`onDeactivated\`
-（\`<keep-alive>\` 激活钩子）在 React 无对应机制，未实现。
 `;
 
 export default function AffixPage() {

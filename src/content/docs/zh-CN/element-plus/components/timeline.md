@@ -121,18 +121,3 @@ timeline/reverse
 ### Exposes
 
 无。
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `<slot name="dot">` | `dot` 属性 | 传节点，渲染在 `.el-timeline-item__dot` |
-| `icon` 接受图标组件 | `icon` 接受 ReactNode | 与官方一致，渲染在 node 内 |
-| `reverse` 在 Timeline 内 reverse 子节点 | 对 children 数组 reverse | 行为一致 |
-
-**实现说明**：
-
-- `mode` 会同时输出到 `ul.el-timeline.is-{mode}` 与每个 `li.el-timeline-item.is-{mode}`，与 theme-chalk 的选择器对齐
-- `reverse` 反转 children 顺序，时间戳与内容结构不变
-- 节点结构与官方一致：默认节点为 `el-timeline-item__node`（带 size / type / is-hollow 类），自定义图标渲染在该节点内部；`dot` 则替换为 `el-timeline-item__dot`
-- 时间戳在 `placement="top"` 时渲染在内容上方，否则在下方；`hideTimestamp` 可完全隐藏

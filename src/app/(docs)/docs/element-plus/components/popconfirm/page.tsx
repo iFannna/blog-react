@@ -142,23 +142,6 @@ const API_MD = `
 | --- | --- |
 | hide() | 立即隐藏 |
 | show() | 立即显示 |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`<slot name="reference">\` | 直接包住触发元素 | — |
-| \`<slot name="actions">\` | \`actions\` 渲染函数 | 参数 \`{ confirm, cancel }\` 一致 |
-| \`popperRef\` | 未导出 | 需要时通过 Tooltip 层获取 |
-| 未导出 \`show()\` | 导出 \`show()\` | 便于受控场景主动展示 |
-
-**实现说明**：官方是 ElTooltip 的包装，固定 \`popperClass="el-popover"\`，
-并把 \`fallbackPlacements\` 限定为 \`['bottom', 'top', 'right', 'left']\`
-—— 翻转时只在四个主方向间切换，不使用 -start / -end 变体。
-默认文案「确定」「取消」取自官方中文语言包。
-
-点击确认或取消后组件会自动关闭（对应官方 \`onConfirm\` / \`onCancel\`
-后调用 hide 的行为）；\`trigger\` 默认 click，但可按需改为 hover / focus 等。
 `;
 
 export default function PopconfirmPage() {

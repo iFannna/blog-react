@@ -76,16 +76,3 @@ text/override
 ### Exposes
 
 无。
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| 任意 HTML 属性透传 | 显式 `className` / `style` / `title` | React 组件需声明 props |
-| `tag` 接受任意标签 | 相同 | 通过 createElement 渲染 |
-
-**实现说明**：
-
-- `lineClamp` 通过内联的 `-webkit-line-clamp` 生效，配合 CSS 里的 `display: -webkit-box`
-- 文本真的溢出时组件会补上原生 `title` 属性（未溢出则移除），与官方 `bindTitle` 行为一致；显式传 `title` 时不自动覆盖
-- 官方 Text **没有** bold / italic / delete / underline 这些属性，需要这些效果请使用 `tag` 或 Typography 组件

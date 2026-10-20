@@ -148,20 +148,6 @@ const API_MD = `
 | --- | --- | --- |
 | default | 标签内容 | \`children\` |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`@close\` | \`onClose\` | 由使用方在回调里决定是否卸载，与官方一致 |
-| \`@click\` | \`onClick\` | — |
-
-**实现说明**：官方 ElTag 内部不负责卸载自身，关闭动画通过 Vue 的
-\`<transition name="el-zoom-in-center">\` 承载，是否移除由使用方控制。
-React 侧保留同样的职责划分：\`onClose\` 触发时先打上收起动画标记，
-元素的实际卸载仍由使用方在回调里决定。
-
-关闭按钮的 \`aria-label\` 走 \`useLocale\`，默认取 \`el.tag.close\`，
-也可用 \`closeLabel\` 覆盖。
 `;
 
 export default function TagPage() {

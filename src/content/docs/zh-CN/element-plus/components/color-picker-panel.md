@@ -86,11 +86,3 @@ color-picker-panel/disabled
 | color | 当前颜色对象 | ^[object]`Color` |
 | inputRef | 底部输入框的原生 input | ^[object]`HTMLInputElement` |
 | update | 手动刷新子组件 | ^[Function]`() => void` |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `v-model` | `value` + `onChange` | 受控用法 |
-| `hue-slider-class` 支持数组/对象 | 接受字符串类名 | 与项目内其他组件一致 |
-| footer 插槽 | `footer` ReactNode | — |

@@ -111,25 +111,6 @@ CSS 变量，任何组件都直接引用它们。因此本节没有 Attributes /
 | --el-box-shadow-lighter | 更浅阴影 | 0px 0px 6px rgba(0, 0, 0, 0.12) |
 | --el-box-shadow-dark | 深阴影 | 0px 16px 48px 16px rgba(0, 0, 0, 0.08), 0px 12px 32px rgba(0, 0, 0, 0.12), 0px 8px 16px -8px rgba(0, 0, 0, 0.16) |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| 无组件，纯 CSS 变量 | 无组件，纯 CSS 变量 | 完全一致，本节只演示变量效果 |
-| 官方示例内联 \`style\` 写 \`border-radius\` / \`box-shadow\` | 改用 \`demo-*\` 修饰类 | 项目禁止内联 style，值与官方逐条对齐 |
-
-**实现说明**：三个示例的 DOM 结构与类名（\`demo-border\` / \`demo-radius\` /
-\`demo-shadow\`）与官方 \`docs/examples/border/*.vue\` 一致；
-圆角示例复用 \`ElRow\` / \`ElCol\`（\`gutter={12}\`、\`span={6}\`、\`xs={{ span: 12 }}\`），
-生成的类名与 grid 结构与官方渲染结果相同。
-
-**未实现的官方能力**：
-
-- 官方示例用 \`useCssVar('--el-border-radius-*')\` 在运行时读取变量实际值显示在
-  \`<code>\` 里，React 侧直接把同名值（2px / 4px / 20px）写在常量表中；如果主题
-  在运行时改写这些变量，示例里的文字不会跟着变。
-- 官方 shadow 示例用 \`getCssVarName()\` 动态拼出变量名并内联引用，React 侧改为
-  四个固定的修饰类 \`--light\` / \`--lighter\` / \`--dark\`，新增阴影档位需要同步加类。
 `;
 
 export default function BorderPage() {

@@ -123,23 +123,6 @@ const API_MD = `
 | icon | 自定义图标 | \`icon\` 属性 |
 | title | 自定义标题 | \`title\` 属性 |
 | description | 自定义描述 | \`description\` 属性 |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`<slot name="icon">\` | \`icon\` 属性 | 传节点 |
-| 子项经 provide/inject 回写状态 | 由父组件 cloneElement 注入 index | 行为等价 |
-| \`@change\` | \`onChange\` | 仅在 active 值变化后触发，不回调初始值 |
-| 根元素透传 class/style | 显式 \`className\` / \`style\` | React 侧不展开任意 HTML 属性 |
-
-**实现说明**：
-
-- 子项状态推导与官方 updateStatus 一致：下标小于 \`active\` 取 \`finishStatus\`，等于取 \`processStatus\`，其余为 \`wait\`；显式传 \`status\` 时以它为准
-- flex 布局与官方一致：非居中横向步骤按 \`100 / (stepCount - 1)%\` 计算 \`flexBasis\`，最后一项限宽 \`100 / stepCount%\`；传入 \`space\` 时改用固定间距
-- 步骤根节点按方向输出 \`is-horizontal\` / \`is-vertical\` / \`is-simple\`，最后一项在无 space 且非居中时带 \`is-flex\`，与 theme-chalk 选择器对齐
-- 连接线进度与官方 calcProgress 一致：\`wait\` / \`process\` 宽度为 0，其余状态铺满并补 1px 边框；纵向时改用高度
-- success / error 状态分别渲染对勾与叉号图标，带 \`is-status\` 类；简洁模式下不渲染序号
 `;
 
 export default function StepsPage() {

@@ -343,17 +343,3 @@ interface SelectV2TagRenderParams {
   deleteTag: (event: MouseEvent, option: SelectV2Option) => void
 }
 ```
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `v-model` | `value` + `onChange` | 受控用法，多选时值必须是数组 |
-| `@change` / `@visible-change` | `onChange` / `onVisibleChange` | 事件改为 on 前缀 |
-| 默认插槽 | `children` 渲染函数 | 参数为 `{ item, index, disabled }` |
-| `header` / `footer` / `empty` / `loading` / `prefix` 插槽 | `header` / `footer` / `empty` / `loadingSlot` / `prefix` props | ReactNode |
-| `tag` / `label` 作用域插槽 | `tag` / `label` 渲染函数 | 参数与官方一致 |
-| `suffix-icon` / `clear-icon` 组件类型 | `ReactNode` | 例如 `suffixIcon={<Search />}` |
-| `ref` + defineExpose | `ref` + `SelectV2Expose` | 方法名保持一致 |
-| `popper-append-to-body` | 不支持 | 使用 `teleported` + `appendTo` |
-| `popper-options` | 不支持 | Popper 配置未透传 |

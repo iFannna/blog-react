@@ -97,15 +97,6 @@ const API_MD = `
 | default | 描述文字 | \`description\` |
 | title | 标题内容 | \`title\` |
 | icon | 自定义图标 | \`icon\` |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`type\` | 同 | 官方含 \`primary\`，无 \`default\` |
-
-**实现说明**：官方用 \`v-show\` 控制显隐并在组件内维护 \`visible\`，
-React 侧沿用该职责：\`onClose\` 触发时先卸载自身，使用方无需额外维护显隐状态。
 `;
 
 export default function AlertPage() {

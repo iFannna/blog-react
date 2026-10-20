@@ -44,17 +44,6 @@ const API_MD = `
 | image | 自定义插图 | \`image\` 属性 |
 | description | 自定义描述 | \`description\` 属性 |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`<slot name="image">\` | \`image\` 属性 | 传地址字符串 |
-| 默认描述取自 \`useLocale\` | 固定「暂无数据」 | 未引入多语言，可用 \`description\` 覆盖 |
-
-**实现说明**：内置插图复刻自官方 \`img-empty.vue\`，路径坐标逐值一致，
-配色走 \`--el-empty-fill-color-1\` 到 \`--el-empty-fill-color-9\` 九个变量，
-因此自动跟随明暗主题。渐变与 rect 的 \`id\` 用 \`useId\` 生成，
-避免同页多个 Empty 的 \`id\` 冲突导致配色错乱。
 `;
 
 export default function EmptyPage() {

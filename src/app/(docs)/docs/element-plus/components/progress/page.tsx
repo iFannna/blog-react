@@ -89,18 +89,6 @@ const API_MD = `
 | --- | --- | --- |
 | default | 自定义文字内容，参数为百分比 | \`children\` 函数 |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`<slot :percentage="percentage">\` | \`children(percentage)\` | 函数形式接收百分比 |
-
-**实现说明**：官方 \`color\` 支持三种形态，React 侧全部保留：
-单色字符串、\`{ color, percentage }\` 分段数组、\`(percentage) => string\` 函数。
-分段数组的简写（纯字符串数组）会按官方逻辑自动补全为等分区间。
-
-环形与仪表盘用 SVG 的 \`stroke-dasharray\` 绘制，路径与官方逐字符一致
-（含 \`rate = 0.75\` 的仪表盘缺口）。
 `;
 
 export default function ProgressPage() {

@@ -132,23 +132,3 @@ tabs/default-value
 | --- | --- | --- |
 | default | 面板内容 | children |
 | label | 自定义标签内容 | `label` 属性 |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `v-model` | `value` + `onChange` | 受控写法；不传 value 时可用 `defaultValue` |
-| `@tab-change` | `onChange` | React 侧合并为值变化回调 |
-| `@edit` | `onEdit` | 参数与触发时机一致 |
-| `<slot name="add-icon">` | `addIcon` 属性 | 传节点 |
-| `<template #label>` | `label` 属性 | 传节点 |
-| `expose: currentName / tabNavRef` | 暂未提供 | 可通过受控 value 获取当前项 |
-
-**实现说明**：
-
-- 激活条定位与官方 `getBarStyle` 一致：量激活项 `offsetLeft` 与扣除左右 padding 后的宽度，用 `transform: translateX` 定位；card / border-card 不渲染激活条
-- 键盘交互与官方一致：方向键循环切换可用 tab（左/上向前、右/下向后），聚焦后立即选中；Delete / Backspace 关闭当前可关闭 tab；新增按钮支持 Enter 触发
-- ARIA：`role="tablist" / "tab" / "tabpanel"`，并由 `useId` 生成稳定的 `aria-controls`、`aria-labelledby` 关联；`aria-orientation` 随 `tabPosition` 变化
-- `lazy` 面板首次激活后保持挂载（仅 `display: none`），等价于官方面板的 keep-alive 行为
-- 官方面板切换的 fade 过渡与超出宽度时的 nav 滚动按钮尚未实现，结构与类名保持一致
-- 未受控时若移除当前面板，需由使用方像官方 demo 一样在 `onEdit` / `onTabRemove` 中切换 `value`

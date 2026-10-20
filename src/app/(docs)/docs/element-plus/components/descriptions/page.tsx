@@ -190,15 +190,6 @@ const API_MD = `
 | default | 自定义内容 | \`children\` |
 | label | 自定义标签 | \`label\` |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`<template #title>\` | \`title\` 属性 | 传节点 |
-| \`<el-descriptions-item>\` | \`ElDescriptionsItem\` | 子项按 column 自动分行 |
-
-**实现说明**：渲染规则与官方 descriptions-row / descriptions-cell 一致；
-horizontal + border 时内容的 colSpan 为 \`span * 2 - 1\`；最后一行不足时用 span 撑满。
 `;
 
 export default function DescriptionsPage() {

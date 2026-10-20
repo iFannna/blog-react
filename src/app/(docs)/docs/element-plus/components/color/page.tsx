@@ -161,39 +161,6 @@ Element Plus 把所有颜色收敛成 \`--el-color-*\` / \`--el-text-color-*\` /
 另外 \`--el-color-white\`（#ffffff）与 \`--el-color-black\`（#000000）是无派生档位的
 纯色常量。
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| 无组件，纯 CSS 变量 | 无组件，纯 CSS 变量 | 完全一致，本节只演示变量效果 |
-| 示例用 \`:style=": { background: var(--el-*) }"\` 内联上色 | 改用 \`demo-color-box--*\` 修饰类 | 项目禁止内联 style 对象，类名逐一映射同名变量 |
-| \`useCssVar\` / \`getCssVarValue\` 运行时读取变量值显示 | 常量表列出默认值 | 见下方「未实现的官方能力」 |
-| 官方 md 用 \`<ClientOnly><MainColor /></ClientOnly>\` 挂全局组件 | 三条 \`DemoBlock\` 展示 | 官方 md 无 \`:::demo\`，示例目录为空，故按展示块组织 |
-
-**实现说明**：三个色板的 DOM 结构与类名（\`demo-color-box\`、\`demo-color-box-lite\`、
-\`bg-color-sub\`、\`bg-blue-sub-item\`、\`bg-secondary-sub-item\`、\`demo-color-box-group\` 除外）
-与官方 \`docs/.vitepress/vitepress/components/globals/{main,secondary,neutral}-color.vue\` 对齐；
-布局复用 \`ElRow\` / \`ElCol\`（\`gutter={12}\`、\`span\` 与 \`xs={{ span: 12 }}\` 同官方），
-渲染出的 grid 结构与官方一致。色块的尺寸、圆角、字体、子色条高度取自官方
-文档构建产物里编译后的 CSS（\`height: 112px\`、\`padding: 20px\`、\`font-size: 14px\`、
-\`bg-color-sub: 40px\`），官方 md 里那段 scoped style 与实际产物有出入（md 写
-\`padding: 20px; height: 112px\`，而 UnoCSS 包里还有 \`text-xs\` / \`op-69\` 等规则），
-本页按产物为准。
-
-**未实现的官方能力**：
-
-- 官方用 \`getCssVarValue()\` 在运行时读取 \`--el-*\` 的实际值（含暗色主题切换后的值）
-  显示在 \`.value\` 里，React 侧用常量表写死浅色默认值。所以切到暗色主题时，
-  色块本身会跟着变（颜色由 CSS 变量驱动），但色块上那行变量值文字不会跟着变。
-- 官方主色卡与场景色卡把「变量实际值」也用在色块背景上（\`background: primary\`），
-  本页背景同样来自 \`var(--el-color-*)\`，行为一致；但子色条的宽度官方用内联
-  \`width: 100/6%\`，本页改为 CSS 里的 \`calc(100% / 6)\`。
-- 官方的 \`demo-color-box-group\` 容器类在 \`neutral-color.vue\` 里只作为分组包裹元素，
-  官方源码中未找到对应的 CSS 规则（产物里也无），故本页未复刻该类，直接用 Col 作包裹。
-- 官方点击子色条复制的是 \`useClipboard\` + \`ElMessage\` 提示；本页复制逻辑一致，
-  但复制失败时的提示文案为项目自定义中文（官方是 \`Copy failed\`）。
-- 官方色彩页顶部有一个「显示源码」式的 Source 链接区块（指向 GitHub 上的 color.md），
-  本页未复刻该链接。
 `;
 
 export default function ColorPage() {

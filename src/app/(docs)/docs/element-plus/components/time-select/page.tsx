@@ -106,47 +106,6 @@ const API_MD = `
 | --- | --- | --- |
 | focus | 让输入框聚焦 | ^[Function]\`() => void\` |
 | blur | 让输入框失焦 | ^[Function]\`() => void\` |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model\` | \`value\` + \`onChange\` | React 惯用写法，清空同样经 \`onChange\` 回传 |
-| \`@change\` | \`onChange\` | 官方把 update:model-value 与 change 分别抛出，这里合一 |
-| \`@clear\` | \`onClear\` | 清空时除 \`onChange\` 外额外回调 |
-| \`prefix-icon\` / \`clear-icon\` 传组件 | 传 \`ReactNode\` | React 无动态组件，直接传元素 |
-| \`format\` 走 dayjs | 内置等价的 token 格式化 | 项目未引入 dayjs，见「未实现的官方能力」 |
-
-**实现说明**：官方 \`ElTimeSelect\` 是把时间列表交给 \`ElSelect\`（打开 \`filterable\` +
-\`default-first-option\` + prefix 插槽）渲染的薄封装；本实现按官方 2.14 的
-\`el-select\` DOM 结构（\`.el-select__wrapper\` / \`.el-select__selection\` /
-\`.el-select__prefix\` / \`.el-select-dropdown__item\`）直接落地，下拉复用
-\`ElPopperContent\` + \`ElScrollbar\`，选项列表、禁用比较（min-time / max-time）、
-选中高亮、键盘导航（上下键、Home / End / PageUp / PageDown、Enter、Esc）、
-default-first-option 与输入过滤均按官方行为实现；ARIA 也按官方补齐
-（\`role="combobox"\` / \`listbox\` / \`option\`、\`aria-expanded\`、\`aria-controls\`、
-\`aria-activedescendant\`、\`aria-selected\` / \`aria-disabled\`）。
-
-**未实现的官方能力**：
-
-- \`format\` 只覆盖 dayjs 时间范围内的 token（\`H/HH/h/hh/m/mm/s/ss/A/a\` 与 \`[]\` 字面量），
-  \`YYYY\`、\`D\`、\`Z\`、时区偏移等日期级 token 未实现。
-- 语言包 \`meridiem\`：官方取 dayjs locale 的 12 小时制文案，这里以「小时 < 12 为 AM」
-  近似；中文语言包用「上午/下午」，与官方 zh-cn 文案一致。
-- 官方 \`ElTimeSelect\` 委托 \`ElSelect\` 因而顺带具备的 \`empty-values\` /
-  \`value-on-clear\` 全局配置回退已实现，但 \`teleported\` / \`append-to\` /
-  \`popper-options\` / \`offset\` 等 ElSelect 透传属性未暴露（下拉固定内联渲染于
-  触发器旁，\`fallbackPlacements\` 固定为官方默认值）。
-- 官方 \`ElTimeSelect\` 未暴露 \`automatic-dropdown\`，这里同样不提供；\`editable\`
-  对应 ElSelect 的 \`filterable\`，关闭后不渲染过滤输入、悬停项回到当前选中项。
-- \`size\`：官方把尺寸透传给 ElSelect，由 \`.el-select--large\` / \`.el-select--small\`
-  调整内边距与行高；这里已按同一套类名实现，但未验证过 \`large\` / \`small\` 下的图标与
-  清空按钮排布。
-- \`name\`：已透传到原生 input，但未参与表单序列化校验（官方 \`ElSelect\` 同样只是透传属性）。
-- 未实现 \`ElSelect\` 的 \`persistent\`（下拉关闭后保留 DOM）与过渡动画
-  \`el-zoom-in-top\`：React 侧下拉为条件渲染，无进出场过渡。
-- 官方 \`prefix-icon\` 默认取 \`@element-plus/icons-vue\` 的 \`Clock\`；本实现已内置
-  同名图标，但 \`clear-icon\` / \`prefix-icon\` 传字符串组件名的能力未实现（React 无动态组件）。
 `;
 
 export default function TimeSelectPage() {

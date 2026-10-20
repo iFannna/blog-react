@@ -108,33 +108,3 @@ autocomplete/custom-header-footer
 `handleKeyEnter` / `highlight` / `getData`，以及只读的 `activated`、
 `loading`、`highlightedIndex`、`suggestions`（官方是 Ref，这里用 getter 暴露当前值）。
 官方 `inputRef` / `popperRef` 对应为 `input`（原生 input 元素）与 `popper`（浮层容器元素）。
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `v-model` | `value` + `onChange` | React 惯用写法 |
-| `@select` / `@change` / `@blur` / `@focus` / `@clear` | 同名 `onSelect` 等回调 | 事件名加 on 前缀 |
-| `fetch-suggestions` 函数式 | 同名 prop，也接受数组 | 两种形态都支持 |
-| `#default="{ item }"` | `renderItem={(item) => ...}` | 渲染函数替代作用域插槽 |
-| `#header` / `#footer` / `#loading` | `header` / `footer` / `loading` | 直接传节点 |
-| `aria-label` | `ariaLabel` | 驼峰属性名 |
-| `value-key` | `valueKey` | 驼峰属性名 |
-| `append-to` | `appendTo` | 支持选择器或 HTMLElement |
-| `[input props]` | 同名 props 直接透传 | 与官方一致，输入框属性整体透传 |
-| expose 的 `Ref<boolean>` | 只读 getter | 取值语义一致 |
-| expose 的 `inputRef` / `popperRef` | `input` / `popper` | 这里是原生元素，不是组件实例 |
-
-**实现说明**：结构对齐官方 —— 外层 `.el-autocomplete[role=combobox]`，
-下拉为 `.el-autocomplete__popper.el-popper.is-pure`（无内边距），
-内部 `.el-autocomplete-suggestion` + `__header` / ElScrollbar 的 `__wrap` / `__list` / `__footer`。
-定位复用项目里的 ElPopperContent（popper.js），未走 ElTooltip，因为官方用的是 tooltip 的
-manual-mode，直接调 popper 层行为等价且少一层受控状态。
-
-**未实现的官方能力**：
-
-- `popper-append-to-body`（已废弃）：未提供，使用 `teleported` / `appendTo` 控制挂载位置。
-- `popper-options` 的完整语义：已透传给 popper.js，但官方在此基础上还有
-  `fallback-placements` 的多向翻转策略，这里只固定 `['bottom-start', 'top-start']`。
-- `useId` 生成的 `listboxId` 前缀与官方不同（官方是 `el-id-xxx`），仅影响
-  `aria-owns` / `aria-activedescendant` 的具体字符串值，不影响可访问性语义。

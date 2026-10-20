@@ -41,16 +41,6 @@ const API_MD = `
 | 插槽名 | 说明 | React 写法 |
 | --- | --- | --- |
 | default | 自定义内容 | \`children\` |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`right\` / \`bottom\` 仅 ^[number] | 兼容 ^[string] | 便于传百分比、\`2rem\` 等 |
-| 滚动节流用 \`useThrottleFn\` | leading 节流 300ms | 效果等价 |
-
-**实现说明**：有 \`target\` 时监听该元素滚动，否则监听文档；点击时按目标类型调用
-\`window.scrollTo\` 或元素的 \`scrollTo\`，均为平滑滚动。
 `;
 
 export default function BacktopPage() {

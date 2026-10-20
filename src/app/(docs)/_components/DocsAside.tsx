@@ -166,6 +166,15 @@ export default function DocsAside() {
         return;
       }
 
+      // 触底兜底：最后一段内容较短时，末尾标题永远越不过触发线，
+      // 页面已无法继续滚动，直接选中最后一项
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
+      if (list.length > 0 && scrollTop >= maxScroll - 1) {
+        setActiveId(list[list.length - 1].id);
+        return;
+      }
+
       for (let i = 0; i < list.length; i++) {
         const item = list[i];
         const next = list[i + 1];

@@ -156,35 +156,3 @@ config-provider/table
 | 名称 | 说明 | 类型 |
 | --- | --- | --- |
 | default | 自定义默认内容 | config: 当前生效的全局配置 |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| `provide/inject` 跨组件注入 | React Context（6 个独立 Context） | 语义一致：Provider 内所有组件都能读到 |
-| 插槽回传 `config` | `children` 支持函数形态 `(config) => ReactNode` | 用法等价 |
-| `locale` 传 `element-plus/es/locale/lang/zh-cn` | `import { zhCn } from "@/components/ui/config-provider/locales"` | 内置 en / zh-cn 两个语言包 |
-| 命令式组件读模块级 `globalConfig` | `getGlobalConfig()` 模块级快照 | ElMessage / MessageBox 等照常读到全局配置 |
-| `dialog.transition` 支持对象（JS 过渡钩子） | 仅支持字符串 | React 无 Vue 过渡系统，无法执行 `onBeforeEnter` 等钩子 |
-
-**实现说明**：
-
-- `size` 已接入 `useFormSize`（输入类组件 / 按钮 / 表格 / 单选 / 复选等全部生效）
-- `zIndex` 已接入 `useZIndex`（Dialog / Drawer / 各类浮层以此为初始层级）
-- `locale` 已接入分页、表格空数据、Empty、Select 占位与空数据、MessageBox 文案
-- `emptyValues` / `valueOnClear` 已接入 Select 的清空逻辑
-- `button` / `link` / `card` / `dialog` / `message` / `table` 六组配置均已接入对应组件
-- `namespace` 提供 `useNamespace(block)`，与官方 `_bem` / `cssVar` 逐字一致；由于本项目样式表是
-  官方 theme-chalk 的产物（类名硬编码 `el-`），改 `namespace` 只能改变组件输出的类名，
-  不会生成对应的新样式，实际使用请保持默认值
-
-**未实现的官方能力**：
-
-- `namespace` 对 CSS 变量前缀的联动：官方样式由 SCSS 按 `$namespace` 编译，本项目用编译好的
-  固定前缀样式表，故改前缀后无配套样式
-- 实验特性（`experimental-features`）：官方当前也是空对象，未定义任何特性，仅保留该配置项
-- `a11y` / `keyboard-navigation`：官方当前源码中也没有任何组件读取这两个值（仅 ConfigProvider
-  自身声明），本项目同样仅保留配置项
-- `dialog.transition` 的对象形态（配合 Vue 过渡钩子）
-- `table.tooltipOptions` / `table.tooltipFormatter`：官方这两个配置最终交给 ElTooltip 渲染
-  溢出提示，本项目表格的溢出省略只加了 `is-truncated` 样式与 `el-tooltip` 类名，尚未接入 Tooltip

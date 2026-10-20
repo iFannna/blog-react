@@ -163,22 +163,6 @@ Header / Aside / Main / Footer 均只有默认插槽，React 侧对应 \`childre
 
 无。
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| 遍历子 vnode 类名检测 Aside | Aside 通过 context 主动注册 | 行为一致，React 侧更可靠 |
-| 任意 HTML 属性透传 | 仅 \`className\` / \`style\` | React 组件显式声明 props |
-| 根标签 \`section / header / aside / main / footer\` | 相同 | 结构一致 |
-
-**实现说明**：官方通过遍历子 vnode 的类名判断是否存在 \`el-aside\`，
-从而决定默认布局方向。React 里函数组件的 \`props.className\` 拿不到组件内部
-拼好的类名，因此改为由 \`ElAside\` 挂载时通过 context **主动注册**：
-
-- 显式传 \`direction\` 时以它为准
-- 未传且直接子级含 Aside 时横向布局（Aside 在左、Main 在右）
-- 未传且不含 Aside 时纵向堆叠
-- 嵌套容器各自独立判断方向，与官方示例的七种布局一致
 `;
 
 export default function ContainerPage() {

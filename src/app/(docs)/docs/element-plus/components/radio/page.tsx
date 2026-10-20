@@ -129,22 +129,6 @@ const API_MD = `
 | 插槽名 | 说明 | 子标签 |
 | --- | --- | --- |
 | default | 自定义选项内容；不传时按 options 渲染 | Radio |
-
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model\`（组内） | group 的 \`value\` + \`onChange\` | 单值不是布尔，故不用 checked |
-| \`v-model\`（独立） | \`checked\` + \`onCheckedChange\` | 独立使用时为布尔选中态 |
-| \`@change\` | \`onChange\` / \`onCheckedChange\` | — |
-| \`label\` 兼作 value | 需显式传 \`value\` | 官方标记为 3.0 移除 |
-| group 的 \`props\`（选项字段别名） | group 的 \`optionProps\` | 避免与 React 组件 props 混淆 |
-
-**未实现的官方能力**：
-
-- 组内 \`label\` 兼作 \`value\`（官方 3.0 将移除）。
-
-\`validate-event\` 已接入 ElFormItem：RadioGroup 的值变化后触发 \`change\` 校验（与官方一致，独立 Radio 不触发）。
 `;
 
 export default function RadioPage() {

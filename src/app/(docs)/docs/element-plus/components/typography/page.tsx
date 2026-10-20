@@ -116,28 +116,6 @@ font-family:
   'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
 \`\`\`
 
-## 与 Vue 版 API 的差异
-
-官方 Typography 不是组件：\`packages/components\` 下没有 typography 目录，
-它是一页设计约定，正文只由 3 个 Vue 示例加一段 CSS 组成。
-React 侧因此也没有 \`ui/\` 目录，本页即全部实现。
-
-| 官方 Vue 示例 | React 实现 | 说明 |
-| --- | --- | --- |
-| \`font.vue\` 五个终端字体截图 | 页内内联 DOM | 暗色切换由 CSS 完成，不再依赖 \`isDark\` |
-| \`convention.vue\` 字号对照表 | 页内内联 DOM | 字号值取自 \`--el-font-size-*\` 的最终 px 值 |
-| \`line-height.vue\` 行高示意 | 页内内联 DOM | 明暗两套图，同上 |
-| \`useCssVar\` 读字体变量 | 写死同名字号 | 纯 React 无运行时变量读取 |
-| \`<style scoped>\` 里的 img 尺寸 | \`docs.css\` 的 \`.demo-term-box__img\` | 项目禁止内联 style 与 \`<style>\` |
-| 逐行 \`style="font-size: …"\` | \`.demo-typo-size__row--*\` 修饰类 | 同一组 \`--el-font-size-*\` 变量 |
-
-**实现说明**：官方示例的 \`<style scoped>\` 只给字体截图设了 220x174 的尺寸
-（第 3 张 \`nth-of-type(3)\` 去掉右边距），行高示例在当前线上版本没有任何样式
-（旧版 \`demo-styles/typography.scss\` 未随文档重构迁移），
-因此行高图按原始尺寸 474x114 渲染、下方列表吃 VitePress 默认样式。
-本页对齐了实测值：两个示例根节点补回继承自正文的 16px / 1.4 行高（行内图片的基线间隙），
-字号表撤销正文表格的边框与全宽，行高列表写回 40px 缩进与 li 零外边距。
-
 ## 未实现的官方能力
 
 - 未使用官方 CDN 之外的本地图片：\`public/\` 下没有 typography 目录，

@@ -58,18 +58,3 @@ icon/collection
 | --- | --- | --- | --- |
 | size | 图标尺寸，数字补 px | ^[number] / ^[string] | — |
 | color | 图标颜色，落到 --color 变量 | ^[string] | — |
-
-## 与 Vue 版 API 的差异
-
-官方图标包导出的是 Vue 组件，React 侧由 `scripts/build-element-icons.mjs`
-从官方 `@element-plus/icons-vue` 提取同结构 SVG 生成 React 组件，
-`viewBox` 与 path 数据与官方逐字节一致，不引入 Vue 运行时。
-
-| 官方 Vue | React |
-| --- | --- |
-| `import { Edit } from '@element-plus/icons-vue'` | `import { Edit } from "@/components/element-plus/icons"` |
-| 通过 `app.component(name, Icon)` 全局注册 | 按需 import，或从 `icons` 模块按名字取用 |
-| `<el-icon :size="24">` | `<ElIcon size={24}>` |
-| `class="is-loading"` | `className="is-loading"` |
-
-升级图标包后重新执行 `npm run build:icons` 即可生成新图标。

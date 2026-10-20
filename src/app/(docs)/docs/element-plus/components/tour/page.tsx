@@ -174,27 +174,6 @@ const API_MD = `
 | onClick | 追加在官方默认行为之后的点击回调 | ^[Function]\`() => void\` | — |
 | 其余字段 | 透传给 ElButton 的属性（type / disabled / class 等） | ^[ButtonProps] | — |
 
-## 与 Vue 版 API 的差异
-
-| 官方 Vue | React | 说明 |
-| --- | --- | --- |
-| \`v-model\` | \`visible\` + \`onVisibleChange\` | React 惯用写法 |
-| \`v-model:current\` | \`current\` + \`onCurrentChange\` | 不传 \`current\` 时为非受控，内部自增 |
-| \`onUpdate:modelValue\` / \`onUpdate:current\` | \`onVisibleChange\` / \`onCurrentChange\` | 事件名对应语义而非 Vue 语法 |
-| \`#indicators="{ current, total }"\` 插槽 | \`indicators\` 渲染函数 | 入参与官方一致，\`current\` 为 0 基 |
-| \`#default\` / \`#header\` 插槽 | \`children\` / \`header\` props | 官方在 TourStep 上定义，React 同样落在 ElTourStep 的 props 上 |
-| \`next-button-props.children\` | 同名字段 | 支持 ReactNode，不再限于字符串 |
-| \`close-icon\` 传组件名 / 组件 | \`closeIcon\` 传 ReactNode | 直接给渲染好的图标节点 |
-| \`append-to\` 字符串 / 元素 | 同 | 通过 portal 挂载，客户端挂载后生效 |
-
-**实现说明**：定位引擎由官方依赖的 floating-ui 换成项目已有的 @popperjs/core，
-内容层固定为 \`position: fixed\` 与遮罩同一坐标系；arrow 与 overflow 两个中间件按
-floating-ui 的算式用 popper 自定义中间件复刻（箭头坐标写回元素的 left / top，
-溢出折算成 \`max-width\`）。遮罩沿用官方 svg path 挖孔方案：外圈与内圈绕向相反，
-默认的 nonzero 填充规则下自然形成孔洞。
-
-**未实现的官方能力**：见下节。
-
 ## 未实现的官方能力
 
 - \`target-area-clickable\` 只做到了遮罩层的 pointer-events 切换；遮罩与挖孔都渲染在
