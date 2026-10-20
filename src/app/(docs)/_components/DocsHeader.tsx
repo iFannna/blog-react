@@ -1,16 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ElTag } from "@/components/element-plus/tag";
 import { ElSwitch } from "@/components/element-plus/switch";
 import { useTheme } from "@/hooks/theme";
-import { ELEMENT_PLUS_HEADER, LOCALE_LABELS } from "@/lib/docs/sections";
-import {
-  DOC_LOCALES,
-  type DocLocale,
-  type DocsHeaderConfig,
-} from "@/lib/docs/types";
+import { ELEMENT_PLUS_HEADER } from "@/lib/docs/sections";
+import type { DocLocale, DocsHeaderConfig } from "@/lib/docs/types";
 import { useDocsMessages } from "./DocsI18nProvider";
 
 /**
@@ -60,12 +56,52 @@ function ThemeToggle() {
   );
 }
 
+function TranslateIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="m18.5 10l4.4 11h-2.155l-1.201-3h-4.09l-1.199 3h-2.154L16.5 10zM10 2v2h6v2h-1.968a18.2 18.2 0 0 1-3.62 6.301a15 15 0 0 0 2.335 1.707l-.75 1.878A17 17 0 0 1 9 13.725a16.7 16.7 0 0 1-6.201 3.548l-.536-1.929a14.7 14.7 0 0 0 5.327-3.042A18 18 0 0 1 4.767 8h2.24A16 16 0 0 0 9 10.877a16.2 16.2 0 0 0 2.91-4.876L2 6V4h6V2zm7.5 10.885L16.253 16h2.492z"
+      />
+    </svg>
+  );
+}
+
 function localeHref(pathname: string, locale: DocLocale): string {
   if (!/^\/docs\/(?:zh-CN|en-US)(?:\/|$)/.test(pathname)) {
     return `/docs/${locale}`;
   }
 
   return pathname.replace(/^\/docs\/(?:zh-CN|en-US)(?=\/|$)/, `/docs/${locale}`);
+}
+
+/**
+ * 顶栏语言切换：只在挂载于 /docs/<locale> 下时渲染，点击跳到另一语言下的同一页面。
+ */
+function LocaleToggle({ locale }: { locale: DocLocale }) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const t = useDocsMessages();
+  const nextLocale: DocLocale = locale === "zh-CN" ? "en-US" : "zh-CN";
+
+  return (
+    <button
+      type="button"
+      className="docs-header__locale-toggle"
+      aria-label={t.switchLanguage}
+      title={t.switchLanguage}
+      onClick={() => {
+        try {
+          localStorage.setItem("docs-locale", nextLocale);
+        } catch {
+          // 隐私模式下 localStorage 不可用，仅影响下次默认语言
+        }
+        router.push(localeHref(pathname, nextLocale));
+      }}
+    >
+      <TranslateIcon />
+    </button>
+  );
 }
 
 interface DocsHeaderProps {
@@ -82,7 +118,6 @@ export default function DocsHeader({
   locale,
 }: DocsHeaderProps) {
   const pathname = usePathname();
-  const t = useDocsMessages();
 
   return (
     <header className="docs-header">
@@ -140,36 +175,9 @@ export default function DocsHeader({
               );
             })}
 
-            {locale && (
-              <div
-                className="docs-header__locale"
-                role="group"
-                aria-label={t.switchLanguage}
-              >
-                {DOC_LOCALES.map((item) => (
-                  <Link
-                    key={item}
-                    href={localeHref(pathname, item)}
-                    className={
-                      item === locale
-                        ? "docs-header__locale-link is-active"
-                        : "docs-header__locale-link"
-                    }
-                    onClick={() => {
-                      try {
-                        localStorage.setItem("docs-locale", item);
-                      } catch {
-                        // 隐私模式下 localStorage 不可用，仅影响下次默认语言
-                      }
-                    }}
-                  >
-                    {LOCALE_LABELS[item]}
-                  </Link>
-                ))}
-              </div>
-            )}
-
             <ThemeToggle />
+
+            {locale && <LocaleToggle locale={locale} />}
           </div>
         </div>
       </div>

@@ -1344,32 +1344,33 @@ html.dark .lineH-left.is-dark {
   white-space: nowrap;
 }
 
-.docs-header__locale {
-  display: flex;
+.docs-header__locale-toggle {
+  display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  justify-content: center;
+  height: 2.4rem;
   margin-left: 1.2rem;
-  padding-left: 1.2rem;
-  border-left: 1px solid var(--docs-example-border);
-}
-
-.docs-header__locale-link {
-  padding: 0.2rem 0.6rem;
-  border-radius: 0.4rem;
-  font-size: 1.3rem;
+  padding: 0;
+  border: 0;
+  background: none;
   color: var(--docs-text-secondary);
-  text-decoration: none;
-  transition: color 0.2s, background-color 0.2s;
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
-.docs-header__locale-link:hover {
+.docs-header__locale-toggle:hover {
   color: var(--docs-sidebar-link-active);
-  background-color: var(--docs-sidebar-link-hover-bg);
 }
 
-.docs-header__locale-link.is-active {
-  color: var(--docs-sidebar-link-active);
-  background-color: var(--docs-sidebar-link-active-bg);
+.docs-header__locale-toggle:focus-visible {
+  border-radius: 2px;
+  outline: 1px solid var(--docs-sidebar-link-active);
+  outline-offset: 2px;
+}
+
+.docs-header__locale-toggle svg {
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .docs-code-block {

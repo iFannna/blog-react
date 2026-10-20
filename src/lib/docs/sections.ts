@@ -34,11 +34,6 @@ export function getSectionTitle(section: DocsSectionConfig, locale: DocLocale) {
   return section.titles[locale];
 }
 
-export const LOCALE_LABELS: Record<DocLocale, string> = {
-  "zh-CN": "中文",
-  "en-US": "English",
-};
-
 /** 通用文档站的顶栏；Element Plus 旧页面仍使用下面的专用配置 */
 export function getDocsHeaderConfig(locale: DocLocale): DocsHeaderConfig {
   const zh = locale === "zh-CN";
