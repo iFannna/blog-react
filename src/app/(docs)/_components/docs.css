@@ -8,23 +8,74 @@
 
 /*
  * 文档站自有根字号：本文件所有 rem 均按 1rem = 10px 标定（数值与官方 px 一一对应）。
- * 文档站有独立根布局，不再继承博客 globals.css，故基准字号在这里自行声明。
+ * 文档站有独立根布局，不再继承博客 globals.css，故基准字号与元素 reset 在这里自行声明。
  */
 html {
   font-size: 62.5%;
+  line-height: 1.4;
+  font-family: var(--el-font-family);
+  text-size-adjust: 100%;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 32rem;
+  min-height: 100vh;
+  font-size: 1.6rem;
+  line-height: 1.4;
+  color: var(--el-text-color-primary);
+  background-color: var(--el-bg-color);
+  transition: background-color var(--el-transition-duration-fast);
+}
+
+/* Scrollbar — 官方取 6px，thumb 半透明黑/白，轨道透明 */
+
+html {
+  scrollbar-color: var(--el-scrollbar-bg-color) var(--el-fill-color-light);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .docs-shell {
-  /* 官方 .sidebar 实测宽 338px（含 48px 左右内边距，内部链接区 242px） */
-  --docs-sidebar-w: 33.8rem;
-  --docs-aside-w: 31.2rem;
+  /* 官方 --vp-sidebar-width-small：1440–1679px 为 234px，再加 32px 内边距 */
+  --docs-sidebar-w: 26.6rem;
+  /* 官方 toc-wrapper：64 + 200 + 32（≥1680 时右侧 48） */
+  --docs-aside-w: 29.6rem;
   --docs-header-h: 5.5rem;
-  /* 内容区距侧边栏的左内边距，官方为 64px */
-  --docs-content-pad-left: 6.4rem;
 
   --docs-sidebar-link-color: #606266;
   --docs-sidebar-link-active: #409eff;
-  --docs-sidebar-link-hover-bg: rgba(64, 158, 255, 0.06);
   --docs-sidebar-link-active-bg: rgba(64, 158, 255, 0.1);
   --docs-on-primary: #ffffff;
   --docs-group-title-color: #303133;
@@ -84,7 +135,8 @@ html.dark .docs-shell {
 
 .docs-header__wrapper {
   height: var(--docs-header-h);
-  padding: 0 4.8rem;
+  /* 官方 .navbar-wrapper：24px → 32px（≥768）→ 48px（≥1680） */
+  padding: 0 2.4rem;
   border-bottom: 1px solid var(--docs-example-border);
   background-color: var(--docs-header-bg);
   backdrop-filter: saturate(0.5) blur(4px);
@@ -192,13 +244,13 @@ html.dark .docs-shell {
   min-height: calc(100vh - var(--docs-header-h));
 }
 
-/* Right TOC — 官方 .toc-wrapper 宽 312px，内层 sticky 在 top 87px */
+/* Right TOC — 官方 .toc-wrapper 在 ≥1440 才显示，内层 sticky 在 top 87px。
+   顶部留白 = page-content 的 55px + 内容容器 padding-top 64px，与正文标题对齐。 */
 
 .docs-aside {
   flex: 0 0 var(--docs-aside-w);
   width: var(--docs-aside-w);
-  padding: 0 4.8rem 0 6.4rem;
-  box-sizing: border-box;
+  padding: calc(var(--docs-header-h) + 6.4rem) 3.2rem 0 6.4rem;
 }
 
 /* 标题锚点，对应官方 VitePress 的 .header-anchor
@@ -247,18 +299,26 @@ html.dark .docs-shell {
   position: sticky;
   top: 8.7rem;
   width: 20rem;
-  max-height: calc(100vh - 8.7rem - 3.2rem);
+  height: calc(100vh - 8.7rem);
   padding: 0 0.3rem 3rem;
   margin-bottom: 3.2rem;
   overflow-y: auto;
+  /* 官方 toc-content 用 scrollbar-width: none 隐藏原生滚动条 */
+  scrollbar-width: none;
+}
+
+.docs-toc::-webkit-scrollbar {
+  display: none;
 }
 
 .docs-toc__heading {
-  margin: 0 0 0.8rem;
+  margin: 0;
   padding-left: 1.4rem;
   font-size: 1.2rem;
   font-weight: 600;
+  line-height: 3rem;
   color: var(--docs-text-secondary);
+  text-transform: uppercase;
 }
 
 /* 对应官方 .el-anchor：定位上下文，marker 在其中绝对定位 */
@@ -310,17 +370,77 @@ html.dark .docs-shell {
 
 /* Sidebar */
 
+/* 官方侧边栏是 el-scrollbar：外层固定，内层 wrap 滚动，原生滚动条隐藏 */
+
 .docs-sidebar {
+  /* 官方 .el-scrollbar 自己声明的滑块变量，侧边栏不在 el-scrollbar 里，需补上 */
+  --el-scrollbar-opacity: 0.3;
+  --el-scrollbar-bg-color: var(--el-text-color-secondary);
+  --el-scrollbar-hover-opacity: 0.5;
+  --el-scrollbar-hover-bg-color: var(--el-text-color-secondary);
+
   position: sticky;
   /* 顶栏是 sticky 的，侧边栏要从它下方开始固定 */
   top: var(--docs-header-h);
   flex: 0 0 var(--docs-sidebar-w);
   width: var(--docs-sidebar-w);
   height: calc(100vh - var(--docs-header-h));
+  /* 官方 .sidebar 四边内边距 48px（<1680 时左右 32px） */
+  padding: 4.8rem 3.2rem;
+  overflow: hidden;
+}
+
+.docs-sidebar__wrap {
+  height: 100%;
   overflow-y: auto;
-  /* 官方 .sidebar 四边均为 48px 内边距 */
-  padding: 4.8rem;
-  box-sizing: border-box;
+  scrollbar-width: none;
+}
+
+.docs-sidebar__wrap::-webkit-scrollbar {
+  display: none;
+}
+
+/* 对应官方 .sidebar-groups 的 2px 水平内边距 */
+.docs-sidebar__view {
+  padding: 0 2px;
+}
+
+/* 对应官方 .el-scrollbar__bar.is-vertical：右侧 6px，上下各留 2px */
+.docs-sidebar__bar {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  z-index: 1;
+  width: 6px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 120ms ease-out;
+  pointer-events: none;
+}
+
+/* 官方过渡：淡入 340ms，淡出 120ms */
+.docs-sidebar__bar.is-visible {
+  opacity: 1;
+  transition-duration: 340ms;
+  pointer-events: auto;
+}
+
+.docs-sidebar__thumb {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 0;
+  border-radius: inherit;
+  background-color: var(--el-scrollbar-bg-color);
+  cursor: pointer;
+  opacity: var(--el-scrollbar-opacity);
+  transition: background-color var(--el-transition-duration);
+}
+
+.docs-sidebar__thumb:hover {
+  background-color: var(--el-scrollbar-hover-bg-color);
+  opacity: var(--el-scrollbar-hover-opacity);
 }
 
 .docs-sidebar-group {
@@ -347,8 +467,9 @@ html.dark .docs-shell {
   transition: background-color 0.2s;
 }
 
+/* 官方只有激活项带底色，悬停仅变文字颜色 */
 .docs-sidebar-link:hover {
-  background-color: var(--docs-sidebar-link-hover-bg);
+  color: var(--docs-sidebar-link-active);
 }
 
 .docs-sidebar-link.is-active {
@@ -366,16 +487,45 @@ html.dark .docs-shell {
 .docs-content {
   flex: 1 1 auto;
   min-width: 0;
-  /* 官方内容区无 max-width，随视口伸缩；左内边距 64px 与侧边栏拉开距离 */
-  padding: 3.2rem 0 9.6rem var(--docs-content-pad-left);
+  /* 官方 .doc-content-wrapper：<768 为 32px 24px，≥768 为 48px 32px，
+     ≥1440 为 64px 0 48px 64px。
+     ≥960 时正文还要再让出 page-content 的 55px 顶部留白，标题才会落在官方位置 */
+  padding: 3.2rem 2.4rem;
+}
+
+@media (width >= 768px) {
+  .docs-content {
+    padding: 4.8rem 3.2rem;
+  }
+}
+
+@media (width >= 960px) {
+  .docs-content {
+    padding-top: calc(var(--docs-header-h) + 4.8rem);
+  }
+}
+
+@media (width >= 1440px) {
+  .docs-content {
+    padding: calc(var(--docs-header-h) + 6.4rem) 0 4.8rem 6.4rem;
+  }
 }
 
 .docs-content h1 {
-  margin: 0 0 2rem;
-  font-size: 3.2rem;
+  display: flex;
+  align-items: center;
+  margin: 0 0 3.2rem;
+  /* 官方基础 h1 为 1.9rem / ≥480px 为 2.2rem（按 16px 根字号即 30.4 / 35.2px） */
+  font-size: 3.04rem;
   font-weight: 600;
   line-height: 1.25;
   color: var(--docs-text);
+}
+
+@media (width >= 480px) {
+  .docs-content h1 {
+    font-size: 3.52rem;
+  }
 }
 
 .docs-content h2 {
@@ -913,23 +1063,43 @@ html.dark .docs-shell {
   }
 }
 
-@media (width <= 1280px) {
+@media (width >= 768px) {
+  .docs-header__wrapper {
+    padding: 0 3.2rem;
+  }
+}
+
+/* 官方 toc-wrapper 只在 ≥1440 显示 */
+@media (width < 1440px) {
   .docs-aside {
     display: none;
   }
 }
 
-@media (width <= 1024px) {
-  .docs-header__wrapper {
-    padding: 0 1.6rem;
+/* 官方 .sidebar 在 <960 是抽屉形态，桌面复刻不提供汉堡菜单，直接隐藏 */
+@media (width < 960px) {
+  .docs-sidebar {
+    display: none;
   }
+}
 
-  .docs-layout {
-    padding: 0 1.6rem;
+/* 官方 ≥1680：侧边栏 290 + 48，目录右侧 48，顶栏 48 */
+@media (width >= 1680px) {
+  .docs-shell {
+    --docs-sidebar-w: 33.8rem;
+    --docs-aside-w: 31.2rem;
   }
 
   .docs-sidebar {
-    display: none;
+    padding: 4.8rem;
+  }
+
+  .docs-aside {
+    padding-right: 4.8rem;
+  }
+
+  .docs-header__wrapper {
+    padding: 0 4.8rem;
   }
 }
 
