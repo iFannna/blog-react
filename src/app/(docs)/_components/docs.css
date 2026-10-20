@@ -1011,6 +1011,25 @@ html.dark .docs-shell {
   margin-bottom: 0;
 }
 
+.docs-content details {
+  interpolate-size: allow-keywords;
+}
+
+.docs-content details summary {
+  font-weight: 600;
+}
+
+.docs-content details::details-content {
+  content-visibility: auto;
+  height: 0;
+  overflow: hidden;
+  transition: height ease 0.3s;
+}
+
+.docs-content details[open]::details-content {
+  height: auto;
+}
+
 /* Version badge used as ^(2.2.0) in official docs */
 
 .docs-version-tag {
