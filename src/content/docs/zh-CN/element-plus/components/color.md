@@ -39,10 +39,6 @@ color/neutral
 
 :::
 
-## 源代码
-
-[文档](https://github.com/element-plus/element-plus/blob/dev/docs/en-US/component/color.md)
-
 ## Color 规范
 
 ### 主色与场景色

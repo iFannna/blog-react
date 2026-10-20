@@ -132,17 +132,6 @@ export default function BorderPage() {
         <BorderShadow />
       </DemoBlock>
 
-      <Heading level={2}>源代码</Heading>
-      <p>
-        <a
-          href="https://github.com/element-plus/element-plus/blob/dev/docs/en-US/component/border.md"
-          target="_blank"
-          rel="noreferrer"
-        >
-          文档
-        </a>
-      </p>
-
       <DocsContent source={API_MD} />
     </>
   );

@@ -33,10 +33,6 @@ border/shadow
 
 :::
 
-## 源代码
-
-[文档](https://github.com/element-plus/element-plus/blob/dev/docs/en-US/component/border.md)
-
 ## Border 规范
 
 ### Border 变量
