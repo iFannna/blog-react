@@ -11,7 +11,7 @@ Next.js 16 (App Router) 博客 + 文档前端。TypeScript strict；UI 全部用
 
 - 框架: Next.js 16 (App Router)
 - 语言: TypeScript (strict)
-- 样式: 博客 `src/app/globals.css`；文档 `src/components/docs/docs.css`；Element Plus 主题产物 `src/styles/element-plus/`（博客与文档根布局都加载）
+- 样式: 博客 `src/styles/blog/index.css`；文档 `src/styles/docs/index.css`；Element Plus 主题产物 `src/styles/element-plus/index.css`（博客与文档根布局都加载）
 - HTTP: axios，Server Components 内通过 `src/services/` 直连后端，客户端走 `/api` 反向代理
 - 组件: Element Plus React 复刻 + 站点自有组件，不引入第三方 UI 库
 
@@ -44,14 +44,18 @@ src/
 │   └── (root)/               # 无语言前缀的入口，识别语言后跳转
 ├── components/
 │   ├── blog/                 # 博客组件（layout / article / common / auth / site）
-│   ├── docs/                 # 文档站基建（Layout / Header / Sidebar / DemoBlock / docs.css）
+│   ├── docs/                 # 文档站基建（Layout / Header / Sidebar / DemoBlock）
 │   └── element-plus/         # Element Plus 复刻，examples/ 为文档示例，icons/ 为图标
 ├── content/
 │   ├── docs/<locale>/        # Markdown 文档（element-plus/components、notes）
 │   └── demos/                # 示例清单（registry.generated.ts 为生成文件）
 ├── services/                 # 后端请求，以及 VO → UI 模型映射
 ├── lib/                      # 文档管线、locale、Shiki 高亮
-├── hooks/  stores/  utils/  types/  styles/
+├── styles/
+│   ├── blog/index.css        # 博客入口样式，由 (blog) 根布局加载
+│   ├── docs/index.css        # 文档入口样式，由 (docs) 根布局加载
+│   └── element-plus/index.css
+├── hooks/  stores/  utils/  types/
 ```
 
 默认 Server Components，需要交互的组件加 `"use client"`。`src/services/` 负责请求后端，并把 `types/api.ts` 的 snake_case VO 映射为 `types/models.ts` 的 camelCase 模型，组件只消费 UI 模型。
@@ -60,14 +64,14 @@ src/
 
 - 站点自有组件（`src/components/blog/**`、`src/components/docs/**`）用 PascalCase，且与主导出同名（默认导出或主要命名导出），如 `Layout.tsx`、`CommentsPanel.tsx`
 - 其余 TS/TSX 模块用 kebab-case：`src/lib/**`、`src/hooks/**`、`src/services/**`、`src/stores/**`、`src/utils/**`、`src/content/**`
-- 样式文件用 kebab-case：`docs.css`、`*.module.css`
+- 入口样式统一为 `src/styles/<scope>/index.css`；其余样式文件（局部 CSS、`*.module.css`）用 kebab-case
 - `src/app/**` 只放 Next.js 路由文件（`page.tsx`、`layout.tsx`、`route.ts` 等），组件放到 `src/components/**`
 - `src/components/element-plus/**` 是官方实现的 React 迁移，保留上游命名：组件 `ElXxx.tsx`，工具与 hook 用 `use-xxx.ts` / `xxx-utils.ts`，examples 与上游一致
 
 ## 样式约定
 
-- 设计 token（颜色/间距/圆角/阴影）用 CSS 变量定义在 `globals.css` 的 `:root`；暗色模式用 `[data-theme="dark"]` 覆盖变量，不用 class 切换
-- 布局用自定义 CSS class，博客样式写在 `globals.css`，文档样式写在 `docs.css`
+- 设计 token（颜色/间距/圆角/阴影）用 CSS 变量定义在 `src/styles/blog/index.css` 的 `:root`；暗色模式用 `[data-theme="dark"]` 覆盖变量，不用 class 切换
+- 布局用自定义 CSS class，博客样式写在 `src/styles/blog/index.css`，文档样式写在 `src/styles/docs/index.css`，两者由各自根布局加载、互不叠加
 - 禁止 `<style>` 标签；内联 style 仅用于 Shiki token 配色等无法用 class 表达的场景
 - 禁止硬编码颜色/间距/圆角，统一用 `var(--color-*)` 等 CSS 变量
 - 尽量不用 `!important`，优先提高选择器特异性（加 class 层级、用 `:not()`）

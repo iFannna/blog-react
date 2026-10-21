@@ -17,7 +17,7 @@
 
 /*
  * 文档站自有根字号：本文件所有 rem 均按 1rem = 16px 标定（数值与官方 px 一一对应）。
- * 文档站有独立根布局，不再继承博客 globals.css，故基准字号与元素 reset 在这里自行声明。
+ * 文档站有独立根布局，不再继承博客 src/styles/blog/index.css，故基准字号与元素 reset 在这里自行声明。
  */
 html {
   --docs-font: Inter, "Helvetica Neue", Helvetica, "PingFang SC",

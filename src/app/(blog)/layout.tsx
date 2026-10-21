@@ -8,7 +8,7 @@ import { ElConfigProvider } from "@/components/element-plus/config-provider";
 import { zhCn } from "@/components/element-plus/config-provider/locales";
 import { AuthProvider } from "@/hooks/auth";
 import "@/styles/element-plus/index.css";
-import "../globals.css";
+import "@/styles/blog/index.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const setting = await getSiteSetting().catch(() => null);
@@ -50,7 +50,7 @@ export async function generateMetadata(): Promise<Metadata> {
  * <head> 里的防闪脚本不会被 React 在客户端重建（否则会触发 script 相关告警）。
  * 语言校验下沉到 [locale]/layout.tsx。
  *
- * 文档站走 (docs) 组自己的根布局，不加载这里的 globals.css，
+ * 文档站走 (docs) 组自己的根布局，不加载这里的 blog/index.css，
  * 从而与博客全局样式彻底隔离。
  */
 export default function BlogRootLayout({
