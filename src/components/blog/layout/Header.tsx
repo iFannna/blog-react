@@ -9,7 +9,7 @@ import { useTheme } from "@/hooks/theme";
 import { useAuth } from "@/hooks/auth";
 import { useLocale } from "@/hooks/locale";
 import { useDropdownMenu, MenuList, type MenuItem } from "@/components/blog/common/Dropdown";
-import { setSidebarLayout } from "@/stores/layout";
+import { setSidebarLayout } from "@/lib/sidebar-layout";
 
 interface HeaderProps {
   navItems: MenuItem[];

@@ -4,8 +4,8 @@ import { getSiteSetting } from "@/services/site";
 import { articleHref } from "@/utils/article";
 import { localePath } from "@/lib/locale";
 import { DateLinks } from "@/components/blog/article/DateLinks";
-import SearchForm from "@/components/blog/site/SearchForm";
-import SidebarActions from "@/components/blog/site/SidebarActions";
+import SearchForm from "@/components/blog/common/SearchForm";
+import SidebarActions from "@/components/blog/common/SidebarActions";
 
 interface SidebarProps {
   locale: string;
