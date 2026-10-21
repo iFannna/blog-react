@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 // DarkModeToggle uses useTheme
 import { useTheme } from "@/hooks/theme";
 import { useAuth } from "@/hooks/auth";
+import { useLocale } from "@/hooks/locale";
 import { useDropdownMenu, MenuList, type MenuItem } from "@/components/blog/common/dropdown";
 import { setSidebarLayout } from "@/stores/layout";
 
@@ -20,6 +21,7 @@ interface HeaderProps {
 export default function Header({ navItems, mobileNavItems, github, gitee }: HeaderProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const { prefix } = useLocale();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -59,22 +61,22 @@ export default function Header({ navItems, mobileNavItems, github, gitee }: Head
           };
         }
         if (isAuthenticated) {
-          if (item.label === "登录") return { href: "/settings", label: "设置" };
+          if (item.label === "登录") return { href: `${prefix}/settings`, label: "设置" };
           if (item.label === "注册") return { label: "退出", onClick: handleSignOut };
         }
         return item.children ? { ...item, children: inject(item.children) } : item;
       });
     return inject(navItems);
-  }, [navItems, clear, isAuthenticated, handleSignOut]);
+  }, [navItems, clear, isAuthenticated, handleSignOut, prefix]);
 
   const mobileNavItemsAuth = useMemo<MenuItem[]>(() =>
     mobileNavItems.map((item) => {
       if (!isAuthenticated) return item;
-      if (item.label === "登录") return { href: "/settings", label: "设置" };
+      if (item.label === "登录") return { href: `${prefix}/settings`, label: "设置" };
       if (item.label === "注册") return { label: "退出", onClick: handleSignOut };
       return item;
     }),
-  [mobileNavItems, isAuthenticated, handleSignOut]);
+  [mobileNavItems, isAuthenticated, handleSignOut, prefix]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -170,7 +172,7 @@ export default function Header({ navItems, mobileNavItems, github, gitee }: Head
       <div id="header-inner">
         <div className="header-container">
           <div className="logo header-element">
-            <Link href="/" rel="home" className="logo-inner">
+            <Link href={prefix || "/"} rel="home" className="logo-inner">
               <img
                 src="https://java-ai-sau.oss-cn-beijing.aliyuncs.com/Blog.png"
                 alt="Blog"
@@ -263,7 +265,7 @@ export default function Header({ navItems, mobileNavItems, github, gitee }: Head
                     const q = formData.get("s") as string;
                     if (q?.trim()) {
                       closeSearch();
-                      router.push(`/search?q=${encodeURIComponent(q.trim())}`);
+                      router.push(`${prefix}/search?q=${encodeURIComponent(q.trim())}`);
                     }
                   }}
                 >

@@ -196,7 +196,7 @@ export function getSectionNav(locale: DocLocale, section: string): DocsNavGroup[
 
     items.push({
       title: meta.title,
-      href: `/docs/${locale}/${section}/${meta.slugPath}`,
+      href: `/${locale}/docs/${section}/${meta.slugPath}`,
       done: true,
     });
 
@@ -215,7 +215,7 @@ export function getSectionNav(locale: DocLocale, section: string): DocsNavGroup[
 export function getFirstDocPath(locale: DocLocale, section: string): string | undefined {
   // Overview 是手写页面，不在 Markdown 导航里，组件文档入口固定落到总览
   if (section === "element-plus") {
-    return `/docs/${locale}/element-plus/components/overview`;
+    return `/${locale}/docs/element-plus/components/overview`;
   }
 
   const [firstGroup] = getSectionNav(locale, section);
@@ -229,7 +229,7 @@ export function getAdjacentPages(
   section: string,
   slug: string[],
 ): { prev?: DocsNavItem; next?: DocsNavItem } {
-  const currentHref = `/docs/${locale}/${section}/${slug.join("/")}`;
+  const currentHref = `/${locale}/docs/${section}/${slug.join("/")}`;
   const flat = getSectionNav(locale, section).flatMap((group) => group.items);
   const index = flat.findIndex((item) => item.href === currentHref);
 

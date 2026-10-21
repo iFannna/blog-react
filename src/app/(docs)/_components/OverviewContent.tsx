@@ -124,7 +124,7 @@ function OverviewCard({
   return (
     <Link
       className={className}
-      href={`/docs/${locale}/element-plus/components/${item.slug}`}
+      href={`/${locale}/docs/element-plus/components/${item.slug}`}
     >
       {content}
     </Link>

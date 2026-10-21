@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { Article } from "@/types/models";
 import { articleHref } from "@/utils/article";
+import { useLocale } from "@/hooks/locale";
 import { ArchiveDateLinks } from "./archive-date-links";
 
 /* 4-color cycle for category pills */
@@ -18,6 +19,7 @@ interface YouMayLikeProps {
 }
 
 export default function YouMayLike({ articles }: YouMayLikeProps) {
+  const { locale, prefix } = useLocale();
   if (articles.length === 0) return null;
 
   return (
@@ -32,7 +34,7 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
             return (
               <div key={article.id} className="pyml-slide-item">
                 <div className="pyml-slider-backgrounds">
-                  <Link href={articleHref(article)}>
+                  <Link href={`${prefix}${articleHref(article)}`}>
                     <div className="pyml-slide-bg">
                       {article.coverImage ? (
                         <img
@@ -57,7 +59,7 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
                         {article.categories.map((cat, i) => (
                           <Link
                             key={cat.id}
-                            href={`/category/${cat.name}`}
+                            href={`${prefix}/category/${cat.name}`}
                             className={`article-cat-pill ${CAT_COLORS[i % CAT_COLORS.length]}`}
                           >
                             {cat.name}
@@ -70,7 +72,7 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
 
                 <div className="slide-inner">
                   <h6>
-                    <Link href={articleHref(article)}>{article.title}</Link>
+                    <Link href={`${prefix}${articleHref(article)}`}>{article.title}</Link>
                   </h6>
                   <div className="entry-meta">
                     <div className="entry-meta-elements">
@@ -91,12 +93,12 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
                           )}
                           <span>
                             By{" "}
-                            <a href={`/?author=${article.authorName}`} className="article-author-link">{article.authorName}</a>
+                            <a href={`${prefix}/?author=${article.authorName}`} className="article-author-link">{article.authorName}</a>
                           </span>
                         </span>
                       </span>
                       <span>
-                        <ArchiveDateLinks year={article.year} month={article.month} day={article.day} />
+                        <ArchiveDateLinks locale={locale} year={article.year} month={article.month} day={article.day} />
                       </span>
                     </div>
                   </div>

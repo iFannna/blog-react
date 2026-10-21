@@ -2,6 +2,7 @@ import SiteLayout from "@/components/blog/layout/site-layout";
 import Breadcrumbs from "@/components/blog/common/breadcrumb";
 import ArchiveTimeline from "@/components/blog/article/archive-timeline";
 import { getArticles } from "@/services/article";
+import { localePath } from "@/lib/locale";
 import type { Article } from "@/types/models";
 
 const PAGE_SIZE = 50;
@@ -68,7 +69,7 @@ function groupByYearMonth(articles: Article[]): YearGroup[] {
     });
 }
 
-export default async function ArchiveIndexView() {
+export default async function ArchiveIndexView({ locale }: { locale: string }) {
   const { list: articles, total: totalCount } = await fetchAllArticles();
   const yearGroups = groupByYearMonth(articles);
   let latest: { year: number; month: number; day: number } | null = null;
@@ -82,12 +83,13 @@ export default async function ArchiveIndexView() {
   }
 
   const breadcrumbItems = [
-    { name: "Home", path: "/" },
+    { name: "Home", path: localePath(locale, "/") },
     { name: "archive", path: "" },
   ];
 
   return (
     <SiteLayout
+      locale={locale}
       breadcrumbs={<Breadcrumbs items={breadcrumbItems} />}
       youMayLikeArticles={articles.slice(0, 4)}
       featuredArticles={articles.slice(0, 3)}

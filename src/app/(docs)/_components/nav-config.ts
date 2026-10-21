@@ -9,7 +9,7 @@
  */
 
 export interface DocNavItem {
-  /** 路由末段，对应 /docs/<locale>/element-plus/components/[slug] */
+  /** 路由末段，对应 /<locale>/docs/element-plus/components/[slug] */
   slug: string;
   /** 官方侧边栏里的英文标题 */
   title: string;

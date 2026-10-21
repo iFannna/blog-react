@@ -8,8 +8,10 @@ import YouMayLike from "@/components/blog/article/related-articles";
 import { getSiteSetting, getGuestbookCount, getFriendLinkCount } from "@/services/site";
 import { getCategories } from "@/services/category";
 import { getTags } from "@/services/tag";
+import { localePath } from "@/lib/locale";
 
 interface SiteLayoutProps {
+  locale: string;
   children: ReactNode;
   showSidebar?: boolean;
   sidebar?: ReactNode;
@@ -29,6 +31,7 @@ const NAV_ITEMS = [
 ];
 
 export default async function SiteLayout({
+  locale,
   children,
   showSidebar = false,
   sidebar,
@@ -47,8 +50,12 @@ export default async function SiteLayout({
   ]);
   // 「其他」下拉:归档(分类/标签/作者)、排版、文档、登录、注册;分类/标签为动态数据
   const developerName = setting?.developer_name || "Admin";
+  const topNavItems = NAV_ITEMS.map((item) => ({
+    ...item,
+    href: localePath(locale, item.href),
+  }));
   const navItems = [
-    ...NAV_ITEMS,
+    ...topNavItems,
     {
       label: "其他",
       children: [
@@ -57,13 +64,13 @@ export default async function SiteLayout({
           children: [
             {
               label: "分类",
-              children: categories.map((c) => ({ href: `/category/${c.name}`, label: c.name })),
+              children: categories.map((c) => ({ href: localePath(locale, `/category/${c.name}`), label: c.name })),
             },
             {
               label: "标签",
-              children: tags.map((t) => ({ href: `/tag/${t.name}`, label: t.name })),
+              children: tags.map((t) => ({ href: localePath(locale, `/tag/${t.name}`), label: t.name })),
             },
-            { href: `/author/${developerName}`, label: "作者" },
+            { href: localePath(locale, `/author/${developerName}`), label: "作者" },
           ],
         },
         { label: "排版" },
@@ -71,22 +78,22 @@ export default async function SiteLayout({
           label: "文档",
           children: [
             {
-              href: "/docs/zh-CN/element-plus/components/overview",
+              href: localePath(locale, "/docs/element-plus/components/overview"),
               label: "Element Plus",
             },
           ],
         },
-        { href: "/login", label: "登录" },
-        { href: "/register", label: "注册" },
+        { href: localePath(locale, "/login"), label: "登录" },
+        { href: localePath(locale, "/register"), label: "注册" },
       ],
     },
   ];
   // 移动端:平铺菜单,不做多级
   const mobileNavItems = [
-    ...NAV_ITEMS,
-    { href: "/typography", label: "排版" },
-    { href: "/login", label: "登录" },
-    { href: "/register", label: "注册" },
+    ...topNavItems,
+    { href: localePath(locale, "/typography"), label: "排版" },
+    { href: localePath(locale, "/login"), label: "登录" },
+    { href: localePath(locale, "/register"), label: "注册" },
   ];
 
   return (
@@ -114,6 +121,7 @@ export default async function SiteLayout({
         <YouMayLike articles={youMayLikeArticles} />
       )}
       <Footer
+        locale={locale}
         featuredArticles={featuredArticles}
         editorPickArticles={editorPickArticles}
         siteName={setting?.site_name ?? ""}

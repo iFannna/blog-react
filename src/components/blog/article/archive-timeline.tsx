@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { articleHref } from "@/utils/article";
+import { useLocale } from "@/hooks/locale";
 import type { Article } from "@/types/models";
 
 const MONTH_PAGE = 20;
@@ -18,6 +19,7 @@ interface YearGroup {
 }
 
 export default function ArchiveTimeline({ yearGroups }: { yearGroups: YearGroup[] }) {
+  const { prefix } = useLocale();
   const [openYears, setOpenYears] = useState<Set<number>>(
     () => new Set(yearGroups[0] ? [yearGroups[0].year] : []),
   );
@@ -139,7 +141,7 @@ export default function ArchiveTimeline({ yearGroups }: { yearGroups: YearGroup[
                                   <span className="archive-entry-date">
                                     {String(monthNumber).padStart(2, "0")}/{String(day).padStart(2, "0")}
                                   </span>
-                                  <Link href={articleHref(a)} className="archive-entry-title">
+                                  <Link href={`${prefix}${articleHref(a)}`} className="archive-entry-title">
                                     {a.title}
                                   </Link>
                                 </li>

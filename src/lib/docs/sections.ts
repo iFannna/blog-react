@@ -42,19 +42,19 @@ export function getDocsHeaderConfig(locale: DocLocale): DocsHeaderConfig {
     logo: {
       kind: "text",
       text: "Blog Docs",
-      href: `/docs/${locale}`,
+      href: `/${locale}/docs`,
     },
     links: [
-      { text: zh ? "博客" : "Blog", href: "/" },
+      { text: zh ? "博客" : "Blog", href: `/${locale}` },
       {
         text: zh ? "文档" : "Docs",
-        href: `/docs/${locale}`,
-        activePrefix: `/docs/${locale}`,
+        href: `/${locale}/docs`,
+        activePrefix: `/${locale}/docs`,
       },
       {
         text: "Element Plus",
-        href: `/docs/${locale}/element-plus/components/overview`,
-        activePrefix: `/docs/${locale}/element-plus`,
+        href: `/${locale}/docs/element-plus/components/overview`,
+        activePrefix: `/${locale}/docs/element-plus`,
       },
       {
         text: zh ? "官方文档" : "Official Docs",
@@ -68,7 +68,7 @@ export function getDocsHeaderConfig(locale: DocLocale): DocsHeaderConfig {
 /** Element Plus 页面使用带语言切换的顶栏 */
 export function getElementPlusHeaderConfig(locale: DocLocale): DocsHeaderConfig {
   const zh = locale === "zh-CN";
-  const base = `/docs/${locale}/element-plus`;
+  const base = `/${locale}/docs/element-plus`;
   const overview = `${base}/components/overview`;
 
   return {

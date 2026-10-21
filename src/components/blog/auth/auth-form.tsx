@@ -8,6 +8,7 @@ import { login, register, sendVerifyCode } from "@/services/auth";
 import { ApiError } from "@/services/http";
 import { message } from "@/components/element-plus/message";
 import { useAuth } from "@/hooks/auth";
+import { useLocale } from "@/hooks/locale";
 
 type Mode = "login" | "register";
 
@@ -24,6 +25,7 @@ const isLoginMode = (mode: Mode) => mode === "login";
 export default function AuthForm({ mode, redirect }: AuthFormProps) {
   const router = useRouter();
   const { signIn } = useAuth();
+  const { prefix } = useLocale();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -56,7 +58,7 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
       const result = await login(u, p, captchaVerifyParam);
       signIn({ accessToken: result.access_token, userId: result.user_id, username: result.username }, r);
       message.success("登录成功");
-      router.push(redirect || "/");
+      router.push(redirect || prefix || "/");
     } catch (err) {
       message.error(err instanceof ApiError ? err.message : "操作失败，请稍后重试");
     } finally {
@@ -140,7 +142,7 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
     try {
       await register({ username: email, password, email, verify_code: verifyCode });
       message.success("注册成功");
-      router.push("/login");
+      router.push(`${prefix}/login`);
     } catch (err) { message.error(err instanceof ApiError ? err.message : "操作失败，请稍后重试"); }
     finally { setSubmitting(false); }
   }
@@ -232,7 +234,7 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
           {isLoginMode(mode) ? (
             <div className="auth-form-row">
               <label className="auth-remember"><input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} />记住我</label>
-              <Link href="/forgot-password" className="auth-forgot">忘记密码？</Link>
+              <Link href={`${prefix}/forgot-password`} className="auth-forgot">忘记密码？</Link>
             </div>
           ) : (
             <div className="auth-field">
@@ -268,12 +270,12 @@ export default function AuthForm({ mode, redirect }: AuthFormProps) {
         </form>
         <p className="auth-footer">
           {isLoginMode(mode) ? (
-            <>还没有账号？<Link href="/register" className="auth-link">立即注册</Link></>
+            <>还没有账号？<Link href={`${prefix}/register`} className="auth-link">立即注册</Link></>
           ) : (
-            <>已有账号？<Link href="/login" className="auth-link">立即登录</Link></>
+            <>已有账号？<Link href={`${prefix}/login`} className="auth-link">立即登录</Link></>
           )}
         </p>
-        <Link href="/" className="auth-back">返回首页</Link>
+        <Link href={prefix || "/"} className="auth-back">返回首页</Link>
       </div>
     </div>
   );

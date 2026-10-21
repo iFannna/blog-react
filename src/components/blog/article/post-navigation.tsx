@@ -1,8 +1,9 @@
 import Link from "next/link";
 import type { PrevNext } from "@/types/models";
 import { articleHref } from "@/utils/article";
+import { localePath } from "@/lib/locale";
 
-export default function PostNav({ prevNext }: { prevNext: PrevNext }) {
+export default function PostNav({ locale, prevNext }: { locale: string; prevNext: PrevNext }) {
   const { prev, next } = prevNext;
   if (!prev && !next) return null;
 
@@ -12,7 +13,7 @@ export default function PostNav({ prevNext }: { prevNext: PrevNext }) {
       {prev && (
         <div className="nav-previous">
           <h6 className="nav-title">Previous Post</h6>
-          <Link href={articleHref(prev)} rel="prev">
+          <Link href={localePath(locale, articleHref(prev))} rel="prev">
             <div className="nav-content">
               {prev.coverImage && (
                 <img
@@ -29,7 +30,7 @@ export default function PostNav({ prevNext }: { prevNext: PrevNext }) {
       {next && (
         <div className="nav-next">
           <h6 className="nav-title">Next Post</h6>
-          <Link href={articleHref(next)} rel="next">
+          <Link href={localePath(locale, articleHref(next))} rel="next">
             <div className="nav-content">
               <span>{next.title}</span>
               {next.coverImage && (

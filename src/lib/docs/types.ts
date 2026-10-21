@@ -2,8 +2,6 @@ export const DOC_LOCALES = ["zh-CN", "en-US"] as const;
 
 export type DocLocale = (typeof DOC_LOCALES)[number];
 
-export const DEFAULT_DOC_LOCALE: DocLocale = "zh-CN";
-
 export function isDocLocale(value: string): value is DocLocale {
   return (DOC_LOCALES as readonly string[]).includes(value);
 }

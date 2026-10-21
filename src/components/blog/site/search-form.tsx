@@ -2,16 +2,18 @@
 
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
+import { useLocale } from "@/hooks/locale";
 
 export default function SearchForm({ className }: { className?: string }) {
   const router = useRouter();
+  const { prefix } = useLocale();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const q = inputRef.current?.value;
     if (q?.trim()) {
-      router.push(`/search?q=${encodeURIComponent(q.trim())}`);
+      router.push(`${prefix}/search?q=${encodeURIComponent(q.trim())}`);
     }
   };
 

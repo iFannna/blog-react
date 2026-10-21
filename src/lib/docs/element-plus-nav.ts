@@ -12,7 +12,7 @@ export function getElementPlusSectionNav(locale: DocLocale): DocsNavGroup[] {
     items: group.items.map((item) => ({
       // 中文站用官方「英文 + 中文」标题，英文站只保留英文
       title: locale === "zh-CN" ? (item.titleZh ?? item.title) : item.title,
-      href: `/docs/${locale}/element-plus/${COMPONENT_SLUG}/${item.slug}`,
+      href: `/${locale}/docs/element-plus/${COMPONENT_SLUG}/${item.slug}`,
       done: true,
     })),
   }));
@@ -26,7 +26,7 @@ export function getElementPlusAdjacentPages(
   locale: DocLocale,
   slugPath: string,
 ): { prev?: DocsNavItem; next?: DocsNavItem } {
-  const href = `/docs/${locale}/element-plus/${slugPath}`;
+  const href = `/${locale}/docs/element-plus/${slugPath}`;
   const flat = getElementPlusSectionNav(locale).flatMap((group) => group.items);
   const index = flat.findIndex((item) => item.href === href);
 

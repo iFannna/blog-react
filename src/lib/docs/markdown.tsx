@@ -180,7 +180,7 @@ function rewriteHref(href: string | undefined, context: RenderContext): string |
 
   if (!target) return href;
 
-  const directory = `/docs/${context.locale}/${context.section}/${context.slug
+  const directory = `/${context.locale}/docs/${context.section}/${context.slug
     .slice(0, -1)
     .join("/")}`;
   const resolved = path.posix.normalize(`${directory}/${target}`);

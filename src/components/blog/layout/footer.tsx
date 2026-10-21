@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { articleHref } from "@/utils/article";
+import { localePath } from "@/lib/locale";
 import { ArchiveDateLinks } from "@/components/blog/article/archive-date-links";
 import type { Article } from "@/types/models";
 
-function FooterArticleCard({ article }: { article: Article }) {
+function FooterArticleCard({ article, locale }: { article: Article; locale: string }) {
   return (
     <li>
       <div className="footer-post-thumb">
-        <Link href={articleHref(article)}>
+        <Link href={localePath(locale, articleHref(article))}>
           {article.coverImage ? (
             <img
               src={article.coverImage}
@@ -28,12 +29,12 @@ function FooterArticleCard({ article }: { article: Article }) {
         </Link>
       </div>
       <div className="footer-post-content">
-        <Link href={articleHref(article)} className="footer-post-title">
+        <Link href={localePath(locale, articleHref(article))} className="footer-post-title">
           {article.title}
         </Link>
         <div className="footer-post-author">by {article.authorName}</div>
         <div className="footer-post-date">
-          <ArchiveDateLinks year={article.year} month={article.month} day={article.day} />
+          <ArchiveDateLinks locale={locale} year={article.year} month={article.month} day={article.day} />
         </div>
       </div>
     </li>
@@ -41,6 +42,7 @@ function FooterArticleCard({ article }: { article: Article }) {
 }
 
 interface FooterProps {
+  locale: string;
   featuredArticles: Article[];
   editorPickArticles: Article[];
   siteName: string;
@@ -53,6 +55,7 @@ interface FooterProps {
 }
 
 export default function Footer({
+  locale,
   featuredArticles,
   editorPickArticles,
   siteName,
@@ -74,7 +77,7 @@ export default function Footer({
                   <h4 className="footer-widget-title">精选文章</h4>
                   <ul className="footer-posts-list">
                     {featuredArticles.map((article) => (
-                      <FooterArticleCard key={article.id} article={article} />
+                      <FooterArticleCard key={article.id} article={article} locale={locale} />
                     ))}
                   </ul>
                 </div>
@@ -87,7 +90,7 @@ export default function Footer({
                   <h4 className="footer-widget-title">编辑推荐</h4>
                   <ul className="footer-posts-list">
                     {editorPickArticles.map((article) => (
-                      <FooterArticleCard key={article.id} article={article} />
+                      <FooterArticleCard key={article.id} article={article} locale={locale} />
                     ))}
                   </ul>
                 </div>
@@ -101,11 +104,11 @@ export default function Footer({
                     <h6 className="footer-sub-title">其他</h6>
                     <ul className="footer-links-list">
                       <li>
-                        <Link href="/guestbook">留言板</Link>
+                        <Link href={localePath(locale, "/guestbook")}>留言板</Link>
                         <span className="footer-link-count">{guestbookCount}</span>
                       </li>
                       <li>
-                        <Link href="/friendlink">友链</Link>
+                        <Link href={localePath(locale, "/friendlink")}>友链</Link>
                         <span className="footer-link-count">{friendLinkCount}</span>
                       </li>
                     </ul>
@@ -114,10 +117,10 @@ export default function Footer({
                     <h6 className="footer-sub-title">帮助</h6>
                     <ul className="footer-links-list">
                       <li>
-                        <Link href="/about">关于</Link>
+                        <Link href={localePath(locale, "/about")}>关于</Link>
                       </li>
                       <li>
-                        <Link href="/contact">联系</Link>
+                        <Link href={localePath(locale, "/contact")}>联系</Link>
                       </li>
                     </ul>
                   </div>
@@ -153,7 +156,7 @@ export default function Footer({
       <div className="copyright-bar">
         <div className="footer-container">
           <div className="copyright-left">
-            <span>Copyright {new Date().getFullYear()} &mdash; <Link href="/">{siteName}</Link>.</span>
+            <span>Copyright {new Date().getFullYear()} &mdash; <Link href={localePath(locale, "/")}>{siteName}</Link>.</span>
           </div>
           <div className="copyright-right">
             <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">

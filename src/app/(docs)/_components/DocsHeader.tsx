@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { ElTag } from "@/components/element-plus/tag";
 import { ElSwitch } from "@/components/element-plus/switch";
 import { useTheme } from "@/hooks/theme";
+import { LOCALE_COOKIE_NAME } from "@/lib/locale";
 import type { DocLocale, DocsHeaderConfig } from "@/lib/docs/types";
 import { useDocsMessages } from "./DocsI18nProvider";
 
@@ -67,15 +68,16 @@ function TranslateIcon() {
 }
 
 function localeHref(pathname: string, locale: DocLocale): string {
-  if (!/^\/docs\/(?:zh-CN|en-US)(?:\/|$)/.test(pathname)) {
-    return `/docs/${locale}`;
+  if (!/^\/(?:zh-CN|en-US)(?=\/|$)/.test(pathname)) {
+    return `/${locale}/docs`;
   }
 
-  return pathname.replace(/^\/docs\/(?:zh-CN|en-US)(?=\/|$)/, `/docs/${locale}`);
+  return pathname.replace(/^\/(?:zh-CN|en-US)(?=\/|$)/, `/${locale}`);
 }
 
 /**
- * 顶栏语言切换：只在挂载于 /docs/<locale> 下时渲染，点击跳到另一语言下的同一页面。
+ * 顶栏语言切换：挂载于 /<locale>/docs 下，点击跳到另一语言下的同一页面。
+ * 选择写入 cookie，无语言前缀的入口（/docs）识别时优先读取。
  */
 function LocaleToggle({ locale }: { locale: DocLocale }) {
   const pathname = usePathname();
@@ -90,11 +92,7 @@ function LocaleToggle({ locale }: { locale: DocLocale }) {
       aria-label={t.switchLanguage}
       title={t.switchLanguage}
       onClick={() => {
-        try {
-          localStorage.setItem("docs-locale", nextLocale);
-        } catch {
-          // 隐私模式下 localStorage 不可用，仅影响下次默认语言
-        }
+        document.cookie = `${LOCALE_COOKIE_NAME}=${nextLocale}; path=/; max-age=31536000; sameSite=lax`;
         router.push(localeHref(pathname, nextLocale));
       }}
     >

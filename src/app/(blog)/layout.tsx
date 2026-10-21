@@ -43,9 +43,13 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 /**
- * 博客的根布局，只承载博客路由（(blog) 组）。
+ * 博客的根布局，承载 /{locale} 下的博客路由（(blog) 组）。
  *
- * 文档站 (/components) 走 (docs) 组自己的根布局，不加载这里的 globals.css，
+ * 根布局放在 [locale] 之上：语言参数变化（客户端切换）时根布局不参与重渲染，
+ * <head> 里的防闪脚本不会被 React 在客户端重建（否则会触发 script 相关告警）。
+ * 语言校验下沉到 [locale]/layout.tsx。
+ *
+ * 文档站走 (docs) 组自己的根布局，不加载这里的 globals.css，
  * 从而与博客全局样式彻底隔离。
  */
 export default function BlogRootLayout({
