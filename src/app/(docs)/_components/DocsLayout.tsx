@@ -3,7 +3,6 @@ import DocsAside from "./DocsAside";
 import DocsHeader from "./DocsHeader";
 import { DocsI18nProvider } from "./DocsI18nProvider";
 import DocsSidebar from "./DocsSidebar";
-import "./docs.css";
 import type {
   DocLocale,
   DocsHeaderConfig,
