@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
-import SiteLayout from "@/components/blog/layout/site-layout";
-import Sidebar from "@/components/blog/layout/sidebar";
-import ArticleFeed from "@/components/blog/article/article-feed";
-import Breadcrumbs from "@/components/blog/common/breadcrumb";
+import SiteLayout from "@/components/blog/layout/SiteLayout";
+import Sidebar from "@/components/blog/layout/Sidebar";
+import ArticleFeed from "@/components/blog/article/ArticleFeed";
+import Breadcrumbs from "@/components/blog/common/Breadcrumbs";
 import { localePath } from "@/lib/locale";
 import { getArticles } from "@/services/article";
 import { getCategories } from "@/services/category";

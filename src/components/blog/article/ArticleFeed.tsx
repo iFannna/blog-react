@@ -1,5 +1,5 @@
-import { ArticleCard, QuoteCard } from "@/components/blog/article/article-card";
-import Pagination from "@/components/blog/common/pagination";
+import { ArticleCard, QuoteCard } from "@/components/blog/article/ArticleCard";
+import Pagination from "@/components/blog/common/Pagination";
 import type { Article } from "@/types/models";
 
 interface ArticleFeedProps {

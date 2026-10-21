@@ -8,7 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "@/hooks/theme";
 import { useAuth } from "@/hooks/auth";
 import { useLocale } from "@/hooks/locale";
-import { useDropdownMenu, MenuList, type MenuItem } from "@/components/blog/common/dropdown";
+import { useDropdownMenu, MenuList, type MenuItem } from "@/components/blog/common/Dropdown";
 import { setSidebarLayout } from "@/stores/layout";
 
 interface HeaderProps {

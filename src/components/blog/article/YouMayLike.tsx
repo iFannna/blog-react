@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { Article } from "@/types/models";
 import { articleHref } from "@/utils/article";
 import { useLocale } from "@/hooks/locale";
-import { ArchiveDateLinks } from "./archive-date-links";
+import { DateLinks } from "./DateLinks";
 
 /* 4-color cycle for category pills */
 const CAT_COLORS = [
@@ -98,7 +98,7 @@ export default function YouMayLike({ articles }: YouMayLikeProps) {
                         </span>
                       </span>
                       <span>
-                        <ArchiveDateLinks locale={locale} year={article.year} month={article.month} day={article.day} />
+                        <DateLinks locale={locale} year={article.year} month={article.month} day={article.day} />
                       </span>
                     </div>
                   </div>

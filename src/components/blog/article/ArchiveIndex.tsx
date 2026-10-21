@@ -1,6 +1,6 @@
-import SiteLayout from "@/components/blog/layout/site-layout";
-import Breadcrumbs from "@/components/blog/common/breadcrumb";
-import ArchiveTimeline from "@/components/blog/article/archive-timeline";
+import SiteLayout from "@/components/blog/layout/SiteLayout";
+import Breadcrumbs from "@/components/blog/common/Breadcrumbs";
+import ArchiveTimeline from "@/components/blog/article/ArchiveTimeline";
 import { getArticles } from "@/services/article";
 import { localePath } from "@/lib/locale";
 import type { Article } from "@/types/models";
@@ -69,7 +69,7 @@ function groupByYearMonth(articles: Article[]): YearGroup[] {
     });
 }
 
-export default async function ArchiveIndexView({ locale }: { locale: string }) {
+export default async function ArchiveIndex({ locale }: { locale: string }) {
   const { list: articles, total: totalCount } = await fetchAllArticles();
   const yearGroups = groupByYearMonth(articles);
   let latest: { year: number; month: number; day: number } | null = null;

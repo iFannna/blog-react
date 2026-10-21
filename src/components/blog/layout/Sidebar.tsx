@@ -3,9 +3,9 @@ import type { Article, Category, Tag } from "@/types/models";
 import { getSiteSetting } from "@/services/site";
 import { articleHref } from "@/utils/article";
 import { localePath } from "@/lib/locale";
-import { ArchiveDateLinks } from "@/components/blog/article/archive-date-links";
-import SearchForm from "@/components/blog/site/search-form";
-import SidebarOperations from "@/components/blog/site/sidebar-operations";
+import { DateLinks } from "@/components/blog/article/DateLinks";
+import SearchForm from "@/components/blog/site/SearchForm";
+import SidebarActions from "@/components/blog/site/SidebarActions";
 
 interface SidebarProps {
   locale: string;
@@ -74,7 +74,7 @@ export default async function Sidebar({ locale, categories, tags, featuredArticl
             </Link>
             <div className="sidebar-featured-post-author">by {featured.authorName}</div>
             <div className="sidebar-featured-post-date">
-              <ArchiveDateLinks locale={locale} year={featured.year} month={featured.month} day={featured.day} />
+              <DateLinks locale={locale} year={featured.year} month={featured.month} day={featured.day} />
             </div>
             <div className="sidebar-small-articles">
               {smallArticles.map((article) => (
@@ -100,7 +100,7 @@ export default async function Sidebar({ locale, categories, tags, featuredArticl
                     </Link>
                     <div className="small-article-author">by {article.authorName}</div>
                     <div className="small-article-date">
-                      <ArchiveDateLinks locale={locale} year={article.year} month={article.month} day={article.day} />
+                      <DateLinks locale={locale} year={article.year} month={article.month} day={article.day} />
                     </div>
                   </div>
                 </div>
@@ -142,7 +142,7 @@ export default async function Sidebar({ locale, categories, tags, featuredArticl
           </div>
         )}
 
-        <SidebarOperations />
+        <SidebarActions />
       </div>
     </aside>
   );

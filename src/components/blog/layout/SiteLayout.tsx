@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 import type { Article } from "@/types/models";
-import Header from "./header";
-import Footer from "./footer";
-import WavesBackground from "@/components/blog/common/background";
-import ScrollTopButton from "@/components/blog/common/backtop";
-import YouMayLike from "@/components/blog/article/related-articles";
+import Header from "./Header";
+import Footer from "./Footer";
+import WavesBackground from "@/components/blog/common/WavesBackground";
+import BackToTop from "@/components/blog/common/BackToTop";
+import YouMayLike from "@/components/blog/article/YouMayLike";
 import { getSiteSetting, getGuestbookCount, getFriendLinkCount } from "@/services/site";
 import { getCategories } from "@/services/category";
 import { getTags } from "@/services/tag";
@@ -136,7 +136,7 @@ export default async function SiteLayout({
         guestbookCount={guestbookCount}
         friendLinkCount={friendLinkCount}
       />
-      <ScrollTopButton />
+      <BackToTop />
       <WavesBackground />
     </div>
   );

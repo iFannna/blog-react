@@ -1,5 +1,5 @@
-import SiteLayout from "@/components/blog/layout/site-layout";
-import Breadcrumbs from "@/components/blog/common/breadcrumb";
+import SiteLayout from "@/components/blog/layout/SiteLayout";
+import Breadcrumbs from "@/components/blog/common/Breadcrumbs";
 import { DOC_LOCALES } from "@/lib/docs/types";
 import { localePath } from "@/lib/locale";
 import type { Metadata } from "next";

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 
-export default function ScrollTopButton() {
+export default function BackToTop() {
   // 初始值必须与服务端一致，真实滚动位置在挂载后的 effect 中同步
   const [visible, setVisible] = useState(false);
 

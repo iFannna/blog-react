@@ -6,7 +6,7 @@ import { useAuth } from "@/hooks/auth";
 import { useLocale } from "@/hooks/locale";
 
 // 侧边栏操作区，根据登录态展示 设置/登录/注册 或 设置/退出
-export default function SidebarOperations() {
+export default function SidebarActions() {
   const { isAuthenticated, signOut } = useAuth();
   const { prefix } = useLocale();
   const [signingOut, setSigningOut] = useState(false);

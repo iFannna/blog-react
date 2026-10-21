@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
-import ArchiveIndexView from "@/components/blog/article/archive-index-view";
-import SiteLayout from "@/components/blog/layout/site-layout";
-import Sidebar from "@/components/blog/layout/sidebar";
-import ArticleFeed from "@/components/blog/article/article-feed";
-import Breadcrumbs from "@/components/blog/common/breadcrumb";
+import ArchiveIndex from "@/components/blog/article/ArchiveIndex";
+import SiteLayout from "@/components/blog/layout/SiteLayout";
+import Sidebar from "@/components/blog/layout/Sidebar";
+import ArticleFeed from "@/components/blog/article/ArticleFeed";
+import Breadcrumbs from "@/components/blog/common/Breadcrumbs";
 import { localePath } from "@/lib/locale";
 import { getArticles } from "@/services/article";
 import { getCategories } from "@/services/category";
@@ -58,7 +58,7 @@ export default async function ArchivePage({ params, searchParams }: ArchivePageP
 
   // 空 slug → 归档索引聚合页（密度带 + 年份卡）
   if (!slug || slug.length === 0) {
-    return <ArchiveIndexView locale={locale} />;
+    return <ArchiveIndex locale={locale} />;
   }
 
   const { page: pageParam } = await searchParams;

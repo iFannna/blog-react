@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Article } from "@/types/models";
 import { sanitizeCssUrl, articleHref } from "@/utils/article";
 import { localePath } from "@/lib/locale";
-import { ArchiveDateLinks } from "./archive-date-links";
+import { DateLinks } from "./DateLinks";
 
 interface ArticleCardProps {
   locale: string;
@@ -81,7 +81,7 @@ export function ArticleCard({ locale, article, highlightTitle, highlightSummary 
             <svg className="article-meta-icon" viewBox="0 0 29.36 29.36" aria-hidden="true">
               <path d="M14.68 0a14.68 14.68 0 1014.68 14.68A14.64 14.64 0 0014.68 0zm0 26.69a12 12 0 1112-12 12 12 0 01-12 12zm5.87-10.54L16 13.88V6.67a1.25 1.25 0 00-1.33-1.33 1.26 1.26 0 00-1.34 1.33v8a1.28 1.28 0 00.81 1.2l5.33 2.67c.14.13.27.13.54.13a1.28 1.28 0 001.2-.8 1.41 1.41 0 00-.67-1.73z" />
             </svg>
-            <ArchiveDateLinks locale={locale} year={article.year} month={article.month} day={article.day} />
+            <DateLinks locale={locale} year={article.year} month={article.month} day={article.day} />
           </span>
         </div>
 

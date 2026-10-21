@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { articleHref } from "@/utils/article";
 import { localePath } from "@/lib/locale";
-import { ArchiveDateLinks } from "@/components/blog/article/archive-date-links";
+import { DateLinks } from "@/components/blog/article/DateLinks";
 import type { Article } from "@/types/models";
 
 function FooterArticleCard({ article, locale }: { article: Article; locale: string }) {
@@ -34,7 +34,7 @@ function FooterArticleCard({ article, locale }: { article: Article; locale: stri
         </Link>
         <div className="footer-post-author">by {article.authorName}</div>
         <div className="footer-post-date">
-          <ArchiveDateLinks locale={locale} year={article.year} month={article.month} day={article.day} />
+          <DateLinks locale={locale} year={article.year} month={article.month} day={article.day} />
         </div>
       </div>
     </li>

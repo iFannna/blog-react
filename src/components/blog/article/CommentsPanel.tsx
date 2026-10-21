@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getComments, getCommentReplies } from "@/services/article";
-import { useDropdownMenu, MenuList, type MenuItem } from "@/components/blog/common/dropdown";
+import { useDropdownMenu, MenuList, type MenuItem } from "@/components/blog/common/Dropdown";
 import { mockViewer, DEFAULT_AVATAR } from "@/utils/mock";
 import type { CommentVO, ReplyVO } from "@/types/api";
 
@@ -51,7 +51,7 @@ interface ReplyTarget {
   targetName: string;
 }
 
-interface ArticleCommentsPanelProps {
+interface CommentsPanelProps {
   articleId: number;
   commentStatus?: number;
 }
@@ -137,7 +137,7 @@ function sortComments(list: CommentItem[], mode: "hot" | "time") {
   });
 }
 
-export default function ArticleCommentsPanel({ articleId, commentStatus }: ArticleCommentsPanelProps) {
+export default function CommentsPanel({ articleId, commentStatus }: CommentsPanelProps) {
   const [comments, setComments] = useState<CommentItem[]>([]);
   const [sortMode, setSortMode] = useState<"hot" | "time">("hot");
   const [totalComments, setTotalComments] = useState(0);
