@@ -148,6 +148,9 @@ export function TimeSpinner({
     ignoreScroll: { hours: false, minutes: false, seconds: false },
     currentScrollbar: undefined as TimeUnit | undefined,
   });
+  // 对应官方 lodash debounce(adjustCurrentSpinner, 200)：
+  // 必须取消上一次的复位，否则滚动过程中会被定时器拉回当前选中项，出现闪烁
+  const scrollEndTimerRef = useRef<number | null>(null);
 
   const spinnerItems = showSeconds ? timeUnits : timeUnits.slice(0, 2);
 
@@ -272,9 +275,11 @@ export function TimeSpinner({
     if (!wrapEl) return;
 
     stateRef.current.isScrolling = true;
-    window.setTimeout(() => {
+    if (scrollEndTimerRef.current) window.clearTimeout(scrollEndTimerRef.current);
+    scrollEndTimerRef.current = window.setTimeout(() => {
+      scrollEndTimerRef.current = null;
       stateRef.current.isScrolling = false;
-      adjustCurrentSpinner(type);
+      helpersRef.current.adjustCurrentSpinner(type);
     }, 200);
 
     const itemHeight = typeItemHeight(type);
@@ -368,6 +373,13 @@ export function TimeSpinner({
     // handleScroll 通过 ref 取最新实现
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roots, arrowControl, showSeconds]);
+
+  useEffect(
+    () => () => {
+      if (scrollEndTimerRef.current) window.clearTimeout(scrollEndTimerRef.current);
+    },
+    [],
+  );
 
   const incrementRef = useRepeatClick(() => scrollDown(1));
   const decrementRef = useRepeatClick(() => scrollDown(-1));
