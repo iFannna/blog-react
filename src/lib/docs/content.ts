@@ -145,7 +145,7 @@ export function resolveDocPage(
   return undefined;
 }
 
-/** 两个 locale 的并集，保证缺少译文时仍能通过 URL 访问并回退 */
+/** 导航只列当前语言；静态参数取两语言并集，保证缺少译文时 URL 仍可访问并回退 */
 function unionSlugPaths(section: string): string[] {
   const paths = new Set<string>();
 
@@ -185,12 +185,8 @@ export function getSectionNav(locale: DocLocale, section: string): DocsNavGroup[
   const grouped = new Map<string, DocsNavItem[]>();
   const groupOrder = new Map<string, number>();
 
-  for (const slugPath of unionSlugPaths(section)) {
-    const slug = slugPath.split("/");
-    const resolved = resolveDocPage(locale, section, slug);
-    if (!resolved) continue;
-
-    const { meta } = resolved;
+  // 只遍历当前语言目录，另一语言独有的页面不会混进侧边栏
+  for (const meta of loadPages(locale, section)) {
     const groupTitle = meta.group ?? DEFAULT_GROUP[locale];
     const items = grouped.get(groupTitle) ?? [];
 
@@ -220,8 +216,11 @@ export function getFirstDocPath(locale: DocLocale, section: string): string | un
 
   const [firstGroup] = getSectionNav(locale, section);
   const first = firstGroup?.items[0];
+  if (first) return first.href;
 
-  return first?.href;
+  // 当前语言整栏没有文档时取另一语言首篇，URL 仍落在当前语言并显示回退提示
+  const fallbackPage = loadPages(otherLocale(locale), section)[0];
+  return fallbackPage ? `/${locale}/docs/${section}/${fallbackPage.slugPath}` : undefined;
 }
 
 export function getAdjacentPages(

@@ -88,5 +88,5 @@ export const demoManifestLoaders: Record<
   "element-plus/components/typography": () => import("./element-plus/components/typography"),
   "element-plus/components/upload": () => import("./element-plus/components/upload"),
   "element-plus/components/watermark": () => import("./element-plus/components/watermark"),
-  "notes/getting-started": () => import("./notes/getting-started"),
+  "notes/start": () => import("./notes/start"),
 };
