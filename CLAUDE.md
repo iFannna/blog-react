@@ -27,6 +27,13 @@ npm run lint    # ESLint
 
 类型检查（未配独立 script）：`node node_modules/typescript/bin/tsc --noEmit -p tsconfig.json`
 
+## 版本号约定
+
+- `package.json` 的 `version` 使用改动日期，格式为 `YY.MM.DD`，例如 2026-10-21 写为 `26.10.21`。
+- 每次准备提交改动时，将版本号更新为改动当天日期；同一天多次改动保持同一版本。
+- 不使用语义化版本递增，也不预估版本跨度。
+- 使用 `npm version YY.MM.DD --no-git-tag-version` 更新，确保 `package.json` 与 `package-lock.json` 同步。
+
 ## 架构
 
 ```
