@@ -5,7 +5,7 @@ import { MessageBox } from "@/components/element-plus/message-box";
 import { message } from "@/components/element-plus/message";
 import { ElButton } from "@/components/element-plus/button";
 import { ElSwitch } from "@/components/element-plus/switch";
-import { Delete } from "@/components/element-plus/icons";
+import { Delete } from "@/components/element-plus/generated/icons";
 import styles from "./feedback.module.css";
 
 export function MessageBoxAlert() {

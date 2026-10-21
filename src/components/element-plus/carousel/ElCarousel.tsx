@@ -16,7 +16,7 @@ import {
   type TransitionEvent,
 } from "react";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowLeft, ArrowRight } from "../icons";
+import { ArrowLeft, ArrowRight } from "../generated/icons";
 import { useTranslator } from "../config-provider/context";
 import { ElCarouselItem } from "./ElCarouselItem";
 import type { CarouselExpose, CarouselProps } from "./types";

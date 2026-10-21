@@ -8,7 +8,7 @@ import {
   CircleClose,
   Close,
   WarningFilled,
-} from "../icons";
+} from "../generated/icons";
 
 export type ProgressType = "line" | "circle" | "dashboard";
 export type ProgressStatus = "" | "success" | "exception" | "warning";

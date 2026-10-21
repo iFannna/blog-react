@@ -7,7 +7,7 @@ import { ElInput } from "@/components/element-plus/input";
 import { ElSelect } from "@/components/element-plus/select";
 import { ElTable, ElTableColumn } from "@/components/element-plus/table";
 import { MessageBox } from "@/components/element-plus/message-box";
-import { CircleCloseFilled } from "@/components/element-plus/icons";
+import { CircleCloseFilled } from "@/components/element-plus/generated/icons";
 import styles from "./dialog.module.css";
 
 function Footer({

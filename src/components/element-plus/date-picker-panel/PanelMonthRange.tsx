@@ -11,7 +11,7 @@ import {
 import { useLocale, useTranslator } from "../config-provider/context";
 import { useFormDisabled } from "../form";
 import { ElIcon } from "../icon/ElIcon";
-import { DArrowLeft, DArrowRight } from "../icons";
+import { DArrowLeft, DArrowRight } from "../generated/icons";
 
 import { BasicMonthTable } from "./BasicMonthTable";
 import { dayjs } from "./dayjs";

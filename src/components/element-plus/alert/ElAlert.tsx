@@ -8,7 +8,7 @@ import {
   InfoFilled,
   SuccessFilled,
   WarningFilled,
-} from "../icons";
+} from "../generated/icons";
 
 export type AlertType = "primary" | "success" | "warning" | "error" | "info";
 export type AlertEffect = "light" | "dark";

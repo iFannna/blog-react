@@ -14,7 +14,7 @@ import {
   ChatLineRound,
   Male,
   Warning,
-} from "@/components/element-plus/icons";
+} from "@/components/element-plus/generated/icons";
 import { ElCol, ElRow } from "@/components/element-plus/row";
 import { ElStatistic } from "@/components/element-plus/statistic";
 import { ElTooltip } from "@/components/element-plus/tooltip";

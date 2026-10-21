@@ -4,7 +4,7 @@ import type { CSSProperties, HTMLAttributes, ReactNode } from "react";
 
 import { useTranslator } from "../../config-provider/context";
 import { ElIcon } from "../../icon/ElIcon";
-import { ArrowRight } from "../../icons";
+import { ArrowRight } from "../../generated/icons";
 import { TableCell } from "../Cell";
 import { Alignment, placeholderSign } from "../constants";
 import { enforceUnit, get, ns, tryCall } from "../utils";

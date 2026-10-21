@@ -16,7 +16,7 @@ import {
   type SVGProps,
 } from "react";
 import { ElIcon } from "../icon/ElIcon";
-import { Star, StarFilled } from "../icons";
+import { Star, StarFilled } from "../generated/icons";
 import {
   useFormDisabled,
   useFormItem,

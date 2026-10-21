@@ -8,7 +8,7 @@ import { ElSelect } from "@/components/element-plus/select";
 import { ElRadio, ElRadioGroup } from "@/components/element-plus/radio";
 import { ElTable, ElTableColumn } from "@/components/element-plus/table";
 import { MessageBox } from "@/components/element-plus/message-box";
-import { CircleCloseFilled } from "@/components/element-plus/icons";
+import { CircleCloseFilled } from "@/components/element-plus/generated/icons";
 
 export function DrawerBasicUsage() {
   const [direction, setDirection] = useState<DrawerDirection>("rtl");

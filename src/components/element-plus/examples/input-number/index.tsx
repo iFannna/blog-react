@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ElInputNumber } from "@/components/element-plus/input-number";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { ElSpace } from "@/components/element-plus/space";
-import { ArrowDown, ArrowUp, Minus, Plus } from "@/components/element-plus/icons";
+import { ArrowDown, ArrowUp, Minus, Plus } from "@/components/element-plus/generated/icons";
 
 const row = {
   display: "flex",

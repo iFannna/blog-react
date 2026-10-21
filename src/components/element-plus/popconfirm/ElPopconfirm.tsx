@@ -17,7 +17,7 @@ import type {
 } from "../tooltip/ElTooltip";
 import { ElIcon } from "../icon/ElIcon";
 import { ElButton } from "../button";
-import { QuestionFilled } from "../icons";
+import { QuestionFilled } from "../generated/icons";
 import { addUnit } from "../utils";
 import type { PopperEffect, PopperPlacement } from "../popper/use-popper";
 

@@ -13,7 +13,7 @@ import {
   type ReactNode,
 } from "react";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowDown, CircleClose, Clock } from "../icons";
+import { ArrowDown, CircleClose, Clock } from "../generated/icons";
 import { ElScrollbar, type ScrollbarExpose } from "../scrollbar";
 import { ElPopperContent } from "../popper/ElPopperContent";
 import { ElPopperArrow } from "../popper/ElPopperArrow";

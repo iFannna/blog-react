@@ -13,7 +13,7 @@ import {
 } from "react";
 import { ElButton } from "../button/ElButton";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowDown, Close } from "../icons";
+import { ArrowDown, Close } from "../generated/icons";
 import { ElTooltip } from "../tooltip/ElTooltip";
 import { useFormDisabled, useFormItem, useFormItemInputId, useFormSize } from "../form/use-form";
 import { useEmptyValues, useTranslator } from "../config-provider/context";

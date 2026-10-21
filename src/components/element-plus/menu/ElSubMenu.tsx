@@ -11,7 +11,7 @@ import {
 } from "react";
 import { ElTooltip } from "../tooltip";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowDown, ArrowRight } from "../icons";
+import { ArrowDown, ArrowRight } from "../generated/icons";
 import { SubMenuTransition } from "./MenuCollapseTransition";
 import {
   SubMenuContext,

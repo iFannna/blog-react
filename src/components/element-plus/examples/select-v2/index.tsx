@@ -6,7 +6,7 @@ import { ElButton } from "@/components/element-plus/button";
 import { ElCheckbox } from "@/components/element-plus/checkbox";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { ElInput } from "@/components/element-plus/input";
-import { Loading } from "@/components/element-plus/icons";
+import { Loading } from "@/components/element-plus/generated/icons";
 import { message } from "@/components/element-plus/message";
 import { ElSelectV2 } from "@/components/element-plus/select-v2";
 import { ElTag } from "@/components/element-plus/tag";

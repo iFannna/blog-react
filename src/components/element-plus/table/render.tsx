@@ -3,7 +3,7 @@
 import { useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { ElCheckbox } from "../checkbox";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowRight, Loading } from "../icons";
+import { ArrowRight, Loading } from "../generated/icons";
 import { ElTooltip } from "../tooltip";
 import type {
   DefaultRow,

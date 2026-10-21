@@ -3,7 +3,7 @@ import type { SVGProps } from "react";
 /*
  * ElImageViewer 默认工具栏用到的 5 个图标（ZoomOut / RefreshLeft / RefreshRight /
  * FullScreen / ScaleToOriginal）在官方 @element-plus/icons-vue 里存在，
- * 但本项目 src/components/element-plus/icons 的生成清单尚未收录。
+ * 但本项目 src/components/element-plus/generated/icons 的生成清单尚未收录。
  *
  * 主控不允许单独改动生成脚本与 icons barrel，故在此内联官方同一份 SVG path，
  * 避免为了 5 个图标把 Vue 运行时拉进项目。已把这 5 个图标名提报给主控补入清单，

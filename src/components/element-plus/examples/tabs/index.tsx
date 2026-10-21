@@ -5,7 +5,7 @@ import { ElTabs, ElTabPane, type TabPosition } from "@/components/element-plus/t
 import { ElButton } from "@/components/element-plus/button";
 import { ElRadio, ElRadioGroup } from "@/components/element-plus/radio";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import { Calendar, Select } from "@/components/element-plus/icons";
+import { Calendar, Select } from "@/components/element-plus/generated/icons";
 import styles from "./tabs.module.css";
 
 interface EditableTab {

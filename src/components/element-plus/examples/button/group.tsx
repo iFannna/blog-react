@@ -8,7 +8,7 @@ import {
   House,
   Notification,
   Operation,
-} from "@/components/element-plus/icons";
+} from "@/components/element-plus/generated/icons";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { ElRadio, ElRadioGroup } from "@/components/element-plus/radio";
 import { mb16, mb8 } from "./styles";

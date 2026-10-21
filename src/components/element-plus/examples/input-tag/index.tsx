@@ -4,7 +4,7 @@ import { useState, type CSSProperties } from "react";
 import { ElInputTag } from "@/components/element-plus/input-tag";
 import { ElSegmented } from "@/components/element-plus/segmented";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import { CloseBold, ElementPlus, Search } from "@/components/element-plus/icons";
+import { CloseBold, ElementPlus, Search } from "@/components/element-plus/generated/icons";
 import type { ComponentSize } from "@/components/element-plus/button/types";
 import type { TagEffect, TagType } from "@/components/element-plus/tag";
 

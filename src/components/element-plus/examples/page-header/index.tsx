@@ -8,7 +8,7 @@ import { ElButton } from "@/components/element-plus/button";
 import { ElTag } from "@/components/element-plus/tag";
 import { ElDescriptions, ElDescriptionsItem } from "@/components/element-plus/descriptions";
 import { notification } from "@/components/element-plus/notification";
-import { ArrowLeft } from "@/components/element-plus/icons";
+import { ArrowLeft } from "@/components/element-plus/generated/icons";
 import styles from "./page-header.module.css";
 
 const AVATAR_IMG =

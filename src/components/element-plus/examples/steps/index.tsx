@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ElStep, ElSteps } from "@/components/element-plus/steps";
 import { ElButton } from "@/components/element-plus/button";
-import { Edit, Picture, Upload, UploadFilled } from "@/components/element-plus/icons";
+import { Edit, Picture, Upload, UploadFilled } from "@/components/element-plus/generated/icons";
 
 const stepsStyle = { maxWidth: 600 } as const;
 

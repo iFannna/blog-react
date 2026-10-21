@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { ElIcon } from "../icon/ElIcon";
-import { Loading } from "../icons";
+import { Loading } from "../generated/icons";
 import { useFormItem, useFormItemInputId } from "../form/use-form";
 import { addUnit } from "../utils";
 import type { ComponentSize } from "../button/types";

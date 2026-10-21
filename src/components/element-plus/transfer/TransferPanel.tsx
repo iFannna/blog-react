@@ -11,7 +11,7 @@ import {
 import { ElCheckbox } from "../checkbox/ElCheckbox";
 import { ElCheckboxGroup } from "../checkbox/ElCheckboxGroup";
 import { ElInput } from "../input/ElInput";
-import { Search } from "../icons";
+import { Search } from "../generated/icons";
 import { useTranslator } from "../config-provider/context";
 import { TransferVirtualList } from "./VirtualList";
 import { DEFAULT_PROPS_ALIAS, keysSignature } from "./types";

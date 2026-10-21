@@ -6,7 +6,7 @@ import {
   ChatDotRound,
   ChatLineRound,
   ChatRound,
-} from "@/components/element-plus/icons";
+} from "@/components/element-plus/generated/icons";
 
 const blockBase: CSSProperties = {
   padding: "30px 0",

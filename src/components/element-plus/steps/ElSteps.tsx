@@ -12,7 +12,7 @@ import {
   type ReactNode,
 } from "react";
 import { ElIcon } from "../icon/ElIcon";
-import { Check, Close } from "../icons";
+import { Check, Close } from "../generated/icons";
 
 export type StepStatus = "wait" | "process" | "finish" | "error" | "success";
 

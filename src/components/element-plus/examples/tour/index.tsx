@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ElButton } from "@/components/element-plus/button";
 import { ElDivider } from "@/components/element-plus/divider";
 import { ElSpace } from "@/components/element-plus/space";
-import { MoreFilled } from "@/components/element-plus/icons";
+import { MoreFilled } from "@/components/element-plus/generated/icons";
 import { ElTour, ElTourStep } from "@/components/element-plus/tour";
 
 const targetBy = (id: string) => () => document.querySelector<HTMLElement>(id);

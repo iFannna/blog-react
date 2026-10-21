@@ -16,7 +16,7 @@ import { ElScrollbar } from "../scrollbar";
 import { ElIcon } from "../icon/ElIcon";
 import { ElPopperContent } from "../popper/ElPopperContent";
 import { ElPopperArrow } from "../popper/ElPopperArrow";
-import { Loading } from "../icons";
+import { Loading } from "../generated/icons";
 import { useFormDisabled } from "../form/use-form";
 import type { PopperPlacement } from "../popper";
 import type { Options } from "@popperjs/core";

@@ -8,7 +8,7 @@ import { ElButton } from "@/components/element-plus/button";
 import { ElCheckbox } from "@/components/element-plus/checkbox";
 import { ElTag } from "@/components/element-plus/tag";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import { Loading } from "@/components/element-plus/icons";
+import { Loading } from "@/components/element-plus/generated/icons";
 import { message } from "@/components/element-plus/message";
 import type { ComponentSize } from "@/components/element-plus/button/types";
 

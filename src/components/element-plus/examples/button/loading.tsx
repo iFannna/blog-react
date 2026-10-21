@@ -2,7 +2,7 @@
 
 import { ElButton } from "@/components/element-plus/button";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import { Eleme } from "@/components/element-plus/icons";
+import { Eleme } from "@/components/element-plus/generated/icons";
 
 function CustomLoading() {
   return (

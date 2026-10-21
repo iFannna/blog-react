@@ -10,7 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowLeft, ArrowRight, CaretLeft, CaretRight, MoreFilled } from "../icons";
+import { ArrowLeft, ArrowRight, CaretLeft, CaretRight, MoreFilled } from "../generated/icons";
 import { ElSelect, type SelectOption } from "../select/ElSelect";
 import { useTranslator } from "../config-provider/context";
 

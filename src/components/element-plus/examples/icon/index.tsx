@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, type ComponentType, type MouseEvent, type SVGProps } from "react";
-import * as AllIcons from "@/components/element-plus/icons";
+import * as AllIcons from "@/components/element-plus/generated/icons";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { ElButton } from "@/components/element-plus/button";
 import { ElInput } from "@/components/element-plus/input";
@@ -13,7 +13,7 @@ import {
   Loading,
   Search,
   Share,
-} from "@/components/element-plus/icons";
+} from "@/components/element-plus/generated/icons";
 import categoriesData from "./icon-categories.json";
 import styles from "./icon.module.css";
 

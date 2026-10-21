@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell } from "@/components/element-plus/icons";
+import { Bell } from "@/components/element-plus/generated/icons";
 import { ElAlert } from "@/components/element-plus/alert";
 
 const box = { maxWidth: 600 } as const;

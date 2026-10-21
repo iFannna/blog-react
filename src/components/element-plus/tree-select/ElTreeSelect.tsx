@@ -25,7 +25,7 @@ import {
 import { ElScrollbar } from "../scrollbar";
 import { ElTag } from "../tag";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowDown, CircleClose } from "../icons";
+import { ArrowDown, CircleClose } from "../generated/icons";
 import { useEmptyValues, useTranslator } from "../config-provider/context";
 import { useFormDisabled, useFormSize } from "../form/use-form";
 import type { ValueOnClear } from "../config-provider/types";

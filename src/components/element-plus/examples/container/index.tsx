@@ -14,7 +14,7 @@ import { ElDropdown } from "@/components/element-plus/dropdown/ElDropdown";
 import { ElDropdownMenu } from "@/components/element-plus/dropdown/ElDropdownMenu";
 import { ElDropdownItem } from "@/components/element-plus/dropdown/ElDropdownItem";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import { Menu, Message, Setting } from "@/components/element-plus/icons";
+import { Menu, Message, Setting } from "@/components/element-plus/generated/icons";
 import styles from "./container.module.css";
 
 const headerStyle = {

@@ -7,7 +7,7 @@ import { ElButton } from "@/components/element-plus/button";
 import { ElCascader } from "@/components/element-plus/cascader";
 import { ElCascaderPanel } from "@/components/element-plus/cascader-panel";
 import { ElCheckbox } from "@/components/element-plus/checkbox";
-import { CloseBold } from "@/components/element-plus/icons";
+import { CloseBold } from "@/components/element-plus/generated/icons";
 import { ElSwitch } from "@/components/element-plus/switch";
 import { ElTag } from "@/components/element-plus/tag";
 import type { Tag } from "@/components/element-plus/cascader-panel";

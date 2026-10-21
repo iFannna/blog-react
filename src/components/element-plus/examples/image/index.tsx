@@ -23,7 +23,7 @@ import {
   Download,
   Picture,
   ZoomIn,
-} from "@/components/element-plus/icons";
+} from "@/components/element-plus/generated/icons";
 
 function Right(props: SVGProps<SVGSVGElement>) {
   return (

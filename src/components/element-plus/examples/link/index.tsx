@@ -2,7 +2,7 @@
 
 import { ElLink } from "@/components/element-plus/link";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import { Edit, View } from "@/components/element-plus/icons";
+import { Edit, View } from "@/components/element-plus/generated/icons";
 import styles from "./link.module.css";
 
 export function LinkBasic() {

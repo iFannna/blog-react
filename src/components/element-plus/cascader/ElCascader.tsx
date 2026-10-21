@@ -15,7 +15,7 @@ import { ElCascaderPanel } from "../cascader-panel";
 import { useEmptyValues, useTranslator } from "../config-provider/context";
 import { useFormDisabled, useFormItem, useFormSize } from "../form/use-form";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowDown, Check, CircleClose } from "../icons";
+import { ArrowDown, Check, CircleClose } from "../generated/icons";
 import { ElInput } from "../input/ElInput";
 import { ElScrollbar } from "../scrollbar";
 import { ElTag } from "../tag";

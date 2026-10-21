@@ -10,7 +10,7 @@ import { ElPopconfirm } from "@/components/element-plus/popconfirm";
 import { ElButton } from "@/components/element-plus/button";
 import { ElTable, ElTableColumn } from "@/components/element-plus/table";
 import { ElAvatar } from "@/components/element-plus/avatar";
-import { InfoFilled } from "@/components/element-plus/icons";
+import { InfoFilled } from "@/components/element-plus/generated/icons";
 import styles from "./overlay.module.css";
 
 export function TooltipBasic() {

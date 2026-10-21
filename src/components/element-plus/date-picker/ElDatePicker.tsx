@@ -19,7 +19,7 @@ import {
 import { formatter, parseDate, valueEquals } from "../date-picker-panel/utils";
 import { useFormDisabled, useFormItemInputId, useFormSize } from "../form/use-form";
 import { ElIcon } from "../icon/ElIcon";
-import { Calendar, CircleClose, Clock } from "../icons";
+import { Calendar, CircleClose, Clock } from "../generated/icons";
 import { ElInput } from "../input";
 import { ElTooltip } from "../tooltip/ElTooltip";
 

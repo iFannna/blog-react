@@ -5,7 +5,7 @@ import type { CSSProperties, SyntheticEvent } from "react";
 import { ElCheckbox } from "../checkbox";
 import { ElRadio } from "../radio";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowRight, Check, Loading } from "../icons";
+import { ArrowRight, Check, Loading } from "../generated/icons";
 import { useCascaderPanelContext } from "./context";
 
 import type Node from "./node";

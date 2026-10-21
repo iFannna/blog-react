@@ -1,7 +1,7 @@
 "use client";
 
 import { ElIcon } from "../../icon/ElIcon";
-import { SortDown, SortUp } from "../../icons";
+import { SortDown, SortUp } from "../../generated/icons";
 import { SortOrder } from "../constants";
 
 export interface SortIconProps {

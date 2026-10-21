@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Search } from "@/components/element-plus/icons/Search";
-import { OVERVIEW_ICONS } from "@/components/element-plus/overview-icons";
+import { Search } from "@/components/element-plus/generated/icons/Search";
+import { OVERVIEW_ICONS } from "@/components/element-plus/generated/overview-icons";
 import type { DocLocale } from "@/lib/docs/types";
 import { Heading } from "./Heading";
 import { DOC_NAV } from "@/lib/docs/nav-config";

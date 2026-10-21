@@ -6,7 +6,7 @@ import { ElRate } from "@/components/element-plus/rate";
 import { ElButton } from "@/components/element-plus/button";
 import { ElRow } from "@/components/element-plus/row";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import { Bell, ElementPlus } from "@/components/element-plus/icons";
+import { Bell, ElementPlus } from "@/components/element-plus/generated/icons";
 import styles from "./text.module.css";
 
 export function TextBasic() {

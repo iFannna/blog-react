@@ -12,7 +12,7 @@ import { ElRadio } from "@/components/element-plus/radio/ElRadio";
 import { ElRadioGroup } from "@/components/element-plus/radio/ElRadioGroup";
 import { ElRow } from "@/components/element-plus/row/ElRow";
 import { ElCol } from "@/components/element-plus/row/ElCol";
-import { ArrowDown, Document, House, Menu, Setting } from "@/components/element-plus/icons";
+import { ArrowDown, Document, House, Menu, Setting } from "@/components/element-plus/generated/icons";
 import styles from "./menu.module.css";
 
 const VERTICAL_STYLE = { width: 200, minHeight: 400 };

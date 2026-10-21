@@ -2,7 +2,7 @@
 
 import { ElAvatar, ElAvatarGroup } from "@/components/element-plus/avatar";
 import { ElCol, ElRow } from "@/components/element-plus/row";
-import { UserFilled } from "@/components/element-plus/icons";
+import { UserFilled } from "@/components/element-plus/generated/icons";
 
 const CIRCLE_URL =
   "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png";

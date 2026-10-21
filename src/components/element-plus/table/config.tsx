@@ -3,7 +3,7 @@
 import type { ReactNode } from "react";
 import { ElCheckbox } from "../checkbox";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowRight } from "../icons";
+import { ArrowRight } from "../generated/icons";
 import type {
   ColumnStarts,
   DefaultRow,

@@ -12,7 +12,7 @@ import {
 } from "react";
 import { ElButton } from "../button/ElButton";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowLeft, ArrowRight } from "../icons";
+import { ArrowLeft, ArrowRight } from "../generated/icons";
 import { useTranslator } from "../config-provider/context";
 import { useFormItem } from "../form/use-form";
 import { TransferPanel, type TransferPanelHandle } from "./TransferPanel";

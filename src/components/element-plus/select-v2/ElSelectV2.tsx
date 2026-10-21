@@ -16,7 +16,7 @@ import {
   CircleCheck,
   CircleClose,
   Loading,
-} from "../icons";
+} from "../generated/icons";
 import { ElTag } from "../tag";
 import { ElTooltip } from "../tooltip";
 

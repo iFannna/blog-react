@@ -1,7 +1,7 @@
 "use client";
 
 import { ElButton } from "@/components/element-plus/button";
-import { Search } from "@/components/element-plus/icons";
+import { Search } from "@/components/element-plus/generated/icons";
 import { flexRow, flexRowLast } from "./styles";
 
 export default function ButtonSize() {

@@ -20,7 +20,7 @@ import {
   ArrowRight,
   DArrowLeft,
   DArrowRight,
-} from "../icons";
+} from "../generated/icons";
 import { ElInput } from "../input";
 import { Day, TimePanel } from "../time-picker";
 

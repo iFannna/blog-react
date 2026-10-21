@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { ElIcon } from "../icon/ElIcon";
-import { Close } from "../icons";
+import { Close } from "../generated/icons";
 import { useTranslator } from "../config-provider/context";
 import type { ComponentSize } from "../button/types";
 

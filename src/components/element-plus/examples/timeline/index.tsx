@@ -11,7 +11,7 @@ import {
 import { ElCard } from "@/components/element-plus/card";
 import { ElRadio, ElRadioGroup } from "@/components/element-plus/radio";
 import { ElSwitch } from "@/components/element-plus/switch";
-import { MoreFilled } from "@/components/element-plus/icons";
+import { MoreFilled } from "@/components/element-plus/generated/icons";
 
 const activities = [
   { content: "Event start", timestamp: "2018-04-15" },

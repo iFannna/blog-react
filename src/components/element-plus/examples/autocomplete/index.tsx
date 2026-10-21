@@ -9,7 +9,7 @@ import type {
 } from "@/components/element-plus/autocomplete";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 import { ElButton } from "@/components/element-plus/button";
-import { Edit } from "@/components/element-plus/icons";
+import { Edit } from "@/components/element-plus/generated/icons";
 
 
 const demoFlex = {

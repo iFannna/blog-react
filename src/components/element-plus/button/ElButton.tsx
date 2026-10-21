@@ -2,7 +2,7 @@
 
 import { createElement, isValidElement, type ReactNode } from "react";
 import { ElIcon } from "../icon/ElIcon";
-import { Loading } from "../icons";
+import { Loading } from "../generated/icons";
 import { useButton } from "./use-button";
 import type { ButtonProps } from "./types";
 

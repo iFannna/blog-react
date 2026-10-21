@@ -10,7 +10,7 @@ import {
   Close,
   InfoFilled,
   WarningFilled,
-} from "../icons";
+} from "../generated/icons";
 import {
   closeNotification,
   getServerSnapshot,

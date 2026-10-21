@@ -11,7 +11,7 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
-import { More } from "../icons";
+import { More } from "../generated/icons";
 import { ElSubMenu } from "./ElSubMenu";
 import { MenuCollapseTransition } from "./MenuCollapseTransition";
 import {

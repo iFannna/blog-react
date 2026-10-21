@@ -16,7 +16,7 @@ import {
 import { createPortal } from "react-dom";
 import { ElFocusTrap } from "../focus-trap/ElFocusTrap";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowLeft, ArrowRight, Close, ZoomIn } from "../icons";
+import { ArrowLeft, ArrowRight, Close, ZoomIn } from "../generated/icons";
 import {
   FullScreen,
   RefreshLeft,

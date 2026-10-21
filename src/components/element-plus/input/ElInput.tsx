@@ -13,7 +13,7 @@ import {
   type ReactNode,
 } from "react";
 import { ElIcon } from "../icon/ElIcon";
-import { CircleCheck, CircleClose, Hide, Loading, View } from "../icons";
+import { CircleCheck, CircleClose, Hide, Loading, View } from "../generated/icons";
 import {
   useFormDisabled,
   useFormItem,

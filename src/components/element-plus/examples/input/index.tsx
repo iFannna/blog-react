@@ -7,7 +7,7 @@ import type { SelectValue } from "@/components/element-plus/select";
 import { ElButton } from "@/components/element-plus/button";
 import "./input-demo.module.css";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import { Calendar, CloseBold, Lock, Search, Unlock } from "@/components/element-plus/icons";
+import { Calendar, CloseBold, Lock, Search, Unlock } from "@/components/element-plus/generated/icons";
 
 const stack = { display: "flex", flexDirection: "column", gap: "16px" } as const;
 const row = {

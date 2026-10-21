@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ElIcon } from "../icon/ElIcon";
-import { CaretRight, Loading } from "../icons";
+import { CaretRight, Loading } from "../generated/icons";
 import { ElCheckbox } from "../checkbox";
 import { ElText } from "../text";
 import { CollapseTransition } from "./collapse-transition";

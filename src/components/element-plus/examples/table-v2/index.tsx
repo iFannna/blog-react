@@ -17,7 +17,7 @@ import { ElCheckbox } from "@/components/element-plus/checkbox";
 import { ElEmpty } from "@/components/element-plus/empty";
 import { ElFormItem } from "@/components/element-plus/form";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import { Filter, Loading, Timer } from "@/components/element-plus/icons";
+import { Filter, Loading, Timer } from "@/components/element-plus/generated/icons";
 import { ElInput } from "@/components/element-plus/input";
 import { ElPopover } from "@/components/element-plus/popover";
 import type { PopoverExpose } from "@/components/element-plus/popover/ElPopover";

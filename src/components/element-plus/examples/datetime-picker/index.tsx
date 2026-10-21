@@ -5,7 +5,7 @@ import { useState, type CSSProperties, type ReactNode } from "react";
 import { ElConfigProvider, en } from "@/components/element-plus/config-provider";
 import { ElDatePicker } from "@/components/element-plus/date-picker";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import { CaretLeft, CaretRight } from "@/components/element-plus/icons";
+import { CaretLeft, CaretRight } from "@/components/element-plus/generated/icons";
 import type {
   DateModelValue,
   DateShortcut,

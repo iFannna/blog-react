@@ -18,7 +18,7 @@ import type { TooltipVirtualRef } from "../tooltip/ElTooltip";
 import { ElButton } from "../button";
 import { ElButtonGroup } from "../button/ElButtonGroup";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowDown } from "../icons";
+import { ArrowDown } from "../generated/icons";
 import { DropdownContext } from "./context";
 import type { PopperPlacement, PopperEffect } from "../popper/use-popper";
 import type { ComponentSize, ButtonType } from "../button/types";

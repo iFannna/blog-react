@@ -1,7 +1,7 @@
 "use client";
 
 import { ElButton } from "@/components/element-plus/button";
-import { Check, Delete, Edit, Message, Search, Star } from "@/components/element-plus/icons";
+import { Check, Delete, Edit, Message, Search, Star } from "@/components/element-plus/generated/icons";
 import { exampleRow, exampleStack } from "./styles";
 
 export default function ButtonBasic() {

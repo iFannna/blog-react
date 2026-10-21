@@ -17,7 +17,7 @@ import {
   OfficeBuilding,
   Tickets,
   User,
-} from "@/components/element-plus/icons";
+} from "@/components/element-plus/generated/icons";
 import styles from "./descriptions.module.css";
 
 type DemoSize = "large" | "default" | "small";

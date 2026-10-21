@@ -4,7 +4,7 @@ import { useState, type CSSProperties } from "react";
 import { ElSwitch } from "@/components/element-plus/switch";
 import { ElTooltip } from "@/components/element-plus/tooltip";
 import { message } from "@/components/element-plus/message";
-import { Check, Close, Hide, View } from "@/components/element-plus/icons";
+import { Check, Close, Hide, View } from "@/components/element-plus/generated/icons";
 
 const ml2 = { marginLeft: 8 };
 const mb2 = { marginBottom: 8 };

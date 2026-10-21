@@ -8,7 +8,7 @@ import {
 } from "@/components/element-plus/collapse";
 import { ElSwitch } from "@/components/element-plus/switch";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import { CaretRight, InfoFilled } from "@/components/element-plus/icons";
+import { CaretRight, InfoFilled } from "@/components/element-plus/generated/icons";
 
 const consistencyText = [
   "Consistent with real life: in line with the process and logic of real life, and comply with languages and habits that the users are used to;",

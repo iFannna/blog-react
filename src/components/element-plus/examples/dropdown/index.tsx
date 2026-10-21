@@ -18,7 +18,7 @@ import {
   CirclePlus,
   CirclePlusFilled,
   Plus,
-} from "@/components/element-plus/icons";
+} from "@/components/element-plus/generated/icons";
 import styles from "./dropdown.module.css";
 
 function DropdownLink({

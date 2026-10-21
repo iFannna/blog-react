@@ -2,7 +2,7 @@
 
 import { ElDivider } from "@/components/element-plus/divider";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import { StarFilled } from "@/components/element-plus/icons";
+import { StarFilled } from "@/components/element-plus/generated/icons";
 
 export function DividerBasic() {
   return (

@@ -11,7 +11,7 @@ import {
 import { useLocale } from "../config-provider/context";
 import { useFormDisabled } from "../form";
 import { ElIcon } from "../icon/ElIcon";
-import { DArrowLeft, DArrowRight } from "../icons";
+import { DArrowLeft, DArrowRight } from "../generated/icons";
 
 import { BasicQuarterTable } from "./BasicQuarterTable";
 import "./quarter-range.module.css";

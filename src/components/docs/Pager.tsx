@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import { ArrowLeft, ArrowRight } from "@/components/element-plus/icons";
+import { ArrowLeft, ArrowRight } from "@/components/element-plus/generated/icons";
 import { DOCS_MESSAGES } from "@/lib/docs/i18n";
 import type { DocLocale, DocsNavItem } from "@/lib/docs/types";
 

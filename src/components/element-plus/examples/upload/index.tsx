@@ -13,7 +13,7 @@ import {
 import { ElButton } from "@/components/element-plus/button";
 import { ElDialog } from "@/components/element-plus/dialog";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import { Delete, Download, Plus, UploadFilled, ZoomIn } from "@/components/element-plus/icons";
+import { Delete, Download, Plus, UploadFilled, ZoomIn } from "@/components/element-plus/generated/icons";
 import { message } from "@/components/element-plus/message";
 import styles from "./upload.module.css";
 import { MessageBox } from "@/components/element-plus/message-box";

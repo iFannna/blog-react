@@ -20,7 +20,7 @@ import {
 import { ElIcon } from "../icon/ElIcon";
 import { ElTag, type TagEffect, type TagType } from "../tag";
 import { ElTooltip, type TooltipExpose } from "../tooltip";
-import { CircleCheck, CircleClose, Loading } from "../icons";
+import { CircleCheck, CircleClose, Loading } from "../generated/icons";
 import {
   useFormDisabled,
   useFormItem,

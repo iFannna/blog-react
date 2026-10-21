@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { ElProgress } from "@/components/element-plus/progress";
 import { ElButton, ElButtonGroup } from "@/components/element-plus/button";
-import { Check, Minus, Plus } from "@/components/element-plus/icons";
+import { Check, Minus, Plus } from "@/components/element-plus/generated/icons";
 
 const lineStyle = { marginBottom: 15, maxWidth: 600 } as const;
 const line = { maxWidth: 600 } as const;

@@ -1,7 +1,7 @@
 "use client";
 
 import { ElButton } from "@/components/element-plus/button";
-import { Delete, Edit, Search, Share, Upload } from "@/components/element-plus/icons";
+import { Delete, Edit, Search, Share, Upload } from "@/components/element-plus/generated/icons";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
 
 export default function ButtonIcon() {

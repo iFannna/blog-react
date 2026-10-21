@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowRight } from "../icons";
+import { ArrowRight } from "../generated/icons";
 
 export type CollapseActiveName = string | number;
 

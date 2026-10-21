@@ -3,7 +3,7 @@
 import { useRef, useState, type CSSProperties } from "react";
 
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import { Document, Folder, FolderOpened } from "@/components/element-plus/icons";
+import { Document, Folder, FolderOpened } from "@/components/element-plus/generated/icons";
 import { ElInput } from "@/components/element-plus/input";
 import { ElTreeV2 } from "@/components/element-plus/tree-v2";
 import type {

@@ -3,7 +3,7 @@
 import { useMemo, useRef, useState, type ReactNode } from "react";
 import { ElTooltip } from "@/components/element-plus/tooltip";
 import { message } from "@/components/element-plus/message";
-import { CaretTop } from "@/components/element-plus/icons";
+import { CaretTop } from "@/components/element-plus/generated/icons";
 import type { DemoLang } from "@/lib/docs/types";
 import type { HighlightToken } from "@/lib/highlight";
 import { computeFoldRegions } from "./code-fold";

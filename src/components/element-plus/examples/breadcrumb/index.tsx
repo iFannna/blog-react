@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ElBreadcrumb, ElBreadcrumbItem } from "@/components/element-plus/breadcrumb";
-import { ArrowRight } from "@/components/element-plus/icons";
+import { ArrowRight } from "@/components/element-plus/generated/icons";
 import styles from "./breadcrumb.module.css";
 
 export function BreadcrumbBasic() {

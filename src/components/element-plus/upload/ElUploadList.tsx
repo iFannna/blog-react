@@ -8,7 +8,7 @@ import {
 } from "react";
 import { ElIcon } from "../icon/ElIcon";
 import { ElProgress } from "../progress";
-import { Check, CircleCheck, Close, Delete, Document, ZoomIn } from "../icons";
+import { Check, CircleCheck, Close, Delete, Document, ZoomIn } from "../generated/icons";
 import { useFormDisabled } from "../form/use-form";
 import { useTranslator } from "../config-provider/context";
 import type { Crossorigin, ListType, UploadFile, UploadFiles } from "./types";

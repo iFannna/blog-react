@@ -16,7 +16,7 @@ import {
 } from "react";
 import { ElInput } from "../input";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowDown, ArrowUp, Minus, Plus } from "../icons";
+import { ArrowDown, ArrowUp, Minus, Plus } from "../generated/icons";
 import { useFormDisabled, useFormItem, useFormSize } from "../form/use-form";
 import type { ComponentSize } from "../button/types";
 

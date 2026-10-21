@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { ElTooltip } from "../tooltip";
 import { ElCheckbox, ElCheckboxGroup } from "../checkbox";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowDown, ArrowUp } from "../icons";
+import { ArrowDown, ArrowUp } from "../generated/icons";
 import type { PopperPlacement } from "../popper/use-popper";
 import { TABLE_LOCALE } from "./config";
 import type { DefaultRow, TableColumnCtx } from "./context";

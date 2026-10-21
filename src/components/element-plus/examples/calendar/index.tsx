@@ -5,7 +5,7 @@ import { ElButton, ElButtonGroup } from "@/components/element-plus/button";
 import { ElCalendar, type CalendarDateType, type CalendarRef } from "@/components/element-plus/calendar";
 import { ElRadio, ElRadioGroup } from "@/components/element-plus/radio";
 import { ElConfigProvider, en } from "@/components/element-plus/config-provider";
-import { Check } from "@/components/element-plus/icons";
+import { Check } from "@/components/element-plus/generated/icons";
 import type { ReactNode } from "react";
 
 export function CalendarExampleLocale({ children }: { children: ReactNode }) {

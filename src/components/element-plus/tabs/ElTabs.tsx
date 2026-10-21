@@ -13,7 +13,7 @@ import {
   type ReactNode,
 } from "react";
 import { ElIcon } from "../icon/ElIcon";
-import { Close, Plus } from "../icons";
+import { Close, Plus } from "../generated/icons";
 
 export type TabPosition = "top" | "right" | "bottom" | "left";
 export type TabsType = "" | "card" | "border-card";

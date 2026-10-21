@@ -6,7 +6,7 @@ import { ElDropdown } from "@/components/element-plus/dropdown/ElDropdown";
 import { ElDropdownMenu } from "@/components/element-plus/dropdown/ElDropdownMenu";
 import { ElDropdownItem } from "@/components/element-plus/dropdown/ElDropdownItem";
 import { ElIcon } from "@/components/element-plus/icon/ElIcon";
-import { CaretBottom, Message, Share } from "@/components/element-plus/icons";
+import { CaretBottom, Message, Share } from "@/components/element-plus/generated/icons";
 
 const item = {
   marginTop: "0.625rem",

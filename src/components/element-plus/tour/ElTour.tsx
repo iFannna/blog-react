@@ -19,7 +19,7 @@ import { createPortal } from "react-dom";
 import { ElButton } from "../button/ElButton";
 import { ElIcon } from "../icon/ElIcon";
 import { ElFocusTrap } from "../focus-trap/ElFocusTrap";
-import { Close } from "../icons";
+import { Close } from "../generated/icons";
 import { useTranslator } from "../config-provider/context";
 import { useZIndex } from "../popper/use-z-index";
 import { ElTourMask } from "./ElTourMask";

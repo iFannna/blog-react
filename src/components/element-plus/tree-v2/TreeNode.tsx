@@ -9,7 +9,7 @@ import {
 
 import { ElCheckbox } from "../checkbox";
 import { ElIcon } from "../icon/ElIcon";
-import { CaretRight } from "../icons";
+import { CaretRight } from "../generated/icons";
 
 import { ElTreeNodeContent } from "./TreeNodeContent";
 

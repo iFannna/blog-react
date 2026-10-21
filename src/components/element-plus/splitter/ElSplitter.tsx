@@ -16,7 +16,7 @@ import {
   type TouchEvent,
 } from "react";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp } from "../icons";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp } from "../generated/icons";
 import {
   clampOffset,
   computePxSizes,

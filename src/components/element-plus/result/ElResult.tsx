@@ -6,7 +6,7 @@ import {
   CircleCloseFilled,
   InfoFilled,
   WarningFilled,
-} from "../icons";
+} from "../generated/icons";
 
 export type ResultIconType = "primary" | "success" | "warning" | "info" | "error";
 

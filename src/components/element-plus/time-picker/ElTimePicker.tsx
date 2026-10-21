@@ -15,7 +15,7 @@ import {
 import { ElInput } from "../input";
 import { ElIcon } from "../icon/ElIcon";
 import { ElTooltip } from "../tooltip/ElTooltip";
-import { Clock, CircleClose } from "../icons";
+import { Clock, CircleClose } from "../generated/icons";
 import {
   useFormDisabled,
   useFormItemInputId,

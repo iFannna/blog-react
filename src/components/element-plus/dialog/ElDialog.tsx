@@ -14,7 +14,7 @@ import { createPortal } from "react-dom";
 import { ElOverlay } from "../overlay/ElOverlay";
 import { ElFocusTrap } from "../focus-trap/ElFocusTrap";
 import { ElIcon } from "../icon/ElIcon";
-import { Close } from "../icons";
+import { Close } from "../generated/icons";
 import { useZIndex } from "../popper/use-z-index";
 import { useGlobalConfig } from "../config-provider/context";
 

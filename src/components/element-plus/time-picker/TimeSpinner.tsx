@@ -9,7 +9,7 @@ import {
 } from "react";
 import { ElScrollbar, type ScrollbarExpose } from "../scrollbar";
 import { ElIcon } from "../icon/ElIcon";
-import { ArrowDown, ArrowUp } from "../icons";
+import { ArrowDown, ArrowUp } from "../generated/icons";
 import {
   DEFAULT_FORMATS_TIME,
   buildTimeList,

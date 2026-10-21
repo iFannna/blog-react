@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import { PictureFilled } from "../icons";
+import { PictureFilled } from "../generated/icons";
 
 export type SkeletonVariant =
   | "circle"

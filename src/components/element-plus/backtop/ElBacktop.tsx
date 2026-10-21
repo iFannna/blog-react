@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { ElIcon } from "../icon/ElIcon";
-import { CaretTop } from "../icons";
+import { CaretTop } from "../generated/icons";
 
 export interface BacktopProps {
   /** 滚动距离达到该值后显示 */
