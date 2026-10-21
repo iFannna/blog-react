@@ -2,8 +2,8 @@ import type { DemoManifest } from "@/lib/docs/types";
 
 const manifest: DemoManifest = {
   "hello/basic": {
-    load: () => import("@/components/docs/notes/hello-demo"),
-    sourceFile: "src/components/docs/notes/hello-demo.tsx",
+    load: () => import("@/components/docs/demos/HelloDemo"),
+    sourceFile: "src/components/docs/demos/HelloDemo.tsx",
   },
 };
 

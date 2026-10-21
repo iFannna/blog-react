@@ -4,13 +4,13 @@ import { ArrowLeft, ArrowRight } from "@/components/element-plus/icons";
 import { DOCS_MESSAGES } from "@/lib/docs/i18n";
 import type { DocLocale, DocsNavItem } from "@/lib/docs/types";
 
-interface DocPagerProps {
+interface PagerProps {
   locale: DocLocale;
   prev?: DocsNavItem;
   next?: DocsNavItem;
 }
 
-export default function DocPager({ locale, prev, next }: DocPagerProps) {
+export default function Pager({ locale, prev, next }: PagerProps) {
   if (!prev && !next) return null;
 
   const messages = DOCS_MESSAGES[locale];

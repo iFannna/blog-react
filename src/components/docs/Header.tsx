@@ -7,7 +7,7 @@ import { ElSwitch } from "@/components/element-plus/switch";
 import { useTheme } from "@/hooks/theme";
 import { LOCALE_COOKIE_NAME } from "@/lib/locale";
 import type { DocLocale, DocsHeaderConfig } from "@/lib/docs/types";
-import { useDocsMessages } from "./DocsI18nProvider";
+import { useDocsMessages } from "./I18nProvider";
 
 /**
  * 官方开关用的是 Material 的 light_mode / dark_mode 图标，
@@ -101,7 +101,7 @@ function LocaleToggle({ locale }: { locale: DocLocale }) {
   );
 }
 
-interface DocsHeaderProps {
+interface HeaderProps {
   config: DocsHeaderConfig;
   locale: DocLocale;
 }
@@ -109,10 +109,10 @@ interface DocsHeaderProps {
 /**
  * 对应官方 docs 的顶栏：sticky 定位、毛玻璃背景、底部 1px 分隔线。
  */
-export default function DocsHeader({
+export default function Header({
   config,
   locale,
-}: DocsHeaderProps) {
+}: HeaderProps) {
   const pathname = usePathname();
 
   return (

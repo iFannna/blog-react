@@ -13,8 +13,8 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import rehypeSlug from "rehype-slug";
 import { ElTag } from "@/components/element-plus/tag";
-import DemoBlock from "@/app/(docs)/_components/DemoBlock";
-import { Heading } from "@/app/(docs)/_components/Heading";
+import DemoBlock from "@/components/docs/DemoBlock";
+import { Heading } from "@/components/docs/Heading";
 import {
   ensureLanguages,
   highlightTokens,

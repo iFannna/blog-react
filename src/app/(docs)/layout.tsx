@@ -7,7 +7,7 @@ import { ElConfigProvider } from "@/components/element-plus/config-provider";
 import { zhCn } from "@/components/element-plus/config-provider/locales";
 import "@/styles/element-plus/index.css";
 import "@/styles/element-plus/dark.css";
-import "./_components/docs.css";
+import "@/components/docs/docs.css";
 
 /**
  * 文档站的独立根布局。

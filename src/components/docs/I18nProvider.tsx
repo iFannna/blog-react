@@ -17,7 +17,7 @@ const DocsI18nContext = createContext<DocsMessages>(DOCS_MESSAGES["zh-CN"]);
  * 根布局的 <html lang> 是固定的，客户端按当前 locale 修正，
  * 让读屏器与浏览器翻译按正确的语言处理。
  */
-export function DocsI18nProvider({
+export function I18nProvider({
   locale,
   children,
 }: {

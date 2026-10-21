@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import DocPager from "../../../../../_components/DocPager";
-import { OverviewContent } from "../../../../../_components/OverviewContent";
+import Pager from "@/components/docs/Pager";
+import { Overview } from "@/components/docs/Overview";
 import { getElementPlusAdjacentPages } from "@/lib/docs/element-plus-nav";
 import { isDocLocale } from "@/lib/docs/types";
 
@@ -50,8 +50,8 @@ export default async function ComponentsOverviewPage({
   return (
     <>
       <h1>{zh ? "Overview 组件总览" : "Overview"}</h1>
-      <OverviewContent locale={locale} />
-      <DocPager locale={locale} prev={adjacent.prev} next={adjacent.next} />
+      <Overview locale={locale} />
+      <Pager locale={locale} prev={adjacent.prev} next={adjacent.next} />
     </>
   );
 }

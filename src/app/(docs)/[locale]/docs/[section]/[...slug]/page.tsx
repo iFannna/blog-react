@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import DocPager from "../../../../_components/DocPager";
+import Pager from "@/components/docs/Pager";
 import {
   getAdjacentPages,
   getDocStaticParams,
@@ -86,7 +86,7 @@ export default async function DocDetailPage({
         slug={meta.slug}
       />
 
-      <DocPager
+      <Pager
         locale={locale}
         prev={adjacent.prev}
         next={adjacent.next}

@@ -1,6 +1,6 @@
 import "server-only";
 
-import { DOC_NAV } from "@/app/(docs)/_components/nav-config";
+import { DOC_NAV } from "./nav-config";
 import type { DocLocale, DocsNavGroup, DocsNavItem } from "./types";
 
 const COMPONENT_SLUG = "components";

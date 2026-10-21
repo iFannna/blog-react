@@ -1,37 +1,37 @@
 import type { ReactNode } from "react";
-import DocsAside from "./DocsAside";
-import DocsHeader from "./DocsHeader";
-import { DocsI18nProvider } from "./DocsI18nProvider";
-import DocsSidebar from "./DocsSidebar";
+import Aside from "./Aside";
+import Header from "./Header";
+import { I18nProvider } from "./I18nProvider";
+import Sidebar from "./Sidebar";
 import type {
   DocLocale,
   DocsHeaderConfig,
   DocsNavGroup,
 } from "@/lib/docs/types";
 
-interface DocsLayoutProps {
+interface LayoutProps {
   children: ReactNode;
   header: DocsHeaderConfig;
   nav: DocsNavGroup[];
   locale: DocLocale;
 }
 
-export default function DocsLayout({
+export default function Layout({
   children,
   header,
   nav,
   locale,
-}: DocsLayoutProps) {
+}: LayoutProps) {
   const shell = (
     <div className="docs-shell">
-      <DocsHeader config={header} locale={locale} />
+      <Header config={header} locale={locale} />
       <div className="docs-layout">
-        <DocsSidebar groups={nav} />
+        <Sidebar groups={nav} />
         <main className="docs-content">{children}</main>
-        <DocsAside />
+        <Aside />
       </div>
     </div>
   );
 
-  return <DocsI18nProvider locale={locale}>{shell}</DocsI18nProvider>;
+  return <I18nProvider locale={locale}>{shell}</I18nProvider>;
 }

@@ -7,7 +7,7 @@ import { CaretTop } from "@/components/element-plus/icons";
 import type { DemoLang } from "@/lib/docs/types";
 import type { HighlightToken } from "@/lib/highlight";
 import { computeFoldRegions } from "./code-fold";
-import { useDocsMessages } from "./DocsI18nProvider";
+import { useDocsMessages } from "./I18nProvider";
 
 interface DemoBlockProps {
   /** 示例说明，对应官方 :::demo 后面那行文字 */

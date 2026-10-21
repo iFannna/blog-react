@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { DocsNavGroup } from "@/lib/docs/types";
 
-interface DocsSidebarProps {
+interface SidebarProps {
   groups: DocsNavGroup[];
 }
 
@@ -21,7 +21,7 @@ const MIN_THUMB_SIZE = 20;
  * 这里按官方 bar.vue / thumb.vue 的公式计算滑块高度与位移，
  * 尺寸和位置才能与官方逐像素一致，而不是简单地按比例估算。
  */
-export default function DocsSidebar({ groups }: DocsSidebarProps) {
+export default function Sidebar({ groups }: SidebarProps) {
   const pathname = usePathname();
   const sidebarRef = useRef<HTMLElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);

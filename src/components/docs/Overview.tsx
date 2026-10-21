@@ -6,8 +6,8 @@ import { Search } from "@/components/element-plus/icons/Search";
 import { OVERVIEW_ICONS } from "@/components/element-plus/overview-icons";
 import type { DocLocale } from "@/lib/docs/types";
 import { Heading } from "./Heading";
-import { DOC_NAV } from "./nav-config";
-import type { DocNavItem } from "./nav-config";
+import { DOC_NAV } from "@/lib/docs/nav-config";
+import type { DocNavItem } from "@/lib/docs/nav-config";
 
 const OVERVIEW_SLUG = "overview";
 
@@ -21,7 +21,7 @@ function getItemTitle(item: DocNavItem, locale: DocLocale): string {
   return locale === "zh-CN" ? (item.titleZh ?? item.title) : item.title;
 }
 
-export function OverviewContent({ locale }: { locale: DocLocale }) {
+export function Overview({ locale }: { locale: DocLocale }) {
   const [query, setQuery] = useState("");
   const searchRef = useRef<HTMLInputElement>(null);
 

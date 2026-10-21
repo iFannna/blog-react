@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
-import DocsLayout from "../../../_components/DocsLayout";
+import Layout from "@/components/docs/Layout";
 import { getSectionNav } from "@/lib/docs/content";
 import { getElementPlusSectionNav } from "@/lib/docs/element-plus-nav";
 import {
@@ -24,7 +24,7 @@ export default async function DocsSectionLayout({
   const isElementPlus = section === "element-plus";
 
   return (
-    <DocsLayout
+    <Layout
       header={
         isElementPlus
           ? getElementPlusHeaderConfig(locale)
@@ -38,6 +38,6 @@ export default async function DocsSectionLayout({
       locale={locale}
     >
       {children}
-    </DocsLayout>
+    </Layout>
   );
 }
