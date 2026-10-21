@@ -19,7 +19,7 @@ import {
   ensureLanguages,
   highlightTokens,
   type HighlightToken,
-} from "@/app/(docs)/_components/highlight";
+} from "@/lib/highlight";
 import { loadDemo, type LoadedDemo } from "./demos";
 import { DOCS_MESSAGES } from "./i18n";
 import {

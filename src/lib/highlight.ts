@@ -27,6 +27,16 @@ const LANGUAGE_LOADERS: Record<string, LanguageLoader> = {
   html: () => import("@shikijs/langs/html").then((module) => module.default),
   css: () => import("@shikijs/langs/css").then((module) => module.default),
   json: () => import("@shikijs/langs/json").then((module) => module.default),
+  go: () => import("@shikijs/langs/go").then((module) => module.default),
+  java: () => import("@shikijs/langs/java").then((module) => module.default),
+  python: () => import("@shikijs/langs/python").then((module) => module.default),
+  sql: () => import("@shikijs/langs/sql").then((module) => module.default),
+  yaml: () => import("@shikijs/langs/yaml").then((module) => module.default),
+  xml: () => import("@shikijs/langs/xml").then((module) => module.default),
+  markdown: () =>
+    import("@shikijs/langs/markdown").then((module) => module.default),
+  dockerfile: () =>
+    import("@shikijs/langs/dockerfile").then((module) => module.default),
 };
 
 const LANGUAGE_ALIASES: Record<string, string> = {
@@ -44,6 +54,20 @@ const LANGUAGE_ALIASES: Record<string, string> = {
   html: "html",
   css: "css",
   json: "json",
+  go: "go",
+  golang: "go",
+  java: "java",
+  py: "python",
+  python: "python",
+  sql: "sql",
+  mysql: "sql",
+  yaml: "yaml",
+  yml: "yaml",
+  xml: "xml",
+  md: "markdown",
+  markdown: "markdown",
+  dockerfile: "dockerfile",
+  docker: "dockerfile",
 };
 
 /** 未知语言回退为纯文本，避免 Shiki 抛错中断整页渲染 */
@@ -59,7 +83,7 @@ export function getHighlighter(): Promise<HighlighterCore> {
   highlighterPromise ??= createHighlighterCore({
     themes: [githubLight, githubDark],
     langs: [],
-    // JS 正则引擎避免在浏览器加载 oniguruma wasm
+    // JS 正则引擎避免加载 oniguruma wasm
     engine: createJavaScriptRegexEngine(),
   });
   return highlighterPromise;

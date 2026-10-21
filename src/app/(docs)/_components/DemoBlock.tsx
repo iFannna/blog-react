@@ -5,7 +5,7 @@ import { ElTooltip } from "@/components/element-plus/tooltip";
 import { message } from "@/components/element-plus/message";
 import { CaretTop } from "@/components/element-plus/icons";
 import type { DemoLang } from "@/lib/docs/types";
-import type { HighlightToken } from "./highlight";
+import type { HighlightToken } from "@/lib/highlight";
 import { computeFoldRegions } from "./code-fold";
 import { useDocsMessages } from "./DocsI18nProvider";
 
@@ -137,7 +137,7 @@ export default function DemoBlock({
     if (highlightStarted.current) return;
     highlightStarted.current = true;
 
-    void import("./highlight")
+    void import("@/lib/highlight")
       .then(({ highlight }) => highlight(source, lang))
       .then(setTokens)
       .catch(() => {
