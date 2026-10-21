@@ -41,25 +41,15 @@ export function getDocsHeaderConfig(locale: DocLocale): DocsHeaderConfig {
   return {
     logo: {
       kind: "text",
-      text: "Blog Docs",
+      text: "Documents",
       href: `/${locale}/docs`,
     },
     links: [
-      { text: zh ? "博客" : "Blog", href: `/${locale}` },
+      { text: zh ? "首页" : "Blog", href: `/${locale}` },
       {
         text: zh ? "文档" : "Docs",
         href: `/${locale}/docs`,
         activePrefix: `/${locale}/docs`,
-      },
-      {
-        text: "Element Plus",
-        href: `/${locale}/docs/element-plus/components/overview`,
-        activePrefix: `/${locale}/docs/element-plus`,
-      },
-      {
-        text: zh ? "官方文档" : "Official Docs",
-        href: "https://element-plus.org/zh-CN/component/overview",
-        external: true,
       },
     ],
   };
