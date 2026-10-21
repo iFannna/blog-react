@@ -31,6 +31,19 @@ function assignRef<T>(ref: Ref<T>, value: T | null) {
   else if (ref) (ref as MutableRefObject<T | null>).current = value;
 }
 
+/**
+ * 官方通过 useForwardRef 直接拿触发器根元素作为 popper 的 reference。
+ * DatePicker / TimePicker 为避免覆盖 ElInput 的 imperative handle，用了
+ * display: contents 包装节点；它没有布局盒、尺寸恒为 0，不能作为参照物，
+ * 这里下钻到实际渲染出的第一个元素。
+ */
+function resolveTriggerElement(node: HTMLElement | null) {
+  if (!node || getComputedStyle(node).display !== "contents") return node;
+
+  const child = node.firstElementChild;
+  return child instanceof HTMLElement ? child : null;
+}
+
 export type TooltipTrigger = "hover" | "click" | "focus" | "contextmenu";
 
 /**
@@ -562,7 +575,8 @@ export const ElTooltip = forwardRef<TooltipExpose, TooltipProps>(
       isValidElement(children) && !virtualTriggering
         ? cloneElement(children as ReactElement<Record<string, unknown>>, {
             ...mergeTriggerProps(children, triggerProps),
-            ref: (node: HTMLElement | null) => setTriggerEl(node),
+            ref: (node: HTMLElement | null) =>
+              setTriggerEl(resolveTriggerElement(node)),
           })
         : children;
 

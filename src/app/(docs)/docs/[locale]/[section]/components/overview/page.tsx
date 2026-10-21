@@ -50,20 +50,6 @@ export default async function ComponentsOverviewPage({
   return (
     <>
       <h1>{zh ? "Overview 组件总览" : "Overview"}</h1>
-      <p>
-        {zh ? (
-          <>
-            Element Plus 组件库基于 React 复刻，类名与 CSS 变量沿用官方
-            <code>el-*</code> 约定，样式直接编译自官方 theme-chalk。
-          </>
-        ) : (
-          <>
-            A React re-implementation of Element Plus. Class names and CSS
-            variables follow the official <code>el-*</code> conventions, with
-            styles compiled directly from the official theme-chalk.
-          </>
-        )}
-      </p>
       <OverviewContent locale={locale} />
       <DocPager locale={locale} prev={adjacent.prev} next={adjacent.next} />
     </>
