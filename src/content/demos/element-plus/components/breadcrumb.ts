@@ -2,14 +2,14 @@ import type { DemoManifest } from "@/lib/docs/types";
 
 const manifest: DemoManifest = {
   "breadcrumb/basic": {
-    load: () => import("@/components/element-plus/examples/breadcrumb"),
+    load: () => import("@/components/docs/examples/breadcrumb"),
     exportName: "BreadcrumbBasic",
-    sourceFile: "src/components/element-plus/examples/breadcrumb/index.tsx",
+    sourceFile: "src/components/docs/examples/breadcrumb/index.tsx",
   },
   "breadcrumb/icon": {
-    load: () => import("@/components/element-plus/examples/breadcrumb"),
+    load: () => import("@/components/docs/examples/breadcrumb"),
     exportName: "BreadcrumbIcon",
-    sourceFile: "src/components/element-plus/examples/breadcrumb/index.tsx",
+    sourceFile: "src/components/docs/examples/breadcrumb/index.tsx",
   },
 };
 

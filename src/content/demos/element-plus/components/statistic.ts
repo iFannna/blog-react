@@ -2,19 +2,19 @@ import type { DemoManifest } from "@/lib/docs/types";
 
 const manifest: DemoManifest = {
   "statistic/basic": {
-    load: () => import("@/components/element-plus/examples/statistic"),
+    load: () => import("@/components/docs/examples/statistic"),
     exportName: "StatisticBasic",
-    sourceFile: "src/components/element-plus/examples/statistic/index.tsx",
+    sourceFile: "src/components/docs/examples/statistic/index.tsx",
   },
   "statistic/countdown": {
-    load: () => import("@/components/element-plus/examples/statistic"),
+    load: () => import("@/components/docs/examples/statistic"),
     exportName: "StatisticCountdown",
-    sourceFile: "src/components/element-plus/examples/statistic/index.tsx",
+    sourceFile: "src/components/docs/examples/statistic/index.tsx",
   },
   "statistic/card": {
-    load: () => import("@/components/element-plus/examples/statistic"),
+    load: () => import("@/components/docs/examples/statistic"),
     exportName: "StatisticCard",
-    sourceFile: "src/components/element-plus/examples/statistic/index.tsx",
+    sourceFile: "src/components/docs/examples/statistic/index.tsx",
   },
 };
 

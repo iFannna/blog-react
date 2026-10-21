@@ -2,19 +2,19 @@ import type { DemoManifest } from "@/lib/docs/types";
 
 const manifest: DemoManifest = {
   "loading/basic": {
-    load: () => import("@/components/element-plus/examples/notification"),
+    load: () => import("@/components/docs/examples/notification"),
     exportName: "LoadingBasic",
-    sourceFile: "src/components/element-plus/examples/notification/index.tsx",
+    sourceFile: "src/components/docs/examples/notification/index.tsx",
   },
   "loading/customization": {
-    load: () => import("@/components/element-plus/examples/notification"),
+    load: () => import("@/components/docs/examples/notification"),
     exportName: "LoadingCustomization",
-    sourceFile: "src/components/element-plus/examples/notification/index.tsx",
+    sourceFile: "src/components/docs/examples/notification/index.tsx",
   },
   "loading/fullscreen": {
-    load: () => import("@/components/element-plus/examples/notification"),
+    load: () => import("@/components/docs/examples/notification"),
     exportName: "LoadingFullscreen",
-    sourceFile: "src/components/element-plus/examples/notification/index.tsx",
+    sourceFile: "src/components/docs/examples/notification/index.tsx",
   },
 };
 

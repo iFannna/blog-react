@@ -2,24 +2,24 @@ import type { DemoManifest } from "@/lib/docs/types";
 
 const manifest: DemoManifest = {
   "watermark/basic": {
-    load: () => import("@/components/element-plus/examples/watermark"),
+    load: () => import("@/components/docs/examples/watermark"),
     exportName: "WatermarkBasic",
-    sourceFile: "src/components/element-plus/examples/watermark/index.tsx",
+    sourceFile: "src/components/docs/examples/watermark/index.tsx",
   },
   "watermark/multi-line": {
-    load: () => import("@/components/element-plus/examples/watermark"),
+    load: () => import("@/components/docs/examples/watermark"),
     exportName: "WatermarkMultiLine",
-    sourceFile: "src/components/element-plus/examples/watermark/index.tsx",
+    sourceFile: "src/components/docs/examples/watermark/index.tsx",
   },
   "watermark/image": {
-    load: () => import("@/components/element-plus/examples/watermark"),
+    load: () => import("@/components/docs/examples/watermark"),
     exportName: "WatermarkImage",
-    sourceFile: "src/components/element-plus/examples/watermark/index.tsx",
+    sourceFile: "src/components/docs/examples/watermark/index.tsx",
   },
   "watermark/custom": {
-    load: () => import("@/components/element-plus/examples/watermark"),
+    load: () => import("@/components/docs/examples/watermark"),
     exportName: "WatermarkCustom",
-    sourceFile: "src/components/element-plus/examples/watermark/index.tsx",
+    sourceFile: "src/components/docs/examples/watermark/index.tsx",
   },
 };
 

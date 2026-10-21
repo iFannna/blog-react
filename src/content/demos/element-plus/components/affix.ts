@@ -2,19 +2,19 @@ import type { DemoManifest } from "@/lib/docs/types";
 
 const manifest: DemoManifest = {
   "affix/basic": {
-    load: () => import("@/components/element-plus/examples/affix"),
+    load: () => import("@/components/docs/examples/affix"),
     exportName: "AffixBasic",
-    sourceFile: "src/components/element-plus/examples/affix/index.tsx",
+    sourceFile: "src/components/docs/examples/affix/index.tsx",
   },
   "affix/target": {
-    load: () => import("@/components/element-plus/examples/affix"),
+    load: () => import("@/components/docs/examples/affix"),
     exportName: "AffixTarget",
-    sourceFile: "src/components/element-plus/examples/affix/index.tsx",
+    sourceFile: "src/components/docs/examples/affix/index.tsx",
   },
   "affix/fixed": {
-    load: () => import("@/components/element-plus/examples/affix"),
+    load: () => import("@/components/docs/examples/affix"),
     exportName: "AffixFixed",
-    sourceFile: "src/components/element-plus/examples/affix/index.tsx",
+    sourceFile: "src/components/docs/examples/affix/index.tsx",
   },
 };
 
