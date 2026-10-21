@@ -78,6 +78,10 @@ export default async function SiteLayout({
           label: "文档",
           children: [
             {
+              href: localePath(locale, "/docs/notes"),
+              label: "Notes",
+            },
+            {
               href: localePath(locale, "/docs/element-plus/components/overview"),
               label: "Element Plus",
             },
