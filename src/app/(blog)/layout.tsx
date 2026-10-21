@@ -7,6 +7,8 @@ import { ElLoadingContainer } from "@/components/element-plus/loading";
 import { ElConfigProvider } from "@/components/element-plus/config-provider";
 import { zhCn } from "@/components/element-plus/config-provider/locales";
 import { AuthProvider } from "@/hooks/auth";
+import "@/styles/element-plus/index.css";
+import "@/styles/element-plus/dark.css";
 import "../globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {

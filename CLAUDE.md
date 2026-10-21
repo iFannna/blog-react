@@ -11,7 +11,7 @@ Next.js 16 (App Router) 博客 + 文档前端。TypeScript strict；UI 全部用
 
 - 框架: Next.js 16 (App Router)
 - 语言: TypeScript (strict)
-- 样式: 博客 `src/app/globals.css`；文档 `src/components/docs/docs.css`；Element Plus 主题产物 `src/styles/element-plus/`
+- 样式: 博客 `src/app/globals.css`；文档 `src/components/docs/docs.css`；Element Plus 主题产物 `src/styles/element-plus/`（博客与文档根布局都加载）
 - HTTP: axios，Server Components 内通过 `src/services/` 直连后端，客户端走 `/api` 反向代理
 - 组件: Element Plus React 复刻 + 站点自有组件，不引入第三方 UI 库
 
