@@ -3,9 +3,8 @@
 import { useState, useEffect, useCallback } from "react";
 
 export default function ScrollTopButton() {
-  const [visible, setVisible] = useState(
-    () => typeof window !== "undefined" && window.scrollY > 450,
-  );
+  // 初始值必须与服务端一致，真实滚动位置在挂载后的 effect 中同步
+  const [visible, setVisible] = useState(false);
 
   const onScroll = useCallback(() => {
     const y =
