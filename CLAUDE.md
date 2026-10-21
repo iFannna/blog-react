@@ -43,9 +43,9 @@ src/
 │   ├── (docs)/[locale]/docs/ # 文档路由，URL /<locale>/docs/<section>/...
 │   └── (root)/               # 无语言前缀的入口，识别语言后跳转
 ├── components/
-│   ├── blog/                 # 博客组件（layout / article / common / auth / site）
-│   ├── docs/                 # 文档站基建（Layout / Header / Sidebar / DemoBlock）
-│   └── element-plus/         # Element Plus 复刻，examples/ 为文档示例，icons/ 为图标
+│   ├── blog/                 # 博客组件（layout / article / common / auth）
+│   ├── docs/                 # 文档站 UI（Layout / Header / Sidebar / DemoBlock）与 examples/ 文档示例
+│   └── element-plus/         # Element Plus 复刻；generated/ 为生成的图标
 ├── content/
 │   ├── docs/<locale>/        # Markdown 文档（element-plus/components、notes）
 │   └── demos/                # 示例清单（registry.generated.ts 为生成文件）
@@ -66,7 +66,8 @@ src/
 - 其余 TS/TSX 模块用 kebab-case：`src/lib/**`、`src/hooks/**`、`src/services/**`、`src/stores/**`、`src/utils/**`、`src/content/**`
 - 入口样式统一为 `src/styles/<scope>/index.css`；其余样式文件（局部 CSS、`*.module.css`）用 kebab-case
 - `src/app/**` 只放 Next.js 路由文件（`page.tsx`、`layout.tsx`、`route.ts` 等），组件放到 `src/components/**`
-- `src/components/element-plus/**` 是官方实现的 React 迁移，保留上游命名：组件 `ElXxx.tsx`，工具与 hook 用 `use-xxx.ts` / `xxx-utils.ts`，examples 与上游一致
+- `src/components/element-plus/**` 是官方实现的 React 迁移，保留上游命名：组件 `ElXxx.tsx`，工具与 hook 用 `use-xxx.ts` / `xxx-utils.ts`
+- 生成图标统一放 `src/components/element-plus/generated/`，不手动编辑；文档示例统一放 `src/components/docs/examples/`，不放进组件库
 
 ## 样式约定
 
