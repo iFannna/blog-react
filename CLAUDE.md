@@ -5,15 +5,15 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 # Blog React
 
-Next.js 16 (App Router) 博客前端。TypeScript strict，样式用 CSS 自定义属性，纯 React 不依赖 UI 组件库。
+Next.js 16 (App Router) 博客 + 文档前端。TypeScript strict；UI 全部用 React 手写，Element Plus 为源码级复刻而非第三方依赖；样式用 CSS 自定义属性。
 
 ## 技术栈
 
 - 框架: Next.js 16 (App Router)
 - 语言: TypeScript (strict)
-- 样式: CSS 自定义属性，集中维护在 `src/app/globals.css`
-- HTTP: axios，在 Server Components 内直接请求后端
-- 组件: 纯 React，不使用 UI 组件库
+- 样式: 博客 `src/app/globals.css`；文档 `src/components/docs/docs.css`；Element Plus 主题产物 `src/styles/element-plus/`
+- HTTP: axios，Server Components 内通过 `src/services/` 直连后端，客户端走 `/api` 反向代理
+- 组件: Element Plus React 复刻 + 站点自有组件，不引入第三方 UI 库
 
 ## 常用命令
 
@@ -38,29 +38,37 @@ npm run lint    # ESLint
 
 ```
 src/
-├── app/                # App Router 页面与布局（globals.css 也在此）
-│   ├── (blog)/         # 博客路由：archive / category / tag / author / search / ...
-│   └── (docs)/         # 文档站路由
-│       ├── _components/                   # 文档站基建（DemoBlock / 侧边栏 / 目录等，不参与路由）
-│       └── docs/element-plus/components/  # 组件文档页，URL /docs/element-plus/components/<slug>
+├── app/                      # 只放路由与根布局
+│   ├── (blog)/[locale]/      # 博客路由，URL /<locale>/...
+│   ├── (docs)/[locale]/docs/ # 文档路由，URL /<locale>/docs/<section>/...
+│   └── (root)/               # 无语言前缀的入口，识别语言后跳转
 ├── components/
-│   ├── blog/           # 博客自有组件（layout / article / common / auth / site）
-│   └── element-plus/   # Element Plus 复刻组件；examples/ 为文档示例
-├── lib/
-│   ├── api/            # 后端 API 客户端（article / category / tag / search / site / comment / client）
-│   ├── utils.ts        # 工具函数
-│   ├── useTheme.ts     # 主题切换
-│   └── mock-data.ts    # 本地兜底数据
-└── types/              # api = 后端 VO（snake_case），ui = 前端模型（camelCase）
+│   ├── blog/                 # 博客组件（layout / article / common / auth / site）
+│   ├── docs/                 # 文档站基建（Layout / Header / Sidebar / DemoBlock / docs.css）
+│   └── element-plus/         # Element Plus 复刻，examples/ 为文档示例，icons/ 为图标
+├── content/
+│   ├── docs/<locale>/        # Markdown 文档（element-plus/components、notes）
+│   └── demos/                # 示例清单（registry.generated.ts 为生成文件）
+├── services/                 # 后端请求，以及 VO → UI 模型映射
+├── lib/                      # 文档管线、locale、Shiki 高亮
+├── hooks/  stores/  utils/  types/  styles/
 ```
 
-默认 Server Components，需要交互的组件加 `"use client"`。API 层（`lib/api/`）负责把后端 snake_case VO 映射为前端 camelCase 模型（定义在 `types/ui.ts`），组件只消费 ui 模型。
+默认 Server Components，需要交互的组件加 `"use client"`。`src/services/` 负责请求后端，并把 `types/api.ts` 的 snake_case VO 映射为 `types/models.ts` 的 camelCase 模型，组件只消费 UI 模型。
+
+## 文件命名约定
+
+- 站点自有组件（`src/components/blog/**`、`src/components/docs/**`）用 PascalCase，且与主导出同名（默认导出或主要命名导出），如 `Layout.tsx`、`CommentsPanel.tsx`
+- 其余 TS/TSX 模块用 kebab-case：`src/lib/**`、`src/hooks/**`、`src/services/**`、`src/stores/**`、`src/utils/**`、`src/content/**`
+- 样式文件用 kebab-case：`docs.css`、`*.module.css`
+- `src/app/**` 只放 Next.js 路由文件（`page.tsx`、`layout.tsx`、`route.ts` 等），组件放到 `src/components/**`
+- `src/components/element-plus/**` 是官方实现的 React 迁移，保留上游命名：组件 `ElXxx.tsx`，工具与 hook 用 `use-xxx.ts` / `xxx-utils.ts`，examples 与上游一致
 
 ## 样式约定
 
 - 设计 token（颜色/间距/圆角/阴影）用 CSS 变量定义在 `globals.css` 的 `:root`；暗色模式用 `[data-theme="dark"]` 覆盖变量，不用 class 切换
-- 布局用自定义 CSS class，复杂组件样式写在 `globals.css`
-- 禁止 `<style>` 标签或内联 style 对象
+- 布局用自定义 CSS class，博客样式写在 `globals.css`，文档样式写在 `docs.css`
+- 禁止 `<style>` 标签；内联 style 仅用于 Shiki token 配色等无法用 class 表达的场景
 - 禁止硬编码颜色/间距/圆角，统一用 `var(--color-*)` 等 CSS 变量
 - 尽量不用 `!important`，优先提高选择器特异性（加 class 层级、用 `:not()`）
 - `html { font-size: 100% }` → 1rem = 16px，所有 rem 基于此换算
