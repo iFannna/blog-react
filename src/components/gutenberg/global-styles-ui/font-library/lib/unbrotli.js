@@ -32,12 +32,11 @@ export default ( function () {
 	var define, module, exports;
 	return ( function () {
 		function r( e, n, t ) {
-			function o( i, f ) {
+			function o( i ) {
 				if ( ! n[ i ] ) {
 					if ( ! e[ i ] ) {
-						var c = 'function' == typeof require && require;
-						if ( ! f && c ) return c( i, ! 0 );
-						if ( u ) return u( i, ! 0 );
+						// 依赖已全部打进下方的模块表，browserify 的外层 require 回退在这里不可达；
+						// 保留会因为 require( i ) 的实参不是字面量而每次编译报 TP1002，故移除。
 						var a = new Error( "Cannot find module '" + i + "'" );
 						throw ( ( a.code = 'MODULE_NOT_FOUND' ), a );
 					}
@@ -58,12 +57,7 @@ export default ( function () {
 				}
 				return n[ i ].exports;
 			}
-			for (
-				var u = 'function' == typeof require && require, i = 0;
-				i < t.length;
-				i++
-			)
-				o( t[ i ] );
+			for ( var i = 0; i < t.length; i++ ) o( t[ i ] );
 			return o;
 		}
 		return r;

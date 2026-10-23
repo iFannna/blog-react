@@ -13,9 +13,20 @@ import { useContext, useState } from '@/lib/gutenberg/element';
 import type { FontFace } from '@/stores/gutenberg/core-data';
 import { ALLOWED_FILE_EXTENSIONS } from './utils/constants';
 import { FontLibraryContext } from './context';
-import { Font } from './lib/lib-font.browser';
+import type { Font } from './lib/lib-font.browser';
 import makeFamiliesFromFaces from './utils/make-families-from-faces';
 import { loadFontFaceInBrowser } from './utils';
+
+// lib-font 自带 pako/brotli 解码器（约 378 KB），只有解析上传文件时才用得到，
+// 静态引入会把它们打进编辑器首屏 chunk。
+let libFontModule: Promise< typeof import( './lib/lib-font.browser' ) > | undefined;
+
+function loadLibFont() {
+	if ( ! libFontModule ) {
+		libFontModule = import( './lib/lib-font.browser' );
+	}
+	return libFontModule;
+}
 
 function UploadFonts() {
 	const { installFonts } = useContext( FontLibraryContext );
@@ -119,7 +130,8 @@ function UploadFonts() {
 	 * @return {boolean} Whether the file is a valid font file.
 	 */
 	async function isFontFile( file: File ) {
-		const font = new Font( 'Uploaded Font' );
+		const { Font: FontClass } = await loadLibFont();
+		const font = new FontClass( 'Uploaded Font' );
 		try {
 			const buffer = await readFileAsArrayBuffer( file );
 			await font.fromDataBuffer( buffer, 'font' );
@@ -141,9 +153,10 @@ function UploadFonts() {
 
 	const getFontFaceMetadata = async ( fontFile: File ) => {
 		const buffer = await readFileAsArrayBuffer( fontFile );
+		const { Font: FontClass } = await loadLibFont();
 		const fontObj: Font & {
 			onload?: ( val: { detail: { font: any } } ) => void;
-		} = new Font( 'Uploaded Font' );
+		} = new FontClass( 'Uploaded Font' );
 		fontObj.fromDataBuffer( buffer, fontFile.name );
 		// Assuming that fromDataBuffer triggers onload event and returning a Promise
 		const onloadEvent: { detail: { font: any } } = await new Promise(
