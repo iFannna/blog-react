@@ -273,8 +273,10 @@
   ],
   "exclude": [
     "node_modules",
-    "packages/**/stories/**",
-    "packages/**/*.story.*",
-    "packages/**/bin/**"
+    "src/**/stories/**",
+    "src/**/*.story.*",
+    "src/**/__tests__/**",
+    "src/**/*.test.*",
+    "src/**/test/**"
   ]
 }
