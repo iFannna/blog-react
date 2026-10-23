@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { Spinner as WCSpinner } from '@wordpress/components';
-import { useResizeObserver } from '@wordpress/compose';
-import { ImageCropper as ImageCropperComponent } from '@wordpress/image-cropper';
+import { Spinner as WCSpinner } from '@/components/gutenberg/ui';
+import { useResizeObserver } from '@/hooks/gutenberg/compose';
+import { ImageCropper as ImageCropperComponent } from '@/components/gutenberg/image-cropper';
 import { useImageEditingContext } from './context';
 import type { ImageEditorCropperProps } from './types';
 

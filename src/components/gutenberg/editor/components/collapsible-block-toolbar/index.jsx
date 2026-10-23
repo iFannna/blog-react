@@ -3,12 +3,12 @@ import {
 	BlockToolbar,
 	store as blockEditorStore,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { useEffect } from '@wordpress/element';
-import { Button, Popover } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { next, previous } from '@wordpress/icons';
-import { useSelect } from '@wordpress/data';
+} from '@/components/gutenberg/block-editor';
+import { useEffect } from '@/lib/gutenberg/element';
+import { Button, Popover } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { next, previous } from '@/components/gutenberg/icons';
+import { useSelect } from '@/stores/gutenberg/data';
 import { unlock } from '../../lock-unlock';
 
 const { useHasBlockToolbar } = unlock( blockEditorPrivateApis );

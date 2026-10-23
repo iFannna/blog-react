@@ -1,4 +1,4 @@
-import { renderToString } from '@wordpress/element';
+import { renderToString } from '@/lib/gutenberg/element';
 import { convertLegacyBlockNameAndAttributes } from './parser/convert-legacy-block';
 import { createBlock } from './factory';
 import { getBlockType } from './registration';

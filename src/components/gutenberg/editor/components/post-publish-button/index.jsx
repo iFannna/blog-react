@@ -1,5 +1,5 @@
-import { Button } from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { Button } from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import PublishButtonLabel from './label';
 import { store as editorStore } from '../../store';
 

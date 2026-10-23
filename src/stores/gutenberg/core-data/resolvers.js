@@ -1,7 +1,7 @@
 import { camelCase } from 'change-case';
-import { addQueryArgs } from '@wordpress/url';
-import { decodeEntities } from '@wordpress/html-entities';
-import apiFetch from '@wordpress/api-fetch';
+import { addQueryArgs } from '@/utils/gutenberg/url';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import apiFetch from '@/services/gutenberg/api-fetch';
 import { STORE_NAME } from './name';
 import { additionalEntityConfigLoaders, DEFAULT_ENTITY_KEY } from './entities';
 import { getEntitySyncManager } from './entity-sync';

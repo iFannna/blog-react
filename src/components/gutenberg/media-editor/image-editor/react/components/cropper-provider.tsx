@@ -1,4 +1,4 @@
-import { createContext, useContext } from '@wordpress/element';
+import { createContext, useContext } from '@/lib/gutenberg/element';
 import {
 	useCropperReducer,
 	type CropperController,

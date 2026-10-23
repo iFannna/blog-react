@@ -1,7 +1,7 @@
-import { useEffect } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
-import { store as noticesStore } from '@wordpress/notices';
-import type { Field } from '@wordpress/dataviews';
+import { useEffect } from '@/lib/gutenberg/element';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import type { Field } from '@/components/gutenberg/dataviews';
 import type { BasePostWithEmbeddedAuthor } from '../../dataviews/types';
 import { unlock } from '../../lock-unlock';
 import { store as editorStore } from '../../store';

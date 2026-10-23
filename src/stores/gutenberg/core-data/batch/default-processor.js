@@ -1,4 +1,4 @@
-import apiFetch from '@wordpress/api-fetch';
+import apiFetch from '@/services/gutenberg/api-fetch';
 
 /**
  * Maximum number of requests to place in a single batch request. Obtained by

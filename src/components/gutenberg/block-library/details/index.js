@@ -1,5 +1,5 @@
-import { details as icon } from '@wordpress/icons';
-import { __, sprintf } from '@wordpress/i18n';
+import { details as icon } from '@/components/gutenberg/icons';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import initBlock from '../utils/init-block';
 import metadata from './block.json';
 import edit from './edit';

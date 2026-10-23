@@ -1,4 +1,4 @@
-import { createContext } from '@wordpress/element';
+import { createContext } from '@/lib/gutenberg/element';
 
 type ShortcutCallback = ( event: KeyboardEvent ) => void;
 

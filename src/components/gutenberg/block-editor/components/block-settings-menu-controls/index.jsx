@@ -2,9 +2,9 @@ import {
 	createSlotFill,
 	MenuGroup,
 	__experimentalStyleProvider as StyleProvider,
-} from '@wordpress/components';
-import { hasBlockSupport } from '@wordpress/blocks';
-import { useSelect } from '@wordpress/data';
+} from '@/components/gutenberg/ui';
+import { hasBlockSupport } from '@/lib/gutenberg/blocks';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	useConvertToGroupButtonProps,
 	ConvertToGroupButton,

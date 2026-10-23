@@ -1,15 +1,15 @@
-import { Disabled } from '@wordpress/components';
+import { Disabled } from '@/components/gutenberg/ui';
 import {
 	BlockList,
 	privateApis as blockEditorPrivateApis,
 	store as blockEditorStore,
 	__unstableEditorStyles as EditorStyles,
 	__unstableIframe as Iframe,
-} from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { useMemo, forwardRef } from '@wordpress/element';
-import { useGlobalStylesRevisions } from '@wordpress/global-styles-ui';
-import { mergeGlobalStyles } from '@wordpress/global-styles-engine';
+} from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo, forwardRef } from '@/lib/gutenberg/element';
+import { useGlobalStylesRevisions } from '@/components/gutenberg/global-styles-ui';
+import { mergeGlobalStyles } from '@/lib/gutenberg/global-styles-engine';
 import { useGlobalStyles } from '../global-styles/hooks';
 import { useGlobalStylesOutputWithConfig } from '../../hooks/use-global-styles-output';
 import { unlock } from '../../lock-unlock';

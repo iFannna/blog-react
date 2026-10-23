@@ -1,9 +1,9 @@
-import { useSelect } from '@wordpress/data';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	store as blockEditorStore,
 	useStyleOverride,
-} from '@wordpress/block-editor';
-import { store as coreStore } from '@wordpress/core-data';
+} from '@/components/gutenberg/block-editor';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import {
 	findNoteInBlock,
 	getAvatarBorderColor,

@@ -1,7 +1,7 @@
-import { useState } from '@wordpress/element';
-import { useRegistry, createRegistry, RegistryProvider } from '@wordpress/data';
-import { createHigherOrderComponent } from '@wordpress/compose';
-import { storeConfig as blockEditorStoreConfig } from '@wordpress/block-editor';
+import { useState } from '@/lib/gutenberg/element';
+import { useRegistry, createRegistry, RegistryProvider } from '@/stores/gutenberg/data';
+import { createHigherOrderComponent } from '@/hooks/gutenberg/compose';
+import { storeConfig as blockEditorStoreConfig } from '@/components/gutenberg/block-editor';
 import { storeConfig } from '../../store';
 
 function getSubRegistry( subRegistries, registry, useSubRegistry ) {

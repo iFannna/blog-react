@@ -1,4 +1,4 @@
-import type { ResolutionStatus } from '@wordpress/data';
+import type { ResolutionStatus } from '@/stores/gutenberg/data';
 import { Status } from './constants';
 
 /**

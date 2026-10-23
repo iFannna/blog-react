@@ -1,7 +1,7 @@
-import { getBlockSupport, hasBlockSupport } from '@wordpress/blocks';
-import { useMemo, useCallback } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
+import { getBlockSupport, hasBlockSupport } from '@/lib/gutenberg/blocks';
+import { useMemo, useCallback } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
 import InspectorControls from '../components/inspector-controls';
 import {
 	default as StylesTypographyPanel,

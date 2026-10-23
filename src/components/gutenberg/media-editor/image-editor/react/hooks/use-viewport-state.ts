@@ -1,4 +1,4 @@
-import { useReducer, useCallback, useMemo } from '@wordpress/element';
+import { useReducer, useCallback, useMemo } from '@/lib/gutenberg/element';
 import type { ViewportState } from '../../core/types';
 import {
 	viewportReducer,

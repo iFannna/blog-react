@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import { isBlobURL } from '@wordpress/blob';
+import { isBlobURL } from '@/utils/gutenberg/blob';
 import {
 	Spinner as WCSpinner,
 	Placeholder,
 	__experimentalToolsPanel as ToolsPanel,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	BlockControls,
 	BlockIcon,
@@ -15,15 +15,15 @@ import {
 	useBlockEditingMode,
 	__experimentalGetDimensionsClassesAndStyles as getDimensionsClassesAndStyles,
 	__experimentalGetShadowClassesAndStyles as getShadowClassesAndStyles,
-} from '@wordpress/block-editor';
-import { useRef, useEffect, useState } from '@wordpress/element';
-import { useReducedMotion } from '@wordpress/compose';
-import { __ } from '@wordpress/i18n';
-import { inertValue } from '@wordpress/react-inert-value';
-import { useDispatch } from '@wordpress/data';
-import { video as icon } from '@wordpress/icons';
-import { store as noticesStore } from '@wordpress/notices';
-import { prependHTTPS } from '@wordpress/url';
+} from '@/components/gutenberg/block-editor';
+import { useRef, useEffect, useState } from '@/lib/gutenberg/element';
+import { useReducedMotion } from '@/hooks/gutenberg/compose';
+import { __ } from '@/lib/gutenberg/i18n';
+import { inertValue } from '@/hooks/gutenberg/react-inert-value';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { video as icon } from '@/components/gutenberg/icons';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { prependHTTPS } from '@/utils/gutenberg/url';
 import { createUpgradedEmbedBlock } from '../embed/util';
 import {
 	useUploadMediaFromBlobURL,

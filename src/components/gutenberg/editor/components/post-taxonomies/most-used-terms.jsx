@@ -1,6 +1,6 @@
-import { BaseControl, Button } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+import { BaseControl, Button } from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { unescapeTerms } from '../../utils/terms';
 
 const MIN_MOST_USED_TERMS = 3;

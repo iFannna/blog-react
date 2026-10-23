@@ -1,7 +1,7 @@
-import { __ } from '@wordpress/i18n';
-import { Link } from '@wordpress/ui';
-import type { Field } from '@wordpress/dataviews';
-import type { Attachment, Updatable } from '@wordpress/core-data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Link } from '@/components/gutenberg/design-system';
+import type { Field } from '@/components/gutenberg/dataviews';
+import type { Attachment, Updatable } from '@/stores/gutenberg/core-data';
 
 const altTextField: Partial< Field< Updatable< Attachment > > > = {
 	id: 'alt_text',

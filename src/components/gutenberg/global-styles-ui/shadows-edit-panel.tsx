@@ -12,11 +12,11 @@ import {
 	Button,
 	FlexItem,
 	ColorPalette,
-} from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
-import { plus, shadow as shadowIcon, reset } from '@wordpress/icons';
-import { useState, useMemo, useEffect, useRef } from '@wordpress/element';
-import { Stack } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { plus, shadow as shadowIcon, reset } from '@/components/gutenberg/icons';
+import { useState, useMemo, useEffect, useRef } from '@/lib/gutenberg/element';
+import { Stack } from '@/components/gutenberg/design-system';
 import { Subtitle } from './subtitle';
 import { ScreenBody } from './screen-body';
 import { defaultShadow } from './shadows-panel';

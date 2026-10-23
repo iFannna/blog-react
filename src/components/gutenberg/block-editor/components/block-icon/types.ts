@@ -1,4 +1,4 @@
-import type { BlockTypeIcon } from '@wordpress/blocks';
+import type { BlockTypeIcon } from '@/lib/gutenberg/blocks';
 
 export interface BlockIconProps {
 	icon?: BlockTypeIcon | null;

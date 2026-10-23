@@ -1,15 +1,15 @@
-import { useState, memo } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
+import { useState, memo } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	BlockContextProvider,
 	useBlockProps,
 	useInnerBlocksProps,
 	store as blockEditorStore,
 	__experimentalUseBlockPreview as useBlockPreview,
-} from '@wordpress/block-editor';
-import { Spinner as WCSpinner } from '@wordpress/components';
-import { store as coreStore } from '@wordpress/core-data';
+} from '@/components/gutenberg/block-editor';
+import { Spinner as WCSpinner } from '@/components/gutenberg/ui';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { useCommentQueryArgs, useCommentTree } from './hooks';
 
 /**

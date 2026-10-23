@@ -1,11 +1,11 @@
-import { createSelector, createRegistrySelector } from '@wordpress/data';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { store as coreStore } from '@wordpress/core-data';
+import { createSelector, createRegistrySelector } from '@/stores/gutenberg/data';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import {
 	store as editorStore,
 	privateApis as editorPrivateApis,
-} from '@wordpress/editor';
-import deprecated from '@wordpress/deprecated';
+} from '@/components/gutenberg/editor';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { unlock } from '../lock-unlock';
 const { interfaceStore } = unlock( editorPrivateApis );
 const EMPTY_ARRAY = [];

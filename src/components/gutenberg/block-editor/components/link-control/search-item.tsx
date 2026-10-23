@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { MenuItem, TextHighlight } from '@wordpress/components';
+import { __ } from '@/lib/gutenberg/i18n';
+import { MenuItem, TextHighlight } from '@/components/gutenberg/ui';
 import {
 	Icon,
 	globe,
@@ -10,11 +10,11 @@ import {
 	file,
 	home,
 	verse,
-} from '@wordpress/icons';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
-import { safeDecodeURI, filterURLForDisplay, getPath } from '@wordpress/url';
-import { pipe } from '@wordpress/compose';
-import deprecated from '@wordpress/deprecated';
+} from '@/components/gutenberg/icons';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
+import { safeDecodeURI, filterURLForDisplay, getPath } from '@/utils/gutenberg/url';
+import { pipe } from '@/hooks/gutenberg/compose';
+import deprecated from '@/utils/gutenberg/deprecated';
 import type { ComponentProps } from 'react';
 import type {
 	LinkControlSearchItemProps,

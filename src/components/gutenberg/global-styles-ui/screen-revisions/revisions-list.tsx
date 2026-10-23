@@ -1,17 +1,17 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { dateI18n, getDate, humanTimeDiff, getSettings } from '@wordpress/date';
-import { store as coreStore } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
-import { getGlobalStylesChanges } from '@wordpress/global-styles-engine';
-import { DataViewsPicker } from '@wordpress/dataviews';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { dateI18n, getDate, humanTimeDiff, getSettings } from '@/lib/gutenberg/date';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
+import { getGlobalStylesChanges } from '@/lib/gutenberg/global-styles-engine';
+import { DataViewsPicker } from '@/components/gutenberg/dataviews';
 import type {
 	ActionButton,
 	Field,
 	SupportedLayouts,
 	View,
-} from '@wordpress/dataviews';
-import { Badge } from '@wordpress/ui';
+} from '@/components/gutenberg/dataviews';
+import { Badge } from '@/components/gutenberg/design-system';
 import type { Revision } from './types';
 
 const DAY_IN_MILLISECONDS = 60 * 60 * 1000 * 24;

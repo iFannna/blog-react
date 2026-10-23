@@ -4,14 +4,14 @@ import {
 	Spinner as WCSpinner,
 	__unstableMotion as motion,
 	__unstableAnimatePresence as AnimatePresence,
-} from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { __, _x } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import {
 	store as blockEditorStore,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { useState } from '@wordpress/element';
+} from '@/components/gutenberg/block-editor';
+import { useState } from '@/lib/gutenberg/element';
 import { unlock } from '../../lock-unlock';
 
 const { mediaSideloadFromUrlKey } = unlock( blockEditorPrivateApis );

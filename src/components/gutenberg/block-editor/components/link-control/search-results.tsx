@@ -1,7 +1,7 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { MenuGroup } from '@wordpress/components';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { MenuGroup } from '@/components/gutenberg/ui';
 import clsx from 'clsx';
-import deprecated from '@wordpress/deprecated';
+import deprecated from '@/utils/gutenberg/deprecated';
 import LinkControlSearchCreate from './search-create-button';
 import LinkControlSearchItem from './search-item';
 import { CREATE_TYPE, LINK_ENTRY_TYPES } from './constants';

@@ -12,7 +12,7 @@ export type { MediaPreviewProps } from './components/media-preview';
 export type { MediaFormProps } from './components/media-form';
 
 // Re-export commonly used dataviews types for convenience
-export type { Field, Form } from '@wordpress/dataviews';
+export type { Field, Form } from '@/components/gutenberg/dataviews';
 
 // Private APIs (experimental — not for use outside of core packages).
 export { privateApis } from './private-apis';

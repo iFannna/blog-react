@@ -1,39 +1,29 @@
-import { Menu as _Menu } from '@base-ui/react/menu';
 import clsx from 'clsx';
-import { forwardRef } from '@wordpress/element';
-import { MenuGroupContext, useMenuGroupContext } from './context';
-import styles from './style.module.css';
+import * as Ariakit from '@ariakit/react';
+import { forwardRef, useContext } from '@/lib/gutenberg/element';
+import type { WordPressComponentProps } from '../context';
+import { Context } from './context';
 import type { GroupProps } from './types';
+import styles from './style.module.css';
 
-/**
- * Groups related menu items with a corresponding label.
- *
- * Use `Menu.RadioGroup` instead for radio items. Do not nest `Menu.Group` and
- * `Menu.RadioGroup` within each other in the same menu. They can be siblings.
- */
-const Group = forwardRef< HTMLDivElement, GroupProps >( function MenuGroup(
-	{ className, ...props },
-	ref
-) {
-	const parentGroup = useMenuGroupContext();
-	if (
-		process.env.NODE_ENV !== 'production' &&
-		parentGroup === 'radio-group'
-	) {
+export const Group = forwardRef<
+	HTMLDivElement,
+	WordPressComponentProps< GroupProps, 'div', false >
+>( function UnforwardedGroup( { className, ...props }, ref ) {
+	const menuContext = useContext( Context );
+
+	if ( ! menuContext?.store ) {
 		throw new Error(
-			'Menu.Group: Cannot be nested inside Menu.RadioGroup. Remove Menu.Group and put Menu.GroupLabel and Menu.RadioItem directly inside Menu.RadioGroup.'
+			'Menu.Group can only be rendered inside a Menu component'
 		);
 	}
 
 	return (
-		<MenuGroupContext.Provider value="group">
-			<_Menu.Group
-				ref={ ref }
-				className={ clsx( styles.group, className ) }
-				{ ...props }
-			/>
-		</MenuGroupContext.Provider>
+		<Ariakit.MenuGroup
+			ref={ ref }
+			{ ...props }
+			className={ clsx( styles.group, className ) }
+			store={ menuContext.store }
+		/>
 	);
 } );
-
-export { Group };

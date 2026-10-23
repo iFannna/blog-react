@@ -1,6 +1,6 @@
-import { useRefEffect } from '@wordpress/compose';
-import { computeCaretRect, getScrollContainer } from '@wordpress/dom';
-import { UP, DOWN, LEFT, RIGHT } from '@wordpress/keycodes';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { computeCaretRect, getScrollContainer } from '@/utils/gutenberg/dom';
+import { UP, DOWN, LEFT, RIGHT } from '@/utils/gutenberg/keycodes';
 import type { TypewriterProps } from './types';
 
 const isIE = window.navigator.userAgent.indexOf( 'Trident' ) !== -1;

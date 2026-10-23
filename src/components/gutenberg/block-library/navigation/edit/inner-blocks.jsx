@@ -1,11 +1,11 @@
-import { useEntityBlockEditor } from '@wordpress/core-data';
+import { useEntityBlockEditor } from '@/stores/gutenberg/core-data';
 import {
 	useInnerBlocksProps,
 	InnerBlocks,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
+} from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
 import PlaceholderPreview from './placeholder/placeholder-preview';
 import { DEFAULT_BLOCK, PRIORITIZED_INSERTER_BLOCKS } from '../constants';
 

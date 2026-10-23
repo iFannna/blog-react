@@ -1,4 +1,4 @@
-import { useBlockProps, getSpacingPresetCssVar } from '@wordpress/block-editor';
+import { useBlockProps, getSpacingPresetCssVar } from '@/components/gutenberg/block-editor';
 
 export default function save( { attributes } ) {
 	const { height, width, style } = attributes;

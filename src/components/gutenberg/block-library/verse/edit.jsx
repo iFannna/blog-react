@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n';
-import { RichText, useBlockProps } from '@wordpress/block-editor';
-import { createBlock, getDefaultBlockName } from '@wordpress/blocks';
+import { __ } from '@/lib/gutenberg/i18n';
+import { RichText, useBlockProps } from '@/components/gutenberg/block-editor';
+import { createBlock, getDefaultBlockName } from '@/lib/gutenberg/blocks';
 import useDeprecatedTextAlign from '../utils/deprecated-text-align-attributes';
 
 export default function VerseEdit( props ) {

@@ -1,4 +1,4 @@
-import { Path, SVG } from '@wordpress/components';
+import { Path, SVG } from '@/components/gutenberg/ui';
 
 export const ItemSubmenuIcon = () => (
 	<SVG

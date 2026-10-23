@@ -1,5 +1,5 @@
 import type { DependencyList, RefCallback } from 'react';
-import { useCallback, useRef } from '@wordpress/element';
+import { useCallback, useRef } from '@/lib/gutenberg/element';
 
 /**
  * Effect-like ref callback. Just like with `useEffect`, this allows you to

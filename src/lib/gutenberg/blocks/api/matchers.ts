@@ -1,5 +1,5 @@
 export { attr, prop, text, query } from 'hpq';
-import { RichTextData } from '@wordpress/rich-text';
+import { RichTextData } from '@/components/gutenberg/rich-text';
 export { matcher as node } from './node';
 export { matcher as children } from './children';
 

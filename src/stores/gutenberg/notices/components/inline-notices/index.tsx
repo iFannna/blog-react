@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import clsx from 'clsx';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { Children } from '@wordpress/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { Children } from '@/lib/gutenberg/element';
 import { store as noticesStore } from '../../store';
 import type { Notice } from '../../store/types';
 import InlineNotice from './inline-notice';

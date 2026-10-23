@@ -1,5 +1,5 @@
 import { isValid as isValidDate } from 'date-fns';
-import { getDate } from '@wordpress/date';
+import { getDate } from '@/lib/gutenberg/date';
 import type { NormalizedField } from '../../types';
 import parseTime from './parse-time';
 

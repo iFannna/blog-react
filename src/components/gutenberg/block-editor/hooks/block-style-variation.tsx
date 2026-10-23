@@ -1,11 +1,11 @@
-import { getBlockTypes, store as blocksStore } from '@wordpress/blocks';
-import { useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
+import { getBlockTypes, store as blocksStore } from '@/lib/gutenberg/blocks';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
 import {
 	toStyles,
 	getBlockSelectors,
 	privateApis as globalStylesEnginePrivateApis,
-} from '@wordpress/global-styles-engine';
+} from '@/lib/gutenberg/global-styles-engine';
 import { usePrivateStyleOverride } from './utils';
 import { store as blockEditorStore } from '../store';
 import { globalStylesDataKey } from '../store/private-keys';

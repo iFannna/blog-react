@@ -1,6 +1,6 @@
-import { Notice, Button } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { createInterpolateElement } from '@wordpress/element';
+import { Notice, Button } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { createInterpolateElement } from '@/lib/gutenberg/element';
 
 /**
  * Warning displayed when a selected overlay template part has been deleted.

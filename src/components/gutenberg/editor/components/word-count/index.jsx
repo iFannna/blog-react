@@ -1,6 +1,6 @@
-import { useSelect } from '@wordpress/data';
-import { _x } from '@wordpress/i18n';
-import { count as wordCount } from '@wordpress/wordcount';
+import { useSelect } from '@/stores/gutenberg/data';
+import { _x } from '@/lib/gutenberg/i18n';
+import { count as wordCount } from '@/utils/gutenberg/wordcount';
 import { store as editorStore } from '../../store';
 
 /**

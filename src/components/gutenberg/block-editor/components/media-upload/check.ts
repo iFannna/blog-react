@@ -1,4 +1,4 @@
-import { useSelect } from '@wordpress/data';
+import { useSelect } from '@/stores/gutenberg/data';
 import { store as blockEditorStore } from '../../store';
 import type { MediaUploadCheckProps } from './types';
 

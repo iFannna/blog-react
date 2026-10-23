@@ -4,12 +4,12 @@ import {
 	useMergeRefs,
 	useRefEffect,
 	__experimentalUseFixedWindowList as useFixedWindowList,
-} from '@wordpress/compose';
-import { isShallowEqual } from '@wordpress/is-shallow-equal';
-import { __experimentalTreeGrid as TreeGrid } from '@wordpress/components';
-import { VisuallyHidden } from '@wordpress/ui';
-import { AsyncModeProvider, useSelect } from '@wordpress/data';
-import deprecated from '@wordpress/deprecated';
+} from '@/hooks/gutenberg/compose';
+import { isShallowEqual } from '@/utils/gutenberg/is-shallow-equal';
+import { __experimentalTreeGrid as TreeGrid } from '@/components/gutenberg/ui';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
+import { AsyncModeProvider, useSelect } from '@/stores/gutenberg/data';
+import deprecated from '@/utils/gutenberg/deprecated';
 import {
 	useCallback,
 	useMemo,
@@ -17,8 +17,8 @@ import {
 	useReducer,
 	forwardRef,
 	useState,
-} from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+} from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import ListViewBranch from './branch';
 import {
 	ListViewContext,

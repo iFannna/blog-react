@@ -1,4 +1,4 @@
-import { createSlotFill } from '@wordpress/components';
+import { createSlotFill } from '@/components/gutenberg/ui';
 
 /**
  * Slot in the View group of the editor's Options menu, before Panels, that the

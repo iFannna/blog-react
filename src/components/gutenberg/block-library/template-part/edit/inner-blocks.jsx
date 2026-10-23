@@ -1,14 +1,14 @@
-import { useEntityBlockEditor, store as coreStore } from '@wordpress/core-data';
+import { useEntityBlockEditor, store as coreStore } from '@/stores/gutenberg/core-data';
 import {
 	InnerBlocks,
 	useInnerBlocksProps,
 	useSettings,
 	store as blockEditorStore,
 	useBlockEditingMode,
-} from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
-import { parse } from '@wordpress/blocks';
+} from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
+import { parse } from '@/lib/gutenberg/blocks';
 
 function useRenderAppender( hasInnerBlocks ) {
 	const blockEditingMode = useBlockEditingMode();

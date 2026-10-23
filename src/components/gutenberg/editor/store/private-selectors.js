@@ -1,17 +1,17 @@
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { createSelector, createRegistrySelector } from '@wordpress/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { createSelector, createRegistrySelector } from '@/stores/gutenberg/data';
 import {
 	layout,
 	symbol,
 	navigation,
 	page as pageIcon,
 	verse,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import {
 	store as coreStore,
 	privateApis as coreDataPrivateApis,
-} from '@wordpress/core-data';
-import { store as preferencesStore } from '@wordpress/preferences';
+} from '@/stores/gutenberg/core-data';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import {
 	getRenderingMode,
 	getCurrentPost,

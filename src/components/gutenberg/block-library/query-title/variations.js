@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { title } from '@wordpress/icons';
+import { __ } from '@/lib/gutenberg/i18n';
+import { title } from '@/components/gutenberg/icons';
 const variations = [
 	{
 		isDefault: true,

@@ -1,4 +1,4 @@
-import { useSyncExternalStore } from '@wordpress/element';
+import { useSyncExternalStore } from '@/lib/gutenberg/element';
 
 type MQLSubscriber = {
 	subscribe: ( onStoreChange: () => void ) => () => void;

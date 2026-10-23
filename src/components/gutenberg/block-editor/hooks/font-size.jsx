@@ -1,7 +1,7 @@
-import { addFilter } from '@wordpress/hooks';
-import { hasBlockSupport } from '@wordpress/blocks';
-import TokenList from '@wordpress/token-list';
-import { getTypographyFontSizeValue } from '@wordpress/global-styles-engine';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import { hasBlockSupport } from '@/lib/gutenberg/blocks';
+import TokenList from '@/lib/gutenberg/token-list';
+import { getTypographyFontSizeValue } from '@/lib/gutenberg/global-styles-engine';
 import {
 	getFontSize,
 	getFontSizeClass,

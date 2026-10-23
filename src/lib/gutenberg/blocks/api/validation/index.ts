@@ -1,7 +1,7 @@
 import { Tokenizer } from 'simple-html-tokenizer';
 import fastDeepEqual from 'fast-deep-equal/es6/index.js';
-import deprecated from '@wordpress/deprecated';
-import { decodeEntities } from '@wordpress/html-entities';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { createLogger, createQueuedLogger } from './logger';
 import type { Logger, LoggerItem } from './types';
 import { getSaveContent } from '../serializer';

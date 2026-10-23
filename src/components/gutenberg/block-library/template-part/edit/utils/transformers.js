@@ -5,7 +5,7 @@ import {
 	getGroupingBlockName,
 	getPossibleBlockTransformations,
 	switchToBlockType,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 
 /**
  * Converts a widget entity record into a block.

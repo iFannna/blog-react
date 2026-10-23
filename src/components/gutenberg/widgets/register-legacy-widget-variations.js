@@ -1,6 +1,6 @@
-import { subscribe, select, dispatch } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as blocksStore } from '@wordpress/blocks';
+import { subscribe, select, dispatch } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
 
 export default function registerLegacyWidgetVariations( settings ) {
 	const unsubscribe = subscribe( () => {

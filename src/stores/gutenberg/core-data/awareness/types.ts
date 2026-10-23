@@ -1,4 +1,4 @@
-import type { Y } from '@wordpress/sync';
+import type { Y } from '@/services/gutenberg/sync';
 import type { SelectionState } from '../types';
 import type { User } from '../entity-types';
 

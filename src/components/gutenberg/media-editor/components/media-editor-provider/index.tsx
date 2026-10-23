@@ -1,5 +1,5 @@
-import { createContext, useContext } from '@wordpress/element';
-import type { Field, Form } from '@wordpress/dataviews';
+import { createContext, useContext } from '@/lib/gutenberg/element';
+import type { Field, Form } from '@/components/gutenberg/dataviews';
 import type { ReactNode } from 'react';
 
 /**

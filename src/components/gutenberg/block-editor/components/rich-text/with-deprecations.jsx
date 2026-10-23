@@ -1,7 +1,7 @@
-import { forwardRef } from '@wordpress/element';
-import { children as childrenSource } from '@wordpress/blocks';
-import { __unstableCreateElement } from '@wordpress/rich-text';
-import deprecated from '@wordpress/deprecated';
+import { forwardRef } from '@/lib/gutenberg/element';
+import { children as childrenSource } from '@/lib/gutenberg/blocks';
+import { __unstableCreateElement } from '@/components/gutenberg/rich-text';
+import deprecated from '@/utils/gutenberg/deprecated';
 import RichTextMultiline from './multiline';
 
 export function withDeprecations( Component ) {

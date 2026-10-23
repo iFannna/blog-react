@@ -1,4 +1,4 @@
-import { RawHTML } from '@wordpress/element';
+import { RawHTML } from '@/lib/gutenberg/element';
 
 export default function save( { attributes: { customText, noTeaser } } ) {
 	const moreTag = customText ? `<!--more ${ customText }-->` : '<!--more-->';

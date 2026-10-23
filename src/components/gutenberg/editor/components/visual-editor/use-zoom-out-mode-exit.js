@@ -1,6 +1,6 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useRefEffect } from '@wordpress/compose';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import { unlock } from '../../lock-unlock';
 
 /**

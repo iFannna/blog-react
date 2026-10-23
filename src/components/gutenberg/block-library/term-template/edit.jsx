@@ -1,9 +1,9 @@
 import clsx from 'clsx';
-import { ToolbarGroup } from '@wordpress/components';
-import { list, grid } from '@wordpress/icons';
-import { memo, useMemo, useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { __, _x } from '@wordpress/i18n';
+import { ToolbarGroup } from '@/components/gutenberg/ui';
+import { list, grid } from '@/components/gutenberg/icons';
+import { memo, useMemo, useState } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import {
 	BlockControls,
 	BlockContextProvider,
@@ -11,8 +11,8 @@ import {
 	useBlockProps,
 	useInnerBlocksProps,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { useEntityRecords } from '@wordpress/core-data';
+} from '@/components/gutenberg/block-editor';
+import { useEntityRecords } from '@/stores/gutenberg/core-data';
 
 // The Term Template's layout attribute arranges the term items, not the
 // blocks of the template, which always stack vertically inside each term

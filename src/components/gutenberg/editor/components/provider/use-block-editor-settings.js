@@ -1,20 +1,20 @@
-import { useMemo, useCallback } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { useMemo, useCallback } from '@/lib/gutenberg/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import {
 	store as coreStore,
 	__experimentalFetchLinkSuggestions as fetchLinkSuggestions,
 	__experimentalFetchUrlData as fetchUrlData,
 	privateApis as coreDataPrivateApis,
-} from '@wordpress/core-data';
-import { __ } from '@wordpress/i18n';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { useViewportMatch } from '@wordpress/compose';
-import { store as blocksStore } from '@wordpress/blocks';
+} from '@/stores/gutenberg/core-data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
 import {
 	privateApis,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { privateApis as mediaEditorPrivateApis } from '@wordpress/media-editor';
+} from '@/components/gutenberg/block-editor';
+import { privateApis as mediaEditorPrivateApis } from '@/components/gutenberg/media-editor';
 import getInserterMediaCategories from '../media-categories';
 import { mediaUpload } from '../../utils';
 import mediaUploadOnSuccess from '../../utils/media-upload/on-success';

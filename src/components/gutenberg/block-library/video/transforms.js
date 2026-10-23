@@ -1,5 +1,5 @@
-import { createBlobURL, isBlobURL } from '@wordpress/blob';
-import { createBlock } from '@wordpress/blocks';
+import { createBlobURL, isBlobURL } from '@/utils/gutenberg/blob';
+import { createBlock } from '@/lib/gutenberg/blocks';
 
 const transforms = {
 	from: [

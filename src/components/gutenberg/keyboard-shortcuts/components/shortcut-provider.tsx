@@ -1,4 +1,4 @@
-import { useState } from '@wordpress/element';
+import { useState } from '@/lib/gutenberg/element';
 import { context } from '../context';
 
 const { Provider } = context;

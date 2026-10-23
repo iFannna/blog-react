@@ -1,6 +1,6 @@
-import { Link as RouterLink } from '@wordpress/route';
-import { _x } from '@wordpress/i18n';
-import { Link, Stack, Text } from '@wordpress/ui';
+import { Link as RouterLink } from '@/lib/gutenberg/route';
+import { _x } from '@/lib/gutenberg/i18n';
+import { Link, Stack, Text } from '@/components/gutenberg/design-system';
 import type { BreadcrumbsProps } from './types';
 import styles from './style.module.css';
 

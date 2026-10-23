@@ -1,10 +1,10 @@
-import { Button } from '@wordpress/components';
-import { useMemo, useState } from '@wordpress/element';
+import { Button } from '@/components/gutenberg/ui';
+import { useMemo, useState } from '@/lib/gutenberg/element';
 import {
 	privateApis,
 	type PostEditorAwarenessState,
-} from '@wordpress/core-data';
-import { __, sprintf } from '@wordpress/i18n';
+} from '@/stores/gutenberg/core-data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import Avatar from './avatar';
 import AvatarGroup from './avatar-group';
 import { CollaboratorsList } from './list';

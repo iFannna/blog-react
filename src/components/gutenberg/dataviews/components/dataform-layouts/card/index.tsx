@@ -5,10 +5,10 @@ import {
 	useMemo,
 	useRef,
 	useState,
-} from '@wordpress/element';
-import { speak } from '@wordpress/a11y';
-import { __experimentalUseFocusOutside as useFocusOutside } from '@wordpress/compose';
-import { Card, CollapsibleCard, Stack } from '@wordpress/ui';
+} from '@/lib/gutenberg/element';
+import { speak } from '@/utils/gutenberg/a11y';
+import { __experimentalUseFocusOutside as useFocusOutside } from '@/hooks/gutenberg/compose';
+import { Card, CollapsibleCard, Stack } from '@/components/gutenberg/design-system';
 import { getFormFieldLayout } from '..';
 import DataFormContext from '../../dataform-context';
 import { canRenderField } from '../can-render-field';

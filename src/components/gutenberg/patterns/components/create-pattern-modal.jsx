@@ -3,13 +3,13 @@ import {
 	Button,
 	TextControl,
 	ToggleControl,
-} from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
-import { __, _x } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { store as noticesStore } from '@wordpress/notices';
-import { store as coreStore } from '@wordpress/core-data';
+} from '@/components/gutenberg/ui';
+import { Stack } from '@/components/gutenberg/design-system';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { useState } from '@/lib/gutenberg/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import {
 	PATTERN_DEFAULT_CATEGORY,
 	PATTERN_SYNC_TYPES,

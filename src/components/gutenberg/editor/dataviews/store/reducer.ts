@@ -1,5 +1,5 @@
-import { combineReducers } from '@wordpress/data';
-import type { Field } from '@wordpress/dataviews';
+import { combineReducers } from '@/stores/gutenberg/data';
+import type { Field } from '@/components/gutenberg/dataviews';
 
 type ReduxAction =
 	| ReturnType< typeof import( './private-actions' ).receiveEntityFields >

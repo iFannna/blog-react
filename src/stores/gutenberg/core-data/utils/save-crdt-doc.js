@@ -1,4 +1,4 @@
-import apiFetch from '@wordpress/api-fetch';
+import apiFetch from '@/services/gutenberg/api-fetch';
 import { getSyncManager } from '../sync';
 
 const SYNC_SAVE_API_PATH = '/wp-sync/v1/save';
@@ -27,8 +27,8 @@ async function serializeAndSaveCRDTDoc( objectType, objectId, room ) {
 /**
  * Persist the current CRDT document through the sync /save endpoint.
  *
- * @param {import('@wordpress/sync').ObjectType} objectType Object type.
- * @param {import('@wordpress/sync').ObjectID}   objectId   Object ID.
+ * @param {import('@/services/gutenberg/sync').ObjectType} objectType Object type.
+ * @param {import('@/services/gutenberg/sync').ObjectID}   objectId   Object ID.
  */
 export async function saveCRDTDoc( objectType, objectId ) {
 	const room = `${ objectType }:${ objectId }`;

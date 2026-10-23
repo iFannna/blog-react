@@ -96,7 +96,7 @@ export type {
  * Example:
  *
  * ```ts
- * import type { Context } from '@wordpress/core-data';
+ * import type { Context } from '@/stores/gutenberg/core-data';
  * // ...
  *
  * interface Client {

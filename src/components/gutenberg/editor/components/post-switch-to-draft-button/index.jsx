@@ -1,11 +1,11 @@
 import {
 	Button,
 	__experimentalConfirmDialog as ConfirmDialog,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useState } from '@wordpress/element';
-import deprecated from '@wordpress/deprecated';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useState } from '@/lib/gutenberg/element';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { store as editorStore } from '../../store';
 
 /**

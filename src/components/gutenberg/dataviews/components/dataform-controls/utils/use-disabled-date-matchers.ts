@@ -1,4 +1,4 @@
-import { useMemo } from '@wordpress/element';
+import { useMemo } from '@/lib/gutenberg/element';
 import type { NormalizedRules } from '../../../types';
 
 type DateMatcher = { before: Date } | { after: Date };

@@ -3,7 +3,7 @@ import {
 	createBlock,
 	createBlocksFromInnerBlocksTemplate,
 	getBlockType,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 
 const MAXIMUM_SELECTED_BLOCKS = 6;
 const COLUMN_VERTICAL_ALIGNMENTS = [ 'top', 'center', 'bottom' ];

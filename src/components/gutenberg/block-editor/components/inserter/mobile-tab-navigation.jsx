@@ -1,4 +1,4 @@
-import { __, isRTL } from '@wordpress/i18n';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
 import {
 	__experimentalItemGroup as ItemGroup,
 	__experimentalItem as Item,
@@ -9,8 +9,8 @@ import {
 	__experimentalView as View,
 	Navigator,
 	FlexBlock,
-} from '@wordpress/components';
-import { Icon, chevronRight, chevronLeft } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { Icon, chevronRight, chevronLeft } from '@/components/gutenberg/icons';
 
 function ScreenHeader( { title } ) {
 	return (

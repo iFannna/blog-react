@@ -1,9 +1,9 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
-import { Button, Placeholder } from '@wordpress/components';
-import { layout } from '@wordpress/icons';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Button, Placeholder } from '@/components/gutenberg/ui';
+import { layout } from '@/components/gutenberg/icons';
 import type { ComponentProps } from 'react';
-import type { BlockTypeIconDescriptor } from '@wordpress/blocks';
+import type { BlockTypeIconDescriptor } from '@/lib/gutenberg/blocks';
 import type { BlockVariationPickerProps } from './types';
 
 function BlockVariationPicker( {

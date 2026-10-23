@@ -4,7 +4,7 @@ import {
 	__experimentalGetElementClassName,
 	__experimentalGetDimensionsClassesAndStyles as getDimensionsClassesAndStyles,
 	__experimentalGetShadowClassesAndStyles as getShadowClassesAndStyles,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import Tracks from './tracks';
 
 export default function save( { attributes } ) {

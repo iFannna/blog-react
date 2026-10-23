@@ -1,22 +1,22 @@
 import clsx from 'clsx';
-import { createHigherOrderComponent, useInstanceId } from '@wordpress/compose';
-import { addFilter } from '@wordpress/hooks';
-import { useCallback } from '@wordpress/element';
+import { createHigherOrderComponent, useInstanceId } from '@/hooks/gutenberg/compose';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import { useCallback } from '@/lib/gutenberg/element';
 import {
 	getBlockSupport,
 	hasBlockSupport,
 	store as blocksStore,
-} from '@wordpress/blocks';
-import { privateApis as globalStylesEnginePrivateApis } from '@wordpress/global-styles-engine';
-import { useSelect } from '@wordpress/data';
+} from '@/lib/gutenberg/blocks';
+import { privateApis as globalStylesEnginePrivateApis } from '@/lib/gutenberg/global-styles-engine';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 	ToggleControl,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { kebabCase } from '@wordpress/kebab-case';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { kebabCase } from '@/utils/gutenberg/kebab-case';
 import { store as blockEditorStore } from '../store';
 import { InspectorControls } from '../components';
 import { useSettings } from '../components/use-settings';

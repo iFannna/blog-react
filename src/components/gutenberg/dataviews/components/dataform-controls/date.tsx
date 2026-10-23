@@ -15,23 +15,23 @@ import {
 	BaseControl,
 	Button,
 	__experimentalInputControl as WCInputControl,
-} from '@wordpress/components';
-import { speak } from '@wordpress/a11y';
+} from '@/components/gutenberg/ui';
+import { speak } from '@/utils/gutenberg/a11y';
 import {
 	useCallback,
 	useEffect,
 	useMemo,
 	useRef,
 	useState,
-} from '@wordpress/element';
-import { __, isRTL } from '@wordpress/i18n';
-import { getDate, getSettings } from '@wordpress/date';
+} from '@/lib/gutenberg/element';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
+import { getDate, getSettings } from '@/lib/gutenberg/date';
 import {
 	Calendar,
 	RangeCalendar,
 	Stack,
 	ValidityIndicator,
-} from '@wordpress/ui';
+} from '@/components/gutenberg/design-system';
 import RelativeDateControl from './utils/relative-date-control';
 import useDisabledDateMatchers from './utils/use-disabled-date-matchers';
 import getCalendarLocale from './utils/get-calendar-locale';

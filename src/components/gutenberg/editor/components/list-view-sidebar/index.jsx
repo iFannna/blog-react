@@ -1,14 +1,14 @@
 import {
 	__experimentalListView as ListView,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { useMergeRefs } from '@wordpress/compose';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { focus } from '@wordpress/dom';
-import { useCallback, useRef, useState } from '@wordpress/element';
-import { __, _x } from '@wordpress/i18n';
-import { useShortcut } from '@wordpress/keyboard-shortcuts';
-import { ESCAPE } from '@wordpress/keycodes';
+} from '@/components/gutenberg/block-editor';
+import { useMergeRefs } from '@/hooks/gutenberg/compose';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { focus } from '@/utils/gutenberg/dom';
+import { useCallback, useRef, useState } from '@/lib/gutenberg/element';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { useShortcut } from '@/components/gutenberg/keyboard-shortcuts';
+import { ESCAPE } from '@/utils/gutenberg/keycodes';
 import ListViewOutline from './list-view-outline';
 import { unlock } from '../../lock-unlock';
 import { store as editorStore } from '../../store';

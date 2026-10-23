@@ -1,7 +1,7 @@
 import fastDeepEqual from 'fast-deep-equal/es6/index.js';
-import { useEvent } from '@wordpress/compose';
-import { useMemo } from '@wordpress/element';
-import { Flex } from '@wordpress/components';
+import { useEvent } from '@/hooks/gutenberg/compose';
+import { useMemo } from '@/lib/gutenberg/element';
+import { Flex } from '@/components/gutenberg/ui';
 import type {
 	View,
 	NormalizedFilter,

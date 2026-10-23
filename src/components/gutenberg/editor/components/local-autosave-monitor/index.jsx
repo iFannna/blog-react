@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useMemo, useRef } from '@wordpress/element';
-import { ifCondition, usePrevious } from '@wordpress/compose';
-import { useSelect, useDispatch, useRegistry } from '@wordpress/data';
-import { __, sprintf } from '@wordpress/i18n';
-import { dateI18n, getSettings as getDateSettings } from '@wordpress/date';
-import { store as noticesStore } from '@wordpress/notices';
+import { useCallback, useEffect, useMemo, useRef } from '@/lib/gutenberg/element';
+import { ifCondition, usePrevious } from '@/hooks/gutenberg/compose';
+import { useSelect, useDispatch, useRegistry } from '@/stores/gutenberg/data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { dateI18n, getSettings as getDateSettings } from '@/lib/gutenberg/date';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import AutosaveMonitor from '../autosave-monitor';
 import {
 	localAutosaveGet,

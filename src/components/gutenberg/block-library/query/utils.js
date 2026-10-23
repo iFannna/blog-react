@@ -1,13 +1,13 @@
-import { useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { decodeEntities } from '@wordpress/html-entities';
-import { __ } from '@wordpress/i18n';
-import { cloneBlock, store as blocksStore } from '@wordpress/blocks';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { __ } from '@/lib/gutenberg/i18n';
+import { cloneBlock, store as blocksStore } from '@/lib/gutenberg/blocks';
 
-/** @typedef {import('@wordpress/blocks').WPBlockVariation} WPBlockVariation */
-/** @typedef {import('@wordpress/components/build-types/query-controls/types').OrderByOption} OrderByOption */
+/** @typedef {import('@/lib/gutenberg/blocks').WPBlockVariation} WPBlockVariation */
+/** @typedef {import('@/components/gutenberg/ui/query-controls/types').OrderByOption} OrderByOption */
 
 /**
  * @typedef IHasNameAndId

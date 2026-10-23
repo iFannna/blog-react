@@ -1,9 +1,9 @@
 import a11yPlugin from 'colord/plugins/a11y';
 import namesPlugin from 'colord/plugins/names';
 import { colord, extend } from 'colord';
-import { __, sprintf } from '@wordpress/i18n';
-import { Notice } from '@wordpress/components';
-import { speak } from '@wordpress/a11y';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { Notice } from '@/components/gutenberg/ui';
+import { speak } from '@/utils/gutenberg/a11y';
 import type { ContrastCheckerProps, ContrastWarning } from './types';
 
 extend( [ namesPlugin, a11yPlugin ] );

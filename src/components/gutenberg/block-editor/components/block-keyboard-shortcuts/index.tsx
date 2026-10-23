@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useRef } from '@wordpress/element';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useCallback, useEffect, useRef } from '@/lib/gutenberg/element';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	useShortcut,
 	store as keyboardShortcutsStore,
-} from '@wordpress/keyboard-shortcuts';
-import { store as blocksStore, switchToBlockType } from '@wordpress/blocks';
-import warning from '@wordpress/warning';
+} from '@/components/gutenberg/keyboard-shortcuts';
+import { store as blocksStore, switchToBlockType } from '@/lib/gutenberg/blocks';
+import warning from '@/utils/gutenberg/warning';
 import { store as blockEditorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 import type {

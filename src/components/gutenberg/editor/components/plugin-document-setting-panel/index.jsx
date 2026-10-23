@@ -1,7 +1,7 @@
-import { createSlotFill, PanelBody } from '@wordpress/components';
-import { usePluginContext } from '@wordpress/plugins';
-import { useDispatch, useSelect } from '@wordpress/data';
-import warning from '@wordpress/warning';
+import { createSlotFill, PanelBody } from '@/components/gutenberg/ui';
+import { usePluginContext } from '@/lib/gutenberg/plugins';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import warning from '@/utils/gutenberg/warning';
 import EnablePluginDocumentSettingPanelOption from '../preferences-modal/enable-plugin-document-setting-panel';
 import { store as editorStore } from '../../store';
 
@@ -45,8 +45,8 @@ const { Fill, Slot } = createSlotFill( 'PluginDocumentSettingPanel' );
  * @example
  * ```jsx
  * // Using ESNext syntax
- * import { registerPlugin } from '@wordpress/plugins';
- * import { PluginDocumentSettingPanel } from '@wordpress/editor';
+ * import { registerPlugin } from '@/lib/gutenberg/plugins';
+ * import { PluginDocumentSettingPanel } from '@/components/gutenberg/editor';
  *
  * const MyDocumentSettingTest = () => (
  * 		<PluginDocumentSettingPanel className="my-document-setting-plugin" title="My Panel" name="my-panel">

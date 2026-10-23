@@ -1,5 +1,5 @@
-import { useRef } from '@wordpress/element';
-import { useResizeObserver } from '@wordpress/compose';
+import { useRef } from '@/lib/gutenberg/element';
+import { useResizeObserver } from '@/hooks/gutenberg/compose';
 
 function useMaxWidthObserver() {
 	const [ contentResizeListener, { width } ] = useResizeObserver();

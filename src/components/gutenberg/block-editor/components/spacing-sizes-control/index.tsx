@@ -2,9 +2,9 @@ import {
 	BaseControl,
 	__experimentalHStack as HStack,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { useState } from '@wordpress/element';
-import { _x, sprintf } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { useState } from '@/lib/gutenberg/element';
+import { _x, sprintf } from '@/lib/gutenberg/i18n';
 import useSpacingSizes from './hooks/use-spacing-sizes';
 import AxialInputControls from './input-controls/axial';
 import SeparatedInputControls from './input-controls/separated';
@@ -28,8 +28,8 @@ import type { Side, SideValues, SpacingSizesControlProps } from './types';
  *
  * @example
  * ```jsx
- * import { __experimentalSpacingSizesControl as SpacingSizesControl } from '@wordpress/block-editor';
- * import { useState } from '@wordpress/element';
+ * import { __experimentalSpacingSizesControl as SpacingSizesControl } from '@/components/gutenberg/block-editor';
+ * import { useState } from '@/lib/gutenberg/element';
  *
  * function Example() {
  *   const [ sides, setSides ] = useState( {

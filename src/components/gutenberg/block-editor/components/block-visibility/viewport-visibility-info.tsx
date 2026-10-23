@@ -1,7 +1,7 @@
-import { useSelect } from '@wordpress/data';
-import { __, sprintf } from '@wordpress/i18n';
-import { unseen } from '@wordpress/icons';
-import { Notice } from '@wordpress/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { unseen } from '@/components/gutenberg/icons';
+import { Notice } from '@/components/gutenberg/design-system';
 import { unlock } from '../../lock-unlock';
 import { store as blockEditorStore } from '../../store';
 import useBlockVisibility from './use-block-visibility';

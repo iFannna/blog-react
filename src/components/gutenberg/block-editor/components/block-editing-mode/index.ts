@@ -1,5 +1,5 @@
-import { useSelect, useRegistry } from '@wordpress/data';
-import { useEffect } from '@wordpress/element';
+import { useSelect, useRegistry } from '@/stores/gutenberg/data';
+import { useEffect } from '@/lib/gutenberg/element';
 import { store as blockEditorStore } from '../../store';
 import {
 	useBlockEditContext,

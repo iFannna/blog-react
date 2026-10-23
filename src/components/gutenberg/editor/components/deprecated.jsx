@@ -1,6 +1,6 @@
 // Block Creation Components.
-import deprecated from '@wordpress/deprecated';
-import { forwardRef } from '@wordpress/element';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { forwardRef } from '@/lib/gutenberg/element';
 import {
 	Autocomplete as RootAutocomplete,
 	AlignmentToolbar as RootAlignmentToolbar,
@@ -54,9 +54,9 @@ import {
 	withColorContext as rootWithColorContext,
 	withColors as rootWithColors,
 	withFontSizes as rootWithFontSizes,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 
-export { default as ServerSideRender } from '@wordpress/server-side-render';
+export { default as ServerSideRender } from '@/components/gutenberg/server-side-render';
 
 function deprecateComponent( name, Wrapped, staticsToHoist = [] ) {
 	const Component = forwardRef( ( props, ref ) => {

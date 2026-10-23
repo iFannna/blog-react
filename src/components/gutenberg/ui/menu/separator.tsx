@@ -1,22 +1,31 @@
-import { Menu as _Menu } from '@base-ui/react/menu';
 import clsx from 'clsx';
-import { forwardRef } from '@wordpress/element';
-import styles from './style.module.css';
+import * as Ariakit from '@ariakit/react';
+import { forwardRef, useContext } from '@/lib/gutenberg/element';
+import type { WordPressComponentProps } from '../context';
+import { Context } from './context';
 import type { SeparatorProps } from './types';
+import styles from './style.module.css';
 
-/**
- * Renders a visual and semantic separator between menu items.
- */
-const Separator = forwardRef< HTMLDivElement, SeparatorProps >(
-	function MenuSeparator( { className, ...props }, ref ) {
-		return (
-			<_Menu.Separator
-				ref={ ref }
-				className={ clsx( styles.separator, className ) }
-				{ ...props }
-			/>
+export const Separator = forwardRef<
+	HTMLHRElement,
+	WordPressComponentProps< SeparatorProps, 'hr', false >
+>( function UnforwardedSeparator( { className, ...props }, ref ) {
+	const menuContext = useContext( Context );
+
+	if ( ! menuContext?.store ) {
+		throw new Error(
+			'Menu.Separator can only be rendered inside a Menu component'
 		);
 	}
-);
 
-export { Separator };
+	return (
+		<Ariakit.MenuSeparator
+			ref={ ref }
+			{ ...props }
+			className={ clsx( styles.separator, className, {
+				[ styles[ 'is-toolbar' ] ]: menuContext.variant === 'toolbar',
+			} ) }
+			store={ menuContext.store }
+		/>
+	);
+} );

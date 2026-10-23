@@ -1,4 +1,4 @@
-import { privateApis as composePrivateApis } from '@wordpress/compose';
+import { privateApis as composePrivateApis } from '@/hooks/gutenberg/compose';
 import { ownsSelection } from './owns-selection';
 import { unlock } from './lock-unlock';
 

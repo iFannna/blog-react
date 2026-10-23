@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from 'react';
-import type { __experimentalUnitControl as UnitControl } from '@wordpress/components';
+import type { __experimentalUnitControl as UnitControl } from '@/components/gutenberg/ui';
 
 /**
  * A unit option of `UnitControl`.

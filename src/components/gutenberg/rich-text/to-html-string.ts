@@ -2,7 +2,7 @@ import {
 	escapeEditableHTML,
 	escapeAttribute,
 	isValidAttributeName,
-} from '@wordpress/escape-html';
+} from '@/utils/gutenberg/escape-html';
 import { toTree } from './to-tree';
 import type { HTMLTreeNode, RichTextValue } from './types';
 

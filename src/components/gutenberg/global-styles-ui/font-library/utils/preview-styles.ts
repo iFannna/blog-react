@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import type { FontFace, FontFamily } from '@wordpress/core-data';
+import type { FontFace, FontFamily } from '@/stores/gutenberg/core-data';
 
 function findNearest( input: number, numbers: number[] ) {
 	// If the numbers array is empty, return null

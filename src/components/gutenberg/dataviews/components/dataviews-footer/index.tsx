@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { useContext } from '@wordpress/element';
-import { inertValue } from '@wordpress/react-inert-value';
-import { Stack } from '@wordpress/ui';
+import { useContext } from '@/lib/gutenberg/element';
+import { inertValue } from '@/hooks/gutenberg/react-inert-value';
+import { Stack } from '@/components/gutenberg/design-system';
 import DataViewsContext from '../dataviews-context';
 import DataViewsPagination, {
 	hasPaginationControls,

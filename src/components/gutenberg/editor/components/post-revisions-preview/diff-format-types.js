@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { registerFormatType, unregisterFormatType } from '@wordpress/rich-text';
+import { __ } from '@/lib/gutenberg/i18n';
+import { registerFormatType, unregisterFormatType } from '@/components/gutenberg/rich-text';
 
 /**
  * IDs of the visually-hidden description elements rendered into the

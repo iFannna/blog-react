@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from 'react';
-import type { SlotComponentProps, ToolbarGroup } from '@wordpress/components';
+import type { SlotComponentProps, ToolbarGroup } from '@/components/gutenberg/ui';
 
 /**
  * Props of `BlockControls`.

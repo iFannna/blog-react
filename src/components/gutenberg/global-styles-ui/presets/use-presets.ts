@@ -1,4 +1,4 @@
-import type { BasePreset } from '@wordpress/global-styles-engine';
+import type { BasePreset } from '@/lib/gutenberg/global-styles-engine';
 import { useSetting } from '../hooks';
 
 const EMPTY_ARRAY: any[] = [];

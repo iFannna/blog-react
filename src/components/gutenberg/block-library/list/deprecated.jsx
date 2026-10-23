@@ -1,4 +1,4 @@
-import { RichText, InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { RichText, InnerBlocks, useBlockProps } from '@/components/gutenberg/block-editor';
 import migrateFontFamily from '../utils/migrate-font-family';
 import { migrateToListV2, migrateTypeToInlineStyle } from './utils';
 

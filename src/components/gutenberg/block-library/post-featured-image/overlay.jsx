@@ -4,8 +4,8 @@ import {
 	__experimentalUseGradient,
 	__experimentalUseMultipleOriginColorsAndGradients as useMultipleOriginColorsAndGradients,
 	__experimentalUseBorderProps as useBorderProps,
-} from '@wordpress/block-editor';
-import { compose } from '@wordpress/compose';
+} from '@/components/gutenberg/block-editor';
+import { compose } from '@/hooks/gutenberg/compose';
 import { dimRatioToClass } from './utils';
 
 const Overlay = ( { attributes, overlayColor } ) => {

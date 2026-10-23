@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { useCallback, useEffect, useMemo, useState } from '@wordpress/element';
-import { Spinner as WCSpinner } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+import { useCallback, useEffect, useMemo, useState } from '@/lib/gutenberg/element';
+import { Spinner as WCSpinner } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import { useMediaEditorContext } from '../media-editor-provider';
 import { getMediaTypeFromMimeType } from '../../utils';
 import { Cropper } from '../../image-editor';

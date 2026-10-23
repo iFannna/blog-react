@@ -2,8 +2,8 @@ import {
 	insert,
 	remove,
 	privateApis as richTextPrivateApis,
-} from '@wordpress/rich-text';
-import { privateApis as composePrivateApis } from '@wordpress/compose';
+} from '@/components/gutenberg/rich-text';
+import { privateApis as composePrivateApis } from '@/hooks/gutenberg/compose';
 import { unlock } from '../../../lock-unlock';
 
 const { subscribeOwnedListener, ownsSelection } = unlock( richTextPrivateApis );

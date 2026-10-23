@@ -1,4 +1,4 @@
-import { createContext, useContext } from '@wordpress/element';
+import { createContext, useContext } from '@/lib/gutenberg/element';
 import type { BlockEditContextValue } from './types';
 
 export const mayDisplayControlsKey = Symbol( 'mayDisplayControls' );

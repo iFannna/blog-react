@@ -1,8 +1,8 @@
 import { isPlainObject } from 'is-plain-object';
 import { isValidElementType } from 'react-is';
-import deprecated from '@wordpress/deprecated';
-import { applyFilters } from '@wordpress/hooks';
-import warning from '@wordpress/warning';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { applyFilters } from '@/hooks/gutenberg/hooks';
+import warning from '@/utils/gutenberg/warning';
 import { isValidIcon, normalizeIconObject, omit } from '../api/utils';
 import { BLOCK_ICON_DEFAULT, DEPRECATED_ENTRY_KEYS } from '../api/constants';
 import type {

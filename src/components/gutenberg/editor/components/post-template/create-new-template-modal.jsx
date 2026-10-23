@@ -1,15 +1,15 @@
 import { paramCase as kebabCase } from 'change-case';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useState } from '@wordpress/element';
-import { serialize, createBlock } from '@wordpress/blocks';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useState } from '@/lib/gutenberg/element';
+import { serialize, createBlock } from '@/lib/gutenberg/blocks';
 import {
 	Modal,
 	TextControl,
 	Button,
 	__experimentalHStack as HStack,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import { unlock } from '../../lock-unlock';
 import { store as editorStore } from '../../store';
 

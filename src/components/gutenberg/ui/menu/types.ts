@@ -1,240 +1,330 @@
-import type { Menu as _Menu } from '@base-ui/react/menu';
-import type { ElementType, ReactElement, ReactNode } from 'react';
-import type { KeyboardShortcut } from '../utils/keyboard-shortcut';
-import type { ComponentProps } from '../utils/types';
-import type { IconProps } from '../icon/types';
+import type * as Ariakit from '@ariakit/react';
 
-export type PrefixIconProps = IconProps;
-
-export type PortalProps = ComponentProps< typeof _Menu.Portal >;
-
-export type PositionerProps = ComponentProps< typeof _Menu.Positioner >;
-
-// Keep the menu vertical, expose Escape bubbling only on SubmenuRoot, and omit
-// Base UI's detached-trigger handle and payload-rendering API.
-export interface RootProps extends Pick<
-	_Menu.Root.Props,
-	| 'open'
-	| 'onOpenChange'
-	| 'onOpenChangeComplete'
-	| 'defaultOpen'
-	| 'modal'
-	| 'loopFocus'
-	| 'highlightItemOnHover'
-	| 'actionsRef'
-	| 'triggerId'
-	| 'defaultTriggerId'
-> {
+export interface ContextProps {
 	/**
-	 * The menu subcomponents (`Menu.Trigger`, `Menu.Popup`, etc.).
+	 * The ariakit store shared across all Menu subcomponents.
 	 */
-	children?: ReactNode;
+	store: Ariakit.MenuStore;
+	/**
+	 * The variant used by the underlying menu popover.
+	 */
+	variant?: 'toolbar';
 }
 
-// Detached triggers require handle utilities and payload roots that Menu does
-// not expose.
-export type TriggerProps = Omit<
-	ComponentProps< typeof _Menu.Trigger >,
-	'handle' | 'payload'
-> & {
+export interface Props {
 	/**
-	 * The content to be rendered inside the trigger.
+	 * The elements, which should include one instance of the `Menu.TriggerButton`
+	 * component and one instance of the `Menu.Popover` component.
 	 */
-	children?: ReactNode;
-};
-
-// Keep submenus vertical; horizontal orientation is not supported by the
-// styled Menu layout.
-export interface SubmenuRootProps extends Pick<
-	_Menu.SubmenuRoot.Props,
-	| 'open'
-	| 'onOpenChange'
-	| 'onOpenChangeComplete'
-	| 'defaultOpen'
-	| 'loopFocus'
-	| 'highlightItemOnHover'
-	| 'closeParentOnEsc'
-	| 'actionsRef'
-> {
+	children?: Ariakit.MenuProviderProps[ 'children' ];
 	/**
-	 * The submenu subcomponents (`Menu.SubmenuTrigger`, `Menu.Popup`, etc.).
-	 */
-	children?: ReactNode;
-}
-
-export type RadioGroupProps = ComponentProps< typeof _Menu.RadioGroup > & {
-	/**
-	 * The radio menu items in the group.
-	 */
-	children?: ReactNode;
-};
-
-export type GroupProps = ComponentProps< typeof _Menu.Group > & {
-	/**
-	 * The content to be rendered inside the group.
-	 */
-	children?: ReactNode;
-};
-
-export type GroupLabelProps = ComponentProps< typeof _Menu.GroupLabel > & {
-	/**
-	 * The content to be rendered inside the group label.
-	 */
-	children?: ReactNode;
-};
-
-export type SeparatorProps = ComponentProps< typeof _Menu.Separator >;
-
-export interface PopupProps extends ComponentProps< typeof _Menu.Popup > {
-	/**
-	 * The content to be rendered inside the menu popup.
-	 */
-	children?: ReactNode;
-
-	/**
-	 * Optional portal element, typically `<Menu.Portal />` with custom
-	 * `container`. When omitted, `Menu.Popup` uses `Menu.Portal` with default
-	 * props. Do not pass `children` on the portal element; they would be
-	 * ignored.
-	 */
-	portal?: ReactElement< Omit< PortalProps, 'children' > >;
-
-	/**
-	 * Optional positioner element, typically `<Menu.Positioner />` with custom
-	 * positioning props (`side`, `align`, `sideOffset`, collision settings,
-	 * etc.). When omitted, `Menu.Popup` uses `Menu.Positioner` with default
-	 * props. Do not pass `children` on the positioner element; they would be
-	 * ignored.
-	 */
-	positioner?: ReactElement< Omit< PositionerProps, 'children' > >;
-}
-
-export interface MenuItemLayoutProps {
-	/**
-	 * Presentational content before the item label. Use `Menu.PrefixIcon` for
-	 * icons that help users recognize actions or give a key action useful
-	 * prominence.
+	 * Whether the menu popover and its contents should be visible by default.
 	 *
-	 * Prefer icons on every item in a group, or none. If only one item needs an
-	 * icon, reconsider its grouping. Prefer omitting it over adding unnecessary
-	 * icons to the other items. Mixed icon usage is supported. Avoid combining
-	 * a prefix icon and a description in the same item.
-	 */
-	prefix?: ReactNode;
-
-	/**
-	 * Presentational content displayed after the item label.
-	 */
-	suffix?: ReactNode;
-
-	/**
-	 * The keyboard shortcut associated with this item. When provided, the
-	 * shortcut is displayed in the item and announced to assistive technology.
+	 * Note: this prop will be overridden by the `open` prop if it is
+	 * provided (meaning the component will be used in "controlled" mode).
 	 *
-	 * **Note**: This prop is for display and accessibility purposes only; the
-	 * consumer is responsible for implementing the actual keyboard event handler.
+	 * @default false
 	 */
-	shortcut?: KeyboardShortcut;
-}
-
-export interface ItemLabelProps extends ComponentProps< 'span' > {
+	defaultOpen?: Ariakit.MenuProviderProps[ 'defaultOpen' ];
 	/**
-	 * The primary label for a menu item. Use as the first direct child of every
-	 * menu item. Keep labels short, clear, and understandable on their own.
+	 * Whether the menu popover and its contents should be visible.
+	 * Should be used in conjunction with `onOpenChange` in order to control
+	 * the open state of the menu popover.
+	 *
+	 * Note: this prop will set the component in "controlled" mode, and it will
+	 * override the `defaultOpen` prop.
 	 */
-	children: ReactNode;
-}
-
-export interface ItemDescriptionProps extends ComponentProps< 'span' > {
+	open?: Ariakit.MenuProviderProps[ 'open' ];
 	/**
-	 * Supporting text below a menu item label. Use as a direct child after
-	 * `Menu.ItemLabel`. Content should be text or non-interactive inline markup.
-	 * Keep descriptions brief and use them only for essential context the label
-	 * cannot convey. Avoid combining a description and a prefix icon in the
-	 * same item.
+	 * A callback that gets called when the `open` state changes.
 	 */
-	children: ReactNode;
+	onOpenChange?: Ariakit.MenuProviderProps[ 'setOpen' ];
+	/**
+	 * The placement of the menu popover.
+	 *
+	 * @default 'bottom-start' for root-level menus, 'right-start' for submenus
+	 */
+	placement?: Ariakit.MenuProviderProps[ 'placement' ];
 }
 
-type MenuItemChildren =
-	| ReactElement< ItemLabelProps >
-	| [
-			ReactElement< ItemLabelProps >,
-			...(
-				ReactElement< ItemDescriptionProps > | false | null | undefined
-			)[],
-	  ];
+export interface PopoverProps {
+	/**
+	 * The contents of the menu popover, which should include instances of the
+	 * `Menu.Item`, `Menu.CheckboxItem`, `Menu.RadioItem`, `Menu.Group`, and
+	 * `Menu.Separator` components.
+	 */
+	children?: Ariakit.MenuProps[ 'children' ];
+	/**
+	 * The modality of the menu popover. When set to true, interaction with
+	 * outside elements will be disabled and only menu content will be visible to
+	 * screen readers.
+	 *
+	 * Determines whether the menu popover is modal. Modal dialogs have distinct
+	 * states and behaviors:
+	 * - The `portal` and `preventBodyScroll` props are set to `true`. They can
+	 *   still be manually set to `false`.
+	 * - When the dialog is open, element tree outside it will be inert.
+	 *
+	 * @default true
+	 */
+	modal?: Ariakit.MenuProps[ 'modal' ];
+	/**
+	 * The distance between the popover and the anchor element.
+	 *
+	 * @default 8 for root-level menus, 16 for nested menus
+	 */
+	gutter?: Ariakit.MenuProps[ 'gutter' ];
+	/**
+	 * The skidding of the popover along the anchor element. Can be set to
+	 * negative values to make the popover shift to the opposite side.
+	 *
+	 * @default 0 for root-level menus, -8 for nested menus
+	 */
+	shift?: Ariakit.MenuProps[ 'shift' ];
+	/**
+	 * Determines if the menu popover will hide when the user presses the
+	 * Escape key.
+	 *
+	 * This prop can be either a boolean or a function that accepts an event as an
+	 * argument and returns a boolean. The event object represents the keydown
+	 * event that initiated the hide action, which could be either a native
+	 * keyboard event or a React synthetic event.
+	 *
+	 * @default `( event ) => { event.preventDefault(); return true; }`
+	 */
+	hideOnEscape?: Ariakit.MenuProps[ 'hideOnEscape' ];
+}
 
-type MenuItemComponentProps< T extends ElementType > = Omit<
-	ComponentProps< T >,
-	keyof MenuItemLayoutProps | 'children'
->;
+export interface TriggerButtonProps {
+	/**
+	 * The contents of the menu trigger button.
+	 */
+	children?: Ariakit.MenuButtonProps[ 'children' ];
+	/**
+	 * Allows the component to be rendered as a different HTML element or React
+	 * component. The value can be a React element or a function that takes in the
+	 * original component props and gives back a React element with the props
+	 * merged.
+	 */
+	render?: Ariakit.MenuButtonProps[ 'render' ];
+	/**
+	 * Determines if the element is disabled. This sets the `aria-disabled`
+	 * attribute accordingly, enabling support for all elements, including those
+	 * that don't support the native `disabled` attribute.
+	 *
+	 * This feature can be combined with the `accessibleWhenDisabled` prop to
+	 * make disabled elements still accessible via keyboard.
+	 *
+	 * @default false
+	 */
+	disabled?: Ariakit.MenuButtonProps[ 'disabled' ];
+	/**
+	 * Indicates whether the element should be focusable even when it is
+	 * `disabled`.
+	 *
+	 * This is important when discoverability is a concern. For example:
+	 *
+	 * > A toolbar in an editor contains a set of special smart paste functions
+	 * that are disabled when the clipboard is empty or when the function is not
+	 * applicable to the current content of the clipboard. It could be helpful to
+	 * keep the disabled buttons focusable if the ability to discover their
+	 * functionality is primarily via their presence on the toolbar.
+	 *
+	 * Learn more on [Focusability of disabled
+	 * controls](https://www.w3.org/WAI/ARIA/apg/practices/keyboard-interface/#focusabilityofdisabledcontrols).
+	 */
+	accessibleWhenDisabled?: Ariakit.MenuButtonProps[ 'accessibleWhenDisabled' ];
+}
 
-export type ItemProps = MenuItemComponentProps< typeof _Menu.Item > &
-	MenuItemLayoutProps & {
-		/**
-		 * One direct `Menu.ItemLabel`, followed by zero or more direct
-		 * `Menu.ItemDescription` components.
-		 */
-		children: MenuItemChildren;
-	};
+export interface GroupProps {
+	/**
+	 * The contents of the menu group, which should include one instance of the
+	 * `Menu.GroupLabel` component and one or more instances of `Menu.Item`,
+	 * `Menu.CheckboxItem`, and `Menu.RadioItem`.
+	 */
+	children: Ariakit.MenuGroupProps[ 'children' ];
+}
 
-export type LinkItemProps = Omit<
-	MenuItemComponentProps< typeof _Menu.LinkItem >,
-	'target'
-> &
-	MenuItemLayoutProps & {
-		/**
-		 * Where to open the linked document. `"_blank"` also adds the visual
-		 * indicator and accessible new-tab notice.
-		 *
-		 * When both `target` and `openInNewTab` are set, `target` determines the
-		 * browsing context.
-		 */
-		target?: ComponentProps< 'a' >[ 'target' ];
+export interface GroupLabelProps {
+	/**
+	 * The contents of the menu group label, which should provide an accessible
+	 * label for the menu group.
+	 */
+	children: Ariakit.MenuGroupLabelProps[ 'children' ];
+}
 
-		/**
-		 * Adds a visual indicator and accessible notice for opening in a new tab.
-		 * Defaults `target` to `"_blank"` when no explicit target is set.
-		 *
-		 * @default false
-		 */
-		openInNewTab?: boolean;
+export interface ItemProps {
+	/**
+	 * The contents of the menu item, which could include one instance of the
+	 * `Menu.ItemLabel` component and/or one instance of the `Menu.ItemHelpText`
+	 * component.
+	 */
+	children: Ariakit.MenuItemProps[ 'children' ];
+	/**
+	 * The contents of the menu item's prefix, such as an icon.
+	 */
+	prefix?: React.ReactNode;
+	/**
+	 * The contents of the menu item's suffix, such as a keyboard shortcut.
+	 */
+	suffix?: React.ReactNode;
+	/**
+	 * Determines if the menu should hide when this item is clicked.
+	 *
+	 * **Note**: This behavior isn't triggered if this menu item is rendered as a
+	 * link and modifier keys are used to either open the link in a new tab or
+	 * download it.
+	 *
+	 * @default true
+	 */
+	hideOnClick?: Ariakit.MenuItemProps[ 'hideOnClick' ];
+	/**
+	 * Determines if the element is disabled. This sets the `aria-disabled`
+	 * attribute accordingly, enabling support for all elements, including those
+	 * that don't support the native `disabled` attribute.
+	 *
+	 * @default false
+	 */
+	disabled?: Ariakit.MenuItemProps[ 'disabled' ];
+	/**
+	 * Allows the component to be rendered as a different HTML element or React
+	 * component. The value can be a React element or a function that takes in the
+	 * original component props and gives back a React element with the props
+	 * merged.
+	 */
+	render?: Ariakit.MenuItemProps[ 'render' ];
+	/**
+	 * The ariakit menu store. This prop is only meant for internal use.
+	 * @ignore
+	 */
+	store?: Ariakit.MenuItemProps[ 'store' ];
+}
 
-		/**
-		 * One direct `Menu.ItemLabel`, followed by zero or more direct
-		 * `Menu.ItemDescription` components.
-		 */
-		children: MenuItemChildren;
-	};
+export interface CheckboxItemProps {
+	/**
+	 * The contents of the menu item, which could include one instance of the
+	 * `Menu.ItemLabel` component and/or one instance of the `Menu.ItemHelpText`
+	 * component.
+	 */
+	children: Ariakit.MenuItemCheckboxProps[ 'children' ];
+	/**
+	 * The contents of the menu item's suffix, such as a keyboard shortcut.
+	 */
+	suffix?: React.ReactNode;
+	/**
+	 * Determines if the menu should hide when this item is clicked.
+	 *
+	 * **Note**: This behavior isn't triggered if this menu item is rendered as a
+	 * link and modifier keys are used to either open the link in a new tab or
+	 * download it.
+	 *
+	 * @default false
+	 */
+	hideOnClick?: Ariakit.MenuItemCheckboxProps[ 'hideOnClick' ];
+	/**
+	 * Determines if the element is disabled. This sets the `aria-disabled`
+	 * attribute accordingly, enabling support for all elements, including those
+	 * that don't support the native `disabled` attribute.
+	 *
+	 * @default false
+	 */
+	disabled?: Ariakit.MenuItemCheckboxProps[ 'disabled' ];
+	/**
+	 * Allows the component to be rendered as a different HTML element or React
+	 * component. The value can be a React element or a function that takes in the
+	 * original component props and gives back a React element with the props
+	 * merged.
+	 */
+	render?: Ariakit.MenuItemCheckboxProps[ 'render' ];
+	/**
+	 * The checkbox menu item's name.
+	 */
+	name: Ariakit.MenuItemCheckboxProps[ 'name' ];
+	/**
+	 * The checkbox item's value, useful when using multiple checkbox menu items
+	 * associated to the same `name`.
+	 */
+	value?: Ariakit.MenuItemCheckboxProps[ 'value' ];
+	/**
+	 * The controlled checked state of the checkbox menu item.
+	 *
+	 * Note: this prop will override the `defaultChecked` prop.
+	 */
+	checked?: Ariakit.MenuItemCheckboxProps[ 'checked' ];
+	/**
+	 * The checked state of the checkbox menu item when it is initially rendered.
+	 * Use when not wanting to control its checked state.
+	 *
+	 * Note: this prop will be overridden by the `checked` prop, if it is defined.
+	 */
+	defaultChecked?: Ariakit.MenuItemCheckboxProps[ 'defaultChecked' ];
+	/**
+	 * A function that is called when the checkbox's checked state changes.
+	 */
+	onChange?: Ariakit.MenuItemCheckboxProps[ 'onChange' ];
+}
 
-export type CheckboxItemProps = MenuItemComponentProps<
-	typeof _Menu.CheckboxItem
-> &
-	MenuItemLayoutProps & {
-		/**
-		 * One direct `Menu.ItemLabel`, followed by zero or more direct
-		 * `Menu.ItemDescription` components.
-		 */
-		children: MenuItemChildren;
-	};
+export interface RadioItemProps {
+	/**
+	 * The contents of the menu item, which could include one instance of the
+	 * `Menu.ItemLabel` component and/or one instance of the `Menu.ItemHelpText`
+	 * component.
+	 */
+	children: Ariakit.MenuItemRadioProps[ 'children' ];
+	/**
+	 * The contents of the menu item's suffix, such as a keyboard shortcut.
+	 */
+	suffix?: React.ReactNode;
+	/**
+	 * Determines if the menu should hide when this item is clicked.
+	 *
+	 * **Note**: This behavior isn't triggered if this menu item is rendered as a
+	 * link and modifier keys are used to either open the link in a new tab or
+	 * download it.
+	 *
+	 * @default false
+	 */
+	hideOnClick?: Ariakit.MenuItemRadioProps[ 'hideOnClick' ];
+	/**
+	 * Determines if the element is disabled. This sets the `aria-disabled`
+	 * attribute accordingly, enabling support for all elements, including those
+	 * that don't support the native `disabled` attribute.
+	 *
+	 * @default false
+	 */
+	disabled?: Ariakit.MenuItemRadioProps[ 'disabled' ];
+	/**
+	 * Allows the component to be rendered as a different HTML element or React
+	 * component. The value can be a React element or a function that takes in the
+	 * original component props and gives back a React element with the props
+	 * merged.
+	 */
+	render?: Ariakit.MenuItemRadioProps[ 'render' ];
+	/**
+	 * The radio item's name.
+	 */
+	name: Ariakit.MenuItemRadioProps[ 'name' ];
+	/**
+	 * The radio item's value.
+	 */
+	value: Ariakit.MenuItemRadioProps[ 'value' ];
+	/**
+	 * The controlled checked state of the radio menu item.
+	 *
+	 * Note: this prop will override the `defaultChecked` prop.
+	 */
+	checked?: Ariakit.MenuItemRadioProps[ 'checked' ];
+	/**
+	 * The checked state of the radio menu item when it is initially rendered.
+	 * Use when not wanting to control its checked state.
+	 *
+	 * Note: this prop will be overridden by the `checked` prop, if it is defined.
+	 */
+	defaultChecked?: Ariakit.MenuItemRadioProps[ 'defaultChecked' ];
+	/**
+	 * A function that is called when the checkbox's checked state changes.
+	 */
+	onChange?: Ariakit.MenuItemRadioProps[ 'onChange' ];
+}
 
-export type RadioItemProps = MenuItemComponentProps< typeof _Menu.RadioItem > &
-	MenuItemLayoutProps & {
-		/**
-		 * One direct `Menu.ItemLabel`, followed by zero or more direct
-		 * `Menu.ItemDescription` components.
-		 */
-		children: MenuItemChildren;
-	};
-
-export type SubmenuTriggerProps = MenuItemComponentProps<
-	typeof _Menu.SubmenuTrigger
-> &
-	MenuItemLayoutProps & {
-		/**
-		 * One direct `Menu.ItemLabel`, followed by zero or more direct
-		 * `Menu.ItemDescription` components.
-		 */
-		children: MenuItemChildren;
-	};
+export interface SeparatorProps {}

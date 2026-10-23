@@ -4,15 +4,15 @@ import {
 	useRef,
 	useCallback,
 	useEffect,
-} from '@wordpress/element';
-import { useRefEffect, useMergeRefs } from '@wordpress/compose';
-import { useSelect } from '@wordpress/data';
+} from '@/lib/gutenberg/element';
+import { useRefEffect, useMergeRefs } from '@/hooks/gutenberg/compose';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	privateApis as blockEditorPrivateApis,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
-import { Tooltip } from '@wordpress/ui';
+} from '@/components/gutenberg/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Tooltip } from '@/components/gutenberg/design-system';
 import { unlock } from '../../lock-unlock';
 
 const { useBlockElementRef } = unlock( blockEditorPrivateApis );

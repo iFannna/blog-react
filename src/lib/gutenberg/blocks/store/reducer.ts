@@ -1,6 +1,6 @@
 import { camelCase } from 'change-case';
-import { combineReducers } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
+import { combineReducers } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
 import { omit } from '../api/utils';
 import type {
 	BlockType,

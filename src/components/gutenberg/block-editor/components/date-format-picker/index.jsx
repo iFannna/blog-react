@@ -1,13 +1,13 @@
-import { _x, __ } from '@wordpress/i18n';
-import { dateI18n, humanTimeDiff } from '@wordpress/date';
-import { useState } from '@wordpress/element';
+import { _x, __ } from '@/lib/gutenberg/i18n';
+import { dateI18n, humanTimeDiff } from '@/lib/gutenberg/date';
+import { useState } from '@/lib/gutenberg/element';
 import {
 	Fieldset,
 	InputControl,
 	SelectControl,
 	Stack,
 	SwitchControl,
-} from '@wordpress/ui';
+} from '@/components/gutenberg/design-system';
 
 // So that we illustrate the different formats in the dropdown properly, show a date that is
 // somewhat recent, has a day greater than 12, and a month with more than three letters.

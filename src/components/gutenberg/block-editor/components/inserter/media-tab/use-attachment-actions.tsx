@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from '@wordpress/element';
-import { __, _n, sprintf } from '@wordpress/i18n';
-import { useDispatch } from '@wordpress/data';
-import { store as noticesStore } from '@wordpress/notices';
-import { external, linkOff } from '@wordpress/icons';
+import { useCallback, useEffect, useMemo, useState } from '@/lib/gutenberg/element';
+import { __, _n, sprintf } from '@/lib/gutenberg/i18n';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { external, linkOff } from '@/components/gutenberg/icons';
 import DetachConfirmation from './detach-confirmation';
 import type { MediaItem } from './types';
 

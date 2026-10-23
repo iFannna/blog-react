@@ -1,5 +1,5 @@
-import { Field, Select } from '@wordpress/ui';
-import { __ } from '@wordpress/i18n';
+import { Field, Select } from '@/components/gutenberg/design-system';
+import { __ } from '@/lib/gutenberg/i18n';
 import { getFontStylesAndWeights } from '../../utils/get-font-styles-and-weights';
 import type { FontAppearanceControlProps, FontAppearanceValue } from './types';
 

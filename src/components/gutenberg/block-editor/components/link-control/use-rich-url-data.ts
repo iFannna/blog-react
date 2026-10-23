@@ -1,5 +1,5 @@
-import { useSelect } from '@wordpress/data';
-import { useEffect, useReducer } from '@wordpress/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useEffect, useReducer } from '@/lib/gutenberg/element';
 import { store as blockEditorStore } from '../../store';
 import type { RichUrlData } from './types';
 

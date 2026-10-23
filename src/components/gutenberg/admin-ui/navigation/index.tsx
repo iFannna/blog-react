@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { Link, Stack, Text } from '@wordpress/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Link, Stack, Text } from '@/components/gutenberg/design-system';
 import type { NavigationProps } from './types';
 import styles from './style.module.css';
 

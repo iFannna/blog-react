@@ -1,9 +1,9 @@
-import { useCallback } from '@wordpress/element';
-import { getBlockType, parse } from '@wordpress/blocks';
-import type { Block, BlockType } from '@wordpress/blocks';
-import { useDispatch, useRegistry } from '@wordpress/data';
-import { store as noticesStore } from '@wordpress/notices';
-import { __, sprintf } from '@wordpress/i18n';
+import { useCallback } from '@/lib/gutenberg/element';
+import { getBlockType, parse } from '@/lib/gutenberg/blocks';
+import type { Block, BlockType } from '@/lib/gutenberg/blocks';
+import { useDispatch, useRegistry } from '@/stores/gutenberg/data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import { store as blockEditorStore } from '../../store';
 import {
 	hasAlignSupport,

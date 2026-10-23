@@ -1,4 +1,4 @@
-import { createBlock } from '@wordpress/blocks';
+import { createBlock } from '@/lib/gutenberg/blocks';
 
 const transforms = {
 	to: [

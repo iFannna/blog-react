@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import type { ComponentPropsWithoutRef, ForwardedRef } from 'react';
-import { createElement, forwardRef } from '@wordpress/element';
+import { createElement, forwardRef } from '@/lib/gutenberg/element';
 import type { SVGProps } from './types';
 
 export type { SVGProps } from './types';

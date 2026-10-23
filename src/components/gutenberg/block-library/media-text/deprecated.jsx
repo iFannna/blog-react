@@ -4,8 +4,8 @@ import {
 	getColorClassName,
 	useInnerBlocksProps,
 	useBlockProps,
-} from '@wordpress/block-editor';
-import { compose } from '@wordpress/compose';
+} from '@/components/gutenberg/block-editor';
+import { compose } from '@/hooks/gutenberg/compose';
 import { DEFAULT_MEDIA_SIZE_SLUG } from './constants';
 
 const v1ToV5ImageFillStyles = ( url, focalPoint ) => {

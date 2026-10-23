@@ -1,6 +1,6 @@
-import { Fragment } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+import { Fragment } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import HierarchicalTermSelector from './hierarchical-term-selector';
 import FlatTermSelector from './flat-term-selector';
 import { store as editorStore } from '../../store';

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
-import { decodeEntities } from '@wordpress/html-entities';
+import { __ } from '@/lib/gutenberg/i18n';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 
 /**
  * Displays a label with an "(Invalid)" or "(Draft)" indicator for navigation links.

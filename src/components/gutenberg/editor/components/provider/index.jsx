@@ -3,21 +3,21 @@ import {
 	useEffect,
 	useLayoutEffect,
 	useMemo,
-} from '@wordpress/element';
-import { useDispatch, useSelect, useRegistry } from '@wordpress/data';
+} from '@/lib/gutenberg/element';
+import { useDispatch, useSelect, useRegistry } from '@/stores/gutenberg/data';
 import {
 	EntityProvider,
 	useEntityBlockEditor,
 	store as coreStore,
 	privateApis as coreDataPrivateApis,
-} from '@wordpress/core-data';
+} from '@/stores/gutenberg/core-data';
 import {
 	BlockEditorProvider,
 	BlockContextProvider,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { privateApis as editPatternsPrivateApis } from '@wordpress/patterns';
-import { createBlock } from '@wordpress/blocks';
+} from '@/components/gutenberg/block-editor';
+import { privateApis as editPatternsPrivateApis } from '@/components/gutenberg/patterns';
+import { createBlock } from '@/lib/gutenberg/blocks';
 import withRegistryProvider from './with-registry-provider';
 import { store as editorStore } from '../../store';
 import useAutosaveNotice from './use-autosave-notice';

@@ -6,25 +6,25 @@ import {
 	useMemo,
 	useRef,
 	useEffect,
-} from '@wordpress/element';
-import { __, _x, sprintf, _n } from '@wordpress/i18n';
+} from '@/lib/gutenberg/element';
+import { __, _x, sprintf, _n } from '@/lib/gutenberg/i18n';
 import {
 	privateApis as coreDataPrivateApis,
 	store as coreStore,
-} from '@wordpress/core-data';
-import { resolveSelect, useDispatch, useSelect } from '@wordpress/data';
-import { Modal, DropZone, FormFileUpload, Button } from '@wordpress/components';
-import { upload as uploadIcon } from '@wordpress/icons';
-import { DataViewsPicker } from '@wordpress/dataviews';
+} from '@/stores/gutenberg/core-data';
+import { resolveSelect, useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { Modal, DropZone, FormFileUpload, Button } from '@/components/gutenberg/ui';
+import { upload as uploadIcon } from '@/components/gutenberg/icons';
+import { DataViewsPicker } from '@/components/gutenberg/dataviews';
 import type {
 	Field,
 	ActionButton,
 	Filter,
 	SupportedLayouts,
 	View,
-} from '@wordpress/dataviews';
-import { useView } from '@wordpress/views';
-import { Stack } from '@wordpress/ui';
+} from '@/components/gutenberg/dataviews';
+import { useView } from '@/components/gutenberg/views';
+import { Stack } from '@/components/gutenberg/design-system';
 import {
 	altTextField,
 	attachedToField,
@@ -38,8 +38,8 @@ import {
 	mediaDimensionsField,
 	mediaThumbnailField,
 	mimeTypeField,
-} from '@wordpress/media-fields';
-import { store as noticesStore, SnackbarNotices } from '@wordpress/notices';
+} from '@/components/gutenberg/media-fields';
+import { store as noticesStore, SnackbarNotices } from '@/stores/gutenberg/notices';
 import type { Attachment, RestAttachment } from '../../utils/types';
 import { transformAttachment } from '../../utils/transform-attachment';
 import { uploadMedia } from '../../utils/upload-media';

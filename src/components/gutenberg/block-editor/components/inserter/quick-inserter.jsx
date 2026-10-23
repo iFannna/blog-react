@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { useState, useEffect } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { Button, SearchControl } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
+import { useState, useEffect } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Button, SearchControl } from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
 import InserterSearchResults from './search-results';
 import useInsertionPoint from './hooks/use-insertion-point';
 import useBlockTypesState from './hooks/use-block-types-state';

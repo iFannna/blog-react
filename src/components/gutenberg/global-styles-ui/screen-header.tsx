@@ -7,11 +7,11 @@ import {
 	__experimentalText as WCText,
 	Button,
 	Navigator,
-} from '@wordpress/components';
-import { isRTL, __ } from '@wordpress/i18n';
-import { chevronRight, chevronLeft } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { isRTL, __ } from '@/lib/gutenberg/i18n';
+import { chevronRight, chevronLeft } from '@/components/gutenberg/icons';
 // @ts-expect-error: Not typed yet.
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
+import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import type { StateDefinition } from './utils';
 import { unlock } from './lock-unlock';
 

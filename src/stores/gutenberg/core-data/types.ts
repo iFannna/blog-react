@@ -1,10 +1,10 @@
-import type { ConnectionStatusDisconnected, Y } from '@wordpress/sync';
+import type { ConnectionStatusDisconnected, Y } from '@/services/gutenberg/sync';
 import type {
 	SelectionType,
 	SelectionDirection,
 } from './utils/crdt-user-selections';
 
-export type { ConnectionStatus } from '@wordpress/sync';
+export type { ConnectionStatus } from '@/services/gutenberg/sync';
 
 export type ConnectionError = NonNullable<
 	ConnectionStatusDisconnected[ 'error' ]
@@ -58,9 +58,9 @@ export type AbsoluteBlockIndexPath = number[];
  * intermediate stages before someone is able to highlight, type, or modify text.
  *
  * This type is duplicated to avoid creating circular dependencies.
- * @see {import("@wordpress/block-editor/src/store/actions").WPBlockSelection}
- * @see {import("@wordpress/block-editor/src/store/selectors").WPBlockSelection}
- * @see {import("@wordpress/editor/src/store/selectors").WPBlockSelection}
+ * @see {import("@/components/gutenberg/block-editor/store/actions").WPBlockSelection}
+ * @see {import("@/components/gutenberg/block-editor/store/selectors").WPBlockSelection}
+ * @see {import("@/components/gutenberg/editor/store/selectors").WPBlockSelection}
  *
  * @todo Move this into a canonical types file which can be imported in separate
  *       packages without causing circular dependencies.

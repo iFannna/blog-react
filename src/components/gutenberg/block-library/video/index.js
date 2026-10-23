@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { video as icon } from '@wordpress/icons';
+import { __ } from '@/lib/gutenberg/i18n';
+import { video as icon } from '@/components/gutenberg/icons';
 import initBlock from '../utils/init-block';
 import deprecated from './deprecated';
 import edit from './edit';

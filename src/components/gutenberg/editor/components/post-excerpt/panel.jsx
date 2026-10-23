@@ -1,19 +1,19 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	PanelBody,
 	__experimentalText as WCText,
 	Dropdown,
 	Button,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useMemo, useState } from '@wordpress/element';
-import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@wordpress/block-editor';
+} from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useMemo, useState } from '@/lib/gutenberg/element';
+import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@/components/gutenberg/block-editor';
 import {
 	store as coreStore,
 	privateApis as coreDataPrivateApis,
-} from '@wordpress/core-data';
-import { decodeEntities } from '@wordpress/html-entities';
+} from '@/stores/gutenberg/core-data';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import PostExcerptForm from './index';
 import PostExcerptCheck from './check';
 import PluginPostExcerpt from './plugin';

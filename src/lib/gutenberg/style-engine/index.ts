@@ -32,7 +32,7 @@ export type { GeneratedCSSRule } from './types';
  *
  * @example
  * ```js
- * import { compileCSS } from '@wordpress/style-engine';
+ * import { compileCSS } from '@/lib/gutenberg/style-engine';
  *
  * // With a selector, a full stylesheet string is returned.
  * compileCSS(
@@ -112,7 +112,7 @@ export function compileCSS( style: Style, options: StyleOptions = {} ): string {
  *
  * @example
  * ```js
- * import { getCSSRules } from '@wordpress/style-engine';
+ * import { getCSSRules } from '@/lib/gutenberg/style-engine';
  *
  * getCSSRules(
  * 	{ spacing: { padding: '10px', margin: '12px' } },

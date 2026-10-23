@@ -1,11 +1,11 @@
-import { __, sprintf } from '@wordpress/i18n';
-import type { Block } from '@wordpress/blocks';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import type { Block } from '@/lib/gutenberg/blocks';
 import {
 	getBlockType,
 	getBlockTypes,
 	getBlockFromExample,
 	createBlock,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import type { BlockExample, ColorOrigin, MultiOriginPalettes } from './types';
 import ColorExamples from './color-examples';
 import DuotoneExamples from './duotone-examples';

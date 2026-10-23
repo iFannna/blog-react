@@ -1,6 +1,6 @@
-import { usePrevious } from '@wordpress/compose';
-import { useState, useLayoutEffect } from '@wordpress/element';
-import { getRectangleFromRange } from '@wordpress/dom';
+import { usePrevious } from '@/hooks/gutenberg/compose';
+import { useState, useLayoutEffect } from '@/lib/gutenberg/element';
+import { getRectangleFromRange } from '@/utils/gutenberg/dom';
 import type { FormatType } from '../types';
 import { ownsSelection } from '../owns-selection';
 

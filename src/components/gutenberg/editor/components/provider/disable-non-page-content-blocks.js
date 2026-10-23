@@ -1,6 +1,6 @@
-import { useSelect, useRegistry } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { useEffect, useRef } from '@wordpress/element';
+import { useSelect, useRegistry } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { useEffect, useRef } from '@/lib/gutenberg/element';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 import usePostContentBlockTypes from './use-post-content-block-types';

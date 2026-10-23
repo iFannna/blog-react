@@ -1,9 +1,9 @@
-import { RichText } from '@wordpress/block-editor';
+import { RichText } from '@/components/gutenberg/block-editor';
 import {
 	createBlock,
 	cloneSanitizedBlock,
 	switchToBlockType,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 
 const transforms = {
 	from: [

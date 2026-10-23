@@ -1,21 +1,21 @@
 import removeAccents from 'remove-accents';
-import { __, sprintf } from '@wordpress/i18n';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	Button,
 	Dropdown,
 	ComboboxControl,
-} from '@wordpress/components';
-import { debounce } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { debounce } from '@/hooks/gutenberg/compose';
 import {
 	createInterpolateElement,
 	useState,
 	useMemo,
-} from '@wordpress/element';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { decodeEntities } from '@wordpress/html-entities';
-import { store as coreStore } from '@wordpress/core-data';
-import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@wordpress/block-editor';
-import { filterURLForDisplay } from '@wordpress/url';
+} from '@/lib/gutenberg/element';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@/components/gutenberg/block-editor';
+import { filterURLForDisplay } from '@/utils/gutenberg/url';
 import PostPanelRow from '../post-panel-row';
 import { buildTermsTree } from '../../utils/terms';
 import { store as editorStore } from '../../store';

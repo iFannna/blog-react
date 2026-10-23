@@ -1,7 +1,7 @@
-import { useInstanceId } from '@wordpress/compose';
-import { useSelect } from '@wordpress/data';
-import { useState } from '@wordpress/element';
-import { privateApis as globalStylesEnginePrivateApis } from '@wordpress/global-styles-engine';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useState } from '@/lib/gutenberg/element';
+import { privateApis as globalStylesEnginePrivateApis } from '@/lib/gutenberg/global-styles-engine';
 import { store as blockEditorStore } from '../store';
 import { unlock } from '../lock-unlock';
 import { useStyleOverride } from './utils';

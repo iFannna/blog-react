@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useEntityProp, store as coreStore } from '@wordpress/core-data';
+import { useEntityProp, store as coreStore } from '@/stores/gutenberg/core-data';
 import {
 	useCallback,
 	useEffect,
@@ -7,18 +7,18 @@ import {
 	useMemo,
 	useRef,
 	useState,
-} from '@wordpress/element';
+} from '@/lib/gutenberg/element';
 import {
 	Placeholder,
 	SandBox,
 	Spinner as WCSpinner,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	compose,
 	useMergeRefs,
 	useReducedMotion,
 	useResizeObserver,
-} from '@wordpress/compose';
+} from '@/hooks/gutenberg/compose';
 import {
 	withColors,
 	ColorPalette,
@@ -28,12 +28,12 @@ import {
 	store as blockEditorStore,
 	useBlockEditingMode,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
-import { useSelect, useDispatch, useRegistry } from '@wordpress/data';
-import { createBlocksFromInnerBlocksTemplate } from '@wordpress/blocks';
-import { isBlobURL } from '@wordpress/blob';
-import { store as noticesStore } from '@wordpress/notices';
+} from '@/components/gutenberg/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect, useDispatch, useRegistry } from '@/stores/gutenberg/data';
+import { createBlocksFromInnerBlocksTemplate } from '@/lib/gutenberg/blocks';
+import { isBlobURL } from '@/utils/gutenberg/blob';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import {
 	attributesFromMedia,
 	IMAGE_BACKGROUND_TYPE,

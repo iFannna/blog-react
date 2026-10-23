@@ -1,6 +1,6 @@
-import { addFilter } from '@wordpress/hooks';
-import { hasBlockSupport, getBlockDefaultClassName } from '@wordpress/blocks';
-import type { BlockType } from '@wordpress/blocks';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import { hasBlockSupport, getBlockDefaultClassName } from '@/lib/gutenberg/blocks';
+import type { BlockType } from '@/lib/gutenberg/blocks';
 
 /**
  * Override props assigned to save component to inject generated className if

@@ -1,4 +1,4 @@
-import { privateApis as composePrivateApis } from '@wordpress/compose';
+import { privateApis as composePrivateApis } from '@/hooks/gutenberg/compose';
 import { unlock } from '../../lock-unlock';
 
 const { subscribeDelegatedListener } = unlock( composePrivateApis );

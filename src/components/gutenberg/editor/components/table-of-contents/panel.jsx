@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import WordCount from '../word-count';
 import TimeToRead from '../time-to-read';
 import DocumentOutline from '../document-outline';

@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react';
-import type { SelectControl } from '@wordpress/ui';
+import type { SelectControl } from '@/components/gutenberg/design-system';
 
 /**
  * An option of the HTML element select.

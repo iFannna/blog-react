@@ -1,6 +1,6 @@
 import type { ComponentType, RefObject } from 'react';
-import { getActiveFormat, getActiveObject } from '@wordpress/rich-text';
-import type { RichTextValue } from '@wordpress/rich-text';
+import { getActiveFormat, getActiveObject } from '@/components/gutenberg/rich-text';
+import type { RichTextValue } from '@/components/gutenberg/rich-text';
 
 /*
  * The registered format type settings, as stored by

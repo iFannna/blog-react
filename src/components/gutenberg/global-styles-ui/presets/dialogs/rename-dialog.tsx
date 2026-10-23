@@ -2,10 +2,10 @@ import {
 	__experimentalInputControl as WCInputControl,
 	Button,
 	Modal,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
-import { Stack } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useState } from '@/lib/gutenberg/element';
+import { Stack } from '@/components/gutenberg/design-system';
 
 interface RenameDialogProps {
 	initialName: string;

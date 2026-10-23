@@ -1,9 +1,9 @@
-import { useContext, useId } from '@wordpress/element';
+import { useContext, useId } from '@/lib/gutenberg/element';
 import {
 	CheckboxControl as WCCheckboxControl,
 	Flex,
-} from '@wordpress/components';
-import type { FontFace, FontFamily } from '@wordpress/core-data';
+} from '@/components/gutenberg/ui';
+import type { FontFace, FontFamily } from '@/stores/gutenberg/core-data';
 import { getFontFaceVariantName } from './utils';
 import { FontLibraryContext } from './context';
 import FontDemo from './font-demo';

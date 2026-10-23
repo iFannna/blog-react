@@ -1,4 +1,4 @@
-import { useMemo } from '@wordpress/element';
+import { useMemo } from '@/lib/gutenberg/element';
 
 /**
  * Calculates the image sizes that are available for the current gallery images in order to

@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import type { RefObject } from 'react';
-import { Dropdown, FlexItem, Icon as WCIcon } from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
-import { useMemo, useRef } from '@wordpress/element';
-import { closeSmall } from '@wordpress/icons';
-import { Select, Stack, Tooltip } from '@wordpress/ui';
+import { Dropdown, FlexItem, Icon as WCIcon } from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useMemo, useRef } from '@/lib/gutenberg/element';
+import { closeSmall } from '@/components/gutenberg/icons';
+import { Select, Stack, Tooltip } from '@/components/gutenberg/design-system';
 import SearchWidget from './search-widget';
 import InputWidget from './input-widget';
 import { getOperatorByName } from '../../utils/operators';

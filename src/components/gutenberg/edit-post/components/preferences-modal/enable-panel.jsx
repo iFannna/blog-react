@@ -1,6 +1,6 @@
-import { useDispatch, useSelect } from '@wordpress/data';
-import { store as editorStore } from '@wordpress/editor';
-import { privateApis as preferencesPrivateApis } from '@wordpress/preferences';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { store as editorStore } from '@/components/gutenberg/editor';
+import { privateApis as preferencesPrivateApis } from '@/stores/gutenberg/preferences';
 import { unlock } from '../../lock-unlock';
 
 const { PreferenceBaseOption } = unlock( preferencesPrivateApis );

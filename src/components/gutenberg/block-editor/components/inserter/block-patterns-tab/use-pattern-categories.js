@@ -1,6 +1,6 @@
-import { useMemo } from '@wordpress/element';
-import { _n, sprintf } from '@wordpress/i18n';
-import { speak } from '@wordpress/a11y';
+import { useMemo } from '@/lib/gutenberg/element';
+import { _n, sprintf } from '@/lib/gutenberg/i18n';
+import { speak } from '@/utils/gutenberg/a11y';
 import usePatternsState from '../hooks/use-patterns-state';
 import {
 	isPatternFiltered,

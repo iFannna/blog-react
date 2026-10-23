@@ -3,9 +3,9 @@ import {
 	useDispatch,
 	select as globalSelect,
 	dispatch,
-} from '@wordpress/data';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { useCallback, useEffect, useMemo, useState } from '@wordpress/element';
+} from '@/stores/gutenberg/data';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { useCallback, useEffect, useMemo, useState } from '@/lib/gutenberg/element';
 import { store as commandsStore } from '../store';
 import { unlock } from '../lock-unlock';
 import type { CommandConfig, CommandLoaderHook } from '../store/types';

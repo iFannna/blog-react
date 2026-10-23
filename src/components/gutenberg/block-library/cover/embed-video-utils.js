@@ -1,4 +1,4 @@
-import { getBlockVariations } from '@wordpress/blocks';
+import { getBlockVariations } from '@/lib/gutenberg/blocks';
 import { matchesPatterns } from '../embed/util';
 
 const DEFAULT_EMBED_BLOCK = 'core/embed';

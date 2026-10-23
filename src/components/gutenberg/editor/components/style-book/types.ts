@@ -1,4 +1,4 @@
-import type { Block } from '@wordpress/blocks';
+import type { Block } from '@/lib/gutenberg/blocks';
 
 export type StyleBookCategory = {
 	title: string;

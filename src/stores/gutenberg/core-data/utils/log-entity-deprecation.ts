@@ -1,4 +1,4 @@
-import deprecated from '@wordpress/deprecated';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { deprecatedEntities } from '../entities';
 
 let loggedAlready = false;

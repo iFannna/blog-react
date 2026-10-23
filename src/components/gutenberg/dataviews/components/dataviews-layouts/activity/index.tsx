@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { Spinner as WCSpinner } from '@wordpress/components';
-import { inertValue } from '@wordpress/react-inert-value';
-import { Stack } from '@wordpress/ui';
+import { Spinner as WCSpinner } from '@/components/gutenberg/ui';
+import { inertValue } from '@/hooks/gutenberg/react-inert-value';
+import { Stack } from '@/components/gutenberg/design-system';
 import type { ViewActivityProps } from '../../../types';
 import getDataByGroup from '../utils/get-data-by-group';
 import ActivityGroup from './activity-group';

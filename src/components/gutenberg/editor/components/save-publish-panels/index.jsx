@@ -1,8 +1,8 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { Button, createSlotFill } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useCallback } from '@wordpress/element';
-import { privateApis as coreDataPrivateApis } from '@wordpress/core-data';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { Button, createSlotFill } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useCallback } from '@/lib/gutenberg/element';
+import { privateApis as coreDataPrivateApis } from '@/stores/gutenberg/core-data';
 import PostPublishPanel from '../post-publish-panel';
 import PluginPrePublishPanel from '../plugin-pre-publish-panel';
 import PluginPostPublishPanel from '../plugin-post-publish-panel';

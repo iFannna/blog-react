@@ -1,5 +1,5 @@
-import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
-import { _x } from '@wordpress/i18n';
+import { __experimentalNumberControl as NumberControl } from '@/components/gutenberg/ui';
+import { _x } from '@/lib/gutenberg/i18n';
 
 const MIN_OFFSET = 0;
 const MAX_OFFSET = 100;

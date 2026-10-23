@@ -1,6 +1,6 @@
-import { Children, isValidElement } from '@wordpress/element';
+import { Children, isValidElement } from '@/lib/gutenberg/element';
 // eslint-disable-next-line @wordpress/use-recommended-components
-import { Menu } from '@wordpress/ui';
+import { Menu } from '@/components/gutenberg/design-system';
 import type { ComponentProps, ReactNode } from 'react';
 import MoreMenuItem from './more-menu-item';
 

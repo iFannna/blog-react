@@ -1,13 +1,13 @@
 import type { MouseEventHandler } from 'react';
-import { Button, Modal } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useMemo, useState } from '@wordpress/element';
-import { moreVertical } from '@wordpress/icons';
-import { useRegistry } from '@wordpress/data';
-import { useViewportMatch } from '@wordpress/compose';
+import { Button, Modal } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useMemo, useState } from '@/lib/gutenberg/element';
+import { moreVertical } from '@/components/gutenberg/icons';
+import { useRegistry } from '@/stores/gutenberg/data';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of the new Menu, pending WordPress/gutenberg#76135.
-import { Menu, Stack } from '@wordpress/ui';
-import { kebabCase } from '@wordpress/kebab-case';
+import { Menu, Stack } from '@/components/gutenberg/design-system';
+import { kebabCase } from '@/utils/gutenberg/kebab-case';
 import type { Action, ActionModal as ActionModalType } from '../../types';
 
 export interface ActionTriggerProps< Item > {

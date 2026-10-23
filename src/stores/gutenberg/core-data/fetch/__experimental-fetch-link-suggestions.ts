@@ -1,7 +1,7 @@
-import apiFetch from '@wordpress/api-fetch';
-import { addQueryArgs } from '@wordpress/url';
-import { decodeEntities } from '@wordpress/html-entities';
-import { __ } from '@wordpress/i18n';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { addQueryArgs } from '@/utils/gutenberg/url';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { __ } from '@/lib/gutenberg/i18n';
 
 type SearchType = 'attachment' | 'post' | 'term' | 'post-format';
 
@@ -99,7 +99,7 @@ export type SearchResult = {
  *
  * @example
  * ```js
- * import { __experimentalFetchLinkSuggestions as fetchLinkSuggestions } from '@wordpress/core-data';
+ * import { __experimentalFetchLinkSuggestions as fetchLinkSuggestions } from '@/stores/gutenberg/core-data';
  *
  * //...
  *

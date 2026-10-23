@@ -1,4 +1,4 @@
-import { createContext, useContext } from '@wordpress/element';
+import { createContext, useContext } from '@/lib/gutenberg/element';
 import { getLayoutType } from '../../layouts';
 import { useSettings } from '../use-settings';
 import type { Layout, LayoutStyleArgs } from '../../layouts/types';

@@ -1,5 +1,5 @@
-import { PanelBody } from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { PanelBody } from '@/components/gutenberg/ui';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import { store as editorStore } from '../../store';
 import PostTaxonomiesForm from './index';
 import PostTaxonomiesCheck from './check';

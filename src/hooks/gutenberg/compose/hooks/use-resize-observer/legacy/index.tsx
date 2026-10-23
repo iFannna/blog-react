@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { useCallback, useRef, useState } from '@wordpress/element';
+import { useCallback, useRef, useState } from '@/lib/gutenberg/element';
 import { useResizeObserver } from '../use-resize-observer';
 
 export type ObservedSize = {

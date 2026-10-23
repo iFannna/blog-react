@@ -1,4 +1,4 @@
-import { Badge } from '@wordpress/ui';
+import { Badge } from '@/components/gutenberg/design-system';
 import type { FieldValidity } from '../../types';
 import getValidationMessage from './get-validation-message';
 

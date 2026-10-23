@@ -1,4 +1,4 @@
-import { useInnerBlocksProps, useBlockProps } from '@wordpress/block-editor';
+import { useInnerBlocksProps, useBlockProps } from '@/components/gutenberg/block-editor';
 
 export default function save() {
 	const blockProps = useBlockProps.save();

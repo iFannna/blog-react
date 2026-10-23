@@ -1,6 +1,6 @@
-import { useContext } from '@wordpress/element';
-import { __unstableMotion as motion } from '@wordpress/components';
-import { _x } from '@wordpress/i18n';
+import { useContext } from '@/lib/gutenberg/element';
+import { __unstableMotion as motion } from '@/components/gutenberg/ui';
+import { _x } from '@/lib/gutenberg/i18n';
 import { GlobalStylesContext } from './context';
 import { getFamilyPreviewStyle } from './font-library/utils/preview-styles';
 import { getFontFamilies } from './utils';

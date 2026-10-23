@@ -1,4 +1,4 @@
-import { useMemo, useSyncExternalStore } from '@wordpress/element';
+import { useMemo, useSyncExternalStore } from '@/lib/gutenberg/element';
 import type { ObservableMap } from '../../utils/observable-map';
 
 /**

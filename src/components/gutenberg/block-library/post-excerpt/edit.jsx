@@ -1,20 +1,20 @@
 import clsx from 'clsx';
-import { useEntityProp, store as coreStore } from '@wordpress/core-data';
-import { useMemo } from '@wordpress/element';
+import { useEntityProp, store as coreStore } from '@/stores/gutenberg/core-data';
+import { useMemo } from '@/lib/gutenberg/element';
 import {
 	InspectorControls,
 	RichText,
 	Warning,
 	useBlockProps,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	ToggleControl,
 	RangeControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { __, _x } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
+} from '@/components/gutenberg/ui';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	useCanEditEntity,
 	useToolsPanelDropdownMenuProps,

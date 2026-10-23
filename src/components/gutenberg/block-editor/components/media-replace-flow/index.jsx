@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { __, _x } from '@wordpress/i18n';
-import { speak } from '@wordpress/a11y';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { speak } from '@/utils/gutenberg/a11y';
 import {
 	FormFileUpload,
 	NavigableMenu,
@@ -8,18 +8,18 @@ import {
 	Dropdown,
 	withFilters,
 	ToolbarButton,
-} from '@wordpress/components';
-import { useSelect, withDispatch } from '@wordpress/data';
-import { DOWN } from '@wordpress/keycodes';
+} from '@/components/gutenberg/ui';
+import { useSelect, withDispatch } from '@/stores/gutenberg/data';
+import { DOWN } from '@/utils/gutenberg/keycodes';
 import {
 	postFeaturedImage,
 	upload,
 	media as mediaIcon,
-} from '@wordpress/icons';
-import { compose } from '@wordpress/compose';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
-import { store as noticesStore } from '@wordpress/notices';
-import { useMemo } from '@wordpress/element';
+} from '@/components/gutenberg/icons';
+import { compose } from '@/hooks/gutenberg/compose';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { useMemo } from '@/lib/gutenberg/element';
 import MediaUpload from '../media-upload';
 import MediaUploadCheck from '../media-upload/check';
 import LinkControl from '../link-control';

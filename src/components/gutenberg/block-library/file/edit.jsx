@@ -1,11 +1,11 @@
 import clsx from 'clsx';
-import { isBlobURL } from '@wordpress/blob';
+import { isBlobURL } from '@/utils/gutenberg/blob';
 import {
 	__unstableGetAnimateClassName as getAnimateClassName,
 	ResizableBox,
 	ToolbarButton,
-} from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
+} from '@/components/gutenberg/ui';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	BlockControls,
 	BlockIcon,
@@ -15,14 +15,14 @@ import {
 	useBlockProps,
 	store as blockEditorStore,
 	__experimentalGetElementClassName,
-} from '@wordpress/block-editor';
-import { useState } from '@wordpress/element';
-import { useCopyToClipboard } from '@wordpress/compose';
-import { __ } from '@wordpress/i18n';
-import { file as icon } from '@wordpress/icons';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as noticesStore } from '@wordpress/notices';
-import { getFilename } from '@wordpress/url';
+} from '@/components/gutenberg/block-editor';
+import { useState } from '@/lib/gutenberg/element';
+import { useCopyToClipboard } from '@/hooks/gutenberg/compose';
+import { __ } from '@/lib/gutenberg/i18n';
+import { file as icon } from '@/components/gutenberg/icons';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { getFilename } from '@/utils/gutenberg/url';
 import FileBlockInspector from './inspector';
 import { browserSupportsPdfs } from './utils';
 import removeAnchorTag from '../utils/remove-anchor-tag';

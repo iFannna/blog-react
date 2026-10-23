@@ -1,6 +1,6 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { useMemo } from '@wordpress/element';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useMemo } from '@/lib/gutenberg/element';
 import { CATEGORY_SLUG } from './components/category-selector';
 
 /**

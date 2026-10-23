@@ -1,9 +1,9 @@
 import {
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
-} from '@wordpress/components';
-import { __, _x } from '@wordpress/i18n';
-import { useContext } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { useContext } from '@/lib/gutenberg/element';
 import DataViewsContext from '../../dataviews-context';
 import type {
 	ViewTable,

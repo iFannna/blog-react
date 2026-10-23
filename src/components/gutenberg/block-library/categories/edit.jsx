@@ -6,20 +6,20 @@ import {
 	ToggleControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { useInstanceId } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
 import {
 	InspectorControls,
 	useBlockProps,
 	RichText,
-} from '@wordpress/block-editor';
-import { decodeEntities } from '@wordpress/html-entities';
-import { __, sprintf } from '@wordpress/i18n';
-import { pin } from '@wordpress/icons';
-import { useEntityRecords } from '@wordpress/core-data';
-import { useDispatch } from '@wordpress/data';
-import { VisuallyHidden } from '@wordpress/ui';
-import { store as noticeStore } from '@wordpress/notices';
+} from '@/components/gutenberg/block-editor';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { pin } from '@/components/gutenberg/icons';
+import { useEntityRecords } from '@/stores/gutenberg/core-data';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
+import { store as noticeStore } from '@/stores/gutenberg/notices';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 export default function CategoriesEdit( {

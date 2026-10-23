@@ -1,6 +1,6 @@
 // @ts-expect-error: Not typed yet.
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
-import { useMemo } from '@wordpress/element';
+import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
+import { useMemo } from '@/lib/gutenberg/element';
 import { useStyle, useSetting } from './hooks';
 import { unlock } from './lock-unlock';
 

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { forwardRef } from '@wordpress/element';
+import { forwardRef } from '@/lib/gutenberg/element';
 
 /**
  * Type definitions

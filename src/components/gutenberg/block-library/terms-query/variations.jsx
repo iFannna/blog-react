@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { Path, SVG } from '@wordpress/components';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Path, SVG } from '@/components/gutenberg/ui';
 
 export const titleDate = (
 	<SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">

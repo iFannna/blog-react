@@ -1,15 +1,15 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 	ToggleControl,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	InspectorControls,
 	PlainText,
 	useBlockProps,
-} from '@wordpress/block-editor';
-import { getDefaultBlockName, createBlock } from '@wordpress/blocks';
+} from '@/components/gutenberg/block-editor';
+import { getDefaultBlockName, createBlock } from '@/lib/gutenberg/blocks';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 const DEFAULT_TEXT = __( 'Read more' );

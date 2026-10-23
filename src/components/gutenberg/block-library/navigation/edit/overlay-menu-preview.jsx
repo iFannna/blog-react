@@ -3,8 +3,8 @@ import {
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import OverlayMenuIcon from './overlay-menu-icon';
 
 export default function OverlayMenuPreview( { setAttributes, hasIcon, icon } ) {

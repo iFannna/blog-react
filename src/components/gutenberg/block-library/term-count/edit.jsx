@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n';
-import { useBlockProps, BlockControls } from '@wordpress/block-editor';
-import { ToolbarDropdownMenu } from '@wordpress/components';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useBlockProps, BlockControls } from '@/components/gutenberg/block-editor';
+import { ToolbarDropdownMenu } from '@/components/gutenberg/ui';
 import {
 	bareNumber,
 	numberInParenthesis,

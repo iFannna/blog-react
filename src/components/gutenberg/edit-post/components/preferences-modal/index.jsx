@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n';
-import { privateApis as preferencesPrivateApis } from '@wordpress/preferences';
-import { privateApis as editorPrivateApis } from '@wordpress/editor';
+import { __ } from '@/lib/gutenberg/i18n';
+import { privateApis as preferencesPrivateApis } from '@/stores/gutenberg/preferences';
+import { privateApis as editorPrivateApis } from '@/components/gutenberg/editor';
 import { unlock } from '../../lock-unlock';
 import { MetaBoxesSection } from './meta-boxes-section';
 

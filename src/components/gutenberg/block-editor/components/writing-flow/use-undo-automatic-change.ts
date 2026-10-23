@@ -1,6 +1,6 @@
-import { BACKSPACE, ESCAPE } from '@wordpress/keycodes';
-import { useSelect } from '@wordpress/data';
-import { useRefEffect } from '@wordpress/compose';
+import { BACKSPACE, ESCAPE } from '@/utils/gutenberg/keycodes';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
 import { store as blockEditorStore } from '../../store';
 
 export default function useUndoAutomaticChange() {

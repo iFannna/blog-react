@@ -1,9 +1,9 @@
-import deprecated from '@wordpress/deprecated';
-import { Button, Dropdown } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { forwardRef } from '@wordpress/element';
-import { listView } from '@wordpress/icons';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { Button, Dropdown } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { forwardRef } from '@/lib/gutenberg/element';
+import { listView } from '@/components/gutenberg/icons';
 import ListView from '../list-view';
 import { store as blockEditorStore } from '../../store';
 

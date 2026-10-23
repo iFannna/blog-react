@@ -1,11 +1,11 @@
 import clsx from 'clsx';
-import { useDispatch } from '@wordpress/data';
-import { useRef, useCallback, useState, useEffect } from '@wordpress/element';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { useRef, useCallback, useState, useEffect } from '@/lib/gutenberg/element';
 import {
 	ResizableBox,
 	__unstableMotion as motion,
-} from '@wordpress/components';
-import { useReducedMotion, useResizeObserver } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { useReducedMotion, useResizeObserver } from '@/hooks/gutenberg/compose';
 import ResizeHandle from './resize-handle';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';

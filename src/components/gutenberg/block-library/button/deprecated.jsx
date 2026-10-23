@@ -10,8 +10,8 @@ import {
 	__experimentalGetShadowClassesAndStyles as getShadowClassesAndStyles,
 	__experimentalGetElementClassName,
 	getTypographyClassesAndStyles,
-} from '@wordpress/block-editor';
-import { compose } from '@wordpress/compose';
+} from '@/components/gutenberg/block-editor';
+import { compose } from '@/hooks/gutenberg/compose';
 import migrateFontFamily from '../utils/migrate-font-family';
 import migrateTextAlign from '../utils/migrate-text-align';
 

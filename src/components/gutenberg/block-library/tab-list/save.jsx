@@ -7,7 +7,7 @@ import {
 	__experimentalGetColorClassesAndStyles as getColorClassesAndStyles,
 	__experimentalGetShadowClassesAndStyles as getShadowClassesAndStyles,
 	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 
 export default function save( { attributes } ) {
 	const { tabs } = attributes;

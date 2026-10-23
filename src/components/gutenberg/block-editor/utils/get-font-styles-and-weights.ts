@@ -1,4 +1,4 @@
-import { _x, sprintf } from '@wordpress/i18n';
+import { _x, sprintf } from '@/lib/gutenberg/i18n';
 import { formatFontStyle } from './format-font-style';
 import { formatFontWeight } from './format-font-weight';
 import type {

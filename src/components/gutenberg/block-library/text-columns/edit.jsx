@@ -1,13 +1,13 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { PanelBody, RangeControl } from '@wordpress/components';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { PanelBody, RangeControl } from '@/components/gutenberg/ui';
 import {
 	BlockControls,
 	BlockAlignmentToolbar,
 	InspectorControls,
 	RichText,
 	useBlockProps,
-} from '@wordpress/block-editor';
-import deprecated from '@wordpress/deprecated';
+} from '@/components/gutenberg/block-editor';
+import deprecated from '@/utils/gutenberg/deprecated';
 
 export default function TextColumnsEdit( { attributes, setAttributes } ) {
 	const { width, content, columns } = attributes;

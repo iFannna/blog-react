@@ -1,9 +1,9 @@
-import { useViewportMatch } from '@wordpress/compose';
-import { useMemo } from '@wordpress/element';
-import { __experimentalPaletteEdit as PaletteEdit } from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
-import { __ } from '@wordpress/i18n';
-import type { Color, Duotone } from '@wordpress/global-styles-engine';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
+import { useMemo } from '@/lib/gutenberg/element';
+import { __experimentalPaletteEdit as PaletteEdit } from '@/components/gutenberg/ui';
+import { Stack } from '@/components/gutenberg/design-system';
+import { __ } from '@/lib/gutenberg/i18n';
+import type { Color, Duotone } from '@/lib/gutenberg/global-styles-engine';
 import { useSetting } from './hooks';
 
 const mobilePopoverProps = { placement: 'bottom-start' as const, offset: 8 };

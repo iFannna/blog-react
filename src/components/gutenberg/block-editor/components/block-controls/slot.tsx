@@ -1,11 +1,11 @@
-import { useContext, useMemo } from '@wordpress/element';
+import { useContext, useMemo } from '@/lib/gutenberg/element';
 import {
 	privateApis,
 	__experimentalToolbarContext as ToolbarContext,
 	ToolbarGroup,
 	__experimentalUseSlotFills as useSlotFills,
-} from '@wordpress/components';
-import warning from '@wordpress/warning';
+} from '@/components/gutenberg/ui';
+import warning from '@/utils/gutenberg/warning';
 import groups from './groups';
 import { unlock } from '../../lock-unlock';
 import type { BlockControlsSlotProps } from './types';

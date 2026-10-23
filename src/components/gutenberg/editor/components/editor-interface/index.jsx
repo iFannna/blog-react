@@ -1,20 +1,20 @@
 import clsx from 'clsx';
-import { InterfaceSkeleton, ComplementaryArea } from '@wordpress/interface';
-import { useSelect, useDispatch, useRegistry } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
-import { store as preferencesStore } from '@wordpress/preferences';
+import { InterfaceSkeleton, ComplementaryArea } from '@/components/gutenberg/interface';
+import { useSelect, useDispatch, useRegistry } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import {
 	BlockBreadcrumb,
 	BlockToolbar,
 	privateApis as blockEditorPrivateApis,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { useViewportMatch } from '@wordpress/compose';
-import { useState, useCallback, useLayoutEffect } from '@wordpress/element';
-import { decodeEntities } from '@wordpress/html-entities';
-import { InlineNotices } from '@wordpress/notices';
-import { ThemeProvider } from '@wordpress/theme';
-import { Stack } from '@wordpress/ui';
+} from '@/components/gutenberg/block-editor';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
+import { useState, useCallback, useLayoutEffect } from '@/lib/gutenberg/element';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { InlineNotices } from '@/stores/gutenberg/notices';
+import { ThemeProvider } from '@/lib/gutenberg/theme';
+import { Stack } from '@/components/gutenberg/design-system';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 import TemplateValidationNotice from '../template-validation-notice';

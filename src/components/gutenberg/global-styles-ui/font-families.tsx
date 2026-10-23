@@ -1,13 +1,13 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	__experimentalText as WCText,
 	__experimentalItemGroup as ItemGroup,
 	__experimentalVStack as VStack,
 	__experimentalHStack as HStack,
 	Button,
-} from '@wordpress/components';
-import { settings } from '@wordpress/icons';
-import { useContext } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { settings } from '@/components/gutenberg/icons';
+import { useContext } from '@/lib/gutenberg/element';
 import { Subtitle } from './subtitle';
 import { useSetting } from './hooks';
 import FontLibraryProvider, {

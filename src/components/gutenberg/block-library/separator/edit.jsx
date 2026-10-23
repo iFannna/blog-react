@@ -4,12 +4,12 @@ import {
 	InspectorControls,
 	useBlockProps,
 	__experimentalUseColorProps as useColorProps,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	HorizontalRule,
 	SelectControl as WCSelectControl,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import useDeprecatedOpacity from './use-deprecated-opacity';
 
 const HtmlElementControl = ( { tagName, setAttributes } ) => {

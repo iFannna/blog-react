@@ -1,7 +1,7 @@
-import { useContext, useRef, useCallback, useEffect } from '@wordpress/element';
-import { Button } from '@wordpress/components';
-import { funnel } from '@wordpress/icons';
-import { __, _x } from '@wordpress/i18n';
+import { useContext, useRef, useCallback, useEffect } from '@/lib/gutenberg/element';
+import { Button } from '@/components/gutenberg/ui';
+import { funnel } from '@/components/gutenberg/icons';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import { AddFilterMenu } from './add-filter';
 import DataViewsContext from '../dataviews-context';
 import type { View } from '../../types';

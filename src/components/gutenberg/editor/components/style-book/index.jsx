@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { Disabled, Composite } from '@wordpress/components';
-import { __, _x, sprintf } from '@wordpress/i18n';
+import { Disabled, Composite } from '@/components/gutenberg/ui';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	BlockList,
 	privateApis as blockEditorPrivateApis,
@@ -10,9 +10,9 @@ import {
 	__unstableEditorStyles as EditorStyles,
 	__unstableIframe as Iframe,
 	__experimentalUseMultipleOriginColorsAndGradients as useMultipleOriginColorsAndGradients,
-} from '@wordpress/block-editor';
-import { useSelect, dispatch } from '@wordpress/data';
-import { mergeGlobalStyles } from '@wordpress/global-styles-engine';
+} from '@/components/gutenberg/block-editor';
+import { useSelect, dispatch } from '@/stores/gutenberg/data';
+import { mergeGlobalStyles } from '@/lib/gutenberg/global-styles-engine';
 import {
 	useMemo,
 	useState,
@@ -21,11 +21,11 @@ import {
 	useLayoutEffect,
 	useEffect,
 	forwardRef,
-} from '@wordpress/element';
-import { ENTER, SPACE } from '@wordpress/keycodes';
-import { uploadMedia } from '@wordpress/media-utils';
-import { store as coreStore } from '@wordpress/core-data';
-import { Tabs } from '@wordpress/ui';
+} from '@/lib/gutenberg/element';
+import { ENTER, SPACE } from '@/utils/gutenberg/keycodes';
+import { uploadMedia } from '@/utils/gutenberg/media-utils';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { Tabs } from '@/components/gutenberg/design-system';
 import { unlock } from '../../lock-unlock';
 import { STYLE_BOOK_IFRAME_STYLES } from './constants';
 import {

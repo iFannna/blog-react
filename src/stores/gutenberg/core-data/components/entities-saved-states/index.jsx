@@ -1,16 +1,16 @@
 import clsx from 'clsx';
-import { Button, Flex, FlexItem } from '@wordpress/components';
-import { __, _n, sprintf } from '@wordpress/i18n';
+import { Button, Flex, FlexItem } from '@/components/gutenberg/ui';
+import { __, _n, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	useCallback,
 	useRef,
 	createInterpolateElement,
-} from '@wordpress/element';
+} from '@/lib/gutenberg/element';
 import {
 	__experimentalUseDialog as useDialog,
 	useInstanceId,
-} from '@wordpress/compose';
-import { useDispatch } from '@wordpress/data';
+} from '@/hooks/gutenberg/compose';
+import { useDispatch } from '@/stores/gutenberg/data';
 import EntityTypeList from './entity-type-list';
 import { useIsDirty } from './hooks/use-is-dirty';
 import { unlock } from '../../lock-unlock';

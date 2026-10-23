@@ -1,5 +1,5 @@
-import { _x } from '@wordpress/i18n';
-import { home } from '@wordpress/icons';
+import { _x } from '@/lib/gutenberg/i18n';
+import { home } from '@/components/gutenberg/icons';
 import initBlock from '../utils/init-block';
 import metadata from './block.json';
 import edit from './edit';

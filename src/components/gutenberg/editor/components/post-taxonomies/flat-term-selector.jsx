@@ -1,23 +1,23 @@
-import { __, _n, _x, sprintf } from '@wordpress/i18n';
+import { __, _n, _x, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	useCallback,
 	useEffect,
 	useMemo,
 	useRef,
 	useState,
-} from '@wordpress/element';
-import { withFilters } from '@wordpress/components';
+} from '@/lib/gutenberg/element';
+import { withFilters } from '@/components/gutenberg/ui';
 import {
 	SearchableChipSelectControl,
 	Spinner,
 	Stack,
 	VisuallyHidden,
-} from '@wordpress/ui';
-import { useSelect, useDispatch, useRegistry } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { useDebounce } from '@wordpress/compose';
-import { speak } from '@wordpress/a11y';
-import { store as noticesStore } from '@wordpress/notices';
+} from '@/components/gutenberg/design-system';
+import { useSelect, useDispatch, useRegistry } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useDebounce } from '@/hooks/gutenberg/compose';
+import { speak } from '@/utils/gutenberg/a11y';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import { store as editorStore } from '../../store';
 import { unescapeString } from '../../utils/terms';
 import MostUsedTerms from './most-used-terms';

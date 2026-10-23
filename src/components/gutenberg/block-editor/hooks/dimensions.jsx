@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { useState, useEffect, useCallback } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { getBlockSupport } from '@wordpress/blocks';
-import deprecated from '@wordpress/deprecated';
+import { useState, useEffect, useCallback } from '@/lib/gutenberg/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { getBlockSupport } from '@/lib/gutenberg/blocks';
+import deprecated from '@/utils/gutenberg/deprecated';
 import InspectorControls from '../components/inspector-controls';
 import {
 	DimensionsPanel as StylesDimensionsPanel,

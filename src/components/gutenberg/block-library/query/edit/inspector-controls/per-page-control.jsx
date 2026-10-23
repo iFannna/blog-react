@@ -1,5 +1,5 @@
-import { RangeControl } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+import { RangeControl } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 
 const MIN_POSTS_PER_PAGE = 1;
 const MAX_POSTS_PER_PAGE = 100;

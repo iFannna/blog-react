@@ -2,15 +2,15 @@ import {
 	InspectorControls,
 	useBlockProps,
 	RichText,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { Icon, close } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Icon, close } from '@/components/gutenberg/icons';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 export default function NavigationOverlayCloseEdit( {

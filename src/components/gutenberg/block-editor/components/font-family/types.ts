@@ -3,7 +3,7 @@ import type {
 	FocusEventHandler,
 	MouseEventHandler,
 } from 'react';
-import type { FontFamilyPreset } from '@wordpress/global-styles-engine';
+import type { FontFamilyPreset } from '@/lib/gutenberg/global-styles-engine';
 
 /**
  * A font family the control offers, labelled by its name or its CSS value.

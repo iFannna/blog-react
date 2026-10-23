@@ -1,5 +1,5 @@
-import deprecated from '@wordpress/deprecated';
-import { getPhrasingContentSchema } from '@wordpress/dom';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { getPhrasingContentSchema } from '@/utils/gutenberg/dom';
 import { htmlToBlocks } from './html-to-blocks';
 import parse from '../parser';
 import normaliseBlocks from './normalise-blocks';
@@ -31,7 +31,7 @@ export function deprecatedGetPhrasingContentSchema(
  *
  * @example
  * ```js
- * import { rawHandler } from '@wordpress/blocks';
+ * import { rawHandler } from '@/lib/gutenberg/blocks';
  *
  * const blocks = rawHandler( { HTML: '<p>Hello</p><p>World</p>' } );
  * ```

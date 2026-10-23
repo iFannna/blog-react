@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { memo, useMemo, useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { __, _x } from '@wordpress/i18n';
+import { memo, useMemo, useState } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import {
 	BlockControls,
 	BlockContextProvider,
@@ -9,10 +9,10 @@ import {
 	useBlockProps,
 	useInnerBlocksProps,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { Spinner as WCSpinner, ToolbarGroup } from '@wordpress/components';
-import { store as coreStore } from '@wordpress/core-data';
-import { list, grid } from '@wordpress/icons';
+} from '@/components/gutenberg/block-editor';
+import { Spinner as WCSpinner, ToolbarGroup } from '@/components/gutenberg/ui';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { list, grid } from '@/components/gutenberg/icons';
 
 // The Post Template's layout attribute arranges the post items, not the
 // blocks of the template, which always stack vertically inside each post

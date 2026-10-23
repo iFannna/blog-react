@@ -1,12 +1,12 @@
-import { useMemo, useCallback } from '@wordpress/element';
+import { useMemo, useCallback } from '@/lib/gutenberg/element';
 import {
 	mergeGlobalStyles,
 	getStyle,
 	getSetting,
-} from '@wordpress/global-styles-engine';
-import { store as coreStore } from '@wordpress/core-data';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
+} from '@/lib/gutenberg/global-styles-engine';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import { unlock } from '../../lock-unlock';
 
 const { cleanEmptyObject } = unlock( blockEditorPrivateApis );

@@ -6,17 +6,17 @@ import {
 	__experimentalItemGroup as ItemGroup,
 	__experimentalHStack as HStack,
 	__experimentalTruncate as Truncate,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	MediaReplaceFlow,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { focus } from '@wordpress/dom';
-import { useRef } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { reset as resetIcon } from '@wordpress/icons';
-import { getFilename } from '@wordpress/url';
+} from '@/components/gutenberg/block-editor';
+import { focus } from '@/utils/gutenberg/dom';
+import { useRef } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { reset as resetIcon } from '@/components/gutenberg/icons';
+import { getFilename } from '@/utils/gutenberg/url';
 
 /**
  * Focuses the toggle button.

@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from '@wordpress/element';
+import { useEffect, useLayoutEffect } from '@/lib/gutenberg/element';
 
 /**
  * Preferred over direct usage of `useLayoutEffect` when supporting

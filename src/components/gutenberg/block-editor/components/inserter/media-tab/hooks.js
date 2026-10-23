@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
+import { useEffect, useState, useRef } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
 import { store as blockEditorStore } from '../../../store';
 import { unlock } from '../../../lock-unlock';
 

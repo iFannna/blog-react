@@ -1,7 +1,7 @@
-import { __, _x } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { decodeEntities } from '@wordpress/html-entities';
-import { Tabs } from '@wordpress/ui';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { Tabs } from '@/components/gutenberg/design-system';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 import { sidebars } from './constants';

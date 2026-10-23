@@ -8,16 +8,16 @@ import {
 	useSettings,
 	useInnerBlocksProps,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	__experimentalUseCustomUnits as useCustomUnits,
 	__experimentalUnitControl as UnitControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useState } from '@wordpress/element';
-import { sprintf, __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useState } from '@/lib/gutenberg/element';
+import { sprintf, __ } from '@/lib/gutenberg/i18n';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 function ColumnInspectorControls( { width, setAttributes } ) {

@@ -1,4 +1,4 @@
-import { privateApis as coreDataPrivateApis } from '@wordpress/core-data';
+import { privateApis as coreDataPrivateApis } from '@/stores/gutenberg/core-data';
 import { unlock } from '../lock-unlock';
 
 const { CRDT_AUTOSAVE_SNAPSHOT_KEY } = unlock( coreDataPrivateApis );

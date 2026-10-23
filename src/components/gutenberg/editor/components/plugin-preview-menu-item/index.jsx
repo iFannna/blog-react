@@ -1,6 +1,6 @@
-import deprecated from '@wordpress/deprecated';
-import { usePluginContext } from '@wordpress/plugins';
-import { ActionItem } from '@wordpress/interface';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { usePluginContext } from '@/lib/gutenberg/plugins';
+import { ActionItem } from '@/components/gutenberg/interface';
 
 /**
  * Renders a menu item in the Preview dropdown, which can be used as a button or link depending on the props provided.
@@ -15,9 +15,9 @@ import { ActionItem } from '@wordpress/interface';
  *
  * @example
  * ```jsx
- * import { __ } from '@wordpress/i18n';
- * import { PluginPreviewMenuItem } from '@wordpress/editor';
- * import { external } from '@wordpress/icons';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { PluginPreviewMenuItem } from '@/components/gutenberg/editor';
+ * import { external } from '@/components/gutenberg/icons';
  *
  * function onPreviewClick() {
  *   // Handle preview action

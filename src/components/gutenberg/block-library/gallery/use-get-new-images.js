@@ -1,4 +1,4 @@
-import { useMemo, useState } from '@wordpress/element';
+import { useMemo, useState } from '@/lib/gutenberg/element';
 
 /**
  * Keeps track of images already in the gallery to allow new innerBlocks to be identified. This

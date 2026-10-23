@@ -1,4 +1,4 @@
-import { VisuallyHidden } from '@wordpress/ui';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
 
 export default function AccessibleDescription( { id, children } ) {
 	return (

@@ -4,7 +4,7 @@ import {
 	useState,
 	useMemo,
 	createInterpolateElement,
-} from '@wordpress/element';
+} from '@/lib/gutenberg/element';
 import {
 	__experimentalSpacer as Spacer,
 	__experimentalText as WCText,
@@ -18,25 +18,25 @@ import {
 	Button,
 	SearchControl,
 	CheckboxControl as WCCheckboxControl,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of the new Menu, pending WordPress/gutenberg#76135.
-import { Menu, Progress, Select } from '@wordpress/ui';
-import { debounce } from '@wordpress/compose';
-import { sprintf, __, _x, isRTL } from '@wordpress/i18n';
+import { Menu, Progress, Select } from '@/components/gutenberg/design-system';
+import { debounce } from '@/hooks/gutenberg/compose';
+import { sprintf, __, _x, isRTL } from '@/lib/gutenberg/i18n';
 import {
 	moreVertical,
 	next,
 	previous,
 	chevronLeft,
 	chevronRight,
-} from '@wordpress/icons';
-import { useEntityRecord } from '@wordpress/core-data';
+} from '@/components/gutenberg/icons';
+import { useEntityRecord } from '@/stores/gutenberg/core-data';
 import type {
 	FontCollection as FontCollectionType,
 	FontFace,
 	FontFamily,
 	CollectionFontFamily,
-} from '@wordpress/core-data';
+} from '@/stores/gutenberg/core-data';
 import { FontLibraryContext } from './context';
 import FontCard from './font-card';
 import filterFonts from './utils/filter-fonts';

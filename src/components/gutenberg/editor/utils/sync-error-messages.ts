@@ -1,5 +1,5 @@
-import { type ConnectionError } from '@wordpress/core-data';
-import { __ } from '@wordpress/i18n';
+import { type ConnectionError } from '@/stores/gutenberg/core-data';
+import { __ } from '@/lib/gutenberg/i18n';
 
 // These error codes are defined in the sync package:
 // packages/sync/src/errors.ts

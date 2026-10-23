@@ -1,5 +1,5 @@
-import { Progress } from '@wordpress/ui';
-import { __ } from '@wordpress/i18n';
+import { Progress } from '@/components/gutenberg/design-system';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	__experimentalText as WCText,
 	__experimentalVStack as VStack,
@@ -8,9 +8,9 @@ import {
 	Notice,
 	FormFileUpload,
 	FlexItem,
-} from '@wordpress/components';
-import { useContext, useState } from '@wordpress/element';
-import type { FontFace } from '@wordpress/core-data';
+} from '@/components/gutenberg/ui';
+import { useContext, useState } from '@/lib/gutenberg/element';
+import type { FontFace } from '@/stores/gutenberg/core-data';
 import { ALLOWED_FILE_EXTENSIONS } from './utils/constants';
 import { FontLibraryContext } from './context';
 import { Font } from './lib/lib-font.browser';

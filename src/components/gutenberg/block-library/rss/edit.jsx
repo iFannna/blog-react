@@ -2,7 +2,7 @@ import {
 	BlockControls,
 	InspectorControls,
 	useBlockProps,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	Button,
 	Placeholder,
@@ -15,13 +15,13 @@ import {
 	__experimentalInputControl as WCInputControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { createInterpolateElement, useState } from '@wordpress/element';
-import { grid, list, pencil, rss } from '@wordpress/icons';
-import { __, _x, sprintf } from '@wordpress/i18n';
-import { prependHTTPS } from '@wordpress/url';
-import { useServerSideRender } from '@wordpress/server-side-render';
-import { useDisabled } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { createInterpolateElement, useState } from '@/lib/gutenberg/element';
+import { grid, list, pencil, rss } from '@/components/gutenberg/icons';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
+import { prependHTTPS } from '@/utils/gutenberg/url';
+import { useServerSideRender } from '@/components/gutenberg/server-side-render';
+import { useDisabled } from '@/hooks/gutenberg/compose';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 import HtmlRenderer from '../utils/html-renderer';
 

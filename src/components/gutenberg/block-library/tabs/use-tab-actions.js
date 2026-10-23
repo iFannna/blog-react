@@ -1,6 +1,6 @@
-import { createBlock } from '@wordpress/blocks';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { useDispatch, useRegistry } from '@wordpress/data';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { useDispatch, useRegistry } from '@/stores/gutenberg/data';
 
 /**
  * Provides callbacks to insert, remove and move tabs for a tabs block.

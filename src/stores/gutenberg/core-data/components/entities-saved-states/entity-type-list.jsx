@@ -1,7 +1,7 @@
-import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { PanelBody, PanelRow } from '@wordpress/components';
-import { getGlobalStylesChanges } from '@wordpress/global-styles-engine';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { PanelBody, PanelRow } from '@/components/gutenberg/ui';
+import { getGlobalStylesChanges } from '@/lib/gutenberg/global-styles-engine';
 import EntityRecordItem from './entity-record-item';
 import { STORE_NAME } from '../../name';
 

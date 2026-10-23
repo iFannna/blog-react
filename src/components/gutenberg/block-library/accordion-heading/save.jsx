@@ -4,7 +4,7 @@ import {
 	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles,
 	RichText,
 	getTypographyClassesAndStyles,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 
 export default function save( { attributes } ) {
 	const { level, title, iconPosition, showIcon } = attributes;

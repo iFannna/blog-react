@@ -1,4 +1,4 @@
-import { LEFT, RIGHT } from '@wordpress/keycodes';
+import { LEFT, RIGHT } from '@/utils/gutenberg/keycodes';
 import { isCollapsed } from '../../is-collapsed';
 import { subscribeOwnedListener } from '../../subscribe-owned-listener';
 import type { RichTextFormatList } from '../../types';

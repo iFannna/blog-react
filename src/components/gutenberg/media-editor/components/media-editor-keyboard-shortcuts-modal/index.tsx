@@ -1,11 +1,11 @@
-import { Modal } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { Modal } from '@/components/gutenberg/ui';
+import { Fragment } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	displayShortcutList,
 	shortcutAriaLabel,
 	type WPKeycodeModifier,
-} from '@wordpress/keycodes';
+} from '@/utils/gutenberg/keycodes';
 
 interface KeyCombination {
 	/** Modifier for cross-platform display (e.g. 'primary', 'primaryShift', 'shift'). */

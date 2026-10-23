@@ -1,15 +1,15 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	reset,
 	formatCapitalize,
 	formatLowercase,
 	formatUppercase,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import {
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import type { TextTransformControlProps } from './types';
 
 const TEXT_TRANSFORMS = [

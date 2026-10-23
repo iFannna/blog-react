@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useMemo, useState } from '@wordpress/element';
-import { applyFilters } from '@wordpress/hooks';
-import { useImageCropper } from '@wordpress/image-cropper';
+import { useCallback, useEffect, useMemo, useState } from '@/lib/gutenberg/element';
+import { applyFilters } from '@/hooks/gutenberg/hooks';
+import { useImageCropper } from '@/components/gutenberg/image-cropper';
 import type { ImageEditorProps, TransformImage } from './types';
 
 export default function useTransformImage( {

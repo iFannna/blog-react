@@ -1,5 +1,5 @@
-import { createBlock } from '@wordpress/blocks';
-import { __unstableCreateElement as createElement } from '@wordpress/rich-text';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { __unstableCreateElement as createElement } from '@/components/gutenberg/rich-text';
 import { getTransformedAttributes } from '../utils/get-transformed-attributes';
 
 const transforms = {

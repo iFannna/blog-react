@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { arrowDown, arrowUp } from '@wordpress/icons';
+import { __ } from '@/lib/gutenberg/i18n';
+import { arrowDown, arrowUp } from '@/components/gutenberg/icons';
 import type { DayNumber } from './types';
 
 // Filter operators.

@@ -1,4 +1,4 @@
-import { SETTINGS_DEFAULTS } from '@wordpress/block-editor';
+import { SETTINGS_DEFAULTS } from '@/components/gutenberg/block-editor';
 
 /**
  * The default post editor settings.

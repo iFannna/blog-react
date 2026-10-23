@@ -1,6 +1,6 @@
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import type { View, SupportedLayouts, Form } from '@wordpress/dataviews';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import type { View, SupportedLayouts, Form } from '@/components/gutenberg/dataviews';
 import { unlock } from './lock-unlock';
 
 /**

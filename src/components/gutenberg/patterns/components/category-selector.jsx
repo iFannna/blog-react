@@ -1,8 +1,8 @@
-import { __ } from '@wordpress/i18n';
-import { useMemo, useState } from '@wordpress/element';
-import { FormTokenField } from '@wordpress/components';
-import { useDebounce } from '@wordpress/compose';
-import { decodeEntities } from '@wordpress/html-entities';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useMemo, useState } from '@/lib/gutenberg/element';
+import { FormTokenField } from '@/components/gutenberg/ui';
+import { useDebounce } from '@/hooks/gutenberg/compose';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 
 const unescapeString = ( arg ) => {
 	return decodeEntities( arg );

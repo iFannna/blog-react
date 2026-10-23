@@ -1,7 +1,7 @@
-import { MenuItem } from '@wordpress/components';
-import { _x } from '@wordpress/i18n';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { displayShortcut } from '@wordpress/keycodes';
+import { MenuItem } from '@/components/gutenberg/ui';
+import { _x } from '@/lib/gutenberg/i18n';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { displayShortcut } from '@/utils/gutenberg/keycodes';
 import { store as blockEditorStore } from '../../store';
 import { groupBlocks } from '../../utils/group-blocks';
 import useConvertToGroupButtonProps from './use-convert-to-group-button-props';

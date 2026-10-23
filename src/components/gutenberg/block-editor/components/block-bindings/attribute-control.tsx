@@ -1,20 +1,20 @@
 import fastDeepEqual from 'fast-deep-equal/es6/index.js';
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	getBlockBindingsSource,
 	store as blocksStore,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import {
 	__experimentalItem as Item,
 	__experimentalText as WCText,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { useContext } from '@wordpress/element';
-import { useViewportMatch } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useContext } from '@/lib/gutenberg/element';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of the new Menu, pending WordPress/gutenberg#76135.
-import { Menu } from '@wordpress/ui';
+import { Menu } from '@/components/gutenberg/design-system';
 import BlockContext from '../block-context';
 import BlockBindingsSourceFieldsList from './source-fields-list';
 import useBlockBindingsUtils from './use-block-bindings-utils';

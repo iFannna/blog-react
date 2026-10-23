@@ -1,5 +1,5 @@
 import { colord } from 'colord';
-import { useEffect, useRef } from '@wordpress/element';
+import { useEffect, useRef } from '@/lib/gutenberg/element';
 import type { RefObject } from 'react';
 import type { RichTextRecord } from './types';
 

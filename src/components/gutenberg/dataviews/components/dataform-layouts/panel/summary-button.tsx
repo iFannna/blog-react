@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { Button } from '@wordpress/components';
-import { sprintf, _x } from '@wordpress/i18n';
-import { pencil } from '@wordpress/icons';
-import { useInstanceId } from '@wordpress/compose';
+import { Button } from '@/components/gutenberg/ui';
+import { sprintf, _x } from '@/lib/gutenberg/i18n';
+import { pencil } from '@/components/gutenberg/icons';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
 import type {
 	FieldValidity,
 	NormalizedField,

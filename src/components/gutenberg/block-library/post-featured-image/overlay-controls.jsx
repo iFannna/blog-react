@@ -1,15 +1,15 @@
 import {
 	RangeControl,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	withColors,
 	__experimentalColorGradientSettingsDropdown as ColorGradientSettingsDropdown,
 	__experimentalUseGradient as useGradient,
 	__experimentalUseMultipleOriginColorsAndGradients as useMultipleOriginColorsAndGradients,
-} from '@wordpress/block-editor';
-import { compose } from '@wordpress/compose';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/block-editor';
+import { compose } from '@/hooks/gutenberg/compose';
+import { __ } from '@/lib/gutenberg/i18n';
 
 const Overlay = ( {
 	clientId,

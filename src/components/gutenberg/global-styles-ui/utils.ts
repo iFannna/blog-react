@@ -1,12 +1,12 @@
 import {
 	areGlobalStylesEqual,
 	privateApis as globalStylesEnginePrivateApis,
-} from '@wordpress/global-styles-engine';
+} from '@/lib/gutenberg/global-styles-engine';
 import type {
 	GlobalStylesConfig,
 	GlobalStylesSettings,
-} from '@wordpress/global-styles-engine';
-import { __ } from '@wordpress/i18n';
+} from '@/lib/gutenberg/global-styles-engine';
+import { __ } from '@/lib/gutenberg/i18n';
 import { unlock } from './lock-unlock';
 
 const { getViewportBreakpoints } = unlock( globalStylesEnginePrivateApis );

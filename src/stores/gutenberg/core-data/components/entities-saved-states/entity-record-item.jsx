@@ -1,10 +1,10 @@
 import {
 	CheckboxControl as WCCheckboxControl,
 	PanelRow,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { decodeEntities } from '@wordpress/html-entities';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { STORE_NAME } from '../../name';
 import { getTemplateInfo } from '../../utils/get-template-info';
 

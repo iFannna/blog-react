@@ -1,5 +1,5 @@
-import { parse } from '@wordpress/blocks';
-import { store as coreStore } from '@wordpress/core-data';
+import { parse } from '@/lib/gutenberg/blocks';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import getMediaIdsInBlocks from './media-ids-in-blocks';
 import invalidateAttachmentResolutions from './invalidate-attachment-resolutions';
 

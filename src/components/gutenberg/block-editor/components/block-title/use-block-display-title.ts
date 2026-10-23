@@ -1,9 +1,9 @@
-import { useSelect } from '@wordpress/data';
-import type { DataRegistry } from '@wordpress/data';
+import { useSelect } from '@/stores/gutenberg/data';
+import type { DataRegistry } from '@/stores/gutenberg/data';
 import {
 	__experimentalGetBlockLabel as getBlockLabel,
 	store as blocksStore,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import { store as blockEditorStore } from '../../store';
 import type { BlockTitleProps } from './types';
 

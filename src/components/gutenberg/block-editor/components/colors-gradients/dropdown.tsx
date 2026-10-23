@@ -8,10 +8,10 @@ import {
 	__experimentalDropdownContentWrapper as DropdownContentWrapper,
 	__experimentalHStack as HStack,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { useRef } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { reset as resetIcon } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { useRef } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { reset as resetIcon } from '@/components/gutenberg/icons';
 import ColorGradientControl from './control';
 import type {
 	ColorGradientSetting,

@@ -1,4 +1,4 @@
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps } from '@/components/gutenberg/block-editor';
 
 // Earlier versions stored the LaTeX source in the block comment. Content that
 // could not be rendered was saved with an empty `<math>`, so the source is

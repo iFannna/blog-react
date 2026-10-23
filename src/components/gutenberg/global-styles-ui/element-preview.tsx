@@ -1,16 +1,16 @@
-import { __ } from '@wordpress/i18n';
-import { useMemo } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { getBlockType } from '@wordpress/blocks';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useMemo } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { getBlockType } from '@/lib/gutenberg/blocks';
 import {
 	__unstableIframe as Iframe,
 	__unstableEditorStyles as EditorStyles,
 	store as blockEditorStore,
 	transformStyles,
 	// @ts-expect-error: Not typed yet.
-} from '@wordpress/block-editor';
-import { __unstableGeneratePreviewStateStyles as generatePreviewStateStyles } from '@wordpress/global-styles-engine';
-import type { GlobalStylesStyles } from '@wordpress/global-styles-engine';
+} from '@/components/gutenberg/block-editor';
+import { __unstableGeneratePreviewStateStyles as generatePreviewStateStyles } from '@/lib/gutenberg/global-styles-engine';
+import type { GlobalStylesStyles } from '@/lib/gutenberg/global-styles-engine';
 
 interface ElementPreviewProps {
 	element: string;

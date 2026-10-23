@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n';
-import { Stack } from '@wordpress/ui';
-import { useContext } from '@wordpress/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Stack } from '@/components/gutenberg/design-system';
+import { useContext } from '@/lib/gutenberg/element';
 import { ScreenHeader } from './screen-header';
 import { ScreenBody } from './screen-body';
 import TypographyElements from './typography-elements';

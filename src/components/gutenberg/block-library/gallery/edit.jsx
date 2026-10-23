@@ -11,7 +11,7 @@ import {
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 	ToolbarDropdownMenu,
 	Button,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	store as blockEditorStore,
 	MediaPlaceholder,
@@ -22,20 +22,20 @@ import {
 	BlockControls,
 	MediaReplaceFlow,
 	useSettings,
-} from '@wordpress/block-editor';
-import { useEffect, useMemo, useRef, useState } from '@wordpress/element';
-import { __, _x, sprintf } from '@wordpress/i18n';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { createBlock } from '@wordpress/blocks';
-import { createBlobURL } from '@wordpress/blob';
-import { store as noticesStore } from '@wordpress/notices';
+} from '@/components/gutenberg/block-editor';
+import { useEffect, useMemo, useRef, useState } from '@/lib/gutenberg/element';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { createBlobURL } from '@/utils/gutenberg/blob';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import {
 	link as linkIcon,
 	customLink,
 	image as imageIcon,
 	linkOff,
 	fullscreen,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import { sharedIcon } from './shared-icon';
 import {
 	defaultColumnsNumber,

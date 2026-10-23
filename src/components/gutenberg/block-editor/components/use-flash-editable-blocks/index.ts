@@ -1,5 +1,5 @@
-import { useRefEffect } from '@wordpress/compose';
-import { useSelect } from '@wordpress/data';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { useSelect } from '@/stores/gutenberg/data';
 import { store as blockEditorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 import type { UseFlashEditableBlocksOptions } from './types';

@@ -1,5 +1,5 @@
-import TokenList from '@wordpress/token-list';
-import { _x } from '@wordpress/i18n';
+import TokenList from '@/lib/gutenberg/token-list';
+import { _x } from '@/lib/gutenberg/i18n';
 
 /**
  * Returns the active style from the given className.

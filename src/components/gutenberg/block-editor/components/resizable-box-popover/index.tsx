@@ -1,4 +1,4 @@
-import { ResizableBox } from '@wordpress/components';
+import { ResizableBox } from '@/components/gutenberg/ui';
 import BlockPopoverCover from '../block-popover/cover';
 import type { ResizableBoxPopoverProps } from './types';
 

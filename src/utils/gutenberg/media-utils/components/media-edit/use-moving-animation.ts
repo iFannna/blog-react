@@ -1,5 +1,5 @@
 import { Controller } from '@react-spring/web';
-import { useLayoutEffect, useRef } from '@wordpress/element';
+import { useLayoutEffect, useRef } from '@/lib/gutenberg/element';
 
 function getAbsolutePosition( element: HTMLElement ) {
 	return {

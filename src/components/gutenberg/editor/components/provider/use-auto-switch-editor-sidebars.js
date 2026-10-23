@@ -1,8 +1,8 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useEffect } from '@wordpress/element';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { store as interfaceStore } from '@wordpress/interface';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useEffect } from '@/lib/gutenberg/element';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { store as interfaceStore } from '@/components/gutenberg/interface';
 
 /**
  * This listener hook monitors for block selection and triggers the appropriate

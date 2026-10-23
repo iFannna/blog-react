@@ -1,9 +1,9 @@
-import { RawHTML, StrictMode, Fragment } from '@wordpress/element';
+import { RawHTML, StrictMode, Fragment } from '@/lib/gutenberg/element';
 import {
 	getSaveElement,
 	__unstableGetBlockProps as getBlockProps,
-} from '@wordpress/blocks';
-import { RichTextData } from '@wordpress/rich-text';
+} from '@/lib/gutenberg/blocks';
+import { RichTextData } from '@/components/gutenberg/rich-text';
 import InnerBlocks from '../inner-blocks';
 import { Content } from './content';
 

@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 
 /**
  * Reads the response body as JSON, normalizing a parse failure into an

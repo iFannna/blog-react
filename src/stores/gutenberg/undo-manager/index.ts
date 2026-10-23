@@ -1,4 +1,4 @@
-import { isShallowEqual } from '@wordpress/is-shallow-equal';
+import { isShallowEqual } from '@/utils/gutenberg/is-shallow-equal';
 import type {
 	HistoryChange as _HistoryChange,
 	HistoryChanges as _HistoryChanges,

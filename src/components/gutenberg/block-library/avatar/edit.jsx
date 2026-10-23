@@ -4,20 +4,20 @@ import {
 	useBlockProps,
 	__experimentalUseBorderProps as useBorderProps,
 	__experimentalGetShadowClassesAndStyles as getShadowClassesAndStyles,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	RangeControl,
 	ResizableBox,
 	ToggleControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { store as coreStore } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
-import { createInterpolateElement } from '@wordpress/element';
-import { __, isRTL } from '@wordpress/i18n';
-import { Link, Text } from '@wordpress/ui';
-import { addQueryArgs, removeQueryArgs } from '@wordpress/url';
+} from '@/components/gutenberg/ui';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { createInterpolateElement } from '@/lib/gutenberg/element';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
+import { Link, Text } from '@/components/gutenberg/design-system';
+import { addQueryArgs, removeQueryArgs } from '@/utils/gutenberg/url';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 import { useCommentAvatar, useUserAvatar } from './hooks';
 import UserControl from './user-control';

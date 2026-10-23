@@ -1,5 +1,5 @@
 import { dequal } from 'dequal';
-import type { View, Filter, SupportedLayouts } from '@wordpress/dataviews';
+import type { View, Filter, SupportedLayouts } from '@/components/gutenberg/dataviews';
 import type { ViewOverrides } from './types';
 
 type PlainObject = Record< string, unknown >;

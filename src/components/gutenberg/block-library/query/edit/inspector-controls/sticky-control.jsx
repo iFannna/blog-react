@@ -1,5 +1,5 @@
-import { SelectControl as WCSelectControl } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+import { SelectControl as WCSelectControl } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 
 const stickyOptions = [
 	{ label: __( 'Include' ), value: '' },

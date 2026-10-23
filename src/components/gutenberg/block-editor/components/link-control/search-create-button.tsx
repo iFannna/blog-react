@@ -1,7 +1,7 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { MenuItem } from '@wordpress/components';
-import { createInterpolateElement } from '@wordpress/element';
-import { plus } from '@wordpress/icons';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { MenuItem } from '@/components/gutenberg/ui';
+import { createInterpolateElement } from '@/lib/gutenberg/element';
+import { plus } from '@/components/gutenberg/icons';
 import type { LinkControlSearchCreateProps } from './types';
 
 export const LinkControlSearchCreate = ( {

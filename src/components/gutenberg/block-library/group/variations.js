@@ -1,5 +1,5 @@
-import { __, _x } from '@wordpress/i18n';
-import { group, row, stack, grid } from '@wordpress/icons';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { group, row, stack, grid } from '@/components/gutenberg/icons';
 
 const example = {
 	innerBlocks: [

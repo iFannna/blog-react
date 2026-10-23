@@ -1,5 +1,5 @@
-import { createContext, useContext, useMemo } from '@wordpress/element';
-import deprecated from '@wordpress/deprecated';
+import { createContext, useContext, useMemo } from '@/lib/gutenberg/element';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { useBlockEditContext } from '../block-edit/context';
 
 const RenderedRefsContext = createContext( {} );

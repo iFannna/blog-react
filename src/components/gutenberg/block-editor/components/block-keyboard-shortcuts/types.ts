@@ -1,4 +1,4 @@
-import type { BlockShortcut } from '@wordpress/blocks';
+import type { BlockShortcut } from '@/lib/gutenberg/blocks';
 
 /**
  * A keyboard shortcut a block type declares, paired with the block change it

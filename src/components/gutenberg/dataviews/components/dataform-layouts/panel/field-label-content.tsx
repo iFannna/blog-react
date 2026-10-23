@@ -1,6 +1,6 @@
-import { Icon as WCIcon } from '@wordpress/components';
-import { error as errorIcon } from '@wordpress/icons';
-import { VisuallyHidden } from '@wordpress/ui';
+import { Icon as WCIcon } from '@/components/gutenberg/ui';
+import { error as errorIcon } from '@/components/gutenberg/icons';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
 
 function FieldLabelContent( {
 	showError,

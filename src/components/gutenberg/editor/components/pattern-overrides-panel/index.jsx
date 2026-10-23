@@ -1,5 +1,5 @@
-import { useSelect } from '@wordpress/data';
-import { privateApis as patternsPrivateApis } from '@wordpress/patterns';
+import { useSelect } from '@/stores/gutenberg/data';
+import { privateApis as patternsPrivateApis } from '@/components/gutenberg/patterns';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 

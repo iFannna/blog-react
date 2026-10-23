@@ -1,5 +1,5 @@
-import { __experimentalUseSlotFills as useSlotFills } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
+import { __experimentalUseSlotFills as useSlotFills } from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
 import InspectorControlsGroups, {
 	PrivateInspectorControlsAllowedBlocks,
 } from '../inspector-controls/groups';

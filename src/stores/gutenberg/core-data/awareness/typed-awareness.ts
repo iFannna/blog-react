@@ -1,4 +1,4 @@
-import { Awareness } from '@wordpress/sync';
+import { Awareness } from '@/services/gutenberg/sync';
 import { getRecordValue } from './utils';
 
 /**

@@ -1,4 +1,4 @@
-import { getCSSValueFromRawStyle } from '@wordpress/style-engine';
+import { getCSSValueFromRawStyle } from '@/lib/gutenberg/style-engine';
 import type {
 	GlobalStylesSettings,
 	ThemeFileLink,

@@ -7,12 +7,12 @@ import {
 	__experimentalInputControl as WCInputControl,
 	__experimentalInputControlSuffixWrapper as InputControlSuffixWrapper,
 	withFilters,
-} from '@wordpress/components';
-import { __, _x } from '@wordpress/i18n';
-import { useState, useEffect, useMemo } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { keyboardReturn } from '@wordpress/icons';
-import deprecated from '@wordpress/deprecated';
+} from '@/components/gutenberg/ui';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { useState, useEffect, useMemo } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { keyboardReturn } from '@/components/gutenberg/icons';
+import deprecated from '@/utils/gutenberg/deprecated';
 import type { ChangeEvent, FormEvent, ReactNode } from 'react';
 import MediaUpload from '../media-upload';
 import MediaUploadCheck from '../media-upload/check';

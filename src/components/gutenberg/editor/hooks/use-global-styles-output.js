@@ -1,7 +1,7 @@
-import { getBlockTypes, store as blocksStore } from '@wordpress/blocks';
-import { useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
-import { generateGlobalStyles } from '@wordpress/global-styles-engine';
+import { getBlockTypes, store as blocksStore } from '@/lib/gutenberg/blocks';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
+import { generateGlobalStyles } from '@/lib/gutenberg/global-styles-engine';
 import { store as editorStore } from '../store';
 import { useGlobalStyles } from '../components/global-styles';
 

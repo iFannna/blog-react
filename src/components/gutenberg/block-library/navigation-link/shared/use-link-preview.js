@@ -1,8 +1,8 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { safeDecodeURI } from '@wordpress/url';
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { store as coreDataStore } from '@wordpress/core-data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { safeDecodeURI } from '@/utils/gutenberg/url';
+import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreDataStore } from '@/stores/gutenberg/core-data';
 import { unlock } from '../../lock-unlock';
 
 const { useRemoteUrlData, isHashLink, isRelativePath } = unlock(

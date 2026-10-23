@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from 'react';
-import type { Button } from '@wordpress/components';
+import type { Button } from '@/components/gutenberg/ui';
 
 /**
  * An action button of the popover header.

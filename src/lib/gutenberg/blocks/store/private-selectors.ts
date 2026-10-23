@@ -1,5 +1,5 @@
-import { createSelector, createRegistrySelector } from '@wordpress/data';
-import deprecated from '@wordpress/deprecated';
+import { createSelector, createRegistrySelector } from '@/stores/gutenberg/data';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { getBlockType } from './selectors';
 import { getValueFromObjectPath } from './utils';
 import {

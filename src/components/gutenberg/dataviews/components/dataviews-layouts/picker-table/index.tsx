@@ -1,13 +1,13 @@
 import clsx from 'clsx';
-import { __, sprintf } from '@wordpress/i18n';
-import { Spinner as WCSpinner, Composite } from '@wordpress/components';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { Spinner as WCSpinner, Composite } from '@/components/gutenberg/ui';
 import {
 	useContext,
 	useEffect,
 	useId,
 	useRef,
 	useState,
-} from '@wordpress/element';
+} from '@/lib/gutenberg/element';
 import DataViewsContext from '../../dataviews-context';
 import DataViewsSelectionCheckbox from '../../dataviews-selection-checkbox';
 import { useIsMultiselectPicker } from '../../dataviews-picker-footer';

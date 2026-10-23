@@ -1,5 +1,5 @@
-import { useRefEffect } from '@wordpress/compose';
-import { useContext } from '@wordpress/element';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { useContext } from '@/lib/gutenberg/element';
 import { IntersectionObserver } from '../';
 
 export function useIntersectionObserver() {

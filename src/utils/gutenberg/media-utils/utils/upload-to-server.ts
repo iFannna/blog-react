@@ -1,4 +1,4 @@
-import apiFetch from '@wordpress/api-fetch';
+import apiFetch from '@/services/gutenberg/api-fetch';
 import { flattenFormData } from './flatten-form-data';
 import { transformAttachment } from './transform-attachment';
 import type { CreateRestAttachment, RestAttachment } from './types';

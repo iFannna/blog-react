@@ -1,8 +1,8 @@
-import type { ComponentProps } from '../utils/types';
+import type { ReactNode } from 'react';
 
-export interface VisuallyHiddenProps extends ComponentProps< 'div' > {
+export type VisuallyHiddenProps = {
 	/**
-	 * The content to be rendered inside the component.
+	 * The children elements.
 	 */
-	children?: React.ReactNode;
-}
+	children: ReactNode;
+};

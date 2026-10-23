@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { createBlock } from '@wordpress/blocks';
+import { createBlock } from '@/lib/gutenberg/blocks';
 import {
 	RichText,
 	getColorClassName,
@@ -7,9 +7,9 @@ import {
 	__experimentalGetGradientClass,
 	useBlockProps,
 	useInnerBlocksProps,
-} from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
-import { compose } from '@wordpress/compose';
+} from '@/components/gutenberg/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
+import { compose } from '@/hooks/gutenberg/compose';
 import {
 	IMAGE_BACKGROUND_TYPE,
 	VIDEO_BACKGROUND_TYPE,

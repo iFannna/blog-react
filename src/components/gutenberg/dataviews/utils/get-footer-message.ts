@@ -1,4 +1,4 @@
-import { _n, sprintf } from '@wordpress/i18n';
+import { _n, sprintf } from '@/lib/gutenberg/i18n';
 
 /**
  * Get the footer message for the DataViews footer.

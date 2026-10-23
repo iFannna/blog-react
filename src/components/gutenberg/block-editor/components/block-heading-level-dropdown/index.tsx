@@ -1,5 +1,5 @@
-import { ToolbarDropdownMenu } from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
+import { ToolbarDropdownMenu } from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import type { ReactElement } from 'react';
 import HeadingLevelIcon from './heading-level-icon';
 import type { HeadingLevelDropdownProps } from './types';

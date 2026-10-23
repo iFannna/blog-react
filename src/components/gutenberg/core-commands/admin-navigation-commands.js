@@ -1,9 +1,9 @@
-import { useCommandLoader, useCommands } from '@wordpress/commands';
-import { __, sprintf } from '@wordpress/i18n';
-import { external } from '@wordpress/icons';
-import { useMemo } from '@wordpress/element';
-import { store as coreStore } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
+import { useCommandLoader, useCommands } from '@/lib/gutenberg/commands';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { external } from '@/components/gutenberg/icons';
+import { useMemo } from '@/lib/gutenberg/element';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
 
 const getViewSiteCommand = () =>
 	function useViewSiteCommand() {

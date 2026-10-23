@@ -1,7 +1,7 @@
-import { useLayoutEffect, useState } from '@wordpress/element';
-import { useRegistry } from '@wordpress/data';
-import deprecated from '@wordpress/deprecated';
-import { isShallowEqual } from '@wordpress/is-shallow-equal';
+import { useLayoutEffect, useState } from '@/lib/gutenberg/element';
+import { useRegistry } from '@/stores/gutenberg/data';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { isShallowEqual } from '@/utils/gutenberg/is-shallow-equal';
 import { store as blockEditorStore } from '../../store';
 import { getLayoutType } from '../../layouts';
 

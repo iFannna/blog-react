@@ -1,4 +1,4 @@
-import type { ThunkArgs } from '@wordpress/data';
+import type { ThunkArgs } from '@/stores/gutenberg/data';
 import type { GetRecordsHttpQuery, State } from './selectors';
 import type * as ET from './entity-types';
 

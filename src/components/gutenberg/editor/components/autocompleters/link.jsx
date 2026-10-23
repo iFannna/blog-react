@@ -1,7 +1,7 @@
-import apiFetch from '@wordpress/api-fetch';
-import { addQueryArgs } from '@wordpress/url';
-import { Icon, page, post } from '@wordpress/icons';
-import { decodeEntities } from '@wordpress/html-entities';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { addQueryArgs } from '@/utils/gutenberg/url';
+import { Icon, page, post } from '@/components/gutenberg/icons';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 
 const SHOWN_SUGGESTIONS = 10;
 

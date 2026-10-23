@@ -1,4 +1,4 @@
-import { registerBlockBindingsSource } from '@wordpress/blocks';
+import { registerBlockBindingsSource } from '@/lib/gutenberg/blocks';
 import patternOverrides from './pattern-overrides';
 import postData from './post-data';
 import postMeta from './post-meta';
@@ -9,7 +9,7 @@ import termData from './term-data';
  *
  * @example
  * ```js
- * import { registerCoreBlockBindingsSources } from '@wordpress/editor';
+ * import { registerCoreBlockBindingsSources } from '@/components/gutenberg/editor';
  *
  * registerCoreBlockBindingsSources();
  * ```

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { memo, useContext, useRef } from '@wordpress/element';
-import { Stack } from '@wordpress/ui';
+import { memo, useContext, useRef } from '@/lib/gutenberg/element';
+import { Stack } from '@/components/gutenberg/design-system';
 import Filter from './filter';
 import { default as AddFilter } from './add-filter';
 import ResetFilters from './reset-filters';

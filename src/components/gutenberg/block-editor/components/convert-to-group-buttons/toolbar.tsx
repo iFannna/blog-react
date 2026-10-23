@@ -1,8 +1,8 @@
-import { useDispatch, useSelect } from '@wordpress/data';
-import { store as blocksStore } from '@wordpress/blocks';
-import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
-import { group, row, stack, grid } from '@wordpress/icons';
-import { _x } from '@wordpress/i18n';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
+import { ToolbarButton, ToolbarGroup } from '@/components/gutenberg/ui';
+import { group, row, stack, grid } from '@/components/gutenberg/icons';
+import { _x } from '@/lib/gutenberg/i18n';
 import { useConvertToGroupButtonProps } from '../convert-to-group-buttons';
 import { store as blockEditorStore } from '../../store';
 import { groupBlocks } from '../../utils/group-blocks';

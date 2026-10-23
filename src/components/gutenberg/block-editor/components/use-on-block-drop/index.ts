@@ -1,4 +1,4 @@
-import { useCallback } from '@wordpress/element';
+import { useCallback } from '@/lib/gutenberg/element';
 import {
 	cloneBlock,
 	createBlock,
@@ -7,10 +7,10 @@ import {
 	getBlockTransforms,
 	pasteHandler,
 	store as blocksStore,
-} from '@wordpress/blocks';
-import { useDispatch, useSelect, useRegistry } from '@wordpress/data';
-import { getFilesFromDataTransfer } from '@wordpress/dom';
-import type { Block, BlockFilesTransform } from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
+import { useDispatch, useSelect, useRegistry } from '@/stores/gutenberg/data';
+import { getFilesFromDataTransfer } from '@/utils/gutenberg/dom';
+import type { Block, BlockFilesTransform } from '@/lib/gutenberg/blocks';
 import type { DragEvent } from 'react';
 import { store as blockEditorStore } from '../../store';
 import type { Settings } from '../../store/types';

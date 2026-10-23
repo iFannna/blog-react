@@ -1,7 +1,7 @@
-import { useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
-import { useRef } from '@wordpress/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Button } from '@/components/gutenberg/ui';
+import { useRef } from '@/lib/gutenberg/element';
 import type { RefObject } from 'react';
 import { store as blockEditorStore } from '../../store';
 import { useBlockElementRef } from '../block-list/use-block-props/use-block-refs';

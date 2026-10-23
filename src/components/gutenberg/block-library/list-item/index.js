@@ -1,6 +1,6 @@
-import { listItem as icon } from '@wordpress/icons';
-import { privateApis } from '@wordpress/block-editor';
-import { privateApis as blocksPrivateApis } from '@wordpress/blocks';
+import { listItem as icon } from '@/components/gutenberg/icons';
+import { privateApis } from '@/components/gutenberg/block-editor';
+import { privateApis as blocksPrivateApis } from '@/lib/gutenberg/blocks';
 import initBlock from '../utils/init-block';
 import metadata from './block.json';
 import edit from './edit';

@@ -1,5 +1,5 @@
 import type { ReactElement, ReactNode, ComponentProps } from 'react';
-import type { useFocusOnMount } from '@wordpress/compose';
+import type { useFocusOnMount } from '@/hooks/gutenberg/compose';
 import type {
 	Field,
 	NormalizedField,

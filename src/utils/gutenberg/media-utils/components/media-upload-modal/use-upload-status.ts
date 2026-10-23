@@ -9,8 +9,8 @@
  * from that store (getItems, isBatchUploaded, getItemProgress, etc.) while
  * keeping the same return interface.
  */
-import { useState, useCallback } from '@wordpress/element';
-import { isBlobURL } from '@wordpress/blob';
+import { useState, useCallback } from '@/lib/gutenberg/element';
+import { isBlobURL } from '@/utils/gutenberg/blob';
 import type { Attachment } from '../../utils/types';
 import { UploadError } from '../../utils/upload-error';
 import type { UploadingFile } from './upload-status-popover';

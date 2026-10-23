@@ -1,6 +1,6 @@
-import { select, dispatch } from '@wordpress/data';
-import { _x } from '@wordpress/i18n';
-import warning from '@wordpress/warning';
+import { select, dispatch } from '@/stores/gutenberg/data';
+import { _x } from '@/lib/gutenberg/i18n';
+import warning from '@/utils/gutenberg/warning';
 import i18nBlockSchema from './i18n-block.json';
 import { store as blocksStore } from '../store';
 import { unlock } from '../lock-unlock';
@@ -114,8 +114,8 @@ type SettingsBlockConfiguration<
  *
  * @example
  * ```js
- * import { __ } from '@wordpress/i18n';
- * import { registerBlockType } from '@wordpress/blocks'
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { registerBlockType } from '@/lib/gutenberg/blocks'
  *
  * registerBlockType( 'namespace/block-name', {
  *     title: __( 'My First Block' ),
@@ -244,8 +244,8 @@ function translateBlockSettingUsingI18nSchema(
  *
  * @example
  * ```js
- * import { __ } from '@wordpress/i18n';
- * import { registerBlockCollection, registerBlockType } from '@wordpress/blocks';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { registerBlockCollection, registerBlockType } from '@/lib/gutenberg/blocks';
  *
  * // Register the collection.
  * registerBlockCollection( 'my-collection', {
@@ -274,7 +274,7 @@ export function registerBlockCollection(
  *
  * @example
  * ```js
- * import { unregisterBlockCollection } from '@wordpress/blocks';
+ * import { unregisterBlockCollection } from '@/lib/gutenberg/blocks';
  *
  * unregisterBlockCollection( 'my-collection' );
  * ```
@@ -290,8 +290,8 @@ export function unregisterBlockCollection( namespace: string ): void {
  *
  * @example
  * ```js
- * import { __ } from '@wordpress/i18n';
- * import { unregisterBlockType } from '@wordpress/blocks';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { unregisterBlockType } from '@/lib/gutenberg/blocks';
  *
  * const ExampleComponent = () => {
  *     return (
@@ -373,7 +373,7 @@ export function getUnregisteredTypeHandlerName(): string | null {
  *
  * @example
  * ```js
- * import { setDefaultBlockName } from '@wordpress/blocks';
+ * import { setDefaultBlockName } from '@/lib/gutenberg/blocks';
  *
  * const ExampleComponent = () => {
  *
@@ -400,7 +400,7 @@ export function setDefaultBlockName( name: string ): void {
  *
  * @example
  * ```js
- * import { setGroupingBlockName } from '@wordpress/blocks';
+ * import { setGroupingBlockName } from '@/lib/gutenberg/blocks';
  *
  * const ExampleComponent = () => {
  *
@@ -568,9 +568,9 @@ export const hasChildBlocksWithInserterSupport = (
  *
  * @example
  * ```js
- * import { __ } from '@wordpress/i18n';
- * import { registerBlockStyle } from '@wordpress/blocks';
- * import { Button } from '@wordpress/components';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { registerBlockStyle } from '@/lib/gutenberg/blocks';
+ * import { Button } from '@/components/gutenberg/ui';
  *
  *
  * const ExampleComponent = () => {
@@ -604,9 +604,9 @@ export const registerBlockStyle = (
  *
  * @example
  * ```js
- * import { __ } from '@wordpress/i18n';
- * import { unregisterBlockStyle } from '@wordpress/blocks';
- * import { Button } from '@wordpress/components';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { unregisterBlockStyle } from '@/lib/gutenberg/blocks';
+ * import { Button } from '@/components/gutenberg/ui';
  *
  * const ExampleComponent = () => {
  *     return (
@@ -657,9 +657,9 @@ export const getBlockVariations = (
  *
  * @example
  * ```js
- * import { __ } from '@wordpress/i18n';
- * import { registerBlockVariation } from '@wordpress/blocks';
- * import { Button } from '@wordpress/components';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { registerBlockVariation } from '@/lib/gutenberg/blocks';
+ * import { Button } from '@/components/gutenberg/ui';
  *
  * const ExampleComponent = () => {
  *     return (
@@ -703,9 +703,9 @@ export const registerBlockVariation = (
  *
  * @example
  * ```js
- * import { __ } from '@wordpress/i18n';
- * import { unregisterBlockVariation } from '@wordpress/blocks';
- * import { Button } from '@wordpress/components';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { unregisterBlockVariation } from '@/lib/gutenberg/blocks';
+ * import { Button } from '@/components/gutenberg/ui';
  *
  * const ExampleComponent = () => {
  *     return (
@@ -738,8 +738,8 @@ export const unregisterBlockVariation = (
  *
  * @example
  * ```js
- * import { _x } from '@wordpress/i18n';
- * import { registerBlockBindingsSource } from '@wordpress/blocks'
+ * import { _x } from '@/lib/gutenberg/i18n';
+ * import { registerBlockBindingsSource } from '@/lib/gutenberg/blocks'
  *
  * registerBlockBindingsSource( {
  *     name: 'plugin/my-custom-source',
@@ -872,7 +872,7 @@ export const registerBlockBindingsSource = (
  *
  * @example
  * ```js
- * import { unregisterBlockBindingsSource } from '@wordpress/blocks';
+ * import { unregisterBlockBindingsSource } from '@/lib/gutenberg/blocks';
  *
  * unregisterBlockBindingsSource( 'plugin/my-custom-source' );
  * ```

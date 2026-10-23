@@ -1,4 +1,4 @@
-import { useEffect, useRef } from '@wordpress/element';
+import { useEffect, useRef } from '@/lib/gutenberg/element';
 import useEvent from '../use-event';
 
 // This is the current implementation of `useResizeObserver`.

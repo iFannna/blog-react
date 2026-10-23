@@ -17,13 +17,13 @@ import {
 	ToolbarItem,
 	DropdownMenu,
 	Popover,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	useMergeRefs,
 	useResizeObserver,
 	useViewportMatch,
-} from '@wordpress/compose';
-import { useSelect, useDispatch } from '@wordpress/data';
+} from '@/hooks/gutenberg/compose';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	BlockControls,
 	InspectorControls,
@@ -35,7 +35,7 @@ import {
 	__experimentalGetShadowClassesAndStyles as getShadowClassesAndStyles,
 	privateApis as blockEditorPrivateApis,
 	BlockSettingsMenuControls,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	createInterpolateElement,
 	useCallback,
@@ -43,13 +43,13 @@ import {
 	useMemo,
 	useRef,
 	useState,
-} from '@wordpress/element';
-import { __, _x, sprintf, isRTL } from '@wordpress/i18n';
-import { getFilename } from '@wordpress/url';
-import { getBlockBindingsSource, switchToBlockType } from '@wordpress/blocks';
-import { crop, overlayText, upload, chevronDown } from '@wordpress/icons';
-import { store as noticesStore } from '@wordpress/notices';
-import { store as coreStore } from '@wordpress/core-data';
+} from '@/lib/gutenberg/element';
+import { __, _x, sprintf, isRTL } from '@/lib/gutenberg/i18n';
+import { getFilename } from '@/utils/gutenberg/url';
+import { getBlockBindingsSource, switchToBlockType } from '@/lib/gutenberg/blocks';
+import { crop, overlayText, upload, chevronDown } from '@/components/gutenberg/icons';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { unlock } from '../lock-unlock';
 import { createUpgradedEmbedBlock } from '../embed/util';
 import { isExternalImage } from './edit';

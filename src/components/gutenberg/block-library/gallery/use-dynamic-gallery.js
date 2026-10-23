@@ -1,8 +1,8 @@
-import { useMemo } from '@wordpress/element';
-import { useDispatch, useSelect, useRegistry } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { store as coreStore } from '@wordpress/core-data';
-import { createBlock } from '@wordpress/blocks';
+import { useMemo } from '@/lib/gutenberg/element';
+import { useDispatch, useSelect, useRegistry } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { createBlock } from '@/lib/gutenberg/blocks';
 import { pickRelevantMediaFiles } from './shared';
 import { getHrefAndDestination } from './utils';
 import { getUpdatedLinkTargetSettings } from '../image/utils';

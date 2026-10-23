@@ -4,7 +4,7 @@ import {
 	useReducer,
 	useRef,
 	useState,
-} from '@wordpress/element';
+} from '@/lib/gutenberg/element';
 import {
 	DEFAULT_STATE,
 	ORIGINAL_ASPECT_RATIO,

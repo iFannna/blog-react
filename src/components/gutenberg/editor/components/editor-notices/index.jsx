@@ -1,7 +1,7 @@
-import deprecated from '@wordpress/deprecated';
-import { useSelect } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { InlineNotices } from '@wordpress/notices';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { InlineNotices } from '@/stores/gutenberg/notices';
 import TemplateValidationNotice from '../template-validation-notice';
 
 /**

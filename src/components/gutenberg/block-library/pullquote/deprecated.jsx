@@ -5,8 +5,8 @@ import {
 	RichText,
 	store as blockEditorStore,
 	useBlockProps,
-} from '@wordpress/block-editor';
-import { select } from '@wordpress/data';
+} from '@/components/gutenberg/block-editor';
+import { select } from '@/stores/gutenberg/data';
 import { SOLID_COLOR_CLASS } from './shared';
 import migrateTextAlignAttributeToBlockSupport from '../utils/migrate-text-align';
 

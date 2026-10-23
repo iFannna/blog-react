@@ -1,4 +1,4 @@
-import { FontSizePicker as BaseFontSizePicker } from '@wordpress/components';
+import { FontSizePicker as BaseFontSizePicker } from '@/components/gutenberg/ui';
 import { useSettings } from '../use-settings';
 import type { FontSizePickerProps } from './types';
 

@@ -1,7 +1,7 @@
 import { capitalCase, pascalCase } from 'change-case';
-import apiFetch from '@wordpress/api-fetch';
-import { __unstableSerializeAndClean, parse } from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { __unstableSerializeAndClean, parse } from '@/lib/gutenberg/blocks';
+import { __ } from '@/lib/gutenberg/i18n';
 import { PostEditorAwareness } from './awareness/post-editor-awareness';
 import {
 	applyPostChangesToCRDTDoc,
@@ -384,7 +384,7 @@ async function loadPostTypeEntities() {
 		}
 
 		/**
-		 * @type {import('@wordpress/sync').SyncConfig}
+		 * @type {import('@/services/gutenberg/sync').SyncConfig}
 		 */
 		entity.syncConfig = {
 			// Save a CRDT document with this entity
@@ -394,8 +394,8 @@ async function loadPostTypeEntities() {
 			 * Apply changes from the local editor to the local CRDT document so
 			 * that those changes can be synced to other peers (via the provider).
 			 *
-			 * @param {import('@wordpress/sync').CRDTDoc}               crdtDoc
-			 * @param {Partial< import('@wordpress/sync').ObjectData >} changes
+			 * @param {import('@/services/gutenberg/sync').CRDTDoc}               crdtDoc
+			 * @param {Partial< import('@/services/gutenberg/sync').ObjectData >} changes
 			 * @return {void}
 			 */
 			applyChangesToCRDTDoc: ( crdtDoc, changes ) =>
@@ -404,9 +404,9 @@ async function loadPostTypeEntities() {
 			/**
 			 * Create the awareness instance for the entity's CRDT document.
 			 *
-			 * @param {import('@wordpress/sync').CRDTDoc}  ydoc
-			 * @param {import('@wordpress/sync').ObjectID} objectId
-			 * @return {import('@wordpress/sync').Awareness} Awareness instance
+			 * @param {import('@/services/gutenberg/sync').CRDTDoc}  ydoc
+			 * @param {import('@/services/gutenberg/sync').ObjectID} objectId
+			 * @return {import('@/services/gutenberg/sync').Awareness} Awareness instance
 			 */
 			createAwareness: ( ydoc, objectId ) => {
 				const kind = 'postType';
@@ -418,9 +418,9 @@ async function loadPostTypeEntities() {
 			 * Extract changes from a CRDT document that can be used to update the
 			 * local editor state.
 			 *
-			 * @param {import('@wordpress/sync').CRDTDoc}    crdtDoc
-			 * @param {import('@wordpress/sync').ObjectData} editedRecord
-			 * @return {Partial< import('@wordpress/sync').ObjectData >} Changes to record
+			 * @param {import('@/services/gutenberg/sync').CRDTDoc}    crdtDoc
+			 * @param {import('@/services/gutenberg/sync').ObjectData} editedRecord
+			 * @return {Partial< import('@/services/gutenberg/sync').ObjectData >} Changes to record
 			 */
 			getChangesFromCRDTDoc: ( crdtDoc, editedRecord ) =>
 				getPostChangesFromCRDTDoc(
@@ -433,8 +433,8 @@ async function loadPostTypeEntities() {
 			 * Extract changes from a CRDT document that can be used to update the
 			 * local editor state.
 			 *
-			 * @param {import('@wordpress/sync').ObjectData} record
-			 * @return {Partial< import('@wordpress/sync').ObjectData >} Changes to record
+			 * @param {import('@/services/gutenberg/sync').ObjectData} record
+			 * @return {Partial< import('@/services/gutenberg/sync').ObjectData >} Changes to record
 			 */
 			getPersistedCRDTDoc: ( record ) => {
 				return (

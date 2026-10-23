@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactElement } from 'react';
-import { Stack } from '@wordpress/ui';
+import { Stack } from '@/components/gutenberg/design-system';
 import type { MediaAspectRatio, NormalizedField } from '../../../types';
 import { ItemClickWrapper } from '../utils/item-click-wrapper';
 

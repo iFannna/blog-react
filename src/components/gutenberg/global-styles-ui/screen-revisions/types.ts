@@ -1,4 +1,4 @@
-import type { GlobalStylesConfig } from '@wordpress/global-styles-engine';
+import type { GlobalStylesConfig } from '@/lib/gutenberg/global-styles-engine';
 
 export interface User {
 	id: number;

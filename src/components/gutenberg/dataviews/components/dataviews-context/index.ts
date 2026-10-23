@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactElement, ReactNode } from 'react';
-import { createContext, createRef } from '@wordpress/element';
+import { createContext, createRef } from '@/lib/gutenberg/element';
 import type {
 	View,
 	Action,

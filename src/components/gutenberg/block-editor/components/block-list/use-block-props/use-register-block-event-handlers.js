@@ -3,7 +3,7 @@ import {
 	useEffect,
 	useInsertionEffect,
 	useRef,
-} from '@wordpress/element';
+} from '@/lib/gutenberg/element';
 import { getEventHandlers } from '../../writing-flow/use-editable-root-event-handlers';
 import { BlockRefs } from '../../provider/block-refs-provider';
 

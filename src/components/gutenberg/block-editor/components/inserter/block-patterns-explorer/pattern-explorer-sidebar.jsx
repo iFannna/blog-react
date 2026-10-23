@@ -1,6 +1,6 @@
-import { SearchControl } from '@wordpress/components';
-import { Stack, Tabs } from '@wordpress/ui';
-import { __ } from '@wordpress/i18n';
+import { SearchControl } from '@/components/gutenberg/ui';
+import { Stack, Tabs } from '@/components/gutenberg/design-system';
+import { __ } from '@/lib/gutenberg/i18n';
 
 function PatternExplorerSidebar( {
 	patternCategories,

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { __, _x, sprintf } from '@wordpress/i18n';
-import { Fragment } from '@wordpress/element';
-import { ToggleControl } from '@wordpress/components';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
+import { Fragment } from '@/lib/gutenberg/element';
+import { ToggleControl } from '@/components/gutenberg/ui';
 import ResponsiveBlockControlLabel from './label';
 
 function ResponsiveBlockControl( props ) {

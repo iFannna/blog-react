@@ -1,10 +1,10 @@
 import {
 	store as blockEditorStore,
 	__unstableBlockToolbarLastItem as BlockToolbarLastItem,
-} from '@wordpress/block-editor';
-import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
-import { useRegistry, useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/block-editor';
+import { ToolbarButton, ToolbarGroup } from '@/components/gutenberg/ui';
+import { useRegistry, useSelect } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
 
 const CONTENT = 'content';
 

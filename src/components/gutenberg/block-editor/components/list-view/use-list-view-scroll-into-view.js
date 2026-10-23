@@ -1,5 +1,5 @@
-import { getScrollContainer } from '@wordpress/dom';
-import { useLayoutEffect } from '@wordpress/element';
+import { getScrollContainer } from '@/utils/gutenberg/dom';
+import { useLayoutEffect } from '@/lib/gutenberg/element';
 
 export default function useListViewScrollIntoView( {
 	isSelected,

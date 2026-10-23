@@ -1,23 +1,23 @@
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	useEntityRecord,
 	useEntityBlockEditor,
 	store as coreStore,
-} from '@wordpress/core-data';
-import { BlockPreview } from '@wordpress/block-editor';
+} from '@/stores/gutenberg/core-data';
+import { BlockPreview } from '@/components/gutenberg/block-editor';
 import {
 	PanelBody,
 	Button,
 	__experimentalHStack as HStack,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { useState } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import { decodeEntities } from '@wordpress/html-entities';
-import { ENTER, SPACE } from '@wordpress/keycodes';
-import { store as noticesStore } from '@wordpress/notices';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { Tooltip } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { useState } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { ENTER, SPACE } from '@/utils/gutenberg/keycodes';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { Tooltip } from '@/components/gutenberg/design-system';
 import { store as editorStore } from '../../store';
 import CreateNewTemplateModal from '../post-template/create-new-template-modal';
 import { SwapTemplateModal } from '../post-template/swap-template-button';

@@ -1,5 +1,5 @@
-import { createBlock, getBlockContent } from '@wordpress/blocks';
-import { create, toHTMLString } from '@wordpress/rich-text';
+import { createBlock, getBlockContent } from '@/lib/gutenberg/blocks';
+import { create, toHTMLString } from '@/components/gutenberg/rich-text';
 import { getTransformedAttributes } from '../utils/get-transformed-attributes';
 
 const transforms = {

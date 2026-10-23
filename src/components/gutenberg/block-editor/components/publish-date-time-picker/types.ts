@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react';
-import type { DateTimePicker } from '@wordpress/components';
+import type { DateTimePicker } from '@/components/gutenberg/ui';
 
 /**
  * Props of `PublishDateTimePicker`: the props of `DateTimePicker`, plus the

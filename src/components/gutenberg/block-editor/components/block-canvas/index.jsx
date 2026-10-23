@@ -1,7 +1,7 @@
-import { useMergeRefs, useViewportMatch } from '@wordpress/compose';
-import { useRef } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { createSlotFill } from '@wordpress/components';
+import { useMergeRefs, useViewportMatch } from '@/hooks/gutenberg/compose';
+import { useRef } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { createSlotFill } from '@/components/gutenberg/ui';
 import BlockList from '../block-list';
 import BlockTools from '../block-tools';
 import EditorStyles from '../editor-styles';

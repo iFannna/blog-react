@@ -1,7 +1,7 @@
 // @ts-expect-error: Not typed yet.
-import { getComputedFluidTypographyValue } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
-import type { FontSize } from '@wordpress/global-styles-engine';
+import { getComputedFluidTypographyValue } from '@/components/gutenberg/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
+import type { FontSize } from '@/lib/gutenberg/global-styles-engine';
 import { useStyle } from '../hooks';
 
 interface FontSizePreviewProps {

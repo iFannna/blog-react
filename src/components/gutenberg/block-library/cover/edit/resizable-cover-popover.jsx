@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { useState } from '@wordpress/element';
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
+import { useState } from '@/lib/gutenberg/element';
+import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import { unlock } from '../../lock-unlock';
 
 const RESIZABLE_BOX_ENABLE_OPTION = {

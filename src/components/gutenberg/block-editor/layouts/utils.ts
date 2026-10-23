@@ -1,4 +1,4 @@
-import { __, sprintf } from '@wordpress/i18n';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import { LAYOUT_DEFINITIONS } from './definitions';
 import type { AlignmentsInfo, Layout, LayoutDefinition } from './types';
 

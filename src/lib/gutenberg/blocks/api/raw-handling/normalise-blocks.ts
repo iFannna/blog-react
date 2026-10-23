@@ -1,4 +1,4 @@
-import { isEmpty, isPhrasingContent } from '@wordpress/dom';
+import { isEmpty, isPhrasingContent } from '@/utils/gutenberg/dom';
 
 export default function normaliseBlocks(
 	HTML: string,

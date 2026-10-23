@@ -1,12 +1,12 @@
-import { useRefEffect } from '@wordpress/compose';
-import { useSelect } from '@wordpress/data';
-import { getScrollContainer } from '@wordpress/dom';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { useSelect } from '@/stores/gutenberg/data';
+import { getScrollContainer } from '@/utils/gutenberg/dom';
 import {
 	useCallback,
 	useLayoutEffect,
 	useMemo,
 	useState,
-} from '@wordpress/element';
+} from '@/lib/gutenberg/element';
 import { store as blockEditorStore } from '../../store';
 import { useBlockElement } from '../block-list/use-block-props/use-block-refs';
 import { hasStickyOrFixedPositionValue } from '../../hooks/position';

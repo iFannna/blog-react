@@ -1,7 +1,7 @@
-import { useBlockProps } from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
-import { store as coreStore } from '@wordpress/core-data';
+import { useBlockProps } from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import useDeprecatedTextAlign from '../utils/deprecated-text-align-attributes';
 
 function PostAuthorBiographyEdit( props ) {

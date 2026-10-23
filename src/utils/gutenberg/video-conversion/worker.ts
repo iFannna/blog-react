@@ -5,7 +5,7 @@
  * context. The `@wordpress/worker-threads` library handles the RPC
  * communication with the main thread.
  */
-import { expose } from '@wordpress/worker-threads';
+import { expose } from '@/utils/gutenberg/worker-threads';
 import { cancelOperations, convertGifToVideo } from './index.ts';
 
 /**

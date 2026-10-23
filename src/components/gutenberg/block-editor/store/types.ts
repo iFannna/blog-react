@@ -3,8 +3,8 @@ import type {
 	BlockTypeIcon,
 	BlockVariation,
 	synchronizeBlocksWithTemplate,
-} from '@wordpress/blocks';
-import type { ThunkArgs, select as globalSelect } from '@wordpress/data';
+} from '@/lib/gutenberg/blocks';
+import type { ThunkArgs, select as globalSelect } from '@/stores/gutenberg/data';
 import type { BlockEditingMode } from '../components/block-editing-mode';
 import type { BlockVisibility } from '../components/block-visibility/use-block-visibility';
 import type {

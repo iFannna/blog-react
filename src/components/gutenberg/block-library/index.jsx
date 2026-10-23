@@ -4,12 +4,12 @@ import {
 	setGroupingBlockName,
 	registerBlockType,
 	store as blocksStore,
-} from '@wordpress/blocks';
-import { useDisabled } from '@wordpress/compose';
-import { select } from '@wordpress/data';
-import { useBlockProps } from '@wordpress/block-editor';
-import { useServerSideRender } from '@wordpress/server-side-render';
-import { __, sprintf } from '@wordpress/i18n';
+} from '@/lib/gutenberg/blocks';
+import { useDisabled } from '@/hooks/gutenberg/compose';
+import { select } from '@/stores/gutenberg/data';
+import { useBlockProps } from '@/components/gutenberg/block-editor';
+import { useServerSideRender } from '@/components/gutenberg/server-side-render';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import HtmlRenderer from './utils/html-renderer';
 // Experimental blocks are only registered in the Gutenberg plugin (see
 // `__experimentalRegisterExperimentalCoreBlocks`). `registerCoreBlocks`
@@ -272,7 +272,7 @@ const getAllBlocks = () => {
  *
  * @example
  * ```js
- * import { __experimentalGetCoreBlocks } from '@wordpress/block-library';
+ * import { __experimentalGetCoreBlocks } from '@/components/gutenberg/block-library';
  *
  * const coreBlocks = __experimentalGetCoreBlocks();
  * ```
@@ -289,7 +289,7 @@ export const __experimentalGetCoreBlocks = () =>
  *
  * @example
  * ```js
- * import { registerCoreBlocks } from '@wordpress/block-library';
+ * import { registerCoreBlocks } from '@/components/gutenberg/block-library';
  *
  * registerCoreBlocks();
  * ```
@@ -376,7 +376,7 @@ export const registerCoreBlocks = (
  * @param {boolean} enableFSEBlocks Whether to enable the full site editing blocks.
  * @example
  * ```js
- * import { __experimentalRegisterExperimentalCoreBlocks } from '@wordpress/block-library';
+ * import { __experimentalRegisterExperimentalCoreBlocks } from '@/components/gutenberg/block-library';
  *
  * __experimentalRegisterExperimentalCoreBlocks( settings );
  * ```

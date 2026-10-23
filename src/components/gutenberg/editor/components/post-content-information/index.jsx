@@ -1,9 +1,9 @@
-import { __experimentalText as WCText } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { __, _x, _n, sprintf } from '@wordpress/i18n';
-import { count as wordCount } from '@wordpress/wordcount';
-import { useMemo } from '@wordpress/element';
-import { store as coreStore } from '@wordpress/core-data';
+import { __experimentalText as WCText } from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { __, _x, _n, sprintf } from '@/lib/gutenberg/i18n';
+import { count as wordCount } from '@/utils/gutenberg/wordcount';
+import { useMemo } from '@/lib/gutenberg/element';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { store as editorStore } from '../../store';
 import {
 	TEMPLATE_POST_TYPE,

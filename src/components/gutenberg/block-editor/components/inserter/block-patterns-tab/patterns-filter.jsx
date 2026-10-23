@@ -4,10 +4,10 @@ import {
 	DropdownMenu,
 	MenuGroup,
 	MenuItemsChoice,
-} from '@wordpress/components';
-import { __, _x } from '@wordpress/i18n';
-import { Icon } from '@wordpress/icons';
-import { useMemo } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { Icon } from '@/components/gutenberg/icons';
+import { useMemo } from '@/lib/gutenberg/element';
 import {
 	sitePatternsCategory,
 	INSERTER_SYNC_TYPES,

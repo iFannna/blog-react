@@ -1,11 +1,11 @@
-import { __, isRTL } from '@wordpress/i18n';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
 import {
 	blockTable,
 	category,
 	formatListBullets,
 	formatListBulletsRTL,
 	scheduled,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import ViewTable from './table';
 import ViewGrid from './grid';
 import ViewList from './list';

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from '@wordpress/element';
+import { useCallback, useEffect, useRef, useState } from '@/lib/gutenberg/element';
 import useIsomorphicLayoutEffect from '../use-isomorphic-layout-effect';
 import type { DraggingProps, DraggingReturn } from './types';
 

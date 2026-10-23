@@ -1,8 +1,8 @@
-import { Button } from '@wordpress/components';
-import { InputLayout } from '@wordpress/ui';
-import { useCallback, useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { seen, unseen } from '@wordpress/icons';
+import { Button } from '@/components/gutenberg/ui';
+import { InputLayout } from '@/components/gutenberg/design-system';
+import { useCallback, useState } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { seen, unseen } from '@/components/gutenberg/icons';
 import ValidatedText from './utils/validated-input';
 import type { DataFormControlProps } from '../../types';
 

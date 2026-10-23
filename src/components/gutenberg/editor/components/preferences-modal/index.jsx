@@ -1,12 +1,12 @@
-import { __ } from '@wordpress/i18n';
-import { useViewportMatch } from '@wordpress/compose';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
 import {
 	store as preferencesStore,
 	privateApis as preferencesPrivateApis,
-} from '@wordpress/preferences';
-import { store as interfaceStore } from '@wordpress/interface';
+} from '@/stores/gutenberg/preferences';
+import { store as interfaceStore } from '@/components/gutenberg/interface';
 import EnablePanelOption from './enable-panel';
 import EnablePluginDocumentSettingPanelOption from './enable-plugin-document-setting-panel';
 import EnablePublishSidebarOption from './enable-publish-sidebar';

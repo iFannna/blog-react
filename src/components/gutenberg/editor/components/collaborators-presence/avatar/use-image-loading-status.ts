@@ -1,4 +1,4 @@
-import { useCallback, useState } from '@wordpress/element';
+import { useCallback, useState } from '@/lib/gutenberg/element';
 
 export type ImageLoadingStatus = 'idle' | 'loading' | 'loaded' | 'error';
 

@@ -1,8 +1,8 @@
-import { __, _x } from '@wordpress/i18n';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import {
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 
 export function QueryPaginationArrowControls( { value, onChange } ) {
 	return (

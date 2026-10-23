@@ -1,6 +1,6 @@
-import { removep, autop } from '@wordpress/autop';
-import { getBlockTransforms, rawHandler } from '@wordpress/blocks';
-import { next } from '@wordpress/shortcode';
+import { removep, autop } from '@/utils/gutenberg/autop';
+import { getBlockTransforms, rawHandler } from '@/lib/gutenberg/blocks';
+import { next } from '@/utils/gutenberg/shortcode';
 
 const getShortcodeFromTransforms = () =>
 	getBlockTransforms( 'from' ).filter(

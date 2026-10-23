@@ -1,7 +1,7 @@
-import { Modal } from '@wordpress/components';
-import { Tabs } from '@wordpress/ui';
-import { useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { Modal } from '@/components/gutenberg/ui';
+import { Tabs } from '@/components/gutenberg/design-system';
+import { useState } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import PatternExplorerSidebar from './pattern-explorer-sidebar';
 import PatternList from './pattern-list';
 import { usePatternCategories } from '../block-patterns-tab/use-pattern-categories';

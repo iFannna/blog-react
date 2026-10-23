@@ -1,13 +1,13 @@
-import { useDispatch, useSelect } from '@wordpress/data';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import {
 	store as blockEditorStore,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { useViewportMatch } from '@wordpress/compose';
-import { useCallback, useRef } from '@wordpress/element';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { ESCAPE } from '@wordpress/keycodes';
-import { store as interfaceStore } from '@wordpress/interface';
+} from '@/components/gutenberg/block-editor';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
+import { useCallback, useRef } from '@/lib/gutenberg/element';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { ESCAPE } from '@/utils/gutenberg/keycodes';
+import { store as interfaceStore } from '@/components/gutenberg/interface';
 import { unlock } from '../../lock-unlock';
 import { store as editorStore } from '../../store';
 

@@ -1,6 +1,6 @@
-import { createContext, useContext } from '@wordpress/element';
-import { createHigherOrderComponent } from '@wordpress/compose';
-import deprecated from '@wordpress/deprecated';
+import { createContext, useContext } from '@/lib/gutenberg/element';
+import { createHigherOrderComponent } from '@/hooks/gutenberg/compose';
+import deprecated from '@/utils/gutenberg/deprecated';
 import type { WPPlugin } from '../../api';
 
 export interface PluginContext {

@@ -1,12 +1,12 @@
 import clsx from 'clsx';
-import { Modal } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+import { Modal } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	useShortcut,
 	store as keyboardShortcutsStore,
-} from '@wordpress/keyboard-shortcuts';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { store as interfaceStore } from '@wordpress/interface';
+} from '@/components/gutenberg/keyboard-shortcuts';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { store as interfaceStore } from '@/components/gutenberg/interface';
 import { textFormattingShortcuts } from './config';
 import Shortcut from './shortcut';
 import DynamicShortcut from './dynamic-shortcut';

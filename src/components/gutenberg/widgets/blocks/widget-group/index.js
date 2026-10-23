@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n';
-import { createBlock, cloneSanitizedBlock } from '@wordpress/blocks';
-import { group as icon } from '@wordpress/icons';
+import { __ } from '@/lib/gutenberg/i18n';
+import { createBlock, cloneSanitizedBlock } from '@/lib/gutenberg/blocks';
+import { group as icon } from '@/components/gutenberg/icons';
 import metadata from './block.json';
 import edit from './edit';
 import save from './save';

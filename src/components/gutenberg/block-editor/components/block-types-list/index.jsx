@@ -1,5 +1,5 @@
-import { getBlockMenuDefaultClassName } from '@wordpress/blocks';
-import { useInstanceId } from '@wordpress/compose';
+import { getBlockMenuDefaultClassName } from '@/lib/gutenberg/blocks';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
 import InserterListItem from '../inserter-list-item';
 import { InserterListboxGroup, InserterListboxRow } from '../inserter-listbox';
 

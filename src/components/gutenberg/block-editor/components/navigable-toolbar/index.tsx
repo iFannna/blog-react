@@ -1,4 +1,4 @@
-import { NavigableMenu, Toolbar } from '@wordpress/components';
+import { NavigableMenu, Toolbar } from '@/components/gutenberg/ui';
 import {
 	useState,
 	useRef,
@@ -6,12 +6,12 @@ import {
 	useLayoutEffect,
 	useEffect,
 	useCallback,
-} from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import deprecated from '@wordpress/deprecated';
-import { focus } from '@wordpress/dom';
-import { useShortcut } from '@wordpress/keyboard-shortcuts';
-import { ESCAPE } from '@wordpress/keycodes';
+} from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { focus } from '@/utils/gutenberg/dom';
+import { useShortcut } from '@/components/gutenberg/keyboard-shortcuts';
+import { ESCAPE } from '@/utils/gutenberg/keycodes';
 import type { RefObject } from 'react';
 import { store as blockEditorStore } from '../../store';
 import { BlockRefs } from '../provider/block-refs-provider';

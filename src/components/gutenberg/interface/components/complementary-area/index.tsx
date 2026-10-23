@@ -7,25 +7,25 @@ import {
 	Fill,
 	__unstableMotion as motion,
 	__unstableAnimatePresence as AnimatePresence,
-} from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
-import { check, starEmpty, starFilled } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { check, starEmpty, starFilled } from '@/components/gutenberg/icons';
 import {
 	cloneElement,
 	isValidElement,
 	useEffect,
 	useRef,
 	useState,
-} from '@wordpress/element';
-import { store as viewportStore } from '@wordpress/viewport';
-import { store as preferencesStore } from '@wordpress/preferences';
+} from '@/lib/gutenberg/element';
+import { store as viewportStore } from '@/hooks/gutenberg/viewport';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import {
 	useReducedMotion,
 	useViewportMatch,
 	usePrevious,
-} from '@wordpress/compose';
-import { usePluginContext } from '@wordpress/plugins';
+} from '@/hooks/gutenberg/compose';
+import { usePluginContext } from '@/lib/gutenberg/plugins';
 import ComplementaryAreaHeader from '../complementary-area-header';
 import {
 	DefaultComplementaryAreaMoreMenuItem,

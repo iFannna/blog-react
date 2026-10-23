@@ -1,4 +1,4 @@
-import deprecated from '@wordpress/deprecated';
+import deprecated from '@/utils/gutenberg/deprecated';
 
 /**
  * Previously returned inline styles that sized the editor canvas to emulate a

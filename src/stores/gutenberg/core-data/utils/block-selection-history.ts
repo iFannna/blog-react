@@ -1,4 +1,4 @@
-import { Y } from '@wordpress/sync';
+import { Y } from '@/services/gutenberg/sync';
 import {
 	asRichTextOffset,
 	findBlockByClientIdInDoc,

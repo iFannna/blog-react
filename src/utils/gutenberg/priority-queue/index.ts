@@ -46,7 +46,7 @@ export interface WPPriorityQueue {
  *
  * @example
  *```js
- * import { createQueue } from '@wordpress/priority-queue';
+ * import { createQueue } from '@/utils/gutenberg/priority-queue';
  *
  * const queue = createQueue();
  *

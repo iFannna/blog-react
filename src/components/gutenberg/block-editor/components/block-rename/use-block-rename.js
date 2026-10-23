@@ -1,4 +1,4 @@
-import { getBlockSupport } from '@wordpress/blocks';
+import { getBlockSupport } from '@/lib/gutenberg/blocks';
 
 export default function useBlockRename( name ) {
 	return {

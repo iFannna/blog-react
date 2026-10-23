@@ -1,28 +1,28 @@
-import { __, _n, _x, sprintf } from '@wordpress/i18n';
+import { __, _n, _x, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	memo,
 	useDeferredValue,
 	useEffect,
 	useMemo,
 	useState,
-} from '@wordpress/element';
-import { store as noticesStore } from '@wordpress/notices';
+} from '@/lib/gutenberg/element';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import {
 	Button,
 	CheckboxControl as WCCheckboxControl,
 	TreeSelect,
 	withFilters,
 	SearchControl,
-} from '@wordpress/components';
-import { InputControl, Spinner, Stack } from '@wordpress/ui';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useDebounce, useEvent } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { InputControl, Spinner, Stack } from '@/components/gutenberg/design-system';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useDebounce, useEvent } from '@/hooks/gutenberg/compose';
 import {
 	store as coreStore,
 	privateApis as coreDataPrivateApis,
-} from '@wordpress/core-data';
-import { speak } from '@wordpress/a11y';
-import { decodeEntities } from '@wordpress/html-entities';
+} from '@/stores/gutenberg/core-data';
+import { speak } from '@/utils/gutenberg/a11y';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { buildTermsTree } from '../../utils/terms';
 import { normalizeTextString } from '../../utils/normalize-text-string';
 import { store as editorStore } from '../../store';

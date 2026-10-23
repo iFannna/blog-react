@@ -1,5 +1,5 @@
-import { createSelector, createRegistrySelector } from '@wordpress/data';
-import type { ConnectionStatus } from '@wordpress/sync';
+import { createSelector, createRegistrySelector } from '@/stores/gutenberg/data';
+import type { ConnectionStatus } from '@/services/gutenberg/sync';
 import { getDefaultTemplateId, getEntityRecord, type State } from './selectors';
 import { STORE_NAME } from './name';
 import { unlock } from './lock-unlock';

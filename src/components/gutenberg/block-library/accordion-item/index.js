@@ -1,4 +1,4 @@
-import { accordionItem as icon } from '@wordpress/icons';
+import { accordionItem as icon } from '@/components/gutenberg/icons';
 import edit from './edit';
 import save from './save';
 import metadata from './block.json';

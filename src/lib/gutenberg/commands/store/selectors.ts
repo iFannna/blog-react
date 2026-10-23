@@ -1,4 +1,4 @@
-import { createSelector } from '@wordpress/data';
+import { createSelector } from '@/stores/gutenberg/data';
 import type { State } from './types';
 
 /**

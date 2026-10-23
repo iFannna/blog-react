@@ -1,8 +1,8 @@
-import { store as coreStore } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
-import { GlobalStylesUI } from '@wordpress/global-styles-ui';
-import { uploadMedia } from '@wordpress/media-utils';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
+import { GlobalStylesUI } from '@/components/gutenberg/global-styles-ui';
+import { uploadMedia } from '@/utils/gutenberg/media-utils';
 import { GlobalStylesBlockLink } from './block-link';
 import { useGlobalStyles } from './hooks';
 

@@ -1,8 +1,8 @@
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	useRefEffect,
 	privateApis as composePrivateApis,
-} from '@wordpress/compose';
+} from '@/hooks/gutenberg/compose';
 import { isInsideRootBlock } from '../../../utils/dom';
 import { store as blockEditorStore } from '../../../store';
 import { unlock } from '../../../lock-unlock';

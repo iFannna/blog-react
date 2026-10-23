@@ -2,9 +2,9 @@ import {
 	useBlockProps,
 	useInnerBlocksProps,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useEffect } from '@wordpress/element';
+} from '@/components/gutenberg/block-editor';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useEffect } from '@/lib/gutenberg/element';
 import Controls from './controls';
 
 export default function Edit( { clientId, isSelected } ) {

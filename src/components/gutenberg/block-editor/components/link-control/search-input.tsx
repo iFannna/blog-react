@@ -1,7 +1,7 @@
 import type { FormEvent, KeyboardEvent, RefObject } from 'react';
-import { forwardRef, useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import deprecated from '@wordpress/deprecated';
+import { forwardRef, useState } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { URLInput } from '../';
 import LinkControlSearchResults from './search-results';
 import { CREATE_TYPE } from './constants';

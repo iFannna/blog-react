@@ -1,4 +1,4 @@
-import { Component } from '@wordpress/element';
+import { Component } from '@/lib/gutenberg/element';
 import type {
 	PluginErrorBoundaryProps as Props,
 	PluginErrorBoundaryState as State,

@@ -1,4 +1,4 @@
-import { isPhrasingContent, getPhrasingContentSchema } from '@wordpress/dom';
+import { isPhrasingContent, getPhrasingContentSchema } from '@/utils/gutenberg/dom';
 import { hasBlockSupport } from '..';
 import { getRawTransforms } from './get-raw-transforms';
 import type { NodeFilterFunction } from './types';

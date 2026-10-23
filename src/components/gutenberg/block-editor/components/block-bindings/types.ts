@@ -1,4 +1,4 @@
-import type { BlockBindingsSource } from '@wordpress/blocks';
+import type { BlockBindingsSource } from '@/lib/gutenberg/blocks';
 import type { Binding } from '../../utils/block-bindings';
 
 /**

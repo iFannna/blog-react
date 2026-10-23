@@ -2,8 +2,8 @@ import {
 	insert,
 	isCollapsed,
 	privateApis as richTextPrivateApis,
-} from '@wordpress/rich-text';
-import { applyFilters } from '@wordpress/hooks';
+} from '@/components/gutenberg/rich-text';
+import { applyFilters } from '@/hooks/gutenberg/hooks';
 import { store as blockEditorStore } from '../../../store';
 import { unlock } from '../../../lock-unlock';
 

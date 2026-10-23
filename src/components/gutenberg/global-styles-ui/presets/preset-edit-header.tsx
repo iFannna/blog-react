@@ -2,10 +2,10 @@ import {
 	__experimentalSpacer as Spacer,
 	Button,
 	FlexItem,
-} from '@wordpress/components';
-import { moreVertical } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { moreVertical } from '@/components/gutenberg/icons';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of the new Menu, pending WordPress/gutenberg#76135.
-import { Menu, Stack } from '@wordpress/ui';
+import { Menu, Stack } from '@/components/gutenberg/design-system';
 import { ScreenHeader } from '../screen-header';
 
 export interface PresetEditHeaderMenuItem {

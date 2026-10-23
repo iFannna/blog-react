@@ -1,5 +1,5 @@
 import type { ComponentClass, ComponentType, FunctionComponent } from 'react';
-import type { Color } from '@wordpress/global-styles-engine';
+import type { Color } from '@/lib/gutenberg/global-styles-engine';
 import type { IncompatibleInjectedProps } from '../font-sizes/types';
 
 /**

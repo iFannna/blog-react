@@ -1,5 +1,5 @@
-import { createBlock } from '@wordpress/blocks';
-import { inertValue } from '@wordpress/react-inert-value';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { inertValue } from '@/hooks/gutenberg/react-inert-value';
 import FilePreview from './file-preview';
 
 const mediaTypeTag = { image: 'img', video: 'video' };

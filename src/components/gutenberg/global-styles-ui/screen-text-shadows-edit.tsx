@@ -7,12 +7,12 @@ import {
 	Dropdown,
 	Button,
 	ColorPalette,
-} from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
-import { __, sprintf } from '@wordpress/i18n';
-import { plus, typography as typographyIcon, reset } from '@wordpress/icons';
-import { useState, useMemo, useLayoutEffect, useRef } from '@wordpress/element';
-import type { TextShadowPreset } from '@wordpress/global-styles-engine';
+} from '@/components/gutenberg/ui';
+import { Stack } from '@/components/gutenberg/design-system';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { plus, typography as typographyIcon, reset } from '@/components/gutenberg/icons';
+import { useState, useMemo, useLayoutEffect, useRef } from '@/lib/gutenberg/element';
+import type { TextShadowPreset } from '@/lib/gutenberg/global-styles-engine';
 import { Subtitle } from './subtitle';
 import { ScreenBody } from './screen-body';
 import { DEFAULT_TEXT_SHADOW } from './screen-text-shadows';

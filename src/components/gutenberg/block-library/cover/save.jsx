@@ -4,7 +4,7 @@ import {
 	getColorClassName,
 	__experimentalGetGradientClass,
 	useBlockProps,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	IMAGE_BACKGROUND_TYPE,
 	VIDEO_BACKGROUND_TYPE,

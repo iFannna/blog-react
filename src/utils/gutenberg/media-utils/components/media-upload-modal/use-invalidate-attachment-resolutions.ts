@@ -13,8 +13,8 @@
  * resolution for `getEntityRecords` and invalidates only the entries where
  * the first two arguments match `['postType', 'attachment']`.
  */
-import { useCallback } from '@wordpress/element';
-import { useRegistry } from '@wordpress/data';
+import { useCallback } from '@/lib/gutenberg/element';
+import { useRegistry } from '@/stores/gutenberg/data';
 import { invalidateAttachmentResolutions } from '../../utils/invalidate-attachment-resolutions';
 
 /**

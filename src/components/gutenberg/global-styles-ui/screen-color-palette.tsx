@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { Tabs } from '@wordpress/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Tabs } from '@/components/gutenberg/design-system';
 import { ScreenHeader } from './screen-header';
 import ColorPalettePanel from './color-palette-panel';
 import GradientPalettePanel from './gradients-palette-panel';

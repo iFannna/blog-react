@@ -1,1 +1,1 @@
-export { VisuallyHidden } from './visually-hidden';
+export { default as VisuallyHidden } from './component';

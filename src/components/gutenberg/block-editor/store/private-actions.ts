@@ -1,8 +1,8 @@
-import deprecated from '@wordpress/deprecated';
-import { speak } from '@wordpress/a11y';
-import { __ } from '@wordpress/i18n';
-import { getBlockType, isUnmodifiedBlock } from '@wordpress/blocks';
-import type { Block } from '@wordpress/blocks';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { speak } from '@/utils/gutenberg/a11y';
+import { __ } from '@/lib/gutenberg/i18n';
+import { getBlockType, isUnmodifiedBlock } from '@/lib/gutenberg/blocks';
+import type { Block } from '@/lib/gutenberg/blocks';
 import type {
 	BlockEditorThunkArgs,
 	BlockRemovalRule,

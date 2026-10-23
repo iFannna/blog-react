@@ -1,4 +1,4 @@
-import type { WPKeycodeModifier } from '@wordpress/keycodes';
+import type { WPKeycodeModifier } from '@/utils/gutenberg/keycodes';
 
 /**
  * Keyboard key combination.
@@ -32,9 +32,9 @@ export type ShortcutAction =
  *
  *```js
  * import { useEffect } from 'react';
- * import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
- * import { useSelect, useDispatch } from '@wordpress/data';
- * import { __ } from '@wordpress/i18n';
+ * import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
+ * import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+ * import { __ } from '@/lib/gutenberg/i18n';
  *
  * const ExampleComponent = () => {
  *     const { registerShortcut } = useDispatch( keyboardShortcutsStore );
@@ -94,9 +94,9 @@ export function registerShortcut( {
  *
  *```js
  * import { useEffect } from 'react';
- * import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
- * import { useSelect, useDispatch } from '@wordpress/data';
- * import { __ } from '@wordpress/i18n';
+ * import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
+ * import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+ * import { __ } from '@/lib/gutenberg/i18n';
  *
  * const ExampleComponent = () => {
  *     const { unregisterShortcut } = useDispatch( keyboardShortcutsStore );

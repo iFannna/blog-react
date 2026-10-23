@@ -1,5 +1,5 @@
-import { Y } from '@wordpress/sync';
-import { create, insert, toHTMLString } from '@wordpress/rich-text';
+import { Y } from '@/services/gutenberg/sync';
+import { create, insert, toHTMLString } from '@/components/gutenberg/rich-text';
 import type { YBlock, YBlocks } from './crdt-blocks';
 import type { YPostRecord } from './crdt';
 import { CRDT_RECORD_MAP_KEY } from '../sync';

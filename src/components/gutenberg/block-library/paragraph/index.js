@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n';
-import { paragraph as icon } from '@wordpress/icons';
-import { privateApis as blocksPrivateApis } from '@wordpress/blocks';
+import { __ } from '@/lib/gutenberg/i18n';
+import { paragraph as icon } from '@/components/gutenberg/icons';
+import { privateApis as blocksPrivateApis } from '@/lib/gutenberg/blocks';
 import initBlock from '../utils/init-block';
 import deprecated from './deprecated';
 import edit from './edit';

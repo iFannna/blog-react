@@ -1,11 +1,11 @@
 import clsx from 'clsx';
-import { addFilter } from '@wordpress/hooks';
+import { addFilter } from '@/hooks/gutenberg/hooks';
 import {
 	getBlockSupport,
 	getBlockType,
 	hasBlockSupport,
-} from '@wordpress/blocks';
-import type { BlockType } from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
+import type { BlockType } from '@/lib/gutenberg/blocks';
 import { BlockControls, BlockAlignmentControl } from '../components';
 import useAvailableAlignments, {
 	useAlignmentMenu,

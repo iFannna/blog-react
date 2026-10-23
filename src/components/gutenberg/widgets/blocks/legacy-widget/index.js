@@ -1,4 +1,4 @@
-import { widget as icon } from '@wordpress/icons';
+import { widget as icon } from '@/components/gutenberg/icons';
 import metadata from './block.json';
 import edit from './edit';
 import transforms from './transforms';

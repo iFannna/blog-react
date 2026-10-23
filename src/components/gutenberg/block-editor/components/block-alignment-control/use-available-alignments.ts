@@ -1,4 +1,4 @@
-import { useSelect } from '@wordpress/data';
+import { useSelect } from '@/stores/gutenberg/data';
 import { useLayout } from '../block-list/layout';
 import { useSettings } from '../use-settings';
 import { store as blockEditorStore } from '../../store';

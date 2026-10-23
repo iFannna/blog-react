@@ -1,7 +1,7 @@
 import { Controller } from '@react-spring/web';
-import { useLayoutEffect, useMemo, useRef } from '@wordpress/element';
-import { getScrollContainer } from '@wordpress/dom';
-import { useSelect } from '@wordpress/data';
+import { useLayoutEffect, useMemo, useRef } from '@/lib/gutenberg/element';
+import { getScrollContainer } from '@/utils/gutenberg/dom';
+import { useSelect } from '@/stores/gutenberg/data';
 import { store as blockEditorStore } from '../../store';
 import type { UseMovingAnimationOptions } from './types';
 

@@ -2,14 +2,14 @@ import clsx from 'clsx';
 import {
 	__unstableGetAnimateClassName as getAnimateClassName,
 	Button,
-} from '@wordpress/components';
-import { usePrevious, useViewportMatch } from '@wordpress/compose';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useEffect, useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { Icon, check, cloud, cloudUpload } from '@wordpress/icons';
-import { displayShortcut } from '@wordpress/keycodes';
-import { store as preferencesStore } from '@wordpress/preferences';
+} from '@/components/gutenberg/ui';
+import { usePrevious, useViewportMatch } from '@/hooks/gutenberg/compose';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useEffect, useState } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Icon, check, cloud, cloudUpload } from '@/components/gutenberg/icons';
+import { displayShortcut } from '@/utils/gutenberg/keycodes';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import { STATUS_OPTIONS } from '../../components/post-status';
 import { store as editorStore } from '../../store';
 import { ATTACHMENT_POST_TYPE } from '../../store/constants';

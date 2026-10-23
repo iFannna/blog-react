@@ -1,8 +1,8 @@
-import deprecated from '@wordpress/deprecated';
+import deprecated from '@/utils/gutenberg/deprecated';
 
 /**
- * @typedef {import('@wordpress/dataviews').Action} Action
- * @typedef {import('@wordpress/dataviews').Field} Field
+ * @typedef {import('@/components/gutenberg/dataviews').Action} Action
+ * @typedef {import('@/components/gutenberg/dataviews').Field} Field
  */
 
 /*

@@ -6,12 +6,12 @@ import {
 	MenuItem,
 	Spinner as WCSpinner,
 	__experimentalConfirmDialog as ConfirmDialog,
-} from '@wordpress/components';
-import { Stack, Tabs, VisuallyHidden } from '@wordpress/ui';
-import { useViewportMatch } from '@wordpress/compose';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { NavigableRegion } from '@wordpress/admin-ui';
+} from '@/components/gutenberg/ui';
+import { Stack, Tabs, VisuallyHidden } from '@/components/gutenberg/design-system';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { NavigableRegion } from '@/components/gutenberg/admin-ui';
 import {
 	createContext,
 	createPortal,
@@ -20,8 +20,8 @@ import {
 	useEffect,
 	useRef,
 	useState,
-} from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+} from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	backup,
 	close,
@@ -30,14 +30,14 @@ import {
 	moreVertical,
 	redo,
 	undo,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import {
 	displayShortcut,
 	isAppleOS,
 	isKeyboardEvent,
-} from '@wordpress/keycodes';
-import { SnackbarNotices, store as noticesStore } from '@wordpress/notices';
-import type { Field, Form } from '@wordpress/dataviews';
+} from '@/utils/gutenberg/keycodes';
+import { SnackbarNotices, store as noticesStore } from '@/stores/gutenberg/notices';
+import type { Field, Form } from '@/components/gutenberg/dataviews';
 import type {
 	KeyboardEvent as ReactKeyboardEvent,
 	ReactElement,

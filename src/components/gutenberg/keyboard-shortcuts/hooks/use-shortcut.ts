@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from '@wordpress/element';
+import { useContext, useEffect, useRef } from '@/lib/gutenberg/element';
 import useShortcutEventMatch from './use-shortcut-event-match';
 import { context } from '../context';
 

@@ -1,5 +1,5 @@
-import { useCallback, useMemo, useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { useCallback, useMemo, useState } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import { useMediaCategories } from './hooks';
 import { getBlockAndPreviewFromMedia } from './utils';
 import { MediaCategoryPanel } from './media-panel';

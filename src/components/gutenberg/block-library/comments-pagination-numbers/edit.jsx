@@ -1,4 +1,4 @@
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps } from '@/components/gutenberg/block-editor';
 
 const PaginationItem = ( { content, tag: Tag = 'a', extraClass = '' } ) =>
 	Tag === 'a' ? (

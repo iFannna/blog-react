@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
 import BlockStyles from '../block-styles';
 import InspectorControls from '../inspector-controls';
 import PositionControls from './position-controls-panel';

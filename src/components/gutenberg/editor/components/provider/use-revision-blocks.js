@@ -1,6 +1,6 @@
-import { useSelect } from '@wordpress/data';
-import { useMemo, useRef } from '@wordpress/element';
-import { createBlock, parse } from '@wordpress/blocks';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo, useRef } from '@/lib/gutenberg/element';
+import { createBlock, parse } from '@/lib/gutenberg/blocks';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 import { diffRevisionContent } from '../post-revisions-preview/block-diff';

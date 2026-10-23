@@ -17,7 +17,7 @@
  * exported data types using interface merging as follows:
  *
  * ```ts
- * import type { Context } from '@wordpress/core-data';
+ * import type { Context } from '@/stores/gutenberg/core-data';
  * declare module '@wordpress/core-data' {
  *     export namespace BaseEntityRecords {
  *         export interface Comment< C extends Context > {
@@ -26,7 +26,7 @@
  *     }
  * }
  *
- * import type { Comment } from '@wordpress/core-data';
+ * import type { Comment } from '@/stores/gutenberg/core-data';
  * const c : Comment< 'view' > = ...;
  *
  * // c.numberOfViews is a number

@@ -10,19 +10,19 @@ import {
 	__experimentalHStack as HStack,
 	BaseControl,
 	withFilters,
-} from '@wordpress/components';
-import { isBlobURL, getBlobTypeByURL } from '@wordpress/blob';
-import { store as coreStore, type Attachment } from '@wordpress/core-data';
-import { useSelect, useDispatch } from '@wordpress/data';
+} from '@/components/gutenberg/ui';
+import { isBlobURL, getBlobTypeByURL } from '@/utils/gutenberg/blob';
+import { store as coreStore, type Attachment } from '@/stores/gutenberg/core-data';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	useCallback,
 	useEffect,
 	useMemo,
 	useRef,
 	useState,
-} from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import { decodeEntities } from '@wordpress/html-entities';
+} from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import {
 	archive,
 	audio,
@@ -33,15 +33,15 @@ import {
 	chevronDown,
 	chevronLeft,
 	chevronRight,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import {
 	Stack,
 	Tooltip,
 	ValidityIndicator,
 	VisuallyHidden,
-} from '@wordpress/ui';
-import { speak } from '@wordpress/a11y';
-import { store as noticesStore } from '@wordpress/notices';
+} from '@/components/gutenberg/design-system';
+import { speak } from '@/utils/gutenberg/a11y';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import MediaUpload from '../media-upload';
 import { MediaUploadModal } from '../media-upload-modal';
 import { uploadMedia } from '../../utils/upload-media';
@@ -574,9 +574,9 @@ function CompactMediaEditAttachments( {
  *
  * @example
  * ```tsx
- * import { privateApis as mediaUtilsPrivateApis } from '@wordpress/media-utils';
+ * import { privateApis as mediaUtilsPrivateApis } from '@/utils/gutenberg/media-utils';
  * import { unlock } from './lock-unlock';
- * import type { DataFormControlProps } from '@wordpress/dataviews';
+ * import type { DataFormControlProps } from '@/components/gutenberg/dataviews';
  *
  * const { MediaEdit } = unlock( mediaUtilsPrivateApis );
  *

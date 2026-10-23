@@ -1,6 +1,6 @@
-import { ToolbarGroup, ToolbarItem } from '@wordpress/components';
-import deprecated from '@wordpress/deprecated';
-import { ImageCropperProvider } from '@wordpress/image-cropper';
+import { ToolbarGroup, ToolbarItem } from '@/components/gutenberg/ui';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { ImageCropperProvider } from '@/components/gutenberg/image-cropper';
 import AspectRatioDropdown from './aspect-ratio-dropdown';
 import BlockControls from '../block-controls';
 import ImageEditingProvider from './context';

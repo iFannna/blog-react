@@ -1,9 +1,9 @@
-import { useSelect } from '@wordpress/data';
-import { useLayoutEffect, useEffect, useRef } from '@wordpress/element';
-import { getBlobByURL, isBlobURL, revokeBlobURL } from '@wordpress/blob';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { store as coreStore } from '@wordpress/core-data';
-import { useViewportMatch } from '@wordpress/compose';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useLayoutEffect, useEffect, useRef } from '@/lib/gutenberg/element';
+import { getBlobByURL, isBlobURL, revokeBlobURL } from '@/utils/gutenberg/blob';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
 
 /**
  * Returns whether the current user can edit the given entity.

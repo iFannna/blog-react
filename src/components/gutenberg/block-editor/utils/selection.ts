@@ -1,4 +1,4 @@
-import { RichTextData } from '@wordpress/rich-text';
+import { RichTextData } from '@/components/gutenberg/rich-text';
 
 /**
  * A robust way to retain selection position through various

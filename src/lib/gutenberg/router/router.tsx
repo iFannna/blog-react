@@ -7,14 +7,14 @@ import {
 	useMemo,
 	useState,
 	useEffect,
-} from '@wordpress/element';
+} from '@/lib/gutenberg/element';
 import {
 	addQueryArgs,
 	getQueryArgs,
 	getPath,
 	buildQueryString,
-} from '@wordpress/url';
-import { useEvent, usePrevious } from '@wordpress/compose';
+} from '@/utils/gutenberg/url';
+import { useEvent, usePrevious } from '@/hooks/gutenberg/compose';
 import type { ReactNode } from 'react';
 
 const history = createBrowserHistory();

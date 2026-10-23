@@ -5,11 +5,11 @@ import {
 	DuotoneSwatch,
 	MenuGroup,
 	ToolbarButton,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { DOWN } from '@wordpress/keycodes';
-import { Icon, filter } from '@wordpress/icons';
-import { useInstanceId } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { DOWN } from '@/utils/gutenberg/keycodes';
+import { Icon, filter } from '@/components/gutenberg/icons';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
 
 function DuotoneControl( {
 	id: idProp,

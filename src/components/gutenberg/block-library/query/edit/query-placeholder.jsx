@@ -1,17 +1,17 @@
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	createBlocksFromInnerBlocksTemplate,
 	store as blocksStore,
-} from '@wordpress/blocks';
-import { useState } from '@wordpress/element';
+} from '@/lib/gutenberg/blocks';
+import { useState } from '@/lib/gutenberg/element';
 import {
 	store as blockEditorStore,
 	__experimentalBlockVariationPicker,
 	useBlockProps,
-} from '@wordpress/block-editor';
-import { Button, Placeholder } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useResizeObserver } from '@wordpress/compose';
+} from '@/components/gutenberg/block-editor';
+import { Button, Placeholder } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useResizeObserver } from '@/hooks/gutenberg/compose';
 import { useScopedBlockVariations } from '../utils';
 import { useBlockPatterns } from './pattern-selection';
 import QueryToolbar from './query-toolbar';

@@ -3,9 +3,9 @@ import {
 	Button,
 	Icon as WCIcon,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { reset as resetIcon } from '@wordpress/icons';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { reset as resetIcon } from '@/components/gutenberg/icons';
+import { __ } from '@/lib/gutenberg/i18n';
 import type { MouseEvent } from 'react';
 import type { ClassValue } from 'clsx';
 import type {

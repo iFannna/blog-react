@@ -1,5 +1,5 @@
-import { useSelect } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 
 /**
  * Hook to determine if link status validation should be enabled.

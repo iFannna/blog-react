@@ -1,5 +1,5 @@
-import { postCategories as icon } from '@wordpress/icons';
-import { addFilter } from '@wordpress/hooks';
+import { postCategories as icon } from '@/components/gutenberg/icons';
+import { addFilter } from '@/hooks/gutenberg/hooks';
 import initBlock from '../utils/init-block';
 import metadata from './block.json';
 import edit from './edit';

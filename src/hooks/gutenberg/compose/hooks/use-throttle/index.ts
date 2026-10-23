@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from '@wordpress/element';
+import { useEffect, useMemo } from '@/lib/gutenberg/element';
 import { throttle } from '../../utils/throttle';
 import type { ThrottleOptions } from '../../utils/throttle';
 import type { DebouncedFunc } from '../../utils/debounce';

@@ -1,12 +1,12 @@
-import { useSelect } from '@wordpress/data';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	store as blocksStore,
 	isReusableBlock,
 	isTemplatePart,
 	__experimentalGetBlockLabel as getBlockLabel,
-} from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
-import { symbol } from '@wordpress/icons';
+} from '@/lib/gutenberg/blocks';
+import { __ } from '@/lib/gutenberg/i18n';
+import { symbol } from '@/components/gutenberg/icons';
 import { store as blockEditorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 import type { BlockEditorThunkArgs } from '../../store/types';

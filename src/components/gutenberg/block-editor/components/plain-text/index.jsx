@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { forwardRef } from '@wordpress/element';
+import { forwardRef } from '@/lib/gutenberg/element';
 import EditableText from '../editable-text';
 
 /**
@@ -9,8 +9,8 @@ import EditableText from '../editable-text';
  *
  * @example
  * ```jsx
- * import { registerBlockType } from '@wordpress/blocks';
- * import { PlainText } from '@wordpress/block-editor';
+ * import { registerBlockType } from '@/lib/gutenberg/blocks';
+ * import { PlainText } from '@/components/gutenberg/block-editor';
  *
  * registerBlockType( 'my-plugin/example-block', {
  *   // ...

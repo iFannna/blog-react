@@ -1,11 +1,11 @@
 import {
 	Button,
 	__experimentalConfirmDialog as ConfirmDialog,
-} from '@wordpress/components';
-import { store as coreStore, useEntityId } from '@wordpress/core-data';
-import { useDispatch } from '@wordpress/data';
-import { useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { store as coreStore, useEntityId } from '@/stores/gutenberg/core-data';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { useState } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 
 export default function NavigationMenuDeleteControl( { onDelete } ) {
 	const [ isConfirmDialogVisible, setIsConfirmDialogVisible ] =

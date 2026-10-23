@@ -1,11 +1,11 @@
-import { Fragment, useContext, useMemo } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { Stack, Text } from '@wordpress/ui';
+import { Fragment, useContext, useMemo } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { Stack, Text } from '@/components/gutenberg/design-system';
 import {
 	store as blockEditorStore,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import { unlock } from '../../lock-unlock';
 import { NoteThread } from './note-thread';
 import { focusNoteThread } from './utils';

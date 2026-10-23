@@ -1,7 +1,7 @@
-import { useEffect } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
-import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
-import { __ } from '@wordpress/i18n';
+import { useEffect } from '@/lib/gutenberg/element';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
+import { __ } from '@/lib/gutenberg/i18n';
 import { useSettings } from '../use-settings';
 
 function KeyboardShortcuts() {

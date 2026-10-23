@@ -1,5 +1,5 @@
-import { useSelect } from '@wordpress/data';
-import { forwardRef } from '@wordpress/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { forwardRef } from '@/lib/gutenberg/element';
 import { PrivateInserterMenu } from './menu';
 import { store as blockEditorStore } from '../../store';
 

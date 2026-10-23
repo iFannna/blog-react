@@ -1,16 +1,16 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	alignLeft,
 	alignCenter,
 	alignRight,
 	alignJustify,
-} from '@wordpress/icons';
-import { useMemo } from '@wordpress/element';
+} from '@/components/gutenberg/icons';
+import { useMemo } from '@/lib/gutenberg/element';
 import {
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import type { TextAlignmentControlProps } from './types';
 
 const TEXT_ALIGNMENT_OPTIONS = [

@@ -1,4 +1,4 @@
-import { __unstableMotion as motion } from '@wordpress/components';
+import { __unstableMotion as motion } from '@/components/gutenberg/ui';
 import { useStylesPreviewColors } from './preview-hooks';
 
 interface HighlightedColorsProps {

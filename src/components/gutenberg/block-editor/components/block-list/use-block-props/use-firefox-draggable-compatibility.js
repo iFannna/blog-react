@@ -1,4 +1,4 @@
-import { useRefEffect } from '@wordpress/compose';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
 
 const nodesByDocument = new Map();
 

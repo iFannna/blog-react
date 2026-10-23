@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import clsx from 'clsx';
-import { Slot, Fill } from '@wordpress/components';
+import { Slot, Fill } from '@/components/gutenberg/ui';
 import type { PinnedItemsProps, PinnedItemsSlotProps } from './types';
 
 function PinnedItems( { scope, ...props }: PinnedItemsProps ) {

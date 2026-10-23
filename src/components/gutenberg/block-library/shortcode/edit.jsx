@@ -1,8 +1,8 @@
-import { __ } from '@wordpress/i18n';
-import { PlainText, useBlockProps } from '@wordpress/block-editor';
-import { useInstanceId } from '@wordpress/compose';
-import { Placeholder } from '@wordpress/components';
-import { shortcode } from '@wordpress/icons';
+import { __ } from '@/lib/gutenberg/i18n';
+import { PlainText, useBlockProps } from '@/components/gutenberg/block-editor';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { Placeholder } from '@/components/gutenberg/ui';
+import { shortcode } from '@/components/gutenberg/icons';
 
 export default function ShortcodeEdit( { attributes, setAttributes } ) {
 	const instanceId = useInstanceId( ShortcodeEdit );

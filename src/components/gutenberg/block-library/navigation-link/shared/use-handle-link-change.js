@@ -1,8 +1,8 @@
-import { useCallback } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
-import { escapeHTML } from '@wordpress/escape-html';
+import { useCallback } from '@/lib/gutenberg/element';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
+import { escapeHTML } from '@/utils/gutenberg/escape-html';
 import { updateAttributes } from './update-attributes';
 import { useEntityBinding } from './use-entity-binding';
 

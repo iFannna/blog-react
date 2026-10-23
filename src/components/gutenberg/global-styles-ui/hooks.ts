@@ -1,7 +1,7 @@
-import { useCallback, useContext, useMemo } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { __ } from '@wordpress/i18n';
+import { useCallback, useContext, useMemo } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	getResolvedValue,
 	getStyle,
@@ -9,11 +9,11 @@ import {
 	getSetting,
 	setSetting,
 	mergeGlobalStyles,
-} from '@wordpress/global-styles-engine';
+} from '@/lib/gutenberg/global-styles-engine';
 import type {
 	GlobalStylesConfig,
 	StyleVariation,
-} from '@wordpress/global-styles-engine';
+} from '@/lib/gutenberg/global-styles-engine';
 import { GlobalStylesContext } from './context';
 import { removePropertiesFromObject, isVariationWithProperties } from './utils';
 

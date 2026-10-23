@@ -1,5 +1,5 @@
-import apiFetch from '@wordpress/api-fetch';
-import { transformAttachment } from '@wordpress/media-utils';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { transformAttachment } from '@/utils/gutenberg/media-utils';
 import { receiveFinalizedAttachment } from '../media-upload/finalized-attachments';
 
 export default async function mediaFinalize( id, subSizes = [] ) {

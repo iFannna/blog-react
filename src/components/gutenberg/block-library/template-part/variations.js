@@ -1,5 +1,5 @@
-import { store as coreDataStore } from '@wordpress/core-data';
-import { select } from '@wordpress/data';
+import { store as coreDataStore } from '@/stores/gutenberg/core-data';
+import { select } from '@/stores/gutenberg/data';
 import { getTemplatePartIcon } from './edit/utils/get-template-part-icon';
 
 export function enhanceTemplatePartVariations( settings, name ) {

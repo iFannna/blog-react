@@ -4,10 +4,10 @@ import {
 	useState,
 	useMemo,
 	useRef,
-} from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import { Placeholder, Spinner as WCSpinner } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
+} from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { Placeholder, Spinner as WCSpinner } from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
 import { useServerSideRender } from './hook';
 import type {
 	PlaceholderProps,
@@ -128,9 +128,9 @@ export function ServerSideRender( props: ServerSideRenderProps ) {
  *
  * @example
  * ```jsx
- * import { ServerSideRender } from '@wordpress/server-side-render';
+ * import { ServerSideRender } from '@/components/gutenberg/server-side-render';
  * // Legacy import for WordPress 6.8 and earlier
- * // import { default as ServerSideRender } from '@wordpress/server-side-render';
+ * // import { default as ServerSideRender } from '@/components/gutenberg/server-side-render';
  *
  * function Example() {
  *   return (

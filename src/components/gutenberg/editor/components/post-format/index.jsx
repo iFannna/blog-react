@@ -1,8 +1,8 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { Button, RadioControl } from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useInstanceId } from '@wordpress/compose';
-import { store as coreStore } from '@wordpress/core-data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { Button, RadioControl } from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import PostFormatCheck from './check';
 import { store as editorStore } from '../../store';
 

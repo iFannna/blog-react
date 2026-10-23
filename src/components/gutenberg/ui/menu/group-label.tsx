@@ -1,25 +1,40 @@
-import { Menu as _Menu } from '@base-ui/react/menu';
 import clsx from 'clsx';
-import { forwardRef } from '@wordpress/element';
-import styles from './style.module.css';
+import * as Ariakit from '@ariakit/react';
+import { forwardRef, useContext } from '@/lib/gutenberg/element';
+import type { WordPressComponentProps } from '../context';
+import { Context } from './context';
+import { Text } from '../text';
 import type { GroupLabelProps } from './types';
+import styles from './style.module.css';
 
-/**
- * Renders an accessible label for a menu group.
- *
- * Place it inside the `Menu.Group` or `Menu.RadioGroup` it labels. A label in
- * an outer group does not label an inner group.
- */
-const GroupLabel = forwardRef< HTMLDivElement, GroupLabelProps >(
-	function MenuGroupLabel( { className, ...props }, ref ) {
-		return (
-			<_Menu.GroupLabel
-				ref={ ref }
-				className={ clsx( styles[ 'group-label' ], className ) }
-				{ ...props }
-			/>
+export const GroupLabel = forwardRef<
+	HTMLDivElement,
+	WordPressComponentProps< GroupLabelProps, 'div', false >
+>( function Group( { className, ...props }, ref ) {
+	const menuContext = useContext( Context );
+
+	if ( ! menuContext?.store ) {
+		throw new Error(
+			'Menu.GroupLabel can only be rendered inside a Menu component'
 		);
 	}
-);
 
-export { GroupLabel };
+	return (
+		<Ariakit.MenuGroupLabel
+			ref={ ref }
+			render={
+				// @ts-expect-error The `children` prop is passed
+				<Text
+					upperCase
+					variant="muted"
+					size="11px"
+					weight="var(--wpds-typography-font-weight-emphasis)"
+					lineHeight="16px"
+				/>
+			}
+			{ ...props }
+			className={ clsx( styles[ 'group-label' ], className ) }
+			store={ menuContext.store }
+		/>
+	);
+} );

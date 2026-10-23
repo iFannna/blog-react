@@ -1,5 +1,5 @@
 import removeAccents from 'remove-accents';
-import deprecated from '@wordpress/deprecated';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { OPERATOR_IS_NOT_ALL } from '../constants';
 import normalizeFields from '../field-types';
 import type { Field, Operator, View } from '../types';

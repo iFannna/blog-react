@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { InnerBlocks, useBlockProps } from '@/components/gutenberg/block-editor';
 
 /**
  * The specific handling by `className` below is needed because `itemsJustification`

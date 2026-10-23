@@ -1,5 +1,5 @@
-import { useEffect, useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
+import { useEffect, useState } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
 import { store as blockEditorStore } from '../../store';
 
 export default function useListViewExpandSelectedItem( {

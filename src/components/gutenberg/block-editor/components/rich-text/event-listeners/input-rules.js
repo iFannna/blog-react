@@ -2,8 +2,8 @@ import {
 	insert,
 	toHTMLString,
 	privateApis as richTextPrivateApis,
-} from '@wordpress/rich-text';
-import { getBlockTransforms, findTransform } from '@wordpress/blocks';
+} from '@/components/gutenberg/rich-text';
+import { getBlockTransforms, findTransform } from '@/lib/gutenberg/blocks';
 import { store as blockEditorStore } from '../../../store';
 import { preventEventDiscovery } from '../prevent-event-discovery';
 import {

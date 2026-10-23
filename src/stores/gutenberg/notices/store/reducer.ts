@@ -1,4 +1,4 @@
-import { keyedReducer } from '@wordpress/data';
+import { keyedReducer } from '@/stores/gutenberg/data';
 import type { Notice, ReducerAction } from './types';
 
 /**

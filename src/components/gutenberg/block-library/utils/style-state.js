@@ -2,7 +2,7 @@ import {
 	getStyleForState,
 	setStyleForState,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import { unlock } from '../lock-unlock';
 
 const { cleanEmptyObject } = unlock( blockEditorPrivateApis );

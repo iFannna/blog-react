@@ -1,12 +1,12 @@
 import type { ComponentProps, ComponentType } from 'react';
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	ToolbarDropdownMenu,
 	ToolbarGroup,
 	MenuGroup,
 	MenuItem,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import { useAlignmentMenu } from './use-available-alignments';
 import { BLOCK_ALIGNMENTS_CONTROLS, DEFAULT_CONTROL } from './constants';
 import type { BlockAlignmentUIProps } from './types';

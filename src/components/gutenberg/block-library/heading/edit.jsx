@@ -1,11 +1,11 @@
-import { __ } from '@wordpress/i18n';
-import { useEffect } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useEffect } from '@/lib/gutenberg/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import {
 	RichText,
 	useBlockProps,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import { generateAnchor, setAnchor } from './autogenerate-anchors';
 import useDeprecatedTextAlign from '../utils/deprecated-text-align-attributes';
 

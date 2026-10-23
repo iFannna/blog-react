@@ -4,9 +4,9 @@ import {
 	store as blockEditorStore,
 	useStyleOverride,
 	useSettings,
-} from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { privateApis as globalStylesEnginePrivateApis } from '@wordpress/global-styles-engine';
+} from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { privateApis as globalStylesEnginePrivateApis } from '@/lib/gutenberg/global-styles-engine';
 import { unlock } from '../lock-unlock';
 import { getGalleryResponsiveCSS } from './responsive-styles';
 

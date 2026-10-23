@@ -4,11 +4,11 @@ import {
 	cloneElement,
 	renderToString,
 	RawHTML,
-} from '@wordpress/element';
-import { hasFilter, applyFilters } from '@wordpress/hooks';
-import { isShallowEqual } from '@wordpress/is-shallow-equal';
-import { removep } from '@wordpress/autop';
-import deprecated from '@wordpress/deprecated';
+} from '@/lib/gutenberg/element';
+import { hasFilter, applyFilters } from '@/hooks/gutenberg/hooks';
+import { isShallowEqual } from '@/utils/gutenberg/is-shallow-equal';
+import { removep } from '@/utils/gutenberg/autop';
+import deprecated from '@/utils/gutenberg/deprecated';
 import {
 	getBlockType,
 	getFreeformContentHandlerName,

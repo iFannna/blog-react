@@ -1,5 +1,5 @@
-import { select } from '@wordpress/data';
-import { store as preferencesStore } from '@wordpress/preferences';
+import { select } from '@/stores/gutenberg/data';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import { generatePreferenceKey } from './preference-keys';
 import { resolveView } from './resolve-view';
 import type { ViewConfig, ViewOverrides } from './types';

@@ -1,12 +1,12 @@
-import { useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
-import { store as blocksStore } from '@wordpress/blocks';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
 import {
 	store as blockEditorStore,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { PanelBody } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/block-editor';
+import { PanelBody } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import { unlock } from '../../lock-unlock';
 import { TEMPLATE_PART_POST_TYPE } from '../../store/constants';
 import { store as editorStore } from '../../store';

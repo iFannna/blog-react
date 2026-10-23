@@ -1,14 +1,14 @@
 import clsx from 'clsx';
-import { isBlobURL } from '@wordpress/blob';
+import { isBlobURL } from '@/utils/gutenberg/blob';
 import {
 	SelectControl as WCSelectControl,
 	Spinner as WCSpinner,
 	ToggleControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { inertValue } from '@wordpress/react-inert-value';
-import { Text } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { inertValue } from '@/hooks/gutenberg/react-inert-value';
+import { Text } from '@/components/gutenberg/design-system';
 import {
 	BlockControls,
 	BlockIcon,
@@ -17,12 +17,12 @@ import {
 	MediaReplaceFlow,
 	useBlockProps,
 	useBlockEditingMode,
-} from '@wordpress/block-editor';
-import { __, _x } from '@wordpress/i18n';
-import { useDispatch } from '@wordpress/data';
-import { audio as icon } from '@wordpress/icons';
-import { store as noticesStore } from '@wordpress/notices';
-import { useState } from '@wordpress/element';
+} from '@/components/gutenberg/block-editor';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { audio as icon } from '@/components/gutenberg/icons';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { useState } from '@/lib/gutenberg/element';
 import { createUpgradedEmbedBlock } from '../embed/util';
 import {
 	useUploadMediaFromBlobURL,

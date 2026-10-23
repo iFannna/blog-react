@@ -1,5 +1,5 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useEffect, useRef } from '@wordpress/element';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useEffect, useRef } from '@/lib/gutenberg/element';
 import { store as blockEditorStore } from '../store';
 import { unlock } from '../lock-unlock';
 import type { BlockEditorThunkArgs } from '../store/types';

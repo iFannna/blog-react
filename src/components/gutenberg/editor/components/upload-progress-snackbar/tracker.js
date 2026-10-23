@@ -1,4 +1,4 @@
-import { useSyncExternalStore } from '@wordpress/element';
+import { useSyncExternalStore } from '@/lib/gutenberg/element';
 
 /**
  * A minimal in-memory tracker for in-flight media uploads that happen outside

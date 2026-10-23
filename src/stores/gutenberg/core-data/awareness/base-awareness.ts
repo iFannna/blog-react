@@ -1,4 +1,4 @@
-import { resolveSelect } from '@wordpress/data';
+import { resolveSelect } from '@/stores/gutenberg/data';
 import { AwarenessState } from './awareness-state';
 import { STORE_NAME as coreStore } from '../name';
 import { generateCollaboratorInfo, areCollaboratorInfosEqual } from './utils';

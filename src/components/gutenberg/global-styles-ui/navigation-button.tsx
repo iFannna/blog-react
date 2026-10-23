@@ -3,7 +3,7 @@ import {
 	__experimentalItem as Item,
 	FlexItem,
 	__experimentalHStack as HStack,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import { IconWithCurrentColor } from './icon-with-current-color';
 
 interface GenericNavigationButtonProps {

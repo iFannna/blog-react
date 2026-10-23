@@ -1,9 +1,9 @@
-import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	store as blockEditorStore,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import DialogWrapper from './dialog-wrapper';
 import { unlock } from '../../lock-unlock';
 

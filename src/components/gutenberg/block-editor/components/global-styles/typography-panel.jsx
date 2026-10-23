@@ -5,10 +5,10 @@ import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalParseQuantityAndUnitFromRawValue as parseQuantityAndUnitFromRawValue,
 	ToggleControl,
-} from '@wordpress/components';
-import { Notice } from '@wordpress/ui';
-import { __ } from '@wordpress/i18n';
-import { useCallback, useContext, useMemo } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { Notice } from '@/components/gutenberg/design-system';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useCallback, useContext, useMemo } from '@/lib/gutenberg/element';
 import FontFamilyControl from '../font-family';
 import FontAppearanceControl from '../font-appearance-control';
 import LineHeightControl from '../line-height-control';

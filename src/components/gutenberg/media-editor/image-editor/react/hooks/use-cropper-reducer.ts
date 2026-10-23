@@ -4,7 +4,7 @@ import {
 	useMemo,
 	useRef,
 	useState,
-} from '@wordpress/element';
+} from '@/lib/gutenberg/element';
 import type {
 	CropperState,
 	CropperAction,

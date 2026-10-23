@@ -1,4 +1,4 @@
-import { addQueryArgs } from '@wordpress/url';
+import { addQueryArgs } from '@/utils/gutenberg/url';
 import { withWeakMapCache, getNormalizedCommaSeparable } from '../utils';
 
 /**

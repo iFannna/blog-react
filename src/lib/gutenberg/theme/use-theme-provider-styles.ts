@@ -9,7 +9,7 @@ import {
 	type PlainColorObject,
 } from 'colorjs.io/fn';
 import memoize from 'memize';
-import { useMemo, useContext } from '@wordpress/element';
+import { useMemo, useContext } from '@/lib/gutenberg/element';
 import { ThemeContext } from './context.ts';
 import colorTokens from './prebuilt/ts/color-tokens.ts';
 import {

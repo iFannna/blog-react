@@ -1,4 +1,4 @@
-import { layout } from '@wordpress/icons';
+import { layout } from '@/components/gutenberg/icons';
 import { getTemplatePartIcon } from './get-template-part-icon';
 const EMPTY_OBJECT = {};
 

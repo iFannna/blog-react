@@ -1,4 +1,4 @@
-import { combineReducers } from '@wordpress/data';
+import { combineReducers } from '@/stores/gutenberg/data';
 import { EDITOR_SETTINGS_DEFAULTS } from './defaults';
 import dataviewsReducer from '../dataviews/store/reducer';
 

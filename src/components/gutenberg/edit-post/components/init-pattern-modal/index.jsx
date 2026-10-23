@@ -1,14 +1,14 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { __, _x } from '@wordpress/i18n';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import {
 	Modal,
 	Button,
 	ToggleControl,
 	TextControl,
-} from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
-import { useState } from '@wordpress/element';
-import { store as editorStore } from '@wordpress/editor';
+} from '@/components/gutenberg/ui';
+import { Stack } from '@/components/gutenberg/design-system';
+import { useState } from '@/lib/gutenberg/element';
+import { store as editorStore } from '@/components/gutenberg/editor';
 
 export default function InitPatternModal() {
 	const { editPost } = useDispatch( editorStore );

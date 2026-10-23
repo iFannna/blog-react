@@ -1,5 +1,5 @@
-import { useEffect, useContext } from '@wordpress/element';
-import { useEvent } from '@wordpress/compose';
+import { useEffect, useContext } from '@/lib/gutenberg/element';
+import { useEvent } from '@/hooks/gutenberg/compose';
 import { InputEventContext } from './contexts';
 import type { RichTextInputEventProps } from './types';
 

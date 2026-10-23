@@ -1,4 +1,4 @@
-import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
+import { useBlockProps, useInnerBlocksProps } from '@/components/gutenberg/block-editor';
 import TabToolbarControls from './tab-toolbar-controls';
 import useTabListItemsSync from './use-tab-list-items-sync';
 

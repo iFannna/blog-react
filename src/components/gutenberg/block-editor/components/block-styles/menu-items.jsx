@@ -1,5 +1,5 @@
-import { MenuItem, __experimentalText as WCText } from '@wordpress/components';
-import { check } from '@wordpress/icons';
+import { MenuItem, __experimentalText as WCText } from '@/components/gutenberg/ui';
+import { check } from '@/components/gutenberg/icons';
 
 const noop = () => {};
 

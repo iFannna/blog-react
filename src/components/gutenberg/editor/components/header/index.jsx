@@ -1,9 +1,9 @@
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { useMediaQuery, useViewportMatch } from '@wordpress/compose';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { useState } from '@wordpress/element';
-import { PinnedItems } from '@wordpress/interface';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMediaQuery, useViewportMatch } from '@/hooks/gutenberg/compose';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { useState } from '@/lib/gutenberg/element';
+import { PinnedItems } from '@/components/gutenberg/interface';
 import CollapsibleBlockToolbar from '../collapsible-block-toolbar';
 import DocumentBar from '../document-bar';
 import DocumentTools from '../document-tools';

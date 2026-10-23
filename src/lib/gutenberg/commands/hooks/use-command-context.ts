@@ -1,5 +1,5 @@
-import { useEffect, useRef } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { useEffect, useRef } from '@/lib/gutenberg/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import { store as commandsStore } from '../store';
 import { unlock } from '../lock-unlock';
 

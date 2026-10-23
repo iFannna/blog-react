@@ -1,7 +1,7 @@
-import { __ } from '@wordpress/i18n';
-import { useEffect } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useEffect } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 
 /**
  * Warns the user if there are unsaved changes before leaving the editor.

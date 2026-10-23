@@ -1,5 +1,5 @@
-import { createBlock } from '@wordpress/blocks';
-import { create, split, toHTMLString } from '@wordpress/rich-text';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { create, split, toHTMLString } from '@/components/gutenberg/rich-text';
 import { createListBlockFromDOMElement } from './utils';
 
 function getListContentSchema( { phrasingContentSchema } ) {

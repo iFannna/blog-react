@@ -1,4 +1,4 @@
-import { SVG, Path } from '@wordpress/components';
+import { SVG, Path } from '@/components/gutenberg/ui';
 
 export const resultsFound = (
 	<SVG

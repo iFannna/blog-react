@@ -1,5 +1,5 @@
-import { CustomSelectControl } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+import { CustomSelectControl } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 
 const BACKGROUND_CLIP_OPTIONS = [
 	{ key: 'border-box', name: __( 'Border box' ) },

@@ -1,4 +1,4 @@
-import { shortcode as icon } from '@wordpress/icons';
+import { shortcode as icon } from '@/components/gutenberg/icons';
 import initBlock from '../utils/init-block';
 import edit from './edit';
 import save from './save';

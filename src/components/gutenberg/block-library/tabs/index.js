@@ -1,5 +1,5 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { tabs as icon } from '@wordpress/icons';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { tabs as icon } from '@/components/gutenberg/icons';
 import initBlock from '../utils/init-block';
 import edit from './edit';
 import save from './save';

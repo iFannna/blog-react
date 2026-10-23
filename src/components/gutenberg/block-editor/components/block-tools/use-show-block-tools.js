@@ -1,5 +1,5 @@
-import { useSelect } from '@wordpress/data';
-import { isUnmodifiedDefaultBlock } from '@wordpress/blocks';
+import { useSelect } from '@/stores/gutenberg/data';
+import { isUnmodifiedDefaultBlock } from '@/lib/gutenberg/blocks';
 import { store as blockEditorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 

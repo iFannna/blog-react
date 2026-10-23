@@ -1,7 +1,7 @@
 import {
 	__experimentalStyleProvider as StyleProvider,
 	ToolbarGroup,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import useBlockControlsFill from './hook';
 import type { ForwardedContext } from '../inspector-controls/types';
 import type { BlockControlsFillProps } from './types';

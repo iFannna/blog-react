@@ -3,10 +3,10 @@ import {
 	useBlockProps,
 	useInnerBlocksProps,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { ToolbarButton } from '@wordpress/components';
-import { useDispatch, useSelect, useRegistry } from '@wordpress/data';
-import { isRTL, __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/block-editor';
+import { ToolbarButton } from '@/components/gutenberg/ui';
+import { useDispatch, useSelect, useRegistry } from '@/stores/gutenberg/data';
+import { isRTL, __ } from '@/lib/gutenberg/i18n';
 import {
 	formatListBullets,
 	formatListBulletsRTL,
@@ -14,10 +14,10 @@ import {
 	formatListNumberedRTL,
 	formatOutdent,
 	formatOutdentRTL,
-} from '@wordpress/icons';
-import { createBlock } from '@wordpress/blocks';
-import { useCallback, useEffect } from '@wordpress/element';
-import deprecated from '@wordpress/deprecated';
+} from '@/components/gutenberg/icons';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { useCallback, useEffect } from '@/lib/gutenberg/element';
+import deprecated from '@/utils/gutenberg/deprecated';
 import OrderedListSettings from './ordered-list-settings';
 import { migrateToListV2 } from './utils';
 import TagName from './tag-name';

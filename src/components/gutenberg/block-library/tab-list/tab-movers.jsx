@@ -1,11 +1,11 @@
-import { __, isRTL } from '@wordpress/i18n';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
 import {
 	BlockControls,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { ToolbarButton } from '@wordpress/components';
-import { chevronLeft, chevronRight } from '@wordpress/icons';
-import { useSelect } from '@wordpress/data';
+} from '@/components/gutenberg/block-editor';
+import { ToolbarButton } from '@/components/gutenberg/ui';
+import { chevronLeft, chevronRight } from '@/components/gutenberg/icons';
+import { useSelect } from '@/stores/gutenberg/data';
 import useTabActions from '../tabs/use-tab-actions';
 
 /**

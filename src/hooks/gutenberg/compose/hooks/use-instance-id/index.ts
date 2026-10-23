@@ -1,4 +1,4 @@
-import { useMemo } from '@wordpress/element';
+import { useMemo } from '@/lib/gutenberg/element';
 
 const instanceMap = new WeakMap< object, number >();
 

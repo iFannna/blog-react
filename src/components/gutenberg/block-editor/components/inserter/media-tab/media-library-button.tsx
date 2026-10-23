@@ -1,4 +1,4 @@
-import { Button } from '@wordpress/components';
+import { Button } from '@/components/gutenberg/ui';
 import UntypedMediaUpload from '../../media-upload';
 import MediaUploadCheck from '../../media-upload/check';
 

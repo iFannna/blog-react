@@ -1,14 +1,14 @@
-import { _n, sprintf, isRTL } from '@wordpress/i18n';
-import { useEffect, useRef } from '@wordpress/element';
+import { _n, sprintf, isRTL } from '@/lib/gutenberg/i18n';
+import { useEffect, useRef } from '@/lib/gutenberg/element';
 import {
 	useNavigator,
 	__experimentalText as WCText,
 	Button,
 	Flex,
 	FlexItem,
-} from '@wordpress/components';
-import { Icon, chevronLeft, chevronRight } from '@wordpress/icons';
-import type { FontFamily } from '@wordpress/core-data';
+} from '@/components/gutenberg/ui';
+import { Icon, chevronLeft, chevronRight } from '@/components/gutenberg/icons';
+import type { FontFamily } from '@/stores/gutenberg/core-data';
 import FontDemo from './font-demo';
 
 function FontCard( {

@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
-import { __ } from '@wordpress/i18n';
-import { desktop, tablet, mobile } from '@wordpress/icons';
+import { __ } from '@/lib/gutenberg/i18n';
+import { desktop, tablet, mobile } from '@/components/gutenberg/icons';
 
 /**
  * The viewports for which block visibility can be controlled.

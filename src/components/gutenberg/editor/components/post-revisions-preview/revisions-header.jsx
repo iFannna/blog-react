@@ -1,9 +1,9 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { Button } from '@wordpress/components';
-import { store as interfaceStore } from '@wordpress/interface';
-import { __, _x, isRTL, sprintf } from '@wordpress/i18n';
-import { dateI18n, getSettings as getDateSettings } from '@wordpress/date';
-import { drawerLeft, drawerRight, seen } from '@wordpress/icons';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { Button } from '@/components/gutenberg/ui';
+import { store as interfaceStore } from '@/components/gutenberg/interface';
+import { __, _x, isRTL, sprintf } from '@/lib/gutenberg/i18n';
+import { dateI18n, getSettings as getDateSettings } from '@/lib/gutenberg/date';
+import { drawerLeft, drawerRight, seen } from '@/components/gutenberg/icons';
 import HeaderSkeleton from '../header/header-skeleton';
 import MoreMenu from '../more-menu';
 import PostPreviewButton from '../post-preview-button';

@@ -1,4 +1,4 @@
-import { tag as icon } from '@wordpress/icons';
+import { tag as icon } from '@/components/gutenberg/icons';
 import initBlock from '../utils/init-block';
 import transforms from './transforms';
 import metadata from './block.json';

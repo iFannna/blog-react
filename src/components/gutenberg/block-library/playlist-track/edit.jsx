@@ -1,5 +1,5 @@
-import { isBlobURL } from '@wordpress/blob';
-import { useContext, useEffect, useRef, useState } from '@wordpress/element';
+import { isBlobURL } from '@/utils/gutenberg/blob';
+import { useContext, useEffect, useRef, useState } from '@/lib/gutenberg/element';
 import {
 	MediaPlaceholder,
 	MediaReplaceFlow,
@@ -10,7 +10,7 @@ import {
 	BlockControls,
 	InspectorControls,
 	PlainText,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	Button,
 	PanelBody,
@@ -18,13 +18,13 @@ import {
 	TextareaControl as WCTextareaControl,
 	BaseControl,
 	Spinner as WCSpinner,
-} from '@wordpress/components';
-import { Link } from '@wordpress/ui';
-import { useDispatch } from '@wordpress/data';
-import { store as noticesStore } from '@wordpress/notices';
-import { __ } from '@wordpress/i18n';
-import { audio as icon } from '@wordpress/icons';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
+} from '@/components/gutenberg/ui';
+import { Link } from '@/components/gutenberg/design-system';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { __ } from '@/lib/gutenberg/i18n';
+import { audio as icon } from '@/components/gutenberg/icons';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
 import { PlaylistContext } from '../playlist/context';
 import { getTrackAttributes, getTrackImageAttributes } from '../playlist/utils';
 import { useUploadMediaFromBlobURL } from '../utils/hooks';

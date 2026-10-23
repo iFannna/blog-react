@@ -1,4 +1,4 @@
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import { store as blockEditorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 

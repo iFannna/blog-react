@@ -1,6 +1,6 @@
-import { speak } from '@wordpress/a11y';
-import { useEffect, useLayoutEffect, useRef } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
+import { speak } from '@/utils/gutenberg/a11y';
+import { useEffect, useLayoutEffect, useRef } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import type { CropperState } from '../../core/types';
 import { getSourceRegion } from '../../core/source-region';
 

@@ -1,7 +1,7 @@
 /**
  * Defines as extensibility slot for the Summary panel.
  */
-import { createSlotFill, PanelRow } from '@wordpress/components';
+import { createSlotFill, PanelRow } from '@/components/gutenberg/ui';
 
 const { Fill, Slot } = createSlotFill( 'PluginPostStatusInfo' );
 
@@ -34,8 +34,8 @@ const { Fill, Slot } = createSlotFill( 'PluginPostStatusInfo' );
  * @example
  * ```jsx
  * // Using ESNext syntax
- * import { __ } from '@wordpress/i18n';
- * import { PluginPostStatusInfo } from '@wordpress/editor';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { PluginPostStatusInfo } from '@/components/gutenberg/editor';
  *
  * const MyPluginPostStatusInfo = () => (
  * 	<PluginPostStatusInfo

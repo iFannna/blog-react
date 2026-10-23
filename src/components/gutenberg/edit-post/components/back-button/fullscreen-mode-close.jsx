@@ -1,10 +1,10 @@
-import { useSelect } from '@wordpress/data';
-import { Button } from '@wordpress/components';
-import { __, isRTL } from '@wordpress/i18n';
-import { addQueryArgs } from '@wordpress/url';
-import { chevronLeft, chevronRight } from '@wordpress/icons';
-import { store as editorStore } from '@wordpress/editor';
-import { store as coreStore } from '@wordpress/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { Button } from '@/components/gutenberg/ui';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
+import { addQueryArgs } from '@/utils/gutenberg/url';
+import { chevronLeft, chevronRight } from '@/components/gutenberg/icons';
+import { store as editorStore } from '@/components/gutenberg/editor';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 
 function FullscreenModeClose( { showTooltip, icon, href, initialPost } ) {
 	const postType = useSelect(

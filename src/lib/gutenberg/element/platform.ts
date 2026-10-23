@@ -13,7 +13,7 @@ type PlatformSelectSpec< T > = {
  * Here is an example of how to use the select method:
  * @example
  * ```js
- * import { Platform } from '@wordpress/element';
+ * import { Platform } from '@/lib/gutenberg/element';
  *
  * const placeholderLabel = Platform.select( {
  *   web: __( 'Drag images, upload new ones or select files from your library.' ),

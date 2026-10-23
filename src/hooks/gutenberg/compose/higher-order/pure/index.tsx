@@ -1,7 +1,7 @@
 import type { ComponentType, ComponentClass } from 'react';
-import { isShallowEqual } from '@wordpress/is-shallow-equal';
-import { Component } from '@wordpress/element';
-import deprecated from '@wordpress/deprecated';
+import { isShallowEqual } from '@/utils/gutenberg/is-shallow-equal';
+import { Component } from '@/lib/gutenberg/element';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { createHigherOrderComponent } from '../../utils/create-higher-order-component';
 
 /**

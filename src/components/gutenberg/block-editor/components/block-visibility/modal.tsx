@@ -1,11 +1,11 @@
 import clsx from 'clsx';
-import { __, sprintf } from '@wordpress/i18n';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	useState,
 	useMemo,
 	useCallback,
 	createInterpolateElement,
-} from '@wordpress/element';
+} from '@/lib/gutenberg/element';
 import {
 	Button,
 	CheckboxControl as WCCheckboxControl,
@@ -13,10 +13,10 @@ import {
 	FlexItem,
 	Icon as WCIcon,
 	Modal,
-} from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
-import { store as noticesStore } from '@wordpress/notices';
+} from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import type { FormEvent } from 'react';
 import { BLOCK_VISIBILITY_VIEWPORTS } from './constants';
 import { store as blockEditorStore } from '../../store';

@@ -1,4 +1,4 @@
-import { isTextContent } from '@wordpress/dom';
+import { isTextContent } from '@/utils/gutenberg/dom';
 
 /**
  * Whether or not the given node is figure content.

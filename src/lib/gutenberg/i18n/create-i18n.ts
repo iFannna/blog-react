@@ -1,6 +1,6 @@
 import type { TanninLocaleDomain } from 'tannin';
 import Tannin from 'tannin';
-import type { Hooks } from '@wordpress/hooks';
+import type { Hooks } from '@/hooks/gutenberg/hooks';
 import type {
 	getFilterDomain,
 	I18n,

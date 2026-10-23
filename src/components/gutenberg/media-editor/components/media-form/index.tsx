@@ -1,11 +1,11 @@
-import { DataForm } from '@wordpress/dataviews';
-import type { Form } from '@wordpress/dataviews';
+import { DataForm } from '@/components/gutenberg/dataviews';
+import type { Form } from '@/components/gutenberg/dataviews';
 import {
 	Spinner as WCSpinner,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { VisuallyHidden } from '@wordpress/ui';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
+import { __ } from '@/lib/gutenberg/i18n';
 import type { ReactNode } from 'react';
 import { useMediaEditorContext } from '../media-editor-provider';
 

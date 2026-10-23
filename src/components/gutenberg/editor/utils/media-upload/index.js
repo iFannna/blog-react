@@ -1,8 +1,8 @@
 import { v4 as uuid } from 'uuid';
-import { select, dispatch } from '@wordpress/data';
-import { store as coreDataStore } from '@wordpress/core-data';
-import { uploadMedia } from '@wordpress/media-utils';
-import { __ } from '@wordpress/i18n';
+import { select, dispatch } from '@/stores/gutenberg/data';
+import { store as coreDataStore } from '@/stores/gutenberg/core-data';
+import { uploadMedia } from '@/utils/gutenberg/media-utils';
+import { __ } from '@/lib/gutenberg/i18n';
 import { store as editorStore } from '../../store';
 import {
 	addFiles as trackStart,

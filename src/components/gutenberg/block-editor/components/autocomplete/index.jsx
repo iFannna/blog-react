@@ -1,10 +1,10 @@
-import { applyFilters, hasFilter } from '@wordpress/hooks';
+import { applyFilters, hasFilter } from '@/hooks/gutenberg/hooks';
 import {
 	Autocomplete as WCAutocomplete,
 	__unstableUseAutocompleteProps as useAutocompleteProps,
-} from '@wordpress/components';
-import { useMemo } from '@wordpress/element';
-import { getDefaultBlockName, getBlockSupport } from '@wordpress/blocks';
+} from '@/components/gutenberg/ui';
+import { useMemo } from '@/lib/gutenberg/element';
+import { getDefaultBlockName, getBlockSupport } from '@/lib/gutenberg/blocks';
 import { useBlockEditContext } from '../block-edit/context';
 import blockAutocompleter from '../../autocompleters/block';
 

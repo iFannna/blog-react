@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import type { Store as ReduxStore, StoreEnhancer } from 'redux';
 import EquivalentKeyMap from 'equivalent-key-map';
-import createReduxRoutineMiddleware from '@wordpress/redux-routine';
-import { compose } from '@wordpress/compose';
+import createReduxRoutineMiddleware from '@/stores/gutenberg/redux-routine';
+import { compose } from '@/hooks/gutenberg/compose';
 import { combineReducers } from './combine-reducers';
 import { builtinControls } from '../controls';
 import { lock } from '../lock-unlock';
@@ -169,7 +169,7 @@ function createPrivateProxy< T extends Record< string, any > >(
  *
  * @example
  * ```js
- * import { createReduxStore } from '@wordpress/data';
+ * import { createReduxStore } from '@/stores/gutenberg/data';
  *
  * const store = createReduxStore( 'demo', {
  *     reducer: ( state = 'OK' ) => state,

@@ -1,7 +1,7 @@
-import { __ } from '@wordpress/i18n';
-import { useViewportMatch } from '@wordpress/compose';
-import { privateApis as editorPrivateApis } from '@wordpress/editor';
-import { keyboardShortcut } from '@wordpress/keycodes';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
+import { privateApis as editorPrivateApis } from '@/components/gutenberg/editor';
+import { keyboardShortcut } from '@/utils/gutenberg/keycodes';
 import { unlock } from '../../lock-unlock';
 import ManagePatternsMenuItem from './manage-patterns-menu-item';
 import EditPostPreferencesModal from '../preferences-modal';

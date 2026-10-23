@@ -4,7 +4,7 @@ import type {
 	ReactNode,
 	RefObject,
 } from 'react';
-import type { Popover } from '@wordpress/components';
+import type { Popover } from '@/components/gutenberg/ui';
 
 type PopoverProps = Omit<
 	ComponentPropsWithoutRef< typeof Popover >,

@@ -1,6 +1,6 @@
-import apiFetch from '@wordpress/api-fetch';
-import { select } from '@wordpress/data';
-import { transformAttachment } from '@wordpress/media-utils';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { select } from '@/stores/gutenberg/data';
+import { transformAttachment } from '@/utils/gutenberg/media-utils';
 import { store as editorStore } from '../../store';
 
 const noop = () => {};

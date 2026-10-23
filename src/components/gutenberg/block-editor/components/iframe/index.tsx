@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import { version as reactVersion } from 'react';
 import type { CSSProperties, ForwardedRef, Ref, SyntheticEvent } from 'react';
-import { useState, createPortal, forwardRef } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { useMergeRefs, useRefEffect, useDisabled } from '@wordpress/compose';
-import { __experimentalStyleProvider as StyleProvider } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
+import { useState, createPortal, forwardRef } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useMergeRefs, useRefEffect, useDisabled } from '@/hooks/gutenberg/compose';
+import { __experimentalStyleProvider as StyleProvider } from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
 import { useWritingFlow } from '../writing-flow';
 import { getCompatibilityStyles } from './get-compatibility-styles';
 import { useScaleCanvas } from './use-scale-canvas';

@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react';
-import type { __experimentalToolsPanelItem as ToolsPanelItem } from '@wordpress/components';
+import type { __experimentalToolsPanelItem as ToolsPanelItem } from '@/components/gutenberg/ui';
 
 /**
  * An image size option of `ResolutionTool`.

@@ -1,5 +1,5 @@
-import { useMemo } from '@wordpress/element';
-import { applyFilters } from '@wordpress/hooks';
+import { useMemo } from '@/lib/gutenberg/element';
+import { applyFilters } from '@/hooks/gutenberg/hooks';
 
 const POST_CONTENT_BLOCK_TYPES = [
 	'core/post-title',

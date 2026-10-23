@@ -1,4 +1,4 @@
-import { Icon as WCIcon } from '@wordpress/components';
+import { Icon as WCIcon } from '@/components/gutenberg/ui';
 
 function InserterPanel( { title, icon, children } ) {
 	return (

@@ -1,5 +1,5 @@
-import { useMemo, useRef, useInsertionEffect } from '@wordpress/element';
-import { useRefEffect } from '@wordpress/compose';
+import { useMemo, useRef, useInsertionEffect } from '@/lib/gutenberg/element';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
 import copyHandler from './copy-handler';
 import selectObject from './select-object';
 import formatBoundaries from './format-boundaries';

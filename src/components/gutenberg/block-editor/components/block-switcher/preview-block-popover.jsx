@@ -1,5 +1,5 @@
-import { Popover } from '@wordpress/components';
-import { useViewportMatch } from '@wordpress/compose';
+import { Popover } from '@/components/gutenberg/ui';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
 import BlockPreview from '../block-preview';
 
 export default function PreviewBlockPopover( {

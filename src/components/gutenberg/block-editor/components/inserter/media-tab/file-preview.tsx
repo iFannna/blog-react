@@ -1,7 +1,7 @@
-import { Icon as WCIcon } from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
-import { audio, file } from '@wordpress/icons';
-import { getFilename } from '@wordpress/url';
+import { Icon as WCIcon } from '@/components/gutenberg/ui';
+import { Stack } from '@/components/gutenberg/design-system';
+import { audio, file } from '@/components/gutenberg/icons';
+import { getFilename } from '@/utils/gutenberg/url';
 
 const PREVIEW_ICONS: Record< string, React.JSX.Element > = {
 	audio,

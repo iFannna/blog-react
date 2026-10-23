@@ -1,7 +1,7 @@
 import {
 	__experimentalUseCustomUnits as useCustomUnits,
 	__experimentalUnitControl as BaseUnitControl,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import { useSettings } from '../use-settings';
 import type { UnitControlProps } from './types';
 

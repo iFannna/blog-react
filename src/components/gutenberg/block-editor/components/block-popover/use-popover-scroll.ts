@@ -1,5 +1,5 @@
-import { useRefEffect } from '@wordpress/compose';
-import { getScrollContainer } from '@wordpress/dom';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { getScrollContainer } from '@/utils/gutenberg/dom';
 import type { RefObject } from 'react';
 
 const scrollContainerCache = new WeakMap< Element, Element | undefined >();

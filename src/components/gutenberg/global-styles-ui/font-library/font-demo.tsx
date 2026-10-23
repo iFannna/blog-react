@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { useContext, useEffect, useState, useRef } from '@wordpress/element';
-import type { FontFamily, FontFace } from '@wordpress/core-data';
-import { Skeleton } from '@wordpress/ui';
+import { useContext, useEffect, useState, useRef } from '@/lib/gutenberg/element';
+import type { FontFamily, FontFace } from '@/stores/gutenberg/core-data';
+import { Skeleton } from '@/components/gutenberg/design-system';
 import { FontLibraryContext } from './context';
 import {
 	getFacePreviewStyle,

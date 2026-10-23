@@ -2,11 +2,11 @@ import clsx from 'clsx';
 import {
 	Popover,
 	__experimentalTruncate as Truncate,
-} from '@wordpress/components';
-import { getScrollContainer } from '@wordpress/dom';
-import { useCallback, useMemo } from '@wordpress/element';
-import { isRTL } from '@wordpress/i18n';
-import { Stack } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { getScrollContainer } from '@/utils/gutenberg/dom';
+import { useCallback, useMemo } from '@/lib/gutenberg/element';
+import { isRTL } from '@/lib/gutenberg/i18n';
+import { Stack } from '@/components/gutenberg/design-system';
 import BlockIcon from '../block-icon';
 import useBlockDisplayInformation from '../use-block-display-information';
 import useBlockDisplayTitle from '../block-title/use-block-display-title';

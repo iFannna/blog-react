@@ -1,5 +1,5 @@
-import { useMemo, useContext } from '@wordpress/element';
-import { hasBlockSupport } from '@wordpress/blocks';
+import { useMemo, useContext } from '@/lib/gutenberg/element';
+import { hasBlockSupport } from '@/lib/gutenberg/blocks';
 import Edit from './edit';
 import {
 	BlockEditContextProvider,

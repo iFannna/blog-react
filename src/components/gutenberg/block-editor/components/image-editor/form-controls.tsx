@@ -1,5 +1,5 @@
-import { ToolbarButton } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+import { ToolbarButton } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import { useImageEditingContext } from './context';
 
 export default function FormControls() {

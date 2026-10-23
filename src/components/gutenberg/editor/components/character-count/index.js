@@ -1,5 +1,5 @@
-import { useSelect } from '@wordpress/data';
-import { count as characterCount } from '@wordpress/wordcount';
+import { useSelect } from '@/stores/gutenberg/data';
+import { count as characterCount } from '@/utils/gutenberg/wordcount';
 import { store as editorStore } from '../../store';
 
 /**

@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 
 /**
  * Messages providing helpful descriptions for HTML elements.

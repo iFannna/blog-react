@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo } from '@wordpress/element';
+import { createContext, useContext, useMemo } from '@/lib/gutenberg/element';
 import useSaveImage from './use-save-image';
 import useTransformImage from './use-transform-image';
 import type {

@@ -1,16 +1,16 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	InspectorControls,
 	useBlockProps,
 	useInnerBlocksProps,
 	store as blockEditorStore,
 	Warning,
-} from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
+} from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import { CommentsPaginationArrowControls } from './comments-pagination-arrow-controls';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 

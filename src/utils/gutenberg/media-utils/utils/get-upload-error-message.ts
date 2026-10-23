@@ -1,4 +1,4 @@
-import { __, sprintf } from '@wordpress/i18n';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 
 /**
  * `apiFetch` rejection codes that say nothing about what actually went wrong.

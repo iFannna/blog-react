@@ -1,19 +1,19 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	InspectorControls,
 	useSettings,
 	__experimentalSpacingSizesControl as SpacingSizesControl,
 	isValueSpacingPreset,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	__experimentalUseCustomUnits as useCustomUnits,
 	__experimentalUnitControl as UnitControl,
 	__experimentalParseQuantityAndUnitFromRawValue as parseQuantityAndUnitFromRawValue,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { useInstanceId } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
 import { unlock } from '../lock-unlock';
 import { MIN_SPACER_SIZE } from './constants';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';

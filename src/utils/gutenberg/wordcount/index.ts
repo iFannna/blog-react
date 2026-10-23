@@ -104,7 +104,7 @@ function countCharacters(
  *
  * @example
  * ```ts
- * import { count } from '@wordpress/wordcount';
+ * import { count } from '@/utils/gutenberg/wordcount';
  * const numberOfWords = count( 'Words to count', 'words', {} )
  * ```
  *

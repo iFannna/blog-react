@@ -1,11 +1,11 @@
-import { createSelector } from '@wordpress/data';
+import { createSelector } from '@/stores/gutenberg/data';
 import {
 	displayShortcut,
 	keyboardShortcut,
 	shortcutAriaLabel,
 	rawShortcut,
-} from '@wordpress/keycodes';
-import type { WPKeyboardShortcut } from '@wordpress/keycodes';
+} from '@/utils/gutenberg/keycodes';
+import type { WPKeyboardShortcut } from '@/utils/gutenberg/keycodes';
 import type { ShortcutKeyCombination } from './actions';
 
 interface ShortcutState {
@@ -74,10 +74,10 @@ function getKeyCombinationRepresentation(
  * @example
  *
  *```js
- * import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
- * import { useSelect } from '@wordpress/data';
- * import { createInterpolateElement } from '@wordpress/element';
- * import { sprintf } from '@wordpress/i18n';
+ * import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
+ * import { useSelect } from '@/stores/gutenberg/data';
+ * import { createInterpolateElement } from '@/lib/gutenberg/element';
+ * import { sprintf } from '@/lib/gutenberg/i18n';
  * const ExampleComponent = () => {
  *     const {character, modifier} = useSelect(
  *         ( select ) =>
@@ -123,9 +123,9 @@ export function getShortcutKeyCombination(
  * @example
  *
  *```js
- * import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
- * import { useSelect } from '@wordpress/data';
- * import { sprintf } from '@wordpress/i18n';
+ * import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
+ * import { useSelect } from '@/stores/gutenberg/data';
+ * import { sprintf } from '@/lib/gutenberg/i18n';
  *
  * const ExampleComponent = () => {
  *     const {display, raw, ariaLabel} = useSelect(
@@ -178,9 +178,9 @@ export function getShortcutRepresentation(
  * @example
  *
  *```js
- * import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
- * import { useSelect } from '@wordpress/data';
- * import { Menu } from '@wordpress/ui';
+ * import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
+ * import { useSelect } from '@/stores/gutenberg/data';
+ * import { Menu } from '@/components/gutenberg/design-system';
  *
  * const ExampleComponent = () => {
  *     const shortcut = useSelect(
@@ -225,9 +225,9 @@ export const getKeyboardShortcut = createSelector(
  * @example
  *
  *```js
- * import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
- * import { useSelect } from '@wordpress/data';
- * import { __ } from '@wordpress/i18n';
+ * import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
+ * import { useSelect } from '@/stores/gutenberg/data';
+ * import { __ } from '@/lib/gutenberg/i18n';
  * const ExampleComponent = () => {
  *     const shortcutDescription = useSelect(
  *         ( select ) =>
@@ -259,10 +259,10 @@ export function getShortcutDescription(
  * @example
  *
  *```js
- * import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
- * import { useSelect } from '@wordpress/data';
- * import { createInterpolateElement } from '@wordpress/element';
- * import { sprintf } from '@wordpress/i18n';
+ * import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
+ * import { useSelect } from '@/stores/gutenberg/data';
+ * import { createInterpolateElement } from '@/lib/gutenberg/element';
+ * import { sprintf } from '@/lib/gutenberg/i18n';
  * const ExampleComponent = () => {
  *     const shortcutAliases = useSelect(
  *         ( select ) =>
@@ -314,10 +314,10 @@ export function getShortcutAliases(
  * @example
  *
  *```js
- * import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
- * import { useSelect } from '@wordpress/data';
- * import { createInterpolateElement } from '@wordpress/element';
- * import { sprintf } from '@wordpress/i18n';
+ * import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
+ * import { useSelect } from '@/stores/gutenberg/data';
+ * import { createInterpolateElement } from '@/lib/gutenberg/element';
+ * import { sprintf } from '@/lib/gutenberg/i18n';
  *
  * const ExampleComponent = () => {
  *     const allShortcutKeyCombinations = useSelect(
@@ -377,10 +377,10 @@ export const getAllShortcutKeyCombinations = createSelector(
  * @example
  *
  *```js
- * import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
- * import { useSelect } from '@wordpress/data';
- * import { createInterpolateElement } from '@wordpress/element';
- * import { sprintf } from '@wordpress/i18n';
+ * import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
+ * import { useSelect } from '@/stores/gutenberg/data';
+ * import { createInterpolateElement } from '@/lib/gutenberg/element';
+ * import { sprintf } from '@/lib/gutenberg/i18n';
  *
  * const ExampleComponent = () => {
  *     const allShortcutRawKeyCombinations = useSelect(
@@ -435,8 +435,8 @@ export const getAllShortcutRawKeyCombinations = createSelector(
  * @example
  *
  *```js
- * import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
- * import { useSelect } from '@wordpress/data';
+ * import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
+ * import { useSelect } from '@/stores/gutenberg/data';
  *
  * const ExampleComponent = () => {
  *     const categoryShortcuts = useSelect(

@@ -1,14 +1,14 @@
-import { useRef } from '@wordpress/element';
-import { useRefEffect } from '@wordpress/compose';
-import { privateApis as richTextPrivateApis } from '@wordpress/rich-text';
-import { useSelect, useDispatch, useRegistry } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+import { useRef } from '@/lib/gutenberg/element';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { privateApis as richTextPrivateApis } from '@/components/gutenberg/rich-text';
+import { useSelect, useDispatch, useRegistry } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import {
 	hasBlockSupport,
 	createBlock,
 	cloneBlock,
 	getDefaultBlockName,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import { unlock } from '../lock-unlock';
 
 const { subscribeOwnedListener } = unlock( richTextPrivateApis );

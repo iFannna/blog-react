@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { __experimentalVStack as VStack } from '@wordpress/components';
+import { __experimentalVStack as VStack } from '@/components/gutenberg/ui';
 
 function PostPanelSection( { className, children } ) {
 	return (

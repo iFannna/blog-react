@@ -2,12 +2,12 @@ import type {
 	Block,
 	BlockBlockTransform,
 	NormalizedBlockTransform,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import {
 	findTransform,
 	getBlockTransforms,
 	switchToBlockType,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 
 /**
  * Wraps the given blocks in the grouping block. Unlike a plain

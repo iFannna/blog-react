@@ -1,6 +1,6 @@
-import type { ThunkArgs } from '@wordpress/data';
-import deprecated from '@wordpress/deprecated';
-import { store as preferencesStore } from '@wordpress/preferences';
+import type { ThunkArgs } from '@/stores/gutenberg/data';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import {
 	normalizeComplementaryAreaScope,
 	normalizeComplementaryAreaName,

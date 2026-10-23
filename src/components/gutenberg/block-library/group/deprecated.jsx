@@ -4,7 +4,7 @@ import {
 	getColorClassName,
 	useBlockProps,
 	useInnerBlocksProps,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 
 const migrateAttributes = ( attributes ) => {
 	if ( ! attributes.tagName ) {

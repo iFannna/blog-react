@@ -1,17 +1,17 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
-import { forwardRef, useState } from '@wordpress/element';
-import { decodeEntities } from '@wordpress/html-entities';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { pasteHandler } from '@wordpress/blocks';
+import { __ } from '@/lib/gutenberg/i18n';
+import { forwardRef, useState } from '@/lib/gutenberg/element';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { pasteHandler } from '@/lib/gutenberg/blocks';
 import {
 	privateApis as richTextPrivateApis,
 	create,
 	insert,
-} from '@wordpress/rich-text';
-import { useMergeRefs, useRefEffect } from '@wordpress/compose';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
+} from '@/components/gutenberg/rich-text';
+import { useMergeRefs, useRefEffect } from '@/hooks/gutenberg/compose';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
 import { DEFAULT_CLASSNAMES, REGEXP_NEWLINES } from './constants';
 import usePostTitleFocus from './use-post-title-focus';
 import usePostTitle from './use-post-title';

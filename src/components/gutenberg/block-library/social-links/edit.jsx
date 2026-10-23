@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useEffect } from '@wordpress/element';
+import { useEffect } from '@/lib/gutenberg/element';
 import {
 	useInnerBlocksProps,
 	useBlockProps,
@@ -10,15 +10,15 @@ import {
 	__experimentalColorGradientSettingsDropdown as ColorGradientSettingsDropdown,
 	__experimentalUseMultipleOriginColorsAndGradients as useMultipleOriginColorsAndGradients,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	ToggleControl,
 	SelectControl as WCSelectControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 const sizeOptions = [

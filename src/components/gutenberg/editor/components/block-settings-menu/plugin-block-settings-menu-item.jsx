@@ -1,6 +1,6 @@
-import { BlockSettingsMenuControls } from '@wordpress/block-editor';
-import { MenuItem } from '@wordpress/components';
-import { compose } from '@wordpress/compose';
+import { BlockSettingsMenuControls } from '@/components/gutenberg/block-editor';
+import { MenuItem } from '@/components/gutenberg/ui';
+import { compose } from '@/hooks/gutenberg/compose';
 
 const isEverySelectedBlockAllowed = ( selected, allowed ) =>
 	selected.filter( ( id ) => ! allowed.includes( id ) ).length === 0;
@@ -57,8 +57,8 @@ const shouldRenderItem = ( selectedBlocks, allowedBlocks ) =>
  * @example
  * ```jsx
  * // Using ESNext syntax
- * import { __ } from '@wordpress/i18n';
- * import { PluginBlockSettingsMenuItem } from '@wordpress/editor';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { PluginBlockSettingsMenuItem } from '@/components/gutenberg/editor';
  *
  * const doOnClick = ( ) => {
  *     // To be called when the user clicks the menu item.

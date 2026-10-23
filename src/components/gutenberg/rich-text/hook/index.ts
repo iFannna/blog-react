@@ -3,11 +3,11 @@ import {
 	useRef,
 	useLayoutEffect,
 	useReducer,
-} from '@wordpress/element';
+} from '@/lib/gutenberg/element';
 import type { RefObject } from 'react';
-import { useMergeRefs, useRefEffect } from '@wordpress/compose';
-import { useRegistry } from '@wordpress/data';
-import deprecated from '@wordpress/deprecated';
+import { useMergeRefs, useRefEffect } from '@/hooks/gutenberg/compose';
+import { useRegistry } from '@/stores/gutenberg/data';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { create, RichTextData } from '../create';
 import { apply, getDomPosition } from '../to-dom';
 import { toHTMLString } from '../to-html-string';

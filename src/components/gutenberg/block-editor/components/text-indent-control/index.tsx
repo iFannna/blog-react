@@ -8,8 +8,8 @@ import {
 	Flex,
 	FlexItem,
 	BaseControl,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import { useSettings } from '../../components/use-settings';
 import type { TextIndentControlProps } from './types';
 

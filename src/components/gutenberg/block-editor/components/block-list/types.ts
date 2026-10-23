@@ -1,4 +1,4 @@
-import type { BlockType } from '@wordpress/blocks';
+import type { BlockType } from '@/lib/gutenberg/blocks';
 import type { BlockEditingMode } from '../block-editing-mode';
 import type { BlockVisibility } from '../block-visibility/use-block-visibility';
 

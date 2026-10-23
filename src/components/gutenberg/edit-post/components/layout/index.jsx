@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { NavigableRegion, getAdminThemeColors } from '@wordpress/admin-ui';
+import { NavigableRegion, getAdminThemeColors } from '@/components/gutenberg/admin-ui';
 import {
 	AutosaveMonitor,
 	LocalAutosaveMonitor,
@@ -8,39 +8,39 @@ import {
 	PostLockedModal,
 	store as editorStore,
 	privateApis as editorPrivateApis,
-} from '@wordpress/editor';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { getLayoutStyles } from '@wordpress/global-styles-engine';
-import { PluginArea } from '@wordpress/plugins';
-import { __, sprintf } from '@wordpress/i18n';
+} from '@/components/gutenberg/editor';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { getLayoutStyles } from '@/lib/gutenberg/global-styles-engine';
+import { PluginArea } from '@/lib/gutenberg/plugins';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	useCallback,
 	useMemo,
 	useId,
 	useRef,
 	useState,
-} from '@wordpress/element';
-import { chevronDown, chevronUp } from '@wordpress/icons';
-import { SnackbarNotices, store as noticesStore } from '@wordpress/notices';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { privateApis as commandsPrivateApis } from '@wordpress/commands';
-import { addQueryArgs } from '@wordpress/url';
-import { decodeEntities } from '@wordpress/html-entities';
-import { store as coreStore } from '@wordpress/core-data';
+} from '@/lib/gutenberg/element';
+import { chevronDown, chevronUp } from '@/components/gutenberg/icons';
+import { SnackbarNotices, store as noticesStore } from '@/stores/gutenberg/notices';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { privateApis as commandsPrivateApis } from '@/lib/gutenberg/commands';
+import { addQueryArgs } from '@/utils/gutenberg/url';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import {
 	Icon as WCIcon,
 	SlotFillProvider,
 	__unstableUseNavigateRegions as useNavigateRegions,
 	privateApis as componentsPrivateApis,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	useMediaQuery,
 	useMergeRefs,
 	useRefEffect,
-} from '@wordpress/compose';
-import { ThemeProvider } from '@wordpress/theme';
-import { Tooltip, VisuallyHidden } from '@wordpress/ui';
+} from '@/hooks/gutenberg/compose';
+import { ThemeProvider } from '@/lib/gutenberg/theme';
+import { Tooltip, VisuallyHidden } from '@/components/gutenberg/design-system';
 import EditorInitialization from '../editor-initialization';
 import EditPostKeyboardShortcuts from '../keyboard-shortcuts';
 import InitPatternModal from '../init-pattern-modal';

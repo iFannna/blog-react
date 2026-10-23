@@ -2,7 +2,7 @@ import type { Moment } from 'moment';
 import momentLib from 'moment';
 import 'moment-timezone/moment-timezone.js';
 import 'moment-timezone/moment-timezone-utils.js';
-import deprecated from '@wordpress/deprecated';
+import deprecated from '@/utils/gutenberg/deprecated';
 import type { DateSettings } from './types';
 
 export type * from './types';

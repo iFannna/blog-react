@@ -1,4 +1,4 @@
-import type { GlobalStylesConfig } from '@wordpress/global-styles-engine';
+import type { GlobalStylesConfig } from '@/lib/gutenberg/global-styles-engine';
 import ColorVariationsInternal from './variations/variations-color';
 import { withGlobalStylesProvider } from './with-global-styles-provider';
 

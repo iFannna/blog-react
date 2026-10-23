@@ -1,4 +1,4 @@
-import { PanelBody } from '@wordpress/components';
+import { PanelBody } from '@/components/gutenberg/ui';
 import PostPanelRow from '../post-panel-row';
 
 /**

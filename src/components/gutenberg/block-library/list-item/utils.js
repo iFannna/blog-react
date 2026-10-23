@@ -1,5 +1,5 @@
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { cloneBlock } from '@wordpress/blocks';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { cloneBlock } from '@/lib/gutenberg/blocks';
 
 /**
  * The previous sibling to nest a list item under when indenting, or undefined

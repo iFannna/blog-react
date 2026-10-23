@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { safeHTML } from '@wordpress/dom';
+import { useBlockProps, useInnerBlocksProps } from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { safeHTML } from '@/utils/gutenberg/dom';
 import { ItemSubmenuIcon } from '../navigation-link/icons';
 import {
 	getColors,

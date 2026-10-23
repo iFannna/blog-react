@@ -2,11 +2,11 @@ import {
 	Button,
 	__unstableMotion as motion,
 	__unstableAnimatePresence as AnimatePresence,
-} from '@wordpress/components';
-import { chevronLeftSmall, chevronRightSmall } from '@wordpress/icons';
-import { useReducedMotion, useInstanceId } from '@wordpress/compose';
-import { _x, isRTL } from '@wordpress/i18n';
-import { Fragment } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { chevronLeftSmall, chevronRightSmall } from '@/components/gutenberg/icons';
+import { useReducedMotion, useInstanceId } from '@/hooks/gutenberg/compose';
+import { _x, isRTL } from '@/lib/gutenberg/i18n';
+import { Fragment } from '@/lib/gutenberg/element';
 import type { LinkSettingsDrawerProps } from './types';
 
 function LinkSettingsDrawer( {

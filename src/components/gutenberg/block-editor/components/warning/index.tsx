@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { DropdownMenu, MenuGroup, MenuItem } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { moreVertical } from '@wordpress/icons';
+import { DropdownMenu, MenuGroup, MenuItem } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { moreVertical } from '@/components/gutenberg/icons';
 import type { WarningProps } from './types';
 
 function Warning( {

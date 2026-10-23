@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { createBlock } from '@wordpress/blocks';
+import { createBlock } from '@/lib/gutenberg/blocks';
 import {
 	InspectorControls,
 	BlockControls,
@@ -8,7 +8,7 @@ import {
 	getColorClassName,
 	store as blockEditorStore,
 	Warning,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	ToolbarButton,
 	Spinner as WCSpinner,
@@ -18,11 +18,11 @@ import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 	__experimentalConfirmDialog as ConfirmDialog,
-} from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
-import { useMemo, useState, useEffect } from '@wordpress/element';
-import { useEntityRecords } from '@wordpress/core-data';
-import { useSelect, useDispatch } from '@wordpress/data';
+} from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useMemo, useState, useEffect } from '@/lib/gutenberg/element';
+import { useEntityRecords } from '@/stores/gutenberg/core-data';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import { useConvertToNavigationLinks } from './use-convert-to-navigation-links';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 

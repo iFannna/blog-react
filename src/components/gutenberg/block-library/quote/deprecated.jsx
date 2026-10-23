@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { createBlock, parseWithAttributeSchema } from '@wordpress/blocks';
-import { InnerBlocks, RichText, useBlockProps } from '@wordpress/block-editor';
+import { createBlock, parseWithAttributeSchema } from '@/lib/gutenberg/blocks';
+import { InnerBlocks, RichText, useBlockProps } from '@/components/gutenberg/block-editor';
 
 export const migrateToQuoteV2 = ( attributes ) => {
 	const { value, ...restAttributes } = attributes;

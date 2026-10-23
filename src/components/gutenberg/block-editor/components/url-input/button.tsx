@@ -1,11 +1,11 @@
 import type { FormEvent } from 'react';
-import { __ } from '@wordpress/i18n';
-import { useReducer } from '@wordpress/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useReducer } from '@/lib/gutenberg/element';
 import {
 	Button,
 	__experimentalInputControlSuffixWrapper as InputControlSuffixWrapper,
-} from '@wordpress/components';
-import { link, keyboardReturn, arrowLeft } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { link, keyboardReturn, arrowLeft } from '@/components/gutenberg/icons';
 import URLInput from './';
 import type { URLInputButtonProps } from './types';
 

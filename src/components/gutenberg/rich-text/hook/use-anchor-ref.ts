@@ -1,5 +1,5 @@
-import { useMemo } from '@wordpress/element';
-import deprecated from '@wordpress/deprecated';
+import { useMemo } from '@/lib/gutenberg/element';
+import deprecated from '@/utils/gutenberg/deprecated';
 import type { RefObject } from 'react';
 import { getActiveFormat } from '../get-active-format';
 import type { FormatType, RichTextValue } from '../types';

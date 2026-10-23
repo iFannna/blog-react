@@ -1,14 +1,14 @@
-import apiFetch from '@wordpress/api-fetch';
-import { store as preferencesStore } from '@wordpress/preferences';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import {
 	store as editorStore,
 	privateApis as editorPrivateApis,
-} from '@wordpress/editor';
-import deprecated from '@wordpress/deprecated';
-import { addAction } from '@wordpress/hooks';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as noticesStore } from '@wordpress/notices';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/editor';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { addAction } from '@/hooks/gutenberg/hooks';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { __ } from '@/lib/gutenberg/i18n';
 import { getMetaBoxContainer } from '../utils/meta-boxes';
 import { unlock } from '../lock-unlock';
 

@@ -2,9 +2,9 @@ import {
 	__experimentalUseSlotFills as useSlotFills,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { useDispatch, useRegistry, useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { useDispatch, useRegistry, useSelect } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
 import InspectorControlsGroups from '../inspector-controls/groups';
 import { default as InspectorControls } from '../inspector-controls';
 import { store as blockEditorStore } from '../../store';

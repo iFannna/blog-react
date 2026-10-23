@@ -1,4 +1,4 @@
-import { RichText, useBlockProps } from '@wordpress/block-editor';
+import { RichText, useBlockProps } from '@/components/gutenberg/block-editor';
 import metadata from './block.json';
 import Tracks from './tracks';
 

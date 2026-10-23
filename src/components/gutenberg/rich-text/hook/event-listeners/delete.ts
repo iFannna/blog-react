@@ -1,4 +1,4 @@
-import { BACKSPACE, DELETE } from '@wordpress/keycodes';
+import { BACKSPACE, DELETE } from '@/utils/gutenberg/keycodes';
 import { remove } from '../../remove';
 import { subscribeOwnedListener } from '../../subscribe-owned-listener';
 import type { EventListenerEffect } from '../types';

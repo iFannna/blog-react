@@ -8,10 +8,10 @@ import {
 	__experimentalUseCustomUnits as useCustomUnits,
 	Flex,
 	FlexItem,
-} from '@wordpress/components';
-import { __, _x } from '@wordpress/i18n';
-import { useEffect } from '@wordpress/element';
-import { useSelect, useDispatch } from '@wordpress/data';
+} from '@/components/gutenberg/ui';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { useEffect } from '@/lib/gutenberg/element';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import { useGetNumberOfBlocksBeforeCell } from '../grid/use-get-number-of-blocks-before-cell';
 import { store as blockEditorStore } from '../../store';
 import { useSettings } from '../use-settings';

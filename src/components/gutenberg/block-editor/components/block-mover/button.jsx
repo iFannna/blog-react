@@ -1,18 +1,18 @@
 import clsx from 'clsx';
-import { getBlockType } from '@wordpress/blocks';
-import { Button } from '@wordpress/components';
-import { VisuallyHidden } from '@wordpress/ui';
-import { useInstanceId, useViewportMatch } from '@wordpress/compose';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { forwardRef, useMemo } from '@wordpress/element';
-import { __, isRTL, sprintf } from '@wordpress/i18n';
-import { displayShortcut, shortcutAriaLabel } from '@wordpress/keycodes';
+import { getBlockType } from '@/lib/gutenberg/blocks';
+import { Button } from '@/components/gutenberg/ui';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
+import { useInstanceId, useViewportMatch } from '@/hooks/gutenberg/compose';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { forwardRef, useMemo } from '@/lib/gutenberg/element';
+import { __, isRTL, sprintf } from '@/lib/gutenberg/i18n';
+import { displayShortcut, shortcutAriaLabel } from '@/utils/gutenberg/keycodes';
 import {
 	chevronLeft,
 	chevronRight,
 	chevronUp,
 	chevronDown,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import { getBlockMoverDescription } from './mover-description';
 import { store as blockEditorStore } from '../../store';
 

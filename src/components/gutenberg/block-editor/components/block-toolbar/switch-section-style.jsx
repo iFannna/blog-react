@@ -4,10 +4,10 @@ import {
 	Icon as WCIcon,
 	Path,
 	SVG,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { privateApis as globalStylesEnginePrivateApis } from '@wordpress/global-styles-engine';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { privateApis as globalStylesEnginePrivateApis } from '@/lib/gutenberg/global-styles-engine';
 import useStylesForBlocks from '../block-styles/use-styles-for-block';
 import { replaceActiveStyle } from '../block-styles/utils';
 import { store as blockEditorStore } from '../../store';

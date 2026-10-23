@@ -1,8 +1,8 @@
 import {
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 	Spinner as WCSpinner,
-} from '@wordpress/components';
-import { useCallback } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { useCallback } from '@/lib/gutenberg/element';
 import type { DataFormControlProps } from '../../types';
 import { ValidatedToggleGroupControl } from '../validated-form-controls';
 import getCustomValidity from './utils/get-custom-validity';

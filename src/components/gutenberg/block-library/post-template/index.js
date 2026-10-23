@@ -1,4 +1,4 @@
-import { layout } from '@wordpress/icons';
+import { layout } from '@/components/gutenberg/icons';
 import initBlock from '../utils/init-block';
 import metadata from './block.json';
 import edit from './edit';

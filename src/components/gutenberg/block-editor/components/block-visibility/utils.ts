@@ -1,5 +1,5 @@
-import { privateApis as globalStylesEnginePrivateApis } from '@wordpress/global-styles-engine';
-import { __, sprintf } from '@wordpress/i18n';
+import { privateApis as globalStylesEnginePrivateApis } from '@/lib/gutenberg/global-styles-engine';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	BLOCK_VISIBILITY_VIEWPORT_ENTRIES,
 	BLOCK_VISIBILITY_VIEWPORTS,

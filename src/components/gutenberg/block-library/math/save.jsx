@@ -1,4 +1,4 @@
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps } from '@/components/gutenberg/block-editor';
 
 export default function save( { attributes } ) {
 	const { latex, mathML } = attributes;

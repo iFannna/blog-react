@@ -1,9 +1,9 @@
-import { __, isRTL } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { displayShortcut } from '@wordpress/keycodes';
-import { undo as undoIcon, redo as redoIcon } from '@wordpress/icons';
-import { forwardRef } from '@wordpress/element';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
+import { Button } from '@/components/gutenberg/ui';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { displayShortcut } from '@/utils/gutenberg/keycodes';
+import { undo as undoIcon, redo as redoIcon } from '@/components/gutenberg/icons';
+import { forwardRef } from '@/lib/gutenberg/element';
 import { store as editorStore } from '../../store';
 
 function EditorHistoryUndo( props, ref ) {

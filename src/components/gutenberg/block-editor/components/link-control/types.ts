@@ -1,7 +1,7 @@
 import type { ComponentProps, ReactNode } from 'react';
-import type { MenuItem } from '@wordpress/components';
-import type { Icon } from '@wordpress/icons';
-import type { Badge } from '@wordpress/ui';
+import type { MenuItem } from '@/components/gutenberg/ui';
+import type { Icon } from '@/components/gutenberg/icons';
+import type { Badge } from '@/components/gutenberg/design-system';
 import type {
 	SuggestionItemProps,
 	URLInputSuggestionsProps,

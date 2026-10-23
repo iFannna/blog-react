@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Stack, Text } from '@wordpress/ui';
+import { Stack, Text } from '@/components/gutenberg/design-system';
 import Navigation from '../navigation';
 import type { NavigationConfig } from '../navigation/types';
 import { SidebarToggleSlot } from './sidebar-toggle-slot';

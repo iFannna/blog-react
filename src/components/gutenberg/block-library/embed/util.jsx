@@ -1,19 +1,19 @@
 import clsx from 'clsx';
 import memoize from 'memize';
-import { renderToString } from '@wordpress/element';
+import { renderToString } from '@/lib/gutenberg/element';
 import {
 	createBlock,
 	getBlockType,
 	getBlockVariations,
-} from '@wordpress/blocks';
-import { getAuthority } from '@wordpress/url';
-import { kebabCase } from '@wordpress/kebab-case';
+} from '@/lib/gutenberg/blocks';
+import { getAuthority } from '@/utils/gutenberg/url';
+import { kebabCase } from '@/utils/gutenberg/kebab-case';
 import metadata from './block.json';
 import { ASPECT_RATIOS, WP_EMBED_TYPE } from './constants';
 
 const { name: DEFAULT_EMBED_BLOCK } = metadata;
 
-/** @typedef {import('@wordpress/blocks').WPBlockVariation} WPBlockVariation */
+/** @typedef {import('@/lib/gutenberg/blocks').WPBlockVariation} WPBlockVariation */
 
 /**
  * Returns the embed block's information by matching the provided service provider

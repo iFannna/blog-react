@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from '@wordpress/element';
+import { useCallback, useEffect } from '@/lib/gutenberg/element';
 
 /**
  * Shows validation errors for all invalid form inputs within a container

@@ -1,4 +1,4 @@
-import { postComments as icon } from '@wordpress/icons';
+import { postComments as icon } from '@/components/gutenberg/icons';
 import initBlock from '../utils/init-block';
 import metadata from './block.json';
 import deprecated from './deprecated';

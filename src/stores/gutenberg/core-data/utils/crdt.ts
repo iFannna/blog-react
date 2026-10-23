@@ -3,7 +3,7 @@ import {
 	__unstableSerializeAndClean,
 	parse,
 	type Block as WPBlock,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import {
 	type CRDTDoc,
 	type ObjectData,
@@ -11,7 +11,7 @@ import {
 	type ObjectType,
 	type SyncConfig,
 	Y,
-} from '@wordpress/sync';
+} from '@/services/gutenberg/sync';
 import { BaseAwareness } from '../awareness/base-awareness';
 import {
 	type Block,

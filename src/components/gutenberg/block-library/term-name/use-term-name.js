@@ -1,5 +1,5 @@
-import { store as coreStore } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
 
 /**
  * Hook to fetch term name based on context or fallback to template parsing.

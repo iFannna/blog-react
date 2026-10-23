@@ -1,10 +1,10 @@
-import { __, sprintf } from '@wordpress/i18n';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	__experimentalSpacer as Spacer,
 	__experimentalView as View,
-} from '@wordpress/components';
-import type { FontSize } from '@wordpress/global-styles-engine';
-import { Stack } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import type { FontSize } from '@/lib/gutenberg/global-styles-engine';
+import { Stack } from '@/components/gutenberg/design-system';
 import { ScreenHeader } from '../screen-header';
 import PresetGroup from '../presets/preset-group';
 import { usePresets } from '../presets/use-presets';

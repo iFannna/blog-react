@@ -1,7 +1,7 @@
 import {
 	__experimentalHStack as HStack,
 	__unstableMotion as motion,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import PresetColors from './preset-colors';
 import PreviewWrapper from './preview-wrapper';
 

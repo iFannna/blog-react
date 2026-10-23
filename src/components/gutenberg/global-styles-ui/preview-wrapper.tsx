@@ -1,12 +1,12 @@
 import clsx from 'clsx';
-import { __unstableMotion as motion } from '@wordpress/components';
+import { __unstableMotion as motion } from '@/components/gutenberg/ui';
 import {
 	useThrottle,
 	useReducedMotion,
 	useResizeObserver,
-} from '@wordpress/compose';
-import { useLayoutEffect, useState } from '@wordpress/element';
-import { Skeleton } from '@wordpress/ui';
+} from '@/hooks/gutenberg/compose';
+import { useLayoutEffect, useState } from '@/lib/gutenberg/element';
+import { Skeleton } from '@/components/gutenberg/design-system';
 import { useStyle } from './hooks';
 
 const normalizedWidth = 248;

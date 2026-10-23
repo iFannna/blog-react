@@ -1,5 +1,5 @@
-import { createHigherOrderComponent } from '@wordpress/compose';
-import { forwardRef, memo } from '@wordpress/element';
+import { createHigherOrderComponent } from '@/hooks/gutenberg/compose';
+import { forwardRef, memo } from '@/lib/gutenberg/element';
 import type { ForwardedRef } from 'react';
 import useSelect from '../use-select';
 import type { SelectFunction, DataRegistry } from '../../types';
@@ -14,7 +14,7 @@ import type { SelectFunction, DataRegistry } from '../../types';
  *
  * @example
  * ```js
- * import { withSelect } from '@wordpress/data';
+ * import { withSelect } from '@/stores/gutenberg/data';
  * import { store as myCustomStore } from 'my-custom-store';
  *
  * function PriceDisplay( { price, currency } ) {

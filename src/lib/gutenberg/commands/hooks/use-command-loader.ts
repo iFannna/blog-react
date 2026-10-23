@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
+import { useCallback, useEffect, useRef } from '@/lib/gutenberg/element';
+import { useDispatch } from '@/stores/gutenberg/data';
 import { store as commandsStore } from '../store';
 import type { CommandLoaderConfig, CommandLoaderHook } from '../store/types';
 
@@ -13,13 +13,13 @@ import type { CommandLoaderConfig, CommandLoaderHook } from '../store/types';
  *
  * @example
  * ```js
- * import { __ } from '@wordpress/i18n';
- * import { addQueryArgs } from '@wordpress/url';
- * import { useCommandLoader } from '@wordpress/commands';
- * import { page } from '@wordpress/icons';
- * import { useSelect } from '@wordpress/data';
- * import { store as coreStore } from '@wordpress/core-data';
- * import { useMemo } from '@wordpress/element';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { addQueryArgs } from '@/utils/gutenberg/url';
+ * import { useCommandLoader } from '@/lib/gutenberg/commands';
+ * import { page } from '@/components/gutenberg/icons';
+ * import { useSelect } from '@/stores/gutenberg/data';
+ * import { store as coreStore } from '@/stores/gutenberg/core-data';
+ * import { useMemo } from '@/lib/gutenberg/element';
  *
  * function usePageSearchCommandLoader( { search } ) {
  *     // Retrieve the pages for the "search" term.

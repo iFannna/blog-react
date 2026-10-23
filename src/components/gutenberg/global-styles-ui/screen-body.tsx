@@ -1,4 +1,4 @@
-import { __experimentalSpacer as Spacer } from '@wordpress/components';
+import { __experimentalSpacer as Spacer } from '@/components/gutenberg/ui';
 import clsx from 'clsx';
 
 interface ScreenBodyProps {

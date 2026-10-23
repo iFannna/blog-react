@@ -1,5 +1,5 @@
-import { createBlock } from '@wordpress/blocks';
-import { getFilename } from '@wordpress/url';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { getFilename } from '@/utils/gutenberg/url';
 
 const transforms = {
 	from: [

@@ -1,11 +1,11 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	cornerAll,
 	cornerBottomLeft,
 	cornerBottomRight,
 	cornerTopLeft,
 	cornerTopRight,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import type { Preset } from '../preset-input-control/types';
 
 export const DEFAULT_VALUES = {

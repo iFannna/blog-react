@@ -1,8 +1,8 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { MenuItem } from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
-import { check } from '@wordpress/icons';
-import { speak } from '@wordpress/a11y';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { MenuItem } from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { check } from '@/components/gutenberg/icons';
+import { speak } from '@/utils/gutenberg/a11y';
 import { store as preferencesStore } from '../../store';
 
 type PreferenceToggleMenuItemProps = {

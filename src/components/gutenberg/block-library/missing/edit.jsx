@@ -1,14 +1,14 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { RawHTML } from '@wordpress/element';
-import { Button } from '@wordpress/components';
-import { createBlock } from '@wordpress/blocks';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { RawHTML } from '@/lib/gutenberg/element';
+import { Button } from '@/components/gutenberg/ui';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import {
 	Warning,
 	useBlockProps,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { safeHTML } from '@wordpress/dom';
+} from '@/components/gutenberg/block-editor';
+import { safeHTML } from '@/utils/gutenberg/dom';
 
 export default function MissingEdit( { attributes, clientId } ) {
 	const { originalName, originalUndelimitedContent } = attributes;

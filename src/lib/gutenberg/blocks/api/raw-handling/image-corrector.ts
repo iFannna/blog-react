@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { createBlobURL } from '@wordpress/blob';
+import { createBlobURL } from '@/utils/gutenberg/blob';
 
 export default function imageCorrector( img: Node ): void {
 	if ( img.nodeName !== 'IMG' ) {

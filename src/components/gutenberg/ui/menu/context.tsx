@@ -1,38 +1,5 @@
-import { createContext, useContext } from '@wordpress/element';
-import type { ReactNode, RefObject } from 'react';
+import { createContext } from '@/lib/gutenberg/element';
+import type { ContextProps } from './types';
 
-type MenuContextValue = {
-	isSubmenu: boolean;
-	submenuTriggerRef?: RefObject< HTMLDivElement | null >;
-};
-
-const MenuContext = createContext< MenuContextValue >( {
-	isSubmenu: false,
-} );
-
-const useMenuContext = () => useContext( MenuContext );
-
-const MenuGroupContext = createContext< 'group' | 'radio-group' | null >(
-	null
-);
-
-const useMenuGroupContext = () => useContext( MenuGroupContext );
-
-type MenuItemContentContextValue = {
-	labelId?: string;
-	labelTrailing?: ReactNode;
-};
-
-const MenuItemContentContext =
-	createContext< MenuItemContentContextValue | null >( null );
-
-const useMenuItemContentContext = () => useContext( MenuItemContentContext );
-
-export {
-	MenuContext,
-	MenuGroupContext,
-	MenuItemContentContext,
-	useMenuContext,
-	useMenuGroupContext,
-	useMenuItemContentContext,
-};
+export const Context = createContext< ContextProps | undefined >( undefined );
+Context.displayName = 'MenuContext';

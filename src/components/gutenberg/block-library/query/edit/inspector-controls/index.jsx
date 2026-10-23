@@ -8,12 +8,12 @@ import {
 	ToggleControl,
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
-} from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { __, _x, sprintf } from '@wordpress/i18n';
-import { debounce } from '@wordpress/compose';
-import { useState, useMemo } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
+import { debounce } from '@/hooks/gutenberg/compose';
+import { useState, useMemo } from '@/lib/gutenberg/element';
 import OrderControl from './order-control';
 import AuthorControl from './author-control';
 import ParentControl from './parent-control';

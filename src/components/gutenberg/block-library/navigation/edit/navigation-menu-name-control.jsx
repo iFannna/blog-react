@@ -1,6 +1,6 @@
-import { TextControl } from '@wordpress/components';
-import { useEntityProp } from '@wordpress/core-data';
-import { __ } from '@wordpress/i18n';
+import { TextControl } from '@/components/gutenberg/ui';
+import { useEntityProp } from '@/stores/gutenberg/core-data';
+import { __ } from '@/lib/gutenberg/i18n';
 
 export default function NavigationMenuNameControl() {
 	const [ title, updateTitle ] = useEntityProp(

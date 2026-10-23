@@ -1,4 +1,4 @@
-import { useContext, useEffect } from '@wordpress/element';
+import { useContext, useEffect } from '@/lib/gutenberg/element';
 import DataViewsContext from '../../dataviews-context';
 
 /**

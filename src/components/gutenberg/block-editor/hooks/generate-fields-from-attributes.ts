@@ -1,4 +1,4 @@
-import type { Field, FieldTypeName, Form } from '@wordpress/dataviews';
+import type { Field, FieldTypeName, Form } from '@/components/gutenberg/dataviews';
 import type { AutoGenerateAttribute } from './types';
 
 /**

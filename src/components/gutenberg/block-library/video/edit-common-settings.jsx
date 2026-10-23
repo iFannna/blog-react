@@ -1,10 +1,10 @@
-import { __, _x } from '@wordpress/i18n';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import {
 	ToggleControl,
 	SelectControl as WCSelectControl,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { useMemo, useCallback } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { useMemo, useCallback } from '@/lib/gutenberg/element';
 
 const options = [
 	{ value: 'auto', label: __( 'Auto' ) },

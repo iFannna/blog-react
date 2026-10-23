@@ -1,8 +1,8 @@
-import { useDispatch, useSelect } from '@wordpress/data';
-import { ExternalLink, Guide } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { store as interfaceStore } from '@wordpress/interface';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { ExternalLink, Guide } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { store as interfaceStore } from '@/components/gutenberg/interface';
 import WelcomeGuideImage from './welcome-guide-image';
 
 export default function WelcomeGuideStyles() {

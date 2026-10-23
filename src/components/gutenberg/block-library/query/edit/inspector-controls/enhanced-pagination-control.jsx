@@ -1,5 +1,5 @@
-import { ToggleControl } from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
+import { ToggleControl } from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import { useUnsupportedBlocks } from '../../utils';
 
 export default function EnhancedPaginationControl( {

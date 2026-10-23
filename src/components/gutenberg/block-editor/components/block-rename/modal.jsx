@@ -4,11 +4,11 @@ import {
 	Button,
 	TextControl,
 	Modal,
-} from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
-import { speak } from '@wordpress/a11y';
-import { useSelect, useDispatch } from '@wordpress/data';
+} from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useState } from '@/lib/gutenberg/element';
+import { speak } from '@/utils/gutenberg/a11y';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import { store as blockEditorStore } from '../../store';
 import { useBlockDisplayInformation } from '..';
 import isEmptyString from './is-empty-string';

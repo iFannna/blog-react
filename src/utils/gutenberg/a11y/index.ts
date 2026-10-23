@@ -1,4 +1,4 @@
-import domReady from '@wordpress/dom-ready';
+import domReady from '@/utils/gutenberg/dom-ready';
 import addContainer from './script/add-container';
 import addIntroText from './script/add-intro-text';
 

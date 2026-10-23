@@ -1,13 +1,13 @@
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useCallback } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import { store as noticesStore } from '@wordpress/notices';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useCallback } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import {
 	privateApis,
 	type PostEditorAwarenessState,
 	type PostSaveEvent,
-} from '@wordpress/core-data';
-import { store as preferencesStore } from '@wordpress/preferences';
+} from '@/stores/gutenberg/core-data';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import { unlock } from '../../lock-unlock';
 import { store as editorStore } from '../../store';
 import { getCollaboratorDisplayName } from '../../utils/get-collaborator-display-name';

@@ -1,4 +1,4 @@
-import { __, sprintf, isRTL } from '@wordpress/i18n';
+import { __, sprintf, isRTL } from '@/lib/gutenberg/i18n';
 
 const getMovementDirection = ( moveDirection, orientation ) => {
 	if ( moveDirection === 'up' ) {

@@ -1,4 +1,4 @@
-import { postCategories, postTerms } from '@wordpress/icons';
+import { postCategories, postTerms } from '@/components/gutenberg/icons';
 
 const variationIconMap = {
 	category: postCategories,

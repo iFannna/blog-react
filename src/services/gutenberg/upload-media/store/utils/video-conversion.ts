@@ -92,14 +92,14 @@ export function isConversionTimeoutError( error: unknown ): boolean {
  * is fetched only when GIF-to-video conversion is actually triggered.
  */
 let videoConversionModulePromise:
-	| Promise< typeof import( '@wordpress/video-conversion/worker' ) >
+	| Promise< typeof import( '@/utils/gutenberg/video-conversion/worker' ) >
 	| undefined;
 
 /**
  * The resolved module reference, available synchronously after first load.
  */
 let videoConversionModule:
-	typeof import( '@wordpress/video-conversion/worker' ) | undefined;
+	typeof import( '@/utils/gutenberg/video-conversion/worker' ) | undefined;
 
 /**
  * Lazily loads and caches the `@wordpress/video-conversion/worker` module.
@@ -107,11 +107,11 @@ let videoConversionModule:
  * @return The video conversion worker module.
  */
 function loadVideoConversionModule(): Promise<
-	typeof import( '@wordpress/video-conversion/worker' )
+	typeof import( '@/utils/gutenberg/video-conversion/worker' )
 > {
 	if ( ! videoConversionModulePromise ) {
 		videoConversionModulePromise =
-			import( '@wordpress/video-conversion/worker' )
+			import( '@/utils/gutenberg/video-conversion/worker' )
 				.then( ( mod ) => {
 					videoConversionModule = mod;
 					return mod;

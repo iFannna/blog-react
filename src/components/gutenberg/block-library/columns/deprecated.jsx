@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { createBlock } from '@wordpress/blocks';
-import { InnerBlocks, getColorClassName } from '@wordpress/block-editor';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { InnerBlocks, getColorClassName } from '@/components/gutenberg/block-editor';
 
 /**
  * Given an HTML string for a deprecated columns inner block, returns the

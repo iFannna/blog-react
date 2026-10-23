@@ -1,5 +1,5 @@
-import { store as coreStore, useEntityProp } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
+import { store as coreStore, useEntityProp } from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
 
 /**
  * Hook to fetch term description based on context or fallback to template parsing.

@@ -1,8 +1,8 @@
-import { speak } from '@wordpress/a11y';
-import { Slot } from '@wordpress/components';
-import { RawHTML, useEffect, useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { Collapsible, Notice, VisuallyHidden } from '@wordpress/ui';
+import { speak } from '@/utils/gutenberg/a11y';
+import { Slot } from '@/components/gutenberg/ui';
+import { RawHTML, useEffect, useState } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Collapsible, Notice, VisuallyHidden } from '@/components/gutenberg/design-system';
 import clsx from 'clsx';
 import CopyButton from './copy-button';
 import DetailsText from './details-text';

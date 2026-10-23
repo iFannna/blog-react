@@ -1,8 +1,8 @@
-import { dispatch, select } from '@wordpress/data';
+import { dispatch, select } from '@/stores/gutenberg/data';
 // @ts-expect-error No exported types.
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { isUnmodifiedBlock } from '@wordpress/blocks';
-import { type CRDTDoc, Y } from '@wordpress/sync';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { isUnmodifiedBlock } from '@/lib/gutenberg/blocks';
+import { type CRDTDoc, Y } from '@/services/gutenberg/sync';
 import {
 	createBlockSelectionHistory,
 	YSelectionType,

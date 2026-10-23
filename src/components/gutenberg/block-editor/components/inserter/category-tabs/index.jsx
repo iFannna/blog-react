@@ -1,9 +1,9 @@
-import { usePrevious, useReducedMotion } from '@wordpress/compose';
+import { usePrevious, useReducedMotion } from '@/hooks/gutenberg/compose';
 import {
 	privateApis as componentsPrivateApis,
 	__unstableMotion as motion,
-} from '@wordpress/components';
-import { useState } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { useState } from '@/lib/gutenberg/element';
 import { unlock } from '../../../lock-unlock';
 
 const { Tabs } = unlock( componentsPrivateApis );

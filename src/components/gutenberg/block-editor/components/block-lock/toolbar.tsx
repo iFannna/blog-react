@@ -1,7 +1,7 @@
-import { __ } from '@wordpress/i18n';
-import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
-import { useReducer, useRef, useEffect } from '@wordpress/element';
-import { lock, unlock } from '@wordpress/icons';
+import { __ } from '@/lib/gutenberg/i18n';
+import { ToolbarButton, ToolbarGroup } from '@/components/gutenberg/ui';
+import { useReducer, useRef, useEffect } from '@/lib/gutenberg/element';
+import { lock, unlock } from '@/components/gutenberg/icons';
 import BlockLockModal from './modal';
 import useBlockLock from './use-block-lock';
 import type { BlockLockControlProps } from './types';

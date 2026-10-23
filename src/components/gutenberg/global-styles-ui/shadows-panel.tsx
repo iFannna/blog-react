@@ -1,5 +1,5 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { Stack } from '@wordpress/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { Stack } from '@/components/gutenberg/design-system';
 import { ScreenHeader } from './screen-header';
 import { ScreenBody } from './screen-body';
 import PresetGroup from './presets/preset-group';

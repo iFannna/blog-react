@@ -1,38 +1,96 @@
-import type { ReactNode } from 'react';
-import type { ComponentProps } from '../utils/types';
+import type { SurfaceProps } from '../surface/types';
+import type { FlexProps } from '../flex/types';
 
-export interface RootProps extends ComponentProps< 'div' > {
-	/**
-	 * The content to be rendered inside the card.
-	 */
-	children?: ReactNode;
-}
+type DeprecatedSizeOptions = 'extraSmall';
+export type SizeToken = 'xSmall' | 'small' | 'medium' | 'large' | 'none';
 
-export interface HeaderProps extends ComponentProps< 'div' > {
+export type SizeOptions =
+	| SizeToken
+	| {
+			blockStart: SizeToken;
+			blockEnd: SizeToken;
+			inlineStart: SizeToken;
+			inlineEnd: SizeToken;
+	  };
+type SizeableProps = {
 	/**
-	 * The content to be rendered inside the header.
+	 * Determines the amount of padding within the component.
+	 *
+	 * @default 'medium'
 	 */
-	children?: ReactNode;
-}
+	size?: SizeOptions | DeprecatedSizeOptions;
+};
 
-export interface ContentProps extends ComponentProps< 'div' > {
-	/**
-	 * The content to be rendered inside the content area.
-	 */
-	children?: ReactNode;
-}
+export type Props = SurfaceProps &
+	SizeableProps & {
+		/**
+		 * Size of the elevation shadow, based on the Style system's elevation system.
+		 * Elevating a `Card` can be done by adjusting the `elevation` prop. This may
+		 * be helpful in highlighting certain content. For more information, check out
+		 * `Elevation`.
+		 *
+		 * @default 0
+		 */
+		elevation?: number;
+		/**
+		 * Renders without a border.
+		 *
+		 * @default false
+		 */
+		isBorderless?: boolean;
+		/**
+		 * Renders with rounded corners.
+		 *
+		 * @default true
+		 */
+		isRounded?: boolean;
+		/**
+		 * Renders with elevation styles (box shadow).
+		 *
+		 * @default false
+		 * @deprecated
+		 */
+		isElevated?: boolean;
+	};
 
-export interface FullBleedProps extends ComponentProps< 'div' > {
+type BaseSubComponentProps = SizeableProps & {
 	/**
-	 * The content to be rendered edge-to-edge, breaking out of the
-	 * card's padding.
+	 * The children elements.
 	 */
-	children?: ReactNode;
-}
+	children: React.ReactNode;
+	/**
+	 * Renders with a light gray background color.
+	 *
+	 * @default false
+	 */
+	isShady?: boolean;
+};
 
-export interface TitleProps extends ComponentProps< 'div' > {
+export type BodyProps = BaseSubComponentProps & {
 	/**
-	 * The title text for the card.
+	 * Determines if the component is scrollable.
+	 *
+	 * @default false
 	 */
-	children?: ReactNode;
-}
+	isScrollable?: boolean;
+};
+
+export type MediaProps = {
+	/**
+	 * The children elements.
+	 */
+	children: React.ReactNode;
+};
+
+type MarginalSubComponentProps = BaseSubComponentProps & {
+	/**
+	 * Renders without a border.
+	 *
+	 * @default false
+	 */
+	isBorderless?: boolean;
+};
+
+export type HeaderProps = MarginalSubComponentProps & Partial< FlexProps >;
+
+export type FooterProps = MarginalSubComponentProps & Partial< FlexProps >;

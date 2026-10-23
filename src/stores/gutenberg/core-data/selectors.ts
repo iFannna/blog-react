@@ -1,8 +1,8 @@
-import { createSelector, createRegistrySelector } from '@wordpress/data';
-import { addQueryArgs } from '@wordpress/url';
-import type { UndoManager } from '@wordpress/undo-manager';
-import deprecated from '@wordpress/deprecated';
-import type { ConnectionStatus } from '@wordpress/sync';
+import { createSelector, createRegistrySelector } from '@/stores/gutenberg/data';
+import { addQueryArgs } from '@/utils/gutenberg/url';
+import type { UndoManager } from '@/stores/gutenberg/undo-manager';
+import deprecated from '@/utils/gutenberg/deprecated';
+import type { ConnectionStatus } from '@/services/gutenberg/sync';
 import { STORE_NAME } from './name';
 import {
 	getQueriedItems,

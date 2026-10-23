@@ -1,5 +1,5 @@
-import { Component, forwardRef } from '@wordpress/element';
-import deprecated from '@wordpress/deprecated';
+import { Component, forwardRef } from '@/lib/gutenberg/element';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { createHigherOrderComponent } from '../../utils/create-higher-order-component';
 import Listener from './listener';
 import type { WithGlobalEventsHOC, RefComponent, WrapperProps } from './types';

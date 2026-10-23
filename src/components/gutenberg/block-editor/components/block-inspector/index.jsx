@@ -1,18 +1,18 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	getBlockType,
 	getUnregisteredTypeHandlerName,
 	store as blocksStore,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import {
 	MenuGroup,
 	MenuItem,
 	__unstableMotion as motion,
-} from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useRef } from '@wordpress/element';
-import { check } from '@wordpress/icons';
-import { Text } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useRef } from '@/lib/gutenberg/element';
+import { check } from '@/components/gutenberg/icons';
+import { Text } from '@/components/gutenberg/design-system';
 import EditContents from './edit-contents';
 import { PrivateBlockInspectorEditOriginal } from './edit-original-slot-fill';
 import SkipToSelectedBlock from '../skip-to-selected-block';

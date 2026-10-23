@@ -1,8 +1,8 @@
 import { animated } from '@react-spring/web';
 import clsx from 'clsx';
-import { __experimentalTreeGridRow as TreeGridRow } from '@wordpress/components';
-import { useMergeRefs } from '@wordpress/compose';
-import { forwardRef } from '@wordpress/element';
+import { __experimentalTreeGridRow as TreeGridRow } from '@/components/gutenberg/ui';
+import { useMergeRefs } from '@/hooks/gutenberg/compose';
+import { forwardRef } from '@/lib/gutenberg/element';
 import useMovingAnimation from '../use-moving-animation';
 
 const AnimatedTreeGridRow = animated( TreeGridRow );

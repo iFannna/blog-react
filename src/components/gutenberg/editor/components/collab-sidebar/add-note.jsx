@@ -1,11 +1,11 @@
-import { __ } from '@wordpress/i18n';
-import { useRef } from '@wordpress/element';
-import { __experimentalUseFocusOutside as useFocusOutside } from '@wordpress/compose';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useRef } from '@/lib/gutenberg/element';
+import { __experimentalUseFocusOutside as useFocusOutside } from '@/hooks/gutenberg/compose';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	store as blockEditorStore,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import { NoteCard } from './note-card';
 import { NoteForm } from './note-form';
 import { FloatingContainer } from './floating-container';

@@ -1,6 +1,6 @@
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { useBlockEditingMode } from '@wordpress/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useBlockEditingMode } from '@/components/gutenberg/block-editor';
 
 /**
  * A React hook to determine if a navigation link or submenu's parent link is invalid.

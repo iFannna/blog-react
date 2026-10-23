@@ -1,5 +1,5 @@
-import { forwardRef } from '@wordpress/element';
-import { Composite } from '@wordpress/components';
+import { forwardRef } from '@/lib/gutenberg/element';
+import { Composite } from '@/components/gutenberg/ui';
 import type {
 	ForwardedRef,
 	ForwardRefExoticComponent,

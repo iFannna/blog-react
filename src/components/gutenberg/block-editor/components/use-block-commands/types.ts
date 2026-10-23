@@ -1,4 +1,4 @@
-import type { Block, BlockTypeIconDescriptor } from '@wordpress/blocks';
+import type { Block, BlockTypeIconDescriptor } from '@/lib/gutenberg/blocks';
 import type { InserterItem } from '../../store/types';
 
 /**

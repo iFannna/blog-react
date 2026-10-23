@@ -1,14 +1,14 @@
 import clsx from 'clsx';
-import { __, _x, sprintf } from '@wordpress/i18n';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	Warning,
 	store as blockEditorStore,
 	__experimentalGetElementClassName,
-} from '@wordpress/block-editor';
-import { Button } from '@wordpress/components';
-import { useInstanceId } from '@wordpress/compose';
-import { useEntityProp, store as coreStore } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
+} from '@/components/gutenberg/block-editor';
+import { Button } from '@/components/gutenberg/ui';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { useEntityProp, store as coreStore } from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
 
 const CommentsFormPlaceholder = () => {
 	const instanceId = useInstanceId( CommentsFormPlaceholder );

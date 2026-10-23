@@ -1,6 +1,6 @@
-import { useSelect } from '@wordpress/data';
-import { store as coreStore, useEntityProp } from '@wordpress/core-data';
-import { __ } from '@wordpress/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore, useEntityProp } from '@/stores/gutenberg/core-data';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	RichText,
 	InspectorControls,
@@ -8,13 +8,13 @@ import {
 	useBlockProps,
 	HeadingLevelDropdown,
 	useBlockEditingMode,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	ToggleControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { decodeEntities } from '@wordpress/html-entities';
+} from '@/components/gutenberg/ui';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 import useDeprecatedTextAlign from '../utils/deprecated-text-align-attributes';
 

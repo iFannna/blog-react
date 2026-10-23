@@ -1,5 +1,5 @@
-import { escapeHTML } from '@wordpress/escape-html';
-import { safeDecodeURI, getPath } from '@wordpress/url';
+import { escapeHTML } from '@/utils/gutenberg/escape-html';
+import { safeDecodeURI, getPath } from '@/utils/gutenberg/url';
 
 /**
  * Determines if an entity link should be severed based on URL changes.

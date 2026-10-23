@@ -1,4 +1,4 @@
-import { useSelect } from '@wordpress/data';
+import { useSelect } from '@/stores/gutenberg/data';
 import PostTypeSupportCheck from '../post-type-support-check';
 import { store as editorStore } from '../../store';
 

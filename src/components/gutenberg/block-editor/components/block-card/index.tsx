@@ -1,16 +1,16 @@
 import clsx from 'clsx';
-import { Button, Icon as WCIcon } from '@wordpress/components';
-import { Badge, Text, Stack } from '@wordpress/ui';
-import { useDispatch, useSelect } from '@wordpress/data';
-import deprecated from '@wordpress/deprecated';
-import { __, sprintf, isRTL } from '@wordpress/i18n';
+import { Button, Icon as WCIcon } from '@/components/gutenberg/ui';
+import { Badge, Text, Stack } from '@/components/gutenberg/design-system';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { __, sprintf, isRTL } from '@/lib/gutenberg/i18n';
 import {
 	chevronLeft,
 	chevronRight,
 	arrowRight,
 	arrowLeft,
-} from '@wordpress/icons';
-import { getBlockType } from '@wordpress/blocks';
+} from '@/components/gutenberg/icons';
+import { getBlockType } from '@/lib/gutenberg/blocks';
 import { unlock } from '../../lock-unlock';
 import { store as blockEditorStore } from '../../store';
 import BlockIcon from '../block-icon';

@@ -1,7 +1,7 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { Notice, __experimentalVStack as VStack } from '@wordpress/components';
-import { SelectControl } from '@wordpress/ui';
-import { useSelect } from '@wordpress/data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { Notice, __experimentalVStack as VStack } from '@/components/gutenberg/ui';
+import { SelectControl } from '@/components/gutenberg/design-system';
+import { useSelect } from '@/stores/gutenberg/data';
 import { store as blockEditorStore } from '../../store';
 import { htmlElementMessages } from './messages';
 import type { HTMLElementControlProps, HTMLElementOption } from './types';

@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import { close, Icon } from '@wordpress/icons';
-import { Button } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { getColorClassName } from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+import { close, Icon } from '@/components/gutenberg/icons';
+import { Button } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { getColorClassName } from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import OverlayMenuIcon from './overlay-menu-icon';
 import { createTemplatePartId } from '../../template-part/edit/utils/create-template-part-id';
 

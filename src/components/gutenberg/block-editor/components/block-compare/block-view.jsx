@@ -1,6 +1,6 @@
-import { Button } from '@wordpress/components';
-import { RawHTML } from '@wordpress/element';
-import { safeHTML } from '@wordpress/dom';
+import { Button } from '@/components/gutenberg/ui';
+import { RawHTML } from '@/lib/gutenberg/element';
+import { safeHTML } from '@/utils/gutenberg/dom';
 
 export default function BlockView( {
 	title,

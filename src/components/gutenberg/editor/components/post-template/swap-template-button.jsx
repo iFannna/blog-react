@@ -1,13 +1,13 @@
-import { useMemo, useState } from '@wordpress/element';
-import { decodeEntities } from '@wordpress/html-entities';
-import { __experimentalBlockPatternsList as BlockPatternsList } from '@wordpress/block-editor';
-import { Modal, SearchControl } from '@wordpress/components';
+import { useMemo, useState } from '@/lib/gutenberg/element';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { __experimentalBlockPatternsList as BlockPatternsList } from '@/components/gutenberg/block-editor';
+import { Modal, SearchControl } from '@/components/gutenberg/ui';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of the new Menu, pending WordPress/gutenberg#76135.
-import { Menu } from '@wordpress/ui';
-import { __ } from '@wordpress/i18n';
-import { useDispatch } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { parse } from '@wordpress/blocks';
+import { Menu } from '@/components/gutenberg/design-system';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { parse } from '@/lib/gutenberg/blocks';
 import { useAvailableTemplates, useEditedPostContext } from './hooks';
 import { searchTemplates } from '../../utils/search-templates';
 

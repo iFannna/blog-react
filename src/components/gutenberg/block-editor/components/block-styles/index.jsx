@@ -1,15 +1,15 @@
-import { useState, useMemo } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { debounce, useInstanceId } from '@wordpress/compose';
+import { useState, useMemo } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { debounce, useInstanceId } from '@/hooks/gutenberg/compose';
 import {
 	Composite,
 	__experimentalTruncate as Truncate,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 // eslint-disable-next-line @wordpress/use-recommended-components
-import { Button } from '@wordpress/ui';
-import { __ } from '@wordpress/i18n';
+import { Button } from '@/components/gutenberg/design-system';
+import { __ } from '@/lib/gutenberg/i18n';
 import PreviewBlockPopover from '../block-switcher/preview-block-popover';
 import useStylesForBlocks from './use-styles-for-block';
 import { useToolsPanelDropdownMenuProps } from '../global-styles/utils';

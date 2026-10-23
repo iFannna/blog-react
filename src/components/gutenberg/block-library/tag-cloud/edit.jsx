@@ -10,17 +10,17 @@ import {
 	__experimentalParseQuantityAndUnitFromRawValue as parseQuantityAndUnitFromRawValue,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { __, sprintf } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	InspectorControls,
 	useBlockProps,
 	useSettings,
-} from '@wordpress/block-editor';
-import { store as coreStore } from '@wordpress/core-data';
-import { useServerSideRender } from '@wordpress/server-side-render';
-import { useDisabled } from '@wordpress/compose';
+} from '@/components/gutenberg/block-editor';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useServerSideRender } from '@/components/gutenberg/server-side-render';
+import { useDisabled } from '@/hooks/gutenberg/compose';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 import HtmlRenderer from '../utils/html-renderer';
 

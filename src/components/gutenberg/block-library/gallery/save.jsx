@@ -4,7 +4,7 @@ import {
 	useBlockProps,
 	useInnerBlocksProps,
 	__experimentalGetElementClassName,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import { isGalleryFlexLayout } from './shared';
 
 export default function saveWithInnerBlocks( { attributes } ) {

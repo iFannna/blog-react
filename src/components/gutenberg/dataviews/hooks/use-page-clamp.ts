@@ -1,5 +1,5 @@
-import { useEffect } from '@wordpress/element';
-import { useEvent } from '@wordpress/compose';
+import { useEffect } from '@/lib/gutenberg/element';
+import { useEvent } from '@/hooks/gutenberg/compose';
 import type { View } from '../types';
 
 interface UsePageClampParams {

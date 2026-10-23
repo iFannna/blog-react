@@ -30,7 +30,7 @@
  * toggleFont({ slug: 'roboto' }, { fontWeight: '500', fontStyle: 'normal' }, customFonts);
  * // This will add the specified face to 'roboto' in customFonts
  */
-import type { FontFamily, FontFace } from '@wordpress/core-data';
+import type { FontFamily, FontFace } from '@/stores/gutenberg/core-data';
 
 export function toggleFont(
 	font: FontFamily,

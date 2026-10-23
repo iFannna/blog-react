@@ -1,5 +1,5 @@
-import { Spinner as WCSpinner } from '@wordpress/components';
-import { useCallback } from '@wordpress/element';
+import { Spinner as WCSpinner } from '@/components/gutenberg/ui';
+import { useCallback } from '@/lib/gutenberg/element';
 import type { DataFormControlProps } from '../../types';
 import useElements from '../../hooks/use-elements';
 import { ValidatedSelectControl } from '../validated-form-controls';

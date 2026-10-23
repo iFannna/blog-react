@@ -1,31 +1,39 @@
-import { forwardRef } from '@wordpress/element';
 import clsx from 'clsx';
-import { Tabs as _Tabs } from '@base-ui/react/tabs';
-import { useRegisterTab } from './context';
-import styles from './style.module.css';
+import { Tab as AriakitTab } from '@ariakit/react';
+import { forwardRef } from '@/lib/gutenberg/element';
+import warning from '@/utils/gutenberg/warning';
 import type { TabProps } from './types';
+import { useTabsContext } from './context';
+import styles from './style.module.css';
+import type { WordPressComponentProps } from '../context';
 
-/**
- * An individual interactive tab button that toggles the corresponding panel.
- *
- * `Tabs` is a collection of React components that combine to render
- * an [ARIA-compliant tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/).
- */
-export const Tab = forwardRef< HTMLButtonElement, TabProps >(
-	function UnforwardedTab(
-		{ className, children, ...otherProps },
-		forwardedRef
-	) {
-		useRegisterTab();
+export const Tab = forwardRef<
+	HTMLButtonElement,
+	Omit< WordPressComponentProps< TabProps, 'button', false >, 'id' >
+>( function UnforwardedTab(
+	{ children, tabId, disabled, render, className, ...otherProps },
+	ref
+) {
+	const { store, instanceId } = useTabsContext() ?? {};
 
-		return (
-			<_Tabs.Tab
-				ref={ forwardedRef }
-				className={ clsx( styles.tab, className ) }
-				{ ...otherProps }
-			>
-				<span className={ styles[ 'tab-children' ] }>{ children }</span>
-			</_Tabs.Tab>
-		);
+	if ( ! store ) {
+		warning( '`Tabs.Tab` must be wrapped in a `Tabs` component.' );
+		return null;
 	}
-);
+
+	const instancedTabId = `${ instanceId }-${ tabId }`;
+
+	return (
+		<AriakitTab
+			ref={ ref }
+			store={ store }
+			id={ instancedTabId }
+			disabled={ disabled }
+			render={ render }
+			{ ...otherProps }
+			className={ clsx( styles.tab, className ) }
+		>
+			<span className={ styles[ 'tab-children' ] }>{ children }</span>
+		</AriakitTab>
+	);
+} );

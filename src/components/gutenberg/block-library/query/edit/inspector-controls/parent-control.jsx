@@ -1,9 +1,9 @@
-import { __ } from '@wordpress/i18n';
-import { FormTokenField } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { useState, useEffect, useMemo } from '@wordpress/element';
-import { useDebounce } from '@wordpress/compose';
+import { __ } from '@/lib/gutenberg/i18n';
+import { FormTokenField } from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useState, useEffect, useMemo } from '@/lib/gutenberg/element';
+import { useDebounce } from '@/hooks/gutenberg/compose';
 import { getEntitiesInfo, mapToIHasNameAndId } from '../../utils';
 
 const EMPTY_ARRAY = [];

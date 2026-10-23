@@ -4,18 +4,18 @@ import {
 	useInnerBlocksProps,
 	BlockControls,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { isRTL, __ } from '@wordpress/i18n';
-import { ToolbarButton } from '@wordpress/components';
+} from '@/components/gutenberg/block-editor';
+import { isRTL, __ } from '@/lib/gutenberg/i18n';
+import { ToolbarButton } from '@/components/gutenberg/ui';
 import {
 	formatOutdent,
 	formatOutdentRTL,
 	formatIndentRTL,
 	formatIndent,
-} from '@wordpress/icons';
-import { useMergeRefs } from '@wordpress/compose';
-import { useSelect, useRegistry } from '@wordpress/data';
-import { displayShortcut } from '@wordpress/keycodes';
+} from '@/components/gutenberg/icons';
+import { useMergeRefs } from '@/hooks/gutenberg/compose';
+import { useSelect, useRegistry } from '@/stores/gutenberg/data';
+import { displayShortcut } from '@/utils/gutenberg/keycodes';
 import { useEnter, useTab, useMultiSelectTab, useMerge } from './hooks';
 import {
 	indentListItems,

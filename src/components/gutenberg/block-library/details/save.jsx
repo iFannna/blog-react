@@ -1,4 +1,4 @@
-import { RichText, useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { RichText, useBlockProps, InnerBlocks } from '@/components/gutenberg/block-editor';
 
 export default function save( { attributes } ) {
 	const { name, showContent } = attributes;

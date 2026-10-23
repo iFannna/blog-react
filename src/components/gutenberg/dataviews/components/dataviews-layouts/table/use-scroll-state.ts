@@ -1,6 +1,6 @@
 import type { RefObject } from 'react';
-import { useCallback, useEffect, useState } from '@wordpress/element';
-import { isRTL } from '@wordpress/i18n';
+import { useCallback, useEffect, useState } from '@/lib/gutenberg/element';
+import { isRTL } from '@/lib/gutenberg/i18n';
 
 const isScrolledToEnd = ( element: Element ) => {
 	if ( isRTL() ) {

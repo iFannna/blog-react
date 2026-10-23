@@ -1,10 +1,10 @@
-import { useCallback, useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { cloneBlock } from '@wordpress/blocks';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as noticesStore } from '@wordpress/notices';
-import { isBlobURL } from '@wordpress/blob';
-import { getFilename } from '@wordpress/url';
+import { useCallback, useState } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { cloneBlock } from '@/lib/gutenberg/blocks';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { isBlobURL } from '@/utils/gutenberg/blob';
+import { getFilename } from '@/utils/gutenberg/url';
 import { store as blockEditorStore } from '../../../store';
 
 const ALLOWED_MEDIA_TYPES = [ 'image' ];

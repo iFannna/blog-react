@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 
 /*
  * Anchoring-only format: it serializes an inline note's in-content marker as

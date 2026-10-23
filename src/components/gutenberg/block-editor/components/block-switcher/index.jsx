@@ -1,18 +1,18 @@
-import { __, _n, sprintf, _x } from '@wordpress/i18n';
-import { Text } from '@wordpress/ui';
+import { __, _n, sprintf, _x } from '@/lib/gutenberg/i18n';
+import { Text } from '@/components/gutenberg/design-system';
 import {
 	DropdownMenu,
 	ToolbarGroup,
 	ToolbarItem,
 	MenuGroup,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	switchToBlockType,
 	store as blocksStore,
 	isReusableBlock,
 	isTemplatePart,
-} from '@wordpress/blocks';
-import { useSelect, useDispatch } from '@wordpress/data';
+} from '@/lib/gutenberg/blocks';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import { store as blockEditorStore } from '../../store';
 import BlockTransformationsMenu from './block-transformations-menu';
 import { useBlockVariationTransforms } from './block-variation-transformations';

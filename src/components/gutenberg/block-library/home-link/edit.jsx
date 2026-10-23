@@ -4,7 +4,7 @@ import {
 	RichText,
 	useBlockProps,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	Button,
 	CheckboxControl as WCCheckboxControl,
@@ -12,12 +12,12 @@ import {
 	TextareaControl as WCTextareaControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { external } from '@wordpress/icons';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { external } from '@/components/gutenberg/icons';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 const preventDefault = ( event ) => event.preventDefault();

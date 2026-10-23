@@ -1,5 +1,5 @@
-import { parse as grammarParse } from '@wordpress/block-serialization-default-parser';
-import { autop } from '@wordpress/autop';
+import { parse as grammarParse } from '@/utils/gutenberg/block-serialization-default-parser';
+import { autop } from '@/utils/gutenberg/autop';
 import {
 	getFreeformContentHandlerName,
 	getUnregisteredTypeHandlerName,

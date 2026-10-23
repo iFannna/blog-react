@@ -1,5 +1,5 @@
-import { RichTextData, create, toHTMLString } from '@wordpress/rich-text';
-import warning from '@wordpress/warning';
+import { RichTextData, create, toHTMLString } from '@/components/gutenberg/rich-text';
+import warning from '@/utils/gutenberg/warning';
 import getFootnotesOrder from './get-footnotes-order';
 
 let oldFootnotes = {};

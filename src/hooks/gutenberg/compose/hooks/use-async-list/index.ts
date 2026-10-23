@@ -1,5 +1,5 @@
-import { flushSync, useEffect, useState } from '@wordpress/element';
-import { createQueue } from '@wordpress/priority-queue';
+import { flushSync, useEffect, useState } from '@/lib/gutenberg/element';
+import { createQueue } from '@/utils/gutenberg/priority-queue';
 
 type AsyncListConfig = {
 	step: number;

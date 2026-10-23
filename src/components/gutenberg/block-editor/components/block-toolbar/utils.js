@@ -1,5 +1,5 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useState, useRef, useEffect } from '@wordpress/element';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useState, useRef, useEffect } from '@/lib/gutenberg/element';
 import { store as blockEditorStore } from '../../store';
 
 const { clearTimeout, setTimeout } = window;

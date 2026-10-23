@@ -1,24 +1,24 @@
 import clsx from 'clsx';
-import { hasBlockSupport, store as blocksStore } from '@wordpress/blocks';
+import { hasBlockSupport, store as blocksStore } from '@/lib/gutenberg/blocks';
 import {
 	__experimentalTreeGridCell as TreeGridCell,
 	__experimentalTreeGridItem as TreeGridItem,
-} from '@wordpress/components';
-import { useInstanceId, useDebounce } from '@wordpress/compose';
-import { moreVertical } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { useInstanceId, useDebounce } from '@/hooks/gutenberg/compose';
+import { moreVertical } from '@/components/gutenberg/icons';
 import {
 	useCallback,
 	useMemo,
 	useState,
 	useRef,
 	memo,
-} from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
-import { BACKSPACE, DELETE } from '@wordpress/keycodes';
-import { isShallowEqual } from '@wordpress/is-shallow-equal';
-import { __unstableUseShortcutEventMatch as useShortcutEventMatch } from '@wordpress/keyboard-shortcuts';
-import { speak } from '@wordpress/a11y';
+} from '@/lib/gutenberg/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { BACKSPACE, DELETE } from '@/utils/gutenberg/keycodes';
+import { isShallowEqual } from '@/utils/gutenberg/is-shallow-equal';
+import { __unstableUseShortcutEventMatch as useShortcutEventMatch } from '@/components/gutenberg/keyboard-shortcuts';
+import { speak } from '@/utils/gutenberg/a11y';
 import ListViewLeaf from './leaf';
 import useListViewScrollIntoView from './use-list-view-scroll-into-view';
 import {

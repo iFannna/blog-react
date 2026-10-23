@@ -1,8 +1,8 @@
 import type { ForwardedRef } from 'react';
-import { DateTimePicker, TimePicker } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { forwardRef } from '@wordpress/element';
-import { getSettings } from '@wordpress/date';
+import { DateTimePicker, TimePicker } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { forwardRef } from '@/lib/gutenberg/element';
+import { getSettings } from '@/lib/gutenberg/date';
 import InspectorPopoverHeader from '../inspector-popover-header';
 import type {
 	PrivatePublishDateTimePickerProps,

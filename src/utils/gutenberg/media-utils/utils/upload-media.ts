@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { createBlobURL, revokeBlobURL } from '@wordpress/blob';
+import { __ } from '@/lib/gutenberg/i18n';
+import { createBlobURL, revokeBlobURL } from '@/utils/gutenberg/blob';
 import type {
 	AdditionalData,
 	Attachment,

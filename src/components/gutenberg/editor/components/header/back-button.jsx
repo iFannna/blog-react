@@ -1,7 +1,7 @@
 import {
 	__experimentalUseSlotFills as useSlotFills,
 	createSlotFill,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 
 // Keeping an old name for backward compatibility.
 const slotName = '__experimentalMainDashboardButton';

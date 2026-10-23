@@ -1,13 +1,13 @@
 import type { ComponentProps, ComponentType } from 'react';
-import { __, _x } from '@wordpress/i18n';
-import { ToolbarGroup, ToolbarDropdownMenu } from '@wordpress/components';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { ToolbarGroup, ToolbarDropdownMenu } from '@/components/gutenberg/ui';
 import {
 	justifyTop,
 	justifyCenterVertical,
 	justifyBottom,
 	justifyStretchVertical,
 	justifySpaceBetweenVertical,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import type {
 	BlockVerticalAlignment,
 	BlockVerticalAlignmentUIProps,

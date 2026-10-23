@@ -1,14 +1,14 @@
-import { useEffect, useMemo } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useInstanceId } from '@wordpress/compose';
-import { PanelBody } from '@wordpress/components';
-import { getBlockType, hasBlockSupport } from '@wordpress/blocks';
-import { __, sprintf } from '@wordpress/i18n';
+import { useEffect, useMemo } from '@/lib/gutenberg/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { PanelBody } from '@/components/gutenberg/ui';
+import { getBlockType, hasBlockSupport } from '@/lib/gutenberg/blocks';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	processCSSNesting,
 	privateApis as globalStylesEnginePrivateApis,
-} from '@wordpress/global-styles-engine';
-import { store as noticesStore } from '@wordpress/notices';
+} from '@/lib/gutenberg/global-styles-engine';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import { useBlockEditingMode } from '../components/block-editing-mode';
 import InspectorControls from '../components/inspector-controls';
 import { PrivateInspectorControlsStyleStateAdvanced } from '../components/inspector-controls/groups';

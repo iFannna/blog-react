@@ -1,4 +1,4 @@
-import { useMemo } from '@wordpress/element';
+import { useMemo } from '@/lib/gutenberg/element';
 
 export default function useListViewBlockIndexes( blocks ) {
 	const blockIndexes = useMemo( () => {

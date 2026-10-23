@@ -4,9 +4,9 @@ import {
 	__experimentalUseCustomUnits as useCustomUnits,
 	__experimentalVStack as VStack,
 	__experimentalHStack as HStack,
-} from '@wordpress/components';
-import { useState, useMemo } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { useState, useMemo } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import LinkedButton from './linked-button';
 import { useSettings } from '../use-settings';
 import { hasDefinedValues, hasMixedValues, getAllValue } from './utils';

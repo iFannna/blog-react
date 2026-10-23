@@ -1,4 +1,4 @@
-import { Component } from '@wordpress/element';
+import { Component } from '@/lib/gutenberg/element';
 
 class BlockCrashBoundary extends Component {
 	constructor() {

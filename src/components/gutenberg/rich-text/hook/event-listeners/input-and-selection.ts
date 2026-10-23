@@ -1,4 +1,4 @@
-import { privateApis as composePrivateApis } from '@wordpress/compose';
+import { privateApis as composePrivateApis } from '@/hooks/gutenberg/compose';
 import { getActiveFormats } from '../../get-active-formats';
 import { isCollapsed } from '../../is-collapsed';
 import { updateFormats } from '../../update-formats';

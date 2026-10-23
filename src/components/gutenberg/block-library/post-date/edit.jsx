@@ -1,10 +1,10 @@
-import { store as coreStore } from '@wordpress/core-data';
-import { useEffect, useMemo, useState } from '@wordpress/element';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useEffect, useMemo, useState } from '@/lib/gutenberg/element';
 import {
 	dateI18n,
 	humanTimeDiff,
 	getSettings as getDateSettings,
-} from '@wordpress/date';
+} from '@/lib/gutenberg/date';
 import {
 	BlockControls,
 	InspectorControls,
@@ -13,7 +13,7 @@ import {
 	useBlockEditingMode,
 	__experimentalDateFormatPicker as DateFormatPicker,
 	__experimentalPublishDateTimePicker as PublishDateTimePicker,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	Dropdown,
 	ToolbarGroup,
@@ -21,12 +21,12 @@ import {
 	ToggleControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { __, _x, sprintf } from '@wordpress/i18n';
-import { pencil } from '@wordpress/icons';
-import { DOWN } from '@wordpress/keycodes';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as blocksStore } from '@wordpress/blocks';
+} from '@/components/gutenberg/ui';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
+import { pencil } from '@/components/gutenberg/icons';
+import { DOWN } from '@/utils/gutenberg/keycodes';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 import useDeprecatedTextAlign from '../utils/deprecated-text-align-attributes';
 

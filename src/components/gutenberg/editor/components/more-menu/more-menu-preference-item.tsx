@@ -1,9 +1,9 @@
-import { speak } from '@wordpress/a11y';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { __, sprintf } from '@wordpress/i18n';
-import { store as preferencesStore } from '@wordpress/preferences';
+import { speak } from '@/utils/gutenberg/a11y';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 // eslint-disable-next-line @wordpress/use-recommended-components
-import { Menu } from '@wordpress/ui';
+import { Menu } from '@/components/gutenberg/design-system';
 import type { ComponentProps, ReactNode } from 'react';
 
 type MoreMenuPreferenceItemProps = {

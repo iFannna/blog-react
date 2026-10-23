@@ -1,4 +1,4 @@
-import { privateApis as composePrivateApis } from '@wordpress/compose';
+import { privateApis as composePrivateApis } from '@/hooks/gutenberg/compose';
 import { isRangeEqual } from '../../is-range-equal';
 import { unlock } from '../../lock-unlock';
 import type { EventListenerEffect } from '../types';

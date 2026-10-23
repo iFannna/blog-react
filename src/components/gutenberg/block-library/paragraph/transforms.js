@@ -1,4 +1,4 @@
-import { createBlock, getBlockAttributes } from '@wordpress/blocks';
+import { createBlock, getBlockAttributes } from '@/lib/gutenberg/blocks';
 import metadata from './block.json';
 
 const { name } = metadata;

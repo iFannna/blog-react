@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
-import { createBlobURL, isBlobURL, revokeBlobURL } from '@wordpress/blob';
-import type { createRegistry } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
+import { createBlobURL, isBlobURL, revokeBlobURL } from '@/utils/gutenberg/blob';
+import type { createRegistry } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
 type WPDataRegistry = ReturnType< typeof createRegistry >;
 import {
 	cloneFile,

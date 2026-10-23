@@ -1,27 +1,27 @@
-import { createContext, useState, useEffect } from '@wordpress/element';
+import { createContext, useState, useEffect } from '@/lib/gutenberg/element';
 import {
 	useSelect,
 	useDispatch,
 	resolveSelect,
 	useRegistry,
-} from '@wordpress/data';
+} from '@/stores/gutenberg/data';
 import {
 	useEntityRecord,
 	useEntityRecords,
 	store as coreStore,
-} from '@wordpress/core-data';
-import { __ } from '@wordpress/i18n';
+} from '@/stores/gutenberg/core-data';
+import { __ } from '@/lib/gutenberg/i18n';
 import type {
 	FontFamilyPreset,
 	GlobalStylesConfig,
-} from '@wordpress/global-styles-engine';
+} from '@/lib/gutenberg/global-styles-engine';
 import type {
 	CollectionFontFace,
 	CollectionFontFamily,
 	FontFace,
 	FontFamily,
 	WpFontFamily,
-} from '@wordpress/core-data';
+} from '@/stores/gutenberg/core-data';
 import { fetchInstallFontFamily } from './api';
 import {
 	setUIValuesNeeded,

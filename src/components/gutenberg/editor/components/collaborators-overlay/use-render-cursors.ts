@@ -1,13 +1,13 @@
-import { privateApis as coreDataPrivateApis } from '@wordpress/core-data';
+import { privateApis as coreDataPrivateApis } from '@/stores/gutenberg/core-data';
 import type {
 	CoreDataPrivateApis,
 	ResolvedSelection,
 	SelectionEndpoint,
 	PostEditorAwarenessState as ActiveCollaborator,
-} from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
-import { useEffect, useState } from '@wordpress/element';
-import { store as preferencesStore } from '@wordpress/preferences';
+} from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useEffect, useState } from '@/lib/gutenberg/element';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import { unlock } from '../../lock-unlock';
 import { getAvatarUrl } from './get-avatar-url';
 import { getAvatarBorderColor } from '../collab-sidebar/utils';

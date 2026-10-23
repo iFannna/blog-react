@@ -1,5 +1,5 @@
-import { useMemo, useRef } from '@wordpress/element';
-import { useIsomorphicLayoutEffect } from '@wordpress/compose';
+import { useMemo, useRef } from '@/lib/gutenberg/element';
+import { useIsomorphicLayoutEffect } from '@/hooks/gutenberg/compose';
 import useRegistry from '../registry-provider/use-registry';
 import type { DataRegistry } from '../../types';
 

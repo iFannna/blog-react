@@ -1,4 +1,4 @@
-import { createSlotFill } from '@wordpress/components';
+import { createSlotFill } from '@/components/gutenberg/ui';
 
 /**
  * Canvas margin for UI beside the content. The canvas reserves space while a

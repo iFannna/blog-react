@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { isBlobURL, createBlobURL } from '@wordpress/blob';
-import { createBlock, getBlockBindingsSource } from '@wordpress/blocks';
-import { Placeholder } from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { isBlobURL, createBlobURL } from '@/utils/gutenberg/blob';
+import { createBlock, getBlockBindingsSource } from '@/lib/gutenberg/blocks';
+import { Placeholder } from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import {
 	BlockIcon,
 	useBlockProps,
@@ -11,14 +11,14 @@ import {
 	__experimentalUseBorderProps as useBorderProps,
 	__experimentalGetShadowClassesAndStyles as getShadowClassesAndStyles,
 	useBlockEditingMode,
-} from '@wordpress/block-editor';
-import { useEffect, useRef, useState } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import { image as icon, plugins as pluginsIcon } from '@wordpress/icons';
-import { store as noticesStore } from '@wordpress/notices';
-import { useResizeObserver } from '@wordpress/compose';
-import { getProtocol, prependHTTPS } from '@wordpress/url';
-import { store as uploadStore } from '@wordpress/upload-media';
+} from '@/components/gutenberg/block-editor';
+import { useEffect, useRef, useState } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { image as icon, plugins as pluginsIcon } from '@/components/gutenberg/icons';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { useResizeObserver } from '@/hooks/gutenberg/compose';
+import { getProtocol, prependHTTPS } from '@/utils/gutenberg/url';
+import { store as uploadStore } from '@/services/gutenberg/upload-media';
 import { useUploadMediaFromBlobURL } from '../utils/hooks';
 import Image from './image';
 import { isValidFileType } from './utils';

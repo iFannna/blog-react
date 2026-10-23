@@ -21,8 +21,8 @@ const DEFAULT_NOTICES: Array< Notice > = [];
  * @example
  *
  *```js
- * import { useSelect } from '@wordpress/data';
- * import { store as noticesStore } from '@wordpress/notices';
+ * import { useSelect } from '@/stores/gutenberg/data';
+ * import { store as noticesStore } from '@/stores/gutenberg/notices';
  *
  * const ExampleComponent = () => {
  *     const notices = useSelect( ( select ) => select( noticesStore ).getNotices() );

@@ -1,11 +1,11 @@
-import { __, isRTL } from '@wordpress/i18n';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
 import {
 	__experimentalItemGroup as ItemGroup,
 	__experimentalVStack as VStack,
 	__experimentalHStack as HStack,
 	FlexItem,
-} from '@wordpress/components';
-import { Icon, chevronLeft, chevronRight } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { Icon, chevronLeft, chevronRight } from '@/components/gutenberg/icons';
 import { Subtitle } from '../subtitle';
 import { NavigationButtonAsItem } from '../navigation-button';
 

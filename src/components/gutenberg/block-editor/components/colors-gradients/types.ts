@@ -3,8 +3,8 @@ import type {
 	ColorPalette,
 	GradientPicker,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import type { Palette } from '@wordpress/global-styles-engine';
+} from '@/components/gutenberg/ui';
+import type { Palette } from '@/lib/gutenberg/global-styles-engine';
 import type { NoticeProps } from './control';
 
 type ColorPaletteProps = ComponentProps< typeof ColorPalette >;

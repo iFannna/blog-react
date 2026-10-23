@@ -1,6 +1,6 @@
-import deprecated from '@wordpress/deprecated';
-import { usePluginContext } from '@wordpress/plugins';
-import { ActionItem } from '@wordpress/interface';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { usePluginContext } from '@/lib/gutenberg/plugins';
+import { ActionItem } from '@/components/gutenberg/interface';
 
 /**
  * Renders a menu item in `Plugins` group in `More Menu` drop down, and can be used to as a button or link depending on the props provided.
@@ -39,9 +39,9 @@ import { ActionItem } from '@wordpress/interface';
  * @example
  * ```jsx
  * // Using ESNext syntax
- * import { __ } from '@wordpress/i18n';
- * import { PluginMoreMenuItem } from '@wordpress/editor';
- * import { more } from '@wordpress/icons';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { PluginMoreMenuItem } from '@/components/gutenberg/editor';
+ * import { more } from '@/components/gutenberg/icons';
  *
  * function onButtonClick() {
  * 	alert( 'Button clicked.' );

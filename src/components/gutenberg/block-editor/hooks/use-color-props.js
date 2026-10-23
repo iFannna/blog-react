@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useMemo } from '@wordpress/element';
+import { useMemo } from '@/lib/gutenberg/element';
 import { getInlineStyles } from './style';
 import {
 	getColorClassName,

@@ -1,8 +1,8 @@
-import { Button, TextControl, Modal } from '@wordpress/components';
-import { Stack, Text } from '@wordpress/ui';
-import { __, sprintf } from '@wordpress/i18n';
-import { useState, useId } from '@wordpress/element';
-import { speak } from '@wordpress/a11y';
+import { Button, TextControl, Modal } from '@/components/gutenberg/ui';
+import { Stack, Text } from '@/components/gutenberg/design-system';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useState, useId } from '@/lib/gutenberg/element';
+import { speak } from '@/utils/gutenberg/a11y';
 
 export function AllowOverridesModal( {
 	placeholder,

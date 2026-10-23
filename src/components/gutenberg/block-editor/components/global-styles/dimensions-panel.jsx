@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	__experimentalToolsPanel as ToolsPanel,
 	BoxControl,
@@ -6,10 +6,10 @@ import {
 	__experimentalUseCustomUnits as useCustomUnits,
 	__experimentalInputControlPrefixWrapper as InputControlPrefixWrapper,
 	__experimentalParseQuantityAndUnitFromRawValue as parseQuantityAndUnitFromRawValue,
-} from '@wordpress/components';
-import { Icon, alignNone, stretchWide } from '@wordpress/icons';
-import { useCallback, useState } from '@wordpress/element';
-import { getValueFromVariable } from '@wordpress/global-styles-engine';
+} from '@/components/gutenberg/ui';
+import { Icon, alignNone, stretchWide } from '@/components/gutenberg/icons';
+import { useCallback, useState } from '@/lib/gutenberg/element';
+import { getValueFromVariable } from '@/lib/gutenberg/global-styles-engine';
 import { useToolsPanelDropdownMenuProps } from './utils';
 import SpacingSizesControl from '../spacing-sizes-control';
 import DimensionControl from '../dimension-control';

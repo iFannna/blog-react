@@ -1,10 +1,10 @@
 import fastDeepEqual from 'fast-deep-equal/es6/index.js';
-import { getBlockBindingsSource } from '@wordpress/blocks';
-import { useSelect } from '@wordpress/data';
-import { useContext, useMemo } from '@wordpress/element';
-import { useViewportMatch } from '@wordpress/compose';
+import { getBlockBindingsSource } from '@/lib/gutenberg/blocks';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useContext, useMemo } from '@/lib/gutenberg/element';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of the new Menu, pending WordPress/gutenberg#76135.
-import { Menu } from '@wordpress/ui';
+import { Menu } from '@/components/gutenberg/design-system';
 import useBlockBindingsUtils from './use-block-bindings-utils';
 import BlockContext from '../block-context';
 import type {

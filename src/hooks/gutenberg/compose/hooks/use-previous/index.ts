@@ -1,4 +1,4 @@
-import { useEffect, useRef } from '@wordpress/element';
+import { useEffect, useRef } from '@/lib/gutenberg/element';
 
 /**
  * Use something's value from the previous render.

@@ -52,7 +52,7 @@ export { plugins };
  *
  * @example
  * ```js
- * import { combineReducers, createReduxStore, register } from '@wordpress/data';
+ * import { combineReducers, createReduxStore, register } from '@/stores/gutenberg/data';
  *
  * const prices = ( state = {}, action ) => {
  * 	return action.type === 'SET_PRICE' ?
@@ -96,7 +96,7 @@ export const combineReducers =
  *
  * @example
  * ```js
- * import { resolveSelect } from '@wordpress/data';
+ * import { resolveSelect } from '@/stores/gutenberg/data';
  * import { store as myCustomStore } from 'my-custom-store';
  *
  * resolveSelect( myCustomStore ).getPrice( 'hammer' ).then(console.log)
@@ -141,7 +141,7 @@ export const suspendSelect = (
  *
  * @example
  * ```js
- * import { subscribe } from '@wordpress/data';
+ * import { subscribe } from '@/stores/gutenberg/data';
  *
  * const unsubscribe = subscribe( () => {
  * 	// You could use this opportunity to test whether the derived result of a
@@ -196,7 +196,7 @@ export const use: any = defaultRegistry.use;
  *
  * @example
  * ```js
- * import { createReduxStore, register } from '@wordpress/data';
+ * import { createReduxStore, register } from '@/stores/gutenberg/data';
  *
  * const store = createReduxStore( 'demo', {
  *     reducer: ( state = 'OK' ) => state,

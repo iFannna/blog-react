@@ -1,9 +1,9 @@
 import {
 	Button,
 	privateApis as componentsPrivateApis,
-} from '@wordpress/components';
-import { forwardRef } from '@wordpress/element';
-import { closeSmall } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { forwardRef } from '@/lib/gutenberg/element';
+import { closeSmall } from '@/components/gutenberg/icons';
 import type { ForwardedRef } from 'react';
 import { unlock } from '../../lock-unlock';
 import type { TabbedSidebarProps } from './types';

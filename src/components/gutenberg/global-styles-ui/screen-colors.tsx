@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { __experimentalVStack as VStack } from '@wordpress/components';
+import { __ } from '@/lib/gutenberg/i18n';
+import { __experimentalVStack as VStack } from '@/components/gutenberg/ui';
 import { ScreenHeader } from './screen-header';
 import { ScreenBody } from './screen-body';
 import Palette from './palette';

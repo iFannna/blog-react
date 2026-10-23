@@ -1,6 +1,6 @@
-import { useDispatch, useSelect } from '@wordpress/data';
-import deprecated from '@wordpress/deprecated';
-import { useMemo } from '@wordpress/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { useMemo } from '@/lib/gutenberg/element';
 import { store as coreStore } from '../';
 import type { Status } from './constants';
 import { getResolutionStatus } from './utils';
@@ -67,7 +67,7 @@ const EMPTY_OBJECT = {};
  * @param    options  Optional hook options.
  * @example
  * ```js
- * import { useEntityRecord } from '@wordpress/core-data';
+ * import { useEntityRecord } from '@/stores/gutenberg/core-data';
  *
  * function PageTitleDisplay( { id } ) {
  *   const { record, isResolving } = useEntityRecord( 'postType', 'page', id );
@@ -90,11 +90,11 @@ const EMPTY_OBJECT = {};
  * @example
  * ```js
  * import { useCallback } from 'react';
- * import { useDispatch } from '@wordpress/data';
- * import { __ } from '@wordpress/i18n';
- * import { TextControl } from '@wordpress/components';
- * import { store as noticeStore } from '@wordpress/notices';
- * import { useEntityRecord } from '@wordpress/core-data';
+ * import { useDispatch } from '@/stores/gutenberg/data';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { TextControl } from '@/components/gutenberg/ui';
+ * import { store as noticeStore } from '@/stores/gutenberg/notices';
+ * import { useEntityRecord } from '@/stores/gutenberg/core-data';
  *
  * function PageRenameForm( { id } ) {
  * 	const page = useEntityRecord( 'postType', 'page', id );

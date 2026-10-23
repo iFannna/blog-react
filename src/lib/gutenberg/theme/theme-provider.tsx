@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef } from '@wordpress/element';
-import { useEvent, useIsomorphicLayoutEffect } from '@wordpress/compose';
+import { useEffect, useMemo, useRef } from '@/lib/gutenberg/element';
+import { useEvent, useIsomorphicLayoutEffect } from '@/hooks/gutenberg/compose';
 import { ThemeContext } from './context.ts';
 import { useThemeProviderStyles } from './use-theme-provider-styles.ts';
 import { type ThemeProviderProps } from './types.ts';

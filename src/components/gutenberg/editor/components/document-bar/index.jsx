@@ -1,23 +1,23 @@
 import clsx from 'clsx';
-import { __, isRTL } from '@wordpress/i18n';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	Button,
 	__experimentalText as WCText,
 	__unstableMotion as motion,
 	__unstableAnimatePresence as AnimatePresence,
-} from '@wordpress/components';
-import { BlockIcon, store as blockEditorStore } from '@wordpress/block-editor';
-import { chevronLeftSmall, chevronRightSmall, layout } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { BlockIcon, store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { chevronLeftSmall, chevronRightSmall, layout } from '@/components/gutenberg/icons';
 import {
 	store as coreStore,
 	privateApis as coreDataPrivateApis,
-} from '@wordpress/core-data';
-import { store as commandsStore } from '@wordpress/commands';
-import { useRef, useEffect } from '@wordpress/element';
-import { useReducedMotion } from '@wordpress/compose';
-import { decodeEntities } from '@wordpress/html-entities';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
+} from '@/stores/gutenberg/core-data';
+import { store as commandsStore } from '@/lib/gutenberg/commands';
+import { useRef, useEffect } from '@/lib/gutenberg/element';
+import { useReducedMotion } from '@/hooks/gutenberg/compose';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
 import { TEMPLATE_POST_TYPES } from '../../store/constants';
 import { store as editorStore } from '../../store';
 import usePageTypeBadge from '../../utils/pageTypeBadge';
@@ -25,7 +25,7 @@ import { getStylesCanvasTitle } from '../styles-canvas';
 import { unlock } from '../../lock-unlock';
 import useEditedSectionDetails from './useEditedSectionDetails';
 
-/** @typedef {import("@wordpress/components").IconType} IconType */
+/** @typedef {import("@/components/gutenberg/ui").IconType} IconType */
 
 const { getTemplateInfo } = unlock( coreDataPrivateApis );
 const MotionButton = motion.create( Button );

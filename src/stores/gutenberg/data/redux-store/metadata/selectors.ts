@@ -1,4 +1,4 @@
-import deprecated from '@wordpress/deprecated';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { createSelector } from '../../create-selector';
 import { selectorArgsToStateKey } from './utils';
 import type { State, StateValue } from './reducer';

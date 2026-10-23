@@ -4,12 +4,12 @@ import {
 	getBlockType,
 	hasBlockSupport,
 	store as blocksStore,
-} from '@wordpress/blocks';
-import { withFilters } from '@wordpress/components';
-import { useRegistry, useSelect } from '@wordpress/data';
-import { useCallback, useContext, useMemo } from '@wordpress/element';
+} from '@/lib/gutenberg/blocks';
+import { withFilters } from '@/components/gutenberg/ui';
+import { useRegistry, useSelect } from '@/stores/gutenberg/data';
+import { useCallback, useContext, useMemo } from '@/lib/gutenberg/element';
 import type { ComponentType } from 'react';
-import type { BlockBindingsSource } from '@wordpress/blocks';
+import type { BlockBindingsSource } from '@/lib/gutenberg/blocks';
 import BlockContext from '../block-context';
 import isURLLike from '../link-control/is-url-like';
 import {

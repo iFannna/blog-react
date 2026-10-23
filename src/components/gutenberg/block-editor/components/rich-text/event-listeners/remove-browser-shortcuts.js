@@ -1,5 +1,5 @@
-import { isKeyboardEvent } from '@wordpress/keycodes';
-import { privateApis as richTextPrivateApis } from '@wordpress/rich-text';
+import { isKeyboardEvent } from '@/utils/gutenberg/keycodes';
+import { privateApis as richTextPrivateApis } from '@/components/gutenberg/rich-text';
 import { unlock } from '../../../lock-unlock';
 
 const { subscribeOwnedListener } = unlock( richTextPrivateApis );

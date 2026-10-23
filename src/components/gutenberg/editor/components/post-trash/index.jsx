@@ -1,10 +1,10 @@
-import { __, sprintf } from '@wordpress/i18n';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	Button,
 	__experimentalConfirmDialog as ConfirmDialog,
-} from '@wordpress/components';
-import { useSelect, useDispatch, useRegistry } from '@wordpress/data';
-import { useState } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { useSelect, useDispatch, useRegistry } from '@/stores/gutenberg/data';
+import { useState } from '@/lib/gutenberg/element';
 import { store as editorStore } from '../../store';
 import PostTrashCheck from './check';
 

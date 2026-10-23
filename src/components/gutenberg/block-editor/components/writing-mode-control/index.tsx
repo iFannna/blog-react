@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import { __, isRTL } from '@wordpress/i18n';
-import { textHorizontal, textVertical } from '@wordpress/icons';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
+import { textHorizontal, textVertical } from '@/components/gutenberg/icons';
 import {
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import type { WritingModeControlProps } from './types';
 
 const WRITING_MODES = [

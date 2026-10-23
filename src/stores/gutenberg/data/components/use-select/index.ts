@@ -2,15 +2,15 @@
 // in its internal helpers (_useStaticSelect, _useMappingSelect) where
 // hooks are called inside non-hook functions and conditionally dispatched.
 /* eslint-disable react-hooks/rules-of-hooks */
-import { createQueue } from '@wordpress/priority-queue';
+import { createQueue } from '@/utils/gutenberg/priority-queue';
 import {
 	useRef,
 	useCallback,
 	useMemo,
 	useSyncExternalStore,
 	useDebugValue,
-} from '@wordpress/element';
-import { isShallowEqual } from '@wordpress/is-shallow-equal';
+} from '@/lib/gutenberg/element';
+import { isShallowEqual } from '@/utils/gutenberg/is-shallow-equal';
 import useRegistry from '../registry-provider/use-registry';
 import useAsyncMode from '../async-mode-provider/use-async-mode';
 import type {
@@ -377,7 +377,7 @@ function _useMappingSelect(
  *
  * @example
  * ```js
- * import { useSelect } from '@wordpress/data';
+ * import { useSelect } from '@/stores/gutenberg/data';
  * import { store as myCustomStore } from 'my-custom-store';
  *
  * function HammerPriceDisplay( { currency } ) {
@@ -408,7 +408,7 @@ function _useMappingSelect(
  * function because your component won't re-render on a data change.**
  *
  * ```js
- * import { useSelect } from '@wordpress/data';
+ * import { useSelect } from '@/stores/gutenberg/data';
  * import { store as myCustomStore } from 'my-custom-store';
  *
  * function Paste( { children } ) {

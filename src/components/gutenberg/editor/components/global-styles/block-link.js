@@ -1,7 +1,7 @@
-import { useSelect } from '@wordpress/data';
-import { useEffect } from '@wordpress/element';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { usePrevious } from '@wordpress/compose';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useEffect } from '@/lib/gutenberg/element';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { usePrevious } from '@/hooks/gutenberg/compose';
 
 /**
  * Auto-navigate to block styles when a block is selected in the canvas.

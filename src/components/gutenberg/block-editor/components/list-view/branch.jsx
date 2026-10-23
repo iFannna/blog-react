@@ -1,9 +1,9 @@
 import {
 	__experimentalTreeGridRow as TreeGridRow,
 	__experimentalTreeGridCell as TreeGridCell,
-} from '@wordpress/components';
-import { memo } from '@wordpress/element';
-import { AsyncModeProvider, useSelect } from '@wordpress/data';
+} from '@/components/gutenberg/ui';
+import { memo } from '@/lib/gutenberg/element';
+import { AsyncModeProvider, useSelect } from '@/stores/gutenberg/data';
 import { Appender } from './appender';
 import ListViewBlock from './block';
 import { useInsertedBlockClientId, useListViewTreeState } from './context';

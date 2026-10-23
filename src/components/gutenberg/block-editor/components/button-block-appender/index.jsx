@@ -1,9 +1,9 @@
 import clsx from 'clsx';
-import { Button } from '@wordpress/components';
-import { forwardRef } from '@wordpress/element';
-import { _x, sprintf } from '@wordpress/i18n';
-import { Icon, plus } from '@wordpress/icons';
-import deprecated from '@wordpress/deprecated';
+import { Button } from '@/components/gutenberg/ui';
+import { forwardRef } from '@/lib/gutenberg/element';
+import { _x, sprintf } from '@/lib/gutenberg/i18n';
+import { Icon, plus } from '@/components/gutenberg/icons';
+import deprecated from '@/utils/gutenberg/deprecated';
 import Inserter from '../inserter';
 
 function ButtonBlockAppender(

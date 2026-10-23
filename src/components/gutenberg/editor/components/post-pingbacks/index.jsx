@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n';
-import { CheckboxControl as WCCheckboxControl } from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { CheckboxControl as WCCheckboxControl } from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import { store as editorStore } from '../../store';
 
 function PostPingbacks() {

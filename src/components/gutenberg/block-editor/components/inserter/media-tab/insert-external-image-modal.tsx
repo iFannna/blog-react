@@ -1,6 +1,6 @@
-import { Modal, Button } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { Stack } from '@wordpress/ui';
+import { Modal, Button } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Stack } from '@/components/gutenberg/design-system';
 
 type InsertExternalImageModalProps = {
 	/**

@@ -6,7 +6,7 @@ import type {
 import type {
 	Icon as WCIcon,
 	__experimentalUnitControl as UnitControl,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 
 /**
  * A unit option, which can carry its own `max` and `step`.

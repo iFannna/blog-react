@@ -1,9 +1,9 @@
-import { getBlockType, store as blocksStore } from '@wordpress/blocks';
-import { PanelBody } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { DataForm } from '@wordpress/dataviews';
-import { useContext, useMemo } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { getBlockType, store as blocksStore } from '@/lib/gutenberg/blocks';
+import { PanelBody } from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { DataForm } from '@/components/gutenberg/dataviews';
+import { useContext, useMemo } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import InspectorControls from '../components/inspector-controls';
 import { useBlockEditingMode } from '../components/block-editing-mode';
 import { store as blockEditorStore } from '../store';

@@ -1,7 +1,7 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { info } from '@wordpress/icons';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { info } from '@/components/gutenberg/icons';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Infotip pattern; Popover is not allowlisted yet (same as widget-header-infotip).
-import { Badge, Icon, Popover, Stack, VisuallyHidden } from '@wordpress/ui';
+import { Badge, Icon, Popover, Stack, VisuallyHidden } from '@/components/gutenberg/design-system';
 
 function getSummaryDescription( selectedViewport, selectedPseudoState ) {
 	if ( selectedViewport && selectedPseudoState ) {

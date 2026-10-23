@@ -1,15 +1,15 @@
-import { useDispatch } from '@wordpress/data';
-import { useEffect, useMemo, useRef } from '@wordpress/element';
-import { SlotFillProvider } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { useEffect, useMemo, useRef } from '@/lib/gutenberg/element';
+import { SlotFillProvider } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	MediaUploadProvider,
 	store as uploadStore,
 	detectClientSideMediaSupport,
 	isHeicCanvasSupported,
 	isHeicFile,
-} from '@wordpress/upload-media';
-import type { DataRegistry } from '@wordpress/data';
+} from '@/services/gutenberg/upload-media';
+import type { DataRegistry } from '@/stores/gutenberg/data';
 import withRegistryProvider from './with-registry-provider';
 import useBlockSync from './use-block-sync';
 import { store as blockEditorStore } from '../../store';

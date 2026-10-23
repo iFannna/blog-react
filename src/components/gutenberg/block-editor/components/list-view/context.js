@@ -1,4 +1,4 @@
-import { createContext, useContext } from '@wordpress/element';
+import { createContext, useContext } from '@/lib/gutenberg/element';
 
 /**
  * Values that never change for the lifetime of a List View, such as the

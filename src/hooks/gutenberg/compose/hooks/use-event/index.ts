@@ -1,4 +1,4 @@
-import { useRef, useInsertionEffect, useCallback } from '@wordpress/element';
+import { useRef, useInsertionEffect, useCallback } from '@/lib/gutenberg/element';
 
 /**
  * Any function.

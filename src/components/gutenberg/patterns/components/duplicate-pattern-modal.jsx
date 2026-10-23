@@ -1,7 +1,7 @@
-import { store as coreStore } from '@wordpress/core-data';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { __, _x, sprintf } from '@wordpress/i18n';
-import { store as noticesStore } from '@wordpress/notices';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import CreatePatternModal from './create-pattern-modal';
 import { PATTERN_SYNC_TYPES, PATTERN_TYPES } from '../constants';
 

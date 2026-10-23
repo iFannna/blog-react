@@ -1,6 +1,6 @@
-import { useCallback, useMemo } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { parse, __unstableSerializeAndClean } from '@wordpress/blocks';
+import { useCallback, useMemo } from '@/lib/gutenberg/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { parse, __unstableSerializeAndClean } from '@/lib/gutenberg/blocks';
 import { STORE_NAME } from '../name';
 import useEntityId from './use-entity-id';
 import { updateFootnotesFromMeta } from '../footnotes';

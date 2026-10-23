@@ -1,4 +1,4 @@
-import { useMemo } from '@wordpress/element';
+import { useMemo } from '@/lib/gutenberg/element';
 import {
 	BaseControl,
 	RangeControl,
@@ -8,9 +8,9 @@ import {
 	__experimentalUseCustomUnits as useCustomUnits,
 	__experimentalUnitControl as UnitControl,
 	__experimentalParseQuantityAndUnitFromRawValue as parseQuantityAndUnitFromRawValue,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import deprecated from '@wordpress/deprecated';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { useSettings } from '../use-settings';
 import type { HeightControlProps } from './types';
 

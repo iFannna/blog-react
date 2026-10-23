@@ -1,13 +1,13 @@
-import { useDispatch, useSelect } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { MenuItem } from '@wordpress/components';
-import { createBlock } from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
-import { store as noticesStore } from '@wordpress/notices';
-import { symbolFilled } from '@wordpress/icons';
-import { store as coreStore } from '@wordpress/core-data';
-import { privateApis as patternsPrivateApis } from '@wordpress/patterns';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { MenuItem } from '@/components/gutenberg/ui';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useState } from '@/lib/gutenberg/element';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { symbolFilled } from '@/components/gutenberg/icons';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { privateApis as patternsPrivateApis } from '@/components/gutenberg/patterns';
 import { unlock } from '../../lock-unlock';
 
 const { CreateTemplatePartModal } = unlock( patternsPrivateApis );

@@ -2,9 +2,9 @@ import {
 	isReusableBlock,
 	createBlock,
 	getBlockFromExample,
-} from '@wordpress/blocks';
-import { useMemo } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+} from '@/lib/gutenberg/blocks';
+import { useMemo } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import BlockCard from '../block-card';
 import BlockPreview from '../block-preview';
 

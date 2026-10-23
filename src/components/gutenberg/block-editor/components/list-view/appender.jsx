@@ -1,8 +1,8 @@
-import { useInstanceId } from '@wordpress/compose';
-import { speak } from '@wordpress/a11y';
-import { useSelect } from '@wordpress/data';
-import { forwardRef, useEffect } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { speak } from '@/utils/gutenberg/a11y';
+import { useSelect } from '@/stores/gutenberg/data';
+import { forwardRef, useEffect } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import { store as blockEditorStore } from '../../store';
 import useBlockDisplayTitle from '../block-title/use-block-display-title';
 import { useInsertedBlockClientId, useListViewContext } from './context';

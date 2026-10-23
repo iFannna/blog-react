@@ -5,18 +5,18 @@ import {
 	PlainText,
 	HeadingLevelDropdown,
 	useBlockEditingMode,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	ToggleControl,
 	TextControl,
 	ExternalLink,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useEntityProp, store as coreStore } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
-import { createInterpolateElement } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useEntityProp, store as coreStore } from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { createInterpolateElement } from '@/lib/gutenberg/element';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 export default function PostTitleEdit( {

@@ -1,12 +1,12 @@
-import { useSelect } from '@wordpress/data';
-import { useEntityProp } from '@wordpress/core-data';
-import { useMemo } from '@wordpress/element';
-import { createHigherOrderComponent } from '@wordpress/compose';
-import { addFilter } from '@wordpress/hooks';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useEntityProp } from '@/stores/gutenberg/core-data';
+import { useMemo } from '@/lib/gutenberg/element';
+import { createHigherOrderComponent } from '@/hooks/gutenberg/compose';
+import { addFilter } from '@/hooks/gutenberg/hooks';
 import { store as editorStore } from '../store';
 
-/** @typedef {import('@wordpress/compose').WPHigherOrderComponent} WPHigherOrderComponent */
-/** @typedef {import('@wordpress/blocks').WPBlockSettings} WPBlockSettings */
+/** @typedef {import('@/hooks/gutenberg/compose').WPHigherOrderComponent} WPHigherOrderComponent */
+/** @typedef {import('@/lib/gutenberg/blocks').WPBlockSettings} WPBlockSettings */
 
 /**
  * Object whose keys are the names of block attributes, where each value

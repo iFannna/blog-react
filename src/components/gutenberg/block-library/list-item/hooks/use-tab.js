@@ -1,9 +1,9 @@
-import { useRefEffect } from '@wordpress/compose';
-import { privateApis as richTextPrivateApis } from '@wordpress/rich-text';
-import { SPACE, TAB } from '@wordpress/keycodes';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { useRegistry } from '@wordpress/data';
-import { isEntirelySelected } from '@wordpress/dom';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { privateApis as richTextPrivateApis } from '@/components/gutenberg/rich-text';
+import { SPACE, TAB } from '@/utils/gutenberg/keycodes';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { useRegistry } from '@/stores/gutenberg/data';
+import { isEntirelySelected } from '@/utils/gutenberg/dom';
 import { indentListItems, outdentListItems } from '../utils';
 import { unlock } from '../../lock-unlock';
 

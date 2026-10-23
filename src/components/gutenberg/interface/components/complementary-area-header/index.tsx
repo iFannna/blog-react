@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { closeSmall } from '@wordpress/icons';
+import { closeSmall } from '@/components/gutenberg/icons';
 import ComplementaryAreaToggle from '../complementary-area-toggle';
 import type { ComplementaryAreaHeaderProps } from './types';
 

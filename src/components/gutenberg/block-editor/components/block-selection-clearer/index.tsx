@@ -1,5 +1,5 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useRefEffect } from '@wordpress/compose';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
 import type { ComponentPropsWithoutRef } from 'react';
 import { store as blockEditorStore } from '../../store';
 

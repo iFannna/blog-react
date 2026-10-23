@@ -1,17 +1,17 @@
-import { useDispatch, useSelect, useRegistry } from '@wordpress/data';
-import { useCallback, useState } from '@wordpress/element';
+import { useDispatch, useSelect, useRegistry } from '@/stores/gutenberg/data';
+import { useCallback, useState } from '@/lib/gutenberg/element';
 import type { RefCallback } from 'react';
 import {
 	useThrottle,
 	__experimentalUseDropZone as useDropZone,
-} from '@wordpress/compose';
-import { isRTL } from '@wordpress/i18n';
+} from '@/hooks/gutenberg/compose';
+import { isRTL } from '@/lib/gutenberg/i18n';
 import {
 	hasBlockSupport,
 	isUnmodifiedDefaultBlock as getIsUnmodifiedDefaultBlock,
 	store as blocksStore,
-} from '@wordpress/blocks';
-import type { Block } from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
+import type { Block } from '@/lib/gutenberg/blocks';
 import useOnBlockDrop from '../use-on-block-drop';
 import {
 	getDistanceToNearestEdge,

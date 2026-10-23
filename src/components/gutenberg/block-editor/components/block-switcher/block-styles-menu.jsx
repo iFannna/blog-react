@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n';
-import { MenuGroup } from '@wordpress/components';
-import { useMemo, useState } from '@wordpress/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { MenuGroup } from '@/components/gutenberg/ui';
+import { useMemo, useState } from '@/lib/gutenberg/element';
 import BlockStylesMenuItems from '../block-styles/menu-items';
 import useStylesForBlocks from '../block-styles/use-styles-for-block';
 import { replaceActiveStyle } from '../block-styles/utils';

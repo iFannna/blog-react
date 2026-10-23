@@ -1,4 +1,4 @@
-import { applyFilters } from '@wordpress/hooks';
+import { applyFilters } from '@/hooks/gutenberg/hooks';
 
 export const DEFAULT_CLIENT_LIMIT_PER_ROOM = 3;
 

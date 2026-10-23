@@ -1,9 +1,9 @@
-import { useLayoutEffect, useRef } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { store as coreStore } from '@wordpress/core-data';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useInstanceId } from '@wordpress/compose';
-import { VisuallyHidden } from '@wordpress/ui';
+import { useLayoutEffect, useRef } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
 import { store as editorStore } from '../../store';
 import { adjustPosition, getDiff } from './utils';
 

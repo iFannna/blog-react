@@ -4,7 +4,7 @@ import type {
 	RefCallback,
 	SyntheticEvent,
 } from 'react';
-import { useRef, useEffect, useCallback } from '@wordpress/element';
+import { useRef, useEffect, useCallback } from '@/lib/gutenberg/element';
 import useConstrainedTabbing from '../use-constrained-tabbing';
 import { useFocusOnMount } from '../use-focus-on-mount';
 import useFocusReturn from '../use-focus-return';

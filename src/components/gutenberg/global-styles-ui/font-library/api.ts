@@ -1,11 +1,11 @@
-import apiFetch from '@wordpress/api-fetch';
-import { store as coreDataStore } from '@wordpress/core-data';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { store as coreDataStore } from '@/stores/gutenberg/core-data';
 import type {
 	CollectionFontFace,
 	CollectionFontFamily,
 	FontFace,
-} from '@wordpress/core-data';
-import type { DataRegistry } from '@wordpress/data';
+} from '@/stores/gutenberg/core-data';
+import type { DataRegistry } from '@/stores/gutenberg/data';
 
 const FONT_FAMILIES_URL = '/wp/v2/font-families';
 

@@ -1,4 +1,4 @@
-import { sprintf, _n } from '@wordpress/i18n';
+import { sprintf, _n } from '@/lib/gutenberg/i18n';
 import type { FieldValidity } from '../../types';
 
 function countInvalidFields( validity: FieldValidity | undefined ): number {

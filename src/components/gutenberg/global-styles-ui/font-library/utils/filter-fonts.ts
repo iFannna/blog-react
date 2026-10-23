@@ -1,4 +1,4 @@
-import type { CollectionFontFamily } from '@wordpress/core-data';
+import type { CollectionFontFamily } from '@/stores/gutenberg/core-data';
 
 /**
  * Filters a list of fonts based on the specified filters.

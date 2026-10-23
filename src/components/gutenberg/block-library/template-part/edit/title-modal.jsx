@@ -1,12 +1,12 @@
-import { useState } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
+import { useState } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	TextControl,
 	Button,
 	Modal,
 	__experimentalHStack as HStack,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 
 export default function TitleModal( { areaLabel, onClose, onSubmit } ) {
 	// Restructure onCreate to set the blocks on local state.

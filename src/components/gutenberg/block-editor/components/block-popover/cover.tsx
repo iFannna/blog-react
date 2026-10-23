@@ -1,5 +1,5 @@
 import type { CSSProperties, ForwardedRef, ReactNode } from 'react';
-import { useEffect, useState, useMemo, forwardRef } from '@wordpress/element';
+import { useEffect, useState, useMemo, forwardRef } from '@/lib/gutenberg/element';
 import { useBlockElement } from '../block-list/use-block-props/use-block-refs';
 import { PrivateBlockPopover } from '.';
 import type { BlockPopoverCoverProps } from './types';

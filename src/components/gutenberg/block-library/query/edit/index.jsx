@@ -1,6 +1,6 @@
-import { useSelect } from '@wordpress/data';
-import { useState } from '@wordpress/element';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useState } from '@/lib/gutenberg/element';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import QueryContent from './query-content';
 import QueryPlaceholder from './query-placeholder';
 import { PatternSelectionModal } from './pattern-selection';

@@ -1,4 +1,4 @@
-import type { BlockVariation } from '@wordpress/blocks';
+import type { BlockVariation } from '@/lib/gutenberg/blocks';
 
 /**
  * Props of the controls switching between the transform variations.

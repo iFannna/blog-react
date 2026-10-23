@@ -8,7 +8,7 @@
  * on Windows Control will usually come first. So don't provide your own
  * shortcut combos directly to keyboardShortcut().
  */
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import type { KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { isAppleOS } from './platform';
 

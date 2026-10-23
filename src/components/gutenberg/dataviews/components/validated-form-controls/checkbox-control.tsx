@@ -1,10 +1,10 @@
-import { forwardRef, useRef } from '@wordpress/element';
-import { useMergeRefs } from '@wordpress/compose';
-import { CheckboxControl as WCCheckboxControl } from '@wordpress/components';
+import { forwardRef, useRef } from '@/lib/gutenberg/element';
+import { useMergeRefs } from '@/hooks/gutenberg/compose';
+import { CheckboxControl as WCCheckboxControl } from '@/components/gutenberg/ui';
 import {
 	// eslint-disable-next-line @wordpress/use-recommended-components
 	ControlWithError,
-} from '@wordpress/ui';
+} from '@/components/gutenberg/design-system';
 import type { ValidatedControlProps } from './types';
 
 type CheckboxControlProps = React.ComponentProps< typeof WCCheckboxControl >;

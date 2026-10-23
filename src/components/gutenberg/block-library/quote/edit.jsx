@@ -1,17 +1,17 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	AlignmentControl,
 	BlockControls,
 	useBlockProps,
 	useInnerBlocksProps,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { BlockQuotation } from '@wordpress/components';
-import { useDispatch, useRegistry, useSelect } from '@wordpress/data';
-import { useEffect } from '@wordpress/element';
-import deprecated from '@wordpress/deprecated';
-import { verse } from '@wordpress/icons';
+} from '@/components/gutenberg/block-editor';
+import { BlockQuotation } from '@/components/gutenberg/ui';
+import { useDispatch, useRegistry, useSelect } from '@/stores/gutenberg/data';
+import { useEffect } from '@/lib/gutenberg/element';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { verse } from '@/components/gutenberg/icons';
 import { migrateToQuoteV2 } from './deprecated';
 import { Caption } from '../utils/caption';
 

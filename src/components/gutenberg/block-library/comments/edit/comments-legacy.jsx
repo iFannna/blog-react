@@ -4,9 +4,9 @@ import {
 	BlockControls,
 	Warning,
 	useBlockProps,
-} from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
+} from '@/components/gutenberg/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Button } from '@/components/gutenberg/ui';
 import Placeholder from './placeholder';
 
 export default function CommentsLegacy( {

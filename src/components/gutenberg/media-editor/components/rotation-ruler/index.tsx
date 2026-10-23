@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import type { CSSProperties, KeyboardEvent } from 'react';
-import { useId, useMemo, useRef } from '@wordpress/element';
+import { useId, useMemo, useRef } from '@/lib/gutenberg/element';
 import { useRulerDrag, clampValue } from './use-ruler-drag';
 
 export interface RotationRulerProps {

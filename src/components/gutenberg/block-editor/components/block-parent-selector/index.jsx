@@ -1,9 +1,9 @@
-import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { __, _x, sprintf } from '@wordpress/i18n';
-import { useRef } from '@wordpress/element';
-import { getBlockType, hasBlockSupport } from '@wordpress/blocks';
-import { plus } from '@wordpress/icons';
+import { ToolbarButton, ToolbarGroup } from '@/components/gutenberg/ui';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
+import { useRef } from '@/lib/gutenberg/element';
+import { getBlockType, hasBlockSupport } from '@/lib/gutenberg/blocks';
+import { plus } from '@/components/gutenberg/icons';
 import useBlockDisplayInformation from '../use-block-display-information';
 import BlockIcon from '../block-icon';
 import Inserter from '../inserter';

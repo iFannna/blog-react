@@ -1,4 +1,4 @@
-import { RichText, useBlockProps } from '@wordpress/block-editor';
+import { RichText, useBlockProps } from '@/components/gutenberg/block-editor';
 import { escape } from './utils';
 
 export default function save( { attributes } ) {

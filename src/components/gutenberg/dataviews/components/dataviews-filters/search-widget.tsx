@@ -2,16 +2,16 @@
 import * as Ariakit from '@ariakit/react';
 import removeAccents from 'remove-accents';
 import clsx from 'clsx';
-import { useInstanceId } from '@wordpress/compose';
-import { __, sprintf } from '@wordpress/i18n';
-import { useState, useMemo, useDeferredValue } from '@wordpress/element';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useState, useMemo, useDeferredValue } from '@/lib/gutenberg/element';
 import {
 	Icon as WCIcon,
 	Composite,
 	Spinner as WCSpinner,
-} from '@wordpress/components';
-import { search, check } from '@wordpress/icons';
-import { VisuallyHidden } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { search, check } from '@/components/gutenberg/icons';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
 import { getCurrentValue } from './utils';
 import type { Filter, NormalizedFilter, View, Option } from '../../types';
 import useElements from '../../hooks/use-elements';

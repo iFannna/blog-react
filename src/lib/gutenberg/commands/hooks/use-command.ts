@@ -1,5 +1,5 @@
-import { useEffect, useRef } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
+import { useEffect, useRef } from '@/lib/gutenberg/element';
+import { useDispatch } from '@/stores/gutenberg/data';
 import { store as commandsStore } from '../store';
 import type { CommandConfig } from '../store/types';
 
@@ -10,8 +10,8 @@ import type { CommandConfig } from '../store/types';
  *
  * @example
  * ```js
- * import { useCommand } from '@wordpress/commands';
- * import { plus } from '@wordpress/icons';
+ * import { useCommand } from '@/lib/gutenberg/commands';
+ * import { plus } from '@/components/gutenberg/icons';
  *
  * useCommand( {
  *     name: 'myplugin/my-command-name',
@@ -71,8 +71,8 @@ export function useCommand( command: CommandConfig ) {
  *
  * @example
  * ```js
- * import { useCommands } from '@wordpress/commands';
- * import { plus, pencil } from '@wordpress/icons';
+ * import { useCommands } from '@/lib/gutenberg/commands';
+ * import { plus, pencil } from '@/components/gutenberg/icons';
  *
  * useCommands( [
  *     {

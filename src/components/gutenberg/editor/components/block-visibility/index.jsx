@@ -1,10 +1,10 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { hasBlockSupport, store as blocksStore } from '@wordpress/blocks';
-import { useMemo } from '@wordpress/element';
-import { Button } from '@wordpress/components';
-import { __, _n, sprintf } from '@wordpress/i18n';
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { hasBlockSupport, store as blocksStore } from '@/lib/gutenberg/blocks';
+import { useMemo } from '@/lib/gutenberg/element';
+import { Button } from '@/components/gutenberg/ui';
+import { __, _n, sprintf } from '@/lib/gutenberg/i18n';
+import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 

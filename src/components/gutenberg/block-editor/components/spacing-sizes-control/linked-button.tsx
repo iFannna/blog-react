@@ -1,6 +1,6 @@
-import { Button } from '@wordpress/components';
-import { link, linkOff } from '@wordpress/icons';
-import { __ } from '@wordpress/i18n';
+import { Button } from '@/components/gutenberg/ui';
+import { link, linkOff } from '@/components/gutenberg/icons';
+import { __ } from '@/lib/gutenberg/i18n';
 import type { LinkedButtonProps } from './types';
 
 export default function LinkedButton( {

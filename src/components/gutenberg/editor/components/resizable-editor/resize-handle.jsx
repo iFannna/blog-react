@@ -1,7 +1,7 @@
-import { __ } from '@wordpress/i18n';
-import { LEFT, RIGHT } from '@wordpress/keycodes';
-import { __unstableMotion as motion } from '@wordpress/components';
-import { Tooltip, VisuallyHidden } from '@wordpress/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { LEFT, RIGHT } from '@/utils/gutenberg/keycodes';
+import { __unstableMotion as motion } from '@/components/gutenberg/ui';
+import { Tooltip, VisuallyHidden } from '@/components/gutenberg/design-system';
 
 const DELTA_DISTANCE = 20; // The distance to resize per keydown in pixels.
 

@@ -1,6 +1,6 @@
-import { useSelect } from '@wordpress/data';
-import { useRefEffect } from '@wordpress/compose';
-import { useContext } from '@wordpress/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { useContext } from '@/lib/gutenberg/element';
 import { store as blockEditorStore } from '../../store';
 import { getBlockClientId, getSelectionEditableElement } from '../../utils/dom';
 import { BlockRefs } from '../provider/block-refs-provider';

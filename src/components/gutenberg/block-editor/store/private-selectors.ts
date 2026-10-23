@@ -1,10 +1,10 @@
-import { createSelector, createRegistrySelector } from '@wordpress/data';
+import { createSelector, createRegistrySelector } from '@/stores/gutenberg/data';
 import {
 	getBlockType,
 	hasBlockSupport,
 	privateApis as blocksPrivateApis,
-} from '@wordpress/blocks';
-import { privateApis as globalStylesEnginePrivateApis } from '@wordpress/global-styles-engine';
+} from '@/lib/gutenberg/blocks';
+import { privateApis as globalStylesEnginePrivateApis } from '@/lib/gutenberg/global-styles-engine';
 import {
 	getBlockOrder,
 	getBlockParents,

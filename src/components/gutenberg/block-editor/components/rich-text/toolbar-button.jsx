@@ -1,5 +1,5 @@
-import { Fill, ToolbarButton } from '@wordpress/components';
-import { displayShortcut } from '@wordpress/keycodes';
+import { Fill, ToolbarButton } from '@/components/gutenberg/ui';
+import { displayShortcut } from '@/utils/gutenberg/keycodes';
 
 export function RichTextToolbarButton( {
 	name,

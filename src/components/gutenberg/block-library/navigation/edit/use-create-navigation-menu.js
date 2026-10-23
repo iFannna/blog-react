@@ -1,7 +1,7 @@
-import { serialize } from '@wordpress/blocks';
-import { store as coreStore } from '@wordpress/core-data';
-import { useDispatch } from '@wordpress/data';
-import { useState, useCallback } from '@wordpress/element';
+import { serialize } from '@/lib/gutenberg/blocks';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { useState, useCallback } from '@/lib/gutenberg/element';
 import useGenerateDefaultNavigationTitle from './use-generate-default-navigation-title';
 
 export const CREATE_NAVIGATION_MENU_SUCCESS = 'success';

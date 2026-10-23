@@ -1,27 +1,27 @@
 import { Command, useCommandState } from 'cmdk';
 import type { JSX } from 'react';
 import clsx from 'clsx';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	useState,
 	useEffect,
 	useRef,
 	isValidElement,
-} from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+} from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	Icon as WCIcon,
 	Modal,
 	TextHighlight,
 	__experimentalHStack as HStack,
-} from '@wordpress/components';
-import type { IconType } from '@wordpress/components';
+} from '@/components/gutenberg/ui';
+import type { IconType } from '@/components/gutenberg/ui';
 import {
 	store as keyboardShortcutsStore,
 	useShortcut,
-} from '@wordpress/keyboard-shortcuts';
-import { withIgnoreIMEEvents } from '@wordpress/keycodes';
-import { Icon, search as inputIcon, arrowRight } from '@wordpress/icons';
+} from '@/components/gutenberg/keyboard-shortcuts';
+import { withIgnoreIMEEvents } from '@/utils/gutenberg/keycodes';
+import { Icon, search as inputIcon, arrowRight } from '@/components/gutenberg/icons';
 import { store as commandsStore } from '../store';
 import { unlock } from '../lock-unlock';
 import {

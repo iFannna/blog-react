@@ -1,11 +1,11 @@
 import { colord, extend } from 'colord';
 import namesPlugin from 'colord/plugins/names';
 import a11yPlugin from 'colord/plugins/a11y';
-import { Component, isValidElement } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
-import { RichTextData } from '@wordpress/rich-text';
-import deprecated from '@wordpress/deprecated';
+import { Component, isValidElement } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
+import { RichTextData } from '@/components/gutenberg/rich-text';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { BLOCK_ICON_DEFAULT } from './constants';
 import { getBlockType, getDefaultBlockName } from './registration';
 import type {

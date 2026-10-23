@@ -1,5 +1,5 @@
-import { useEffect, useState } from '@wordpress/element';
-import { usePrevious } from '@wordpress/compose';
+import { useEffect, useState } from '@/lib/gutenberg/element';
+import { usePrevious } from '@/hooks/gutenberg/compose';
 
 export default function useDeprecatedOpacity(
 	opacity,

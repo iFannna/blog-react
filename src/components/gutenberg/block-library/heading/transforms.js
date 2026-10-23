@@ -1,5 +1,5 @@
-import { createBlock, getBlockAttributes } from '@wordpress/blocks';
-import { __, sprintf } from '@wordpress/i18n';
+import { createBlock, getBlockAttributes } from '@/lib/gutenberg/blocks';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import { getLevelFromHeadingNodeName } from './shared';
 import { getTransformedAttributes } from '../utils/get-transformed-attributes';
 

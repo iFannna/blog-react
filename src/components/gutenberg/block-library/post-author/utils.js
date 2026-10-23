@@ -1,6 +1,6 @@
-import { createBlock } from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { __ } from '@/lib/gutenberg/i18n';
+import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import { unlock } from '../lock-unlock';
 
 const { cleanEmptyObject } = unlock( blockEditorPrivateApis );

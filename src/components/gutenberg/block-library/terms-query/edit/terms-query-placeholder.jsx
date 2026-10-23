@@ -1,13 +1,13 @@
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	createBlocksFromInnerBlocksTemplate,
 	store as blocksStore,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import {
 	store as blockEditorStore,
 	__experimentalBlockVariationPicker,
 	useBlockProps,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 
 export default function TermsQueryPlaceholder( {
 	attributes,

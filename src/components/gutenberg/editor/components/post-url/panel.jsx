@@ -1,10 +1,10 @@
-import { useMemo, useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { Dropdown, Button } from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
-import { safeDecodeURIComponent } from '@wordpress/url';
-import { store as coreStore } from '@wordpress/core-data';
-import { Link } from '@wordpress/ui';
+import { useMemo, useState } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { Dropdown, Button } from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { safeDecodeURIComponent } from '@/utils/gutenberg/url';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { Link } from '@/components/gutenberg/design-system';
 import PostURLCheck from './check';
 import PostURL from './index';
 import PostPanelRow from '../post-panel-row';

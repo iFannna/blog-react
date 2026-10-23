@@ -1,5 +1,5 @@
-import type { ConnectionStatus } from '@wordpress/core-data';
-import { useState, useEffect, useRef } from '@wordpress/element';
+import type { ConnectionStatus } from '@/stores/gutenberg/core-data';
+import { useState, useEffect, useRef } from '@/lib/gutenberg/element';
 
 interface UseRetryCountdownResult {
 	onManualRetry: () => void;

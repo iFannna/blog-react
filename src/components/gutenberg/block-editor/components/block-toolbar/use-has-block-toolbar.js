@@ -1,5 +1,5 @@
-import { useSelect } from '@wordpress/data';
-import { getBlockType, hasBlockSupport } from '@wordpress/blocks';
+import { useSelect } from '@/stores/gutenberg/data';
+import { getBlockType, hasBlockSupport } from '@/lib/gutenberg/blocks';
 import { store as blockEditorStore } from '../../store';
 
 /**

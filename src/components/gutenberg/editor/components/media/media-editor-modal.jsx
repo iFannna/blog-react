@@ -1,8 +1,8 @@
-import { useSettings } from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
-import { privateApis as mediaEditorPrivateApis } from '@wordpress/media-editor';
-import { useViewConfig } from '@wordpress/views';
+import { useSettings } from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
+import { privateApis as mediaEditorPrivateApis } from '@/components/gutenberg/media-editor';
+import { useViewConfig } from '@/components/gutenberg/views';
 import { unlock } from '../../lock-unlock';
 import usePostFields from '../post-fields';
 

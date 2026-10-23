@@ -1,9 +1,9 @@
 import clsx from 'clsx';
-import { hasBlockSupport, getBlockSupport } from '@wordpress/blocks';
-import { __experimentalHasSplitBorders as hasSplitBorders } from '@wordpress/components';
-import { useCallback, useMemo } from '@wordpress/element';
-import { addFilter } from '@wordpress/hooks';
-import { useSelect } from '@wordpress/data';
+import { hasBlockSupport, getBlockSupport } from '@/lib/gutenberg/blocks';
+import { __experimentalHasSplitBorders as hasSplitBorders } from '@/components/gutenberg/ui';
+import { useCallback, useMemo } from '@/lib/gutenberg/element';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import { useSelect } from '@/stores/gutenberg/data';
 import { getColorClassName } from '../components/colors';
 import InspectorControls from '../components/inspector-controls';
 import useMultipleOriginColorsAndGradients from '../components/colors-gradients/use-multiple-origin-colors-and-gradients';

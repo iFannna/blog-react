@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import type { FormatInteger, NormalizedField } from '../types';
 import type { FieldType } from '../types/private';
 import {

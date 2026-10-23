@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react';
-import type { Button } from '@wordpress/components';
+import type { Button } from '@/components/gutenberg/ui';
 import type { Preset } from '../preset-input-control/types';
 
 /**

@@ -1,10 +1,10 @@
-import { __ } from '@wordpress/i18n';
-import { DOWN } from '@wordpress/keycodes';
+import { __ } from '@/lib/gutenberg/i18n';
+import { DOWN } from '@/utils/gutenberg/keycodes';
 import {
 	ToolbarButton,
 	Dropdown,
 	AlignmentMatrixControl,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import type { KeyboardEvent } from 'react';
 import type { BlockAlignmentMatrixControlProps } from './types';
 

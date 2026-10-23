@@ -1,14 +1,14 @@
-import { forwardRef, useInsertionEffect, useRef } from '@wordpress/element';
-import deprecated from '@wordpress/deprecated';
-import { useDispatch, useRegistry, useSelect } from '@wordpress/data';
-import { ENTER } from '@wordpress/keycodes';
+import { forwardRef, useInsertionEffect, useRef } from '@/lib/gutenberg/element';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { useDispatch, useRegistry, useSelect } from '@/stores/gutenberg/data';
+import { ENTER } from '@/utils/gutenberg/keycodes';
 import {
 	create,
 	split,
 	toHTMLString,
 	privateApis as richTextPrivateApis,
-} from '@wordpress/rich-text';
-import { useRefEffect } from '@wordpress/compose';
+} from '@/components/gutenberg/rich-text';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
 import { RichTextWrapper } from './';
 import { store as blockEditorStore } from '../../store';
 import { useBlockEditContext } from '../block-edit';

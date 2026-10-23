@@ -1,5 +1,5 @@
-import { __experimentalToolsPanelContext as ToolsPanelContext } from '@wordpress/components';
-import { useContext, useMemo } from '@wordpress/element';
+import { __experimentalToolsPanelContext as ToolsPanelContext } from '@/components/gutenberg/ui';
+import { useContext, useMemo } from '@/lib/gutenberg/element';
 import type { BlockSupportSlotContainerProps } from './types';
 
 export default function BlockSupportSlotContainer( {

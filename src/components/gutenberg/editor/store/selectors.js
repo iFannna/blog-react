@@ -3,17 +3,17 @@ import {
 	getDefaultBlockName,
 	__unstableSerializeAndClean,
 	parse,
-} from '@wordpress/blocks';
-import { isInTheFuture, getDate } from '@wordpress/date';
-import { addQueryArgs, cleanForSlug } from '@wordpress/url';
-import { createSelector, createRegistrySelector } from '@wordpress/data';
-import deprecated from '@wordpress/deprecated';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+} from '@/lib/gutenberg/blocks';
+import { isInTheFuture, getDate } from '@/lib/gutenberg/date';
+import { addQueryArgs, cleanForSlug } from '@/utils/gutenberg/url';
+import { createSelector, createRegistrySelector } from '@/stores/gutenberg/data';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import {
 	store as coreStore,
 	privateApis as coreDataPrivateApis,
-} from '@wordpress/core-data';
-import { store as preferencesStore } from '@wordpress/preferences';
+} from '@/stores/gutenberg/core-data';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import {
 	ATTACHMENT_POST_TYPE,
 	EDIT_MERGE_PROPERTIES,
@@ -1061,9 +1061,9 @@ export function isPostLocked( state ) {
  *
  * @example
  * ```jsx
- * import { __ } from '@wordpress/i18n';
- * import { store as editorStore } from '@wordpress/editor';
- * import { useSelect } from '@wordpress/data';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { store as editorStore } from '@/components/gutenberg/editor';
+ * import { useSelect } from '@/stores/gutenberg/data';
  *
  * const ExampleComponent = () => {
  * 	const isSavingLocked = useSelect(
@@ -1092,9 +1092,9 @@ export function isPostSavingLocked( state ) {
  *
  * @example
  * ```jsx
- * import { __ } from '@wordpress/i18n';
- * import { store as editorStore } from '@wordpress/editor';
- * import { useSelect } from '@wordpress/data';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { store as editorStore } from '@/components/gutenberg/editor';
+ * import { useSelect } from '@/stores/gutenberg/data';
  *
  * const ExampleComponent = () => {
  * 	const isAutoSavingLocked = useSelect(
@@ -1257,9 +1257,9 @@ export const isEditorPanelOpened = createRegistrySelector(
  *
  * This type is duplicated to avoid creating circular dependencies.
  *
- * @see {import("@wordpress/block-editor/src/store/actions").WPBlockSelection}
- * @see {import("@wordpress/block-editor/src/store/selectors").WPBlockSelection}
- * @see {import("@wordpress/core-data/src/types").WPBlockSelection}
+ * @see {import("@/components/gutenberg/block-editor/store/actions").WPBlockSelection}
+ * @see {import("@/components/gutenberg/block-editor/store/selectors").WPBlockSelection}
+ * @see {import("@/stores/gutenberg/core-data/types").WPBlockSelection}
  *
  * @typedef {Object} WPBlockSelection
  *

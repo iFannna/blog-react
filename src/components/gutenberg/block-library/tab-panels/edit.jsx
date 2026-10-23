@@ -2,8 +2,8 @@ import {
 	useBlockProps,
 	useInnerBlocksProps,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
+} from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
 import TabToolbarControls from '../tabs/tab-toolbar-controls';
 
 export default function Edit( { clientId } ) {

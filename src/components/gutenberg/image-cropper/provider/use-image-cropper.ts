@@ -1,5 +1,5 @@
 import { dequal } from 'dequal';
-import { useMemo, useState, useCallback } from '@wordpress/element';
+import { useMemo, useState, useCallback } from '@/lib/gutenberg/element';
 import type { Point, ImageCropperState, CropperState } from '../types';
 import { MIN_ZOOM } from '../constants';
 import {

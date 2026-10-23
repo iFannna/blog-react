@@ -1,13 +1,13 @@
 import clsx from 'clsx';
-import type { Field } from '@wordpress/dataviews';
-import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
-import { commentAuthorAvatar as authorIcon } from '@wordpress/icons';
-import { Icon as WCIcon } from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import type { User } from '@wordpress/core-data';
+import type { Field } from '@/components/gutenberg/dataviews';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useState } from '@/lib/gutenberg/element';
+import { commentAuthorAvatar as authorIcon } from '@/components/gutenberg/icons';
+import { Icon as WCIcon } from '@/components/gutenberg/ui';
+import { Stack } from '@/components/gutenberg/design-system';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import type { User } from '@/stores/gutenberg/core-data';
 import type { BasePostWithEmbeddedAuthor } from '../../dataviews/types';
 
 function AuthorView( { item }: { item: BasePostWithEmbeddedAuthor } ) {

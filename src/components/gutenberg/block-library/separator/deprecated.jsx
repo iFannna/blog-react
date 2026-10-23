@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { getColorClassName, useBlockProps } from '@wordpress/block-editor';
+import { getColorClassName, useBlockProps } from '@/components/gutenberg/block-editor';
 
 const v1 = {
 	attributes: {

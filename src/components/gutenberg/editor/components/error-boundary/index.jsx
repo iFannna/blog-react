@@ -1,10 +1,10 @@
-import { Component } from '@wordpress/element';
-import { speak } from '@wordpress/a11y';
-import { __ } from '@wordpress/i18n';
-import { Card, CollapsibleCard, Notice, Stack, Text } from '@wordpress/ui';
-import { select } from '@wordpress/data';
-import { useCopyToClipboard } from '@wordpress/compose';
-import { doAction } from '@wordpress/hooks';
+import { Component } from '@/lib/gutenberg/element';
+import { speak } from '@/utils/gutenberg/a11y';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Card, CollapsibleCard, Notice, Stack, Text } from '@/components/gutenberg/design-system';
+import { select } from '@/stores/gutenberg/data';
+import { useCopyToClipboard } from '@/hooks/gutenberg/compose';
+import { doAction } from '@/hooks/gutenberg/hooks';
 import { store as editorStore } from '../../store';
 
 function getContent() {

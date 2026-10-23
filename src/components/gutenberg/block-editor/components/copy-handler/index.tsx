@@ -1,4 +1,4 @@
-import deprecated from '@wordpress/deprecated';
+import deprecated from '@/utils/gutenberg/deprecated';
 import type { HTMLAttributes } from 'react';
 import useClipboardHandler from '../writing-flow/use-clipboard-handler';
 

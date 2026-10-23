@@ -1,9 +1,9 @@
 import clsx from 'clsx';
-import { createBlock } from '@wordpress/blocks';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
-import { displayShortcut, isKeyboardEvent } from '@wordpress/keycodes';
-import { __, sprintf } from '@wordpress/i18n';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { ToolbarButton, ToolbarGroup } from '@/components/gutenberg/ui';
+import { displayShortcut, isKeyboardEvent } from '@/utils/gutenberg/keycodes';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	BlockControls,
 	InspectorControls,
@@ -12,12 +12,12 @@ import {
 	store as blockEditorStore,
 	getColorClassName,
 	useInnerBlocksProps,
-} from '@wordpress/block-editor';
-import { isURL, prependHTTP } from '@wordpress/url';
-import { useState, useEffect, useRef, useCallback } from '@wordpress/element';
-import { VisuallyHidden } from '@wordpress/ui';
-import { link as linkIcon, addSubmenu } from '@wordpress/icons';
-import { useMergeRefs, useInstanceId } from '@wordpress/compose';
+} from '@/components/gutenberg/block-editor';
+import { isURL, prependHTTP } from '@/utils/gutenberg/url';
+import { useState, useEffect, useRef, useCallback } from '@/lib/gutenberg/element';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
+import { link as linkIcon, addSubmenu } from '@/components/gutenberg/icons';
+import { useMergeRefs, useInstanceId } from '@/hooks/gutenberg/compose';
 import { getColors } from '../navigation/edit/utils';
 import {
 	Controls,

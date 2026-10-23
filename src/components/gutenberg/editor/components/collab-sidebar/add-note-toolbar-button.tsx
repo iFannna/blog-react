@@ -1,14 +1,14 @@
-import { ToolbarButton } from '@wordpress/components';
-import { __, _n, sprintf } from '@wordpress/i18n';
+import { ToolbarButton } from '@/components/gutenberg/ui';
+import { __, _n, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	privateApis as blockEditorPrivateApis,
 	store as blockEditorStore,
 	// @ts-expect-error `@wordpress/block-editor` has no type declarations.
-} from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { getUnregisteredTypeHandlerName } from '@wordpress/blocks';
-import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
-import { comment as commentIcon } from '@wordpress/icons';
+} from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { getUnregisteredTypeHandlerName } from '@/lib/gutenberg/blocks';
+import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
+import { comment as commentIcon } from '@/components/gutenberg/icons';
 import { unlock } from '../../lock-unlock';
 
 const { NoteIconToolbarSlotFill } = unlock( blockEditorPrivateApis );

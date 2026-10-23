@@ -1,5 +1,5 @@
-import { useContext, useMemo } from '@wordpress/element';
-import { Stack } from '@wordpress/ui';
+import { useContext, useMemo } from '@/lib/gutenberg/element';
+import { Stack } from '@/components/gutenberg/design-system';
 import type {
 	FieldValidity,
 	FormValidity,

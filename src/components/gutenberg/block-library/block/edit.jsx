@@ -1,14 +1,14 @@
 import clsx from 'clsx';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useRef, useMemo } from '@wordpress/element';
-import { store as coreStore } from '@wordpress/core-data';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useRef, useMemo } from '@/lib/gutenberg/element';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import {
 	Placeholder,
 	Spinner as WCSpinner,
 	ToolbarButton,
 	ToolbarGroup,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	useInnerBlocksProps,
 	RecursionProvider,
@@ -19,9 +19,9 @@ import {
 	store as blockEditorStore,
 	BlockControls,
 	InnerBlocks,
-} from '@wordpress/block-editor';
-import { privateApis as patternsPrivateApis } from '@wordpress/patterns';
-import { getBlockBindingsSource, parse } from '@wordpress/blocks';
+} from '@/components/gutenberg/block-editor';
+import { privateApis as patternsPrivateApis } from '@/components/gutenberg/patterns';
+import { getBlockBindingsSource, parse } from '@/lib/gutenberg/blocks';
 import { unlock } from '../lock-unlock';
 import EditOriginalInspectorButton from '../utils/edit-original-inspector-button';
 

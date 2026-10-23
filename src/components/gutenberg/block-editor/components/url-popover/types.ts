@@ -5,7 +5,7 @@ import type {
 	ReactNode,
 	RefAttributes,
 } from 'react';
-import type { MenuItem, Popover } from '@wordpress/components';
+import type { MenuItem, Popover } from '@/components/gutenberg/ui';
 import type { URLInputProps } from '../url-input/types';
 
 /**

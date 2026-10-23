@@ -1,4 +1,4 @@
-import { createSlotFill } from '@wordpress/components';
+import { createSlotFill } from '@/components/gutenberg/ui';
 import EnablePanelOption from './enable-panel';
 
 const { Fill, Slot } = createSlotFill(

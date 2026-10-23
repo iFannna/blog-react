@@ -1,4 +1,4 @@
-import type { ToggleControl } from '@wordpress/components';
+import type { ToggleControl } from '@/components/gutenberg/ui';
 
 type ToggleControlProps = Parameters< typeof ToggleControl >[ 0 ];
 export type BaseOptionProps = Pick<

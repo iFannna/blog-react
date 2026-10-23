@@ -1,5 +1,5 @@
-import { _x } from '@wordpress/i18n';
-import { useBlockProps } from '@wordpress/block-editor';
+import { _x } from '@/lib/gutenberg/i18n';
+import { useBlockProps } from '@/components/gutenberg/block-editor';
 import useDeprecatedTextAlign from '../utils/deprecated-text-align-attributes';
 
 function Edit( props ) {

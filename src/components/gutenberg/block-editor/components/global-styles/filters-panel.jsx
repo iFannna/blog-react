@@ -8,12 +8,12 @@ import {
 	DuotoneSwatch,
 	Dropdown,
 	Button,
-} from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
-import { __, _x } from '@wordpress/i18n';
-import { useCallback, useMemo, useRef } from '@wordpress/element';
-import { reset as resetIcon } from '@wordpress/icons';
-import { getValueFromVariable } from '@wordpress/global-styles-engine';
+} from '@/components/gutenberg/ui';
+import { Stack } from '@/components/gutenberg/design-system';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { useCallback, useMemo, useRef } from '@/lib/gutenberg/element';
+import { reset as resetIcon } from '@/components/gutenberg/icons';
+import { getValueFromVariable } from '@/lib/gutenberg/global-styles-engine';
 import {
 	useToolsPanelDropdownMenuProps,
 	useToolsPanelItemPopoverProps,

@@ -1,10 +1,10 @@
 import {
 	TextareaControl as WCTextareaControl,
 	Notice,
-} from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
-import { useEffect, useRef, useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { Stack } from '@/components/gutenberg/design-system';
+import { useEffect, useRef, useState } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import { default as transformStyles } from '../../utils/transform-styles';
 
 /**

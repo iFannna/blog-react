@@ -1,9 +1,9 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
-import { useCopyToClipboard } from '@wordpress/compose';
-import { store as noticesStore } from '@wordpress/notices';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useCopyToClipboard } from '@/hooks/gutenberg/compose';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 // eslint-disable-next-line @wordpress/use-recommended-components
-import { Menu } from '@wordpress/ui';
+import { Menu } from '@/components/gutenberg/design-system';
 import { store as editorStore } from '../../store';
 
 export default function CopyContentMenuItem() {

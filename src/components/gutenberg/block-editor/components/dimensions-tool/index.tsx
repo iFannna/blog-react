@@ -1,4 +1,4 @@
-import { useEffect, useRef } from '@wordpress/element';
+import { useEffect, useRef } from '@/lib/gutenberg/element';
 import AspectRatioTool from './aspect-ratio-tool';
 import ScaleTool from './scale-tool';
 import WidthHeightTool from './width-height-tool';

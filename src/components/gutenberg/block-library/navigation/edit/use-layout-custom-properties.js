@@ -1,5 +1,5 @@
-import { useSettings, useStyleOverride } from '@wordpress/block-editor';
-import { privateApis as globalStylesEnginePrivateApis } from '@wordpress/global-styles-engine';
+import { useSettings, useStyleOverride } from '@/components/gutenberg/block-editor';
+import { privateApis as globalStylesEnginePrivateApis } from '@/lib/gutenberg/global-styles-engine';
 import { unlock } from '../../lock-unlock';
 
 const { getResponsiveMediaQueries } = unlock( globalStylesEnginePrivateApis );

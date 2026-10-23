@@ -1,6 +1,6 @@
-import { useRefEffect } from '@wordpress/compose';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import { unlock } from '../../lock-unlock';
 
 const DISTANCE_THRESHOLD = 500;

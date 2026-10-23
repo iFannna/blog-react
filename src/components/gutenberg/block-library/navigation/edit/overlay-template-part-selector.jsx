@@ -1,19 +1,19 @@
-import { useMemo, useState, useCallback } from '@wordpress/element';
-import { useInstanceId } from '@wordpress/compose';
-import { useEntityRecords, store as coreStore } from '@wordpress/core-data';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { useMemo, useState, useCallback } from '@/lib/gutenberg/element';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { useEntityRecords, store as coreStore } from '@/stores/gutenberg/core-data';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import {
 	SelectControl as WCSelectControl,
 	Button,
 	FlexBlock,
 	FlexItem,
 	__experimentalHStack as HStack,
-} from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
-import { decodeEntities } from '@wordpress/html-entities';
-import { store as noticesStore } from '@wordpress/notices';
-import { plus } from '@wordpress/icons';
-import { Text } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { plus } from '@/components/gutenberg/icons';
+import { Text } from '@/components/gutenberg/design-system';
 import { createTemplatePartId } from '../../template-part/edit/utils/create-template-part-id';
 import useCreateOverlayTemplatePart from './use-create-overlay';
 import DeletedOverlayWarning from './deleted-overlay-warning';

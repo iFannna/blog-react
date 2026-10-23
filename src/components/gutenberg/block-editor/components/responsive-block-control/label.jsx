@@ -1,6 +1,6 @@
-import { useInstanceId } from '@wordpress/compose';
-import { VisuallyHidden } from '@wordpress/ui';
-import { _x, sprintf } from '@wordpress/i18n';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
+import { _x, sprintf } from '@/lib/gutenberg/i18n';
 
 export default function ResponsiveBlockControlLabel( {
 	property,

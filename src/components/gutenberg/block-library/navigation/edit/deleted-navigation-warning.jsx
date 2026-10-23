@@ -1,7 +1,7 @@
-import { Warning } from '@wordpress/block-editor';
-import { Button, Notice } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useState, createInterpolateElement } from '@wordpress/element';
+import { Warning } from '@/components/gutenberg/block-editor';
+import { Button, Notice } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useState, createInterpolateElement } from '@/lib/gutenberg/element';
 
 function DeletedNavigationWarning( { onCreateNew, isNotice = false } ) {
 	const [ isButtonDisabled, setIsButtonDisabled ] = useState( false );

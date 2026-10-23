@@ -1,17 +1,17 @@
 import clsx from 'clsx';
-import { __experimentalTruncate as Truncate } from '@wordpress/components';
-import { forwardRef } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { store as blocksStore } from '@wordpress/blocks';
+import { __experimentalTruncate as Truncate } from '@/components/gutenberg/ui';
+import { forwardRef } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
 import {
 	Icon,
 	lockSmall as lock,
 	pinSmall,
 	symbol,
 	unseen,
-} from '@wordpress/icons';
-import { SPACE, ENTER } from '@wordpress/keycodes';
-import { Stack, Tooltip } from '@wordpress/ui';
+} from '@/components/gutenberg/icons';
+import { SPACE, ENTER } from '@/utils/gutenberg/keycodes';
+import { Stack, Tooltip } from '@/components/gutenberg/design-system';
 import BlockIcon from '../block-icon';
 import useBlockDisplayTitle from '../block-title/use-block-display-title';
 import ListViewExpander from './expander';

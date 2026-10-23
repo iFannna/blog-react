@@ -1,5 +1,5 @@
-import { Button, Composite } from '@wordpress/components';
-import { forwardRef } from '@wordpress/element';
+import { Button, Composite } from '@/components/gutenberg/ui';
+import { forwardRef } from '@/lib/gutenberg/element';
 import type { ForwardedRef } from 'react';
 import type { InserterListboxItemProps } from './types';
 

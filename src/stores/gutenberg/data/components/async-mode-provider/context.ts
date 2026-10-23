@@ -1,4 +1,4 @@
-import { createContext } from '@wordpress/element';
+import { createContext } from '@/lib/gutenberg/element';
 
 export const Context = createContext( false );
 Context.displayName = 'AsyncModeContext';
@@ -10,8 +10,8 @@ Context.displayName = 'AsyncModeContext';
  * @example
  *
  * ```js
- * import { useSelect, AsyncModeProvider } from '@wordpress/data';
- * import { store as blockEditorStore } from '@wordpress/block-editor';
+ * import { useSelect, AsyncModeProvider } from '@/stores/gutenberg/data';
+ * import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
  *
  * function BlockCount() {
  *   const count = useSelect( ( select ) => {

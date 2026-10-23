@@ -1,4 +1,4 @@
-import { wrap, replaceTag } from '@wordpress/dom';
+import { wrap, replaceTag } from '@/utils/gutenberg/dom';
 
 export default function phrasingContentReducer(
 	node: Node,

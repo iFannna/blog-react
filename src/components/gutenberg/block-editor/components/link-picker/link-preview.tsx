@@ -3,10 +3,10 @@ import {
 	__experimentalHStack as HStack,
 	__experimentalVStack as VStack,
 	FlexItem,
-} from '@wordpress/components';
-import { Icon, chevronDown } from '@wordpress/icons';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
-import { Badge } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { Icon, chevronDown } from '@/components/gutenberg/icons';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
+import { Badge } from '@/components/gutenberg/design-system';
 import type { LinkPreviewProps } from './types';
 
 /**

@@ -6,8 +6,8 @@ import {
 	useMemo,
 	useRef,
 	useState,
-} from '@wordpress/element';
-import { Stack, useEnableWpCompatOverlaySlot } from '@wordpress/ui';
+} from '@/lib/gutenberg/element';
+import { Stack, useEnableWpCompatOverlaySlot } from '@/components/gutenberg/design-system';
 import DataViewsContext from '../components/dataviews-context';
 import { VIEW_LAYOUTS } from '../components/dataviews-layouts';
 import {

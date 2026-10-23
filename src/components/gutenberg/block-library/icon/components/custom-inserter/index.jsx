@@ -1,14 +1,14 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	Modal,
 	SearchControl,
 	Spinner as WCSpinner,
-} from '@wordpress/components';
-import { Stack, Tabs } from '@wordpress/ui';
-import { useState, useMemo } from '@wordpress/element';
-import { useDebounce } from '@wordpress/compose';
-import { useSelect } from '@wordpress/data';
-import { store as coreDataStore } from '@wordpress/core-data';
+} from '@/components/gutenberg/ui';
+import { Stack, Tabs } from '@/components/gutenberg/design-system';
+import { useState, useMemo } from '@/lib/gutenberg/element';
+import { useDebounce } from '@/hooks/gutenberg/compose';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreDataStore } from '@/stores/gutenberg/core-data';
 import IconGrid from './icon-grid';
 import { normalizeSearchInput } from '../../../utils/search-patterns';
 

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Stack } from '@wordpress/ui';
+import { Stack } from '@/components/gutenberg/design-system';
 import { NoteByline } from './note-byline';
 
 export function NoteCard( { note, actions, className, children, ...props } ) {

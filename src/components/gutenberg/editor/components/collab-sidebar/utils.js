@@ -1,5 +1,5 @@
-import { _x } from '@wordpress/i18n';
-import { create, getActiveFormat, RichTextData } from '@wordpress/rich-text';
+import { _x } from '@/lib/gutenberg/i18n';
+import { create, getActiveFormat, RichTextData } from '@/components/gutenberg/rich-text';
 import { NOTE_FORMAT_NAME } from './constants';
 
 /**

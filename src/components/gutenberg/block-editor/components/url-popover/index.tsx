@@ -1,12 +1,12 @@
-import { __ } from '@wordpress/i18n';
-import { forwardRef, useState } from '@wordpress/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { forwardRef, useState } from '@/lib/gutenberg/element';
 import {
 	Button,
 	Popover,
 	privateApis as componentsPrivateApis,
-} from '@wordpress/components';
-import { chevronDown } from '@wordpress/icons';
-import deprecated from '@wordpress/deprecated';
+} from '@/components/gutenberg/ui';
+import { chevronDown } from '@/components/gutenberg/icons';
+import deprecated from '@/utils/gutenberg/deprecated';
 import LinkViewer from './link-viewer';
 import LinkEditor from './link-editor';
 import { unlock } from '../../lock-unlock';

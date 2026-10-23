@@ -1,15 +1,15 @@
 import { isSameMonth } from 'date-fns';
-import { BaseControl } from '@wordpress/components';
-import { useCallback, useEffect, useRef, useState } from '@wordpress/element';
-import { __, isRTL } from '@wordpress/i18n';
-import { speak } from '@wordpress/a11y';
-import { dateI18n, getDate, getSettings } from '@wordpress/date';
+import { BaseControl } from '@/components/gutenberg/ui';
+import { useCallback, useEffect, useRef, useState } from '@/lib/gutenberg/element';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
+import { speak } from '@/utils/gutenberg/a11y';
+import { dateI18n, getDate, getSettings } from '@/lib/gutenberg/date';
 import {
 	Calendar,
 	Stack,
 	// eslint-disable-next-line @wordpress/use-recommended-components
 	ValidatedInputControl,
-} from '@wordpress/ui';
+} from '@/components/gutenberg/design-system';
 import type { DataFormControlProps, FormatDatetime } from '../../types';
 import { OPERATOR_IN_THE_PAST, OPERATOR_OVER } from '../../constants';
 import RelativeDateControl from './utils/relative-date-control';

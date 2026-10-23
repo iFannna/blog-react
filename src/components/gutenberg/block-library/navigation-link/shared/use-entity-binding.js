@@ -1,10 +1,10 @@
-import { useCallback } from '@wordpress/element';
+import { useCallback } from '@/lib/gutenberg/element';
 import {
 	useBlockBindingsUtils,
 	useBlockEditingMode,
-} from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+} from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 
 /**
  * Builds entity binding configuration for navigation link URLs.

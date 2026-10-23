@@ -1,13 +1,13 @@
-import { cloneBlock } from '@wordpress/blocks';
-import { useSelect, useDispatch, useRegistry } from '@wordpress/data';
-import { useState, useEffect } from '@wordpress/element';
+import { cloneBlock } from '@/lib/gutenberg/blocks';
+import { useSelect, useDispatch, useRegistry } from '@/stores/gutenberg/data';
+import { useState, useEffect } from '@/lib/gutenberg/element';
 import {
 	Warning,
 	store as blockEditorStore,
 	useBlockProps,
-} from '@wordpress/block-editor';
-import { store as coreStore } from '@wordpress/core-data';
-import { __, sprintf } from '@wordpress/i18n';
+} from '@/components/gutenberg/block-editor';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import { useParsePatternDependencies } from './recursion-detector';
 
 const PatternEdit = ( { attributes, clientId } ) => {

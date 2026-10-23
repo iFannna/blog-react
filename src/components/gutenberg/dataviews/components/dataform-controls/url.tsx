@@ -1,5 +1,5 @@
-import { Icon, InputLayout } from '@wordpress/ui';
-import { link } from '@wordpress/icons';
+import { Icon, InputLayout } from '@/components/gutenberg/design-system';
+import { link } from '@/components/gutenberg/icons';
 import type { DataFormControlProps } from '../../types';
 import ValidatedText from './utils/validated-input';
 

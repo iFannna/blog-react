@@ -1,6 +1,6 @@
-import { __experimentalToolsPanel as ToolsPanel } from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useCallback } from '@wordpress/element';
+import { __experimentalToolsPanel as ToolsPanel } from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useCallback } from '@/lib/gutenberg/element';
 import { store as blockEditorStore } from '../../store';
 import { cleanEmptyObject } from '../../hooks/utils';
 import { useToolsPanelDropdownMenuProps } from '../global-styles/utils';

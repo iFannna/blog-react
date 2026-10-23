@@ -1,5 +1,5 @@
-import { addFilter } from '@wordpress/hooks';
-import type { BlockType } from '@wordpress/blocks';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import type { BlockType } from '@/lib/gutenberg/blocks';
 
 /**
  * Filters registered block settings, extending attributes to include `lock`.

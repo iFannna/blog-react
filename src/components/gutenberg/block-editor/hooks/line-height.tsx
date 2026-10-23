@@ -1,4 +1,4 @@
-import { hasBlockSupport } from '@wordpress/blocks';
+import { hasBlockSupport } from '@/lib/gutenberg/blocks';
 import LineHeightControl from '../components/line-height-control';
 import { cleanEmptyObject } from './utils';
 import { useSettings } from '../components/use-settings';

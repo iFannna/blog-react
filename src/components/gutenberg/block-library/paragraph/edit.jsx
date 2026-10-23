@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import { __, _x, isRTL } from '@wordpress/i18n';
+import { __, _x, isRTL } from '@/lib/gutenberg/i18n';
 import {
 	ToolbarButton,
 	ToggleControl,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	BlockControls,
 	InspectorControls,
@@ -13,10 +13,10 @@ import {
 	useSettings,
 	useBlockEditingMode,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { getBlockSupport } from '@wordpress/blocks';
-import { formatLTR } from '@wordpress/icons';
+} from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { getBlockSupport } from '@/lib/gutenberg/blocks';
+import { formatLTR } from '@/components/gutenberg/icons';
 import { useOnEnter } from './use-enter';
 import useDeprecatedAlign from './deprecated-attributes';
 

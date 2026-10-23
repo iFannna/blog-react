@@ -1,5 +1,5 @@
 import type { AriaRole, ElementType } from 'react';
-import type { IconType } from '@wordpress/components';
+import type { IconType } from '@/components/gutenberg/ui';
 
 export type ComplementaryAreaToggleProps = {
 	/**

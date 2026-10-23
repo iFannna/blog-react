@@ -1,8 +1,8 @@
-import { __, _x } from '@wordpress/i18n';
-import { Placeholder, TextControl, Button } from '@wordpress/components';
-import { useState } from '@wordpress/element';
-import { blockDefault } from '@wordpress/icons';
-import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { Placeholder, TextControl, Button } from '@/components/gutenberg/ui';
+import { useState } from '@/lib/gutenberg/element';
+import { blockDefault } from '@/components/gutenberg/icons';
+import { useBlockProps, useInnerBlocksProps } from '@/components/gutenberg/block-editor';
 
 export default function Edit( { attributes: { commentId }, setAttributes } ) {
 	const [ commentIdInput, setCommentIdInput ] = useState( commentId );

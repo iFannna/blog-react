@@ -1,4 +1,4 @@
-import { Path, SVG } from '@wordpress/primitives';
+import { Path, SVG } from '@/components/gutenberg/primitives';
 
 export const TelegramIcon = () => (
 	<SVG width="24" height="24" viewBox="0 0 128 128" version="1.1">

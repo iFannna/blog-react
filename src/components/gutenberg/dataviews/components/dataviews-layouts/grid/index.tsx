@@ -1,9 +1,9 @@
 import clsx from 'clsx';
-import { Spinner as WCSpinner } from '@wordpress/components';
-import { useEffect, useRef, useState } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import { inertValue } from '@wordpress/react-inert-value';
-import { Stack } from '@wordpress/ui';
+import { Spinner as WCSpinner } from '@/components/gutenberg/ui';
+import { useEffect, useRef, useState } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { inertValue } from '@/hooks/gutenberg/react-inert-value';
+import { Stack } from '@/components/gutenberg/design-system';
 import type { ViewGridProps } from '../../../types';
 import getDataByGroup from '../utils/get-data-by-group';
 import useSelectionProps from '../utils/use-selection-props';

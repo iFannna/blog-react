@@ -1,10 +1,10 @@
-import { useState, useId } from '@wordpress/element';
+import { useState, useId } from '@/lib/gutenberg/element';
 import {
 	InspectorControls,
 	useBlockBindingsUtils,
-} from '@wordpress/block-editor';
-import { BaseControl, Button } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/block-editor';
+import { BaseControl, Button } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import { PATTERN_OVERRIDES_BINDING_SOURCE } from '../constants';
 import {
 	AllowOverridesModal,

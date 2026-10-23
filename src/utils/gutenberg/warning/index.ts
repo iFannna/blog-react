@@ -12,7 +12,7 @@ function isDev(): boolean {
  *
  * @example
  * ```js
- * import warning from '@wordpress/warning';
+ * import warning from '@/utils/gutenberg/warning';
  *
  * function MyComponent( props ) {
  *   if ( ! props.title ) {

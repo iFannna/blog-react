@@ -1,20 +1,20 @@
-import { useEntityProp } from '@wordpress/core-data';
+import { useEntityProp } from '@/stores/gutenberg/core-data';
 import {
 	dateI18n,
 	humanTimeDiff,
 	getSettings as getDateSettings,
-} from '@wordpress/date';
+} from '@/lib/gutenberg/date';
 import {
 	InspectorControls,
 	useBlockProps,
 	__experimentalDateFormatPicker as DateFormatPicker,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 	ToggleControl,
-} from '@wordpress/components';
-import { __, _x } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 /**

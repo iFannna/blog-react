@@ -1,4 +1,4 @@
-import { regexp, next } from '@wordpress/shortcode';
+import { regexp, next } from '@/utils/gutenberg/shortcode';
 import { createBlock, getBlockTransforms, findTransform } from '../factory';
 import { getBlockType } from '../registration';
 import { getBlockAttributes } from '../parser/get-block-attributes';

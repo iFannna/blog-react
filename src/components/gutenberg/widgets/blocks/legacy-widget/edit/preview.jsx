@@ -1,13 +1,13 @@
 import clsx from 'clsx';
-import { useRefEffect } from '@wordpress/compose';
-import { useEffect, useState } from '@wordpress/element';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { useEffect, useState } from '@/lib/gutenberg/element';
 import {
 	Disabled,
 	Placeholder,
 	Spinner as WCSpinner,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import apiFetch from '@wordpress/api-fetch';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import apiFetch from '@/services/gutenberg/api-fetch';
 
 export default function Preview( { idBase, instance, isVisible } ) {
 	const [ isLoaded, setIsLoaded ] = useState( false );

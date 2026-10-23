@@ -1,6 +1,6 @@
-import { isKeyboardEvent } from '@wordpress/keycodes';
-import { useEffect, useContext } from '@wordpress/element';
-import { useEvent } from '@wordpress/compose';
+import { isKeyboardEvent } from '@/utils/gutenberg/keycodes';
+import { useEffect, useContext } from '@/lib/gutenberg/element';
+import { useEvent } from '@/hooks/gutenberg/compose';
 import { KeyboardShortcutContext } from './contexts';
 import type { RichTextShortcutProps } from './types';
 

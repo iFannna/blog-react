@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
-import type { FontSizePicker as BaseFontSizePicker } from '@wordpress/components';
-import type { FontSizePreset } from '@wordpress/global-styles-engine';
+import type { FontSizePicker as BaseFontSizePicker } from '@/components/gutenberg/ui';
+import type { FontSizePreset } from '@/lib/gutenberg/global-styles-engine';
 
 /**
  * A font size, either a preset or just a custom size.

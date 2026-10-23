@@ -1,13 +1,13 @@
-import { store as coreStore } from '@wordpress/core-data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { __, _x, sprintf } from '@wordpress/i18n';
-import { store as noticesStore } from '@wordpress/notices';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { addQueryArgs } from '@wordpress/url';
-import apiFetch from '@wordpress/api-fetch';
-import { parse, __unstableSerializeAndClean } from '@wordpress/blocks';
-import { decodeEntities } from '@wordpress/html-entities';
-import { dateI18n, getSettings as getDateSettings } from '@wordpress/date';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { addQueryArgs } from '@/utils/gutenberg/url';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { parse, __unstableSerializeAndClean } from '@/lib/gutenberg/blocks';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { dateI18n, getSettings as getDateSettings } from '@/lib/gutenberg/date';
 import isTemplateRevertable from './utils/is-template-revertable';
 import { buildRevisionsPageQuery } from './private-selectors';
 import {

@@ -1,4 +1,4 @@
-import { getFilesFromDataTransfer } from '@wordpress/dom';
+import { getFilesFromDataTransfer } from '@/utils/gutenberg/dom';
 
 /**
  * Normalizes a given string of HTML to remove the Windows-specific "Fragment"

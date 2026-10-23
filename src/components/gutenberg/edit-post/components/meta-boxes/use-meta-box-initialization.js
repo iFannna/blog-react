@@ -1,7 +1,7 @@
-import { useDispatch, useSelect } from '@wordpress/data';
-import { store as editorStore } from '@wordpress/editor';
-import { store as coreStore } from '@wordpress/core-data';
-import { useEffect } from '@wordpress/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { store as editorStore } from '@/components/gutenberg/editor';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useEffect } from '@/lib/gutenberg/element';
 import { store as editPostStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 

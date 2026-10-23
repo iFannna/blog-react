@@ -1,12 +1,12 @@
-import { __, sprintf } from '@wordpress/i18n';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	Placeholder,
 	Button,
 	Spinner as WCSpinner,
-} from '@wordpress/components';
-import { useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+} from '@/components/gutenberg/ui';
+import { useState } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import {
 	useAlternativeBlockPatterns,
 	useAlternativeTemplateParts,

@@ -1,4 +1,4 @@
-import { useReducedMotion, useRefEffect } from '@wordpress/compose';
+import { useReducedMotion, useRefEffect } from '@/hooks/gutenberg/compose';
 
 export function useScrollIntoView( { isSelected } ) {
 	const prefersReducedMotion = useReducedMotion();

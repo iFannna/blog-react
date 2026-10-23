@@ -1,7 +1,7 @@
 import memoize from 'memize';
-import { useMemo, useSyncExternalStore } from '@wordpress/element';
-import { addAction, removeAction } from '@wordpress/hooks';
-import { isShallowEqual } from '@wordpress/is-shallow-equal';
+import { useMemo, useSyncExternalStore } from '@/lib/gutenberg/element';
+import { addAction, removeAction } from '@/hooks/gutenberg/hooks';
+import { isShallowEqual } from '@/utils/gutenberg/is-shallow-equal';
 import { PluginContextProvider } from '../plugin-context';
 import { PluginErrorBoundary } from '../plugin-error-boundary';
 import { getPlugins } from '../../api';
@@ -40,7 +40,7 @@ const getPluginContext = memoize(
  * @example
  * ```js
  * // Using ESNext syntax
- * import { PluginArea } from '@wordpress/plugins';
+ * import { PluginArea } from '@/lib/gutenberg/plugins';
  *
  * const Layout = () => (
  * 	<div>

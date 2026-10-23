@@ -1,12 +1,12 @@
 import clsx from 'clsx';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { isTextField } from '@wordpress/dom';
-import { Popover } from '@wordpress/components';
-import { __unstableUseShortcutEventMatch as useShortcutEventMatch } from '@wordpress/keyboard-shortcuts';
-import { useRef, useState } from '@wordpress/element';
-import { hasBlockSupport, store as blocksStore } from '@wordpress/blocks';
-import { speak } from '@wordpress/a11y';
-import { __, sprintf, _n } from '@wordpress/i18n';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { isTextField } from '@/utils/gutenberg/dom';
+import { Popover } from '@/components/gutenberg/ui';
+import { __unstableUseShortcutEventMatch as useShortcutEventMatch } from '@/components/gutenberg/keyboard-shortcuts';
+import { useRef, useState } from '@/lib/gutenberg/element';
+import { hasBlockSupport, store as blocksStore } from '@/lib/gutenberg/blocks';
+import { speak } from '@/utils/gutenberg/a11y';
+import { __, sprintf, _n } from '@/lib/gutenberg/i18n';
 import EmptyBlockInserter from './empty-block-inserter';
 import {
 	InsertionPointOpenRef,

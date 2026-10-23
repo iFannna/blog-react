@@ -1,4 +1,4 @@
-import type { Attachment, Updatable, Post, User } from '@wordpress/core-data';
+import type { Attachment, Updatable, Post, User } from '@/stores/gutenberg/core-data';
 
 export type MediaKind = 'image' | 'video' | 'audio' | 'application';
 

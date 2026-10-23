@@ -1,7 +1,7 @@
-import { __, isRTL } from '@wordpress/i18n';
-import { __experimentalItemGroup as ItemGroup } from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
-import { Icon, chevronLeft, chevronRight } from '@wordpress/icons';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
+import { __experimentalItemGroup as ItemGroup } from '@/components/gutenberg/ui';
+import { Stack } from '@/components/gutenberg/design-system';
+import { Icon, chevronLeft, chevronRight } from '@/components/gutenberg/icons';
 import { Subtitle } from './subtitle';
 import { NavigationButtonAsItem } from './navigation-button';
 

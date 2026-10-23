@@ -1,5 +1,5 @@
-import { Composite } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
+import { Composite } from '@/components/gutenberg/ui';
+import { Fragment } from '@/lib/gutenberg/element';
 export { default as InserterListboxGroup } from './group';
 export { default as InserterListboxRow } from './row';
 export { default as InserterListboxItem } from './item';

@@ -4,10 +4,10 @@ import {
 	ToolbarGroup,
 	SVG,
 	Path,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { DOWN } from '@wordpress/keycodes';
-import deprecated from '@wordpress/deprecated';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { DOWN } from '@/utils/gutenberg/keycodes';
+import deprecated from '@/utils/gutenberg/deprecated';
 import type { KeyboardEvent } from 'react';
 import type {
 	BlockColorsStyleSelectorProps,

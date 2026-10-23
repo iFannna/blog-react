@@ -2,9 +2,9 @@ import {
 	Flex,
 	BaseControl,
 	__experimentalNumberControl as NumberControl,
-} from '@wordpress/components';
-import { useCallback } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { useCallback } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import { OPERATOR_BETWEEN } from '../../../constants';
 import type { DataFormControlProps, FormatNumber } from '../../../types';
 import { ValidatedNumberControl } from '../../validated-form-controls';

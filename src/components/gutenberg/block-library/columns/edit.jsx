@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	ToggleControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	InspectorControls,
 	useInnerBlocksProps,
@@ -13,12 +13,12 @@ import {
 	__experimentalBlockVariationPicker,
 	useBlockProps,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { useDispatch, useSelect, useRegistry } from '@wordpress/data';
+} from '@/components/gutenberg/block-editor';
+import { useDispatch, useSelect, useRegistry } from '@/stores/gutenberg/data';
 import {
 	createBlocksFromInnerBlocksTemplate,
 	store as blocksStore,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 const DEFAULT_BLOCK = {

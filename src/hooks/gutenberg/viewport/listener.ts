@@ -1,5 +1,5 @@
-import { debounce } from '@wordpress/compose';
-import { dispatch } from '@wordpress/data';
+import { debounce } from '@/hooks/gutenberg/compose';
+import { dispatch } from '@/stores/gutenberg/data';
 import { store } from './store';
 import type { Breakpoints, Operators } from './types';
 

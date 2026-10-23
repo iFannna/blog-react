@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { getBlockSupport } from '@wordpress/blocks';
-import { useSelect } from '@wordpress/data';
-import { useCallback } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { getBlockSupport } from '@/lib/gutenberg/blocks';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useCallback } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import InspectorControls from '../components/inspector-controls';
 import { cleanEmptyObject } from './utils';
 import { extractPresetSlug } from '../utils/color-values';

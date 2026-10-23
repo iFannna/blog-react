@@ -5,20 +5,20 @@ import {
 	__experimentalVStack as VStack,
 	TextControl,
 	RadioControl,
-} from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useState, useMemo } from '@wordpress/element';
-import { store as coreStore } from '@wordpress/core-data';
-import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@wordpress/block-editor';
-import { useInstanceId } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useState, useMemo } from '@/lib/gutenberg/element';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@/components/gutenberg/block-editor';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
 import {
 	drafts,
 	published,
 	scheduled,
 	pending,
 	notAllowed,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import { DESIGN_POST_TYPES } from '../../store/constants';
 import PostPanelRow from '../post-panel-row';
 import PostSticky from '../post-sticky';

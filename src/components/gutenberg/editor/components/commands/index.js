@@ -1,5 +1,5 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { __, isRTL, sprintf } from '@wordpress/i18n';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { __, isRTL, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	blockDefault,
 	code,
@@ -13,14 +13,14 @@ import {
 	layout,
 	rotateRight,
 	rotateLeft,
-} from '@wordpress/icons';
-import { useCommandLoader } from '@wordpress/commands';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { store as noticesStore } from '@wordpress/notices';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { store as coreStore, useEntityRecord } from '@wordpress/core-data';
-import { store as interfaceStore } from '@wordpress/interface';
-import { decodeEntities } from '@wordpress/html-entities';
+} from '@/components/gutenberg/icons';
+import { useCommandLoader } from '@/lib/gutenberg/commands';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { store as coreStore, useEntityRecord } from '@/stores/gutenberg/core-data';
+import { store as interfaceStore } from '@/components/gutenberg/interface';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { unlock } from '../../lock-unlock';
 import { store as editorStore } from '../../store';
 import {

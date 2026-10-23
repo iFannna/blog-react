@@ -1,13 +1,13 @@
-import { useState, useEffect, useCallback, useRef } from '@wordpress/element';
-import { __, sprintf, _n } from '@wordpress/i18n';
+import { useState, useEffect, useCallback, useRef } from '@/lib/gutenberg/element';
+import { __, sprintf, _n } from '@/lib/gutenberg/i18n';
 import {
 	Button,
 	Icon as WCIcon,
 	Notice,
 	Popover,
 	Spinner as WCSpinner,
-} from '@wordpress/components';
-import { check, chevronDown } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { check, chevronDown } from '@/components/gutenberg/icons';
 
 export interface UploadingFile {
 	id: string;

@@ -1,16 +1,16 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useInstanceId } from '@wordpress/compose';
-import { useEffect, useCallback } from '@wordpress/element';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { useEffect, useCallback } from '@/lib/gutenberg/element';
 import {
 	InspectorControls,
 	useBlockProps,
 	store as blockEditorStore,
 	useInnerBlocksProps,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { __, sprintf } from '@wordpress/i18n';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as noticesStore } from '@wordpress/notices';
+} from '@/components/gutenberg/block-editor';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import EnhancedPaginationControl from './inspector-controls/enhanced-pagination-control';
 import { unlock } from '../../lock-unlock';
 import QueryInspectorControls from './inspector-controls';

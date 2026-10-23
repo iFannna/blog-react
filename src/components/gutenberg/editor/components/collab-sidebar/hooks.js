@@ -1,5 +1,5 @@
-import { speak } from '@wordpress/a11y';
-import { __ } from '@wordpress/i18n';
+import { speak } from '@/utils/gutenberg/a11y';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	createContext,
 	useContext,
@@ -8,16 +8,16 @@ import {
 	useLayoutEffect,
 	useMemo,
 	useSyncExternalStore,
-} from '@wordpress/element';
-import { useEvent } from '@wordpress/compose';
-import { useEntityRecords, store as coreStore } from '@wordpress/core-data';
-import { useDispatch, useRegistry, useSelect } from '@wordpress/data';
+} from '@/lib/gutenberg/element';
+import { useEvent } from '@/hooks/gutenberg/compose';
+import { useEntityRecords, store as coreStore } from '@/stores/gutenberg/core-data';
+import { useDispatch, useRegistry, useSelect } from '@/stores/gutenberg/data';
 import {
 	store as blockEditorStore,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { store as noticesStore } from '@wordpress/notices';
-import { decodeEntities } from '@wordpress/html-entities';
+} from '@/components/gutenberg/block-editor';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 import { createBoardStore } from './board-store';

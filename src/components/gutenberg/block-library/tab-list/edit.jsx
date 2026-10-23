@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	InspectorControls,
 	useBlockProps,
@@ -10,14 +10,14 @@ import {
 	__experimentalUseColorProps as useColorProps,
 	__experimentalGetShadowClassesAndStyles as getShadowClassesAndStyles,
 	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	TextControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { useSelect, useDispatch, useRegistry } from '@wordpress/data';
-import { useEffect, useMemo, useRef } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { useSelect, useDispatch, useRegistry } from '@/stores/gutenberg/data';
+import { useEffect, useMemo, useRef } from '@/lib/gutenberg/element';
 import TabToolbarControls from '../tabs/tab-toolbar-controls';
 import TabMovers from './tab-movers';
 import useTabActions from '../tabs/use-tab-actions';

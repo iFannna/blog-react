@@ -4,15 +4,15 @@ import {
 	useSelect,
 	useDispatch,
 	useRegistry,
-} from '@wordpress/data';
-import { useMergeRefs, useDebounce } from '@wordpress/compose';
+} from '@/stores/gutenberg/data';
+import { useMergeRefs, useDebounce } from '@/hooks/gutenberg/compose';
 import {
 	createContext,
 	useEffect,
 	useMemo,
 	useCallback,
-} from '@wordpress/element';
-import { createBlock, getDefaultBlockName } from '@wordpress/blocks';
+} from '@/lib/gutenberg/element';
+import { createBlock, getDefaultBlockName } from '@/lib/gutenberg/blocks';
 import BlockListBlock from './block';
 import BlockListAppender from '../block-list-appender';
 import { useInBetweenInserter } from './use-in-between-inserter';

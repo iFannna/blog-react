@@ -1,4 +1,4 @@
-import { useState } from '@wordpress/element';
+import { useState } from '@/lib/gutenberg/element';
 import fastDeepEqual from 'fast-deep-equal';
 import type { LinkControlValue } from './types';
 

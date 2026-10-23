@@ -1,108 +1,223 @@
-import type { ReactElement, ReactNode } from 'react';
-import type { Popover as _Popover } from '@base-ui/react/popover';
-import type { ComponentProps } from '../utils/types';
+import type { Placement } from '@floating-ui/react-dom';
+import type { useFocusOnMount } from '@/hooks/gutenberg/compose';
+import type { RefObject, ReactNode, SyntheticEvent } from 'react';
 
-export type PortalProps = ComponentProps< typeof _Popover.Portal >;
+type PositionYAxis = 'top' | 'middle' | 'bottom';
+type PositionXAxis = 'left' | 'center' | 'right';
+type PositionCorner = 'top' | 'right' | 'bottom' | 'left';
 
-export type PositionerProps = ComponentProps< typeof _Popover.Positioner >;
-
-export interface RootProps extends Pick<
-	_Popover.Root.Props,
-	'open' | 'onOpenChange' | 'defaultOpen' | 'modal'
-> {
-	/**
-	 * The popover sub-components (`Popover.Trigger`, `Popover.Popup`, etc.).
-	 */
-	children?: ReactNode;
-}
-
-// Detached triggers require handle and payload APIs that Popover does not
-// expose.
-export type TriggerProps = Omit<
-	ComponentProps< typeof _Popover.Trigger >,
-	'handle' | 'payload'
-> & {
-	/**
-	 * The content to be rendered inside the component.
-	 */
-	children?: ReactNode;
+type DomRectWithOwnerDocument = DOMRect & {
+	ownerDocument?: Document;
 };
 
-export interface PopupProps
-	extends
-		ComponentProps< 'div' >,
-		Pick< _Popover.Popup.Props, 'initialFocus' | 'finalFocus' > {
+type PopoverPlacement = Placement | 'overlay';
+
+export type PopoverAnchorRefReference = RefObject< Element | null | undefined >;
+export type PopoverAnchorRefTopBottom = { top: Element; bottom: Element };
+
+export type VirtualElement = Pick< Element, 'getBoundingClientRect' > & {
+	ownerDocument?: Document;
+};
+
+export type PopoverProps = {
 	/**
-	 * Whether to render a backdrop overlay behind the popover.
+	 * The name of the Slot in which the popover should be rendered. It should
+	 * be also passed to the corresponding `PopoverSlot` component.
 	 *
-	 * Typically used with `modal` to signal that interaction with the rest
-	 * of the page is blocked. The backdrop is a semi-transparent dark overlay.
+	 * @default 'Popover'
+	 */
+	__unstableSlotName?: string;
+	/**
+	 * The element that should be used by the popover as its anchor. It can either
+	 * be an `Element` or, alternatively, a `VirtualElement` — ie. an object with
+	 * the `getBoundingClientRect()` and the `ownerDocument` properties defined.
+	 *
+	 * **The anchor element should be stored in local state** rather than a
+	 * plain React ref to ensure reactive updating when it changes.
+	 */
+	anchor?: Element | VirtualElement | null;
+	/**
+	 * Whether the popover should animate when opening.
+	 *
+	 * @default true
+	 */
+	animate?: boolean;
+	/**
+	 * The `children` elements rendered as the popover's content.
+	 */
+	children: ReactNode;
+	/**
+	 * Show the popover fullscreen on mobile viewports.
+	 */
+	expandOnMobile?: boolean;
+	/**
+	 * Specifies whether the popover should flip across its axis if there isn't
+	 * space for it in the normal placement.
+	 * When the using a 'top' placement, the popover will switch to a 'bottom'
+	 * placement. When using a 'left' placement, the popover will switch to a
+	 * `right' placement.
+	 * The popover will retain its alignment of 'start' or 'end' when flipping.
+	 *
+	 * @default true
+	 */
+	flip?: boolean;
+	/**
+	 * Determines whether tabbing is constrained to within the popover,
+	 * preventing keyboard focus from leaving the popover content without
+	 * explicit focus elsewhere, or whether the popover remains part of the wider
+	 * tab order. If no value is passed, it will be derived from `focusOnMount`.
+	 *
+	 * @default `focusOnMount` !== false
+	 */
+	constrainTabbing?: boolean;
+	/**
+	 * Determines focus behavior when the popover mounts.
+	 *
+	 * - `"firstElement"` focuses the first tabbable element within.
+	 * - `"firstInputElement"` focuses the first value control within.
+	 * - `true` focuses the element itself.
+	 * - `false` does nothing and _should not be used unless an accessible
+	 *    substitute behavior is implemented_.
+	 *
+	 * @default 'firstElement'
+	 */
+	focusOnMount?: useFocusOnMount.Mode;
+	/**
+	 * A callback invoked when the focus leaves the opened popover. This should
+	 * only be provided in advanced use-cases when a popover should close under
+	 * specific circumstances (for example, if the new `document.activeElement`
+	 * is content of or otherwise controlling popover visibility).
+	 *
+	 * When not provided, the `onClose` callback will be called instead.
+	 */
+	onFocusOutside?: ( event: SyntheticEvent ) => void;
+	/**
+	 * Used to customize the header text shown when the popover is toggled to
+	 * fullscreen on mobile viewports (see the `expandOnMobile` prop).
+	 */
+	headerTitle?: string;
+	/**
+	 * Used to show/hide the arrow that points at the popover's anchor.
+	 *
+	 * @default true
+	 */
+	noArrow?: boolean;
+	/**
+	 * The distance (in px) between the anchor and the popover. Pass an object to
+	 * also displace the popover along its cross axis.
+	 */
+	offset?:
+		| number
+		| {
+				mainAxis?: number;
+				crossAxis?: number;
+		  };
+	/**
+	 * A callback invoked when the popover should be closed.
+	 */
+	onClose?: () => void;
+	/**
+	 * Used to specify the popover's position with respect to its anchor.
+	 *
+	 * @default 'bottom-start'
+	 */
+	placement?: PopoverPlacement;
+	/**
+	 * Legacy way to specify the popover's position with respect to its anchor.
+	 * _Note: this prop is deprecated. Use the `placement` prop instead._
+	 */
+	position?:
+		| `${ PositionYAxis }`
+		| `${ PositionYAxis } ${ PositionXAxis }`
+		| `${ PositionYAxis } ${ PositionXAxis } ${ PositionCorner }`;
+	/**
+	 * Adjusts the size of the popover to prevent its contents from going out of
+	 * view when meeting the viewport edges.
+	 * _Note: The `resize` and `shift` props are not intended to be used together.
+	 * Enabling both can cause unexpected behavior._
+	 *
+	 * @default true
+	 */
+	resize?: boolean;
+	/**
+	 * Enables the `Popover` to shift in order to stay in view when meeting the
+	 * viewport edges.
+	 * _Note: The `resize` and `shift` props are not intended to be used together.
+	 * Enabling both can cause unexpected behavior._
 	 *
 	 * @default false
 	 */
-	backdrop?: boolean;
-
+	shift?: boolean;
 	/**
-	 * The content to be rendered inside the component.
-	 */
-	children?: ReactNode;
-
-	/**
-	 * Optional portal element, typically `<Popover.Portal />` with custom
-	 * `container` for cross-document rendering. Floating content is rendered
-	 * as this portal's children (do not pass `children` on the portal element;
-	 * they would be ignored).
+	 * Specifies the popover's style.
 	 *
-	 * When omitted, `Popover.Popup` uses `Popover.Portal` with default props.
-	 */
-	portal?: ReactElement< Omit< PortalProps, 'children' > >;
-
-	/**
-	 * Optional positioner element, typically `<Popover.Positioner />` with
-	 * custom positioning props (`side`, `align`, `sideOffset`, collision
-	 * settings, anchor, etc.). When omitted, `Popover.Popup` uses
-	 * `Popover.Positioner` with default props. Do not pass `children` on
-	 * the positioner element; they would be ignored.
-	 */
-	positioner?: ReactElement< Omit< PositionerProps, 'children' > >;
-
-	/**
-	 * The visual style variant of the popup.
+	 * Leave undefined for the default style. Other values are:
+	 * - 'unstyled':  The popover is essentially without any visible style, it
+	 *                has no background, border, outline or drop shadow, but
+	 *                the popover contents are still displayed.
+	 * - 'toolbar':   A style that has no elevation, but a high contrast with
+	 *                other elements. This is matches the style of the
+	 *                `Toolbar` component.
 	 *
-	 * - `'default'` — standard surface styling with background, padding,
-	 *    border radius, and shadow.
-	 * - `'unstyled'` — no visual treatment; useful as a blank positioning
-	 *    container for fully custom content.
+	 * @default undefined
+	 */
+	variant?: 'unstyled' | 'toolbar';
+	/**
+	 * Whether to render the popover inline or within the slot.
 	 *
-	 * @default 'default'
+	 * @default false
 	 */
-	variant?: 'default' | 'unstyled';
-}
-
-export interface ArrowProps extends ComponentProps< 'div' > {
+	inline?: boolean;
+	// Deprecated props
 	/**
-	 * Custom arrow visuals to render inside the positioned container.
+	 * Prevent the popover from flipping and resizing when meeting the viewport
+	 * edges. _Note: this prop is deprecated. Instead, provide use the individual
+	 * `flip` and `resize` props._
+	 *
+	 * @deprecated
 	 */
-	children?: ReactNode;
-}
-
-export interface TitleProps extends ComponentProps< 'h2' > {
+	__unstableForcePosition?: boolean;
 	/**
-	 * The title content to be rendered.
+	 * An object extending a `DOMRect` with an additional optional `ownerDocument`
+	 * property, used to specify a fixed popover position.
+	 *
+	 * @deprecated
 	 */
-	children?: ReactNode;
-}
-
-export interface DescriptionProps extends ComponentProps< 'p' > {
+	anchorRect?: DomRectWithOwnerDocument;
 	/**
-	 * The description content to be rendered.
+	 * Used to specify a fixed popover position. It can be an `Element`, a React
+	 * reference to an `element`, an object with a `top` and a `bottom` properties
+	 * (both pointing to elements), or a `range`.
+	 *
+	 * @deprecated
 	 */
-	children?: ReactNode;
-}
-
-export interface CloseProps extends ComponentProps< 'button' > {
+	anchorRef?:
+		Element | PopoverAnchorRefReference | PopoverAnchorRefTopBottom | Range;
 	/**
-	 * The content to be rendered inside the component.
+	 * A function returning the same value as the one expected by the `anchorRect`
+	 * prop, used to specify a dynamic popover position.
+	 *
+	 * @deprecated
 	 */
-	children?: ReactNode;
-}
+	getAnchorRect?: (
+		fallbackReferenceElement: Element | null
+	) => DomRectWithOwnerDocument;
+	/**
+	 * Used to enable a different visual style for the popover.
+	 * _Note: this prop is deprecated. Use the `variant` prop with the
+	 * 'toolbar' value instead._
+	 *
+	 * @deprecated
+	 */
+	isAlternate?: boolean;
+};
+
+export type PopoverSlotProps = {
+	/**
+	 * The name of the Slot in which the popover should be rendered. It should
+	 * be also passed to the corresponding `PopoverSlot` component.
+	 *
+	 * @default 'Popover'
+	 */
+	name?: string;
+};

@@ -1,4 +1,4 @@
-import { store as blockEditorStore } from '@wordpress/block-editor';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 
 const CONTENT = 'content';
 

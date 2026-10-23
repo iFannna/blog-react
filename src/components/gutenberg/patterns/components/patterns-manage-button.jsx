@@ -1,14 +1,14 @@
 import {
 	MenuItem,
 	__experimentalConfirmDialog as ConfirmDialog,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { isReusableBlock } from '@wordpress/blocks';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useState } from '@wordpress/element';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { addQueryArgs } from '@wordpress/url';
-import { store as coreStore } from '@wordpress/core-data';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { isReusableBlock } from '@/lib/gutenberg/blocks';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useState } from '@/lib/gutenberg/element';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { addQueryArgs } from '@/utils/gutenberg/url';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { store as patternsStore } from '../store';
 import { unlock } from '../lock-unlock';
 

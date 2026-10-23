@@ -1,7 +1,7 @@
-import { useEffect } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { Notice } from '@wordpress/components';
-import { speak } from '@wordpress/a11y';
+import { useEffect } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Notice } from '@/components/gutenberg/ui';
+import { speak } from '@/utils/gutenberg/a11y';
 
 /**
  * Component that checks if the fit text computed font size is below a minimum

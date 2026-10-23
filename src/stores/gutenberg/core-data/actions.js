@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
-import apiFetch from '@wordpress/api-fetch';
-import { addQueryArgs } from '@wordpress/url';
-import deprecated from '@wordpress/deprecated';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { addQueryArgs } from '@/utils/gutenberg/url';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { clearUnchangedEdits, getNestedValue, setNestedValue } from './utils';
 import { receiveItems, removeItems, receiveQueriedItems } from './queried-data';
 import { DEFAULT_ENTITY_KEY } from './entities';

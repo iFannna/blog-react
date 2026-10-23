@@ -1,4 +1,4 @@
-import { getPhrasingContentSchema, removeInvalidHTML } from '@wordpress/dom';
+import { getPhrasingContentSchema, removeInvalidHTML } from '@/utils/gutenberg/dom';
 import { htmlToBlocks } from './html-to-blocks';
 import { hasBlockSupport } from '../registration';
 import { getBlockInnerHTML } from '../serializer';

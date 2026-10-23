@@ -1,4 +1,4 @@
-import { prependHTTPS } from '@wordpress/url';
+import { prependHTTPS } from '@/utils/gutenberg/url';
 import { NEW_TAB_REL, NEW_TAB_TARGET, NOFOLLOW_REL } from './constants';
 
 /**

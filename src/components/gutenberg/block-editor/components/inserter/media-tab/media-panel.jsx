@@ -1,9 +1,9 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
-import { Spinner as WCSpinner } from '@wordpress/components';
-import { useCallback, useMemo, useRef, useState } from '@wordpress/element';
-import { usePrevious } from '@wordpress/compose';
-import { getScrollContainer } from '@wordpress/dom';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Spinner as WCSpinner } from '@/components/gutenberg/ui';
+import { useCallback, useMemo, useRef, useState } from '@/lib/gutenberg/element';
+import { usePrevious } from '@/hooks/gutenberg/compose';
+import { getScrollContainer } from '@/utils/gutenberg/dom';
 import MediaGrid from './media-grid';
 import { useMediaResults } from './hooks';
 import { useMediaInsert } from './use-media-insert';

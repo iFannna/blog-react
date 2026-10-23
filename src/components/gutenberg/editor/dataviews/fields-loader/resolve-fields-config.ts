@@ -1,4 +1,4 @@
-import type { Field } from '@wordpress/dataviews';
+import type { Field } from '@/components/gutenberg/dataviews';
 
 /**
  * The fields registered on the server for an entity, as the

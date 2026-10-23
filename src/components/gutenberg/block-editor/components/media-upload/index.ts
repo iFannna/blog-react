@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { withFilters } from '@wordpress/components';
+import { withFilters } from '@/components/gutenberg/ui';
 import type { MediaUploadProps } from './types';
 
 /**

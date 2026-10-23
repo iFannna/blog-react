@@ -1,9 +1,9 @@
-import { speak } from '@wordpress/a11y';
-import { __, sprintf } from '@wordpress/i18n';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useCallback } from '@wordpress/element';
-import { UP, DOWN, HOME, END, ESCAPE } from '@wordpress/keycodes';
-import { store as blocksStore } from '@wordpress/blocks';
+import { speak } from '@/utils/gutenberg/a11y';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useCallback } from '@/lib/gutenberg/element';
+import { UP, DOWN, HOME, END, ESCAPE } from '@/utils/gutenberg/keycodes';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
 import { store as blockEditorStore } from '../../store';
 import { getCommonDepthClientIds } from './utils';
 

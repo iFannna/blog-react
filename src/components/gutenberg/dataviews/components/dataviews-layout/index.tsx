@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react';
-import { useContext } from '@wordpress/element';
-import { Spinner as WCSpinner } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+import { useContext } from '@/lib/gutenberg/element';
+import { Spinner as WCSpinner } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import DataViewsContext from '../dataviews-context';
 import { VIEW_LAYOUTS } from '../dataviews-layouts';
 import { useDelayedLoading } from '../../hooks/use-delayed-loading';

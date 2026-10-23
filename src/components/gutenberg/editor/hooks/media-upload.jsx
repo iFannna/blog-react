@@ -1,12 +1,12 @@
-import { Component } from '@wordpress/element';
-import { addFilter } from '@wordpress/hooks';
-import deprecated from '@wordpress/deprecated';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+import { Component } from '@/lib/gutenberg/element';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import {
 	MediaUpload,
 	privateApis as mediaUtilsPrivateApis,
-} from '@wordpress/media-utils';
+} from '@/utils/gutenberg/media-utils';
 import { unlock } from '../lock-unlock';
 import { store as editorStore } from '../store';
 

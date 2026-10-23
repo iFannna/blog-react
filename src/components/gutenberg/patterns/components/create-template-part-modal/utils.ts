@@ -1,7 +1,7 @@
 import { paramCase as kebabCase } from 'change-case';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import type { WpTemplatePart } from '@wordpress/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import type { WpTemplatePart } from '@/stores/gutenberg/core-data';
 
 const EMPTY_ARRAY: WpTemplatePart[] = [];
 

@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import { useRef, useEffect } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
-import { store as noticesStore } from '@wordpress/notices';
-import { __, sprintf } from '@wordpress/i18n';
-import { Popover } from '@wordpress/components';
-import { useViewportMatch } from '@wordpress/compose';
+import { useRef, useEffect } from '@/lib/gutenberg/element';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { Popover } from '@/components/gutenberg/ui';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
 import Control from './control';
 
 export default function Form( {

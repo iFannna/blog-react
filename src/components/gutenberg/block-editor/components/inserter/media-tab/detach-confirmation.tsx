@@ -1,5 +1,5 @@
-import { Button } from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
+import { Button } from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 
 /**
  * The body of the "Detach" action's confirmation modal.

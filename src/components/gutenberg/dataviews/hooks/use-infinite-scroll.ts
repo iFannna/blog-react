@@ -3,8 +3,8 @@ import {
 	useEffect,
 	useLayoutEffect,
 	useRef,
-} from '@wordpress/element';
-import { throttle } from '@wordpress/compose';
+} from '@/lib/gutenberg/element';
+import { throttle } from '@/hooks/gutenberg/compose';
 import type { View } from '../types';
 
 /**

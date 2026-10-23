@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { Popover, ToolbarGroup } from '@wordpress/components';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Popover, ToolbarGroup } from '@/components/gutenberg/ui';
 import BlockControls from '../block-controls';
 import FormatToolbar from './format-toolbar';
 import NavigableToolbar from '../navigable-toolbar';

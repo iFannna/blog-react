@@ -30,7 +30,7 @@ import {
 	escapeHTML,
 	escapeAttribute,
 	isValidAttributeName,
-} from '@wordpress/escape-html';
+} from '@/utils/gutenberg/escape-html';
 import {
 	createContext,
 	createElement,

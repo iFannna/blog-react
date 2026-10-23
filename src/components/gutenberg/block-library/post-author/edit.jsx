@@ -7,7 +7,7 @@ import {
 	useBlockProps,
 	store as blockEditorStore,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	Button,
 	ComboboxControl,
@@ -17,14 +17,14 @@ import {
 	__experimentalVStack as VStack,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { debounce } from '@wordpress/compose';
-import { store as coreStore } from '@wordpress/core-data';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useMemo, useState } from '@wordpress/element';
-import { decodeEntities } from '@wordpress/html-entities';
-import { __, sprintf } from '@wordpress/i18n';
-import { store as blocksStore } from '@wordpress/blocks';
+} from '@/components/gutenberg/ui';
+import { debounce } from '@/hooks/gutenberg/compose';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useMemo, useState } from '@/lib/gutenberg/element';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
 import { recreateWithRecommendedBlocks } from './utils';
 import {
 	useDefaultAvatar,

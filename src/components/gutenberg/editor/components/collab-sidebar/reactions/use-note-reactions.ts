@@ -1,8 +1,8 @@
-import { __ } from '@wordpress/i18n';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as noticesStore } from '@wordpress/notices';
-import { decodeEntities } from '@wordpress/html-entities';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { store as editorStore } from '../../../store';
 
 interface ReactionSummaryEntry {

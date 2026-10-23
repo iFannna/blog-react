@@ -1,5 +1,5 @@
 import type { ComponentPropsWithoutRef } from 'react';
-import { forwardRef } from '@wordpress/element';
+import { forwardRef } from '@/lib/gutenberg/element';
 import clsx from 'clsx';
 
 export const GridItems = forwardRef<

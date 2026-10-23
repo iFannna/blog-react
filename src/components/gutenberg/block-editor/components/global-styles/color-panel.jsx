@@ -1,7 +1,7 @@
-import { __experimentalToolsPanel as ToolsPanel } from '@wordpress/components';
-import { useCallback, useMemo } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { getCSSValueFromRawStyle } from '@wordpress/style-engine';
+import { __experimentalToolsPanel as ToolsPanel } from '@/components/gutenberg/ui';
+import { useCallback, useMemo } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { getCSSValueFromRawStyle } from '@/lib/gutenberg/style-engine';
 import ColorGradientDropdownItem from './color-gradient-dropdown-item';
 import {
 	useColorsPerOrigin,

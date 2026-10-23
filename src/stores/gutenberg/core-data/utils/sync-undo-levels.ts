@@ -14,7 +14,7 @@ import type {
 	HistoryChanges,
 	HistoryRecord,
 	UndoManager,
-} from '@wordpress/undo-manager';
+} from '@/stores/gutenberg/undo-manager';
 import type { EntitySyncManager, EntitySyncRecordId } from '../entity-sync';
 
 type UndoLevelType = 'undo' | 'redo';

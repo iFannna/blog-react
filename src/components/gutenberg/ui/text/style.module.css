@@ -1,121 +1,219 @@
-@layer wp-ui {
-	@layer utilities, components, compositions, overrides;
+/**
+ * Colors
+ */
+.text {
+  --wp-components-text-color: initial;
+  --wp-components-text-display: initial;
+  --wp-components-text-font-size: initial;
+  --wp-components-text-font-weight: initial;
+  --wp-components-text-line-height: initial;
+  --wp-components-text-letter-spacing: initial;
+  --wp-components-text-text-align: initial;
+  color: var(--wp-components-text-color, var(--wp-components-color-foreground, var(--wpds-color-foreground-content-neutral)));
+  font-size: var(--wp-components-text-font-size);
+  font-weight: var(--wp-components-text-font-weight);
+  line-height: var(--wp-components-text-line-height, 1.4);
+  margin: 0;
+}
 
-	@layer components {
-		.text {
-			margin: 0;
-			text-wrap: pretty;
-		}
+.control-line-height {
+  --wp-components-text-line-height: 44px;
+}
 
-		/* Text variants can render as either paragraphs or headings, so each variant
-		   provides values for both element-specific CSS defenses. */
-		.heading-2xl {
-			--_gcd-heading-font-size: var(--wpds-typography-font-size-2xl);
-			--_gcd-heading-font-weight: var(--wpds-typography-font-weight-emphasis);
-			--_gcd-p-font-size: var(--wpds-typography-font-size-2xl);
-			--_gcd-p-line-height: var(--wpds-typography-line-height-2xl);
+.control-line-height-large {
+  --wp-components-text-line-height: 51.2px;
+}
 
-			font-family: var(--wpds-typography-font-family-heading);
-			font-size: var(--wpds-typography-font-size-2xl);
-			line-height: var(--wpds-typography-line-height-2xl);
-			font-weight: var(--wpds-typography-font-weight-emphasis);
-		}
+.control-line-height-small {
+  --wp-components-text-line-height: 36.8px;
+}
 
-		.heading-xl {
-			--_gcd-heading-font-size: var(--wpds-typography-font-size-xl);
-			--_gcd-heading-font-weight: var(--wpds-typography-font-weight-emphasis);
-			--_gcd-p-font-size: var(--wpds-typography-font-size-xl);
-			--_gcd-p-line-height: var(--wpds-typography-line-height-md);
+.control-line-height-xSmall {
+  --wp-components-text-line-height: 29.6px;
+}
 
-			font-family: var(--wpds-typography-font-family-heading);
-			font-size: var(--wpds-typography-font-size-xl);
-			line-height: var(--wpds-typography-line-height-md);
-			font-weight: var(--wpds-typography-font-weight-emphasis);
-		}
+:where(.text) {
+  text-wrap: pretty;
+}
 
-		.heading-lg {
-			--_gcd-heading-font-size: var(--wpds-typography-font-size-lg);
-			--_gcd-heading-font-weight: var(--wpds-typography-font-weight-emphasis);
-			--_gcd-p-font-size: var(--wpds-typography-font-size-lg);
-			--_gcd-p-line-height: var(--wpds-typography-line-height-sm);
+.has-display {
+  display: var(--wp-components-text-display);
+}
 
-			font-family: var(--wpds-typography-font-family-heading);
-			font-size: var(--wpds-typography-font-size-lg);
-			line-height: var(--wpds-typography-line-height-sm);
-			font-weight: var(--wpds-typography-font-weight-emphasis);
-		}
+.has-letter-spacing {
+  letter-spacing: var(--wp-components-text-letter-spacing);
+}
 
-		.heading-md {
-			--_gcd-heading-font-size: var(--wpds-typography-font-size-md);
-			--_gcd-heading-font-weight: var(--wpds-typography-font-weight-emphasis);
-			--_gcd-p-font-size: var(--wpds-typography-font-size-md);
-			--_gcd-p-line-height: var(--wpds-typography-line-height-sm);
+.has-text-align {
+  text-align: var(--wp-components-text-text-align);
+}
 
-			font-family: var(--wpds-typography-font-family-heading);
-			font-size: var(--wpds-typography-font-size-md);
-			line-height: var(--wpds-typography-line-height-sm);
-			font-weight: var(--wpds-typography-font-weight-emphasis);
-		}
+.color-inherit {
+  color: inherit;
+}
 
-		.heading-sm {
-			--_gcd-heading-font-size: var(--wpds-typography-font-size-xs);
-			--_gcd-heading-font-weight: var(--wpds-typography-font-weight-emphasis);
-			--_gcd-p-font-size: var(--wpds-typography-font-size-xs);
-			--_gcd-p-line-height: var(--wpds-typography-line-height-xs);
+.color-initial {
+  color: initial;
+}
 
-			font-family: var(--wpds-typography-font-family-heading);
-			font-size: var(--wpds-typography-font-size-xs);
-			line-height: var(--wpds-typography-line-height-xs);
-			font-weight: var(--wpds-typography-font-weight-emphasis);
-			text-transform: uppercase;
-		}
+.color-unset {
+  color: unset;
+}
 
-		.body-xl {
-			--_gcd-heading-font-size: var(--wpds-typography-font-size-xl);
-			--_gcd-heading-font-weight: var(--wpds-typography-font-weight-default);
-			--_gcd-p-font-size: var(--wpds-typography-font-size-xl);
-			--_gcd-p-line-height: var(--wpds-typography-line-height-xl);
+.color-revert {
+  color: revert;
+}
 
-			font-family: var(--wpds-typography-font-family-body);
-			font-size: var(--wpds-typography-font-size-xl);
-			line-height: var(--wpds-typography-line-height-xl);
-			font-weight: var(--wpds-typography-font-weight-default);
-		}
+.color-revert-layer {
+  color: revert-layer;
+}
 
-		.body-lg {
-			--_gcd-heading-font-size: var(--wpds-typography-font-size-lg);
-			--_gcd-heading-font-weight: var(--wpds-typography-font-weight-default);
-			--_gcd-p-font-size: var(--wpds-typography-font-size-lg);
-			--_gcd-p-line-height: var(--wpds-typography-line-height-md);
+.display-inherit {
+  display: inherit;
+}
 
-			font-family: var(--wpds-typography-font-family-body);
-			font-size: var(--wpds-typography-font-size-lg);
-			line-height: var(--wpds-typography-line-height-md);
-			font-weight: var(--wpds-typography-font-weight-default);
-		}
+.display-initial {
+  display: initial;
+}
 
-		.body-md {
-			--_gcd-heading-font-size: var(--wpds-typography-font-size-md);
-			--_gcd-heading-font-weight: var(--wpds-typography-font-weight-default);
-			--_gcd-p-font-size: var(--wpds-typography-font-size-md);
-			--_gcd-p-line-height: var(--wpds-typography-line-height-sm);
+.display-unset {
+  display: unset;
+}
 
-			font-family: var(--wpds-typography-font-family-body);
-			font-size: var(--wpds-typography-font-size-md);
-			line-height: var(--wpds-typography-line-height-sm);
-			font-weight: var(--wpds-typography-font-weight-default);
-		}
+.display-revert {
+  display: revert;
+}
 
-		.body-sm {
-			--_gcd-heading-font-size: var(--wpds-typography-font-size-sm);
-			--_gcd-heading-font-weight: var(--wpds-typography-font-weight-default);
-			--_gcd-p-font-size: var(--wpds-typography-font-size-sm);
-			--_gcd-p-line-height: var(--wpds-typography-line-height-xs);
+.display-revert-layer {
+  display: revert-layer;
+}
 
-			font-family: var(--wpds-typography-font-family-body);
-			font-size: var(--wpds-typography-font-size-sm);
-			line-height: var(--wpds-typography-line-height-xs);
-			font-weight: var(--wpds-typography-font-weight-default);
-		}
-	}
+.font-size-inherit {
+  font-size: inherit;
+}
+
+.font-size-initial {
+  font-size: initial;
+}
+
+.font-size-unset {
+  font-size: unset;
+}
+
+.font-size-revert {
+  font-size: revert;
+}
+
+.font-size-revert-layer {
+  font-size: revert-layer;
+}
+
+.font-weight-inherit {
+  font-weight: inherit;
+}
+
+.font-weight-initial {
+  font-weight: initial;
+}
+
+.font-weight-unset {
+  font-weight: unset;
+}
+
+.font-weight-revert {
+  font-weight: revert;
+}
+
+.font-weight-revert-layer {
+  font-weight: revert-layer;
+}
+
+.line-height-inherit {
+  line-height: inherit;
+}
+
+.line-height-initial {
+  line-height: initial;
+}
+
+.line-height-unset {
+  line-height: unset;
+}
+
+.line-height-revert {
+  line-height: revert;
+}
+
+.line-height-revert-layer {
+  line-height: revert-layer;
+}
+
+.letter-spacing-inherit {
+  letter-spacing: inherit;
+}
+
+.letter-spacing-initial {
+  letter-spacing: initial;
+}
+
+.letter-spacing-unset {
+  letter-spacing: unset;
+}
+
+.letter-spacing-revert {
+  letter-spacing: revert;
+}
+
+.letter-spacing-revert-layer {
+  letter-spacing: revert-layer;
+}
+
+.text-align-inherit {
+  text-align: inherit;
+}
+
+.text-align-initial {
+  text-align: initial;
+}
+
+.text-align-unset {
+  text-align: unset;
+}
+
+.text-align-revert {
+  text-align: revert;
+}
+
+.text-align-revert-layer {
+  text-align: revert-layer;
+}
+
+.readability-dark {
+  color: #1e1e1e;
+}
+
+.readability-light {
+  color: #fff;
+}
+
+.destructive {
+  color: #d94f4f;
+}
+
+.highlighter-text mark {
+  background: #f0b849;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05) inset, 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+}
+
+.block {
+  display: block;
+}
+
+.muted {
+  color: var(--wp-components-color-gray-700, var(--wpds-color-foreground-content-neutral-weak));
+}
+
+.upper-case {
+  text-transform: uppercase;
 }

@@ -1,12 +1,12 @@
-import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
+import { InspectorControls } from '@/components/gutenberg/block-editor';
 import {
 	TextControl,
 	ToggleControl,
 	SelectControl as WCSelectControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 const LIST_STYLE_OPTIONS = [

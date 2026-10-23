@@ -1,5 +1,5 @@
 import type { ComponentPropsWithoutRef } from 'react';
-import type { ResizableBox } from '@wordpress/components';
+import type { ResizableBox } from '@/components/gutenberg/ui';
 import type BlockPopoverCover from '../block-popover/cover';
 
 /**

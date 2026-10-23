@@ -3,12 +3,12 @@ import {
 	MenuItem,
 	MenuItemsChoice,
 	DropdownMenu,
-} from '@wordpress/components';
-import { moreVertical } from '@wordpress/icons';
-import { __, sprintf } from '@wordpress/i18n';
-import { decodeEntities } from '@wordpress/html-entities';
-import { useEffect, useMemo, useState } from '@wordpress/element';
-import { useEntityRecords, useEntityProp } from '@wordpress/core-data';
+} from '@/components/gutenberg/ui';
+import { moreVertical } from '@/components/gutenberg/icons';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { useEffect, useMemo, useState } from '@/lib/gutenberg/element';
+import { useEntityRecords, useEntityProp } from '@/stores/gutenberg/core-data';
 import useNavigationMenu from '../use-navigation-menu';
 
 function buildMenuLabel( title, id, status ) {

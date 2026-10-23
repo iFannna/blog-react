@@ -1,14 +1,14 @@
-import { Draggable } from '@wordpress/components';
-import { createBlock, store as blocksStore } from '@wordpress/blocks';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
+import { Draggable } from '@/components/gutenberg/ui';
+import { createBlock, store as blocksStore } from '@/lib/gutenberg/blocks';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
 import BlockDraggableChip from '../block-draggable/draggable-chip';
 import { INSERTER_PATTERN_TYPES } from '../inserter/block-patterns-tab/utils';
 import { store as blockEditorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 
-/** @typedef {import('@wordpress/blocks').Block} Block */
-/** @typedef {import('@wordpress/blocks').BlockTypeIcon} BlockTypeIcon */
+/** @typedef {import('@/lib/gutenberg/blocks').Block} Block */
+/** @typedef {import('@/lib/gutenberg/blocks').BlockTypeIcon} BlockTypeIcon */
 
 /**
  * The parts of a pattern this component reads. A synced user pattern drags as

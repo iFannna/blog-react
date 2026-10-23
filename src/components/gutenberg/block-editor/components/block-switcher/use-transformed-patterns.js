@@ -1,5 +1,5 @@
-import { useMemo } from '@wordpress/element';
-import { cloneBlock } from '@wordpress/blocks';
+import { useMemo } from '@/lib/gutenberg/element';
+import { cloneBlock } from '@/lib/gutenberg/blocks';
 import { getMatchingBlockByName, getRetainedBlockAttributes } from './utils';
 
 /**

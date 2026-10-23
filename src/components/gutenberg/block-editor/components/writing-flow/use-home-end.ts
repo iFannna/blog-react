@@ -1,6 +1,6 @@
-import { HOME, END } from '@wordpress/keycodes';
-import { useSelect } from '@wordpress/data';
-import { useRefEffect } from '@wordpress/compose';
+import { HOME, END } from '@/utils/gutenberg/keycodes';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
 import { getSelectionEditableElement } from '../../utils/dom';
 import { store as blockEditorStore } from '../../store';
 

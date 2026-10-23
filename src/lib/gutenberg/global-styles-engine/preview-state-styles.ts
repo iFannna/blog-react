@@ -1,4 +1,4 @@
-import { __EXPERIMENTAL_ELEMENTS as ELEMENTS } from '@wordpress/blocks';
+import { __EXPERIMENTAL_ELEMENTS as ELEMENTS } from '@/lib/gutenberg/blocks';
 import { generateGlobalStyles } from './core/render';
 import type { GlobalStylesConfig } from './types';
 

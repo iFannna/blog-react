@@ -1,5 +1,5 @@
-import { serialize } from '@wordpress/blocks';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { serialize } from '@/lib/gutenberg/blocks';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	BlockSettingsMenuControls,
 	useBlockProps,
@@ -10,18 +10,18 @@ import {
 	InspectorControls,
 	__experimentalBlockPatternsList as BlockPatternsList,
 	BlockControls,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	PanelBody,
 	Spinner as WCSpinner,
 	Modal,
 	MenuItem,
 	ToolbarButton,
-} from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
-import { store as coreStore } from '@wordpress/core-data';
-import { useState } from '@wordpress/element';
-import { store as noticesStore } from '@wordpress/notices';
+} from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useState } from '@/lib/gutenberg/element';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import TemplatePartPlaceholder from './placeholder';
 import TemplatePartSelectionModal from './selection-modal';
 import { TemplatePartAdvancedControls } from './advanced-controls';

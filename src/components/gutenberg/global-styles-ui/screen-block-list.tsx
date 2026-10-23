@@ -1,5 +1,5 @@
-import { store as blocksStore } from '@wordpress/blocks';
-import { __, sprintf, _n } from '@wordpress/i18n';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
+import { __, sprintf, _n } from '@/lib/gutenberg/i18n';
 import {
 	Button,
 	FlexItem,
@@ -7,10 +7,10 @@ import {
 	__experimentalHStack as HStack,
 	__experimentalItemGroup as ItemGroup,
 	__experimentalText as WCText,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of the new Menu, pending WordPress/gutenberg#76135.
-import { Menu } from '@wordpress/ui';
-import { useSelect } from '@wordpress/data';
+import { Menu } from '@/components/gutenberg/design-system';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	useState,
 	useContext,
@@ -19,17 +19,17 @@ import {
 	useRef,
 	useDeferredValue,
 	memo,
-} from '@wordpress/element';
-import type { BlockType } from '@wordpress/blocks';
-import type { GlobalStylesConfig } from '@wordpress/global-styles-engine';
+} from '@/lib/gutenberg/element';
+import type { BlockType } from '@/lib/gutenberg/blocks';
+import type { GlobalStylesConfig } from '@/lib/gutenberg/global-styles-engine';
 import {
 	BlockIcon,
 	privateApis as blockEditorPrivateApis,
 	// @ts-expect-error: Not typed yet.
-} from '@wordpress/block-editor';
-import { useDebounce } from '@wordpress/compose';
-import { speak } from '@wordpress/a11y';
-import { funnel } from '@wordpress/icons';
+} from '@/components/gutenberg/block-editor';
+import { useDebounce } from '@/hooks/gutenberg/compose';
+import { speak } from '@/utils/gutenberg/a11y';
+import { funnel } from '@/components/gutenberg/icons';
 import { useBlockVariations } from './variations/variations-panel';
 import { ScreenHeader } from './screen-header';
 import { NavigationButtonAsItem } from './navigation-button';

@@ -1,5 +1,5 @@
-import { useCallback } from '@wordpress/element';
-import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
+import { useCallback } from '@/lib/gutenberg/element';
+import { useBlockProps, useInnerBlocksProps } from '@/components/gutenberg/block-editor';
 import TermsQueryInspectorControls from './inspector-controls';
 
 export default function TermsQueryContent( {

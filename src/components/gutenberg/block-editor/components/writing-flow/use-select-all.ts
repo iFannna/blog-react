@@ -1,7 +1,7 @@
-import { isEntirelySelected } from '@wordpress/dom';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { __unstableUseShortcutEventMatch as useShortcutEventMatch } from '@wordpress/keyboard-shortcuts';
-import { useRefEffect } from '@wordpress/compose';
+import { isEntirelySelected } from '@/utils/gutenberg/dom';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { __unstableUseShortcutEventMatch as useShortcutEventMatch } from '@/components/gutenberg/keyboard-shortcuts';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
 import { store as blockEditorStore } from '../../store';
 import {
 	isInsideRootBlock,

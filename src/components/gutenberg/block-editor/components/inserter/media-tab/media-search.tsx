@@ -1,6 +1,6 @@
-import { SearchControl } from '@wordpress/components';
-import { useEffect } from '@wordpress/element';
-import { useDebouncedInput } from '@wordpress/compose';
+import { SearchControl } from '@/components/gutenberg/ui';
+import { useEffect } from '@/lib/gutenberg/element';
+import { useDebouncedInput } from '@/hooks/gutenberg/compose';
 
 /**
  * The Media tab's search field.

@@ -1,4 +1,4 @@
-import { useCallback } from '@wordpress/element';
+import { useCallback } from '@/lib/gutenberg/element';
 import type { DataFormControlProps } from '../../types';
 import { ValidatedToggleControl } from '../validated-form-controls';
 import getCustomValidity from './utils/get-custom-validity';

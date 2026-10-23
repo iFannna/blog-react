@@ -2,8 +2,8 @@ import {
 	store as coreStore,
 	useResourcePermissions,
 	useEntityRecords,
-} from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
+} from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
 import { PRELOADED_NAVIGATION_MENUS_QUERY } from './constants';
 
 export default function useNavigationMenu( ref ) {

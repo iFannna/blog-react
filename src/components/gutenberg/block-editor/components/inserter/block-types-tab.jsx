@@ -1,6 +1,6 @@
-import { __, _x } from '@wordpress/i18n';
-import { useMemo, useEffect, forwardRef } from '@wordpress/element';
-import { useAsyncList } from '@wordpress/compose';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { useMemo, useEffect, forwardRef } from '@/lib/gutenberg/element';
+import { useAsyncList } from '@/hooks/gutenberg/compose';
 import BlockTypesList from '../block-types-list';
 import InserterPanel from './panel';
 import useBlockTypesState from './hooks/use-block-types-state';

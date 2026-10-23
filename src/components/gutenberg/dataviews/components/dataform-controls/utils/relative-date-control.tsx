@@ -3,10 +3,10 @@ import {
 	BaseControl,
 	SelectControl as WCSelectControl,
 	__experimentalNumberControl as NumberControl,
-} from '@wordpress/components';
-import { useCallback } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { Stack } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { useCallback } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Stack } from '@/components/gutenberg/design-system';
 import { OPERATOR_IN_THE_PAST, OPERATOR_OVER } from '../../../constants';
 import type { DataFormControlProps } from '../../../types';
 

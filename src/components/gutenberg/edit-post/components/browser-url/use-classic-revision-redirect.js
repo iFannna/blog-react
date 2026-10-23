@@ -1,8 +1,8 @@
-import { useRegistry, useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as editorStore } from '@wordpress/editor';
-import { useEffect } from '@wordpress/element';
-import { addQueryArgs } from '@wordpress/url';
+import { useRegistry, useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as editorStore } from '@/components/gutenberg/editor';
+import { useEffect } from '@/lib/gutenberg/element';
+import { addQueryArgs } from '@/utils/gutenberg/url';
 import { unlock } from '../../lock-unlock';
 
 /**

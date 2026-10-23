@@ -1,6 +1,6 @@
-import { useRefEffect } from '@wordpress/compose';
-import { useSelect } from '@wordpress/data';
-import type { SelectFunction } from '@wordpress/data';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { useSelect } from '@/stores/gutenberg/data';
+import type { SelectFunction } from '@/stores/gutenberg/data';
 import { store as blockEditorStore } from '../../store';
 import { setContentEditableWrapper } from './utils';
 

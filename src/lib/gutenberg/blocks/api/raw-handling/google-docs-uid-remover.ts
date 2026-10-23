@@ -1,4 +1,4 @@
-import { unwrap } from '@wordpress/dom';
+import { unwrap } from '@/utils/gutenberg/dom';
 
 export default function googleDocsUIdRemover( node: Node ): void {
 	const el = node as HTMLElement;

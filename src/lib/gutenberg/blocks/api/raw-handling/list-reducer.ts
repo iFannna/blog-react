@@ -1,4 +1,4 @@
-import { unwrap } from '@wordpress/dom';
+import { unwrap } from '@/utils/gutenberg/dom';
 
 function isList( node: Node ): boolean {
 	return node.nodeName === 'OL' || node.nodeName === 'UL';

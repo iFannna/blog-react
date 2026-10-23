@@ -1,11 +1,11 @@
-import { __, _x } from '@wordpress/i18n';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import {
 	Modal,
 	privateApis as componentsPrivateApis,
-} from '@wordpress/components';
-import { store as coreStore, useEntityRecords } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
-import type { FontCollection as FontCollectionType } from '@wordpress/core-data';
+} from '@/components/gutenberg/ui';
+import { store as coreStore, useEntityRecords } from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import type { FontCollection as FontCollectionType } from '@/stores/gutenberg/core-data';
 import InstalledFonts from './installed-fonts';
 import FontCollection from './font-collection';
 import UploadFonts from './upload-fonts';

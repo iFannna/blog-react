@@ -1,8 +1,8 @@
-import apiFetch from '@wordpress/api-fetch';
-import { store as noticesStore } from '@wordpress/notices';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { decodeEntities } from '@wordpress/html-entities';
-import { __ } from '@wordpress/i18n';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { __ } from '@/lib/gutenberg/i18n';
 import { STORE_NAME } from './name';
 import { getEntitySyncManager } from './entity-sync';
 import { createSyncUndoLevelRecord } from './utils/sync-undo-levels';

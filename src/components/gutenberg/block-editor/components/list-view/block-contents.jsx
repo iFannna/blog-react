@@ -1,4 +1,4 @@
-import { forwardRef } from '@wordpress/element';
+import { forwardRef } from '@/lib/gutenberg/element';
 import ListViewBlockSelectButton from './block-select-button';
 import BlockDraggable from '../block-draggable';
 import { useInsertedBlockClientId, useListViewContext } from './context';

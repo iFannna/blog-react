@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 import fastDeepEqual from 'fast-deep-equal/es6/index.js';
-import { getBlockTypes } from '@wordpress/blocks';
-import { RichTextData } from '@wordpress/rich-text';
-import { Y } from '@wordpress/sync';
+import { getBlockTypes } from '@/lib/gutenberg/blocks';
+import { RichTextData } from '@/components/gutenberg/rich-text';
+import { Y } from '@/services/gutenberg/sync';
 import {
 	asRichTextOffset,
 	createYMap,
@@ -136,7 +136,7 @@ function makeBlocksSerializable( blocks: Block[] ): Block[] {
 			 * Any validation issues discovered when loading a block are appended
 			 * to the block node with a logging function, which cannot be serialized.
 			 *
-			 * @see import("@wordpress/blocks/src/api/parser").parseRawBlock()
+			 * @see import("@/lib/gutenberg/blocks/api/parser").parseRawBlock()
 			 */
 			validationIssues,
 			...rest

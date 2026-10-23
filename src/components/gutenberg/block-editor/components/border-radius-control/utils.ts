@@ -1,4 +1,4 @@
-import { __experimentalParseQuantityAndUnitFromRawValue as parseQuantityAndUnitFromRawValue } from '@wordpress/components';
+import { __experimentalParseQuantityAndUnitFromRawValue as parseQuantityAndUnitFromRawValue } from '@/components/gutenberg/ui';
 import type { BorderRadiusValues } from './types';
 
 /**

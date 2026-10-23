@@ -12,9 +12,9 @@ import {
 	store as blockEditorStore,
 	__experimentalGetElementClassName,
 	useSettings,
-} from '@wordpress/block-editor';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useEffect, useRef, useState } from '@wordpress/element';
+} from '@/components/gutenberg/block-editor';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useEffect, useRef, useState } from '@/lib/gutenberg/element';
 import {
 	SelectControl as WCSelectControl,
 	ToggleControl,
@@ -26,13 +26,13 @@ import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { useInstanceId } from '@wordpress/compose';
-import { Icon } from '@wordpress/icons';
-import { __, sprintf } from '@wordpress/i18n';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
-import { speak } from '@wordpress/a11y';
-import { Path, SVG } from '@wordpress/primitives';
+} from '@/components/gutenberg/ui';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { Icon } from '@/components/gutenberg/icons';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
+import { speak } from '@/utils/gutenberg/a11y';
+import { Path, SVG } from '@/components/gutenberg/primitives';
 import {
 	PC_WIDTH_DEFAULT,
 	PX_WIDTH_DEFAULT,

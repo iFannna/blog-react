@@ -1,4 +1,4 @@
-import { getBlockType, hasBlockSupport } from '@wordpress/blocks';
+import { getBlockType, hasBlockSupport } from '@/lib/gutenberg/blocks';
 
 /**
  * Transform block support attributes and metadata during block transforms.

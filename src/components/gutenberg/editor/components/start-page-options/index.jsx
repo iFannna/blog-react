@@ -4,20 +4,20 @@ import {
 	Modal,
 	CheckboxControl as WCCheckboxControl,
 	SearchControl,
-} from '@wordpress/components';
-import { Stack, Tabs, Text } from '@wordpress/ui';
-import { __, _x } from '@wordpress/i18n';
-import { useState, useMemo, useEffect } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { Stack, Tabs, Text } from '@/components/gutenberg/design-system';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { useState, useMemo, useEffect } from '@/lib/gutenberg/element';
 import {
 	store as blockEditorStore,
 	__experimentalBlockPatternsList as BlockPatternsList,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { __unstableSerializeAndClean } from '@wordpress/blocks';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { store as interfaceStore } from '@wordpress/interface';
+} from '@/components/gutenberg/block-editor';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { __unstableSerializeAndClean } from '@/lib/gutenberg/blocks';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { store as interfaceStore } from '@/components/gutenberg/interface';
 import {
 	ATTACHMENT_POST_TYPE,
 	TEMPLATE_POST_TYPE,

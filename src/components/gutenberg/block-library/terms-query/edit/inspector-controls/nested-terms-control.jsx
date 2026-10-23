@@ -1,4 +1,4 @@
-import { ToggleControl } from '@wordpress/components';
+import { ToggleControl } from '@/components/gutenberg/ui';
 
 export default function NestedTermsControl( { value, onChange, ...props } ) {
 	return (

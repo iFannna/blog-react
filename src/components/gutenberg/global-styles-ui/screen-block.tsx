@@ -1,17 +1,17 @@
-import { getBlockType } from '@wordpress/blocks';
+import { getBlockType } from '@/lib/gutenberg/blocks';
 // @ts-expect-error: Not typed yet.
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
-import { useContext, useMemo, useState } from '@wordpress/element';
+import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
+import { useContext, useMemo, useState } from '@/lib/gutenberg/element';
 import {
 	PanelBody,
 	__experimentalVStack as VStack,
 	__experimentalHasSplitBorders as hasSplitBorders,
-} from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	setStyle as setStyleHelper,
 	setSetting as setSettingHelper,
-} from '@wordpress/global-styles-engine';
+} from '@/lib/gutenberg/global-styles-engine';
 import { ScreenHeader } from './screen-header';
 import BlockPreviewPanel from './block-preview-panel';
 import { Subtitle } from './subtitle';

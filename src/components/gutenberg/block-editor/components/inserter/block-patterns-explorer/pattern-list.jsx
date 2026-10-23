@@ -1,8 +1,8 @@
-import { useMemo, useEffect, useRef, useState } from '@wordpress/element';
-import { __, _n, sprintf } from '@wordpress/i18n';
-import { useDebounce } from '@wordpress/compose';
-import { Text } from '@wordpress/ui';
-import { speak } from '@wordpress/a11y';
+import { useMemo, useEffect, useRef, useState } from '@/lib/gutenberg/element';
+import { __, _n, sprintf } from '@/lib/gutenberg/i18n';
+import { useDebounce } from '@/hooks/gutenberg/compose';
+import { Text } from '@/components/gutenberg/design-system';
+import { speak } from '@/utils/gutenberg/a11y';
 import BlockPatternsList from '../../block-patterns-list';
 import useInsertionPoint from '../hooks/use-insertion-point';
 import usePatternsState from '../hooks/use-patterns-state';

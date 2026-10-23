@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { InnerBlocks, useBlockProps } from '@/components/gutenberg/block-editor';
 
 /**
  * @param {Object} attributes Block's attributes.

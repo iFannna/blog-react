@@ -1,5 +1,5 @@
-import { useRegistry, useSelect } from '@wordpress/data';
-import { useRefEffect } from '@wordpress/compose';
+import { useRegistry, useSelect } from '@/stores/gutenberg/data';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
 import { store as blockEditorStore } from '../../store';
 import { setContentEditableWrapper } from './utils';
 import { getBlockClientId, getSelectionEditableElement } from '../../utils/dom';

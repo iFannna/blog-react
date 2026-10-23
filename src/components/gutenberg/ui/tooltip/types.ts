@@ -1,47 +1,62 @@
-import type { ReactElement, ReactNode } from 'react';
-import type { Tooltip as _Tooltip } from '@base-ui/react/tooltip';
-import type { ComponentProps } from '../utils/types';
+import type { Placement } from '@floating-ui/react-dom';
+import type { PopoverProps } from '../popover/types';
+import type { ShortcutProps } from '../shortcut/types';
 
-export type PortalProps = ComponentProps< typeof _Tooltip.Portal >;
-
-export type PositionerProps = ComponentProps< typeof _Tooltip.Positioner >;
-
-export type RootProps = Pick< _Tooltip.Root.Props, 'disabled' | 'children' >;
-
-export type ProviderProps = _Tooltip.Provider.Props;
-
-// Detached triggers require handle and payload APIs that Tooltip does not
-// expose.
-export type TriggerProps = Omit<
-	ComponentProps< typeof _Tooltip.Trigger >,
-	'handle' | 'payload'
-> & {
+export type TooltipProps = {
 	/**
-	 * The content to be rendered inside the component.
+	 * The anchor for the tooltip.
+	 *
+	 * **Note**: Accepts only one child element.
 	 */
-	children?: ReactNode;
+	children: React.ReactElement;
+	/**
+	 * Custom class name for the tooltip.
+	 */
+	className?: string;
+	/**
+	 * Option to hide the tooltip when the anchor is clicked.
+	 *
+	 * @default true
+	 */
+	hideOnClick?: boolean;
+	/**
+	 * The amount of time in milliseconds to wait before showing the tooltip.
+	 *
+	 * @default 700
+	 */
+	delay?: number;
+	/**
+	 * Where the tooltip should be positioned relative to its parent.
+	 *
+	 * @default top
+	 */
+	placement?: Placement;
+	/**
+	 * _Note: this prop is deprecated. Please use the `placement` prop instead._
+	 *
+	 * Legacy way of specifying the tooltip's position relative to its parent.
+	 *
+	 * Specify y- and x-axis as a space-separated string. Supports `"top"`,
+	 * `"bottom"` y axis, and `"left"`, `"center"`, `"right"` x axis.
+	 *
+	 * @deprecated
+	 * @default top
+	 */
+	position?: PopoverProps[ 'position' ];
+	/**
+	 * An option for adding accessible keyboard shortcuts.
+	 *
+	 * If shortcut is a string, it is expecting the display text. If shortcut is an
+	 * object, it will accept the properties of `display` (string) and `ariaLabel`
+	 * (string).
+	 */
+	shortcut?: ShortcutProps[ 'shortcut' ];
+	/**
+	 * The text shown in the tooltip when anchor element is focused or hovered.
+	 */
+	text?: string;
 };
 
-export interface PopupProps extends ComponentProps< 'div' > {
-	/**
-	 * The content to be rendered inside the component.
-	 */
-	children?: ReactNode;
-
-	/**
-	 * Optional portal element, typically `<Tooltip.Portal />` with custom
-	 * `container`. When omitted, `Tooltip.Popup` uses `Tooltip.Portal` with
-	 * default props. Do not pass `children` on the portal element; they would
-	 * be ignored.
-	 */
-	portal?: ReactElement< Omit< PortalProps, 'children' > >;
-
-	/**
-	 * Optional positioner element, typically `<Tooltip.Positioner />` with
-	 * custom positioning props (`side`, `align`, `sideOffset`, collision
-	 * settings, etc.). When omitted, `Tooltip.Popup` uses `Tooltip.Positioner`
-	 * with default props. Do not pass `children` on the positioner element;
-	 * they would be ignored.
-	 */
-	positioner?: ReactElement< Omit< PositionerProps, 'children' > >;
-}
+export type TooltipInternalContext = {
+	isNestedInTooltip: boolean;
+};

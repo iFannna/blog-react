@@ -1,7 +1,7 @@
-import { useMemo } from '@wordpress/element';
-import { getFilename } from '@wordpress/url';
-import type { DataViewRenderFieldProps } from '@wordpress/dataviews';
-import { Tooltip } from '@wordpress/ui';
+import { useMemo } from '@/lib/gutenberg/element';
+import { getFilename } from '@/utils/gutenberg/url';
+import type { DataViewRenderFieldProps } from '@/components/gutenberg/dataviews';
+import { Tooltip } from '@/components/gutenberg/design-system';
 import type { MediaItem } from '../types';
 
 // Proxy threshold for "long enough that the cell will visually truncate" —

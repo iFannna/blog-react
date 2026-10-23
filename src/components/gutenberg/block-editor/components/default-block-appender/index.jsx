@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
-import { decodeEntities } from '@wordpress/html-entities';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { ENTER, SPACE } from '@wordpress/keycodes';
+import { __ } from '@/lib/gutenberg/i18n';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { ENTER, SPACE } from '@/utils/gutenberg/keycodes';
 import Inserter from '../inserter';
 import { store as blockEditorStore } from '../../store';
 

@@ -1,31 +1,28 @@
 import clsx from 'clsx';
-import { forwardRef } from '@wordpress/element';
-import { useMenuItemContentContext } from './context';
+import { forwardRef, useContext } from '@/lib/gutenberg/element';
+import type { WordPressComponentProps } from '../context';
+import { Context } from './context';
+import { Truncate } from '../truncate';
 import styles from './style.module.css';
-import type { ItemLabelProps } from './types';
-import { Text } from '../text';
 
-/**
- * Renders the primary label within a menu item. Use it as the first direct
- * child of every item.
- */
-const ItemLabel = forwardRef< HTMLSpanElement, ItemLabelProps >(
-	function MenuItemLabel( { children, className, id, ...props }, ref ) {
-		const itemContentContext = useMenuItemContentContext();
+export const ItemLabel = forwardRef<
+	HTMLSpanElement,
+	WordPressComponentProps< { children: React.ReactNode }, 'span', true >
+>( function UnforwardedItemLabel( { className, ...props }, ref ) {
+	const menuContext = useContext( Context );
 
-		return (
-			<Text
-				ref={ ref }
-				variant="body-md"
-				{ ...props }
-				id={ id ?? itemContentContext?.labelId }
-				className={ clsx( styles[ 'item-label' ], className ) }
-			>
-				{ children }
-				{ itemContentContext?.labelTrailing }
-			</Text>
+	if ( ! menuContext?.store ) {
+		throw new Error(
+			'Menu.ItemLabel can only be rendered inside a Menu component'
 		);
 	}
-);
 
-export { ItemLabel };
+	return (
+		<Truncate
+			numberOfLines={ 1 }
+			ref={ ref }
+			{ ...props }
+			className={ clsx( styles[ 'item-label' ], className ) }
+		/>
+	);
+} );

@@ -3,12 +3,12 @@ import {
 	useLayoutEffect,
 	useRef,
 	useState,
-} from '@wordpress/element';
-import { useRegistry, useSelect } from '@wordpress/data';
+} from '@/lib/gutenberg/element';
+import { useRegistry, useSelect } from '@/stores/gutenberg/data';
 import {
 	store as coreStore,
 	privateApis as coreDataPrivateApis,
-} from '@wordpress/core-data';
+} from '@/stores/gutenberg/core-data';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 

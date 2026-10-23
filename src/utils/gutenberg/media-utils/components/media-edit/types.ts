@@ -1,4 +1,4 @@
-import type { DataFormControlProps } from '@wordpress/dataviews';
+import type { DataFormControlProps } from '@/components/gutenberg/dataviews';
 
 /**
  * The props of the media control.

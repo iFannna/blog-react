@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
-import { ToolbarItem, DropdownMenu, Slot } from '@wordpress/components';
-import { chevronDown } from '@wordpress/icons';
+import { __ } from '@/lib/gutenberg/i18n';
+import { ToolbarItem, DropdownMenu, Slot } from '@/components/gutenberg/ui';
+import { chevronDown } from '@/components/gutenberg/icons';
 import { orderBy } from '../../../utils/sorting';
 
 const POPOVER_PROPS = {

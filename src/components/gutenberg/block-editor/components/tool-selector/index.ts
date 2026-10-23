@@ -1,5 +1,5 @@
-import deprecated from '@wordpress/deprecated';
-import { forwardRef } from '@wordpress/element';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { forwardRef } from '@/lib/gutenberg/element';
 
 function ToolSelector() {
 	deprecated( 'wp.blockEditor.ToolSelector', {

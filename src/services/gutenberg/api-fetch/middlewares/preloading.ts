@@ -1,4 +1,4 @@
-import { addQueryArgs, getQueryArgs, normalizePath } from '@wordpress/url';
+import { addQueryArgs, getQueryArgs, normalizePath } from '@/utils/gutenberg/url';
 import type { APIFetchMiddleware } from '../types';
 
 export const ENABLE_MULTI_USE = Symbol( 'preloadingEnableMultiUse' );

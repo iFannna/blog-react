@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
-import { useEffect, useState } from '@wordpress/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useEffect, useState } from '@/lib/gutenberg/element';
 import {
 	BlockControls,
 	BlockIcon,
@@ -8,19 +8,19 @@ import {
 	useBlockProps,
 	store as blockEditorStore,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { parse, serialize, getBlockContent } from '@wordpress/blocks';
-import { useSelect, useDispatch, useRegistry } from '@wordpress/data';
-import { useResizeObserver } from '@wordpress/compose';
-import deprecated from '@wordpress/deprecated';
+} from '@/components/gutenberg/block-editor';
+import { parse, serialize, getBlockContent } from '@/lib/gutenberg/blocks';
+import { useSelect, useDispatch, useRegistry } from '@/stores/gutenberg/data';
+import { useResizeObserver } from '@/hooks/gutenberg/compose';
+import deprecated from '@/utils/gutenberg/deprecated';
 import {
 	ToolbarButton,
 	ToolbarGroup,
 	Placeholder,
 	Button,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { Icon, code, html } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { Icon, code, html } from '@/components/gutenberg/icons';
 import { unlock } from '../lock-unlock';
 import HTMLEditModal from './modal';
 

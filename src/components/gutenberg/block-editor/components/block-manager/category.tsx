@@ -1,7 +1,7 @@
-import { useCallback } from '@wordpress/element';
-import { useInstanceId } from '@wordpress/compose';
-import { CheckboxControl as WCCheckboxControl } from '@wordpress/components';
-import type { BlockType } from '@wordpress/blocks';
+import { useCallback } from '@/lib/gutenberg/element';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { CheckboxControl as WCCheckboxControl } from '@/components/gutenberg/ui';
+import type { BlockType } from '@/lib/gutenberg/blocks';
 import BlockTypesChecklist from './checklist';
 import type { BlockManagerCategoryProps } from './types';
 

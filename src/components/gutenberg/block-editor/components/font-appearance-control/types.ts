@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react';
-import type { Select } from '@wordpress/ui';
+import type { Select } from '@/components/gutenberg/design-system';
 import type { FontFamilyFace } from '../../utils/types';
 
 /**

@@ -1,7 +1,7 @@
-import { __ } from '@wordpress/i18n';
-import { ExternalLink } from '@wordpress/components';
+import { __ } from '@/lib/gutenberg/i18n';
+import { ExternalLink } from '@/components/gutenberg/ui';
 // @ts-expect-error: Not typed yet.
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
+import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import { ScreenHeader } from './screen-header';
 import { useStyle } from './hooks';
 import { unlock } from './lock-unlock';

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { useInstanceId, usePrevious } from '@wordpress/compose';
-import { Button, Spinner as WCSpinner, Composite } from '@wordpress/components';
+import { useInstanceId, usePrevious } from '@/hooks/gutenberg/compose';
+import { Button, Spinner as WCSpinner, Composite } from '@/components/gutenberg/ui';
 import {
 	useCallback,
 	useEffect,
@@ -8,13 +8,13 @@ import {
 	useRef,
 	useState,
 	useContext,
-} from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import { moreVertical } from '@wordpress/icons';
-import { useRegistry } from '@wordpress/data';
-import { inertValue } from '@wordpress/react-inert-value';
+} from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { moreVertical } from '@/components/gutenberg/icons';
+import { useRegistry } from '@/stores/gutenberg/data';
+import { inertValue } from '@/hooks/gutenberg/react-inert-value';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of the new Menu, pending WordPress/gutenberg#76135.
-import { Menu, Stack, VisuallyHidden } from '@wordpress/ui';
+import { Menu, Stack, VisuallyHidden } from '@/components/gutenberg/design-system';
 import { ActionsMenuGroup, ActionModal } from '../../dataviews-item-actions';
 import DataViewsContext from '../../dataviews-context';
 import { useDelayedLoading } from '../../../hooks/use-delayed-loading';

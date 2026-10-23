@@ -1,14 +1,14 @@
-import { __, _x, _n, sprintf } from '@wordpress/i18n';
-import { useMemo } from '@wordpress/element';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { __, _x, _n, sprintf } from '@/lib/gutenberg/i18n';
+import { useMemo } from '@/lib/gutenberg/element';
+import { useBlockProps, InspectorControls } from '@/components/gutenberg/block-editor';
 import {
 	ToggleControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { __unstableSerializeAndClean } from '@wordpress/blocks';
-import { useEntityProp, useEntityBlockEditor } from '@wordpress/core-data';
-import { count as wordCount } from '@wordpress/wordcount';
+} from '@/components/gutenberg/ui';
+import { __unstableSerializeAndClean } from '@/lib/gutenberg/blocks';
+import { useEntityProp, useEntityBlockEditor } from '@/stores/gutenberg/core-data';
+import { count as wordCount } from '@/utils/gutenberg/wordcount';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 function PostTimeToReadEdit( { attributes, setAttributes, context } ) {

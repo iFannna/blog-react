@@ -1,4 +1,4 @@
-import { privateApis as composePrivateApis } from '@wordpress/compose';
+import { privateApis as composePrivateApis } from '@/hooks/gutenberg/compose';
 import { toHTMLString } from '../../to-html-string';
 import { isCollapsed } from '../../is-collapsed';
 import { slice } from '../../slice';

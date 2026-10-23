@@ -1,14 +1,14 @@
 import clsx from 'clsx';
-import { cloneBlock } from '@wordpress/blocks';
-import { useEffect, useState, forwardRef, useMemo } from '@wordpress/element';
+import { cloneBlock } from '@/lib/gutenberg/blocks';
+import { useEffect, useState, forwardRef, useMemo } from '@/lib/gutenberg/element';
 import {
 	Composite,
 	__experimentalHStack as HStack,
-} from '@wordpress/components';
-import { VisuallyHidden, Text, Tooltip } from '@wordpress/ui';
-import { useInstanceId } from '@wordpress/compose';
-import { __ } from '@wordpress/i18n';
-import { Icon, symbol } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { VisuallyHidden, Text, Tooltip } from '@/components/gutenberg/design-system';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Icon, symbol } from '@/components/gutenberg/icons';
 import BlockPreview from '../block-preview';
 import InserterDraggableBlocks from '../inserter-draggable-blocks';
 import BlockPatternsPaging from '../block-patterns-paging';

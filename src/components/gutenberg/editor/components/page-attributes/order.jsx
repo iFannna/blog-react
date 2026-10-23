@@ -1,11 +1,11 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	Flex,
 	FlexBlock,
 	__experimentalNumberControl as NumberControl,
-} from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useState } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useState } from '@/lib/gutenberg/element';
 import PostTypeSupportCheck from '../post-type-support-check';
 import { store as editorStore } from '../../store';
 

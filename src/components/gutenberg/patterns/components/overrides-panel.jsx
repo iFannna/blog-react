@@ -1,11 +1,11 @@
 import {
 	privateApis as blockEditorPrivateApis,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { PanelBody } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/block-editor';
+import { PanelBody } from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import { isOverridableBlock } from '../api';
 import { unlock } from '../lock-unlock';
 

@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n';
-import { ToolbarButton } from '@wordpress/components';
-import { fullHeight } from '@wordpress/icons';
+import { __ } from '@/lib/gutenberg/i18n';
+import { ToolbarButton } from '@/components/gutenberg/ui';
+import { fullHeight } from '@/components/gutenberg/icons';
 import type { BlockFullHeightAlignmentControlProps } from './types';
 
 function BlockFullHeightAlignmentControl( {

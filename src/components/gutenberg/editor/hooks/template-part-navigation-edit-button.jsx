@@ -1,14 +1,14 @@
-import { addFilter } from '@wordpress/hooks';
-import { createHigherOrderComponent } from '@wordpress/compose';
-import { useCallback } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import { createHigherOrderComponent } from '@/hooks/gutenberg/compose';
+import { useCallback } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	__unstableBlockToolbarLastItem as BlockToolbarLastItem,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
-import { useSelect, useDispatch, useRegistry } from '@wordpress/data';
-import { store as interfaceStore } from '@wordpress/interface';
+} from '@/components/gutenberg/block-editor';
+import { ToolbarButton, ToolbarGroup } from '@/components/gutenberg/ui';
+import { useSelect, useDispatch, useRegistry } from '@/stores/gutenberg/data';
+import { store as interfaceStore } from '@/components/gutenberg/interface';
 import { unlock } from '../lock-unlock';
 
 // Block name constants

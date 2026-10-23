@@ -1,4 +1,4 @@
-import { useContext } from '@wordpress/element';
+import { useContext } from '@/lib/gutenberg/element';
 import { Context } from './context';
 
 export default function useAsyncMode(): boolean {

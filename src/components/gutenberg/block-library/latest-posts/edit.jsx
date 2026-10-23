@@ -11,17 +11,17 @@ import {
 	__experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { __, _x, sprintf } from '@wordpress/i18n';
-import { dateI18n, format, getSettings } from '@wordpress/date';
+} from '@/components/gutenberg/ui';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
+import { dateI18n, format, getSettings } from '@/lib/gutenberg/date';
 import {
 	InspectorControls,
 	BlockControls,
 	__experimentalImageSizeControl as ImageSizeControl,
 	useBlockProps,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { useSelect, useDispatch } from '@wordpress/data';
+} from '@/components/gutenberg/block-editor';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	pin,
 	list,
@@ -30,11 +30,11 @@ import {
 	positionLeft,
 	positionCenter,
 	positionRight,
-} from '@wordpress/icons';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as noticeStore } from '@wordpress/notices';
-import { useInstanceId } from '@wordpress/compose';
-import { createInterpolateElement } from '@wordpress/element';
+} from '@/components/gutenberg/icons';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as noticeStore } from '@/stores/gutenberg/notices';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { createInterpolateElement } from '@/lib/gutenberg/element';
 import {
 	MIN_EXCERPT_LENGTH,
 	MAX_EXCERPT_LENGTH,

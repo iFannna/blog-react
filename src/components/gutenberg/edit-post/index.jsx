@@ -1,22 +1,22 @@
-import { store as blocksStore } from '@wordpress/blocks';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
 import {
 	registerCoreBlocks,
 	__experimentalRegisterExperimentalCoreBlocks,
-} from '@wordpress/block-library';
-import deprecated from '@wordpress/deprecated';
-import { createRoot, StrictMode } from '@wordpress/element';
-import { dispatch, resolveSelect, select } from '@wordpress/data';
-import { store as preferencesStore } from '@wordpress/preferences';
+} from '@/components/gutenberg/block-library';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { createRoot, StrictMode } from '@/lib/gutenberg/element';
+import { dispatch, resolveSelect, select } from '@/stores/gutenberg/data';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import {
 	registerLegacyWidgetBlock,
 	registerWidgetGroupBlock,
-} from '@wordpress/widgets';
+} from '@/components/gutenberg/widgets';
 import {
 	store as editorStore,
 	privateApis as editorPrivateApis,
-} from '@wordpress/editor';
-import { store as coreDataStore } from '@wordpress/core-data';
-import apiFetch from '@wordpress/api-fetch';
+} from '@/components/gutenberg/editor';
+import { store as coreDataStore } from '@/stores/gutenberg/core-data';
+import apiFetch from '@/services/gutenberg/api-fetch';
 import Layout from './components/layout';
 import { unlock } from './lock-unlock';
 

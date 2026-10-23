@@ -1,11 +1,11 @@
 import type { ReactNode, Ref, PropsWithoutRef, RefAttributes } from 'react';
-import { __, isRTL } from '@wordpress/i18n';
-import { arrowLeft, arrowRight, unseen, funnel } from '@wordpress/icons';
-import { Button } from '@wordpress/components';
-import { forwardRef, Children, Fragment, useContext } from '@wordpress/element';
-import { inertValue } from '@wordpress/react-inert-value';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
+import { arrowLeft, arrowRight, unseen, funnel } from '@/components/gutenberg/icons';
+import { Button } from '@/components/gutenberg/ui';
+import { forwardRef, Children, Fragment, useContext } from '@/lib/gutenberg/element';
+import { inertValue } from '@/hooks/gutenberg/react-inert-value';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of the new Menu, pending WordPress/gutenberg#76135.
-import { Menu, VisuallyHidden } from '@wordpress/ui';
+import { Menu, VisuallyHidden } from '@/components/gutenberg/design-system';
 import { SORTING_DIRECTIONS, sortArrows, sortLabels } from '../../../constants';
 import type {
 	NormalizedField,

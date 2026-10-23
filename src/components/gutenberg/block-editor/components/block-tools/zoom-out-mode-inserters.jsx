@@ -1,5 +1,5 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useEffect, useState } from '@wordpress/element';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useEffect, useState } from '@/lib/gutenberg/element';
 import BlockPopoverInbetween from '../block-popover/inbetween';
 import ZoomOutModeInserterButton from './zoom-out-mode-inserter-button';
 import { store as blockEditorStore } from '../../store';

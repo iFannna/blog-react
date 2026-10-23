@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react';
-import type { __experimentalNumberControl as NumberControl } from '@wordpress/components';
+import type { __experimentalNumberControl as NumberControl } from '@/components/gutenberg/ui';
 
 type NumberControlProps = ComponentProps< typeof NumberControl >;
 

@@ -1,7 +1,7 @@
-import { Button } from '@wordpress/components';
+import { Button } from '@/components/gutenberg/ui';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of the new Menu, pending WordPress/gutenberg#76135.
-import { Menu } from '@wordpress/ui';
-import { __ } from '@wordpress/i18n';
+import { Menu } from '@/components/gutenberg/design-system';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	aspectRatio as aspectRatioIcon,
 	rotateLeft,
@@ -10,7 +10,7 @@ import {
 	flipVertical,
 	lineSolid,
 	plus,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import { useMediaEditor } from '../../state';
 import {
 	MAX_ZOOM,

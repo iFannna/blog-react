@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from '@wordpress/element';
+import { useCallback, useEffect, useRef } from '@/lib/gutenberg/element';
 import { useMediaEditor } from '../state';
 
 /**

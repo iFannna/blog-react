@@ -4,15 +4,15 @@ import {
 	useCallback,
 	useRef,
 	useEffect,
-} from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+} from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	__experimentalHStack as HStack,
 	__experimentalVStack as VStack,
 	__experimentalHeading as Heading,
 	__experimentalText as WCText,
 	FlexBlock,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import usePatternsState from '../hooks/use-patterns-state';
 import BlockPatternsList from '../../block-patterns-list';
 import usePatternsPaging from '../hooks/use-patterns-paging';

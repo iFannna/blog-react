@@ -1,4 +1,4 @@
-import { insert } from '@wordpress/rich-text';
+import { insert } from '@/components/gutenberg/rich-text';
 
 export function preventEventDiscovery( value ) {
 	const searchText = 'tales of gutenberg';

@@ -1,6 +1,6 @@
-import { createBlock } from '@wordpress/blocks';
-import { useDispatch } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import { buildNavigationLinkEntityBinding } from '../navigation-link/shared';
 
 /**

@@ -1,9 +1,9 @@
 import type { KeyboardEvent } from 'react';
 import clsx from 'clsx';
-import { speak } from '@wordpress/a11y';
-import { __, sprintf, _n } from '@wordpress/i18n';
-import { useEffect, useRef, useState } from '@wordpress/element';
-import { UP, DOWN, ENTER, TAB } from '@wordpress/keycodes';
+import { speak } from '@/utils/gutenberg/a11y';
+import { __, sprintf, _n } from '@/lib/gutenberg/i18n';
+import { useEffect, useRef, useState } from '@/lib/gutenberg/element';
+import { UP, DOWN, ENTER, TAB } from '@/utils/gutenberg/keycodes';
 import {
 	BaseControl,
 	Button,
@@ -11,10 +11,10 @@ import {
 	Spinner as WCSpinner,
 	Popover,
 	privateApis as componentsPrivateApis,
-} from '@wordpress/components';
-import { useDebounce, useEvent, useInstanceId } from '@wordpress/compose';
-import { useSelect } from '@wordpress/data';
-import { isURL } from '@wordpress/url';
+} from '@/components/gutenberg/ui';
+import { useDebounce, useEvent, useInstanceId } from '@/hooks/gutenberg/compose';
+import { useSelect } from '@/stores/gutenberg/data';
+import { isURL } from '@/utils/gutenberg/url';
 import { store as blockEditorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 import type { LinkControlSuggestion } from '../link-control/types';

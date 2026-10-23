@@ -1,9 +1,9 @@
 import type { ComponentType } from 'react';
-import { createElement } from '@wordpress/element';
+import { createElement } from '@/lib/gutenberg/element';
 import {
 	createHigherOrderComponent,
 	useViewportMatch,
-} from '@wordpress/compose';
+} from '@/hooks/gutenberg/compose';
 import type { ViewportQueries, BreakpointName, QueryOperator } from './types';
 
 /**

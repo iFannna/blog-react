@@ -1,10 +1,10 @@
-import { useDispatch } from '@wordpress/data';
-import { cloneBlock } from '@wordpress/blocks';
-import { Composite } from '@wordpress/components';
-import { VisuallyHidden } from '@wordpress/ui';
-import { useState } from '@wordpress/element';
-import { useInstanceId } from '@wordpress/compose';
-import { __ } from '@wordpress/i18n';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { cloneBlock } from '@/lib/gutenberg/blocks';
+import { Composite } from '@/components/gutenberg/ui';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
+import { useState } from '@/lib/gutenberg/element';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { __ } from '@/lib/gutenberg/i18n';
 import { store as blockEditorStore } from '../../store';
 import BlockPreview from '../block-preview';
 import SetupToolbar from './setup-toolbar';

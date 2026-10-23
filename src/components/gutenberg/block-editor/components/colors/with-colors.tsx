@@ -1,8 +1,8 @@
-import { useMemo, useRef } from '@wordpress/element';
-import { compose, createHigherOrderComponent } from '@wordpress/compose';
-import { kebabCase } from '@wordpress/kebab-case';
+import { useMemo, useRef } from '@/lib/gutenberg/element';
+import { compose, createHigherOrderComponent } from '@/hooks/gutenberg/compose';
+import { kebabCase } from '@/utils/gutenberg/kebab-case';
 import type { ComponentType } from 'react';
-import type { Color } from '@wordpress/global-styles-engine';
+import type { Color } from '@/lib/gutenberg/global-styles-engine';
 import {
 	getColorClassName,
 	getColorObjectByColorValue,

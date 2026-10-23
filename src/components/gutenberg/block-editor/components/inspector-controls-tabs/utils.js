@@ -1,5 +1,5 @@
-import { cog, styles, listView, page } from '@wordpress/icons';
-import { __ } from '@wordpress/i18n';
+import { cog, styles, listView, page } from '@/components/gutenberg/icons';
+import { __ } from '@/lib/gutenberg/i18n';
 
 export const TAB_SETTINGS = {
 	name: 'settings',

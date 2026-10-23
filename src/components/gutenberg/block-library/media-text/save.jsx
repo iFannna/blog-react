@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useInnerBlocksProps, useBlockProps } from '@wordpress/block-editor';
+import { useInnerBlocksProps, useBlockProps } from '@/components/gutenberg/block-editor';
 import { imageFillStyles } from './image-fill';
 import { DEFAULT_MEDIA_SIZE_SLUG } from './constants';
 

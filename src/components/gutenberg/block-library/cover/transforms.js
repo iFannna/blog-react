@@ -1,5 +1,5 @@
-import { createBlock } from '@wordpress/blocks';
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import { IMAGE_BACKGROUND_TYPE, VIDEO_BACKGROUND_TYPE } from './shared';
 import { unlock } from '../lock-unlock';
 

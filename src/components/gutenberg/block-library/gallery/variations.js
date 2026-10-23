@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { gallery, grid } from '@wordpress/icons';
+import { __ } from '@/lib/gutenberg/i18n';
+import { gallery, grid } from '@/components/gutenberg/icons';
 import { ATTACHED_MEDIA } from './dynamic-source';
 import { isGalleryFlexLayout } from './shared';
 

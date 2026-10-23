@@ -1,6 +1,6 @@
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
 import RevisionDiffPanel from '../revision-diff-panel';
 
 /**

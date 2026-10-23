@@ -1,16 +1,16 @@
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	RangeControl,
 	Spinner as WCSpinner,
 	Button,
-} from '@wordpress/components';
-import { store as coreStore } from '@wordpress/core-data';
-import { __, sprintf } from '@wordpress/i18n';
-import { dateI18n, getSettings as getDateSettings } from '@wordpress/date';
-import { useCallback, useMemo, useRef } from '@wordpress/element';
-import { chevronLeft, chevronRight } from '@wordpress/icons';
-import { Stack } from '@wordpress/ui';
-import { useFocusOnMount } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { dateI18n, getSettings as getDateSettings } from '@/lib/gutenberg/date';
+import { useCallback, useMemo, useRef } from '@/lib/gutenberg/element';
+import { chevronLeft, chevronRight } from '@/components/gutenberg/icons';
+import { Stack } from '@/components/gutenberg/design-system';
+import { useFocusOnMount } from '@/hooks/gutenberg/compose';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 

@@ -1,7 +1,7 @@
-import { __ } from '@wordpress/i18n';
-import { MenuItem } from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
+import { __ } from '@/lib/gutenberg/i18n';
+import { MenuItem } from '@/components/gutenberg/ui';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
 import { store as blockEditorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 import { useSettings } from '../use-settings';

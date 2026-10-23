@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { ExternalLink } from '@wordpress/components';
-import { safeDecodeURI, filterURLForDisplay } from '@wordpress/url';
+import { ExternalLink } from '@/components/gutenberg/ui';
+import { safeDecodeURI, filterURLForDisplay } from '@/utils/gutenberg/url';
 import type { URLPopoverLinkViewerURLProps } from './types';
 
 export default function LinkViewerURL( {

@@ -4,15 +4,15 @@ import {
 	getBlockSupport,
 	getBlockType,
 	hasBlockSupport,
-} from '@wordpress/blocks';
-import { useInstanceId } from '@wordpress/compose';
-import { addFilter } from '@wordpress/hooks';
-import { useMemo, useEffect } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
+} from '@/lib/gutenberg/blocks';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import { useMemo, useEffect } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	getBlockSelector,
 	privateApis as globalStylesEnginePrivateApis,
-} from '@wordpress/global-styles-engine';
+} from '@/lib/gutenberg/global-styles-engine';
 import {
 	BlockControls,
 	InspectorControls,

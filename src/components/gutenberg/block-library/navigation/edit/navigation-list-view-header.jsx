@@ -1,9 +1,9 @@
 import {
 	__experimentalHStack as HStack,
 	__experimentalHeading as Heading,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import NavigationMenuSelector from './navigation-menu-selector';
 import { unlock } from '../../lock-unlock';
 

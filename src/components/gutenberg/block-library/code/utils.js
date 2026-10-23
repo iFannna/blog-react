@@ -1,4 +1,4 @@
-import { pipe } from '@wordpress/compose';
+import { pipe } from '@/hooks/gutenberg/compose';
 
 /**
  * Escapes ampersands, shortcodes, and links.

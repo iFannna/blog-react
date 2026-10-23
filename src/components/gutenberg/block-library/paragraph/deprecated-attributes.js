@@ -1,8 +1,8 @@
-import { useEvent } from '@wordpress/compose';
-import { useEffect, useRef } from '@wordpress/element';
-import deprecated from '@wordpress/deprecated';
-import { useDispatch } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+import { useEvent } from '@/hooks/gutenberg/compose';
+import { useEffect, useRef } from '@/lib/gutenberg/element';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 
 /**
  * If a plugin is still using the old align attribute, we need to migrate its value

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useState, useRef } from '@wordpress/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useState, useRef } from '@/lib/gutenberg/element';
 import {
 	BlockControls,
 	BlockVerticalAlignmentControl,
@@ -12,7 +12,7 @@ import {
 	store as blockEditorStore,
 	useBlockEditingMode,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	RangeControl,
 	TextareaControl as WCTextareaControl,
@@ -22,12 +22,12 @@ import {
 	FocalPointPicker,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { isBlobURL, getBlobTypeByURL } from '@wordpress/blob';
-import { pullLeft, pullRight } from '@wordpress/icons';
-import { useEntityProp, store as coreStore } from '@wordpress/core-data';
-import { store as noticesStore } from '@wordpress/notices';
-import { getFilename } from '@wordpress/url';
+} from '@/components/gutenberg/ui';
+import { isBlobURL, getBlobTypeByURL } from '@/utils/gutenberg/blob';
+import { pullLeft, pullRight } from '@/components/gutenberg/icons';
+import { useEntityProp, store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { getFilename } from '@/utils/gutenberg/url';
 import MediaContainer from './media-container';
 import {
 	ALLOWED_MEDIA_TYPES,

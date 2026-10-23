@@ -1,15 +1,15 @@
 import clsx from 'clsx';
-import { __, isRTL } from '@wordpress/i18n';
-import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
-import { VisuallyHidden } from '@wordpress/ui';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
+import { ToolbarButton, ToolbarGroup } from '@/components/gutenberg/ui';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
 import {
 	chevronLeft,
 	chevronUp,
 	chevronDown,
 	chevronRight,
-} from '@wordpress/icons';
-import { useDispatch } from '@wordpress/data';
-import { useInstanceId } from '@wordpress/compose';
+} from '@/components/gutenberg/icons';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
 import BlockControls from '../block-controls';
 import { useGetNumberOfBlocksBeforeCell } from './use-get-number-of-blocks-before-cell';
 import { store as blockEditorStore } from '../../store';

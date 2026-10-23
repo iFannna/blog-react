@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactElement, ReactNode } from 'react';
-import type { IconType } from '@wordpress/components';
+import type { IconType } from '@/components/gutenberg/ui';
 import type { ComplementaryAreaToggleProps } from '../complementary-area-toggle/types';
 
 export type ComplementaryAreaTransition = {

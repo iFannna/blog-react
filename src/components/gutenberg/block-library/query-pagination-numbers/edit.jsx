@@ -1,10 +1,10 @@
-import { __ } from '@wordpress/i18n';
-import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
+import { InspectorControls, useBlockProps } from '@/components/gutenberg/block-editor';
 import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 	RangeControl,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 const createPaginationItem = ( content, Tag = 'a', extraClass = '' ) => (

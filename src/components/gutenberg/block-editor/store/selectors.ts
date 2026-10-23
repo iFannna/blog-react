@@ -1,4 +1,4 @@
-import type { Block, BlockType, BlockVariation } from '@wordpress/blocks';
+import type { Block, BlockType, BlockVariation } from '@/lib/gutenberg/blocks';
 import {
 	getBlockType,
 	getBlockTypes,
@@ -9,16 +9,16 @@ import {
 	switchToBlockType,
 	store as blocksStore,
 	privateApis as blocksPrivateApis,
-} from '@wordpress/blocks';
-import { applyFilters } from '@wordpress/hooks';
-import { symbol } from '@wordpress/icons';
-import { create, remove, toHTMLString } from '@wordpress/rich-text';
-import deprecated from '@wordpress/deprecated';
+} from '@/lib/gutenberg/blocks';
+import { applyFilters } from '@/hooks/gutenberg/hooks';
+import { symbol } from '@/components/gutenberg/icons';
+import { create, remove, toHTMLString } from '@/components/gutenberg/rich-text';
+import deprecated from '@/utils/gutenberg/deprecated';
 import {
 	createSelector,
 	createRegistrySelector,
 	select as globalSelect,
-} from '@wordpress/data';
+} from '@/stores/gutenberg/data';
 import {
 	isFiltered,
 	checkAllowListRecursive,
@@ -63,9 +63,9 @@ const { isContentBlock } = unlock( blocksPrivateApis );
  *
  * This type is duplicated to avoid creating circular dependencies.
  *
- * @see {import("@wordpress/block-editor/src/store/actions").WPBlockSelection}
- * @see {import("@wordpress/core-data/src/types").WPBlockSelection}
- * @see {import("@wordpress/editor/src/store/selectors").WPBlockSelection}
+ * @see {import("@/components/gutenberg/block-editor/store/actions").WPBlockSelection}
+ * @see {import("@/stores/gutenberg/core-data/types").WPBlockSelection}
+ * @see {import("@/components/gutenberg/editor/store/selectors").WPBlockSelection}
  *
  * @typedef {Object} WPBlockSelection
  *
@@ -570,8 +570,8 @@ export function getSelectedBlockClientId( state: State ) {
  * @example
  *
  *```js
- * import { select } from '@wordpress/data'
- * import { store as blockEditorStore } from '@wordpress/block-editor'
+ * import { select } from '@/stores/gutenberg/data'
+ * import { store as blockEditorStore } from '@/components/gutenberg/block-editor'
  *
  * // Set initial active block client ID
  * let activeBlockClientId = null

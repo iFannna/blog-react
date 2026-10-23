@@ -4,17 +4,17 @@ import {
 	useInnerBlocksProps,
 	InspectorControls,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	TextControl,
 	ToggleControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { withIgnoreIMEEvents } from '@wordpress/keycodes';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useState } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { withIgnoreIMEEvents } from '@/utils/gutenberg/keycodes';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 function DetailsEdit( { attributes, setAttributes, clientId } ) {

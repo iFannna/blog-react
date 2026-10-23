@@ -1,7 +1,7 @@
-import { Button, PanelBody } from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { __, sprintf } from '@wordpress/i18n';
-import { store as coreStore } from '@wordpress/core-data';
+import { Button, PanelBody } from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { POST_FORMATS } from '../post-format';
 import { store as editorStore } from '../../store';
 

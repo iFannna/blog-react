@@ -1,5 +1,5 @@
-import { useMemo, forwardRef } from '@wordpress/element';
-import { useGlobalStylesRevisions } from '@wordpress/global-styles-ui';
+import { useMemo, forwardRef } from '@/lib/gutenberg/element';
+import { useGlobalStylesRevisions } from '@/components/gutenberg/global-styles-ui';
 import StyleBook from '../style-book';
 import { STYLE_BOOK_COLOR_GROUPS } from '../style-book/constants';
 import { useGlobalStyles } from '../global-styles/hooks';

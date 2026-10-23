@@ -1,5 +1,5 @@
-import { useViewportMatch } from '@wordpress/compose';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import PostPublishButton from './index';
 import { store as editorStore } from '../../store';
 import { ATTACHMENT_POST_TYPE } from '../../store/constants';

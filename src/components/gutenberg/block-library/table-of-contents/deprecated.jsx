@@ -1,4 +1,4 @@
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps } from '@/components/gutenberg/block-editor';
 
 const ENTRY_CLASS_NAME = 'wp-block-table-of-contents__entry';
 

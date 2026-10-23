@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
+import { useBlockProps, useInnerBlocksProps } from '@/components/gutenberg/block-editor';
 
 const DEFAULT_BLOCK = {
 	name: 'core/button',

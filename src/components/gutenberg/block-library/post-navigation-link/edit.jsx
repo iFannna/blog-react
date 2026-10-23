@@ -6,7 +6,7 @@ import {
 	__experimentalToolsPanelItem as ToolsPanelItem,
 	ToggleControl,
 	SelectControl as WCSelectControl,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	InspectorControls,
 	RichText,
@@ -16,10 +16,10 @@ import {
 	__experimentalGetDimensionsClassesAndStyles as getDimensionsClassesAndStyles,
 	__experimentalGetShadowClassesAndStyles as getShadowClassesAndStyles,
 	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles,
-} from '@wordpress/block-editor';
-import { __, _x } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+} from '@/components/gutenberg/block-editor';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 export default function PostNavigationLinkEdit( {

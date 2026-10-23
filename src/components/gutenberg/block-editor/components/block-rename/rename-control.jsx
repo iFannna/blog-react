@@ -1,8 +1,8 @@
-import { MenuItem } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
+import { MenuItem } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useState } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
 import BlockRenameModal from './modal';
 
 export default function BlockRenameControl( { clientId } ) {

@@ -1,7 +1,7 @@
-import { useBlockProps } from '@wordpress/block-editor';
-import { useState, useEffect } from '@wordpress/element';
-import apiFetch from '@wordpress/api-fetch';
-import { addQueryArgs } from '@wordpress/url';
+import { useBlockProps } from '@/components/gutenberg/block-editor';
+import { useState, useEffect } from '@/lib/gutenberg/element';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { addQueryArgs } from '@/utils/gutenberg/url';
 
 export default function PostCommentsCountEdit( { context } ) {
 	const { postId } = context;

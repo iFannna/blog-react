@@ -5,7 +5,7 @@
  *
  * @example
  * ```js
- * import domReady from '@wordpress/dom-ready';
+ * import domReady from '@/utils/gutenberg/dom-ready';
  *
  * domReady( function() {
  * 	//do something after DOM loads.

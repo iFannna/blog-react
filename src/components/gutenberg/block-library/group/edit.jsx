@@ -1,4 +1,4 @@
-import { useDispatch, useSelect } from '@wordpress/data';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import {
 	InnerBlocks,
 	useBlockProps,
@@ -6,9 +6,9 @@ import {
 	useInnerBlocksProps,
 	store as blockEditorStore,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/block-editor';
+import { useState } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import GroupPlaceHolder, { useShouldShowPlaceHolder } from './placeholder';
 import { unlock } from '../lock-unlock';
 

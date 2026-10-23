@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n';
-import { getFilename } from '@wordpress/url';
-import type { Field } from '@wordpress/dataviews';
+import { __ } from '@/lib/gutenberg/i18n';
+import { getFilename } from '@/utils/gutenberg/url';
+import type { Field } from '@/components/gutenberg/dataviews';
 import type { MediaItem } from '../types';
 import FileNameView from './view';
 

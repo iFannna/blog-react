@@ -5,8 +5,8 @@ import {
 	__experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
 	__experimentalInputControlPrefixWrapper as InputControlPrefixWrapper,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	Icon,
 	alignNone,
@@ -14,9 +14,9 @@ import {
 	justifyLeft,
 	justifyCenter,
 	justifyRight,
-} from '@wordpress/icons';
-import { getCSSRules } from '@wordpress/style-engine';
-import type { Style } from '@wordpress/style-engine';
+} from '@/components/gutenberg/icons';
+import { getCSSRules } from '@/lib/gutenberg/style-engine';
+import type { Style } from '@/lib/gutenberg/style-engine';
 import { useSettings } from '../components/use-settings';
 import { appendSelectors, getBlockGapCSS, getAlignmentsInfo } from './utils';
 import { getGapCSSValue } from '../hooks/gap';

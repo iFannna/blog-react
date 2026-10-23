@@ -4,15 +4,15 @@ import {
 	createBlock,
 	serialize,
 	getBlockType,
-} from '@wordpress/blocks';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { useState, useCallback } from '@wordpress/element';
-import { MenuItem } from '@wordpress/components';
-import { symbol } from '@wordpress/icons';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { __, sprintf } from '@wordpress/i18n';
-import { store as noticesStore } from '@wordpress/notices';
+} from '@/lib/gutenberg/blocks';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { useState, useCallback } from '@/lib/gutenberg/element';
+import { MenuItem } from '@/components/gutenberg/ui';
+import { symbol } from '@/components/gutenberg/icons';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import { store as patternsStore } from '../store';
 import CreatePatternModal from './create-pattern-modal';
 import { unlock } from '../lock-unlock';

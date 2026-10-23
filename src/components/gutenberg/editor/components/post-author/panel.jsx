@@ -1,10 +1,10 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { Button, Dropdown } from '@wordpress/components';
-import { useState, useMemo } from '@wordpress/element';
-import { decodeEntities } from '@wordpress/html-entities';
-import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { Button, Dropdown } from '@/components/gutenberg/ui';
+import { useState, useMemo } from '@/lib/gutenberg/element';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import PostAuthorCheck from './check';
 import PostAuthorControl from './index';
 import PostPanelRow from '../post-panel-row';

@@ -1,5 +1,5 @@
-import { useEffect, useState, flushSync } from '@wordpress/element';
-import { createQueue } from '@wordpress/priority-queue';
+import { useEffect, useState, flushSync } from '@/lib/gutenberg/element';
+import { createQueue } from '@/utils/gutenberg/priority-queue';
 
 const blockPreviewQueue = createQueue();
 

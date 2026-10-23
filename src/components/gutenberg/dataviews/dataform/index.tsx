@@ -1,4 +1,4 @@
-import { useMemo } from '@wordpress/element';
+import { useMemo } from '@/lib/gutenberg/element';
 import type { DataFormProps } from '../types';
 import normalizeFields from '../field-types';
 import { DataFormProvider } from '../components/dataform-context';

@@ -1,12 +1,12 @@
 import {
 	__experimentalItemGroup as ItemGroup,
 	ColorIndicator,
-} from '@wordpress/components';
-import { isRTL, __ } from '@wordpress/i18n';
-import { Icon, chevronLeft, chevronRight } from '@wordpress/icons';
-import { useMemo } from '@wordpress/element';
-import type { Color } from '@wordpress/global-styles-engine';
-import { Stack } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { isRTL, __ } from '@/lib/gutenberg/i18n';
+import { Icon, chevronLeft, chevronRight } from '@/components/gutenberg/icons';
+import { useMemo } from '@/lib/gutenberg/element';
+import type { Color } from '@/lib/gutenberg/global-styles-engine';
+import { Stack } from '@/components/gutenberg/design-system';
 import { Subtitle } from './subtitle';
 import { NavigationButtonAsItem } from './navigation-button';
 import ColorIndicatorWrapper from './color-indicator-wrapper';

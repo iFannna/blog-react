@@ -5,17 +5,17 @@ import type {
 	HTMLAttributes,
 	CSSProperties,
 } from 'react';
-import { Flex, FlexItem, Composite } from '@wordpress/components';
-import { Badge, Stack, Tooltip } from '@wordpress/ui';
-import { __, sprintf } from '@wordpress/i18n';
-import { useInstanceId } from '@wordpress/compose';
+import { Flex, FlexItem, Composite } from '@/components/gutenberg/ui';
+import { Badge, Stack, Tooltip } from '@/components/gutenberg/design-system';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
 import {
 	useCallback,
 	useContext,
 	useRef,
 	forwardRef,
-} from '@wordpress/element';
-import { inertValue } from '@wordpress/react-inert-value';
+} from '@/lib/gutenberg/element';
+import { inertValue } from '@/hooks/gutenberg/react-inert-value';
 import { MEDIA_ASPECT_RATIOS } from '../../../constants';
 import ItemActions from '../../dataviews-item-actions';
 import DataViewsSelectionCheckbox from '../../dataviews-selection-checkbox';

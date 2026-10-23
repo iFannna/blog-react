@@ -1,5 +1,5 @@
-import { useEffect } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
+import { useEffect } from '@/lib/gutenberg/element';
+import { useDispatch } from '@/stores/gutenberg/data';
 import withRegistryProvider from './with-registry-provider';
 import { unlock } from '../../lock-unlock';
 import { store as uploadStore } from '../../store';

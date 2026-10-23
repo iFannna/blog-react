@@ -1,4 +1,4 @@
-import { defaultHooks } from '@wordpress/hooks';
+import { defaultHooks } from '@/hooks/gutenberg/hooks';
 import { createI18n } from './create-i18n';
 import {
 	LocaleData,

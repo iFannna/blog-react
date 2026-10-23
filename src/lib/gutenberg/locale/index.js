@@ -1,5 +1,5 @@
-import { setLocaleData } from '@wordpress/i18n';
-import { getSettings, setSettings } from '@wordpress/date';
+import { setLocaleData } from '@/lib/gutenberg/i18n';
+import { getSettings, setSettings } from '@/lib/gutenberg/date';
 import zhCN from './zh_CN.json';
 
 const ZH_L10N = {

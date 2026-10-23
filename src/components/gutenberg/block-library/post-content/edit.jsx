@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	InspectorControls,
 	useBlockProps,
@@ -8,15 +8,15 @@ import {
 	Warning,
 	privateApis as blockEditorPrivateApis,
 	__experimentalUseBlockPreview as useBlockPreview,
-} from '@wordpress/block-editor';
-import { parse } from '@wordpress/blocks';
+} from '@/components/gutenberg/block-editor';
+import { parse } from '@/lib/gutenberg/blocks';
 import {
 	useEntityProp,
 	useEntityBlockEditor,
 	store as coreStore,
-} from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
+} from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
 import { useCanEditEntity } from '../utils/hooks';
 import { unlock } from '../lock-unlock';
 

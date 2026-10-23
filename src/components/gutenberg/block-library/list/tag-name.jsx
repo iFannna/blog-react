@@ -1,4 +1,4 @@
-import { forwardRef } from '@wordpress/element';
+import { forwardRef } from '@/lib/gutenberg/element';
 
 function TagName( props, ref ) {
 	const { ordered, ...extraProps } = props;

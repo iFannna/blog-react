@@ -1,22 +1,12 @@
-import { type ComponentProps } from '../utils/types';
-
-export interface BadgeProps extends ComponentProps< 'span' > {
+export type BadgeProps = {
 	/**
-	 * The text to display in the badge.
+	 * Badge variant.
+	 *
+	 * @default 'default'
+	 */
+	intent?: 'default' | 'info' | 'success' | 'warning' | 'error';
+	/**
+	 * Text to display inside the badge.
 	 */
 	children: string;
-
-	/**
-	 * The semantic intent of the badge, communicating its meaning through color.
-	 *
-	 * @default "none"
-	 */
-	intent?:
-		| 'high'
-		| 'medium'
-		| 'low'
-		| 'stable'
-		| 'informational'
-		| 'draft'
-		| 'none';
-}
+};

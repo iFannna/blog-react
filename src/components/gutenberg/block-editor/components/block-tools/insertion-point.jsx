@@ -1,13 +1,13 @@
 import clsx from 'clsx';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	useRef,
 	createContext,
 	useContext,
 	useCallback,
-} from '@wordpress/element';
-import { __unstableMotion as motion } from '@wordpress/components';
-import { useReducedMotion } from '@wordpress/compose';
+} from '@/lib/gutenberg/element';
+import { __unstableMotion as motion } from '@/components/gutenberg/ui';
+import { useReducedMotion } from '@/hooks/gutenberg/compose';
 import Inserter from '../inserter';
 import { store as blockEditorStore } from '../../store';
 import BlockPopoverInbetween from '../block-popover/inbetween';

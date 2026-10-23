@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { InnerBlocks } from '@wordpress/block-editor';
+import { InnerBlocks } from '@/components/gutenberg/block-editor';
 
 const deprecated = [
 	{

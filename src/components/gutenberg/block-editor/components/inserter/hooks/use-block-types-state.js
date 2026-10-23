@@ -3,9 +3,9 @@ import {
 	createBlocksFromInnerBlocksTemplate,
 	store as blocksStore,
 	parse,
-} from '@wordpress/blocks';
-import { useSelect } from '@wordpress/data';
-import { useCallback } from '@wordpress/element';
+} from '@/lib/gutenberg/blocks';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useCallback } from '@/lib/gutenberg/element';
 import { store as blockEditorStore } from '../../../store';
 import { isFiltered } from '../../../store/utils';
 

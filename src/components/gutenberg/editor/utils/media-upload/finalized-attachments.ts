@@ -1,6 +1,6 @@
-import { dispatch } from '@wordpress/data';
-import { store as coreDataStore } from '@wordpress/core-data';
-import type { Attachment } from '@wordpress/core-data';
+import { dispatch } from '@/stores/gutenberg/data';
+import { store as coreDataStore } from '@/stores/gutenberg/core-data';
+import type { Attachment } from '@/stores/gutenberg/core-data';
 
 /**
  * The queries the editor resolves an attachment record with.

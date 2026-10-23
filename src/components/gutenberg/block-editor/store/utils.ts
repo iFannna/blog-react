@@ -1,7 +1,7 @@
-import type { Block } from '@wordpress/blocks';
-import { parse } from '@wordpress/blocks';
-import { parse as grammarParse } from '@wordpress/block-serialization-default-parser';
-import type { select as globalSelect } from '@wordpress/data';
+import type { Block } from '@/lib/gutenberg/blocks';
+import { parse } from '@/lib/gutenberg/blocks';
+import { parse as grammarParse } from '@/utils/gutenberg/block-serialization-default-parser';
+import type { select as globalSelect } from '@/stores/gutenberg/data';
 import {
 	selectBlockPatternsKey,
 	userPatternCategoriesSelectKey,

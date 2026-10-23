@@ -1,4 +1,4 @@
-import { createHigherOrderComponent } from '@wordpress/compose';
+import { createHigherOrderComponent } from '@/hooks/gutenberg/compose';
 import { useDispatchWithMap } from '../use-dispatch';
 import type { DataRegistry } from '../../types';
 
@@ -19,7 +19,7 @@ import type { DataRegistry } from '../../types';
  *     return <button type="button" onClick={ onClick }>{ children }</button>;
  * }
  *
- * import { withDispatch } from '@wordpress/data';
+ * import { withDispatch } from '@/stores/gutenberg/data';
  * import { store as myCustomStore } from 'my-custom-store';
  *
  * const SaleButton = withDispatch( ( dispatch, ownProps ) => {
@@ -57,7 +57,7 @@ import type { DataRegistry } from '../../types';
  *     return <button type="button" onClick={ onClick }>{ children }</button>;
  * }
  *
- * import { withDispatch } from '@wordpress/data';
+ * import { withDispatch } from '@/stores/gutenberg/data';
  * import { store as myCustomStore } from 'my-custom-store';
  *
  * const SaleButton = withDispatch( ( dispatch, ownProps, { select } ) => {

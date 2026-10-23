@@ -1,4 +1,4 @@
-import type { FontFace } from '@wordpress/core-data';
+import type { FontFace } from '@/stores/gutenberg/core-data';
 
 function getNumericFontWeight( value: string ): number {
 	switch ( value ) {

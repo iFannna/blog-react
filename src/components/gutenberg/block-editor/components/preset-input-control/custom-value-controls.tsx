@@ -1,8 +1,8 @@
 import {
 	RangeControl,
 	__experimentalUnitControl as UnitControl,
-} from '@wordpress/components';
-import { Tooltip } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { Tooltip } from '@/components/gutenberg/design-system';
 import type { CustomValueControlsProps } from './types';
 
 /**

@@ -1,5 +1,5 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { InspectorControls, useBlockProps } from '@/components/gutenberg/block-editor';
 import {
 	ToggleControl,
 	TextControl,
@@ -7,12 +7,12 @@ import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 	Spinner as WCSpinner,
-} from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { useEffect, useRef, useState } from '@wordpress/element';
-import { useServerSideRender } from '@wordpress/server-side-render';
-import { useDisabled } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useEffect, useRef, useState } from '@/lib/gutenberg/element';
+import { useServerSideRender } from '@/components/gutenberg/server-side-render';
+import { useDisabled } from '@/hooks/gutenberg/compose';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 import HtmlRenderer from '../utils/html-renderer';
 

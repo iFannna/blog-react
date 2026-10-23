@@ -1,14 +1,14 @@
-import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
-import { useAsyncList, useInstanceId } from '@wordpress/compose';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Button } from '@/components/gutenberg/ui';
+import { useAsyncList, useInstanceId } from '@/hooks/gutenberg/compose';
 import {
 	forwardRef,
 	memo,
 	useRef,
 	useLayoutEffect,
 	useMemo,
-} from '@wordpress/element';
-import { getScrollContainer } from '@wordpress/dom';
+} from '@/lib/gutenberg/element';
+import { getScrollContainer } from '@/utils/gutenberg/dom';
 import HtmlRenderer from '../../../utils/html-renderer';
 import { groupIconsByCollection } from './utils';
 

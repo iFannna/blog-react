@@ -1,4 +1,4 @@
-import { decodeEntities } from '@wordpress/html-entities';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 
 /**
  * Returns terms in a tree form.

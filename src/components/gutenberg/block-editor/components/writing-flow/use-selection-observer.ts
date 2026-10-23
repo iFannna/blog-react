@@ -1,10 +1,10 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useRefEffect } from '@wordpress/compose';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
 import {
 	create,
 	privateApis as richTextPrivateApis,
-} from '@wordpress/rich-text';
-import { isSelectionForward } from '@wordpress/dom';
+} from '@/components/gutenberg/rich-text';
+import { isSelectionForward } from '@/utils/gutenberg/dom';
 import { store as blockEditorStore } from '../../store';
 import { getBlockClientId } from '../../utils/dom';
 import { setContentEditableWrapper } from './utils';

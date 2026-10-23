@@ -1,11 +1,11 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useEffect, useMemo, useRef } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import { speak } from '@wordpress/a11y';
-import { store as uploadStore } from '@wordpress/upload-media';
-import { store as noticesStore } from '@wordpress/notices';
-import { Icon as WCIcon, Spinner as WCSpinner } from '@wordpress/components';
-import { check } from '@wordpress/icons';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useEffect, useMemo, useRef } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { speak } from '@/utils/gutenberg/a11y';
+import { store as uploadStore } from '@/services/gutenberg/upload-media';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { Icon as WCIcon, Spinner as WCSpinner } from '@/components/gutenberg/ui';
+import { check } from '@/components/gutenberg/icons';
 import {
 	useTracker,
 	getFailureCount as getTrackedFailureCount,

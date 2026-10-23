@@ -1,6 +1,6 @@
-import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { ToolbarButton, ToolbarGroup } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import { store as blockEditorStore } from '../../store';
 import type { BlockEditVisuallyButtonProps } from './types';
 

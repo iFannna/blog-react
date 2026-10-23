@@ -4,7 +4,7 @@ import {
 	postList,
 	tag,
 	customPostType,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 
 function getIcon( variationName ) {
 	switch ( variationName ) {

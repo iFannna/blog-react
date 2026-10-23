@@ -1,4 +1,4 @@
-import type { BlockType } from '@wordpress/blocks';
+import type { BlockType } from '@/lib/gutenberg/blocks';
 
 /**
  * Props of `BlockManager`.

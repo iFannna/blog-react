@@ -1,11 +1,11 @@
-import { Button } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useMemo, useState, useContext } from '@wordpress/element';
-import { useRegistry } from '@wordpress/data';
-import { closeSmall, chevronDown } from '@wordpress/icons';
-import { useViewportMatch } from '@wordpress/compose';
+import { Button } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useMemo, useState, useContext } from '@/lib/gutenberg/element';
+import { useRegistry } from '@/stores/gutenberg/data';
+import { closeSmall, chevronDown } from '@/components/gutenberg/icons';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of Checkbox and Menu, pending WordPress/gutenberg#76135.
-import { Checkbox, Field, Menu, Stack } from '@wordpress/ui';
+import { Checkbox, Field, Menu, Stack } from '@/components/gutenberg/design-system';
 import DataViewsContext from '../dataviews-context';
 import { ActionModal } from '../dataviews-item-actions';
 import type { Action, ActionModal as ActionModalType } from '../../types';

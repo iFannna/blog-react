@@ -1,9 +1,9 @@
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect } from '@/lib/gutenberg/element';
 
 /**
  * A React hook to determine if it's dragging within the target element.
  *
- * @typedef {import('@wordpress/element').RefObject} RefObject
+ * @typedef {import('@/lib/gutenberg/element').RefObject} RefObject
  *
  * @param {RefObject<HTMLElement>} elementRef The target elementRef object.
  *

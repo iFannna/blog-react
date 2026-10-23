@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
-import type { ObservableMap } from '@wordpress/compose';
-import type { Block } from '@wordpress/blocks';
-import type { DataRegistry } from '@wordpress/data';
+import type { ObservableMap } from '@/hooks/gutenberg/compose';
+import type { Block } from '@/lib/gutenberg/blocks';
+import type { DataRegistry } from '@/stores/gutenberg/data';
 import type { BlockEventHandlers } from '../writing-flow/types';
 import type {
 	BlockSelection,

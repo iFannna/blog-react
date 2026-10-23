@@ -6,10 +6,10 @@ import {
 	store as blockEditorStore,
 	privateApis as blockEditorPrivateApis,
 	useBlockEditingMode,
-} from '@wordpress/block-editor';
-import { ResizableBox } from '@wordpress/components';
-import { useState, useEffect } from '@wordpress/element';
-import { useSelect, useDispatch } from '@wordpress/data';
+} from '@/components/gutenberg/block-editor';
+import { ResizableBox } from '@/components/gutenberg/ui';
+import { useState, useEffect } from '@/lib/gutenberg/element';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import { unlock } from '../lock-unlock';
 import SpacerControls from './controls';
 import { MIN_SPACER_SIZE } from './constants';

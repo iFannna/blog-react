@@ -130,7 +130,7 @@ function replaceInHtmlTags(
  *
  * @example
  *```js
- * import { autop } from '@wordpress/autop';
+ * import { autop } from '@/utils/gutenberg/autop';
  * autop( 'my text' ); // "<p>my text</p>"
  * ```
  *
@@ -340,7 +340,7 @@ export function autop( text: string, br: boolean = true ): string {
  *
  * @example
  * ```js
- * import { removep } from '@wordpress/autop';
+ * import { removep } from '@/utils/gutenberg/autop';
  * removep( '<p>my text</p>' ); // "my text"
  * ```
  *

@@ -5,14 +5,14 @@
  * In the future we could consider creating an Openvese package that can be used in both `editor` and `site-editor`.
  * The rest of the settings would still need to be in sync though.
  */
-import { __, sprintf, _x } from '@wordpress/i18n';
-import { dispatch, resolveSelect, select, subscribe } from '@wordpress/data';
-import { decodeEntities } from '@wordpress/html-entities';
-import { store as coreStore } from '@wordpress/core-data';
+import { __, sprintf, _x } from '@/lib/gutenberg/i18n';
+import { dispatch, resolveSelect, select, subscribe } from '@/stores/gutenberg/data';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 
-/** @typedef {import('@wordpress/block-editor').InserterMediaRequest} InserterMediaRequest */
-/** @typedef {import('@wordpress/block-editor').InserterMediaItem} InserterMediaItem */
-/** @typedef {import('@wordpress/block-editor').InserterMediaCategory} InserterMediaCategory */
+/** @typedef {import('@/components/gutenberg/block-editor').InserterMediaRequest} InserterMediaRequest */
+/** @typedef {import('@/components/gutenberg/block-editor').InserterMediaItem} InserterMediaItem */
+/** @typedef {import('@/components/gutenberg/block-editor').InserterMediaCategory} InserterMediaCategory */
 
 const getExternalLink = ( url, text ) =>
 	`<a ${ getExternalLinkAttributes( url ) }>${ text }</a>`;

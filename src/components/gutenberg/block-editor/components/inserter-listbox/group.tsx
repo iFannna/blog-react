@@ -1,6 +1,6 @@
-import { forwardRef, useEffect, useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { speak } from '@wordpress/a11y';
+import { forwardRef, useEffect, useState } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { speak } from '@/utils/gutenberg/a11y';
 import type { ComponentPropsWithoutRef, ForwardedRef } from 'react';
 
 function InserterListboxGroup(

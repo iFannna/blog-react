@@ -1,8 +1,8 @@
-import { Disabled } from '@wordpress/components';
-import { store as coreStore } from '@wordpress/core-data';
-import { useRegistry } from '@wordpress/data';
-import { useContext, useCallback } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
+import { Disabled } from '@/components/gutenberg/ui';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useRegistry } from '@/stores/gutenberg/data';
+import { useContext, useCallback } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import useTemplatePartAreaLabel from '../use-template-part-area-label';
 
 const DRAFT_MENU_PARAMS = [

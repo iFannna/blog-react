@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react';
-import type { Area } from '@wordpress/image-cropper';
+import type { Area } from '@/components/gutenberg/image-cropper';
 
 /**
  * Border classes and styles of the edited image.

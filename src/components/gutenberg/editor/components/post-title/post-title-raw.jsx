@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import { TextareaControl as WCTextareaControl } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { decodeEntities } from '@wordpress/html-entities';
-import { useSelect } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { useState, forwardRef } from '@wordpress/element';
+import { TextareaControl as WCTextareaControl } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { useState, forwardRef } from '@/lib/gutenberg/element';
 import { DEFAULT_CLASSNAMES, REGEXP_NEWLINES } from './constants';
 import usePostTitleFocus from './use-post-title-focus';
 import usePostTitle from './use-post-title';

@@ -1,4 +1,4 @@
-import { Path, SVG } from '@wordpress/primitives';
+import { Path, SVG } from '@/components/gutenberg/primitives';
 
 export const YouTubeIcon = () => (
 	<SVG width="24" height="24" viewBox="0 0 24 24" version="1.1">

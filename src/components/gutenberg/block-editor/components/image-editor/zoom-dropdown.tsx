@@ -3,9 +3,9 @@ import {
 	RangeControl,
 	Dropdown,
 	__experimentalDropdownContentWrapper as DropdownContentWrapper,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { search } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { search } from '@/components/gutenberg/icons';
 import { MIN_ZOOM, MAX_ZOOM, POPOVER_PROPS } from './constants';
 import { useImageEditingContext } from './context';
 

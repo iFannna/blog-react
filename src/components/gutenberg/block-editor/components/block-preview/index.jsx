@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { useDisabled, useMergeRefs } from '@wordpress/compose';
-import { useSelect } from '@wordpress/data';
-import { memo, useMemo } from '@wordpress/element';
-import deprecated from '@wordpress/deprecated';
+import { useDisabled, useMergeRefs } from '@/hooks/gutenberg/compose';
+import { useSelect } from '@/stores/gutenberg/data';
+import { memo, useMemo } from '@/lib/gutenberg/element';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { ExperimentalBlockEditorProvider } from '../provider';
 import AutoHeightBlockPreview from './auto';
 import EditorStyles from '../editor-styles';

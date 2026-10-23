@@ -1,5 +1,5 @@
 import { camelCase } from 'change-case';
-import apiFetch from '@wordpress/api-fetch';
+import apiFetch from '@/services/gutenberg/api-fetch';
 
 export { default as __experimentalFetchLinkSuggestions } from './__experimental-fetch-link-suggestions';
 export { default as __experimentalFetchUrlData } from './__experimental-fetch-url-data';

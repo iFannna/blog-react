@@ -1,4 +1,4 @@
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockType } from '@/lib/gutenberg/blocks';
 import * as legacyWidget from './blocks/legacy-widget';
 import * as widgetGroup from './blocks/widget-group';
 

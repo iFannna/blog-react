@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useCallback, useEffect, useMemo, useState } from '@wordpress/element';
+import { useCallback, useEffect, useMemo, useState } from '@/lib/gutenberg/element';
 import {
 	store as blockEditorStore,
 	MediaPlaceholder,
@@ -11,20 +11,20 @@ import {
 	InspectorControls,
 	__experimentalColorGradientSettingsDropdown as ColorGradientSettingsDropdown,
 	__experimentalUseMultipleOriginColorsAndGradients as useMultipleOriginColorsAndGradients,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	ToggleControl,
 	Disabled,
 	SelectControl as WCSelectControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as noticesStore } from '@wordpress/notices';
-import { __, _x } from '@wordpress/i18n';
-import { playlist as icon } from '@wordpress/icons';
-import { createBlock } from '@wordpress/blocks';
-import { createBlobURL } from '@wordpress/blob';
+} from '@/components/gutenberg/ui';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { playlist as icon } from '@/components/gutenberg/icons';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { createBlobURL } from '@/utils/gutenberg/blob';
 import { Caption } from '../utils/caption';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 import { WaveformPlayer } from '../utils/waveform-player';

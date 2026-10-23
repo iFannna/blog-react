@@ -1,4 +1,4 @@
-import { useEffect } from '@wordpress/element';
+import { useEffect } from '@/lib/gutenberg/element';
 import type { FullscreenModeProps } from './types';
 
 const FullscreenMode = ( { isActive }: FullscreenModeProps ) => {

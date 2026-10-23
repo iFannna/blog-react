@@ -1,8 +1,8 @@
 import {
 	// eslint-disable-next-line @wordpress/use-recommended-components
 	ValidatedTextareaControl,
-} from '@wordpress/ui';
-import { useCallback } from '@wordpress/element';
+} from '@/components/gutenberg/design-system';
+import { useCallback } from '@/lib/gutenberg/element';
 import type { DataFormControlProps } from '../../types';
 import getCustomValidity from './utils/get-custom-validity';
 

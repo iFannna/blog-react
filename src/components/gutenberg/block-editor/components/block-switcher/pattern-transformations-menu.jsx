@@ -1,9 +1,9 @@
-import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
-import { useInstanceId, useViewportMatch } from '@wordpress/compose';
-import { chevronRight } from '@wordpress/icons';
-import { Composite, MenuGroup, MenuItem, Popover } from '@wordpress/components';
-import { VisuallyHidden } from '@wordpress/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useState } from '@/lib/gutenberg/element';
+import { useInstanceId, useViewportMatch } from '@/hooks/gutenberg/compose';
+import { chevronRight } from '@/components/gutenberg/icons';
+import { Composite, MenuGroup, MenuItem, Popover } from '@/components/gutenberg/ui';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
 import BlockPreview from '../block-preview';
 import useTransformedPatterns from './use-transformed-patterns';
 

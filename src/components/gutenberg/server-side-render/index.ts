@@ -8,7 +8,7 @@ import { useServerSideRender } from './hook';
  *
  * @example
  * ```js
- * import ServerSideRender from '@wordpress/server-side-render';
+ * import ServerSideRender from '@/components/gutenberg/server-side-render';
  * ```
  */
 const ServerSideRenderCompat =

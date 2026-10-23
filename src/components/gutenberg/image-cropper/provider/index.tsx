@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo } from '@wordpress/element';
+import { createContext, useContext, useMemo } from '@/lib/gutenberg/element';
 import useCropper from './use-image-cropper';
 import type { ImageCropperContextValue } from '../types';
 import { MIN_ZOOM } from '../constants';

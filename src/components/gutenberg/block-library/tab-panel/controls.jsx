@@ -1,14 +1,14 @@
 import {
 	InspectorControls,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	CheckboxControl as WCCheckboxControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useDispatch } from '@wordpress/data';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useDispatch } from '@/stores/gutenberg/data';
 import TabToolbarControls from '../tabs/tab-toolbar-controls';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 

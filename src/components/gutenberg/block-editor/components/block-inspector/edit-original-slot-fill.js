@@ -1,4 +1,4 @@
-import { createSlotFill } from '@wordpress/components';
+import { createSlotFill } from '@/components/gutenberg/ui';
 
 /**
  * Where the block inspector shows how to edit the entity a synced pattern or

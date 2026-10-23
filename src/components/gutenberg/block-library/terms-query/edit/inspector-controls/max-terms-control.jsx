@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { RangeControl } from '@wordpress/components';
+import { __ } from '@/lib/gutenberg/i18n';
+import { RangeControl } from '@/components/gutenberg/ui';
 
 export default function MaxTermsControl( { value, onChange, ...props } ) {
 	return (

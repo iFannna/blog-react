@@ -1,6 +1,6 @@
-import { check, aspectRatio as aspectRatioIcon } from '@wordpress/icons';
-import { DropdownMenu, MenuGroup, MenuItem } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+import { check, aspectRatio as aspectRatioIcon } from '@/components/gutenberg/icons';
+import { DropdownMenu, MenuGroup, MenuItem } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import type { ComponentProps } from 'react';
 import { useSettings } from '../use-settings';
 import { POPOVER_PROPS } from './constants';

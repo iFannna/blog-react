@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { __unstableMotion as motion } from '@wordpress/components';
+import { __unstableMotion as motion } from '@/components/gutenberg/ui';
 import BackButton, { useHasBackButton } from './back-button';
 
 const toolbarVariations = {

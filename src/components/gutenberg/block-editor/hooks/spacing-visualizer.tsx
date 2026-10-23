@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect, useReducer } from '@wordpress/element';
-import { isShallowEqual } from '@wordpress/is-shallow-equal';
+import { useState, useRef, useEffect, useReducer } from '@/lib/gutenberg/element';
+import { isShallowEqual } from '@/utils/gutenberg/is-shallow-equal';
 import BlockPopoverCover from '../components/block-popover/cover';
 import { useBlockElement } from '../components/block-list/use-block-props/use-block-refs';
 import type {

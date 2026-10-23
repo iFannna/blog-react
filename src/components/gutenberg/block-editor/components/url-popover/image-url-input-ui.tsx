@@ -1,11 +1,11 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	useRef,
 	useEffect,
 	useState,
 	createInterpolateElement,
-} from '@wordpress/element';
-import { focus } from '@wordpress/dom';
+} from '@/lib/gutenberg/element';
+import { focus } from '@/utils/gutenberg/dom';
 import {
 	ToolbarButton,
 	NavigableMenu,
@@ -15,7 +15,7 @@ import {
 	TextControl,
 	__experimentalVStack as VStack,
 	ExternalLink,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	Icon,
 	link as linkIcon,
@@ -23,8 +23,8 @@ import {
 	page,
 	fullscreen,
 	linkOff,
-} from '@wordpress/icons';
-import { prependHTTPS } from '@wordpress/url';
+} from '@/components/gutenberg/icons';
+import { prependHTTPS } from '@/utils/gutenberg/url';
 import type { FormEvent, ReactNode, RefObject, SyntheticEvent } from 'react';
 import URLPopover from './index';
 import type { ImageLinkDestination, ImageURLInputUIProps } from './types';

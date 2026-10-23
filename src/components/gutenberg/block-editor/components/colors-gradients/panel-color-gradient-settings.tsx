@@ -2,9 +2,9 @@ import clsx from 'clsx';
 import {
 	__experimentalSpacer as Spacer,
 	__experimentalToolsPanel as ToolsPanel,
-} from '@wordpress/components';
-import { useRegistry } from '@wordpress/data';
-import { useInstanceId } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { useRegistry } from '@/stores/gutenberg/data';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
 import ColorGradientSettingsDropdown from './dropdown';
 import useColorsAndGradientsPalettes from './use-multiple-origin-colors-and-gradients';
 import type { PanelColorGradientSettingsProps } from './types';

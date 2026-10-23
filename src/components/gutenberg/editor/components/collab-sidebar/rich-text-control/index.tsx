@@ -4,24 +4,24 @@ import {
 	SlotFillProvider,
 	privateApis as componentsPrivateApis,
 	__unstableUseAutocompleteProps as useAutocompleteProps,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	useMergeRefs,
 	useRefEffect,
 	__experimentalUseFocusOutside as useFocusOutside,
-} from '@wordpress/compose';
+} from '@/hooks/gutenberg/compose';
 import {
 	useInsertionEffect,
 	useMemo,
 	useRef,
 	useState,
-} from '@wordpress/element';
-import { withIgnoreIMEEvents } from '@wordpress/keycodes';
+} from '@/lib/gutenberg/element';
+import { withIgnoreIMEEvents } from '@/utils/gutenberg/keycodes';
 import {
 	insert,
 	privateApis as richTextPrivateApis,
-} from '@wordpress/rich-text';
-import type { EventCallbacksSet, RichTextValue } from '@wordpress/rich-text';
+} from '@/components/gutenberg/rich-text';
+import type { EventCallbacksSet, RichTextValue } from '@/components/gutenberg/rich-text';
 import { unlock } from '../../../lock-unlock';
 import { getAllowedFormats } from './utils';
 import FormatEdit from './format-edit';

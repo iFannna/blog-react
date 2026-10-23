@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { addFilter } from '@wordpress/hooks';
-import { getBlockSupport, hasBlockSupport } from '@wordpress/blocks';
-import { useMemo } from '@wordpress/element';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import { getBlockSupport, hasBlockSupport } from '@/lib/gutenberg/blocks';
+import { useMemo } from '@/lib/gutenberg/element';
 import {
 	getColorClassName,
 	getColorObjectByAttributeValues,

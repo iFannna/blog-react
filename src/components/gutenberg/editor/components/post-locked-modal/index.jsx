@@ -1,17 +1,17 @@
-import { __, sprintf } from '@wordpress/i18n';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	Modal,
 	Button,
 	ExternalLink,
 	__experimentalHStack as HStack,
 	withFilters,
-} from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { addQueryArgs } from '@wordpress/url';
-import { useEffect, createInterpolateElement } from '@wordpress/element';
-import { addAction, removeAction } from '@wordpress/hooks';
-import { useInstanceId } from '@wordpress/compose';
-import { store as coreStore } from '@wordpress/core-data';
+} from '@/components/gutenberg/ui';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { addQueryArgs } from '@/utils/gutenberg/url';
+import { useEffect, createInterpolateElement } from '@/lib/gutenberg/element';
+import { addAction, removeAction } from '@/hooks/gutenberg/hooks';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { unlock } from '../../lock-unlock';
 import { DOCUMENT_SIZE_LIMIT_EXCEEDED } from '../../utils/sync-error-messages';
 import { store as editorStore } from '../../store';

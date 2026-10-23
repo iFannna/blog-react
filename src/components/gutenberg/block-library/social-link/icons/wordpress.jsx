@@ -1,4 +1,4 @@
-import { Path, SVG } from '@wordpress/primitives';
+import { Path, SVG } from '@/components/gutenberg/primitives';
 
 export const WordPressIcon = () => (
 	<SVG

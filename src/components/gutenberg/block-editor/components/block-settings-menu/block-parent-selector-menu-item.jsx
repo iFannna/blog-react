@@ -1,8 +1,8 @@
-import { useRef } from '@wordpress/element';
-import { MenuItem } from '@wordpress/components';
-import { useViewportMatch } from '@wordpress/compose';
-import { useDispatch } from '@wordpress/data';
-import { __, sprintf } from '@wordpress/i18n';
+import { useRef } from '@/lib/gutenberg/element';
+import { MenuItem } from '@/components/gutenberg/ui';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import BlockIcon from '../block-icon';
 import { useShowHoveredOrFocusedGestures } from '../block-toolbar/utils';
 import { store as blockEditorStore } from '../../store';

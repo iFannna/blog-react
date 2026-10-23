@@ -1,19 +1,19 @@
-import { store as blocksStore } from '@wordpress/blocks';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
 import type { ComponentProps, ReactElement } from 'react';
 import type {
 	BlockTypeIconDescriptor,
 	BlockVariation,
-} from '@wordpress/blocks';
-import { __, sprintf } from '@wordpress/i18n';
+} from '@/lib/gutenberg/blocks';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	Button,
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of the new Menu, pending WordPress/gutenberg#76135.
-import { Menu, VisuallyHidden } from '@wordpress/ui';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
+import { Menu, VisuallyHidden } from '@/components/gutenberg/design-system';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
 import BlockIcon from '../block-icon';
 import { store as blockEditorStore } from '../../store';
 import { unlock } from '../../lock-unlock';

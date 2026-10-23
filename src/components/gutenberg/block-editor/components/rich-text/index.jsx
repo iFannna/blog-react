@@ -9,13 +9,13 @@ import {
 	useMemo,
 	forwardRef,
 	useContext,
-} from '@wordpress/element';
-import { useDispatch, useRegistry, useSelect } from '@wordpress/data';
-import { useMergeRefs, useInstanceId } from '@wordpress/compose';
-import { privateApis as richTextPrivateApis } from '@wordpress/rich-text';
-import { Popover } from '@wordpress/components';
-import { getBlockBindingsSource } from '@wordpress/blocks';
-import { __, sprintf } from '@wordpress/i18n';
+} from '@/lib/gutenberg/element';
+import { useDispatch, useRegistry, useSelect } from '@/stores/gutenberg/data';
+import { useMergeRefs, useInstanceId } from '@/hooks/gutenberg/compose';
+import { privateApis as richTextPrivateApis } from '@/components/gutenberg/rich-text';
+import { Popover } from '@/components/gutenberg/ui';
+import { getBlockBindingsSource } from '@/lib/gutenberg/blocks';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import { useBlockEditorAutocompleteProps } from '../autocomplete';
 import { useBlockEditContext } from '../block-edit';
 import {

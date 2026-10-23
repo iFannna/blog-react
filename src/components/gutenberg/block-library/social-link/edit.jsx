@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { DELETE, BACKSPACE, ENTER } from '@wordpress/keycodes';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { DELETE, BACKSPACE, ENTER } from '@/utils/gutenberg/keycodes';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import {
 	BlockControls,
 	InspectorControls,
@@ -9,8 +9,8 @@ import {
 	useBlockEditingMode,
 	useBlockProps,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { useState, useRef, createInterpolateElement } from '@wordpress/element';
+} from '@/components/gutenberg/block-editor';
+import { useState, useRef, createInterpolateElement } from '@/lib/gutenberg/element';
 import {
 	Icon as WCIcon,
 	Button,
@@ -21,11 +21,11 @@ import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 	__experimentalInputControlSuffixWrapper as InputControlSuffixWrapper,
-} from '@wordpress/components';
-import { useMergeRefs } from '@wordpress/compose';
-import { __ } from '@wordpress/i18n';
-import { keyboardReturn } from '@wordpress/icons';
-import { store as blocksStore } from '@wordpress/blocks';
+} from '@/components/gutenberg/ui';
+import { useMergeRefs } from '@/hooks/gutenberg/compose';
+import { __ } from '@/lib/gutenberg/i18n';
+import { keyboardReturn } from '@/components/gutenberg/icons';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
 import { getSocialService } from './social-list';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 

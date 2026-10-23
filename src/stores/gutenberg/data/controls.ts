@@ -21,7 +21,7 @@ function isStoreDescriptor( object: unknown ): object is StoreDescriptor {
  *
  * @example
  * ```js
- * import { controls } from '@wordpress/data';
+ * import { controls } from '@/stores/gutenberg/data';
  *
  * // Action generator using `select`.
  * export function* myAction() {
@@ -60,7 +60,7 @@ function select(
  *
  * @example
  * ```js
- * import { controls } from '@wordpress/data';
+ * import { controls } from '@/stores/gutenberg/data';
  *
  * // Action generator using resolveSelect
  * export function* myAction() {
@@ -95,7 +95,7 @@ function resolveSelect(
  *
  * @example
  * ```js
- * import { controls } from '@wordpress/data-controls';
+ * import { controls } from '@/stores/gutenberg/data/controls';
  *
  * // Action generator using dispatch
  * export function* myAction() {

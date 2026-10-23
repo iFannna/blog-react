@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { Field, Select, VisuallyHidden } from '@wordpress/ui';
-import { __ } from '@wordpress/i18n';
+import { Field, Select, VisuallyHidden } from '@/components/gutenberg/design-system';
+import { __ } from '@/lib/gutenberg/i18n';
 import type { CSSProperties } from 'react';
-import type { FontFamilyPreset } from '@wordpress/global-styles-engine';
+import type { FontFamilyPreset } from '@/lib/gutenberg/global-styles-engine';
 import { useSettings } from '../use-settings';
 import type { FontFamilyControlProps } from './types';
 

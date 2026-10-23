@@ -1,4 +1,4 @@
-import { createSelector } from '@wordpress/data';
+import { createSelector } from '@/stores/gutenberg/data';
 import type { FormatType, State } from '../types';
 
 /**
@@ -8,9 +8,9 @@ import type { FormatType, State } from '../types';
  *
  * @example
  * ```js
- * import { __, sprintf } from '@wordpress/i18n';
- * import { store as richTextStore } from '@wordpress/rich-text';
- * import { useSelect } from '@wordpress/data';
+ * import { __, sprintf } from '@/lib/gutenberg/i18n';
+ * import { store as richTextStore } from '@/components/gutenberg/rich-text';
+ * import { useSelect } from '@/stores/gutenberg/data';
  *
  * const ExampleComponent = () => {
  *    const { getFormatTypes } = useSelect(
@@ -47,9 +47,9 @@ export const getFormatTypes = createSelector(
  *
  * @example
  * ```js
- * import { __, sprintf } from '@wordpress/i18n';
- * import { store as richTextStore } from '@wordpress/rich-text';
- * import { useSelect } from '@wordpress/data';
+ * import { __, sprintf } from '@/lib/gutenberg/i18n';
+ * import { store as richTextStore } from '@/components/gutenberg/rich-text';
+ * import { useSelect } from '@/stores/gutenberg/data';
  *
  * const ExampleComponent = () => {
  *    const { getFormatType } = useSelect(
@@ -92,9 +92,9 @@ export function getFormatType(
  *
  * @example
  * ```js
- * import { __, sprintf } from '@wordpress/i18n';
- * import { store as richTextStore } from '@wordpress/rich-text';
- * import { useSelect } from '@wordpress/data';
+ * import { __, sprintf } from '@/lib/gutenberg/i18n';
+ * import { store as richTextStore } from '@/components/gutenberg/rich-text';
+ * import { useSelect } from '@/stores/gutenberg/data';
  *
  * const ExampleComponent = () => {
  *    const { getFormatTypeForBareElement } = useSelect(
@@ -134,9 +134,9 @@ export function getFormatTypeForBareElement(
  *
  * @example
  * ```js
- * import { __, sprintf } from '@wordpress/i18n';
- * import { store as richTextStore } from '@wordpress/rich-text';
- * import { useSelect } from '@wordpress/data';
+ * import { __, sprintf } from '@/lib/gutenberg/i18n';
+ * import { store as richTextStore } from '@/components/gutenberg/rich-text';
+ * import { useSelect } from '@/stores/gutenberg/data';
  *
  * const ExampleComponent = () => {
  *    const { getFormatTypeForClassName } = useSelect(

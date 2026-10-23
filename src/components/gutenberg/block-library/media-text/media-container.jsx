@@ -3,21 +3,21 @@ import {
 	ResizableBox,
 	Spinner as WCSpinner,
 	Placeholder,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	BlockControls,
 	BlockIcon,
 	MediaPlaceholder,
 	MediaReplaceFlow,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
-import { useViewportMatch } from '@wordpress/compose';
-import { useDispatch } from '@wordpress/data';
-import { forwardRef } from '@wordpress/element';
-import { createBlobURL, isBlobURL } from '@wordpress/blob';
-import { store as noticesStore } from '@wordpress/notices';
-import { media as icon } from '@wordpress/icons';
+} from '@/components/gutenberg/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { forwardRef } from '@/lib/gutenberg/element';
+import { createBlobURL, isBlobURL } from '@/utils/gutenberg/blob';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { media as icon } from '@/components/gutenberg/icons';
 import { imageFillStyles } from './image-fill';
 import { ALLOWED_MEDIA_TYPES } from './constants';
 

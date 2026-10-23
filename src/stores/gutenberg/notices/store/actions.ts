@@ -1,4 +1,4 @@
-import deprecated from '@wordpress/deprecated';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { DEFAULT_CONTEXT, DEFAULT_STATUS, NOTICE_SLOT } from './constants';
 import type { NoticeOptions, ReducerAction } from './types';
 
@@ -13,10 +13,10 @@ let uniqueId = 0;
  *
  * @example
  * ```js
- * import { __ } from '@wordpress/i18n';
- * import { useDispatch } from '@wordpress/data';
- * import { store as noticesStore } from '@wordpress/notices';
- * import { Button } from '@wordpress/components';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { useDispatch } from '@/stores/gutenberg/data';
+ * import { store as noticesStore } from '@/stores/gutenberg/notices';
+ * import { Button } from '@/components/gutenberg/ui';
  *
  * const ExampleComponent = () => {
  *     const { createNotice } = useDispatch( noticesStore );
@@ -103,10 +103,10 @@ export function createNotice(
  *
  * @example
  * ```js
- * import { __ } from '@wordpress/i18n';
- * import { useDispatch } from '@wordpress/data';
- * import { store as noticesStore } from '@wordpress/notices';
- * import { Button } from '@wordpress/components';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { useDispatch } from '@/stores/gutenberg/data';
+ * import { store as noticesStore } from '@/stores/gutenberg/notices';
+ * import { Button } from '@/components/gutenberg/ui';
  *
  * const ExampleComponent = () => {
  *     const { createSuccessNotice } = useDispatch( noticesStore );
@@ -145,10 +145,10 @@ export function createSuccessNotice(
  *
  * @example
  * ```js
- * import { __ } from '@wordpress/i18n';
- * import { useDispatch } from '@wordpress/data';
- * import { store as noticesStore } from '@wordpress/notices';
- * import { Button } from '@wordpress/components';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { useDispatch } from '@/stores/gutenberg/data';
+ * import { store as noticesStore } from '@/stores/gutenberg/notices';
+ * import { Button } from '@/components/gutenberg/ui';
  *
  * const ExampleComponent = () => {
  *     const { createInfoNotice } = useDispatch( noticesStore );
@@ -183,10 +183,10 @@ export function createInfoNotice( content: string, options?: NoticeOptions ) {
  *
  * @example
  * ```js
- * import { __ } from '@wordpress/i18n';
- * import { useDispatch } from '@wordpress/data';
- * import { store as noticesStore } from '@wordpress/notices';
- * import { Button } from '@wordpress/components';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { useDispatch } from '@/stores/gutenberg/data';
+ * import { store as noticesStore } from '@/stores/gutenberg/notices';
+ * import { Button } from '@/components/gutenberg/ui';
  *
  * const ExampleComponent = () => {
  *     const { createErrorNotice } = useDispatch( noticesStore );
@@ -224,10 +224,10 @@ export function createErrorNotice( content: string, options?: NoticeOptions ) {
  *
  * @example
  * ```js
- * import { __ } from '@wordpress/i18n';
- * import { useDispatch } from '@wordpress/data';
- * import { store as noticesStore } from '@wordpress/notices';
- * import { Button } from '@wordpress/components';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { useDispatch } from '@/stores/gutenberg/data';
+ * import { store as noticesStore } from '@/stores/gutenberg/notices';
+ * import { Button } from '@/components/gutenberg/ui';
  *
  * const ExampleComponent = () => {
  *     const { createWarningNotice, createInfoNotice } = useDispatch( noticesStore );
@@ -267,10 +267,10 @@ export function createWarningNotice(
  *
  * @example
  * ```js
- * import { __ } from '@wordpress/i18n';
- * import { useDispatch } from '@wordpress/data';
- * import { store as noticesStore } from '@wordpress/notices';
- * import { Button } from '@wordpress/components';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { useDispatch } from '@/stores/gutenberg/data';
+ * import { store as noticesStore } from '@/stores/gutenberg/notices';
+ * import { Button } from '@/components/gutenberg/ui';
  *
  * const ExampleComponent = () => {
  *    const notices = useSelect( ( select ) => select( noticesStore ).getNotices() );
@@ -318,10 +318,10 @@ export function removeNotice(
  *
  * @example
  * ```js
- * import { __ } from '@wordpress/i18n';
- * import { useDispatch, useSelect } from '@wordpress/data';
- * import { store as noticesStore } from '@wordpress/notices';
- * import { Button } from '@wordpress/components';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+ * import { store as noticesStore } from '@/stores/gutenberg/notices';
+ * import { Button } from '@/components/gutenberg/ui';
  *
  * export const ExampleComponent = () => {
  * 	const notices = useSelect( ( select ) =>
@@ -375,10 +375,10 @@ export function removeAllNotices(
  *                intended to appear. Defaults to 'default' context.
  * @example
  * ```js
- * import { __ } from '@wordpress/i18n';
- * import { useDispatch, useSelect } from '@wordpress/data';
- * import { store as noticesStore } from '@wordpress/notices';
- * import { Button } from '@wordpress/components';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+ * import { store as noticesStore } from '@/stores/gutenberg/notices';
+ * import { Button } from '@/components/gutenberg/ui';
  *
  * const ExampleComponent = () => {
  * 	const notices = useSelect( ( select ) =>

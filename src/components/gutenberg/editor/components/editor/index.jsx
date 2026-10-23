@@ -1,7 +1,7 @@
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { Notice } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { Notice } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import { store as editorStore } from '../../store';
 import { TEMPLATE_POST_TYPE } from '../../store/constants';
 import EditorInterface from '../editor-interface';

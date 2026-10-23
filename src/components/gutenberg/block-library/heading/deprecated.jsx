@@ -3,7 +3,7 @@ import {
 	getColorClassName,
 	RichText,
 	useBlockProps,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import migrateTextAlignAttributeToBlockSupport from '../utils/migrate-text-align';
 
 const blockSupports = {

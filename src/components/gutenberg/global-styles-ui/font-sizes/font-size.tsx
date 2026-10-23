@@ -1,18 +1,18 @@
-import { __, sprintf } from '@wordpress/i18n';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	__experimentalSpacer as Spacer,
 	__experimentalView as View,
 	useNavigator,
 	FlexItem,
 	ToggleControl,
-} from '@wordpress/components';
-import { useState, useEffect } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { useState, useEffect } from '@/lib/gutenberg/element';
 import type {
 	FontSize as FontSizeType,
 	FluidTypographySettings,
 	FluidTypographyConfig,
-} from '@wordpress/global-styles-engine';
-import { Stack } from '@wordpress/ui';
+} from '@/lib/gutenberg/global-styles-engine';
+import { Stack } from '@/components/gutenberg/design-system';
 import FontSizePreview from './font-size-preview';
 import { SizeControl } from '../size-control';
 import { usePresets } from '../presets/use-presets';

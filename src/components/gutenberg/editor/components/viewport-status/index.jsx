@@ -1,7 +1,7 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { Icon, Stack } from '@wordpress/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { Icon, Stack } from '@/components/gutenberg/design-system';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 import { DEVICE_TYPE_METADATA } from '../../utils/device-type';

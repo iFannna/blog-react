@@ -1,15 +1,15 @@
 import clsx from 'clsx';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import {
 	__experimentalTruncate as Truncate,
 	__experimentalVStack as VStack,
 	Icon as WCIcon,
-} from '@wordpress/components';
-import { useState, useRef, useLayoutEffect } from '@wordpress/element';
-import type { Attachment } from '@wordpress/core-data';
-import { getFilename } from '@wordpress/url';
-import type { DataViewRenderFieldProps } from '@wordpress/dataviews';
+} from '@/components/gutenberg/ui';
+import { useState, useRef, useLayoutEffect } from '@/lib/gutenberg/element';
+import type { Attachment } from '@/stores/gutenberg/core-data';
+import { getFilename } from '@/utils/gutenberg/url';
+import type { DataViewRenderFieldProps } from '@/components/gutenberg/dataviews';
 import { getMediaTypeFromMimeType } from '../utils/get-media-type-from-mime-type';
 import type { MediaItem } from '../types';
 

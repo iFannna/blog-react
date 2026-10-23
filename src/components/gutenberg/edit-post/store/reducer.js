@@ -1,4 +1,4 @@
-import { combineReducers } from '@wordpress/data';
+import { combineReducers } from '@/stores/gutenberg/data';
 
 /**
  * Reducer keeping track of the meta boxes isSaving state.

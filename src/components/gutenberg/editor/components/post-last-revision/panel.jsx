@@ -1,4 +1,4 @@
-import { PanelBody } from '@wordpress/components';
+import { PanelBody } from '@/components/gutenberg/ui';
 import PostLastRevision from './';
 import PostLastRevisionCheck from './check';
 

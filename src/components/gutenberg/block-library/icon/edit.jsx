@@ -1,17 +1,17 @@
 import clsx from 'clsx';
-import { __, sprintf } from '@wordpress/i18n';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	DropdownMenu,
 	TextControl,
 	ToolbarButton,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	flipHorizontal as flipHorizontalIcon,
 	flipVertical as flipVerticalIcon,
 	rotateRight,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import {
 	BlockControls,
 	InspectorControls,
@@ -23,12 +23,12 @@ import {
 	__experimentalGetShadowClassesAndStyles as useShadowProps,
 	__experimentalGetSpacingClassesAndStyles as useSpacingProps,
 	getDimensionsClassesAndStyles as useDimensionsProps,
-} from '@wordpress/block-editor';
-import { getBlockBindingsSource } from '@wordpress/blocks';
-import { useCallback, useState } from '@wordpress/element';
-import { SVG, Rect, Path } from '@wordpress/primitives';
-import { useSelect } from '@wordpress/data';
-import { store as coreDataStore } from '@wordpress/core-data';
+} from '@/components/gutenberg/block-editor';
+import { getBlockBindingsSource } from '@/lib/gutenberg/blocks';
+import { useCallback, useState } from '@/lib/gutenberg/element';
+import { SVG, Rect, Path } from '@/components/gutenberg/primitives';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreDataStore } from '@/stores/gutenberg/core-data';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 import HtmlRenderer from '../utils/html-renderer';
 import { CustomInserterModal } from './components';

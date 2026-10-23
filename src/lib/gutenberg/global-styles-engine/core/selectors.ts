@@ -1,4 +1,4 @@
-import type { BlockType } from '@wordpress/blocks';
+import type { BlockType } from '@/lib/gutenberg/blocks';
 import { scopeSelector } from '../utils/common';
 import { getValueFromObjectPath } from '../utils/object';
 

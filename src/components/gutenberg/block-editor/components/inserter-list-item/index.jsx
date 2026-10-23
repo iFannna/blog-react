@@ -1,13 +1,13 @@
 import clsx from 'clsx';
-import { useMemo, useRef, memo } from '@wordpress/element';
+import { useMemo, useRef, memo } from '@/lib/gutenberg/element';
 import {
 	createBlock,
 	createBlocksFromInnerBlocksTemplate,
 	isReusableBlock,
 	isTemplatePart,
-} from '@wordpress/blocks';
-import { __experimentalTruncate as Truncate } from '@wordpress/components';
-import { ENTER, isAppleOS } from '@wordpress/keycodes';
+} from '@/lib/gutenberg/blocks';
+import { __experimentalTruncate as Truncate } from '@/components/gutenberg/ui';
+import { ENTER, isAppleOS } from '@/utils/gutenberg/keycodes';
 import BlockIcon from '../block-icon';
 import { InserterListboxItem } from '../inserter-listbox';
 import InserterDraggableBlocks from '../inserter-draggable-blocks';

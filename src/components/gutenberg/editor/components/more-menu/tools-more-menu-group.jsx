@@ -1,4 +1,4 @@
-import { createSlotFill } from '@wordpress/components';
+import { createSlotFill } from '@/components/gutenberg/ui';
 
 const { Fill: ToolsMoreMenuGroup, Slot } = createSlotFill(
 	Symbol( 'ToolsMoreMenuGroup' )

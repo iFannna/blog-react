@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from 'react';
-import type { __experimentalToolsPanelItem as ToolsPanelItem } from '@wordpress/components';
+import type { __experimentalToolsPanelItem as ToolsPanelItem } from '@/components/gutenberg/ui';
 
 export interface InheritanceResetButtonProps {
 	/**

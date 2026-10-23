@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { __, sprintf } from '@wordpress/i18n';
-import { applyFilters } from '@wordpress/hooks';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { applyFilters } from '@/hooks/gutenberg/hooks';
 import {
 	DropZone,
 	Button,
@@ -9,17 +9,17 @@ import {
 	withFilters,
 	__experimentalHStack as HStack,
 	Notice,
-} from '@wordpress/components';
-import { isBlobURL } from '@wordpress/blob';
-import { useState, useRef } from '@wordpress/element';
-import { compose } from '@wordpress/compose';
-import { useSelect, withDispatch, withSelect } from '@wordpress/data';
+} from '@/components/gutenberg/ui';
+import { isBlobURL } from '@/utils/gutenberg/blob';
+import { useState, useRef } from '@/lib/gutenberg/element';
+import { compose } from '@/hooks/gutenberg/compose';
+import { useSelect, withDispatch, withSelect } from '@/stores/gutenberg/data';
 import {
 	MediaUpload,
 	MediaUploadCheck,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { store as coreStore } from '@wordpress/core-data';
+} from '@/components/gutenberg/block-editor';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import PostFeaturedImageCheck from './check';
 import { store as editorStore } from '../../store';
 

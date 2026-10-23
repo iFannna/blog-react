@@ -3,16 +3,16 @@ import {
 	Button,
 	TextControl,
 	ExternalLink,
-} from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
-import { useCallback, useEffect, useState, useRef } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { addQueryArgs, safeDecodeURIComponent } from '@wordpress/url';
-import { decodeEntities } from '@wordpress/html-entities';
-import { useCopyToClipboard } from '@wordpress/compose';
-import { store as coreStore } from '@wordpress/core-data';
-import { external } from '@wordpress/icons';
-import { VisuallyHidden } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useCallback, useEffect, useState, useRef } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { addQueryArgs, safeDecodeURIComponent } from '@/utils/gutenberg/url';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { useCopyToClipboard } from '@/hooks/gutenberg/compose';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { external } from '@/components/gutenberg/icons';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
 import PostScheduleLabel from '../post-schedule/label';
 import { store as editorStore } from '../../store';
 

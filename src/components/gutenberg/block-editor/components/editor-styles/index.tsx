@@ -1,9 +1,9 @@
 import { colord, extend } from 'colord';
 import namesPlugin from 'colord/plugins/names';
 import a11yPlugin from 'colord/plugins/a11y';
-import { SVG } from '@wordpress/components';
-import { useCallback, useMemo, memo } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
+import { SVG } from '@/components/gutenberg/ui';
+import { useCallback, useMemo, memo } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
 import transformStyles from '../../utils/transform-styles';
 import { store as blockEditorStore } from '../../store';
 import { unlock } from '../../lock-unlock';

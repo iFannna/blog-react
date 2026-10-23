@@ -1,6 +1,6 @@
-import apiFetch from '@wordpress/api-fetch';
-import { debounce } from '@wordpress/compose';
-import { __ } from '@wordpress/i18n';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { debounce } from '@/hooks/gutenberg/compose';
+import { __ } from '@/lib/gutenberg/i18n';
 
 /**
  * An API for creating and loading a widget control (a <div class="widget">

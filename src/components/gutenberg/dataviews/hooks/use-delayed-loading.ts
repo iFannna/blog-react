@@ -1,4 +1,4 @@
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState } from '@/lib/gutenberg/element';
 
 export function useDelayedLoading(
 	isLoading: boolean,

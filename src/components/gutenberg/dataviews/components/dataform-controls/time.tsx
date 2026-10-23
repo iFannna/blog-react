@@ -1,11 +1,11 @@
-import { BaseControl } from '@wordpress/components';
-import { useCallback } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { BaseControl } from '@/components/gutenberg/ui';
+import { useCallback } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	Stack,
 	// eslint-disable-next-line @wordpress/use-recommended-components
 	ValidatedInputControl,
-} from '@wordpress/ui';
+} from '@/components/gutenberg/design-system';
 import type { DataFormControlProps, FormatTime } from '../../types';
 import { OPERATOR_BETWEEN } from '../../constants';
 import parseTime from '../../field-types/utils/parse-time';

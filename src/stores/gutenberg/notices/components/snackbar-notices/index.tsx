@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { SnackbarList } from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { SnackbarList } from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import { store as noticesStore } from '../../store';
 
 // Last three notices. Slices from the tail end of the list.

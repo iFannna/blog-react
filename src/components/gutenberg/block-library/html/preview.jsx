@@ -1,11 +1,11 @@
-import { useMemo } from '@wordpress/element';
+import { useMemo } from '@/lib/gutenberg/element';
 import {
 	transformStyles,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { SandBox } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/block-editor';
+import { SandBox } from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
 
 // Default styles used to unset some of the styles
 // that might be inherited from the editor style.

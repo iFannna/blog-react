@@ -1,6 +1,6 @@
-import { useDispatch } from '@wordpress/data';
-import { useMemo, useEffect } from '@wordpress/element';
-import { store as noticesStore } from '@wordpress/notices';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { useMemo, useEffect } from '@/lib/gutenberg/element';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import { useEntityActions } from '../../dataviews/entity-actions-loader';
 
 export function usePostActions( { postType, onActionPerformed, context } ) {

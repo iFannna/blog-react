@@ -1,13 +1,13 @@
 import {
 	__experimentalFetchLinkSuggestions as fetchLinkSuggestions,
 	store as coreStore,
-} from '@wordpress/core-data';
-import { ComboboxControl } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
-import { useDebounce, useEvent } from '@wordpress/compose';
-import { useSelect } from '@wordpress/data';
-import type { DataFormControlProps } from '@wordpress/dataviews';
+} from '@/stores/gutenberg/core-data';
+import { ComboboxControl } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useState } from '@/lib/gutenberg/element';
+import { useDebounce, useEvent } from '@/hooks/gutenberg/compose';
+import { useSelect } from '@/stores/gutenberg/data';
+import type { DataFormControlProps } from '@/components/gutenberg/dataviews';
 import type { MediaItem } from '../types';
 import { getRenderedContent } from '../utils/get-rendered-content';
 

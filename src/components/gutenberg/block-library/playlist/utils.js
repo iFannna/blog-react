@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { decodeEntities } from '@wordpress/html-entities';
+import { __ } from '@/lib/gutenberg/i18n';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 
 function getMediaUrl( media ) {
 	return media?.url ?? media?.source_url;

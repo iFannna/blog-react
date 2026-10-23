@@ -1,12 +1,12 @@
 import clsx from 'clsx';
-import { isBlobURL } from '@wordpress/blob';
+import { isBlobURL } from '@/utils/gutenberg/blob';
 import {
 	createInterpolateElement,
 	useEffect,
 	useRef,
 	useState,
-} from '@wordpress/element';
-import { __, isRTL } from '@wordpress/i18n';
+} from '@/lib/gutenberg/element';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
 import {
 	RangeControl,
 	ResizableBox,
@@ -18,8 +18,8 @@ import {
 	DropZone,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { useViewportMatch } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
 import {
 	BlockControls,
 	InspectorControls,
@@ -29,11 +29,11 @@ import {
 	store as blockEditorStore,
 	useBlockEditingMode,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { crop, upload } from '@wordpress/icons';
-import { store as noticesStore } from '@wordpress/notices';
+} from '@/components/gutenberg/block-editor';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { crop, upload } from '@/components/gutenberg/icons';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import { MIN_SIZE } from '../image/constants';
 import { MediaControl, MediaControlPreview } from '../utils/media-control';
 import { unlock } from '../lock-unlock';

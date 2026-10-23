@@ -8,9 +8,9 @@ import {
 	PluginPostStatusInfo as EditorPluginPostStatusInfo,
 	PluginSidebar as EditorPluginSidebar,
 	PluginSidebarMoreMenuItem as EditorPluginSidebarMoreMenuItem,
-} from '@wordpress/editor';
-import { getPath } from '@wordpress/url';
-import deprecated from '@wordpress/deprecated';
+} from '@/components/gutenberg/editor';
+import { getPath } from '@/utils/gutenberg/url';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { unlock } from './lock-unlock';
 const { PluginPostExcerpt } = unlock( editorPrivateApis );
 

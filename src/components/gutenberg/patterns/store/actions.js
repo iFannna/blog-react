@@ -1,6 +1,6 @@
-import { getBlockType, cloneBlock } from '@wordpress/blocks';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+import { getBlockType, cloneBlock } from '@/lib/gutenberg/blocks';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import { PATTERN_SYNC_TYPES } from '../constants';
 
 /**

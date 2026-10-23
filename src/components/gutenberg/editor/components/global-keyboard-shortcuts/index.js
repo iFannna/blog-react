@@ -1,10 +1,10 @@
-import { useShortcut } from '@wordpress/keyboard-shortcuts';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { store as interfaceStore } from '@wordpress/interface';
+import { useShortcut } from '@/components/gutenberg/keyboard-shortcuts';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { store as interfaceStore } from '@/components/gutenberg/interface';
 import {
 	store as blockEditorStore,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 

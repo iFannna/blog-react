@@ -1,13 +1,13 @@
 import clsx from 'clsx';
-import { useRef, useState, useLayoutEffect } from '@wordpress/element';
+import { useRef, useState, useLayoutEffect } from '@/lib/gutenberg/element';
 import {
 	__experimentalConfirmDialog as ConfirmDialog,
 	Button,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of the new Menu, pending WordPress/gutenberg#76135.
-import { Button as UIButton, Menu } from '@wordpress/ui';
-import { __, _x, sprintf } from '@wordpress/i18n';
-import { moreVertical, published } from '@wordpress/icons';
+import { Button as UIButton, Menu } from '@/components/gutenberg/design-system';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
+import { moreVertical, published } from '@/components/gutenberg/icons';
 import { NoteCard } from './note-card';
 import { NoteForm } from './note-form';
 import { NoteReactions } from './reactions/note-reactions';

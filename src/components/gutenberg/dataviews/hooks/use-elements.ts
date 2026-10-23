@@ -1,4 +1,4 @@
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState } from '@/lib/gutenberg/element';
 import type { Option } from '../types';
 
 const EMPTY_ARRAY: Option[] = [];

@@ -1,6 +1,6 @@
-import { createRegistrySelector } from '@wordpress/data';
-import deprecated from '@wordpress/deprecated';
-import { store as preferencesStore } from '@wordpress/preferences';
+import { createRegistrySelector } from '@/stores/gutenberg/data';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import {
 	normalizeComplementaryAreaScope,
 	normalizeComplementaryAreaName,

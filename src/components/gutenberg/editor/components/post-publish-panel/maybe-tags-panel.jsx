@@ -1,8 +1,8 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { PanelBody } from '@wordpress/components';
-import { store as coreStore } from '@wordpress/core-data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useState } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { PanelBody } from '@/components/gutenberg/ui';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import FlatTermSelector from '../post-taxonomies/flat-term-selector';
 import { store as editorStore } from '../../store';
 

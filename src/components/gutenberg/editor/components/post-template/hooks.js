@@ -1,7 +1,7 @@
-import { useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
-import { useEntityProp, store as coreStore } from '@wordpress/core-data';
-import { __, sprintf } from '@wordpress/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
+import { useEntityProp, store as coreStore } from '@/stores/gutenberg/core-data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import { store as editorStore } from '../../store';
 
 export function useEditedPostContext() {

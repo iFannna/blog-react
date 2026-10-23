@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect } from '@wordpress/element';
+import { useRef, useLayoutEffect } from '@/lib/gutenberg/element';
 import type { RefObject, RefCallback } from 'react';
 import useRefEffect from '../use-ref-effect';
 

@@ -1,9 +1,9 @@
-import { __, _x } from '@wordpress/i18n';
-import apiFetch from '@wordpress/api-fetch';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { downloadBlob } from '@wordpress/blob';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as noticesStore } from '@wordpress/notices';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { downloadBlob } from '@/utils/gutenberg/blob';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import { store as editorStore } from '../../store';
 import {
 	TEMPLATE_POST_TYPE,

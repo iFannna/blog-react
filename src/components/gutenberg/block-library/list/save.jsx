@@ -1,4 +1,4 @@
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { InnerBlocks, useBlockProps } from '@/components/gutenberg/block-editor';
 
 export default function save( { attributes } ) {
 	const { ordered, type, reversed, start } = attributes;

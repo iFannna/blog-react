@@ -1,10 +1,10 @@
-import { __ } from '@wordpress/i18n';
-import { useDispatch, useSelect, useRegistry } from '@wordpress/data';
-import { store as coreDataStore } from '@wordpress/core-data';
-import { DataForm } from '@wordpress/dataviews';
-import { Notice, Stack } from '@wordpress/ui';
-import { useMemo } from '@wordpress/element';
-import { useViewConfig } from '@wordpress/views';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useDispatch, useSelect, useRegistry } from '@/stores/gutenberg/data';
+import { store as coreDataStore } from '@/stores/gutenberg/core-data';
+import { DataForm } from '@/components/gutenberg/dataviews';
+import { Notice, Stack } from '@/components/gutenberg/design-system';
+import { useMemo } from '@/lib/gutenberg/element';
+import { useViewConfig } from '@/components/gutenberg/views';
 import PostCardPanel from '../post-card-panel';
 import PluginPostStatusInfo from '../plugin-post-status-info';
 import PostPanelSection from '../post-panel-section';

@@ -1,14 +1,14 @@
-import { __, _n, sprintf } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
-import { useDebounce } from '@wordpress/compose';
+import { __, _n, sprintf } from '@/lib/gutenberg/i18n';
+import { useState } from '@/lib/gutenberg/element';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { useDebounce } from '@/hooks/gutenberg/compose';
 import {
 	// eslint-disable-next-line @wordpress/use-recommended-components -- SearchableSelect is the only searchable single-select in `@wordpress/ui`.
 	SearchableSelect,
 	Spinner,
 	Stack,
 	VisuallyHidden,
-} from '@wordpress/ui';
+} from '@/components/gutenberg/design-system';
 import { store as editorStore } from '../../store';
 import { useAuthorsQuery } from './hook';
 

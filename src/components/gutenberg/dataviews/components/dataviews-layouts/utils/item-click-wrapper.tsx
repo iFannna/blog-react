@@ -1,5 +1,5 @@
 import type { ReactNode, ReactElement, ComponentProps } from 'react';
-import { cloneElement } from '@wordpress/element';
+import { cloneElement } from '@/lib/gutenberg/element';
 
 function getClickableItemProps< Item >( {
 	item,

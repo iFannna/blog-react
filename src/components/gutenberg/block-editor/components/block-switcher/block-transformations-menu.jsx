@@ -1,10 +1,10 @@
-import { __ } from '@wordpress/i18n';
-import { MenuGroup, MenuItem } from '@wordpress/components';
+import { __ } from '@/lib/gutenberg/i18n';
+import { MenuGroup, MenuItem } from '@/components/gutenberg/ui';
 import {
 	getBlockMenuDefaultClassName,
 	switchToBlockType,
-} from '@wordpress/blocks';
-import { useState, useMemo } from '@wordpress/element';
+} from '@/lib/gutenberg/blocks';
+import { useState, useMemo } from '@/lib/gutenberg/element';
 import BlockIcon from '../block-icon';
 import PreviewBlockPopover from './preview-block-popover';
 import BlockVariationTransformations from './block-variation-transformations';

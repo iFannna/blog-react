@@ -1,5 +1,5 @@
-import type { CollaboratorInfo } from '@wordpress/core-data';
-import { __ } from '@wordpress/i18n';
+import type { CollaboratorInfo } from '@/stores/gutenberg/core-data';
+import { __ } from '@/lib/gutenberg/i18n';
 
 /**
  * Return a collaborator name localized for the current viewer.

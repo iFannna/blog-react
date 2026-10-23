@@ -1,4 +1,4 @@
-import { store as coreStore } from '@wordpress/core-data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { resolveFieldsConfig } from '../fields-loader/resolve-fields-config';
 import type { FieldsConfig } from '../fields-loader/resolve-fields-config';
 import { unlock } from '../../lock-unlock';

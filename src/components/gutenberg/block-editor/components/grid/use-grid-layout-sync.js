@@ -1,6 +1,6 @@
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useEffect, useMemo } from '@wordpress/element';
-import { usePrevious } from '@wordpress/compose';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useEffect, useMemo } from '@/lib/gutenberg/element';
+import { usePrevious } from '@/hooks/gutenberg/compose';
 import { store as blockEditorStore } from '../../store';
 import { GridRect } from './utils';
 import { setImmutably } from '../../utils/object';

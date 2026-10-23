@@ -1,5 +1,5 @@
-import { useSelect } from '@wordpress/data';
-import { __, _x } from '@wordpress/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import PostPanelRow from '../post-panel-row';
 import { store as editorStore } from '../../store';
 

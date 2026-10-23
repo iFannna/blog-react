@@ -1,4 +1,4 @@
-import { useSelect } from '@wordpress/data';
+import { useSelect } from '@/stores/gutenberg/data';
 import { VISIBILITY_OPTIONS } from './utils';
 import { store as editorStore } from '../../store';
 

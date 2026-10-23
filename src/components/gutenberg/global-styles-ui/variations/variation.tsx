@@ -1,12 +1,12 @@
 import clsx from 'clsx';
-import { useMemo, useContext, useState } from '@wordpress/element';
-import { ENTER } from '@wordpress/keycodes';
-import { _x, sprintf } from '@wordpress/i18n';
+import { useMemo, useContext, useState } from '@/lib/gutenberg/element';
+import { ENTER } from '@/utils/gutenberg/keycodes';
+import { _x, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	areGlobalStylesEqual,
 	mergeGlobalStyles,
-} from '@wordpress/global-styles-engine';
-import { Tooltip } from '@wordpress/ui';
+} from '@/lib/gutenberg/global-styles-engine';
+import { Tooltip } from '@/components/gutenberg/design-system';
 import { GlobalStylesContext } from '../context';
 import { filterObjectByProperties } from '../utils';
 

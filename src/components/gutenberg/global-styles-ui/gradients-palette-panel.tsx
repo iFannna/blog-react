@@ -1,10 +1,10 @@
-import { useViewportMatch } from '@wordpress/compose';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
 import {
 	__experimentalVStack as VStack,
 	__experimentalPaletteEdit as PaletteEdit,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import type { Gradient } from '@wordpress/global-styles-engine';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import type { Gradient } from '@/lib/gutenberg/global-styles-engine';
 import { useSetting } from './hooks';
 
 const mobilePopoverProps = { placement: 'bottom-start' as const, offset: 8 };

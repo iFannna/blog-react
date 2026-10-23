@@ -1,12 +1,12 @@
-import { store as coreStore } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
-import { useContext, useMemo } from '@wordpress/element';
-import { __experimentalGrid as Grid } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useContext, useMemo } from '@/lib/gutenberg/element';
+import { __experimentalGrid as Grid } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import type {
 	GlobalStylesConfig,
 	StyleVariation,
-} from '@wordpress/global-styles-engine';
+} from '@/lib/gutenberg/global-styles-engine';
 import PreviewStyles from './preview-styles';
 import Variation from './variations/variation';
 import { GlobalStylesContext } from './context';

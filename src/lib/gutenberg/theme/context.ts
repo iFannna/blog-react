@@ -1,4 +1,4 @@
-import { createContext } from '@wordpress/element';
+import { createContext } from '@/lib/gutenberg/element';
 import type { ThemeProviderSettings } from './types.ts';
 
 interface ThemeContextType {

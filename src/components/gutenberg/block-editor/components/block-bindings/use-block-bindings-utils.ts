@@ -1,4 +1,4 @@
-import { useDispatch, useRegistry } from '@wordpress/data';
+import { useDispatch, useRegistry } from '@/stores/gutenberg/data';
 import { store as blockEditorStore } from '../../store';
 import { useBlockEditContext } from '../block-edit';
 import type { Binding } from '../../utils/block-bindings';
@@ -32,7 +32,7 @@ function isObjectEmpty( object: object | null | undefined ): boolean {
  *
  * @example
  * ```js
- * import { useBlockBindingsUtils } from '@wordpress/block-editor'
+ * import { useBlockBindingsUtils } from '@/components/gutenberg/block-editor'
  * const { updateBlockBindings, removeAllBlockBindings } = useBlockBindingsUtils();
  *
  * // Update url and alt attributes.
@@ -76,7 +76,7 @@ export default function useBlockBindingsUtils(
 	 *
 	 * @example
 	 * ```js
-	 * import { useBlockBindingsUtils } from '@wordpress/block-editor'
+	 * import { useBlockBindingsUtils } from '@/components/gutenberg/block-editor'
 	 *
 	 * const { updateBlockBindings } = useBlockBindingsUtils();
 	 * updateBlockBindings( {
@@ -135,7 +135,7 @@ export default function useBlockBindingsUtils(
 	 *
 	 * @example
 	 * ```js
-	 * import { useBlockBindingsUtils } from '@wordpress/block-editor'
+	 * import { useBlockBindingsUtils } from '@/components/gutenberg/block-editor'
 	 *
 	 * const { removeAllBlockBindings } = useBlockBindingsUtils();
 	 * removeAllBlockBindings();

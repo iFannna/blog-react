@@ -1,11 +1,11 @@
-import { renderToString } from '@wordpress/element';
-import { Button, Path, SVG } from '@wordpress/components';
-import { __, _x } from '@wordpress/i18n';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { applyFilters } from '@wordpress/hooks';
-import { store as coreStore } from '@wordpress/core-data';
+import { renderToString } from '@/lib/gutenberg/element';
+import { Button, Path, SVG } from '@/components/gutenberg/ui';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { applyFilters } from '@/hooks/gutenberg/hooks';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 // eslint-disable-next-line @wordpress/use-recommended-components
-import { Menu, VisuallyHidden } from '@wordpress/ui';
+import { Menu, VisuallyHidden } from '@/components/gutenberg/design-system';
 import { store as editorStore } from '../../store';
 
 function buildInterstitialMarkup() {

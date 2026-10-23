@@ -1,16 +1,16 @@
-import { addFilter } from '@wordpress/hooks';
-import { privateApis as patternsPrivateApis } from '@wordpress/patterns';
-import { createHigherOrderComponent } from '@wordpress/compose';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import { privateApis as patternsPrivateApis } from '@/components/gutenberg/patterns';
+import { createHigherOrderComponent } from '@/hooks/gutenberg/compose';
 import {
 	store as blockEditorStore,
 	useBlockEditingMode,
-} from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { getBlockBindingsSource } from '@wordpress/blocks';
+} from '@/components/gutenberg/block-editor';
+import { useSelect } from '@/stores/gutenberg/data';
+import { getBlockBindingsSource } from '@/lib/gutenberg/blocks';
 import { store as editorStore } from '../store';
 import { unlock } from '../lock-unlock';
 
-/** @typedef {import('@wordpress/blocks').WPBlockSettings} WPBlockSettings */
+/** @typedef {import('@/lib/gutenberg/blocks').WPBlockSettings} WPBlockSettings */
 
 const {
 	PatternOverridesControls,

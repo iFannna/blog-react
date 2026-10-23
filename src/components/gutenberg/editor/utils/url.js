@@ -1,5 +1,5 @@
-import { cleanForSlug as urlCleanForSlug } from '@wordpress/url';
-import deprecated from '@wordpress/deprecated';
+import { cleanForSlug as urlCleanForSlug } from '@/utils/gutenberg/url';
+import deprecated from '@/utils/gutenberg/deprecated';
 
 /**
  * Performs some basic cleanup of a string for use as a post slug

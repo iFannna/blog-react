@@ -1,10 +1,10 @@
-import { useBlockProps } from '@wordpress/block-editor';
-import { useState, useEffect } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import apiFetch from '@wordpress/api-fetch';
-import { addQueryArgs } from '@wordpress/url';
-import { __, sprintf, _n } from '@wordpress/i18n';
-import { store as coreStore } from '@wordpress/core-data';
+import { useBlockProps } from '@/components/gutenberg/block-editor';
+import { useState, useEffect } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { addQueryArgs } from '@/utils/gutenberg/url';
+import { __, sprintf, _n } from '@/lib/gutenberg/i18n';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 
 function PostCommentsLinkEdit( { context } ) {
 	const { postType, postId } = context;

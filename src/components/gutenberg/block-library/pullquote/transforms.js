@@ -1,5 +1,5 @@
-import { createBlock } from '@wordpress/blocks';
-import { create, join, toHTMLString } from '@wordpress/rich-text';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { create, join, toHTMLString } from '@/components/gutenberg/rich-text';
 
 const transforms = {
 	from: [

@@ -1,7 +1,7 @@
-import { useRefEffect } from '@wordpress/compose';
-import { TAB } from '@wordpress/keycodes';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { useSelect, useRegistry } from '@wordpress/data';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { TAB } from '@/utils/gutenberg/keycodes';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { useSelect, useRegistry } from '@/stores/gutenberg/data';
 import { indentListItems, outdentListItems } from '../utils';
 
 export default function useMultiSelectTab( clientId ) {

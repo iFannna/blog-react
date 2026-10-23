@@ -1,7 +1,7 @@
-import { useContext, useEffect, useRef } from '@wordpress/element';
-import { useRegistry } from '@wordpress/data';
-import { cloneBlock } from '@wordpress/blocks';
-import type { Block } from '@wordpress/blocks';
+import { useContext, useEffect, useRef } from '@/lib/gutenberg/element';
+import { useRegistry } from '@/stores/gutenberg/data';
+import { cloneBlock } from '@/lib/gutenberg/blocks';
+import type { Block } from '@/lib/gutenberg/blocks';
 import { store as blockEditorStore } from '../../store';
 import { SelectionContext } from './selection-context';
 import type { BlockSelection } from '../../store/types';

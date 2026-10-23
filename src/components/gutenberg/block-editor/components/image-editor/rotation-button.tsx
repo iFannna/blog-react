@@ -1,6 +1,6 @@
-import { ToolbarButton } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { rotateRight as rotateRightIcon } from '@wordpress/icons';
+import { ToolbarButton } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { rotateRight as rotateRightIcon } from '@/components/gutenberg/icons';
 import { useImageEditingContext } from './context';
 
 export default function RotationButton() {

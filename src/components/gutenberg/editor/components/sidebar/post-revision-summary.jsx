@@ -1,10 +1,10 @@
-import { useSelect } from '@wordpress/data';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	ExternalLink,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { addQueryArgs } from '@wordpress/url';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { addQueryArgs } from '@/utils/gutenberg/url';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 import PostRevisionsTimeline from '../post-revisions-timeline';

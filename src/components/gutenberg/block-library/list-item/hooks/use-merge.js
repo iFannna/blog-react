@@ -1,6 +1,6 @@
-import { useRegistry } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { isUnmodifiedBlock, switchToBlockType } from '@wordpress/blocks';
+import { useRegistry } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { isUnmodifiedBlock, switchToBlockType } from '@/lib/gutenberg/blocks';
 import { outdentListItems, getOutdentTarget } from '../utils';
 
 export default function useMerge( clientId, onMerge ) {

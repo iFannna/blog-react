@@ -6,18 +6,18 @@ import {
 	useSettings,
 	RecursionProvider,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { useEffect, useRef, useMemo, useState } from '@wordpress/element';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { parse } from '@wordpress/blocks';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { __experimentalUseSlotFills as useSlotFills } from '@wordpress/components';
+} from '@/components/gutenberg/block-editor';
+import { useEffect, useRef, useMemo, useState } from '@/lib/gutenberg/element';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { parse } from '@/lib/gutenberg/blocks';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { __experimentalUseSlotFills as useSlotFills } from '@/components/gutenberg/ui';
 import {
 	useMergeRefs,
 	useResizeObserver,
 	useViewportMatch,
-} from '@wordpress/compose';
+} from '@/hooks/gutenberg/compose';
 import PostTitle from '../post-title';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';

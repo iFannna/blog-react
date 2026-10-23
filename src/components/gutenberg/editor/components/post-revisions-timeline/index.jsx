@@ -1,10 +1,10 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { DataViewsPicker, filterSortAndPaginate } from '@wordpress/dataviews';
-import { dateI18n, getDate, humanTimeDiff, getSettings } from '@wordpress/date';
-import { useCallback, useEffect, useMemo, useState } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import { Badge, Stack, Text } from '@wordpress/ui';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { DataViewsPicker, filterSortAndPaginate } from '@/components/gutenberg/dataviews';
+import { dateI18n, getDate, humanTimeDiff, getSettings } from '@/lib/gutenberg/date';
+import { useCallback, useEffect, useMemo, useState } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { Badge, Stack, Text } from '@/components/gutenberg/design-system';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 import { PostContentInformationUI } from '../post-content-information';

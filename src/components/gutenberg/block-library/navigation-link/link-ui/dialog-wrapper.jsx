@@ -1,8 +1,8 @@
-import { Button } from '@wordpress/components';
-import { __, isRTL } from '@wordpress/i18n';
-import { chevronLeftSmall, chevronRightSmall } from '@wordpress/icons';
-import { useInstanceId, useFocusOnMount } from '@wordpress/compose';
-import { VisuallyHidden } from '@wordpress/ui';
+import { Button } from '@/components/gutenberg/ui';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
+import { chevronLeftSmall, chevronRightSmall } from '@/components/gutenberg/icons';
+import { useInstanceId, useFocusOnMount } from '@/hooks/gutenberg/compose';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
 
 /**
  * Shared BackButton component for consistent navigation across LinkUI sub-components.

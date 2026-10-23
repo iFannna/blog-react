@@ -1,8 +1,8 @@
 import { dequal } from 'dequal';
-import { useCallback, useMemo } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
-import type { View } from '@wordpress/dataviews';
-import { store as preferencesStore } from '@wordpress/preferences';
+import { useCallback, useMemo } from '@/lib/gutenberg/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import type { View } from '@/components/gutenberg/dataviews';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import { generatePreferenceKey } from './preference-keys';
 import {
 	getApplicablePersistedView,

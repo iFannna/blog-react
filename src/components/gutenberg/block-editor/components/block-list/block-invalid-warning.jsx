@@ -1,8 +1,8 @@
-import { __, _x } from '@wordpress/i18n';
-import { Button, Modal } from '@wordpress/components';
-import { useState, useCallback, useMemo } from '@wordpress/element';
-import { createBlock, rawHandler } from '@wordpress/blocks';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { Button, Modal } from '@/components/gutenberg/ui';
+import { useState, useCallback, useMemo } from '@/lib/gutenberg/element';
+import { createBlock, rawHandler } from '@/lib/gutenberg/blocks';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import Warning from '../warning';
 import BlockCompare from '../block-compare';
 import { store as blockEditorStore } from '../../store';

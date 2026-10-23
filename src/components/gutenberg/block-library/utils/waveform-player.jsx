@@ -1,6 +1,6 @@
-import { useEffect, useRef } from '@wordpress/element';
-import { useEvent, useRefEffect } from '@wordpress/compose';
-import { __, _x } from '@wordpress/i18n';
+import { useEffect, useRef } from '@/lib/gutenberg/element';
+import { useEvent, useRefEffect } from '@/hooks/gutenberg/compose';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import {
 	applyWaveformPlayerStyles,
 	initWaveformPlayer,

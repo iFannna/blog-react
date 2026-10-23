@@ -1,8 +1,8 @@
-import { __experimentalToolsPanel as ToolsPanel } from '@wordpress/components';
-import { Notice } from '@wordpress/ui';
-import { useCallback } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { VALID_BACKGROUND_CLIP_VALUES } from '@wordpress/style-engine';
+import { __experimentalToolsPanel as ToolsPanel } from '@/components/gutenberg/ui';
+import { Notice } from '@/components/gutenberg/design-system';
+import { useCallback } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { VALID_BACKGROUND_CLIP_VALUES } from '@/lib/gutenberg/style-engine';
 import BackgroundClipControl from '../background-clip-control';
 import BackgroundImageControl from '../background-image-control';
 import ColorGradientDropdownItem from './color-gradient-dropdown-item';

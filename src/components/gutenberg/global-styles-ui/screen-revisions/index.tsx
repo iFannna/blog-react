@@ -1,11 +1,11 @@
-import { __, sprintf } from '@wordpress/i18n';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	__experimentalConfirmDialog as ConfirmDialog,
 	useNavigator,
-} from '@wordpress/components';
-import { useCallback, useContext, useMemo, useState } from '@wordpress/element';
-import { areGlobalStylesEqual } from '@wordpress/global-styles-engine';
-import type { ActionButton, View } from '@wordpress/dataviews';
+} from '@/components/gutenberg/ui';
+import { useCallback, useContext, useMemo, useState } from '@/lib/gutenberg/element';
+import { areGlobalStylesEqual } from '@/lib/gutenberg/global-styles-engine';
+import type { ActionButton, View } from '@/components/gutenberg/dataviews';
 import { ScreenHeader } from '../screen-header';
 import { GlobalStylesContext } from '../context';
 import useGlobalStylesRevisions from './use-global-styles-revisions';

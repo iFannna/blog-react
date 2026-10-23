@@ -1,11 +1,11 @@
-import { useState } from '@wordpress/element';
+import { useState } from '@/lib/gutenberg/element';
 import {
 	__experimentalConfirmDialog as ConfirmDialog,
 	TextControl,
 	Notice,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { Stack } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Stack } from '@/components/gutenberg/design-system';
 import { isValidVideoEmbedUrl } from '../embed-video-utils';
 
 export default function EmbedVideoUrlInput( {

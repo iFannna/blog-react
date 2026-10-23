@@ -2,18 +2,18 @@ import {
 	__experimentalItemGroup as ItemGroup,
 	Button,
 	FlexItem,
-} from '@wordpress/components';
-import { isRTL } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { isRTL } from '@/lib/gutenberg/i18n';
 import {
 	plus,
 	Icon,
 	chevronLeft,
 	chevronRight,
 	moreVertical,
-} from '@wordpress/icons';
-import { useState } from '@wordpress/element';
+} from '@/components/gutenberg/icons';
+import { useState } from '@/lib/gutenberg/element';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of the new Menu, pending WordPress/gutenberg#76135.
-import { Menu, Stack } from '@wordpress/ui';
+import { Menu, Stack } from '@/components/gutenberg/design-system';
 import { Subtitle } from '../subtitle';
 import { NavigationButtonAsItem } from '../navigation-button';
 import ConfirmResetDialog from './dialogs/confirm-reset-dialog';

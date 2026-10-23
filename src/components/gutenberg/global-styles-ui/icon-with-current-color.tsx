@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Icon } from '@wordpress/icons';
+import { Icon } from '@/components/gutenberg/icons';
 
 interface IconWithCurrentColorProps {
 	icon: any;

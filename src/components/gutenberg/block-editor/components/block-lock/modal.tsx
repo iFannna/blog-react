@@ -1,5 +1,5 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { useEffect, useState } from '@wordpress/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useEffect, useState } from '@/lib/gutenberg/element';
 import {
 	Button,
 	CheckboxControl as WCCheckboxControl,
@@ -8,10 +8,10 @@ import {
 	Icon as WCIcon,
 	Modal,
 	ToggleControl,
-} from '@wordpress/components';
-import { lock as lockIcon, unlock as unlockIcon } from '@wordpress/icons';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { getBlockType } from '@wordpress/blocks';
+} from '@/components/gutenberg/ui';
+import { lock as lockIcon, unlock as unlockIcon } from '@/components/gutenberg/icons';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { getBlockType } from '@/lib/gutenberg/blocks';
 import useBlockLock from './use-block-lock';
 import useBlockDisplayInformation from '../use-block-display-information';
 import { store as blockEditorStore } from '../../store';

@@ -8,7 +8,7 @@
  * @example
  * Main thread usage:
  * ```typescript
- * import { wrap, terminate } from '@wordpress/worker-threads';
+ * import { wrap, terminate } from '@/utils/gutenberg/worker-threads';
  * import type { WorkerAPI } from './worker';
  *
  * const worker = new Worker(new URL('./worker.js', import.meta.url));
@@ -21,7 +21,7 @@
  *
  * Worker thread usage:
  * ```typescript
- * import { expose } from '@wordpress/worker-threads';
+ * import { expose } from '@/utils/gutenberg/worker-threads';
  *
  * const api = {
  *   async processData(data: ArrayBuffer): Promise<ArrayBuffer> {

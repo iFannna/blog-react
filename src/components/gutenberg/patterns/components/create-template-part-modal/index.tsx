@@ -6,13 +6,13 @@ import {
 	Modal,
 	__experimentalHStack as HStack,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { useInstanceId } from '@wordpress/compose';
-import type { TemplatePartArea } from '@wordpress/core-data';
-import { store as coreStore } from '@wordpress/core-data';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import type { TemplatePartArea } from '@/stores/gutenberg/core-data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useState } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	check,
 	footer as footerIcon,
@@ -20,9 +20,9 @@ import {
 	sidebar as sidebarIcon,
 	navigationOverlay as navigationOverlayIcon,
 	symbolFilled as symbolFilledIcon,
-} from '@wordpress/icons';
-import { store as noticesStore } from '@wordpress/notices';
-import { serialize } from '@wordpress/blocks';
+} from '@/components/gutenberg/icons';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { serialize } from '@/lib/gutenberg/blocks';
 import {
 	getCleanTemplatePartSlug,
 	getUniqueTemplatePartTitle,

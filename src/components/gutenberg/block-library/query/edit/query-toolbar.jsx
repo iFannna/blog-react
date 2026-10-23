@@ -2,13 +2,13 @@ import {
 	ToolbarButton,
 	Dropdown,
 	__experimentalDropdownContentWrapper as DropdownContentWrapper,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	BlockControls,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import PatternSelection, { useBlockPatterns } from './pattern-selection';
 import { unlock } from '../../lock-unlock';
 

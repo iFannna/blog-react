@@ -4,11 +4,11 @@ import {
 	ColorIndicator,
 	Dropdown,
 	Button,
-} from '@wordpress/components';
-import { useRef } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { reset as resetIcon, caution as cautionIcon } from '@wordpress/icons';
-import { Stack, Tabs } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { useRef } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { reset as resetIcon, caution as cautionIcon } from '@/components/gutenberg/icons';
+import { Stack, Tabs } from '@/components/gutenberg/design-system';
 import ColorGradientControl from '../colors-gradients/control';
 import {
 	getInheritanceProps,

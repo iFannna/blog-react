@@ -1,7 +1,7 @@
-import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { store as editorStore } from '@wordpress/editor';
-import { privateApis as preferencesPrivateApis } from '@wordpress/preferences';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as editorStore } from '@/components/gutenberg/editor';
+import { privateApis as preferencesPrivateApis } from '@/stores/gutenberg/preferences';
 import EnableCustomFieldsOption from './enable-custom-fields';
 import EnablePanelOption from './enable-panel';
 import { store as editPostStore } from '../../store';

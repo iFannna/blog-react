@@ -1,7 +1,7 @@
 import { subDays, subWeeks, subMonths, subYears } from 'date-fns';
-import { __, sprintf } from '@wordpress/i18n';
-import { createInterpolateElement } from '@wordpress/element';
-import { getDate } from '@wordpress/date';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { createInterpolateElement } from '@/lib/gutenberg/element';
+import { getDate } from '@/lib/gutenberg/date';
 import type { ReactElement } from 'react';
 import type {
 	FilterOperator,

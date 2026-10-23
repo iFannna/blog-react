@@ -1,5 +1,5 @@
-import deprecated from '@wordpress/deprecated';
-import warning from '@wordpress/warning';
+import deprecated from '@/utils/gutenberg/deprecated';
+import warning from '@/utils/gutenberg/warning';
 import { store as coreStore } from '../';
 import { Status } from './constants';
 import useQuerySelect from './use-query-select';
@@ -59,7 +59,7 @@ function useResourcePermissions< IdType = void >(
  *
  * @example
  * ```js
- * import { useResourcePermissions } from '@wordpress/core-data';
+ * import { useResourcePermissions } from '@/stores/gutenberg/core-data';
  *
  * function PagesList() {
  *   const { canCreate, isResolving } = useResourcePermissions( { kind: 'postType', name: 'page' } );
@@ -82,7 +82,7 @@ function useResourcePermissions< IdType = void >(
  *
  * @example
  * ```js
- * import { useResourcePermissions } from '@wordpress/core-data';
+ * import { useResourcePermissions } from '@/stores/gutenberg/core-data';
  *
  * function Page({ pageId }) {
  *   const {

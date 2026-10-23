@@ -1,5 +1,5 @@
-import { select } from '@wordpress/data';
-import { store as blocksStore } from '@wordpress/blocks';
+import { select } from '@/stores/gutenberg/data';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
 
 /**
  * Shared cache of blocks parsed from an entity's `content` string. Populated

@@ -1,5 +1,5 @@
 import type { ElementType, ReactNode, RefObject } from 'react';
-import type { createSlotFill } from '@wordpress/components';
+import type { createSlotFill } from '@/components/gutenberg/ui';
 import type { ResetAllContext, ResetAllFilter } from '../../hooks/types';
 
 /**

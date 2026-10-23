@@ -1,8 +1,8 @@
-import { useMemo } from '@wordpress/element';
+import { useMemo } from '@/lib/gutenberg/element';
 import {
 	getStyle,
 	getValueFromVariable,
-} from '@wordpress/global-styles-engine';
+} from '@/lib/gutenberg/global-styles-engine';
 import { getStyleLabel } from './style-labels';
 import {
 	formatStyleValue,

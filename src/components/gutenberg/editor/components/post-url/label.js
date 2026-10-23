@@ -1,5 +1,5 @@
-import { useSelect } from '@wordpress/data';
-import { filterURLForDisplay, safeDecodeURIComponent } from '@wordpress/url';
+import { useSelect } from '@/stores/gutenberg/data';
+import { filterURLForDisplay, safeDecodeURIComponent } from '@/utils/gutenberg/url';
 import { store as editorStore } from '../../store';
 
 /**

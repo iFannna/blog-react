@@ -1,5 +1,5 @@
-import { createSlotFill, PanelBody } from '@wordpress/components';
-import { usePluginContext } from '@wordpress/plugins';
+import { createSlotFill, PanelBody } from '@/components/gutenberg/ui';
+import { usePluginContext } from '@/lib/gutenberg/plugins';
 
 const { Fill, Slot } = createSlotFill( 'PluginPrePublishPanel' );
 
@@ -20,8 +20,8 @@ const { Fill, Slot } = createSlotFill( 'PluginPrePublishPanel' );
  * @example
  * ```jsx
  * // Using ESNext syntax
- * import { __ } from '@wordpress/i18n';
- * import { PluginPrePublishPanel } from '@wordpress/editor';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { PluginPrePublishPanel } from '@/components/gutenberg/editor';
  *
  * const MyPluginPrePublishPanel = () => (
  * 	<PluginPrePublishPanel

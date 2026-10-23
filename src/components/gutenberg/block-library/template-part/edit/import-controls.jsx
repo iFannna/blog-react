@@ -1,6 +1,6 @@
-import { __, _x, sprintf } from '@wordpress/i18n';
-import { useMemo, useState } from '@wordpress/element';
-import { useDispatch, useSelect, useRegistry } from '@wordpress/data';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
+import { useMemo, useState } from '@/lib/gutenberg/element';
+import { useDispatch, useSelect, useRegistry } from '@/stores/gutenberg/data';
 import {
 	Button,
 	FlexBlock,
@@ -8,9 +8,9 @@ import {
 	SelectControl as WCSelectControl,
 	__experimentalHStack as HStack,
 	__experimentalSpacer as Spacer,
-} from '@wordpress/components';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as noticesStore } from '@wordpress/notices';
+} from '@/components/gutenberg/ui';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import { useCreateTemplatePartFromBlocks } from './utils/hooks';
 import { transformWidgetToBlock } from './utils/transformers';
 

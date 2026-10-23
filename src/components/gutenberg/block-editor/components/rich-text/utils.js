@@ -1,4 +1,4 @@
-import { RichTextData, create } from '@wordpress/rich-text';
+import { RichTextData, create } from '@/components/gutenberg/rich-text';
 
 export function addActiveFormats( value, activeFormats ) {
 	if ( activeFormats?.length ) {
@@ -49,7 +49,7 @@ getAllowedFormats.EMPTY_ARRAY = [];
  *
  * @param {unknown} value Attribute value.
  *
- * @return {import('@wordpress/rich-text').RichTextValue} Rich text value
+ * @return {import('@/components/gutenberg/rich-text').RichTextValue} Rich text value
  *                                                       without a selection.
  */
 export function toRecord( value ) {

@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react';
-import type { Dropdown } from '@wordpress/components';
+import type { Dropdown } from '@/components/gutenberg/ui';
 
 /**
  * A justification of the items in a block.

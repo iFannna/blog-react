@@ -4,8 +4,8 @@ import {
 	InspectorControls,
 	store as blockEditorStore,
 	useBlockProps,
-} from '@wordpress/block-editor';
-import { createBlock } from '@wordpress/blocks';
+} from '@/components/gutenberg/block-editor';
+import { createBlock } from '@/lib/gutenberg/blocks';
 import {
 	Placeholder,
 	ToggleControl,
@@ -15,19 +15,19 @@ import {
 	__experimentalConfirmDialog as ConfirmDialog,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useState } from '@wordpress/element';
-import { __, isRTL } from '@wordpress/i18n';
-import { useInstanceId } from '@wordpress/compose';
-import { store as noticeStore } from '@wordpress/notices';
+} from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useState } from '@/lib/gutenberg/element';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { store as noticeStore } from '@/stores/gutenberg/notices';
 import {
 	tableOfContents as icon,
 	formatListBullets,
 	formatListBulletsRTL,
 	formatListNumbered,
 	formatListNumberedRTL,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import TableOfContentsList from './list';
 import { createListItemBlocks, linearToNestedHeadingList } from './utils';
 import { useHeadings } from './hooks';

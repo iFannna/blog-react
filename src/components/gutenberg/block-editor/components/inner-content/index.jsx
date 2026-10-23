@@ -4,9 +4,9 @@ import {
 	useMemo,
 	useRef,
 	useState,
-} from '@wordpress/element';
-import { AsyncModeProvider, useSelect } from '@wordpress/data';
-import { safeHTML } from '@wordpress/dom';
+} from '@/lib/gutenberg/element';
+import { AsyncModeProvider, useSelect } from '@/stores/gutenberg/data';
+import { safeHTML } from '@/utils/gutenberg/dom';
 import { store as blockEditorStore } from '../../store';
 import BlockListBlock from '../block-list/block';
 import { LayoutProvider } from '../block-list/layout';

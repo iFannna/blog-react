@@ -1,5 +1,5 @@
-import deprecated from '@wordpress/deprecated';
-import { SnackbarNotices } from '@wordpress/notices';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { SnackbarNotices } from '@/stores/gutenberg/notices';
 
 /**
  * @deprecated since 7.0, use `wp.notices.SnackbarNotices` instead.

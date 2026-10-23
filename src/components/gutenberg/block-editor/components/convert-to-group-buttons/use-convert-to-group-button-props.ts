@@ -1,6 +1,6 @@
-import { store as blocksStore } from '@wordpress/blocks';
-import { useSelect } from '@wordpress/data';
-import type { Block } from '@wordpress/blocks';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
+import { useSelect } from '@/stores/gutenberg/data';
+import type { Block } from '@/lib/gutenberg/blocks';
 import { store as blockEditorStore } from '../../store';
 import type { ConvertToGroupButtonProps } from './types';
 

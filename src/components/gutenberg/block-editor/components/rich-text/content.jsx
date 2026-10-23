@@ -1,6 +1,6 @@
-import { RawHTML } from '@wordpress/element';
-import { children as childrenSource } from '@wordpress/blocks';
-import deprecated from '@wordpress/deprecated';
+import { RawHTML } from '@/lib/gutenberg/element';
+import { children as childrenSource } from '@/lib/gutenberg/blocks';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { getMultilineTag, isEmpty } from './utils';
 
 export function valueToHTMLString( value, multiline ) {

@@ -16,17 +16,17 @@ import {
 	Spinner as WCSpinner,
 	__experimentalDropdownContentWrapper as DropdownContentWrapper,
 	Button,
-} from '@wordpress/components';
-import { VisuallyHidden } from '@wordpress/ui';
-import { reset as resetIcon } from '@wordpress/icons';
-import { __, _x, sprintf } from '@wordpress/i18n';
-import { store as noticesStore } from '@wordpress/notices';
-import { getFilename } from '@wordpress/url';
-import { useRef, useState, useEffect, useMemo } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { focus } from '@wordpress/dom';
-import { isBlobURL } from '@wordpress/blob';
-import { getResolvedValue } from '@wordpress/global-styles-engine';
+} from '@/components/gutenberg/ui';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
+import { reset as resetIcon } from '@/components/gutenberg/icons';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { getFilename } from '@/utils/gutenberg/url';
+import { useRef, useState, useEffect, useMemo } from '@/lib/gutenberg/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { focus } from '@/utils/gutenberg/dom';
+import { isBlobURL } from '@/utils/gutenberg/blob';
+import { getResolvedValue } from '@/lib/gutenberg/global-styles-engine';
 import { hasBackgroundImageValue } from '../global-styles/background-panel';
 import {
 	InheritanceResetButton,

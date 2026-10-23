@@ -1,5 +1,5 @@
-import { getActiveFormat, getActiveObject } from '@wordpress/rich-text';
-import { useContext, useMemo } from '@wordpress/element';
+import { getActiveFormat, getActiveObject } from '@/components/gutenberg/rich-text';
+import { useContext, useMemo } from '@/lib/gutenberg/element';
 import BlockContext from '../block-context';
 
 const DEFAULT_BLOCK_CONTEXT = {};

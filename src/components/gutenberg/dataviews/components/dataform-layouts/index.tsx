@@ -1,4 +1,4 @@
-import { Stack } from '@wordpress/ui';
+import { Stack } from '@/components/gutenberg/design-system';
 import type { NormalizedLayout, NormalizedRowLayout } from '../../types';
 import FormRegularField from './regular';
 import FormPanelField from './panel';

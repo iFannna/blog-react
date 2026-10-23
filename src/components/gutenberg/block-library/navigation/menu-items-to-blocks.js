@@ -1,5 +1,5 @@
-import { createBlock, parse } from '@wordpress/blocks';
-import { applyFilters } from '@wordpress/hooks';
+import { createBlock, parse } from '@/lib/gutenberg/blocks';
+import { applyFilters } from '@/hooks/gutenberg/hooks';
 import { buildNavigationLinkEntityBinding } from '../navigation-link/shared/use-entity-binding';
 
 /**

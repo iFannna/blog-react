@@ -1,4 +1,4 @@
-import { tableOfContents as icon } from '@wordpress/icons';
+import { tableOfContents as icon } from '@/components/gutenberg/icons';
 import initBlock from '../utils/init-block';
 import deprecated from './deprecated';
 import metadata from './block.json';

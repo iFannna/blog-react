@@ -7,11 +7,11 @@ import {
 	useMemo,
 	useRef,
 	useLayoutEffect,
-} from '@wordpress/element';
-import { SearchControl, Popover } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useDebouncedInput, useViewportMatch } from '@wordpress/compose';
-import { useDispatch, useSelect } from '@wordpress/data';
+} from '@/lib/gutenberg/element';
+import { SearchControl, Popover } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useDebouncedInput, useViewportMatch } from '@/hooks/gutenberg/compose';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import InserterPreviewPanel from './preview-panel';
 import BlockTypesTab from './block-types-tab';
 import BlockPatternsTab from './block-patterns-tab';

@@ -1,8 +1,8 @@
-import { useMemo } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { store as blocksStore } from '@wordpress/blocks';
-import { _x } from '@wordpress/i18n';
-import { getValueFromVariable } from '@wordpress/global-styles-engine';
+import { useMemo } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
+import { _x } from '@/lib/gutenberg/i18n';
+import { getValueFromVariable } from '@/lib/gutenberg/global-styles-engine';
 import { unlock } from '../../lock-unlock';
 import type { StyleSettings } from './types';
 

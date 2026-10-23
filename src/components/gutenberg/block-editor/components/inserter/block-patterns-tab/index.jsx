@@ -1,7 +1,7 @@
-import { useState } from '@wordpress/element';
-import { useViewportMatch } from '@wordpress/compose';
-import { Button } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+import { useState } from '@/lib/gutenberg/element';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
+import { Button } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import PatternsExplorerModal from '../block-patterns-explorer';
 import MobileTabNavigation from '../mobile-tab-navigation';
 import { PatternCategoryPreviews } from './pattern-category-previews';

@@ -2,11 +2,11 @@ import {
 	privateApis as blockEditorPrivateApis,
 	InspectorControls,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { PanelBody, Spinner as WCSpinner } from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { __, sprintf } from '@wordpress/i18n';
-import { useContext } from '@wordpress/element';
+} from '@/components/gutenberg/block-editor';
+import { PanelBody, Spinner as WCSpinner } from '@/components/gutenberg/ui';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useContext } from '@/lib/gutenberg/element';
 import NavigationMenuSelector from './navigation-menu-selector';
 import { unlock } from '../../lock-unlock';
 import DeletedNavigationWarning from './deleted-navigation-warning';

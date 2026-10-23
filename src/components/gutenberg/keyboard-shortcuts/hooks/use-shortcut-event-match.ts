@@ -1,6 +1,6 @@
-import { useSelect } from '@wordpress/data';
-import { useCallback } from '@wordpress/element';
-import { isKeyboardEvent } from '@wordpress/keycodes';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useCallback } from '@/lib/gutenberg/element';
+import { isKeyboardEvent } from '@/utils/gutenberg/keycodes';
 import { store as keyboardShortcutsStore } from '../store';
 
 /**

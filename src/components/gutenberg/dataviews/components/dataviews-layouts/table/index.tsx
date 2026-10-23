@@ -1,16 +1,16 @@
 import clsx from 'clsx';
 import type { ComponentProps, CSSProperties, ReactElement } from 'react';
-import { __, sprintf, isRTL } from '@wordpress/i18n';
-import { Spinner as WCSpinner, Popover } from '@wordpress/components';
+import { __, sprintf, isRTL } from '@/lib/gutenberg/i18n';
+import { Spinner as WCSpinner, Popover } from '@/components/gutenberg/ui';
 import {
 	useContext,
 	useEffect,
 	useId,
 	useRef,
 	useState,
-} from '@wordpress/element';
-import { isAppleOS } from '@wordpress/keycodes';
-import { inertValue } from '@wordpress/react-inert-value';
+} from '@/lib/gutenberg/element';
+import { isAppleOS } from '@/utils/gutenberg/keycodes';
+import { inertValue } from '@/hooks/gutenberg/react-inert-value';
 import DataViewsContext from '../../dataviews-context';
 import DataViewsSelectionCheckbox from '../../dataviews-selection-checkbox';
 import ItemActions from '../../dataviews-item-actions';

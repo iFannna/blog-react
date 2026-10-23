@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	__experimentalVStack as VStack,
 	__experimentalHeading as Heading,
@@ -8,11 +8,11 @@ import {
 	FlexItem,
 	Dropdown,
 	Composite,
-} from '@wordpress/components';
-import { useMemo, useRef } from '@wordpress/element';
-import { shadow as shadowIcon, Icon, check, reset } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { useMemo, useRef } from '@/lib/gutenberg/element';
+import { shadow as shadowIcon, Icon, check, reset } from '@/components/gutenberg/icons';
 import clsx from 'clsx';
-import { Tooltip } from '@wordpress/ui';
+import { Tooltip } from '@/components/gutenberg/design-system';
 import { InheritanceResetButton } from './inheritance';
 import { useToolsPanelItemPopoverProps } from './utils';
 

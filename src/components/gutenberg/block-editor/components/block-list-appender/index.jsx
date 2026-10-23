@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { useSelect } from '@wordpress/data';
-import { getDefaultBlockName } from '@wordpress/blocks';
+import { useSelect } from '@/stores/gutenberg/data';
+import { getDefaultBlockName } from '@/lib/gutenberg/blocks';
 import DefaultBlockAppender from '../default-block-appender';
 import ButtonBlockAppender from '../button-block-appender';
 import { store as blockEditorStore } from '../../store';

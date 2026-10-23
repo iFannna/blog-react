@@ -1,11 +1,11 @@
-import { Button } from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { moreVertical } from '@wordpress/icons';
-import { store as coreStore } from '@wordpress/core-data';
+import { Button } from '@/components/gutenberg/ui';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { moreVertical } from '@/components/gutenberg/icons';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 // eslint-disable-next-line @wordpress/use-recommended-components
-import { Menu } from '@wordpress/ui';
+import { Menu } from '@/components/gutenberg/design-system';
 import { useGlobalStyles } from './hooks';
 
 /**

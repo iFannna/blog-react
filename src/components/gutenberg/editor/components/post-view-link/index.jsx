@@ -1,9 +1,9 @@
-import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
-import { external } from '@wordpress/icons';
-import { store as coreStore } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
-import { store as preferencesStore } from '@wordpress/preferences';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Button } from '@/components/gutenberg/ui';
+import { external } from '@/components/gutenberg/icons';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import { store as editorStore } from '../../store';
 
 export default function PostViewLink() {

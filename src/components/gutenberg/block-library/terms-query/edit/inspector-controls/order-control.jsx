@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { SelectControl as WCSelectControl } from '@wordpress/components';
+import { __ } from '@/lib/gutenberg/i18n';
+import { SelectControl as WCSelectControl } from '@/components/gutenberg/ui';
 
 export default function OrderControl( { orderBy, order, onChange, ...props } ) {
 	return (

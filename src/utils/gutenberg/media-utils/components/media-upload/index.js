@@ -1,7 +1,7 @@
-import { Component } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import deprecated from '@wordpress/deprecated';
-import { select, dispatch } from '@wordpress/data';
+import { Component } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { select, dispatch } from '@/stores/gutenberg/data';
 import { invalidateAttachmentResolutions } from '../../utils/invalidate-attachment-resolutions';
 
 const DEFAULT_EMPTY_GALLERY = [];

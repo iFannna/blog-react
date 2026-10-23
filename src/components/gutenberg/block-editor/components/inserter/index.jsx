@@ -1,15 +1,15 @@
 import clsx from 'clsx';
-import { speak } from '@wordpress/a11y';
-import { __, _x, sprintf } from '@wordpress/i18n';
-import { Dropdown, Button } from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { speak } from '@/utils/gutenberg/a11y';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
+import { Dropdown, Button } from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import {
 	createBlock,
 	store as blocksStore,
 	__experimentalGetBlockLabel as getBlockLabel,
-} from '@wordpress/blocks';
-import { forwardRef } from '@wordpress/element';
-import { plus } from '@wordpress/icons';
+} from '@/lib/gutenberg/blocks';
+import { forwardRef } from '@/lib/gutenberg/element';
+import { plus } from '@/components/gutenberg/icons';
 import InserterMenu from './menu';
 import QuickInserter from './quick-inserter';
 import { store as blockEditorStore } from '../../store';

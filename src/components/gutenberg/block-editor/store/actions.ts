@@ -13,14 +13,14 @@ import {
 	isUnmodifiedDefaultBlock,
 	isUnmodifiedBlock,
 	privateApis as blocksPrivateApis,
-} from '@wordpress/blocks';
-import { speak } from '@wordpress/a11y';
-import { __, _n, sprintf } from '@wordpress/i18n';
-import { store as noticesStore } from '@wordpress/notices';
-import { create, insert, remove, toHTMLString } from '@wordpress/rich-text';
-import deprecated from '@wordpress/deprecated';
-import type { Block, BlockType } from '@wordpress/blocks';
-import type { RichTextData } from '@wordpress/rich-text';
+} from '@/lib/gutenberg/blocks';
+import { speak } from '@/utils/gutenberg/a11y';
+import { __, _n, sprintf } from '@/lib/gutenberg/i18n';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { create, insert, remove, toHTMLString } from '@/components/gutenberg/rich-text';
+import deprecated from '@/utils/gutenberg/deprecated';
+import type { Block, BlockType } from '@/lib/gutenberg/blocks';
+import type { RichTextData } from '@/components/gutenberg/rich-text';
 import {
 	retrieveSelectedAttribute,
 	findRichTextAttributeKey,

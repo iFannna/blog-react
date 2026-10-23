@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import { reset, formatStrikethrough, formatUnderline } from '@wordpress/icons';
-import { __ } from '@wordpress/i18n';
+import { reset, formatStrikethrough, formatUnderline } from '@/components/gutenberg/icons';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import type { TextDecorationControlProps } from './types';
 
 const TEXT_DECORATIONS = [

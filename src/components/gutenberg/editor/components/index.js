@@ -1,4 +1,4 @@
-import { privateApis as coreDataPrivateApis } from '@wordpress/core-data';
+import { privateApis as coreDataPrivateApis } from '@/stores/gutenberg/core-data';
 import { unlock } from '../lock-unlock';
 import EditorKeyboardShortcuts from './global-keyboard-shortcuts';
 

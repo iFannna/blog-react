@@ -1,9 +1,9 @@
-import { useDispatch, useRegistry, useSelect } from '@wordpress/data';
-import { getBlockType, isUnmodifiedDefaultBlock } from '@wordpress/blocks';
-import { __, _n, sprintf } from '@wordpress/i18n';
-import { store as noticesStore } from '@wordpress/notices';
-import { speak } from '@wordpress/a11y';
-import { useCallback } from '@wordpress/element';
+import { useDispatch, useRegistry, useSelect } from '@/stores/gutenberg/data';
+import { getBlockType, isUnmodifiedDefaultBlock } from '@/lib/gutenberg/blocks';
+import { __, _n, sprintf } from '@/lib/gutenberg/i18n';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { speak } from '@/utils/gutenberg/a11y';
+import { useCallback } from '@/lib/gutenberg/element';
 import { store as blockEditorStore } from '../../../store';
 import { unlock } from '../../../lock-unlock';
 

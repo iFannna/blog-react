@@ -1,5 +1,5 @@
-import { useMemo } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
+import { useMemo } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
 import { store as blockEditorStore } from '../../store';
 
 // Maximum number of images to display in a list view row.

@@ -1,10 +1,10 @@
-import { heading as icon } from '@wordpress/icons';
-import { __, sprintf } from '@wordpress/i18n';
+import { heading as icon } from '@/components/gutenberg/icons';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	getBlockType,
 	unregisterBlockVariation,
 	privateApis as blocksPrivateApis,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import initBlock from '../utils/init-block';
 import deprecated from './deprecated';
 import edit from './edit';

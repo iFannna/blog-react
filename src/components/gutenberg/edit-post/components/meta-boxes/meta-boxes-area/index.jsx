@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { useRef, useLayoutEffect } from '@wordpress/element';
-import { Spinner as WCSpinner } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
+import { useRef, useLayoutEffect } from '@/lib/gutenberg/element';
+import { Spinner as WCSpinner } from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import { store as editPostStore } from '../../../store';
 import { unlock } from '../../../lock-unlock';
 

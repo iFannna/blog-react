@@ -1,13 +1,13 @@
 import type { ComponentProps, ComponentType } from 'react';
-import { ToolbarDropdownMenu, ToolbarGroup } from '@wordpress/components';
+import { ToolbarDropdownMenu, ToolbarGroup } from '@/components/gutenberg/ui';
 import {
 	justifyLeft,
 	justifyCenter,
 	justifyRight,
 	justifySpaceBetween,
 	justifyStretch,
-} from '@wordpress/icons';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/icons';
+import { __ } from '@/lib/gutenberg/i18n';
 import type { JustifyContentUIProps, JustifyContentValue } from './types';
 
 const icons = {

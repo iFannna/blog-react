@@ -1,6 +1,6 @@
-import { __, isRTL } from '@wordpress/i18n';
-import { ToolbarDropdownMenu, ToolbarGroup } from '@wordpress/components';
-import { alignLeft, alignRight, alignCenter } from '@wordpress/icons';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
+import { ToolbarDropdownMenu, ToolbarGroup } from '@/components/gutenberg/ui';
+import { alignLeft, alignRight, alignCenter } from '@/components/gutenberg/icons';
 import type { ComponentProps, ComponentType } from 'react';
 import type { AlignmentControlOption, AlignmentUIProps } from './types';
 

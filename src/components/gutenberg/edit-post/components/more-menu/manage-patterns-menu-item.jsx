@@ -1,8 +1,8 @@
-import { store as coreStore } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
-import { privateApis as editorPrivateApis } from '@wordpress/editor';
-import { __ } from '@wordpress/i18n';
-import { addQueryArgs } from '@wordpress/url';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { privateApis as editorPrivateApis } from '@/components/gutenberg/editor';
+import { __ } from '@/lib/gutenberg/i18n';
+import { addQueryArgs } from '@/utils/gutenberg/url';
 import { unlock } from '../../lock-unlock';
 
 const { MoreMenuItem } = unlock( editorPrivateApis );

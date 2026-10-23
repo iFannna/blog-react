@@ -1,8 +1,8 @@
-import { Button } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { settings } from '@wordpress/icons';
+import { Button } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { settings } from '@/components/gutenberg/icons';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of the new Menu, pending WordPress/gutenberg#76135.
-import { Menu } from '@wordpress/ui';
+import { Menu } from '@/components/gutenberg/design-system';
 
 export type MediaSource = {
 	name: string;

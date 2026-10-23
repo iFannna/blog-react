@@ -3,8 +3,8 @@ import {
 	RichText,
 	useBlockProps,
 	useInnerBlocksProps,
-} from '@wordpress/block-editor';
-import { createBlock } from '@wordpress/blocks';
+} from '@/components/gutenberg/block-editor';
+import { createBlock } from '@/lib/gutenberg/blocks';
 import {
 	LINK_DESTINATION_ATTACHMENT,
 	LINK_DESTINATION_MEDIA,

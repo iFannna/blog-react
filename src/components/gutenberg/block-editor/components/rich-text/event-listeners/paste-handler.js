@@ -1,13 +1,13 @@
-import { pasteHandler } from '@wordpress/blocks';
+import { pasteHandler } from '@/lib/gutenberg/blocks';
 import {
 	isEmpty,
 	insert,
 	create,
 	getActiveFormats,
 	privateApis as richTextPrivateApis,
-} from '@wordpress/rich-text';
-import { isURL } from '@wordpress/url';
-import { privateApis as composePrivateApis } from '@wordpress/compose';
+} from '@/components/gutenberg/rich-text';
+import { isURL } from '@/utils/gutenberg/url';
+import { privateApis as composePrivateApis } from '@/hooks/gutenberg/compose';
 import { store as blockEditorStore } from '../../../store';
 import { addActiveFormats } from '../utils';
 import { getPasteEventData } from '../../../utils/pasting';
@@ -17,7 +17,7 @@ import { getDropPasteProps, isTextDrop } from './drag-and-drop';
 const { subscribeDelegatedListener } = unlock( composePrivateApis );
 const { ownsSelection } = unlock( richTextPrivateApis );
 
-/** @typedef {import('@wordpress/rich-text').RichTextValue} RichTextValue */
+/** @typedef {import('@/components/gutenberg/rich-text').RichTextValue} RichTextValue */
 
 /**
  * Creates the paste listener of a field, which also inserts text dropped on

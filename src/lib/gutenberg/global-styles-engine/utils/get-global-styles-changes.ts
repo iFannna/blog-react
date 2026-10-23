@@ -1,6 +1,6 @@
 import memoize from 'memize';
-import { __, _n, sprintf } from '@wordpress/i18n';
-import { getBlockTypes } from '@wordpress/blocks';
+import { __, _n, sprintf } from '@/lib/gutenberg/i18n';
+import { getBlockTypes } from '@/lib/gutenberg/blocks';
 
 type TranslationMap = Record< string, string >;
 type BlockNamesMap = Record< string, string >;

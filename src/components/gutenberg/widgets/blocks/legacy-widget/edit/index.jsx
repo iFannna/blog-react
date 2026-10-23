@@ -4,17 +4,17 @@ import {
 	BlockControls,
 	InspectorControls,
 	BlockIcon,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	Flex,
 	FlexBlock,
 	Spinner as WCSpinner,
 	Placeholder,
-} from '@wordpress/components';
-import { brush as brushIcon } from '@wordpress/icons';
-import { __ } from '@wordpress/i18n';
-import { useState, useCallback } from '@wordpress/element';
-import { useEntityRecord } from '@wordpress/core-data';
+} from '@/components/gutenberg/ui';
+import { brush as brushIcon } from '@/components/gutenberg/icons';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useState, useCallback } from '@/lib/gutenberg/element';
+import { useEntityRecord } from '@/stores/gutenberg/core-data';
 import WidgetTypeSelector from './widget-type-selector';
 import InspectorCard from './inspector-card';
 import Form from './form';

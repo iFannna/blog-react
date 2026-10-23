@@ -1,4 +1,4 @@
-import { remove } from '@wordpress/dom';
+import { remove } from '@/utils/gutenberg/dom';
 
 /**
  * Looks for comments, and removes them.

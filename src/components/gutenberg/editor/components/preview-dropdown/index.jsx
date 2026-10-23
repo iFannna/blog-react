@@ -1,16 +1,16 @@
 import clsx from 'clsx';
-import { useViewportMatch } from '@wordpress/compose';
-import { Button } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useEffect, useRef } from '@wordpress/element';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { ActionItem, store as interfaceStore } from '@wordpress/interface';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { privateApis as globalStylesEnginePrivateApis } from '@wordpress/global-styles-engine';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
+import { Button } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useEffect, useRef } from '@/lib/gutenberg/element';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { ActionItem, store as interfaceStore } from '@/components/gutenberg/interface';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { privateApis as globalStylesEnginePrivateApis } from '@/lib/gutenberg/global-styles-engine';
 // eslint-disable-next-line @wordpress/use-recommended-components
-import { Menu } from '@wordpress/ui';
+import { Menu } from '@/components/gutenberg/design-system';
 import { store as editorStore } from '../../store';
 import MoreMenuItem from '../more-menu/more-menu-item';
 import { toMenuItems } from '../more-menu/more-menu-submenu';

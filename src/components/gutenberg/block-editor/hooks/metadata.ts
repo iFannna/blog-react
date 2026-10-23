@@ -1,6 +1,6 @@
-import { addFilter } from '@wordpress/hooks';
-import { hasBlockSupport } from '@wordpress/blocks';
-import type { BlockType } from '@wordpress/blocks';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import { hasBlockSupport } from '@/lib/gutenberg/blocks';
+import type { BlockType } from '@/lib/gutenberg/blocks';
 import type { BlockMetadata, BlockWithMetadata } from './types';
 
 const META_ATTRIBUTE_NAME = 'metadata';

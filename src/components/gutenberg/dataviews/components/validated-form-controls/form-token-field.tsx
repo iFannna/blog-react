@@ -1,9 +1,9 @@
-import { forwardRef, useRef } from '@wordpress/element';
-import { FormTokenField } from '@wordpress/components';
+import { forwardRef, useRef } from '@/lib/gutenberg/element';
+import { FormTokenField } from '@/components/gutenberg/ui';
 import {
 	// eslint-disable-next-line @wordpress/use-recommended-components
 	ControlWithError,
-} from '@wordpress/ui';
+} from '@/components/gutenberg/design-system';
 import type { ValidatedControlProps } from './types';
 
 type FormTokenFieldProps = React.ComponentProps< typeof FormTokenField >;

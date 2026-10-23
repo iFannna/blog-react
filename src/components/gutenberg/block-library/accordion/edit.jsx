@@ -6,8 +6,8 @@ import {
 	useBlockEditingMode,
 	store as blockEditorStore,
 	HeadingLevelDropdown,
-} from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	ToggleControl,
 	__experimentalToggleGroupControl as ToggleGroupControl,
@@ -16,9 +16,9 @@ import {
 	__experimentalToolsPanelItem as ToolsPanelItem,
 	ToolbarButton,
 	ToolbarGroup,
-} from '@wordpress/components';
-import { useDispatch, useSelect, useRegistry } from '@wordpress/data';
-import { createBlock } from '@wordpress/blocks';
+} from '@/components/gutenberg/ui';
+import { useDispatch, useSelect, useRegistry } from '@/stores/gutenberg/data';
+import { createBlock } from '@/lib/gutenberg/blocks';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 const ACCORDION_BLOCK_NAME = 'core/accordion-item';

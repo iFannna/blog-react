@@ -7,18 +7,18 @@ import {
 	TextControl,
 	__experimentalHStack as HStack,
 	__experimentalInputControlSuffixWrapper as InputControlSuffixWrapper,
-} from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
-import { useRef, useState, useEffect, useMemo } from '@wordpress/element';
-import { useInstanceId, useMergeRefs } from '@wordpress/compose';
-import { focus } from '@wordpress/dom';
-import { ENTER } from '@wordpress/keycodes';
-import { isShallowEqualObjects } from '@wordpress/is-shallow-equal';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { keyboardReturn, linkOff } from '@wordpress/icons';
-import deprecated from '@wordpress/deprecated';
-import { isURL, prependHTTPS } from '@wordpress/url';
+} from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useRef, useState, useEffect, useMemo } from '@/lib/gutenberg/element';
+import { useInstanceId, useMergeRefs } from '@/hooks/gutenberg/compose';
+import { focus } from '@/utils/gutenberg/dom';
+import { ENTER } from '@/utils/gutenberg/keycodes';
+import { isShallowEqualObjects } from '@/utils/gutenberg/is-shallow-equal';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { keyboardReturn, linkOff } from '@/components/gutenberg/icons';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { isURL, prependHTTPS } from '@/utils/gutenberg/url';
 import { useNativeUndo } from '../../utils/native-undo';
 import LinkControlSettingsDrawer from './settings-drawer';
 import LinkControlSearchInput from './search-input';

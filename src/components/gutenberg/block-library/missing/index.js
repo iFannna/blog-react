@@ -1,4 +1,4 @@
-import { getBlockType } from '@wordpress/blocks';
+import { getBlockType } from '@/lib/gutenberg/blocks';
 import initBlock from '../utils/init-block';
 import edit from './edit';
 import metadata from './block.json';

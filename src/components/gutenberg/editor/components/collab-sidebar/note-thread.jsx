@@ -1,18 +1,18 @@
 import clsx from 'clsx';
-import { useContext, useEffect, useRef, useState } from '@wordpress/element';
-import { Button } from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
+import { useContext, useEffect, useRef, useState } from '@/lib/gutenberg/element';
+import { Button } from '@/components/gutenberg/ui';
+import { Stack } from '@/components/gutenberg/design-system';
 import {
 	useDebounce,
 	__experimentalUseFocusOutside as useFocusOutside,
-} from '@wordpress/compose';
-import { __, _n, sprintf } from '@wordpress/i18n';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
+} from '@/hooks/gutenberg/compose';
+import { __, _n, sprintf } from '@/lib/gutenberg/i18n';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
 import {
 	store as blockEditorStore,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import { AddNote } from './add-note';
 import { Note } from './note';
 import { NoteCard } from './note-card';

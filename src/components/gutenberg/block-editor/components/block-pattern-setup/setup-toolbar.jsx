@@ -1,11 +1,11 @@
-import { __, isRTL } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
+import { __, isRTL } from '@/lib/gutenberg/i18n';
+import { Button } from '@/components/gutenberg/ui';
 import {
 	chevronRight,
 	chevronLeft,
 	grid,
 	stretchFullWidth,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import { VIEWMODES } from './constants';
 
 const Actions = ( { onBlockPatternSelect } ) => (

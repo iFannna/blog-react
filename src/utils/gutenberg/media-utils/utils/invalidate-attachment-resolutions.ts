@@ -1,5 +1,5 @@
-import type { DataRegistry } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+import type { DataRegistry } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 
 /**
  * Invalidates every cached `getEntityRecords` resolution for the `attachment`

@@ -1,13 +1,13 @@
-import { __, _x } from '@wordpress/i18n';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import {
 	Dropdown,
 	Button,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { useState, useMemo } from '@wordpress/element';
-import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@wordpress/block-editor';
-import { store as coreStore } from '@wordpress/core-data';
+} from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useState, useMemo } from '@/lib/gutenberg/element';
+import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@/components/gutenberg/block-editor';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { store as editorStore } from '../../store';
 import PostTypeSupportCheck from '../post-type-support-check';
 import PostComments from '../post-comments';

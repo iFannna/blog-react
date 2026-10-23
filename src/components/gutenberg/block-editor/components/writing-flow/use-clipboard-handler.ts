@@ -4,15 +4,15 @@ import {
 	getBlockTransforms,
 	hasBlockSupport,
 	switchToBlockType,
-} from '@wordpress/blocks';
-import type { Block, BlockFilesTransform } from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
+import type { Block, BlockFilesTransform } from '@/lib/gutenberg/blocks';
 import {
 	documentHasSelection,
 	documentHasUncollapsedSelection,
 	isEntirelySelected,
-} from '@wordpress/dom';
-import { useDispatch, useRegistry, useSelect } from '@wordpress/data';
-import { useRefEffect } from '@wordpress/compose';
+} from '@/utils/gutenberg/dom';
+import { useDispatch, useRegistry, useSelect } from '@/stores/gutenberg/data';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
 import { store as blockEditorStore } from '../../store';
 import { useNotifyCopy } from '../../utils/use-notify-copy';
 import { setClipboardBlocks, setContentEditableWrapper } from './utils';

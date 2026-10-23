@@ -1,11 +1,11 @@
-import { MenuItem } from '@wordpress/components';
+import { MenuItem } from '@/components/gutenberg/ui';
 import {
 	getBlockMenuDefaultClassName,
 	cloneBlock,
 	store as blocksStore,
-} from '@wordpress/blocks';
-import { useSelect } from '@wordpress/data';
-import { useState, useMemo } from '@wordpress/element';
+} from '@/lib/gutenberg/blocks';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useState, useMemo } from '@/lib/gutenberg/element';
 import { store as blockEditorStore } from '../../store';
 import BlockIcon from '../block-icon';
 import PreviewBlockPopover from './preview-block-popover';

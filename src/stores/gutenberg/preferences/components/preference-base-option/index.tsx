@@ -1,4 +1,4 @@
-import { ToggleControl } from '@wordpress/components';
+import { ToggleControl } from '@/components/gutenberg/ui';
 import type { BaseOptionProps } from './types';
 
 function BaseOption( {

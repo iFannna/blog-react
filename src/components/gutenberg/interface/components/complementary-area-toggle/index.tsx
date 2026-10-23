@@ -1,7 +1,7 @@
 import type { AriaRole } from 'react';
-import { Button } from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { usePluginContext } from '@wordpress/plugins';
+import { Button } from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { usePluginContext } from '@/lib/gutenberg/plugins';
 import { store as interfaceStore } from '../../store';
 import type { ComplementaryAreaToggleProps } from './types';
 

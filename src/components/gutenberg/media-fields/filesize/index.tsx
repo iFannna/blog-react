@@ -1,5 +1,5 @@
-import { __, sprintf, _x } from '@wordpress/i18n';
-import type { Field } from '@wordpress/dataviews';
+import { __, sprintf, _x } from '@/lib/gutenberg/i18n';
+import type { Field } from '@/components/gutenberg/dataviews';
 import type { MediaItem } from '../types';
 
 const KB_IN_BYTES = 1024;

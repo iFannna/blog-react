@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { useDispatch } from '@wordpress/data';
-import { useEffect, useRef } from '@wordpress/element';
-import { useShortcut } from '@wordpress/keyboard-shortcuts';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { useEffect, useRef } from '@/lib/gutenberg/element';
+import { useShortcut } from '@/components/gutenberg/keyboard-shortcuts';
 import { PrivateBlockPopover } from '../block-popover';
 import useBlockToolbarPopoverProps from './use-block-toolbar-popover-props';
 import useSelectedBlockToolProps from './use-selected-block-tool-props';

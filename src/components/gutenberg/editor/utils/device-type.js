@@ -1,6 +1,6 @@
-import { privateApis as globalStylesEnginePrivateApis } from '@wordpress/global-styles-engine';
-import { __ } from '@wordpress/i18n';
-import { desktop, tablet, mobile } from '@wordpress/icons';
+import { privateApis as globalStylesEnginePrivateApis } from '@/lib/gutenberg/global-styles-engine';
+import { __ } from '@/lib/gutenberg/i18n';
+import { desktop, tablet, mobile } from '@/components/gutenberg/icons';
 import { unlock } from '../lock-unlock';
 
 const { getViewportBreakpoints, getViewportBreakpointValueInPixels } = unlock(

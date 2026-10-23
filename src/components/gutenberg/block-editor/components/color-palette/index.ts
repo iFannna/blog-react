@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react';
-import { ColorPalette } from '@wordpress/components';
+import { ColorPalette } from '@/components/gutenberg/ui';
 import withColorContext from './with-color-context';
 import type { WithColorContextProps } from './types';
 

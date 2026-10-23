@@ -1,7 +1,7 @@
-import { useRegistry, useDispatch } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { useState, useCallback } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
+import { useRegistry, useDispatch } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useState, useCallback } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import menuItemsToBlocks from '../menu-items-to-blocks';
 
 export const CLASSIC_MENU_CONVERSION_SUCCESS = 'success';

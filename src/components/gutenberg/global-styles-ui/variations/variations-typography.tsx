@@ -1,7 +1,7 @@
 import {
 	__experimentalGrid as Grid,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import StylesPreviewTypography from '../preview-typography';
 import { useCurrentMergeThemeStyleVariationsWithUserConfig } from '../hooks';
 import { Subtitle } from '../subtitle';

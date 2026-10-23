@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { RichText, useBlockProps } from '@wordpress/block-editor';
+import { RichText, useBlockProps } from '@/components/gutenberg/block-editor';
 import migrateFontFamily from '../utils/migrate-font-family';
 import migrateTextAlign from '../utils/migrate-text-align';
 

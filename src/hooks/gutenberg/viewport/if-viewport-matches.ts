@@ -2,7 +2,7 @@ import {
 	ifCondition,
 	compose,
 	createHigherOrderComponent,
-} from '@wordpress/compose';
+} from '@/hooks/gutenberg/compose';
 import withViewportMatch from './with-viewport-match';
 import type { ViewportQuery } from './types';
 

@@ -4,11 +4,11 @@ import {
 	FlexItem,
 	Modal,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { useState } from '@wordpress/element';
-import { _x, __ } from '@wordpress/i18n';
-import { useDispatch } from '@wordpress/data';
-import { Text } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { useState } from '@/lib/gutenberg/element';
+import { _x, __ } from '@/lib/gutenberg/i18n';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { Text } from '@/components/gutenberg/design-system';
 import { store as blockEditorStore } from '../../store';
 import BlockManager from '../block-manager';
 

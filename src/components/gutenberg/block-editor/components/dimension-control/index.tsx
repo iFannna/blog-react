@@ -1,11 +1,11 @@
 import clsx from 'clsx';
-import { useMemo, useState } from '@wordpress/element';
+import { useMemo, useState } from '@/lib/gutenberg/element';
 import {
 	BaseControl,
 	__experimentalParseQuantityAndUnitFromRawValue as parseQuantityAndUnitFromRawValue,
 	__experimentalUseCustomUnits as useCustomUnits,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import { useSettings } from '../use-settings';
 import PresetInputControl from '../preset-input-control';
 import { CUSTOM_VALUE_SETTINGS } from '../preset-input-control/constants';

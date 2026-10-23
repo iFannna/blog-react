@@ -1,4 +1,4 @@
-import { RichText } from '@wordpress/block-editor';
+import { RichText } from '@/components/gutenberg/block-editor';
 
 export default [
 	{

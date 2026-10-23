@@ -1,5 +1,5 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { useMemo, useState } from '@wordpress/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useMemo, useState } from '@/lib/gutenberg/element';
 import {
 	Button,
 	Notice,
@@ -8,13 +8,13 @@ import {
 	Spinner as WCSpinner,
 	ToolbarButton,
 	__experimentalConfirmDialog as ConfirmDialog,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	BlockContextProvider,
 	BlockControls,
 	useBlockEditingMode,
 	__experimentalUseBlockPreview as useBlockPreview,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import { sharedIcon } from './shared-icon';
 import { isGalleryFlexLayout } from './shared';
 import { Caption } from '../utils/caption';

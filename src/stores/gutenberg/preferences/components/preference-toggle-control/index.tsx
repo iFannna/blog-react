@@ -1,4 +1,4 @@
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import { store as preferencesStore } from '../../store';
 import type { BaseOptionProps } from '../preference-base-option/types';
 import PreferenceBaseOption from '../preference-base-option';

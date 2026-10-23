@@ -1,5 +1,5 @@
-import { getBlockType } from '@wordpress/blocks';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { getBlockType } from '@/lib/gutenberg/blocks';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	Button,
 	__experimentalVStack as VStack,
@@ -7,10 +7,10 @@ import {
 	Flex,
 	FlexBlock,
 	FlexItem,
-} from '@wordpress/components';
-import { Icon, chevronRight } from '@wordpress/icons';
-import { useEffect } from '@wordpress/element';
-import { useDebounce, useEvent } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { Icon, chevronRight } from '@/components/gutenberg/icons';
+import { useEffect } from '@/lib/gutenberg/element';
+import { useDebounce, useEvent } from '@/hooks/gutenberg/compose';
 import { store as blockEditorStore } from '../../store';
 import BlockIcon from '../block-icon';
 import useBlockDisplayInformation from '../use-block-display-information';

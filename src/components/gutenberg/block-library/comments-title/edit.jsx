@@ -4,18 +4,18 @@ import {
 	InspectorControls,
 	store as blockEditorStore,
 	HeadingLevelDropdown,
-} from '@wordpress/block-editor';
-import { __, _n, sprintf } from '@wordpress/i18n';
-import { useEntityProp } from '@wordpress/core-data';
+} from '@/components/gutenberg/block-editor';
+import { __, _n, sprintf } from '@/lib/gutenberg/i18n';
+import { useEntityProp } from '@/stores/gutenberg/core-data';
 import {
 	ToggleControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { useState, useEffect } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import apiFetch from '@wordpress/api-fetch';
-import { addQueryArgs } from '@wordpress/url';
+} from '@/components/gutenberg/ui';
+import { useState, useEffect } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { addQueryArgs } from '@/utils/gutenberg/url';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 import useDeprecatedTextAlign from '../utils/deprecated-text-align-attributes';
 

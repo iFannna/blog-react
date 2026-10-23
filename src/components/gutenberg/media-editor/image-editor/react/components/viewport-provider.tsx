@@ -1,4 +1,4 @@
-import { createContext, useContext } from '@wordpress/element';
+import { createContext, useContext } from '@/lib/gutenberg/element';
 import {
 	useViewportState,
 	type UseViewportStateReturn,

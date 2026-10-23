@@ -1,5 +1,5 @@
-import { focus } from '@wordpress/dom';
-import { useEffect, useRef } from '@wordpress/element';
+import { focus } from '@/utils/gutenberg/dom';
+import { useEffect, useRef } from '@/lib/gutenberg/element';
 import useRefEffect from '../use-ref-effect';
 
 /**
@@ -13,7 +13,7 @@ import useRefEffect from '../use-ref-effect';
  *
  * @example
  * ```js
- * import { useFocusOnMount } from '@wordpress/compose';
+ * import { useFocusOnMount } from '@/hooks/gutenberg/compose';
  *
  * const WithFocusOnMount = () => {
  *     const ref = useFocusOnMount()

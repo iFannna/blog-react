@@ -1,5 +1,5 @@
-import { useDispatch, useSelect } from '@wordpress/data';
-import { hasBlockSupport, store as blocksStore } from '@wordpress/blocks';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { hasBlockSupport, store as blocksStore } from '@/lib/gutenberg/blocks';
 import usePasteStyles from '../use-paste-styles';
 import { store as blockEditorStore } from '../../store';
 import { groupBlocks } from '../../utils/group-blocks';

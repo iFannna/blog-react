@@ -2,10 +2,10 @@ import {
 	__experimentalToolsPanelItem as ToolsPanelItem,
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
-} from '@wordpress/components';
-import { useMemo } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { useMemo } from '@/lib/gutenberg/element';
 import type { ReactNode } from 'react';
-import { __, _x } from '@wordpress/i18n';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import type { DimensionsToolOption, ScaleToolProps } from './types';
 
 /**

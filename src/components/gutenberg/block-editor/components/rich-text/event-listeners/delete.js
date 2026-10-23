@@ -1,9 +1,9 @@
-import { DELETE, BACKSPACE } from '@wordpress/keycodes';
+import { DELETE, BACKSPACE } from '@/utils/gutenberg/keycodes';
 import {
 	isCollapsed,
 	isEmpty,
 	privateApis as richTextPrivateApis,
-} from '@wordpress/rich-text';
+} from '@/components/gutenberg/rich-text';
 import { unlock } from '../../../lock-unlock';
 
 const { subscribeOwnedListener } = unlock( richTextPrivateApis );

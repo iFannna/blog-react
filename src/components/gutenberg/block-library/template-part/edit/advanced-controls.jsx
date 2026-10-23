@@ -1,11 +1,11 @@
-import { useEntityProp, store as coreStore } from '@wordpress/core-data';
+import { useEntityProp, store as coreStore } from '@/stores/gutenberg/core-data';
 import {
 	SelectControl as WCSelectControl,
 	TextControl,
-} from '@wordpress/components';
-import { sprintf, __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
+} from '@/components/gutenberg/ui';
+import { sprintf, __ } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import { TemplatePartImportControls } from './import-controls';
 import { unlock } from '../../lock-unlock';
 

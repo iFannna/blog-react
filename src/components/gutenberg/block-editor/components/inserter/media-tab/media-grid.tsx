@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
-import { useCallback, useMemo } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import { DataViews } from '@wordpress/dataviews';
-import type { Action, Field, View } from '@wordpress/dataviews';
-import { Spinner as WCSpinner } from '@wordpress/components';
-import { Stack, Tabs } from '@wordpress/ui';
+import { useCallback, useMemo } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { DataViews } from '@/components/gutenberg/dataviews';
+import type { Action, Field, View } from '@/components/gutenberg/dataviews';
+import { Spinner as WCSpinner } from '@/components/gutenberg/ui';
+import { Stack, Tabs } from '@/components/gutenberg/design-system';
 import InserterDraggableBlocks from '../../inserter-draggable-blocks';
 import MediaSearch from './media-search';
 import { getBlockAndPreviewFromMedia, getItemId } from './utils';

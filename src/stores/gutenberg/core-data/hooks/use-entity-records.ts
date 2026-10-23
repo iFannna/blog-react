@@ -1,7 +1,7 @@
-import { addQueryArgs } from '@wordpress/url';
-import deprecated from '@wordpress/deprecated';
-import { useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
+import { addQueryArgs } from '@/utils/gutenberg/url';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
 import { store as coreStore } from '../';
 import type { Options } from './use-entity-record';
 import type { Status } from './constants';
@@ -67,7 +67,7 @@ const EMPTY_ARRAY = [];
  * @param    options   Optional hook options.
  * @example
  * ```js
- * import { useEntityRecords } from '@wordpress/core-data';
+ * import { useEntityRecords } from '@/stores/gutenberg/core-data';
  *
  * function PageTitlesList() {
  *   const { records, isResolving } = useEntityRecords( 'postType', 'page' );

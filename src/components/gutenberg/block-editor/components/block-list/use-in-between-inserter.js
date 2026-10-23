@@ -1,7 +1,7 @@
-import { useRefEffect } from '@wordpress/compose';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useContext } from '@wordpress/element';
-import { isRTL } from '@wordpress/i18n';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useContext } from '@/lib/gutenberg/element';
+import { isRTL } from '@/lib/gutenberg/i18n';
 import { store as blockEditorStore } from '../../store';
 import { BlockRefs } from '../provider/block-refs-provider';
 import { InsertionPointOpenRef } from '../block-tools/insertion-point';

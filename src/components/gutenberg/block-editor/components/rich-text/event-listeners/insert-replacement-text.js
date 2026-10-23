@@ -1,4 +1,4 @@
-import { privateApis as richTextPrivateApis } from '@wordpress/rich-text';
+import { privateApis as richTextPrivateApis } from '@/components/gutenberg/rich-text';
 import { store as blockEditorStore } from '../../../store';
 import { unlock } from '../../../lock-unlock';
 

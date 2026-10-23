@@ -1,7 +1,7 @@
-import { sprintf, _n } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { copy } from '@wordpress/icons';
-import { Stack } from '@wordpress/ui';
+import { sprintf, _n } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { copy } from '@/components/gutenberg/icons';
+import { Stack } from '@/components/gutenberg/design-system';
 import BlockIcon from '../block-icon';
 import { store as blockEditorStore } from '../../store';
 

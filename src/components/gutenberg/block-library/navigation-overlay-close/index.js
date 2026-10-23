@@ -1,4 +1,4 @@
-import { addFilter } from '@wordpress/hooks';
+import { addFilter } from '@/hooks/gutenberg/hooks';
 import initBlock from '../utils/init-block';
 import { isWithinNavigationOverlay } from '../utils/is-within-overlay';
 import edit from './edit';

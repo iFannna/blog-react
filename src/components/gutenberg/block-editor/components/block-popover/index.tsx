@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import type { ForwardedRef } from 'react';
-import { useMergeRefs } from '@wordpress/compose';
-import { Popover } from '@wordpress/components';
+import { useMergeRefs } from '@/hooks/gutenberg/compose';
+import { Popover } from '@/components/gutenberg/ui';
 import {
 	forwardRef,
 	useMemo,
 	useReducer,
 	useLayoutEffect,
-} from '@wordpress/element';
+} from '@/lib/gutenberg/element';
 import { useBlockElement } from '../block-list/use-block-props/use-block-refs';
 import usePopoverScroll from './use-popover-scroll';
 import { rectUnion, getElementBounds } from '../../utils/dom';

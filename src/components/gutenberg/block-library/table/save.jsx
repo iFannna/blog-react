@@ -6,7 +6,7 @@ import {
 	__experimentalGetColorClassesAndStyles as getColorClassesAndStyles,
 	__experimentalGetElementClassName,
 	getBackgroundClassesAndStyles,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 
 export default function save( { attributes } ) {
 	const { hasFixedLayout, head, body, foot, caption, style } = attributes;

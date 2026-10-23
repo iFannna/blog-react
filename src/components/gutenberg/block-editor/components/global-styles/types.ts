@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
-import type { Dropdown } from '@wordpress/components';
-import type { Color, Gradient } from '@wordpress/global-styles-engine';
+import type { Dropdown } from '@/components/gutenberg/ui';
+import type { Color, Gradient } from '@/lib/gutenberg/global-styles-engine';
 
 export type ToolsPanelPopoverProps = Pick<
 	NonNullable< ComponentProps< typeof Dropdown >[ 'popoverProps' ] >,

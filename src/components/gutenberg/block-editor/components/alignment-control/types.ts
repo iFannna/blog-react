@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react';
-import type { ToolbarDropdownMenu } from '@wordpress/components';
+import type { ToolbarDropdownMenu } from '@/components/gutenberg/ui';
 
 /**
  * A text alignment option.

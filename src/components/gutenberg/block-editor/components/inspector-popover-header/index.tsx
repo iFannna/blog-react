@@ -3,10 +3,10 @@ import {
 	__experimentalHStack as HStack,
 	__experimentalSpacer as Spacer,
 	Button,
-} from '@wordpress/components';
-import { closeSmall } from '@wordpress/icons';
-import { __ } from '@wordpress/i18n';
-import { Text } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { closeSmall } from '@/components/gutenberg/icons';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Text } from '@/components/gutenberg/design-system';
 import type { InspectorPopoverHeaderProps } from './types';
 
 export default function InspectorPopoverHeader( {

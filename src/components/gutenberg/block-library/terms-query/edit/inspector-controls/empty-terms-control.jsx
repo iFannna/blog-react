@@ -1,4 +1,4 @@
-import { ToggleControl } from '@wordpress/components';
+import { ToggleControl } from '@/components/gutenberg/ui';
 
 export default function EmptyTermsControl( { value, onChange, ...props } ) {
 	return (

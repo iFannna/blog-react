@@ -1,5 +1,5 @@
-import { useMemo, useRef, useInsertionEffect } from '@wordpress/element';
-import { useRefEffect } from '@wordpress/compose';
+import { useMemo, useRef, useInsertionEffect } from '@/lib/gutenberg/element';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
 import beforeInputRules from './before-input-rules';
 import inputRules from './input-rules';
 import insertReplacementText from './insert-replacement-text';

@@ -1,6 +1,6 @@
-import { Button, __experimentalVStack as VStack } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { Icon, close } from '@wordpress/icons';
+import { Button, __experimentalVStack as VStack } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Icon, close } from '@/components/gutenberg/icons';
 import OverlayMenuIcon from './overlay-menu-icon';
 import OverlayMenuPreviewControls from './overlay-menu-preview-controls';
 

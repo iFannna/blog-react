@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n';
-import { store as coreDataStore } from '@wordpress/core-data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
+import { store as coreDataStore } from '@/stores/gutenberg/core-data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 
 // Navigation block types that use special handling for backwards compatibility
 const NAVIGATION_BLOCK_TYPES = [

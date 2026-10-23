@@ -1,15 +1,15 @@
 import { v4 as createId } from 'uuid';
-import { __ } from '@wordpress/i18n';
-import { formatListNumbered as icon } from '@wordpress/icons';
-import { insertObject } from '@wordpress/rich-text';
+import { __ } from '@/lib/gutenberg/i18n';
+import { formatListNumbered as icon } from '@/components/gutenberg/icons';
+import { insertObject } from '@/components/gutenberg/rich-text';
 import {
 	RichTextToolbarButton,
 	store as blockEditorStore,
 	privateApis,
-} from '@wordpress/block-editor';
-import { useSelect, useDispatch, useRegistry } from '@wordpress/data';
-import { store as coreDataStore } from '@wordpress/core-data';
-import { createBlock, store as blocksStore } from '@wordpress/blocks';
+} from '@/components/gutenberg/block-editor';
+import { useSelect, useDispatch, useRegistry } from '@/stores/gutenberg/data';
+import { store as coreDataStore } from '@/stores/gutenberg/core-data';
+import { createBlock, store as blocksStore } from '@/lib/gutenberg/blocks';
 import { unlock } from '../lock-unlock';
 import { name as FOOTNOTES_BLOCK_NAME } from './';
 

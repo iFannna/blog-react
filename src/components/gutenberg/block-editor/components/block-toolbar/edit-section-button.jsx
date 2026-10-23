@@ -1,7 +1,7 @@
-import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { isReusableBlock, isTemplatePart } from '@wordpress/blocks';
+import { ToolbarButton, ToolbarGroup } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { isReusableBlock, isTemplatePart } from '@/lib/gutenberg/blocks';
 import { store as blockEditorStore } from '../../store';
 import useContentOnlySectionEdit from '../../hooks/use-content-only-section-edit';
 

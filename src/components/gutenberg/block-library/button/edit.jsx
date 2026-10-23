@@ -1,13 +1,13 @@
 import clsx from 'clsx';
-import { __, sprintf } from '@wordpress/i18n';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	useEffect,
 	useState,
 	useRef,
 	useMemo,
 	createInterpolateElement,
-} from '@wordpress/element';
-import { TextControl, ToolbarButton, Popover } from '@wordpress/components';
+} from '@/lib/gutenberg/element';
+import { TextControl, ToolbarButton, Popover } from '@/components/gutenberg/ui';
 import {
 	BlockControls,
 	InspectorControls,
@@ -26,22 +26,22 @@ import {
 	getTypographyClassesAndStyles as useTypographyProps,
 	useSettings,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { displayShortcut, isKeyboardEvent, ENTER } from '@wordpress/keycodes';
-import { link } from '@wordpress/icons';
+} from '@/components/gutenberg/block-editor';
+import { displayShortcut, isKeyboardEvent, ENTER } from '@/utils/gutenberg/keycodes';
+import { link } from '@/components/gutenberg/icons';
 import {
 	createBlock,
 	cloneBlock,
 	getDefaultBlockName,
 	getBlockBindingsSource,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import {
 	useMergeRefs,
 	useRefEffect,
 	privateApis as composePrivateApis,
-} from '@wordpress/compose';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { Link } from '@wordpress/ui';
+} from '@/hooks/gutenberg/compose';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { Link } from '@/components/gutenberg/design-system';
 import { NEW_TAB_TARGET, NOFOLLOW_REL } from './constants';
 import { getUpdatedLinkAttributes } from './get-updated-link-attributes';
 import removeAnchorTag from '../utils/remove-anchor-tag';

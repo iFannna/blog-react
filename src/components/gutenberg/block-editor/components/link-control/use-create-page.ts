@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { useEffect, useState, useRef } from '@wordpress/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useEffect, useState, useRef } from '@/lib/gutenberg/element';
 import type {
 	LinkControlCreateSuggestionProp,
 	LinkControlSuggestion,

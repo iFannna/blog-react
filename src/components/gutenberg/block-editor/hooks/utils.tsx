@@ -1,11 +1,11 @@
 import clsx from 'clsx';
-import { getBlockSupport } from '@wordpress/blocks';
-import { memo, useMemo, useEffect, useId, useState } from '@wordpress/element';
-import { useDispatch, useRegistry } from '@wordpress/data';
-import { createHigherOrderComponent } from '@wordpress/compose';
-import { addFilter } from '@wordpress/hooks';
-import type { Block, BlockType } from '@wordpress/blocks';
-import type { DataRegistry } from '@wordpress/data';
+import { getBlockSupport } from '@/lib/gutenberg/blocks';
+import { memo, useMemo, useEffect, useId, useState } from '@/lib/gutenberg/element';
+import { useDispatch, useRegistry } from '@/stores/gutenberg/data';
+import { createHigherOrderComponent } from '@/hooks/gutenberg/compose';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import type { Block, BlockType } from '@/lib/gutenberg/blocks';
+import type { DataRegistry } from '@/stores/gutenberg/data';
 import type { Dispatch, SetStateAction } from 'react';
 import {
 	useBlockEditContext,

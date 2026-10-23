@@ -1,5 +1,5 @@
-import { Spinner as WCSpinner } from '@wordpress/components';
-import { useCallback, useMemo } from '@wordpress/element';
+import { Spinner as WCSpinner } from '@/components/gutenberg/ui';
+import { useCallback, useMemo } from '@/lib/gutenberg/element';
 import type { DataFormControlProps } from '../../types';
 import { ValidatedFormTokenField } from '../validated-form-controls';
 import getCustomValidity from './utils/get-custom-validity';

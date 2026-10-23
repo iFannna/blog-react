@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { useRef, useContext, useMemo } from '@wordpress/element';
-import { useRegistry } from '@wordpress/data';
-import { useViewportMatch } from '@wordpress/compose';
-import { Stack, VisuallyHidden } from '@wordpress/ui';
+import { useRef, useContext, useMemo } from '@/lib/gutenberg/element';
+import { useRegistry } from '@/stores/gutenberg/data';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
+import { Stack, VisuallyHidden } from '@/components/gutenberg/design-system';
 import ItemActions, { PrimaryActions } from '../../dataviews-item-actions';
 import DataViewsContext from '../../dataviews-context';
 import { ItemClickWrapper } from '../utils/item-click-wrapper';

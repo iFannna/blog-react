@@ -1,4 +1,4 @@
-import { _x } from '@wordpress/i18n';
+import { _x } from '@/lib/gutenberg/i18n';
 
 export const ALLOWED_MEDIA_TYPES = [ 'image', 'video' ];
 export const DEFAULT_MEDIA_SIZE_SLUG = 'full';

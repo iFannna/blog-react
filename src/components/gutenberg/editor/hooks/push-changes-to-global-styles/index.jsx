@@ -1,23 +1,23 @@
-import { addFilter } from '@wordpress/hooks';
-import { createHigherOrderComponent } from '@wordpress/compose';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import { createHigherOrderComponent } from '@/hooks/gutenberg/compose';
 import {
 	InspectorAdvancedControls,
 	store as blockEditorStore,
 	privateApis as blockEditorPrivateApis,
 	useBlockEditingMode,
-} from '@wordpress/block-editor';
-import { BaseControl, Button } from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
+} from '@/components/gutenberg/block-editor';
+import { BaseControl, Button } from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	__EXPERIMENTAL_STYLE_PROPERTY,
 	getBlockType,
 	hasBlockSupport,
 	store as blocksStore,
-} from '@wordpress/blocks';
-import { useMemo, useCallback, useState } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { store as noticesStore } from '@wordpress/notices';
-import { store as coreStore } from '@wordpress/core-data';
+} from '@/lib/gutenberg/blocks';
+import { useMemo, useCallback, useState } from '@/lib/gutenberg/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { unlock } from '../../lock-unlock';
 import setNestedValue from '../../utils/set-nested-value';
 import { useGlobalStyles } from '../../components/global-styles/hooks';

@@ -1,6 +1,6 @@
-import { useMemo } from '@wordpress/element';
-import { useSelect, useDispatch } from '@wordpress/data';
-import type { SelectFunction } from '@wordpress/data';
+import { useMemo } from '@/lib/gutenberg/element';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import type { SelectFunction } from '@/stores/gutenberg/data';
 import { store as richTextStore } from '../store';
 import type { RichTextFormatList } from '../types';
 

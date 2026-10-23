@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useState } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	Modal,
 	Button,
@@ -9,14 +9,14 @@ import {
 	privateApis as componentsPrivateApis,
 	__experimentalVStack as VStack,
 	__experimentalHStack as HStack,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	PlainText,
 	store as blockEditorStore,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { fullscreen, square } from '@wordpress/icons';
-import { useViewportMatch } from '@wordpress/compose';
+} from '@/components/gutenberg/block-editor';
+import { fullscreen, square } from '@/components/gutenberg/icons';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
 import { unlock } from '../lock-unlock';
 import Preview from './preview';
 import { parseContent, serializeContent } from './utils';

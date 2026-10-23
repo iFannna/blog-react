@@ -1,5 +1,5 @@
-import { getSettings } from '@wordpress/date';
-import { __, sprintf } from '@wordpress/i18n';
+import { getSettings } from '@/lib/gutenberg/date';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 
 /**
  * Help text communicating the timezone a datetime value is edited in.

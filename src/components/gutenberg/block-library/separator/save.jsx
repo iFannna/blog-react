@@ -3,7 +3,7 @@ import {
 	getColorClassName,
 	useBlockProps,
 	__experimentalGetColorClassesAndStyles as getColorClassesAndStyles,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 
 export default function separatorSave( { attributes } ) {
 	const { backgroundColor, style, opacity, tagName: Tag } = attributes;

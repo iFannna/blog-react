@@ -2,7 +2,7 @@ import { colord, extend } from 'colord';
 import namesPlugin from 'colord/plugins/names';
 import { FastAverageColor } from 'fast-average-color';
 import memoize from 'memize';
-import { applyFilters } from '@wordpress/hooks';
+import { applyFilters } from '@/hooks/gutenberg/hooks';
 
 /**
  * @typedef {import('colord').RgbaColor} RgbaColor

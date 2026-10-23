@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react';
-import type { AlignmentMatrixControl } from '@wordpress/components';
+import type { AlignmentMatrixControl } from '@/components/gutenberg/ui';
 
 /**
  * Props of `BlockAlignmentMatrixControl`.

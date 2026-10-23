@@ -1,4 +1,4 @@
-import { useDispatch, useSelect } from '@wordpress/data';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import { store as blockEditorStore } from '../store';
 import { unlock } from '../lock-unlock';
 import type { BlockEditorThunkArgs } from '../store/types';

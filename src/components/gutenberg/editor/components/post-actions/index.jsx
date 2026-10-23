@@ -1,12 +1,12 @@
-import { useRegistry, useSelect } from '@wordpress/data';
-import { useState, useMemo } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { Button, Modal } from '@wordpress/components';
-import { moreVertical } from '@wordpress/icons';
-import { store as coreStore } from '@wordpress/core-data';
-import { kebabCase } from '@wordpress/kebab-case';
+import { useRegistry, useSelect } from '@/stores/gutenberg/data';
+import { useState, useMemo } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Button, Modal } from '@/components/gutenberg/ui';
+import { moreVertical } from '@/components/gutenberg/icons';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { kebabCase } from '@/utils/gutenberg/kebab-case';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of the new Menu, pending WordPress/gutenberg#76135.
-import { Menu } from '@wordpress/ui';
+import { Menu } from '@/components/gutenberg/design-system';
 import { unlock } from '../../lock-unlock';
 import { usePostActions } from './actions';
 

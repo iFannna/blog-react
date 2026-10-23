@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from '@wordpress/element';
+import { useLayoutEffect, useRef, useState } from '@/lib/gutenberg/element';
 import type { HandlePosition, NormalizedRect, Size } from '../../../core/types';
 
 const HANDLE_GAP_PX = 12;

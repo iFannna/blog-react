@@ -1,4 +1,4 @@
-import { _x } from '@wordpress/i18n';
+import { _x } from '@/lib/gutenberg/i18n';
 
 const variations = [
 	{

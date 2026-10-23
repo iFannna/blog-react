@@ -1,11 +1,11 @@
-import { store as coreStore } from '@wordpress/core-data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import {
 	privateApis as blockEditorPrivateApis,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
-import { useRegistry, useSelect } from '@wordpress/data';
-import { useCallback, useEffect, useRef } from '@wordpress/element';
+} from '@/components/gutenberg/block-editor';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
+import { useRegistry, useSelect } from '@/stores/gutenberg/data';
+import { useCallback, useEffect, useRef } from '@/lib/gutenberg/element';
 import { unlock } from '../lock-unlock';
 import {
 	DEFAULT_MEDIA_SIZE_SLUG,

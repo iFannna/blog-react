@@ -1,6 +1,6 @@
-import { __experimentalUseSlotFills as useSlotFills } from '@wordpress/components';
-import { forwardRef } from '@wordpress/element';
-import warning from '@wordpress/warning';
+import { __experimentalUseSlotFills as useSlotFills } from '@/components/gutenberg/ui';
+import { forwardRef } from '@/lib/gutenberg/element';
+import warning from '@/utils/gutenberg/warning';
 import type {
 	ForwardedRef,
 	ForwardRefExoticComponent,

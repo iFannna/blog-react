@@ -1,4 +1,4 @@
-import { store as coreStore } from '@wordpress/core-data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 
 /**
  * Clears the cached lists of media, so anything showing media by post asks the

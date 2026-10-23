@@ -1,5 +1,5 @@
-import { useEffect } from '@wordpress/element';
-import { addFilter, removeFilter } from '@wordpress/hooks';
+import { useEffect } from '@/lib/gutenberg/element';
+import { addFilter, removeFilter } from '@/hooks/gutenberg/hooks';
 
 // These post types are "structural" block lists.
 // We should be allowed to use

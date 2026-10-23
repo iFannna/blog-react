@@ -1,4 +1,4 @@
-import deprecated from '@wordpress/deprecated';
+import deprecated from '@/utils/gutenberg/deprecated';
 
 export function normalizeComplementaryAreaScope( scope: string ): string {
 	if ( [ 'core/edit-post', 'core/edit-site' ].includes( scope ) ) {

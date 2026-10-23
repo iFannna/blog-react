@@ -1,9 +1,9 @@
 import { capitalCase } from 'change-case';
-import { store as coreDataStore } from '@wordpress/core-data';
-import { select } from '@wordpress/data';
-import { symbolFilled } from '@wordpress/icons';
-import { addFilter } from '@wordpress/hooks';
-import { decodeEntities } from '@wordpress/html-entities';
+import { store as coreDataStore } from '@/stores/gutenberg/core-data';
+import { select } from '@/stores/gutenberg/data';
+import { symbolFilled } from '@/components/gutenberg/icons';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import initBlock from '../utils/init-block';
 import metadata from './block.json';
 import edit from './edit';

@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from '@wordpress/element';
+import { useEffect, useMemo } from '@/lib/gutenberg/element';
 import { debounce } from '../../utils/debounce';
 import type { DebounceOptions, DebouncedFunc } from '../../utils/debounce';
 

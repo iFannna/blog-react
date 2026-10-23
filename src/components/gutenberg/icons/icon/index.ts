@@ -1,6 +1,6 @@
-import { cloneElement, forwardRef } from '@wordpress/element';
+import { cloneElement, forwardRef } from '@/lib/gutenberg/element';
 import type { CSSProperties, ReactElement, RefAttributes } from 'react';
-import type { SVGProps } from '@wordpress/primitives';
+import type { SVGProps } from '@/components/gutenberg/primitives';
 
 export interface IconProps extends SVGProps {
 	/**

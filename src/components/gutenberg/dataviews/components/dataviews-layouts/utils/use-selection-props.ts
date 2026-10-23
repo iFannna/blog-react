@@ -1,5 +1,5 @@
-import { useEffect, useRef } from '@wordpress/element';
-import { isAppleOS } from '@wordpress/keycodes';
+import { useEffect, useRef } from '@/lib/gutenberg/element';
+import { isAppleOS } from '@/utils/gutenberg/keycodes';
 import { SELECTION_CHECKBOX_CLASS } from '../../dataviews-selection-checkbox';
 import type { SetSelection } from '../../../types/private';
 

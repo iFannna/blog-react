@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import { ATTACHMENT_POST_TYPE } from '../constants';
 
 const AUTO_SAVE_FAILURE_NOTICE = __(

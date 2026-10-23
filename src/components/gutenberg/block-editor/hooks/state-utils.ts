@@ -1,6 +1,6 @@
-import type { BlockType } from '@wordpress/blocks';
-import { getBlockDefaultClassName, getBlockType } from '@wordpress/blocks';
-import { splitSelectorList } from '@wordpress/global-styles-engine';
+import type { BlockType } from '@/lib/gutenberg/blocks';
+import { getBlockDefaultClassName, getBlockType } from '@/lib/gutenberg/blocks';
+import { splitSelectorList } from '@/lib/gutenberg/global-styles-engine';
 
 type BlockSelector = NonNullable< BlockType[ 'selectors' ] >[ string ];
 

@@ -1,10 +1,10 @@
-import { useId } from '@wordpress/element';
+import { useId } from '@/lib/gutenberg/element';
 import {
 	CheckboxControl as WCCheckboxControl,
 	Flex,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { Text } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Text } from '@/components/gutenberg/design-system';
 import { getFontFaceVariantName } from './utils';
 import FontDemo from './font-demo';
 import type { CollectionFontVariantProps } from './types';

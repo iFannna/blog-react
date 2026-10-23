@@ -1,9 +1,9 @@
 import Mousetrap from 'mousetrap';
 import 'mousetrap/plugins/global-bind/mousetrap-global-bind.js';
 import type { ExtendedKeyboardEvent } from 'mousetrap';
-import type { RefObject } from '@wordpress/element';
-import { useEffect, useRef } from '@wordpress/element';
-import { isAppleOS } from '@wordpress/keycodes';
+import type { RefObject } from '@/lib/gutenberg/element';
+import { useEffect, useRef } from '@/lib/gutenberg/element';
+import { isAppleOS } from '@/utils/gutenberg/keycodes';
 
 type KeyboardShortcutConfig = {
 	/**

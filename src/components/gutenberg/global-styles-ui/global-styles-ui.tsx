@@ -1,15 +1,15 @@
-import { Navigator, useNavigator } from '@wordpress/components';
-import { getBlockTypes, store as blocksStore } from '@wordpress/blocks';
-import { useSelect } from '@wordpress/data';
+import { Navigator, useNavigator } from '@/components/gutenberg/ui';
+import { getBlockTypes, store as blocksStore } from '@/lib/gutenberg/blocks';
+import { useSelect } from '@/stores/gutenberg/data';
 // @ts-expect-error: Not typed yet.
-import { BlockEditorProvider } from '@wordpress/block-editor';
-import { useMemo, useEffect, Fragment } from '@wordpress/element';
-import { usePrevious } from '@wordpress/compose';
+import { BlockEditorProvider } from '@/components/gutenberg/block-editor';
+import { useMemo, useEffect, Fragment } from '@/lib/gutenberg/element';
+import { usePrevious } from '@/hooks/gutenberg/compose';
 import {
 	generateGlobalStyles,
 	mergeGlobalStyles,
-} from '@wordpress/global-styles-engine';
-import type { GlobalStylesConfig } from '@wordpress/global-styles-engine';
+} from '@/lib/gutenberg/global-styles-engine';
+import type { GlobalStylesConfig } from '@/lib/gutenberg/global-styles-engine';
 import { GlobalStylesProvider } from './provider';
 import ScreenRoot from './screen-root';
 import ScreenBlockList from './screen-block-list';

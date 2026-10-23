@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { Button } from '@wordpress/components';
-import { plus } from '@wordpress/icons';
-import { _x } from '@wordpress/i18n';
+import { Button } from '@/components/gutenberg/ui';
+import { plus } from '@/components/gutenberg/icons';
+import { _x } from '@/lib/gutenberg/i18n';
 
 function ZoomOutModeInserterButton( { onClick } ) {
 	return (

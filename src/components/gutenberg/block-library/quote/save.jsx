@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { InnerBlocks, RichText, useBlockProps } from '@wordpress/block-editor';
+import { InnerBlocks, RichText, useBlockProps } from '@/components/gutenberg/block-editor';
 
 export default function save( { attributes } ) {
 	const { textAlign, citation } = attributes;

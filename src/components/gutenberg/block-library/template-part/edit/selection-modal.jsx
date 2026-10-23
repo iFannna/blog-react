@@ -1,12 +1,12 @@
-import { useMemo, useState } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import { store as noticesStore } from '@wordpress/notices';
-import { useDispatch } from '@wordpress/data';
-import { __experimentalBlockPatternsList as BlockPatternsList } from '@wordpress/block-editor';
+import { useMemo, useState } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { __experimentalBlockPatternsList as BlockPatternsList } from '@/components/gutenberg/block-editor';
 import {
 	SearchControl,
 	__experimentalHStack as HStack,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	useAlternativeBlockPatterns,
 	useAlternativeTemplateParts,

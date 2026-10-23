@@ -1,7 +1,7 @@
-import { useResizeObserver, useRefEffect } from '@wordpress/compose';
-import { useSelect } from '@wordpress/data';
-import { memo, useMemo } from '@wordpress/element';
-import { Disabled } from '@wordpress/components';
+import { useResizeObserver, useRefEffect } from '@/hooks/gutenberg/compose';
+import { useSelect } from '@/stores/gutenberg/data';
+import { memo, useMemo } from '@/lib/gutenberg/element';
+import { Disabled } from '@/components/gutenberg/ui';
 import BlockList from '../block-list';
 import Iframe from '../iframe';
 import EditorStyles from '../editor-styles';

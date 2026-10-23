@@ -1,7 +1,7 @@
 import fastDeepEqual from 'fast-deep-equal/es6/index.js';
-import { compose } from '@wordpress/compose';
-import { combineReducers } from '@wordpress/data';
-import { createUndoManager } from '@wordpress/undo-manager';
+import { compose } from '@/hooks/gutenberg/compose';
+import { combineReducers } from '@/stores/gutenberg/data';
+import { createUndoManager } from '@/stores/gutenberg/undo-manager';
 import { clearUnchangedEdits, ifMatchingAction, replaceAction } from './utils';
 import { reducer as queriedDataReducer } from './queried-data';
 import { rootEntitiesConfig, DEFAULT_ENTITY_KEY } from './entities';

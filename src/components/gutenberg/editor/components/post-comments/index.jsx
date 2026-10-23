@@ -1,9 +1,9 @@
-import { __, _x } from '@wordpress/i18n';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import {
 	RadioControl,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
+} from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import { store as editorStore } from '../../store';
 
 const COMMENT_OPTIONS = [

@@ -1,16 +1,16 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	useBlockProps,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { Popover } from '@wordpress/components';
+} from '@/components/gutenberg/block-editor';
+import { Popover } from '@/components/gutenberg/ui';
 import {
 	// eslint-disable-next-line @wordpress/use-recommended-components
 	ValidatedTextareaControl,
-} from '@wordpress/ui';
-import { useState, useEffect, useRef } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
-import { useEvent } from '@wordpress/compose';
+} from '@/components/gutenberg/design-system';
+import { useState, useEffect, useRef } from '@/lib/gutenberg/element';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { useEvent } from '@/hooks/gutenberg/compose';
 
 export default function MathEdit( { attributes, setAttributes, isSelected } ) {
 	const { latex, mathML } = attributes;
@@ -39,7 +39,7 @@ export default function MathEdit( { attributes, setAttributes, isSelected } ) {
 	} );
 
 	useEffect( () => {
-		import( '@wordpress/latex-to-mathml' ).then( ( module ) => {
+		import( '@/utils/gutenberg/latex-to-mathml' ).then( ( module ) => {
 			setLatexToMathML( () => module.default );
 			renderLatest( module.default );
 		} );

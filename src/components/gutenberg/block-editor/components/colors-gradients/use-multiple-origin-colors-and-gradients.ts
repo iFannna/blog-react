@@ -1,6 +1,6 @@
-import { useMemo } from '@wordpress/element';
-import { _x } from '@wordpress/i18n';
-import type { Color, Gradient } from '@wordpress/global-styles-engine';
+import { useMemo } from '@/lib/gutenberg/element';
+import { _x } from '@/lib/gutenberg/i18n';
+import type { Color, Gradient } from '@/lib/gutenberg/global-styles-engine';
 import { useSettings } from '../use-settings';
 import type {
 	ColorOrigin,

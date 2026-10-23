@@ -1,7 +1,7 @@
-import { createHigherOrderComponent, compose } from '@wordpress/compose';
-import { Component } from '@wordpress/element';
+import { createHigherOrderComponent, compose } from '@/hooks/gutenberg/compose';
+import { Component } from '@/lib/gutenberg/element';
 import type { ComponentClass, ComponentType, FunctionComponent } from 'react';
-import type { FontSizePreset } from '@wordpress/global-styles-engine';
+import type { FontSizePreset } from '@/lib/gutenberg/global-styles-engine';
 import { getFontSize, getFontSizeClass } from './utils';
 import { useSettings } from '../use-settings';
 import type {

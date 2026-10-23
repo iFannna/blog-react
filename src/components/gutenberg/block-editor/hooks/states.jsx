@@ -1,6 +1,6 @@
-import { useMemo } from '@wordpress/element';
-import { privateApis as globalStylesEnginePrivateApis } from '@wordpress/global-styles-engine';
-import { __, _x } from '@wordpress/i18n';
+import { useMemo } from '@/lib/gutenberg/element';
+import { privateApis as globalStylesEnginePrivateApis } from '@/lib/gutenberg/global-styles-engine';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import StateControl from '../components/global-styles/state-control';
 import StateControlBadges from '../components/global-styles/state-control-badges';
 import { useToolsPanelDropdownMenuProps } from '../components/global-styles/utils';

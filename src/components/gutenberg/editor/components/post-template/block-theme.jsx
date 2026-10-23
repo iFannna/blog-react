@@ -1,13 +1,13 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { decodeEntities } from '@wordpress/html-entities';
-import { Button } from '@wordpress/components';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { Button } from '@/components/gutenberg/ui';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of the new Menu, pending WordPress/gutenberg#76135.
-import { Menu } from '@wordpress/ui';
-import { useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { useEntityRecord, store as coreStore } from '@wordpress/core-data';
-import { store as noticesStore } from '@wordpress/notices';
-import { store as preferencesStore } from '@wordpress/preferences';
+import { Menu } from '@/components/gutenberg/design-system';
+import { useState } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useEntityRecord, store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import PostPanelRow from '../post-panel-row';
 import { store as editorStore } from '../../store';
 import SwapTemplateButton, { SwapTemplateModal } from './swap-template-button';

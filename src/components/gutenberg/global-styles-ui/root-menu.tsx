@@ -1,4 +1,4 @@
-import { __experimentalItemGroup as ItemGroup } from '@wordpress/components';
+import { __experimentalItemGroup as ItemGroup } from '@/components/gutenberg/ui';
 import {
 	background,
 	blockDefault,
@@ -6,11 +6,11 @@ import {
 	color,
 	layout,
 	shadow as shadowIcon,
-} from '@wordpress/icons';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/icons';
+import { __ } from '@/lib/gutenberg/i18n';
 // @ts-expect-error: Not typed yet.
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
-import type { GlobalStylesSettings } from '@wordpress/global-styles-engine';
+import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
+import type { GlobalStylesSettings } from '@/lib/gutenberg/global-styles-engine';
 import { NavigationButtonAsItem } from './navigation-button';
 import { useSetting } from './hooks';
 import { unlock } from './lock-unlock';

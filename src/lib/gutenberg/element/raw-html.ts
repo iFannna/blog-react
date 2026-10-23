@@ -15,7 +15,7 @@ export type RawHTMLProps = {
  *
  * @example
  * ```jsx
- * import { RawHTML } from '@wordpress/element';
+ * import { RawHTML } from '@/lib/gutenberg/element';
  *
  * const Component = () => <RawHTML><h3>Hello world</h3></RawHTML>;
  * // Edit: <div><h3>Hello world</h3></div>

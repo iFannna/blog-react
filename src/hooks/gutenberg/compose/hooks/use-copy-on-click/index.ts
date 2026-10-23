@@ -1,5 +1,5 @@
-import { useEffect, useState } from '@wordpress/element';
-import deprecated from '@wordpress/deprecated';
+import { useEffect, useState } from '@/lib/gutenberg/element';
+import deprecated from '@/utils/gutenberg/deprecated';
 import type { RefObject } from 'react';
 import { restoreFocus, copyToClipboard } from '../use-copy-to-clipboard';
 

@@ -1,14 +1,14 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useRefEffect } from '@wordpress/compose';
-import { ENTER, BACKSPACE, DELETE } from '@wordpress/keycodes';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { ENTER, BACKSPACE, DELETE } from '@/utils/gutenberg/keycodes';
 import {
 	createBlock,
 	getDefaultBlockName,
 	hasBlockSupport,
 	getBlockTransforms,
 	findTransform,
-} from '@wordpress/blocks';
-import type { BlockEnterTransform } from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
+import type { BlockEnterTransform } from '@/lib/gutenberg/blocks';
 import { store as blockEditorStore } from '../../store';
 import { setContentEditableWrapper } from './utils';
 import { getBlockClientId, getSelectionEditableElement } from '../../utils/dom';

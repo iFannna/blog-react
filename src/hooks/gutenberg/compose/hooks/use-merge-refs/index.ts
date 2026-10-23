@@ -1,4 +1,4 @@
-import { useRef, useCallback, useLayoutEffect } from '@wordpress/element';
+import { useRef, useCallback, useLayoutEffect } from '@/lib/gutenberg/element';
 import type { Ref, RefCallback } from 'react';
 
 // Returns a cleanup function if the ref callback returned one (React 19 ref

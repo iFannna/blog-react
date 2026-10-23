@@ -1,14 +1,14 @@
-import { useSelect, useDispatch, useRegistry } from '@wordpress/data';
+import { useSelect, useDispatch, useRegistry } from '@/stores/gutenberg/data';
 import {
 	createContext,
 	useContext,
 	useMemo,
 	useRef,
 	useState,
-} from '@wordpress/element';
-import { useRefEffect } from '@wordpress/compose';
-import { Popover } from '@wordpress/components';
-import { getBlockType } from '@wordpress/blocks';
+} from '@/lib/gutenberg/element';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { Popover } from '@/components/gutenberg/ui';
+import { getBlockType } from '@/lib/gutenberg/blocks';
 import {
 	RichTextData,
 	create,
@@ -16,8 +16,8 @@ import {
 	split,
 	toHTMLString,
 	privateApis as richTextPrivateApis,
-} from '@wordpress/rich-text';
-import type { RichTextValue } from '@wordpress/rich-text';
+} from '@/components/gutenberg/rich-text';
+import type { RichTextValue } from '@/components/gutenberg/rich-text';
 import type { ReactNode, RefObject } from 'react';
 import { store as blockEditorStore } from '../../store';
 import { unlock } from '../../lock-unlock';

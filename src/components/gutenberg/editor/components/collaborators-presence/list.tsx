@@ -1,8 +1,8 @@
-import { __ } from '@wordpress/i18n';
-import { Popover, Button } from '@wordpress/components';
-import { closeSmall } from '@wordpress/icons';
-import { type PostEditorAwarenessState } from '@wordpress/core-data';
-import { speak } from '@wordpress/a11y';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Popover, Button } from '@/components/gutenberg/ui';
+import { closeSmall } from '@/components/gutenberg/icons';
+import { type PostEditorAwarenessState } from '@/stores/gutenberg/core-data';
+import { speak } from '@/utils/gutenberg/a11y';
 import Avatar from './avatar';
 import { getAvatarUrl } from '../collaborators-overlay/get-avatar-url';
 import { getAvatarBorderColor } from '../collab-sidebar/utils';

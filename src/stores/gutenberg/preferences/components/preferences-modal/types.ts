@@ -1,4 +1,4 @@
-import type { Modal } from '@wordpress/components';
+import type { Modal } from '@/components/gutenberg/ui';
 
 type ModalProps = Parameters< typeof Modal >[ 0 ];
 

@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
 import clsx from 'clsx';
-import { Button } from '@wordpress/components';
-import { createInterpolateElement, memo, useContext } from '@wordpress/element';
-import { sprintf, __, _x, isRTL } from '@wordpress/i18n';
-import { next, previous } from '@wordpress/icons';
-import { Select, Stack } from '@wordpress/ui';
+import { Button } from '@/components/gutenberg/ui';
+import { createInterpolateElement, memo, useContext } from '@/lib/gutenberg/element';
+import { sprintf, __, _x, isRTL } from '@/lib/gutenberg/i18n';
+import { next, previous } from '@/components/gutenberg/icons';
+import { Select, Stack } from '@/components/gutenberg/design-system';
 import DataViewsContext from '../dataviews-context';
 import type { View } from '../../types';
 

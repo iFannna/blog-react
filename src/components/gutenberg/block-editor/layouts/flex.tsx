@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { __, _x } from '@wordpress/i18n';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import {
 	justifyLeft,
 	justifyCenter,
@@ -13,14 +13,14 @@ import {
 	justifySpaceBetweenVertical,
 	arrowRight,
 	arrowDown,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import {
 	Flex,
 	ToggleControl,
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import { appendSelectors, getBlockGapCSS } from './utils';
 import { getGapCSSValue, getGapBoxControlValueFromStyle } from '../hooks/gap';
 import { getSpacingPresetCssVar } from '../components/spacing-sizes-control/utils';

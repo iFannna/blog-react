@@ -1,6 +1,6 @@
-import { useMemo, useState, useEffect } from '@wordpress/element';
-import { usePrevious } from '@wordpress/compose';
-import { getScrollContainer } from '@wordpress/dom';
+import { useMemo, useState, useEffect } from '@/lib/gutenberg/element';
+import { usePrevious } from '@/hooks/gutenberg/compose';
+import { getScrollContainer } from '@/utils/gutenberg/dom';
 
 const PAGE_SIZE = 20;
 

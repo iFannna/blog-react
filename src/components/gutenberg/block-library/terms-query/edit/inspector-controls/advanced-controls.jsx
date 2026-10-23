@@ -1,8 +1,8 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	InspectorControls,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import { unlock } from '../../../lock-unlock';
 
 const { HTMLElementControl } = unlock( blockEditorPrivateApis );

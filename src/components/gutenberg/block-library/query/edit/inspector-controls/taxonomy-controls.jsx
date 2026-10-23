@@ -1,17 +1,17 @@
-import { __experimentalVStack as VStack } from '@wordpress/components';
+import { __experimentalVStack as VStack } from '@/components/gutenberg/ui';
 import {
 	SearchableChipSelectControl,
 	Spinner,
 	Stack,
 	VisuallyHidden,
-} from '@wordpress/ui';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { useState, useEffect, useMemo, Fragment } from '@wordpress/element';
-import { useDebounce } from '@wordpress/compose';
-import { speak } from '@wordpress/a11y';
-import { decodeEntities } from '@wordpress/html-entities';
-import { sprintf, _n, _x, __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/design-system';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useState, useEffect, useMemo, Fragment } from '@/lib/gutenberg/element';
+import { useDebounce } from '@/hooks/gutenberg/compose';
+import { speak } from '@/utils/gutenberg/a11y';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { sprintf, _n, _x, __ } from '@/lib/gutenberg/i18n';
 import { useTaxonomies } from '../../utils';
 
 const EMPTY_ARRAY = [];

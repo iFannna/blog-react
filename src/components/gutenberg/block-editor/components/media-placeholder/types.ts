@@ -5,7 +5,7 @@ import type {
 	MouseEventHandler,
 	ReactNode,
 } from 'react';
-import type { Placeholder } from '@wordpress/components';
+import type { Placeholder } from '@/components/gutenberg/ui';
 
 /**
  * A media item the placeholder shows or a gallery adds to.

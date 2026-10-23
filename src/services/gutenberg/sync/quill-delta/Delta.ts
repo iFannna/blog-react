@@ -612,7 +612,7 @@ class Delta {
 	 *       diff. When this is fixed, it should not be necessary to verify that the
 	 *       transformed diff applies cleanly.
 	 *
-	 * @see import("@wordpress/core-data/src/utils/crdt-blocks").mergeRichTextUpdate()
+	 * @see import("@/stores/gutenberg/core-data/utils/crdt-blocks").mergeRichTextUpdate()
 	 *
 	 * @param other             - The other Delta to diff against.
 	 * @param cursorAfterChange - The cursor position index after the change.

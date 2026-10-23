@@ -1,6 +1,6 @@
-import { _x, sprintf } from '@wordpress/i18n';
-import { customLink as linkIcon } from '@wordpress/icons';
-import { addFilter } from '@wordpress/hooks';
+import { _x, sprintf } from '@/lib/gutenberg/i18n';
+import { customLink as linkIcon } from '@/components/gutenberg/icons';
+import { addFilter } from '@/hooks/gutenberg/hooks';
 import deprecated from './deprecated';
 import initBlock from '../utils/init-block';
 import metadata from './block.json';

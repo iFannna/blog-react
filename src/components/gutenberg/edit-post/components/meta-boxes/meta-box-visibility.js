@@ -1,6 +1,6 @@
-import { useEffect } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { store as editorStore } from '@wordpress/editor';
+import { useEffect } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as editorStore } from '@/components/gutenberg/editor';
 
 export default function MetaBoxVisibility( { id } ) {
 	const isVisible = useSelect(

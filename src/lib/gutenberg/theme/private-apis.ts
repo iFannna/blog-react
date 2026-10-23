@@ -1,4 +1,4 @@
-import deprecated from '@wordpress/deprecated';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { lock } from './lock-unlock.ts';
 import { ThemeProvider } from './theme-provider.tsx';
 import { useThemeProviderStyles } from './use-theme-provider-styles.ts';

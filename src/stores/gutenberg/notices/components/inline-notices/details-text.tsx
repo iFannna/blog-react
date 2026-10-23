@@ -1,4 +1,4 @@
-import { Link } from '@wordpress/ui';
+import { Link } from '@/components/gutenberg/design-system';
 
 const URL_PATTERN = /https?:\/\/[^\s<>"]+/g;
 

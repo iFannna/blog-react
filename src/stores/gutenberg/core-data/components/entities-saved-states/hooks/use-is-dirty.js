@@ -1,5 +1,5 @@
-import { useSelect } from '@wordpress/data';
-import { useMemo, useState } from '@wordpress/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo, useState } from '@/lib/gutenberg/element';
 import { STORE_NAME } from '../../../name';
 
 /**

@@ -1,8 +1,8 @@
-import { Popover, ToolbarButton } from '@wordpress/components';
-import { Text } from '@wordpress/ui';
-import { __, sprintf } from '@wordpress/i18n';
-import { useState, useRef } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
+import { Popover, ToolbarButton } from '@/components/gutenberg/ui';
+import { Text } from '@/components/gutenberg/design-system';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useState, useRef } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
 import { store as blockEditorStore } from '../../store';
 
 /**

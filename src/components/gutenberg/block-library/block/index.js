@@ -1,7 +1,7 @@
-import { symbol as icon } from '@wordpress/icons';
-import { store as coreStore } from '@wordpress/core-data';
-import { select } from '@wordpress/data';
-import { decodeEntities } from '@wordpress/html-entities';
+import { symbol as icon } from '@/components/gutenberg/icons';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { select } from '@/stores/gutenberg/data';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import initBlock from '../utils/init-block';
 import metadata from './block.json';
 import edit from './edit';

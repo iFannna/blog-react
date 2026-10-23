@@ -1,8 +1,8 @@
-import { addFilter } from '@wordpress/hooks';
-import { TextControl, ExternalLink } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { hasBlockSupport } from '@wordpress/blocks';
-import type { BlockType } from '@wordpress/blocks';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import { TextControl, ExternalLink } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { hasBlockSupport } from '@/lib/gutenberg/blocks';
+import type { BlockType } from '@/lib/gutenberg/blocks';
 import { InspectorControls } from '../components';
 import { useBlockEditingMode } from '../components/block-editing-mode';
 import type { AnchorAttributes, AnchorEditProps } from './types';

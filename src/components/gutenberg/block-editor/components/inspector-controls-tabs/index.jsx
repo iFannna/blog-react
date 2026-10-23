@@ -1,11 +1,11 @@
 import {
 	Icon as WCIcon,
 	privateApis as componentsPrivateApis,
-} from '@wordpress/components';
-import { useEffect, useState, useRef } from '@wordpress/element';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { Tooltip } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { useEffect, useState, useRef } from '@/lib/gutenberg/element';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { Tooltip } from '@/components/gutenberg/design-system';
 import { TAB_SETTINGS, TAB_STYLES, TAB_LIST_VIEW, TAB_CONTENT } from './utils';
 import SettingsTab from './settings-tab';
 import StylesTab from './styles-tab';

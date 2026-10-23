@@ -1,4 +1,4 @@
-import { column as icon } from '@wordpress/icons';
+import { column as icon } from '@/components/gutenberg/icons';
 import initBlock from '../utils/init-block';
 import deprecated from './deprecated';
 import edit from './edit';

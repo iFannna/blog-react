@@ -1,4 +1,4 @@
-import { createHigherOrderComponent } from '@wordpress/compose';
+import { createHigherOrderComponent } from '@/hooks/gutenberg/compose';
 import { RegistryConsumer } from '../registry-provider';
 
 /**

@@ -1,9 +1,9 @@
-import { Modal } from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
-import { ShortcutProvider } from '@wordpress/keyboard-shortcuts';
-import { store as noticesStore } from '@wordpress/notices';
-import type { Field, Form } from '@wordpress/dataviews';
+import { Modal } from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { ShortcutProvider } from '@/components/gutenberg/keyboard-shortcuts';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import type { Field, Form } from '@/components/gutenberg/dataviews';
 import type { KeyboardEvent as ReactKeyboardEvent } from 'react';
 import MediaEditor from '../media-editor';
 import type { Media } from '../media-editor-provider';

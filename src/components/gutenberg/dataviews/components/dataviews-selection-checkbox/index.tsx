@@ -1,5 +1,5 @@
-import { Checkbox } from '@wordpress/ui';
-import { __ } from '@wordpress/i18n';
+import { Checkbox } from '@/components/gutenberg/design-system';
+import { __ } from '@/lib/gutenberg/i18n';
 import type { SetSelection } from '../../types/private';
 import type { NormalizedField } from '../../types';
 

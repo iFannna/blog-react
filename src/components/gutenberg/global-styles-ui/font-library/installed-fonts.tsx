@@ -1,4 +1,4 @@
-import { Progress } from '@wordpress/ui';
+import { Progress } from '@/components/gutenberg/design-system';
 import {
 	Button,
 	__experimentalConfirmDialog as ConfirmDialog,
@@ -12,17 +12,17 @@ import {
 	Flex,
 	Notice,
 	CheckboxControl as WCCheckboxControl,
-} from '@wordpress/components';
-import { useEntityRecord, store as coreStore } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
-import { useContext, useEffect, useMemo, useState } from '@wordpress/element';
-import { __, _x, sprintf, isRTL } from '@wordpress/i18n';
-import { chevronLeft, chevronRight } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { useEntityRecord, store as coreStore } from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useContext, useEffect, useMemo, useState } from '@/lib/gutenberg/element';
+import { __, _x, sprintf, isRTL } from '@/lib/gutenberg/i18n';
+import { chevronLeft, chevronRight } from '@/components/gutenberg/icons';
 import type {
 	FontFamilyPreset,
 	GlobalStylesConfig,
-} from '@wordpress/global-styles-engine';
-import type { FontFamily } from '@wordpress/core-data';
+} from '@/lib/gutenberg/global-styles-engine';
+import type { FontFamily } from '@/stores/gutenberg/core-data';
 import { FontLibraryContext } from './context';
 import FontCard from './font-card';
 import LibraryFontVariant from './library-font-variant';

@@ -1,4 +1,4 @@
-import type { Color } from '@wordpress/global-styles-engine';
+import type { Color } from '@/lib/gutenberg/global-styles-engine';
 import { useSetting, useStyle } from './hooks';
 
 export function useStylesPreviewColors(): {

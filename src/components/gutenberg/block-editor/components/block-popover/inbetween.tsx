@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { useSelect } from '@wordpress/data';
-import { useMemo, useReducer, useLayoutEffect } from '@wordpress/element';
-import { Popover } from '@wordpress/components';
-import { isRTL } from '@wordpress/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo, useReducer, useLayoutEffect } from '@/lib/gutenberg/element';
+import { Popover } from '@/components/gutenberg/ui';
+import { isRTL } from '@/lib/gutenberg/i18n';
 import { store as blockEditorStore } from '../../store';
 import { useBlockElement } from '../block-list/use-block-props/use-block-refs';
 import usePopoverScroll from './use-popover-scroll';

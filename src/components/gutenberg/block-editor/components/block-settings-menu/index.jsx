@@ -1,4 +1,4 @@
-import { ToolbarGroup, ToolbarItem } from '@wordpress/components';
+import { ToolbarGroup, ToolbarItem } from '@/components/gutenberg/ui';
 import BlockSettingsDropdown from './block-settings-dropdown';
 import NoteIconToolbarSlotFill from '../../components/collab/note-icon-toolbar-slot';
 

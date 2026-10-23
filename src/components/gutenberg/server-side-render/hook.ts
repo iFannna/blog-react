@@ -1,8 +1,8 @@
-import { debounce } from '@wordpress/compose';
-import { useEffect, useState, useRef } from '@wordpress/element';
-import apiFetch from '@wordpress/api-fetch';
-import { addQueryArgs } from '@wordpress/url';
-import { sanitizeBlockAttributes } from '@wordpress/blocks';
+import { debounce } from '@/hooks/gutenberg/compose';
+import { useEffect, useState, useRef } from '@/lib/gutenberg/element';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { addQueryArgs } from '@/utils/gutenberg/url';
+import { sanitizeBlockAttributes } from '@/lib/gutenberg/blocks';
 import { parseErrorMessage } from './errors';
 
 export function rendererPath(
@@ -88,8 +88,8 @@ export interface UseServerSideRenderArgs {
  * Basic usage:
  *
  * ```jsx
- * import { RawHTML } from '@wordpress/element';
- * import { useServerSideRender } from '@wordpress/server-side-render';
+ * import { RawHTML } from '@/lib/gutenberg/element';
+ * import { useServerSideRender } from '@/components/gutenberg/server-side-render';
  *
  * function MyServerSideRender( { attributes, block } ) {
  *   const { content, status, error } = useServerSideRender( {

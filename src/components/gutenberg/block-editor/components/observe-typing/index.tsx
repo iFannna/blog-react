@@ -1,6 +1,6 @@
-import { useRefEffect, useMergeRefs } from '@wordpress/compose';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { isTextField } from '@wordpress/dom';
+import { useRefEffect, useMergeRefs } from '@/hooks/gutenberg/compose';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { isTextField } from '@/utils/gutenberg/dom';
 import {
 	UP,
 	RIGHT,
@@ -10,7 +10,7 @@ import {
 	BACKSPACE,
 	ESCAPE,
 	TAB,
-} from '@wordpress/keycodes';
+} from '@/utils/gutenberg/keycodes';
 import { store as blockEditorStore } from '../../store';
 import type { ObserveTypingProps } from './types';
 

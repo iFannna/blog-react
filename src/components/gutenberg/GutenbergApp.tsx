@@ -11,7 +11,7 @@ declare global {
 
 /**
  * 编辑器外壳：只负责挂载容器和引导参考工程的原生编辑器。
- * 所有区块、侧栏与画布逻辑都来自 src/lib/gutenberg 与 src/styles/gutenberg。
+ * 所有区块、侧栏与画布逻辑都来自 src/components/gutenberg 与 src/styles/gutenberg。
  */
 export function GutenbergApp({ locale }: { locale: string }) {
   useEffect(() => {
@@ -36,7 +36,7 @@ export function GutenbergApp({ locale }: { locale: string }) {
         settings.isRTL = false;
       }
 
-      await import("@/lib/gutenberg/editor.jsx");
+      await import("@/services/gutenberg/bootstrap.js");
     })().catch((error) => {
       window.__gutenbergBooted = false;
       console.error("Gutenberg editor failed to start:", error);

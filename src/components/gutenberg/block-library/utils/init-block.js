@@ -1,4 +1,4 @@
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockType } from '@/lib/gutenberg/blocks';
 
 /**
  * Function to register an individual block.

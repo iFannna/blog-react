@@ -2,12 +2,12 @@ import {
 	Placeholder,
 	Button,
 	Spinner as WCSpinner,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { navigation, Icon } from '@wordpress/icons';
-import { speak } from '@wordpress/a11y';
-import { useEffect } from '@wordpress/element';
-import { useEntityRecords } from '@wordpress/core-data';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { navigation, Icon } from '@/components/gutenberg/icons';
+import { speak } from '@/utils/gutenberg/a11y';
+import { useEffect } from '@/lib/gutenberg/element';
+import { useEntityRecords } from '@/stores/gutenberg/core-data';
 import PlaceholderPreview from './placeholder-preview';
 import NavigationMenuSelector from '../navigation-menu-selector';
 

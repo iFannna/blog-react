@@ -1,6 +1,6 @@
-import { createBlock } from '@wordpress/blocks';
-import { createBlobURL } from '@wordpress/blob';
-import { addFilter } from '@wordpress/hooks';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { createBlobURL } from '@/utils/gutenberg/blob';
+import { addFilter } from '@/hooks/gutenberg/hooks';
 import {
 	LINK_DESTINATION_ATTACHMENT,
 	LINK_DESTINATION_NONE,

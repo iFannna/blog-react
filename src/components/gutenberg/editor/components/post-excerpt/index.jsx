@@ -1,8 +1,8 @@
-import { __ } from '@wordpress/i18n';
-import { TextareaControl as WCTextareaControl } from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useState } from '@wordpress/element';
-import { decodeEntities } from '@wordpress/html-entities';
+import { __ } from '@/lib/gutenberg/i18n';
+import { TextareaControl as WCTextareaControl } from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useState } from '@/lib/gutenberg/element';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { store as editorStore } from '../../store';
 
 /**

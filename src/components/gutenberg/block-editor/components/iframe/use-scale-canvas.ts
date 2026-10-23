@@ -1,5 +1,5 @@
-import { useEffect, useRef, useCallback, useState } from '@wordpress/element';
-import { useReducedMotion, useResizeObserver } from '@wordpress/compose';
+import { useEffect, useRef, useCallback, useState } from '@/lib/gutenberg/element';
+import { useReducedMotion, useResizeObserver } from '@/hooks/gutenberg/compose';
 import type {
 	ObservedSize,
 	ScaleCanvasOptions,

@@ -1,7 +1,7 @@
-import { useSelect } from '@wordpress/data';
-import { decodeEntities } from '@wordpress/html-entities';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { store as coreStore } from '@wordpress/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { unlock } from '../../lock-unlock';
 
 /**

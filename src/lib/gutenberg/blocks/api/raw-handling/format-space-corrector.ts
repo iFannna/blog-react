@@ -1,4 +1,4 @@
-import { isPhrasingContent } from '@wordpress/dom';
+import { isPhrasingContent } from '@/utils/gutenberg/dom';
 
 /**
  * Moves a space from one edge of an element out to the surrounding text.

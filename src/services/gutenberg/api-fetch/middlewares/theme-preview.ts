@@ -1,4 +1,4 @@
-import { addQueryArgs, getQueryArg, removeQueryArgs } from '@wordpress/url';
+import { addQueryArgs, getQueryArg, removeQueryArgs } from '@/utils/gutenberg/url';
 import type { APIFetchMiddleware } from '../types';
 
 /**

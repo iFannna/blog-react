@@ -1,8 +1,8 @@
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useCallback, useMemo, useState } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import { store as noticesStore } from '@wordpress/notices';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useCallback, useMemo, useState } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
 import { store as blockEditorStore } from '../../store';
 import { mediaEditKey } from '../../store/private-keys';
 import type { EditMediaEntity, SaveImage, SaveImageOptions } from './types';

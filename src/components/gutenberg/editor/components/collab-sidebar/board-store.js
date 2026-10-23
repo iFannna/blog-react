@@ -1,4 +1,4 @@
-import { getScrollContainer } from '@wordpress/dom';
+import { getScrollContainer } from '@/utils/gutenberg/dom';
 import { getNoteAnchorRect } from './utils';
 
 const EMPTY_SNAPSHOT = {

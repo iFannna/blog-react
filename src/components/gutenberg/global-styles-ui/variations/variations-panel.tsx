@@ -1,7 +1,7 @@
-import type { BlockStyle } from '@wordpress/blocks';
-import { store as blocksStore } from '@wordpress/blocks';
-import { useSelect } from '@wordpress/data';
-import { __experimentalItemGroup as ItemGroup } from '@wordpress/components';
+import type { BlockStyle } from '@/lib/gutenberg/blocks';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
+import { useSelect } from '@/stores/gutenberg/data';
+import { __experimentalItemGroup as ItemGroup } from '@/components/gutenberg/ui';
 import { NavigationButtonAsItem } from '../navigation-button';
 import { useStyle } from '../hooks';
 

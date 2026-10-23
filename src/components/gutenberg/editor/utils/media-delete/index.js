@@ -1,4 +1,4 @@
-import apiFetch from '@wordpress/api-fetch';
+import apiFetch from '@/services/gutenberg/api-fetch';
 
 export default async function mediaDelete( id ) {
 	await apiFetch( {

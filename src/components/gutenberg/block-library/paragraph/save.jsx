@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { RichText, useBlockProps } from '@wordpress/block-editor';
-import { isRTL } from '@wordpress/i18n';
+import { RichText, useBlockProps } from '@/components/gutenberg/block-editor';
+import { isRTL } from '@/lib/gutenberg/i18n';
 
 export default function save( { attributes } ) {
 	const { content, dropCap, direction, style } = attributes;

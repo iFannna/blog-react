@@ -1,4 +1,4 @@
-import { getProtocol, isValidProtocol, isValidFragment } from '@wordpress/url';
+import { getProtocol, isValidProtocol, isValidFragment } from '@/utils/gutenberg/url';
 
 /**
  * Checks if a value is a hash/anchor link (e.g., #section).

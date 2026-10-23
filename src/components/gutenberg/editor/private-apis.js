@@ -1,4 +1,4 @@
-import * as interfaceApis from '@wordpress/interface';
+import * as interfaceApis from '@/components/gutenberg/interface';
 import { lock } from './lock-unlock';
 import BackButton from './components/header/back-button';
 import Editor from './components/editor';

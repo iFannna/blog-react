@@ -4,17 +4,17 @@ import {
 	__experimentalHStack as HStack,
 	__experimentalVStack as VStack,
 	__experimentalText as WCText,
-} from '@wordpress/components';
-import { Badge } from '@wordpress/ui';
-import { close } from '@wordpress/icons';
+} from '@/components/gutenberg/ui';
+import { Badge } from '@/components/gutenberg/design-system';
+import { close } from '@/components/gutenberg/icons';
 import {
 	store as coreStore,
 	privateApis as coreDataPrivateApis,
-} from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
+} from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
 import { store as editorStore } from '../../store';
 import {
 	TEMPLATE_POST_TYPE,

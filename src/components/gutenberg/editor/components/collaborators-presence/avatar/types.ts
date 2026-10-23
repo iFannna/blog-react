@@ -1,4 +1,4 @@
-import type { IconType } from '@wordpress/components';
+import type { IconType } from '@/components/gutenberg/ui';
 
 export type AvatarProps = {
 	/**

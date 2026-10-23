@@ -3,13 +3,13 @@ import {
 	useBlockProps,
 	useBlockDisplayInformation,
 	RichText,
-} from '@wordpress/block-editor';
-import { createBlock, getDefaultBlockName } from '@wordpress/blocks';
-import { Spinner as WCSpinner, TextControl } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { decodeEntities } from '@wordpress/html-entities';
-import { __ } from '@wordpress/i18n';
-import { store as coreStore } from '@wordpress/core-data';
+} from '@/components/gutenberg/block-editor';
+import { createBlock, getDefaultBlockName } from '@/lib/gutenberg/blocks';
+import { Spinner as WCSpinner, TextControl } from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { __ } from '@/lib/gutenberg/i18n';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import usePostTerms from './use-post-terms';
 
 // Allowed formats for the prefix and suffix fields.

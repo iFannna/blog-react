@@ -1,4 +1,4 @@
-import type { FontFace, FontFamily } from '@wordpress/core-data';
+import type { FontFace, FontFamily } from '@/stores/gutenberg/core-data';
 
 export function getFontsOutline(
 	fonts: FontFamily[]

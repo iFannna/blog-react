@@ -4,9 +4,9 @@
  * adjacent word changes into a single removed/added pair.
  */
 import { diffWordsWithSpace } from 'diff';
-import { useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import RevisionDiffPanel from '../revision-diff-panel';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';

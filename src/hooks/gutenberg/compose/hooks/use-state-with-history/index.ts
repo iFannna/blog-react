@@ -1,6 +1,6 @@
-import { createUndoManager } from '@wordpress/undo-manager';
-import { useCallback, useReducer } from '@wordpress/element';
-import type { UndoManager } from '@wordpress/undo-manager';
+import { createUndoManager } from '@/stores/gutenberg/undo-manager';
+import { useCallback, useReducer } from '@/lib/gutenberg/element';
+import type { UndoManager } from '@/stores/gutenberg/undo-manager';
 
 type UndoRedoState< T > = {
 	manager: UndoManager< T >;

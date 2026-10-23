@@ -1,10 +1,10 @@
-import type { Color } from '@wordpress/global-styles-engine';
-import { useViewportMatch } from '@wordpress/compose';
+import type { Color } from '@/lib/gutenberg/global-styles-engine';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
 import {
 	__experimentalPaletteEdit as PaletteEdit,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import { useSetting } from './hooks';
 import ColorVariations from './variations/variations-color';
 

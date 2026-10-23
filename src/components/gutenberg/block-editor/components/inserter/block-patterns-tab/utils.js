@@ -1,4 +1,4 @@
-import { __, _x } from '@wordpress/i18n';
+import { __, _x } from '@/lib/gutenberg/i18n';
 
 export const INSERTER_PATTERN_TYPES = {
 	user: 'user',

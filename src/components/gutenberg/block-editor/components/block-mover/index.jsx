@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { dragHandle } from '@wordpress/icons';
-import { ToolbarGroup, ToolbarItem, Button } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
+import { dragHandle } from '@/components/gutenberg/icons';
+import { ToolbarGroup, ToolbarItem, Button } from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
 import BlockDraggable from '../block-draggable';
 import { BlockMoverUpButton, BlockMoverDownButton } from './button';
 import { store as blockEditorStore } from '../../store';

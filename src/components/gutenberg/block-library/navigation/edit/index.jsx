@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useCallback, useState, useEffect, useRef } from '@wordpress/element';
+import { useCallback, useState, useEffect, useRef } from '@/lib/gutenberg/element';
 import {
 	InspectorControls,
 	useBlockProps,
@@ -15,13 +15,13 @@ import {
 	__experimentalUseMultipleOriginColorsAndGradients as useMultipleOriginColorsAndGradients,
 	useBlockEditingMode,
 	BlockControls,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	EntityProvider,
 	store as coreStore,
 	useEntityRecords,
-} from '@wordpress/core-data';
-import { useDispatch, useSelect } from '@wordpress/data';
+} from '@/stores/gutenberg/core-data';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
@@ -32,12 +32,12 @@ import {
 	Notice,
 	ToolbarButton,
 	ToolbarGroup,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { speak } from '@wordpress/a11y';
-import { page } from '@wordpress/icons';
-import { createBlock, getBlockSupport } from '@wordpress/blocks';
-import { useInstanceId } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { speak } from '@/utils/gutenberg/a11y';
+import { page } from '@/components/gutenberg/icons';
+import { createBlock, getBlockSupport } from '@/lib/gutenberg/blocks';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
 import useNavigationMenu from '../use-navigation-menu';
 import Placeholder from './placeholder';
 import ResponsiveWrapper from './responsive-wrapper';

@@ -1,8 +1,8 @@
-import { useSelect } from '@wordpress/data';
-import { useEffect, useState } from '@wordpress/element';
-import { __, _n, sprintf } from '@wordpress/i18n';
-import { Fill } from '@wordpress/components';
-import { store as noticesStore } from '@wordpress/notices';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useEffect, useState } from '@/lib/gutenberg/element';
+import { __, _n, sprintf } from '@/lib/gutenberg/i18n';
+import { Fill } from '@/components/gutenberg/ui';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import { store as editorStore } from '../../store';
 import { AUTOSAVE_RETRY_SLOT } from '../../store/constants';
 

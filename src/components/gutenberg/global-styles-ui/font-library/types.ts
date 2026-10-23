@@ -1,5 +1,5 @@
-import type { FontFamilyPreset } from '@wordpress/global-styles-engine';
-import type { FontFamily, FontFace } from '@wordpress/core-data';
+import type { FontFamilyPreset } from '@/lib/gutenberg/global-styles-engine';
+import type { FontFamily, FontFace } from '@/stores/gutenberg/core-data';
 
 export type FontFaceToUpload = FontFace & {
 	file?: File | File[];

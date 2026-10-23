@@ -1,9 +1,9 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
-import { fullscreen } from '@wordpress/icons';
-import { useCommand } from '@wordpress/commands';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { store as noticesStore } from '@wordpress/notices';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { fullscreen } from '@/components/gutenberg/icons';
+import { useCommand } from '@/lib/gutenberg/commands';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 
 export default function useCommands() {
 	const { isFullscreen } = useSelect( ( select ) => {

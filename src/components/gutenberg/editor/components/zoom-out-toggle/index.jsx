@@ -1,15 +1,15 @@
-import { Button } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useEffect } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { square as zoomOutIcon } from '@wordpress/icons';
-import { store as preferencesStore } from '@wordpress/preferences';
+import { Button } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useEffect } from '@/lib/gutenberg/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { square as zoomOutIcon } from '@/components/gutenberg/icons';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import {
 	useShortcut,
 	store as keyboardShortcutsStore,
-} from '@wordpress/keyboard-shortcuts';
-import { isAppleOS } from '@wordpress/keycodes';
+} from '@/components/gutenberg/keyboard-shortcuts';
+import { isAppleOS } from '@/utils/gutenberg/keycodes';
 import { unlock } from '../../lock-unlock';
 
 const ZoomOutToggle = ( { disabled } ) => {

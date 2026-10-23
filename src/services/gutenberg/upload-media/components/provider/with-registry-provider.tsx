@@ -1,6 +1,6 @@
-import { useState } from '@wordpress/element';
-import { useRegistry, createRegistry, RegistryProvider } from '@wordpress/data';
-import { createHigherOrderComponent } from '@wordpress/compose';
+import { useState } from '@/lib/gutenberg/element';
+import { useRegistry, createRegistry, RegistryProvider } from '@/stores/gutenberg/data';
+import { createHigherOrderComponent } from '@/hooks/gutenberg/compose';
 import { storeConfig } from '../../store';
 import { STORE_NAME as mediaUploadStoreName } from '../../store/constants';
 

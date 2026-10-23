@@ -1,4 +1,4 @@
-import { __, sprintf } from '@wordpress/i18n';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	headingLevel1,
 	headingLevel2,
@@ -6,7 +6,7 @@ import {
 	headingLevel4,
 	headingLevel5,
 	headingLevel6,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 
 const LEVEL_ICONS = [
 	headingLevel1,

@@ -1,5 +1,5 @@
-import { createContext } from '@wordpress/element';
-import type { GlobalStylesConfig } from '@wordpress/global-styles-engine';
+import { createContext } from '@/lib/gutenberg/element';
+import type { GlobalStylesConfig } from '@/lib/gutenberg/global-styles-engine';
 
 export interface GlobalStylesContextType {
 	user: GlobalStylesConfig;

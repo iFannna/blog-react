@@ -1,23 +1,23 @@
-import { useMemo } from '@wordpress/element';
-import { addFilter } from '@wordpress/hooks';
-import { useSelect } from '@wordpress/data';
+import { useMemo } from '@/lib/gutenberg/element';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	mergeGlobalStyles,
 	privateApis as globalStylesEnginePrivateApis,
-} from '@wordpress/global-styles-engine';
+} from '@/lib/gutenberg/global-styles-engine';
 import {
 	getBlockSupport,
 	getBlockType,
 	hasBlockSupport,
 	__EXPERIMENTAL_ELEMENTS as ELEMENTS,
-} from '@wordpress/blocks';
-import { useInstanceId } from '@wordpress/compose';
+} from '@/lib/gutenberg/blocks';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
 import {
 	getCSSRules,
 	compileCSS,
 	getCSSValueFromRawStyle,
 	VALID_BACKGROUND_CLIP_VALUES,
-} from '@wordpress/style-engine';
+} from '@/lib/gutenberg/style-engine';
 import { BACKGROUND_SUPPORT_KEY, BackgroundImagePanel } from './background';
 import { BORDER_SUPPORT_KEY, BorderPanel, SHADOW_SUPPORT_KEY } from './border';
 import { COLOR_SUPPORT_KEY } from './color';

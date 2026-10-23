@@ -1,5 +1,5 @@
-import { chevronRightSmall, chevronLeftSmall, Icon } from '@wordpress/icons';
-import { isRTL } from '@wordpress/i18n';
+import { chevronRightSmall, chevronLeftSmall, Icon } from '@/components/gutenberg/icons';
+import { isRTL } from '@/lib/gutenberg/i18n';
 
 export default function ListViewExpander( { onClick } ) {
 	return (

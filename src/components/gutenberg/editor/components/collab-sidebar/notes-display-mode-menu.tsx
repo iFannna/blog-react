@@ -1,15 +1,15 @@
-import { speak } from '@wordpress/a11y';
+import { speak } from '@/utils/gutenberg/a11y';
 // @ts-expect-error - No type declarations available for @wordpress/block-editor
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { __experimentalUseSlot as useSlot } from '@wordpress/components';
-import { useViewportMatch } from '@wordpress/compose';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useLayoutEffect, useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { store as interfaceStore } from '@wordpress/interface';
-import { store as preferencesStore } from '@wordpress/preferences';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { __experimentalUseSlot as useSlot } from '@/components/gutenberg/ui';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useLayoutEffect, useState } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { store as interfaceStore } from '@/components/gutenberg/interface';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 // eslint-disable-next-line @wordpress/use-recommended-components
-import { Menu } from '@wordpress/ui';
+import { Menu } from '@/components/gutenberg/design-system';
 import NotesMoreMenuGroup from '../more-menu/notes-more-menu-group';
 import MoreMenuSubmenu from '../more-menu/more-menu-submenu';
 import { ALL_NOTES_SIDEBAR } from './constants';

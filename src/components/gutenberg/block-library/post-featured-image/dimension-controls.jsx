@@ -1,9 +1,9 @@
-import { __, _x } from '@wordpress/i18n';
-import { __experimentalUseCustomUnits as useCustomUnits } from '@wordpress/components';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { __experimentalUseCustomUnits as useCustomUnits } from '@/components/gutenberg/ui';
 import {
 	privateApis as blockEditorPrivateApis,
 	useSettings,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	getActiveDimensionValue,
 	getDimensionUpdateAttributes,

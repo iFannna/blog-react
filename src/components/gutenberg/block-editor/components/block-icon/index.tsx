@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import { Icon as WCIcon } from '@wordpress/components';
-import type { IconType } from '@wordpress/components';
-import { blockDefault } from '@wordpress/icons';
-import { memo } from '@wordpress/element';
+import { Icon as WCIcon } from '@/components/gutenberg/ui';
+import type { IconType } from '@/components/gutenberg/ui';
+import { blockDefault } from '@/components/gutenberg/icons';
+import { memo } from '@/lib/gutenberg/element';
 import type { CSSProperties } from 'react';
-import type { BlockTypeIconDescriptor } from '@wordpress/blocks';
+import type { BlockTypeIconDescriptor } from '@/lib/gutenberg/blocks';
 import type { BlockIconProps } from './types';
 
 function BlockIcon( {

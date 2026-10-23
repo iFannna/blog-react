@@ -1,8 +1,8 @@
-import { BlockIcon, RichText, useBlockProps } from '@wordpress/block-editor';
-import { useEntityProp } from '@wordpress/core-data';
-import { __ } from '@wordpress/i18n';
-import { Placeholder } from '@wordpress/components';
-import { formatListNumbered as icon } from '@wordpress/icons';
+import { BlockIcon, RichText, useBlockProps } from '@/components/gutenberg/block-editor';
+import { useEntityProp } from '@/stores/gutenberg/core-data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Placeholder } from '@/components/gutenberg/ui';
+import { formatListNumbered as icon } from '@/components/gutenberg/icons';
 
 export default function FootnotesEdit( { context: { postType, postId } } ) {
 	const [ meta, updateMeta ] = useEntityProp(

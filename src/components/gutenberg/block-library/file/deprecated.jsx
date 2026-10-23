@@ -3,8 +3,8 @@ import {
 	__experimentalGetElementClassName,
 	RichText,
 	useBlockProps,
-} from '@wordpress/block-editor';
-import { __, sprintf } from '@wordpress/i18n';
+} from '@/components/gutenberg/block-editor';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 
 // Version of the file block without PR#43050 removing the translated aria-label.
 const v3 = {

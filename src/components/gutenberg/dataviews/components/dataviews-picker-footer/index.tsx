@@ -3,11 +3,11 @@ import clsx from 'clsx';
 import {
 	Button,
 	CheckboxControl as WCCheckboxControl,
-} from '@wordpress/components';
-import { useRegistry } from '@wordpress/data';
-import { useContext, useMemo, useState } from '@wordpress/element';
-import { Stack } from '@wordpress/ui';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { useRegistry } from '@/stores/gutenberg/data';
+import { useContext, useMemo, useState } from '@/lib/gutenberg/element';
+import { Stack } from '@/components/gutenberg/design-system';
+import { __ } from '@/lib/gutenberg/i18n';
 import DataViewsPagination from '../dataviews-pagination';
 import DataViewsContext from '../dataviews-context';
 import type { SetSelection } from '../../types/private';

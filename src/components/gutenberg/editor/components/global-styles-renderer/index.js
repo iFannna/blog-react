@@ -1,5 +1,5 @@
-import { useEffect } from '@wordpress/element';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useEffect } from '@/lib/gutenberg/element';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import { store as editorStore } from '../../store';
 import { useGlobalStylesOutput } from '../../hooks/use-global-styles-output';
 

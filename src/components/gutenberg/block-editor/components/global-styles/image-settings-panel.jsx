@@ -2,8 +2,8 @@ import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 	ToggleControl,
-} from '@wordpress/components';
-import { __, _x } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import { useToolsPanelDropdownMenuProps } from './utils';
 
 export function useHasImageSettingsPanel( name, value, inheritedValue ) {

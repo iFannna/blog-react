@@ -3,10 +3,10 @@ import {
 	__experimentalSpacer as Spacer,
 	Button,
 	Modal,
-} from '@wordpress/components';
-import { useContext, useMemo, useRef, useState } from '@wordpress/element';
-import { useFocusOnMount, useMergeRefs } from '@wordpress/compose';
-import { Stack } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { useContext, useMemo, useRef, useState } from '@/lib/gutenberg/element';
+import { useFocusOnMount, useMergeRefs } from '@/hooks/gutenberg/compose';
+import { Stack } from '@/components/gutenberg/design-system';
 import type {
 	Field,
 	NormalizedForm,

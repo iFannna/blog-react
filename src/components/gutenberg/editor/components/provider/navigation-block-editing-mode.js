@@ -1,6 +1,6 @@
-import { useEffect } from '@wordpress/element';
-import { useRegistry, useSelect } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+import { useEffect } from '@/lib/gutenberg/element';
+import { useRegistry, useSelect } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 
 /**
  * For the Navigation block editor, we need to force the block editor to contentOnly for that block.

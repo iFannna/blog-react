@@ -1,6 +1,6 @@
 import type { ComponentType, ReactElement } from 'react';
-import type { WPKeycodeModifier } from '@wordpress/keycodes';
-import type { ShortcodeAttrs, ShortcodeMatch } from '@wordpress/shortcode';
+import type { WPKeycodeModifier } from '@/utils/gutenberg/keycodes';
+import type { ShortcodeAttrs, ShortcodeMatch } from '@/utils/gutenberg/shortcode';
 
 /**
  * An icon type definition. One of a Dashicon slug, an element,

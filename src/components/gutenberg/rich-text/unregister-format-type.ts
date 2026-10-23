@@ -1,4 +1,4 @@
-import { select, dispatch } from '@wordpress/data';
+import { select, dispatch } from '@/stores/gutenberg/data';
 import { store as richTextStore } from './store';
 import type { FormatType } from './types';
 

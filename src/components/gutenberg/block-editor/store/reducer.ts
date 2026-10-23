@@ -1,12 +1,12 @@
 import fastDeepEqual from 'fast-deep-equal/es6/index.js';
-import { pipe } from '@wordpress/compose';
-import { combineReducers, select } from '@wordpress/data';
-import deprecated from '@wordpress/deprecated';
+import { pipe } from '@/hooks/gutenberg/compose';
+import { combineReducers, select } from '@/stores/gutenberg/data';
+import deprecated from '@/utils/gutenberg/deprecated';
 import {
 	store as blocksStore,
 	privateApis as blocksPrivateApis,
-} from '@wordpress/blocks';
-import type { Block } from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
+import type { Block } from '@/lib/gutenberg/blocks';
 import { PREFERENCES_DEFAULTS, SETTINGS_DEFAULTS } from './defaults';
 import { insertAt, moveTo } from './array';
 import { sectionRootClientIdKey, isIsolatedEditorKey } from './private-keys';

@@ -1,4 +1,4 @@
-import { useRefEffect } from '@wordpress/compose';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
 
 /**
  * Elements whose content the browser's own undo acts on (a dialog input, an

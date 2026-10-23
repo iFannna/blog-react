@@ -1,10 +1,10 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	__experimentalItemGroup as ItemGroup,
 	__experimentalVStack as VStack,
 	__experimentalHStack as HStack,
 	FlexItem,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import { NavigationButtonAsItem } from './navigation-button';
 import { Subtitle } from './subtitle';
 import { useStyle } from './hooks';

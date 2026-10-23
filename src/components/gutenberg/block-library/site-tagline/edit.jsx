@@ -1,13 +1,13 @@
-import { useSelect } from '@wordpress/data';
-import { store as coreStore, useEntityProp } from '@wordpress/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore, useEntityProp } from '@/stores/gutenberg/core-data';
 import {
 	useBlockProps,
 	BlockControls,
 	HeadingLevelDropdown,
 	RichText,
-} from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
-import { createBlock, getDefaultBlockName } from '@wordpress/blocks';
+} from '@/components/gutenberg/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
+import { createBlock, getDefaultBlockName } from '@/lib/gutenberg/blocks';
 import useDeprecatedTextAlign from '../utils/deprecated-text-align-attributes';
 
 export default function SiteTaglineEdit( props ) {

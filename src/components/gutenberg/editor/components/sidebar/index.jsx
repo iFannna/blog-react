@@ -1,13 +1,13 @@
 import {
 	BlockInspector,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { isRTL, __, _x } from '@wordpress/i18n';
-import { drawerLeft, drawerRight } from '@wordpress/icons';
-import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
-import { store as interfaceStore } from '@wordpress/interface';
-import { Tabs } from '@wordpress/ui';
+} from '@/components/gutenberg/block-editor';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { isRTL, __, _x } from '@/lib/gutenberg/i18n';
+import { drawerLeft, drawerRight } from '@/components/gutenberg/icons';
+import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
+import { store as interfaceStore } from '@/components/gutenberg/interface';
+import { Tabs } from '@/components/gutenberg/design-system';
 import PatternOverridesPanel from '../pattern-overrides-panel';
 import PluginDocumentSettingPanel from '../plugin-document-setting-panel';
 import PluginSidebar from '../plugin-sidebar';

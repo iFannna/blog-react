@@ -1,9 +1,9 @@
-import { createBlobURL } from '@wordpress/blob';
-import { createBlock } from '@wordpress/blocks';
-import { select } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { _x } from '@wordpress/i18n';
-import { getFilename } from '@wordpress/url';
+import { createBlobURL } from '@/utils/gutenberg/blob';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import { select } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { _x } from '@/lib/gutenberg/i18n';
+import { getFilename } from '@/utils/gutenberg/url';
 
 // Transforms bypass the default variation, so set the localized default here.
 const downloadButtonText = _x( 'Download', 'button label' );

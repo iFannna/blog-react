@@ -1,5 +1,5 @@
-import { __experimentalHeading as Heading } from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
+import { __experimentalHeading as Heading } from '@/components/gutenberg/ui';
+import { Stack } from '@/components/gutenberg/design-system';
 import type {
 	FieldLayoutProps,
 	NormalizedForm,

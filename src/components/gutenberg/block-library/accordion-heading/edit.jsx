@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
-import { useEffect } from '@wordpress/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useEffect } from '@/lib/gutenberg/element';
 import {
 	useBlockProps,
 	__experimentalGetSpacingClassesAndStyles as useSpacingProps,
@@ -8,8 +8,8 @@ import {
 	getTypographyClassesAndStyles as useTypographyProps,
 	useSettings,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { useDispatch } from '@wordpress/data';
+} from '@/components/gutenberg/block-editor';
+import { useDispatch } from '@/stores/gutenberg/data';
 
 export default function Edit( { attributes, setAttributes, context } ) {
 	const { title } = attributes;

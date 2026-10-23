@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useInnerBlocksProps, useBlockProps } from '@wordpress/block-editor';
+import { useInnerBlocksProps, useBlockProps } from '@/components/gutenberg/block-editor';
 
 export default function save( { attributes } ) {
 	const { isStackedOnMobile, verticalAlignment } = attributes;

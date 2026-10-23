@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n';
-import { CheckboxControl as WCCheckboxControl } from '@wordpress/components';
-import { VisuallyHidden } from '@wordpress/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { CheckboxControl as WCCheckboxControl } from '@/components/gutenberg/ui';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
 import type { LinkControlSetting, LinkControlSettingsProps } from './types';
 
 const noop = () => {};

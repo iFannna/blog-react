@@ -2,14 +2,14 @@ import {
 	getBlockType,
 	serialize,
 	store as blocksStore,
-} from '@wordpress/blocks';
-import { DropdownMenu, MenuGroup, MenuItem } from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { chevronDown, chevronUp, moreVertical } from '@wordpress/icons';
-import { Children, cloneElement } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
-import { pipe, useCopyToClipboard } from '@wordpress/compose';
+} from '@/lib/gutenberg/blocks';
+import { DropdownMenu, MenuGroup, MenuItem } from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { chevronDown, chevronUp, moreVertical } from '@/components/gutenberg/icons';
+import { Children, cloneElement } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
+import { pipe, useCopyToClipboard } from '@/hooks/gutenberg/compose';
 import BlockActions from '../block-actions';
 import NoteIconSlotFill from '../../components/collab/note-icon-slot';
 import BlockHTMLConvertButton from './block-html-convert-button';

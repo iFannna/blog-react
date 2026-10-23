@@ -1,4 +1,4 @@
-import { RichTextData } from '@wordpress/rich-text';
+import { RichTextData } from '@/components/gutenberg/rich-text';
 
 const RICH_TEXT_CACHE_MAX_SIZE = 500;
 

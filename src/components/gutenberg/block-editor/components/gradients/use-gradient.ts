@@ -1,6 +1,6 @@
-import { useCallback, useMemo } from '@wordpress/element';
-import { useSelect, useDispatch } from '@wordpress/data';
-import type { Gradient } from '@wordpress/global-styles-engine';
+import { useCallback, useMemo } from '@/lib/gutenberg/element';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import type { Gradient } from '@/lib/gutenberg/global-styles-engine';
 import { useBlockEditContext } from '../block-edit';
 import { useSettings } from '../use-settings';
 import { store as blockEditorStore } from '../../store';

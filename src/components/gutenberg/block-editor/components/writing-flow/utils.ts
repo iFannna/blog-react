@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
+import { __ } from '@/lib/gutenberg/i18n';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
 import {
 	serialize,
 	createBlock,
@@ -7,9 +7,9 @@ import {
 	findTransform,
 	getBlockTransforms,
 	store as blocksStore,
-} from '@wordpress/blocks';
-import type { Block, BlockFilesTransform } from '@wordpress/blocks';
-import type { DataRegistry } from '@wordpress/data';
+} from '@/lib/gutenberg/blocks';
+import type { Block, BlockFilesTransform } from '@/lib/gutenberg/blocks';
+import type { DataRegistry } from '@/stores/gutenberg/data';
 import type { ClipboardEvent as ReactClipboardEvent } from 'react';
 import { getPasteEventData } from '../../utils/pasting';
 import { store as blockEditorStore } from '../../store';

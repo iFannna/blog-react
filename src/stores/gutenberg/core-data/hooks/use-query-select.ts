@@ -1,4 +1,4 @@
-import { useSelect } from '@wordpress/data';
+import { useSelect } from '@/stores/gutenberg/data';
 import memoize from 'memize';
 import { getResolutionStatus } from './utils';
 
@@ -36,8 +36,8 @@ interface QuerySelectResponse< Data > {
  *
  * @example
  * ```js
- * import { useQuerySelect } from '@wordpress/data';
- * import { store as coreDataStore } from '@wordpress/core-data';
+ * import { useQuerySelect } from '@/stores/gutenberg/data';
+ * import { store as coreDataStore } from '@/stores/gutenberg/core-data';
  *
  * function PageTitleDisplay( { id } ) {
  *   const { data: page, isResolving } = useQuerySelect( ( query ) => {

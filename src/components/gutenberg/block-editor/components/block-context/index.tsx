@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo } from '@wordpress/element';
+import { createContext, useContext, useMemo } from '@/lib/gutenberg/element';
 import type { BlockContextProviderProps } from './types';
 
 const Context = createContext< Record< string, unknown > >( {} );

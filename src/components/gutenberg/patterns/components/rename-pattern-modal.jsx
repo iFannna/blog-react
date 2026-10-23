@@ -1,11 +1,11 @@
-import { Button, Modal, TextControl } from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
-import { store as coreStore } from '@wordpress/core-data';
-import { useDispatch } from '@wordpress/data';
-import { useState } from '@wordpress/element';
-import { decodeEntities } from '@wordpress/html-entities';
-import { __ } from '@wordpress/i18n';
-import { store as noticesStore } from '@wordpress/notices';
+import { Button, Modal, TextControl } from '@/components/gutenberg/ui';
+import { Stack } from '@/components/gutenberg/design-system';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { useState } from '@/lib/gutenberg/element';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { __ } from '@/lib/gutenberg/i18n';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 
 export default function RenamePatternModal( {
 	onClose,

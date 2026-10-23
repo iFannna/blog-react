@@ -4,13 +4,13 @@ import {
 	useBlockProps,
 	Warning,
 	HeadingLevelDropdown,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	ToggleControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { __, _x, sprintf } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
 import { useArchiveLabel } from './use-archive-label';
 import { usePostTypeLabel } from './use-post-type-label';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';

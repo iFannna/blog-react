@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import { __experimentalGrid as Grid } from '@wordpress/components';
+import { __experimentalGrid as Grid } from '@/components/gutenberg/ui';
 import {
 	getColorClassName,
 	__experimentalGetGradientClass,
 	// @ts-expect-error `@wordpress/block-editor` does not expose type declarations for its entry point.
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import type { Color, Gradient, ColorExampleProps } from './types';
 
 const ColorExamples = ( {

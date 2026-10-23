@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import parse, { attributesToProps, domToReact } from 'html-react-parser';
-import { safeHTML } from '@wordpress/dom';
+import { safeHTML } from '@/utils/gutenberg/dom';
 
 /**
  * Renders HTML content as React elements with optional wrapper props.

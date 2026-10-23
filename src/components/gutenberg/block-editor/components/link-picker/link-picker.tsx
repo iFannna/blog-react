@@ -3,10 +3,10 @@ import {
 	Button,
 	Popover,
 	useBaseControlProps,
-} from '@wordpress/components';
-import { VisuallyHidden } from '@wordpress/ui';
-import { useState, useId, useRef } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
+import { useState, useId, useRef } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import LinkControl from '../link-control';
 import { LinkPreview } from './link-preview';
 import type { LinkControlValue } from '../link-control/types';

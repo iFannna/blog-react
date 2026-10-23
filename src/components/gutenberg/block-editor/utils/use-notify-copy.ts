@@ -1,8 +1,8 @@
-import { useCallback } from '@wordpress/element';
-import { store as blocksStore } from '@wordpress/blocks';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { __, _n, sprintf } from '@wordpress/i18n';
-import { store as noticesStore } from '@wordpress/notices';
+import { useCallback } from '@/lib/gutenberg/element';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { __, _n, sprintf } from '@/lib/gutenberg/i18n';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import { store as blockEditorStore } from '../store';
 
 export function useNotifyCopy() {

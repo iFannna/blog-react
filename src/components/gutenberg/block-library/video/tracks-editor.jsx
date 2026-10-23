@@ -1,4 +1,4 @@
-import { __, _x, sprintf } from '@wordpress/i18n';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	NavigableMenu,
 	MenuItem,
@@ -14,17 +14,17 @@ import {
 	__experimentalGrid as Grid,
 	__experimentalHStack as HStack,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { Badge } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { Badge } from '@/components/gutenberg/design-system';
 import {
 	MediaUpload,
 	MediaUploadCheck,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { upload, media } from '@wordpress/icons';
-import { useSelect } from '@wordpress/data';
-import { useState, useRef, useEffect } from '@wordpress/element';
-import { getFilename } from '@wordpress/url';
+} from '@/components/gutenberg/block-editor';
+import { upload, media } from '@/components/gutenberg/icons';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useState, useRef, useEffect } from '@/lib/gutenberg/element';
+import { getFilename } from '@/utils/gutenberg/url';
 
 const ALLOWED_TYPES = [ 'text/vtt' ];
 

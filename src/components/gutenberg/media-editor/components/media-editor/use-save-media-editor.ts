@@ -1,9 +1,9 @@
-import apiFetch from '@wordpress/api-fetch';
-import { useDispatch, useRegistry } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { useCallback, useState } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import { store as noticesStore } from '@wordpress/notices';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { useDispatch, useRegistry } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useCallback, useState } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import type { Media } from '../media-editor-provider';
 import type { MediaEditorSession } from '../../state';
 import {

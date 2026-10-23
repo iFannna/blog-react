@@ -1,9 +1,9 @@
 import {
 	__experimentalStyleProvider as StyleProvider,
 	__experimentalToolsPanelContext as ToolsPanelContext,
-} from '@wordpress/components';
-import warning from '@wordpress/warning';
-import { useEffect, useContext, useMemo } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import warning from '@/utils/gutenberg/warning';
+import { useEffect, useContext, useMemo } from '@/lib/gutenberg/element';
 import {
 	useBlockEditContext,
 	mayDisplayControlsKey,

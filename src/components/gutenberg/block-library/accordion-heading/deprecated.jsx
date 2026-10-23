@@ -3,7 +3,7 @@ import {
 	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles,
 	RichText,
 	getTypographyClassesAndStyles,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 
 const v1 = {
 	attributes: {

@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
-import { getBlockSupport, hasBlockSupport } from '@wordpress/blocks';
-import { alignLeft, alignRight, alignCenter } from '@wordpress/icons';
-import { useSelect } from '@wordpress/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { getBlockSupport, hasBlockSupport } from '@/lib/gutenberg/blocks';
+import { alignLeft, alignRight, alignCenter } from '@/components/gutenberg/icons';
+import { useSelect } from '@/stores/gutenberg/data';
 import { AlignmentControl, BlockControls } from '../components';
 import { useBlockEditingMode } from '../components/block-editing-mode';
 import {

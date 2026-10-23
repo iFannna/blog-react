@@ -4,19 +4,19 @@
  * adjacent word changes into a single removed/added pair.
  */
 import { diffArrays, diffWordsWithSpace } from 'diff';
-import { parse as grammarParse } from '@wordpress/block-serialization-default-parser';
+import { parse as grammarParse } from '@/utils/gutenberg/block-serialization-default-parser';
 import {
 	privateApis as blocksPrivateApis,
 	getBlockType,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import {
 	RichTextData,
 	create,
 	slice,
 	concat,
 	applyFormat,
-} from '@wordpress/rich-text';
-import { __, _n, sprintf } from '@wordpress/i18n';
+} from '@/components/gutenberg/rich-text';
+import { __, _n, sprintf } from '@/lib/gutenberg/i18n';
 import { unlock } from '../../lock-unlock';
 import { DIFF_DESCRIPTION_IDS } from './diff-format-types';
 

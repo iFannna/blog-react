@@ -1,7 +1,7 @@
-import { useState } from '@wordpress/element';
-import { useRegistry, createRegistry, RegistryProvider } from '@wordpress/data';
-import { createHigherOrderComponent } from '@wordpress/compose';
-import type { DataRegistry } from '@wordpress/data';
+import { useState } from '@/lib/gutenberg/element';
+import { useRegistry, createRegistry, RegistryProvider } from '@/stores/gutenberg/data';
+import { createHigherOrderComponent } from '@/hooks/gutenberg/compose';
+import type { DataRegistry } from '@/stores/gutenberg/data';
 import type { ComponentType } from 'react';
 import { storeConfig } from '../../store';
 import { STORE_NAME as blockEditorStoreName } from '../../store/constants';

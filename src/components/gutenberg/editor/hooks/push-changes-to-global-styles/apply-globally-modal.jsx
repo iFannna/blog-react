@@ -1,8 +1,8 @@
-import { Modal } from '@wordpress/components';
-import { DataViewsPicker } from '@wordpress/dataviews';
-import { __, sprintf } from '@wordpress/i18n';
-import { getBlockType } from '@wordpress/blocks';
-import { useMemo, useState } from '@wordpress/element';
+import { Modal } from '@/components/gutenberg/ui';
+import { DataViewsPicker } from '@/components/gutenberg/dataviews';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { getBlockType } from '@/lib/gutenberg/blocks';
+import { useMemo, useState } from '@/lib/gutenberg/element';
 import { useGlobalStyles } from '../../components/global-styles/hooks';
 import { useReviewRows } from './use-review-rows';
 

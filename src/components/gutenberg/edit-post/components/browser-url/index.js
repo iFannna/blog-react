@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from '@wordpress/element';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { addQueryArgs, getQueryArg } from '@wordpress/url';
-import { store as editorStore } from '@wordpress/editor';
+import { useEffect, useRef, useState } from '@/lib/gutenberg/element';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { addQueryArgs, getQueryArg } from '@/utils/gutenberg/url';
+import { store as editorStore } from '@/components/gutenberg/editor';
 import { unlock } from '../../lock-unlock';
 import useClassicRevisionRedirect from './use-classic-revision-redirect';
 

@@ -1,6 +1,6 @@
-import { createElement, useEffect, useRef, useState } from '@wordpress/element';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+import { createElement, useEffect, useRef, useState } from '@/lib/gutenberg/element';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { store as editorStore } from '../../store';
 import AutosaveRetry from '../autosave-retry';
 

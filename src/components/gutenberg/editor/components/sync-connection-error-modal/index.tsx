@@ -1,22 +1,22 @@
-import { useSelect, select } from '@wordpress/data';
-import { useCopyToClipboard } from '@wordpress/compose';
-import { serialize } from '@wordpress/blocks';
+import { useSelect, select } from '@/stores/gutenberg/data';
+import { useCopyToClipboard } from '@/hooks/gutenberg/compose';
+import { serialize } from '@/lib/gutenberg/blocks';
 import {
 	store as coreDataStore,
 	privateApis as coreDataPrivateApis,
-} from '@wordpress/core-data';
+} from '@/stores/gutenberg/core-data';
 // @ts-expect-error - No type declarations available for @wordpress/block-editor
 // prettier-ignore
-import { privateApis, store as blockEditorStore } from '@wordpress/block-editor';
+import { privateApis, store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import {
 	Button,
 	Modal,
 	__experimentalHStack as HStack,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { applyFilters } from '@wordpress/hooks';
-import { useState, useEffect } from '@wordpress/element';
-import { __, sprintf, _n } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { applyFilters } from '@/hooks/gutenberg/hooks';
+import { useState, useEffect } from '@/lib/gutenberg/element';
+import { __, sprintf, _n } from '@/lib/gutenberg/i18n';
 import {
 	getSyncErrorMessages,
 	PROTOCOL_MISMATCH,

@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { diffChars } from 'diff';
-import { Fragment } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { getBlockContent } from '@wordpress/blocks';
+import { Fragment } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { getBlockContent } from '@/lib/gutenberg/blocks';
 import BlockView from './block-view';
 
 /**

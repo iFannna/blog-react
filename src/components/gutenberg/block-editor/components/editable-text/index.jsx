@@ -1,4 +1,4 @@
-import { forwardRef } from '@wordpress/element';
+import { forwardRef } from '@/lib/gutenberg/element';
 import RichText from '../rich-text';
 
 const EditableText = forwardRef( ( props, ref ) => {

@@ -1,7 +1,7 @@
-import { dispatch, select, subscribe } from '@wordpress/data';
-import { Y } from '@wordpress/sync';
+import { dispatch, select, subscribe } from '@/stores/gutenberg/data';
+import { Y } from '@/services/gutenberg/sync';
 // @ts-expect-error `@wordpress/block-editor` does not expose type declarations for its entry point.
-import { store as blockEditorStore } from '@wordpress/block-editor';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import { BaseAwarenessState, baseEqualityFieldChecks } from './base-awareness';
 import { isCollaboratorInfo } from './utils';
 import {

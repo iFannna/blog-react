@@ -1,11 +1,11 @@
-import { useSelect } from '@wordpress/data';
-import { useState, useCallback, useEffect } from '@wordpress/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useState, useCallback, useEffect } from '@/lib/gutenberg/element';
 import {
 	useThrottle,
 	__experimentalUseDropZone as useDropZone,
 	usePrevious,
-} from '@wordpress/compose';
-import { isRTL } from '@wordpress/i18n';
+} from '@/hooks/gutenberg/compose';
+import { isRTL } from '@/lib/gutenberg/i18n';
 import {
 	getDistanceToNearestEdge,
 	isPointContainedByRect,

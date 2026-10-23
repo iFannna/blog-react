@@ -1,7 +1,7 @@
-import { useCopyToClipboard } from '@wordpress/compose';
-import { useEffect, useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { Notice } from '@wordpress/ui';
+import { useCopyToClipboard } from '@/hooks/gutenberg/compose';
+import { useEffect, useState } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Notice } from '@/components/gutenberg/design-system';
 
 // How long the confirmation stays after a successful copy.
 const CONFIRMATION_TIMEOUT = 4000;

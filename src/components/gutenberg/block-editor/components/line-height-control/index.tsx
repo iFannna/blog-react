@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
+import { __ } from '@/lib/gutenberg/i18n';
+import { __experimentalNumberControl as NumberControl } from '@/components/gutenberg/ui';
 import {
 	BASE_DEFAULT_VALUE,
 	RESET_VALUE,

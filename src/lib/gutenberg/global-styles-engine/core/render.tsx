@@ -4,10 +4,10 @@ import {
 	getBlockSupport,
 	getBlockTypes,
 	store as blocksStore,
-} from '@wordpress/blocks';
-import type { BlockType } from '@wordpress/blocks';
-import { getCSSRules, getCSSValueFromRawStyle } from '@wordpress/style-engine';
-import { select } from '@wordpress/data';
+} from '@/lib/gutenberg/blocks';
+import type { BlockType } from '@/lib/gutenberg/blocks';
+import { getCSSRules, getCSSValueFromRawStyle } from '@/lib/gutenberg/style-engine';
+import { select } from '@/stores/gutenberg/data';
 import {
 	PRESET_METADATA,
 	ROOT_BLOCK_SELECTOR,

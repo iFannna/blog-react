@@ -160,7 +160,7 @@ function Frame(
  *
  * Parsing code:
  * ```js
- * import { parse } from '@wordpress/block-serialization-default-parser';
+ * import { parse } from '@/utils/gutenberg/block-serialization-default-parser';
  *
  * parse( post ) === [
  *     {

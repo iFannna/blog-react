@@ -1,8 +1,8 @@
-import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { PanelBody } from '@wordpress/components';
-import { store as coreStore } from '@wordpress/core-data';
-import { useState, useEffect } from '@wordpress/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { PanelBody } from '@/components/gutenberg/ui';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useState, useEffect } from '@/lib/gutenberg/element';
 import HierarchicalTermSelector from '../post-taxonomies/hierarchical-term-selector';
 import { store as editorStore } from '../../store';
 

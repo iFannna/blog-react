@@ -1,7 +1,7 @@
-import { getBlockType } from '@wordpress/blocks';
-import { Button } from '@wordpress/components';
-import { useDispatch } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
+import { getBlockType } from '@/lib/gutenberg/blocks';
+import { Button } from '@/components/gutenberg/ui';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
 import { store as blockEditorStore } from '../../store';
 import Warning from '../warning';
 import type { MultipleUsageWarningProps } from './types';

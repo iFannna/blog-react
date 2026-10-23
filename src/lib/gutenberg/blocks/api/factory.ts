@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
-import { applyFilters } from '@wordpress/hooks';
-import deprecated from '@wordpress/deprecated';
-import warning from '@wordpress/warning';
+import { applyFilters } from '@/hooks/gutenberg/hooks';
+import deprecated from '@/utils/gutenberg/deprecated';
+import warning from '@/utils/gutenberg/warning';
 import {
 	getBlockType,
 	getBlockTypes,

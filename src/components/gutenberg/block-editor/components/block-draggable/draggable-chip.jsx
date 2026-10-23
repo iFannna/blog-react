@@ -1,9 +1,9 @@
-import { __, _n, sprintf } from '@wordpress/i18n';
-import { Flex, FlexItem } from '@wordpress/components';
-import { dragHandle } from '@wordpress/icons';
+import { __, _n, sprintf } from '@/lib/gutenberg/i18n';
+import { Flex, FlexItem } from '@/components/gutenberg/ui';
+import { dragHandle } from '@/components/gutenberg/icons';
 import BlockIcon from '../block-icon';
 
-/** @typedef {import('@wordpress/blocks').BlockTypeIcon} BlockTypeIcon */
+/** @typedef {import('@/lib/gutenberg/blocks').BlockTypeIcon} BlockTypeIcon */
 
 /**
  * The chip that follows the cursor while blocks are dragged.

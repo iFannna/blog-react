@@ -1,5 +1,5 @@
-import { getScrollContainer } from '@wordpress/dom';
-import { useCallback, useEffect, useRef } from '@wordpress/element';
+import { getScrollContainer } from '@/utils/gutenberg/dom';
+import { useCallback, useEffect, useRef } from '@/lib/gutenberg/element';
 
 const SCROLL_INACTIVE_DISTANCE_PX = 50;
 const SCROLL_INTERVAL_MS = 25;

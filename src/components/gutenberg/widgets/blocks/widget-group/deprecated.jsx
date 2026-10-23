@@ -1,4 +1,4 @@
-import { InnerBlocks, RichText } from '@wordpress/block-editor';
+import { InnerBlocks, RichText } from '@/components/gutenberg/block-editor';
 
 const v1 = {
 	attributes: {

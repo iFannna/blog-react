@@ -1,4 +1,4 @@
-import { createBlock, cloneSanitizedBlock } from '@wordpress/blocks';
+import { createBlock, cloneSanitizedBlock } from '@/lib/gutenberg/blocks';
 
 const transforms = {
 	from: [

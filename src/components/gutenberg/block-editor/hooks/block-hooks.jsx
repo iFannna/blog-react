@@ -1,8 +1,8 @@
-import { __ } from '@wordpress/i18n';
-import { Fragment, useMemo } from '@wordpress/element';
-import { PanelBody, ToggleControl } from '@wordpress/components';
-import { createBlock, store as blocksStore } from '@wordpress/blocks';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Fragment, useMemo } from '@/lib/gutenberg/element';
+import { PanelBody, ToggleControl } from '@/components/gutenberg/ui';
+import { createBlock, store as blocksStore } from '@/lib/gutenberg/blocks';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import { InspectorControls } from '../components';
 import { store as blockEditorStore } from '../store';
 

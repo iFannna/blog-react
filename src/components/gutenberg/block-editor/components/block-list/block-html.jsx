@@ -1,12 +1,12 @@
-import { useEffect, useMemo, useState } from '@wordpress/element';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useEffect, useMemo, useState } from '@/lib/gutenberg/element';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	getBlockAttributes,
 	getBlockContent,
 	getBlockType,
 	getSaveContent,
 	validateBlock,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import { store as blockEditorStore } from '../../store';
 import { useNativeUndo } from '../../utils/native-undo';
 

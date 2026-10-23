@@ -1,5 +1,5 @@
-import { InnerBlocks } from '@wordpress/block-editor';
-import { compose } from '@wordpress/compose';
+import { InnerBlocks } from '@/components/gutenberg/block-editor';
+import { compose } from '@/hooks/gutenberg/compose';
 import migrateFontFamily from '../utils/migrate-font-family';
 
 const TYPOGRAPHY_PRESET_DEPRECATION_MAP = {

@@ -1,4 +1,4 @@
-import { createReduxStore, register } from '@wordpress/data';
+import { createReduxStore, register } from '@/stores/gutenberg/data';
 import * as actions from './actions';
 import * as selectors from './selectors';
 import reducer from './reducer';

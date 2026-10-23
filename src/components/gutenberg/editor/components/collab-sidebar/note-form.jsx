@@ -1,13 +1,13 @@
-import { useState } from '@wordpress/element';
+import { useState } from '@/lib/gutenberg/element';
 import {
 	__experimentalTruncate as Truncate,
 	Button,
-} from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
-import { __ } from '@wordpress/i18n';
-import { useInstanceId } from '@wordpress/compose';
-import { displayShortcut, isKeyboardEvent } from '@wordpress/keycodes';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
+} from '@/components/gutenberg/ui';
+import { Stack } from '@/components/gutenberg/design-system';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { displayShortcut, isKeyboardEvent } from '@/utils/gutenberg/keycodes';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
 import { sanitizeNoteContent } from './utils';
 import noteMentionCompleter from './note-mention-completer';
 /*

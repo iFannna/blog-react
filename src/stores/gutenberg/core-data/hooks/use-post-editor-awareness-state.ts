@@ -1,6 +1,6 @@
-import { usePrevious } from '@wordpress/compose';
-import { useEffect, useState, useCallback } from '@wordpress/element';
-import type { Y } from '@wordpress/sync';
+import { usePrevious } from '@/hooks/gutenberg/compose';
+import { useEffect, useState, useCallback } from '@/lib/gutenberg/element';
+import type { Y } from '@/services/gutenberg/sync';
 import { getSyncManager } from '../sync';
 import { usePostContentBlocks } from '../awareness/block-lookup';
 import { isCollaboratorInfo } from '../awareness/utils';

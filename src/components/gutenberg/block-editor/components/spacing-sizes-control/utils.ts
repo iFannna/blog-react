@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	sidesAll,
 	sidesBottom,
@@ -7,7 +7,7 @@ import {
 	sidesRight,
 	sidesTop,
 	sidesVertical,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import { getPresetSlug, isValuePreset } from '../preset-input-control/utils';
 import type { Side, SideValues, SpacingSize } from './types';
 

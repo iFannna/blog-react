@@ -1,12 +1,12 @@
-import { __, sprintf } from '@wordpress/i18n';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	hasBlockSupport,
 	store as blocksStore,
 	switchToBlockType,
 	isTemplatePart,
-} from '@wordpress/blocks';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useCommandLoader } from '@wordpress/commands';
+} from '@/lib/gutenberg/blocks';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useCommandLoader } from '@/lib/gutenberg/commands';
 import {
 	copy,
 	trash as remove,
@@ -16,9 +16,9 @@ import {
 	seen,
 	unseen,
 	blockDefault as blockDefaultIcon,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import type { ReactElement } from 'react';
-import type { Block } from '@wordpress/blocks';
+import type { Block } from '@/lib/gutenberg/blocks';
 import { store as blockEditorStore } from '../../store';
 import { groupBlocks } from '../../utils/group-blocks';
 import { unlock } from '../../lock-unlock';

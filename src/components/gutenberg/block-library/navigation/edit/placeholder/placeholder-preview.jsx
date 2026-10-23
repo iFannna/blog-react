@@ -1,5 +1,5 @@
-import { Icon, navigation } from '@wordpress/icons';
-import { __ } from '@wordpress/i18n';
+import { Icon, navigation } from '@/components/gutenberg/icons';
+import { __ } from '@/lib/gutenberg/i18n';
 
 const PlaceholderPreview = ( { isVisible = true } ) => {
 	return (

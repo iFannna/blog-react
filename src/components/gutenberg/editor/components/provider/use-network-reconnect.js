@@ -1,6 +1,6 @@
-import { useEffect } from '@wordpress/element';
-import { useRegistry } from '@wordpress/data';
-import { store as uploadStore } from '@wordpress/upload-media';
+import { useEffect } from '@/lib/gutenberg/element';
+import { useRegistry } from '@/stores/gutenberg/data';
+import { store as uploadStore } from '@/services/gutenberg/upload-media';
 import { unlock } from '../../lock-unlock';
 
 /**

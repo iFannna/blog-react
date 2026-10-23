@@ -1,6 +1,6 @@
-import { useState, useEffect } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import type { DataViewRenderFieldProps } from '@wordpress/dataviews';
+import { useState, useEffect } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import type { DataViewRenderFieldProps } from '@/components/gutenberg/dataviews';
 import type { MediaItem } from '../types';
 import { getRenderedContent } from '../utils/get-rendered-content';
 

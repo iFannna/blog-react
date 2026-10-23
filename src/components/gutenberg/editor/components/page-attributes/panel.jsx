@@ -1,5 +1,5 @@
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { store as editorStore } from '../../store';
 import PageAttributesCheck from './check';
 import { ParentRow } from './parent';

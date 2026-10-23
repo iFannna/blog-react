@@ -1,4 +1,4 @@
-import { math as icon } from '@wordpress/icons';
+import { math as icon } from '@/components/gutenberg/icons';
 import initBlock from '../utils/init-block';
 import edit from './edit';
 import metadata from './block.json';

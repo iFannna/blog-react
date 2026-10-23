@@ -1,16 +1,16 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	InspectorControls,
 	useBlockProps,
 	useInnerBlocksProps,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { useDispatch, useSelect } from '@wordpress/data';
+} from '@/components/gutenberg/block-editor';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { useEffect } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { useEffect } from '@/lib/gutenberg/element';
 import { QueryPaginationArrowControls } from './query-pagination-arrow-controls';
 import { QueryPaginationLabelControl } from './query-pagination-label-control';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';

@@ -7,11 +7,11 @@ import {
 	placeCaretAtVerticalEdge,
 	isRTL,
 	isFormElement,
-} from '@wordpress/dom';
-import { UP, DOWN, LEFT, RIGHT } from '@wordpress/keycodes';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useRefEffect } from '@wordpress/compose';
-import { getBlockType, hasBlockSupport } from '@wordpress/blocks';
+} from '@/utils/gutenberg/dom';
+import { UP, DOWN, LEFT, RIGHT } from '@/utils/gutenberg/keycodes';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { getBlockType, hasBlockSupport } from '@/lib/gutenberg/blocks';
 import {
 	getBlockClientId,
 	getSelectionEditableElement,

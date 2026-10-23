@@ -1,5 +1,5 @@
-import { SVG, Rect } from '@wordpress/primitives';
-import { Icon, menu } from '@wordpress/icons';
+import { SVG, Rect } from '@/components/gutenberg/primitives';
+import { Icon, menu } from '@/components/gutenberg/icons';
 
 export default function OverlayMenuIcon( { icon } ) {
 	if ( icon === 'menu' ) {

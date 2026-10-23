@@ -1,14 +1,14 @@
-import { store as blocksStore } from '@wordpress/blocks';
-import { useSelect } from '@wordpress/data';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	SearchControl,
 	CheckboxControl as WCCheckboxControl,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { __, _n, sprintf } from '@wordpress/i18n';
-import { useEffect, useState } from '@wordpress/element';
-import { useDebounce } from '@wordpress/compose';
-import { speak } from '@wordpress/a11y';
+} from '@/components/gutenberg/ui';
+import { __, _n, sprintf } from '@/lib/gutenberg/i18n';
+import { useEffect, useState } from '@/lib/gutenberg/element';
+import { useDebounce } from '@/hooks/gutenberg/compose';
+import { speak } from '@/utils/gutenberg/a11y';
 import BlockManagerCategory from './category';
 import type { BlockManagerProps } from './types';
 

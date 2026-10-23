@@ -1,7 +1,7 @@
 import {
 	useRefEffect,
 	privateApis as composePrivateApis,
-} from '@wordpress/compose';
+} from '@/hooks/gutenberg/compose';
 import { unlock } from '../../../lock-unlock';
 
 const { subscribeDelegatedListener } = unlock( composePrivateApis );

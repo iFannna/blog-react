@@ -91,7 +91,7 @@ function withNormalizedErrors< T extends object >( target: T ): T {
  * @example
  * ```typescript
  * // worker.ts
- * import { expose } from '@wordpress/worker-threads/worker';
+ * import { expose } from '@/utils/gutenberg/worker-threads';
  *
  * const api = {
  *   async processImage(buffer: ArrayBuffer): Promise<ArrayBuffer> {

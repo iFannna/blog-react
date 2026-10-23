@@ -1,12 +1,12 @@
 import clsx from 'clsx';
-import { RawHTML } from '@wordpress/element';
+import { RawHTML } from '@/lib/gutenberg/element';
 import {
 	getColorClassName,
 	getFontSizeClass,
 	RichText,
 	useBlockProps,
-} from '@wordpress/block-editor';
-import { isRTL } from '@wordpress/i18n';
+} from '@/components/gutenberg/block-editor';
+import { isRTL } from '@/lib/gutenberg/i18n';
 
 const supports = {
 	className: false,

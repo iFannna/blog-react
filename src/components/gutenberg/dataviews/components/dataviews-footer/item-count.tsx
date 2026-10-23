@@ -1,4 +1,4 @@
-import { useContext } from '@wordpress/element';
+import { useContext } from '@/lib/gutenberg/element';
 import DataViewsContext from '../dataviews-context';
 import getFooterMessage from '../../utils/get-footer-message';
 

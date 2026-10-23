@@ -1,8 +1,8 @@
-import { Button } from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
-import { __ } from '@wordpress/i18n';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { isReusableBlock, isTemplatePart } from '@wordpress/blocks';
+import { Button } from '@/components/gutenberg/ui';
+import { Stack } from '@/components/gutenberg/design-system';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { isReusableBlock, isTemplatePart } from '@/lib/gutenberg/blocks';
 import useContentOnlySectionEdit from '../../hooks/use-content-only-section-edit';
 import { store as blockEditorStore } from '../../store';
 

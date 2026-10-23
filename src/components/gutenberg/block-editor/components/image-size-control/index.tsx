@@ -4,9 +4,9 @@ import {
 	__experimentalVStack as VStack,
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
-} from '@wordpress/components';
-import { SelectControl } from '@wordpress/ui';
-import { __, sprintf } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { SelectControl } from '@/components/gutenberg/design-system';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import useDimensionHandler from './use-dimension-handler';
 import type { ImageSizeControlProps } from './types';
 

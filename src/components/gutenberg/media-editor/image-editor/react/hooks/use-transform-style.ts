@@ -1,4 +1,4 @@
-import { useMemo } from '@wordpress/element';
+import { useMemo } from '@/lib/gutenberg/element';
 import type { CropperState, Size } from '../../core/types';
 import { computeTransformStyle } from '../../core/transform-style';
 

@@ -1,7 +1,7 @@
-import { useMemo } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { sprintf, _x } from '@wordpress/i18n';
-import { __experimentalUseCustomUnits as useCustomUnits } from '@wordpress/components';
+import { useMemo } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { sprintf, _x } from '@/lib/gutenberg/i18n';
+import { __experimentalUseCustomUnits as useCustomUnits } from '@/components/gutenberg/ui';
 import PresetInputControl from '../../preset-input-control';
 import { useSettings } from '../../use-settings';
 import { store as blockEditorStore } from '../../../store';

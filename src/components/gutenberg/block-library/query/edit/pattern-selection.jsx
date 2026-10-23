@@ -1,12 +1,12 @@
-import { useState, useMemo } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
-import { Modal, SearchControl } from '@wordpress/components';
+import { useState, useMemo } from '@/lib/gutenberg/element';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { Modal, SearchControl } from '@/components/gutenberg/ui';
 import {
 	BlockContextProvider,
 	store as blockEditorStore,
 	__experimentalBlockPatternsList as BlockPatternsList,
-} from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	useBlockNameForPatterns,
 	getTransformedBlocksFromPattern,

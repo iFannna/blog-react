@@ -1,8 +1,8 @@
 import { parse as hpqParse } from 'hpq';
 import type { MatcherObj } from 'hpq';
 import memoize from 'memize';
-import { applyFilters } from '@wordpress/hooks';
-import { RichTextData } from '@wordpress/rich-text';
+import { applyFilters } from '@/hooks/gutenberg/hooks';
+import { RichTextData } from '@/components/gutenberg/rich-text';
 import {
 	attr,
 	html,

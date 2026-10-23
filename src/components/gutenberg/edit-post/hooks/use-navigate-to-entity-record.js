@@ -1,7 +1,7 @@
-import { useCallback, useReducer } from '@wordpress/element';
-import { useSelect, useDispatch, useRegistry } from '@wordpress/data';
-import { store as editorStore } from '@wordpress/editor';
-import { store as coreStore } from '@wordpress/core-data';
+import { useCallback, useReducer } from '@/lib/gutenberg/element';
+import { useSelect, useDispatch, useRegistry } from '@/stores/gutenberg/data';
+import { store as editorStore } from '@/components/gutenberg/editor';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 
 /**
  * A hook that records the 'entity' history in the post editor as a user

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import type { ComponentProps } from 'react';
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	BaseControl,
 	__experimentalVStack as VStack,
@@ -8,7 +8,7 @@ import {
 	GradientPicker,
 	Notice,
 	privateApis as componentsPrivateApis,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import { useSettings } from '../use-settings';
 import { unlock } from '../../lock-unlock';
 import type { ColorGradientControlProps, ColorGradientOptions } from './types';

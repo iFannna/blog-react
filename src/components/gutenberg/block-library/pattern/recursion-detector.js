@@ -9,7 +9,7 @@
  * @see https://github.com/WordPress/gutenberg/pull/31455
  * @see packages/block-editor/src/components/recursion-provider/README.md
  */
-import { useRegistry } from '@wordpress/data';
+import { useRegistry } from '@/stores/gutenberg/data';
 
 /**
  * Naming is hard.

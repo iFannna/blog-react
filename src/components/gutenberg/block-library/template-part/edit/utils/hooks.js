@@ -1,10 +1,10 @@
 import { paramCase as kebabCase } from 'change-case';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { useMemo } from '@wordpress/element';
-import { serialize } from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { useMemo } from '@/lib/gutenberg/element';
+import { serialize } from '@/lib/gutenberg/blocks';
+import { __ } from '@/lib/gutenberg/i18n';
 import { createTemplatePartId } from './create-template-part-id';
 
 /**

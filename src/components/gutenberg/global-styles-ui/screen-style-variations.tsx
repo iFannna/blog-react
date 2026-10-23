@@ -1,5 +1,5 @@
-import { Card, CardBody } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+import { Card, CardBody } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 import { ScreenHeader } from './screen-header';
 import { StyleVariationsContent } from './style-variations-content';
 

@@ -1,9 +1,9 @@
-import { useEffect, useLayoutEffect, useReducer } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { store as blocksStore } from '@wordpress/blocks';
-import type { BlockType } from '@wordpress/blocks';
-import { getBlockSelector } from '@wordpress/global-styles-engine';
-import { speak } from '@wordpress/a11y';
+import { useEffect, useLayoutEffect, useReducer } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as blocksStore } from '@/lib/gutenberg/blocks';
+import type { BlockType } from '@/lib/gutenberg/blocks';
+import { getBlockSelector } from '@/lib/gutenberg/global-styles-engine';
+import { speak } from '@/utils/gutenberg/a11y';
 import { getContrastWarning } from '../components/contrast-checker';
 import { useBlockElement } from '../components/block-list/use-block-props/use-block-refs';
 import type {

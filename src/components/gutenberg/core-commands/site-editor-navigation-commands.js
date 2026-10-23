@@ -1,13 +1,13 @@
-import { useCommandLoader } from '@wordpress/commands';
-import { __ } from '@wordpress/i18n';
-import { useMemo, useEffect, useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { post, page, layout, symbolFilled } from '@wordpress/icons';
-import { privateApis as routerPrivateApis } from '@wordpress/router';
-import { addQueryArgs, getPath } from '@wordpress/url';
-import { useDebounce } from '@wordpress/compose';
-import { decodeEntities } from '@wordpress/html-entities';
+import { useCommandLoader } from '@/lib/gutenberg/commands';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useMemo, useEffect, useState } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { post, page, layout, symbolFilled } from '@/components/gutenberg/icons';
+import { privateApis as routerPrivateApis } from '@/lib/gutenberg/router';
+import { addQueryArgs, getPath } from '@/utils/gutenberg/url';
+import { useDebounce } from '@/hooks/gutenberg/compose';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { unlock } from './lock-unlock';
 import { orderEntityRecordsBySearch } from './utils/order-entity-records-by-search';
 

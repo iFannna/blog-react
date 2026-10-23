@@ -1,11 +1,11 @@
 import clsx from 'clsx';
-import { useContext } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import { inertValue } from '@wordpress/react-inert-value';
-import { __unstableGetBlockProps as getBlockProps } from '@wordpress/blocks';
-import { useMergeRefs, useDisabled, useRefEffect } from '@wordpress/compose';
-import { useDispatch } from '@wordpress/data';
-import warning from '@wordpress/warning';
+import { useContext } from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { inertValue } from '@/hooks/gutenberg/react-inert-value';
+import { __unstableGetBlockProps as getBlockProps } from '@/lib/gutenberg/blocks';
+import { useMergeRefs, useDisabled, useRefEffect } from '@/hooks/gutenberg/compose';
+import { useDispatch } from '@/stores/gutenberg/data';
+import warning from '@/utils/gutenberg/warning';
 import useMovingAnimation from '../../use-moving-animation';
 import { store as blockEditorStore } from '../../../store';
 import { PrivateBlockContext } from '../private-block-context';
@@ -82,7 +82,7 @@ function useGhostMaterialize( rootClientId, ghostBlock ) {
  *
  * @example
  * ```js
- * import { useBlockProps } from '@wordpress/block-editor';
+ * import { useBlockProps } from '@/components/gutenberg/block-editor';
  *
  * export default function Edit() {
  *

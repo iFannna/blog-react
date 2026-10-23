@@ -1,9 +1,9 @@
-import { __ } from '@wordpress/i18n';
-import { Dropdown, Button } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { info } from '@wordpress/icons';
-import { forwardRef } from '@wordpress/element';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Dropdown, Button } from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { info } from '@/components/gutenberg/icons';
+import { forwardRef } from '@/lib/gutenberg/element';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import TableOfContentsPanel from './panel';
 
 function TableOfContents(

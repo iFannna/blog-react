@@ -1,4 +1,4 @@
-import { parse } from '@wordpress/blocks';
+import { parse } from '@/lib/gutenberg/blocks';
 import { createTemplatePartId } from './create-template-part-id';
 
 /**

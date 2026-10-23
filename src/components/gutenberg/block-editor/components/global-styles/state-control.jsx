@@ -1,7 +1,7 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { check, chevronDown, moreVertical } from '@wordpress/icons';
-import { DropdownMenu, MenuGroup, MenuItem } from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { check, chevronDown, moreVertical } from '@/components/gutenberg/icons';
+import { DropdownMenu, MenuGroup, MenuItem } from '@/components/gutenberg/ui';
+import { Stack } from '@/components/gutenberg/design-system';
 
 /**
  * State control for managing viewport and pseudo-state styles.

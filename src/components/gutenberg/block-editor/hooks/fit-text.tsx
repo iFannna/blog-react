@@ -1,14 +1,14 @@
-import { addFilter } from '@wordpress/hooks';
-import { hasBlockSupport } from '@wordpress/blocks';
-import type { BlockType } from '@wordpress/blocks';
-import { useEffect, useCallback, useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import { hasBlockSupport } from '@/lib/gutenberg/blocks';
+import type { BlockType } from '@/lib/gutenberg/blocks';
+import { useEffect, useCallback, useState } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	ToggleControl,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { createHigherOrderComponent } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { createHigherOrderComponent } from '@/hooks/gutenberg/compose';
 const EMPTY_OBJECT: FitTextBlockState = {};
 const MIN_FONT_SIZE_FOR_WARNING = 12;
 import { optimizeFitText } from '../utils/fit-text-utils';

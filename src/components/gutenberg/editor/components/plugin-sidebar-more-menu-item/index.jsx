@@ -1,5 +1,5 @@
-import deprecated from '@wordpress/deprecated';
-import { ComplementaryAreaMoreMenuItem } from '@wordpress/interface';
+import deprecated from '@/utils/gutenberg/deprecated';
+import { ComplementaryAreaMoreMenuItem } from '@/components/gutenberg/interface';
 
 /**
  * Renders a menu item in `Plugins` group in `More Menu` drop down,
@@ -33,9 +33,9 @@ import { ComplementaryAreaMoreMenuItem } from '@wordpress/interface';
  * @example
  * ```jsx
  * // Using ESNext syntax
- * import { __ } from '@wordpress/i18n';
- * import { PluginSidebarMoreMenuItem } from '@wordpress/editor';
- * import { more } from '@wordpress/icons';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { PluginSidebarMoreMenuItem } from '@/components/gutenberg/editor';
+ * import { more } from '@/components/gutenberg/icons';
  *
  * const MySidebarMoreMenuItem = () => (
  * 	<PluginSidebarMoreMenuItem

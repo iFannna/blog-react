@@ -1,6 +1,6 @@
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { useContext, useMemo } from '@wordpress/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useContext, useMemo } from '@/lib/gutenberg/element';
 import { GlobalStylesContext } from '../context';
 import type { Revision, User } from './types';
 

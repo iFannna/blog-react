@@ -1,7 +1,7 @@
-import { __ } from '@wordpress/i18n';
-import { PanelBody } from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { PanelBody } from '@/components/gutenberg/ui';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { store as editorStore } from '../../store';
 import PostFeaturedImage from './index';
 import PostFeaturedImageCheck from './check';

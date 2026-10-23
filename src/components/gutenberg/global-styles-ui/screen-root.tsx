@@ -6,11 +6,11 @@ import {
 	CardBody,
 	Card,
 	CardMedia,
-} from '@wordpress/components';
-import { isRTL, __ } from '@wordpress/i18n';
-import { chevronLeft, chevronRight } from '@wordpress/icons';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+} from '@/components/gutenberg/ui';
+import { isRTL, __ } from '@/lib/gutenberg/i18n';
+import { chevronLeft, chevronRight } from '@/components/gutenberg/icons';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { IconWithCurrentColor } from './icon-with-current-color';
 import { NavigationButtonAsItem } from './navigation-button';
 import RootMenu from './root-menu';

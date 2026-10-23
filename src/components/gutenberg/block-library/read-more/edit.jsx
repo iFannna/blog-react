@@ -2,14 +2,14 @@ import {
 	InspectorControls,
 	RichText,
 	useBlockProps,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	ToggleControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { createBlock, getDefaultBlockName } from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { createBlock, getDefaultBlockName } from '@/lib/gutenberg/blocks';
+import { __ } from '@/lib/gutenberg/i18n';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 export default function ReadMore( {

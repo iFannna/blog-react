@@ -1,4 +1,4 @@
-import { combineReducers } from '@wordpress/data';
+import { combineReducers } from '@/stores/gutenberg/data';
 import type { StoreState, WPPreferencesPersistenceLayer } from './types';
 import type { AvailableActions } from './actions';
 

@@ -1,16 +1,16 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { speak } from '@wordpress/a11y';
-import { createElement, useCallback } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { speak } from '@/utils/gutenberg/a11y';
+import { createElement, useCallback } from '@/lib/gutenberg/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import {
 	createBlock,
 	createBlocksFromInnerBlocksTemplate,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import {
 	BlockIcon,
 	store as blockEditorStore,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import { unlock } from '../../lock-unlock';
 
 const { searchItems, normalizeString } = unlock( blockEditorPrivateApis );

@@ -1,8 +1,8 @@
-import { privateApis as coreDataPrivateApis } from '@wordpress/core-data';
+import { privateApis as coreDataPrivateApis } from '@/stores/gutenberg/core-data';
 import type {
 	CoreDataPrivateApis,
 	ResolvedSelection,
-} from '@wordpress/core-data';
+} from '@/stores/gutenberg/core-data';
 import { unlock } from '../../lock-unlock';
 import {
 	getCursorPosition,

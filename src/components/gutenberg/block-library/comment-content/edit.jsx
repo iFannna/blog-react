@@ -1,8 +1,8 @@
-import { _x } from '@wordpress/i18n';
-import { RawHTML } from '@wordpress/element';
-import { Disabled } from '@wordpress/components';
-import { useEntityProp } from '@wordpress/core-data';
-import { useBlockProps } from '@wordpress/block-editor';
+import { _x } from '@/lib/gutenberg/i18n';
+import { RawHTML } from '@/lib/gutenberg/element';
+import { Disabled } from '@/components/gutenberg/ui';
+import { useEntityProp } from '@/stores/gutenberg/core-data';
+import { useBlockProps } from '@/components/gutenberg/block-editor';
 import useDeprecatedTextAlign from '../utils/deprecated-text-align-attributes';
 
 export default function Edit( props ) {

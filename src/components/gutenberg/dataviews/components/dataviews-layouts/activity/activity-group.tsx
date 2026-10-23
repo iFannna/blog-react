@@ -1,6 +1,6 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { createInterpolateElement } from '@wordpress/element';
-import { Stack } from '@wordpress/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { createInterpolateElement } from '@/lib/gutenberg/element';
+import { Stack } from '@/components/gutenberg/design-system';
 import type { NormalizedField } from '../../../types';
 
 interface ActivityGroupProps< Item > {

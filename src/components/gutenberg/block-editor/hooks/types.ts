@@ -4,8 +4,8 @@ import type {
 	BlockAttribute,
 	BlockType,
 	ColorProps,
-} from '@wordpress/blocks';
-import type { GlobalStylesConfig } from '@wordpress/global-styles-engine';
+} from '@/lib/gutenberg/blocks';
+import type { GlobalStylesConfig } from '@/lib/gutenberg/global-styles-engine';
 import type { BlockVisibility } from '../components/block-visibility/use-block-visibility';
 import type { BlockEditorThunkArgs } from '../store/types';
 import type { Bindings } from '../utils/block-bindings';

@@ -1,5 +1,5 @@
-import { useEffect, useImperativeHandle, useRef } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
+import { useEffect, useImperativeHandle, useRef } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
 import { store as editorStore } from '../../store';
 
 /**

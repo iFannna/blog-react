@@ -1,5 +1,5 @@
-import { useEntityProp } from '@wordpress/core-data';
-import { __, sprintf } from '@wordpress/i18n';
+import { useEntityProp } from '@/stores/gutenberg/core-data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import AccessibleDescription from './accessible-description';
 
 export default function AccessibleMenuDescription( { id } ) {

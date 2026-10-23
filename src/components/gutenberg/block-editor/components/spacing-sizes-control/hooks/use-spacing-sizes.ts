@@ -1,5 +1,5 @@
-import { useMemo } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { useMemo } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import { useSettings } from '../../use-settings';
 import { RANGE_CONTROL_MAX_SIZE } from '../utils';
 import type { SpacingSize } from '../types';

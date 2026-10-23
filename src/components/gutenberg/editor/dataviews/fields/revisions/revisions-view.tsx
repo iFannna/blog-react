@@ -1,7 +1,7 @@
-import { Button } from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { _n, sprintf } from '@wordpress/i18n';
-import { addQueryArgs } from '@wordpress/url';
+import { Button } from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { _n, sprintf } from '@/lib/gutenberg/i18n';
+import { addQueryArgs } from '@/utils/gutenberg/url';
 import { store as editorStore } from '../../../store';
 import { unlock } from '../../../lock-unlock';
 

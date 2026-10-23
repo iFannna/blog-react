@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 
 /**
  * Source discriminator for "images attached to the post" — the only dynamic

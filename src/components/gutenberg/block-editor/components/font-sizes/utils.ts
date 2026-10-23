@@ -1,5 +1,5 @@
-import { kebabCase } from '@wordpress/kebab-case';
-import type { FontSizePreset } from '@wordpress/global-styles-engine';
+import { kebabCase } from '@/utils/gutenberg/kebab-case';
+import type { FontSizePreset } from '@/lib/gutenberg/global-styles-engine';
 import type { FontSizeObject } from './types';
 
 /**

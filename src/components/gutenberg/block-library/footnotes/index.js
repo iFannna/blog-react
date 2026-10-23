@@ -1,5 +1,5 @@
-import { formatListNumbered as icon } from '@wordpress/icons';
-import { registerFormatType } from '@wordpress/rich-text';
+import { formatListNumbered as icon } from '@/components/gutenberg/icons';
+import { registerFormatType } from '@/components/gutenberg/rich-text';
 import initBlock from '../utils/init-block';
 import edit from './edit';
 import metadata from './block.json';

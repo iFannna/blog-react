@@ -1,4 +1,4 @@
-import { __experimentalHStack as HStack } from '@wordpress/components';
+import { __experimentalHStack as HStack } from '@/components/gutenberg/ui';
 import TypographyExample from './typography-example';
 import PreviewWrapper from './preview-wrapper';
 

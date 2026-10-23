@@ -1,19 +1,19 @@
-import { __ } from '@wordpress/i18n';
-import { useEffect, useRef } from '@wordpress/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useEffect, useRef } from '@/lib/gutenberg/element';
 import {
 	Button,
 	Spinner as WCSpinner,
 	CheckboxControl as WCCheckboxControl,
-} from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
+} from '@/components/gutenberg/ui';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	useConstrainedTabbing,
 	useEvent,
 	useFocusReturn,
 	useMergeRefs,
-} from '@wordpress/compose';
-import { closeSmall } from '@wordpress/icons';
-import { store as coreStore } from '@wordpress/core-data';
+} from '@/hooks/gutenberg/compose';
+import { closeSmall } from '@/components/gutenberg/icons';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import PostPublishButton from '../post-publish-button';
 import PostPublishPanelPrepublish from './prepublish';
 import PostPublishPanelPostpublish from './postpublish';

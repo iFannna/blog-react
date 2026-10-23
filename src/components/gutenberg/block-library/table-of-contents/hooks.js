@@ -1,8 +1,8 @@
-import { useEntityBlockEditor, store as coreStore } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
-import { useMemo } from '@wordpress/element';
-import { addQueryArgs, removeQueryArgs } from '@wordpress/url';
+import { useEntityBlockEditor, store as coreStore } from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
+import { useMemo } from '@/lib/gutenberg/element';
+import { addQueryArgs, removeQueryArgs } from '@/utils/gutenberg/url';
 
 const EMPTY_ARRAY = [];
 

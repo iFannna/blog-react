@@ -1,7 +1,7 @@
-import { createBlobURL, isBlobURL } from '@wordpress/blob';
-import { createBlock, getBlockAttributes } from '@wordpress/blocks';
-import { select } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+import { createBlobURL, isBlobURL } from '@/utils/gutenberg/blob';
+import { createBlock, getBlockAttributes } from '@/lib/gutenberg/blocks';
+import { select } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 
 /**
  * Returns the subset of block attributes that should be carried over when

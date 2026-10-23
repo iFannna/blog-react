@@ -4,7 +4,7 @@ import type {
 	ElementType,
 	ReactNode,
 } from 'react';
-import type { Composite } from '@wordpress/components';
+import type { Composite } from '@/components/gutenberg/ui';
 
 /**
  * Props of `InserterListbox`.

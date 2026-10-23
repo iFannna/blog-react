@@ -1,4 +1,4 @@
-import { useMemo } from '@wordpress/element';
+import { useMemo } from '@/lib/gutenberg/element';
 import {
 	FocalPointPicker,
 	RangeControl,
@@ -9,8 +9,8 @@ import {
 	__experimentalToolsPanelItem as ToolsPanelItem,
 	__experimentalUnitControl as UnitControl,
 	__experimentalParseQuantityAndUnitFromRawValue as parseQuantityAndUnitFromRawValue,
-} from '@wordpress/components';
-import { useInstanceId, useReducedMotion } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { useInstanceId, useReducedMotion } from '@/hooks/gutenberg/compose';
 import {
 	InspectorControls,
 	useSettings,
@@ -19,12 +19,12 @@ import {
 	__experimentalUseGradient,
 	__experimentalUseMultipleOriginColorsAndGradients as useMultipleOriginColorsAndGradients,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { getFilename } from '@wordpress/url';
-import { Link } from '@wordpress/ui';
+} from '@/components/gutenberg/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { getFilename } from '@/utils/gutenberg/url';
+import { Link } from '@/components/gutenberg/design-system';
 import {
 	ALLOWED_MEDIA_TYPES,
 	COVER_MIN_HEIGHT,

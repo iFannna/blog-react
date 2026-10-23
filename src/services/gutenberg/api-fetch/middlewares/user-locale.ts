@@ -1,4 +1,4 @@
-import { addQueryArgs, hasQueryArg } from '@wordpress/url';
+import { addQueryArgs, hasQueryArg } from '@/utils/gutenberg/url';
 import type { APIFetchMiddleware } from '../types';
 
 const userLocaleMiddleware: APIFetchMiddleware = ( options, next ) => {

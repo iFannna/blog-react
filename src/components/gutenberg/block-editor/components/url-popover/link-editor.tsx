@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
-import { keyboardReturn } from '@wordpress/icons';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Button } from '@/components/gutenberg/ui';
+import { keyboardReturn } from '@/components/gutenberg/icons';
 import URLInput from '../url-input';
 import type { URLPopoverLinkEditorProps } from './types';
 

@@ -1,6 +1,6 @@
-import { createBlock } from '@wordpress/blocks';
-import type { Block } from '@wordpress/blocks';
-import { escapeAttribute, escapeEditableHTML } from '@wordpress/escape-html';
+import { createBlock } from '@/lib/gutenberg/blocks';
+import type { Block } from '@/lib/gutenberg/blocks';
+import { escapeAttribute, escapeEditableHTML } from '@/utils/gutenberg/escape-html';
 
 export interface HeadingData {
 	/** The plain text content of the heading. */

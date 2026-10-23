@@ -1,15 +1,15 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { useRef } from '@wordpress/element';
-import { useViewportMatch } from '@wordpress/compose';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useRef } from '@/lib/gutenberg/element';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
 import {
 	getBlockType,
 	hasBlockSupport,
 	isReusableBlock,
 	isTemplatePart,
-} from '@wordpress/blocks';
-import { ToolbarGroup } from '@wordpress/components';
+} from '@/lib/gutenberg/blocks';
+import { ToolbarGroup } from '@/components/gutenberg/ui';
 import BlockMover from '../block-mover';
 import BlockParentSelector from '../block-parent-selector';
 import BlockControls from '../block-controls';

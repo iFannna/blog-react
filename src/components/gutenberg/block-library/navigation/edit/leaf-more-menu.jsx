@@ -2,17 +2,17 @@ import {
 	createBlock,
 	hasBlockSupport,
 	store as blocksStore,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import {
 	addSubmenu,
 	chevronUp,
 	chevronDown,
 	moreVertical,
-} from '@wordpress/icons';
-import { DropdownMenu, MenuItem, MenuGroup } from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { __, sprintf } from '@wordpress/i18n';
-import { BlockTitle, store as blockEditorStore } from '@wordpress/block-editor';
+} from '@/components/gutenberg/icons';
+import { DropdownMenu, MenuItem, MenuGroup } from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { BlockTitle, store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import { DEFAULT_BLOCK } from '../constants';
 
 const POPOVER_PROPS = {

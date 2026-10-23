@@ -1,4 +1,4 @@
-import { focus } from '@wordpress/dom';
+import { focus } from '@/utils/gutenberg/dom';
 import useRefEffect from '../use-ref-effect';
 
 /**
@@ -9,7 +9,7 @@ import useRefEffect from '../use-ref-effect';
  *
  * @example
  * ```ts
- * import { useConstrainedTabbing } from '@wordpress/compose';
+ * import { useConstrainedTabbing } from '@/hooks/gutenberg/compose';
  *
  * const ConstrainedTabbingExample = () => {
  *     const constrainedTabbingRef = useConstrainedTabbing()

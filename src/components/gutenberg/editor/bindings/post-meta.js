@@ -1,4 +1,4 @@
-import { store as coreDataStore } from '@wordpress/core-data';
+import { store as coreDataStore } from '@/stores/gutenberg/core-data';
 import { store as editorStore } from '../store';
 import { unlock } from '../lock-unlock';
 

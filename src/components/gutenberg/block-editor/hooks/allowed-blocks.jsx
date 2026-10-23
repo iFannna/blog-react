@@ -1,5 +1,5 @@
-import { addFilter } from '@wordpress/hooks';
-import { hasBlockSupport, getBlockType } from '@wordpress/blocks';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import { hasBlockSupport, getBlockType } from '@/lib/gutenberg/blocks';
 import { PrivateInspectorControlsAllowedBlocks } from '../components/inspector-controls/groups';
 import BlockAllowedBlocksControl from '../components/block-allowed-blocks/allowed-blocks-control';
 import { useBlockEditingMode } from '../components/block-editing-mode';

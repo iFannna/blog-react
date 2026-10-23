@@ -1,5 +1,5 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { focus } from '@wordpress/dom';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { focus } from '@/utils/gutenberg/dom';
 
 // Must match the row height in `style.scss`; the windowing math relies on it.
 // See: https://github.com/WordPress/gutenberg/pull/35230 for additional context.
@@ -76,7 +76,7 @@ export function getCommonDepthClientIds(
 /**
  * Shift focus to the list view item associated with a particular clientId.
  *
- * @typedef {import('@wordpress/element').RefObject} RefObject
+ * @typedef {import('@/lib/gutenberg/element').RefObject} RefObject
  *
  * @param {string}       focusClientId   The client ID of the block to focus.
  * @param {?HTMLElement} treeGridElement The container element to search within.

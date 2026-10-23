@@ -1,10 +1,10 @@
 import { diffLines } from 'diff';
-import { Spinner as WCSpinner } from '@wordpress/components';
-import { store as coreStore } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
-import { useMemo } from '@wordpress/element';
-import { __, _x } from '@wordpress/i18n';
-import { VisuallyHidden } from '@wordpress/ui';
+import { Spinner as WCSpinner } from '@/components/gutenberg/ui';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useMemo } from '@/lib/gutenberg/element';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
 import { store as editorStore } from '../../store';
 import { buildRevisionsPageQuery } from '../../store/private-selectors';
 import { unlock } from '../../lock-unlock';

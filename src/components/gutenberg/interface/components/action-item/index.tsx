@@ -1,5 +1,5 @@
-import { MenuGroup, MenuItem, Slot, Fill } from '@wordpress/components';
-import { Children } from '@wordpress/element';
+import { MenuGroup, MenuItem, Slot, Fill } from '@/components/gutenberg/ui';
+import { Children } from '@/lib/gutenberg/element';
 import type { ActionItemProps, ActionItemSlotProps } from './types';
 
 function ActionItemSlot( {

@@ -1,5 +1,5 @@
-import { renderToString } from '@wordpress/element';
-import deprecated from '@wordpress/deprecated';
+import { renderToString } from '@/lib/gutenberg/element';
+import deprecated from '@/utils/gutenberg/deprecated';
 import * as node from './node';
 
 /**

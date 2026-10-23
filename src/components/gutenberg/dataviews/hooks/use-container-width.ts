@@ -1,5 +1,5 @@
-import { useCallback, useState } from '@wordpress/element';
-import { useMergeRefs, useResizeObserver } from '@wordpress/compose';
+import { useCallback, useState } from '@/lib/gutenberg/element';
+import { useMergeRefs, useResizeObserver } from '@/hooks/gutenberg/compose';
 
 /**
  * Tracks the width of the element the returned ref is attached to.

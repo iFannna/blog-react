@@ -1,10 +1,10 @@
-import { useEffect } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
+import { useEffect } from '@/lib/gutenberg/element';
+import { useDispatch } from '@/stores/gutenberg/data';
 import {
 	useShortcut,
 	store as keyboardShortcutsStore,
-} from '@wordpress/keyboard-shortcuts';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/keyboard-shortcuts';
+import { __ } from '@/lib/gutenberg/i18n';
 import { store as editPostStore } from '../../store';
 
 function KeyboardShortcuts() {

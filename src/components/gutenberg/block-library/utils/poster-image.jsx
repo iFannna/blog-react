@@ -3,8 +3,8 @@ import {
 	MediaUpload,
 	MediaUploadCheck,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
-import { store as noticesStore } from '@wordpress/notices';
+} from '@/components/gutenberg/block-editor';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import {
 	Button,
 	BaseControl,
@@ -12,12 +12,12 @@ import {
 	Spinner as WCSpinner,
 	__experimentalHStack as HStack,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
-import { isBlobURL } from '@wordpress/blob';
-import { __, sprintf } from '@wordpress/i18n';
-import { useRef, useState } from '@wordpress/element';
-import { useInstanceId } from '@wordpress/compose';
-import { useSelect, useDispatch } from '@wordpress/data';
+} from '@/components/gutenberg/ui';
+import { isBlobURL } from '@/utils/gutenberg/blob';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useRef, useState } from '@/lib/gutenberg/element';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 
 const POSTER_IMAGE_ALLOWED_MEDIA_TYPES = [ 'image' ];
 

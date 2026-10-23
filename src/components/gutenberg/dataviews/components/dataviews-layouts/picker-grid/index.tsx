@@ -5,11 +5,11 @@ import {
 	Flex,
 	FlexItem,
 	Composite,
-} from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
-import { useInstanceId } from '@wordpress/compose';
-import { useContext, useRef } from '@wordpress/element';
-import { Badge, Stack } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { useContext, useRef } from '@/lib/gutenberg/element';
+import { Badge, Stack } from '@/components/gutenberg/design-system';
 import DataViewsSelectionCheckbox from '../../dataviews-selection-checkbox';
 import DataViewsContext from '../../dataviews-context';
 import { useIsMultiselectPicker } from '../../dataviews-picker-footer';

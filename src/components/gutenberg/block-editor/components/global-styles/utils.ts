@@ -1,5 +1,5 @@
-import { useViewportMatch } from '@wordpress/compose';
-import { createContext, useContext } from '@wordpress/element';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
+import { createContext, useContext } from '@/lib/gutenberg/element';
 import type { ToolsPanelPopoverProps } from './types';
 
 /**

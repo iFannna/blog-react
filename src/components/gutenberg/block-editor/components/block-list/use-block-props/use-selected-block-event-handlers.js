@@ -1,8 +1,8 @@
-import { isReusableBlock, isTemplatePart } from '@wordpress/blocks';
-import { isTextField } from '@wordpress/dom';
-import { ENTER, BACKSPACE, DELETE } from '@wordpress/keycodes';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useRefEffect } from '@wordpress/compose';
+import { isReusableBlock, isTemplatePart } from '@/lib/gutenberg/blocks';
+import { isTextField } from '@/utils/gutenberg/dom';
+import { ENTER, BACKSPACE, DELETE } from '@/utils/gutenberg/keycodes';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
 import { store as blockEditorStore } from '../../../store';
 import { unlock } from '../../../lock-unlock';
 

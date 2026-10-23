@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import type { createRegistry } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
+import type { createRegistry } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
 type WPDataRegistry = ReturnType< typeof createRegistry >;
 import type {
 	AdditionalData,

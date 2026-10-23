@@ -1,9 +1,9 @@
-import { __ } from '@wordpress/i18n';
-import { Button, Composite, Dropdown } from '@wordpress/components';
-import { SelectControl, Stack, Text } from '@wordpress/ui';
-import { useRef, useMemo } from '@wordpress/element';
-import { shadow as textShadowIcon, Icon, check, reset } from '@wordpress/icons';
-import type { TextShadowPreset } from '@wordpress/global-styles-engine';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Button, Composite, Dropdown } from '@/components/gutenberg/ui';
+import { SelectControl, Stack, Text } from '@/components/gutenberg/design-system';
+import { useRef, useMemo } from '@/lib/gutenberg/element';
+import { shadow as textShadowIcon, Icon, check, reset } from '@/components/gutenberg/icons';
+import type { TextShadowPreset } from '@/lib/gutenberg/global-styles-engine';
 import clsx from 'clsx';
 import { useSettings } from '../use-settings';
 import { useToolsPanelItemPopoverProps } from './utils';

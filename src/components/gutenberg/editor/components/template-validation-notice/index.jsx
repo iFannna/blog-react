@@ -1,10 +1,10 @@
-import { speak } from '@wordpress/a11y';
-import { __experimentalConfirmDialog as ConfirmDialog } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useEffect, useState } from '@wordpress/element';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { Notice } from '@wordpress/ui';
+import { speak } from '@/utils/gutenberg/a11y';
+import { __experimentalConfirmDialog as ConfirmDialog } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { useEffect, useState } from '@/lib/gutenberg/element';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { Notice } from '@/components/gutenberg/design-system';
 
 export default function TemplateValidationNotice() {
 	const [ showConfirmDialog, setShowConfirmDialog ] = useState( false );

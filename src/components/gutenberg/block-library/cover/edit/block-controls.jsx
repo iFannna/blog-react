@@ -1,14 +1,14 @@
-import { useState } from '@wordpress/element';
+import { useState } from '@/lib/gutenberg/element';
 import {
 	BlockControls,
 	MediaReplaceFlow,
 	__experimentalBlockAlignmentMatrixControl as BlockAlignmentMatrixControl,
 	__experimentalBlockFullHeightAligmentControl as FullHeightAlignmentControl,
 	privateApis as blockEditorPrivateApis,
-} from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
-import { MenuItem, ToolbarButton } from '@wordpress/components';
-import { crop, link } from '@wordpress/icons';
+} from '@/components/gutenberg/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
+import { MenuItem, ToolbarButton } from '@/components/gutenberg/ui';
+import { crop, link } from '@/components/gutenberg/icons';
 import { ALLOWED_MEDIA_TYPES, EMBED_VIDEO_BACKGROUND_TYPE } from '../shared';
 import { unlock } from '../../lock-unlock';
 import EmbedVideoUrlInput from './embed-video-url-input';

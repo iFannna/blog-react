@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { ToggleControl } from '@wordpress/components';
+import { __ } from '@/lib/gutenberg/i18n';
+import { ToggleControl } from '@/components/gutenberg/ui';
 
 export function QueryPaginationLabelControl( { value, onChange } ) {
 	return (

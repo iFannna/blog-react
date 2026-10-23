@@ -4,12 +4,12 @@ import {
 	RangeControl,
 	__experimentalHStack as HStack,
 	__experimentalParseQuantityAndUnitFromRawValue as parseQuantityAndUnitFromRawValue,
-} from '@wordpress/components';
-import { SelectControl } from '@wordpress/ui';
-import { usePrevious } from '@wordpress/compose';
-import { __, sprintf } from '@wordpress/i18n';
-import { settings } from '@wordpress/icons';
-import { useState, useEffect, useMemo } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { SelectControl } from '@/components/gutenberg/design-system';
+import { usePrevious } from '@/hooks/gutenberg/compose';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { settings } from '@/components/gutenberg/icons';
+import { useState, useEffect, useMemo } from '@/lib/gutenberg/element';
 import {
 	CUSTOM_VALUE_SETTINGS,
 	ICON_SIZE,

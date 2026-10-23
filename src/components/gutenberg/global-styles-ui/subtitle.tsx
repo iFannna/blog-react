@@ -1,4 +1,4 @@
-import { __experimentalHeading as Heading } from '@wordpress/components';
+import { __experimentalHeading as Heading } from '@/components/gutenberg/ui';
 
 interface SubtitleProps {
 	children: React.ReactNode;

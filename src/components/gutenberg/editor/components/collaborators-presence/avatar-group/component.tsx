@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { Children } from '@wordpress/element';
-import { sprintf, _n } from '@wordpress/i18n';
+import { Children } from '@/lib/gutenberg/element';
+import { sprintf, _n } from '@/lib/gutenberg/i18n';
 import type { AvatarGroupProps } from './types';
 
 function AvatarGroup( {

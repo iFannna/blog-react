@@ -1,13 +1,13 @@
-import { Button } from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
-import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
+import { Button } from '@/components/gutenberg/ui';
+import { Stack } from '@/components/gutenberg/design-system';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	privateApis as blockEditorPrivateApis,
 	store as blockEditorStore,
 	// @ts-expect-error No exported types
-} from '@wordpress/block-editor';
-import { store as coreStore } from '@wordpress/core-data';
+} from '@/components/gutenberg/block-editor';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { unlock } from '../lock-unlock';
 
 const { PrivateBlockInspectorEditOriginal } = unlock( blockEditorPrivateApis );

@@ -5,7 +5,7 @@ import {
 	useEffect,
 	useRef,
 	useState,
-} from '@wordpress/element';
+} from '@/lib/gutenberg/element';
 import {
 	InspectorControls,
 	BlockControls,
@@ -17,8 +17,8 @@ import {
 	__experimentalUseBorderProps as useBorderProps,
 	useBackgroundProps,
 	useBlockEditingMode,
-} from '@wordpress/block-editor';
-import { __, _x } from '@wordpress/i18n';
+} from '@/components/gutenberg/block-editor';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import {
 	Button,
 	Placeholder,
@@ -28,7 +28,7 @@ import {
 	__experimentalHasSplitBorders as hasSplitBorders,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	alignLeft,
 	alignRight,
@@ -41,7 +41,7 @@ import {
 	tableRowBefore,
 	tableRowDelete,
 	table,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 import {
 	createTable,
 	updateSelectedCell,

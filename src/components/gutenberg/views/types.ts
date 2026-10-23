@@ -1,4 +1,4 @@
-import type { View, SupportedLayouts } from '@wordpress/dataviews';
+import type { View, SupportedLayouts } from '@/components/gutenberg/dataviews';
 
 /**
  * A layer merged on top of a view: the active view overrides, and the user's

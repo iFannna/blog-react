@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { memo, RawHTML, useContext, useMemo } from '@wordpress/element';
+import { memo, RawHTML, useContext, useMemo } from '@/lib/gutenberg/element';
 import {
 	getBlockType,
 	getSaveContent,
@@ -13,11 +13,11 @@ import {
 	hasBlockSupport,
 	createBlock,
 	store as blocksStore,
-} from '@wordpress/blocks';
-import { withFilters } from '@wordpress/components';
-import { withDispatch, useSelect } from '@wordpress/data';
-import { compose, useRefEffect } from '@wordpress/compose';
-import { safeHTML } from '@wordpress/dom';
+} from '@/lib/gutenberg/blocks';
+import { withFilters } from '@/components/gutenberg/ui';
+import { withDispatch, useSelect } from '@/stores/gutenberg/data';
+import { compose, useRefEffect } from '@/hooks/gutenberg/compose';
+import { safeHTML } from '@/utils/gutenberg/dom';
 import BlockEdit from '../block-edit';
 import BlockInvalidWarning from './block-invalid-warning';
 import BlockCrashWarning from './block-crash-warning';

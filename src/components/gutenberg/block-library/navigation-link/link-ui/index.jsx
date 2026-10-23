@@ -1,24 +1,24 @@
-import { __unstableStripHTML as stripHTML, focus } from '@wordpress/dom';
+import { __unstableStripHTML as stripHTML, focus } from '@/utils/gutenberg/dom';
 import {
 	Popover,
 	Button,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { LinkControl, useBlockEditingMode } from '@wordpress/block-editor';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { LinkControl, useBlockEditingMode } from '@/components/gutenberg/block-editor';
 import {
 	useMemo,
 	useState,
 	useRef,
 	useEffect,
 	forwardRef,
-} from '@wordpress/element';
-import { store as coreStore } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
-import { plus } from '@wordpress/icons';
-import { useInstanceId } from '@wordpress/compose';
-import { VisuallyHidden } from '@wordpress/ui';
-import { isURL } from '@wordpress/url';
+} from '@/lib/gutenberg/element';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { plus } from '@/components/gutenberg/icons';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { VisuallyHidden } from '@/components/gutenberg/design-system';
+import { isURL } from '@/utils/gutenberg/url';
 import { LinkUIPageCreator } from './page-creator';
 import LinkUIBlockInserter from './block-inserter';
 import {

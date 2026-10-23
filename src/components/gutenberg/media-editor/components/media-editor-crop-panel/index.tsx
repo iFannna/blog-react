@@ -1,5 +1,5 @@
-import { SelectControl, Stack, VisuallyHidden } from '@wordpress/ui';
-import { __ } from '@wordpress/i18n';
+import { SelectControl, Stack, VisuallyHidden } from '@/components/gutenberg/design-system';
+import { __ } from '@/lib/gutenberg/i18n';
 import { CROP_CONTROL_ATTR } from '../../hooks/use-crop-gesture-handlers';
 import MediaEditorImageControls from '../media-editor-image-controls';
 import type { AspectRatioPreset } from '../../image-editor/core/constants';

@@ -1,5 +1,5 @@
-import { useLayoutEffect, useRef } from '@wordpress/element';
-import { useDebounce, useEvent } from '@wordpress/compose';
+import { useLayoutEffect, useRef } from '@/lib/gutenberg/element';
+import { useDebounce, useEvent } from '@/hooks/gutenberg/compose';
 
 const TYPING_TIMEOUT = 1000;
 

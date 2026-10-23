@@ -1,7 +1,7 @@
 /**
  * Defines as extensibility slot for the Excerpt panel.
  */
-import { createSlotFill, PanelRow } from '@wordpress/components';
+import { createSlotFill, PanelRow } from '@/components/gutenberg/ui';
 
 const { Fill, Slot } = createSlotFill( 'PluginPostExcerpt' );
 
@@ -32,8 +32,8 @@ const { Fill, Slot } = createSlotFill( 'PluginPostExcerpt' );
  * @example
  * ```jsx
  * // Using ESNext syntax
- * import { __ } from '@wordpress/i18n';
- * import { __experimentalPluginPostExcerpt as PluginPostExcerpt } from '@wordpress/edit-post';
+ * import { __ } from '@/lib/gutenberg/i18n';
+ * import { __experimentalPluginPostExcerpt as PluginPostExcerpt } from '@/components/gutenberg/edit-post';
  *
  * const MyPluginPostExcerpt = () => (
  * 	<PluginPostExcerpt className="my-plugin-post-excerpt">

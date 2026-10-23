@@ -1,5 +1,5 @@
-import { useCallback, useContext } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { useCallback, useContext } from '@/lib/gutenberg/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import { STORE_NAME } from '../name';
 import { EntityContext } from '../entity-context';
 import useEntityId from './use-entity-id';

@@ -7,14 +7,14 @@ import {
 	__experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
 	SelectControl as WCSelectControl,
 	__experimentalHeading as Heading,
-} from '@wordpress/components';
-import { __, _x } from '@wordpress/i18n';
-import { memo, useContext, useMemo } from '@wordpress/element';
-import { cog } from '@wordpress/icons';
-import warning from '@wordpress/warning';
-import { useInstanceId } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { memo, useContext, useMemo } from '@/lib/gutenberg/element';
+import { cog } from '@/components/gutenberg/icons';
+import warning from '@/utils/gutenberg/warning';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Intentional early adoption of the new Menu, pending WordPress/gutenberg#76135.
-import { Menu, Stack } from '@wordpress/ui';
+import { Menu, Stack } from '@/components/gutenberg/design-system';
 import { SORTING_DIRECTIONS, sortIcons, sortLabels } from '../../constants';
 import { VIEW_LAYOUTS } from '../dataviews-layouts';
 import type { View } from '../../types';

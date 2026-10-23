@@ -1,6 +1,6 @@
-import { createRoot, StrictMode } from '@wordpress/element';
-import { privateApis as routerPrivateApis } from '@wordpress/router';
-import { CommandMenu } from '@wordpress/commands';
+import { createRoot, StrictMode } from '@/lib/gutenberg/element';
+import { privateApis as routerPrivateApis } from '@/lib/gutenberg/router';
+import { CommandMenu } from '@/lib/gutenberg/commands';
 import { useAdminNavigationCommands } from './admin-navigation-commands';
 import { useSiteEditorNavigationCommands } from './site-editor-navigation-commands';
 import { unlock } from './lock-unlock';

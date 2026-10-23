@@ -1,4 +1,4 @@
-import { useContext } from '@wordpress/element';
+import { useContext } from '@/lib/gutenberg/element';
 import { Context } from './context';
 import type { DataRegistry } from '../../types';
 
@@ -22,7 +22,7 @@ import type { DataRegistry } from '../../types';
  *   RegistryProvider,
  *   createRegistry,
  *   useRegistry,
- * } from '@wordpress/data';
+ * } from '@/stores/gutenberg/data';
  *
  * const registry = createRegistry( {} );
  *

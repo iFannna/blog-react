@@ -1,8 +1,8 @@
-import { BaseControl, Button } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { hasBlockSupport, store as blocksStore } from '@wordpress/blocks';
+import { BaseControl, Button } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useState } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { hasBlockSupport, store as blocksStore } from '@/lib/gutenberg/blocks';
 import BlockAllowedBlocksModal from './modal';
 import { store as blockEditorStore } from '../../store';
 

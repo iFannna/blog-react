@@ -1,12 +1,12 @@
 // @ts-expect-error: Not typed yet.
-import { BlockPreview } from '@wordpress/block-editor';
-import { getBlockType, getBlockFromExample } from '@wordpress/blocks';
-import { __experimentalSpacer as Spacer } from '@wordpress/components';
-import { useMemo } from '@wordpress/element';
+import { BlockPreview } from '@/components/gutenberg/block-editor';
+import { getBlockType, getBlockFromExample } from '@/lib/gutenberg/blocks';
+import { __experimentalSpacer as Spacer } from '@/components/gutenberg/ui';
+import { useMemo } from '@/lib/gutenberg/element';
 import {
 	privateApis as globalStylesEnginePrivateApis,
 	__unstableGeneratePreviewStateStyles as generatePreviewStateStyles,
-} from '@wordpress/global-styles-engine';
+} from '@/lib/gutenberg/global-styles-engine';
 import { getVariationClassName } from './utils';
 import { unlock } from './lock-unlock';
 

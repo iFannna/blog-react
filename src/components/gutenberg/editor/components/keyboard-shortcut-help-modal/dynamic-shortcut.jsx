@@ -1,5 +1,5 @@
-import { useSelect } from '@wordpress/data';
-import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
 import Shortcut from './shortcut';
 
 function DynamicShortcut( { name } ) {

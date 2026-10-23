@@ -22,7 +22,7 @@ export interface LatexToMathMLOptions {
  *
  * @example
  * ```js
- * import latexToMathML from '@wordpress/latex-to-mathml';
+ * import latexToMathML from '@/utils/gutenberg/latex-to-mathml';
  *
  * const mathML = latexToMathML( 'x^2', { displayMode: false } );
  * ```

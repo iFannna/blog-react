@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useRef } from '@wordpress/element';
+import { useState, useEffect, useMemo, useRef } from '@/lib/gutenberg/element';
 import type { View } from '../types';
 
 type PaginationInfo = {

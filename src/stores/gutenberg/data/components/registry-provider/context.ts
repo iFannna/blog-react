@@ -1,4 +1,4 @@
-import { createContext } from '@wordpress/element';
+import { createContext } from '@/lib/gutenberg/element';
 import defaultRegistry from '../../default-registry';
 
 export const Context = createContext( defaultRegistry );
@@ -19,7 +19,7 @@ const { Consumer, Provider } = Context;
  *   RegistryProvider,
  *   RegistryConsumer,
  *   createRegistry
- * } from '@wordpress/data';
+ * } from '@/stores/gutenberg/data';
  *
  * const registry = createRegistry( {} );
  *

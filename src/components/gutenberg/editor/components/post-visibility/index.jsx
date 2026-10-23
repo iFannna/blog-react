@@ -1,14 +1,14 @@
-import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useState } from '@/lib/gutenberg/element';
 import {
 	TextControl,
 	RadioControl,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { useInstanceId } from '@wordpress/compose';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@wordpress/block-editor';
-import { Text } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { useInstanceId } from '@/hooks/gutenberg/compose';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@/components/gutenberg/block-editor';
+import { Text } from '@/components/gutenberg/design-system';
 import { VISIBILITY_OPTIONS } from './utils';
 import { store as editorStore } from '../../store';
 

@@ -1,6 +1,6 @@
 import type { Ref, RefCallback } from 'react';
-import { useContext, useState, useLayoutEffect } from '@wordpress/element';
-import { useRefEffect } from '@wordpress/compose';
+import { useContext, useState, useLayoutEffect } from '@/lib/gutenberg/element';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
 import { BlockRefs } from '../../provider/block-refs-provider';
 
 /**

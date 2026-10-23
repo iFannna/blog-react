@@ -1,7 +1,7 @@
-import { useDispatch, useSelect } from '@wordpress/data';
-import { privateApis as patternsPrivateApis } from '@wordpress/patterns';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as interfaceStore } from '@wordpress/interface';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { privateApis as patternsPrivateApis } from '@/components/gutenberg/patterns';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as interfaceStore } from '@/components/gutenberg/interface';
 import { unlock } from '../../lock-unlock';
 import { store as editorStore } from '../../store';
 import { PATTERN_POST_TYPE } from '../../store/constants';

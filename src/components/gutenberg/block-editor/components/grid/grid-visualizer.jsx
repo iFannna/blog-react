@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { useState, useEffect, forwardRef, useMemo } from '@wordpress/element';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { __experimentalUseDropZone as useDropZone } from '@wordpress/compose';
+import { useState, useEffect, forwardRef, useMemo } from '@/lib/gutenberg/element';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { __experimentalUseDropZone as useDropZone } from '@/hooks/gutenberg/compose';
 import { useBlockElement } from '../block-list/use-block-props/use-block-refs';
 import BlockPopoverCover from '../block-popover/cover';
 import { range, GridRect, getGridInfo, getGridItemRect } from './utils';

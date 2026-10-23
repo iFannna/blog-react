@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { accordion as icon } from '@wordpress/icons';
+import { __ } from '@/lib/gutenberg/i18n';
+import { accordion as icon } from '@/components/gutenberg/icons';
 import edit from './edit';
 import save from './save';
 import metadata from './block.json';

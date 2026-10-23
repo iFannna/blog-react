@@ -1,12 +1,12 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
-import { useState, useCallback, useEffect } from '@wordpress/element';
-import { commentAuthorAvatar as authorIcon } from '@wordpress/icons';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useState, useCallback, useEffect } from '@/lib/gutenberg/element';
+import { commentAuthorAvatar as authorIcon } from '@/components/gutenberg/icons';
 import {
 	__experimentalHStack as HStack,
 	Icon as WCIcon,
-} from '@wordpress/components';
-import type { DataViewRenderFieldProps } from '@wordpress/dataviews';
+} from '@/components/gutenberg/ui';
+import type { DataViewRenderFieldProps } from '@/components/gutenberg/dataviews';
 import type { MediaItem } from '../types';
 
 export default function AuthorView( {

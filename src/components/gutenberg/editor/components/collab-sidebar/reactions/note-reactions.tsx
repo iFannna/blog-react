@@ -1,14 +1,14 @@
 import clsx from 'clsx';
 import type { MouseEvent } from 'react';
-import { __, sprintf, _n } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import type { Comment } from '@wordpress/core-data';
+import { __, sprintf, _n } from '@/lib/gutenberg/i18n';
+import { useState } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import type { Comment } from '@/stores/gutenberg/core-data';
 // eslint-disable-next-line @wordpress/use-recommended-components -- Pending Design System review, see #76135.
-import { Button, IconButton, Menu, Stack, Tooltip } from '@wordpress/ui';
-import { ThemeProvider } from '@wordpress/theme';
-import { reaction as reactionIcon } from '@wordpress/icons';
+import { Button, IconButton, Menu, Stack, Tooltip } from '@/components/gutenberg/design-system';
+import { ThemeProvider } from '@/lib/gutenberg/theme';
+import { reaction as reactionIcon } from '@/components/gutenberg/icons';
 import { store as editorStore } from '../../../store';
 import { REACTION_EMOJIS, getReactionEmoji } from './reaction-emojis';
 import { useNoteReactions } from './use-note-reactions';

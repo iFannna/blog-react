@@ -1,8 +1,8 @@
-import { sprintf, __, _n } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { backup } from '@wordpress/icons';
-import { addQueryArgs } from '@wordpress/url';
+import { sprintf, __, _n } from '@/lib/gutenberg/i18n';
+import { Button } from '@/components/gutenberg/ui';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { backup } from '@/components/gutenberg/icons';
+import { addQueryArgs } from '@/utils/gutenberg/url';
 import PostLastRevisionCheck from './check';
 import PostPanelRow from '../post-panel-row';
 import { store as editorStore } from '../../store';

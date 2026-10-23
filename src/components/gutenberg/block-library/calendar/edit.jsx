@@ -1,12 +1,12 @@
 import memoize from 'memize';
-import { calendar as icon } from '@wordpress/icons';
-import { Placeholder, Spinner as WCSpinner } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { useServerSideRender } from '@wordpress/server-side-render';
-import { useBlockProps } from '@wordpress/block-editor';
-import { store as coreStore } from '@wordpress/core-data';
-import { __, sprintf } from '@wordpress/i18n';
-import { useDisabled } from '@wordpress/compose';
+import { calendar as icon } from '@/components/gutenberg/icons';
+import { Placeholder, Spinner as WCSpinner } from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { useServerSideRender } from '@/components/gutenberg/server-side-render';
+import { useBlockProps } from '@/components/gutenberg/block-editor';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useDisabled } from '@/hooks/gutenberg/compose';
 import HtmlRenderer from '../utils/html-renderer';
 
 /**

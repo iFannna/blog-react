@@ -1,10 +1,10 @@
-import { __ } from '@wordpress/i18n';
-import { Icon as WCIcon, PanelBody } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { globe } from '@wordpress/icons';
-import { filterURLForDisplay } from '@wordpress/url';
-import { store as coreStore } from '@wordpress/core-data';
-import { decodeEntities } from '@wordpress/html-entities';
+import { __ } from '@/lib/gutenberg/i18n';
+import { Icon as WCIcon, PanelBody } from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
+import { globe } from '@/components/gutenberg/icons';
+import { filterURLForDisplay } from '@/utils/gutenberg/url';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { PrivatePostVisibility } from '../post-visibility';
 import PostVisibilityLabel from '../post-visibility/label';
 import { PrivatePostSchedule } from '../post-schedule';

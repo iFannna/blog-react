@@ -1,5 +1,5 @@
 import fastDeepEqual from 'fast-deep-equal/es6/index.js';
-import { dispatch, resolveSelect, select } from '@wordpress/data';
+import { dispatch, resolveSelect, select } from '@/stores/gutenberg/data';
 import {
 	ConnectionErrorCode,
 	createSyncManager,
@@ -14,7 +14,7 @@ import {
 	type SyncConfig,
 	type SyncManager,
 	type Y,
-} from '@wordpress/sync';
+} from '@/services/gutenberg/sync';
 import {
 	registerEntitySyncManager,
 	type EntitySyncBeforeSaveContext,

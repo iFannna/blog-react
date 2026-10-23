@@ -1,4 +1,4 @@
-import { useMemo, useRef } from '@wordpress/element';
+import { useMemo, useRef } from '@/lib/gutenberg/element';
 import type { View } from '../types';
 
 /**

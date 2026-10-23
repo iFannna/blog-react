@@ -1,7 +1,7 @@
-import { useSelect } from '@wordpress/data';
-import { Y } from '@wordpress/sync';
+import { useSelect } from '@/stores/gutenberg/data';
+import { Y } from '@/services/gutenberg/sync';
 // @ts-expect-error `@wordpress/block-editor` does not expose type declarations for its entry point.
-import { store as blockEditorStore } from '@wordpress/block-editor';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import type { AbsoluteBlockIndexPath } from '../types';
 import { unlock } from '../lock-unlock';
 

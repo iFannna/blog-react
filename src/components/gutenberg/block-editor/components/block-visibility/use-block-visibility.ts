@@ -1,5 +1,5 @@
-import { useMediaQuery } from '@wordpress/compose';
-import { privateApis as globalStylesEnginePrivateApis } from '@wordpress/global-styles-engine';
+import { useMediaQuery } from '@/hooks/gutenberg/compose';
+import { privateApis as globalStylesEnginePrivateApis } from '@/lib/gutenberg/global-styles-engine';
 import type { BlockVisibilityViewport } from './constants';
 import { unlock } from '../../lock-unlock';
 

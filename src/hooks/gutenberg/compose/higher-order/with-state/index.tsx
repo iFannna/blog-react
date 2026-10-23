@@ -1,5 +1,5 @@
-import { Component } from '@wordpress/element';
-import deprecated from '@wordpress/deprecated';
+import { Component } from '@/lib/gutenberg/element';
+import deprecated from '@/utils/gutenberg/deprecated';
 import type { ComponentType } from 'react';
 import { createHigherOrderComponent } from '../../utils/create-higher-order-component';
 import type {

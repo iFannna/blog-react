@@ -1,4 +1,4 @@
-import { select } from '@wordpress/data';
+import { select } from '@/stores/gutenberg/data';
 import { store as richTextStore } from './store';
 import { createElement } from './create-element';
 import { mergePair } from './concat';

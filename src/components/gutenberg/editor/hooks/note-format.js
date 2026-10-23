@@ -1,4 +1,4 @@
-import { registerFormatType } from '@wordpress/rich-text';
+import { registerFormatType } from '@/components/gutenberg/rich-text';
 import { NOTE_FORMAT_NAME } from '../components/collab-sidebar/constants';
 import { noteFormat } from '../components/collab-sidebar/format';
 

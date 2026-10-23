@@ -1,83 +1,72 @@
-import { Menu as _Menu } from '@base-ui/react/menu';
 import clsx from 'clsx';
-import { forwardRef } from '@wordpress/element';
-import { check } from '@wordpress/icons';
-import { Icon } from '../icon';
-import defenseStyles from '../utils/css/global-css-defense.module.css';
-import resetStyles from '../utils/css/resets.module.css';
-import styles from './style.module.css';
-import { MenuItemContentContext } from './context';
-import { ItemContent, useItemContent } from './item';
+import * as Ariakit from '@ariakit/react';
+import { forwardRef, useContext } from '@/lib/gutenberg/element';
+import { Icon, check } from '@/components/gutenberg/icons';
+import type { WordPressComponentProps } from '../context';
+import { Context } from './context';
 import type { CheckboxItemProps } from './types';
+import styles from './style.module.css';
+import { useMenuItemHideOnClick } from './use-menu-item-hide-on-click';
 
-/**
- * Renders a menu item that toggles a setting on or off.
- */
-const CheckboxItem = forwardRef< HTMLDivElement, CheckboxItemProps >(
-	function MenuCheckboxItem(
-		{
-			children,
-			className,
-			prefix,
-			shortcut,
-			suffix,
-			'aria-describedby': ariaDescribedBy,
-			'aria-keyshortcuts': ariaKeyShortcuts,
-			'aria-label': ariaLabel,
-			'aria-labelledby': ariaLabelledBy,
-			...props
-		},
-		ref
-	) {
-		const {
-			contentChildren,
-			contentContextValue,
-			itemAriaProps,
-			shortcutDescriptionId,
-		} = useItemContent( children, {
-			'aria-describedby': ariaDescribedBy,
-			'aria-keyshortcuts': ariaKeyShortcuts,
-			'aria-label': ariaLabel,
-			'aria-labelledby': ariaLabelledBy,
-			shortcut,
-		} );
+export const CheckboxItem = forwardRef<
+	HTMLDivElement,
+	WordPressComponentProps< CheckboxItemProps, 'div', false >
+>( function UnforwardedCheckboxItem(
+	{
+		className,
+		suffix,
+		children,
+		disabled = false,
+		hideOnClick = false,
+		...props
+	},
+	ref
+) {
+	const menuContext = useContext( Context );
+	const store = menuContext?.store;
+	const computedHideOnClick = useMenuItemHideOnClick( store, hideOnClick );
 
-		return (
-			<_Menu.CheckboxItem
-				ref={ ref }
-				{ ...itemAriaProps }
-				className={ clsx(
-					defenseStyles.div,
-					resetStyles[ 'box-sizing' ],
-					styles.item,
-					className
-				) }
-				{ ...props }
-			>
-				<_Menu.CheckboxItemIndicator
-					keepMounted
-					className={ styles[ 'item-selection-indicator' ] }
-				>
-					<Icon
-						icon={ check }
-						size={ 16 }
-						className={ styles[ 'checkbox-selection-icon' ] }
-						aria-hidden="true"
-					/>
-				</_Menu.CheckboxItemIndicator>
-				<MenuItemContentContext.Provider value={ contentContextValue }>
-					<ItemContent
-						prefix={ prefix }
-						shortcut={ shortcut }
-						shortcutDescriptionId={ shortcutDescriptionId }
-						suffix={ suffix }
-					>
-						{ contentChildren }
-					</ItemContent>
-				</MenuItemContentContext.Provider>
-			</_Menu.CheckboxItem>
+	if ( ! store ) {
+		throw new Error(
+			'Menu.CheckboxItem can only be rendered inside a Menu component'
 		);
 	}
-);
+	return (
+		<Ariakit.MenuItemCheckbox
+			ref={ ref }
+			{ ...props }
+			className={ clsx(
+				styles.item,
+				styles[ 'checkbox-item' ],
+				className
+			) }
+			accessibleWhenDisabled
+			disabled={ disabled }
+			store={ store }
+			hideOnClick={ computedHideOnClick }
+		>
+			<Ariakit.MenuItemCheck
+				store={ store }
+				render={
+					<span className={ styles[ 'item-prefix-wrapper' ] } />
+				}
+				// Override some ariakit inline styles
+				style={ { width: 'auto', height: 'auto' } }
+			>
+				<Icon icon={ check } size={ 24 } />
+			</Ariakit.MenuItemCheck>
 
-export { CheckboxItem };
+			<div className={ styles[ 'item-content-wrapper' ] }>
+				<div className={ styles[ 'item-children-wrapper' ] }>
+					{ children }
+				</div>
+
+				{ suffix && (
+					<span className={ styles[ 'item-suffix-wrapper' ] }>
+						{ suffix }
+					</span>
+				) }
+			</div>
+		</Ariakit.MenuItemCheckbox>
+	);
+} );

@@ -1,6 +1,6 @@
-import { addQueryArgs } from '@wordpress/url';
-import { Button, MenuItem } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+import { addQueryArgs } from '@/utils/gutenberg/url';
+import { Button, MenuItem } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
 
 const ManageMenusButton = ( {
 	className = '',

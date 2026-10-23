@@ -5,13 +5,13 @@ import {
 	CheckboxControl as WCCheckboxControl,
 	__experimentalVStack as VStack,
 	__experimentalHStack as HStack,
-} from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as noticesStore } from '@wordpress/notices';
-import { decodeEntities } from '@wordpress/html-entities';
-import { useState } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { useState } from '@/lib/gutenberg/element';
 import DialogWrapper from './dialog-wrapper';
 
 /**

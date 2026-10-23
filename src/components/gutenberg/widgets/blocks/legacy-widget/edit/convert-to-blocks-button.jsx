@@ -1,8 +1,8 @@
-import { useDispatch } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { ToolbarButton } from '@wordpress/components';
-import { createBlock, rawHandler } from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { ToolbarButton } from '@/components/gutenberg/ui';
+import { createBlock, rawHandler } from '@/lib/gutenberg/blocks';
+import { __ } from '@/lib/gutenberg/i18n';
 
 export default function ConvertToBlocksButton( { clientId, rawInstance } ) {
 	const { replaceBlocks } = useDispatch( blockEditorStore );

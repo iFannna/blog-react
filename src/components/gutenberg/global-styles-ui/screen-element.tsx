@@ -1,12 +1,12 @@
-import { __, sprintf } from '@wordpress/i18n';
-import { useMemo, useState } from '@wordpress/element';
-import { PanelBody, useNavigator } from '@wordpress/components';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useMemo, useState } from '@/lib/gutenberg/element';
+import { PanelBody, useNavigator } from '@/components/gutenberg/ui';
 // @ts-expect-error: Not typed yet.
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
+import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import type {
 	GlobalStylesSettings,
 	GlobalStylesStyles,
-} from '@wordpress/global-styles-engine';
+} from '@/lib/gutenberg/global-styles-engine';
 import { ScreenHeader } from './screen-header';
 import ElementPreview from './element-preview';
 import { useSetting, useStyle, useCanEditCSS } from './hooks';

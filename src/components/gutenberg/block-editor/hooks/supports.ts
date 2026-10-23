@@ -1,5 +1,5 @@
-import { getBlockSupport, hasBlockSupport } from '@wordpress/blocks';
-import type { BlockType } from '@wordpress/blocks';
+import { getBlockSupport, hasBlockSupport } from '@/lib/gutenberg/blocks';
+import type { BlockType } from '@/lib/gutenberg/blocks';
 import type { BorderSupport, ColorSupport } from './types';
 
 const ALIGN_SUPPORT_KEY = 'align';

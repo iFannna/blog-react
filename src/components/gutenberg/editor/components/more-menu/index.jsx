@@ -1,12 +1,12 @@
-import { __, _x } from '@wordpress/i18n';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { Button } from '@wordpress/components';
-import { moreVertical } from '@wordpress/icons';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { store as interfaceStore, ActionItem } from '@wordpress/interface';
-import { keyboardShortcut } from '@wordpress/keycodes';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { Button } from '@/components/gutenberg/ui';
+import { moreVertical } from '@/components/gutenberg/icons';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { store as interfaceStore, ActionItem } from '@/components/gutenberg/interface';
+import { keyboardShortcut } from '@/utils/gutenberg/keycodes';
 // eslint-disable-next-line @wordpress/use-recommended-components
-import { Menu } from '@wordpress/ui';
+import { Menu } from '@/components/gutenberg/design-system';
 import CopyContentMenuItem from './copy-content-menu-item';
 import MoreMenuItem from './more-menu-item';
 import ModeSwitcher from '../mode-switcher';

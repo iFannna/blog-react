@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { isBlobURL } from '@wordpress/blob';
-import { useEntityProp, store as coreStore } from '@wordpress/core-data';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { isBlobURL } from '@/utils/gutenberg/blob';
+import { useEntityProp, store as coreStore } from '@/stores/gutenberg/core-data';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import {
 	ToggleControl,
 	Placeholder,
@@ -11,7 +11,7 @@ import {
 	ExternalLink,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	InspectorControls,
 	BlockControls,
@@ -23,16 +23,16 @@ import {
 	useBlockEditingMode,
 	privateApis as blockEditorPrivateApis,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import {
 	useMemo,
 	useEffect,
 	useState,
 	createInterpolateElement,
-} from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import { upload } from '@wordpress/icons';
-import { store as noticesStore } from '@wordpress/notices';
+} from '@/lib/gutenberg/element';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { upload } from '@/components/gutenberg/icons';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
 import DimensionControls from './dimension-controls';
 import OverlayControls from './overlay-controls';
 import Overlay from './overlay';

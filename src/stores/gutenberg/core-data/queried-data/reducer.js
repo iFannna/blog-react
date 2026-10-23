@@ -1,5 +1,5 @@
-import { combineReducers, keyedReducer } from '@wordpress/data';
-import { compose } from '@wordpress/compose';
+import { combineReducers, keyedReducer } from '@/stores/gutenberg/data';
+import { compose } from '@/hooks/gutenberg/compose';
 import { conservativeMapItem, ifMatchingAction, replaceAction } from '../utils';
 import { DEFAULT_ENTITY_KEY } from '../entities';
 import getQueryParts from './get-query-parts';

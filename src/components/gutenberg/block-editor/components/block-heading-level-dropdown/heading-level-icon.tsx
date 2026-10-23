@@ -6,8 +6,8 @@ import {
 	headingLevel5,
 	headingLevel6,
 	paragraph,
-} from '@wordpress/icons';
-import { Icon as WCIcon } from '@wordpress/components';
+} from '@/components/gutenberg/icons';
+import { Icon as WCIcon } from '@/components/gutenberg/ui';
 import type { ReactElement } from 'react';
 import type { HeadingLevelIconProps } from './types';
 

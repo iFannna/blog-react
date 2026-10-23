@@ -1,4 +1,4 @@
-import { BlockSettingsMenuControls } from '@wordpress/block-editor';
+import { BlockSettingsMenuControls } from '@/components/gutenberg/block-editor';
 import PatternConvertButton from './pattern-convert-button';
 import PatternsManageButton from './patterns-manage-button';
 

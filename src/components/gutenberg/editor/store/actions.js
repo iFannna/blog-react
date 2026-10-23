@@ -1,29 +1,29 @@
-import { speak } from '@wordpress/a11y';
-import apiFetch from '@wordpress/api-fetch';
-import { addQueryArgs } from '@wordpress/url';
-import deprecated from '@wordpress/deprecated';
-import warning from '@wordpress/warning';
+import { speak } from '@/utils/gutenberg/a11y';
+import apiFetch from '@/services/gutenberg/api-fetch';
+import { addQueryArgs } from '@/utils/gutenberg/url';
+import deprecated from '@/utils/gutenberg/deprecated';
+import warning from '@/utils/gutenberg/warning';
 import {
 	parse,
 	synchronizeBlocksWithTemplate,
 	__unstableSerializeAndClean,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import {
 	store as noticesStore,
 	privateApis as noticesPrivateApis,
-} from '@wordpress/notices';
+} from '@/stores/gutenberg/notices';
 import {
 	store as coreStore,
 	privateApis as coreDataPrivateApis,
-} from '@wordpress/core-data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+} from '@/stores/gutenberg/core-data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import {
 	applyFilters,
 	applyFiltersAsync,
 	doActionAsync,
-} from '@wordpress/hooks';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { __, sprintf } from '@wordpress/i18n';
+} from '@/hooks/gutenberg/hooks';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
 import { localAutosaveSet } from './local-autosave';
 import {
 	getNotificationArgumentsForSaveSuccess,

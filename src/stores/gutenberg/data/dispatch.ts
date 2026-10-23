@@ -17,7 +17,7 @@ import defaultRegistry from './default-registry';
  *
  * @example
  * ```js
- * import { dispatch } from '@wordpress/data';
+ * import { dispatch } from '@/stores/gutenberg/data';
  * import { store as myCustomStore } from 'my-custom-store';
  *
  * dispatch( myCustomStore ).setPrice( 'hammer', 9.75 );

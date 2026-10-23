@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from '@wordpress/element';
+import { useRef, useEffect, useCallback } from '@/lib/gutenberg/element';
 
 let origin: Element | null = null;
 
@@ -11,7 +11,7 @@ let origin: Element | null = null;
  *
  * @example
  * ```ts
- * import { useFocusReturn } from '@wordpress/compose';
+ * import { useFocusReturn } from '@/hooks/gutenberg/compose';
  *
  * const WithFocusReturn = () => {
  *     const ref = useFocusReturn()

@@ -1,4 +1,4 @@
-import { privateApis as richTextPrivateApis } from '@wordpress/rich-text';
+import { privateApis as richTextPrivateApis } from '@/components/gutenberg/rich-text';
 import { unlock } from '../../../lock-unlock';
 
 const { subscribeOwnedListener } = unlock( richTextPrivateApis );

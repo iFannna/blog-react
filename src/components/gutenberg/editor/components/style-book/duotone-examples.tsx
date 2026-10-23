@@ -1,4 +1,4 @@
-import { __experimentalGrid as Grid } from '@wordpress/components';
+import { __experimentalGrid as Grid } from '@/components/gutenberg/ui';
 import type { Duotone } from './types';
 
 const DuotoneExamples = ( { duotones }: { duotones: Duotone[] } ) => {

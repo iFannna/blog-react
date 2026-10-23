@@ -1,9 +1,9 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { PanelBody } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { __experimentalBlockPatternsList as BlockPatternsList } from '@wordpress/block-editor';
-import { serialize } from '@wordpress/blocks';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { PanelBody } from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { __experimentalBlockPatternsList as BlockPatternsList } from '@/components/gutenberg/block-editor';
+import { serialize } from '@/lib/gutenberg/blocks';
 import { store as editorStore } from '../../store';
 import { useAvailablePatterns } from './hooks';
 import {

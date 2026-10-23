@@ -3,8 +3,8 @@ import {
 	__experimentalHStack as HStack,
 	__experimentalText as WCText,
 	Button,
-} from '@wordpress/components';
-import { __, _x, _n, sprintf } from '@wordpress/i18n';
+} from '@/components/gutenberg/ui';
+import { __, _x, _n, sprintf } from '@/lib/gutenberg/i18n';
 import type { PaginationProps } from './types';
 
 export default function Pagination( {

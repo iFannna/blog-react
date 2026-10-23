@@ -1,4 +1,4 @@
-import { InnerBlocks } from '@wordpress/block-editor';
+import { InnerBlocks } from '@/components/gutenberg/block-editor';
 
 export default function save() {
 	return <InnerBlocks.Content />;

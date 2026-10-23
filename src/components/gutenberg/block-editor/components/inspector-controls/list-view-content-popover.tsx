@@ -2,10 +2,10 @@ import {
 	createSlotFill,
 	Popover,
 	__experimentalUseSlotFills as useSlotFills,
-} from '@wordpress/components';
-import { useState, useLayoutEffect } from '@wordpress/element';
-import { useViewportMatch } from '@wordpress/compose';
-import { useSelect, useDispatch } from '@wordpress/data';
+} from '@/components/gutenberg/ui';
+import { useState, useLayoutEffect } from '@/lib/gutenberg/element';
+import { useViewportMatch } from '@/hooks/gutenberg/compose';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import { store as blockEditorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 import type { ListViewContentPopoverProps } from './types';

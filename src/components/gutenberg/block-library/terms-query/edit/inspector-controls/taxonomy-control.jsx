@@ -1,4 +1,4 @@
-import { SelectControl as WCSelectControl } from '@wordpress/components';
+import { SelectControl as WCSelectControl } from '@/components/gutenberg/ui';
 import { usePublicTaxonomies } from '../../utils';
 
 export default function TaxonomyControl( { value, onChange, ...props } ) {

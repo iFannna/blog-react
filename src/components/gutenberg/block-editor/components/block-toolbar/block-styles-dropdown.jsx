@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { DropdownMenu, ToolbarGroup, ToolbarItem } from '@wordpress/components';
+import { __ } from '@/lib/gutenberg/i18n';
+import { DropdownMenu, ToolbarGroup, ToolbarItem } from '@/components/gutenberg/ui';
 import BlockStylesMenu from '../block-switcher/block-styles-menu';
 
 export default function BlockStylesDropdown( {

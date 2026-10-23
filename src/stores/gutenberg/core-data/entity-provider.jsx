@@ -1,4 +1,4 @@
-import { useContext, useMemo } from '@wordpress/element';
+import { useContext, useMemo } from '@/lib/gutenberg/element';
 import { EntityContext } from './entity-context';
 
 /**

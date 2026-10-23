@@ -1,4 +1,4 @@
-import { isTextContent } from '@wordpress/dom';
+import { isTextContent } from '@/utils/gutenberg/dom';
 
 /**
  * Checks if the given node should be considered inline content, optionally

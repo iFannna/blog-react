@@ -4,7 +4,7 @@ import {
 	sidebar as sidebarIcon,
 	navigationOverlay as navigationOverlayIcon,
 	symbolFilled as symbolFilledIcon,
-} from '@wordpress/icons';
+} from '@/components/gutenberg/icons';
 
 /**
  * Helper function to retrieve the corresponding icon by area name.

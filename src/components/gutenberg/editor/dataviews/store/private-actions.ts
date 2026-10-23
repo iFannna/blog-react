@@ -1,5 +1,5 @@
-import type { Field } from '@wordpress/dataviews';
-import { doAction } from '@wordpress/hooks';
+import type { Field } from '@/components/gutenberg/dataviews';
+import { doAction } from '@/hooks/gutenberg/hooks';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 

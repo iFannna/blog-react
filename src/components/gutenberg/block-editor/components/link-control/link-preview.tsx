@@ -1,13 +1,13 @@
 import clsx from 'clsx';
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	Button,
 	__experimentalTruncate as Truncate,
 	__experimentalHStack as HStack,
 	Flex,
-} from '@wordpress/components';
-import { useCopyToClipboard } from '@wordpress/compose';
-import { filterURLForDisplay, safeDecodeURI } from '@wordpress/url';
+} from '@/components/gutenberg/ui';
+import { useCopyToClipboard } from '@/hooks/gutenberg/compose';
+import { filterURLForDisplay, safeDecodeURI } from '@/utils/gutenberg/url';
 import {
 	Icon,
 	globe,
@@ -15,12 +15,12 @@ import {
 	linkOff,
 	pencil,
 	copySmall,
-} from '@wordpress/icons';
-import { __unstableStripHTML as stripHTML } from '@wordpress/dom';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { store as noticesStore } from '@wordpress/notices';
-import { store as preferencesStore } from '@wordpress/preferences';
-import { Badge, Link } from '@wordpress/ui';
+} from '@/components/gutenberg/icons';
+import { __unstableStripHTML as stripHTML } from '@/utils/gutenberg/dom';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
+import { Badge, Link } from '@/components/gutenberg/design-system';
 import { ViewerSlot } from './viewer-slot';
 import useRichUrlData from './use-rich-url-data';
 import type { LinkPreviewProps } from './types';

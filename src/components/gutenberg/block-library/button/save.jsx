@@ -8,7 +8,7 @@ import {
 	__experimentalGetShadowClassesAndStyles as getShadowClassesAndStyles,
 	__experimentalGetElementClassName,
 	getTypographyClassesAndStyles,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 
 export default function save( { attributes } ) {
 	const {

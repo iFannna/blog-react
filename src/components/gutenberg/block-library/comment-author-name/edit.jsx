@@ -1,12 +1,12 @@
-import { __, _x } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { store as coreStore } from '@wordpress/core-data';
+import { __, _x } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { InspectorControls, useBlockProps } from '@/components/gutenberg/block-editor';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import {
 	ToggleControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 import useDeprecatedTextAlign from '../utils/deprecated-text-align-attributes';
 

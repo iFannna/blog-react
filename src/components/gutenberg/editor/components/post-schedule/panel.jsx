@@ -1,7 +1,7 @@
-import { Button, Dropdown } from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
-import { useState, useMemo } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
+import { Button, Dropdown } from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { useState, useMemo } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
 import PostScheduleCheck from './check';
 import PostScheduleForm from './index';
 import { usePostScheduleLabel } from './label';

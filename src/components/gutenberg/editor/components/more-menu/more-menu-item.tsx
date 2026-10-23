@@ -1,8 +1,8 @@
-import { Icon as WCIcon } from '@wordpress/components';
-import { forwardRef, isValidElement } from '@wordpress/element';
-import { SVG } from '@wordpress/primitives';
+import { Icon as WCIcon } from '@/components/gutenberg/ui';
+import { forwardRef, isValidElement } from '@/lib/gutenberg/element';
+import { SVG } from '@/components/gutenberg/primitives';
 // eslint-disable-next-line @wordpress/use-recommended-components
-import { Menu } from '@wordpress/ui';
+import { Menu } from '@/components/gutenberg/design-system';
 import type {
 	ComponentProps,
 	ForwardedRef,

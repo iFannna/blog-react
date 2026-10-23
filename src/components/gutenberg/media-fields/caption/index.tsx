@@ -1,6 +1,6 @@
-import { __ } from '@wordpress/i18n';
-import type { Attachment, Updatable } from '@wordpress/core-data';
-import type { Field } from '@wordpress/dataviews';
+import { __ } from '@/lib/gutenberg/i18n';
+import type { Attachment, Updatable } from '@/stores/gutenberg/core-data';
+import type { Field } from '@/components/gutenberg/dataviews';
 import { getRawContent } from '../utils/get-raw-content';
 
 const captionField: Partial< Field< Updatable< Attachment > > > = {

@@ -1,7 +1,7 @@
-import { __ } from '@wordpress/i18n';
-import { MenuItem } from '@wordpress/components';
-import { getBlockType, hasBlockSupport } from '@wordpress/blocks';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { MenuItem } from '@/components/gutenberg/ui';
+import { getBlockType, hasBlockSupport } from '@/lib/gutenberg/blocks';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import { store as blockEditorStore } from '../../store';
 
 const noop = () => {};

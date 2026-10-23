@@ -1,15 +1,15 @@
 import clsx from 'clsx';
-import { useState, useEffect, useCallback } from '@wordpress/element';
-import { usePrevious } from '@wordpress/compose';
-import { __ } from '@wordpress/i18n';
+import { useState, useEffect, useCallback } from '@/lib/gutenberg/element';
+import { usePrevious } from '@/hooks/gutenberg/compose';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	BlockControls,
 	__experimentalGetElementClassName,
 	RichText,
-} from '@wordpress/block-editor';
-import { ToolbarButton } from '@wordpress/components';
-import { caption as captionIcon } from '@wordpress/icons';
-import { createBlock, getDefaultBlockName } from '@wordpress/blocks';
+} from '@/components/gutenberg/block-editor';
+import { ToolbarButton } from '@/components/gutenberg/ui';
+import { caption as captionIcon } from '@/components/gutenberg/icons';
+import { createBlock, getDefaultBlockName } from '@/lib/gutenberg/blocks';
 
 export function Caption( {
 	attributeKey = 'caption',

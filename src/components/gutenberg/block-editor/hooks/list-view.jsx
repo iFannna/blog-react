@@ -1,8 +1,8 @@
-import { __ } from '@wordpress/i18n';
-import { PanelBody } from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { hasBlockSupport, getBlockType } from '@wordpress/blocks';
-import { useContext } from '@wordpress/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { PanelBody } from '@/components/gutenberg/ui';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { hasBlockSupport, getBlockType } from '@/lib/gutenberg/blocks';
+import { useContext } from '@/lib/gutenberg/element';
 import { store as blockEditorStore } from '../store';
 import { PrivateListView } from '../components/list-view';
 import InspectorControls from '../components/inspector-controls/fill';

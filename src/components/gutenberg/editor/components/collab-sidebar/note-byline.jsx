@@ -1,14 +1,14 @@
-import { Stack, Tooltip } from '@wordpress/ui';
-import { __, _x } from '@wordpress/i18n';
+import { Stack, Tooltip } from '@/components/gutenberg/design-system';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import {
 	dateI18n,
 	getSettings as getDateSettings,
 	humanTimeDiff,
 	getDate,
-} from '@wordpress/date';
-import { store as coreStore } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+} from '@/lib/gutenberg/date';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import { getAvatarBorderColor } from './utils';
 
 export function NoteByline( { avatar, name, date, userId } ) {

@@ -1,6 +1,6 @@
-import { useRefEffect } from '@wordpress/compose';
-import { useSelect } from '@wordpress/data';
-import { TAB, UP, DOWN, LEFT, RIGHT } from '@wordpress/keycodes';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { useSelect } from '@/stores/gutenberg/data';
+import { TAB, UP, DOWN, LEFT, RIGHT } from '@/utils/gutenberg/keycodes';
 import { store as blockEditorStore } from '../../store';
 
 /**

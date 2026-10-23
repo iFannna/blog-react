@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from '@wordpress/element';
+import { useCallback, useEffect, useRef, useState } from '@/lib/gutenberg/element';
 import type { CropperState, Size } from '../../core/types';
 import {
 	InteractionController,

@@ -1,4 +1,4 @@
-import type { WPKeycodeModifier } from '@wordpress/keycodes';
+import type { WPKeycodeModifier } from '@/utils/gutenberg/keycodes';
 import type * as actions from './store/actions';
 
 /**

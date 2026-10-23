@@ -1,9 +1,9 @@
-import { Spinner as WCSpinner } from '@wordpress/components';
-import { SelectControl } from '@wordpress/ui';
-import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+import { Spinner as WCSpinner } from '@/components/gutenberg/ui';
+import { SelectControl } from '@/components/gutenberg/design-system';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 
 export default function WidgetTypeSelector( { selectedId, onSelect } ) {
 	const widgetTypes = useSelect( ( select ) => {

@@ -1,9 +1,9 @@
-import { useCallback } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
-import { parse, serialize, createBlock } from '@wordpress/blocks';
+import { useCallback } from '@/lib/gutenberg/element';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
+import { parse, serialize, createBlock } from '@/lib/gutenberg/blocks';
 import { getUniqueTemplatePartTitle, getCleanTemplatePartSlug } from './utils';
 import { NAVIGATION_OVERLAY_TEMPLATE_PART_AREA } from '../constants';
 import { unlock } from '../../lock-unlock';

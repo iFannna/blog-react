@@ -3,12 +3,12 @@ import {
 	__experimentalSpacer as Spacer,
 	Dropdown,
 	Button,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
-import { useMemo, useRef, useState } from '@wordpress/element';
-import { closeSmall } from '@wordpress/icons';
-import { __experimentalUseDialog as useDialog } from '@wordpress/compose';
-import { Stack } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useMemo, useRef, useState } from '@/lib/gutenberg/element';
+import { closeSmall } from '@/components/gutenberg/icons';
+import { __experimentalUseDialog as useDialog } from '@/hooks/gutenberg/compose';
+import { Stack } from '@/components/gutenberg/design-system';
 import type {
 	FieldLayoutProps,
 	NormalizedForm,

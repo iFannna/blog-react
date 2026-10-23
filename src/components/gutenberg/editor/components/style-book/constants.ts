@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 import type { StyleBookCategory, StyleBookColorGroup } from './types';
 
 export const STYLE_BOOK_COLOR_GROUPS: StyleBookColorGroup[] = [

@@ -1,13 +1,13 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { store as coreStore } from '@wordpress/core-data';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import {
 	MenuItem,
 	__experimentalConfirmDialog as ConfirmDialog,
-} from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
-import { decodeEntities } from '@wordpress/html-entities';
-import { useState } from '@wordpress/element';
+} from '@/components/gutenberg/ui';
+import { __, sprintf } from '@/lib/gutenberg/i18n';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { useState } from '@/lib/gutenberg/element';
 
 export default function ConvertToRegularBlocks( { clientId, onClose } ) {
 	const [ showConfirmDialog, setShowConfirmDialog ] = useState( false );

@@ -3,7 +3,7 @@ import {
 	type CoreDataPrivateApis,
 	type ResolvedSelection,
 	type SelectionState,
-} from '@wordpress/core-data';
+} from '@/stores/gutenberg/core-data';
 import { unlock } from '../../lock-unlock';
 
 const { SelectionType } = unlock( coreDataPrivateApis ) as Pick<

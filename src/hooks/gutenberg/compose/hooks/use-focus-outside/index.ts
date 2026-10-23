@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from '@wordpress/element';
+import { useCallback, useEffect, useRef } from '@/lib/gutenberg/element';
 
 /**
  * Input types which are classified as button types, for use in considering

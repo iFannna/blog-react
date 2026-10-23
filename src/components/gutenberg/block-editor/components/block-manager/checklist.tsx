@@ -1,4 +1,4 @@
-import { CheckboxControl as WCCheckboxControl } from '@wordpress/components';
+import { CheckboxControl as WCCheckboxControl } from '@/components/gutenberg/ui';
 import BlockIcon from '../block-icon';
 import type { BlockTypesChecklistProps } from './types';
 

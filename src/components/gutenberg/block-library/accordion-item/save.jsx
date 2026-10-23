@@ -1,4 +1,4 @@
-import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
+import { useBlockProps, useInnerBlocksProps } from '@/components/gutenberg/block-editor';
 import clsx from 'clsx';
 
 export default function save( { attributes } ) {

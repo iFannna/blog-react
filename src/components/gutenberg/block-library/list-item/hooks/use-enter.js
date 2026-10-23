@@ -2,11 +2,11 @@ import {
 	createBlock,
 	getDefaultBlockName,
 	cloneBlock,
-} from '@wordpress/blocks';
-import { useRefEffect } from '@wordpress/compose';
-import { privateApis as richTextPrivateApis } from '@wordpress/rich-text';
-import { useRegistry } from '@wordpress/data';
-import { store as blockEditorStore } from '@wordpress/block-editor';
+} from '@/lib/gutenberg/blocks';
+import { useRefEffect } from '@/hooks/gutenberg/compose';
+import { privateApis as richTextPrivateApis } from '@/components/gutenberg/rich-text';
+import { useRegistry } from '@/stores/gutenberg/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import { outdentListItems, getOutdentTarget } from '../utils';
 import { unlock } from '../../lock-unlock';
 

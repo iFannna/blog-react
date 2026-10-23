@@ -1,5 +1,5 @@
-import { observableMap, useObservableValue } from '@wordpress/compose';
-import { useLayoutEffect } from '@wordpress/element';
+import { observableMap, useObservableValue } from '@/hooks/gutenberg/compose';
+import { useLayoutEffect } from '@/lib/gutenberg/element';
 import ComplementaryAreaToggle from '../complementary-area-toggle';
 import ActionItem from '../action-item';
 import type {

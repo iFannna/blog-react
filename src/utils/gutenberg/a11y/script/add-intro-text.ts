@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from '@/lib/gutenberg/i18n';
 
 /**
  * Build the explanatory text to be placed before the aria live regions.

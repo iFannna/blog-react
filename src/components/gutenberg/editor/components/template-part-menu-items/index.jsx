@@ -1,8 +1,8 @@
-import { useSelect } from '@wordpress/data';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	BlockSettingsMenuControls,
 	store as blockEditorStore,
-} from '@wordpress/block-editor';
+} from '@/components/gutenberg/block-editor';
 import ConvertToRegularBlocks from './convert-to-regular';
 import ConvertToTemplatePart from './convert-to-template-part';
 

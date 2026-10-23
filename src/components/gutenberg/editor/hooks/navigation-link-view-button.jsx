@@ -1,14 +1,14 @@
-import { addFilter } from '@wordpress/hooks';
-import { createHigherOrderComponent } from '@wordpress/compose';
-import { useCallback } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { addFilter } from '@/hooks/gutenberg/hooks';
+import { createHigherOrderComponent } from '@/hooks/gutenberg/compose';
+import { useCallback } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	__unstableBlockToolbarLastItem as BlockToolbarLastItem,
 	store as blockEditorStore,
 	useBlockEditingMode,
-} from '@wordpress/block-editor';
-import { ToolbarButton, ToolbarGroup } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
+} from '@/components/gutenberg/block-editor';
+import { ToolbarButton, ToolbarGroup } from '@/components/gutenberg/ui';
+import { useSelect } from '@/stores/gutenberg/data';
 
 // Target blocks that should have the View button.
 const SUPPORTED_BLOCKS = [ 'core/navigation-link', 'core/navigation-submenu' ];

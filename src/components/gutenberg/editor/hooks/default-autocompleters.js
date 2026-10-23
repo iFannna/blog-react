@@ -1,4 +1,4 @@
-import { addFilter } from '@wordpress/hooks';
+import { addFilter } from '@/hooks/gutenberg/hooks';
 import { linkAutocompleter, userAutocompleter } from '../components';
 
 function setDefaultCompleters( completers = [] ) {

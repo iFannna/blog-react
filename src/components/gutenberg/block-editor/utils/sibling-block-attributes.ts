@@ -1,4 +1,4 @@
-import { getBlockAttributesNamesByRole } from '@wordpress/blocks';
+import { getBlockAttributesNamesByRole } from '@/lib/gutenberg/blocks';
 
 /**
  * Returns the attributes a newly created block inherits from an adjacent

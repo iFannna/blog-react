@@ -1,7 +1,7 @@
 import type {
 	Block,
 	BlockEditProps as BlockTypeEditProps,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import type { BlockEditingMode } from '../block-editing-mode';
 import type { BlockAttributes, InitialPosition } from '../../store/types';
 import type {

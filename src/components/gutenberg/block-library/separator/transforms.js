@@ -2,7 +2,7 @@ import {
 	createBlock,
 	getBlockVariations,
 	getDefaultBlockName,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 
 const transforms = {
 	from: [

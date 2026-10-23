@@ -1,217 +1,70 @@
-import { Menu as _Menu } from '@base-ui/react/menu';
 import clsx from 'clsx';
-import { Children, forwardRef } from '@wordpress/element';
-import defenseStyles from '../utils/css/global-css-defense.module.css';
-import resetStyles from '../utils/css/resets.module.css';
-import {
-	KeyboardShortcutDescription,
-	KeyboardShortcutDisplay,
-	useKeyboardShortcutProps,
-} from '../utils/keyboard-shortcut';
-import { useItemContent as usePopupItemContent } from '../utils/item-popup';
-import styles from './style.module.css';
-import { MenuItemContentContext } from './context';
-import {
-	ITEM_DESCRIPTION_DIRECT_CHILD,
-	ItemDescription,
-} from './item-description';
-import { ItemLabel } from './item-label';
-import { Text } from '../text';
+import * as Ariakit from '@ariakit/react';
+import { forwardRef, useContext } from '@/lib/gutenberg/element';
+import type { WordPressComponentProps } from '../context';
 import type { ItemProps } from './types';
+import styles from './style.module.css';
+import { Context } from './context';
+import { useMenuItemHideOnClick } from './use-menu-item-hide-on-click';
 
-type ItemAriaProps = Pick<
-	ItemProps,
-	'aria-describedby' | 'aria-keyshortcuts' | 'aria-label' | 'aria-labelledby'
->;
-type UseItemContentOptions = ItemAriaProps & {
-	labelTrailing?: ItemProps[ 'suffix' ];
-	shortcut?: ItemProps[ 'shortcut' ];
-};
-
-const ITEM_CONTENT_COMPONENTS = {
-	Label: ItemLabel,
-	Description: ItemDescription,
-	validationMessage:
-		'Menu.ItemLabel must be the first direct child of every menu item, followed only by Menu.ItemDescription components.',
-	descriptionValidationToken: ITEM_DESCRIPTION_DIRECT_CHILD,
-};
-
-function useItemContent(
-	children: ItemProps[ 'children' ],
+export const Item = forwardRef<
+	HTMLDivElement,
+	WordPressComponentProps< ItemProps, 'div', false >
+>( function UnforwardedItem(
 	{
-		'aria-describedby': ariaDescribedBy,
-		'aria-keyshortcuts': ariaKeyShortcuts,
-		'aria-label': ariaLabel,
-		'aria-labelledby': ariaLabelledBy,
-		labelTrailing,
-		shortcut,
-	}: UseItemContentOptions
-) {
-	const { contentChildren, resolvedLabelId, itemAriaProps } =
-		usePopupItemContent( children, ITEM_CONTENT_COMPONENTS, {
-			'aria-describedby': ariaDescribedBy,
-			'aria-label': ariaLabel,
-			'aria-labelledby': ariaLabelledBy,
-		} );
-	const {
-		descriptionId: shortcutDescriptionId,
-		targetProps: shortcutAriaProps,
-	} = useKeyboardShortcutProps( {
-		'aria-describedby': itemAriaProps[ 'aria-describedby' ],
-		'aria-keyshortcuts': ariaKeyShortcuts,
-		shortcut,
-	} );
-
-	return {
-		// React widens the tuple while mapping; validation preserves the item-child
-		// contract and cloning changes only generated description IDs.
-		contentChildren: contentChildren as ItemProps[ 'children' ],
-		contentContextValue: {
-			labelId: resolvedLabelId,
-			labelTrailing,
-		},
-		itemAriaProps: {
-			...shortcutAriaProps,
-			'aria-label': itemAriaProps[ 'aria-label' ],
-			'aria-labelledby': itemAriaProps[ 'aria-labelledby' ],
-		},
-		shortcutDescriptionId,
-	};
-}
-
-function ItemContent( {
-	children,
-	prefix,
-	shortcut,
-	shortcutDescriptionId,
-	suffix,
-	trailing,
-}: Pick< ItemProps, 'children' | 'prefix' | 'shortcut' | 'suffix' > & {
-	shortcutDescriptionId?: string;
-	trailing?: ItemProps[ 'suffix' ];
-} ) {
-	const hasPrefix = Children.toArray( prefix ).some(
-		( child ) => child !== ''
-	);
-	const hasSuffix = Children.toArray( suffix ).some(
-		( child ) => child !== ''
-	);
-	const hasTrailing = Children.toArray( trailing ).some(
-		( child ) => child !== ''
-	);
-	const [ label, ...descriptions ] = Children.toArray( children );
-
-	/*
-	 * Content comes first in the DOM because Base UI falls back to the item's
-	 * textContent for typeahead. CSS grid still places the optional
-	 * presentational prefix in the earlier visual column.
-	 */
-	return (
-		<>
-			<span
-				className={ clsx(
-					styles[ 'item-content' ],
-					hasPrefix && styles[ 'has-prefix' ]
-				) }
-			>
-				{ label }
-				{ hasSuffix && (
-					<Text
-						variant="body-sm"
-						className={ styles[ 'item-suffix' ] }
-					>
-						{ suffix }
-					</Text>
-				) }
-				{ shortcut && (
-					<Text
-						variant="body-sm"
-						className={ styles[ 'item-shortcut' ] }
-					>
-						<KeyboardShortcutDisplay shortcut={ shortcut } />
-					</Text>
-				) }
-				{ hasTrailing && (
-					<span className={ styles[ 'item-trailing' ] }>
-						{ trailing }
-					</span>
-				) }
-			</span>
-			{ descriptions.length > 0 && (
-				<span className={ styles[ 'item-descriptions' ] }>
-					{ descriptions }
-				</span>
-			) }
-			{ hasPrefix && (
-				<span aria-hidden="true" className={ styles[ 'item-prefix' ] }>
-					{ prefix }
-				</span>
-			) }
-			{ shortcut && shortcutDescriptionId && (
-				<KeyboardShortcutDescription
-					descriptionId={ shortcutDescriptionId }
-					shortcut={ shortcut }
-				/>
-			) }
-		</>
-	);
-}
-
-/**
- * Renders an individual menu item.
- */
-const Item = forwardRef< HTMLDivElement, ItemProps >( function MenuItem(
-	{
-		children,
 		className,
 		prefix,
-		shortcut,
 		suffix,
-		'aria-describedby': ariaDescribedBy,
-		'aria-keyshortcuts': ariaKeyShortcuts,
-		'aria-label': ariaLabel,
-		'aria-labelledby': ariaLabelledBy,
+		children,
+		disabled = false,
+		hideOnClick = true,
+		store,
 		...props
 	},
 	ref
 ) {
-	const {
-		contentChildren,
-		contentContextValue,
-		itemAriaProps,
-		shortcutDescriptionId,
-	} = useItemContent( children, {
-		'aria-describedby': ariaDescribedBy,
-		'aria-keyshortcuts': ariaKeyShortcuts,
-		'aria-label': ariaLabel,
-		'aria-labelledby': ariaLabelledBy,
-		shortcut,
-	} );
+	const menuContext = useContext( Context );
+	const computedStore = store ?? menuContext?.store;
+	const computedHideOnClick = useMenuItemHideOnClick(
+		computedStore,
+		hideOnClick
+	);
 
+	if ( ! menuContext?.store || ! computedStore ) {
+		throw new Error(
+			'Menu.Item can only be rendered inside a Menu component'
+		);
+	}
+
+	// In most cases, the menu store will be retrieved from context (ie. the store
+	// created by the top-level menu component). But in rare cases (ie.
+	// `Menu.SubmenuTriggerItem`), the context store wouldn't be correct. This is
+	// why the component accepts a `store` prop to override the context store.
 	return (
-		<_Menu.Item
+		<Ariakit.MenuItem
 			ref={ ref }
-			{ ...itemAriaProps }
-			className={ clsx(
-				defenseStyles.div,
-				resetStyles[ 'box-sizing' ],
-				styles.item,
-				className
-			) }
 			{ ...props }
+			className={ clsx( styles.item, className ) }
+			accessibleWhenDisabled
+			disabled={ disabled }
+			store={ computedStore }
+			hideOnClick={ computedHideOnClick }
 		>
-			<MenuItemContentContext.Provider value={ contentContextValue }>
-				<ItemContent
-					prefix={ prefix }
-					shortcut={ shortcut }
-					shortcutDescriptionId={ shortcutDescriptionId }
-					suffix={ suffix }
-				>
-					{ contentChildren }
-				</ItemContent>
-			</MenuItemContentContext.Provider>
-		</_Menu.Item>
+			<span className={ styles[ 'item-prefix-wrapper' ] }>
+				{ prefix }
+			</span>
+
+			<div className={ styles[ 'item-content-wrapper' ] }>
+				<div className={ styles[ 'item-children-wrapper' ] }>
+					{ children }
+				</div>
+
+				{ suffix && (
+					<span className={ styles[ 'item-suffix-wrapper' ] }>
+						{ suffix }
+					</span>
+				) }
+			</div>
+		</Ariakit.MenuItem>
 	);
 } );
-
-export { Item, ItemContent, useItemContent };

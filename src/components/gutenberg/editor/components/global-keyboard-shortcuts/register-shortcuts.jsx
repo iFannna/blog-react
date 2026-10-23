@@ -1,9 +1,9 @@
-import { useEffect } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
-import { BlockEditorKeyboardShortcuts } from '@wordpress/block-editor';
-import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
-import { isAppleOS } from '@wordpress/keycodes';
+import { useEffect } from '@/lib/gutenberg/element';
+import { useDispatch } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { BlockEditorKeyboardShortcuts } from '@/components/gutenberg/block-editor';
+import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
+import { isAppleOS } from '@/utils/gutenberg/keycodes';
 
 /**
  * Component for registering editor keyboard shortcuts.

@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
-import { audio, video, image, file } from '@wordpress/icons';
+import { __ } from '@/lib/gutenberg/i18n';
+import { audio, video, image, file } from '@/components/gutenberg/icons';
 import type { MediaType } from '../types';
 
 /**

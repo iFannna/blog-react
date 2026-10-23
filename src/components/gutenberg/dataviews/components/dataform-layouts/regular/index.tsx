@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import { useContext, useMemo } from '@wordpress/element';
+import { useContext, useMemo } from '@/lib/gutenberg/element';
 import {
 	__experimentalHeading as Heading,
 	BaseControl,
-} from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
+} from '@/components/gutenberg/ui';
+import { Stack } from '@/components/gutenberg/design-system';
 import type {
 	FieldLayoutProps,
 	NormalizedForm,

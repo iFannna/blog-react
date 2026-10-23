@@ -1,8 +1,8 @@
-import { useLayoutEffect } from '@wordpress/element';
-import { useDispatch, useRegistry } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
-import { store as noticesStore } from '@wordpress/notices';
-import { getQueryArg } from '@wordpress/url';
+import { useLayoutEffect } from '@/lib/gutenberg/element';
+import { useDispatch, useRegistry } from '@/stores/gutenberg/data';
+import { __ } from '@/lib/gutenberg/i18n';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { getQueryArg } from '@/utils/gutenberg/url';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 import useEntityContainsSnapshot from './use-entity-contains-snapshot';

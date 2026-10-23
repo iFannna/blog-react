@@ -1,4 +1,4 @@
-import { applyFilters } from '@wordpress/hooks';
+import { applyFilters } from '@/hooks/gutenberg/hooks';
 import { createHttpPollingProvider } from './http-polling/http-polling-provider';
 import type { ProviderCreator } from '../types';
 

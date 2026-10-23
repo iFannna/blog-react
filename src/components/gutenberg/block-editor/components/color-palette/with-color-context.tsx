@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react';
-import { createHigherOrderComponent } from '@wordpress/compose';
-import type { Color } from '@wordpress/global-styles-engine';
+import { createHigherOrderComponent } from '@/hooks/gutenberg/compose';
+import type { Color } from '@/lib/gutenberg/global-styles-engine';
 import { useSettings } from '../use-settings';
 import type { WithColorContextProps } from './types';
 

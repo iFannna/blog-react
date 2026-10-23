@@ -1,6 +1,6 @@
-import { __, _x, sprintf } from '@wordpress/i18n';
-import type { Attachment, Updatable } from '@wordpress/core-data';
-import type { Field } from '@wordpress/dataviews';
+import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
+import type { Attachment, Updatable } from '@/stores/gutenberg/core-data';
+import type { Field } from '@/components/gutenberg/dataviews';
 
 const mediaDimensionsField: Partial< Field< Updatable< Attachment > > > = {
 	id: 'media_dimensions',

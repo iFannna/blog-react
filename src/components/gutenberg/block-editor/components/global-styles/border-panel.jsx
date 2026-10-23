@@ -4,10 +4,10 @@ import {
 	__experimentalIsDefinedBorder as isDefinedBorder,
 	__experimentalToolsPanel as ToolsPanel,
 	BaseControl,
-} from '@wordpress/components';
-import { useCallback, useMemo } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { getValueFromVariable } from '@wordpress/global-styles-engine';
+} from '@/components/gutenberg/ui';
+import { useCallback, useMemo } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { getValueFromVariable } from '@/lib/gutenberg/global-styles-engine';
 import BorderRadiusControl from '../border-radius-control';
 import { useColorsPerOrigin } from './hooks';
 import {

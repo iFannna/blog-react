@@ -1,8 +1,8 @@
 import fastDeepEqual from 'fast-deep-equal/es6/index.js';
-import { useRef, useLayoutEffect } from '@wordpress/element';
-import { useRegistry } from '@wordpress/data';
-import { getBlockType, synchronizeBlocksWithTemplate } from '@wordpress/blocks';
-import deprecated from '@wordpress/deprecated';
+import { useRef, useLayoutEffect } from '@/lib/gutenberg/element';
+import { useRegistry } from '@/stores/gutenberg/data';
+import { getBlockType, synchronizeBlocksWithTemplate } from '@/lib/gutenberg/blocks';
+import deprecated from '@/utils/gutenberg/deprecated';
 import { store as blockEditorStore } from '../../store';
 
 /**

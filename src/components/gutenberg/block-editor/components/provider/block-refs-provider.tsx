@@ -1,5 +1,5 @@
-import { createContext, useMemo } from '@wordpress/element';
-import { observableMap } from '@wordpress/compose';
+import { createContext, useMemo } from '@/lib/gutenberg/element';
+import { observableMap } from '@/hooks/gutenberg/compose';
 import type { BlockRefsContextValue, BlockRefsProviderProps } from './types';
 
 // `eventHandlers` maps a block's client ID to a ref holding its `wrapperProps`

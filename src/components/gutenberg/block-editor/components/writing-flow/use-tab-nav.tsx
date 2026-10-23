@@ -1,9 +1,9 @@
-import { focus, isFormElement } from '@wordpress/dom';
-import { TAB, withIgnoreIMEEvents } from '@wordpress/keycodes';
-import { __ } from '@wordpress/i18n';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useRefEffect, useMergeRefs, useInstanceId } from '@wordpress/compose';
-import { useRef } from '@wordpress/element';
+import { focus, isFormElement } from '@/utils/gutenberg/dom';
+import { TAB, withIgnoreIMEEvents } from '@/utils/gutenberg/keycodes';
+import { __ } from '@/lib/gutenberg/i18n';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { useRefEffect, useMergeRefs, useInstanceId } from '@/hooks/gutenberg/compose';
+import { useRef } from '@/lib/gutenberg/element';
 import type {
 	CSSProperties,
 	KeyboardEvent as ReactKeyboardEvent,

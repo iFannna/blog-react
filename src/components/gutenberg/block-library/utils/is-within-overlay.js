@@ -1,5 +1,5 @@
-import { select } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
+import { select } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { NAVIGATION_OVERLAY_TEMPLATE_PART_AREA } from '../navigation/constants';
 
 /**

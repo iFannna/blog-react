@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from '@wordpress/element';
+import { useCallback, useEffect, useRef, useState } from '@/lib/gutenberg/element';
 
 /**
  * Returns a recompute token and a debounced callback that bumps it.

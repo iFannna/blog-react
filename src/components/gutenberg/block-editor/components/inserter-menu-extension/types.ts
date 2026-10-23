@@ -1,4 +1,4 @@
-import type { createSlotFill } from '@wordpress/components';
+import type { createSlotFill } from '@/components/gutenberg/ui';
 
 type SlotFill = ReturnType< typeof createSlotFill >;
 

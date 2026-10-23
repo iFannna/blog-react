@@ -5,11 +5,11 @@ import {
 	useMemo,
 	useRef,
 	useState,
-} from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { speak } from '@wordpress/a11y';
-import { __experimentalUseFocusOutside as useFocusOutside } from '@wordpress/compose';
-import { Stack } from '@wordpress/ui';
+} from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
+import { speak } from '@/utils/gutenberg/a11y';
+import { __experimentalUseFocusOutside as useFocusOutside } from '@/hooks/gutenberg/compose';
+import { Stack } from '@/components/gutenberg/design-system';
 import type {
 	NormalizedForm,
 	NormalizedDetailsLayout,

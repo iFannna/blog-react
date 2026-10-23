@@ -1,5 +1,5 @@
-import { store as blockEditorStore } from '@wordpress/block-editor';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
+import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import {
 	LinkUI,
 	updateAttributes,

@@ -5,14 +5,14 @@ import {
 	ColorPicker,
 	Dropdown,
 	__experimentalDropdownContentWrapper as DropdownContentWrapper,
-} from '@wordpress/components';
+} from '@/components/gutenberg/ui';
 import {
 	InputLayout,
 	// eslint-disable-next-line @wordpress/use-recommended-components
 	ValidatedInputControl,
-} from '@wordpress/ui';
-import { useCallback } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+} from '@/components/gutenberg/design-system';
+import { useCallback } from '@/lib/gutenberg/element';
+import { __ } from '@/lib/gutenberg/i18n';
 import type { DataFormControlProps } from '../../types';
 import getCustomValidity from './utils/get-custom-validity';
 

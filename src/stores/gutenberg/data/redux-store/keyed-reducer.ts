@@ -9,7 +9,7 @@ import type { AnyAction, Reducer } from 'redux';
  *
  * @example
  * ```js
- * import { keyedReducer } from '@wordpress/data';
+ * import { keyedReducer } from '@/stores/gutenberg/data';
  *
  * const itemsByContext = keyedReducer( 'context' )( ( state = [], action ) => {
  *   switch ( action.type ) {

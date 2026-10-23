@@ -1,12 +1,12 @@
 import clsx from 'clsx';
-import { useMergeRefs } from '@wordpress/compose';
-import { forwardRef, useMemo, memo } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
+import { useMergeRefs } from '@/hooks/gutenberg/compose';
+import { forwardRef, useMemo, memo } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
 import {
 	getBlockSupport,
 	store as blocksStore,
 	__unstableGetInnerBlocksProps as getInnerBlocksProps,
-} from '@wordpress/blocks';
+} from '@/lib/gutenberg/blocks';
 import ButtonBlockAppender from './button-block-appender';
 import DefaultBlockAppender from './default-block-appender';
 import useNestedSettingsUpdate from './use-nested-settings-update';

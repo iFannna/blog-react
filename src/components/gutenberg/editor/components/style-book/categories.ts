@@ -1,5 +1,5 @@
 // @wordpress/blocks imports are not typed.
-import { getCategories } from '@wordpress/blocks';
+import { getCategories } from '@/lib/gutenberg/blocks';
 import type {
 	BlockExample,
 	StyleBookCategory,

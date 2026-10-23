@@ -1,6 +1,6 @@
-import { __experimentalToolsPanelItem as ToolsPanelItem } from '@wordpress/components';
-import { SelectControl } from '@wordpress/ui';
-import { __, _x } from '@wordpress/i18n';
+import { __experimentalToolsPanelItem as ToolsPanelItem } from '@/components/gutenberg/ui';
+import { SelectControl } from '@/components/gutenberg/design-system';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import type { ResolutionOption, ResolutionToolProps } from './types';
 
 const DEFAULT_SIZE_OPTIONS: ResolutionOption[] = [

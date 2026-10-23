@@ -1,8 +1,8 @@
-import { useSelect, useDispatch } from '@wordpress/data';
-import { safeDecodeURIComponent, cleanForSlug } from '@wordpress/url';
-import { useRef, useState } from '@wordpress/element';
-import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
+import { useSelect, useDispatch } from '@/stores/gutenberg/data';
+import { safeDecodeURIComponent, cleanForSlug } from '@/utils/gutenberg/url';
+import { useRef, useState } from '@/lib/gutenberg/element';
+import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@/components/gutenberg/block-editor';
+import { __ } from '@/lib/gutenberg/i18n';
 import {
 	ExternalLink,
 	Button,
@@ -10,11 +10,11 @@ import {
 	__experimentalInputControlPrefixWrapper as InputControlPrefixWrapper,
 	__experimentalInputControlSuffixWrapper as InputControlSuffixWrapper,
 	__experimentalVStack as VStack,
-} from '@wordpress/components';
-import { store as noticesStore } from '@wordpress/notices';
-import { copySmall } from '@wordpress/icons';
-import { store as coreStore } from '@wordpress/core-data';
-import { useCopyToClipboard, useInstanceId } from '@wordpress/compose';
+} from '@/components/gutenberg/ui';
+import { store as noticesStore } from '@/stores/gutenberg/notices';
+import { copySmall } from '@/components/gutenberg/icons';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { useCopyToClipboard, useInstanceId } from '@/hooks/gutenberg/compose';
 import { store as editorStore } from '../../store';
 
 /**
