@@ -1,0 +1,228 @@
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+.grid {
+  --wp-components-grid-align: initial;
+  --wp-components-grid-justify: initial;
+  --wp-components-grid-gap: initial;
+  --wp-components-grid-template-columns: initial;
+  --wp-components-grid-template-rows: initial;
+  --wp-components-grid-row-gap: initial;
+  --wp-components-grid-column-gap: initial;
+  display: grid;
+}
+
+.grid:not(:where(.row-gap-inherit,
+.row-gap-initial,
+.row-gap-unset,
+.row-gap-revert,
+.row-gap-revert-layer)) {
+  row-gap: var(--wp-components-grid-row-gap, calc(4px * var(--wp-components-grid-gap)));
+}
+
+.grid:not(:where(.column-gap-inherit,
+.column-gap-initial,
+.column-gap-unset,
+.column-gap-revert,
+.column-gap-revert-layer)) {
+  column-gap: var(--wp-components-grid-column-gap, calc(4px * var(--wp-components-grid-gap)));
+}
+
+.has-align:not(:where(.align-inherit,
+.align-initial,
+.align-unset,
+.align-revert,
+.align-revert-layer)) {
+  align-items: var(--wp-components-grid-align);
+}
+
+.has-justify:not(:where(.justify-inherit,
+.justify-initial,
+.justify-unset,
+.justify-revert,
+.justify-revert-layer)) {
+  justify-content: var(--wp-components-grid-justify);
+}
+
+.has-template-columns:not(:where(.template-columns-inherit,
+.template-columns-initial,
+.template-columns-unset,
+.template-columns-revert,
+.template-columns-revert-layer)) {
+  grid-template-columns: var(--wp-components-grid-template-columns);
+}
+
+.has-template-rows:not(:where(.template-rows-inherit,
+.template-rows-initial,
+.template-rows-unset,
+.template-rows-revert,
+.template-rows-revert-layer)) {
+  grid-template-rows: var(--wp-components-grid-template-rows);
+}
+
+.is-inline {
+  display: inline-grid;
+  vertical-align: middle;
+}
+
+.align-inherit {
+  align-items: inherit;
+}
+
+.align-initial {
+  align-items: initial;
+}
+
+.align-unset {
+  align-items: unset;
+}
+
+.align-revert {
+  align-items: revert;
+}
+
+.align-revert-layer {
+  align-items: revert-layer;
+}
+
+.justify-inherit {
+  justify-content: inherit;
+}
+
+.justify-initial {
+  justify-content: initial;
+}
+
+.justify-unset {
+  justify-content: unset;
+}
+
+.justify-revert {
+  justify-content: revert;
+}
+
+.justify-revert-layer {
+  justify-content: revert-layer;
+}
+
+.template-columns-inherit {
+  grid-template-columns: inherit;
+}
+
+.template-columns-initial {
+  grid-template-columns: initial;
+}
+
+.template-columns-unset {
+  grid-template-columns: unset;
+}
+
+.template-columns-revert {
+  grid-template-columns: revert;
+}
+
+.template-columns-revert-layer {
+  grid-template-columns: revert-layer;
+}
+
+.template-rows-inherit {
+  grid-template-rows: inherit;
+}
+
+.template-rows-initial {
+  grid-template-rows: initial;
+}
+
+.template-rows-unset {
+  grid-template-rows: unset;
+}
+
+.template-rows-revert {
+  grid-template-rows: revert;
+}
+
+.template-rows-revert-layer {
+  grid-template-rows: revert-layer;
+}
+
+.row-gap-inherit {
+  row-gap: inherit;
+}
+
+.row-gap-initial {
+  row-gap: initial;
+}
+
+.row-gap-unset {
+  row-gap: unset;
+}
+
+.row-gap-revert {
+  row-gap: revert;
+}
+
+.row-gap-revert-layer {
+  row-gap: revert-layer;
+}
+
+.column-gap-inherit {
+  column-gap: inherit;
+}
+
+.column-gap-initial {
+  column-gap: initial;
+}
+
+.column-gap-unset {
+  column-gap: unset;
+}
+
+.column-gap-revert {
+  column-gap: revert;
+}
+
+.column-gap-revert-layer {
+  column-gap: revert-layer;
+}

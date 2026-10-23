@@ -1,0 +1,137 @@
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+.prefix {
+  color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+}
+
+.number-control {
+  width: 96px;
+}
+
+.select {
+  /* stylelint-disable-next-line logical-css/require-logical-properties -- Keep the existing physical offset in both LTR and RTL. */
+  margin-left: -8px;
+}
+
+.range {
+  flex: 1;
+  /* stylelint-disable-next-line logical-css/require-logical-properties -- Keep the existing physical gap in both LTR and RTL. */
+  margin-right: 8px;
+}
+
+.auxiliary {
+  padding: 8px 0 0;
+}
+
+.header {
+  padding-inline: 16px;
+}
+
+.color-input {
+  padding-block: 16px 20px;
+  /* stylelint-disable logical-css/require-logical-properties -- Preserve the asymmetric physical padding in both directions. */
+  padding-left: 16px;
+  padding-right: 12px;
+  /* stylelint-enable logical-css/require-logical-properties */
+}
+
+.colorful {
+  box-sizing: border-box;
+}
+.colorful *,
+.colorful *::before,
+.colorful *::after {
+  box-sizing: inherit;
+}
+.colorful {
+  width: 216px;
+}
+.colorful :global(.react-colorful) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 216px;
+  height: auto;
+}
+.colorful :global(.react-colorful__saturation) {
+  width: 100%;
+  border-radius: 0;
+  height: 216px;
+  margin-bottom: 16px;
+  border-bottom: none;
+}
+.colorful :global(.react-colorful__hue),
+.colorful :global(.react-colorful__alpha) {
+  width: 184px;
+  height: 16px;
+  border-radius: 9999px;
+  margin-bottom: 8px;
+}
+.colorful :global(.react-colorful__pointer) {
+  height: 16px;
+  width: 16px;
+  border: none;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.25);
+  outline: 2px solid transparent;
+}
+@media not (prefers-reduced-motion) {
+  .colorful :global(.react-colorful__pointer) {
+    transition: transform 160ms ease-in-out;
+  }
+}
+.colorful :global(.react-colorful__interactive):focus :global(.react-colorful__pointer) {
+  box-shadow: 0 0 0 1.5px #fff;
+  border: 1.5px solid #000;
+  transform: translate(-50%, -50%) scale(1.5);
+}
+.colorful :global(.react-colorful__pointer-fill) {
+  box-shadow: inset 0 0 0 1.5px #fff;
+}
+.colorful :global(.react-colorful__interactive) {
+  width: calc(100% - 8px);
+  /* stylelint-disable-next-line logical-css/require-logical-properties -- Keep the physical inset paired with the picker's physical positioning. */
+  margin-left: 4px;
+}

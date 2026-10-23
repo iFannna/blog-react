@@ -1,0 +1,225 @@
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+/**
+ * Breakpoints & Media Queries
+ */
+.select {
+  display: block;
+  background-color: var(--wp-components-color-background, var(--wpds-color-background-surface-neutral-strong));
+  border: none;
+  color: var(--wp-components-color-foreground, var(--wpds-color-foreground-content-neutral));
+  cursor: var(--wpds-cursor-control);
+  font-family: inherit;
+  text-align: start;
+  user-select: none;
+  width: 100%;
+  font-size: 16px;
+}
+.select[data-focus-visible] {
+  outline: none;
+}
+.select:where(:not(.has-custom-render)) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media (min-width: 600px) {
+  .select {
+    font-size: 13px;
+  }
+  .select:where(.is-small) {
+    font-size: 11px;
+  }
+}
+
+.select {
+  padding-inline-start: 12px;
+  padding-inline-end: 30px;
+}
+.select:where(.has-custom-render) {
+  min-height: 40px;
+}
+.select:where(:not(.has-custom-render)) {
+  height: 40px;
+}
+
+.item {
+  padding-inline-start: 12px;
+  padding-inline-end: 6px;
+}
+
+.select:where(.is-compact) {
+  padding-inline-start: 8px;
+  padding-inline-end: 26px;
+}
+.select:where(.is-compact):where(.has-custom-render) {
+  min-height: 32px;
+}
+.select:where(.is-compact):where(:not(.has-custom-render)) {
+  height: 32px;
+}
+
+.item:where(.is-compact) {
+  padding-inline-start: 8px;
+  padding-inline-end: 2px;
+}
+
+.select:where(.is-small) {
+  padding-inline-start: 8px;
+  padding-inline-end: 26px;
+}
+.select:where(.is-small):where(.has-custom-render) {
+  min-height: 24px;
+}
+.select:where(.is-small):where(:not(.has-custom-render)) {
+  height: 24px;
+}
+
+.item:where(.is-small) {
+  padding-inline-start: 8px;
+  padding-inline-end: 2px;
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(-4px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.popover {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--wp-components-color-background, var(--wpds-color-background-surface-neutral-strong));
+  border-radius: 2px;
+  border: 1px solid var(--wp-components-color-foreground, var(--wpds-color-foreground-content-neutral));
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05), 0 4px 5px rgba(0, 0, 0, 0.04), 0 12px 12px rgba(0, 0, 0, 0.03), 0 16px 16px rgba(0, 0, 0, 0.02);
+  /* z-index(".components-popover") */
+  z-index: 1000000;
+  max-height: min(var(--popover-available-height, 400px), 400px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  min-width: min-content;
+}
+@media not (prefers-reduced-motion) {
+  .popover[data-open] {
+    animation-name: slide-down, fade-in;
+    animation-duration: var(--wpds-motion-duration-md), var(--wpds-motion-duration-sm);
+    animation-timing-function: var(--wpds-motion-easing-expressive), linear;
+    will-change: transform, opacity;
+  }
+}
+.popover[data-focus-visible] {
+  outline: none;
+}
+
+.item {
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  line-height: 28px;
+  padding-block: 8px;
+  scroll-margin: 4px;
+  user-select: none;
+}
+.item[aria-disabled=true] {
+  cursor: not-allowed;
+}
+.item[data-active-item] {
+  background-color: var(--wp-components-color-gray-300, var(--wpds-color-stroke-surface-neutral));
+}
+
+.selected-hint-wrapper {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selected-hint {
+  color: var(--wp-components-color-gray-600, var(--wpds-color-stroke-interactive-neutral));
+  margin-inline-start: 8px;
+}
+
+.hint-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 1;
+  column-gap: 16px;
+}
+
+.item-hint {
+  color: var(--wp-components-color-gray-600, var(--wpds-color-stroke-interactive-neutral));
+  text-align: initial;
+  line-height: 1.4;
+  padding-inline-end: 4px;
+  margin-block: 4px;
+}
+
+.item-check {
+  display: flex;
+  align-items: center;
+  margin-inline-start: 8px;
+  fill: currentColor;
+  align-self: start;
+  margin-block-start: 2px;
+  font-size: 0;
+}
+.hint-wrapper ~ .item-check, .item-check:not(:empty) {
+  font-size: 24px;
+}

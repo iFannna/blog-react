@@ -1,0 +1,205 @@
+@charset "UTF-8";
+/**
+ * Typography
+ */
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+/**
+ * Breakpoints & Media Queries
+ */
+/**
+*  Converts a hex value into the rgb equivalent.
+*
+* @param {string} hex - the hexadecimal value to convert
+* @return {string} comma separated rgb values
+*/
+/**
+ * Long content fade mixin
+ *
+ * Creates a fading overlay to signify that the content is longer
+ * than the space allows.
+ */
+/**
+ * Breakpoint mixins
+ */
+/**
+ * Focus styles.
+ */
+/**
+ * Standard focus rings for the WordPress Design System.
+ *
+ * Apply `outset-ring__focus` inside the relevant pseudo-class at the call site,
+ * e.g. `&:focus { @include outset-ring__focus(); }`.
+ */
+/**
+ * Applies editor left position to the selector passed as argument
+ */
+/**
+ * Styles that are reused verbatim in a few places
+ */
+/**
+ * Allows users to opt-out of animations via OS-level preferences.
+ */
+/**
+ * Reset default styles for JavaScript UI based pages.
+ * This is a WP-admin agnostic reset
+ */
+/**
+ * Reset the WP Admin page styles for Gutenberg-like pages.
+ */
+/**
+ * Creates a checkerboard pattern background to indicate transparency.
+ * @param {String} $size - The size of the squares in the checkerboard pattern. Default is 12px.
+ */
+@layer wp-ui {
+  @layer utilities, components, compositions, overrides;
+  @layer components {
+    /*
+     * Style overrides for the outer wrapper rendered by `CollapsibleCard.Header`
+     * (defaults to `<div>`, but consumers can opt into a heading level via
+     * `render={ <h2 /> }` etc.). Combined with `defenseStyles.heading` so that,
+     * when the wrapper renders as an h1–h6, the unlayered defense class beats
+     * wp-admin's bare `h2`/`h3`/etc. selectors. Keeps the wrapper visually
+     * transparent so UA and host stylesheets don't bleed into the inner
+     * trigger.
+     */
+    .heading-wrapper {
+      --_gcd-heading-color: inherit;
+      --_gcd-heading-font-size: inherit;
+      --_gcd-heading-font-weight: inherit;
+      --_gcd-heading-margin: 0;
+      /* Properties not covered by the defense file. */
+      font-family: inherit;
+      line-height: inherit;
+    }
+    .header-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .header-description {
+      color: var(--wpds-color-foreground-content-neutral-weak);
+    }
+    .header-trigger-positioner {
+      flex-shrink: 0;
+      align-self: flex-start;
+      margin-block-start: calc(var(--wpds-typography-line-height-sm) / 2);
+      /* Prevent the trigger from making the header taller than its content,
+         preserving the same metrics between `Card` and `CollapsibleCard`. */
+      max-height: 0;
+      overflow: visible;
+    }
+    .header-trigger-wrapper {
+      display: flex;
+      /* Offset by half the button's own height so it visually centers
+         against the title's line box. */
+      translate: 0 -50%;
+      /* For an outline that looks like `IconButton`'s */
+      border-radius: var(--wpds-border-radius-sm);
+    }
+    /* The whole header is the trigger, but the focus ring is shown only
+       on the icon to visually emulate it being the button. */
+    .header:focus-visible .header-trigger-wrapper {
+      outline: var(--wpds-border-width-focus, var(--wp-admin-border-width-focus, 2px)) solid var(--focus-color, var(--wpds-color-stroke-focus, var(--wp-admin-theme-color, #3858e9)));
+      outline-offset: var(--wpds-border-width-focus, var(--wp-admin-border-width-focus, 2px));
+      --_gcd-a-outline: var(--wpds-border-width-focus) solid var(--focus-color, var(--wpds-color-stroke-focus));
+      --_gcd-div-outline: var(--wpds-border-width-focus) solid var(--focus-color, var(--wpds-color-stroke-focus));
+    }
+    @media not (prefers-reduced-motion) {
+      .header-trigger {
+        transition: rotate 0.15s ease-out;
+      }
+    }
+    .header[data-panel-open] .header-trigger {
+      rotate: 180deg;
+    }
+    /* Simulate disabled button styles */
+    .header[data-disabled] .header-trigger {
+      color: var(--wpds-color-foreground-interactive-neutral-disabled);
+    }
+    .content {
+      height: var(--collapsible-panel-height);
+      margin-block-start: var(--wp-ui-card-header-content-margin);
+      /* Clip while collapsed or transitioning so the panel collapses
+         cleanly. The `overflow-visible` class is set once the open
+         transition has settled, dropping the clip so descendant
+         focus rings aren't cut off. */
+      overflow: hidden;
+    }
+    .content.overflow-visible {
+      overflow: visible;
+    }
+    .content[hidden]:not([hidden=until-found]) {
+      display: none;
+    }
+    .content[data-starting-style], .content[data-ending-style] {
+      height: 0;
+    }
+    @media not (prefers-reduced-motion) {
+      .content {
+        transition: all 150ms ease-out;
+      }
+    }
+  }
+  @layer compositions {
+    .content-inner {
+      /* Card.Content's `.header + .content` selector doesn't match here
+         because Collapsible.Panel sits between Card.Header and Card.Content.
+         Re-apply the zero top padding manually so the header/content gap
+         matches Card. */
+      padding-block-start: 0;
+    }
+    .header {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      gap: var(--wpds-dimension-gap-sm);
+      outline: none;
+    }
+    .header:not([data-disabled]) {
+      cursor: var(--wpds-cursor-control);
+    }
+  }
+}

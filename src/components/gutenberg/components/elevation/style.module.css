@@ -1,0 +1,53 @@
+.elevation {
+  --wp-components-elevation-border-radius: initial;
+  background: transparent;
+  border-radius: var(--wp-components-elevation-border-radius);
+  display: block;
+  inset: var(--wp-components-elevation-offset);
+  margin: 0 !important;
+  opacity: 1;
+  pointer-events: none;
+  position: absolute;
+  will-change: box-shadow;
+}
+@media not (prefers-reduced-motion) {
+  .elevation {
+    transition: box-shadow 200ms cubic-bezier(0.08, 0.52, 0.52, 1);
+  }
+}
+
+.has-shadow {
+  box-shadow: var(--wp-components-elevation-shadow);
+}
+
+.border-radius-inherit {
+  border-radius: inherit;
+}
+
+.border-radius-initial {
+  border-radius: initial;
+}
+
+.border-radius-unset {
+  border-radius: unset;
+}
+
+.border-radius-revert {
+  border-radius: revert;
+}
+
+.border-radius-revert-layer {
+  border-radius: revert-layer;
+}
+
+*:hover > .has-hover {
+  box-shadow: var(--wp-components-elevation-hover-shadow);
+}
+
+*:focus > .has-focus {
+  box-shadow: var(--wp-components-elevation-focus-shadow);
+}
+
+*:active > .has-active {
+  box-shadow: var(--wp-components-elevation-active-shadow);
+}

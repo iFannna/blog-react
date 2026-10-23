@@ -1,0 +1,219 @@
+/**
+ * Colors
+ */
+.text {
+  --wp-components-text-color: initial;
+  --wp-components-text-display: initial;
+  --wp-components-text-font-size: initial;
+  --wp-components-text-font-weight: initial;
+  --wp-components-text-line-height: initial;
+  --wp-components-text-letter-spacing: initial;
+  --wp-components-text-text-align: initial;
+  color: var(--wp-components-text-color, var(--wp-components-color-foreground, var(--wpds-color-foreground-content-neutral)));
+  font-size: var(--wp-components-text-font-size);
+  font-weight: var(--wp-components-text-font-weight);
+  line-height: var(--wp-components-text-line-height, 1.4);
+  margin: 0;
+}
+
+.control-line-height {
+  --wp-components-text-line-height: 44px;
+}
+
+.control-line-height-large {
+  --wp-components-text-line-height: 51.2px;
+}
+
+.control-line-height-small {
+  --wp-components-text-line-height: 36.8px;
+}
+
+.control-line-height-xSmall {
+  --wp-components-text-line-height: 29.6px;
+}
+
+:where(.text) {
+  text-wrap: pretty;
+}
+
+.has-display {
+  display: var(--wp-components-text-display);
+}
+
+.has-letter-spacing {
+  letter-spacing: var(--wp-components-text-letter-spacing);
+}
+
+.has-text-align {
+  text-align: var(--wp-components-text-text-align);
+}
+
+.color-inherit {
+  color: inherit;
+}
+
+.color-initial {
+  color: initial;
+}
+
+.color-unset {
+  color: unset;
+}
+
+.color-revert {
+  color: revert;
+}
+
+.color-revert-layer {
+  color: revert-layer;
+}
+
+.display-inherit {
+  display: inherit;
+}
+
+.display-initial {
+  display: initial;
+}
+
+.display-unset {
+  display: unset;
+}
+
+.display-revert {
+  display: revert;
+}
+
+.display-revert-layer {
+  display: revert-layer;
+}
+
+.font-size-inherit {
+  font-size: inherit;
+}
+
+.font-size-initial {
+  font-size: initial;
+}
+
+.font-size-unset {
+  font-size: unset;
+}
+
+.font-size-revert {
+  font-size: revert;
+}
+
+.font-size-revert-layer {
+  font-size: revert-layer;
+}
+
+.font-weight-inherit {
+  font-weight: inherit;
+}
+
+.font-weight-initial {
+  font-weight: initial;
+}
+
+.font-weight-unset {
+  font-weight: unset;
+}
+
+.font-weight-revert {
+  font-weight: revert;
+}
+
+.font-weight-revert-layer {
+  font-weight: revert-layer;
+}
+
+.line-height-inherit {
+  line-height: inherit;
+}
+
+.line-height-initial {
+  line-height: initial;
+}
+
+.line-height-unset {
+  line-height: unset;
+}
+
+.line-height-revert {
+  line-height: revert;
+}
+
+.line-height-revert-layer {
+  line-height: revert-layer;
+}
+
+.letter-spacing-inherit {
+  letter-spacing: inherit;
+}
+
+.letter-spacing-initial {
+  letter-spacing: initial;
+}
+
+.letter-spacing-unset {
+  letter-spacing: unset;
+}
+
+.letter-spacing-revert {
+  letter-spacing: revert;
+}
+
+.letter-spacing-revert-layer {
+  letter-spacing: revert-layer;
+}
+
+.text-align-inherit {
+  text-align: inherit;
+}
+
+.text-align-initial {
+  text-align: initial;
+}
+
+.text-align-unset {
+  text-align: unset;
+}
+
+.text-align-revert {
+  text-align: revert;
+}
+
+.text-align-revert-layer {
+  text-align: revert-layer;
+}
+
+.readability-dark {
+  color: #1e1e1e;
+}
+
+.readability-light {
+  color: #fff;
+}
+
+.destructive {
+  color: #d94f4f;
+}
+
+.highlighter-text mark {
+  background: #f0b849;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05) inset, 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+}
+
+.block {
+  display: block;
+}
+
+.muted {
+  color: var(--wp-components-color-gray-700, var(--wpds-color-foreground-content-neutral-weak));
+}
+
+.upper-case {
+  text-transform: uppercase;
+}

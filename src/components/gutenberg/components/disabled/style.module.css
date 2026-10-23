@@ -1,0 +1,12 @@
+.disabled {
+  position: relative;
+  pointer-events: none;
+}
+.disabled::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.disabled * {
+  pointer-events: none;
+}

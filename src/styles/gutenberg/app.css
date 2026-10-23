@@ -1,0 +1,26 @@
+html,
+body,
+#editor {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+}
+
+/*
+ * 主题和全局样式会同时注入编辑器外壳；这里使用更高的优先级把外壳字号
+ * 固定为 WordPress 后台默认的 13px，避免侧栏等继承画布的 20.25px。
+ */
+html body {
+	font-size: 13px;
+}
+
+/* 独立编辑器没有 admin bar，不保留 WordPress 预留的顶部高度。 */
+:root {
+	--wp-admin--admin-bar--height: 0px;
+}
+
+body.is-fullscreen-mode .interface-interface-skeleton {
+	top: 0;
+}

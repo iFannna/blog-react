@@ -1,0 +1,135 @@
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+.wrapper {
+  box-sizing: border-box;
+  font-size: 13px;
+}
+
+.fieldset {
+  border: 0;
+  margin: 0 0 16px;
+  padding: 0;
+}
+.fieldset:last-child {
+  margin-bottom: 0;
+}
+
+.time-wrapper {
+  /* rtl:ignore */
+  direction: ltr;
+  display: flex;
+}
+
+.hours-input.hours-input.hours-input :global(.components-input-control__input),
+.minutes-input.minutes-input.minutes-input :global(.components-input-control__input),
+.day-input.day-input.day-input :global(.components-input-control__input),
+.year-input.year-input.year-input :global(.components-input-control__input) {
+  /* stylelint-disable logical-css/require-logical-properties -- Time fields remain physically LTR, including in RTL locales. */
+  padding-left: 8px;
+  padding-right: 8px;
+  /* stylelint-enable logical-css/require-logical-properties */
+  text-align: center;
+}
+
+.hours-input {
+  width: 36px;
+}
+.hours-input.hours-input.hours-input {
+  /* stylelint-disable logical-css/require-logical-properties -- Preserve the physical joins between the LTR hours and minutes fields. */
+}
+.hours-input.hours-input.hours-input :global(.components-input-control__input) {
+  padding-right: 0;
+}
+.hours-input.hours-input.hours-input :global(.components-input-control__backdrop) {
+  border-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.hours-input.hours-input.hours-input {
+  /* stylelint-enable logical-css/require-logical-properties */
+}
+
+.time-separator {
+  border-top: 1px solid #757575;
+  border-bottom: 1px solid #757575;
+  font-size: 13px;
+  line-height: 34px;
+  display: inline-block;
+}
+
+.minutes-input {
+  width: 36px;
+}
+.minutes-input.minutes-input.minutes-input {
+  /* stylelint-disable logical-css/require-logical-properties -- Preserve the physical joins between the LTR hours and minutes fields. */
+}
+.minutes-input.minutes-input.minutes-input :global(.components-input-control__input) {
+  padding-left: 0;
+}
+.minutes-input.minutes-input.minutes-input :global(.components-input-control__backdrop) {
+  border-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.minutes-input.minutes-input.minutes-input {
+  /* stylelint-enable logical-css/require-logical-properties */
+}
+
+.month-select-wrapper {
+  flex-grow: 1;
+}
+
+.day-input {
+  width: 36px;
+}
+
+.year-input {
+  width: 56px;
+}
+
+.time-zone {
+  text-decoration: underline dotted;
+}

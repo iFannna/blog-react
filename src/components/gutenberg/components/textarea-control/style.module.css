@@ -1,0 +1,161 @@
+/**
+ * Typography
+ */
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+/**
+ * Breakpoints & Media Queries
+ */
+/**
+*  Converts a hex value into the rgb equivalent.
+*
+* @param {string} hex - the hexadecimal value to convert
+* @return {string} comma separated rgb values
+*/
+/**
+ * Long content fade mixin
+ *
+ * Creates a fading overlay to signify that the content is longer
+ * than the space allows.
+ */
+/**
+ * Breakpoint mixins
+ */
+/**
+ * Focus styles.
+ */
+/**
+ * Standard focus rings for the WordPress Design System.
+ *
+ * Apply `outset-ring__focus` inside the relevant pseudo-class at the call site,
+ * e.g. `&:focus { @include outset-ring__focus(); }`.
+ */
+/**
+ * Applies editor left position to the selector passed as argument
+ */
+/**
+ * Styles that are reused verbatim in a few places
+ */
+/**
+ * Allows users to opt-out of animations via OS-level preferences.
+ */
+/**
+ * Reset default styles for JavaScript UI based pages.
+ * This is a WP-admin agnostic reset
+ */
+/**
+ * Reset the WP Admin page styles for Gutenberg-like pages.
+ */
+/**
+ * Creates a checkerboard pattern background to indicate transparency.
+ * @param {String} $size - The size of the squares in the checkerboard pattern. Default is 12px.
+ */
+.textarea {
+  width: 100%;
+  display: block;
+  background: var(--wp-components-color-background, var(--wpds-color-background-surface-neutral-strong));
+  color: var(--wp-components-color-foreground, var(--wpds-color-foreground-content-neutral));
+  /* stylelint-disable-next-line logical-css/require-logical-keywords -- Preserve `resize: vertical`; `block` is not equivalent in vertical writing modes. */
+  resize: vertical;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  padding: 6px 8px;
+  /* Fonts smaller than 16px causes mobile safari to zoom. */
+  font-size: 16px;
+  /* Override core line-height. To be reviewed. */
+  line-height: normal;
+  border: var(--wpds-border-width-xs, 1px) solid var(--wpds-color-stroke-interactive-neutral, #8d8d8d);
+  border-radius: var(--wpds-border-radius-sm, 2px);
+}
+@media (min-width: 600px) {
+  .textarea {
+    font-size: 13px;
+    /* Override core line-height. To be reviewed. */
+    line-height: normal;
+  }
+}
+.textarea:hover:not(:disabled, [aria-disabled=true]) {
+  border-color: var(--wpds-color-stroke-interactive-neutral-active, #6e6e6e);
+}
+.textarea:focus {
+  outline: var(--wpds-border-width-focus, var(--wp-admin-border-width-focus, 2px)) solid var(--focus-color, var(--wpds-color-stroke-focus, var(--wp-admin-theme-color, #3858e9)));
+  outline-offset: var(--wpds-border-width-focus, var(--wp-admin-border-width-focus, 2px));
+  border-color: var(--wpds-color-stroke-interactive-neutral, #8d8d8d);
+  box-shadow: none;
+}
+.textarea::placeholder {
+  color: rgba(30, 30, 30, 0.62);
+}
+.textarea {
+  line-height: 20px;
+  padding: 9px 11px;
+  min-height: 38px;
+}
+.textarea:disabled {
+  border-color: var(--wpds-color-stroke-interactive-neutral-disabled);
+  color: var(--wpds-color-foreground-interactive-neutral-disabled);
+  background: var(--wp-components-color-background, var(--wpds-color-background-surface-neutral-strong));
+}
+.textarea::-webkit-input-placeholder {
+  color: color-mix(in srgb, var(--wp-components-color-foreground, var(--wpds-color-foreground-content-neutral)), transparent 38%);
+}
+.textarea::-moz-placeholder {
+  color: color-mix(in srgb, var(--wp-components-color-foreground, var(--wpds-color-foreground-content-neutral)), transparent 38%);
+}
+.textarea:-ms-input-placeholder {
+  color: color-mix(in srgb, var(--wp-components-color-foreground, var(--wpds-color-foreground-content-neutral)), transparent 38%);
+}
+:global(.is-dark-theme) .textarea::-webkit-input-placeholder {
+  color: color-mix(in srgb, var(--wp-components-color-background, var(--wpds-color-background-surface-neutral-strong)), transparent 35%);
+}
+:global(.is-dark-theme) .textarea::-moz-placeholder {
+  color: color-mix(in srgb, var(--wp-components-color-background, var(--wpds-color-background-surface-neutral-strong)), transparent 35%);
+}
+:global(.is-dark-theme) .textarea:-ms-input-placeholder {
+  color: color-mix(in srgb, var(--wp-components-color-background, var(--wpds-color-background-surface-neutral-strong)), transparent 35%);
+}
+.textarea:disabled::placeholder {
+  color: var(--wpds-color-foreground-interactive-neutral-disabled);
+}

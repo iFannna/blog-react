@@ -1,0 +1,62 @@
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+.hide-html-arrows input[type=number]::-webkit-outer-spin-button,
+.hide-html-arrows input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+.hide-html-arrows input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.spin-button.spin-button.spin-button.spin-button.spin-button {
+  color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+}
+.spin-button:where(.is-small) {
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+}

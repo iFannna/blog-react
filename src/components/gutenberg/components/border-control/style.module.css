@@ -1,0 +1,122 @@
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+.border-control {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.border-control *,
+.border-control *::before,
+.border-control *::after {
+  box-sizing: inherit;
+}
+
+.inner-wrapper {
+  height: 40px;
+}
+.inner-wrapper :global(.components-unit-control) {
+  flex: 1 1 40%;
+}
+.inner-wrapper {
+  /* Preserve the established specificity for UnitSelect's min-height override. */
+}
+.inner-wrapper.inner-wrapper :global(.components-unit-control__select):global(.components-unit-control__select) {
+  min-height: 0;
+}
+
+/* Forces a set UnitControl width instead of the default 40/60 split with RangeControl. */
+.inner-wrapper-has-width :global(.components-unit-control) {
+  flex: 0 0 auto;
+}
+
+.dropdown {
+  background: #fff;
+  /* Preserve the established specificity for Button overrides. */
+}
+.dropdown.dropdown > button {
+  aspect-ratio: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-start-start-radius: 2px;
+  border-end-start-radius: 2px;
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+  border: 1px solid var(--wp-components-color-gray-600, var(--wpds-color-stroke-interactive-neutral));
+}
+
+.color-indicator-wrapper {
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  /* border-style / border-color are applied inline by the dropdown hook. */
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+  /* Transparent gradient keeps the indicator visible over the active toggle. */
+}
+.color-indicator-wrapper > span {
+  height: 16px;
+  width: 16px;
+  background: linear-gradient(-45deg, transparent 48%, rgba(0, 0, 0, 0.2) 48%, rgba(0, 0, 0, 0.2) 52%, transparent 52%);
+}
+
+.popover-controls {
+  /* $swatch-size * 6 + $swatch-gap * 5, matching $color-palette-circle-size. */
+  width: 228px;
+}
+
+.reset-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-block-start: 12px;
+}
+
+.slider {
+  flex: 1 1 60%;
+  margin-inline-end: 12px;
+}

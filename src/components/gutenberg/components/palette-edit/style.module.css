@@ -1,0 +1,97 @@
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+.indicator.indicator {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.name-input :global(.components-input-control__container) {
+  background: #f0f0f0;
+  border-radius: 1px;
+}
+.name-input :global(.components-input-control__container) :global(.components-input-control__input.components-input-control__input.components-input-control__input.components-input-control__input) {
+  height: 32px;
+}
+.name-input :global(.components-input-control__container) :global(.components-input-control__backdrop.components-input-control__backdrop.components-input-control__backdrop) {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.name {
+  line-height: 32px;
+  margin-inline: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.heading {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.heading.heading.heading {
+  font-size: 11px;
+  line-height: 24px;
+  margin-bottom: 0;
+}
+
+.contents {
+  margin-top: 8px;
+}
+
+.palette.palette.palette :global(.components-button.has-icon) {
+  min-width: 0;
+  padding: 0;
+}
+
+.done.done {
+  color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+}
+
+.remove.remove {
+  margin-top: 4px;
+}

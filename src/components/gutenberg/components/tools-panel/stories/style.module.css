@@ -1,0 +1,14 @@
+.panel-wrapper {
+  font-size: 13px;
+}
+.panel-wrapper :global(.components-dropdown-menu__menu) {
+  max-width: 220px;
+}
+
+.single-column-item.single-column-item {
+  grid-column: span 1;
+}
+
+.intro-text {
+  grid-column: span 2;
+}

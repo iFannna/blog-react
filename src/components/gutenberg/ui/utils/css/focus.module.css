@@ -1,0 +1,123 @@
+/**
+ * Typography
+ */
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+/**
+ * Breakpoints & Media Queries
+ */
+/**
+*  Converts a hex value into the rgb equivalent.
+*
+* @param {string} hex - the hexadecimal value to convert
+* @return {string} comma separated rgb values
+*/
+/**
+ * Long content fade mixin
+ *
+ * Creates a fading overlay to signify that the content is longer
+ * than the space allows.
+ */
+/**
+ * Breakpoint mixins
+ */
+/**
+ * Focus styles.
+ */
+/**
+ * Standard focus rings for the WordPress Design System.
+ *
+ * Apply `outset-ring__focus` inside the relevant pseudo-class at the call site,
+ * e.g. `&:focus { @include outset-ring__focus(); }`.
+ */
+/**
+ * Applies editor left position to the selector passed as argument
+ */
+/**
+ * Styles that are reused verbatim in a few places
+ */
+/**
+ * Allows users to opt-out of animations via OS-level preferences.
+ */
+/**
+ * Reset default styles for JavaScript UI based pages.
+ * This is a WP-admin agnostic reset
+ */
+/**
+ * Reset the WP Admin page styles for Gutenberg-like pages.
+ */
+/**
+ * Creates a checkerboard pattern background to indicate transparency.
+ * @param {String} $size - The size of the squares in the checkerboard pattern. Default is 12px.
+ */
+@layer wp-ui {
+  @layer utilities, components, compositions, overrides;
+  @layer utilities {
+    /*
+     * Shared focus-ring utility classes. For new code, prefer using the
+     * mixin directly in the component stylesheet.
+     */
+    .outset-ring--focus:focus,
+    .outset-ring--focus-visible:focus-visible,
+    .outset-ring--focus-within:focus-within {
+      outline: var(--wpds-border-width-focus, var(--wp-admin-border-width-focus, 2px)) solid var(--focus-color, var(--wpds-color-stroke-focus, var(--wp-admin-theme-color, #3858e9)));
+      outline-offset: var(--wpds-border-width-focus, var(--wp-admin-border-width-focus, 2px));
+      --_gcd-a-outline: var(--wpds-border-width-focus) solid var(--focus-color, var(--wpds-color-stroke-focus));
+      --_gcd-div-outline: var(--wpds-border-width-focus) solid var(--focus-color, var(--wpds-color-stroke-focus));
+    }
+    .outset-ring--focus-except-active:focus,
+    .outset-ring--focus-within-except-active:focus-within {
+      outline: none;
+    }
+    .outset-ring--focus-except-active:focus:not(:active),
+    .outset-ring--focus-within-except-active:focus-within:not(:has(:active)) {
+      outline: var(--wpds-border-width-focus, var(--wp-admin-border-width-focus, 2px)) solid var(--focus-color, var(--wpds-color-stroke-focus, var(--wp-admin-theme-color, #3858e9)));
+      outline-offset: var(--wpds-border-width-focus, var(--wp-admin-border-width-focus, 2px));
+      --_gcd-a-outline: var(--wpds-border-width-focus) solid var(--focus-color, var(--wpds-color-stroke-focus));
+      --_gcd-div-outline: var(--wpds-border-width-focus) solid var(--focus-color, var(--wpds-color-stroke-focus));
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.invisible-drag-image {
+  position: fixed;
+  /* stylelint-disable-next-line logical-css/require-logical-properties -- Offscreen drag-image stand-in; flipping with writing direction has no benefit. */
+  left: -1000px;
+  height: 50px;
+  width: 50px;
+}
+
+.clone {
+  position: fixed;
+  padding: 0;
+  background: transparent;
+  pointer-events: none;
+}
+
+.clone:not(.is-in-compat-slot) {
+  z-index: 1000000000;
+}
+
+:global(body.is-dragging-components-draggable) {
+  cursor: move; /* Fallback for IE/Edge < 14 */
+  cursor: grabbing !important;
+}

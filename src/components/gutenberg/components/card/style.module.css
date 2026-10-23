@@ -1,0 +1,230 @@
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+.card {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+.card-borderless {
+  box-shadow: none;
+}
+
+.is-rounded {
+  border-radius: 7px;
+}
+
+.content {
+  height: 100%;
+}
+
+.header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+.header:last-child {
+  border-bottom: none;
+}
+
+.footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+.footer:first-of-type {
+  border-top: none;
+}
+
+.body {
+  box-sizing: border-box;
+  height: auto;
+  max-height: 100%;
+}
+
+.is-scrollable {
+  height: 100%;
+}
+
+.media {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.media > img, .media > iframe {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  width: 100%;
+}
+
+.header:first-of-type,
+.footer:first-of-type,
+.body:first-of-type,
+.media:first-of-type {
+  border-start-start-radius: 7px;
+  border-start-end-radius: 7px;
+}
+.header:last-of-type,
+.footer:last-of-type,
+.body:last-of-type,
+.media:last-of-type {
+  border-end-start-radius: 7px;
+  border-end-end-radius: 7px;
+}
+
+.divider.divider {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.section-borderless {
+  border: none;
+}
+
+.is-shady {
+  background-color: var(--wp-components-color-gray-100, var(--wpds-color-background-surface-neutral));
+}
+
+.padding-none {
+  padding: 0;
+}
+
+.padding-x-small {
+  padding: 8px;
+}
+
+.padding-small {
+  padding: 16px;
+}
+
+.padding-medium {
+  padding: 16px 24px;
+}
+
+.padding-large {
+  padding: 24px 32px;
+}
+
+.padding-block-start-none {
+  padding-block-start: 0;
+}
+
+.padding-block-start-x-small {
+  padding-block-start: 8px;
+}
+
+.padding-block-start-small {
+  padding-block-start: 16px;
+}
+
+.padding-block-start-medium {
+  padding-block-start: 24px;
+}
+
+.padding-block-start-large {
+  padding-block-start: 32px;
+}
+
+.padding-block-end-none {
+  padding-block-end: 0;
+}
+
+.padding-block-end-x-small {
+  padding-block-end: 8px;
+}
+
+.padding-block-end-small {
+  padding-block-end: 16px;
+}
+
+.padding-block-end-medium {
+  padding-block-end: 24px;
+}
+
+.padding-block-end-large {
+  padding-block-end: 32px;
+}
+
+.padding-inline-start-none {
+  padding-inline-start: 0;
+}
+
+.padding-inline-start-x-small {
+  padding-inline-start: 8px;
+}
+
+.padding-inline-start-small {
+  padding-inline-start: 16px;
+}
+
+.padding-inline-start-medium {
+  padding-inline-start: 24px;
+}
+
+.padding-inline-start-large {
+  padding-inline-start: 32px;
+}
+
+.padding-inline-end-none {
+  padding-inline-end: 0;
+}
+
+.padding-inline-end-x-small {
+  padding-inline-end: 8px;
+}
+
+.padding-inline-end-small {
+  padding-inline-end: 16px;
+}
+
+.padding-inline-end-medium {
+  padding-inline-end: 24px;
+}
+
+.padding-inline-end-large {
+  padding-inline-end: 32px;
+}

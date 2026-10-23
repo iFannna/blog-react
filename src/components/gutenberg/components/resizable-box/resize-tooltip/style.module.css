@@ -1,0 +1,80 @@
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+.root {
+  box-sizing: border-box;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.tooltip-wrapper {
+  align-items: center;
+  box-sizing: border-box;
+  display: inline-flex;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms linear;
+}
+
+.tooltip {
+  background: var(--wp-components-color-foreground, var(--wpds-color-foreground-content-neutral));
+  border-radius: 2px;
+  box-sizing: border-box;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 12px;
+  color: var(--wp-components-color-foreground-inverted, var(--wpds-color-background-surface-neutral));
+  padding: 4px 8px;
+  position: relative;
+}
+
+.label-text.label-text.label-text {
+  color: var(--wp-components-color-foreground-inverted, var(--wpds-color-background-surface-neutral));
+  display: block;
+  font-size: 13px;
+  line-height: 1.4;
+  white-space: nowrap;
+}

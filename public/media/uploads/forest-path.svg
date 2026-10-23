@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+	<defs>
+		<linearGradient id="haze" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="#d7e4d7" />
+			<stop offset="1" stop-color="#6f8c78" />
+		</linearGradient>
+	</defs>
+	<rect width="1200" height="800" fill="url(#haze)" />
+	<g fill="#4c6857" opacity="0.75">
+		<path d="M120 560 L190 330 L260 560 Z" />
+		<path d="M260 560 L340 300 L420 560 Z" />
+		<path d="M820 560 L900 320 L980 560 Z" />
+		<path d="M980 560 L1060 340 L1140 560 Z" />
+	</g>
+	<g fill="#2f4a3b">
+		<path d="M40 620 L130 360 L220 620 Z" />
+		<path d="M200 640 L300 340 L400 640 Z" />
+		<path d="M760 640 L860 330 L960 640 Z" />
+		<path d="M940 620 L1040 370 L1140 620 Z" />
+	</g>
+	<path d="M430 800 L560 540 L700 800 Z" fill="#d9c9a6" />
+	<path d="M520 800 L590 620 L680 800 Z" fill="#c4ad83" opacity="0.8" />
+	<g fill="#1f3329">
+		<path d="M0 690 Q240 620 470 690 T950 675 T1200 690 V800 H0 Z" />
+	</g>
+</svg>

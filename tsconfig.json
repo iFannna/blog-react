@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,16 +24,257 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@wordpress/a11y": [
+        "./src/utils/gutenberg/a11y/index.ts"
+      ],
+      "@wordpress/admin-ui": [
+        "./src/components/gutenberg/admin-ui/index.ts"
+      ],
+      "@wordpress/api-fetch": [
+        "./src/services/gutenberg/api-fetch/index.ts"
+      ],
+      "@wordpress/autop": [
+        "./src/utils/gutenberg/autop/index.ts"
+      ],
+      "@wordpress/blob": [
+        "./src/utils/gutenberg/blob/index.ts"
+      ],
+      "@wordpress/block-editor": [
+        "./src/components/gutenberg/block-editor/index.js"
+      ],
+      "@wordpress/block-library": [
+        "./src/components/gutenberg/block-library/index.jsx"
+      ],
+      "@wordpress/block-serialization-default-parser": [
+        "./src/utils/gutenberg/block-serialization-default-parser/index.ts"
+      ],
+      "@wordpress/blocks": [
+        "./src/lib/gutenberg/blocks/index.ts"
+      ],
+      "@wordpress/commands": [
+        "./src/lib/gutenberg/commands/index.ts"
+      ],
+      "@wordpress/components": [
+        "./src/components/gutenberg/components/index.ts"
+      ],
+      "@wordpress/compose": [
+        "./src/hooks/gutenberg/compose/index.ts"
+      ],
+      "@wordpress/core-commands": [
+        "./src/components/gutenberg/core-commands/index.jsx"
+      ],
+      "@wordpress/core-data": [
+        "./src/stores/gutenberg/core-data/index.js"
+      ],
+      "@wordpress/data": [
+        "./src/stores/gutenberg/data/index.ts"
+      ],
+      "@wordpress/dataviews": [
+        "./src/components/gutenberg/dataviews/index.ts"
+      ],
+      "@wordpress/date": [
+        "./src/lib/gutenberg/date/index.ts"
+      ],
+      "@wordpress/deprecated": [
+        "./src/utils/gutenberg/deprecated/index.ts"
+      ],
+      "@wordpress/dom": [
+        "./src/utils/gutenberg/dom/index.ts"
+      ],
+      "@wordpress/dom-ready": [
+        "./src/utils/gutenberg/dom-ready/index.ts"
+      ],
+      "@wordpress/edit-post": [
+        "./src/components/gutenberg/edit-post/index.jsx"
+      ],
+      "@wordpress/editor": [
+        "./src/components/gutenberg/editor/index.js"
+      ],
+      "@wordpress/element": [
+        "./src/lib/gutenberg/element/index.ts"
+      ],
+      "@wordpress/escape-html": [
+        "./src/utils/gutenberg/escape-html/index.ts"
+      ],
+      "@wordpress/global-styles-engine": [
+        "./src/lib/gutenberg/global-styles-engine/index.ts"
+      ],
+      "@wordpress/global-styles-ui": [
+        "./src/components/gutenberg/global-styles-ui/index.ts"
+      ],
+      "@wordpress/hooks": [
+        "./src/hooks/gutenberg/hooks/index.ts"
+      ],
+      "@wordpress/html-entities": [
+        "./src/utils/gutenberg/html-entities/index.ts"
+      ],
+      "@wordpress/i18n": [
+        "./src/lib/gutenberg/i18n/index.ts"
+      ],
+      "@wordpress/icons": [
+        "./src/components/gutenberg/icons/index.ts"
+      ],
+      "@wordpress/image-cropper": [
+        "./src/components/gutenberg/image-cropper/index.ts"
+      ],
+      "@wordpress/interface": [
+        "./src/components/gutenberg/interface/index.ts"
+      ],
+      "@wordpress/is-shallow-equal": [
+        "./src/utils/gutenberg/is-shallow-equal/index.ts"
+      ],
+      "@wordpress/kebab-case": [
+        "./src/utils/gutenberg/kebab-case/index.ts"
+      ],
+      "@wordpress/keyboard-shortcuts": [
+        "./src/components/gutenberg/keyboard-shortcuts/index.ts"
+      ],
+      "@wordpress/keycodes": [
+        "./src/utils/gutenberg/keycodes/index.ts"
+      ],
+      "@wordpress/latex-to-mathml": [
+        "./src/utils/gutenberg/latex-to-mathml/index.ts"
+      ],
+      "@wordpress/media-editor": [
+        "./src/components/gutenberg/media-editor/index.ts"
+      ],
+      "@wordpress/media-fields": [
+        "./src/components/gutenberg/media-fields/index.ts"
+      ],
+      "@wordpress/media-utils": [
+        "./src/utils/gutenberg/media-utils/index.ts"
+      ],
+      "@wordpress/notices": [
+        "./src/stores/gutenberg/notices/index.ts"
+      ],
+      "@wordpress/patterns": [
+        "./src/components/gutenberg/patterns/index.js"
+      ],
+      "@wordpress/plugins": [
+        "./src/lib/gutenberg/plugins/index.ts"
+      ],
+      "@wordpress/preferences": [
+        "./src/stores/gutenberg/preferences/index.ts"
+      ],
+      "@wordpress/primitives": [
+        "./src/components/gutenberg/primitives/index.ts"
+      ],
+      "@wordpress/priority-queue": [
+        "./src/utils/gutenberg/priority-queue/index.ts"
+      ],
+      "@wordpress/private-apis": [
+        "./src/lib/gutenberg/private-apis/index.ts"
+      ],
+      "@wordpress/react-inert-value": [
+        "./src/hooks/gutenberg/react-inert-value/index.ts"
+      ],
+      "@wordpress/redux-routine": [
+        "./src/stores/gutenberg/redux-routine/index.ts"
+      ],
+      "@wordpress/rich-text": [
+        "./src/components/gutenberg/rich-text/index.ts"
+      ],
+      "@wordpress/route": [
+        "./src/lib/gutenberg/route/index.ts"
+      ],
+      "@wordpress/router": [
+        "./src/lib/gutenberg/router/index.ts"
+      ],
+      "@wordpress/server-side-render": [
+        "./src/components/gutenberg/server-side-render/index.ts"
+      ],
+      "@wordpress/shortcode": [
+        "./src/utils/gutenberg/shortcode/index.ts"
+      ],
+      "@wordpress/style-engine": [
+        "./src/lib/gutenberg/style-engine/index.ts"
+      ],
+      "@wordpress/style-runtime": [
+        "./src/lib/gutenberg/style-runtime/index.ts"
+      ],
+      "@wordpress/sync": [
+        "./src/services/gutenberg/sync/index.ts"
+      ],
+      "@wordpress/theme": [
+        "./src/lib/gutenberg/theme/index.ts"
+      ],
+      "@wordpress/token-list": [
+        "./src/lib/gutenberg/token-list/index.ts"
+      ],
+      "@wordpress/ui": [
+        "./src/components/gutenberg/ui/index.ts"
+      ],
+      "@wordpress/undo-manager": [
+        "./src/stores/gutenberg/undo-manager/index.ts"
+      ],
+      "@wordpress/upload-media": [
+        "./src/services/gutenberg/upload-media/index.ts"
+      ],
+      "@wordpress/url": [
+        "./src/utils/gutenberg/url/index.ts"
+      ],
+      "@wordpress/video-conversion": [
+        "./src/utils/gutenberg/video-conversion/index.ts"
+      ],
+      "@wordpress/viewport": [
+        "./src/hooks/gutenberg/viewport/index.ts"
+      ],
+      "@wordpress/views": [
+        "./src/components/gutenberg/views/index.ts"
+      ],
+      "@wordpress/warning": [
+        "./src/utils/gutenberg/warning/index.ts"
+      ],
+      "@wordpress/widgets": [
+        "./src/components/gutenberg/widgets/index.js"
+      ],
+      "@wordpress/wordcount": [
+        "./src/utils/gutenberg/wordcount/index.ts"
+      ],
+      "@wordpress/worker-threads": [
+        "./src/utils/gutenberg/worker-threads/index.ts"
+      ],
+      "@wordpress/video-conversion/worker": [
+        "./src/utils/gutenberg/video-conversion/worker.ts"
+      ],
+      "@wordpress/block-editor/src/store/actions": [
+        "./src/components/gutenberg/block-editor/store/actions.ts"
+      ],
+      "@wordpress/block-editor/src/store/selectors": [
+        "./src/components/gutenberg/block-editor/store/selectors.ts"
+      ],
+      "@wordpress/editor/src/store/selectors": [
+        "./src/components/gutenberg/editor/store/selectors.js"
+      ],
+      "@wordpress/core-data/src/types": [
+        "./src/stores/gutenberg/core-data/types.ts"
+      ],
+      "@wordpress/core-data/src/utils/crdt-blocks": [
+        "./src/stores/gutenberg/core-data/utils/crdt-blocks.ts"
+      ],
+      "@wordpress/blocks/src/api/parser": [
+        "./src/lib/gutenberg/blocks/api/parser/index.ts"
+      ],
+      "@wordpress/components/build-types/query-controls/types": [
+        "./src/components/gutenberg/components/query-controls/types.ts"
+      ]
     }
   },
   "include": [
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.mts",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "packages/**/stories/**",
+    "packages/**/*.story.*",
+    "packages/**/bin/**"
+  ]
 }

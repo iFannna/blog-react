@@ -1,0 +1,146 @@
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+.wrapper {
+  box-sizing: border-box;
+}
+.wrapper *,
+.wrapper *::before,
+.wrapper *::after {
+  box-sizing: inherit;
+}
+
+.navigator {
+  grid-template-columns: 0.5fr repeat(5, 1fr) 0.5fr;
+  justify-items: center;
+  margin-bottom: 16px;
+}
+
+.navigator.navigator {
+  display: grid;
+}
+
+.previous-month {
+  grid-column: 1/2;
+}
+
+.next-month {
+  grid-column: 7/8;
+}
+
+.heading {
+  grid-column: 2/7;
+}
+.heading strong {
+  font-weight: 600;
+}
+
+.heading.heading {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.calendar {
+  column-gap: 8px;
+  display: grid;
+  grid-template-columns: 0.5fr repeat(5, 1fr) 0.5fr;
+  justify-items: center;
+  row-gap: 8px;
+}
+
+.day-of-week {
+  color: var(--wp-components-color-gray-700, var(--wpds-color-foreground-content-neutral-weak));
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.day {
+  grid-column: var(--_wp-components-date-picker-column);
+  position: relative;
+  justify-content: center;
+  padding: 0;
+}
+.day:where(:disabled) {
+  pointer-events: none;
+}
+.day:where(.has-events)::before {
+  border: 2px solid var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+  border-radius: 50%;
+  content: " ";
+  /* stylelint-disable-next-line logical-css/require-logical-properties -- Preserve the physical center and translate offset in both directions. */
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, 9px);
+}
+.day:where(.has-events.is-selected)::before {
+  border-color: var(--wp-components-color-accent-inverted, var(--wpds-color-foreground-interactive-brand-strong));
+}
+
+.day.day.day {
+  border-radius: 50%;
+  height: 28px;
+  width: 28px;
+  font-weight: 400;
+}
+.day.day.day:where(.is-selected) {
+  background: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+}
+.day.day.day:where(.is-selected), .day.day.day:where(.is-selected):hover:not(:disabled, [aria-disabled=true]) {
+  color: var(--wp-components-color-accent-inverted, var(--wpds-color-foreground-interactive-brand-strong));
+}
+.day.day.day:where(.is-selected):focus:not(:disabled) {
+  border: 1.5px solid currentColor;
+}
+.day.day.day:where(.is-selected)::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid transparent;
+}
+.day.day.day:where(.is-today) {
+  background: var(--wp-components-color-gray-200, var(--wpds-color-stroke-surface-neutral));
+}

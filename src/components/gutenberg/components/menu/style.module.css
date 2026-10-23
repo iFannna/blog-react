@@ -1,0 +1,295 @@
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+.menu {
+  position: relative;
+  z-index: 1000000;
+  /* Only visible in Windows High Contrast mode */
+  outline: 2px solid transparent !important;
+}
+
+.menu-surface {
+  display: grid;
+  grid-template-columns: minmax(0, max-content) 1fr;
+  grid-template-rows: auto;
+  box-sizing: border-box;
+  min-width: 160px;
+  max-width: 320px;
+  max-height: var(--popover-available-height);
+  padding: 4px;
+  overscroll-behavior: contain;
+  overflow: auto;
+  background-color: var(--wp-components-color-background, var(--wpds-color-background-surface-neutral-strong));
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px var(--wp-components-color-gray-300, var(--wpds-color-stroke-surface-neutral)), 0 2px 3px rgba(0, 0, 0, 0.05), 0 4px 5px rgba(0, 0, 0, 0.04), 0 12px 12px rgba(0, 0, 0, 0.03), 0 16px 16px rgba(0, 0, 0, 0.02);
+}
+.menu-surface:where(.is-toolbar) {
+  box-shadow: 0 0 0 1px var(--wp-components-color-foreground, var(--wpds-color-foreground-content-neutral));
+}
+
+@media not (prefers-reduced-motion) {
+  .menu-motion-root {
+    transition-property: transform, opacity;
+    transition-duration: var(--wpds-motion-duration-md), var(--wpds-motion-duration-sm);
+    transition-timing-function: var(--wpds-motion-easing-expressive), linear;
+    will-change: transform, opacity;
+  }
+  .menu-motion-root:not(:has(> .menu-surface[data-submenu])) {
+    /* Regardless of the side, fade in and out. */
+    opacity: 0;
+  }
+  .menu-motion-root:not(:has(> .menu-surface[data-submenu])):has(> .menu-surface[data-enter]) {
+    opacity: 1;
+  }
+  .menu-motion-root:not(:has(> .menu-surface[data-submenu])) {
+    /* Slide in the direction the menu is opening. */
+  }
+  .menu-motion-root:not(:has(> .menu-surface[data-submenu])):has(> .menu-surface[data-side=bottom]) {
+    transform: translateY(-4px);
+  }
+  .menu-motion-root:not(:has(> .menu-surface[data-submenu])):has(> .menu-surface[data-side=top]) {
+    transform: translateY(4px);
+  }
+  .menu-motion-root:not(:has(> .menu-surface[data-submenu])):has(> .menu-surface[data-side=left]) {
+    transform: translateX(4px);
+  }
+  .menu-motion-root:not(:has(> .menu-surface[data-submenu])):has(> .menu-surface[data-side=right]) {
+    transform: translateX(-4px);
+  }
+  .menu-motion-root:not(:has(> .menu-surface[data-submenu])):has(> .menu-surface[data-enter][data-side=bottom]), .menu-motion-root:not(:has(> .menu-surface[data-submenu])):has(> .menu-surface[data-enter][data-side=top]) {
+    transform: translateY(0);
+  }
+  .menu-motion-root:not(:has(> .menu-surface[data-submenu])):has(> .menu-surface[data-enter][data-side=left]), .menu-motion-root:not(:has(> .menu-surface[data-submenu])):has(> .menu-surface[data-enter][data-side=right]) {
+    transform: translateX(0);
+  }
+}
+
+.item {
+  all: unset;
+  cursor: var(--wpds-cursor-control);
+  position: relative;
+  min-height: 32px;
+  box-sizing: border-box;
+  /* Occupy the width of all grid columns (ie. full width) */
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: minmax(0, max-content) 1fr;
+  align-items: center;
+}
+@supports (grid-template-columns: subgrid) {
+  .item {
+    /*
+     * Define a grid layout which inherits the same columns configuration
+     * from the parent layout (ie. subgrid). This allows the menu
+     * to synchronize the indentation of all its items.
+     */
+    grid-template-columns: subgrid;
+  }
+}
+.item {
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--wp-components-color-foreground, var(--wpds-color-foreground-content-neutral));
+  border-radius: 2px;
+  padding-block: 4px;
+  padding-inline: 12px;
+  /*
+   * Make sure that, when an item is scrolled into view (eg. while using the
+   * keyboard to move focus), the whole item comes into view
+   */
+  scroll-margin: 4px;
+  user-select: none;
+  outline: none;
+}
+.item[aria-disabled=true] {
+  color: var(--wpds-color-foreground-interactive-neutral-disabled);
+}
+.item {
+  /* Active item (including hover) */
+}
+.item[data-active-item]:not([data-focus-visible]):not([aria-disabled=true]) {
+  background-color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+  color: var(--wp-components-color-accent-inverted, var(--wpds-color-foreground-interactive-brand-strong));
+}
+.item {
+  /* Keyboard focus (focus-visible) */
+}
+.item[data-focus-visible] {
+  box-shadow: 0 0 0 1.5px var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+  /* Only visible in Windows High Contrast mode */
+  outline: 2px solid transparent;
+}
+.item {
+  /* When the item is the trigger of an open submenu */
+}
+.menu:not(:focus) .item:not(:focus)[aria-expanded=true] {
+  background-color: var(--wp-components-color-gray-100, var(--wpds-color-background-surface-neutral));
+  color: var(--wp-components-color-foreground, var(--wpds-color-foreground-content-neutral));
+}
+.item svg {
+  fill: currentColor;
+}
+
+.item-prefix-wrapper {
+  /* Always occupy the first column, even when auto-collapsing */
+  grid-column: 1;
+  /*
+   * Even when the item is not checked, occupy the same screen space to avoid
+   * the space collapside when no items are checked.
+   */
+}
+.checkbox-item > .item-prefix-wrapper, .radio-item > .item-prefix-wrapper {
+  /* Same width as the check icons */
+  min-width: 24px;
+}
+.checkbox-item > .item-prefix-wrapper, .radio-item > .item-prefix-wrapper, .item-prefix-wrapper:not(:empty) {
+  margin-inline-end: 8px;
+}
+.item-prefix-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wp-components-color-gray-700, var(--wpds-color-foreground-content-neutral-weak));
+  /*
+  * When the parent menu item is active, except when it's a non-focused/hovered
+  * submenu trigger (in that case, color should not be inherited)
+  */
+}
+[data-active-item]:not([data-focus-visible]) > .item-prefix-wrapper, [aria-disabled=true] > .item-prefix-wrapper {
+  color: inherit;
+}
+
+.item-content-wrapper {
+  /*
+   * Always occupy the second column, since the first column
+   * is taken by the prefix wrapper (when displayed).
+   */
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.item-children-wrapper {
+  flex: 1;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.item-suffix-wrapper {
+  flex: 0 1 fit-content;
+  min-width: 0;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--wp-components-color-gray-700, var(--wpds-color-foreground-content-neutral-weak));
+  /*
+   * When the parent menu item is active, except when it's a non-focused/hovered
+   * submenu trigger (in that case, color should not be inherited)
+   */
+}
+[data-active-item]:not([data-focus-visible]) *:not(.menu) .item-suffix-wrapper, [aria-disabled=true] *:not(.menu) .item-suffix-wrapper {
+  color: inherit;
+}
+
+.group {
+  /* Ignore this element when calculating the layout. Useful for subgrid */
+  display: contents;
+}
+
+.group-label {
+  /* Occupy the width of all grid columns (ie. full width) */
+  grid-column: 1/-1;
+  padding-block-start: 12px;
+  padding-block-end: 8px;
+  padding-inline: 12px;
+}
+
+.separator {
+  /* Occupy the width of all grid columns (ie. full width) */
+  grid-column: 1/-1;
+  border: none;
+  height: 1px;
+  background-color: var(--wp-components-color-gray-200, var(--wpds-color-stroke-surface-neutral));
+  /* Align with menu items' content */
+  margin-block: 8px;
+  margin-inline: 12px;
+  /* Only visible in Windows High Contrast mode */
+  outline: 2px solid transparent;
+}
+.separator:where(.is-toolbar) {
+  background-color: var(--wp-components-color-foreground, var(--wpds-color-foreground-content-neutral));
+}
+
+.submenu-chevron-icon {
+  width: 6px;
+  transform: scaleX(1);
+}
+.submenu-chevron-icon:where(.is-rtl) {
+  transform: scaleX(-1);
+}
+
+.item-label {
+  font-size: 13px;
+  line-height: 20px;
+  color: inherit;
+}
+
+.item-help-text {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--wp-components-color-gray-700, var(--wpds-color-foreground-content-neutral-weak));
+  overflow-wrap: anywhere;
+}
+[data-active-item]:not([data-focus-visible]) *:not(.menu) .item-help-text, [aria-disabled=true] *:not(.menu) .item-help-text {
+  color: inherit;
+}

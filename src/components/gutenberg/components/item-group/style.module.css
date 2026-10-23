@@ -1,0 +1,172 @@
+/**
+ * Typography
+ */
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+/**
+ * Breakpoints & Media Queries
+ */
+/**
+*  Converts a hex value into the rgb equivalent.
+*
+* @param {string} hex - the hexadecimal value to convert
+* @return {string} comma separated rgb values
+*/
+/**
+ * Long content fade mixin
+ *
+ * Creates a fading overlay to signify that the content is longer
+ * than the space allows.
+ */
+/**
+ * Breakpoint mixins
+ */
+/**
+ * Focus styles.
+ */
+/**
+ * Standard focus rings for the WordPress Design System.
+ *
+ * Apply `outset-ring__focus` inside the relevant pseudo-class at the call site,
+ * e.g. `&:focus { @include outset-ring__focus(); }`.
+ */
+/**
+ * Applies editor left position to the selector passed as argument
+ */
+/**
+ * Styles that are reused verbatim in a few places
+ */
+/**
+ * Allows users to opt-out of animations via OS-level preferences.
+ */
+/**
+ * Reset default styles for JavaScript UI based pages.
+ * This is a WP-admin agnostic reset
+ */
+/**
+ * Reset the WP Admin page styles for Gutenberg-like pages.
+ */
+/**
+ * Creates a checkerboard pattern background to indicate transparency.
+ * @param {String} $size - The size of the squares in the checkerboard pattern. Default is 12px.
+ */
+/*
+ * Math:
+ * - Use the desired height as the base value
+ * - Subtract the computed height of (default) text
+ * - Subtract the effects of border
+ * - Divide the calculated number by 2, in order to get an individual top/bottom padding
+ */
+.item-group.is-bordered {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.item-group.is-separated > *:not(marquee) > * {
+  border-block-end: 1px solid rgba(0, 0, 0, 0.1);
+}
+.item-group.is-separated > *:last-of-type > * {
+  border-block-end-color: transparent;
+}
+.item-group.is-rounded {
+  border-radius: var(--wpds-border-radius-sm);
+}
+.item-group.is-rounded > *:first-of-type > * {
+  border-start-start-radius: var(--wpds-border-radius-sm);
+  border-start-end-radius: var(--wpds-border-radius-sm);
+}
+.item-group.is-rounded > *:last-of-type > * {
+  border-end-start-radius: var(--wpds-border-radius-sm);
+  border-end-end-radius: var(--wpds-border-radius-sm);
+}
+
+.item-wrapper {
+  width: 100%;
+  display: block;
+}
+
+.item {
+  box-sizing: border-box;
+  width: 100%;
+  display: block;
+  margin: 0;
+  color: inherit;
+}
+.item.is-unstyled-button, .item.is-unstyled-link {
+  font-size: 13px;
+  font-family: inherit;
+  appearance: none;
+  border: 1px solid transparent;
+  cursor: var(--wpds-cursor-control);
+  background: none;
+  text-align: start;
+}
+.item.is-unstyled-button svg, .item.is-unstyled-link svg {
+  fill: currentColor;
+}
+.item.is-unstyled-button:hover, .item.is-unstyled-link:hover {
+  color: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+}
+.item.is-unstyled-button:focus, .item.is-unstyled-link:focus {
+  box-shadow: none;
+}
+.item.is-unstyled-button:focus-visible, .item.is-unstyled-link:focus-visible {
+  outline: var(--wpds-border-width-focus, var(--wp-admin-border-width-focus, 2px)) solid var(--focus-color, var(--wpds-color-stroke-focus, var(--wp-admin-theme-color, #3858e9)));
+  outline-offset: var(--wpds-border-width-focus, var(--wp-admin-border-width-focus, 2px));
+}
+.item.is-unstyled-link {
+  text-decoration: none;
+}
+.item.is-spaced-around {
+  border-radius: var(--wpds-border-radius-sm);
+}
+.item.is-size-small {
+  padding: calc((36px * 0.8 - 18.2px - 2px) / 2) 8px;
+}
+.item.is-size-medium {
+  padding: calc((36px - 18.2px - 2px) / 2) 12px;
+}
+.item.is-size-large {
+  padding: calc((36px * 1.2 - 18.2px - 2px) / 2) 16.0008px;
+}

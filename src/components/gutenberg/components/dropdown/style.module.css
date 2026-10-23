@@ -1,0 +1,67 @@
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+.content-wrapper {
+  /* stylelint-disable logical-css/require-logical-properties -- Preserve the previous physical offsets against Popover padding. */
+  margin-left: -8px;
+  margin-right: -8px;
+}
+.content-wrapper:first-of-type {
+  margin-top: -8px;
+}
+.content-wrapper:last-of-type {
+  margin-bottom: -8px;
+}
+.content-wrapper {
+  /* stylelint-enable logical-css/require-logical-properties */
+}
+
+.padding-small {
+  padding: 8px;
+}
+
+.padding-medium {
+  padding: 16px;
+}

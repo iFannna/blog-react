@@ -1,0 +1,276 @@
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+.border {
+  border-color: var(--wpds-color-stroke-interactive-neutral);
+}
+.container:hover .border:not(.is-disabled, .is-borderless) {
+  border-color: var(--wpds-color-stroke-interactive-neutral-active);
+}
+
+.border.is-disabled:not(.is-borderless) {
+  border-color: var(--wpds-color-stroke-interactive-neutral-disabled);
+}
+@media (forced-colors: active) {
+  .border.is-disabled:not(.is-borderless) {
+    border-color: GrayText;
+  }
+}
+
+.border.is-borderless {
+  border-color: transparent;
+}
+
+.root {
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 2px;
+  padding-block-start: 0;
+}
+
+.container {
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: inherit;
+  display: flex;
+  flex: 1;
+  position: relative;
+  background-color: var(--wp-components-color-background, var(--wpds-color-background-surface-neutral-strong));
+}
+.container:where(.is-disabled) {
+  color: var(--wpds-color-foreground-interactive-neutral-disabled);
+}
+@media (forced-colors: active) {
+  .container:where(.is-disabled) {
+    color: GrayText;
+  }
+}
+.container:where(.full-width) {
+  width: 100%;
+}
+.container:where(.custom-width) {
+  width: var(--_wp-components-input-control-width);
+}
+.container:where(.edge-width) {
+  flex: 0 0 var(--_wp-components-input-control-width);
+}
+
+.container:where(.width-inherit) {
+  width: inherit;
+}
+
+.container:where(.width-initial) {
+  width: initial;
+}
+
+.container:where(.width-revert) {
+  width: revert;
+}
+
+.container:where(.width-revert-layer) {
+  width: revert-layer;
+}
+
+.container:where(.width-unset) {
+  width: unset;
+}
+
+.prefix {
+  box-sizing: border-box;
+  display: block;
+}
+
+.suffix {
+  align-items: center;
+  align-self: stretch;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.backdrop.backdrop.backdrop {
+  box-sizing: border-box;
+  border-radius: inherit;
+  border-style: solid;
+  border-width: 1px;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.input.input.input {
+  --_wp-components-input-control-padding: 12px;
+  background-color: transparent;
+  box-sizing: border-box;
+  border: none;
+  box-shadow: none !important;
+  color: var(--wp-components-color-foreground, var(--wpds-color-foreground-content-neutral));
+  display: block;
+  font-family: inherit;
+  font-size: 16px;
+  margin: 0;
+  outline: none;
+  width: 100%;
+  height: 40px;
+  min-height: 40px;
+  line-height: 1;
+}
+@media (min-width: 600px) {
+  .input.input.input {
+    font-size: 13px;
+  }
+}
+.input.input.input:where(.is-small) {
+  height: 24px;
+  min-height: 24px;
+  --_wp-components-input-control-padding: 8px;
+}
+@media (min-width: 600px) {
+  .input.input.input:where(.is-small) {
+    font-size: 11px;
+  }
+}
+.input.input.input:where(.is-compact) {
+  height: 32px;
+  min-height: 32px;
+  --_wp-components-input-control-padding: 8px;
+}
+.input.input.input {
+  padding-inline-start: var(--_wp-components-input-control-padding-start, var(--_wp-components-input-control-padding));
+  padding-inline-end: var(--_wp-components-input-control-padding-end, var(--_wp-components-input-control-padding));
+}
+.input.input.input:where(.is-dragging) {
+  cursor: var(--_wp-components-input-control-drag-cursor, auto);
+  user-select: none;
+}
+.input.input.input:where(.is-dragging)::-webkit-outer-spin-button, .input.input.input:where(.is-dragging)::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+.input.input.input:where(.has-drag-cursor):active {
+  cursor: var(--_wp-components-input-control-drag-cursor);
+}
+.input.input.input:where(:disabled) {
+  color: var(--wpds-color-foreground-interactive-neutral-disabled);
+}
+@media (forced-colors: active) {
+  .input.input.input:where(:disabled) {
+    color: GrayText;
+  }
+}
+.input.input.input:disabled::placeholder {
+  color: var(--wpds-color-foreground-interactive-neutral-disabled);
+}
+.input.input.input::-webkit-input-placeholder {
+  color: color-mix(in srgb, var(--wp-components-color-foreground, var(--wpds-color-foreground-content-neutral)), transparent 38%);
+}
+.input.input.input::-moz-placeholder {
+  color: color-mix(in srgb, var(--wp-components-color-foreground, var(--wpds-color-foreground-content-neutral)), transparent 38%);
+}
+.input.input.input:-ms-input-placeholder {
+  color: color-mix(in srgb, var(--wp-components-color-foreground, var(--wpds-color-foreground-content-neutral)), transparent 38%);
+}
+.input.input.input[type=date]::-webkit-datetime-edit, .input.input.input[type=datetime-local]::-webkit-datetime-edit, .input.input.input[type=month]::-webkit-datetime-edit, .input.input.input[type=time]::-webkit-datetime-edit, .input.input.input[type=week]::-webkit-datetime-edit {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+@supports (-webkit-hyphens: none) and (not (-moz-appearance: none)) {
+  .input.input.input[type=date][data-empty-value]:not(:focus), .input.input.input[type=time][data-empty-value]:not(:focus), .input.input.input[type=datetime-local][data-empty-value]:not(:focus) {
+    color: transparent;
+  }
+  .input.input.input[type=date][data-empty-value]:not(:focus):disabled::-webkit-datetime-edit-text, .input.input.input[type=time][data-empty-value]:not(:focus):disabled::-webkit-datetime-edit-text, .input.input.input[type=datetime-local][data-empty-value]:not(:focus):disabled::-webkit-datetime-edit-text {
+    color: transparent;
+  }
+}
+.input.input.input[type=email], .input.input.input[type=url] {
+  /* rtl:ignore */
+  direction: ltr;
+}
+
+.label.label.label {
+  font-size: 11px;
+  font-weight: var(--wpds-typography-font-weight-emphasis);
+  line-height: 1.4;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  display: block;
+  padding-block: 0;
+  max-width: 100%;
+  z-index: 1;
+}
+
+.label-wrapper.label-wrapper {
+  max-width: calc(100% - 10px);
+}
+
+.prefix-wrapper {
+  padding-inline-start: 12px;
+}
+.prefix-wrapper:where(.is-small, .is-compact) {
+  padding-inline-start: 8px;
+}
+.prefix-wrapper:where(.has-reduced-padding) {
+  display: flex;
+  padding-inline-start: 8px;
+}
+.prefix-wrapper:where(.has-reduced-padding):where(.is-small, .is-compact) {
+  padding-inline-start: 4px;
+}
+
+.suffix-wrapper {
+  padding-inline-end: 12px;
+}
+.suffix-wrapper:where(.is-small, .is-compact) {
+  padding-inline-end: 8px;
+}
+.suffix-wrapper:where(.has-reduced-padding) {
+  display: flex;
+  padding-inline-end: 8px;
+}
+.suffix-wrapper:where(.has-reduced-padding):where(.is-small, .is-compact) {
+  padding-inline-end: 4px;
+}

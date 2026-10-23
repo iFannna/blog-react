@@ -1,0 +1,79 @@
+/**
+ * SCSS Variables.
+ *
+ * Please use variables from this sheet to ensure consistency across the UI.
+ * Don't add to this sheet unless you're pretty sure the value will be reused in many places.
+ * For example, don't add rules to this sheet that affect block visuals. It's purely for UI.
+ */
+/**
+ * Colors
+ */
+/**
+ * Fonts & basic variables.
+ */
+/**
+ * Typography
+ */
+/**
+ * Grid System.
+ * https://make.wordpress.org/design/2019/10/31/proposal-a-consistent-spacing-system-for-wordpress/
+ */
+/**
+ * Radius scale.
+ */
+/**
+ * Elevation scale.
+ */
+/**
+ * Dimensions.
+ */
+/**
+ * Mobile specific styles
+ */
+/**
+ * Editor styles.
+ */
+/**
+ * Block & Editor UI.
+ */
+/**
+ * Block paddings.
+ */
+/**
+ * React Native specific.
+ * These variables do not appear to be used anywhere else.
+ */
+.wrapper {
+  box-sizing: border-box;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 13px;
+}
+.wrapper *,
+.wrapper *::before,
+.wrapper *::after {
+  box-sizing: inherit;
+}
+
+:global(.components-panel__row) .field {
+  margin-bottom: inherit;
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  padding: 0;
+  font-size: 11px;
+  font-weight: var(--wpds-typography-font-weight-emphasis);
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--wpds-color-foreground-content-neutral);
+}
+
+.help {
+  margin-top: 8px;
+  margin-bottom: 0;
+  font-size: 12px;
+  font-style: normal;
+  color: var(--wp-components-color-gray-700, var(--wpds-color-foreground-content-neutral-weak));
+  text-wrap: pretty;
+}
