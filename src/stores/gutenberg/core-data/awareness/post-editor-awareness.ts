@@ -1,6 +1,5 @@
 import { dispatch, select, subscribe } from '@/stores/gutenberg/data';
 import { Y } from '@/services/gutenberg/sync';
-// @ts-expect-error `@wordpress/block-editor` does not expose type declarations for its entry point.
 import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import { BaseAwarenessState, baseEqualityFieldChecks } from './base-awareness';
 import { isCollaboratorInfo } from './utils';
@@ -72,8 +71,8 @@ export class PostEditorAwareness extends BaseAwarenessState< PostEditorState > {
 
 		// Keep track of the current selection in the outer scope so we can compare
 		// in the subscription.
-		let selectionStart = getSelectionStart();
-		let selectionEnd = getSelectionEnd();
+		let selectionStart = getSelectionStart() as unknown as WPBlockSelection;
+		let selectionEnd = getSelectionEnd() as unknown as WPBlockSelection;
 		let localCursorTimeout: NodeJS.Timeout | null = null;
 
 		// During rapid selection changes (e.g. undo restoring content and
@@ -89,8 +88,8 @@ export class PostEditorAwareness extends BaseAwarenessState< PostEditorState > {
 		} | null = null;
 
 		subscribe( () => {
-			const newSelectionStart = getSelectionStart();
-			const newSelectionEnd = getSelectionEnd();
+			const newSelectionStart = getSelectionStart() as unknown as WPBlockSelection;
+			const newSelectionEnd = getSelectionEnd() as unknown as WPBlockSelection;
 
 			if (
 				newSelectionStart === selectionStart &&
@@ -118,7 +117,7 @@ export class PostEditorAwareness extends BaseAwarenessState< PostEditorState > {
 			void this.updateSelectionInEntityRecord(
 				selectionStart,
 				selectionEnd,
-				initialPosition
+				initialPosition as number | null
 			);
 
 			// We receive two selection changes in quick succession

@@ -1,5 +1,4 @@
 import { dispatch, select } from '@/stores/gutenberg/data';
-// @ts-expect-error No exported types.
 import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import { isUnmodifiedBlock } from '@/lib/gutenberg/blocks';
 import { type CRDTDoc, Y } from '@/services/gutenberg/sync';

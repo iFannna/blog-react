@@ -1,5 +1,4 @@
 import { __ } from '@/lib/gutenberg/i18n';
-// @ts-expect-error: Not typed yet.
 import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import { __experimentalText as WCText } from '@/components/gutenberg/ui';
 import BackgroundPanel from './background-panel';

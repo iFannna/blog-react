@@ -125,7 +125,7 @@ export function useHistory() {
 			await new Promise< void >( ( resolve ) => {
 				const classname = options.transition ?? '';
 				document.documentElement.classList.add( classname );
-				const transition = document.startViewTransition( () =>
+				const transition = document.startViewTransition!( () =>
 					performPush()
 				);
 				transition.finished.finally( () => {

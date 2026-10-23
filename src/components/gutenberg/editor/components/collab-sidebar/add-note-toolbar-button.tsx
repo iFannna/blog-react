@@ -3,7 +3,6 @@ import { __, _n, sprintf } from '@/lib/gutenberg/i18n';
 import {
 	privateApis as blockEditorPrivateApis,
 	store as blockEditorStore,
-	// @ts-expect-error `@wordpress/block-editor` has no type declarations.
 } from '@/components/gutenberg/block-editor';
 import { useSelect } from '@/stores/gutenberg/data';
 import { getUnregisteredTypeHandlerName } from '@/lib/gutenberg/blocks';

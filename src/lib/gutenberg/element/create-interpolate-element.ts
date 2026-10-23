@@ -138,7 +138,7 @@ function createInterpolateElement< Input extends InterpolationInput >(
 	stack = [];
 	tokenizer.lastIndex = 0;
 
-	if ( ! isValidConversionMap( conversionMap ) ) {
+	if ( ! isValidConversionMap( conversionMap as Record< string, ReactElement > ) ) {
 		throw new TypeError(
 			'The conversionMap provided is not valid. It must be an object with values that are React Elements'
 		);
@@ -146,7 +146,7 @@ function createInterpolateElement< Input extends InterpolationInput >(
 
 	do {
 		// twiddle our thumbs
-	} while ( proceed( conversionMap ) );
+	} while ( proceed( conversionMap as Record< string, ReactElement > ) );
 	return createElement( Fragment, null, ...output );
 }
 
@@ -167,7 +167,7 @@ const isValidConversionMap = (
 ): boolean => {
 	const isObject =
 		typeof conversionMap === 'object' && conversionMap !== null;
-	const values = isObject && Object.values( conversionMap );
+	const values = isObject ? Object.values( conversionMap ) : [];
 	return (
 		isObject &&
 		values.length > 0 &&
@@ -196,7 +196,7 @@ type TokenResult =
  */
 function proceed( conversionMap: Record< string, ReactElement > ): boolean {
 	const next = nextToken();
-	const [ tokenType, name, startOffset, tokenLength ] = next;
+	const [ tokenType, name, startOffset = 0, tokenLength = 0 ] = next;
 	const stackDepth = stack.length;
 	const leadingTextStart = startOffset > offset ? offset : null;
 	if ( name && ! conversionMap[ name ] ) {
@@ -207,8 +207,8 @@ function proceed( conversionMap: Record< string, ReactElement > ): boolean {
 		case 'no-more-tokens':
 			if ( stackDepth !== 0 ) {
 				const { leadingTextStart: stackLeadingText, tokenStart } =
-					stack.pop();
-				output.push( indoc.substr( stackLeadingText, tokenStart ) );
+					stack.pop()!;
+				output.push( indoc.substr( stackLeadingText ?? 0, tokenStart ) );
 			}
 			addText();
 			return false;
@@ -252,7 +252,7 @@ function proceed( conversionMap: Record< string, ReactElement > ): boolean {
 			// A closing tag with no matching opening tag on the stack is
 			// invalid. Warn and bail, keeping anything interpolated so far.
 			if ( 0 === stackDepth ) {
-				if ( globalThis.SCRIPT_DEBUG ) {
+				if ( ( globalThis as { SCRIPT_DEBUG?: boolean } ).SCRIPT_DEBUG ) {
 					// eslint-disable-next-line no-console
 					console.warn(
 						`Unmatched closing tag '</${ name }>' in createInterpolateElement. The rest of the string was not interpolated.`
@@ -271,10 +271,10 @@ function proceed( conversionMap: Record< string, ReactElement > ): boolean {
 
 			// Otherwise we're nested and we have to close out the current
 			// block and add it as a innerBlock to the parent.
-			const stackTop = stack.pop();
+			const stackTop = stack.pop()!;
 			const text = indoc.substr(
-				stackTop.prevOffset,
-				startOffset - stackTop.prevOffset
+				stackTop.prevOffset ?? startOffset,
+				startOffset - ( stackTop.prevOffset ?? startOffset )
 			);
 			stackTop.children.push( text );
 			stackTop.prevOffset = startOffset + tokenLength;
@@ -346,17 +346,17 @@ function addText(): void {
  */
 function addChild( frame: Frame ): void {
 	const { element, tokenStart, tokenLength, prevOffset, children } = frame;
-	const parent = stack[ stack.length - 1 ];
+	const parent = stack[ stack.length - 1 ]!;
 	const text = indoc.substr(
-		parent.prevOffset,
-		tokenStart - parent.prevOffset
+		parent.prevOffset ?? 0,
+		tokenStart - ( parent.prevOffset ?? 0 )
 	);
 
 	if ( text ) {
 		parent.children.push( text );
 	}
 
-	parent.children.push( cloneElement( element, null, ...children ) );
+	parent.children.push( cloneElement( element as any, {}, ...children ) );
 	parent.prevOffset = prevOffset ? prevOffset : tokenStart + tokenLength;
 }
 
@@ -373,8 +373,8 @@ function addChild( frame: Frame ): void {
  *                           the element.
  */
 function closeOuterElement( endOffset: number ): void {
-	const { element, leadingTextStart, prevOffset, tokenStart, children } =
-		stack.pop();
+	const { element, leadingTextStart, prevOffset = 0, tokenStart, children } =
+		stack.pop()!;
 
 	const text = endOffset
 		? indoc.substr( prevOffset, endOffset - prevOffset )
@@ -384,13 +384,13 @@ function closeOuterElement( endOffset: number ): void {
 		children.push( text );
 	}
 
-	if ( null !== leadingTextStart ) {
+	if ( null != leadingTextStart ) {
 		output.push(
 			indoc.substr( leadingTextStart, tokenStart - leadingTextStart )
 		);
 	}
 
-	output.push( cloneElement( element, null, ...children ) );
+	output.push( cloneElement( element as any, {}, ...children ) );
 }
 
 export default createInterpolateElement;

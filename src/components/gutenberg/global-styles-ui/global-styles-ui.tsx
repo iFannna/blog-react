@@ -1,7 +1,6 @@
 import { Navigator, useNavigator } from '@/components/gutenberg/ui';
 import { getBlockTypes, store as blocksStore } from '@/lib/gutenberg/blocks';
 import { useSelect } from '@/stores/gutenberg/data';
-// @ts-expect-error: Not typed yet.
 import { BlockEditorProvider } from '@/components/gutenberg/block-editor';
 import { useMemo, useEffect, Fragment } from '@/lib/gutenberg/element';
 import { usePrevious } from '@/hooks/gutenberg/compose';

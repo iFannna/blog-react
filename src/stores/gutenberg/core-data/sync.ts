@@ -375,12 +375,12 @@ export function createDefaultEntitySyncManager(
 			}
 
 			return {
-				undo: ( kind, name, recordId ) =>
+				undo: ( kind: string, name: string, recordId: string | number ) =>
 					undoManager.undo(
 						`${ kind }/${ name }`,
 						toObjectId( recordId )
 					),
-				redo: ( kind, name, recordId ) =>
+				redo: ( kind: string, name: string, recordId: string | number ) =>
 					undoManager.redo(
 						`${ kind }/${ name }`,
 						toObjectId( recordId )

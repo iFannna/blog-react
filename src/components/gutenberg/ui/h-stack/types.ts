@@ -23,6 +23,14 @@ export type Alignments = Record< HStackAlignment, AlignmentProps >;
 
 export type Props = Omit< FlexProps, 'align' | 'gap' > & {
 	/**
+	 * Deprecated alias for `alignment`, forwarded to Flex.
+	 */
+	align?: FlexProps[ 'align' ];
+	/**
+	 * Deprecated alias for `spacing`, forwarded to Flex.
+	 */
+	gap?: FlexProps[ 'gap' ];
+	/**
 	 * Determines how the child elements are aligned.
 	 *
 	 * * `top`: Aligns content to the top.

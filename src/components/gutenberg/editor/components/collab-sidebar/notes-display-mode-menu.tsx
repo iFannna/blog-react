@@ -1,5 +1,4 @@
 import { speak } from '@/utils/gutenberg/a11y';
-// @ts-expect-error - No type declarations available for @wordpress/block-editor
 import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import { __experimentalUseSlot as useSlot } from '@/components/gutenberg/ui';
 import { useViewportMatch } from '@/hooks/gutenberg/compose';

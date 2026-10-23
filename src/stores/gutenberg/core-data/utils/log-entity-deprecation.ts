@@ -25,7 +25,9 @@ export default function logEntityDeprecation(
 		isShorthandSelector?: boolean;
 	} = {}
 ) {
-	const deprecation = deprecatedEntities[ kind ]?.[ name ];
+	const deprecation = ( deprecatedEntities as Record< string, any > )[ kind ]?.[
+		name
+	];
 	if ( ! deprecation ) {
 		return;
 	}

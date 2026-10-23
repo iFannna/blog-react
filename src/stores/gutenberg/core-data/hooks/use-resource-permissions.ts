@@ -135,7 +135,7 @@ function useResourcePermissions< IdType = void >(
 	}
 
 	return useQuerySelect(
-		( resolve ) => {
+		( resolve: ( store: any ) => any ) => {
 			const hasId = isEntity ? !! resource.id : !! id;
 			const { canUser } = resolve( coreStore );
 			const collectionResource = isEntity

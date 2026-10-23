@@ -5,7 +5,6 @@ import { useSelect } from '@/stores/gutenberg/data';
 import {
 	privateApis as blockEditorPrivateApis,
 	store as blockEditorStore,
-	// @ts-expect-error No exported types
 } from '@/components/gutenberg/block-editor';
 import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { unlock } from '../lock-unlock';
@@ -74,7 +73,10 @@ export default function EditOriginalInspectorButton( {
 							__next40pxDefaultSize
 							variant="secondary"
 							onClick={ () =>
-								onNavigateToEntityRecord( { postId, postType } )
+								( onNavigateToEntityRecord as any )( {
+									postId,
+									postType,
+								} )
 							}
 							accessibleWhenDisabled
 							disabled={ ! postId }

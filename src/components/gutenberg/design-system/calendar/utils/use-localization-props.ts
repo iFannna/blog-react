@@ -10,7 +10,11 @@ type IntlLocaleWithInfo = Intl.Locale & {
 };
 
 function isLocaleRTL( locale: IntlLocaleWithInfo ) {
-	const direction = ( locale.getTextInfo?.() ?? locale.textInfo )?.direction;
+	const direction = (
+		( locale as IntlLocaleWithInfo & {
+			getTextInfo?: () => { direction?: string };
+		} ).getTextInfo?.() ?? locale.textInfo
+	)?.direction;
 	if ( direction ) {
 		return direction === 'rtl';
 	}

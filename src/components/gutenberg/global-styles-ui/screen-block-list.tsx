@@ -25,7 +25,6 @@ import type { GlobalStylesConfig } from '@/lib/gutenberg/global-styles-engine';
 import {
 	BlockIcon,
 	privateApis as blockEditorPrivateApis,
-	// @ts-expect-error: Not typed yet.
 } from '@/components/gutenberg/block-editor';
 import { useDebounce } from '@/hooks/gutenberg/compose';
 import { speak } from '@/utils/gutenberg/a11y';

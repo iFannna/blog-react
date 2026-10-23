@@ -39,7 +39,7 @@ export const getBlockPatternsForPostType = createRegistrySelector(
 				select( STORE_NAME )
 					.getBlockPatterns()
 					.filter(
-						( { postTypes } ) =>
+						( { postTypes }: { postTypes?: string[] } ) =>
 							! postTypes ||
 							( Array.isArray( postTypes ) &&
 								postTypes.includes( postType ) )
@@ -216,7 +216,7 @@ export const getTemplateId = createRegistrySelector(
 				return;
 			}
 			const id = templates.find(
-				( { slug } ) => slug === 'front-page'
+				( { slug }: { slug: string } ) => slug === 'front-page'
 			)?.id;
 			if ( id ) {
 				return id;
@@ -247,7 +247,7 @@ export const getTemplateId = createRegistrySelector(
 				.getEntityRecords( 'postType', 'wp_template', {
 					per_page: -1,
 				} )
-				?.find( ( { slug } ) => slug === currentTemplateSlug );
+				?.find( ( { slug }: { slug: string } ) => slug === currentTemplateSlug );
 			if ( currentTemplate ) {
 				return currentTemplate.id;
 			}

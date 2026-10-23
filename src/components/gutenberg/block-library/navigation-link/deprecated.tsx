@@ -1,4 +1,3 @@
-// @ts-expect-error `@wordpress/block-editor` does not expose type declarations for its entry point.
 import { InnerBlocks } from '@/components/gutenberg/block-editor';
 
 type NavigationLinkDeprecatedAttributes = {
@@ -50,7 +49,8 @@ const deprecated = [
 		},
 
 		save() {
-			return <InnerBlocks.Content />;
+			const InnerBlocksContent = ( InnerBlocks as any ).Content;
+			return <InnerBlocksContent />;
 		},
 	},
 ];

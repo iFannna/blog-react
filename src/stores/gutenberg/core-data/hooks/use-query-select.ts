@@ -67,9 +67,12 @@ interface QuerySelectResponse< Data > {
  *
  * @return {QuerySelectResponse} Queried data.
  */
-export default function useQuerySelect( mapQuerySelect, deps ) {
+export default function useQuerySelect(
+	mapQuerySelect: ( resolve: ( store: any ) => any, registry: any ) => any,
+	deps: any[]
+) {
 	return useSelect( ( select, registry ) => {
-		const resolve = ( store ) => enrichSelectors( select( store ) );
+		const resolve = ( store: any ) => enrichSelectors( select( store ) );
 		return mapQuerySelect( resolve, registry );
 	}, deps );
 }

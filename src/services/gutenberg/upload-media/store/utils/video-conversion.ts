@@ -85,36 +85,38 @@ export function isConversionTimeoutError( error: unknown ): boolean {
 	);
 }
 
+type VideoConversionWorkerModule = {
+	convertGifToVideo: typeof import( '@/utils/gutenberg/video-conversion' )[ 'convertGifToVideo' ];
+	cancelGifToVideoOperations: ( id: QueueItemId ) => Promise< boolean >;
+	terminateVideoConversionWorker: () => void;
+};
+
 /**
  * Cached dynamic import promise for `@wordpress/video-conversion/worker`.
  *
  * Using a dynamic import keeps the worker module out of the main bundle; it
  * is fetched only when GIF-to-video conversion is actually triggered.
  */
-let videoConversionModulePromise:
-	| Promise< typeof import( '@/utils/gutenberg/video-conversion/worker' ) >
-	| undefined;
+let videoConversionModulePromise: Promise< VideoConversionWorkerModule > | undefined;
 
 /**
  * The resolved module reference, available synchronously after first load.
  */
-let videoConversionModule:
-	typeof import( '@/utils/gutenberg/video-conversion/worker' ) | undefined;
+let videoConversionModule: VideoConversionWorkerModule | undefined;
 
 /**
  * Lazily loads and caches the `@wordpress/video-conversion/worker` module.
  *
  * @return The video conversion worker module.
  */
-function loadVideoConversionModule(): Promise<
-	typeof import( '@/utils/gutenberg/video-conversion/worker' )
-> {
+function loadVideoConversionModule(): Promise< VideoConversionWorkerModule > {
 	if ( ! videoConversionModulePromise ) {
 		videoConversionModulePromise =
 			import( '@/utils/gutenberg/video-conversion/worker' )
 				.then( ( mod ) => {
-					videoConversionModule = mod;
-					return mod;
+					const api = mod as unknown as VideoConversionWorkerModule;
+					videoConversionModule = api;
+					return api;
 				} )
 				.catch( ( error ) => {
 					/*

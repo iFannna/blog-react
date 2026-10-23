@@ -155,7 +155,6 @@ export default function LinkPreview( {
 									<HStack
 										className="block-editor-link-control__preview-badges"
 										alignment="left"
-										// @ts-expect-error `HStack` takes `spacing`, so `gap` is overridden.
 										gap={ 1 }
 									>
 										{ value.badges!.map(

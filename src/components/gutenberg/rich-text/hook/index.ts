@@ -349,5 +349,5 @@ export function useDeprecatedRichText<
 	deprecated( '`__unstableUseRichText` hook', {
 		since: '7.0',
 	} );
-	return useRichTextBase( props as RichTextBaseProps );
+	return useRichTextBase( props as unknown as RichTextBaseProps );
 }

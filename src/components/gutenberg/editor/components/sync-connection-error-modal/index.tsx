@@ -5,7 +5,6 @@ import {
 	store as coreDataStore,
 	privateApis as coreDataPrivateApis,
 } from '@/stores/gutenberg/core-data';
-// @ts-expect-error - No type declarations available for @wordpress/block-editor
 // prettier-ignore
 import { privateApis, store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import {

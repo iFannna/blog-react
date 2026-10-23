@@ -70,7 +70,7 @@ interface VipsResizeOptions {
  * Media uploads are mocked here, so every image operation rejects instead
  * of loading the worker.
  */
-const unavailable = () =>
+const unavailable = ( ..._args: any[] ): Promise< any > =>
 	Promise.reject(
 		new Error( 'Image processing is not available in this demo.' )
 	);

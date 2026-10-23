@@ -95,9 +95,10 @@ function hasValidAvatarUrls(
 		return false;
 	}
 
-	return [ '24', '48', '96' ].every(
-		( size ) => ! ( size in value ) || 'string' === typeof value[ size ]
-	);
+	return [ '24', '48', '96' ].every( ( size ) => {
+		const record = value as Record< string, unknown >;
+		return ! ( size in record ) || 'string' === typeof record[ size ];
+	} );
 }
 
 /**

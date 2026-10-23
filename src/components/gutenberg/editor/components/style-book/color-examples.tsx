@@ -3,7 +3,6 @@ import { __experimentalGrid as Grid } from '@/components/gutenberg/ui';
 import {
 	getColorClassName,
 	__experimentalGetGradientClass,
-	// @ts-expect-error `@wordpress/block-editor` does not expose type declarations for its entry point.
 } from '@/components/gutenberg/block-editor';
 import type { Color, Gradient, ColorExampleProps } from './types';
 

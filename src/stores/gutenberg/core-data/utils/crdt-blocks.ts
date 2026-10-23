@@ -621,7 +621,9 @@ export function mergeCrdtBlocks(
 					default:
 						if (
 							! fastDeepEqual(
-								incomingYBlock[ incomingBlockProperty ],
+								( incomingYBlock as Record< string, any > )[
+									incomingBlockProperty
+								],
 								localYBlock.get( incomingBlockProperty )
 							)
 						) {

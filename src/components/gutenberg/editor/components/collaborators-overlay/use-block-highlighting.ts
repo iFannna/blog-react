@@ -4,7 +4,6 @@ import {
 	type PostEditorAwarenessState as ActiveCollaborator,
 	type SelectionEndpoint,
 } from '@/stores/gutenberg/core-data';
-// @ts-expect-error - No type declarations available for @wordpress/block-editor
 // prettier-ignore
 import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import { useEffect, useRef, useState } from '@/lib/gutenberg/element';

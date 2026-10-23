@@ -8,7 +8,6 @@ import {
 	shadow as shadowIcon,
 } from '@/components/gutenberg/icons';
 import { __ } from '@/lib/gutenberg/i18n';
-// @ts-expect-error: Not typed yet.
 import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import type { GlobalStylesSettings } from '@/lib/gutenberg/global-styles-engine';
 import { NavigationButtonAsItem } from './navigation-button';

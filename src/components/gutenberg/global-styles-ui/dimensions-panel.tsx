@@ -1,4 +1,3 @@
-// @ts-expect-error: Not typed yet.
 import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import { useMemo } from '@/lib/gutenberg/element';
 import { useStyle, useSetting } from './hooks';

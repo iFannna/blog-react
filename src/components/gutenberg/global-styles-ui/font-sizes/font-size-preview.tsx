@@ -1,4 +1,3 @@
-// @ts-expect-error: Not typed yet.
 import { getComputedFluidTypographyValue } from '@/components/gutenberg/block-editor';
 import { __ } from '@/lib/gutenberg/i18n';
 import type { FontSize } from '@/lib/gutenberg/global-styles-engine';
@@ -23,12 +22,12 @@ function FontSizePreview( { fontSize }: FontSizePreviewProps ) {
 					fontSize: fontSize.size,
 				};
 
-	const computedFontSize = getComputedFluidTypographyValue( input );
+	const computedFontSize = getComputedFluidTypographyValue( input as any );
 	return (
 		<div
 			className="global-styles-ui-typography-preview"
 			style={ {
-				fontSize: computedFontSize,
+				fontSize: computedFontSize as any,
 				fontFamily: font?.fontFamily ?? 'serif',
 			} }
 		>

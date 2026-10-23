@@ -10,7 +10,6 @@ import {
 } from '@/components/gutenberg/ui';
 import { isRTL, __ } from '@/lib/gutenberg/i18n';
 import { chevronRight, chevronLeft } from '@/components/gutenberg/icons';
-// @ts-expect-error: Not typed yet.
 import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import type { StateDefinition } from './utils';
 import { unlock } from './lock-unlock';

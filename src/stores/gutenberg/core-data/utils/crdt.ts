@@ -145,7 +145,7 @@ export function applyPostChangesToCRDTDoc(
 			return;
 		}
 
-		const newValue = changes[ key ];
+		const newValue = ( changes as Record< string, any > )[ key ];
 
 		// Cannot serialize function values, so cannot sync them. `content` is
 		// often passed as a lazy serializer by `useEntityBlockEditor`; the
@@ -391,7 +391,7 @@ export function getPostChangesFromCRDTDoc(
 				return false;
 			}
 
-			const currentValue = editedRecord[ key ];
+			const currentValue = ( editedRecord as Record< string, any > )[ key ];
 
 			switch ( key ) {
 				case 'blocks': {

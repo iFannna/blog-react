@@ -1,6 +1,5 @@
 import { __ } from '@/lib/gutenberg/i18n';
 import { ExternalLink } from '@/components/gutenberg/ui';
-// @ts-expect-error: Not typed yet.
 import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import { ScreenHeader } from './screen-header';
 import { useStyle } from './hooks';

@@ -1,7 +1,6 @@
 import { __, sprintf } from '@/lib/gutenberg/i18n';
 import { useMemo, useState } from '@/lib/gutenberg/element';
 import { PanelBody, useNavigator } from '@/components/gutenberg/ui';
-// @ts-expect-error: Not typed yet.
 import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import type {
 	GlobalStylesSettings,

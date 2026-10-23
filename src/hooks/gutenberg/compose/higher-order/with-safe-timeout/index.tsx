@@ -14,8 +14,11 @@ import { createHigherOrderComponent } from '../../utils/create-higher-order-comp
  * `setTimeout` only accepts a function (not a string) and an optional delay.
  */
 interface TimeoutProps {
-	setTimeout: ( fn: () => void, delay: number ) => number;
-	clearTimeout: ( id: number ) => void;
+	setTimeout: (
+		fn: () => void,
+		delay: number
+	) => ReturnType< typeof setTimeout >;
+	clearTimeout: ( id: ReturnType< typeof setTimeout > ) => void;
 }
 
 /**
@@ -28,7 +31,7 @@ const withSafeTimeout = createHigherOrderComponent(
 	) => {
 		type WrappedProps = WithoutInjectedProps< C, TimeoutProps >;
 		return class WrappedComponent extends Component< WrappedProps > {
-			timeouts: number[];
+			timeouts: ReturnType< typeof setTimeout >[];
 
 			constructor( props: WrappedProps ) {
 				super( props );
@@ -50,7 +53,7 @@ const withSafeTimeout = createHigherOrderComponent(
 				return id;
 			}
 
-			clearTimeout( id: number ) {
+			clearTimeout( id: ReturnType< typeof setTimeout > ) {
 				clearTimeout( id );
 				this.timeouts = this.timeouts.filter(
 					( timeoutId ) => timeoutId !== id

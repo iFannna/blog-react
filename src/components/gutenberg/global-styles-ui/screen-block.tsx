@@ -1,5 +1,4 @@
 import { getBlockType } from '@/lib/gutenberg/blocks';
-// @ts-expect-error: Not typed yet.
 import { privateApis as blockEditorPrivateApis } from '@/components/gutenberg/block-editor';
 import { useContext, useMemo, useState } from '@/lib/gutenberg/element';
 import {

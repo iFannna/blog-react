@@ -7,7 +7,6 @@ import {
 	__unstableEditorStyles as EditorStyles,
 	store as blockEditorStore,
 	transformStyles,
-	// @ts-expect-error: Not typed yet.
 } from '@/components/gutenberg/block-editor';
 import { __unstableGeneratePreviewStateStyles as generatePreviewStateStyles } from '@/lib/gutenberg/global-styles-engine';
 import type { GlobalStylesStyles } from '@/lib/gutenberg/global-styles-engine';
@@ -104,7 +103,11 @@ export default function ElementPreview( {
 	}, [ stateStyles, element ] );
 
 	const editorStyles = useMemo(
-		() => [ ...( styles ?? [] ), { css: PREVIEW_CSS }, { css: stateCSS } ],
+		() => [
+			...( ( styles as any[] | undefined ) ?? [] ),
+			{ css: PREVIEW_CSS },
+			{ css: stateCSS },
+		],
 		[ styles, stateCSS ]
 	);
 

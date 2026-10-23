@@ -39,6 +39,7 @@ export interface State {
 	themeGlobalStyleRevisions: Record< number, Array< object > >;
 	undoManager: UndoManager;
 	undoManagerReference: Record< string, never >;
+	editsReference: number;
 	userPermissions: Record< string, boolean >;
 	users: UserState;
 	navigationFallbackId: EntityRecordKey;
@@ -428,14 +429,16 @@ export const getEntityRecord = ( <
 
 	if ( ! query || ! query._fields ) {
 		// If expecting a complete item, validate that completeness.
-		if ( ! queriedState.itemIsComplete[ context ]?.[ recordId ] ) {
+		if ( ! queriedState.itemIsComplete[ context as ET.Context ]?.[ recordId as number ] ) {
 			return undefined;
 		}
 
-		return queriedState.items[ context ][ recordId ];
+		return queriedState.items[ context as ET.Context ][
+			recordId as number
+		] as EntityRecord | undefined;
 	}
 
-	const item = queriedState.items[ context ]?.[ recordId ];
+	const item = queriedState.items[ context as ET.Context ]?.[ recordId as number ];
 	if ( ! item ) {
 		return item;
 	}
@@ -491,10 +494,10 @@ export function hasEntityRecord(
 
 	// If expecting a complete item, validate that completeness.
 	if ( ! query || ! query._fields ) {
-		return !! queriedState.itemIsComplete[ context ]?.[ recordId ];
+		return !! queriedState.itemIsComplete[ context as ET.Context ]?.[ recordId as number ];
 	}
 
-	const item = queriedState.items[ context ]?.[ recordId ];
+	const item = queriedState.items[ context as ET.Context ]?.[ recordId as number ];
 	if ( ! item ) {
 		return false;
 	}
@@ -510,7 +513,7 @@ export function hasEntityRecord(
 			if ( ! value || ! Object.hasOwn( value, part ) ) {
 				return false;
 			}
-			value = value[ part ];
+			value = ( value as any )[ part ];
 		}
 	}
 
@@ -567,16 +570,17 @@ export const getRawEntityRecord = createSelector(
 		// Because edits are the "raw" attribute values,
 		// we return those from record selectors to make rendering,
 		// comparisons, and joins with edits easier.
+		const recordValues = record as Record< string, any >;
 		return Object.fromEntries(
 			Object.keys( record ).map( ( key ) => {
 				if ( config.rawAttributes.includes( key ) ) {
-					const rawValue = record[ key ]?.raw;
+					const rawValue = recordValues[ key ]?.raw;
 					return [
 						key,
-						rawValue !== undefined ? rawValue : record[ key ],
+						rawValue !== undefined ? rawValue : recordValues[ key ],
 					];
 				}
-				return [ key, record[ key ] ];
+				return [ key, recordValues[ key ] ];
 			} )
 		) as EntityRecord;
 	},
@@ -591,10 +595,10 @@ export const getRawEntityRecord = createSelector(
 		return [
 			state.entities.config,
 			state.entities.records?.[ kind ]?.[ name ]?.queriedData?.items[
-				context
-			]?.[ recordId ],
+				context as ET.Context
+			]?.[ recordId as number ],
 			state.entities.records?.[ kind ]?.[ name ]?.queriedData
-				?.itemIsComplete[ context ]?.[ recordId ],
+				?.itemIsComplete[ context as ET.Context ]?.[ recordId as number ],
 		];
 	}
 );
@@ -852,7 +856,7 @@ export const __experimentalGetDirtyEntityRecords = createSelector(
 							// We avoid using primaryKey because it's transformed into a string
 							// when it's used as an object key.
 							key: entityRecord
-								? entityRecord[
+								? ( entityRecord as Record< string, any > )[
 										entityConfig.key || DEFAULT_ENTITY_KEY
 									]
 								: undefined,
@@ -905,7 +909,7 @@ export const __experimentalGetEntitiesBeingSaved = createSelector(
 							// We avoid using primaryKey because it's transformed into a string
 							// when it's used as an object key.
 							key: entityRecord
-								? entityRecord[
+								? ( entityRecord as Record< string, any > )[
 										entityConfig.key || DEFAULT_ENTITY_KEY
 									]
 								: undefined,
@@ -974,7 +978,7 @@ export const getEntityRecordNonTransientEdits = createSelector(
 		}
 		return Object.keys( edits ).reduce( ( acc, key ) => {
 			if ( ! transientEdits[ key ] ) {
-				acc[ key ] = edits[ key ];
+				( acc as Record< string, any > )[ key ] = edits[ key ];
 			}
 			return acc;
 		}, {} );
@@ -1061,10 +1065,10 @@ export const getEditedEntityRecord = createSelector(
 		return [
 			state.entities.config,
 			state.entities.records?.[ kind ]?.[ name ]?.queriedData.items[
-				context
-			]?.[ recordId ],
+				context as ET.Context
+			]?.[ recordId as number ],
 			state.entities.records?.[ kind ]?.[ name ]?.queriedData
-				.itemIsComplete[ context ]?.[ recordId ],
+				.itemIsComplete[ context as ET.Context ]?.[ recordId as number ],
 			state.entities.records?.[ kind ]?.[ name ]?.edits?.[
 				String( recordId )
 			],
@@ -1472,7 +1476,7 @@ export const hasFetchedAutosaves = createRegistrySelector(
  *
  * @return A value whose reference will change only when an edit occurs.
  */
-export function getReferenceByDistinctEdits( state ) {
+export function getReferenceByDistinctEdits( state: State ) {
 	return state.editsReference;
 }
 
@@ -1609,7 +1613,9 @@ export const getRevisions = (
 ): RevisionRecord[] | null => {
 	logEntityDeprecation( kind, name, 'getRevisions' );
 	const queriedStateRevisions =
-		state.entities.records?.[ kind ]?.[ name ]?.revisions?.[ recordKey ];
+		( state.entities.records?.[ kind ]?.[ name ]?.revisions as any )?.[
+			String( recordKey )
+		];
 	if ( ! queriedStateRevisions ) {
 		return null;
 	}
@@ -1642,7 +1648,9 @@ export function hasRevision(
 	query?: GetRecordsHttpQuery
 ): boolean {
 	const queriedState =
-		state.entities.records?.[ kind ]?.[ name ]?.revisions?.[ recordKey ];
+		( state.entities.records?.[ kind ]?.[ name ]?.revisions as any )?.[
+			String( recordKey )
+		];
 	if ( ! queriedState ) {
 		return false;
 	}
@@ -1666,7 +1674,7 @@ export function hasRevision(
 			if ( ! value || ! Object.hasOwn( value, part ) ) {
 				return false;
 			}
-			value = value[ part ];
+			value = ( value as any )[ part ];
 		}
 	}
 
@@ -1696,7 +1704,9 @@ export const getRevision = (
 ): RevisionRecord | Record< PropertyKey, never > | undefined => {
 	logEntityDeprecation( kind, name, 'getRevision' );
 	const queriedState =
-		state.entities.records?.[ kind ]?.[ name ]?.revisions?.[ recordKey ];
+		( state.entities.records?.[ kind ]?.[ name ]?.revisions as any )?.[
+			String( recordKey )
+		];
 
 	if ( ! queriedState ) {
 		return undefined;

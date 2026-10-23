@@ -1,4 +1,3 @@
-// @ts-expect-error: Not typed yet.
 import { BlockPreview } from '@/components/gutenberg/block-editor';
 import { getBlockType, getBlockFromExample } from '@/lib/gutenberg/blocks';
 import { __experimentalSpacer as Spacer } from '@/components/gutenberg/ui';
@@ -139,6 +138,8 @@ const BlockPreviewPanel = ( {
 					blocks={ blocks }
 					viewportWidth={ viewportWidth }
 					minHeight={ previewHeight }
+					__experimentalMinHeight={ undefined }
+					__experimentalPadding={ undefined }
 					additionalStyles={
 						//We want this CSS to be in sync with the one in InserterPreviewPanel.
 						[

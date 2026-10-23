@@ -45,8 +45,8 @@ export const inputEventsListener =
 			}
 		}
 
-		element.addEventListener( 'input', onInput );
+		element.addEventListener( 'input', onInput as EventListener );
 		return () => {
-			element.removeEventListener( 'input', onInput );
+			element.removeEventListener( 'input', onInput as EventListener );
 		};
 	};

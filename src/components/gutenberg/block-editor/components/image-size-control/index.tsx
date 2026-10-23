@@ -124,7 +124,6 @@ export default function ImageSizeControl( {
 			{ isResizable && (
 				<>
 					<HStack
-						// @ts-expect-error `HStack` passes `align` on to `Flex`.
 						align="baseline"
 						spacing="4"
 					>

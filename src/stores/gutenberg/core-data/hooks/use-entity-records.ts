@@ -54,7 +54,7 @@ interface EntityRecordsWithPermissionsResolution< RecordType > extends Omit<
 	records: WithPermissions< RecordType >[] | null;
 }
 
-const EMPTY_ARRAY = [];
+const EMPTY_ARRAY: any[] = [];
 
 /**
  * Resolves the specified entity records.

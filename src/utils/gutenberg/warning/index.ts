@@ -2,7 +2,7 @@ import { logged } from './utils';
 
 function isDev(): boolean {
 	// eslint-disable-next-line @wordpress/wp-global-usage
-	return globalThis.SCRIPT_DEBUG === true;
+	return ( globalThis as { SCRIPT_DEBUG?: boolean } ).SCRIPT_DEBUG === true;
 }
 
 /**

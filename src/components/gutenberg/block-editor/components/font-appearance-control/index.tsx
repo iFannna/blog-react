@@ -162,7 +162,7 @@ export default function FontAppearanceControl(
 							<Select.Item key={ item.value } value={ item }>
 								<Select.ItemLabel
 									className="components-font-appearance-control__option"
-									style={ item.style }
+									style={ item.style as any }
 								>
 									{ item.label }
 								</Select.ItemLabel>

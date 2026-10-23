@@ -155,7 +155,7 @@ export default function useEntityRecord< RecordType >(
 
 	const mutations = useMemo(
 		() => ( {
-			edit: ( record, editOptions: any = {} ) =>
+			edit: ( record: Record< string, any >, editOptions: any = {} ) =>
 				editEntityRecord( kind, name, recordId, record, editOptions ),
 			save: ( saveOptions: any = {} ) =>
 				saveEditedEntityRecord( kind, name, recordId, {
