@@ -20,23 +20,10 @@ export function GutenbergApp({ locale }: { locale: string }) {
     window.__experimentalDataViewsMediaModal = true;
 
     void (async () => {
-      const settingsModule = await import(
-        "@/lib/gutenberg/fixtures/settings.js"
+      const { bootGutenberg } = await import(
+        "@/services/gutenberg/bootstrap.js"
       );
-      const settings = settingsModule.default as typeof settingsModule.default & {
-        locale?: string;
-        isRTL?: boolean;
-      };
-
-      if (locale === "zh-CN") {
-        const { setupLocale } = await import("@/lib/gutenberg/locale/index.js");
-        setupLocale(settings);
-      } else {
-        settings.locale = "en_US";
-        settings.isRTL = false;
-      }
-
-      await import("@/services/gutenberg/bootstrap.js");
+      await bootGutenberg(locale);
     })().catch((error) => {
       window.__gutenbergBooted = false;
       console.error("Gutenberg editor failed to start:", error);
