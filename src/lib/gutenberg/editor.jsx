@@ -4,8 +4,8 @@ import settings from './fixtures/settings.js';
 import { installMockApi } from '@/services/gutenberg/mock/api.js';
 import { configureCanvasAssets } from '@/styles/gutenberg/canvas.js';
 import '@/styles/gutenberg/inline.js';
-import '@/styles/gutenberg/snapshot/index.js';
-import '@/styles/gutenberg/app.css';
+import '@/styles/gutenberg/compiled/index.js';
+import '@/styles/gutenberg/index.css';
 
 installMockApi( settings.locale );
 configureCanvasAssets( settings );

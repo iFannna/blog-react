@@ -1,4 +1,7 @@
-/* Local snapshot of the demo styles — do not edit. */
+/*
+ * Compiled Gutenberg styles used by the editor.
+ * This project has no Sass pipeline; these files are the editable style source.
+ */
 import './vendor/blockbase-ponyfill.css';
 import './vendor/design-tokens.css';
 import './vendor/components.css';

@@ -1,6 +1,6 @@
-import globalStylesCss from './snapshot/inline/global-styles.js';
-import formatLibraryCss from './snapshot/inline/format-library.js';
-import editPostInlineCss from './snapshot/inline/edit-post.js';
+import globalStylesCss from './compiled/inline/global-styles.js';
+import formatLibraryCss from './compiled/inline/format-library.js';
+import editPostInlineCss from './compiled/inline/edit-post.js';
 
 // WordPress prints these as identified <style> tags. The editor copies styles
 // with an id into the canvas iframe, so they must exist as strings at runtime.
