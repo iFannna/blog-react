@@ -12,7 +12,6 @@ import MoreMenuItem from './more-menu-item';
 import ModeSwitcher from '../mode-switcher';
 import MoreMenuPreferenceItem from './more-menu-preference-item';
 import MoreMenuSubmenu, { toMenuItems } from './more-menu-submenu';
-import NotesMoreMenuGroup from './notes-more-menu-group';
 import ToolsMoreMenuGroup from './tools-more-menu-group';
 import ViewMoreMenuGroup from './view-more-menu-group';
 import { store as editorStore } from '../../store';
@@ -115,7 +114,6 @@ export default function MoreMenu( { isRevisionMode = false } ) {
 						/>
 						<ViewMoreMenuGroup.Slot />
 					</MoreMenuSubmenu>
-					<NotesMoreMenuGroup.Slot />
 					<ActionItem.Slot
 						name="core/plugin-more-menu"
 						fillProps={ { as: MoreMenuItem } }
