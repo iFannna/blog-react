@@ -11,7 +11,7 @@ import { Stack, Tabs, VisuallyHidden } from '@/components/gutenberg/design-syste
 import { useViewportMatch } from '@/hooks/gutenberg/compose';
 import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import { store as coreStore } from '@/stores/gutenberg/core-data';
-import { NavigableRegion } from '@/components/gutenberg/admin-ui';
+import { NavigableRegion } from '@/components/gutenberg/interface';
 import {
 	createContext,
 	createPortal,

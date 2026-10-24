@@ -1,6 +1,6 @@
 import type { ForwardedRef } from 'react';
 import clsx from 'clsx';
-import { NavigableRegion } from '@/components/gutenberg/admin-ui';
+import NavigableRegion from '../navigable-region';
 import { forwardRef, useEffect } from '@/lib/gutenberg/element';
 import {
 	__unstableMotion as motion,

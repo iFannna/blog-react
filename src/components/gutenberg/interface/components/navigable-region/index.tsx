@@ -9,6 +9,8 @@ type NavigableRegionProps = {
 	className?: string;
 	ariaLabel: string;
 	as?: React.ElementType;
+	// Forwarded to the rendered element, so their types are open-ended.
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	[ key: string ]: any;
 };
 

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { getAdminThemeColors } from '@/components/gutenberg/admin-ui';
+import { getAdminThemeColors } from './admin-theme-colors';
 import {
 	AutosaveMonitor,
 	LocalAutosaveMonitor,
