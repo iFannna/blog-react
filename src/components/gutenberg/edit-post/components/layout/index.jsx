@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { NavigableRegion, getAdminThemeColors } from '@/components/gutenberg/admin-ui';
+import { getAdminThemeColors } from '@/components/gutenberg/admin-ui';
 import {
 	AutosaveMonitor,
 	LocalAutosaveMonitor,
@@ -14,14 +14,7 @@ import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import { getLayoutStyles } from '@/lib/gutenberg/global-styles-engine';
 import { PluginArea } from '@/lib/gutenberg/plugins';
 import { __, sprintf } from '@/lib/gutenberg/i18n';
-import {
-	useCallback,
-	useMemo,
-	useId,
-	useRef,
-	useState,
-} from '@/lib/gutenberg/element';
-import { chevronDown, chevronUp } from '@/components/gutenberg/icons';
+import { useCallback, useMemo } from '@/lib/gutenberg/element';
 import { SnackbarNotices, store as noticesStore } from '@/stores/gutenberg/notices';
 import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import { privateApis as commandsPrivateApis } from '@/lib/gutenberg/commands';
@@ -29,41 +22,24 @@ import { addQueryArgs } from '@/utils/gutenberg/url';
 import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { store as coreStore } from '@/stores/gutenberg/core-data';
 import {
-	Icon as WCIcon,
 	SlotFillProvider,
 	__unstableUseNavigateRegions as useNavigateRegions,
-	privateApis as componentsPrivateApis,
 } from '@/components/gutenberg/ui';
-import {
-	useMediaQuery,
-	useMergeRefs,
-	useRefEffect,
-} from '@/hooks/gutenberg/compose';
 import { ThemeProvider } from '@/lib/gutenberg/theme';
-import { Tooltip, VisuallyHidden } from '@/components/gutenberg/design-system';
+import { Tooltip } from '@/components/gutenberg/design-system';
 import EditorInitialization from '../editor-initialization';
 import EditPostKeyboardShortcuts from '../keyboard-shortcuts';
 import InitPatternModal from '../init-pattern-modal';
 import BrowserURL from '../browser-url';
-import MetaBoxes from '../meta-boxes';
 import PostEditorMoreMenu from '../more-menu';
 import { store as editPostStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 import useEditPostCommands from '../../commands/use-commands';
 import useNavigateToEntityRecord from '../../hooks/use-navigate-to-entity-record';
-import { useMetaBoxInitialization } from '../meta-boxes/use-meta-box-initialization';
 
 const { useCommandContext } = unlock( commandsPrivateApis );
-/** @type {{} & {useDrag: import('@use-gesture/react').useDrag}} */
-const { useDrag } = unlock( componentsPrivateApis );
 const { Editor, FullscreenMode, UploadProgressSnackbar } =
 	unlock( editorPrivateApis );
-const DESIGN_POST_TYPES = [
-	'wp_template',
-	'wp_template_part',
-	'wp_block',
-	'wp_navigation',
-];
 
 function useEditorStyles( settings ) {
 	const { hasThemeStyleSupport } = useSelect( ( select ) => {
@@ -114,235 +90,6 @@ function useEditorStyles( settings ) {
 	] );
 }
 
-function MetaBoxesMain() {
-	const [ isOpen, openHeight, hasAnyVisible ] = useSelect( ( select ) => {
-		const { get } = select( preferencesStore );
-		const { isMetaBoxLocationVisible } = select( editPostStore );
-		return [
-			!! get( 'core/edit-post', 'metaBoxesMainIsOpen' ),
-			get( 'core/edit-post', 'metaBoxesMainOpenHeight' ),
-			isMetaBoxLocationVisible( 'normal' ) ||
-				isMetaBoxLocationVisible( 'advanced' ) ||
-				isMetaBoxLocationVisible( 'side' ),
-		];
-	}, [] );
-	const { set: setPreference } = useDispatch( preferencesStore );
-
-	const isShort = useMediaQuery( '(max-height: 549px)' );
-
-	const [ { min = 0, max }, setHeightConstraints ] = useState( () => ( {} ) );
-	// Keeps the resizable area’s size constraints updated taking into account
-	// editor notices. The constraints are also used to derive the value for the
-	// aria-valuenow attribute on the separator.
-	const effectSizeConstraints = useRefEffect( ( node ) => {
-		const container = node.closest(
-			'.interface-interface-skeleton__content'
-		);
-		if ( ! container ) {
-			return;
-		}
-		const noticeContainer = container.querySelector( '.editor-notices' );
-		const resizeHandle = container.querySelector(
-			'.edit-post-meta-boxes-main__presenter'
-		);
-		const deriveConstraints = () => {
-			const fullHeight = container.offsetHeight;
-			let nextMax = fullHeight;
-			if ( noticeContainer ) {
-				nextMax -= noticeContainer.offsetHeight;
-			}
-			const nextMin = resizeHandle?.offsetHeight ?? 0;
-			setHeightConstraints( { min: nextMin, max: nextMax } );
-		};
-		const observer = new window.ResizeObserver( deriveConstraints );
-		observer.observe( container );
-		if ( noticeContainer ) {
-			observer.observe( noticeContainer );
-		}
-		return () => observer.disconnect();
-	}, [] );
-	const metaBoxesMainRef = useRef();
-	const setMainRefs = useMergeRefs( [
-		metaBoxesMainRef,
-		effectSizeConstraints,
-	] );
-
-	const separatorRef = useRef();
-	const separatorHelpId = useId();
-
-	const heightRef = useRef();
-
-	const getAriaValueNow = ( height ) =>
-		Math.round( ( ( height - min ) / ( max - min ) ) * 100 );
-	const persistIsOpen = ( to = ! isOpen ) =>
-		setPreference( 'core/edit-post', 'metaBoxesMainIsOpen', to );
-
-	/**
-	 * @param {number|'auto'} [candidateHeight] Height in pixels or 'auto'.
-	 * @param {boolean}       isPersistent      Whether to persist the height in preferences.
-	 */
-	const applyHeight = ( candidateHeight = 'auto', isPersistent ) => {
-		let styleHeight;
-		if ( candidateHeight === 'auto' ) {
-			isPersistent = false; // Just in case — “auto” should never persist.
-			styleHeight = candidateHeight;
-		} else {
-			candidateHeight = Math.min( max, Math.max( min, candidateHeight ) );
-			heightRef.current = candidateHeight;
-			styleHeight = `${ candidateHeight }px`;
-		}
-		if ( isPersistent ) {
-			setPreference(
-				'core/edit-post',
-				'metaBoxesMainOpenHeight',
-				candidateHeight
-			);
-		}
-		// Applies imperative DOM updates only when not persisting the value
-		// because otherwise it's done by the subsequent render.
-		else {
-			metaBoxesMainRef.current.style.height = styleHeight;
-			if ( ! isShort ) {
-				separatorRef.current.ariaValueNow =
-					getAriaValueNow( candidateHeight );
-			}
-		}
-	};
-
-	// useDrag includes keyboard support with arrow keys emulating a drag.
-	// TODO: Support more/all keyboard interactions from the window splitter pattern:
-	// https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
-	const bindDragGesture = useDrag(
-		( { movement, first, last, memo, tap, args } ) => {
-			const pane = metaBoxesMainRef.current;
-			const [ , yMovement ] = movement;
-			if ( first ) {
-				pane.classList.add( 'is-resizing' );
-				let fromHeight = heightRef.current ?? pane.offsetHeight;
-				if ( isOpen ) {
-					// Starts from max in case shortening the window has imposed it.
-					if ( fromHeight > max ) {
-						fromHeight = max;
-					}
-				} else {
-					fromHeight = min;
-				}
-				applyHeight( fromHeight - yMovement );
-				return { fromHeight };
-			}
-
-			if ( ! first && ! last && ! tap ) {
-				applyHeight( memo.fromHeight - yMovement );
-				return memo;
-			}
-			// Here, `last === true` – it’s the final event of the gesture.
-
-			pane.classList.remove( 'is-resizing' );
-			if ( tap ) {
-				const [ onTap ] = args;
-				onTap?.();
-				return;
-			}
-			const nextIsOpen = heightRef.current > min;
-			persistIsOpen( nextIsOpen );
-			// Persists height only if still open. This is so that when closed by a drag the
-			// prior height can be restored by the toggle button instead of having to drag
-			// the pane open again.
-			applyHeight( heightRef.current, nextIsOpen );
-		},
-		{ keyboardDisplacement: 20, filterTaps: true }
-	);
-
-	if ( ! hasAnyVisible ) {
-		return;
-	}
-
-	const contents = (
-		<div
-			// The class name 'edit-post-layout__metaboxes' is retained because some plugins use it.
-			className="edit-post-layout__metaboxes edit-post-meta-boxes-main__liner"
-			hidden={ ! isOpen }
-		>
-			<MetaBoxes location="normal" />
-			<MetaBoxes location="advanced" />
-		</div>
-	);
-
-	const isAutoHeight = openHeight === undefined;
-	const usedOpenHeight = isShort ? 'auto' : openHeight;
-	const usedHeight = isOpen ? usedOpenHeight : min;
-
-	const usedAriaValueNow =
-		max === undefined || isAutoHeight ? 50 : getAriaValueNow( usedHeight );
-
-	const paneLabel = __( 'Meta Boxes' );
-
-	// The toggle button. It also resizes when the viewport is tall to provide
-	// a larger hit area than the small separator button.
-	const toggle = (
-		<button
-			aria-expanded={ isOpen }
-			// Toggles for all clicks when short and only keyboard “clicks” when
-			// resizable because pointer input is handled by the drag gesture.
-			onClick={ ( { detail } ) => {
-				if ( isShort || ! detail ) {
-					persistIsOpen();
-				}
-			} }
-			// Passes a toggle callback that the drag gesture handler calls when
-			// it interprets the input as a click/tap.
-			{ ...( ! isShort && bindDragGesture( persistIsOpen ) ) }
-		>
-			{ paneLabel }
-			<WCIcon icon={ isOpen ? chevronUp : chevronDown } />
-		</button>
-	);
-
-	// The separator button that provides a11y for resizing.
-	const separator = ! isShort && (
-		<>
-			<Tooltip.Root>
-				<Tooltip.Trigger
-					render={
-						<button
-							ref={ separatorRef }
-							role="separator" // eslint-disable-line jsx-a11y/no-interactive-element-to-noninteractive-role
-							aria-valuenow={ usedAriaValueNow }
-							aria-label={ __( 'Drag to resize' ) }
-							aria-describedby={ separatorHelpId }
-							{ ...bindDragGesture() }
-						/>
-					}
-				/>
-				<Tooltip.Popup>{ __( 'Drag to resize' ) }</Tooltip.Popup>
-			</Tooltip.Root>
-			<VisuallyHidden id={ separatorHelpId }>
-				{ __(
-					'Use up and down arrow keys to resize the meta box pane.'
-				) }
-			</VisuallyHidden>
-		</>
-	);
-
-	return (
-		<NavigableRegion
-			ariaLabel={ paneLabel }
-			ref={ setMainRefs }
-			className={ clsx(
-				'edit-post-meta-boxes-main',
-				! isShort && 'is-resizable'
-			) }
-			style={ { height: usedHeight } }
-		>
-			<div className="edit-post-meta-boxes-main__presenter">
-				{ toggle }
-				{ separator }
-			</div>
-			{ contents }
-		</NavigableRegion>
-	);
-}
-
 function Layout( {
 	postId: initialPostId,
 	postType: initialPostType,
@@ -364,17 +111,13 @@ function Layout( {
 	const {
 		mode,
 		isFullscreenActive,
-		hasResolvedMode,
-		hasActiveMetaboxes,
 		hasBlockSelected,
 		showIconLabels,
-		isDistractionFree,
-		showMetaBoxes,
 		templateId,
 	} = useSelect(
 		( select ) => {
 			const { get } = select( preferencesStore );
-			const { isFeatureActive, hasMetaBoxes } = select( editPostStore );
+			const { isFeatureActive } = select( editPostStore );
 			const { canUser, getPostType, getTemplateId } = unlock(
 				select( coreStore )
 			);
@@ -386,34 +129,17 @@ function Layout( {
 				kind: 'postType',
 				name: 'wp_template',
 			} );
-			const { getBlockSelectionStart, isZoomOut } = unlock(
+			const { getBlockSelectionStart } = unlock(
 				select( blockEditorStore )
 			);
-			const { getEditorMode, getDefaultRenderingMode } = unlock(
-				select( editorStore )
-			);
-			const isNotDesignPostType =
-				! DESIGN_POST_TYPES.includes( currentPostType );
-			const isDirectlyEditingPattern =
-				currentPostType === 'wp_block' &&
-				! onNavigateToPreviousEntityRecord;
+			const { getEditorMode } = unlock( select( editorStore ) );
 			const _templateId = getTemplateId( currentPostType, currentPostId );
-			const defaultMode = getDefaultRenderingMode( currentPostType );
 
 			return {
 				mode: getEditorMode(),
 				isFullscreenActive: isFeatureActive( 'fullscreenMode' ),
-				hasActiveMetaboxes: hasMetaBoxes(),
-				hasResolvedMode:
-					defaultMode === 'template-locked'
-						? !! _templateId
-						: defaultMode !== undefined,
 				hasBlockSelected: !! getBlockSelectionStart(),
 				showIconLabels: get( 'core', 'showIconLabels' ),
-				isDistractionFree: get( 'core', 'distractionFree' ),
-				showMetaBoxes:
-					( isNotDesignPostType && ! isZoomOut() ) ||
-					isDirectlyEditingPattern,
 				templateId:
 					supportsTemplateMode &&
 					isViewable &&
@@ -428,11 +154,8 @@ function Layout( {
 			currentPostId,
 			isEditingTemplate,
 			settings.supportsTemplateMode,
-			onNavigateToPreviousEntityRecord,
 		]
 	);
-
-	useMetaBoxInitialization( hasActiveMetaboxes && hasResolvedMode );
 
 	// Set the right context for the command palette
 	const commandContext = hasBlockSelected
@@ -464,9 +187,7 @@ function Layout( {
 
 	const navigateRegionsProps = useNavigateRegions();
 
-	const className = clsx( 'edit-post-layout', 'is-mode-' + mode, {
-		'has-metaboxes': hasActiveMetaboxes,
-	} );
+	const className = clsx( 'edit-post-layout', 'is-mode-' + mode );
 
 	function onPluginAreaError( name ) {
 		createErrorNotice(
@@ -562,20 +283,10 @@ function Layout( {
 								postId={ currentPostId }
 								templateId={ templateId }
 								className={ className }
-								forceIsDirty={ hasActiveMetaboxes }
 								// We should auto-focus the canvas (title) on load.
 								// eslint-disable-next-line jsx-a11y/no-autofocus
 								autoFocus
 								onActionPerformed={ onActionPerformed }
-								extraSidebarPanels={
-									showMetaBoxes && (
-										<MetaBoxes location="side" />
-									)
-								}
-								extraContent={
-									! isDistractionFree &&
-									showMetaBoxes && <MetaBoxesMain />
-								}
 							>
 								<PostLockedModal />
 								<EditorInitialization />

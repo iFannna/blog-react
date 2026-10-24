@@ -24,7 +24,7 @@ import { store as editorStore } from '../../store';
 
 const SIDEBAR_ACTIVE_BY_DEFAULT = true;
 
-function Sidebar( { extraPanels, onActionPerformed } ) {
+function Sidebar( { onActionPerformed } ) {
 	useAutoSwitchEditorSidebars();
 
 	const { tabName, keyboardShortcut, isRevisionsMode } = useSelect(
@@ -74,7 +74,6 @@ function Sidebar( { extraPanels, onActionPerformed } ) {
 				<PostTransformPanel />
 				<PostTaxonomiesPanel />
 				<PatternOverridesPanel />
-				{ extraPanels }
 			</>
 		);
 	}

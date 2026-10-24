@@ -1,4 +1,4 @@
-import { createSelector, createRegistrySelector } from '@/stores/gutenberg/data';
+import { createRegistrySelector } from '@/stores/gutenberg/data';
 import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import { store as coreStore } from '@/stores/gutenberg/core-data';
 import {
@@ -341,105 +341,6 @@ export const isPluginItemPinned = createRegistrySelector(
 );
 
 /**
- * Returns an array of active meta box locations.
- *
- * @param {Object} state Post editor state.
- *
- * @return {string[]} Active meta box locations.
- */
-export const getActiveMetaBoxLocations = createSelector(
-	( state ) => {
-		return Object.keys( state.metaBoxes.locations ).filter( ( location ) =>
-			isMetaBoxLocationActive( state, location )
-		);
-	},
-	( state ) => [ state.metaBoxes.locations ]
-);
-
-/**
- * Returns true if a metabox location is active and visible
- *
- * @param {Object} state    Post editor state.
- * @param {string} location Meta box location to test.
- *
- * @return {boolean} Whether the meta box location is active and visible.
- */
-export const isMetaBoxLocationVisible = createRegistrySelector(
-	( select ) => ( state, location ) => {
-		return (
-			isMetaBoxLocationActive( state, location ) &&
-			getMetaBoxesPerLocation( state, location )?.some( ( { id } ) => {
-				return select( editorStore ).isEditorPanelEnabled(
-					`meta-box-${ id }`
-				);
-			} )
-		);
-	}
-);
-
-/**
- * Returns true if there is an active meta box in the given location, or false
- * otherwise.
- *
- * @param {Object} state    Post editor state.
- * @param {string} location Meta box location to test.
- *
- * @return {boolean} Whether the meta box location is active.
- */
-export function isMetaBoxLocationActive( state, location ) {
-	const metaBoxes = getMetaBoxesPerLocation( state, location );
-	return !! metaBoxes && metaBoxes.length !== 0;
-}
-
-/**
- * Returns the list of all the available meta boxes for a given location.
- *
- * @param {Object} state    Global application state.
- * @param {string} location Meta box location to test.
- *
- * @return {?Array} List of meta boxes.
- */
-export function getMetaBoxesPerLocation( state, location ) {
-	return state.metaBoxes.locations[ location ];
-}
-
-/**
- * Returns the list of all the available meta boxes.
- *
- * @param {Object} state Global application state.
- *
- * @return {Array} List of meta boxes.
- */
-export const getAllMetaBoxes = createSelector(
-	( state ) => {
-		return Object.values( state.metaBoxes.locations ).flat();
-	},
-	( state ) => [ state.metaBoxes.locations ]
-);
-
-/**
- * Returns true if the post is using Meta Boxes
- *
- * @param {Object} state Global application state
- *
- * @return {boolean} Whether there are metaboxes or not.
- */
-export function hasMetaBoxes( state ) {
-	return getActiveMetaBoxLocations( state ).length > 0;
-}
-
-/**
- * Returns true if the Meta Boxes are being saved.
- *
- * @param {Object} state Global application state.
- *
- * @return {boolean} Whether the metaboxes are being saved.
- */
-export function isSavingMetaBoxes( state ) {
-	return state.metaBoxes.isSaving;
-}
-
-/**
  * Returns the current editing canvas device type.
  *
  * @deprecated
@@ -528,17 +429,6 @@ export const isEditingTemplate = createRegistrySelector( ( select ) => () => {
 	} );
 	return select( editorStore ).getCurrentPostType() === 'wp_template';
 } );
-
-/**
- * Returns true if meta boxes are initialized.
- *
- * @param {Object} state Global application state.
- *
- * @return {boolean} Whether meta boxes are initialized.
- */
-export function areMetaBoxesInitialized( state ) {
-	return state.metaBoxes.initialized;
-}
 
 /**
  * Retrieves the template of the currently edited post.

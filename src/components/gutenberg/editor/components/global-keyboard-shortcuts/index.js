@@ -87,7 +87,7 @@ export default function EditorKeyboardShortcuts() {
 
 		// TODO: This should be handled in the `savePost` effect in
 		// considering `isSaveable`. See note on `isEditedPostSaveable`
-		// selector about dirtiness and meta-boxes.
+		// selector about dirtiness.
 		//
 		// See: `isEditedPostSaveable`
 		if ( ! isEditedPostDirty() ) {

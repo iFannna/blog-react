@@ -22,11 +22,6 @@ function Editor( {
 
 	// This could be part of the settings.
 	onActionPerformed,
-
-	// The following abstractions are not ideal but necessary
-	// to account for site editor and post editor differences for now.
-	extraContent,
-	extraSidebarPanels,
 	...props
 } ) {
 	const {
@@ -114,14 +109,9 @@ function Editor( {
 					renderingMode={ renderingMode }
 					useSubRegistry={ false }
 				>
-					<EditorInterface { ...props }>
-						{ extraContent }
-					</EditorInterface>
+					<EditorInterface { ...props } />
 					{ children }
-					<Sidebar
-						onActionPerformed={ onActionPerformed }
-						extraPanels={ extraSidebarPanels }
-					/>
+					<Sidebar onActionPerformed={ onActionPerformed } />
 					{ isBlockTheme && <GlobalStylesRenderer /> }
 					{ showGlobalStyles && <GlobalStylesSidebar /> }
 				</ExperimentalEditorProvider>

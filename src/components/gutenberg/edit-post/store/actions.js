@@ -1,15 +1,11 @@
-import apiFetch from '@/services/gutenberg/api-fetch';
 import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import {
 	store as editorStore,
 	privateApis as editorPrivateApis,
 } from '@/components/gutenberg/editor';
 import deprecated from '@/utils/gutenberg/deprecated';
-import { addAction } from '@/hooks/gutenberg/hooks';
-import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { store as noticesStore } from '@/stores/gutenberg/notices';
 import { __ } from '@/lib/gutenberg/i18n';
-import { getMetaBoxContainer } from '../utils/meta-boxes';
 import { unlock } from '../lock-unlock';
 
 const { interfaceStore } = unlock( editorPrivateApis );
@@ -259,114 +255,6 @@ export const hideBlockTypes =
 	};
 
 /**
- * Stores info about which Meta boxes are available in which location.
- *
- * @param {Object} metaBoxesPerLocation Meta boxes per location.
- */
-export function setAvailableMetaBoxesPerLocation( metaBoxesPerLocation ) {
-	return {
-		type: 'SET_META_BOXES_PER_LOCATIONS',
-		metaBoxesPerLocation,
-	};
-}
-
-/**
- * Update a metabox.
- */
-export const requestMetaBoxUpdates =
-	() =>
-	async ( { registry, select, dispatch } ) => {
-		dispatch( {
-			type: 'REQUEST_META_BOX_UPDATES',
-		} );
-
-		// Saves the wp_editor fields.
-		if ( window.tinyMCE ) {
-			window.tinyMCE.triggerSave();
-		}
-
-		// We gather the base form data.
-		const baseFormData = new window.FormData(
-			document.querySelector( '.metabox-base-form' )
-		);
-
-		const postId = baseFormData.get( 'post_ID' );
-		const postType = baseFormData.get( 'post_type' );
-
-		// Additional data needed for backward compatibility.
-		// If we do not provide this data, the post will be overridden with the default values.
-		// We cannot rely on getCurrentPost because right now on the editor we may be editing a pattern or a template.
-		// We need to retrieve the post that the base form data is referring to.
-		const post = registry
-			.select( coreStore )
-			.getEditedEntityRecord( 'postType', postType, postId );
-		const additionalData = [
-			post.comment_status
-				? [ 'comment_status', post.comment_status ]
-				: false,
-			post.ping_status ? [ 'ping_status', post.ping_status ] : false,
-			post.sticky ? [ 'sticky', post.sticky ] : false,
-			post.author ? [ 'post_author', post.author ] : false,
-		].filter( Boolean );
-
-		// We gather all the metaboxes locations.
-		const activeMetaBoxLocations = select.getActiveMetaBoxLocations();
-		const formDataToMerge = [
-			baseFormData,
-			...activeMetaBoxLocations.map(
-				( location ) =>
-					new window.FormData( getMetaBoxContainer( location ) )
-			),
-		];
-
-		// Merge all form data objects into a single one.
-		const formData = formDataToMerge.reduce( ( memo, currentFormData ) => {
-			for ( const [ key, value ] of currentFormData ) {
-				memo.append( key, value );
-			}
-			return memo;
-		}, new window.FormData() );
-		additionalData.forEach( ( [ key, value ] ) =>
-			formData.append( key, value )
-		);
-
-		try {
-			// Save the metaboxes.
-			await apiFetch( {
-				url: window._wpMetaBoxUrl,
-				method: 'POST',
-				body: formData,
-				parse: false,
-			} );
-			dispatch.metaBoxUpdatesSuccess();
-		} catch {
-			dispatch.metaBoxUpdatesFailure();
-		}
-	};
-
-/**
- * Returns an action object used to signal a successful meta box update.
- *
- * @return {Object} Action object.
- */
-export function metaBoxUpdatesSuccess() {
-	return {
-		type: 'META_BOX_UPDATES_SUCCESS',
-	};
-}
-
-/**
- * Returns an action object used to signal a failed meta box update.
- *
- * @return {Object} Action object.
- */
-export function metaBoxUpdatesFailure() {
-	return {
-		type: 'META_BOX_UPDATES_FAILURE',
-	};
-}
-
-/**
  * Action that changes the width of the editing canvas.
  *
  * @deprecated
@@ -445,48 +333,6 @@ export function __unstableCreateTemplate() {
 	} );
 	return { type: 'NOTHING' };
 }
-
-let metaBoxesInitialized = false;
-
-/**
- * Initializes WordPress `postboxes` script and the logic for saving meta boxes.
- */
-export const initializeMetaBoxes =
-	() =>
-	( { registry, select, dispatch } ) => {
-		const isEditorReady = registry
-			.select( editorStore )
-			.__unstableIsEditorReady();
-
-		if ( ! isEditorReady ) {
-			return;
-		}
-		// Only initialize once.
-		if ( metaBoxesInitialized ) {
-			return;
-		}
-		const postType = registry.select( editorStore ).getCurrentPostType();
-		if ( window.postboxes.page !== postType ) {
-			window.postboxes.add_postbox_toggles( postType );
-		}
-
-		metaBoxesInitialized = true;
-
-		// Save metaboxes on save completion, except for autosaves.
-		addAction(
-			'editor.savePost',
-			'core/edit-post/save-metaboxes',
-			async ( post, options ) => {
-				if ( ! options.isAutosave && select.hasMetaBoxes() ) {
-					await dispatch.requestMetaBoxUpdates();
-				}
-			}
-		);
-
-		dispatch( {
-			type: 'META_BOXES_INITIALIZED',
-		} );
-	};
 
 /**
  * Action that toggles Distraction free mode.

@@ -126,7 +126,7 @@ export default {
 			return false;
 		}
 
-		// Check that custom fields metabox is not enabled.
+		// Check that the custom fields editor is not enabled.
 		const areCustomFieldsEnabled =
 			select( editorStore ).getEditorSettings().enableCustomFields;
 		if ( areCustomFieldsEnabled ) {
