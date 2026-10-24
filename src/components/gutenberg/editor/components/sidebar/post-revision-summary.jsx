@@ -1,10 +1,5 @@
 import { useSelect } from '@/stores/gutenberg/data';
-import {
-	ExternalLink,
-	__experimentalVStack as VStack,
-} from '@/components/gutenberg/ui';
-import { __ } from '@/lib/gutenberg/i18n';
-import { addQueryArgs } from '@/utils/gutenberg/url';
+import { __experimentalVStack as VStack } from '@/components/gutenberg/ui';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 import PostRevisionsTimeline from '../post-revisions-timeline';
@@ -32,15 +27,6 @@ export default function PostRevisionSummary() {
 			<PostPanelSection className="editor-post-summary">
 				<VStack spacing={ 4 }>
 					<PostCardPanel postId={ postId } hideActions />
-					{ ! isViewingBrowserBackup && (
-						<ExternalLink
-							href={ addQueryArgs( 'revision.php', {
-								revision: revisionId,
-							} ) }
-						>
-							{ __( 'Open classic revisions screen' ) }
-						</ExternalLink>
-					) }
 				</VStack>
 			</PostPanelSection>
 			<RevisionFieldsDiffPanel />

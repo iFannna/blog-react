@@ -1,39 +1,23 @@
 import { Button } from '@/components/gutenberg/ui';
 import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import { _n, sprintf } from '@/lib/gutenberg/i18n';
-import { addQueryArgs } from '@/utils/gutenberg/url';
 import { store as editorStore } from '../../../store';
 import { unlock } from '../../../lock-unlock';
 
 export default function RevisionsView() {
-	const { lastRevisionId, revisionsCount, disableVisualRevisions } =
-		useSelect( ( select ) => {
-			const {
-				getCurrentPostLastRevisionId,
-				getCurrentPostRevisionsCount,
-				getEditorSettings,
-			} = select( editorStore );
-			return {
-				lastRevisionId: getCurrentPostLastRevisionId(),
-				revisionsCount: getCurrentPostRevisionsCount(),
-				disableVisualRevisions:
-					// @ts-expect-error Editor settings are typed as a bare `Object`.
-					!! getEditorSettings().disableVisualRevisions,
-			};
-		}, [] );
+	const { lastRevisionId, revisionsCount } = useSelect( ( select ) => {
+		const { getCurrentPostLastRevisionId, getCurrentPostRevisionsCount } =
+			select( editorStore );
+		return {
+			lastRevisionId: getCurrentPostLastRevisionId(),
+			revisionsCount: getCurrentPostRevisionsCount(),
+		};
+	}, [] );
 	const { setCurrentRevisionId } = unlock( useDispatch( editorStore ) );
-
-	const buttonProps = disableVisualRevisions
-		? {
-				href: addQueryArgs( 'revision.php', {
-					revision: lastRevisionId,
-				} ),
-			}
-		: { onClick: () => setCurrentRevisionId( lastRevisionId ) };
 
 	return (
 		<Button
-			{ ...buttonProps }
+			onClick={ () => setCurrentRevisionId( lastRevisionId ) }
 			className="editor-revisions-field-button"
 			variant="link"
 			text={ String( revisionsCount ) }

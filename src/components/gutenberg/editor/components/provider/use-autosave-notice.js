@@ -1,5 +1,5 @@
 import { useLayoutEffect } from '@/lib/gutenberg/element';
-import { useDispatch, useRegistry } from '@/stores/gutenberg/data';
+import { useDispatch } from '@/stores/gutenberg/data';
 import { __ } from '@/lib/gutenberg/i18n';
 import { store as noticesStore } from '@/stores/gutenberg/notices';
 import { getQueryArg } from '@/utils/gutenberg/url';
@@ -12,17 +12,15 @@ import { unlock } from '../../lock-unlock';
  * @param {Object}   props                      Function props.
  * @param {Object}   props.autosave             The `autosave` editor setting.
  * @param {Function} props.createWarningNotice  Action that creates the notice.
- * @param {Object}   props.registry             The data registry.
  * @param {Function} props.setCurrentRevisionId Action that opens a revision.
  */
 function showAutosaveExistsNotice( {
 	autosave,
 	createWarningNotice,
-	registry,
 	setCurrentRevisionId,
 } ) {
-	// The only place core exposes the autosave ID is the edit
-	// link, always `revision.php?revision=<autosave ID>`.
+	// The only place core exposes the autosave ID is the edit link's
+	// `revision` query arg.
 	const autosaveId = Number( getQueryArg( autosave.editLink, 'revision' ) );
 	createWarningNotice(
 		__(
@@ -35,19 +33,8 @@ function showAutosaveExistsNotice( {
 					label: __( 'View the autosave' ),
 					...( autosaveId
 						? {
-								onClick: () => {
-									// `disableVisualRevisions` is only set
-									// after mount, so read it at click time.
-									const { disableVisualRevisions } = registry
-										.select( editorStore )
-										.getEditorSettings();
-									if ( disableVisualRevisions ) {
-										window.location.href =
-											autosave.editLink;
-										return;
-									}
-									setCurrentRevisionId( autosaveId );
-								},
+								onClick: () =>
+									setCurrentRevisionId( autosaveId ),
 							}
 						: { url: autosave.editLink } ),
 				},
@@ -67,7 +54,6 @@ function showAutosaveExistsNotice( {
  * @param {Object}  props.settings The editor settings.
  */
 export default function useAutosaveNotice( { recovery, settings } ) {
-	const registry = useRegistry();
 	const { createWarningNotice } = useDispatch( noticesStore );
 	const { setCurrentRevisionId } = unlock( useDispatch( editorStore ) );
 
@@ -79,7 +65,6 @@ export default function useAutosaveNotice( { recovery, settings } ) {
 		showAutosaveExistsNotice( {
 			autosave: settings.autosave,
 			createWarningNotice,
-			registry,
 			setCurrentRevisionId,
 		} );
 
