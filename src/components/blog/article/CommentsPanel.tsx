@@ -102,6 +102,13 @@ function getTimeValue(value: string): number {
   return Number.isNaN(targetDate.getTime()) ? 0 : targetDate.getTime();
 }
 
+// 生成与后端一致的本地时间字符串；toISOString 是 UTC，会差一个时区
+function nowLocalDateTime(): string {
+  const now = new Date();
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+}
+
 function formatCommentTime(value: string): string {
   const targetTime = getTimeValue(value);
   if (!targetTime) return "";
@@ -342,7 +349,7 @@ export default function CommentsPanel({ articleId, commentStatus }: CommentsPane
       liked: false,
       replyCount: 0,
       canDelete: true,
-      createTime: new Date().toISOString().replace("T", " ").substring(0, 19),
+      createTime: nowLocalDateTime(),
       previewReply: null,
     };
     setComments((prev) => [newComment, ...prev]);
@@ -368,7 +375,7 @@ export default function CommentsPanel({ articleId, commentStatus }: CommentsPane
       likeCount: 0,
       liked: false,
       canDelete: true,
-      createTime: new Date().toISOString().replace("T", " ").substring(0, 19),
+      createTime: nowLocalDateTime(),
     };
     setLoadedRepliesMap((prev) => ({
       ...prev,

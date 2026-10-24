@@ -165,9 +165,11 @@ export default function Footer({
             {icp && police && (
               <>&nbsp;</>
             )}
-            <a href="https://beian.mps.gov.cn/" target="_blank" rel="noopener noreferrer">
-              {police}
-            </a>
+            {police && (
+              <a href="https://beian.mps.gov.cn/" target="_blank" rel="noopener noreferrer">
+                {police}
+              </a>
+            )}
           </div>
         </div>
       </div>
