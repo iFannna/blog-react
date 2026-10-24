@@ -1,6 +1,5 @@
 import { Component } from '@/lib/gutenberg/element';
 import { addFilter } from '@/hooks/gutenberg/hooks';
-import deprecated from '@/utils/gutenberg/deprecated';
 import { useSelect } from '@/stores/gutenberg/data';
 import { store as coreStore } from '@/stores/gutenberg/core-data';
 import {
@@ -116,11 +115,6 @@ if ( window.__experimentalDataViewsMediaModal ) {
 		'editor.MediaUpload',
 		'core/editor/components/media-upload',
 		() => {
-			deprecated( 'Extending MediaUpload as a class component', {
-				since: '7.0',
-				version: '7.2',
-				hint: 'MediaUpload will become a function component in WordPress 7.2 Please update any custom implementations to use function components instead.',
-			} );
 			return MediaUploadModalWrapper;
 		}
 	);

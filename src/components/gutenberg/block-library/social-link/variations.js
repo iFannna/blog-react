@@ -44,21 +44,12 @@ import {
 	VimeoIcon,
 	VkIcon,
 	WhatsAppIcon,
-	WordPressIcon,
 	XIcon,
 	YelpIcon,
 	YouTubeIcon,
 } from './icons';
 
 const variations = [
-	{
-		isDefault: true,
-		name: 'wordpress',
-		attributes: { service: 'wordpress' },
-		title: _x( 'WordPress', 'social link block variation name' ),
-		icon: WordPressIcon,
-	},
-
 	{
 		name: 'fivehundredpx',
 		attributes: { service: 'fivehundredpx' },
@@ -90,6 +81,7 @@ const variations = [
 		icon: BlueskyIcon,
 	},
 	{
+		isDefault: true,
 		name: 'chain',
 		attributes: { service: 'chain' },
 		title: _x( 'Link', 'social link block variation name' ),

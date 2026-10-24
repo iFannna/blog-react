@@ -639,7 +639,7 @@ export const CATEGORIES = [
 
 export const TAGS = [
 	{ id: 2, name: '示例标签', slug: 'example', taxonomy: 'post_tag', count: 0, link: `${ SITE_URL }/tag/example/` },
-	{ id: 8, name: 'WordPress', slug: 'wordpress', taxonomy: 'post_tag', count: 5, link: `${ SITE_URL }/tag/wordpress/` },
+	{ id: 8, name: '编辑器', slug: 'editor', taxonomy: 'post_tag', count: 5, link: `${ SITE_URL }/tag/editor/` },
 	{ id: 9, name: 'React', slug: 'react', taxonomy: 'post_tag', count: 7, link: `${ SITE_URL }/tag/react/` },
 	{ id: 10, name: 'Next.js', slug: 'nextjs', taxonomy: 'post_tag', count: 6, link: `${ SITE_URL }/tag/nextjs/` },
 	{ id: 11, name: 'Go', slug: 'go', taxonomy: 'post_tag', count: 3, link: `${ SITE_URL }/tag/go/` },

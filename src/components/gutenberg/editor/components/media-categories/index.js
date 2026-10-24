@@ -374,7 +374,7 @@ const inserterMediaCategories = [
 			} );
 			const response = await window.fetch( url, {
 				headers: {
-					'User-Agent': 'WordPress/inserter-media-fetch',
+					'User-Agent': 'blog-react/inserter-media-fetch',
 				},
 			} );
 			const jsonResponse = await response.json();

@@ -242,15 +242,6 @@ export function installMockApi( locale = 'zh_CN' ) {
 			);
 		}
 
-		if ( process.env.NODE_ENV !== 'production' ) {
-			// eslint-disable-next-line no-console
-			console.info(
-				'[mock]',
-				method,
-				pathname + ( query.toString() ? `?${ query }` : '' )
-			);
-		}
-
 		const respond = ( payload, allow = ALLOW_HEADER ) => {
 			if ( ! wantsRawResponse ) {
 				return Promise.resolve( payload );
@@ -703,7 +694,6 @@ export function installMockApi( locale = 'zh_CN' ) {
 		}
 
 		if ( process.env.NODE_ENV !== 'production' ) {
-			// eslint-disable-next-line no-console
 			console.warn(
 				'[mock] unhandled request:',
 				method,
