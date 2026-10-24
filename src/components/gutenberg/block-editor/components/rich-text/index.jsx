@@ -727,4 +727,5 @@ PublicForwardedRichTextContainer.isEmpty = isEmpty;
 export default PublicForwardedRichTextContainer;
 export { RichTextShortcut };
 export { RichTextToolbarButton } from './toolbar-button';
+
 export { RichTextInputEvent as __unstableRichTextInputEvent };

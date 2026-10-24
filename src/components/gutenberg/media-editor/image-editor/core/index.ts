@@ -38,10 +38,7 @@ export type { SourceRegion, SourceRegionPercent } from './source-region';
 export { computeInscribedRect } from './crop-rect';
 
 // Pipeline
-export {
-	applyOperationToState,
-	stateFromPipeline,
-} from './transforms/pipeline';
+
 
 // Export / canvas
 export { exportCroppedImage, applyToCanvas } from './export/canvas-renderer';

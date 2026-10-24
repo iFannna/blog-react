@@ -2,8 +2,8 @@ import { registerBlockType } from '@/lib/gutenberg/blocks';
 import * as legacyWidget from './blocks/legacy-widget';
 import * as widgetGroup from './blocks/widget-group';
 
-export * from './components';
-export * from './utils';
+
+
 
 /**
  * Registers the Legacy Widget block.
@@ -47,4 +47,4 @@ export function registerWidgetGroupBlock( supports = {} ) {
 	);
 }
 
-export { default as registerLegacyWidgetVariations } from './register-legacy-widget-variations';
+

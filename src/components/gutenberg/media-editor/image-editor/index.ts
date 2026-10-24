@@ -9,7 +9,7 @@
 
 // React surface.
 export { useCropperReducer, buildCropperSetters } from './react/hooks';
-export { Cropper, CropperProvider, useCropper } from './react/components';
+export { Cropper } from './react/components';
 export type { CropperController, CropperSetters } from './react/hooks';
 export type { CropperProps } from './react/components';
 
@@ -40,8 +40,6 @@ export {
 	computeInscribedRect,
 	getSourceRegion,
 	getSourceRegionPercent,
-	applyOperationToState,
-	stateFromPipeline,
 	exportCroppedImage,
 	applyToCanvas,
 } from './core';

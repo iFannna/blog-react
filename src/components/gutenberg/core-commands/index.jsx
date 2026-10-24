@@ -4,7 +4,7 @@ import { CommandMenu } from '@/lib/gutenberg/commands';
 import { useAdminNavigationCommands } from './admin-navigation-commands';
 import { useSiteEditorNavigationCommands } from './site-editor-navigation-commands';
 import { unlock } from './lock-unlock';
-export { privateApis } from './private-apis';
+
 
 const { RouterProvider } = unlock( routerPrivateApis );
 

@@ -323,7 +323,7 @@ export function reinitializeEditor() {
 	} );
 }
 
-export { default as __experimentalFullscreenModeClose } from './components/back-button/fullscreen-mode-close';
+
 export { __experimentalMainDashboardButton };
 export { store } from './store';
-export * from './deprecated';
+
