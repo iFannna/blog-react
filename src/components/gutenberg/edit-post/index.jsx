@@ -134,6 +134,13 @@ export function initializeEditor(
 					settings.template
 				);
 			}
+			if (
+				new URLSearchParams( window.location.search ).get(
+					'stylebook'
+				) === '1'
+			) {
+				unlock( dispatch( editorStore ) ).setShowStylebook( true );
+			}
 		}
 		root.render(
 			<StrictMode>
