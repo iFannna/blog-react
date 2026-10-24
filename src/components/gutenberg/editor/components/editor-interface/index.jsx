@@ -7,7 +7,6 @@ import {
 	BlockBreadcrumb,
 	BlockToolbar,
 	privateApis as blockEditorPrivateApis,
-	store as blockEditorStore,
 } from '@/components/gutenberg/block-editor';
 import { useViewportMatch } from '@/hooks/gutenberg/compose';
 import { useState, useCallback, useLayoutEffect } from '@/lib/gutenberg/element';
@@ -17,7 +16,6 @@ import { ThemeProvider } from '@/lib/gutenberg/theme';
 import { Stack } from '@/components/gutenberg/design-system';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
-import TemplateValidationNotice from '../template-validation-notice';
 import Header from '../header';
 import InserterSidebar from '../inserter-sidebar';
 import ListViewSidebar from '../list-view-sidebar';
@@ -48,19 +46,13 @@ const interfaceLabels = {
 };
 
 function Notices() {
-	const isValidTemplate = useSelect( ( select ) => {
-		return select( blockEditorStore ).isValidTemplate();
-	}, [] );
-
 	return (
 		<ThemeProvider cornerRadius="none">
 			<InlineNotices
 				className="editor-notices"
 				pinnedNoticesClassName="editor-notices__pinned"
 				dismissibleNoticesClassName="editor-notices__dismissible"
-			>
-				{ ! isValidTemplate && <TemplateValidationNotice /> }
-			</InlineNotices>
+			/>
 		</ThemeProvider>
 	);
 }

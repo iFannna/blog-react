@@ -1,4 +1,3 @@
-import { __ } from '@/lib/gutenberg/i18n';
 import { useDispatch, useSelect, useRegistry } from '@/stores/gutenberg/data';
 import { store as coreDataStore } from '@/stores/gutenberg/core-data';
 import { DataForm } from '@/components/gutenberg/dataviews';
@@ -11,7 +10,6 @@ import PluginPostStatusInfo from '../plugin-post-status-info';
 import PostPanelSection from '../post-panel-section';
 import { store as editorStore } from '../../store';
 import PostTrash from '../post-trash';
-import { usePostTemplatePanelMode } from '../post-template/hooks';
 import { useFields } from '../../dataviews/fields-loader';
 import revisionsField from '../../dataviews/fields/revisions';
 import readingSettingsField from '../../dataviews/fields/reading-settings';
@@ -171,26 +169,15 @@ function bindFieldToNamespace( field, namespace, isVisible = () => true ) {
 }
 
 export default function DataFormPostSummary( { onActionPerformed } ) {
-	const { postType, postId, isPostStatusRemoved, availableTemplates } =
-		useSelect( ( select ) => {
-			const {
-				getCurrentPostType,
-				getCurrentPostId,
-				isEditorPanelRemoved,
-				getEditorSettings,
-			} = select( editorStore );
-			const _availableTemplates = select(
-				coreDataStore
-			).getCurrentTheme()?.is_block_theme
-				? null
-				: ( getEditorSettings().availableTemplates ?? null );
-			return {
-				postType: getCurrentPostType(),
-				postId: getCurrentPostId(),
-				isPostStatusRemoved: isEditorPanelRemoved( 'post-status' ),
-				availableTemplates: _availableTemplates,
-			};
-		}, [] );
+	const { postType, postId, isPostStatusRemoved } = useSelect( ( select ) => {
+		const { getCurrentPostType, getCurrentPostId, isEditorPanelRemoved } =
+			select( editorStore );
+		return {
+			postType: getCurrentPostType(),
+			postId: getCurrentPostId(),
+			isPostStatusRemoved: isEditorPanelRemoved( 'post-status' ),
+		};
+	}, [] );
 	const { form: formConfig } = useViewConfig( {
 		kind: 'postType',
 		name: postType,
@@ -212,8 +199,6 @@ export default function DataFormPostSummary( { onActionPerformed } ) {
 		},
 		[ postType, postId ]
 	);
-
-	const templatePanelMode = usePostTemplatePanelMode();
 
 	const entityRecords = useSelect(
 		( select ) => {
@@ -256,11 +241,8 @@ export default function DataFormPostSummary( { onActionPerformed } ) {
 			return record;
 		}
 		const extra = { ...entityRecords };
-		if ( availableTemplates && Object.keys( availableTemplates ).length ) {
-			extra.available_templates = availableTemplates;
-		}
 		return { ...record, ...extra };
-	}, [ record, entityRecords, availableTemplates ] );
+	}, [ record, entityRecords ] );
 
 	const { editEntityRecord } = useDispatch( coreDataStore );
 	const registry = useRegistry();
@@ -305,26 +287,6 @@ export default function DataFormPostSummary( { onActionPerformed } ) {
 							),
 						};
 					}
-					if ( field.id === 'template' ) {
-						// `usePostTemplatePanelMode` is reused in the Post Template panel to match
-						// the existing behavior. If the panel rendered nothing we should exclude the
-						// template field from the form.
-						if ( ! templatePanelMode ) {
-							return null;
-						}
-						// In classic themes without available templates we need to make the field read-only.
-						if (
-							templatePanelMode === 'classic' &&
-							Object.keys( availableTemplates ?? {} ).length === 0
-						) {
-							return {
-								...field,
-								readOnly: true,
-								render: () => __( 'Default template' ),
-							};
-						}
-						return field;
-					}
 					return field;
 				} )
 				.filter( Boolean )
@@ -341,13 +303,7 @@ export default function DataFormPostSummary( { onActionPerformed } ) {
 				// registers a field for them: every other consumer of those forms
 				// drops the ids for want of a field.
 				.concat( revisionsField, readingSettingsField ),
-		[
-			_fields,
-			templatePanelMode,
-			availableTemplates,
-			fieldNamespaces,
-			postType,
-		]
+		[ _fields, fieldNamespaces, postType ]
 	);
 
 	const onChange = ( edits ) => {

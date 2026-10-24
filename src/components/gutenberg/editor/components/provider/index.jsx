@@ -33,12 +33,10 @@ import useNetworkReconnect from './use-network-reconnect';
 import BlockRemovalWarnings from '../block-removal-warnings';
 import StartPageOptions from '../start-page-options';
 import KeyboardShortcutHelpModal from '../keyboard-shortcut-help-modal';
-import StartTemplateOptions from '../start-template-options';
 import EditorKeyboardShortcuts from '../global-keyboard-shortcuts';
 import EditorKeyboardShortcutsRegister from '../global-keyboard-shortcuts/register-shortcuts';
 import PatternRenameModal from '../pattern-rename-modal';
 import PatternDuplicateModal from '../pattern-duplicate-modal';
-import TemplatePartMenuItems from '../template-part-menu-items';
 import MediaEditorModalMount from '../media/media-editor-modal';
 import { getCanvasWidthByDeviceType } from '../../utils/device-type';
 
@@ -460,7 +458,6 @@ export const ExperimentalEditorProvider = withRegistryProvider(
 							{ ! settings.isPreviewMode && (
 								<>
 									<PatternsMenuItems />
-									<TemplatePartMenuItems />
 									{ mode === 'template-locked' && (
 										<DisableNonPageContentBlocks />
 									) }
@@ -472,7 +469,6 @@ export const ExperimentalEditorProvider = withRegistryProvider(
 									<KeyboardShortcutHelpModal />
 									<BlockRemovalWarnings />
 									<StartPageOptions />
-									<StartTemplateOptions />
 									<PatternRenameModal />
 									<PatternDuplicateModal />
 									<MediaEditorModalMount />
