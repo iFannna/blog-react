@@ -1,5 +1,4 @@
 import { privateApis as globalStylesEnginePrivateApis } from '@/lib/gutenberg/global-styles-engine';
-import { __ } from '@/lib/gutenberg/i18n';
 import { desktop, tablet, mobile } from '@/components/gutenberg/icons';
 import { unlock } from '../lock-unlock';
 
@@ -17,11 +16,15 @@ const TABLET_DEVICE_TYPE = 'Tablet';
 const MOBILE_DEVICE_TYPE = 'Mobile';
 const DEVICE_PREVIEW_WIDTH_OFFSET = 1;
 
-/** Labels and icons shared by device preview controls and viewport status. */
+/**
+ * Labels and icons shared by device preview controls and viewport status.
+ * Labels are untranslated on purpose: this module is evaluated before the
+ * locale data loads, so consumers translate them at render time.
+ */
 export const DEVICE_TYPE_METADATA = {
-	Desktop: { label: __( 'Desktop' ), icon: desktop },
-	Tablet: { label: __( 'Tablet' ), icon: tablet },
-	Mobile: { label: __( 'Mobile' ), icon: mobile },
+	Desktop: { label: 'Desktop', icon: desktop },
+	Tablet: { label: 'Tablet', icon: tablet },
+	Mobile: { label: 'Mobile', icon: mobile },
 };
 
 /**

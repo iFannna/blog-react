@@ -6,18 +6,20 @@ import { Menu } from '@/components/gutenberg/design-system';
 import { store as editorStore } from '../../store';
 
 /**
- * Set of available mode options.
+ * Set of available mode options. Labels are untranslated on purpose: this
+ * module is evaluated before the locale data loads, so they are translated
+ * at render time.
  *
  * @type {Array}
  */
 const MODES = [
 	{
 		value: 'visual',
-		label: __( 'Visual editor' ),
+		label: 'Visual editor',
 	},
 	{
 		value: 'text',
-		label: __( 'Code editor' ),
+		label: 'Code editor',
 	},
 ];
 
@@ -83,7 +85,7 @@ function ModeSwitcher() {
 					disabled={ choice.disabled }
 					shortcut={ choice.shortcut }
 				>
-					<Menu.ItemLabel>{ choice.label }</Menu.ItemLabel>
+					<Menu.ItemLabel>{ __( choice.label ) }</Menu.ItemLabel>
 					{ choice.info && (
 						<Menu.ItemDescription>
 							{ choice.info }

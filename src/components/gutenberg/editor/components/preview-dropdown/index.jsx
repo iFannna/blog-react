@@ -125,7 +125,7 @@ function PreviewMenu( { forceIsAutosaveable, disabled } ) {
 	const choices = [
 		{
 			value: 'Desktop',
-			label: DEVICE_TYPE_METADATA.Desktop.label,
+			label: __( DEVICE_TYPE_METADATA.Desktop.label ),
 			info: isResponsiveEditing
 				? __( 'Style all viewports.' )
 				: __( 'Preview desktop viewport.' ),
@@ -134,7 +134,7 @@ function PreviewMenu( { forceIsAutosaveable, disabled } ) {
 			? [
 					{
 						value: 'Tablet',
-						label: DEVICE_TYPE_METADATA.Tablet.label,
+						label: __( DEVICE_TYPE_METADATA.Tablet.label ),
 						info: isResponsiveEditing
 							? __( 'Style tablet only.' )
 							: __( 'Preview tablet viewport.' ),
@@ -145,7 +145,7 @@ function PreviewMenu( { forceIsAutosaveable, disabled } ) {
 			? [
 					{
 						value: 'Mobile',
-						label: DEVICE_TYPE_METADATA.Mobile.label,
+						label: __( DEVICE_TYPE_METADATA.Mobile.label ),
 						info: isResponsiveEditing
 							? __( 'Style mobile only.' )
 							: __( 'Preview mobile viewport.' ),

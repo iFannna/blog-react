@@ -21,36 +21,6 @@ const getShouldHideSourcesFilter = ( category ) => {
 	return category.name === sitePatternsCategory.name;
 };
 
-const PATTERN_SOURCE_MENU_OPTIONS = [
-	{
-		value: 'all',
-		label: _x( 'All', 'patterns' ),
-	},
-	{
-		value: INSERTER_PATTERN_TYPES.directory,
-		label: __( 'Pattern Directory' ),
-	},
-	{
-		value: INSERTER_PATTERN_TYPES.theme,
-		label: __( 'Theme & Plugins' ),
-	},
-	{
-		value: INSERTER_PATTERN_TYPES.user,
-		label: __( 'User' ),
-	},
-];
-
-const PATTERN_AUTHOR_MENU_OPTIONS = [
-	{
-		value: 'all',
-		label: _x( 'All', 'patterns' ),
-	},
-	{
-		value: INSERTER_AUTHOR_TYPES.currentUser,
-		label: __( 'My patterns' ),
-	},
-];
-
 export function PatternsFilter( {
 	setPatternSyncFilter,
 	setPatternSourceFilter,
@@ -84,6 +54,42 @@ export function PatternsFilter( {
 	// they're the only ones with an author on this site.
 	const shouldShowAuthorFilter =
 		currentPatternSourceFilter === INSERTER_PATTERN_TYPES.user;
+
+	const patternSourceMenuOptions = useMemo(
+		() => [
+			{
+				value: 'all',
+				label: _x( 'All', 'patterns' ),
+			},
+			{
+				value: INSERTER_PATTERN_TYPES.directory,
+				label: __( 'Pattern Directory' ),
+			},
+			{
+				value: INSERTER_PATTERN_TYPES.theme,
+				label: __( 'Theme & Plugins' ),
+			},
+			{
+				value: INSERTER_PATTERN_TYPES.user,
+				label: __( 'User' ),
+			},
+		],
+		[]
+	);
+
+	const patternAuthorMenuOptions = useMemo(
+		() => [
+			{
+				value: 'all',
+				label: _x( 'All', 'patterns' ),
+			},
+			{
+				value: INSERTER_AUTHOR_TYPES.currentUser,
+				label: __( 'My patterns' ),
+			},
+		],
+		[]
+	);
 
 	const patternSyncMenuOptions = useMemo(
 		() => [
@@ -144,7 +150,7 @@ export function PatternsFilter( {
 						{ ! shouldHideSourcesFilter && (
 							<MenuGroup label={ __( 'Source' ) }>
 								<MenuItemsChoice
-									choices={ PATTERN_SOURCE_MENU_OPTIONS }
+									choices={ patternSourceMenuOptions }
 									onSelect={ ( value ) => {
 										handleSetSourceFilterChange( value );
 										scrollContainerRef.current?.scrollTo(
@@ -159,7 +165,7 @@ export function PatternsFilter( {
 						{ shouldShowAuthorFilter && (
 							<MenuGroup label={ __( 'Author' ) }>
 								<MenuItemsChoice
-									choices={ PATTERN_AUTHOR_MENU_OPTIONS }
+									choices={ patternAuthorMenuOptions }
 									onSelect={ ( value ) => {
 										setPatternAuthorFilter( value );
 										scrollContainerRef.current?.scrollTo(

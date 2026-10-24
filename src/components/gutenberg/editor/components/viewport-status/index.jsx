@@ -37,6 +37,7 @@ export default function ViewportStatus() {
 	}
 
 	const { label, icon } = DEVICE_TYPE_METADATA[ deviceType ];
+	const deviceLabel = __( label );
 	// Allow a pixel of rounding difference between layout and the requested size.
 	const isConstrained =
 		physicalCanvasWidth !== undefined &&
@@ -81,10 +82,10 @@ export default function ViewportStatus() {
 					? sprintf(
 							// translators: 1: Viewport type, e.g. "Tablet". 2: Canvas dimensions, e.g. "800 × 400".
 							__( '%1$s (%2$s)' ),
-							label,
+							deviceLabel,
 							dimensions
 						)
-					: label }
+					: deviceLabel }
 			</Stack>
 		</Stack>
 	);
