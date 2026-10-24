@@ -185,11 +185,6 @@
 		"isLocked": false,
 		"user": null
 	},
-	"postLockUtils": {
-		"nonce": "3ed9641d8d",
-		"unlockNonce": "ebf7718a1d",
-		"ajaxUrl": "/admin-ajax.php"
-	},
 	"enableCustomFields": false,
 	"__experimentalBlockBindingsSupportedAttributes": {
 		"core/button": [

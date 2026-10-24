@@ -38,7 +38,7 @@ export function parseOrderValue( value: string ): Order {
  *
  * - A dynamic gallery passes `orderby/order` to the REST API in the editor (the
  *   `/wp/v2/media` collection params; see `dynamic-source.js`) and to a
- *   `WP_Query` on the front end (see `index.php`). Either way the database
+ *   server-side query on the front end. Either way the database
  *   orders by post date or post title.
  * - A static gallery orders its inner image blocks client-side from the same
  *   attachment fields (see `order-images.js`). Dates compare the same way.
@@ -67,7 +67,7 @@ export const ORDER_OPTIONS = [
 /**
  * The "Random" order. Unlike the orders above it isn't an `orderby`: it is the
  * gallery's `randomOrder` attribute, applied only on the front end by shuffling
- * the rendered images (see `index.php`), so the editor keeps showing the
+ * the rendered images, so the editor keeps showing the
  * underlying order. Offered as the last option of both modes' "Order by"
  * control, since it overrides whatever other order is in place.
  */

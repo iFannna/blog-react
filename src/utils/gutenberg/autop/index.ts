@@ -283,8 +283,8 @@ export function autop( text: string, br: boolean = true ): string {
 		// Note: `[\s\S]*?` is used (instead of `.*?`) so the match can span
 		// newlines, and the backreference `\1` (not `\\1`, which would be a
 		// literal backslash followed by `1` in a regex literal) ensures the
-		// opening and closing tag names match. This mirrors the PHP
-		// `wpautop()` behavior and also protects `svg` and `math` tags.
+		// opening and closing tag names match. This mirrors the
+		// server-side autop behavior and also protects `svg` and `math` tags.
 		text = text.replace(
 			/<(script|style|svg|math)[\s\S]*?<\/\1>/g,
 			( match ) => match.replace( /\n/g, '<WPPreserveNewline />' )

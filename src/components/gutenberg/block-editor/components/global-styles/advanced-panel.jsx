@@ -9,7 +9,7 @@ import { default as transformStyles } from '../../utils/transform-styles';
 
 /**
  * Validates that a CSS string doesn't contain HTML markup.
- * Uses the same validation as the PHP/global styles REST API.
+ * Uses the same validation as the global styles REST API.
  *
  * @param {string} css The CSS string to validate.
  * @return {boolean} True if the CSS is valid, false otherwise.

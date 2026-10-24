@@ -12,46 +12,11 @@ import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 } from '@/components/gutenberg/ui';
-import { store as coreStore } from '@/stores/gutenberg/core-data';
-import { useSelect } from '@/stores/gutenberg/data';
-import { createInterpolateElement } from '@/lib/gutenberg/element';
 import { __, isRTL } from '@/lib/gutenberg/i18n';
-import { Link, Text } from '@/components/gutenberg/design-system';
 import { addQueryArgs, removeQueryArgs } from '@/utils/gutenberg/url';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 import { useCommentAvatar, useUserAvatar } from './hooks';
 import UserControl from './user-control';
-
-/**
- * Returns the help text explaining where avatars come from, with a link to the
- * Discussion settings where the default avatar is chosen. Only users who can
- * manage the site's settings get it, since nobody else can act on it.
- *
- * @return {React.ReactNode|null} Help text, or `null` when the user can't manage settings.
- */
-function useAvatarHelpText() {
-	const canManageSettings = useSelect(
-		( select ) =>
-			select( coreStore ).canUser( 'update', {
-				kind: 'root',
-				name: 'site',
-			} ),
-		[]
-	);
-
-	if ( ! canManageSettings ) {
-		return null;
-	}
-
-	return createInterpolateElement(
-		__(
-			'Avatars use the Gravatar service. Go to <a>Discussion settings</a> to change the default avatar.'
-		),
-		{
-			a: <Link href="options-discussion.php" openInNewTab />,
-		}
-	);
-}
 
 /**
  * Renders the inspector controls for the `core/avatar` block.
@@ -71,7 +36,6 @@ const AvatarInspectorControls = ( {
 	selectUser,
 } ) => {
 	const dropdownMenuProps = useToolsPanelDropdownMenuProps();
-	const helpText = useAvatarHelpText();
 	return (
 		<InspectorControls>
 			<ToolsPanel
@@ -86,11 +50,6 @@ const AvatarInspectorControls = ( {
 				} }
 				dropdownMenuProps={ dropdownMenuProps }
 			>
-				{ helpText && (
-					<Text className="wp-block-avatar__help-text">
-						{ helpText }
-					</Text>
-				) }
 				<ToolsPanelItem
 					label={ __( 'Image size' ) }
 					isShownByDefault

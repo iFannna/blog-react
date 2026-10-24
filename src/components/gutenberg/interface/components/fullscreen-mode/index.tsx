@@ -4,7 +4,7 @@ import type { FullscreenModeProps } from './types';
 const FullscreenMode = ( { isActive }: FullscreenModeProps ) => {
 	useEffect( () => {
 		let isSticky = false;
-		// `is-fullscreen-mode` is set in PHP as a body class by Gutenberg, and this causes
+		// `is-fullscreen-mode` is set server-side as a body class, and this causes
 		// `sticky-menu` to be applied by WordPress and prevents the admin menu being scrolled
 		// even if `is-fullscreen-mode` is then removed. Let's remove `sticky-menu` here as
 		// a consequence of the FullscreenMode setup.

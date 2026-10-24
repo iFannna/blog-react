@@ -159,7 +159,7 @@ export const SETTINGS_DEFAULTS = {
 	blockStatesEditingEnabled: true,
 
 	// Whether the user can edit custom CSS (requires edit_css capability).
-	// Defaults to false for safety - PHP passes true when user has capability.
+	// Defaults to false for safety - the server passes true when user has capability.
 	canEditCSS: false,
 
 	// Allows to disable Openverse media category in the inserter.

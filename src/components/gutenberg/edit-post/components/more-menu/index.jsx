@@ -3,10 +3,9 @@ import { useViewportMatch } from '@/hooks/gutenberg/compose';
 import { privateApis as editorPrivateApis } from '@/components/gutenberg/editor';
 import { keyboardShortcut } from '@/utils/gutenberg/keycodes';
 import { unlock } from '../../lock-unlock';
-import ManagePatternsMenuItem from './manage-patterns-menu-item';
 import EditPostPreferencesModal from '../preferences-modal';
 
-const { MoreMenuPreferenceItem, ToolsMoreMenuGroup, ViewMoreMenuGroup } =
+const { MoreMenuPreferenceItem, ViewMoreMenuGroup } =
 	unlock( editorPrivateApis );
 
 const MoreMenu = () => {
@@ -29,9 +28,6 @@ const MoreMenu = () => {
 					/>
 				</ViewMoreMenuGroup>
 			) }
-			<ToolsMoreMenuGroup>
-				<ManagePatternsMenuItem />
-			</ToolsMoreMenuGroup>
 			<EditPostPreferencesModal />
 		</>
 	);

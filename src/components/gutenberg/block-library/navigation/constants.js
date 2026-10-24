@@ -11,10 +11,8 @@ export const PRIORITIZED_INSERTER_BLOCKS = [
 	'core/navigation-link/custom-link',
 ];
 
-// These parameters must be kept aligned with those in
-// lib/compat/wordpress-6.3/navigation-block-preloading.php
-// and
-// edit-site/src/components/sidebar-navigation-screen-navigation-menus/constants.js
+// These parameters must be kept aligned with the navigation menu query used
+// elsewhere in the editor.
 export const PRELOADED_NAVIGATION_MENUS_QUERY = {
 	per_page: 100,
 	status: [ 'publish', 'draft' ],

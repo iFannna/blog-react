@@ -799,7 +799,7 @@ export default function GalleryEdit( props ) {
 	}
 
 	useEffect( () => {
-		// linkTo attribute must be saved so blocks don't break when changing image_default_link_type in options.php.
+		// linkTo attribute must be saved so blocks don't break when the default link setting changes.
 		if ( ! linkTo ) {
 			__unstableMarkNextChangeAsNotPersistent();
 			setAttributes( {
@@ -889,7 +889,7 @@ export default function GalleryEdit( props ) {
 					 * `canUseDynamicSource` the way the inspector is (see
 					 * `dynamic-gallery.jsx`): even with no
 					 * post type to preview against, the source still resolves at
-					 * render time via `get_the_ID()` (see `index.php`) — e.g. in a
+					 * render time via the current post ID — e.g. in a
 					 * template part or pattern shown on a singular page.
 					 */ }
 					{ blockEditingMode === 'default' && (

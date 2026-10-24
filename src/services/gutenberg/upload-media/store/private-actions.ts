@@ -1946,8 +1946,8 @@ export function generateThumbnails( id: QueueItemId ) {
 /**
  * Finalizes an uploaded item by calling the server's finalize endpoint.
  *
- * This triggers the wp_generate_attachment_metadata filter so that PHP
- * plugins can process the attachment after all client-side operations
+ * This triggers the attachment metadata filter so that the server
+ * can process the attachment after all client-side operations
  * (including thumbnail sideloads) are complete.
  *
  * @param id Item ID.

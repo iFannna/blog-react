@@ -45,12 +45,6 @@ export { default as PostFeaturedImageCheck } from './post-featured-image/check';
 export { default as PostFormat } from './post-format';
 export { default as PostFormatCheck } from './post-format/check';
 
-
-
-export { default as PostLockedModal } from './post-locked-modal';
-
-
-
 export { default as PostPreviewButton } from './post-preview-button';
 export { default as PostPublishButton } from './post-publish-button';
 export { default as PostPublishButtonLabel } from './post-publish-button/label';

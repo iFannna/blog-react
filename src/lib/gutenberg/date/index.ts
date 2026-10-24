@@ -13,8 +13,6 @@ const WP_ZONE = 'WP';
 // See: https://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC
 const VALID_UTC_OFFSET = /^[+-][0-1][0-9](:?[0-9][0-9])?$/;
 
-// Changes made here will likely need to be synced with Core in the file
-// src/wp-includes/script-loader.php in `wp_default_packages_inline_scripts()`.
 let settings: DateSettings = {
 	l10n: {
 		locale: 'en',
@@ -241,7 +239,7 @@ const HOUR_IN_MINUTES = 60;
 const HOUR_IN_SECONDS = 60 * MINUTE_IN_SECONDS;
 
 /**
- * Map of PHP formats to Moment.js formats.
+ * Map of date formats to Moment.js formats.
  *
  * These are used internally by {@link format}, and are either
  * a string representing the corresponding Moment.js format code, or a
@@ -408,8 +406,7 @@ const formatMap = {
 /**
  * Formats a date. Does not alter the date's timezone.
  *
- * @param dateFormat PHP-style formatting string.
- *                   See [php.net/date](https://www.php.net/manual/en/function.date.php).
+ * @param dateFormat Date formatting string.
  * @param dateValue  Date object or string,
  *                   parsable by moment.js.
  *
@@ -427,8 +424,7 @@ export function format(
 		// Is this an escape?
 		if ( '\\' === char ) {
 			// Add next character, then move on. A final backslash is
-			// ignored to align with PHP:
-			// `var_dump( date( 'Y\\', 0 ) );` prints `string(5) "1970"`
+			// ignored.
 			i++;
 			if ( i < dateFormat.length ) {
 				newFormat.push( '[' + dateFormat[ i ] + ']' );
@@ -454,10 +450,9 @@ export function format(
 }
 
 /**
- * Formats a date (like `date()` in PHP).
+ * Formats a date.
  *
- * @param  dateFormat PHP-style formatting string.
- *                    See [php.net/date](https://www.php.net/manual/en/function.date.php).
+ * @param  dateFormat Date formatting string.
  * @param  dateValue  Date object or string, parsable
  *                    by moment.js.
  * @param  timezone   Timezone to output result in or a
@@ -479,10 +474,9 @@ export function date(
 }
 
 /**
- * Formats a date (like `date()` in PHP), in the UTC timezone.
+ * Formats a date in the UTC timezone.
  *
- * @param dateFormat PHP-style formatting string.
- *                   See [php.net/date](https://www.php.net/manual/en/function.date.php).
+ * @param dateFormat Date formatting string.
  * @param dateValue  Date object or string,
  *                   parsable by moment.js.
  *
@@ -497,13 +491,12 @@ export function gmdate(
 }
 
 /**
- * Formats a date (like `wp_date()` in PHP), translating it into site's locale.
+ * Formats a date, translating it into the site's locale.
  *
  * Backward Compatibility Notice: if `timezone` is set to `true`, the function
  * behaves like `gmdateI18n`.
  *
- * @param dateFormat PHP-style formatting string.
- *                   See [php.net/date](https://www.php.net/manual/en/function.date.php).
+ * @param dateFormat Date formatting string.
  * @param dateValue  Date object or string, parsable by
  *                   moment.js.
  * @param timezone   Timezone to output result in or a
@@ -536,11 +529,10 @@ export function dateI18n(
 }
 
 /**
- * Formats a date (like `wp_date()` in PHP), translating it into site's locale
+ * Formats a date, translating it into the site's locale
  * and using the UTC timezone.
  *
- * @param dateFormat PHP-style formatting string.
- *                   See [php.net/date](https://www.php.net/manual/en/function.date.php).
+ * @param dateFormat Date formatting string.
  * @param dateValue  Date object or string,
  *                   parsable by moment.js.
  *
@@ -587,7 +579,7 @@ export function getDate( dateString?: string | null ) {
 }
 
 /**
- * Returns a human-readable time difference between two dates, like human_time_diff() in PHP.
+ * Returns a human-readable time difference between two dates.
  *
  * @param from From date, in the WP timezone.
  * @param to   To date, formatted in the WP timezone.

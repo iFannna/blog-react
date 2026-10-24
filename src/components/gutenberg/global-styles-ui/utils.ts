@@ -21,7 +21,7 @@ export interface StateDefinition {
 
 /**
  * Valid states for elements with their labels.
- * This mirrors the PHP constant in lib/class-wp-theme-json-gutenberg.php
+ * This mirrors the server-side constant.
  */
 export const VALID_ELEMENT_STATES: Record< string, StateDefinition[] > = {
 	link: [
@@ -46,7 +46,7 @@ export const VALID_ELEMENT_STATES: Record< string, StateDefinition[] > = {
 
 /**
  * Valid states for blocks with their labels.
- * This mirrors the PHP constant in lib/class-wp-theme-json-gutenberg.php
+ * This mirrors the server-side constant.
  */
 export const VALID_BLOCK_STATES: Record< string, StateDefinition[] > = {
 	'core/button': [

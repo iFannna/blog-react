@@ -19,7 +19,7 @@ import type { CommandConfig } from '../store/types';
  *	   icon: plus,
  *     category: 'command',
  *     callback: ({ close }) => {
- *         document.location.href = 'post-new.php';
+ *         // Perform the action here.
  *         close();
  *     },
  * } );
@@ -81,7 +81,7 @@ export function useCommand( command: CommandConfig ) {
  *         icon: plus,
  *         category: 'command',
  *         callback: ({ close }) => {
- *             document.location.href = 'post-new.php';
+ *             // Perform the action here.
  *             close();
  *         },
  *     },
@@ -91,7 +91,7 @@ export function useCommand( command: CommandConfig ) {
  *         icon: pencil,
  *         category: 'view',
  *         callback: ({ close }) => {
- *             document.location.href = 'edit.php';
+ *             // Perform the action here.
  *             close();
  *         },
  *     },

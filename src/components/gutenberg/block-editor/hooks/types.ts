@@ -245,7 +245,7 @@ export interface AlignEditProps {
 export type BlockWithClassName = Block< { className?: string } >;
 
 /**
- * A block attribute that PHP marks for an auto-generated inspector control.
+ * A block attribute marked for an auto-generated inspector control.
  */
 export interface AutoGenerateAttribute extends BlockAttribute {
 	autoGenerateControl?: boolean;

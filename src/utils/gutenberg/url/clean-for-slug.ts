@@ -1,7 +1,7 @@
 import { removeAccents } from './remove-accents';
 
 /**
- * Strips HTML tags like PHP's `strip_tags()`: a `<` not followed by ASCII
+ * Strips HTML tags: a `<` not followed by ASCII
  * whitespace opens a tag, even an unclosed one, nested `<` need as many `>`,
  * a `>` inside quotes doesn't close a tag, and a comment ends at `-->`.
  *
@@ -16,7 +16,7 @@ function stripTags( string: string ): string {
 	for ( let i = 0; i < string.length; i++ ) {
 		const char = string[ i ];
 		if ( depth === 0 ) {
-			// Like PHP's `isspace()`, only ASCII whitespace keeps a `<`.
+			// Like `isspace()`, only ASCII whitespace keeps a `<`.
 			if (
 				char === '<' &&
 				! /[ \t\n\v\f\r]/.test( string[ i + 1 ] ?? '' )
@@ -50,7 +50,7 @@ function stripTags( string: string ): string {
 }
 
 /**
- * Truncates a string like PHP's `utf8_uri_encode()` with a length: keeps the
+ * Truncates a string to a byte length: keeps the
  * characters whose percent-encoded form fits in the length, counting each
  * ASCII character as one and any other character as three per UTF-8 byte,
  * without splitting a character.

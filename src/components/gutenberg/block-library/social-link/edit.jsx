@@ -144,7 +144,7 @@ const SocialLinkEdit = ( {
 	// The initial label (ie. the link text) is an empty string.
 	// We want to prevent empty links so that the link text always fallbacks to
 	// the social name, even when users enter and save an empty string or only
-	// spaces. The PHP render callback fallbacks to the social name as well.
+	// spaces. The rendered link falls back to the social name as well.
 	const socialLinkText = label.trim() === '' ? socialLinkName : label;
 
 	const ref = useRef();

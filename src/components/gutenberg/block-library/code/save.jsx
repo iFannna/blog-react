@@ -7,8 +7,7 @@ export default function save( { attributes } ) {
 			<RichText.Content
 				tagName="code"
 				// To do: `escape` encodes characters in shortcodes and URLs to
-				// prevent embedding in PHP. Ideally checks for the code block,
-				// or pre/code tags, should be made on the PHP side?
+				// prevent embedding issues.
 				value={ escape(
 					typeof attributes.content === 'string'
 						? attributes.content

@@ -7,7 +7,7 @@ type BlockSelector = NonNullable< BlockType[ 'selectors' ] >[ string ];
 /**
  * Returns the ancestor part of a block selector whose leading compound names
  * a different block, e.g. `.wp-block-list > ` in List Item's `.wp-block-list > li`.
- * Mirror of `gutenberg_get_state_selector_ancestor()` in PHP.
+ * Mirror of the server-side state selector helper.
  *
  * @param selector A single block or feature selector.
  * @param name     Name of the block being scoped.

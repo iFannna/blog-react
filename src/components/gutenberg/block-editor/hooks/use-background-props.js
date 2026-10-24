@@ -20,7 +20,7 @@ export function getBackgroundClassesAndStyles( attributes ) {
 	const { style } = attributes;
 	const backgroundStyles = style?.background || {};
 
-	// Mirrors gutenberg_render_background_support() in lib/block-supports/background.php.
+	// Mirrors the server-side background support helper.
 	const className =
 		'text' !== backgroundStyles.backgroundClip
 			? getBackgroundImageClasses( style )

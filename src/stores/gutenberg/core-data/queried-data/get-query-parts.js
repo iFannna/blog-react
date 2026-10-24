@@ -93,7 +93,7 @@ export function getQueryParts( query ) {
 				// While it could be any deterministic string, for simplicity's
 				// sake mimic querystring encoding for stable key.
 				//
-				// TODO: For consistency with PHP implementation, addQueryArgs
+				// TODO: For consistency with the server implementation, addQueryArgs
 				// should accept a key value pair, which may optimize its
 				// implementation for our use here, vs. iterating an object
 				// with only a single key.

@@ -14,7 +14,6 @@ import { store as editorStore } from '../../store';
 import PostTrash from '../post-trash';
 import { useFields } from '../../dataviews/fields-loader';
 import revisionsField from '../../dataviews/fields/revisions';
-import readingSettingsField from '../../dataviews/fields/reading-settings';
 
 const EMPTY_FORM = { layout: { type: 'panel' }, fields: [] };
 const VIEW_CONFIG_FIELDS = [ 'form' ];
@@ -67,7 +66,7 @@ function useInspectorPanelVisibility( form ) {
 		const isFieldVisible = ( id ) =>
 			id in visibilityById ? visibilityById[ id ] : ! isPostStatusRemoved;
 		// Recurse into `children` so a panel-tied field is dropped wherever it
-		// sits in the form: the PHP view-config filter can nest such a field
+		// sits in the form: the server view-config filter can nest such a field
 		// inside another field's group.
 		const filterFields = ( fields ) =>
 			fields.reduce( ( acc, field ) => {
@@ -292,23 +291,17 @@ export default function DataFormPostSummary( { onActionPerformed } ) {
 					return field;
 				} )
 				.filter( Boolean )
-				// Editor-only fields, injected here rather than registered on
-				// the server: `revisions` switches the editor to its revisions
-				// view and `reading_settings` shares its component with the
-				// legacy summary panel, so both read the editor store, which the
-				// script modules of `@wordpress/core-fields` cannot import.
+				// `revisions` switches the editor to its revisions view and
+				// reads the editor store, which the script modules of
+				// `@wordpress/core-fields` cannot import.
 				//
-				// Their ids are already in the form configurations the server
-				// builds (`revisions` in the default post type form and in the
-				// `wp_block`, `wp_template_part`, and `wp_template` ones,
-				// `reading_settings` in the `wp_template` one), yet nothing
-				// registers a field for them: every other consumer of those forms
-				// drops the ids for want of a field. The label is resolved here
+				// Its id is already in the form configurations the server
+				// builds (the default post type form and the `wp_block`,
+				// `wp_template_part`, and `wp_template` ones), yet nothing
+				// registers a field for it: every other consumer of those forms
+				// drops the id for want of a field. The label is resolved here
 				// because the field module is evaluated before locale data loads.
-				.concat(
-					{ ...revisionsField, label: __( 'Revisions' ) },
-					readingSettingsField
-				),
+				.concat( { ...revisionsField, label: __( 'Revisions' ) } ),
 		[ _fields, fieldNamespaces, postType ]
 	);
 

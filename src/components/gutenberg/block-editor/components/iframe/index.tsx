@@ -220,7 +220,7 @@ function Iframe( {
 
 		// Ideally ALL classes that are added through get_body_class should
 		// be added in the editor too, which we'll somehow have to get from
-		// the server in the future (which will run the PHP filters).
+		// the server in the future.
 		setBodyClasses(
 			Array.from( ownerDocument.body.classList ).filter(
 				( name ) =>

@@ -1016,7 +1016,7 @@ function pickStyleAndPseudoKeys(
  * Creates style nodes for configured block and element pseudo selectors.
  *
  * Only pseudo selectors listed in the matching block or element allow-list are
- * considered. This mirrors the PHP renderer and avoids treating arbitrary
+ * considered. This mirrors the server renderer and avoids treating arbitrary
  * colon-prefixed keys as pseudo selectors.
  *
  * @param node Style node that may contain configured pseudo styles.
@@ -1242,7 +1242,7 @@ export const getNodesWithStyles = (
 			// in the same node as this block's other default-state declarations,
 			// ahead of its viewport/pseudo-state nodes, so it wins over the
 			// block's own defaults but loses to a more specific state (matching
-			// the PHP renderer's per-node ordering).
+			// the server renderer's per-node ordering).
 			if ( typedNode?.css ) {
 				blockStyles.css = typedNode.css;
 			}
@@ -1478,7 +1478,7 @@ export const getNodesWithStyles = (
 			} );
 
 			// Add variation nodes AFTER the main block and its elements
-			// to match PHP processing order.
+			// to match server processing order.
 			nodes.push( ...variationNodesToAdd );
 		}
 	);
@@ -1697,7 +1697,7 @@ export const generateCustomProperties = (
  *
  * The node renderer handles feature-level selectors, duotone declarations,
  * layout styles, base declarations, and custom CSS. State nodes are expanded
- * before rendering so ordering matches the PHP renderer.
+ * before rendering so ordering matches the server renderer.
  *
  * @param node                          Style node metadata and styles.
  * @param context                       Render context and feature flags.
@@ -1848,7 +1848,7 @@ function renderStylesNode(
 	if ( styles?.css ) {
 		// A block can declare a dedicated selector for custom CSS (e.g. to
 		// target a different element than its other styles); fall back to
-		// this node's own selector otherwise. Mirrors the PHP renderer.
+		// this node's own selector otherwise. Mirrors the server renderer.
 		const cssFeatureSelector =
 			featureSelectors && typeof featureSelectors === 'object'
 				? featureSelectors.css
@@ -1943,7 +1943,7 @@ export const transformToStyles = (
 		// Root padding styles should be output for full templates, patterns and template parts.
 		if ( options.rootPadding && useRootPaddingAlign ) {
 			/*
-			 * These rules reproduce the ones from https://github.com/WordPress/gutenberg/blob/79103f124925d1f457f627e154f52a56228ed5ad/lib/class-wp-theme-json-gutenberg.php#L2508
+			 * These rules reproduce the ones from the server-side theme JSON renderer
 			 * almost exactly, but for the selectors that target block wrappers in the front end. This code only runs in the editor, so it doesn't need those selectors.
 			 */
 			ruleset += `padding-right: 0; padding-left: 0; padding-top: var(--wp--style--root--padding-top); padding-bottom: var(--wp--style--root--padding-bottom) }
@@ -1968,7 +1968,7 @@ export const transformToStyles = (
 				node,
 				responsiveMediaQueries
 			);
-			// Match PHP node order: base, responsive base, pseudo, responsive pseudo.
+			// Match server node order: base, responsive base, pseudo, responsive pseudo.
 			[
 				node,
 				...responsiveNodes,

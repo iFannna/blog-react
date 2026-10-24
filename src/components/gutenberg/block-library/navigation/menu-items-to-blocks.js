@@ -92,8 +92,6 @@ function mapMenuItemsToBlocks( menuItems, level = 0 ) {
 
 /**
  * A WP nav_menu_item object.
- * For more documentation on the individual fields present on a menu item please see:
- * https://core.trac.wordpress.org/browser/tags/5.7.1/src/wp-includes/nav-menu.php#L789
  *
  * @typedef WPNavMenuItem
  *

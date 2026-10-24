@@ -226,7 +226,7 @@ export default {
  */
 function addDuotoneAttributes( settings ) {
 	// Previous `color.__experimentalDuotone` support flag is migrated via
-	// block_type_metadata_settings filter in `lib/block-supports/duotone.php`.
+	// the block type metadata settings filter.
 	if ( ! hasBlockSupport( settings, 'filter.duotone' ) ) {
 		return settings;
 	}
@@ -266,7 +266,7 @@ function useDuotoneStyles( {
 	const isPreset = typeof duotoneAttr === 'string' && duotonePreset;
 	const isCSS = typeof duotoneAttr === 'string' && ! isPreset;
 
-	// Match the structure of WP_Duotone_Gutenberg::render_duotone_support() in PHP.
+	// Match the structure of the server-side duotone renderer.
 	let colors = null;
 	if ( isPreset ) {
 		// Array of colors.
@@ -327,7 +327,7 @@ function useDuotoneStyles( {
 		// colors are changed. When using Safari, force the block element to be
 		// repainted by the browser to ensure any changes are reflected
 		// visually. This logic matches that used on the site frontend in
-		// `block-supports/duotone.php`.
+		// the server-side duotone support.
 		if ( blockElement && isSafari ) {
 			const display = blockElement.style.display;
 			// Switch to `inline-block` to force a repaint. In the editor,

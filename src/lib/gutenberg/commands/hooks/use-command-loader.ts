@@ -53,11 +53,7 @@ import type { CommandLoaderConfig, CommandLoaderHook } from '../store/types';
  *                 icon: page,
  *                 category: 'edit',
  *                 callback: ( { close } ) => {
- *                     const args = {
- * 							p: '/page',
- * 							postId: record.id,
- *                     };
- *                     document.location = addQueryArgs( 'site-editor.php', args );
+ *                     // Perform the action here.
  *                     close();
  *                 },
  *             };

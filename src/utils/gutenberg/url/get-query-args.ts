@@ -68,7 +68,7 @@ function setPath( object: Record< string, any >, path: string[], value: any ) {
 export function getQueryArgs( url: string ): QueryArgs {
 	return (
 		( getQueryString( url ) || '' )
-			// Normalize space encoding, accounting for PHP URL encoding
+			// Normalize space encoding, accounting for form URL encoding
 			// corresponding to `application/x-www-form-urlencoded`.
 			//
 			// See: https://tools.ietf.org/html/rfc1866#section-8.2.1

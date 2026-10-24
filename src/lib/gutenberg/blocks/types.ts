@@ -610,8 +610,8 @@ export interface BlockType<
 	 */
 	viewStyle?: string | string[];
 	/**
-	 * PHP file to use when rendering the block type on the server
-	 * to show on the front end.
+	 * Server-side template file used to render the block type
+	 * on the front end.
 	 *
 	 * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/#render
 	 */

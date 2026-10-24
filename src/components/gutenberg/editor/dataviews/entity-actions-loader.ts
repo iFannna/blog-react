@@ -34,7 +34,7 @@ export interface EntityActionsConfig {
 
 /**
  * The JavaScript parts of the actions a script module provides, keyed by
- * action id: what PHP cannot serialize, such as `callback`, `RenderModal`,
+ * action id: what the server cannot serialize, such as `callback`, `RenderModal`,
  * or `isEligible`.
  *
  * It is the shape of the default export of a script module registered along

@@ -7,7 +7,7 @@ import {
 import { __, sprintf } from '@/lib/gutenberg/i18n';
 import { useCallback, useEffect, useState, useRef } from '@/lib/gutenberg/element';
 import { useSelect } from '@/stores/gutenberg/data';
-import { addQueryArgs, safeDecodeURIComponent } from '@/utils/gutenberg/url';
+import { safeDecodeURIComponent } from '@/utils/gutenberg/url';
 import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { useCopyToClipboard } from '@/hooks/gutenberg/compose';
 import { store as coreStore } from '@/stores/gutenberg/core-data';
@@ -90,12 +90,8 @@ export default function PostPublishPanelPostpublish( {
 
 	const postLabel = postType?.labels?.singular_name;
 	const viewPostLabel = postType?.labels?.view_item;
-	const addNewPostLabel = postType?.labels?.add_new_item;
 	const link =
 		post.status === 'future' ? getFuturePostUrl( post ) : post.link;
-	const addLink = addQueryArgs( 'post-new.php', {
-		post_type: post.type,
-	} );
 
 	const postLinkRef = useCallback(
 		( node ) => {
@@ -145,8 +141,8 @@ export default function PostPublishPanelPostpublish( {
 					</div>
 				</div>
 
-				<div className="post-publish-panel__postpublish-buttons">
-					{ ! isScheduled && (
+				{ ! isScheduled && (
+					<div className="post-publish-panel__postpublish-buttons">
 						<Button
 							variant="primary"
 							href={ link }
@@ -163,15 +159,8 @@ export default function PostPublishPanelPostpublish( {
 								}
 							</VisuallyHidden>
 						</Button>
-					) }
-					<Button
-						variant={ isScheduled ? 'primary' : 'secondary' }
-						__next40pxDefaultSize
-						href={ addLink }
-					>
-						{ addNewPostLabel }
-					</Button>
-				</div>
+					</div>
+				) }
 			</PanelBody>
 			{ children }
 		</div>

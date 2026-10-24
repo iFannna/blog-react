@@ -1,8 +1,8 @@
 /**
  * Generates URL-encoded query string using input query data.
  *
- * It is intended to behave equivalent as PHP's `http_build_query`, configured
- * with encoding type PHP_QUERY_RFC3986 (spaces as `%20`).
+ * It is intended to behave equivalently to a standard query string builder,
+ * with RFC 3986 encoding (spaces as `%20`).
  *
  * @example
  * ```js

@@ -95,7 +95,7 @@ function selectExistingMenu( select, ref ) {
 	// Only published Navigation posts are considered valid.
 	// Draft Navigation posts are valid only on the editor,
 	// requiring a post update to publish to show in frontend.
-	// To achieve that, index.php must reflect this validation only for published.
+	// To achieve that, the server must reflect this validation only for published.
 	const isNavigationMenuPublishedOrDraft =
 		editedNavigationMenu.status === 'publish' ||
 		editedNavigationMenu.status === 'draft';

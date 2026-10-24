@@ -5,7 +5,6 @@ import {
 	LocalAutosaveMonitor,
 	UnsavedChangesWarning,
 	ErrorBoundary,
-	PostLockedModal,
 	store as editorStore,
 	privateApis as editorPrivateApis,
 } from '@/components/gutenberg/editor';
@@ -18,7 +17,6 @@ import { useCallback, useMemo } from '@/lib/gutenberg/element';
 import { SnackbarNotices, store as noticesStore } from '@/stores/gutenberg/notices';
 import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import { privateApis as commandsPrivateApis } from '@/lib/gutenberg/commands';
-import { addQueryArgs } from '@/utils/gutenberg/url';
 import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { store as coreStore } from '@/stores/gutenberg/core-data';
 import {
@@ -30,7 +28,6 @@ import { Tooltip } from '@/components/gutenberg/design-system';
 import EditorInitialization from '../editor-initialization';
 import EditPostKeyboardShortcuts from '../keyboard-shortcuts';
 import InitPatternModal from '../init-pattern-modal';
-import BrowserURL from '../browser-url';
 import PostEditorMoreMenu from '../more-menu';
 import { store as editPostStore } from '../../store';
 import { unlock } from '../../lock-unlock';
@@ -207,20 +204,21 @@ function Layout( {
 		( actionId, items ) => {
 			switch ( actionId ) {
 				case 'move-to-trash':
-					{
-						document.location.href = addQueryArgs( 'edit.php', {
-							trashed: 1,
-							post_type: items[ 0 ].type,
-							ids: items[ 0 ].id,
-						} );
-					}
-					break;
 				case 'permanently-delete':
 					{
-						document.location.href = addQueryArgs( 'edit.php', {
-							deleted: 1,
-							post_type: items[ 0 ].type,
-						} );
+						const item = items[ 0 ];
+						const title =
+							typeof item.title === 'string'
+								? item.title
+								: item.title?.rendered;
+						createSuccessNotice(
+							sprintf(
+								actionId === 'move-to-trash'
+									? __( '"%s" moved to the trash.' )
+									: __( '"%s" permanently deleted.' ),
+								decodeEntities( title ) || __( '(no title)' )
+							)
+						);
 					}
 					break;
 				case 'duplicate-post':
@@ -239,19 +237,6 @@ function Layout( {
 							{
 								type: 'snackbar',
 								id: 'duplicate-post-action',
-								actions: [
-									{
-										label: __( 'Edit' ),
-										onClick: () => {
-											const postId = newItem.id;
-											document.location.href =
-												addQueryArgs( 'post.php', {
-													post: postId,
-													action: 'edit',
-												} );
-										},
-									},
-								],
 							}
 						);
 					}
@@ -288,12 +273,10 @@ function Layout( {
 								autoFocus
 								onActionPerformed={ onActionPerformed }
 							>
-								<PostLockedModal />
 								<EditorInitialization />
 								<FullscreenMode
 									isActive={ isFullscreenActive }
 								/>
-								{ ! settings.__previewOnly && <BrowserURL /> }
 								{ ! settings.__previewOnly && (
 									<UnsavedChangesWarning />
 								) }

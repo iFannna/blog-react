@@ -1,6 +1,5 @@
 /**
- * The fluid utilities must match the backend equivalent.
- * See: gutenberg_get_typography_font_size_value() in lib/block-supports/typography.php
+ * The fluid utilities must match the server-side equivalent.
  * ---------------------------------------------------------------
  */
 

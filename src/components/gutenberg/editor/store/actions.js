@@ -406,11 +406,7 @@ export const savePost =
 				args.length &&
 				! ( options.isAutosave && isManualSaveFailureShown )
 			) {
-				// A PHP fatal error's message, with its stack trace, comes in
-				// `data.error`, apart from the generic message WordPress shows.
-				const phpError = error.data?.error?.message;
-				const status = error.data?.status;
-				const message =
+				const status = error.data?.status;				const message =
 					error.message &&
 					! CLIENT_GENERATED_ERROR_CODES.includes( error.code )
 						? getFailureDetails( error.message )
@@ -427,14 +423,8 @@ export const savePost =
 				]
 					.filter( Boolean )
 					.join( ' ' );
-				const details = [
-					summary,
-					typeof phpError === 'string' ? phpError.trim() : '',
-				]
-					.filter( Boolean )
-					.join( '\n\n' );
-				if ( details ) {
-					args[ 1 ] = { ...args[ 1 ], details };
+				if ( summary ) {
+					args[ 1 ] = { ...args[ 1 ], details: summary };
 				}
 				if ( options.isAutosave ) {
 					const { NOTICE_SLOT } = unlock( noticesPrivateApis );

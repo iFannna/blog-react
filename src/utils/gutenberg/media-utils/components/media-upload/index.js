@@ -379,7 +379,7 @@ class MediaUpload extends Component {
 		wp.media.frame = this.frame;
 		// In order to select the current featured image when opening
 		// the media library we have to set the appropriate settings.
-		// Currently they are set in php for the post editor, but
+		// Currently they are set server-side for the post editor, but
 		// not for site editor.
 		wp.media.view.settings.post = {
 			...wp.media.view.settings.post,

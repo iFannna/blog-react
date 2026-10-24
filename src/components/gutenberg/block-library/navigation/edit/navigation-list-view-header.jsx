@@ -21,7 +21,6 @@ export default function NavigationListViewHeader( {
 	onCreateNew,
 	createNavigationMenuIsSuccess,
 	createNavigationMenuIsError,
-	isManageMenusButtonDisabled,
 } ) {
 	const blockTitle = useBlockDisplayTitle( {
 		clientId,
@@ -47,7 +46,6 @@ export default function NavigationListViewHeader( {
 					}
 					createNavigationMenuIsError={ createNavigationMenuIsError }
 					actionLabel={ actionLabel }
-					isManageMenusButtonDisabled={ isManageMenusButtonDisabled }
 				/>
 			) }
 		</HStack>

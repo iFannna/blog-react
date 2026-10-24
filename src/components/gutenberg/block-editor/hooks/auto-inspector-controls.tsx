@@ -30,10 +30,10 @@ function hasAutoGenerateControl(
 }
 
 /**
- * Renders DataForm-based inspector controls for auto-registered PHP-only blocks.
+ * Renders DataForm-based inspector controls for auto-registered blocks.
  *
  * Fields are generated on-the-fly from attributes marked with `autoGenerateControl`
- * during PHP registration.
+ * during block registration.
  *
  * @param props               Component props.
  * @param props.name          Block name.
@@ -79,7 +79,7 @@ function AutoRegisterControls( {
 
 	const blockType = getBlockType( name );
 
-	// Generate fields from user-defined attributes marked by PHP.
+	// Generate fields from user-defined attributes marked for auto-generation.
 	// The autoGenerateControl marker excludes block support attributes
 	// (which have their own UI) and internal state (role: 'local').
 	// Memoized since blockType.attributes don't change after registration.

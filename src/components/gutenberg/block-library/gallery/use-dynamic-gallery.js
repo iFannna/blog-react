@@ -24,7 +24,7 @@ const EMPTY_ARRAY = [];
  * Used to construct the (non-persisted) image blocks previewed in dynamic mode,
  * and the real image blocks created when a dynamic gallery is converted
  * ("pinned") back to individual images. The frontend equivalent is
- * `block_core_gallery_render_dynamic_image()` in `index.php`.
+ * the server-side dynamic image renderer.
  *
  * @param {Object} media             A media object as returned by the REST API.
  * @param {Object} galleryAttributes The gallery block's attributes.
@@ -40,14 +40,14 @@ function buildImageBlockAttributes( media, galleryAttributes ) {
 		...getHrefAndDestination( media, linkTo ),
 		...getUpdatedLinkTargetSettings( linkTarget, galleryAttributes ),
 		sizeSlug,
-		// Raw caption, mirroring the frontend (`index.php`). Gap: the REST API
-		// exposes no caption run through `wp_get_attachment_caption`, so neither
+		// Raw caption, mirroring the frontend. Gap: the REST API
+		// exposes no caption run through the caption filter, so neither
 		// side applies that filter.
 		caption: media.caption?.raw || '',
 		alt: media.alt_text || '',
 		aspectRatio: hasAspectRatio ? aspectRatio : undefined,
 		// Pair `scale` with `aspectRatio` so the image crops rather than stretches,
-		// matching the image block's UI and the frontend (`index.php`).
+		// matching the image block's UI and the frontend.
 		scale: hasAspectRatio ? 'cover' : undefined,
 	};
 }
@@ -101,8 +101,8 @@ export default function useDynamicGallery( {
 	// Whether dynamic mode makes sense in the current editing context. A
 	// `postType` means the block will resolve against some post at render time —
 	// either a concrete post (post/page editor, Query Loop item) or a post-bound
-	// template (`single`, `page`) whose post is filled in by `get_the_ID()` on the
-	// frontend (see `index.php`). Without it (template part, pattern, generic
+	// template (`single`, `page`) whose post is filled in by the current post ID on the
+	// frontend. Without it (template part, pattern, generic
 	// template) there's no post to attach to, so the source can never resolve.
 	const canUseDynamicSource = !! postType;
 

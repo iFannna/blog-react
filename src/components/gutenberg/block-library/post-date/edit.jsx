@@ -243,6 +243,5 @@ export function is12HourFormat( format ) {
 	// format characters: 'a', 'A', 'g', and 'h'. The character must be
 	// unescaped, i.e. not preceded by a '\'. Coincidentally, 'aAgh' is how I
 	// feel when working with regular expressions.
-	// https://www.php.net/manual/en/datetime.format.php
 	return /(?:^|[^\\])[aAgh]/.test( format );
 }

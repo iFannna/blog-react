@@ -69,7 +69,7 @@ export const MAX_IMAGES = 100;
  * Query block's `query` attribute); each source's resolver maps them to the
  * REST/transport names it needs. `core/attached-media` is a context-relative anchor
  * resolved here to the REST `parent` param. The server-side counterpart is
- * `block_core_gallery_resolve_dynamic_source()` in `index.php`.
+ * the gallery's dynamic source resolver.
  *
  * @param {Object} dynamicContent The gallery's `dynamicContent` attribute.
  * @param {Object} context        Resolution context.

@@ -58,10 +58,6 @@ declare module './base-entity-records' {
 			 */
 			requires_wp: string;
 			/**
-			 * Minimum required version of PHP.
-			 */
-			requires_php: string;
-			/**
 			 * The plugin's text domain.
 			 */
 			textdomain: ContextualField< string, 'view' | 'edit', C >;

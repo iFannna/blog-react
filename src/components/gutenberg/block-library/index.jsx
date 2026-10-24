@@ -299,7 +299,7 @@ export const registerCoreBlocks = (
 ) => {
 	blocks.forEach( ( { init } ) => init() );
 
-	// Auto-register PHP-only blocks with ServerSideRender
+	// Auto-register server-registered blocks with ServerSideRender
 	if ( window.__unstableAutoRegisterBlocks ) {
 		window.__unstableAutoRegisterBlocks.forEach( ( blockName ) => {
 			const bootstrappedBlockType = unlock(
@@ -307,7 +307,7 @@ export const registerCoreBlocks = (
 			).getBootstrappedBlockType( blockName );
 
 			registerBlockType( blockName, {
-				// Use all metadata from PHP registration,
+				// Use all metadata from block registration,
 				// but fall back title to block name if not provided,
 				// ensure minimum apiVersion 3 for block wrapper support,
 				// and override with a ServerSideRender-based edit function.
@@ -318,7 +318,7 @@ export const registerCoreBlocks = (
 				} ),
 				// Always pass the postId context so the server-side render can
 				// reproduce the same output as the front end, while preserving
-				// any context declared in the block's PHP registration.
+				// any context declared in the block's registration.
 				usesContext: Array.from(
 					new Set( [
 						...( bootstrappedBlockType?.usesContext ?? [] ),

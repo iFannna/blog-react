@@ -60,7 +60,7 @@ const TAG_NAME_MESSAGES = {
 const DEFAULT_INNER_PADDING = '4px';
 const PERCENTAGE_WIDTHS = [ 25, 50, 75, 100 ];
 
-// Keep this block-specific icon aligned with the PHP renderer. Unlike the
+// Keep this block-specific icon aligned with the server renderer. Unlike the
 // Search icon from @wordpress/icons, it remains fill-based so existing theme
 // styles continue to work in both the editor and the front end.
 const searchBlockIcon = (

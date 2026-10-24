@@ -4,7 +4,7 @@ import { __, sprintf } from '@/lib/gutenberg/i18n';
  * `apiFetch` rejection codes that say nothing about what actually went wrong.
  *
  * Both are produced when the response body could not be read as a REST error:
- * `invalid_json` when it is not JSON at all (a PHP fatal, a proxy error page,
+ * `invalid_json` when it is not JSON at all (a server fatal, a proxy error page,
  * a truncated response), and `unknown_error` when it parses to nothing. The
  * request failed on the server in every one of those cases, so the code is an
  * implementation detail rather than something worth showing a user.

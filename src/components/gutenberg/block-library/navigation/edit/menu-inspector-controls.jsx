@@ -95,7 +95,6 @@ const MenuInspectorControls = ( props ) => {
 		onCreateNew,
 		onSelectClassicMenu,
 		onSelectNavigationMenu,
-		isManageMenusButtonDisabled,
 		blockEditingMode,
 	} = props;
 
@@ -130,9 +129,6 @@ const MenuInspectorControls = ( props ) => {
 						createNavigationMenuIsError={
 							createNavigationMenuIsError
 						}
-						isManageMenusButtonDisabled={
-							isManageMenusButtonDisabled
-						}
 					/>
 					<MainContent
 						{ ...props }
@@ -164,9 +160,6 @@ const MenuInspectorControls = ( props ) => {
 							createNavigationMenuIsError
 						}
 						actionLabel={ actionLabel }
-						isManageMenusButtonDisabled={
-							isManageMenusButtonDisabled
-						}
 					/>
 				) }
 				<MainContent { ...props } expandRevision={ expandRevision } />

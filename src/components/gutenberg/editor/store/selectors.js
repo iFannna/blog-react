@@ -682,7 +682,7 @@ export function isEditedPostBeingScheduled( state ) {
  * Returns whether the current post should be considered to have a "floating"
  * date (i.e. that it would publish "Immediately" rather than at a set time).
  *
- * Unlike in the PHP backend, the REST API returns a full date string for posts
+ * The REST API returns a full date string for posts
  * where the 0000-00-00T00:00:00 placeholder is present in the database. To
  * infer that a post is set to publish "Immediately" we check whether the date
  * and modified date are the same.

@@ -73,7 +73,7 @@ export function getFluidTypographyOptionsFromSettings(
  * Returns a font-size value based on a given font-size preset.
  * Takes into account fluid typography parameters and attempts to return a css formula depending on available, valid values.
  *
- * The Core PHP equivalent is wp_get_typography_font_size_value().
+ * The server-side equivalent is the typography font size value helper.
  *
  * @param preset   A typography preset object containing size and fluid properties.
  * @param settings Global styles settings object containing typography and layout settings.

@@ -63,8 +63,8 @@ const DEFAULT_COLOR = '#000';
  * editor nor the front end can render.
  *
  * Surviving colors are normalized because the two ends disagree on syntax. The
- * front end parses duotone colors with a PHP port of colord that only accepts
- * hex, `rgb()` and `hsl()` (`WP_Duotone::colord_parse`), while colord in the
+ * front end parses duotone colors with a server-side port of colord that only accepts
+ * hex, `rgb()` and `hsl()`, while colord in the
  * editor also accepts CSS named colors such as `red`, since `namesPlugin` is
  * registered. Passing a palette value straight through would let a named color
  * be saved as a duotone that renders in the editor and is dropped, with a

@@ -30,10 +30,6 @@ declare module './base-entity-records' {
 			 */
 			name: RenderedText< 'edit' >;
 			/**
-			 * The minimum PHP version required for the theme to work.
-			 */
-			requires_php: string;
-			/**
 			 * The minimum WordPress version required for the theme to work.
 			 */
 			requires_wp: string;

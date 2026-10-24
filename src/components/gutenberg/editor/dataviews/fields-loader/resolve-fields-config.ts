@@ -14,7 +14,7 @@ export type FieldsConfig = {
 
 /**
  * The JavaScript parts of the fields a script module provides, keyed by field
- * id: what PHP cannot serialize, such as `render`, `Edit`, or `getElements`.
+ * id: what the server cannot serialize, such as `render`, `Edit`, or `getElements`.
  * It is the shape of the default export of a script module registered along
  * with fields on the server.
  */

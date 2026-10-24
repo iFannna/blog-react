@@ -22,9 +22,9 @@ export default function UnsavedChangesWarning() {
 		 */
 		const warnIfUnsavedChanges = ( event ) => {
 			// We need to call the selector directly in the listener to avoid race
-			// conditions with `BrowserURL` where `componentDidUpdate` gets the
-			// new value of `isEditedPostDirty` before this component does,
-			// causing this component to incorrectly think a trashed post is still dirty.
+			// conditions where the new value of `isEditedPostDirty` arrives before
+			// this component does, causing it to incorrectly think a trashed post
+			// is still dirty.
 			const dirtyEntityRecords = __experimentalGetDirtyEntityRecords();
 			if ( dirtyEntityRecords.length > 0 ) {
 				event.returnValue = __(

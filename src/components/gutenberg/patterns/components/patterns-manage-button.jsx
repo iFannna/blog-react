@@ -7,7 +7,6 @@ import { isReusableBlock } from '@/lib/gutenberg/blocks';
 import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import { useState } from '@/lib/gutenberg/element';
 import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
-import { addQueryArgs } from '@/utils/gutenberg/url';
 import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { store as patternsStore } from '../store';
 import { unlock } from '../lock-unlock';
@@ -19,7 +18,6 @@ function PatternsManageButton( { clientId, onClose } ) {
 		attributes,
 		canDetach,
 		isVisible,
-		managePatternsUrl,
 		isSyncedPattern,
 		isUnsyncedPattern,
 		canEdit,
@@ -56,19 +54,6 @@ function PatternsManageButton( { clientId, onClose } ) {
 				isUnsyncedPattern: _isUnsyncedPattern,
 				isSyncedPattern: _isSyncedPattern,
 				isVisible: _isUnsyncedPattern || _isSyncedPattern,
-				// The site editor and templates both check whether the user
-				// has edit_theme_options capabilities. We can leverage that here
-				// and omit the manage patterns link if the user can't access it.
-				managePatternsUrl: canUser( 'create', {
-					kind: 'postType',
-					name: 'wp_template',
-				} )
-					? addQueryArgs( 'site-editor.php', {
-							p: '/pattern',
-						} )
-					: addQueryArgs( 'edit.php', {
-							post_type: 'wp_block',
-						} ),
 			};
 		},
 		[ clientId ]
@@ -128,9 +113,6 @@ function PatternsManageButton( { clientId, onClose } ) {
 					</ConfirmDialog>
 				</>
 			) }
-			<MenuItem href={ managePatternsUrl }>
-				{ __( 'Manage patterns' ) }
-			</MenuItem>
 		</>
 	);
 }

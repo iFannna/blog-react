@@ -56,7 +56,7 @@ import useConvertClassicToBlockMenu, {
 import useCreateNavigationMenu from './use-create-navigation-menu';
 import { useInnerBlocks } from './use-inner-blocks';
 import { detectColors } from './utils';
-import ManageMenusButton from './manage-menus-button';
+
 import MenuInspectorControls from './menu-inspector-controls';
 import DeletedNavigationWarning from './deleted-navigation-warning';
 import AccessibleDescription from './accessible-description';
@@ -757,9 +757,6 @@ function Navigation( {
 		navMenuResolvedButMissing,
 	] );
 
-	const hasManagePermissions =
-		canUserCreateNavigationMenus || canUserUpdateNavigationMenu;
-
 	const overlayMenuPreviewClasses = clsx(
 		'wp-block-navigation__overlay-menu-preview',
 		{ open: overlayMenuPreview }
@@ -955,8 +952,6 @@ function Navigation( {
 
 	const accessibleDescriptionId = `${ clientId }-desc`;
 	const isHiddenByDefault = 'always' === overlayMenu;
-	const isManageMenusButtonDisabled =
-		! hasManagePermissions || ! hasResolvedNavigationMenus;
 
 	if ( hasUnsavedBlocks && ! isCreatingNavigationMenu ) {
 		return (
@@ -969,7 +964,6 @@ function Navigation( {
 					createNavigationMenuIsError={ createNavigationMenuIsError }
 					currentMenuId={ ref }
 					isNavigationMenuMissing={ isNavigationMenuMissing }
-					isManageMenusButtonDisabled={ isManageMenusButtonDisabled }
 					onCreateNew={ createUntitledEmptyNavigationMenu }
 					onSelectClassicMenu={ onSelectClassicMenu }
 					onSelectNavigationMenu={ onSelectNavigationMenu }
@@ -1023,7 +1017,6 @@ function Navigation( {
 					createNavigationMenuIsError={ createNavigationMenuIsError }
 					currentMenuId={ ref }
 					isNavigationMenuMissing={ isNavigationMenuMissing }
-					isManageMenusButtonDisabled={ isManageMenusButtonDisabled }
 					onCreateNew={ createUntitledEmptyNavigationMenu }
 					onSelectClassicMenu={ onSelectClassicMenu }
 					onSelectNavigationMenu={ onSelectNavigationMenu }
@@ -1092,7 +1085,6 @@ function Navigation( {
 				createNavigationMenuIsError={ createNavigationMenuIsError }
 				currentMenuId={ ref }
 				isNavigationMenuMissing={ isNavigationMenuMissing }
-				isManageMenusButtonDisabled={ isManageMenusButtonDisabled }
 				onCreateNew={ createUntitledEmptyNavigationMenu }
 				onSelectClassicMenu={ onSelectClassicMenu }
 				onSelectNavigationMenu={ onSelectNavigationMenu }
@@ -1125,10 +1117,6 @@ function Navigation( {
 										} }
 									/>
 								) }
-							<ManageMenusButton
-								disabled={ isManageMenusButtonDisabled }
-								className="wp-block-navigation-manage-menus-button"
-							/>
 						</InspectorControls>
 					) }
 

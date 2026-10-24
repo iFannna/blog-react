@@ -214,7 +214,7 @@ function paintsItsOwnBackground( stateStyles ) {
 
 /**
  * Returns a state's clip, or `undefined` when it is not a valid clip value.
- * Mirrors the PHP helpers, which ignore invalid clips.
+ * Mirrors the server-side helpers, which ignore invalid clips.
  *
  * @param {Object} stateStyles State style object.
  * @return {string|undefined} The state's valid clip value.
@@ -488,7 +488,7 @@ function getStateStyleGroups( stateStyles, name ) {
  */
 export function getBlockStateStylesCSS( stateStyles, options ) {
 	const { name, baseSelector, state = '' } = options;
-	// Mirror of the PHP gate: only a block that supports the clip can sit
+	// Mirror of the server-side gate: only a block that supports the clip can sit
 	// under a text clip to escape.
 	const baseStyle = hasBlockSupport( name, [
 		BACKGROUND_SUPPORT_KEY,

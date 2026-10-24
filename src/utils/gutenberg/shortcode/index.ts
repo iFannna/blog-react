@@ -119,9 +119,6 @@ export function string( options: ShortcodeOptions ): string {
 /**
  * Generate a RegExp to identify a shortcode.
  *
- * The base regex is functionally equivalent to the one found in
- * `get_shortcode_regex()` in `wp-includes/shortcodes.php`.
- *
  * Capture groups:
  *
  * 1. An extra `[` to allow for escaping shortcodes with double `[[]]`
@@ -166,8 +163,7 @@ export const attrs = memize( ( text: string ): ShortcodeAttrs => {
 	const named: Record< string, string | undefined > = {};
 	const numeric: string[] = [];
 
-	// This regular expression is reused from `shortcode_parse_atts()` in
-	// `wp-includes/shortcodes.php`.
+	// This regular expression is reused from the shortcode attribute parser.
 	//
 	// Capture groups:
 	//
