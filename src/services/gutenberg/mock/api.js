@@ -1,24 +1,5 @@
 import apiFetch from '@/services/gutenberg/api-fetch';
-import {
-	BASE,
-	BLOCK_PATTERN_CATEGORIES,
-	BLOCK_PATTERNS,
-	CATEGORIES,
-	GLOBAL_STYLES,
-	GLOBAL_STYLES_ID,
-	MEDIA,
-	POST_ID,
-	POSTS_INDEX,
-	REVISIONS,
-	SITE_SETTINGS,
-	TAGS,
-	TAXONOMIES,
-	THEME,
-	TYPES,
-	USER,
-	createMediaRecord,
-	createPost,
-} from './data.js';
+import { POST_ID, createMockData } from './data.js';
 import themeGlobalStyles from '@/lib/gutenberg/fixtures/theme.json';
 
 const ALLOW_HEADER = 'GET, POST, PUT, PATCH, DELETE, OPTIONS';
@@ -82,142 +63,17 @@ function toString( value ) {
 let mockLocale = 'zh_CN';
 const isEnglish = () => mockLocale === 'en_US';
 
-const EN_TYPE_LABELS = {
-	post: {
-		name: 'Posts',
-		singular_name: 'Post',
-		view_item: 'View post',
-		view_items: 'View posts',
-		item_published: 'Post published.',
-		item_published_privately: 'Post published privately.',
-		item_scheduled: 'Post scheduled.',
-		item_updated: 'Post updated.',
-		item_reverted_to_draft: 'Post reverted to draft.',
-		item_trashed: 'Post moved to trash.',
-	},
-	page: {
-		name: 'Pages',
-		singular_name: 'Page',
-		view_item: 'View page',
-		view_items: 'View pages',
-		item_published: 'Page published.',
-		item_published_privately: 'Page published privately.',
-		item_scheduled: 'Page scheduled.',
-		item_updated: 'Page updated.',
-		item_reverted_to_draft: 'Page reverted to draft.',
-		item_trashed: 'Page moved to trash.',
-	},
-	attachment: { name: 'Media', singular_name: 'Media' },
-	wp_block: { name: 'Patterns', singular_name: 'Pattern' },
-};
-
-function localizeTypes( types ) {
-	if ( ! isEnglish() ) {
-		return types;
-	}
-	return Object.fromEntries(
-		Object.entries( types ).map( ( [ key, type ] ) => [
-			key,
-			type?.labels
-				? { ...type, labels: { ...type.labels, ...( EN_TYPE_LABELS[ key ] || {} ) } }
-				: type,
-		] )
-	);
-}
-
-const EN_TAXONOMY_LABELS = {
-	category: {
-		name: 'Categories',
-		singular_name: 'Category',
-		search_items: 'Search Categories',
-		all_items: 'All Categories',
-		edit_item: 'Edit Category',
-		update_item: 'Update Category',
-		add_new_item: 'Add New Category',
-		new_item_name: 'New Category Name',
-		parent_item: 'Parent Category',
-		parent_item_colon: 'Parent Category:',
-		menu_name: 'Categories',
-	},
-	post_tag: {
-		name: 'Tags',
-		singular_name: 'Tag',
-		search_items: 'Search Tags',
-		all_items: 'All Tags',
-		edit_item: 'Edit Tag',
-		update_item: 'Update Tag',
-		add_new_item: 'Add New Tag',
-		new_item_name: 'New Tag Name',
-		menu_name: 'Tags',
-	},
-	wp_pattern_category: {
-		name: 'Pattern Categories',
-		singular_name: 'Pattern Category',
-		menu_name: 'Pattern Categories',
-	},
-};
-
-function localizeTaxonomies( taxonomies ) {
-	if ( ! isEnglish() ) {
-		return taxonomies;
-	}
-	return Object.fromEntries(
-		Object.entries( taxonomies ).map( ( [ key, taxonomy ] ) => [
-			key,
-			taxonomy?.labels
-				? {
-						...taxonomy,
-						labels: {
-							...taxonomy.labels,
-							...( EN_TAXONOMY_LABELS[ key ] || {} ),
-						},
-				  }
-				: taxonomy,
-		] )
-	);
-}
-
-function localizeUser( user ) {
-	return isEnglish()
-		? { ...user, name: 'Admin', nickname: 'Admin', locale: 'en_US' }
-		: user;
-}
-
 export function installMockApi( locale = 'zh_CN' ) {
 	mockLocale = locale;
-	let post = createPost();
-	try {
-		const persisted = JSON.parse(
-			localStorage.getItem( 'gutenberg-editor-post' ) || 'null'
-		);
-		if ( persisted ) {
-			post = { ...post, ...persisted };
-			// Drop the old demo brand from already-persisted state.
-			if ( post.slug === 'gutenberg-editor-demo' ) {
-				post.slug = 'editor-demo';
-			}
-		}
-	} catch {
-		// Ignore corrupted demo state.
-	}
+	const store = createMockData( locale );
+	let post = store.post;
 
-	const persist = () => {
-		localStorage.setItem(
-			'gutenberg-editor-post',
-			JSON.stringify( {
-				title: post.title,
-				content: post.content,
-				excerpt: post.excerpt,
-				status: post.status,
-				slug: post.slug,
-				comment_status: post.comment_status,
-				ping_status: post.ping_status,
-				categories: post.categories,
-				tags: post.tags,
-				modified: post.modified,
-			} )
-		);
-	};
+	// The demo is session-only; drop any state persisted by earlier builds.
+	try {
+		localStorage.removeItem( 'gutenberg-editor-post' );
+	} catch {
+		// Ignore unavailable storage.
+	}
 
 	const uploadedMedia = [];
 	let nextMediaId = 600;
@@ -287,41 +143,41 @@ export function installMockApi( locale = 'zh_CN' ) {
 
 		// REST root (base entity).
 		if ( pathname === '/' || pathname === '' ) {
-			return respond( BASE );
+			return respond( store.base );
 		}
 		if ( pathname === '/wp/v2' || pathname === '/wp/v2/' ) {
-			return respond( POSTS_INDEX );
+			return respond( store.postsIndex );
 		}
 
 		// Users.
 		if ( pathname === '/wp/v2/users/me' ) {
-			return respond( localizeUser( USER ) );
+			return respond( store.user );
 		}
 		if ( pathname === '/wp/v2/users' ) {
-			return respond( [ localizeUser( USER ) ] );
+			return respond( [ store.user ] );
 		}
 
 		// Post types & taxonomies (collection and single record).
 		if ( pathname === '/wp/v2/types' ) {
-			return respond( localizeTypes( TYPES ) );
+			return respond( store.types );
 		}
 		const typeMatch = pathname.match( /^\/wp\/v2\/types\/([^/]+)$/ );
 		if ( typeMatch ) {
-			return respond( localizeTypes( TYPES )[ typeMatch[ 1 ] ] ?? {} );
+			return respond( store.types[ typeMatch[ 1 ] ] ?? {} );
 		}
 		if ( pathname === '/wp/v2/taxonomies' ) {
-			return respond( localizeTaxonomies( TAXONOMIES ) );
+			return respond( store.taxonomies );
 		}
 		const taxonomyMatch = pathname.match( /^\/wp\/v2\/taxonomies\/([^/]+)$/ );
 		if ( taxonomyMatch ) {
 			return respond(
-				localizeTaxonomies( TAXONOMIES )[ taxonomyMatch[ 1 ] ] ?? {}
+				store.taxonomies[ taxonomyMatch[ 1 ] ] ?? {}
 			);
 		}
 
 		// Themes & global styles.
 		if ( pathname === '/wp/v2/themes' ) {
-			return respond( [ THEME ] );
+			return respond( [ store.theme ] );
 		}
 		if ( /^\/wp\/v2\/global-styles\/themes\/[^/]+\/variations$/.test( pathname ) ) {
 			return respond( [] );
@@ -332,22 +188,22 @@ export function installMockApi( locale = 'zh_CN' ) {
 			// the color palette and breaks preset overlay colors, etc.
 			return respond( themeGlobalStyles );
 		}
-		if ( pathname === `/wp/v2/global-styles/${ GLOBAL_STYLES_ID }` ) {
+		if ( pathname === `/wp/v2/global-styles/${ store.globalStyles.id }` ) {
 			if ( method === 'GET' ) {
-				return respond( GLOBAL_STYLES );
+				return respond( store.globalStyles );
 			}
-			return respond( GLOBAL_STYLES );
+			return respond( store.globalStyles );
 		}
-		if ( pathname === `/wp/v2/global-styles/${ GLOBAL_STYLES_ID }/revisions` ) {
+		if ( pathname === `/wp/v2/global-styles/${ store.globalStyles.id }/revisions` ) {
 			return respond( [] );
 		}
 
 		// Patterns.
 		if ( pathname === '/wp/v2/block-patterns/categories' ) {
-			return respond( BLOCK_PATTERN_CATEGORIES );
+			return respond( store.blockPatternCategories );
 		}
 		if ( pathname === '/wp/v2/block-patterns/patterns' ) {
-			return respond( BLOCK_PATTERNS );
+			return respond( store.blockPatterns );
 		}
 		if ( pathname === '/wp/v2/wp_pattern_category' ) {
 			return respond( method === 'GET' ? [] : {} );
@@ -356,9 +212,9 @@ export function installMockApi( locale = 'zh_CN' ) {
 		// Site settings.
 		if ( pathname === '/wp/v2/settings' ) {
 			if ( method === 'GET' ) {
-				return respond( SITE_SETTINGS );
+				return respond( store.siteSettings );
 			}
-			return respond( { ...SITE_SETTINGS, ...( options.data || {} ) } );
+			return respond( { ...store.siteSettings, ...( options.data || {} ) } );
 		}
 
 		// Editor package endpoints.
@@ -544,14 +400,14 @@ export function installMockApi( locale = 'zh_CN' ) {
 						? { parent: options.data?.parent || 0 }
 						: {} ),
 				};
-				( isCategory ? CATEGORIES : TAGS ).push( term );
+				( isCategory ? store.categories : store.tags ).push( term );
 				return respond( term );
 			}
-			return respond( isCategory ? CATEGORIES : TAGS );
+			return respond( isCategory ? store.categories : store.tags );
 		}
 		const termMatch = pathname.match( /^\/wp\/v2\/(categories|tags)\/(\d+)$/ );
 		if ( termMatch ) {
-			const terms = termMatch[ 1 ] === 'categories' ? CATEGORIES : TAGS;
+			const terms = termMatch[ 1 ] === 'categories' ? store.categories : store.tags;
 			return respond(
 				terms.find( ( term ) => String( term.id ) === termMatch[ 2 ] ) || {}
 			);
@@ -569,7 +425,7 @@ export function installMockApi( locale = 'zh_CN' ) {
 			const url = await readFileAsDataURL( file );
 			const dimensions = await getImageDimensions( url );
 			const title = file.name.replace( /\.[^.]+$/, '' );
-			const item = createMediaRecord( {
+			const item = store.createMediaRecord( {
 				id: nextMediaId++,
 				url,
 				file: file.name,
@@ -584,7 +440,7 @@ export function installMockApi( locale = 'zh_CN' ) {
 			return respond( item );
 		}
 		if ( pathname === '/wp/v2/media' && method === 'GET' ) {
-			let items = [ ...uploadedMedia, ...MEDIA ];
+			let items = [ ...uploadedMedia, ...store.media ];
 			const include = query.get( 'include' );
 			if ( include ) {
 				const ids = include.split( ',' );
@@ -629,7 +485,7 @@ export function installMockApi( locale = 'zh_CN' ) {
 		}
 		const mediaMatch = pathname.match( /^\/wp\/v2\/media\/(\d+)$/ );
 		if ( mediaMatch && method === 'GET' ) {
-			const item = [ ...uploadedMedia, ...MEDIA ].find(
+			const item = [ ...uploadedMedia, ...store.media ].find(
 				( media ) => String( media.id ) === mediaMatch[ 1 ]
 			);
 			return item ? respond( item ) : notFound();
@@ -639,19 +495,18 @@ export function installMockApi( locale = 'zh_CN' ) {
 		if ( pathname === `/wp/v2/pages/${ POST_ID }/autosaves` ) {
 			if ( method === 'POST' ) {
 				post = mergePost( post, options.data );
-				persist();
 				return respond( { ...post, autosave: true } );
 			}
 			return respond( [] );
 		}
 		if ( pathname === `/wp/v2/pages/${ POST_ID }/revisions` ) {
-			return respond( REVISIONS );
+			return respond( store.revisions );
 		}
 		const revisionMatch = pathname.match(
 			new RegExp( `^/wp/v2/pages/${ POST_ID }/revisions/(\\d+)$` )
 		);
 		if ( revisionMatch && method === 'GET' ) {
-			const revision = REVISIONS.find(
+			const revision = store.revisions.find(
 				( item ) => String( item.id ) === revisionMatch[ 1 ]
 			);
 			return revision ? respond( revision ) : notFound();
@@ -663,7 +518,6 @@ export function installMockApi( locale = 'zh_CN' ) {
 				return respond( post );
 			}
 			post = mergePost( post, options.data );
-			persist();
 			return respond( post );
 		}
 		if ( pathname === '/wp/v2/pages' ) {
