@@ -19,6 +19,112 @@ const POST_CONTENT = `<!-- wp:heading -->
 <ul class="wp-block-list"><!-- wp:list-item --><li>摘要、分类和标签显示在右侧文档设置中。</li><!-- /wp:list-item --><!-- wp:list-item --><li>讨论面板用于切换是否允许评论。</li><!-- /wp:list-item --><!-- wp:list-item --><li>点击右上角的发布按钮可以打开预发布面板。</li><!-- /wp:list-item --></ul>
 <!-- /wp:list -->`;
 
+export const BLOCK_PATTERN_CATEGORIES = [
+	{ name: 'featured', label: '精选' },
+	{ name: 'call-to-action', label: '行动号召' },
+	{ name: 'layout', label: '布局' },
+];
+
+export const BLOCK_PATTERNS = [
+	{
+		id: 101,
+		name: 'demo/hero',
+		title: '首屏：标题与按钮',
+		description: '标题、说明文字和两个按钮组成的首屏区域。',
+		categories: [ 'featured', 'call-to-action' ],
+		viewport_width: 1200,
+		block_types: [],
+		post_types: [ 'page' ],
+		source: 'theme',
+		inserter: true,
+		content: `<!-- wp:group {"layout":{"type":"constrained"}} -->
+<div class="wp-block-group"><!-- wp:heading {"level":1} -->
+<h1 class="wp-block-heading">为你的下一篇博客写一个漂亮的开头</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>用标题、说明和按钮快速搭出首屏，插入后可以直接修改文字和样式。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"url":"#"} -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#">立即开始</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-outline","url":"#"} -->
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="#">了解更多</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group -->`,
+	},
+	{
+		id: 102,
+		name: 'demo/features',
+		title: '三栏特性介绍',
+		description: '三列并排的标题与说明，适合介绍功能或服务。',
+		categories: [ 'featured', 'layout' ],
+		viewport_width: 1200,
+		block_types: [],
+		post_types: [ 'page' ],
+		source: 'theme',
+		inserter: true,
+		content: `<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">快速</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>几分钟内拼出完整页面。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">一致</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>复用同一套设计语言。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">灵活</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>插入后随时调整内容和布局。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->`,
+	},
+	{
+		id: 103,
+		name: 'demo/contact',
+		title: '订阅与搜索',
+		description: '居中的标题、说明和一个搜索框。',
+		categories: [ 'call-to-action' ],
+		viewport_width: 1200,
+		block_types: [],
+		post_types: [ 'page' ],
+		source: 'theme',
+		inserter: true,
+		content: `<!-- wp:group {"layout":{"type":"constrained"}} -->
+<div class="wp-block-group"><!-- wp:heading {"textAlign":"center","level":2} -->
+<h2 class="wp-block-heading has-text-align-center">保持联系</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center"} -->
+<p class="has-text-align-center">订阅更新，第一时间读到新文章。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:search {"label":"搜索","buttonText":"搜索"} /--></div>
+<!-- /wp:group -->`,
+	},
+];
+
 const ALL_TRUE_CAPS = {
 	read: true,
 	edit_posts: true,

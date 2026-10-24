@@ -1,6 +1,8 @@
 import apiFetch from '@/services/gutenberg/api-fetch';
 import {
 	BASE,
+	BLOCK_PATTERN_CATEGORIES,
+	BLOCK_PATTERNS,
 	CATEGORIES,
 	GLOBAL_STYLES,
 	GLOBAL_STYLES_ID,
@@ -351,10 +353,10 @@ export function installMockApi( locale = 'zh_CN' ) {
 
 		// Patterns.
 		if ( pathname === '/wp/v2/block-patterns/categories' ) {
-			return respond( [] );
+			return respond( BLOCK_PATTERN_CATEGORIES );
 		}
 		if ( pathname === '/wp/v2/block-patterns/patterns' ) {
-			return respond( [] );
+			return respond( BLOCK_PATTERNS );
 		}
 		if ( pathname === '/wp/v2/wp_pattern_category' ) {
 			return respond( method === 'GET' ? [] : {} );
