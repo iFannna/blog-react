@@ -511,21 +511,6 @@ export function showRevisionDiff( state = true, action ) {
 	return state;
 }
 
-/**
- * Reducer returning the currently selected note and its options.
- *
- * @param {Object} state  Current state.
- * @param {Object} action Dispatched action.
- * @return {Object} Updated state.
- */
-export function selectedNote( state = {}, action ) {
-	switch ( action.type ) {
-		case 'SELECT_NOTE':
-			return { noteId: action.noteId, options: action.options };
-	}
-	return state;
-}
-
 export default combineReducers( {
 	postId,
 	postType,
@@ -553,6 +538,5 @@ export default combineReducers( {
 	browserBackup,
 	revisionPage,
 	showRevisionDiff,
-	selectedNote,
 	dataviews: dataviewsReducer,
 } );

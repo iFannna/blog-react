@@ -63,8 +63,6 @@ import { PrivatePublishDateTimePicker } from './components/publish-date-time-pic
 import useSpacingSizes from './components/spacing-sizes-control/hooks/use-spacing-sizes';
 import useBlockDisplayTitle from './components/block-title/use-block-display-title';
 import TabbedSidebar from './components/tabbed-sidebar';
-import NoteIconSlotFill from './components/collab/note-icon-slot';
-import NoteIconToolbarSlotFill from './components/collab/note-icon-toolbar-slot';
 import HTMLElementControl from './components/html-element-control';
 import {
 	useBlockElementRef,
@@ -136,8 +134,6 @@ lock( privateApis, {
 	BlockStyleVariationOverridesWithConfig,
 	setBackgroundStyleDefaults,
 	sectionRootClientIdKey,
-	NoteIconSlotFill,
-	NoteIconToolbarSlotFill,
 	mediaEditKey,
 	getMediaSelectKey,
 	deviceTypeKey,

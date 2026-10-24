@@ -11,7 +11,6 @@ import { __ } from '@/lib/gutenberg/i18n';
 import { store as keyboardShortcutsStore } from '@/components/gutenberg/keyboard-shortcuts';
 import { pipe, useCopyToClipboard } from '@/hooks/gutenberg/compose';
 import BlockActions from '../block-actions';
-import NoteIconSlotFill from '../../components/collab/note-icon-slot';
 import BlockHTMLConvertButton from './block-html-convert-button';
 import __unstableBlockSettingsMenuFirstItem from './block-settings-menu-first-item';
 import BlockSettingsMenuControls from '../block-settings-menu-controls';
@@ -340,14 +339,6 @@ export function BlockSettingsDropdown( {
 												{ __( 'Add after' ) }
 											</MenuItem>
 										</>
-									) }
-									{ canEdit && count === 1 && (
-										<NoteIconSlotFill.Slot
-											fillProps={ {
-												clientId: firstBlockClientId,
-												onClose,
-											} }
-										/>
 									) }
 								</MenuGroup>
 								{ canCopyStyles && ! isContentOnly && (

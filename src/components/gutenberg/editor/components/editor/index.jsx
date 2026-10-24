@@ -7,7 +7,6 @@ import { TEMPLATE_POST_TYPE } from '../../store/constants';
 import EditorInterface from '../editor-interface';
 import { ExperimentalEditorProvider } from '../provider';
 import Sidebar from '../sidebar';
-import NotesSidebar from '../collab-sidebar';
 import GlobalStylesSidebar from '../global-styles-sidebar';
 import { GlobalStylesRenderer } from '../global-styles-renderer';
 
@@ -123,7 +122,6 @@ function Editor( {
 						onActionPerformed={ onActionPerformed }
 						extraPanels={ extraSidebarPanels }
 					/>
-					<NotesSidebar />
 					{ isBlockTheme && <GlobalStylesRenderer /> }
 					{ showGlobalStyles && <GlobalStylesSidebar /> }
 				</ExperimentalEditorProvider>

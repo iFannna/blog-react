@@ -26,8 +26,6 @@ import {
 	RevisionsCanvas,
 	RevisionsCodeDiff,
 } from '../post-revisions-preview';
-import { CollaboratorsOverlay } from '../collaborators-overlay';
-import { useCollaboratorNotifications } from '../collaborators-presence/use-collaborator-notifications';
 import SavePublishPanels from '../save-publish-panels';
 import TextEditor from '../text-editor';
 import VisualEditor from '../visual-editor';
@@ -80,8 +78,6 @@ export default function EditorInterface( {
 } ) {
 	const {
 		mode,
-		postId,
-		postType,
 		isInserterOpened,
 		isListViewOpened,
 		isDistractionFree,
@@ -98,8 +94,6 @@ export default function EditorInterface( {
 		const {
 			getEditorSettings,
 			getPostTypeLabel,
-			getCurrentPostType,
-			getCurrentPostId,
 		} = select( editorStore );
 		const {
 			getStylesPath,
@@ -120,8 +114,6 @@ export default function EditorInterface( {
 
 		return {
 			mode: _mode,
-			postId: getCurrentPostId(),
-			postType: getCurrentPostType(),
 			isInserterOpened: select( editorStore ).isInserterOpened(),
 			isListViewOpened: select( editorStore ).isListViewOpened(),
 			isDistractionFree: get( 'core', 'distractionFree' ),
@@ -157,10 +149,6 @@ export default function EditorInterface( {
 				! get( 'core', 'distractionFree' )
 		);
 	}, [ isPreviewMode, registry, setIsListViewOpened ] );
-
-	// Runs unconditionally so join/leave/save notifications are dispatched
-	// regardless of viewport width or whether the header centre area is visible.
-	useCollaboratorNotifications( postId, postType );
 
 	const isLargeViewport = useViewportMatch( 'medium' );
 	const secondarySidebarLabel = isListViewOpened
@@ -275,10 +263,6 @@ export default function EditorInterface( {
 								/>
 							) }
 							{ children }
-							<CollaboratorsOverlay
-								postId={ postId }
-								postType={ postType }
-							/>
 						</>
 					) }
 				</>
