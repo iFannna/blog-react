@@ -1,5 +1,5 @@
 import { useMemo } from '@/lib/gutenberg/element';
-import { _n, sprintf } from '@/lib/gutenberg/i18n';
+import { __, _n, _x, sprintf } from '@/lib/gutenberg/i18n';
 import { speak } from '@/utils/gutenberg/a11y';
 import usePatternsState from '../hooks/use-patterns-state';
 import {
@@ -34,24 +34,32 @@ export function usePatternCategories( rootClientId, sourceFilter = 'all' ) {
 			filteredPatterns,
 			allCategories
 		);
+		// The category constants are evaluated before the locale data loads,
+		// so translate their labels here, at render time.
 		if (
 			filteredPatterns.some( ( pattern ) =>
 				pattern.blockTypes?.includes( 'core/post-content' )
 			)
 		) {
-			categories.unshift( starterPatternsCategory );
+			categories.unshift( {
+				...starterPatternsCategory,
+				label: __( 'Starter content' ),
+			} );
 		}
 		if (
 			filteredPatterns.some(
 				( pattern ) => pattern.type === INSERTER_PATTERN_TYPES.user
 			)
 		) {
-			categories.unshift( sitePatternsCategory );
+			categories.unshift( {
+				...sitePatternsCategory,
+				label: __( 'Site patterns' ),
+			} );
 		}
 		if ( filteredPatterns.length > 0 ) {
 			categories.unshift( {
 				name: allPatternsCategory.name,
-				label: allPatternsCategory.label,
+				label: _x( 'All', 'patterns' ),
 			} );
 		}
 		speak(
