@@ -20,7 +20,7 @@ const NavigableRegion = forwardRef< HTMLElement, NavigableRegionProps >(
 		return (
 			<Tag
 				ref={ ref }
-				className={ clsx( 'admin-ui-navigable-region', className ) }
+				className={ clsx( 'interface-navigable-region', className ) }
 				aria-label={ ariaLabel }
 				role="region"
 				tabIndex="-1"
