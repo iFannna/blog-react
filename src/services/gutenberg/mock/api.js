@@ -7,6 +7,7 @@ import {
 	MEDIA,
 	POST_ID,
 	POSTS_INDEX,
+	REVISIONS,
 	SITE_SETTINGS,
 	TAGS,
 	TAXONOMIES,
@@ -118,6 +119,58 @@ function localizeTypes( types ) {
 			type?.labels
 				? { ...type, labels: { ...type.labels, ...( EN_TYPE_LABELS[ key ] || {} ) } }
 				: type,
+		] )
+	);
+}
+
+const EN_TAXONOMY_LABELS = {
+	category: {
+		name: 'Categories',
+		singular_name: 'Category',
+		search_items: 'Search Categories',
+		all_items: 'All Categories',
+		edit_item: 'Edit Category',
+		update_item: 'Update Category',
+		add_new_item: 'Add New Category',
+		new_item_name: 'New Category Name',
+		parent_item: 'Parent Category',
+		parent_item_colon: 'Parent Category:',
+		menu_name: 'Categories',
+	},
+	post_tag: {
+		name: 'Tags',
+		singular_name: 'Tag',
+		search_items: 'Search Tags',
+		all_items: 'All Tags',
+		edit_item: 'Edit Tag',
+		update_item: 'Update Tag',
+		add_new_item: 'Add New Tag',
+		new_item_name: 'New Tag Name',
+		menu_name: 'Tags',
+	},
+	wp_pattern_category: {
+		name: 'Pattern Categories',
+		singular_name: 'Pattern Category',
+		menu_name: 'Pattern Categories',
+	},
+};
+
+function localizeTaxonomies( taxonomies ) {
+	if ( ! isEnglish() ) {
+		return taxonomies;
+	}
+	return Object.fromEntries(
+		Object.entries( taxonomies ).map( ( [ key, taxonomy ] ) => [
+			key,
+			taxonomy?.labels
+				? {
+						...taxonomy,
+						labels: {
+							...taxonomy.labels,
+							...( EN_TAXONOMY_LABELS[ key ] || {} ),
+						},
+				  }
+				: taxonomy,
 		] )
 	);
 }
@@ -264,11 +317,13 @@ export function installMockApi( locale = 'zh_CN' ) {
 			return respond( localizeTypes( TYPES )[ typeMatch[ 1 ] ] ?? {} );
 		}
 		if ( pathname === '/wp/v2/taxonomies' ) {
-			return respond( TAXONOMIES );
+			return respond( localizeTaxonomies( TAXONOMIES ) );
 		}
 		const taxonomyMatch = pathname.match( /^\/wp\/v2\/taxonomies\/([^/]+)$/ );
 		if ( taxonomyMatch ) {
-			return respond( TAXONOMIES[ taxonomyMatch[ 1 ] ] ?? {} );
+			return respond(
+				localizeTaxonomies( TAXONOMIES )[ taxonomyMatch[ 1 ] ] ?? {}
+			);
 		}
 
 		// Themes & global styles.
@@ -355,9 +410,10 @@ export function installMockApi( locale = 'zh_CN' ) {
 						},
 						'date',
 						'author',
+						'revisions',
 						{
 							id: 'discussion',
-							label: '讨论',
+							label: isEnglish() ? 'Discussion' : '讨论',
 							children: [ 'comment_status' ],
 							layout: { type: 'panel', summary: 'discussion' },
 						},
@@ -596,7 +652,16 @@ export function installMockApi( locale = 'zh_CN' ) {
 			return respond( [] );
 		}
 		if ( pathname === `/wp/v2/pages/${ POST_ID }/revisions` ) {
-			return respond( [] );
+			return respond( REVISIONS );
+		}
+		const revisionMatch = pathname.match(
+			new RegExp( `^/wp/v2/pages/${ POST_ID }/revisions/(\\d+)$` )
+		);
+		if ( revisionMatch && method === 'GET' ) {
+			const revision = REVISIONS.find(
+				( item ) => String( item.id ) === revisionMatch[ 1 ]
+			);
+			return revision ? respond( revision ) : notFound();
 		}
 
 		// The edited page itself.

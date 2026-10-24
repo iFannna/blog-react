@@ -1,3 +1,4 @@
+import { __ } from '@/lib/gutenberg/i18n';
 import { useDispatch, useSelect, useRegistry } from '@/stores/gutenberg/data';
 import { store as coreDataStore } from '@/stores/gutenberg/core-data';
 import { DataForm } from '@/components/gutenberg/dataviews';
@@ -301,8 +302,12 @@ export default function DataFormPostSummary( { onActionPerformed } ) {
 				// `wp_block`, `wp_template_part`, and `wp_template` ones,
 				// `reading_settings` in the `wp_template` one), yet nothing
 				// registers a field for them: every other consumer of those forms
-				// drops the ids for want of a field.
-				.concat( revisionsField, readingSettingsField ),
+				// drops the ids for want of a field. The label is resolved here
+				// because the field module is evaluated before locale data loads.
+				.concat(
+					{ ...revisionsField, label: __( 'Revisions' ) },
+					readingSettingsField
+				),
 		[ _fields, fieldNamespaces, postType ]
 	);
 

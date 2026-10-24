@@ -542,6 +542,87 @@ export const TAGS = [
 	{ id: 14, name: '性能优化', slug: 'performance', taxonomy: 'post_tag', count: 2, link: `${ SITE_URL }/tag/performance/` },
 ];
 
+const FIRST_REVISION_CONTENT = `<!-- wp:heading -->
+<h2 class="wp-block-heading">演示内容</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>这是最早的修订版本，只包含一段介绍文字。拖动顶部的修订滑块或点击右侧时间线，可以查看后续版本带来的变化。</p>
+<!-- /wp:paragraph -->`;
+
+const SECOND_REVISION_CONTENT = `<!-- wp:heading -->
+<h2 class="wp-block-heading">演示内容</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>这是第二版正文：编辑器的字数统计会随正文实时更新，右侧摘要与讨论设置已经改为 DataForm 行。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>这个版本还没有加入底部的列表区块，可以用来对比第三次修订的差异。</p>
+<!-- /wp:paragraph -->`;
+
+// Ordered newest first, matching the editor's revisions query.
+export const REVISIONS = [
+	{
+		id: 97803,
+		parent: POST_ID,
+		author: 1,
+		date: '2026-10-20T10:00:00',
+		date_gmt: '2026-10-20T02:00:00',
+		modified: '2026-10-20T10:00:00',
+		modified_gmt: '2026-10-20T02:00:00',
+		slug: `${ POST_ID }-revision-v3`,
+		title: { raw: '使用 Gutenberg 编辑页面', rendered: '使用 Gutenberg 编辑页面' },
+		content: {
+			raw: POST_CONTENT,
+			rendered: '',
+			protected: false,
+			block_version: 1,
+		},
+		excerpt: { raw: '', rendered: '', protected: false },
+		meta: {},
+	},
+	{
+		id: 97802,
+		parent: POST_ID,
+		author: 1,
+		date: '2026-10-19T15:20:00',
+		date_gmt: '2026-10-19T07:20:00',
+		modified: '2026-10-19T15:20:00',
+		modified_gmt: '2026-10-19T07:20:00',
+		slug: `${ POST_ID }-revision-v2`,
+		title: { raw: '使用 Gutenberg 编辑页面', rendered: '使用 Gutenberg 编辑页面' },
+		content: {
+			raw: SECOND_REVISION_CONTENT,
+			rendered: '',
+			protected: false,
+			block_version: 1,
+		},
+		excerpt: { raw: '第二版摘要', rendered: '', protected: false },
+		meta: {},
+	},
+	{
+		id: 97801,
+		parent: POST_ID,
+		author: 1,
+		date: '2026-10-18T09:30:00',
+		date_gmt: '2026-10-18T01:30:00',
+		modified: '2026-10-18T09:30:00',
+		modified_gmt: '2026-10-18T01:30:00',
+		slug: `${ POST_ID }-revision-v1`,
+		title: { raw: '使用 Gutenberg 编辑页面', rendered: '使用 Gutenberg 编辑页面' },
+		content: {
+			raw: FIRST_REVISION_CONTENT,
+			rendered: '',
+			protected: false,
+			block_version: 1,
+		},
+		excerpt: { raw: '第一版摘要', rendered: '', protected: false },
+		meta: {},
+	},
+];
+
 export const POSTS_INDEX = {
 	name: '站点',
 	description: '独立编辑器',
@@ -590,7 +671,16 @@ export const createPost = () => ( {
 	_links: {
 		self: [ { href: `${ SITE_URL }/wp/v2/pages/${ POST_ID }` } ],
 		'version-history': [
-			{ href: `${ SITE_URL }/wp/v2/pages/${ POST_ID }/revisions` },
+			{
+				href: `${ SITE_URL }/wp/v2/pages/${ POST_ID }/revisions`,
+				count: REVISIONS.length,
+			},
+		],
+		'predecessor-version': [
+			{
+				href: `${ SITE_URL }/wp/v2/pages/${ POST_ID }/revisions/${ REVISIONS[ 0 ].id }`,
+				id: REVISIONS[ 0 ].id,
+			},
 		],
 		'wp:action-publish': [
 			{ href: `${ SITE_URL }/wp/v2/pages/${ POST_ID }` },

@@ -34,6 +34,7 @@ export default function RevisionsView() {
 	return (
 		<Button
 			{ ...buttonProps }
+			className="editor-revisions-field-button"
 			variant="link"
 			text={ String( revisionsCount ) }
 			aria-label={ sprintf(

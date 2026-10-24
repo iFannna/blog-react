@@ -113,7 +113,8 @@ export default function PostRevisionsTimeline() {
 				enableSorting: false,
 				enableHiding: false,
 			},
-			authorField,
+			// The field module is evaluated before locale data loads.
+			{ ...authorField, label: __( 'Author' ) },
 			{
 				id: 'details',
 				label: __( 'Details' ),
