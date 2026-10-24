@@ -25,7 +25,7 @@ export const settings = {
 				attributes: {
 					// translators: 'Home' as in a website's home page.
 					label: __( 'Home' ),
-					url: 'https://make.wordpress.org/',
+					url: '/',
 				},
 			},
 			{
@@ -33,7 +33,7 @@ export const settings = {
 				attributes: {
 					// translators: 'About' as in a website's about page.
 					label: __( 'About' ),
-					url: 'https://make.wordpress.org/',
+					url: '/',
 				},
 			},
 			{
@@ -41,7 +41,7 @@ export const settings = {
 				attributes: {
 					// translators: 'Contact' as in a website's contact page.
 					label: __( 'Contact' ),
-					url: 'https://make.wordpress.org/',
+					url: '/',
 				},
 			},
 		],

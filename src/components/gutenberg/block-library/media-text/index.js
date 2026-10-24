@@ -18,8 +18,7 @@ export const settings = {
 		viewportWidth: 601, // Columns collapse "@media (max-width: 600px)".
 		attributes: {
 			mediaType: 'image',
-			mediaUrl:
-				'https://s.w.org/images/core/5.3/Biologia_Centrali-Americana_-_Cantorchilus_semibadius_1902.jpg',
+			mediaUrl: '/media/uploads/studio-shapes.svg',
 		},
 		innerBlocks: [
 			{

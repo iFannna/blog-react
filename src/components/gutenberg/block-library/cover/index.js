@@ -18,7 +18,7 @@ export const settings = {
 		attributes: {
 			customOverlayColor: '#065174',
 			dimRatio: 40,
-			url: 'https://s.w.org/images/core/5.3/Windbuchencom.jpg',
+			url: '/media/uploads/forest-path.svg',
 			style: {
 				typography: {
 					fontSize: 48,

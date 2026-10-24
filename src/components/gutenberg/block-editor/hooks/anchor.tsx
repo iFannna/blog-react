@@ -1,5 +1,5 @@
 import { addFilter } from '@/hooks/gutenberg/hooks';
-import { TextControl, ExternalLink } from '@/components/gutenberg/ui';
+import { TextControl } from '@/components/gutenberg/ui';
 import { __ } from '@/lib/gutenberg/i18n';
 import { hasBlockSupport } from '@/lib/gutenberg/blocks';
 import type { BlockType } from '@/lib/gutenberg/blocks';
@@ -54,18 +54,9 @@ function BlockEditAnchorControlPure( {
 				className="html-anchor-control"
 				label={ __( 'HTML anchor' ) }
 				help={
-					<>
-						{ __(
-							'Enter a word or two—without spaces—to make a unique web address just for this block, called an “anchor”. Then, you’ll be able to link directly to this section of your page.'
-						) }{ ' ' }
-						<ExternalLink
-							href={ __(
-								'https://wordpress.org/documentation/article/page-jumps/'
-							) }
-						>
-							{ __( 'Learn more about anchors' ) }
-						</ExternalLink>
-					</>
+					__(
+						'Enter a word or two—without spaces—to make a unique web address just for this block, called an “anchor”. Then, you’ll be able to link directly to this section of your page.'
+					)
 				}
 				value={ anchor || '' }
 				// @ts-expect-error React types `placeholder` as a string, the runtime omits `null`.

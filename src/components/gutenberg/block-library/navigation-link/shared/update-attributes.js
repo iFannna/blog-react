@@ -29,7 +29,7 @@ const shouldSeverEntityLink = ( originalUrl, newUrl ) => {
 				baseUrl ||
 				( typeof window !== 'undefined'
 					? window.location.origin
-					: 'https://wordpress.org' );
+					: '/' );
 			return new URL( url, base );
 		} catch {
 			// If URL construction still fails, it's likely an invalid URL
