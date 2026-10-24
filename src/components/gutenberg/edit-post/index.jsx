@@ -8,10 +8,6 @@ import { createRoot, StrictMode } from '@/lib/gutenberg/element';
 import { dispatch, resolveSelect, select } from '@/stores/gutenberg/data';
 import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import {
-	registerLegacyWidgetBlock,
-	registerWidgetGroupBlock,
-} from '@/components/gutenberg/widgets';
-import {
 	store as editorStore,
 	privateApis as editorPrivateApis,
 } from '@/components/gutenberg/editor';
@@ -85,8 +81,6 @@ export function initializeEditor(
 
 	registerCoreBlocks();
 	registerCoreBlockBindingsSources();
-	registerLegacyWidgetBlock( { inserter: false } );
-	registerWidgetGroupBlock( { inserter: false } );
 	if ( globalThis.IS_GUTENBERG_PLUGIN ) {
 		__experimentalRegisterExperimentalCoreBlocks( {
 			enableFSEBlocks: settings.__unstableEnableFullSiteEditingBlocks,

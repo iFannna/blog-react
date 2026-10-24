@@ -24,5 +24,5 @@ export async function bootGutenberg( locale ) {
 	configureCanvasAssets( settings );
 
 	initializeEditor( 'editor', 'page', 97589, settings, {} );
-	initializeCommandPalette( { menu_commands: [], is_network_admin: false } );
+	initializeCommandPalette();
 }
