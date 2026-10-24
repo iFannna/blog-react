@@ -304,7 +304,7 @@ function StyleBook(
 						<Tabs.List>
 							{ tabs.map( ( tab ) => (
 								<Tabs.Tab value={ tab.slug } key={ tab.slug }>
-									{ tab.title }
+									{ __( tab.title ) }
 								</Tabs.Tab>
 							) ) }
 						</Tabs.List>
@@ -334,7 +334,7 @@ function StyleBook(
 									isSelected={ isSelected }
 									onSelect={ onSelect }
 									settings={ settings }
-									title={ tab.title }
+									title={ __( tab.title ) }
 									goTo={ goTo }
 								/>
 							</Tabs.Panel>
@@ -672,7 +672,7 @@ const Examples = memo(
 						>
 							<Composite.GroupLabel>
 								<h2 className="editor-style-book__subcategory-title">
-									{ subcategory.title }
+									{ __( subcategory.title ) }
 								</h2>
 							</Composite.GroupLabel>
 							<Subcategory

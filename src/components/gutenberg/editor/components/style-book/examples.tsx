@@ -36,7 +36,7 @@ function getColorExamples( colors: MultiOriginPalettes ): BlockExample[] {
 		if ( paletteFiltered?.[ group.type ] ) {
 			const example: BlockExample = {
 				name: group.slug,
-				title: group.title,
+				title: __( group.title ),
 				category: 'colors',
 			};
 			if ( group.type === 'duotones' ) {

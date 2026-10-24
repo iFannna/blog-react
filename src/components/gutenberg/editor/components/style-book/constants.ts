@@ -1,6 +1,8 @@
 import { __ } from '@/lib/gutenberg/i18n';
 import type { StyleBookCategory, StyleBookColorGroup } from './types';
 
+// This module is evaluated before the locale data loads, so the `__()` calls
+// below resolve to English. Consumers translate titles again at render time.
 export const STYLE_BOOK_COLOR_GROUPS: StyleBookColorGroup[] = [
 	{
 		slug: 'theme-colors',
