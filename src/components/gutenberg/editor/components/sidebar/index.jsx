@@ -16,7 +16,6 @@ import PostRevisionSummary from './post-revision-summary';
 import PostTaxonomiesPanel from '../post-taxonomies/panel';
 import PostTransformPanel from '../post-transform-panel';
 import SidebarHeader from './header';
-import TemplateActionsPanel from '../template-actions-panel';
 import TemplateContentPanel from '../template-content-panel';
 import TemplatePartContentPanel from '../template-part-content-panel';
 import RevisionBlockDiffPanel from '../revision-block-diff';
@@ -75,7 +74,6 @@ function Sidebar( { extraPanels, onActionPerformed } ) {
 				<DataFormPostSummary onActionPerformed={ onActionPerformed } />
 				<PluginDocumentSettingPanel.Slot />
 				<TemplateContentPanel />
-				<TemplateActionsPanel />
 				<TemplatePartContentPanel />
 				<PostTransformPanel />
 				<PostTaxonomiesPanel />

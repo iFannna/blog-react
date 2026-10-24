@@ -6,6 +6,7 @@ import { Notice, Stack } from '@/components/gutenberg/design-system';
 import { useMemo } from '@/lib/gutenberg/element';
 import { useViewConfig } from '@/components/gutenberg/views';
 import PostCardPanel from '../post-card-panel';
+import PostContentInformation from '../post-content-information';
 import PluginPostStatusInfo from '../plugin-post-status-info';
 import PostPanelSection from '../post-panel-section';
 import { store as editorStore } from '../../store';
@@ -399,6 +400,7 @@ export default function DataFormPostSummary( { onActionPerformed } ) {
 					postId={ postId }
 					onActionPerformed={ onActionPerformed }
 				/>
+				<PostContentInformation />
 				{ fieldsError && (
 					<Notice.Root intent="error" role="alert">
 						<Notice.Description>

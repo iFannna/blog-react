@@ -3,7 +3,21 @@ const SITE_URL =
 
 export const POST_ID = 97589;
 
-const POST_CONTENT = ``;
+const POST_CONTENT = `<!-- wp:heading -->
+<h2 class="wp-block-heading">演示内容</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>这段文字用于演示 Gutenberg 编辑器的正文区域。你可以直接在这里输入、删除或调整区块，侧边栏中的字数与阅读时长会随正文实时变化。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>编辑器支持标题、段落、列表、图片、引用等多种区块，也可以通过左上角的加号打开区块插入器，或在画布中按回车新建区块。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>摘要、分类和标签显示在右侧文档设置中。</li><!-- /wp:list-item --><!-- wp:list-item --><li>讨论面板用于切换是否允许评论。</li><!-- /wp:list-item --><!-- wp:list-item --><li>点击右上角的发布按钮可以打开预发布面板。</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->`;
 
 const ALL_TRUE_CAPS = {
 	read: true,
@@ -290,6 +304,7 @@ export const TYPES = {
 		capabilities: postTypeCapabilities( 'page', 'pages' ),
 		hierarchical: true,
 		supports: { ...baseType.supports, 'page-attributes': true, comments: true },
+		taxonomies: [ 'category', 'post_tag' ],
 		labels: {
 			...baseType.labels,
 			name: '页面',
@@ -393,7 +408,7 @@ export const TAXONOMIES = {
 		name: 'category',
 		slug: 'category',
 		rest_base: 'categories',
-		types: [ 'post' ],
+		types: [ 'post', 'page' ],
 		hierarchical: true,
 	},
 	post_tag: {
@@ -401,9 +416,20 @@ export const TAXONOMIES = {
 		name: 'post_tag',
 		slug: 'post_tag',
 		rest_base: 'tags',
-		types: [ 'post' ],
+		types: [ 'post', 'page' ],
 		hierarchical: false,
-		labels: { ...baseTaxonomy.labels, name: '标签', singular_name: '标签' },
+		labels: {
+			...baseTaxonomy.labels,
+			name: '标签',
+			singular_name: '标签',
+			menu_name: '标签',
+			search_items: '搜索标签',
+			all_items: '全部标签',
+			edit_item: '编辑标签',
+			update_item: '更新标签',
+			add_new_item: '新建标签',
+			new_item_name: '新标签名称',
+		},
 	},
 	wp_pattern_category: {
 		...baseTaxonomy,
@@ -498,10 +524,22 @@ export const SITE_SETTINGS = {
 
 export const CATEGORIES = [
 	{ id: 1, name: '未分类', slug: 'uncategorized', taxonomy: 'category', count: 0, parent: 0, link: `${ SITE_URL }/category/uncategorized/` },
+	{ id: 3, name: '技术', slug: 'tech', taxonomy: 'category', count: 12, parent: 0, link: `${ SITE_URL }/category/tech/` },
+	{ id: 4, name: '前端', slug: 'frontend', taxonomy: 'category', count: 8, parent: 3, link: `${ SITE_URL }/category/frontend/` },
+	{ id: 5, name: '后端', slug: 'backend', taxonomy: 'category', count: 4, parent: 3, link: `${ SITE_URL }/category/backend/` },
+	{ id: 6, name: '生活随笔', slug: 'life', taxonomy: 'category', count: 6, parent: 0, link: `${ SITE_URL }/category/life/` },
+	{ id: 7, name: '教程', slug: 'tutorials', taxonomy: 'category', count: 9, parent: 0, link: `${ SITE_URL }/category/tutorials/` },
 ];
 
 export const TAGS = [
 	{ id: 2, name: '示例标签', slug: 'example', taxonomy: 'post_tag', count: 0, link: `${ SITE_URL }/tag/example/` },
+	{ id: 8, name: 'WordPress', slug: 'wordpress', taxonomy: 'post_tag', count: 5, link: `${ SITE_URL }/tag/wordpress/` },
+	{ id: 9, name: 'React', slug: 'react', taxonomy: 'post_tag', count: 7, link: `${ SITE_URL }/tag/react/` },
+	{ id: 10, name: 'Next.js', slug: 'nextjs', taxonomy: 'post_tag', count: 6, link: `${ SITE_URL }/tag/nextjs/` },
+	{ id: 11, name: 'Go', slug: 'go', taxonomy: 'post_tag', count: 3, link: `${ SITE_URL }/tag/go/` },
+	{ id: 12, name: '前端', slug: 'frontend', taxonomy: 'post_tag', count: 8, link: `${ SITE_URL }/tag/frontend/` },
+	{ id: 13, name: 'CSS', slug: 'css', taxonomy: 'post_tag', count: 4, link: `${ SITE_URL }/tag/css/` },
+	{ id: 14, name: '性能优化', slug: 'performance', taxonomy: 'post_tag', count: 2, link: `${ SITE_URL }/tag/performance/` },
 ];
 
 export const POSTS_INDEX = {
@@ -566,11 +604,17 @@ export const createPost = () => ( {
 		'wp:action-trash': [
 			{ href: `${ SITE_URL }/wp/v2/pages/${ POST_ID }` },
 		],
-		'wp:action-assign-category': [
+		'wp:action-assign-categories': [
 			{ href: `${ SITE_URL }/wp/v2/pages/${ POST_ID }` },
 		],
-		'wp:action-create-category': [
+		'wp:action-create-categories': [
 			{ href: `${ SITE_URL }/wp/v2/categories` },
+		],
+		'wp:action-assign-tags': [
+			{ href: `${ SITE_URL }/wp/v2/pages/${ POST_ID }` },
+		],
+		'wp:action-create-tags': [
+			{ href: `${ SITE_URL }/wp/v2/tags` },
 		],
 	},
 } );

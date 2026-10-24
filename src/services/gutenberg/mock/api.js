@@ -155,6 +155,10 @@ export function installMockApi( locale = 'zh_CN' ) {
 				excerpt: post.excerpt,
 				status: post.status,
 				slug: post.slug,
+				comment_status: post.comment_status,
+				ping_status: post.ping_status,
+				categories: post.categories,
+				tags: post.tags,
 				modified: post.modified,
 			} )
 		);
@@ -162,6 +166,7 @@ export function installMockApi( locale = 'zh_CN' ) {
 
 	const uploadedMedia = [];
 	let nextMediaId = 600;
+	let nextTermId = 100;
 
 	const handler = async ( options ) => {
 		const method = ( options.method || 'GET' ).toUpperCase();
@@ -323,6 +328,15 @@ export function installMockApi( locale = 'zh_CN' ) {
 					layout: { type: 'panel' },
 					fields: [
 						{
+							id: 'excerpt',
+							layout: {
+								type: 'panel',
+								labelPosition: 'top',
+								summary: 'excerpt',
+								showPlaceholderIfEmpty: true,
+							},
+						},
+						{
 							id: 'status',
 							label: isEnglish() ? 'Status' : '状态',
 							layout: { type: 'panel', summary: 'status' },
@@ -340,13 +354,46 @@ export function installMockApi( locale = 'zh_CN' ) {
 							],
 						},
 						'date',
-						'slug',
 						'author',
+						{
+							id: 'discussion',
+							label: '讨论',
+							children: [ 'comment_status' ],
+							layout: { type: 'panel', summary: 'discussion' },
+						},
 					],
 				},
 			} );
 		}
 		if ( pathname === '/wp/v2/entity-fields' ) {
+			const commentStatusElements = isEnglish()
+				? [
+						{
+							value: 'open',
+							label: 'Open',
+							description:
+								'Visitors can add new comments and replies.',
+						},
+						{
+							value: 'closed',
+							label: 'Closed',
+							description:
+								'Visitors cannot add new comments or replies. Existing comments remain visible.',
+						},
+				  ]
+				: [
+						{
+							value: 'open',
+							label: '开放',
+							description: '访客可以添加新评论和回复。',
+						},
+						{
+							value: 'closed',
+							label: '已关闭',
+							description:
+								'访客无法添加新评论或回复。现有评论保持可见。',
+						},
+				  ];
 			return respond( {
 				kind: query.get( 'kind' ),
 				name: query.get( 'name' ),
@@ -372,7 +419,6 @@ export function installMockApi( locale = 'zh_CN' ) {
 							  ],
 					},
 					{ id: 'date', type: 'datetime', label: isEnglish() ? 'Date' : '日期' },
-					{ id: 'slug', type: 'text', label: isEnglish() ? 'Slug' : '别名' },
 					{
 						id: 'author',
 						type: 'integer',
@@ -380,6 +426,37 @@ export function installMockApi( locale = 'zh_CN' ) {
 						elements: [
 							{ value: 1, label: isEnglish() ? 'Admin' : '管理员' },
 						],
+					},
+					{
+						id: 'excerpt',
+						type: 'text',
+						label: isEnglish() ? 'Excerpt' : '摘要',
+						placeholder: isEnglish()
+							? 'Add an excerpt…'
+							: '添加摘要…',
+						Edit: { control: 'textarea', rows: 3 },
+					},
+					{
+						id: 'comment_status',
+						type: 'text',
+						label: isEnglish() ? 'Comment status' : '评论状态',
+						Edit: 'radio',
+						elements: commentStatusElements,
+					},
+					{
+						id: 'discussion',
+						type: 'text',
+						label: isEnglish() ? 'Discussion' : '讨论',
+						render: ( { item } ) => {
+							const commentsOpen =
+								item.comment_status === 'open';
+							if ( isEnglish() ) {
+								return commentsOpen
+									? 'Comments only'
+									: 'Comments closed';
+							}
+							return commentsOpen ? '开放' : '已关闭';
+						},
 					},
 				],
 				script_modules: [],
@@ -400,11 +477,28 @@ export function installMockApi( locale = 'zh_CN' ) {
 		}
 
 		// Terms.
-		if ( pathname === '/wp/v2/categories' ) {
-			return respond( CATEGORIES );
-		}
-		if ( pathname === '/wp/v2/tags' ) {
-			return respond( TAGS );
+		if (
+			pathname === '/wp/v2/categories' ||
+			pathname === '/wp/v2/tags'
+		) {
+			const isCategory = pathname === '/wp/v2/categories';
+			if ( method === 'POST' ) {
+				const name = options.data?.name || '';
+				const slug = options.data?.slug || name;
+				const term = {
+					id: nextTermId++,
+					name,
+					slug,
+					taxonomy: isCategory ? 'category' : 'post_tag',
+					count: 0,
+					...( isCategory
+						? { parent: options.data?.parent || 0 }
+						: {} ),
+				};
+				( isCategory ? CATEGORIES : TAGS ).push( term );
+				return respond( term );
+			}
+			return respond( isCategory ? CATEGORIES : TAGS );
 		}
 		const termMatch = pathname.match( /^\/wp\/v2\/(categories|tags)\/(\d+)$/ );
 		if ( termMatch ) {
