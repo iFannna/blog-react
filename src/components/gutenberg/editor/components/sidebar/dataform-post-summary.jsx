@@ -7,6 +7,7 @@ import { useMemo } from '@/lib/gutenberg/element';
 import { useViewConfig } from '@/components/gutenberg/views';
 import PostCardPanel from '../post-card-panel';
 import PostContentInformation from '../post-content-information';
+import PostFeaturedImagePanel from '../post-featured-image/panel';
 import PluginPostStatusInfo from '../plugin-post-status-info';
 import PostPanelSection from '../post-panel-section';
 import { store as editorStore } from '../../store';
@@ -361,6 +362,7 @@ export default function DataFormPostSummary( { onActionPerformed } ) {
 					postId={ postId }
 					onActionPerformed={ onActionPerformed }
 				/>
+				<PostFeaturedImagePanel withPanelBody={ false } />
 				<PostContentInformation />
 				{ fieldsError && (
 					<Notice.Root intent="error" role="alert">
