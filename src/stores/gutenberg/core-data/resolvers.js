@@ -4,7 +4,6 @@ import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import apiFetch from '@/services/gutenberg/api-fetch';
 import { STORE_NAME } from './name';
 import { additionalEntityConfigLoaders, DEFAULT_ENTITY_KEY } from './entities';
-import { getEntitySyncManager } from './entity-sync';
 import {
 	forwardResolver,
 	getNormalizedCommaSeparable,
@@ -12,12 +11,10 @@ import {
 	getUserPermissionsFromAllowHeader,
 	ALLOWED_RESOURCE_ACTIONS,
 	RECEIVE_INTERMEDIATE_RESULTS,
-	isNumericID,
 	normalizeQueryForResolution,
 	getPaginationMeta,
 } from './utils';
 import { fetchBlockPatterns } from './fetch';
-import { setCachedBlocks } from './parsed-blocks-cache';
 
 /**
  * Requests authors from the REST API.
@@ -131,106 +128,6 @@ export const getEntityRecord =
 			// `canUser` is keyed by the resource, so one entry covers all
 			// four actions.
 			const canUserResolutionsArgs = [ [ { kind, name, id: key } ] ];
-
-			// A registered entity sync manager is notified about records
-			// fetched without a query and decides whether to sync them. The
-			// no-query fetch is the one the editor uses for the main record
-			// it edits, and it is guaranteed to carry the full editable
-			// record. A fetch with a query may ask for specific fields or a
-			// different context, so it is not a safe base for syncing.
-			const syncManager =
-				select?.isCollaborationSupported?.() === false
-					? undefined
-					: getEntitySyncManager();
-
-			if (
-				syncManager &&
-				isNumericID( key ) &&
-				! query &&
-				false !== syncManager.shouldSync?.( kind, name, key )
-			) {
-				// Use the new transient "read/write" config to compute transients for
-				// the sync manager. Otherwise these transients are not available
-				// if / until the record is edited. Use a copy of the record so that
-				// it does not change the behavior outside this experimental flag.
-				const recordWithTransients = { ...record };
-				Object.entries( entityConfig.transientEdits ?? {} )
-					.filter(
-						( [ propName, transientConfig ] ) =>
-							undefined === recordWithTransients[ propName ] &&
-							transientConfig &&
-							'object' === typeof transientConfig &&
-							'read' in transientConfig &&
-							'function' === typeof transientConfig.read
-					)
-					.forEach( ( [ propName, transientConfig ] ) => {
-						recordWithTransients[ propName ] =
-							transientConfig.read( recordWithTransients );
-					} );
-
-				// Share the parsed blocks with `useEntityBlockEditor` so the
-				// editor doesn't re-parse the same `content` string. The cache
-				// remembers which block types the parse ran against, so an
-				// entry computed before they register is discarded, not served.
-				if (
-					recordWithTransients.blocks &&
-					typeof recordWithTransients.content?.raw === 'string'
-				) {
-					setCachedBlocks(
-						kind,
-						name,
-						key,
-						recordWithTransients.content.raw,
-						recordWithTransients.blocks
-					);
-				}
-
-				// Load the entity record for syncing. Do not await promise.
-				// NOTE: when this resolver runs before block types register,
-				// `recordWithTransients.blocks` was parsed as empty. The cache
-				// above discards such an entry; the sync manager receives it
-				// as-is, and seeding a collaborative document from it is an
-				// open problem of the collaboration path.
-				void syncManager.load( kind, name, key, recordWithTransients, {
-					// Handle edits sourced from the sync manager.
-					editRecord: ( edits, options = {} ) => {
-						if ( ! Object.keys( edits ).length ) {
-							return;
-						}
-
-						dispatch( {
-							type: 'EDIT_ENTITY_RECORD',
-							kind,
-							name,
-							recordId: key,
-							edits,
-							meta: {
-								undo: undefined,
-							},
-							options,
-						} );
-					},
-					// Get the current entity record (with edits)
-					getEditedRecord: async () =>
-						await resolveSelect.getEditedEntityRecord(
-							kind,
-							name,
-							key
-						),
-					// Refetch the current entity record from the database.
-					refetchRecord: async () => {
-						dispatch.receiveEntityRecords(
-							kind,
-							name,
-							await apiFetch( { path, parse: true } ),
-							query
-						);
-					},
-					onUndoLevelOpened: () => {
-						dispatch.recordSyncUndoLevel( kind, name, key );
-					},
-				} );
-			}
 
 			registry.batch( () => {
 				dispatch.receiveEntityRecords( kind, name, record, query );
@@ -394,28 +291,6 @@ export const getEntityRecords =
 					totalItems: records.length,
 					totalPages: 1,
 				};
-			}
-
-			// A registered entity sync manager hears about whole collections,
-			// meaning fetches that ask for every record of a type at once.
-			// Paginated lists are not covered. The manager gets one handler,
-			// `refetchRecords`, which reloads the same list from the REST
-			// API. For example, the real-time collaboration manager watches
-			// a shared document for the collection and calls the handler
-			// when another user saves a record of that type, so lists such
-			// as templates, navigation menus, or a post's notes pick up the
-			// change.
-			if ( -1 === query.per_page ) {
-				void getEntitySyncManager()?.loadCollection?.( kind, name, {
-					refetchRecords: async () => {
-						dispatch.receiveEntityRecords(
-							kind,
-							name,
-							await apiFetch( { path, parse: true } ),
-							query
-						);
-					},
-				} );
 			}
 
 			// If we request fields but the result doesn't contain the fields,

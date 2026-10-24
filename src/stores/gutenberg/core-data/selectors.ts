@@ -2,7 +2,6 @@ import { createSelector, createRegistrySelector } from '@/stores/gutenberg/data'
 import { addQueryArgs } from '@/utils/gutenberg/url';
 import type { UndoManager } from '@/stores/gutenberg/undo-manager';
 import deprecated from '@/utils/gutenberg/deprecated';
-import type { ConnectionStatus } from '@/services/gutenberg/sync';
 import { STORE_NAME } from './name';
 import {
 	getQueriedItems,
@@ -48,8 +47,6 @@ export interface State {
 	registeredPostMeta: Record< string, Object >;
 	editorSettings: Record< string, any > | null;
 	editorAssets: Record< string, any > | null;
-	syncConnectionStatuses?: Record< string, ConnectionStatus >;
-	collaborationSupported: boolean;
 	viewConfigs: Record< string, Record< string, any > >;
 	fieldsConfigs: Record< string, Record< string, FieldsConfig > >;
 	entityActionsConfigs: Record<

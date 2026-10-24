@@ -7,8 +7,6 @@ import { receiveItems, removeItems, receiveQueriedItems } from './queried-data';
 import { DEFAULT_ENTITY_KEY } from './entities';
 import { createBatch } from './batch';
 import { STORE_NAME } from './name';
-import { getEntitySyncManager } from './entity-sync';
-import { applyUndoLevel, recordEntityEdit } from './utils/sync-undo-levels';
 import logEntityDeprecation from './utils/log-entity-deprecation';
 
 function addTitleToAutoDraft( record ) {
@@ -317,8 +315,6 @@ export const deleteEntityRecord =
 				} );
 
 				await dispatch( removeItems( kind, name, recordId, true ) );
-
-				getEntitySyncManager()?.unload( kind, name, recordId );
 			} catch ( _error ) {
 				hasError = true;
 				error = _error;
@@ -394,24 +390,12 @@ export const editEntityRecord =
 			// so that the property is not considered dirty.
 			edits: clearUnchangedEdits( editsWithMerges, record ),
 		};
-		// Tell the entity sync manager about the edit before it arrives in the
-		// store. It receives merged edits and the edit's intent, and decides
-		// what to do with them.
-		const syncManager = getEntitySyncManager();
-		syncManager?.update( kind, name, recordId, editsWithMerges, {
-			isCached: Boolean( options.isCached ),
-			undoIgnore: Boolean( options.undoIgnore ),
-		} );
-		// A record the sync manager has loaded has its undo history tracked
-		// by the manager, which reports each level it opens (see
-		// `recordSyncUndoLevel`). Every other record is recorded here.
-		if (
-			! options.undoIgnore &&
-			! syncManager?.isLoaded?.( kind, name, recordId )
-		) {
-			recordEntityEdit(
-				select.getUndoManager(),
-				syncManager,
+		if ( ! options.undoIgnore ) {
+			const undoManager = select.getUndoManager();
+			if ( options.isCached && undoManager.hasRedo() ) {
+				undoManager.addRecord();
+			}
+			undoManager.addRecord(
 				[
 					{
 						id: { kind, name, recordId },
@@ -489,11 +473,7 @@ export const clearEntityRecordEdits =
 export const undo =
 	() =>
 	( { select, dispatch } ) => {
-		const undoRecord = applyUndoLevel(
-			select.getUndoManager(),
-			getEntitySyncManager(),
-			'undo'
-		);
+		const undoRecord = select.getUndoManager().undo();
 		if ( ! undoRecord ) {
 			return;
 		}
@@ -510,11 +490,7 @@ export const undo =
 export const redo =
 	() =>
 	( { select, dispatch } ) => {
-		const redoRecord = applyUndoLevel(
-			select.getUndoManager(),
-			getEntitySyncManager(),
-			'redo'
-		);
+		const redoRecord = select.getUndoManager().redo();
 		if ( ! redoRecord ) {
 			return;
 		}
@@ -532,7 +508,7 @@ export const redo =
 export const __unstableCreateUndoLevel =
 	() =>
 	( { select } ) => {
-		recordEntityEdit( select.getUndoManager(), getEntitySyncManager() );
+		select.getUndoManager().addRecord();
 	};
 
 /**
@@ -615,21 +591,6 @@ export const saveEntityRecord =
 					? select.getRawEntityRecord( kind, name, recordId )
 					: {};
 
-				// Let the entity sync manager see the edits about to be saved
-				// and add anything it needs to the request. For example,
-				// metadata about a shared document that should be saved with
-				// the post.
-				const syncManager = getEntitySyncManager();
-				const syncEdits = isNewRecord
-					? undefined
-					: await syncManager?.beforeSave?.(
-							kind,
-							name,
-							recordId,
-							record,
-							{ persistedRecord, isAutosave }
-						);
-
 				// Most of this autosave logic is very specific to posts.
 				// This is fine for now as it is the only supported autosave,
 				// but ideally this should all be handled in the back end,
@@ -666,7 +627,7 @@ export const saveEntityRecord =
 					updatedRecord = await __unstableFetch( {
 						path: `${ path }/autosaves`,
 						method: 'POST',
-						data: { ...data, ...syncEdits },
+						data,
 					} );
 
 					// An autosave may be processed by the server as a regular save
@@ -721,7 +682,7 @@ export const saveEntityRecord =
 						);
 					}
 				} else {
-					let edits = { ...record, ...syncEdits };
+					let edits = { ...record };
 					if ( entityConfig.__unstablePrePersist ) {
 						edits = {
 							...edits,

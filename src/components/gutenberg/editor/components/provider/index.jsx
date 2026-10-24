@@ -368,7 +368,7 @@ export const ExperimentalEditorProvider = withRegistryProvider(
 		// Manages the "more recent autosave" notice. Called after the mount
 		// effect above so that its own mount effect runs once `setupEditor`
 		// has populated the current post.
-		useAutosaveNotice( { post, recovery, settings } );
+		useAutosaveNotice( { recovery, settings } );
 
 		// Synchronizes the active post with the state
 		useEffect( () => {

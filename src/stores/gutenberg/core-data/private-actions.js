@@ -4,8 +4,6 @@ import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { __ } from '@/lib/gutenberg/i18n';
 import { STORE_NAME } from './name';
-import { getEntitySyncManager } from './entity-sync';
-import { createSyncUndoLevelRecord } from './utils/sync-undo-levels';
 
 /**
  * Returns an action object used in signalling that the registered post meta
@@ -161,23 +159,6 @@ export function receiveEditorAssets( assets ) {
 }
 
 /**
- * Returns an action object used to set whether collaboration is supported.
- * When set to false, also disconnects all sync entities.
- *
- * @param {boolean} supported Whether collaboration is supported.
- *
- * @return {Object} Action object.
- */
-export const setCollaborationSupported =
-	( supported ) =>
-	( { dispatch } ) => {
-		dispatch( { type: 'SET_COLLABORATION_SUPPORTED', supported } );
-		if ( ! supported ) {
-			getEntitySyncManager()?.unloadAll();
-		}
-	};
-
-/**
  * Returns an action object used to receive view config.
  *
  * @param {string} kind   Entity kind.
@@ -228,58 +209,6 @@ export function receiveEntityActionsConfig( kind, name, config ) {
 		kind,
 		name,
 		config,
-	};
-}
-
-/**
- * Records that the entity sync manager opened a new undo level for a record
- * it syncs, so the level takes its place in core-data's undo history next to
- * the edits core-data records itself.
- *
- * @param {string}        kind     Kind of the record.
- * @param {string}        name     Name of the record.
- * @param {number|string} recordId Id of the record.
- */
-export const recordSyncUndoLevel =
-	( kind, name, recordId ) =>
-	( { select, dispatch } ) => {
-		select
-			.getUndoManager()
-			.addRecord( createSyncUndoLevelRecord( kind, name, recordId ) );
-
-		// The undo manager is a mutable object held in state, so change
-		// state for `hasUndo` and `hasRedo` to be read again. The sync
-		// manager reports levels outside of entity edits, for example after
-		// a deferred document update.
-		dispatch( { type: 'RECORD_SYNC_UNDO_LEVEL' } );
-	};
-
-/**
- * Returns an action object used to set the sync connection status for an entity or collection.
- *
- * @param {string}             kind   Kind of the entity.
- * @param {string}             name   Name of the entity.
- * @param {number|string|null} key    The entity key, or null for collections.
- * @param {Object|null}        status The connection state object or null on unload.
- *
- * @return {Object} Action object.
- */
-export function setSyncConnectionStatus( kind, name, key, status ) {
-	if ( ! status ) {
-		return {
-			type: 'CLEAR_SYNC_CONNECTION_STATUS',
-			kind,
-			name,
-			key,
-		};
-	}
-
-	return {
-		type: 'SET_SYNC_CONNECTION_STATUS',
-		kind,
-		name,
-		key,
-		status,
 	};
 }
 
