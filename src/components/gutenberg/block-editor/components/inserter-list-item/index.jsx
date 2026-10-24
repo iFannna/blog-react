@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { __ } from '@/lib/gutenberg/i18n';
 import { useMemo, useRef, memo } from '@/lib/gutenberg/element';
 import {
 	createBlock,
@@ -121,7 +122,7 @@ function InserterListItem( {
 						</span>
 						<span className="block-editor-block-types-list__item-title">
 							<Truncate numberOfLines={ 3 }>
-								{ item.title }
+								{ __( item.title ) }
 							</Truncate>
 						</span>
 					</InserterListboxItem>

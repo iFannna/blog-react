@@ -1,6 +1,5 @@
 import { camelCase } from 'change-case';
 import { combineReducers } from '@/stores/gutenberg/data';
-import { __ } from '@/lib/gutenberg/i18n';
 import { omit } from '../api/utils';
 import type {
 	BlockType,
@@ -14,16 +13,18 @@ import type {
 import type { Action } from './types';
 
 /**
- * Default set of categories.
+ * Default set of categories. Titles are untranslated on purpose: this module
+ * is evaluated before the locale data loads, so consumers translate them at
+ * render time.
  */
 export const DEFAULT_CATEGORIES: BlockCategory[] = [
-	{ slug: 'text', title: __( 'Text' ) },
-	{ slug: 'media', title: __( 'Media' ) },
-	{ slug: 'design', title: __( 'Design' ) },
-	{ slug: 'widgets', title: __( 'Widgets' ) },
-	{ slug: 'theme', title: __( 'Theme' ) },
-	{ slug: 'embed', title: __( 'Embeds' ) },
-	{ slug: 'reusable', title: __( 'Reusable blocks' ) },
+	{ slug: 'text', title: 'Text' },
+	{ slug: 'media', title: 'Media' },
+	{ slug: 'design', title: 'Design' },
+	{ slug: 'widgets', title: 'Widgets' },
+	{ slug: 'theme', title: 'Theme' },
+	{ slug: 'embed', title: 'Embeds' },
+	{ slug: 'reusable', title: 'Reusable blocks' },
 ];
 
 // Key block types by their name.

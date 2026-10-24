@@ -101,7 +101,7 @@ export default function BlockManager( {
 				{ categories.map( ( category ) => (
 					<BlockManagerCategory
 						key={ category.slug }
-						title={ category.title }
+						title={ __( category.title ) }
 						blockTypes={ filteredBlockTypes.filter(
 							( blockType ) =>
 								blockType.category === category.slug

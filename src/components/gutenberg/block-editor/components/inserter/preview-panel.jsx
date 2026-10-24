@@ -69,9 +69,11 @@ function InserterPreviewPanel( { item } ) {
 			</div>
 			{ ! isReusable && (
 				<BlockCard
-					title={ title }
+					title={ __( title ) }
 					icon={ icon }
-					description={ description }
+					description={
+						description ? __( description ) : undefined
+					}
 				/>
 			) }
 		</div>

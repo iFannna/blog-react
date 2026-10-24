@@ -103,14 +103,14 @@ export function BlockTypesTabPanel( {
 				return (
 					<InserterPanel
 						key={ category.slug }
-						title={ category.title }
+						title={ __( category.title ) }
 						icon={ category.icon }
 					>
 						<BlockTypesList
 							items={ categoryItems }
 							onSelect={ onSelectItem }
 							onHover={ onHover }
-							label={ category.title }
+							label={ __( category.title ) }
 						/>
 					</InserterPanel>
 				);
