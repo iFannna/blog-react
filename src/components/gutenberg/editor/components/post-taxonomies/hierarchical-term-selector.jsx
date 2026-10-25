@@ -25,6 +25,11 @@ import { speak } from '@/utils/gutenberg/a11y';
 import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { buildTermsTree } from '../../utils/terms';
 import { normalizeTextString } from '../../utils/normalize-text-string';
+import {
+	createProjectTerm,
+	getProjectTermAdapter,
+	useProjectTerms,
+} from '@/services/gutenberg/project/terms';
 import { store as editorStore } from '../../store';
 import { unlock } from '../../lock-unlock';
 
@@ -213,6 +218,8 @@ export function HierarchicalTermSelector( { slug } ) {
 	// render the results in a lower priority pass.
 	const deferredFilterValue = useDeferredValue( filterValue );
 	const debouncedSpeak = useDebounce( speak, SPEAK_DEBOUNCE_MS );
+	const projectTerms = useProjectTerms( slug );
+	const usesProjectTerms = !! getProjectTermAdapter();
 
 	const {
 		hasCreateAction,
@@ -244,18 +251,21 @@ export function HierarchicalTermSelector( { slug } ) {
 				terms: _taxonomy
 					? getEditedPostAttribute( _taxonomy.rest_base )
 					: EMPTY_ARRAY,
-				loading: isResolving( 'getEntityRecords', [
-					'taxonomy',
-					slug,
-					DEFAULT_QUERY,
-				] ),
-				availableTerms:
-					getEntityRecords( 'taxonomy', slug, DEFAULT_QUERY ) ||
-					EMPTY_ARRAY,
+				loading:
+					! usesProjectTerms &&
+					isResolving( 'getEntityRecords', [
+						'taxonomy',
+						slug,
+						DEFAULT_QUERY,
+					] ),
+				availableTerms: usesProjectTerms
+					? EMPTY_ARRAY
+					: getEntityRecords( 'taxonomy', slug, DEFAULT_QUERY ) ||
+						EMPTY_ARRAY,
 				taxonomy: _taxonomy,
 			};
 		},
-		[ slug ]
+		[ slug, usesProjectTerms ]
 	);
 
 	const { editPost } = useDispatch( editorStore );
@@ -263,11 +273,13 @@ export function HierarchicalTermSelector( { slug } ) {
 	const { createErrorNotice } = useDispatch( noticesStore );
 
 	const selectedTerms = useMemo( () => new Set( terms ), [ terms ] );
+	const effectiveTerms = projectTerms ? projectTerms.terms : availableTerms;
+	const isLoading = projectTerms ? projectTerms.loading : loading;
 	const availableTermsTree = useMemo(
-		() => sortBySelected( buildTermsTree( availableTerms ), terms ),
+		() => sortBySelected( buildTermsTree( effectiveTerms ), terms ),
 		// Remove `terms` from the dependency list to avoid reordering every time
 		// checking or unchecking a term.
-		[ availableTerms ]
+		[ effectiveTerms ]
 	);
 
 	const shownTerms = useMemo( () => {
@@ -327,6 +339,9 @@ export function HierarchicalTermSelector( { slug } ) {
 	 * @return {Promise} A promise that resolves to save term object.
 	 */
 	const addTerm = ( term ) => {
+		if ( usesProjectTerms ) {
+			return createProjectTerm( slug, term.name );
+		}
 		return saveEntityRecord( 'taxonomy', slug, term, {
 			throwOnError: true,
 		} );
@@ -356,7 +371,7 @@ export function HierarchicalTermSelector( { slug } ) {
 		}
 
 		// Check if the term we are adding already exists.
-		const existingTerm = findTerm( availableTerms, formParent, formName );
+		const existingTerm = findTerm( effectiveTerms, formParent, formName );
 		if ( existingTerm ) {
 			// If the term we are adding exists but is not selected select it.
 			if ( ! terms.some( ( term ) => term === existingTerm.id ) ) {
@@ -379,6 +394,7 @@ export function HierarchicalTermSelector( { slug } ) {
 			createErrorNotice( error.message, {
 				type: 'snackbar',
 			} );
+			setAdding( false );
 			return;
 		}
 		const defaultName =
@@ -422,11 +438,11 @@ export function HierarchicalTermSelector( { slug } ) {
 	const newTermSubmitLabel = newTermButtonLabel;
 	const filterLabel = taxonomy?.labels?.search_items ?? __( 'Search Terms' );
 	const groupLabel = taxonomy?.name ?? __( 'Terms' );
-	const showFilter = availableTerms.length >= MIN_TERMS_COUNT_FOR_FILTER;
+	const showFilter = effectiveTerms.length >= MIN_TERMS_COUNT_FOR_FILTER;
 
 	return (
 		<Stack direction="column" gap="lg">
-			{ showFilter && ! loading && (
+			{ showFilter && ! isLoading && (
 				<SearchControl
 					label={ filterLabel }
 					placeholder={ filterLabel }
@@ -434,7 +450,7 @@ export function HierarchicalTermSelector( { slug } ) {
 					onChange={ setFilterValue }
 				/>
 			) }
-			{ loading && (
+			{ isLoading && (
 				<Stack
 					justify="center"
 					style={ {
@@ -460,7 +476,7 @@ export function HierarchicalTermSelector( { slug } ) {
 					/>
 				) ) }
 			</div>
-			{ ! loading && hasCreateAction && (
+			{ ! isLoading && hasCreateAction && (
 				<Button
 					__next40pxDefaultSize
 					onClick={ onToggleForm }
@@ -481,7 +497,7 @@ export function HierarchicalTermSelector( { slug } ) {
 							onValueChange={ onChangeFormName }
 							required
 						/>
-						{ !! availableTerms.length && (
+						{ ! usesProjectTerms && !! effectiveTerms.length && (
 							<TreeSelect
 								label={ parentSelectLabel }
 								noOptionLabel={ noParentOption }

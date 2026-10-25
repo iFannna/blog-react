@@ -18,6 +18,12 @@ import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { useDebounce } from '@/hooks/gutenberg/compose';
 import { speak } from '@/utils/gutenberg/a11y';
 import { store as noticesStore } from '@/stores/gutenberg/notices';
+import {
+	createProjectTerm,
+	getProjectTermAdapter,
+	searchProjectTerms,
+	useProjectTerms,
+} from '@/services/gutenberg/project/terms';
 import { store as editorStore } from '../../store';
 import { unescapeString } from '../../utils/terms';
 import MostUsedTerms from './most-used-terms';
@@ -98,6 +104,8 @@ export function FlatTermSelector( { slug } ) {
 	const { editPost } = useDispatch( editorStore );
 	const { saveEntityRecord } = useDispatch( coreStore );
 	const { createErrorNotice } = useDispatch( noticesStore );
+	const projectTerms = useProjectTerms( slug );
+	const usesProjectTerms = !! getProjectTermAdapter();
 	const {
 		terms,
 		termIds,
@@ -144,40 +152,58 @@ export function FlatTermSelector( { slug } ) {
 				hasAssignAction: canAssign,
 				taxonomy: _taxonomy,
 				termIds: _termIds,
-				terms: _termIds?.length
-					? getEntityRecords( 'taxonomy', slug, query )
-					: EMPTY_ARRAY,
-				hasResolvedTerms: hasFinishedResolution( 'getEntityRecords', [
-					'taxonomy',
-					slug,
-					query,
-				] ),
+				terms: usesProjectTerms
+					? EMPTY_ARRAY
+					: _termIds?.length
+						? getEntityRecords( 'taxonomy', slug, query )
+						: EMPTY_ARRAY,
+				hasResolvedTerms:
+					! usesProjectTerms &&
+					hasFinishedResolution( 'getEntityRecords', [
+						'taxonomy',
+						slug,
+						query,
+					] ),
 			};
 		},
-		[ slug ]
+		[ slug, usesProjectTerms ]
 	);
+
+	const effectiveTerms = useMemo( () => {
+		if ( ! projectTerms ) {
+			return terms;
+		}
+		const assigned = new Set( termIds ?? EMPTY_ARRAY );
+		return projectTerms.terms.filter( ( term ) => assigned.has( term.id ) );
+	}, [ projectTerms, termIds, terms ] );
+	const hasResolved = projectTerms ? projectTerms.loaded : hasResolvedTerms;
 
 	// Update terms state only after the selectors are resolved.
 	// We're using this to avoid terms temporarily disappearing on slow networks
 	// while core data makes REST API requests.
 	useEffect( () => {
-		if ( hasResolvedTerms ) {
+		if ( hasResolved ) {
 			setValues( ( currentValues ) => [
-				...( terms ?? [] ).map( termToItem ),
+				...( effectiveTerms ?? [] ).map( termToItem ),
 				// Terms that are still being created aren't in the store yet.
 				...currentValues.filter( isPendingTerm ),
 			] );
 		}
-	}, [ terms, hasResolvedTerms ] );
+	}, [ effectiveTerms, hasResolved ] );
 
 	const searchTerms = useCallback(
 		async ( search ) => {
-			const records = await registry
-				.resolveSelect( coreStore )
-				.getEntityRecords( 'taxonomy', slug, {
-					...DEFAULT_QUERY,
-					search,
-				} );
+			let records;
+			if ( usesProjectTerms ) {
+				records = await searchProjectTerms( slug, search );
+			} else {
+				records = await registry
+					.resolveSelect( coreStore )
+					.getEntityRecords( 'taxonomy', slug, {
+						...DEFAULT_QUERY,
+						search,
+					} );
+			}
 
 			// Ignore a request whose search no longer matches the input.
 			if ( lastSearchRef.current === search ) {
@@ -185,7 +211,7 @@ export function FlatTermSelector( { slug } ) {
 				setIsSearching( false );
 			}
 		},
-		[ registry, slug ]
+		[ registry, slug, usesProjectTerms ]
 	);
 	const debouncedSearch = useDebounce( searchTerms, 500 );
 
@@ -225,6 +251,9 @@ export function FlatTermSelector( { slug } ) {
 	}
 
 	async function findOrCreateTerm( name ) {
+		if ( usesProjectTerms ) {
+			return termToItem( await createProjectTerm( slug, name ) );
+		}
 		try {
 			const newTerm = await saveEntityRecord(
 				'taxonomy',
@@ -470,7 +499,11 @@ export function FlatTermSelector( { slug } ) {
 				emptyContent={ isSearching ? null : notFoundLabel }
 				showClearButton={ false }
 			/>
-			<MostUsedTerms taxonomy={ taxonomy } onSelect={ appendTerm } />
+			<MostUsedTerms
+				taxonomy={ taxonomy }
+				onSelect={ appendTerm }
+				terms={ projectTerms ? projectTerms.terms : undefined }
+			/>
 		</Stack>
 	);
 }

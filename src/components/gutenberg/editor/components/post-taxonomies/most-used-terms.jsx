@@ -13,9 +13,16 @@ const DEFAULT_QUERY = {
 	context: 'view',
 };
 
-export default function MostUsedTerms( { onSelect, taxonomy } ) {
+export default function MostUsedTerms( { onSelect, taxonomy, terms: providedTerms } ) {
+	const hasProvidedTerms = providedTerms != null;
 	const { _terms, showTerms } = useSelect(
 		( select ) => {
+			if ( hasProvidedTerms ) {
+				return {
+					_terms: providedTerms,
+					showTerms: providedTerms.length > 0,
+				};
+			}
 			const mostUsedTerms = select( coreStore ).getEntityRecords(
 				'taxonomy',
 				taxonomy.slug,
@@ -26,7 +33,7 @@ export default function MostUsedTerms( { onSelect, taxonomy } ) {
 				showTerms: mostUsedTerms?.length >= MIN_MOST_USED_TERMS,
 			};
 		},
-		[ taxonomy.slug ]
+		[ taxonomy.slug, hasProvidedTerms, providedTerms ]
 	);
 
 	if ( ! showTerms ) {
@@ -34,6 +41,10 @@ export default function MostUsedTerms( { onSelect, taxonomy } ) {
 	}
 
 	const terms = unescapeTerms( _terms );
+	// 项目数据没有使用次数，展示全部已有术语
+	const label = hasProvidedTerms
+		? taxonomy?.labels?.all_items ?? taxonomy.labels.most_used
+		: taxonomy.labels.most_used;
 
 	return (
 		<div className="editor-post-taxonomies__flat-term-most-used">
@@ -41,7 +52,7 @@ export default function MostUsedTerms( { onSelect, taxonomy } ) {
 				as="h3"
 				className="editor-post-taxonomies__flat-term-most-used-label"
 			>
-				{ taxonomy.labels.most_used }
+				{ label }
 			</BaseControl.VisualLabel>
 			{ /*
 			 * Disable reason: The `list` ARIA role is redundant but

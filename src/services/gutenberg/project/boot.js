@@ -11,6 +11,7 @@ import { createGoProjectEditorSource } from "./api";
 import { registerProjectEditor } from "./integration";
 import { createNewEditorPost, toEditorPost } from "./map";
 import { installProjectMediaBridge } from "./media-bridge";
+import { installProjectTermAdapter } from "./terms";
 import "@/styles/gutenberg/inline.js";
 import "@/styles/gutenberg/compiled/index.js";
 import "@/styles/gutenberg/index.css";
@@ -62,6 +63,7 @@ export async function bootProjectEditor(locale, articleId, options = {}) {
 
   installMockApi(settings.locale);
   installProjectMediaBridge();
+  installProjectTermAdapter();
   configureCanvasAssets(settings);
 
   const projectSettings = {

@@ -62,6 +62,10 @@ export function toEditorPost(
 ): EditorPost {
   const links: Record<string, Array<{ href: string }>> = {
     "wp:action-publish": [{ href: "" }],
+    "wp:action-assign-categories": [{ href: "" }],
+    "wp:action-create-categories": [{ href: "" }],
+    "wp:action-assign-tags": [{ href: "" }],
+    "wp:action-create-tags": [{ href: "" }],
   };
   if (article.status !== 2) {
     links["wp:action-trash"] = [{ href: "" }];
@@ -141,6 +145,10 @@ export function createNewEditorPost(): EditorPost {
     meta: {},
     _links: {
       "wp:action-publish": [{ href: "" }],
+      "wp:action-assign-categories": [{ href: "" }],
+      "wp:action-create-categories": [{ href: "" }],
+      "wp:action-assign-tags": [{ href: "" }],
+      "wp:action-create-tags": [{ href: "" }],
     },
     _project: {
       contentFormat: "gutenberg",
