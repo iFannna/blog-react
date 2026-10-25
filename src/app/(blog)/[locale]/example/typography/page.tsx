@@ -27,7 +27,7 @@ export default async function TypographyPage({
       breadcrumbs={
         <Breadcrumbs items={[
           { name: "Home", path: localePath(locale, "/") },
-          { name: "Typography", path: localePath(locale, "/typography") },
+          { name: "Typography", path: localePath(locale, "/example/typography") },
         ]} />
       }
     >

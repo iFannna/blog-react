@@ -48,7 +48,7 @@ export default async function SiteLayout({
     getCategories().catch(() => []),
     getTags().catch(() => []),
   ]);
-  // 「其他」下拉:归档(分类/标签/作者)、排版、文档、登录、注册;分类/标签为动态数据
+  // 「其他」下拉:归档(分类/标签/作者)、排版、文档、示例、登录、注册;分类/标签为动态数据
   const developerName = setting?.developer_name || "Admin";
   const topNavItems = NAV_ITEMS.map((item) => ({
     ...item,
@@ -87,6 +87,19 @@ export default async function SiteLayout({
             },
           ],
         },
+        {
+          label: "示例",
+          children: [
+            {
+              href: localePath(locale, "/example/typography"),
+              label: "Typography",
+            },
+            {
+              href: localePath(locale, "/example/gutenberg"),
+              label: "Gutenberg",
+            },
+          ],
+        },
         { href: localePath(locale, "/login"), label: "登录" },
         { href: localePath(locale, "/register"), label: "注册" },
       ],
@@ -95,7 +108,7 @@ export default async function SiteLayout({
   // 移动端:平铺菜单,不做多级
   const mobileNavItems = [
     ...topNavItems,
-    { href: localePath(locale, "/typography"), label: "排版" },
+    { href: localePath(locale, "/example/typography"), label: "排版" },
     { href: localePath(locale, "/login"), label: "登录" },
     { href: localePath(locale, "/register"), label: "注册" },
   ];
