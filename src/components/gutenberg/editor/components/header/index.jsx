@@ -35,12 +35,14 @@ function Header( {
 		hasBlockSelection,
 		hasSectionRootClientId,
 		isStylesCanvasActive,
+		isProjectEditor,
 	} = useSelect( ( select ) => {
 		const { get: getPreference } = select( preferencesStore );
 		const {
 			getEditorMode,
 			getCurrentPostType,
 			isPublishSidebarOpened: _isPublishSidebarOpened,
+			getEditorSettings,
 		} = select( editorStore );
 		const { getStylesPath, getShowStylebook } = unlock(
 			select( editorStore )
@@ -60,6 +62,7 @@ function Header( {
 			isStylesCanvasActive:
 				!! getStylesPath()?.startsWith( '/revisions' ) ||
 				getShowStylebook(),
+			isProjectEditor: !! getEditorSettings().__projectEditor,
 		};
 	}, [] );
 
@@ -113,17 +116,21 @@ function Header( {
 						<PostSavedState forceIsDirty={ forceIsDirty } />
 					) }
 
-					<PostViewLink />
+					{ ! isProjectEditor && <PostViewLink /> }
 
-					<PreviewDropdown
-						forceIsAutosaveable={ forceIsDirty }
-						disabled={ isStylesCanvasActive }
-					/>
+					{ ! isProjectEditor && (
+						<>
+							<PreviewDropdown
+								forceIsAutosaveable={ forceIsDirty }
+								disabled={ isStylesCanvasActive }
+							/>
 
-					<PostPreviewButton
-						className="editor-header__post-preview-button"
-						forceIsAutosaveable={ forceIsDirty }
-					/>
+							<PostPreviewButton
+								className="editor-header__post-preview-button"
+								forceIsAutosaveable={ forceIsDirty }
+							/>
+						</>
+					) }
 
 					{ isWideViewport && canBeZoomedOut && (
 						<ZoomOutToggle disabled={ isStylesCanvasActive } />

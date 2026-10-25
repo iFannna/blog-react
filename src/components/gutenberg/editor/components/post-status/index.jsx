@@ -28,6 +28,7 @@ import { store as editorStore } from '../../store';
 const postStatusesInfo = {
 	'auto-draft': { label: __( 'Draft' ), icon: drafts },
 	draft: { label: __( 'Draft' ), icon: drafts },
+	trash: { label: __( 'Trash' ), icon: drafts },
 	pending: { label: __( 'Pending' ), icon: pending },
 	private: { label: __( 'Private' ), icon: notAllowed },
 	future: { label: __( 'Scheduled' ), icon: scheduled },
@@ -63,26 +64,34 @@ export const STATUS_OPTIONS = [
 ];
 
 export default function PostStatus() {
-	const { status, date, password, postId, postType, canEdit } = useSelect(
-		( select ) => {
-			const {
-				getEditedPostAttribute,
-				getCurrentPostId,
-				getCurrentPostType,
-				getCurrentPost,
-			} = select( editorStore );
-			return {
-				status: getEditedPostAttribute( 'status' ),
-				date: getEditedPostAttribute( 'date' ),
-				password: getEditedPostAttribute( 'password' ),
-				postId: getCurrentPostId(),
-				postType: getCurrentPostType(),
-				canEdit:
-					getCurrentPost()._links?.[ 'wp:action-publish' ] ?? false,
-			};
-		},
-		[]
-	);
+	const { status, date, password, postId, postType, canEdit, isProjectEditor } =
+		useSelect(
+			( select ) => {
+				const {
+					getEditedPostAttribute,
+					getCurrentPostId,
+					getCurrentPostType,
+					getCurrentPost,
+					getEditorSettings,
+				} = select( editorStore );
+				return {
+					status: getEditedPostAttribute( 'status' ),
+					date: getEditedPostAttribute( 'date' ),
+					password: getEditedPostAttribute( 'password' ),
+					postId: getCurrentPostId(),
+					postType: getCurrentPostType(),
+					canEdit:
+						getCurrentPost()._links?.[ 'wp:action-publish' ] ?? false,
+					isProjectEditor: !! getEditorSettings().__projectEditor,
+				};
+			},
+			[]
+		);
+	const statusOptions = isProjectEditor
+		? STATUS_OPTIONS.filter( ( option ) =>
+				[ 'draft', 'publish' ].includes( option.value )
+		  )
+		: STATUS_OPTIONS;
 	const [ showPassword, setShowPassword ] = useState( !! password );
 	const passwordInputId = useInstanceId(
 		PostStatus,
@@ -186,7 +195,7 @@ export default function PostStatus() {
 										className="editor-change-status__options"
 										hideLabelFromVision
 										label={ __( 'Status' ) }
-										options={ STATUS_OPTIONS }
+										options={ statusOptions }
 										onChange={ handleStatus }
 										selected={
 											status === 'auto-draft'

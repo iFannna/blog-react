@@ -41,7 +41,8 @@ export function initializeEditor(
 	postType,
 	postId,
 	settings,
-	initialEdits
+	initialEdits,
+	initialPost
 ) {
 	const target = document.getElementById( id );
 	const root = createRoot( target );
@@ -108,14 +109,38 @@ export function initializeEditor(
 	// preloaded URL back several selectors (e.g. /wp/v2/settings GET +
 	// OPTIONS serves `getEntitiesConfig`, `canUser`, `getEntityRecord`).
 	enablePreloadMultiUse();
-	const preloadedResolutions = preloadResolutions( postType, postId );
+	const preloadedResolutions = preloadResolutions(
+		postType,
+		initialPost ? null : postId
+	);
 
 	preloadedResolutions.finally( () => {
 		// Anything not consumed by the kickoff falls through to a real
 		// network request from here on. `clearPreloadedData` logs which
 		// preload entries (if any) were never served.
 		clearPreloadedData();
-		if ( postType && postId ) {
+		if ( initialPost ) {
+			dispatch( coreDataStore ).receiveEntityRecords(
+				'postType',
+				postType,
+				initialPost,
+				undefined,
+				false
+			);
+			dispatch( coreDataStore ).finishResolution(
+				'getEntityRecord',
+				[ 'postType', postType, postId ]
+			);
+			dispatch( coreDataStore ).finishResolution(
+				'getEditedEntityRecord',
+				[ 'postType', postType, postId ]
+			);
+			dispatch( editorStore ).setupEditor(
+				initialPost,
+				initialEdits,
+				settings.template
+			);
+		} else if ( postType && postId ) {
 			const post = select( coreDataStore ).getEntityRecord(
 				'postType',
 				postType,
@@ -128,13 +153,13 @@ export function initializeEditor(
 					settings.template
 				);
 			}
-			if (
-				new URLSearchParams( window.location.search ).get(
-					'stylebook'
-				) === '1'
-			) {
-				unlock( dispatch( editorStore ) ).setShowStylebook( true );
-			}
+		}
+		if (
+			new URLSearchParams( window.location.search ).get(
+				'stylebook'
+			) === '1'
+		) {
+			unlock( dispatch( editorStore ) ).setShowStylebook( true );
 		}
 		root.render(
 			<StrictMode>
@@ -217,12 +242,14 @@ async function preloadResolutions( postType, postId ) {
 							.catch( () => {} ),
 					]
 				: [] ),
+			// The post type must resolve even for a not-yet-created post, since
+			// the editor's default rendering mode is derived from it.
+			...( postType ? [ core.getPostType( postType ) ] : [] ),
 			// Per-post resolvers. `getPostType` and `getEditedEntityRecord`
 			// are shorthand/forward-resolver aliases with their own
 			// resolution metadata, so they need separate kicks.
 			...( postType && postId
 				? [
-						core.getPostType( postType ),
 						core.getEntityRecord( 'postType', postType, postId ),
 						core.getEditedEntityRecord(
 							'postType',

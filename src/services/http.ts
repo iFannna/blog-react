@@ -68,10 +68,14 @@ apiClient.interceptors.response.use(
         originalRequest.headers.set("Authorization", `Bearer ${newToken}`);
         return apiClient(originalRequest);
       }
-      // 刷新失败：清登录态，跳转登录页
+      // 刷新失败：清登录态，跳转当前语言下的登录页
       if (typeof window !== "undefined") {
         clearStoredAuth();
-        window.location.href = "/login";
+        const locale = window.location.pathname.split("/")[1] || "zh-CN";
+        const redirect = encodeURIComponent(
+          window.location.pathname + window.location.search,
+        );
+        window.location.href = `/${locale}/login?redirect=${redirect}`;
       }
       return Promise.reject(error);
     }

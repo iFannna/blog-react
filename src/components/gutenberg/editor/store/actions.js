@@ -283,14 +283,53 @@ export const savePost =
 
 		if ( ! error ) {
 			try {
-				await registry
-					.dispatch( coreStore )
-					.saveEntityRecord(
-						'postType',
-						previousRecord.type,
+				const projectSaveTransport = applyFilters(
+					'editor.postSaveTransport',
+					null,
+					edits,
+					previousRecord,
+					options
+				);
+				if ( projectSaveTransport ) {
+					const updatedRecord = await projectSaveTransport(
 						edits,
+						previousRecord,
 						options
 					);
+					// 首次保存会把临时文章换成真实ID，编辑器需要切到真实记录
+					const nextId =
+						updatedRecord?._project?.realId ?? updatedRecord?.id;
+					const postIdChanged =
+						typeof nextId === 'number' &&
+						nextId > 0 &&
+						nextId !== previousRecord.id;
+					registry
+						.dispatch( coreStore )
+						.receiveEntityRecords(
+							'postType',
+							previousRecord.type,
+							updatedRecord,
+							undefined,
+							true,
+							postIdChanged
+								? { ...edits, id: nextId }
+								: edits
+						);
+					if ( postIdChanged ) {
+						dispatch(
+							setEditedPost( previousRecord.type, nextId )
+						);
+					}
+				} else {
+					await registry
+						.dispatch( coreStore )
+						.saveEntityRecord(
+							'postType',
+							previousRecord.type,
+							edits,
+							options
+						);
+				}
 			} catch ( err ) {
 				error =
 					err.message && err.code !== 'unknown_error'
@@ -488,6 +527,41 @@ export const trashPost =
 		const postType = await registry
 			.resolveSelect( coreStore )
 			.getPostType( postTypeSlug );
+		const projectTrashTransport = applyFilters(
+			'editor.postTrashTransport',
+			null,
+			select.getCurrentPost(),
+			{ force }
+		);
+		if ( projectTrashTransport ) {
+			dispatch( { type: 'REQUEST_POST_DELETE_START' } );
+			try {
+				const trashedRecord = await projectTrashTransport(
+					select.getCurrentPost(),
+					{ force }
+				);
+				if ( trashedRecord ) {
+					registry
+						.dispatch( coreStore )
+						.receiveEntityRecords(
+							'postType',
+							postTypeSlug,
+							trashedRecord,
+							undefined,
+							true,
+							{}
+						);
+				}
+			} catch ( error ) {
+				registry
+					.dispatch( noticesStore )
+					.createErrorNotice(
+						...getNotificationArgumentsForTrashFail( { error } )
+					);
+			}
+			dispatch( { type: 'REQUEST_POST_DELETE_FINISH' } );
+			return;
+		}
 		const { rest_base: restBase, rest_namespace: restNamespace = 'wp/v2' } =
 			postType;
 		dispatch( { type: 'REQUEST_POST_DELETE_START' } );

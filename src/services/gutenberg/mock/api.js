@@ -61,10 +61,17 @@ function toString( value ) {
 }
 
 let mockLocale = 'zh_CN';
+let projectMediaHandler = null;
 const isEnglish = () => mockLocale === 'en_US';
+
+/** 接入项目后端后，媒体相关请求转交给项目媒体适配器 */
+export function setProjectMediaHandler( handler ) {
+	projectMediaHandler = handler;
+}
 
 export function installMockApi( locale = 'zh_CN' ) {
 	mockLocale = locale;
+	projectMediaHandler = null;
 	const store = createMockData( locale );
 	let post = store.post;
 
@@ -96,6 +103,16 @@ export function installMockApi( locale = 'zh_CN' ) {
 					headers: { allow: ALLOW_HEADER },
 				} )
 			);
+		}
+
+		if ( projectMediaHandler && pathname.startsWith( '/wp/v2/media' ) ) {
+			return projectMediaHandler( {
+				method,
+				pathname,
+				query,
+				options,
+				wantsRawResponse,
+			} );
 		}
 
 		const respond = ( payload, allow = ALLOW_HEADER ) => {
