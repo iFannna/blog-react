@@ -21,6 +21,7 @@ import { useDispatch } from '@/stores/gutenberg/data';
 import { VisuallyHidden } from '@/components/gutenberg/design-system';
 import { store as noticeStore } from '@/stores/gutenberg/notices';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
+import { useTermRecords } from '../utils/use-term-records';
 
 export default function CategoriesEdit( {
 	attributes: {
@@ -57,8 +58,7 @@ export default function CategoriesEdit( {
 		query.parent = 0;
 	}
 
-	const { records: categories, isResolving } = useEntityRecords(
-		'taxonomy',
+	const { records: categories, isResolving } = useTermRecords(
 		taxonomySlug,
 		query
 	);

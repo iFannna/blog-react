@@ -5,14 +5,13 @@ import {
 	Stack,
 	VisuallyHidden,
 } from '@/components/gutenberg/design-system';
-import { useSelect } from '@/stores/gutenberg/data';
-import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { useState, useEffect, useMemo, Fragment } from '@/lib/gutenberg/element';
 import { useDebounce } from '@/hooks/gutenberg/compose';
 import { speak } from '@/utils/gutenberg/a11y';
 import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { sprintf, _n, _x, __ } from '@/lib/gutenberg/i18n';
 import { useTaxonomies } from '../../utils';
+import { useTermRecords } from '../../../utils/use-term-records';
 
 const EMPTY_ARRAY = [];
 const EMPTY_MAP = new Map();
@@ -263,70 +262,30 @@ function TaxonomyItem( {
 	const debouncedSearch = useDebounce( setSearch, 250 );
 	const isHierarchical = !! taxonomy.hierarchical;
 	const needsTree = isHierarchical && ( hasOpened || !! termIds?.length );
-	const { tree, treeHasResolved } = useSelect(
-		( select ) => {
-			if ( ! needsTree ) {
-				return { tree: null, treeHasResolved: false };
-			}
-			const { getEntityRecords, hasFinishedResolution } =
-				select( coreStore );
-			const selectorArgs = [ 'taxonomy', taxonomy.slug, TREE_QUERY ];
-			const records = getEntityRecords( ...selectorArgs );
-			const hasResolved = hasFinishedResolution(
-				'getEntityRecords',
-				selectorArgs
-			);
-			return {
-				tree: hasResolved ? records : null,
-				treeHasResolved: hasResolved,
-			};
-		},
-		[ needsTree, taxonomy.slug ]
-	);
+	const treeTerms = useTermRecords( taxonomy.slug, TREE_QUERY );
+	const tree = needsTree && treeTerms.hasResolved ? treeTerms.records : null;
+	const treeHasResolved = needsTree && treeTerms.hasResolved;
 	const treeItemById = useMemo(
 		() => ( tree ? getTreeItems( tree ) : EMPTY_MAP ),
 		[ tree ]
 	);
-	const { listedTerms, listTotal, listHasResolved } = useSelect(
-		( select ) => {
-			if ( isHierarchical || ! hasOpened ) {
-				return {
-					listedTerms: EMPTY_ARRAY,
-					listTotal: null,
-					listHasResolved: false,
-				};
-			}
-			const {
-				getEntityRecords,
-				getEntityRecordsTotalItems,
-				hasFinishedResolution,
-			} = select( coreStore );
-
-			const selectorArgs = [
-				'taxonomy',
-				taxonomy.slug,
-				{
-					...FLAT_QUERY,
-					...( search && { search } ),
-					// Leave out the opposite control's terms on the server, so
-					// they don't use up places in the page.
-					...( oppositeTermIds.length && {
-						exclude: oppositeTermIds,
-					} ),
-					per_page: search ? MAX_SEARCH_RESULTS : MAX_TERMS_TO_LIST,
-				},
-			];
-			return {
-				listedTerms: getEntityRecords( ...selectorArgs ) || EMPTY_ARRAY,
-				listTotal: getEntityRecordsTotalItems( ...selectorArgs ),
-				listHasResolved: hasFinishedResolution(
-					'getEntityRecords',
-					selectorArgs
-				),
-			};
-		},
-		[ isHierarchical, hasOpened, search, taxonomy.slug, oppositeTermIds ]
+	const listedQuery = useMemo(
+		() => ( {
+			...FLAT_QUERY,
+			...( search && { search } ),
+			// Leave out the opposite control's terms on the server, so
+			// they don't use up places in the page.
+			...( oppositeTermIds.length && { exclude: oppositeTermIds } ),
+			per_page: search ? MAX_SEARCH_RESULTS : MAX_TERMS_TO_LIST,
+		} ),
+		[ search, oppositeTermIds ]
 	);
+	const listed = useTermRecords( taxonomy.slug, listedQuery );
+	const listedTerms =
+		! isHierarchical && hasOpened ? listed.records : EMPTY_ARRAY;
+	const listTotal = ! isHierarchical && hasOpened ? listed.total : null;
+	const listHasResolved =
+		! isHierarchical && hasOpened ? listed.hasResolved : false;
 	const [ lastListedTerms, setLastListedTerms ] = useState( EMPTY_ARRAY );
 	useEffect( () => {
 		if ( listHasResolved ) {
@@ -334,23 +293,22 @@ function TaxonomyItem( {
 		}
 	}, [ listHasResolved, listedTerms ] );
 	const shownTerms = listHasResolved ? listedTerms : lastListedTerms;
+	const includeQuery = useMemo(
+		() => ( {
+			...FLAT_QUERY,
+			include: termIds,
+			per_page: termIds?.length,
+		} ),
+		[ termIds ]
+	);
+	const includeRecords = useTermRecords( taxonomy.slug, includeQuery );
 	// `existingTerms` are the selected terms of a flat taxonomy, fetched with the same fields as the list.
 	// They are used to extract the terms' names to populate the control properly
 	// and to sanitize the provided `termIds`, by setting only the ones that exist.
-	const existingTerms = useSelect(
-		( select ) => {
-			if ( isHierarchical || ! termIds?.length ) {
-				return EMPTY_ARRAY;
-			}
-			const { getEntityRecords } = select( coreStore );
-			return getEntityRecords( 'taxonomy', taxonomy.slug, {
-				...FLAT_QUERY,
-				include: termIds,
-				per_page: termIds.length,
-			} );
-		},
-		[ isHierarchical, taxonomy.slug, termIds ]
-	);
+	const existingTerms =
+		isHierarchical || ! termIds?.length
+			? EMPTY_ARRAY
+			: includeRecords.records;
 	const selectedItemById = useMemo( () => {
 		if ( isHierarchical ) {
 			return treeItemById;

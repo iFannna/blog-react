@@ -1,9 +1,8 @@
 import { FormTokenField } from '@/components/gutenberg/ui';
-import { useSelect } from '@/stores/gutenberg/data';
-import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { useState, useEffect, useMemo } from '@/lib/gutenberg/element';
 import { useDebounce } from '@/hooks/gutenberg/compose';
 import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import { useTermRecords } from '../../../utils/use-term-records';
 
 const EMPTY_ARRAY = [];
 const BASE_QUERY = {
@@ -23,49 +22,30 @@ export default function IncludeControl( {
 	const [ suggestions, setSuggestions ] = useState( EMPTY_ARRAY );
 	const debouncedSearch = useDebounce( setSearch, 250 );
 
-	const { searchResults, searchHasResolved } = useSelect(
-		( select ) => {
-			if ( ! search ) {
-				return { searchResults: EMPTY_ARRAY, searchHasResolved: true };
-			}
-			const { getEntityRecords, hasFinishedResolution } =
-				select( coreStore );
-			const selectorArgs = [
-				'taxonomy',
-				taxonomy,
-				{
-					...BASE_QUERY,
-					search,
-					orderby: 'name',
-					exclude: include,
-					per_page: 20,
-				},
-			];
-			return {
-				searchResults: getEntityRecords( ...selectorArgs ),
-				searchHasResolved: hasFinishedResolution(
-					'getEntityRecords',
-					selectorArgs
-				),
-			};
-		},
-		[ search, taxonomy, include ]
+	const searchQuery = useMemo(
+		() => ( {
+			...BASE_QUERY,
+			search,
+			orderby: 'name',
+			exclude: include,
+			per_page: 20,
+		} ),
+		[ search, include ]
 	);
+	const searchData = useTermRecords( taxonomy, searchQuery );
+	const searchResults = search ? searchData.records : EMPTY_ARRAY;
+	const searchHasResolved = search ? searchData.hasResolved : true;
 
-	const currentTerms = useSelect(
-		( select ) => {
-			if ( ! include?.length ) {
-				return EMPTY_ARRAY;
-			}
-			const { getEntityRecords } = select( coreStore );
-			return getEntityRecords( 'taxonomy', taxonomy, {
-				...BASE_QUERY,
-				include,
-				per_page: include.length,
-			} );
-		},
-		[ include, taxonomy ]
+	const includeQuery = useMemo(
+		() => ( {
+			...BASE_QUERY,
+			include,
+			per_page: include?.length,
+		} ),
+		[ include ]
 	);
+	const includeData = useTermRecords( taxonomy, includeQuery );
+	const currentTerms = include?.length ? includeData.records : EMPTY_ARRAY;
 
 	// Update the `value` state only after the selectors are resolved
 	// to avoid emptying the input when we're changing terms.

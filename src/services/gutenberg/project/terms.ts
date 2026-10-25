@@ -5,6 +5,7 @@ import apiClient from "@/services/http";
 export interface ProjectTerm {
   id: number;
   name: string;
+  count?: number;
 }
 
 /** 编辑器术语面板使用的术语结构 */
@@ -15,6 +16,7 @@ export interface EditorTerm {
   taxonomy: string;
   parent: number;
   count: number;
+  link: string;
 }
 
 export type TermSlug = "category" | "post_tag";
@@ -54,6 +56,11 @@ export function getProjectTermAdapter() {
   return activeAdapter;
 }
 
+/** 项目数据源只覆盖分类与标签 */
+export function isProjectTermSlug(slug: string): slug is TermSlug {
+  return slug === "category" || slug === "post_tag";
+}
+
 function toEditorTerm(term: ProjectTerm, slug: TermSlug): EditorTerm {
   return {
     id: term.id,
@@ -61,8 +68,68 @@ function toEditorTerm(term: ProjectTerm, slug: TermSlug): EditorTerm {
     slug: term.name,
     taxonomy: slug,
     parent: 0,
-    count: 0,
+    count: term.count ?? 0,
+    link: "",
   };
+}
+
+function normalizeIds(value: unknown): number[] | undefined {
+  if (Array.isArray(value)) return value.map(Number);
+  if (typeof value === "string" && value !== "") {
+    return value.split(",").map(Number);
+  }
+  return undefined;
+}
+
+export interface TermFilter {
+  include?: unknown;
+  exclude?: unknown;
+  search?: string;
+  parent?: number;
+  hideEmpty?: boolean;
+  orderby?: string;
+  order?: string;
+  perPage?: number;
+}
+
+/** 按编辑器查询条件过滤项目术语，模拟 WP 列表参数 */
+export function filterProjectTerms(
+  terms: EditorTerm[],
+  filter: TermFilter = {},
+): EditorTerm[] {
+  const include = normalizeIds(filter.include);
+  const exclude = normalizeIds(filter.exclude);
+  const search = filter.search?.trim().toLowerCase();
+  let result = terms;
+  if (include?.length) {
+    const ids = new Set(include);
+    result = result.filter((term) => ids.has(term.id));
+  }
+  if (exclude?.length) {
+    const ids = new Set(exclude);
+    result = result.filter((term) => !ids.has(term.id));
+  }
+  if (search) {
+    result = result.filter((term) =>
+      term.name.toLowerCase().includes(search),
+    );
+  }
+  if (typeof filter.parent === "number") {
+    result = result.filter((term) => term.parent === filter.parent);
+  }
+  if (filter.hideEmpty) {
+    result = result.filter((term) => term.count > 0);
+  }
+  if (filter.orderby === "name") {
+    const direction = filter.order === "desc" ? -1 : 1;
+    result = [...result].sort(
+      (a, b) => direction * a.name.localeCompare(b.name),
+    );
+  }
+  if (filter.perPage && filter.perPage > 0) {
+    result = result.slice(0, filter.perPage);
+  }
+  return result;
 }
 
 export interface TermState {
@@ -98,20 +165,21 @@ function subscribe(slug: TermSlug, listener: () => void) {
 }
 
 /** 订阅术语列表；未安装项目数据源时返回 null，由调用方回退到 core-data */
-export function useProjectTerms(slug: TermSlug): TermState | null {
-  const enabled = activeAdapter !== null;
+export function useProjectTerms(slug: TermSlug | null): TermState | null {
+  const enabled = activeAdapter !== null && slug !== null;
   const subscribeToSlug = useCallback(
-    (listener: () => void) => (enabled ? subscribe(slug, listener) : () => {}),
+    (listener: () => void) =>
+      enabled && slug ? subscribe(slug, listener) : () => {},
     [enabled, slug],
   );
   const state = useSyncExternalStore(
     subscribeToSlug,
-    () => snapshot(slug),
+    () => (slug ? snapshot(slug) : EMPTY_STATE),
     () => EMPTY_STATE,
   );
 
   useEffect(() => {
-    if (!enabled) return;
+    if (!enabled || !slug) return;
     load(slug).catch(() => {
       // 加载失败时保持空列表，用户仍可在面板内重试创建
     });
