@@ -124,6 +124,7 @@ export default function ProjectEditorPage({
       );
       await bootProjectEditor(locale, resolvedArticleId, {
         sessionLocale: mode === "new" ? locale : null,
+        openInserterWhenEmpty: mode === "new",
       });
     })().catch(() => {
       bootedRef.current = null;
