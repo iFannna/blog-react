@@ -26,6 +26,10 @@ apiClient.interceptors.request.use((config) => {
   if (token) {
     config.headers.set("Authorization", `Bearer ${token}`);
   }
+  // FormData 必须由浏览器生成 multipart 边界，默认的 application/json 会把文件序列化掉
+  if (typeof FormData !== "undefined" && config.data instanceof FormData) {
+    config.headers.delete("Content-Type");
+  }
   return config;
 });
 
