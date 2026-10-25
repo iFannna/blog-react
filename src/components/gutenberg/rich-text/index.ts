@@ -15,8 +15,10 @@ export { remove } from './remove';
 
 export { insert } from './insert';
 export { insertObject } from './insert-object';
+export { replace } from './replace';
 export { slice } from './slice';
 export { split } from './split';
+export { toggleFormat } from './toggle-format';
 export { toDom as __unstableToDom } from './to-dom';
 export { toHTMLString } from './to-html-string';
 

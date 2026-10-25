@@ -3,6 +3,9 @@ import {
 	registerCoreBlocks,
 	__experimentalRegisterExperimentalCoreBlocks,
 } from '@/components/gutenberg/block-library';
+// 注册核心行内格式（Bold/Italic/Link 及 More 菜单），与 WordPress 的
+// wp-format-library 脚本等价；必须在编辑器渲染前执行。
+import '@/components/gutenberg/format-library';
 import deprecated from '@/utils/gutenberg/deprecated';
 import { createRoot, StrictMode } from '@/lib/gutenberg/element';
 import { dispatch, resolveSelect, select } from '@/stores/gutenberg/data';

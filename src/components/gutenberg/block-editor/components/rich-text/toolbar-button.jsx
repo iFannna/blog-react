@@ -1,12 +1,8 @@
 import { Fill, ToolbarButton } from '@/components/gutenberg/ui';
 import { displayShortcut } from '@/utils/gutenberg/keycodes';
 
-export function RichTextToolbarButton( {
-	name,
-	shortcutType,
-	shortcutCharacter,
-	...props
-} ) {
+export function RichTextToolbarButton( props ) {
+	const { name, shortcutType, shortcutCharacter, ...buttonProps } = props;
 	let shortcut;
 	let fillName = 'RichText.ToolbarControls';
 
@@ -20,7 +16,7 @@ export function RichTextToolbarButton( {
 
 	return (
 		<Fill name={ fillName }>
-			<ToolbarButton { ...props } shortcut={ shortcut } />
+			<ToolbarButton { ...buttonProps } shortcut={ shortcut } />
 		</Fill>
 	);
 }
