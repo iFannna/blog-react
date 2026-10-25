@@ -1282,7 +1282,13 @@ export const switchEditorMode =
 
 		const involvesMarkdown =
 			currentMode === 'markdown' || mode === 'markdown';
-		if ( involvesMarkdown && ! options.bypassConfirmation ) {
+		// 画布为空时没有内容需要丢弃，直接切换，不弹确认框
+		const hasContent = select.getEditedPostContent().trim() !== '';
+		if (
+			involvesMarkdown &&
+			hasContent &&
+			! options.bypassConfirmation
+		) {
 			dispatch.setEditorModeSwitchTarget( mode );
 			return;
 		}
