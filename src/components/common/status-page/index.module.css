@@ -1,0 +1,73 @@
+.page {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  /* em 基准：跟随博客全局 rem 缩放的 17px 正文字号 */
+  padding: 2.3529em 0.8824em;
+  background: radial-gradient(
+    circle at 50% 0,
+    rgba(252, 102, 104, 0.09),
+    #ffffff 65%
+  );
+  color: #212121;
+  font-family: "Be Vietnam Pro", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.code {
+  margin: 0;
+  font-size: 8.2353em;
+  font-weight: 600;
+  line-height: 1;
+  color: #fc6668;
+}
+
+.text {
+  margin: 1em 0;
+  font-size: 1.1765em;
+  color: #757575;
+}
+
+.link {
+  display: inline-block;
+  margin-top: 0.5714em;
+  font-size: 0.8235em;
+  color: #757575;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #fc6668;
+}
+
+/* 与博客全局 rem 缩放保持一致（768px → 84.8%，480px → 80%） */
+@media (max-width: 768px) {
+  .page {
+    font-size: 14.416px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    font-size: 13.6px;
+  }
+}
+
+:global([data-theme="dark"]) .page {
+  background: radial-gradient(
+    circle at 50% 0,
+    rgba(252, 102, 104, 0.09),
+    #333333 65%
+  );
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .text,
+:global([data-theme="dark"]) .link {
+  color: #949494;
+}
