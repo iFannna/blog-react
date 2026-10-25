@@ -14,6 +14,7 @@ import { createGoProjectEditorSource } from "./api";
 import { registerProjectEditor } from "./integration";
 import { createNewEditorPost, toEditorPost } from "./map";
 import { installProjectMediaBridge } from "./media-bridge";
+import { createPreferencesPersistenceLayer, loadPreferences } from "./preferences";
 import { installProjectTermAdapter } from "./terms";
 import "@/styles/gutenberg/inline.js";
 import "@/styles/gutenberg/compiled/index.js";
@@ -41,6 +42,8 @@ export async function bootProjectEditor(locale, articleId, options = {}) {
   });
 
   const source = createGoProjectEditorSource();
+  // 偏好与文章并行加载；失败时回退默认值且本次会话不写回
+  const preferencesPromise = loadPreferences();
   let initialPost;
   if (articleId) {
     const article = await source.getArticle(articleId);
@@ -65,6 +68,10 @@ export async function bootProjectEditor(locale, articleId, options = {}) {
   registerProjectEditor(source, locale, {
     sessionLocale: options.sessionLocale ?? null,
   });
+  // 必须在首次渲染前挂载，避免先闪默认布局
+  await dispatch(preferencesStore).setPersistenceLayer(
+    createPreferencesPersistenceLayer(preferencesPromise),
+  );
   initializeEditor(
     "editor",
     "post",

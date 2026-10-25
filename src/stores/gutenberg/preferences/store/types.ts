@@ -19,6 +19,11 @@ export interface WPPreferencesPersistenceLayer< D extends Object > {
 	 * A function that sets data in the persistence layer.
 	 */
 	set: ( value: D ) => void;
+	/**
+	 * Optional predicate deciding whether a preference change should be
+	 * persisted. Returning false keeps the change local to the store.
+	 */
+	shouldPersist?: ( scope: string, name: string ) => boolean;
 }
 
 export type ActionObject<

@@ -60,7 +60,13 @@ function withPersistenceLayer( reducer: PreferencesReducer ) {
 
 		const nextState = reducer( state, action );
 		if ( action.type === 'SET_PREFERENCE_VALUE' ) {
-			persistenceLayer?.set( nextState );
+			// 运行时状态（如 editorMode）不应触发任何持久化调用
+			const shouldPersist =
+				persistenceLayer?.shouldPersist?.( action.scope, action.name ) ??
+				true;
+			if ( shouldPersist ) {
+				persistenceLayer?.set( nextState );
+			}
 		}
 
 		return nextState;
