@@ -1,0 +1,20 @@
+@import "./gutenberg-presets.css";
+@import "./gutenberg-media.css";
+@import "./gutenberg-layout.css";
+
+/*
+ * Gutenberg 正文视觉：文字类元素沿用 Markdown 的 .page-entry-content / typo-* 规则，
+ * 这里只提供结构区块的共用间距变量与容器约束。
+ */
+.gutenberg-content {
+  --gb-gap: 0.9375rem;
+  overflow-wrap: break-word;
+}
+
+.gutenberg-content > :first-child {
+  margin-top: 0;
+}
+
+.gutenberg-content > :last-child {
+  margin-bottom: 0;
+}

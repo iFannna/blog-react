@@ -32,6 +32,7 @@ export interface ArticleTag {
 /** UI 层文章详情 — 扩展 Article，包含正文和额外统计字段 */
 export interface ArticleDetail extends Article {
   content: string;
+  contentFormat: "markdown" | "gutenberg";
   starCount: number;
   shareCount: number;
   commentCount: number;

@@ -8,6 +8,7 @@ import {
 import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
 import githubLight from "@shikijs/themes/github-light";
 import githubDark from "@shikijs/themes/github-dark";
+import { normalizeCodeLang, type CodeLanguage } from "./code-languages";
 
 export interface HighlightToken {
   content: string;
@@ -16,7 +17,8 @@ export interface HighlightToken {
 
 type LanguageLoader = () => Promise<LanguageInput>;
 
-const LANGUAGE_LOADERS: Record<string, LanguageLoader> = {
+// 语言清单以 code-languages.ts 为准，这里只保留按需加载器
+const LANGUAGE_LOADERS: Record<CodeLanguage, LanguageLoader> = {
   vue: () => import("@shikijs/langs/vue").then((module) => module.default),
   tsx: () => import("@shikijs/langs/tsx").then((module) => module.default),
   typescript: () =>
@@ -39,41 +41,9 @@ const LANGUAGE_LOADERS: Record<string, LanguageLoader> = {
     import("@shikijs/langs/dockerfile").then((module) => module.default),
 };
 
-const LANGUAGE_ALIASES: Record<string, string> = {
-  ts: "typescript",
-  typescript: "typescript",
-  tsx: "tsx",
-  js: "javascript",
-  javascript: "javascript",
-  jsx: "tsx",
-  vue: "vue",
-  bash: "bash",
-  sh: "bash",
-  shell: "bash",
-  zsh: "bash",
-  html: "html",
-  css: "css",
-  json: "json",
-  go: "go",
-  golang: "go",
-  java: "java",
-  py: "python",
-  python: "python",
-  sql: "sql",
-  mysql: "sql",
-  yaml: "yaml",
-  yml: "yaml",
-  xml: "xml",
-  md: "markdown",
-  markdown: "markdown",
-  dockerfile: "dockerfile",
-  docker: "dockerfile",
-};
-
-/** 未知语言回退为纯文本，避免 Shiki 抛错中断整页渲染 */
-export function normalizeCodeLang(lang?: string): string {
-  if (!lang) return "text";
-  return LANGUAGE_ALIASES[lang.toLowerCase()] ?? "text";
+// normalizeCodeLang 返回 string，未命中时 "text" 无加载器，正是纯文本路径
+function getLanguageLoader(lang: string): LanguageLoader | undefined {
+  return LANGUAGE_LOADERS[lang as CodeLanguage];
 }
 
 let highlighterPromise: Promise<HighlighterCore> | null = null;
@@ -91,7 +61,7 @@ export function getHighlighter(): Promise<HighlighterCore> {
 
 async function ensureLanguage(highlighter: HighlighterCore, lang: string) {
   const resolved = normalizeCodeLang(lang);
-  const loader = LANGUAGE_LOADERS[resolved];
+  const loader = getLanguageLoader(resolved);
 
   if (!loader || highlighter.getLoadedLanguages().includes(resolved)) return;
 

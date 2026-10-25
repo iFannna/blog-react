@@ -59,6 +59,7 @@ function mapArticleVOToDetail(vo: ArticleVO): ArticleDetail {
   return {
     ...mapArticleVOToArticle(vo),
     content: vo.content,
+    contentFormat: vo.content_format === "gutenberg" ? "gutenberg" : "markdown",
     starCount: vo.star_count,
     shareCount: vo.share_count,
     commentCount: vo.comment_count,

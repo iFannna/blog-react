@@ -4520,39 +4520,51 @@ html:not([data-theme="dark"]) .author-box {
 .typo-heading-3,
 .typo-heading-4,
 .typo-heading-5,
-.typo-heading-6 {
+.typo-heading-6,
+.gutenberg-content h1,
+.gutenberg-content h2,
+.gutenberg-content h3,
+.gutenberg-content h4,
+.gutenberg-content h5,
+.gutenberg-content h6 {
   margin-top: 0;
   margin-bottom: 1.125rem;
   font-weight: 700;
   color: var(--color-text);
 }
 
-.typo-heading-1 {
+.typo-heading-1,
+.gutenberg-content h1 {
   font-size: 2.5rem;
   line-height: 1.1;
 }
 
-.typo-heading-2 {
+.typo-heading-2,
+.gutenberg-content h2 {
   font-size: 2.25rem;
   line-height: 1.2;
 }
 
-.typo-heading-3 {
+.typo-heading-3,
+.gutenberg-content h3 {
   font-size: 1.75rem;
   line-height: 1.2;
 }
 
-.typo-heading-4 {
+.typo-heading-4,
+.gutenberg-content h4 {
   font-size: 1.5rem;
   line-height: 1.2;
 }
 
-.typo-heading-5 {
+.typo-heading-5,
+.gutenberg-content h5 {
   font-size: 1.25rem;
   line-height: 1.2;
 }
 
-.typo-heading-6 {
+.typo-heading-6,
+.gutenberg-content h6 {
   font-weight: 600;
   font-size: 1.125rem;
   line-height: 1.72;
@@ -4563,7 +4575,8 @@ html:not([data-theme="dark"]) .author-box {
   height: 3.125rem;
 }
 
-.typo-separator {
+.typo-separator,
+.gutenberg-content .wp-block-separator:not(.is-style-wide):not(.is-style-dots) {
   border: none;
   border-bottom: 2px solid;
   width: 6.25rem;
@@ -4574,7 +4587,8 @@ html:not([data-theme="dark"]) .author-box {
 }
 
 /* Blockquote */
-.typo-quote {
+.typo-quote,
+.gutenberg-content blockquote:not(.wp-block-pullquote blockquote) {
   padding: 0.5rem 1.5rem;
   border-style: none;
   border-left-style: solid;
@@ -4585,12 +4599,14 @@ html:not([data-theme="dark"]) .author-box {
   font-size: 1rem;
 }
 
-.typo-quote p:first-child {
+.typo-quote p:first-child,
+.gutenberg-content blockquote:not(.wp-block-pullquote blockquote) p:first-child {
   margin-top: 0;
   margin-bottom: 1rem;
 }
 
-.typo-quote p:last-child {
+.typo-quote p:last-child,
+.gutenberg-content blockquote:not(.wp-block-pullquote blockquote) p:last-child {
   margin-bottom: 0;
 }
 
@@ -4635,7 +4651,8 @@ ol.typo-list {
 }
 
 /* Code block */
-.typo-code-block {
+.typo-code-block,
+.gutenberg-content pre.wp-block-code {
   border: 1px solid var(--color-border);
   border-radius: 0.25rem;
   font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Menlo, Consolas, monospace;
@@ -4645,7 +4662,8 @@ ol.typo-list {
   font-variant-ligatures: none;
 }
 
-.typo-code-block code {
+.typo-code-block code,
+.gutenberg-content pre.wp-block-code code {
   display: block;
   white-space: pre-wrap;
   font-size: 90%;
@@ -4770,7 +4788,8 @@ ol.typo-list {
 }
 
 /* Inline Code */
-.typo-inline-code {
+.typo-inline-code,
+.gutenberg-content :not(pre) > code {
   font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Menlo, Consolas, monospace;
   font-size: 90%;
   padding: 0.1rem 0.3rem;
@@ -4780,7 +4799,8 @@ ol.typo-list {
 }
 
 /* Table */
-.typo-table {
+.typo-table,
+.gutenberg-content .wp-block-table table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9375rem;
@@ -4788,13 +4808,16 @@ ol.typo-list {
 }
 
 .typo-table th,
-.typo-table td {
+.typo-table td,
+.gutenberg-content .wp-block-table th,
+.gutenberg-content .wp-block-table td {
   padding: 0.75rem 1rem;
   text-align: left;
   border: 0.0625rem solid var(--color-border);
 }
 
-.typo-table th {
+.typo-table th,
+.gutenberg-content .wp-block-table th {
   font-weight: 600;
 }
 
@@ -4993,11 +5016,13 @@ ol.typo-list {
 
 /* Shiki token 通过内联 CSS 变量携带明暗两套颜色 */
 
-.typo-code-block span {
+.typo-code-block span,
+.gutenberg-content pre.wp-block-code span {
   color: var(--shiki-light, inherit);
 }
 
-[data-theme="dark"] .typo-code-block span {
+[data-theme="dark"] .typo-code-block span,
+[data-theme="dark"] .gutenberg-content pre.wp-block-code span {
   color: var(--shiki-dark, inherit);
 }
 

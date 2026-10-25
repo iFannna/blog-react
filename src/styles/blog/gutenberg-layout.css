@@ -1,0 +1,384 @@
+/*
+ * Layout and remaining static blocks.
+ *
+ * The structural scaffold (flex columns, table overflow, pullquote basics)
+ * comes from /canvas/block-library.css. This layer only retunes the blog's
+ * spacing, color and borders, so no editor chrome leaks into the article.
+ */
+
+.gutenberg-content {
+  /* Negative margins are capped by the article container padding (3.125rem),
+     so wide/full alignment can never push a page-level scrollbar. */
+  --gb-wide-bleed: clamp(0.5rem, 2vw, 1.75rem);
+  --gb-full-bleed: clamp(1rem, 3vw, 3.125rem);
+}
+
+/* Columns */
+
+.gutenberg-content .wp-block-columns {
+  gap: 1.25rem;
+  margin-block: 0 var(--gb-gap);
+}
+
+.gutenberg-content .wp-block-columns.has-background,
+.gutenberg-content .wp-block-column.has-background,
+.gutenberg-content .wp-block-group.has-background {
+  border-radius: var(--radius-normal);
+}
+
+.gutenberg-content .wp-block-column > :last-child {
+  margin-bottom: 0;
+}
+
+/* Layout support：flex/grid 类由渲染器从区块属性补回 */
+
+.gutenberg-content .is-layout-flex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gb-gap);
+}
+
+.gutenberg-content .is-layout-grid {
+  display: grid;
+  gap: var(--gb-gap);
+}
+
+.gutenberg-content .is-layout-flex > *,
+.gutenberg-content .is-layout-grid > * {
+  margin: 0;
+}
+
+/* Group */
+
+.gutenberg-content .wp-block-group {
+  margin-block: 0 var(--gb-gap);
+}
+
+.gutenberg-content .wp-block-group > :last-child {
+  margin-bottom: 0;
+}
+
+/* Buttons */
+
+.gutenberg-content .wp-block-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-block: 0 var(--gb-gap);
+}
+
+.gutenberg-content .wp-block-buttons.is-vertical {
+  align-items: flex-start;
+}
+
+.gutenberg-content .wp-block-button {
+  margin: 0;
+}
+
+.gutenberg-content .wp-block-button__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: 0.625rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-btn);
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none;
+  transition: var(--transition-primary);
+}
+
+.gutenberg-content .wp-block-button__link:not(.has-background):not(.has-text-color):hover,
+.gutenberg-content .wp-block-button__link:not(.has-background):not(.has-text-color):focus-visible {
+  background-color: var(--color-primary-light);
+  color: var(--color-on-primary);
+}
+
+.gutenberg-content .wp-block-button__link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.gutenberg-content .wp-block-button.is-style-outline > .wp-block-button__link,
+.gutenberg-content .wp-block-button__link.is-style-outline {
+  border-color: var(--color-primary);
+  background-color: transparent;
+  color: var(--color-primary);
+}
+
+.gutenberg-content .wp-block-button.is-style-outline > .wp-block-button__link:not(.has-background):not(.has-text-color):hover,
+.gutenberg-content .wp-block-button.is-style-outline > .wp-block-button__link:not(.has-background):not(.has-text-color):focus-visible,
+.gutenberg-content .wp-block-button__link.is-style-outline:not(.has-background):not(.has-text-color):hover,
+.gutenberg-content .wp-block-button__link.is-style-outline:not(.has-background):not(.has-text-color):focus-visible {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+/* Separator */
+
+.gutenberg-content .wp-block-separator.is-style-wide {
+  width: 100%;
+  max-width: none;
+  margin: 2rem 0;
+  border: 0;
+  border-block-start: 1px solid var(--color-border);
+}
+
+.gutenberg-content .wp-block-separator.is-style-dots {
+  margin-block: 2rem;
+  border: 0;
+  color: var(--color-text-muted);
+}
+
+/* Spacer */
+
+.gutenberg-content .wp-block-spacer {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* Table */
+
+.gutenberg-content figure.wp-block-table {
+  margin: 0.9375rem 0;
+}
+
+.gutenberg-content .wp-block-table {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-scrollbar) transparent;
+}
+
+.gutenberg-content .wp-block-table table {
+  width: 100%;
+  min-width: 100%;
+  margin: 0;
+}
+
+.gutenberg-content .wp-block-table thead {
+  border-bottom: 0;
+}
+
+.gutenberg-content .wp-block-table tfoot {
+  border-top: 0;
+}
+
+.gutenberg-content .wp-block-table tfoot td {
+  background-color: var(--color-surface-tint);
+  font-weight: 600;
+}
+
+.gutenberg-content .wp-block-table.is-style-stripes {
+  border-bottom-color: var(--color-border);
+}
+
+.gutenberg-content .wp-block-table.is-style-stripes tbody tr:nth-child(odd) {
+  background-color: var(--color-surface-tint);
+}
+
+.gutenberg-content .wp-block-table figcaption {
+  margin-top: 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .gutenberg-content .wp-block-table table {
+    min-width: 34rem;
+  }
+}
+
+/* Quote */
+
+.gutenberg-content .wp-block-quote cite {
+  display: block;
+  margin-top: 0.625rem;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+.gutenberg-content .wp-block-quote.is-style-plain {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+
+/* Pullquote */
+
+.gutenberg-content .wp-block-pullquote {
+  padding-block: 1.75rem;
+  border-block: 1px solid var(--color-border);
+}
+
+.gutenberg-content .wp-block-pullquote blockquote {
+  max-width: 44rem;
+  margin-inline: auto;
+}
+
+.gutenberg-content .wp-block-pullquote p {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+.gutenberg-content .wp-block-pullquote cite {
+  display: block;
+  margin-top: 1rem;
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+  font-style: normal;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Verse */
+
+.gutenberg-content pre.wp-block-verse {
+  padding-block: 0.5rem;
+  padding-inline: 1.25rem 0;
+  border-inline-start: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-family: inherit;
+  font-size: 1.0625rem;
+  font-style: italic;
+  line-height: 1.9;
+  overflow-x: auto;
+  tab-size: 2;
+  white-space: pre-wrap;
+}
+
+/* Preformatted */
+
+.gutenberg-content pre.wp-block-preformatted {
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-normal);
+  background-color: var(--color-surface-tint);
+  color: var(--color-text);
+  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Menlo, Consolas, monospace;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  overflow-x: auto;
+  tab-size: 4;
+  white-space: pre-wrap;
+}
+
+/* Details */
+
+.gutenberg-content .wp-block-details {
+  margin-block: 0 var(--gb-gap);
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-normal);
+}
+
+.gutenberg-content .wp-block-details[open] {
+  padding-bottom: 1rem;
+}
+
+.gutenberg-content .wp-block-details > summary {
+  display: flex;
+  align-items: baseline;
+  gap: 0.625rem;
+  padding: 0.875rem 1.125rem;
+  border-radius: var(--radius-normal) var(--radius-normal) 0 0;
+  background-color: var(--color-surface-tint);
+  color: var(--color-text);
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  list-style: none;
+}
+
+.gutenberg-content .wp-block-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.gutenberg-content .wp-block-details > summary::before {
+  content: "+";
+  flex: none;
+  width: 1em;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.gutenberg-content .wp-block-details[open] > summary {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.gutenberg-content .wp-block-details[open] > summary::before {
+  content: "−";
+}
+
+.gutenberg-content .wp-block-details > :not(summary):not(.alignwide):not(.alignfull) {
+  margin-inline: 1.125rem;
+}
+
+.gutenberg-content .wp-block-details > summary + * {
+  margin-top: 1rem;
+}
+
+.gutenberg-content .wp-block-details > :last-child {
+  margin-bottom: 0;
+}
+
+/* Raw HTML block: no wrapper class, so only normalize embedded media */
+
+.gutenberg-content :where(iframe, embed, object, video) {
+  max-width: 100%;
+}
+
+.gutenberg-content :where(iframe) {
+  border: 0;
+}
+
+/* Wide and full alignment */
+
+.gutenberg-content :is(.alignwide, .alignfull) {
+  box-sizing: border-box;
+  max-width: none;
+}
+
+.gutenberg-content .alignwide {
+  width: auto;
+  margin-inline: calc(-1 * var(--gb-wide-bleed));
+}
+
+.gutenberg-content .alignfull {
+  width: auto;
+  margin-inline: calc(-1 * var(--gb-full-bleed));
+}
+
+/* Narrow screens */
+
+@media (max-width: 599px) {
+  .gutenberg-content .wp-block-pullquote {
+    padding-block: 1.25rem;
+  }
+
+  .gutenberg-content .wp-block-pullquote p {
+    font-size: 1.25rem;
+  }
+
+  .gutenberg-content .wp-block-details > summary {
+    padding-inline: 1rem;
+  }
+
+  .gutenberg-content .wp-block-details > :not(summary):not(.alignwide):not(.alignfull) {
+    margin-inline: 1rem;
+  }
+}

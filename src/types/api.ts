@@ -21,6 +21,7 @@ export interface ArticleVO {
   day: number;
   summary: string;
   content: string;
+  content_format: "markdown" | "gutenberg";
   cover_image: string | null;
   status: number;
   visibility: number;

@@ -1,0 +1,439 @@
+/*
+ * 媒体类区块样式（图片、画廊、封面、媒体文本、音视频、文件）。
+ * 布局骨架来自 /canvas/block-library.css，这里只补博客视觉层：
+ * 统一圆角、图注、间距与窄屏行为。所有选择器限定在 .gutenberg-content 下。
+ */
+
+.gutenberg-content {
+  --gb-media-gap: 1.25rem;
+  --gb-media-radius: var(--radius-normal);
+  --gb-caption-color: var(--color-text);
+  --gb-caption-size: 0.8125rem;
+  --gb-media-hairline: var(--color-border-subtle);
+}
+
+/* figure 类区块沿用 .page-entry-content figure 的间距，这里只补非 figure 容器 */
+.gutenberg-content :is(.wp-block-cover, .wp-block-media-text, .wp-block-file) {
+  margin-bottom: var(--gb-media-gap);
+}
+
+.gutenberg-content > :is(.wp-block-cover, .wp-block-media-text, .wp-block-file):last-child {
+  margin-bottom: 0;
+}
+
+/* 左/右浮动图在文末不应溢出正文容器 */
+.gutenberg-content::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* ---------- 通用图注 ---------- */
+
+.gutenberg-content .wp-block-image > figcaption,
+.gutenberg-content .wp-block-audio > figcaption,
+.gutenberg-content .wp-block-video > figcaption,
+.gutenberg-content .wp-block-gallery > .blocks-gallery-caption {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  color: var(--gb-caption-color);
+  background: none;
+  text-shadow: none;
+  font-size: var(--gb-caption-size);
+  font-style: normal;
+  line-height: 1.6;
+  text-align: center;
+}
+
+[data-theme="dark"] .gutenberg-content .wp-block-image > figcaption,
+[data-theme="dark"] .gutenberg-content .wp-block-audio > figcaption,
+[data-theme="dark"] .gutenberg-content .wp-block-video > figcaption,
+[data-theme="dark"] .gutenberg-content .wp-block-gallery > .blocks-gallery-caption {
+  color: var(--color-text-muted);
+}
+
+.gutenberg-content .wp-block-image.alignleft > figcaption,
+.gutenberg-content .wp-block-image.alignright > figcaption,
+.gutenberg-content .wp-block-image.aligncenter > figcaption {
+  display: block;
+  caption-side: bottom;
+}
+
+.gutenberg-content .wp-block-image.alignleft > figcaption {
+  text-align: left;
+}
+
+.gutenberg-content .wp-block-image.alignright > figcaption {
+  text-align: right;
+}
+
+/* ---------- 图片 ---------- */
+
+.gutenberg-content .wp-block-image {
+  max-width: 100%;
+}
+
+/* 未设置对齐时沿用 Markdown 图片的居中、最大 60% */
+.gutenberg-content > .wp-block-image:not(.alignleft):not(.alignright):not(.alignwide):not(.alignfull),
+.gutenberg-content .wp-block-column > .wp-block-image:not(.alignleft):not(.alignright):not(.alignwide):not(.alignfull),
+.gutenberg-content .wp-block-group > .wp-block-image:not(.alignleft):not(.alignright):not(.alignwide):not(.alignfull) {
+  max-width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.gutenberg-content .wp-block-image > a {
+  display: block;
+}
+
+.gutenberg-content .wp-block-image img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--gb-media-radius);
+  box-shadow: 0 0 0 1px var(--gb-media-hairline);
+}
+
+/* 空图源不渲染破图占位；整个空区块直接隐藏 */
+.gutenberg-content .wp-block-image img:not([src]),
+.gutenberg-content .wp-block-image img[src=""] {
+  display: none;
+}
+
+.gutenberg-content .wp-block-image:not(:has(img)):not(:has(figcaption)) {
+  display: none;
+}
+
+.gutenberg-content .wp-block-video:not(:has(video)):not(:has(figcaption)) {
+  display: none;
+}
+
+.gutenberg-content .wp-block-gallery.has-nested-images:not(:has(figure)):not(:has(.blocks-gallery-caption)) {
+  display: none;
+}
+
+.gutenberg-content .wp-block-image > a:focus-visible,
+.gutenberg-content .wp-block-media-text__media a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: var(--gb-media-radius);
+}
+
+/* 对齐 */
+.gutenberg-content .wp-block-image.aligncenter {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.gutenberg-content .wp-block-image.alignleft,
+.gutenberg-content .wp-block-gallery.alignleft,
+.gutenberg-content .wp-block-cover.alignleft,
+.gutenberg-content .wp-block-media-text.alignleft {
+  float: left;
+  display: table;
+  margin: 0.5em 1em 0.5em 0;
+}
+
+.gutenberg-content .wp-block-image.alignright,
+.gutenberg-content .wp-block-gallery.alignright,
+.gutenberg-content .wp-block-cover.alignright,
+.gutenberg-content .wp-block-media-text.alignright {
+  float: right;
+  display: table;
+  margin: 0.5em 0 0.5em 1em;
+}
+
+.gutenberg-content .wp-block-image.alignleft,
+.gutenberg-content .wp-block-image.alignright,
+.gutenberg-content .wp-block-gallery.alignleft,
+.gutenberg-content .wp-block-gallery.alignright {
+  max-width: 100%;
+}
+
+/* 宽图 / 全宽：在文章容器内铺满，不做视口出血，避免横向滚动 */
+.gutenberg-content :is(.wp-block-image, .wp-block-gallery, .wp-block-cover, .wp-block-media-text, .wp-block-audio, .wp-block-video, .wp-block-file).alignwide,
+.gutenberg-content :is(.wp-block-image, .wp-block-gallery, .wp-block-cover, .wp-block-media-text, .wp-block-audio, .wp-block-video, .wp-block-file).alignfull {
+  float: none;
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gutenberg-content .wp-block-image.alignwide img,
+.gutenberg-content .wp-block-image.alignfull img {
+  width: 100%;
+}
+
+/* ---------- 画廊 ---------- */
+
+/*
+ * 保存的标记不含 is-layout-flex（布局类由编辑器注入），
+ * 因此网格由这里给出；columns-* 对应 WP 的列数语义。
+ */
+.gutenberg-content .wp-block-gallery.has-nested-images {
+  --gb-gallery-gap: 0.5rem;
+  --gb-gallery-columns: 3;
+  --wp--style--unstable-gallery-gap: var(--gb-gallery-gap);
+
+  display: grid;
+  grid-template-columns: repeat(var(--gb-gallery-columns), minmax(0, 1fr));
+  gap: var(--gb-gallery-gap);
+  align-items: stretch;
+  max-width: 100%;
+}
+
+.gutenberg-content .wp-block-gallery.has-nested-images.columns-1 {
+  --gb-gallery-columns: 1;
+}
+
+.gutenberg-content .wp-block-gallery.has-nested-images.columns-2 {
+  --gb-gallery-columns: 2;
+}
+
+.gutenberg-content .wp-block-gallery.has-nested-images.columns-3 {
+  --gb-gallery-columns: 3;
+}
+
+.gutenberg-content .wp-block-gallery.has-nested-images.columns-4 {
+  --gb-gallery-columns: 4;
+}
+
+.gutenberg-content .wp-block-gallery.has-nested-images.columns-5 {
+  --gb-gallery-columns: 5;
+}
+
+.gutenberg-content .wp-block-gallery.has-nested-images.columns-6 {
+  --gb-gallery-columns: 6;
+}
+
+.gutenberg-content .wp-block-gallery.has-nested-images.columns-7 {
+  --gb-gallery-columns: 7;
+}
+
+.gutenberg-content .wp-block-gallery.has-nested-images.columns-8 {
+  --gb-gallery-columns: 8;
+}
+
+.gutenberg-content .wp-block-gallery.has-nested-images > figure.wp-block-image {
+  position: relative;
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  /* canvas 对画廊子项用了 ID 级选择器计算宽度，这里用 !important 让网格接管 */
+  width: 100% !important;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--gb-media-radius);
+  background: var(--color-surface-tint);
+}
+
+.gutenberg-content .wp-block-gallery.has-nested-images:not(.is-cropped) > figure.wp-block-image {
+  align-self: start;
+}
+
+.gutenberg-content .wp-block-gallery.has-nested-images > figure.wp-block-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.gutenberg-content .wp-block-gallery.has-nested-images.is-cropped > figure.wp-block-image img {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 画廊内图注压在图片底部的暗色渐变上 */
+.gutenberg-content .wp-block-gallery.has-nested-images > figure.wp-block-image > figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  max-height: 100%;
+  margin: 0;
+  padding: 1.5rem 0.5rem 0.5rem;
+  overflow: auto;
+  color: #fff;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0) 80%);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.gutenberg-content .wp-block-gallery.has-nested-images > .blocks-gallery-caption {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--gb-caption-color);
+  text-shadow: none;
+}
+
+/* ---------- 封面 ---------- */
+
+.gutenberg-content .wp-block-cover {
+  min-height: clamp(15rem, 40vw, 24rem);
+  margin-bottom: var(--gb-media-gap);
+  padding: clamp(1.25rem, 5%, 3rem);
+  border-radius: var(--gb-media-radius);
+  overflow: hidden;
+}
+
+.gutenberg-content .wp-block-cover__inner-container {
+  width: 100%;
+}
+
+.gutenberg-content .wp-block-cover .wp-block-cover__inner-container > :first-child {
+  margin-top: 0;
+}
+
+.gutenberg-content .wp-block-cover .wp-block-cover__inner-container > :last-child {
+  margin-bottom: 0;
+}
+
+/* 封面文字颜色跟随遮罩层，避免正文标题色把暗底文字吃掉 */
+.gutenberg-content .wp-block-cover :is(h1, h2, h3, h4, h5, h6, p, li, blockquote, figcaption) {
+  color: inherit;
+}
+
+.gutenberg-content .wp-block-cover a {
+  color: inherit;
+}
+
+.gutenberg-content .wp-block-cover .wp-block-cover__image-background,
+.gutenberg-content .wp-block-cover .wp-block-cover__video-background {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* ---------- 媒体文本 ---------- */
+
+.gutenberg-content .wp-block-media-text {
+  margin-bottom: var(--gb-media-gap);
+  border-radius: var(--gb-media-radius);
+}
+
+.gutenberg-content .wp-block-media-text > .wp-block-media-text__content {
+  padding: 0 clamp(1rem, 4%, 2rem);
+}
+
+.gutenberg-content .wp-block-media-text > .wp-block-media-text__media {
+  border-radius: var(--gb-media-radius);
+}
+
+.gutenberg-content .wp-block-media-text__media img,
+.gutenberg-content .wp-block-media-text__media video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--gb-media-radius);
+  box-shadow: 0 0 0 1px var(--gb-media-hairline);
+}
+
+.gutenberg-content .wp-block-media-text__content > :last-child {
+  margin-bottom: 0;
+}
+
+.gutenberg-content .wp-block-media-text.is-image-fill-element > .wp-block-media-text__media {
+  min-height: 15rem;
+}
+
+/* ---------- 音频 / 视频 ---------- */
+
+.gutenberg-content .wp-block-audio {
+  width: 100%;
+}
+
+/* canvas 给 audio 设了 min-width: 300px，窄屏会撑破容器 */
+.gutenberg-content .wp-block-audio audio {
+  width: 100%;
+  min-width: 0;
+}
+
+.gutenberg-content .wp-block-video video {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--gb-media-radius);
+  background: var(--color-surface-tint);
+}
+
+[data-theme="dark"] .gutenberg-content .wp-block-audio audio,
+[data-theme="dark"] .gutenberg-content .wp-block-video video {
+  color-scheme: dark;
+}
+
+/* ---------- 文件 ---------- */
+
+.gutenberg-content .wp-block-file {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.gutenberg-content .wp-block-file > a:not(.wp-block-file__button) {
+  font-size: 0.9375rem;
+  overflow-wrap: anywhere;
+}
+
+.gutenberg-content .wp-block-file__embed {
+  flex: 0 0 100%;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--gb-media-radius);
+  background: var(--color-surface-tint);
+}
+
+.gutenberg-content .wp-block-file a.wp-block-file__button {
+  margin-left: 0;
+  padding: 0.375rem 0.875rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-btn);
+  background: transparent;
+  color: var(--color-text);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.gutenberg-content .wp-block-file a.wp-block-file__button:hover,
+.gutenberg-content .wp-block-file a.wp-block-file__button:focus-visible {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+/* ---------- 窄屏 ---------- */
+
+@media (max-width: 768px) {
+  /* 媒体文本堆叠后，内容区不再保留左右内边距 */
+  .gutenberg-content .wp-block-media-text.is-stacked-on-mobile > .wp-block-media-text__content {
+    padding: 0;
+    margin-top: 0.875rem;
+  }
+
+  .gutenberg-content .wp-block-cover {
+    min-height: 14rem;
+  }
+}
+
+@media (max-width: 700px) {
+  /* 多列画廊在窄屏改为两列，保持图片可辨识 */
+  .gutenberg-content .wp-block-gallery.has-nested-images[class*="columns-"] {
+    --gb-gallery-columns: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  /* 左/右浮动图在窄屏回归整行，避免挤压正文 */
+  .gutenberg-content :is(.wp-block-image, .wp-block-gallery, .wp-block-cover, .wp-block-media-text).alignleft,
+  .gutenberg-content :is(.wp-block-image, .wp-block-gallery, .wp-block-cover, .wp-block-media-text).alignright {
+    float: none;
+    max-width: 100%;
+    margin: 0 0 var(--gb-media-gap);
+  }
+}

@@ -4,12 +4,14 @@ import Link from "next/link";
 import SiteLayout from "@/components/blog/layout/SiteLayout";
 import Breadcrumbs from "@/components/blog/common/Breadcrumbs";
 import MarkdownContent from "@/components/blog/article/MarkdownContent";
+import GutenbergContent from "@/components/blog/article/GutenbergContent";
 import PostNav from "@/components/blog/article/PostNav";
 import CommentsPanel from "@/components/blog/article/CommentsPanel";
 import { DateLinks } from "@/components/blog/article/DateLinks";
 import { getArticleById, getArticlePrevNext } from "@/services/article";
 import { articleHref } from "@/utils/article";
 import { localePath } from "@/lib/locale";
+import "@/styles/blog/gutenberg.css";
 
 export const dynamic = "force-dynamic";
 
@@ -142,7 +144,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
           {/* 文章正文 */}
           <div className="entry-content page-entry-content">
-            <MarkdownContent content={article.content} />
+            {article.contentFormat === "gutenberg" ? (
+              <GutenbergContent content={article.content} />
+            ) : (
+              <MarkdownContent content={article.content} />
+            )}
           </div>
 
           {/* 文章底部：标签 + 更新时间 */}
