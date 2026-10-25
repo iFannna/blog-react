@@ -1,9 +1,7 @@
 import {
 	Button,
-	CheckboxControl as WCCheckboxControl,
 	Dropdown,
 	__experimentalVStack as VStack,
-	TextControl,
 	RadioControl,
 } from '@/components/gutenberg/ui';
 import { __, sprintf } from '@/lib/gutenberg/i18n';
@@ -11,7 +9,6 @@ import { useDispatch, useSelect } from '@/stores/gutenberg/data';
 import { useState, useMemo } from '@/lib/gutenberg/element';
 import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@/components/gutenberg/block-editor';
-import { useInstanceId } from '@/hooks/gutenberg/compose';
 import {
 	drafts,
 	published,
@@ -64,7 +61,7 @@ export const STATUS_OPTIONS = [
 ];
 
 export default function PostStatus() {
-	const { status, date, password, postId, postType, canEdit, isProjectEditor } =
+	const { status, date, postId, postType, canEdit, isProjectEditor } =
 		useSelect(
 			( select ) => {
 				const {
@@ -77,7 +74,6 @@ export default function PostStatus() {
 				return {
 					status: getEditedPostAttribute( 'status' ),
 					date: getEditedPostAttribute( 'date' ),
-					password: getEditedPostAttribute( 'password' ),
 					postId: getCurrentPostId(),
 					postType: getCurrentPostType(),
 					canEdit:
@@ -92,11 +88,6 @@ export default function PostStatus() {
 				[ 'draft', 'publish' ].includes( option.value )
 		  )
 		: STATUS_OPTIONS;
-	const [ showPassword, setShowPassword ] = useState( !! password );
-	const passwordInputId = useInstanceId(
-		PostStatus,
-		'editor-change-status__password-input'
-	);
 	const { editEntityRecord } = useDispatch( coreStore );
 	const [ popoverAnchor, setPopoverAnchor ] = useState( null );
 	// Memoize popoverProps to avoid returning a new object every time.
@@ -120,36 +111,22 @@ export default function PostStatus() {
 
 	const updatePost = ( {
 		status: newStatus = status,
-		password: newPassword = password,
 		date: newDate = date,
 	} ) => {
 		editEntityRecord( 'postType', postType, postId, {
 			status: newStatus,
 			date: newDate,
-			password: newPassword,
 		} );
-	};
-
-	const handleTogglePassword = ( value ) => {
-		setShowPassword( value );
-		if ( ! value ) {
-			updatePost( { password: '' } );
-		}
 	};
 
 	const handleStatus = ( value ) => {
 		let newDate = date;
-		let newPassword = password;
 		if ( status === 'future' && new Date( date ) > new Date() ) {
 			newDate = null;
-		}
-		if ( value === 'private' && password ) {
-			newPassword = '';
 		}
 		updatePost( {
 			status: value,
 			date: newDate,
-			password: newPassword,
 		} );
 	};
 
@@ -212,47 +189,6 @@ export default function PostStatus() {
 												isCompact
 											/>
 										</div>
-									) }
-									{ status !== 'private' && (
-										<VStack
-											as="fieldset"
-											spacing={ 4 }
-											className="editor-change-status__password-fieldset"
-										>
-											<WCCheckboxControl
-												label={ __(
-													'Password protected'
-												) }
-												help={ __(
-													'Only visible to those who know the password.'
-												) }
-												checked={ showPassword }
-												onChange={
-													handleTogglePassword
-												}
-											/>
-											{ showPassword && (
-												<div className="editor-change-status__password-input">
-													<TextControl
-														label={ __(
-															'Password'
-														) }
-														onChange={ ( value ) =>
-															updatePost( {
-																password: value,
-															} )
-														}
-														value={ password }
-														placeholder={ __(
-															'Use a secure password'
-														) }
-														type="text"
-														id={ passwordInputId }
-														maxLength={ 255 }
-													/>
-												</div>
-											) }
-										</VStack>
 									) }
 									<PostSticky />
 								</VStack>

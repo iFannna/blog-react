@@ -23,6 +23,8 @@ export interface ArticleVO {
   content: string;
   cover_image: string | null;
   status: number;
+  visibility: number;
+  publish_at: string;
   view_count: number;
   like_count: number;
   star_count: number;

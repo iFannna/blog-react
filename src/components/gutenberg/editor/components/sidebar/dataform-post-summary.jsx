@@ -337,13 +337,6 @@ export default function DataFormPostSummary( { onActionPerformed } ) {
 		) {
 			baseEdits.date = null;
 		}
-		if (
-			baseEdits.status &&
-			baseEdits.status === 'private' &&
-			record?.password
-		) {
-			baseEdits.password = '';
-		}
 
 		editEntityRecord( 'postType', postType, postId, baseEdits );
 	};

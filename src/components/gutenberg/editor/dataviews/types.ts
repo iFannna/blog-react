@@ -45,7 +45,6 @@ export interface BasePost extends CommonPost {
 	excerpt?: string | { raw: string; rendered: string };
 	meta?: Record< string, any >;
 	parent?: number;
-	password?: string;
 	template?: string;
 	format?: string;
 	featured_media?: number;

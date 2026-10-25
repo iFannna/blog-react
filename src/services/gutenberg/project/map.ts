@@ -2,7 +2,8 @@ import type { ContentFormat, ProjectArticle } from "./types";
 
 export interface EditorPostProjectMeta {
   contentFormat: ContentFormat;
-  statusCode: 0 | 1 | 2;
+  statusCode: 0 | 1 | 2 | 3;
+  visibility: 1 | 2;
   coverImage: string;
   articleType: number;
   commentStatus: number;
@@ -13,7 +14,7 @@ export interface EditorPostProjectMeta {
 export interface EditorPost {
   id: number;
   type: "post";
-  status: "draft" | "publish" | "auto-draft" | "trash";
+  status: "draft" | "publish" | "private" | "future" | "auto-draft" | "trash";
   title: { raw: string; rendered: string };
   content: {
     raw: string;
@@ -32,19 +33,23 @@ export interface EditorPost {
   date: string;
   modified: string;
   link: string;
+  permalink_template: string;
   slug: string;
-  password: string;
   meta: Record<string, never>;
   _links: Record<string, Array<{ href: string }>>;
   _project: EditorPostProjectMeta;
   [key: string]: unknown;
 }
 
-function articleLink(locale: string, article: ProjectArticle) {
-  if (article.status !== 1) return "";
+function articlePath(locale: string, article: ProjectArticle) {
   const month = String(article.month).padStart(2, "0");
   const day = String(article.day).padStart(2, "0");
   return `/${locale}/archive/${article.year}/${month}/${day}/${article.id}`;
+}
+
+function articleLink(locale: string, article: ProjectArticle) {
+  if (article.status !== 1 || article.visibility !== 1) return "";
+  return articlePath(locale, article);
 }
 
 function formatLocalDateTime(value: Date) {
@@ -75,10 +80,14 @@ export function toEditorPost(
     type: "post",
     status:
       article.status === 1
-        ? "publish"
+        ? article.visibility === 2
+          ? "private"
+          : "publish"
         : article.status === 2
           ? "trash"
-          : "draft",
+          : article.status === 3
+            ? "future"
+            : "draft",
     title: { raw: article.title, rendered: article.title },
     content: {
       raw: article.content,
@@ -98,16 +107,17 @@ export function toEditorPost(
     tags: article.tags.map((item) => item.id),
     featured_media: article.featured_media_id ?? 0,
     author: article.author_id,
-    date: article.created_at,
+    date: article.publish_at || article.created_at,
     modified: article.created_at,
     link: articleLink(locale, article),
+    permalink_template: articlePath(locale, article),
     slug: "",
-    password: "",
     meta: {},
     _links: links,
     _project: {
       contentFormat: article.content_format,
       statusCode: article.status,
+      visibility: article.visibility === 2 ? 2 : 1,
       coverImage: article.cover_image,
       articleType: article.type,
       commentStatus: article.comment_status,
@@ -140,8 +150,8 @@ export function createNewEditorPost(): EditorPost {
     date: now,
     modified: now,
     link: "",
+    permalink_template: "",
     slug: "",
-    password: "",
     meta: {},
     _links: {
       "wp:action-publish": [{ href: "" }],
@@ -153,6 +163,7 @@ export function createNewEditorPost(): EditorPost {
     _project: {
       contentFormat: "gutenberg",
       statusCode: 0,
+      visibility: 1,
       coverImage: "",
       articleType: 1,
       commentStatus: 1,

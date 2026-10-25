@@ -1,11 +1,8 @@
 import { __ } from '@/lib/gutenberg/i18n';
-import { useState } from '@/lib/gutenberg/element';
 import {
-	TextControl,
 	RadioControl,
 	__experimentalVStack as VStack,
 } from '@/components/gutenberg/ui';
-import { useInstanceId } from '@/hooks/gutenberg/compose';
 import { useSelect, useDispatch } from '@/stores/gutenberg/data';
 import { __experimentalInspectorPopoverHeader as InspectorPopoverHeader } from '@/components/gutenberg/block-editor';
 import { Text } from '@/components/gutenberg/design-system';
@@ -35,38 +32,23 @@ export default function PostVisibility( props ) {
  * @return {React.ReactNode} The rendered component.
  */
 export function PrivatePostVisibility( { onClose, showPopoverHeader } ) {
-	const instanceId = useInstanceId( PrivatePostVisibility );
-
-	const { status, visibility, password } = useSelect( ( select ) => ( {
+	const { status, visibility } = useSelect( ( select ) => ( {
 		status: select( editorStore ).getEditedPostAttribute( 'status' ),
 		visibility: select( editorStore ).getEditedPostVisibility(),
-		password: select( editorStore ).getEditedPostAttribute( 'password' ),
 	} ) );
 
 	const { editPost } = useDispatch( editorStore );
 
-	const [ hasPassword, setHasPassword ] = useState( !! password );
-
 	function updateVisibility( value ) {
-		const nextValues = {
-			public: {
-				status: visibility === 'private' ? 'draft' : status,
-				password: '',
-			},
-			private: { status: 'private', password: '' },
-			password: {
-				status: visibility === 'private' ? 'draft' : status,
-				password: password || '',
-			},
-		};
-
-		editPost( nextValues[ value ] );
-		setHasPassword( value === 'password' );
+		editPost( {
+			status:
+				value === 'private'
+					? 'private'
+					: visibility === 'private'
+						? 'draft'
+						: status,
+		} );
 	}
-
-	const updatePassword = ( value ) => {
-		editPost( { password: value } );
-	};
 
 	const help = __( 'Control how this post is viewed.' );
 
@@ -87,20 +69,9 @@ export function PrivatePostVisibility( { onClose, showPopoverHeader } ) {
 					label={ __( 'Visibility' ) }
 					hideLabelFromVision
 					options={ VISIBILITY_OPTIONS }
-					selected={ hasPassword ? 'password' : visibility }
+					selected={ visibility }
 					onChange={ updateVisibility }
 				/>
-				{ hasPassword && (
-					<TextControl
-						label={ __( 'Password' ) }
-						onChange={ updatePassword }
-						value={ password }
-						placeholder={ __( 'Use a secure password' ) }
-						type="text"
-						id={ `editor-post-visibility__password-input-${ instanceId }` }
-						maxLength={ 255 }
-					/>
-				) }
 			</VStack>
 		</div>
 	);

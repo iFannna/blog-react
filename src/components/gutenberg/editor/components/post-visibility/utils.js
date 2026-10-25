@@ -11,9 +11,4 @@ export const VISIBILITY_OPTIONS = [
 		value: 'private',
 		description: __( 'Only visible to site admins and editors.' ),
 	},
-	{
-		label: __( 'Password protected' ),
-		value: 'password',
-		description: __( 'Only visible to those who know the password.' ),
-	},
 ];

@@ -403,7 +403,7 @@ export const getAutosaveAttribute = createRegistrySelector(
 /**
  * Returns the current visibility of the post being edited, preferring the
  * unsaved value if different than the saved post. The return value is one of
- * "private", "password", or "public".
+ * "private" or "public".
  *
  * @param {Object} state Global application state.
  *
@@ -413,11 +413,6 @@ export function getEditedPostVisibility( state ) {
 	const status = getEditedPostAttribute( state, 'status' );
 	if ( status === 'private' ) {
 		return 'private';
-	}
-
-	const password = getEditedPostAttribute( state, 'password' );
-	if ( password ) {
-		return 'password';
 	}
 
 	return 'public';

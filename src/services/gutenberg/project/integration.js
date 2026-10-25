@@ -23,6 +23,17 @@ async function resolveCoverImage(mediaId) {
   return media.url;
 }
 
+/** 编辑器日期转后端可解析的 RFC3339 时间 */
+function toServerDate(value) {
+  if (!value) return null;
+  const normalized =
+    typeof value === "string" && !value.includes("T")
+      ? value.replace(" ", "T")
+      : value;
+  const date = new Date(normalized);
+  return Number.isNaN(date.getTime()) ? null : date.toISOString();
+}
+
 async function saveThroughProject(edits, post) {
   const source = activeSource;
   const project = post._project;
@@ -48,6 +59,10 @@ async function saveThroughProject(edits, post) {
   // 回收站文章直接保存视为恢复草稿
   const targetStatus = requestedStatus === "trash" ? "draft" : requestedStatus;
   const currentStatus = project.statusCode;
+  const currentEditorStatus = post.status;
+  const dateEdited = Object.prototype.hasOwnProperty.call(edits, "date");
+  const requestedDate = dateEdited ? toServerDate(edits.date) : null;
+  const targetVisibility = targetStatus === "private" ? 2 : 1;
   const realId = post.id > 0 ? post.id : 0;
 
   const baseMediaId = post.featured_media ?? 0;
@@ -70,18 +85,34 @@ async function saveThroughProject(edits, post) {
     JSON.stringify(tagIds) !== JSON.stringify(post.tags ?? []) ||
     featuredMediaId !== baseMediaId;
 
-  // 首次保存才落库，发布时直接以已发布状态创建
+  const isSchedule = targetStatus === "future";
+  const isPublishedTarget = ["publish", "private"].includes(targetStatus);
+  const editPayload = {
+    title,
+    summary,
+    content,
+    contentFormat,
+    coverImage,
+    featuredMediaId: featuredMediaId || null,
+    categoryIds,
+    tagIds,
+    visibility: targetVisibility,
+  };
+
+  // 首次保存才落库，发布/定时/私密直接以对应状态创建
   if (!realId) {
+    const createStatus = isSchedule
+      ? 3
+      : isPublishedTarget
+        ? 1
+        : 0;
+    if (isSchedule && !requestedDate) {
+      throw new Error("请选择发布时间");
+    }
     const id = await source.createArticle({
-      title,
-      summary,
-      content,
-      contentFormat,
-      coverImage,
-      featuredMediaId: featuredMediaId || null,
-      categoryIds,
-      tagIds,
-      status: targetStatus === "publish" ? 1 : 0,
+      ...editPayload,
+      status: createStatus,
+      publishAt: isSchedule || dateEdited ? requestedDate : null,
     });
     if (activeSessionLocale) {
       writeSessionArticle(activeSessionLocale, id);
@@ -90,39 +121,50 @@ async function saveThroughProject(edits, post) {
     return toEditorPost(fresh, activeLocale);
   }
 
-  if (targetStatus === "publish" && currentStatus !== 1) {
-    await source.publishArticle(realId, {
-      title,
-      summary,
-      content,
-      contentFormat,
-      coverImage,
-      featuredMediaId: featuredMediaId || null,
-      categoryIds,
-      tagIds,
-    });
-  } else if (
-    targetStatus === "draft" &&
-    !contentChanged &&
-    (currentStatus === 1 || currentStatus === 2)
-  ) {
-    // 仅撤回发布或从回收站恢复，不产生版本
-    await source.unpublishArticle(realId);
-  } else {
-    await source.saveArticle({
-      id: realId,
-      title,
-      summary,
-      content,
-      contentFormat,
-      coverImage,
-      featuredMediaId: featuredMediaId || null,
-      categoryIds,
-      tagIds,
-    });
-    if (targetStatus === "draft" && currentStatus === 1) {
+  if (targetStatus === "draft") {
+    if (currentStatus === 2) {
+      // 回收站恢复为草稿：无内容变化时不产生版本
+      if (contentChanged) {
+        await source.saveArticle({
+          id: realId,
+          ...editPayload,
+          visibility: 1,
+        });
+      } else {
+        await source.unpublishArticle(realId);
+      }
+    } else if (currentStatus === 0 || contentChanged) {
+      await source.saveArticle({
+        id: realId,
+        ...editPayload,
+        visibility: 1,
+      });
+    }
+    if (currentStatus === 1 || currentStatus === 3) {
       await source.unpublishArticle(realId);
     }
+  } else if (
+    !dateEdited &&
+    targetStatus === currentEditorStatus
+  ) {
+    // 状态与发布时间都没变，仅保存内容
+    await source.saveArticle({
+      id: realId,
+      ...editPayload,
+    });
+  } else {
+    // 立即发布、定时发布、私密发布以及三者之间切换
+    const scheduleAt = isSchedule
+      ? requestedDate ?? (currentEditorStatus === "future" ? toServerDate(post.date) : null)
+      : requestedDate;
+    if (isSchedule && !scheduleAt) {
+      throw new Error("请选择发布时间");
+    }
+    await source.publishArticle(realId, {
+      ...editPayload,
+      status: isSchedule ? 3 : 1,
+      publishAt: scheduleAt,
+    });
   }
 
   const fresh = await source.getArticle(realId);

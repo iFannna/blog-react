@@ -26,6 +26,8 @@ function toCreatePayload(input: CreateArticleInput) {
     category_ids: input.categoryIds,
     tag_ids: input.tagIds,
     status: input.status,
+    visibility: input.visibility,
+    publish_at: input.publishAt ?? undefined,
   };
 }
 
@@ -40,6 +42,8 @@ function toSavePayload(input: SaveArticleInput) {
     featured_media_id: input.featuredMediaId ?? 0,
     category_ids: input.categoryIds,
     tag_ids: input.tagIds,
+    visibility: input.visibility,
+    publish_at: input.publishAt ?? undefined,
   };
 }
 
@@ -53,6 +57,9 @@ function toPublishPayload(input: PublishArticleInput) {
     featured_media_id: input.featuredMediaId ?? 0,
     category_ids: input.categoryIds,
     tag_ids: input.tagIds,
+    status: input.status,
+    visibility: input.visibility,
+    publish_at: input.publishAt ?? undefined,
   };
 }
 

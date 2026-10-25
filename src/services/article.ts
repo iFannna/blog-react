@@ -48,7 +48,7 @@ export function mapArticleVOToArticle(vo: ArticleVO): Article {
     viewCount: vo.view_count,
     likeCount: vo.like_count,
     commentCount: vo.comment_count,
-    publishTime: vo.created_at,
+    publishTime: vo.publish_at || vo.created_at,
     year: vo.year,
     month: vo.month,
     day: vo.day,

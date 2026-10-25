@@ -14,7 +14,9 @@ export interface ProjectArticle {
   content_format: ContentFormat;
   cover_image: string;
   featured_media_id: number | null;
-  status: 0 | 1 | 2;
+  status: 0 | 1 | 2 | 3;
+  visibility: 1 | 2;
+  publish_at: string | null;
   comment_status: number;
   author_id: number;
   year: number;
@@ -34,7 +36,9 @@ export interface CreateArticleInput {
   featuredMediaId: number | null;
   categoryIds: number[];
   tagIds: number[];
-  status: 0 | 1;
+  status: 0 | 1 | 3;
+  visibility: 1 | 2;
+  publishAt?: string | null;
 }
 
 export interface SaveArticleInput {
@@ -47,6 +51,8 @@ export interface SaveArticleInput {
   featuredMediaId: number | null;
   categoryIds: number[];
   tagIds: number[];
+  visibility: 1 | 2;
+  publishAt?: string | null;
 }
 
 export interface PublishArticleInput {
@@ -58,6 +64,9 @@ export interface PublishArticleInput {
   featuredMediaId: number | null;
   categoryIds: number[];
   tagIds: number[];
+  status: 1 | 3;
+  visibility: 1 | 2;
+  publishAt?: string | null;
 }
 
 export interface ArticleVersion {
