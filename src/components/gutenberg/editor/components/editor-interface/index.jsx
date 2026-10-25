@@ -131,14 +131,18 @@ export default function EditorInterface( {
 	// which keep this component mounted across it. The preferences are read at
 	// transition time only, so toggling the list view or the preferences
 	// mid-session is never overridden. Disabled for small viewports, and by
-	// `distractionFree` mode, which has no room for the list view.
+	// `distractionFree` mode, which has no room for the list view. An inserter
+	// that is already open on mount takes precedence.
 	useLayoutEffect( () => {
 		const isMediumOrBigger =
 			window.matchMedia( '(min-width: 782px)' ).matches;
 		const { get } = registry.select( preferencesStore );
+		const isInserterOpened =
+			registry.select( editorStore ).isInserterOpened();
 		setIsListViewOpened(
 			! isPreviewMode &&
 				isMediumOrBigger &&
+				! isInserterOpened &&
 				!! get( 'core', 'showListViewByDefault' ) &&
 				! get( 'core', 'distractionFree' )
 		);
