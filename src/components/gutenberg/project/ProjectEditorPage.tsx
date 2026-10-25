@@ -136,19 +136,24 @@ export default function ProjectEditorPage({
 
     // 使用 React 媒体弹窗，避免依赖未随包提供的 wp.media 脚本
     window.__experimentalDataViewsMediaModal = true;
-    void import("@/services/gutenberg/project/boot")
-      .then(({ bootProjectEditor }) =>
-        bootProjectEditor(locale, resolvedArticleId, {
-          sessionLocale: mode === "new" ? locale : null,
-        }),
-      )
-      .catch((err: unknown) => {
-        bootedRef.current = null;
-        const message =
-          err instanceof Error ? err.message : "编辑器启动失败，请稍后重试";
-        setError(message);
-        setPhase("error");
+    void (async () => {
+      // 语言包必须先于编辑器模块求值，模块级 __() 常量才会是中文
+      if (locale === "zh-CN") {
+        await import("@/lib/gutenberg/locale/preload-zh.js");
+      }
+      const { bootProjectEditor } = await import(
+        "@/services/gutenberg/project/boot"
+      );
+      await bootProjectEditor(locale, resolvedArticleId, {
+        sessionLocale: mode === "new" ? locale : null,
       });
+    })().catch((err: unknown) => {
+      bootedRef.current = null;
+      const message =
+        err instanceof Error ? err.message : "编辑器启动失败，请稍后重试";
+      setError(message);
+      setPhase("error");
+    });
   }, [phase, locale, mode, resolvedArticleId]);
 
   if (phase === "error") {

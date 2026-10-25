@@ -20,6 +20,10 @@ export function GutenbergApp({ locale }: { locale: string }) {
     window.__experimentalDataViewsMediaModal = true;
 
     void (async () => {
+      // 语言包必须先于编辑器模块求值，模块级 __() 常量才会是中文
+      if (locale === "zh-CN") {
+        await import("@/lib/gutenberg/locale/preload-zh.js");
+      }
       const { bootGutenberg } = await import(
         "@/services/gutenberg/bootstrap.js"
       );

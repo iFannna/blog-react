@@ -1,5 +1,6 @@
 import { initializeCommandPalette } from "@/components/gutenberg/core-commands";
 import { initializeEditor } from "@/components/gutenberg/edit-post";
+import { setupLocale } from "@/lib/gutenberg/locale/index.js";
 import settings from "@/lib/gutenberg/fixtures/settings.js";
 import {
   getSettings as getDateSettings,
@@ -27,7 +28,6 @@ export class ProjectEditorError extends Error {
 /** 启动接入项目后端的编辑器实例，articleId 为空时挂载尚未落库的临时文章 */
 export async function bootProjectEditor(locale, articleId, options = {}) {
   if (locale === "zh-CN") {
-    const { setupLocale } = await import("@/lib/gutenberg/locale/index.js");
     setupLocale(settings);
   } else {
     settings.locale = "en_US";

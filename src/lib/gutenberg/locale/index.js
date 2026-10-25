@@ -1,6 +1,5 @@
 import { setLocaleData } from '@/lib/gutenberg/i18n';
 import { getSettings, setSettings } from '@/lib/gutenberg/date';
-import zhCN from './zh_CN.json';
 
 const ZH_L10N = {
 	locale: 'zh_CN',
@@ -69,8 +68,10 @@ const ZH_FORMATS = {
 	datetimeAbbreviated: 'Y年n月j日 H:i',
 };
 
-export function setupLocale( settings ) {
-	setLocaleData( zhCN, 'default' );
+export function setupLocale( settings, localeData ) {
+	if ( localeData ) {
+		setLocaleData( localeData, 'default' );
+	}
 
 	const dateSettings = getSettings();
 	setSettings( {
