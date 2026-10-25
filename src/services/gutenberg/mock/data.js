@@ -590,11 +590,6 @@ const TAXONOMY_LABELS = {
 			parent_item: '父级标签',
 			parent_item_colon: '父级标签：',
 		},
-		wp_pattern_category: {
-			name: '模式分类',
-			singular_name: '模式分类',
-			menu_name: '模式分类',
-		},
 	},
 	en_US: {
 		base: {
@@ -622,11 +617,6 @@ const TAXONOMY_LABELS = {
 			new_item_name: 'New Tag Name',
 			parent_item: 'Parent Tag',
 			parent_item_colon: 'Parent Tag:',
-		},
-		wp_pattern_category: {
-			name: 'Pattern Categories',
-			singular_name: 'Pattern Category',
-			menu_name: 'Pattern Categories',
 		},
 	},
 };
@@ -776,15 +766,10 @@ const TAXONOMY_ROWS = {
 		hierarchical: true,
 	},
 	post_tag: {
+		name: 'tag',
 		slug: 'post_tag',
 		rest_base: 'tags',
 		types: [ 'post', 'page' ],
-		hierarchical: false,
-	},
-	wp_pattern_category: {
-		slug: 'wp_pattern_category',
-		rest_base: 'wp_pattern_category',
-		types: [ 'wp_block' ],
 		hierarchical: false,
 	},
 };
