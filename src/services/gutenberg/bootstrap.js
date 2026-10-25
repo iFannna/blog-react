@@ -2,6 +2,7 @@ import { initializeCommandPalette } from '@/components/gutenberg/core-commands';
 import { initializeEditor } from '@/components/gutenberg/edit-post';
 import { store as editorStore } from '@/components/gutenberg/editor';
 import { dispatch } from '@/stores/gutenberg/data';
+import { store as preferencesStore } from '@/stores/gutenberg/preferences';
 import { setupLocale } from '@/lib/gutenberg/locale/index.js';
 import settings from '@/lib/gutenberg/fixtures/settings.js';
 import { installMockApi } from '@/services/gutenberg/mock/api.js';
@@ -26,6 +27,7 @@ export async function bootGutenberg( locale ) {
 	configureCanvasAssets( settings );
 
 	initializeEditor( 'editor', 'page', 97589, settings, {} );
+	dispatch( preferencesStore ).set( 'core', 'editorMode', 'visual' );
 
 	// The demo opens the block inserter by default on desktop only. The open
 	// state lives in the editor store, so a refresh returns to this same default.

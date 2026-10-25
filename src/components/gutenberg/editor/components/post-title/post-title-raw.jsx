@@ -52,7 +52,7 @@ function PostTitleRaw( _, forwardedRef ) {
 	} );
 
 	const decodedPlaceholder =
-		decodeEntities( placeholder ) || __( 'Add title' );
+		__( decodeEntities( placeholder ) ) || __( 'Add title' );
 
 	return (
 		<WCTextareaControl

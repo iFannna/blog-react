@@ -44,7 +44,8 @@ export default function DefaultBlockAppender( { rootClientId } ) {
 	}
 
 	const value =
-		decodeEntities( placeholder ) || __( 'Type / to choose a block' );
+		__( decodeEntities( placeholder ) ) ||
+		__( 'Type / to choose a block' );
 
 	const onAppend = () => {
 		insertDefaultBlock( undefined, rootClientId );

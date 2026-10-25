@@ -26,7 +26,9 @@ import {
 } from '../post-revisions-preview';
 import SavePublishPanels from '../save-publish-panels';
 import TextEditor from '../text-editor';
+import MarkdownEditor from '../markdown-editor';
 import VisualEditor from '../visual-editor';
+import EditorModeSwitchModal from '../editor-mode-switch-modal';
 import StylesCanvas from '../styles-canvas';
 import ViewportStatus from '../viewport-status';
 
@@ -177,7 +179,7 @@ export default function EditorInterface( {
 					/>
 				}
 				content={
-					mode === 'text' ? (
+					mode !== 'visual' ? (
 						<RevisionsCodeDiff />
 					) : (
 						<RevisionsCanvas />
@@ -224,6 +226,7 @@ export default function EditorInterface( {
 			}
 			content={
 				<>
+					{ ! isPreviewMode && <EditorModeSwitchModal /> }
 					{ ! isDistractionFree && ! isPreviewMode && <Notices /> }
 					{ shouldShowStylesCanvas && <StylesCanvas /> }
 					{ shouldShowBlockEditor && (
@@ -234,6 +237,9 @@ export default function EditorInterface( {
 									// eslint-disable-next-line jsx-a11y/no-autofocus
 									autoFocus={ autoFocus }
 								/>
+							) }
+							{ ! isPreviewMode && mode === 'markdown' && (
+								<MarkdownEditor autoFocus={ autoFocus } />
 							) }
 							{ ! isPreviewMode &&
 								! isLargeViewport &&

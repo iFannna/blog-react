@@ -2,6 +2,8 @@ import { initializeCommandPalette } from "@/components/gutenberg/core-commands";
 import { initializeEditor } from "@/components/gutenberg/edit-post";
 import { setupLocale } from "@/lib/gutenberg/locale/index.js";
 import settings from "@/lib/gutenberg/fixtures/settings.js";
+import { dispatch } from "@/stores/gutenberg/data";
+import { store as preferencesStore } from "@/stores/gutenberg/preferences";
 import {
   getSettings as getDateSettings,
   setSettings as setDateSettings,
@@ -16,14 +18,6 @@ import { installProjectTermAdapter } from "./terms";
 import "@/styles/gutenberg/inline.js";
 import "@/styles/gutenberg/compiled/index.js";
 import "@/styles/gutenberg/index.css";
-
-export class ProjectEditorError extends Error {
-  constructor(code, message) {
-    super(message);
-    this.name = "ProjectEditorError";
-    this.code = code;
-  }
-}
 
 /** 启动接入项目后端的编辑器实例，articleId 为空时挂载尚未落库的临时文章 */
 export async function bootProjectEditor(locale, articleId, options = {}) {
@@ -50,12 +44,6 @@ export async function bootProjectEditor(locale, articleId, options = {}) {
   let initialPost;
   if (articleId) {
     const article = await source.getArticle(articleId);
-    if (article.content_format === "markdown") {
-      throw new ProjectEditorError(
-        "MARKDOWN_UNSUPPORTED",
-        "该文章使用 Markdown 格式，暂不支持 Gutenberg 编辑",
-      );
-    }
     initialPost = toEditorPost(article, locale);
   } else {
     initialPost = createNewEditorPost();
@@ -84,6 +72,13 @@ export async function bootProjectEditor(locale, articleId, options = {}) {
     projectSettings,
     {},
     initialPost,
+  );
+  // 初始化会把模式重置为 visual，但首帧渲染在异步预载之后，
+  // 这里同步覆盖，Markdown 文章才能直接以 Markdown 编辑器打开。
+  dispatch(preferencesStore).set(
+    "core",
+    "editorMode",
+    initialPost._project.contentFormat === "markdown" ? "markdown" : "visual",
   );
   initializeCommandPalette();
 }

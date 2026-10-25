@@ -53,7 +53,7 @@ function Header( {
 
 		return {
 			postType: getCurrentPostType(),
-			isTextEditor: getEditorMode() === 'text',
+			isTextEditor: [ 'text', 'markdown' ].includes( getEditorMode() ),
 			isPublishSidebarOpened: _isPublishSidebarOpened(),
 			showIconLabels: getPreference( 'core', 'showIconLabels' ),
 			hasFixedToolbar: getPreference( 'core', 'fixedToolbar' ),

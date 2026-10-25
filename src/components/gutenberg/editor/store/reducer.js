@@ -511,6 +511,21 @@ export function showRevisionDiff( state = true, action ) {
 	return state;
 }
 
+/**
+ * Reducer for the editor mode waiting for user confirmation.
+ *
+ * @param {string|null} state  Current state.
+ * @param {Object}      action Dispatched action.
+ * @return {string|null} Updated state.
+ */
+export function editorModeSwitchTarget( state = null, action ) {
+	switch ( action.type ) {
+		case 'SET_EDITOR_MODE_SWITCH_TARGET':
+			return action.mode;
+	}
+	return state;
+}
+
 export default combineReducers( {
 	postId,
 	postType,
@@ -538,5 +553,6 @@ export default combineReducers( {
 	browserBackup,
 	revisionPage,
 	showRevisionDiff,
+	editorModeSwitchTarget,
 	dataviews: dataviewsReducer,
 } );

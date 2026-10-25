@@ -48,12 +48,14 @@ function PreviewMenu( { forceIsAutosaveable, disabled } ) {
 		isResponsiveEditingEnabled,
 		hasBlockSelection,
 		activeComplementaryArea,
+		editorMode,
 	} = useSelect( ( select ) => {
 		const {
 			getCurrentPostType,
 			getCurrentTemplateId,
 			getRenderingMode,
 			getDeviceType,
+			getEditorMode,
 			getEditorSettings,
 		} = unlock( select( editorStore ) );
 		const {
@@ -85,6 +87,7 @@ function PreviewMenu( { forceIsAutosaveable, disabled } ) {
 			hasBlockSelection: !! getBlockSelectionStart(),
 			activeComplementaryArea:
 				select( interfaceStore ).getActiveComplementaryArea( 'core' ),
+			editorMode: getEditorMode(),
 		};
 	}, [] );
 	const { setDeviceType, setRenderingMode, setDefaultRenderingMode } = unlock(
@@ -261,7 +264,7 @@ function PreviewMenu( { forceIsAutosaveable, disabled } ) {
 						</Menu.Group>
 					</>
 				) }
-				{ isViewable && ! isProjectEditor && (
+				{ isViewable && ! isProjectEditor && editorMode !== 'markdown' && (
 					<>
 						<Menu.Separator />
 						<Menu.Group>

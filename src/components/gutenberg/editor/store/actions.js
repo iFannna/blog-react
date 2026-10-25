@@ -1214,11 +1214,11 @@ export const toggleTopToolbar =
 	};
 
 /**
- * Triggers an action used to switch editor mode.
+ * Applies an editor mode switch without asking for confirmation.
  *
  * @param {string} mode The editor mode.
  */
-export const switchEditorMode =
+const applyEditorModeSwitch =
 	( mode ) =>
 	( { dispatch, registry } ) => {
 		registry.dispatch( preferencesStore ).set( 'core', 'editorMode', mode );
@@ -1240,7 +1240,79 @@ export const switchEditorMode =
 				dispatch.toggleDistractionFree();
 			}
 			speak( __( 'Code editor selected' ), 'assertive' );
+		} else if ( mode === 'markdown' ) {
+			const isDistractionFree = registry
+				.select( preferencesStore )
+				.get( 'core', 'distractionFree' );
+			if ( isDistractionFree ) {
+				dispatch.toggleDistractionFree();
+			}
+			speak( __( 'Markdown editor selected' ), 'assertive' );
 		}
+	};
+
+/**
+ * Sets the editor mode that is waiting for user confirmation.
+ *
+ * @param {string|null} mode Target editor mode.
+ *
+ * @return {Object} Action object.
+ */
+export const setEditorModeSwitchTarget =
+	( mode ) =>
+	( { type: 'SET_EDITOR_MODE_SWITCH_TARGET', mode } );
+
+/**
+ * Triggers an action used to switch editor mode.
+ *
+ * Switching into or out of Markdown discards the current content because the
+ * formats are not converted, so it is deferred until the user confirms it.
+ *
+ * @param {string}  mode             The editor mode.
+ * @param {Object}  [options]
+ * @param {boolean} [options.bypassConfirmation] Switch without confirmation.
+ */
+export const switchEditorMode =
+	( mode, options = {} ) =>
+	( { select, dispatch } ) => {
+		const currentMode = select.getEditorMode();
+		if ( mode === currentMode ) {
+			return;
+		}
+
+		const involvesMarkdown =
+			currentMode === 'markdown' || mode === 'markdown';
+		if ( involvesMarkdown && ! options.bypassConfirmation ) {
+			dispatch.setEditorModeSwitchTarget( mode );
+			return;
+		}
+
+		dispatch( applyEditorModeSwitch( mode ) );
+	};
+
+/**
+ * Confirms the pending editor mode switch and resets the post content.
+ */
+export const confirmEditorModeSwitch =
+	() =>
+	( { select, dispatch } ) => {
+		const target = select.getEditorModeSwitchTarget();
+		if ( ! target ) {
+			return;
+		}
+
+		dispatch.setEditorModeSwitchTarget( null );
+		dispatch.resetEditorBlocks( [] );
+		dispatch( applyEditorModeSwitch( target ) );
+	};
+
+/**
+ * Cancels the pending editor mode switch.
+ */
+export const cancelEditorModeSwitch =
+	() =>
+	( { dispatch } ) => {
+		dispatch.setEditorModeSwitchTarget( null );
 	};
 
 /**

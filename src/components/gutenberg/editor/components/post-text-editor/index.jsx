@@ -12,7 +12,11 @@ import { adjustPosition, getDiff } from './utils';
  *
  * @return {React.ReactNode} The rendered PostTextEditor component.
  */
-export default function PostTextEditor() {
+export default function PostTextEditor( {
+	label,
+	placeholder,
+	className = 'editor-post-text-editor',
+} ) {
 	const instanceId = useInstanceId( PostTextEditor );
 	const textareaRef = useRef();
 	const previousValueRef = useRef();
@@ -86,7 +90,7 @@ export default function PostTextEditor() {
 				// eslint-disable-next-line jsx-a11y/label-has-associated-control
 				render={ <label htmlFor={ `post-content-${ instanceId }` } /> }
 			>
-				{ __( 'Type text or HTML' ) }
+				{ label ?? __( 'Type text or HTML' ) }
 			</VisuallyHidden>
 			<textarea
 				autoComplete="off"
@@ -107,9 +111,11 @@ export default function PostTextEditor() {
 				// range selections do), so track those moves via mouseup/keyup.
 				onMouseUp={ updateSelection }
 				onKeyUp={ updateSelection }
-				className="editor-post-text-editor"
+				className={ className }
 				id={ `post-content-${ instanceId }` }
-				placeholder={ __( 'Start writing with text or HTML' ) }
+				placeholder={
+					placeholder ?? __( 'Start writing with text or HTML' )
+				}
 			/>
 		</>
 	);

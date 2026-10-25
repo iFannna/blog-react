@@ -1,4 +1,6 @@
 import { addFilter } from "@/hooks/gutenberg/hooks";
+import { select } from "@/stores/gutenberg/data";
+import { store as editorStore } from "@/components/gutenberg/editor";
 import { goProjectMediaSource } from "./api";
 import { toEditorPost } from "./map";
 import { clearSessionArticle, writeSessionArticle } from "./session";
@@ -27,9 +29,12 @@ async function saveThroughProject(edits, post) {
   if (!source || !project) {
     throw new Error("编辑器数据源尚未初始化");
   }
-  if (project.contentFormat === "markdown") {
-    throw new Error("Markdown 文章暂不支持 Gutenberg 编辑");
-  }
+
+  // 当前编辑器模式决定文章的内容格式，切换模式后保存即改变文章格式
+  const contentFormat =
+    select(editorStore).getEditorMode() === "markdown"
+      ? "markdown"
+      : "gutenberg";
 
   const title = readString(edits.title, readString(post.title, ""));
   const summary = readString(edits.excerpt, readString(post.excerpt, ""));
@@ -71,7 +76,7 @@ async function saveThroughProject(edits, post) {
       title,
       summary,
       content,
-      contentFormat: "gutenberg",
+      contentFormat,
       coverImage,
       featuredMediaId: featuredMediaId || null,
       categoryIds,
@@ -90,7 +95,7 @@ async function saveThroughProject(edits, post) {
       title,
       summary,
       content,
-      contentFormat: "gutenberg",
+      contentFormat,
       coverImage,
       featuredMediaId: featuredMediaId || null,
       categoryIds,
@@ -109,7 +114,7 @@ async function saveThroughProject(edits, post) {
       title,
       summary,
       content,
-      contentFormat: "gutenberg",
+      contentFormat,
       coverImage,
       featuredMediaId: featuredMediaId || null,
       categoryIds,

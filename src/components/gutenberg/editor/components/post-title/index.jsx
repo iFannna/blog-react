@@ -49,7 +49,7 @@ const PostTitle = forwardRef( ( _, forwardedRef ) => {
 		useDispatch( blockEditorStore );
 
 	const decodedPlaceholder =
-		decodeEntities( placeholder ) || __( 'Add title' );
+		__( decodeEntities( placeholder ) ) || __( 'Add title' );
 
 	const {
 		value,

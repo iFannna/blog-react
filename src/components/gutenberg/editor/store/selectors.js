@@ -1398,6 +1398,17 @@ export const getEditorMode = createRegistrySelector(
 		select( preferencesStore ).get( 'core', 'editorMode' ) ?? 'visual'
 );
 
+/**
+ * Returns the editor mode pending user confirmation, or null.
+ *
+ * @param {Object} state Global application state.
+ *
+ * @return {string|null} Pending editor mode.
+ */
+export function getEditorModeSwitchTarget( state ) {
+	return state.editorModeSwitchTarget;
+}
+
 /*
  * Backward compatibility
  */

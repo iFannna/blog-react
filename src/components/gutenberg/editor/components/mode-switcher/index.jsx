@@ -21,6 +21,10 @@ const MODES = [
 		value: 'text',
 		label: 'Code editor',
 	},
+	{
+		value: 'markdown',
+		label: 'Markdown editor',
+	},
 ];
 
 function ModeSwitcher() {
@@ -66,7 +70,11 @@ function ModeSwitcher() {
 				),
 			};
 		}
-		if ( choice.value !== selectedMode && ! choice.disabled ) {
+		if (
+			choice.value !== selectedMode &&
+			! choice.disabled &&
+			choice.value !== 'markdown'
+		) {
 			return { ...choice, shortcut };
 		}
 		return choice;
