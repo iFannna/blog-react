@@ -39,6 +39,7 @@ function PreviewMenu( { forceIsAutosaveable, disabled } ) {
 		hasTabletViewport,
 		isTemplate,
 		isViewable,
+		isProjectEditor,
 		showIconLabels,
 		isTemplateHidden,
 		hasRenderingMode,
@@ -73,6 +74,7 @@ function PreviewMenu( { forceIsAutosaveable, disabled } ) {
 			hasTabletViewport: viewportBreakpoints.tablet !== undefined,
 			isTemplate: _currentPostType === 'wp_template',
 			isViewable: getPostType( _currentPostType )?.viewable ?? false,
+			isProjectEditor: !! getEditorSettings().__projectEditor,
 			showIconLabels: get( 'core', 'showIconLabels' ),
 			isTemplateHidden: getRenderingMode() === 'post-only',
 			hasRenderingMode: !! getEditorSettings().renderingMode,
@@ -259,7 +261,7 @@ function PreviewMenu( { forceIsAutosaveable, disabled } ) {
 						</Menu.Group>
 					</>
 				) }
-				{ isViewable && (
+				{ isViewable && ! isProjectEditor && (
 					<>
 						<Menu.Separator />
 						<Menu.Group>

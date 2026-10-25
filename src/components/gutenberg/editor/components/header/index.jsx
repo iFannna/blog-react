@@ -118,18 +118,16 @@ function Header( {
 
 					{ ! isProjectEditor && <PostViewLink /> }
 
-					{ ! isProjectEditor && (
-						<>
-							<PreviewDropdown
-								forceIsAutosaveable={ forceIsDirty }
-								disabled={ isStylesCanvasActive }
-							/>
+					<PreviewDropdown
+						forceIsAutosaveable={ forceIsDirty }
+						disabled={ isStylesCanvasActive }
+					/>
 
-							<PostPreviewButton
-								className="editor-header__post-preview-button"
-								forceIsAutosaveable={ forceIsDirty }
-							/>
-						</>
+					{ ! isProjectEditor && (
+						<PostPreviewButton
+							className="editor-header__post-preview-button"
+							forceIsAutosaveable={ forceIsDirty }
+						/>
 					) }
 
 					{ isWideViewport && canBeZoomedOut && (
