@@ -82,18 +82,19 @@
   margin: 0;
 }
 
-.gutenberg-content .wp-block-button__link {
+.gutenberg-content .wp-block-button .wp-block-button__link,
+.gutenberg-content .wp-block-file a.wp-block-file__button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5em;
-  padding: 0.625rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   border: 1px solid transparent;
   border-radius: var(--radius-btn);
   background-color: var(--color-primary);
   color: var(--color-on-primary);
   font-family: inherit;
-  font-size: 0.9375rem;
+  font-size: 1.0625rem;
   font-weight: 600;
   line-height: 1.4;
   text-align: center;
@@ -101,13 +102,20 @@
   transition: var(--transition-primary);
 }
 
+.gutenberg-content .wp-block-file a.wp-block-file__button {
+  margin-left: 0;
+}
+
 .gutenberg-content .wp-block-button__link:not(.has-background):not(.has-text-color):hover,
-.gutenberg-content .wp-block-button__link:not(.has-background):not(.has-text-color):focus-visible {
+.gutenberg-content .wp-block-button__link:not(.has-background):not(.has-text-color):focus-visible,
+.gutenberg-content .wp-block-file a.wp-block-file__button:hover,
+.gutenberg-content .wp-block-file a.wp-block-file__button:focus-visible {
   background-color: var(--color-primary-light);
   color: var(--color-on-primary);
 }
 
-.gutenberg-content .wp-block-button__link:focus-visible {
+.gutenberg-content .wp-block-button__link:focus-visible,
+.gutenberg-content .wp-block-file a.wp-block-file__button:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
@@ -220,79 +228,18 @@
   background: none;
 }
 
-/* Pullquote */
+/* Pullquote / Verse 沿用 block-library 的默认呈现 */
 
-.gutenberg-content .wp-block-pullquote {
-  padding-block: 1.75rem;
-  border-block: 1px solid var(--color-border);
-}
-
-.gutenberg-content .wp-block-pullquote blockquote {
-  max-width: 44rem;
-  margin-inline: auto;
-}
-
-.gutenberg-content .wp-block-pullquote p {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1.5;
-  letter-spacing: -0.01em;
-}
-
-.gutenberg-content .wp-block-pullquote cite {
-  display: block;
-  margin-top: 1rem;
-  color: var(--color-text-muted);
-  font-size: 0.8125rem;
-  font-style: normal;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* Verse */
-
-.gutenberg-content pre.wp-block-verse {
-  padding-block: 0.5rem;
-  padding-inline: 1.25rem 0;
-  border-inline-start: 1px solid var(--color-border);
-  color: var(--color-text-muted);
-  font-family: inherit;
-  font-size: 1.0625rem;
-  font-style: italic;
-  line-height: 1.9;
-  overflow-x: auto;
-  tab-size: 2;
-  white-space: pre-wrap;
-}
-
-/* Preformatted */
+/* Table */
 
 .gutenberg-content pre.wp-block-preformatted {
-  padding: 1rem 1.25rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-normal);
-  background-color: var(--color-surface-tint);
-  color: var(--color-text);
-  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Menlo, Consolas, monospace;
-  font-size: 0.9375rem;
-  line-height: 1.7;
-  overflow-x: auto;
   tab-size: 4;
-  white-space: pre-wrap;
 }
 
-/* Details */
+/* Details：保留原生披露标记，只沿用正文块间距 */
 
 .gutenberg-content .wp-block-details {
   margin-block: 0 var(--gb-gap);
-  padding: 0;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-normal);
-}
-
-.gutenberg-content .wp-block-details[open] {
-  padding-bottom: 1rem;
 }
 
 /* Accordion / Tabs：没有运行时脚本时只呈现初始状态 */
@@ -330,48 +277,6 @@
   border-bottom: 2px solid currentColor;
 }
 
-.gutenberg-content .wp-block-details > summary {
-  display: flex;
-  align-items: baseline;
-  gap: 0.625rem;
-  padding: 0.875rem 1.125rem;
-  border-radius: var(--radius-normal) var(--radius-normal) 0 0;
-  background-color: var(--color-surface-tint);
-  color: var(--color-text);
-  font-weight: 600;
-  line-height: 1.4;
-  cursor: pointer;
-  list-style: none;
-}
-
-.gutenberg-content .wp-block-details > summary::-webkit-details-marker {
-  display: none;
-}
-
-.gutenberg-content .wp-block-details > summary::before {
-  content: "+";
-  flex: none;
-  width: 1em;
-  color: var(--color-primary);
-  font-weight: 700;
-}
-
-.gutenberg-content .wp-block-details[open] > summary {
-  border-bottom: 1px solid var(--color-border);
-}
-
-.gutenberg-content .wp-block-details[open] > summary::before {
-  content: "−";
-}
-
-.gutenberg-content .wp-block-details > :not(summary):not(.alignwide):not(.alignfull) {
-  margin-inline: 1.125rem;
-}
-
-.gutenberg-content .wp-block-details > summary + * {
-  margin-top: 1rem;
-}
-
 .gutenberg-content .wp-block-details > :last-child {
   margin-bottom: 0;
 }
@@ -406,26 +311,6 @@
 
 .gutenberg-content :is(.is-layout-constrained, .is-layout-flex, .is-layout-grid) > :is(.alignwide, .alignfull) {
   margin-inline: 0;
-}
-
-/* Narrow screens */
-
-@media (max-width: 599px) {
-  .gutenberg-content .wp-block-pullquote {
-    padding-block: 1.25rem;
-  }
-
-  .gutenberg-content .wp-block-pullquote p {
-    font-size: 1.25rem;
-  }
-
-  .gutenberg-content .wp-block-details > summary {
-    padding-inline: 1rem;
-  }
-
-  .gutenberg-content .wp-block-details > :not(summary):not(.alignwide):not(.alignfull) {
-    margin-inline: 1rem;
-  }
 }
 
 /* 图片灯箱：portal 到 body，不继承正文容器约束 */

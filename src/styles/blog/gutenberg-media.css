@@ -6,10 +6,8 @@
 
 .gutenberg-content {
   --gb-media-gap: 1.25rem;
-  --gb-media-radius: var(--radius-normal);
   --gb-caption-color: var(--color-text);
   --gb-caption-size: 0.8125rem;
-  --gb-media-hairline: var(--color-border-subtle);
 }
 
 /* figure 类区块沿用 .page-entry-content figure 的间距，这里只补非 figure 容器 */
@@ -95,8 +93,6 @@
   display: block;
   max-width: 100%;
   height: auto;
-  border-radius: var(--gb-media-radius);
-  box-shadow: 0 0 0 1px var(--gb-media-hairline);
 }
 
 /* 空图源不渲染破图占位；整个空区块直接隐藏 */
@@ -121,7 +117,6 @@
 .gutenberg-content .wp-block-media-text__media a:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 3px;
-  border-radius: var(--gb-media-radius);
 }
 
 /* 对齐 */
@@ -230,8 +225,6 @@
   width: 100% !important;
   margin: 0;
   overflow: hidden;
-  border-radius: var(--gb-media-radius);
-  background: var(--color-surface-tint);
 }
 
 .gutenberg-content .wp-block-gallery.has-nested-images:not(.is-cropped) > figure.wp-block-image {
@@ -243,8 +236,6 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  border-radius: 0;
-  box-shadow: none;
 }
 
 .gutenberg-content .wp-block-gallery.has-nested-images.is-cropped > figure.wp-block-image img {
@@ -278,10 +269,7 @@
 /* ---------- 封面 ---------- */
 
 .gutenberg-content .wp-block-cover {
-  min-height: clamp(15rem, 40vw, 24rem);
   margin-bottom: var(--gb-media-gap);
-  padding: clamp(1.25rem, 5%, 3rem);
-  border-radius: var(--gb-media-radius);
   overflow: hidden;
 }
 
@@ -306,25 +294,14 @@
   color: inherit;
 }
 
-.gutenberg-content .wp-block-cover .wp-block-cover__image-background,
-.gutenberg-content .wp-block-cover .wp-block-cover__video-background {
-  border-radius: 0;
-  box-shadow: none;
-}
-
 /* ---------- 媒体文本 ---------- */
 
 .gutenberg-content .wp-block-media-text {
   margin-bottom: var(--gb-media-gap);
-  border-radius: var(--gb-media-radius);
 }
 
 .gutenberg-content .wp-block-media-text > .wp-block-media-text__content {
   padding: 0 clamp(1rem, 4%, 2rem);
-}
-
-.gutenberg-content .wp-block-media-text > .wp-block-media-text__media {
-  border-radius: var(--gb-media-radius);
 }
 
 .gutenberg-content .wp-block-media-text__media img,
@@ -332,8 +309,6 @@
   display: block;
   width: 100%;
   height: auto;
-  border-radius: var(--gb-media-radius);
-  box-shadow: 0 0 0 1px var(--gb-media-hairline);
 }
 
 .gutenberg-content .wp-block-media-text__content > :last-child {
@@ -361,8 +336,6 @@
   width: 100%;
   max-width: 100%;
   height: auto;
-  border-radius: var(--gb-media-radius);
-  background: var(--color-surface-tint);
 }
 
 [data-theme="dark"] .gutenberg-content .wp-block-audio audio,
@@ -380,36 +353,15 @@
 }
 
 .gutenberg-content .wp-block-file > a:not(.wp-block-file__button) {
-  font-size: 0.9375rem;
+  font-size: 1.0625rem;
   overflow-wrap: anywhere;
 }
 
 .gutenberg-content .wp-block-file__embed {
   flex: 0 0 100%;
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--gb-media-radius);
-  background: var(--color-surface-tint);
 }
 
-.gutenberg-content .wp-block-file a.wp-block-file__button {
-  margin-left: 0;
-  padding: 0.375rem 0.875rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-btn);
-  background: transparent;
-  color: var(--color-text);
-  font-size: 0.8125rem;
-  line-height: 1.4;
-  text-decoration: none;
-  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-}
-
-.gutenberg-content .wp-block-file a.wp-block-file__button:hover,
-.gutenberg-content .wp-block-file a.wp-block-file__button:focus-visible {
-  border-color: var(--color-primary);
-  background: var(--color-primary);
-  color: var(--color-on-primary);
-}
+/* 下载按钮复用正文按钮样式，见 gutenberg-layout.css */
 
 /* ---------- 窄屏 ---------- */
 
@@ -418,10 +370,6 @@
   .gutenberg-content .wp-block-media-text.is-stacked-on-mobile > .wp-block-media-text__content {
     padding: 0;
     margin-top: 0.875rem;
-  }
-
-  .gutenberg-content .wp-block-cover {
-    min-height: 14rem;
   }
 }
 
