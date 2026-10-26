@@ -24,6 +24,7 @@ import {
 	type RenderableAttributes,
 } from "@/lib/gutenberg/render/layout";
 import { renderDuotone } from "@/lib/gutenberg/render/duotone";
+import GutenbergInteractions from "./GutenbergInteractions";
 import {
 	renderAspectRatio,
 	renderBackground,
@@ -254,6 +255,26 @@ function createTransform(collector: RenderCollector) {
 		let childrenChanged = false;
 
 		const attributes = block.attributes as RenderableAttributes;
+		const extraProps: Record<string, string> = {};
+
+		// 交互所需的运行期标记：accordion 自动收起、image 灯箱开关
+		if (
+			block.name === "core/accordion" &&
+			typeof attributes.autoclose === "boolean"
+		) {
+			extraProps["data-autoclose"] = attributes.autoclose
+				? "true"
+				: "false";
+		}
+		const lightbox = attributes.lightbox;
+		if (
+			block.name === "core/image" &&
+			lightbox &&
+			typeof lightbox === "object" &&
+			(lightbox as { enabled?: unknown }).enabled === true
+		) {
+			extraProps["data-gb-lightbox"] = "true";
+		}
 
 		// metadata.blockVisibility 为 false 时前端不输出该区块
 		const visibility = renderBlockVisibility(
@@ -392,7 +413,12 @@ function createTransform(collector: RenderCollector) {
 			}
 		}
 
-		if (classNames.length === 0 && !styleChanged && !childrenChanged) {
+		if (
+			classNames.length === 0 &&
+			!styleChanged &&
+			!childrenChanged &&
+			Object.keys(extraProps).length === 0
+		) {
 			return reactNode as ReactElement;
 		}
 
@@ -400,6 +426,7 @@ function createTransform(collector: RenderCollector) {
 			className: mergeClassName(props.className, classNames) || undefined,
 			style,
 			...(childrenChanged ? { children } : {}),
+			...extraProps,
 		});
 	};
 }
@@ -460,7 +487,7 @@ export default async function GutenbergContent({
 					dangerouslySetInnerHTML={{ __html: svg }}
 				/>
 			)}
-			<div className="gutenberg-content">{body}</div>
+			<GutenbergInteractions>{body}</GutenbergInteractions>
 		</>
 	);
 }
