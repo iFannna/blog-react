@@ -1,0 +1,327 @@
+<!-- wp:cover {"url":"/images/hamburger.png","id":1,"dimRatio":40,"minHeight":320,"minHeightUnit":"px","contentPosition":"center center","align":"full","style":{"dimensions":{"aspectRatio":"16/9"},"color":{"duotone":"var:preset|duotone|grayscale"}}} -->
+<div class="wp-block-cover alignfull is-light has-custom-content-position is-position-center-center" style="min-height:320px"><img class="wp-block-cover__image-background wp-image-1" alt="" src="/images/hamburger.png" data-object-fit="cover" data-object-position="50% 50%"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim-40 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:heading {"textAlign":"center","style":{"typography":{"fontSize":"36px"},"color":{"text":"#ffffff"}}} -->
+<h2 class="wp-block-heading has-text-align-center has-text-color" style="color:#ffffff;font-size:36px">静态区块渲染回归</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center","style":{"color":{"text":"#ffffff"}}} -->
+<p class="has-text-align-center has-text-color" style="color:#ffffff">覆盖布局、媒体、duotone、背景、状态与可见性属性</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:cover -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">背景与文字裁剪</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"style":{"background":{"backgroundImage":{"url":"/images/hamburger.png"},"backgroundSize":"cover","backgroundPosition":"50% 50%"},"color":{"text":"#ffffff"},"spacing":{"padding":{"top":"1.5rem","bottom":"1.5rem","left":"1.5rem","right":"1.5rem"}}}} -->
+<p class="has-text-color" style="color:#ffffff;padding-top:1.5rem;padding-right:1.5rem;padding-bottom:1.5rem;padding-left:1.5rem">这是一个带背景图的段落，背景声明只存在于区块注释中，需要渲染期补回。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"style":{"background":{"backgroundClip":"text","gradient":"linear-gradient(90deg,#3858E9,#9b51e0)"},"typography":{"fontSize":"42px"}}} -->
+<h2 class="wp-block-heading" style="font-size:42px">渐变文字裁剪（background-clip: text）</h2>
+<!-- /wp:heading -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">布局</h2>
+<!-- /wp:heading -->
+
+<!-- wp:group {"layout":{"type":"constrained","contentSize":"680px"}} -->
+<div class="wp-block-group"><!-- wp:paragraph -->
+<p>constrained 布局：内容宽度被限制在 680px。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>第二段用于验证内层间距。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"layout":{"type":"flex","orientation":"vertical","justifyContent":"center","verticalAlignment":"center","flexWrap":"wrap"},"style":{"spacing":{"blockGap":"1.5rem"},"@mobile":{"layout":{"type":"flex","orientation":"horizontal","justifyContent":"space-between"}}},"metadata":{"blockVisibility":{"viewport":{"mobile":false}}}} -->
+<div class="wp-block-group"><!-- wp:paragraph -->
+<p>flex 纵向布局，居中；本区块在移动端隐藏。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"width":50,"style":{"dimensions":{"width":"50%"},"color":{"background":"#3858E9","text":"#ffffff"},"typography":{"fontSize":"15px"},"background":{"backgroundImage":{"url":"/images/hamburger.png"},"backgroundSize":"cover"},":hover":{"color":{"background":"#9b51e0","text":"#ffffff"},"typography":{"fontSize":"16px"}}}} -->
+<div class="wp-block-button has-custom-width wp-block-button__width-50"><a class="wp-block-button__link has-text-color has-background has-custom-font-size wp-element-button" href="#" style="color:#ffffff;background-color:#3858E9;font-size:15px">50% 宽度按钮</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-outline","style":{"background":{"gradient":"linear-gradient(90deg,#3858E9,#9b51e0)"}}} -->
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="#">描边按钮 + 背景渐变</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"layout":{"type":"grid","columnCount":3,"minimumColumnWidth":"12rem"},"style":{"spacing":{"blockGap":{"top":"1rem","left":"1rem"}}}} -->
+<div class="wp-block-group"><!-- wp:paragraph -->
+<p>网格 1</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>网格 2</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>网格 3</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:columns {"verticalAlignment":"center","isStackedOnMobile":true} -->
+<div class="wp-block-columns are-vertically-aligned-center is-stacked-on-mobile"><!-- wp:column {"verticalAlignment":"center","width":"40%","style":{"background":{"gradient":"linear-gradient(135deg,#f0f0f0,#e0e0e0)"},"spacing":{"padding":{"top":"1rem","bottom":"1rem","left":"1rem","right":"1rem"}},"@mobile":{"layout":{"selfStretch":"fill"}}}} -->
+<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:40%;padding-top:1rem;padding-right:1rem;padding-bottom:1rem;padding-left:1rem"><!-- wp:paragraph -->
+<p>左列，带渐变背景；移动端 flex 拉伸。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"verticalAlignment":"center"} -->
+<div class="wp-block-column is-vertically-aligned-center"><!-- wp:paragraph -->
+<p>右列，垂直居中。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:group {"style":{"position":{"type":"sticky","top":"0px"}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group"><!-- wp:paragraph -->
+<p>sticky 定位区块（向下滚动时验证）。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">文本</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"dropCap":true,"style":{"typography":{"fontSize":"17px","lineHeight":"1.9"}}} -->
+<p class="has-drop-cap" style="font-size:17px;line-height:1.9">首字下沉段落。Its sometimes her behaviour are contented. Do listening am eagerness oh objection collected. Together happy feelings continue juvenile had off one.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true,"start":3} -->
+<ol class="wp-block-list" start="3"><!-- wp:list-item -->
+<li>有序列表第三项</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>第四项
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>嵌套无序项</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list --></li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:quote {"style":{"border":{"left":{"width":"4px","color":"#3858E9"}},"spacing":{"padding":{"left":"1rem"}}}} -->
+<blockquote class="wp-block-quote has-border-color" style="border-left-width:4px;border-left-color:#3858E9;padding-left:1rem"><!-- wp:paragraph -->
+<p>引用块正文。</p>
+<!-- /wp:paragraph --><cite>引用来源</cite></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:pullquote {"align":"wide"} -->
+<figure class="wp-block-pullquote alignwide"><blockquote><p>Pullquote：强调引文。</p><cite>作者</cite></blockquote></figure>
+<!-- /wp:pullquote -->
+
+<!-- wp:code {"data-code-language":"tsx"} -->
+<pre class="wp-block-code"><code data-code-language="tsx">const greeting: string = "hello";
+console.log( greeting );</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">预格式化文本
+  保留缩进与换行</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:verse -->
+<pre class="wp-block-verse">诗句第一行
+诗句第二行</pre>
+<!-- /wp:verse -->
+
+<!-- wp:details {"showContent":true} -->
+<details class="wp-block-details" open><summary>展开的详情区块</summary><!-- wp:paragraph -->
+<p>详情内容。</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+
+<!-- wp:details -->
+<details class="wp-block-details"><summary>收起的详情区块</summary><!-- wp:paragraph -->
+<p>默认不可见。</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">表格与分隔</h2>
+<!-- /wp:heading -->
+
+<!-- wp:table {"hasFixedLayout":true,"className":"is-style-stripes","style":{"background":{"gradient":"linear-gradient(180deg,#ffffff,#f0f0f0)"}}} -->
+<figure class="wp-block-table is-style-stripes"><table class="has-fixed-layout"><thead><tr><th>列 A</th><th>列 B</th></tr></thead><tbody><tr><td>值 1</td><td>值 2</td></tr><tr><td>值 3</td><td>值 4</td></tr></tbody><tfoot><tr><td>汇总</td><td>4</td></tr></tfoot></table><figcaption class="wp-element-caption">表格图注（背景渐变作用于 table 元素）</figcaption></figure>
+<!-- /wp:table -->
+
+<!-- wp:table -->
+<figure class="wp-block-table"><table><tbody><tr><td>这是一段很长很长的单元格内容，用来验证窄屏下表格在容器内部横向滚动，而不是把整页撑宽导致页面出现横向滚动条。</td><td>第二列</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:separator {"opacity":"css","className":"is-style-wide"} -->
+<hr class="wp-block-separator has-css-opacity is-style-wide"/>
+<!-- /wp:separator -->
+
+<!-- wp:separator {"className":"is-style-dots"} -->
+<hr class="wp-block-separator has-alpha-channel-opacity is-style-dots"/>
+<!-- /wp:separator -->
+
+<!-- wp:spacer {"height":"2rem"} -->
+<div style="height:2rem" aria-hidden="true" class="wp-block-spacer"></div>
+<!-- /wp:spacer -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">媒体</h2>
+<!-- /wp:heading -->
+
+<!-- wp:image {"id":1,"sizeSlug":"large","align":"center","style":{"color":{"duotone":"var:preset|duotone|blue-red"},"border":{"radius":"12px","width":"2px","color":"#3858E9"}}} -->
+<figure class="wp-block-image aligncenter size-large has-custom-border"><img src="/images/hamburger.png" alt="描述文字" class="wp-image-1" style="border-radius:12px;border-width:2px;border-color:#3858E9"/><figcaption class="wp-element-caption">居中图片，duotone 与圆角边框</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"id":1,"width":"320px","height":"180px","scale":"cover","align":"right"} -->
+<figure class="wp-block-image alignright size-large is-resized"><img src="/images/hamburger.png" alt="" class="wp-image-1" style="width:320px;height:180px;object-fit:cover"/><figcaption class="wp-element-caption">右浮动定宽图片</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>右浮动图片应当被正文环绕，并且在文末被清除浮动，不溢出正文容器。这里补充足够长的文字用于观察环绕效果。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:gallery {"ids":[1,1,1],"columns":3,"imageCrop":true,"linkTo":"none","className":"is-cropped","style":{"background":{"gradient":"linear-gradient(180deg,#ffffff,#f5f5f5)"},"@mobile":{"columns":2,"imageCrop":false,"aspectRatio":"4/3"}}} -->
+<figure class="wp-block-gallery has-nested-images columns-3 is-cropped"><!-- wp:image {"id":1,"sizeSlug":"large","linkDestination":"none","style":{"color":{"duotone":"var:preset|duotone|purple-yellow"}}} -->
+<figure class="wp-block-image size-large"><img src="/images/hamburger.png" alt="" class="wp-image-1"/><figcaption class="wp-element-caption">画廊图注 &amp; 更多</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"id":1,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="/images/hamburger.png" alt="" class="wp-image-1"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"id":1,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="/images/hamburger.png" alt="" class="wp-image-1"/></figure>
+<!-- /wp:image --><figcaption class="blocks-gallery-caption wp-element-caption">画廊整体图注</figcaption></figure>
+<!-- /wp:gallery -->
+
+<!-- wp:media-text {"mediaId":1,"mediaType":"image","mediaUrl":"/images/hamburger.png","mediaAlt":"媒体文本图片","mediaWidth":40,"verticalAlignment":"center","isStackedOnMobile":true} -->
+<div class="wp-block-media-text is-stacked-on-mobile is-vertically-aligned-center" style="grid-template-columns:40% auto"><figure class="wp-block-media-text__media"><img src="/images/hamburger.png" alt="媒体文本图片" class="wp-image-1 size-large"/></figure><div class="wp-block-media-text__content"><!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">媒体文本标题</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>媒体在左、内容在右；窄屏堆叠。</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:media-text -->
+
+<!-- wp:media-text {"mediaType":"image","mediaUrl":"/images/hamburger.png","mediaWidth":50,"mediaPosition":"right","imageFill":true,"focalPoint":{"x":0.3,"y":0.4},"isStackedOnMobile":true} -->
+<div class="wp-block-media-text has-media-on-the-right is-stacked-on-mobile is-image-fill-element" style="grid-template-columns:auto 50%"><div class="wp-block-media-text__content"><!-- wp:paragraph -->
+<p>媒体在右，imageFill + 焦点位置。</p>
+<!-- /wp:paragraph --></div><figure class="wp-block-media-text__media"><img src="/images/hamburger.png" alt="" style="object-position:30% 40%"/></figure></div>
+<!-- /wp:media-text -->
+
+<!-- wp:audio {"id":1} -->
+<figure class="wp-block-audio"><audio controls></audio><figcaption class="wp-element-caption">音频图注</figcaption></figure>
+<!-- /wp:audio -->
+
+<!-- wp:video {"id":1,"poster":"/images/hamburger.png"} -->
+<figure class="wp-block-video"><video controls poster="/images/hamburger.png"></video><figcaption class="wp-element-caption">视频图注</figcaption></figure>
+<!-- /wp:video -->
+
+<!-- wp:file {"id":1,"href":"/files/sample.pdf"} -->
+<div class="wp-block-file"><a id="wp-block-file--media-1" href="/files/sample.pdf">sample.pdf</a><a href="/files/sample.pdf" class="wp-block-file__button wp-element-button" download>下载</a></div>
+<!-- /wp:file -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">交互类静态初态</h2>
+<!-- /wp:heading -->
+
+<!-- wp:tabs {"activeTabIndex":1,"style":{"background":{"gradient":"linear-gradient(180deg,#ffffff,#f5f5f5)"}}} -->
+<div class="wp-block-tabs"><!-- wp:tab-list -->
+<div class="wp-block-tab-list" role="tablist"><button type="button" role="tab">标签一</button><button type="button" role="tab">标签二</button><button type="button" role="tab">标签三</button></div>
+<!-- /wp:tab-list -->
+
+<!-- wp:tab-panels -->
+<div class="wp-block-tab-panels"><!-- wp:tab-panel -->
+<div class="wp-block-tab-panel" role="tabpanel"><!-- wp:paragraph -->
+<p>第一个面板。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:tab-panel -->
+
+<!-- wp:tab-panel -->
+<div class="wp-block-tab-panel" role="tabpanel"><!-- wp:paragraph -->
+<p>第二个面板（activeTabIndex=1，默认展示）。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:tab-panel -->
+
+<!-- wp:tab-panel -->
+<div class="wp-block-tab-panel" role="tabpanel"><!-- wp:paragraph -->
+<p>第三个面板。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:tab-panel --></div>
+<!-- /wp:tab-panels --></div>
+<!-- /wp:tabs -->
+
+<!-- wp:accordion -->
+<div class="wp-block-accordion"><!-- wp:accordion-item {"openByDefault":true} -->
+<div class="wp-block-accordion-item is-open"><!-- wp:accordion-heading -->
+<h3 class="wp-block-accordion-heading"><button type="button" class="wp-block-accordion-heading__toggle"><span class="wp-block-accordion-heading__toggle-title">默认展开</span><span class="wp-block-accordion-heading__toggle-icon" aria-hidden="true">+</span></button></h3>
+<!-- /wp:accordion-heading -->
+
+<!-- wp:accordion-panel -->
+<div class="wp-block-accordion-panel"><!-- wp:paragraph -->
+<p>展开的折叠面板内容。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:accordion-panel --></div>
+<!-- /wp:accordion-item -->
+
+<!-- wp:accordion-item -->
+<div class="wp-block-accordion-item"><!-- wp:accordion-heading -->
+<h3 class="wp-block-accordion-heading"><button type="button" class="wp-block-accordion-heading__toggle"><span class="wp-block-accordion-heading__toggle-title">默认收起</span><span class="wp-block-accordion-heading__toggle-icon" aria-hidden="true">+</span></button></h3>
+<!-- /wp:accordion-heading -->
+
+<!-- wp:accordion-panel -->
+<div class="wp-block-accordion-panel"><!-- wp:paragraph -->
+<p>收起面板内容不应显示。</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:accordion-panel --></div>
+<!-- /wp:accordion-item --></div>
+<!-- /wp:accordion -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">其他静态区块</h2>
+<!-- /wp:heading -->
+
+<!-- wp:social-links {"className":"is-style-logos-only"} -->
+<ul class="wp-block-social-links is-style-logos-only"><!-- wp:social-link {"url":"https://example.com","service":"wordpress"} /-->
+
+<!-- wp:social-link {"url":"https://example.com","service":"github"} /--></ul>
+<!-- /wp:social-links -->
+
+<!-- wp:playlist {"type":"audio","caption":"播放列表"} -->
+<figure class="wp-block-playlist"><ol class="wp-block-playlist__tracklist"></ol><figcaption class="wp-element-caption">播放列表</figcaption></figure>
+<!-- /wp:playlist -->
+
+<!-- wp:text-columns {"width":"wide","columns":2} -->
+<div class="wp-block-text-columns alignwide columns-2"><div class="wp-block-column"><p>多栏文本第一栏。</p></div><div class="wp-block-column"><p>多栏文本第二栏。</p></div></div>
+<!-- /wp:text-columns -->
+
+<!-- wp:math -->
+<div class="wp-block-math"><math display="block"><semantics><annotation encoding="application/x-tex">E = mc^2</annotation></semantics></math></div>
+<!-- /wp:math -->
+
+<!-- wp:html -->
+<div class="custom-html-block"><p>HTML 区块按原文输出。</p><iframe title="嵌入内容" width="280" height="160" src="/avatar.svg"></iframe></div>
+<!-- /wp:html -->
+
+<!-- wp:vendor/widget {"label":"未知区块"} -->
+<div class="vendor-widget"><span>未知静态区块的内部 HTML 应保留</span></div>
+<!-- /wp:vendor/widget -->
+
+<!-- wp:latest-posts /-->
+
+<!-- wp:paragraph -->
+<p>下面两段验证整块隐藏与视口可见性。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"metadata":{"blockVisibility":false}} -->
+<p>整块隐藏：这行文字不应该出现在页面上。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"metadata":{"blockVisibility":{"viewport":{"mobile":false,"tablet":true}}}} -->
+<p>视口可见性：移动端隐藏、平板与桌面显示。</p>
+<!-- /wp:paragraph -->

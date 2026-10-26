@@ -20,6 +20,11 @@
   margin-block: 0 var(--gb-gap);
 }
 
+/* 列表基线会给社交链接的 ul 加上圆点，这里还原 */
+.gutenberg-content .wp-block-social-links {
+  list-style: none;
+}
+
 .gutenberg-content .wp-block-columns.has-background,
 .gutenberg-content .wp-block-column.has-background,
 .gutenberg-content .wp-block-group.has-background {

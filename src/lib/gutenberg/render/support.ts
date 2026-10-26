@@ -23,28 +23,105 @@ function sanitizeCssValue(value: unknown): string | undefined {
 
 /** group 等支持 position 的静态区块，保存 HTML 不包含 sticky/fixed 样式。 */
 export function renderPosition(
-	attributes: { style?: { position?: Record<string, unknown> } },
+	attributes: { style?: Record<string, unknown> },
 	instanceId: number
 ): PositionRender | null {
-	const position = attributes.style?.position;
-	const type = sanitizeCssValue( position?.type );
-	if ( ! position || ( type !== 'sticky' && type !== 'fixed' ) ) {
+	const style = attributes.style;
+	const base = style?.position as Record<string, unknown> | undefined;
+	const type = sanitizeCssValue( base?.type );
+	// 主题只声明支持 sticky（theme.json settings.position）
+	const allowed = type === 'sticky';
+	const hasViewportPosition = Object.keys( VIEWPORT_MEDIA ).some( ( state ) => {
+		const viewport = style?.[ state ];
+		return (
+			viewport &&
+			typeof viewport === 'object' &&
+			Boolean( ( viewport as { position?: unknown } ).position )
+		);
+	} );
+
+	if ( ! allowed && ! hasViewportPosition ) {
 		return null;
 	}
 
 	const className = `wp-container-position-${ instanceId }`;
-	const declarations = [ `position: ${ type }` ];
-	for ( const side of [ 'top', 'right', 'bottom', 'left' ] ) {
-		const value = sanitizeCssValue( position[ side ] );
-		if ( value ) {
-			declarations.push( `${ side }: ${ value }` );
+	const classes = new Set< string >();
+	const declarations: string[] = [];
+	const addPositionDeclarations = (
+		position: Record< string, unknown >
+	): boolean => {
+		const positionType = sanitizeCssValue( position.type );
+		if ( positionType !== 'sticky' ) {
+			return false;
+		}
+		classes.add( `is-position-${ positionType }` );
+		for ( const side of [ 'top', 'right', 'bottom', 'left' ] ) {
+			const value = sanitizeCssValue( position[ side ] );
+			if ( value ) {
+				declarations.push( `${ side }: ${ value }` );
+			}
+		}
+		declarations.push( `position: ${ positionType }`, 'z-index: 10' );
+		return true;
+	};
+
+	if ( base ) {
+		addPositionDeclarations( base );
+	}
+
+	const rules: string[] = [];
+	if ( declarations.length > 0 ) {
+		rules.push(
+			`.gutenberg-content .${ className } { ${ declarations.join( '; ' ) }; }`
+		);
+	}
+
+	for ( const [ state, media ] of Object.entries( VIEWPORT_MEDIA ) ) {
+		const viewport = style?.[ state ];
+		if ( ! viewport || typeof viewport !== 'object' ) {
+			continue;
+		}
+		const position = {
+			...( base || {} ),
+			...(
+				( viewport as { position?: Record< string, unknown > } )
+					.position || {}
+			),
+		};
+		const positionType = sanitizeCssValue( position.type );
+		const viewportDeclarations: string[] = [];
+		if ( positionType === 'sticky' ) {
+			classes.add( `is-position-${ positionType }` );
+			for ( const side of [ 'top', 'right', 'bottom', 'left' ] ) {
+				const value = sanitizeCssValue( position[ side ] );
+				if ( value ) {
+					viewportDeclarations.push( `${ side }: ${ value }` );
+				}
+			}
+			viewportDeclarations.push(
+				`position: ${ positionType }`,
+				'z-index: 10'
+			);
+		} else if ( base ) {
+			// 视口状态显式清除了基础定位
+			viewportDeclarations.push( 'position: static' );
+		}
+		if ( viewportDeclarations.length > 0 ) {
+			rules.push(
+				`${ media } { .gutenberg-content .${ className } { ${ viewportDeclarations.join(
+					'; '
+				) }; } }`
+			);
 		}
 	}
-	declarations.push( 'z-index: 10' );
+
+	if ( rules.length === 0 ) {
+		return null;
+	}
 
 	return {
-		className,
-		css: `.gutenberg-content .${ className } { ${ declarations.join( '; ' ) }; }`,
+		className: [ className, ...classes ].join( ' ' ),
+		css: rules.join( '\n' ),
 	};
 }
 
@@ -95,18 +172,12 @@ interface ChildLayout {
 	rowSpan?: number;
 }
 
-/**
- * flex/grid 子区块的 selfStretch、flexSize 与网格定位保存在区块注释里，
- * 保存 HTML 不包含这些布局声明。
- */
-export function renderChildLayout(attributes: {
-	layout?: ChildLayout;
-}): CSSProperties | null {
-	const layout = attributes.layout;
-	if ( ! layout ) {
-		return null;
-	}
+const VIEWPORT_MEDIA: Record<string, string> = {
+	'@mobile': '@media (width <= 480px)',
+	'@tablet': '@media (480px < width <= 782px)',
+};
 
+function childLayoutStyle( layout: ChildLayout ): CSSProperties {
 	const style: CSSProperties = {};
 	const selfStretch = layout.selfStretch;
 	const flexSize = sanitizeCssValue( layout.flexSize );
@@ -140,7 +211,71 @@ export function renderChildLayout(attributes: {
 		style.gridRow = `span ${ layout.rowSpan }`;
 	}
 
+	return style;
+}
+
+/**
+ * flex/grid 子区块的 selfStretch、flexSize 与网格定位保存在区块注释里，
+ * 保存 HTML 不包含这些布局声明。
+ */
+export function renderChildLayout(attributes: {
+	layout?: ChildLayout;
+}): CSSProperties | null {
+	const layout = attributes.layout;
+	if ( ! layout ) {
+		return null;
+	}
+	const style = childLayoutStyle( layout );
 	return Object.keys( style ).length ? style : null;
+}
+
+/**
+ * 子区块的视口状态布局只能输出为实例级媒体查询。
+ */
+export function renderChildStateLayout(
+	attributes: { style?: Record<string, unknown> },
+	scopeClass: string
+): PositionRender | null {
+	const style = attributes.style;
+	if ( ! style ) {
+		return null;
+	}
+
+	const rules: string[] = [];
+	for ( const [ state, media ] of Object.entries( VIEWPORT_MEDIA ) ) {
+		const viewport = style[ state ];
+		if ( ! viewport || typeof viewport !== 'object' ) {
+			continue;
+		}
+		const layout = ( viewport as { layout?: ChildLayout } ).layout;
+		if ( ! layout ) {
+			continue;
+		}
+		const declarations = childLayoutStyle( layout );
+		const entries = Object.entries( declarations );
+		if ( entries.length === 0 ) {
+			continue;
+		}
+		const body = entries
+			.map( ( [ key, value ] ) => {
+				const property = key.startsWith( '--' )
+					? key
+					: key.replace(
+							/[A-Z]/g,
+							( letter ) => `-${ letter.toLowerCase() }`
+						);
+				return `${ property }: ${ value }`;
+			} )
+			.join( '; ' );
+		rules.push(
+			`${ media } { .gutenberg-content .${ scopeClass } { ${ body } } }`
+		);
+	}
+
+	if ( rules.length === 0 ) {
+		return null;
+	}
+	return { className: scopeClass, css: rules.join( '\n' ) };
 }
 
 /**

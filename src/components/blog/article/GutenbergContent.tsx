@@ -25,8 +25,16 @@ import {
 } from "@/lib/gutenberg/render/layout";
 import { renderDuotone } from "@/lib/gutenberg/render/duotone";
 import {
+	renderAspectRatio,
+	renderBackground,
+	renderBlockVisibility,
+	renderGalleryViewportStyles,
+	renderStateStyles,
+} from "@/lib/gutenberg/render/style";
+import {
 	renderButtonWidth,
 	renderChildLayout,
+	renderChildStateLayout,
 	renderPosition,
 	renderTabsState,
 } from "@/lib/gutenberg/render/support";
@@ -44,6 +52,7 @@ interface ParsedBlock {
 
 interface RenderCollector {
 	css: string[];
+	cssKeys: Set<string>;
 	svgs: string[];
 	duotoneIds: Set<string>;
 }
@@ -169,8 +178,51 @@ function mergeStyle(
 	return { ...(existing ?? {}), ...addition };
 }
 
+/** 把区块级样式应用到内部目标元素（button 链接、table、tab 按钮） */
+function applyToChildren(
+	node: ReactNode,
+	tags: string[],
+	className: string,
+	style: CSSProperties,
+): ReactNode {
+	if (Array.isArray(node)) {
+		return node.map((child) => applyToChildren(child, tags, className, style));
+	}
+	if (
+		isValidElement(node) &&
+		typeof node.type === "string" &&
+		tags.includes(node.type)
+	) {
+		const props = node.props as {
+			className?: string;
+			style?: CSSProperties;
+		};
+		return cloneElement(node as ReactElement<Record<string, unknown>>, {
+			className:
+				mergeClassName(props.className, className ? [className] : []) ||
+				undefined,
+			style: mergeStyle(props.style, style),
+		});
+	}
+	return node;
+}
+
+function blockSuffix(blockName: string): string {
+	return blockName.startsWith("core/")
+		? blockName.slice("core/".length)
+		: blockName.replace(/\//g, "-");
+}
+
 function createTransform(collector: RenderCollector) {
 	let instanceId = 0;
+
+	const addCss = (css: string) => {
+		if (!css || collector.cssKeys.has(css)) {
+			return;
+		}
+		collector.cssKeys.add(css);
+		collector.css.push(css);
+	};
 
 	return function applyBlockAttributes(
 		reactNode: ReactNode,
@@ -193,17 +245,36 @@ function createTransform(collector: RenderCollector) {
 		const props = reactNode.props as {
 			className?: string;
 			style?: CSSProperties;
+			children?: ReactNode;
 		};
 		const classNames: string[] = [];
 		let style: CSSProperties | undefined = props.style;
 		let styleChanged = false;
+		let children = props.children;
+		let childrenChanged = false;
 
 		const attributes = block.attributes as RenderableAttributes;
+
+		// metadata.blockVisibility 为 false 时前端不输出该区块
+		const visibility = renderBlockVisibility(
+			block.name,
+			attributes as { metadata?: unknown },
+		);
+		if (visibility?.hidden) {
+			return "";
+		}
+		if (visibility?.className) {
+			classNames.push(visibility.className);
+			if (visibility.css) {
+				addCss(visibility.css);
+			}
+		}
+
 		const layout = renderLayout(block.name, attributes, id);
 		if (layout) {
 			classNames.push(layout.className);
 			if (layout.css) {
-				collector.css.push(layout.css);
+				addCss(layout.css);
 			}
 		}
 
@@ -215,7 +286,7 @@ function createTransform(collector: RenderCollector) {
 			classNames.push(duotone.className);
 			if (!collector.duotoneIds.has(duotone.id)) {
 				collector.duotoneIds.add(duotone.id);
-				collector.css.push(duotone.css);
+				addCss(duotone.css);
 				collector.svgs.push(duotone.svg);
 			}
 		}
@@ -223,13 +294,64 @@ function createTransform(collector: RenderCollector) {
 		const position = renderPosition(attributes, id);
 		if (position) {
 			classNames.push(position.className);
-			collector.css.push(position.css);
+			addCss(position.css);
+		}
+
+		// background 在保存时整体跳过；button/table/tab-list 作用在内部元素上
+		const background = renderBackground(block.name, attributes);
+		if (background) {
+			if (background.target === "wrapper") {
+				if (background.className) {
+					classNames.push(background.className);
+				}
+				style = mergeStyle(style, background.style);
+				styleChanged = true;
+			} else {
+				const tags =
+					background.target === "table"
+						? ["table"]
+						: background.target === "tab-buttons"
+							? ["button"]
+							: ["a", "button"];
+				children = applyToChildren(
+					children,
+					tags,
+					background.className,
+					background.style,
+				);
+				childrenChanged = true;
+			}
+		}
+
+		const aspectRatio = renderAspectRatio(attributes);
+		if (aspectRatio) {
+			style = mergeStyle(style, aspectRatio);
+			styleChanged = true;
+		}
+
+		const stateStyles = renderStateStyles(
+			block.name,
+			attributes,
+			`wp-container-state-${blockSuffix(block.name)}-${id}`,
+		);
+		if (stateStyles) {
+			classNames.push(stateStyles.className);
+			addCss(stateStyles.css);
 		}
 
 		const childLayout = renderChildLayout(attributes);
 		if (childLayout) {
 			style = mergeStyle(style, childLayout);
 			styleChanged = true;
+		}
+
+		const childStateLayout = renderChildStateLayout(
+			attributes as { style?: Record<string, unknown> },
+			`wp-container-child-state-${id}`,
+		);
+		if (childStateLayout) {
+			classNames.push(childStateLayout.className);
+			addCss(childStateLayout.css);
 		}
 
 		if (block.name === "core/button") {
@@ -249,6 +371,15 @@ function createTransform(collector: RenderCollector) {
 				} as CSSProperties);
 				styleChanged = true;
 			}
+
+			const galleryViewport = renderGalleryViewportStyles(
+				attributes,
+				`wp-container-gallery-state-${id}`,
+			);
+			if (galleryViewport) {
+				classNames.push(galleryViewport.className);
+				addCss(galleryViewport.css);
+			}
 		}
 
 		if (block.name === "core/tabs") {
@@ -257,17 +388,18 @@ function createTransform(collector: RenderCollector) {
 			);
 			if (tabsState) {
 				classNames.push(tabsState.className);
-				collector.css.push(tabsState.css);
+				addCss(tabsState.css);
 			}
 		}
 
-		if (classNames.length === 0 && !styleChanged) {
+		if (classNames.length === 0 && !styleChanged && !childrenChanged) {
 			return reactNode as ReactElement;
 		}
 
 		return cloneElement(reactNode as ReactElement<Record<string, unknown>>, {
 			className: mergeClassName(props.className, classNames) || undefined,
 			style,
+			...(childrenChanged ? { children } : {}),
 		});
 	};
 }
@@ -278,16 +410,20 @@ function createTransform(collector: RenderCollector) {
  * 带 data-code-language 的代码块在服务端用 Shiki 着色。
  */
 export default async function GutenbergContent({
-	content,
+	content = "",
 }: GutenbergContentProps) {
 	const languages = [...content.matchAll(CODE_LANGUAGE)].map(
 		(match) => match[1],
 	);
+	// 语言包加载失败只影响代码着色，不应让整篇文章报错
 	const highlighter =
-		languages.length > 0 ? await ensureLanguages(languages) : null;
+		languages.length > 0
+			? await ensureLanguages(languages).catch(() => null)
+			: null;
 
 	const collector: RenderCollector = {
 		css: [],
+		cssKeys: new Set(),
 		svgs: [],
 		duotoneIds: new Set(),
 	};

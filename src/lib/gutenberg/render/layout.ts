@@ -33,6 +33,7 @@ export interface RenderableAttributes {
 		position?: Record<string, unknown>;
 		dimensions?: Record<string, unknown>;
 		color?: Record<string, unknown>;
+		[key: string]: unknown;
 	};
 	[key: string]: unknown;
 }
@@ -238,6 +239,8 @@ function flexCss(
 			}`
 		);
 	} else {
+		// 显式输出 row，视口覆盖时才能覆盖基础布局的 column
+		rules.push( 'flex-direction: row' );
 		if ( vertical ) {
 			rules.push( `align-items: ${ vertical }` );
 		}
@@ -382,21 +385,73 @@ export function renderLayout(
 	classes.push( `wp-container-${ suffix }-${ instanceId }` );
 
 	const gap = getBlockGap( attributes );
-	let css = '';
-	switch ( type ) {
-		case 'flex':
-			css = flexCss( selector, layout, gap );
-			break;
-		case 'grid':
-			css = gridCss( selector, layout, gap );
-			break;
-		case 'constrained':
-			css = constrainedCss( selector, layout, gap );
-			break;
-		default:
-			css = flowGapCss( selector, gap );
-			break;
+	let css = layoutCss( type, selector, layout, gap );
+
+	// 视口状态可以覆盖布局与 blockGap；类名保持基础视图，媒体查询内用 CSS 接管
+	for ( const state of VIEWPORT_STATES ) {
+		const viewport = attributes.style?.[ state ];
+		if ( ! viewport || typeof viewport !== 'object' ) {
+			continue;
+		}
+		const viewportLayout = ( viewport as { layout?: BlockLayout } ).layout;
+		const viewportSpacing = ( viewport as {
+			spacing?: { blockGap?: string | BlockGapValue };
+		} ).spacing;
+		if ( ! hasContainerLayout( viewportLayout ) && ! viewportSpacing?.blockGap ) {
+			continue;
+		}
+
+		const mergedLayout = normalizeLayout( {
+			...( layout || {} ),
+			...( viewportLayout || {} ),
+		} );
+		if ( ! mergedLayout ) {
+			continue;
+		}
+		const mergedGap = getBlockGap( {
+			...attributes,
+			style: {
+				...attributes.style,
+				spacing: viewportSpacing?.blockGap
+					? viewportSpacing
+					: attributes.style?.spacing,
+			},
+		} as RenderableAttributes );
+		const viewportCss = layoutCss(
+			mergedLayout.type || 'default',
+			selector,
+			mergedLayout,
+			mergedGap
+		);
+		if ( viewportCss ) {
+			css += `\n${ VIEWPORT_MEDIA[ state ] } { ${ viewportCss } }`;
+		}
 	}
 
 	return { className: classes.join( ' ' ), css };
+}
+
+const VIEWPORT_STATES = [ '@mobile', '@tablet' ] as const;
+
+const VIEWPORT_MEDIA: Record<( typeof VIEWPORT_STATES )[ number ], string> = {
+	'@mobile': '@media (width <= 480px)',
+	'@tablet': '@media (480px < width <= 782px)',
+};
+
+function layoutCss(
+	type: string,
+	selector: string,
+	layout: BlockLayout,
+	gap: { row?: string; column?: string }
+): string {
+	switch ( type ) {
+		case 'flex':
+			return flexCss( selector, layout, gap );
+		case 'grid':
+			return gridCss( selector, layout, gap );
+		case 'constrained':
+			return constrainedCss( selector, layout, gap );
+		default:
+			return flowGapCss( selector, gap );
+	}
 }
