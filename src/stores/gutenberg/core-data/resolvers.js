@@ -2,6 +2,7 @@ import { camelCase } from 'change-case';
 import { addQueryArgs } from '@/utils/gutenberg/url';
 import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import apiFetch from '@/services/gutenberg/api-fetch';
+import { getMediaDataSource } from '@/services/gutenberg/media/source';
 import { STORE_NAME } from './name';
 import { additionalEntityConfigLoaders, DEFAULT_ENTITY_KEY } from './entities';
 import {
@@ -15,6 +16,38 @@ import {
 	getPaginationMeta,
 } from './utils';
 import { fetchBlockPatterns } from './fetch';
+
+// 项目编辑器安装媒体数据源后，附件实体直接读写项目媒体接口。
+function getProjectMediaSource( kind, name ) {
+	const source = getMediaDataSource();
+	return source && kind === 'postType' && name === 'attachment'
+		? source
+		: null;
+}
+
+function getProjectMediaSourceForResource( resource ) {
+	const source = getMediaDataSource();
+	if ( ! source ) {
+		return null;
+	}
+	if ( typeof resource === 'object' ) {
+		return resource?.kind === 'postType' &&
+			resource?.name === 'attachment'
+			? source
+			: null;
+	}
+	return resource === 'media' ? source : null;
+}
+
+function receiveProjectMediaPermissions( dispatch, resource, id ) {
+	const permissions = {};
+	for ( const action of ALLOWED_RESOURCE_ACTIONS ) {
+		permissions[
+			getUserPermissionCacheKey( action, resource, id )
+		] = true;
+	}
+	dispatch.receiveUserPermissions( permissions );
+}
 
 /**
  * Requests authors from the REST API.
@@ -71,6 +104,23 @@ export const getEntityRecord =
 		);
 
 		try {
+			const mediaSource = getProjectMediaSource( kind, name );
+			if ( mediaSource ) {
+				const record = await mediaSource.getRecord( key );
+				registry.batch( () => {
+					dispatch.receiveEntityRecords( kind, name, record, query );
+					receiveProjectMediaPermissions( dispatch, {
+						kind,
+						name,
+						id: key,
+					} );
+					dispatch.finishResolutions( 'canUser', [
+						[ { kind, name, id: key } ],
+					] );
+				} );
+				return;
+			}
+
 			if ( query !== undefined && query._fields ) {
 				// If requesting specific fields, items and query association to said
 				// records are stored by ID reference. Thus, fields must always include
@@ -212,6 +262,43 @@ export const getEntityRecords =
 		}
 
 		try {
+			const mediaSource = getProjectMediaSource( kind, name );
+			if ( mediaSource ) {
+				const { records, totalItems, totalPages } =
+					await mediaSource.listRecords( rawQuery );
+				const canUserArgs = [];
+				for ( const record of records ) {
+					if ( record?.[ key ] ) {
+						canUserArgs.push( [
+							{ kind, name, id: record[ key ] },
+						] );
+						receiveProjectMediaPermissions( dispatch, {
+							kind,
+							name,
+							id: record[ key ],
+						} );
+					}
+				}
+				registry.batch( () => {
+					dispatch.receiveEntityRecords(
+						kind,
+						name,
+						records,
+						query,
+						false,
+						undefined,
+						{ totalItems, totalPages }
+					);
+					dispatch.finishResolutions( 'canUser', canUserArgs );
+					dispatch.finishResolutions(
+						'getEntityRecord',
+						getResolutionsArgs( records, rawQuery )
+					);
+					dispatch.__unstableReleaseStoreLock( lock );
+				} );
+				return;
+			}
+
 			if ( query._fields ) {
 				// If requesting specific fields, items and query association to said
 				// records are stored by ID reference. Thus, fields must always include
@@ -468,6 +555,11 @@ export const canUser =
 		}
 
 		let response;
+		const mediaSource = getProjectMediaSourceForResource( resource );
+		if ( mediaSource ) {
+			receiveProjectMediaPermissions( dispatch, resource, id );
+			return;
+		}
 		try {
 			response = await apiFetch( {
 				path: resourcePath,

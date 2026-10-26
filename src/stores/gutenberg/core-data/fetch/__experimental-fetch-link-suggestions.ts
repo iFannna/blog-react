@@ -1,4 +1,5 @@
 import apiFetch from '@/services/gutenberg/api-fetch';
+import { getMediaDataSource } from '@/services/gutenberg/media/source';
 import { addQueryArgs } from '@/utils/gutenberg/url';
 import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { __ } from '@/lib/gutenberg/i18n';
@@ -222,16 +223,27 @@ export default async function fetchLinkSuggestions(
 	}
 
 	if ( ! type || type === 'attachment' ) {
+		const mediaSource = getMediaDataSource();
 		queries.push(
-			apiFetch< MediaAPIResult[] >( {
-				path: addQueryArgs( '/wp/v2/media', {
-					search,
-					page,
-					per_page: perPage,
-				} ),
-			} )
-				.then( ( results ) => {
-					return results.map( ( result ) => {
+			( mediaSource
+				? mediaSource.listRecords( {
+						search,
+						page,
+						per_page: perPage,
+				  } )
+				: apiFetch< MediaAPIResult[] >( {
+						path: addQueryArgs( '/wp/v2/media', {
+							search,
+							page,
+							per_page: perPage,
+						} ),
+				  } )
+			)
+				.then( ( response ) => {
+					const results = Array.isArray( response )
+						? response
+						: response?.records ?? [];
+					return results.map( ( result: MediaAPIResult ) => {
 						return {
 							id: result.id,
 							url: result.source_url,

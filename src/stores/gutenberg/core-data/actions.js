@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import apiFetch from '@/services/gutenberg/api-fetch';
+import { getMediaDataSource } from '@/services/gutenberg/media/source';
 import { addQueryArgs } from '@/utils/gutenberg/url';
 import deprecated from '@/utils/gutenberg/deprecated';
 import { clearUnchangedEdits, getNestedValue, setNestedValue } from './utils';
@@ -8,6 +9,14 @@ import { DEFAULT_ENTITY_KEY } from './entities';
 import { createBatch } from './batch';
 import { STORE_NAME } from './name';
 import logEntityDeprecation from './utils/log-entity-deprecation';
+
+// 项目编辑器安装媒体数据源后，附件实体的写入直接走项目媒体接口。
+function getProjectMediaSource( kind, name ) {
+	const source = getMediaDataSource();
+	return source && kind === 'postType' && name === 'attachment'
+		? source
+		: null;
+}
 
 function addTitleToAutoDraft( record ) {
 	return record.status === 'auto-draft' ? { ...record, title: '' } : record;
@@ -302,17 +311,24 @@ export const deleteEntityRecord =
 
 			let hasError = false;
 			const { baseURL } = entityConfig;
+			const mediaSource = getProjectMediaSource( kind, name );
 			try {
-				let path = `${ baseURL }/${ recordId }`;
+				if ( mediaSource ) {
+					deletedRecord = await mediaSource.deleteRecord(
+						recordId
+					);
+				} else {
+					let path = `${ baseURL }/${ recordId }`;
 
-				if ( query ) {
-					path = addQueryArgs( path, query );
+					if ( query ) {
+						path = addQueryArgs( path, query );
+					}
+
+					deletedRecord = await __unstableFetch( {
+						path,
+						method: 'DELETE',
+					} );
 				}
-
-				deletedRecord = await __unstableFetch( {
-					path,
-					method: 'DELETE',
-				} );
 
 				await dispatch( removeItems( kind, name, recordId, true ) );
 			} catch ( _error ) {
@@ -584,6 +600,55 @@ export const saveEntityRecord =
 			let error;
 			let hasError = false;
 			const { baseURL } = entityConfig;
+
+			const mediaSource = getProjectMediaSource( kind, name );
+			if ( mediaSource ) {
+				let mediaError;
+				try {
+					if ( isNewRecord ) {
+						const unsupported = new Error(
+							'项目媒体只能通过上传创建。'
+						);
+						unsupported.code =
+							'project_media_create_unsupported';
+						throw unsupported;
+					}
+					const persistedRecord = select.getRawEntityRecord(
+						kind,
+						name,
+						recordId
+					);
+					updatedRecord = await mediaSource.updateRecord(
+						recordId,
+						record,
+						persistedRecord
+					);
+					dispatch.receiveEntityRecords(
+						kind,
+						name,
+						updatedRecord,
+						undefined,
+						true,
+						record
+					);
+				} catch ( _error ) {
+					mediaError = _error;
+					error = _error;
+				}
+				dispatch( {
+					type: 'SAVE_ENTITY_RECORD_FINISH',
+					kind,
+					name,
+					recordId,
+					error: mediaError,
+					isAutosave,
+				} );
+				if ( mediaError && throwOnError ) {
+					throw mediaError;
+				}
+				return updatedRecord;
+			}
+
 			try {
 				const path = `${ baseURL }${ recordId ? '/' + recordId : '' }`;
 				// Skip the raw values check when creating a new record; they don't exist yet.

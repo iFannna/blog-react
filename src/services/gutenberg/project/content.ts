@@ -380,6 +380,11 @@ function loadSiteSettings() {
 	return siteSettingsPromise;
 }
 
+/** 预取项目站点设置；与 useProjectSiteSettings 共用同一份缓存 */
+export function loadProjectSiteSettings(): Promise<ProjectSiteSettings> {
+	return loadSiteSettings();
+}
+
 /** 项目站点设置；只在项目编辑器安装后生效 */
 export function useProjectSiteSettings(): ProjectSiteSettings | null {
 	const active = isProjectContentSource();

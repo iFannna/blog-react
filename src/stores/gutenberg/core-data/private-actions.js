@@ -1,4 +1,5 @@
 import apiFetch from '@/services/gutenberg/api-fetch';
+import { getMediaDataSource } from '@/services/gutenberg/media/source';
 import { store as noticesStore } from '@/stores/gutenberg/notices';
 import { store as blockEditorStore } from '@/components/gutenberg/block-editor';
 import { decodeEntities } from '@/utils/gutenberg/html-entities';
@@ -53,6 +54,15 @@ export const editMediaEntity =
 	) =>
 	async ( { dispatch, resolveSelect } ) => {
 		if ( ! recordId ) {
+			return;
+		}
+
+		// 项目媒体接口没有图片编辑（裁剪/旋转）能力，避免请求落到 mock 的 WP 路由。
+		if ( getMediaDataSource() ) {
+			const error = new Error( '项目媒体暂不支持裁剪或旋转图片。' );
+			if ( throwOnError ) {
+				throw error;
+			}
 			return;
 		}
 

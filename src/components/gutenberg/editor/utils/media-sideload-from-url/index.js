@@ -1,4 +1,5 @@
 import apiFetch from '@/services/gutenberg/api-fetch';
+import { getMediaDataSource } from '@/services/gutenberg/media/source';
 import { select } from '@/stores/gutenberg/data';
 import { transformAttachment } from '@/utils/gutenberg/media-utils';
 import { store as editorStore } from '../../store';
@@ -22,6 +23,19 @@ export default function mediaSideloadFromUrl( {
 	onSuccess,
 	onError = noop,
 } ) {
+	const mediaSource = getMediaDataSource();
+	if ( mediaSource ) {
+		mediaSource
+			.uploadFromUrl( url )
+			.then( ( attachment ) => {
+				onSuccess?.( transformAttachment( attachment ) );
+			} )
+			.catch( ( error ) => {
+				onError( error?.message || error );
+			} );
+		return;
+	}
+
 	const currentPost = select( editorStore ).getCurrentPost();
 	// Templates and template parts store their numerical ID in `wp_id`.
 	const currentPostId =

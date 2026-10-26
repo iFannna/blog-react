@@ -28,14 +28,10 @@ import { getBlockBindingsSource } from '@/lib/gutenberg/blocks';
 import { useCallback, useState } from '@/lib/gutenberg/element';
 import { SVG, Rect, Path } from '@/components/gutenberg/primitives';
 import { useSelect } from '@/stores/gutenberg/data';
-import { store as coreDataStore } from '@/stores/gutenberg/core-data';
+import { getIconByName } from '@/services/gutenberg/icons/catalog';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 import HtmlRenderer from '../utils/html-renderer';
 import { CustomInserterModal } from './components';
-
-// Matches the icon name pattern accepted by /wp/v2/icons/<name> REST route.
-const ICON_NAME_REGEX =
-	/^[a-z0-9](?:[a-z0-9_-]*[a-z0-9])?\/[a-z0-9](?:[a-z0-9_-]*[a-z0-9])?$/;
 
 const IconPlaceholder = ( { className, style } ) => (
 	<SVG
@@ -126,19 +122,8 @@ export function Edit( { attributes, setAttributes, isSelected, context } ) {
 	const shadowProps = useShadowProps( attributes );
 	const dimensionsProps = useDimensionsProps( attributes );
 
-	const selectedIcon = useSelect(
-		( select ) => {
-			if ( typeof icon !== 'string' || ! ICON_NAME_REGEX.test( icon ) ) {
-				return null;
-			}
-			return select( coreDataStore ).getEntityRecord(
-				'root',
-				'icon',
-				icon
-			);
-		},
-		[ icon ]
-	);
+	const selectedIcon =
+		typeof icon === 'string' ? getIconByName( icon ) : undefined;
 
 	const iconToDisplay = selectedIcon?.content || '';
 

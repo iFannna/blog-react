@@ -1,4 +1,5 @@
 import apiFetch from '@/services/gutenberg/api-fetch';
+import { getMediaDataSource } from '@/services/gutenberg/media/source';
 import { flattenFormData } from './flatten-form-data';
 import { transformAttachment } from './transform-attachment';
 import type { CreateRestAttachment, RestAttachment } from './types';
@@ -8,6 +9,12 @@ export async function uploadToServer(
 	additionalData: CreateRestAttachment = {},
 	signal?: AbortSignal
 ) {
+	const mediaSource = getMediaDataSource();
+	if ( mediaSource ) {
+		const record = await mediaSource.uploadFile( file );
+		return transformAttachment( record as RestAttachment );
+	}
+
 	// Create upload payload.
 	const data = new FormData();
 	data.append( 'file', file, file.name || file.type.replace( '/', '.' ) );

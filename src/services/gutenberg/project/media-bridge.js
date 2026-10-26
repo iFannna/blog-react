@@ -1,4 +1,4 @@
-import { setProjectMediaHandler } from "@/services/gutenberg/mock/api.js";
+import { setMediaDataSource } from "@/services/gutenberg/media/source";
 import { goProjectMediaSource } from "./api";
 
 const SIZE_WIDTHS = [
@@ -6,6 +6,10 @@ const SIZE_WIDTHS = [
 	[ "medium", 300 ],
 	[ "large", 1024 ],
 ];
+
+// 带客户端过滤时按全量分页读取，避免只过滤当前页造成总数和翻页错误
+const MAX_PAGES = 100;
+const FULL_PAGE_SIZE = 100;
 
 function readText( value ) {
 	if ( typeof value === "string" ) {
@@ -98,129 +102,322 @@ export function toAttachment( media ) {
 		height: media.height,
 		sizes,
 		_links: {
-			self: [ { href: `/wp/v2/media/${ media.id }?context=edit` } ],
+			// 指向项目后台地址，避免把项目媒体伪装成 WP REST 资源；
+			// targetHints 供 core-data 判断读/写/删权限。
+			self: [
+				{
+					href: `/admin/media/${ media.id }`,
+					targetHints: {
+						allow: "GET, POST, PUT, PATCH, DELETE",
+					},
+				},
+			],
 			author: [],
-			"wp:action-delete": [ { href: `/wp/v2/media/${ media.id }` } ],
-			"wp:action-edit": [ { href: `/wp/v2/media/${ media.id }` } ],
+			"wp:action-delete": [ { href: `/admin/media/${ media.id }` } ],
+			"wp:action-edit": [ { href: `/admin/media/${ media.id }` } ],
 		},
 	};
 }
 
-function respond( payload, wantsRawResponse, headers = {} ) {
-	if ( ! wantsRawResponse ) {
-		return Promise.resolve( payload );
+function toArray( value ) {
+	if ( value === undefined || value === null || value === "" ) {
+		return [];
 	}
-	return Promise.resolve(
-		new Response( JSON.stringify( payload ), {
-			status: 200,
-			headers: {
-				allow: "GET, POST, PUT, PATCH, DELETE, OPTIONS",
-				"Content-Type": "application/json",
-				...headers,
-			},
-		} )
+	return Array.isArray( value )
+		? value.filter( ( item ) => item !== "" && item !== null )
+		: String( value )
+				.split( "," )
+				.map( ( item ) => item.trim() )
+				.filter( Boolean );
+}
+
+function parseIds( value ) {
+	return toArray( value )
+		.map( ( item ) => Number( item ) )
+		.filter( ( id ) => Number.isInteger( id ) && id > 0 );
+}
+
+function normalizeParentId( media ) {
+	return Number( media.post_id ) || 0;
+}
+
+function matchesMimeType( mimeType, pattern ) {
+	if ( ! pattern ) {
+		return false;
+	}
+	if ( pattern.endsWith( "/*" ) ) {
+		return ( mimeType || "" ).startsWith( pattern.slice( 0, -1 ) );
+	}
+	return mimeType === pattern;
+}
+
+function createFilters( query ) {
+	return {
+		mediaTypes: toArray( query.media_type ),
+		mimeTypes: toArray( query.mime_type ),
+		parents: toArray( query.parent )
+			.map( ( value ) => Number( value ) )
+			.filter( Number.isFinite ),
+		authors: toArray( query.author )
+			.map( ( value ) => Number( value ) )
+			.filter( Number.isFinite ),
+		authorsExclude: toArray( query.author_exclude )
+			.map( ( value ) => Number( value ) )
+			.filter( Number.isFinite ),
+		exclude: parseIds( query.exclude ),
+		before: typeof query.before === "string" ? query.before : "",
+		after: typeof query.after === "string" ? query.after : "",
+	};
+}
+
+function hasClientFilters( filters ) {
+	return !! (
+		filters.mediaTypes.length ||
+		filters.mimeTypes.length ||
+		filters.parents.length ||
+		filters.authors.length ||
+		filters.authorsExclude.length ||
+		filters.exclude.length ||
+		filters.before ||
+		filters.after
 	);
 }
 
-async function handleMediaRequest( {
-	method,
-	pathname,
-	query,
-	options,
-	wantsRawResponse,
-} ) {
-	if ( pathname === "/wp/v2/media" && method === "GET" ) {
-		const include = query.get( "include" );
-		if ( include ) {
-			const ids = include
-				.split( "," )
-				.map( ( value ) => Number( value ) )
-				.filter( ( value ) => Number.isInteger( value ) && value > 0 );
-			const items = await Promise.all(
-				ids.map( ( id ) =>
-					goProjectMediaSource.get( id ).catch( () => null )
-				)
-			);
-			return respond(
-				items.filter( Boolean ).map( toAttachment ),
-				wantsRawResponse
-			);
-		}
-		const mediaType = query.get( "media_type" );
-		if ( mediaType && ! mediaType.split( "," ).includes( "image" ) ) {
-			return respond( [], wantsRawResponse );
-		}
-		const perPage = Math.min(
-			Math.max( Number( query.get( "per_page" ) ) || 20, 1 ),
-			100
-		);
-		const page = Math.max( Number( query.get( "page" ) ) || 1, 1 );
-		const search = query.get( "search" ) || "";
-		const data = await goProjectMediaSource.list( page, perPage, search );
-		return respond(
-			data.list.map( toAttachment ),
-			wantsRawResponse,
-			{
-				"X-WP-Total": String( data.total ),
-				"X-WP-TotalPages": String(
-					Math.max( Math.ceil( data.total / perPage ), 1 )
-				),
-			}
-		);
+function matchesFilters( media, filters ) {
+	const mimeType = media.mime_type || "";
+	if (
+		filters.mediaTypes.length &&
+		! filters.mediaTypes.includes( media.media_type )
+	) {
+		return false;
 	}
-
-	if ( pathname === "/wp/v2/media" && method === "POST" ) {
-		const file = options.body?.get?.( "file" );
-		if ( ! ( file instanceof File ) ) {
-			throw { code: "rest_invalid_param", message: "缺少要上传的文件。" };
-		}
-		const media = await goProjectMediaSource.upload( file );
-		return respond( toAttachment( media ), wantsRawResponse );
+	if (
+		filters.mimeTypes.length &&
+		! filters.mimeTypes.some( ( pattern ) =>
+			matchesMimeType( mimeType, pattern )
+		)
+	) {
+		return false;
 	}
-
-	const match = pathname.match( /^\/wp\/v2\/media\/(\d+)$/ );
-	if ( match ) {
-		const id = Number( match[ 1 ] );
-		if ( method === "GET" ) {
-			const media = await goProjectMediaSource.get( id );
-			return respond( toAttachment( media ), wantsRawResponse );
-		}
-		if ( method === "POST" || method === "PUT" || method === "PATCH" ) {
-			const data = options.data ?? {};
-			const media = await goProjectMediaSource.update( id, {
-				title: readText( data.title ),
-				altText: readText( data.alt_text ),
-				caption: readText( data.caption ),
-				description: readText( data.description ),
-			} );
-			return respond( toAttachment( media ), wantsRawResponse );
-		}
-		if ( method === "DELETE" ) {
-			const previous = await goProjectMediaSource.get( id );
-			await goProjectMediaSource.delete( id );
-			return respond(
-				{ deleted: true, previous: toAttachment( previous ) },
-				wantsRawResponse
-			);
+	if (
+		filters.parents.length &&
+		! filters.parents.includes( normalizeParentId( media ) )
+	) {
+		return false;
+	}
+	const author = Number( media.created_by );
+	if ( filters.authors.length && ! filters.authors.includes( author ) ) {
+		return false;
+	}
+	if ( filters.authorsExclude.length && filters.authorsExclude.includes( author ) ) {
+		return false;
+	}
+	if ( filters.exclude.includes( Number( media.id ) ) ) {
+		return false;
+	}
+	const created = Date.parse( normalizeDate( media.created_at ) );
+	if ( filters.after ) {
+		const after = Date.parse( filters.after );
+		if ( Number.isFinite( created ) && Number.isFinite( after ) && created < after ) {
+			return false;
 		}
 	}
-
-	throw { code: "rest_no_route", message: "媒体接口不存在" };
+	if ( filters.before ) {
+		const before = Date.parse( filters.before );
+		if ( Number.isFinite( created ) && Number.isFinite( before ) && created > before ) {
+			return false;
+		}
+	}
+	return true;
 }
 
-/** 让编辑器媒体弹窗改用项目媒体接口，不再走 mock 的 WP REST 数据 */
-export function installProjectMediaBridge() {
-	setProjectMediaHandler( async ( request ) => {
-		try {
-			return await handleMediaRequest( request );
-		} catch ( error ) {
-			if ( error && typeof error.code === "string" ) {
-				throw error;
-			}
-			throw {
-				code: "project_media_error",
-				message: error?.message || "媒体操作失败",
-			};
+async function fetchAllMedia( search ) {
+	const items = [];
+	let page = 1;
+	let total = Infinity;
+	while ( page <= MAX_PAGES ) {
+		const data = await goProjectMediaSource.list(
+			page,
+			FULL_PAGE_SIZE,
+			search
+		);
+		const list = Array.isArray( data?.list ) ? data.list : [];
+		items.push( ...list );
+		total = Number( data?.total ) || 0;
+		if ( ! list.length || items.length >= total ) {
+			break;
 		}
+		page += 1;
+	}
+	return items;
+}
+
+/** 读取附件列表，参数沿用 core-data 的 WP 查询语义 */
+async function listRecords( query = {} ) {
+	const include = parseIds( query.include );
+	if ( include.length ) {
+		const records = (
+			await Promise.all(
+				include.map( ( id ) =>
+					goProjectMediaSource
+						.get( id )
+						.then( toAttachment )
+						.catch( () => null )
+				)
+			)
+		).filter( Boolean );
+		return {
+			records,
+			totalItems: records.length,
+			totalPages: 1,
+		};
+	}
+
+	const search = typeof query.search === "string" ? query.search : "";
+	const requestedPerPage = Number( query.per_page );
+	const perPage =
+		requestedPerPage === -1
+			? -1
+			: Math.min( Math.max( requestedPerPage || 20, 1 ), 100 );
+	const page = Math.max( Number( query.page ) || 1, 1 );
+	const filters = createFilters( query );
+
+	if ( perPage === -1 || hasClientFilters( filters ) ) {
+		const items = ( await fetchAllMedia( search ) ).filter( ( media ) =>
+			matchesFilters( media, filters )
+		);
+		const pageItems =
+			perPage === -1
+				? items
+				: items.slice( ( page - 1 ) * perPage, page * perPage );
+		return {
+			records: pageItems.map( toAttachment ),
+			totalItems: items.length,
+			totalPages:
+				perPage === -1
+					? 1
+					: Math.max( Math.ceil( items.length / perPage ), 1 ),
+		};
+	}
+
+	const data = await goProjectMediaSource.list( page, perPage, search );
+	const list = Array.isArray( data?.list ) ? data.list : [];
+	const total = Number( data?.total ) || 0;
+	return {
+		records: list.map( toAttachment ),
+		totalItems: total,
+		totalPages: Math.max( Math.ceil( total / perPage ), 1 ),
+	};
+}
+
+/** 读取单条附件 */
+async function getRecord( id ) {
+	return toAttachment( await goProjectMediaSource.get( Number( id ) ) );
+}
+
+const EDITABLE_FIELDS = [
+	[ "title", "title" ],
+	[ "alt_text", "altText" ],
+	[ "caption", "caption" ],
+	[ "description", "description" ],
+];
+
+/**
+ * 更新附件元数据。Go 接口只接受标题/替代文本/说明/描述，
+ * 其余字段（典型如归属文章）不写回，避免整条记录被清空。
+ */
+async function updateRecord( id, record = {}, persistedRecord ) {
+	const numericId = Number( id );
+	const hasPostEdit = Object.prototype.hasOwnProperty.call( record, "post" );
+	const hasMetadataEdit = EDITABLE_FIELDS.some( ( [ key ] ) =>
+		Object.prototype.hasOwnProperty.call( record, key )
+	);
+	if ( ! hasMetadataEdit ) {
+		if ( hasPostEdit ) {
+			// 归属文章由 Go 媒体接口维护，项目模式暂不提供改写入口，
+			// 明确失败而不是返回成功造成“已附加”的假象。
+			throw new Error( "项目媒体暂不支持调整媒体归属文章。" );
+		}
+		return toAttachment( await goProjectMediaSource.get( numericId ) );
+	}
+
+	const base =
+		persistedRecord ?? toAttachment( await goProjectMediaSource.get( numericId ) );
+	if (
+		hasPostEdit &&
+		( Number( record.post ) || 0 ) !== ( Number( base?.post ) || 0 )
+	) {
+		throw new Error( "项目媒体暂不支持调整媒体归属文章。" );
+	}
+	const readField = ( key ) =>
+		Object.prototype.hasOwnProperty.call( record, key )
+			? readText( record[ key ] )
+			: readText( base?.[ key ] );
+	const media = await goProjectMediaSource.update( numericId, {
+		title: readField( "title" ),
+		altText: readField( "alt_text" ),
+		caption: readField( "caption" ),
+		description: readField( "description" ),
 	} );
+	return toAttachment( media );
+}
+
+/** 删除附件，返回 core-data 期望的 deleted/previous 结构 */
+async function deleteRecord( id ) {
+	const numericId = Number( id );
+	let previous;
+	try {
+		previous = toAttachment( await goProjectMediaSource.get( numericId ) );
+	} catch {
+		previous = undefined;
+	}
+	await goProjectMediaSource.delete( numericId );
+	return previous ? { deleted: true, previous } : { deleted: true };
+}
+
+/** 上传文件并返回 attachment 实体 */
+async function uploadFile( file ) {
+	return toAttachment( await goProjectMediaSource.upload( file ) );
+}
+
+/** 从外链下载后上传；跨域且未开放 CORS 的地址会失败 */
+async function uploadFromUrl( url ) {
+	const response = await fetch( url );
+	if ( ! response.ok ) {
+		throw new Error( "无法下载要上传的媒体文件。" );
+	}
+	const blob = await response.blob();
+	let fileName = "media";
+	try {
+		const pathname = new URL( url, window.location.href ).pathname;
+		fileName = decodeURIComponent(
+			pathname.split( "/" ).filter( Boolean ).pop() || fileName
+		);
+	} catch {
+		// 保留默认文件名
+	}
+	if ( ! /\.[^.]+$/.test( fileName ) && blob.type ) {
+		const subtype = blob.type.split( "/" )[ 1 ]?.split( "+" )[ 0 ];
+		if ( subtype ) {
+			fileName = `${ fileName }.${ subtype }`;
+		}
+	}
+	const file = new File( [ blob ], fileName, {
+		type: blob.type || "application/octet-stream",
+	} );
+	return uploadFile( file );
+}
+
+export const projectMediaDataSource = {
+	getRecord,
+	listRecords,
+	updateRecord,
+	deleteRecord,
+	uploadFile,
+	uploadFromUrl,
+};
+
+/** 让编辑器媒体读写改用项目媒体接口，不再经过 mock 的 WP REST 数据 */
+export function installProjectMediaBridge() {
+	setMediaDataSource( projectMediaDataSource );
 }

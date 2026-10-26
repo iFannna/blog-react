@@ -1,4 +1,5 @@
 import apiFetch from '@/services/gutenberg/api-fetch';
+import { getMediaDataSource } from '@/services/gutenberg/media/source';
 import { useDispatch, useRegistry } from '@/stores/gutenberg/data';
 import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { useCallback, useState } from '@/lib/gutenberg/element';
@@ -133,6 +134,11 @@ export function useSaveMediaEditor( {
 					: undefined;
 
 			if ( modifiers.length > 0 ) {
+				if ( getMediaDataSource() ) {
+					throw new Error(
+						__( '项目媒体暂不支持裁剪或旋转图片。' )
+					);
+				}
 				const pendingEdits = registry
 					.select( coreStore )
 					.getEntityRecordNonTransientEdits(

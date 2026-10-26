@@ -2,7 +2,7 @@ const variations = [
 	{
 		name: 'default',
 		isDefault: true,
-		attributes: { icon: 'core/info' },
+		attributes: { icon: 'wordpress/info' },
 	},
 ];
 

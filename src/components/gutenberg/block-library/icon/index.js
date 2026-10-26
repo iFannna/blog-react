@@ -10,7 +10,7 @@ export const settings = {
 	icon,
 	example: {
 		attributes: {
-			icon: 'core/info',
+			icon: 'wordpress/info',
 			style: {
 				dimensions: {
 					width: '48px',

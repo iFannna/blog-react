@@ -1,14 +1,12 @@
 import { __ } from '@/lib/gutenberg/i18n';
-import {
-	Modal,
-	SearchControl,
-	Spinner as WCSpinner,
-} from '@/components/gutenberg/ui';
+import { Modal, SearchControl } from '@/components/gutenberg/ui';
 import { Stack, Tabs } from '@/components/gutenberg/design-system';
 import { useState, useMemo } from '@/lib/gutenberg/element';
 import { useDebounce } from '@/hooks/gutenberg/compose';
-import { useSelect } from '@/stores/gutenberg/data';
-import { store as coreDataStore } from '@/stores/gutenberg/core-data';
+import {
+	iconCollections,
+	getIconsByCollection,
+} from '@/services/gutenberg/icons/catalog';
 import IconGrid from './icon-grid';
 import { normalizeSearchInput } from '../../../utils/search-patterns';
 
@@ -18,43 +16,23 @@ export default function CustomInserterModal( { onClose, value, onChange } ) {
 
 	const debouncedSetSearchInput = useDebounce( setSearchInput, 300 );
 
-	const collections = useSelect(
-		( select ) =>
-			select( coreDataStore ).getEntityRecords(
-				'root',
-				'iconCollection'
-			),
-		[]
-	);
+	const collections = iconCollections;
 
 	// Default to the collection the selected icon belongs to, otherwise the
 	// first collection.
 	const selectedCollection = value?.split( '/' )[ 0 ];
 	const collectionSlug =
 		currentCollection ??
-		( collections?.some( ( { slug } ) => slug === selectedCollection )
+		( collections.some( ( { slug } ) => slug === selectedCollection )
 			? selectedCollection
-			: collections?.[ 0 ]?.slug ) ??
+			: collections[ 0 ]?.slug ) ??
 		null;
 
-	const { icons, hasResolvedIcons } = useSelect(
-		( select ) => {
-			if ( collectionSlug === null ) {
-				return { icons: null, hasResolvedIcons: false };
-			}
-			const query =
-				collectionSlug === '' ? {} : { collection: collectionSlug };
-			const { getEntityRecords, hasFinishedResolution } =
-				select( coreDataStore );
-			return {
-				icons: getEntityRecords( 'root', 'icon', query ),
-				hasResolvedIcons: hasFinishedResolution( 'getEntityRecords', [
-					'root',
-					'icon',
-					query,
-				] ),
-			};
-		},
+	const icons = useMemo(
+		() =>
+			collectionSlug === null
+				? null
+				: getIconsByCollection( collectionSlug ),
 		[ collectionSlug ]
 	);
 
@@ -105,7 +83,7 @@ export default function CustomInserterModal( { onClose, value, onChange } ) {
 					/>
 					<Tabs.List>
 						<Tabs.Tab value="">{ __( 'All' ) }</Tabs.Tab>
-						{ collections?.map( ( collection ) => (
+						{ collections.map( ( collection ) => (
 							<Tabs.Tab
 								key={ collection.slug }
 								value={ collection.slug }
@@ -115,38 +93,26 @@ export default function CustomInserterModal( { onClose, value, onChange } ) {
 						) ) }
 					</Tabs.List>
 				</Stack>
-				{ [ { slug: '' }, ...( collections ?? [] ) ].map(
-					( collection ) => (
-						<Tabs.Panel
-							tabIndex={ -1 }
-							key={ collection.slug }
-							value={ collection.slug }
-							className="wp-block-icon__inserter-panel"
-						>
-							{ ! hasResolvedIcons ? (
-								<div
-									className="wp-block-icon__inserter-loading"
-									role="status"
-									aria-label={ __( 'Loading…' ) }
-								>
-									<WCSpinner />
-								</div>
-							) : (
-								<IconGrid
-									icons={ filteredIcons }
-									onChange={ onChange }
-									value={ value }
-									collections={
-										collectionSlug === '' &&
-										collections?.length > 1
-											? collections
-											: undefined
-									}
-								/>
-							) }
-						</Tabs.Panel>
-					)
-				) }
+				{ [ { slug: '' }, ...collections ].map( ( collection ) => (
+					<Tabs.Panel
+						tabIndex={ -1 }
+						key={ collection.slug }
+						value={ collection.slug }
+						className="wp-block-icon__inserter-panel"
+					>
+						<IconGrid
+							icons={ filteredIcons }
+							onChange={ onChange }
+							value={ value }
+							collections={
+								collectionSlug === '' &&
+								collections.length > 1
+									? collections
+									: undefined
+							}
+						/>
+					</Tabs.Panel>
+				) ) }
 			</Tabs.Root>
 		</Modal>
 	);
