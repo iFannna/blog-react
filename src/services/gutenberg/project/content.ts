@@ -67,6 +67,21 @@ export interface ProjectLatestComment {
 	created_at: string;
 }
 
+export interface ProjectArchiveItem {
+	year: number;
+	month?: number;
+	day?: number;
+	count: number;
+}
+
+export interface ArchivesState {
+	items: ProjectArchiveItem[] | null;
+	loading: boolean;
+	error?: string;
+}
+
+export type ArchiveGroupType = "yearly" | "monthly" | "daily";
+
 export interface LatestPostView {
 	id: number;
 	title: { rendered: string };
@@ -136,6 +151,18 @@ function articleLink(article: ProjectArticle) {
 
 export function commentArticleLink(comment: ProjectLatestComment) {
 	return `/${projectLocale}/archive/${comment.year}/${pad(comment.month)}/${pad(comment.day)}/${comment.article_id}`;
+}
+
+/** 归档条目对应的前台地址 */
+export function archiveItemLink(item: ProjectArchiveItem) {
+	const base = `/${projectLocale}/archive/${item.year}`;
+	if (item.month && item.day) {
+		return `${base}/${pad(item.month)}/${pad(item.day)}`;
+	}
+	if (item.month) {
+		return `${base}/${pad(item.month)}`;
+	}
+	return base;
 }
 
 function escapeHtml(value: string) {
@@ -446,6 +473,64 @@ export function useProjectLatestComments(
 	}, [active, size]);
 
 	return { comments, loading, error };
+}
+
+const archiveCache = new Map<string, Promise<ProjectArchiveItem[]>>();
+
+function loadArchives(type: ArchiveGroupType) {
+	let request = archiveCache.get(type);
+	if (!request) {
+		request = apiClient
+			.get<unknown, ProjectArchiveItem[]>("/article/archives", {
+				params: { type },
+			})
+			.catch((error) => {
+				archiveCache.delete(type);
+				throw error;
+			});
+		archiveCache.set(type, request);
+	}
+	return request;
+}
+
+/** 归档计数；只在项目编辑器安装后生效 */
+export function useProjectArchives(type: ArchiveGroupType): ArchivesState {
+	const active = isProjectContentSource();
+	const [result, setResult] = useState<{
+		type: ArchiveGroupType;
+		items: ProjectArchiveItem[];
+		error?: string;
+	} | null>(null);
+	const loading = active && result?.type !== type;
+	const items = active && result?.type === type ? result.items : null;
+	const error =
+		active && !loading && result?.type === type ? result.error : undefined;
+
+	useEffect(() => {
+		if (!active) return;
+		let cancelled = false;
+		loadArchives(type)
+			.then((data) => {
+				if (!cancelled) setResult({ type, items: data ?? [] });
+			})
+			.catch((requestError: unknown) => {
+				if (!cancelled) {
+					setResult({
+						type,
+						items: [],
+						error:
+							requestError instanceof Error
+								? requestError.message
+								: "加载归档失败",
+					});
+				}
+			});
+		return () => {
+			cancelled = true;
+		};
+	}, [active, type]);
+
+	return { items, loading, error };
 }
 
 function toAdjacentPost(article: NavArticle | null | undefined): ProjectAdjacentPost | null {
