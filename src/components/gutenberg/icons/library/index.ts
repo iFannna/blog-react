@@ -273,7 +273,6 @@ export { default as shadow } from './shadow';
 export { default as share } from './share';
 export { default as shield } from './shield';
 export { default as shipping } from './shipping';
-export { default as shortcode } from './shortcode';
 export { default as shuffle } from './shuffle';
 export { default as sidebar } from './sidebar';
 export { default as sidesAll } from './sides-all';

@@ -88,7 +88,6 @@ import * as readMore from './read-more';
 import * as rss from './rss';
 import * as search from './search';
 import * as separator from './separator';
-import * as shortcode from './shortcode';
 import * as siteLogo from './site-logo';
 import * as siteTagline from './site-tagline';
 import * as siteTitle from './site-title';
@@ -164,7 +163,6 @@ const getAllBlocks = () => {
 		rss,
 		search,
 		separator,
-		shortcode,
 		socialLink,
 		socialLinks,
 		spacer,

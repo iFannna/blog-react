@@ -47,7 +47,6 @@ const VISIBILITY_DISABLED = new Set([
 	"core/more",
 	"core/nextpage",
 	"core/pattern",
-	"core/shortcode",
 	"core/tab-list",
 ]);
 
