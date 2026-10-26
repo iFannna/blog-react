@@ -5,6 +5,10 @@ import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { useMemo, useState } from '@/lib/gutenberg/element';
 import { debounce } from '@/hooks/gutenberg/compose';
 import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import {
+	isProjectContentSource,
+	useProjectUserOptions,
+} from '@/services/gutenberg/project/content';
 
 const AUTHORS_QUERY = {
 	who: 'authors',
@@ -15,8 +19,14 @@ const AUTHORS_QUERY = {
 
 export default function UserControl( { value, onChange } ) {
 	const [ filterValue, setFilterValue ] = useState( '' );
+	const projectActive = isProjectContentSource();
+	const projectUsers = useProjectUserOptions();
 	const { authors, isLoading } = useSelect(
 		( select ) => {
+			if ( isProjectContentSource() ) {
+				return { authors: null, isLoading: false };
+			}
+
 			const { getUsers, isResolving } = select( coreStore );
 
 			const query = { ...AUTHORS_QUERY };
@@ -34,13 +44,29 @@ export default function UserControl( { value, onChange } ) {
 	);
 
 	const options = useMemo( () => {
+		if ( projectActive ) {
+			const keyword = filterValue.trim().toLowerCase();
+			return ( projectUsers ?? [] )
+				.filter(
+					( user ) =>
+						! keyword ||
+						user.nickname.toLowerCase().includes( keyword )
+				)
+				.map( ( user ) => {
+					return {
+						value: user.id,
+						label: decodeEntities( user.nickname ),
+					};
+				} );
+		}
+
 		return ( authors ?? [] ).map( ( author ) => {
 			return {
 				value: author.id,
 				label: decodeEntities( author.name ),
 			};
 		} );
-	}, [ authors ] );
+	}, [ authors, filterValue, projectActive, projectUsers ] );
 
 	return (
 		<ComboboxControl
@@ -52,7 +78,7 @@ export default function UserControl( { value, onChange } ) {
 			onChange={ onChange }
 			options={ options }
 			onFilterValueChange={ debounce( setFilterValue, 300 ) }
-			isLoading={ isLoading }
+			isLoading={ projectActive ? projectUsers === null : isLoading }
 		/>
 	);
 }

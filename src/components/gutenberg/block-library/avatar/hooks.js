@@ -1,7 +1,12 @@
 import { store as coreStore, useEntityProp } from '@/stores/gutenberg/core-data';
 import { __, sprintf } from '@/lib/gutenberg/i18n';
 import { useSelect } from '@/stores/gutenberg/data';
-import { isProjectContentSource } from '@/services/gutenberg/project/content';
+import {
+	isProjectContentSource,
+	useProjectUserOptions,
+	useProjectViewerProfile,
+} from '@/services/gutenberg/project/content';
+import { DEFAULT_AVATAR } from '@/utils/mock';
 import { useDefaultAvatar } from '../utils/hooks';
 
 function getAvatarSizes( sizes ) {
@@ -44,9 +49,23 @@ export function useCommentAvatar( { commentId } ) {
 }
 
 export function useUserAvatar( { userId, postId, postType } ) {
+	const projectActive = isProjectContentSource();
+	const projectUsers = useProjectUserOptions();
+	const projectViewer = useProjectViewerProfile();
 	const { authorDetails, projectAuthor } = useSelect(
 		( select ) => {
 			const { getEditedEntityRecord, getUser } = select( coreStore );
+			if ( projectActive ) {
+				const currentPost = getEditedEntityRecord(
+					'postType',
+					postType,
+					postId
+				);
+				return {
+					authorDetails: null,
+					projectAuthor: currentPost?._project ?? null,
+				};
+			}
 			if ( userId ) {
 				return {
 					authorDetails: getUser( userId ),
@@ -58,12 +77,6 @@ export function useUserAvatar( { userId, postId, postType } ) {
 				postType,
 				postId
 			);
-			if ( isProjectContentSource() ) {
-				return {
-					authorDetails: null,
-					projectAuthor: currentPost?._project ?? null,
-				};
-			}
 			const _authorId = currentPost?.author;
 
 			return {
@@ -71,7 +84,7 @@ export function useUserAvatar( { userId, postId, postType } ) {
 				projectAuthor: null,
 			};
 		},
-		[ postType, postId, userId ]
+		[ postType, postId, userId, projectActive ]
 	);
 	const avatarUrls = authorDetails?.avatar_urls
 		? Object.values( authorDetails.avatar_urls )
@@ -81,11 +94,23 @@ export function useUserAvatar( { userId, postId, postType } ) {
 		: null;
 	const { minSize, maxSize } = getAvatarSizes( sizes );
 	const defaultAvatar = useDefaultAvatar();
-	const authorName = projectAuthor
-		? projectAuthor.authorName
-		: authorDetails?.name;
-	const src = projectAuthor
-		? projectAuthor.authorAvatar || defaultAvatar
+	const projectUser = userId
+		? projectUsers?.find( ( user ) => user.id === userId )
+		: null;
+	const hasProjectAuthor = Boolean(
+		projectAuthor?.authorName || projectAuthor?.authorAvatar
+	);
+	const projectAuthorName = userId
+		? projectUser?.nickname
+		: projectAuthor?.authorName ||
+			( hasProjectAuthor ? '' : projectViewer?.nickname );
+	const projectAvatar = userId
+		? projectUser?.avatar
+		: projectAuthor?.authorAvatar ||
+			( hasProjectAuthor ? '' : projectViewer?.avatar );
+	const authorName = projectActive ? projectAuthorName : authorDetails?.name;
+	const src = projectActive
+		? projectAvatar || DEFAULT_AVATAR
 		: avatarUrls
 			? avatarUrls[ avatarUrls.length - 1 ]
 			: defaultAvatar;

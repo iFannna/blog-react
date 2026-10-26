@@ -53,6 +53,17 @@ export interface ProjectAuthor {
 	count: number;
 }
 
+export interface ProjectUserOption {
+	id: number;
+	nickname: string;
+	avatar: string;
+}
+
+export interface ProjectViewerProfile {
+	nickname: string;
+	avatar: string;
+}
+
 export interface ProjectLatestComment {
 	id: number;
 	article_id: number;
@@ -401,6 +412,73 @@ export async function updateProjectSiteLogo(logo: string) {
 			logo,
 		}));
 	}
+}
+
+let userOptionsPromise: Promise<ProjectUserOption[]> | null = null;
+
+function loadUserOptions() {
+	if (!userOptionsPromise) {
+		userOptionsPromise = apiClient
+			.get<unknown, ProjectUserOption[]>("/user/options")
+			.catch((error) => {
+				userOptionsPromise = null;
+				throw error;
+			});
+	}
+	return userOptionsPromise;
+}
+
+/** 启用用户选项（编辑器用户选择器）；只在项目编辑器安装后生效 */
+export function useProjectUserOptions(): ProjectUserOption[] | null {
+	const active = isProjectContentSource();
+	const [options, setOptions] = useState<ProjectUserOption[] | null>(null);
+
+	useEffect(() => {
+		if (!active) return;
+		let cancelled = false;
+		loadUserOptions()
+			.then((data) => {
+				if (!cancelled) setOptions(data ?? []);
+			})
+			.catch(() => {
+				if (!cancelled) setOptions([]);
+			});
+		return () => {
+			cancelled = true;
+		};
+	}, [active]);
+
+	return active ? options : null;
+}
+
+let viewerProfilePromise: Promise<ProjectViewerProfile | null> | null = null;
+
+function loadViewerProfile() {
+	if (!viewerProfilePromise) {
+		viewerProfilePromise = apiClient
+			.get<unknown, ProjectViewerProfile>("/user/info")
+			.catch(() => null);
+	}
+	return viewerProfilePromise;
+}
+
+/** 当前登录用户资料，用于新文章尚无作者时的头像兜底 */
+export function useProjectViewerProfile(): ProjectViewerProfile | null {
+	const active = isProjectContentSource();
+	const [profile, setProfile] = useState<ProjectViewerProfile | null>(null);
+
+	useEffect(() => {
+		if (!active) return;
+		let cancelled = false;
+		loadViewerProfile().then((data) => {
+			if (!cancelled) setProfile(data);
+		});
+		return () => {
+			cancelled = true;
+		};
+	}, [active]);
+
+	return active ? profile : null;
 }
 
 let authorsPromise: Promise<ProjectAuthor[]> | null = null;
