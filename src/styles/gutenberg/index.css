@@ -9,6 +9,16 @@ body {
 }
 
 /*
+ * 对齐 WordPress 后台重置（wp-admin/css/common.css 中的 iframe, img { border: 0 }）。
+ * 本项目不加载 wp-admin 基础样式，缺少这条规则时，HTML 区块的预览 iframe
+ * 会落回浏览器默认边框。
+ */
+iframe,
+img {
+	border: 0;
+}
+
+/*
  * 主题和全局样式会同时注入编辑器外壳；这里使用更高的优先级把外壳字号
  * 固定为 WordPress 后台默认的 13px，避免侧栏等继承画布的 20.25px。
  */
