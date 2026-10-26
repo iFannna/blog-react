@@ -21,8 +21,14 @@ import {
 import { store as coreStore } from '@/stores/gutenberg/core-data';
 import { useServerSideRender } from '@/components/gutenberg/server-side-render';
 import { useDisabled } from '@/hooks/gutenberg/compose';
+import {
+	getProjectLocale,
+	isProjectContentSource,
+} from '@/services/gutenberg/project/content';
+import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 import HtmlRenderer from '../utils/html-renderer';
+import { useTermRecords } from '../utils/use-term-records';
 
 /**
  * Minimum number of tags a user can show using this block.
@@ -41,6 +47,136 @@ const MAX_TAGS = 100;
 const MIN_FONT_SIZE = 0.1;
 const MAX_FONT_SIZE = 100;
 
+function parseFontSize( value ) {
+	const match = /^\s*([\d.]+)\s*([a-z%]+)\s*$/i.exec( value ?? '' );
+	if ( ! match ) {
+		return { quantity: 8, unit: 'pt' };
+	}
+	return {
+		quantity: parseFloat( match[ 1 ] ),
+		unit: match[ 2 ],
+	};
+}
+
+function ProjectTagCloudPreview( { attributes } ) {
+	const {
+		taxonomy,
+		showTagCounts,
+		numberOfTags,
+		smallestFontSize,
+		largestFontSize,
+	} = attributes;
+	const blockProps = useBlockProps();
+
+	// 项目编辑器直接读取 Go 的标签/分类计数，示例编辑器继续走服务端预览。
+	// 顺序与 wp_tag_cloud 默认值一致：按名称升序，字号按文章数缩放。
+	const { records, isResolving } = useTermRecords( taxonomy, {
+		per_page: numberOfTags,
+		orderby: 'name',
+		order: 'asc',
+		hide_empty: true,
+	} );
+
+	if ( isResolving ) {
+		return (
+			<p { ...blockProps }>
+				<WCSpinner />
+			</p>
+		);
+	}
+
+	const terms = records ?? [];
+	if ( terms.length === 0 ) {
+		return <p { ...blockProps } />;
+	}
+
+	const smallest = parseFontSize( smallestFontSize );
+	const largest = parseFontSize( largestFontSize );
+	const counts = terms.map( ( term ) => Number( term.count ) || 0 );
+	const minCount = Math.min( ...counts );
+	const maxCount = Math.max( ...counts );
+	const countSpread = maxCount - minCount;
+	const fontStep =
+		countSpread > 0
+			? ( largest.quantity - smallest.quantity ) / countSpread
+			: 0;
+	const basePath = `/${ getProjectLocale() }/${
+		taxonomy === 'category' ? 'category' : 'tag'
+	}`;
+
+	return (
+		<p { ...blockProps }>
+			{ terms.map( ( term, index ) => {
+				const name = decodeEntities( term.name ).trim();
+				const count = Number( term.count ) || 0;
+				const fontSize =
+					smallest.quantity + ( count - minCount ) * fontStep;
+				return (
+					<a
+						key={ term.id }
+						className={ `tag-cloud-link tag-link-${ term.id } tag-link-position-${
+							index + 1
+						}` }
+						href={ `${ basePath }/${ encodeURIComponent( name ) }` }
+						style={ {
+							fontSize: `${ Number(
+								fontSize.toFixed( 2 )
+							) }${ smallest.unit }`,
+						} }
+						onClick={ ( event ) => event.preventDefault() }
+					>
+						{ name }
+						{ showTagCounts && (
+							<span className="tag-link-count">
+								{ ` (${ count })` }
+							</span>
+						) }
+					</a>
+				);
+			} ) }
+		</p>
+	);
+}
+
+function ServerTagCloudPreview( { attributes, name } ) {
+	const { content, status, error } = useServerSideRender( {
+		attributes,
+		skipBlockSupportAttributes: true,
+		block: name,
+	} );
+
+	const disabledRef = useDisabled();
+	const blockProps = useBlockProps( { ref: disabledRef } );
+
+	if ( status === 'loading' ) {
+		return (
+			<div { ...blockProps }>
+				<WCSpinner />
+			</div>
+		);
+	}
+
+	if ( status === 'error' ) {
+		return (
+			<div { ...blockProps }>
+				<p>
+					{ sprintf(
+						/* translators: %s: error message returned when rendering the block. */
+						__( 'Error: %s' ),
+						error
+					) }
+				</p>
+			</div>
+		);
+	}
+
+	if ( status === 'success' ) {
+		return <HtmlRenderer wrapperProps={ blockProps } html={ content } />;
+	}
+
+	return null;
+}
+
 function TagCloudEdit( { attributes, setAttributes, name } ) {
 	const {
 		taxonomy,
@@ -50,6 +186,7 @@ function TagCloudEdit( { attributes, setAttributes, name } ) {
 		largestFontSize,
 	} = attributes;
 
+	const projectActive = isProjectContentSource();
 	const [ availableUnits ] = useSettings( 'spacing.units' );
 	const dropdownMenuProps = useToolsPanelDropdownMenuProps();
 
@@ -62,8 +199,11 @@ function TagCloudEdit( { attributes, setAttributes, name } ) {
 	} );
 
 	const taxonomies = useSelect(
-		( select ) => select( coreStore ).getTaxonomies( { per_page: -1 } ),
-		[]
+		( select ) =>
+			projectActive
+				? null
+				: select( coreStore ).getTaxonomies( { per_page: -1 } ),
+		[ projectActive ]
 	);
 
 	const getTaxonomyOptions = () => {
@@ -72,20 +212,24 @@ function TagCloudEdit( { attributes, setAttributes, name } ) {
 			value: '',
 			disabled: true,
 		};
-		const taxonomyOptions = ( taxonomies ?? [] )
-			.filter( ( tax ) => !! tax.show_cloud )
-			.map( ( item ) => {
-				return {
-					value: item.slug,
-					label: item.name,
-				};
-			} );
+		const taxonomyOptions = projectActive
+			? [
+					{ value: 'post_tag', label: __( 'Tags' ) },
+					{ value: 'category', label: __( 'Categories' ) },
+			  ]
+			: ( taxonomies ?? [] )
+					.filter( ( tax ) => !! tax.show_cloud )
+					.map( ( item ) => {
+						return {
+							value: item.slug,
+							label: item.name,
+						};
+					} );
 
 		return [ selectOption, ...taxonomyOptions ];
 	};
 
 	const onFontSizeChange = ( fontSizeLabel, newValue ) => {
-		// eslint-disable-next-line @wordpress/no-unused-vars-before-return
 		const [ quantity, newUnit ] =
 			parseQuantityAndUnitFromRawValue( newValue );
 		if ( ! Number.isFinite( quantity ) ) {
@@ -223,36 +367,13 @@ function TagCloudEdit( { attributes, setAttributes, name } ) {
 		</InspectorControls>
 	);
 
-	const { content, status, error } = useServerSideRender( {
-		attributes,
-		skipBlockSupportAttributes: true,
-		block: name,
-	} );
-
-	const disabledRef = useDisabled();
-	const blockProps = useBlockProps( { ref: disabledRef } );
-
 	return (
 		<>
 			{ inspectorControls }
-			{ status === 'loading' && (
-				<div { ...blockProps }>
-					<WCSpinner />
-				</div>
-			) }
-			{ status === 'error' && (
-				<div { ...blockProps }>
-					<p>
-						{ sprintf(
-							/* translators: %s: error message returned when rendering the block. */
-							__( 'Error: %s' ),
-							error
-						) }
-					</p>
-				</div>
-			) }
-			{ status === 'success' && (
-				<HtmlRenderer wrapperProps={ blockProps } html={ content } />
+			{ projectActive ? (
+				<ProjectTagCloudPreview attributes={ attributes } />
+			) : (
+				<ServerTagCloudPreview attributes={ attributes } name={ name } />
 			) }
 		</>
 	);
