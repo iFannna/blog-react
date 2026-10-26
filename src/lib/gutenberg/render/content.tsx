@@ -643,11 +643,14 @@ function createTransform(
 
     const mergedClassName =
       mergeClassName(props.className, classNames) || undefined;
+    // 重新创建的标签要沿用解析器分配的 key，否则同级数组里会出现无 key 的子项
+    const key = (reactNode as ReactElement).key ?? undefined;
 
     if (dynamicTag) {
       return createElement(
         dynamicTag,
         {
+          key,
           className: mergedClassName,
           style,
           ...extraProps,
