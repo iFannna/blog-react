@@ -205,7 +205,6 @@ export { default as offline } from './offline';
 export { default as overlayText } from './overlay-text';
 export { default as pageBreak } from './page-break';
 export { default as page } from './page';
-export { default as pages } from './pages';
 export { default as paragraph } from './paragraph';
 export { default as pause } from './pause';
 export { default as payment } from './payment';

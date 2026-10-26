@@ -42,7 +42,6 @@ import { DEFAULT_BLOCK } from '../navigation/constants';
 const ALLOWED_BLOCKS = [
 	'core/navigation-link',
 	'core/navigation-submenu',
-	'core/page-list',
 	'core/loginout',
 ];
 

@@ -39,13 +39,6 @@ const transforms = {
 		},
 		{
 			type: 'block',
-			blocks: [ 'core/page-list' ],
-			transform: () => {
-				return createBlock( 'core/navigation-link' );
-			},
-		},
-		{
-			type: 'block',
 			blocks: [ 'core/buttons' ],
 			transform: () => {
 				return createBlock( 'core/navigation-link' );
@@ -100,13 +93,6 @@ const transforms = {
 					buttonUseIcon: true,
 					buttonPosition: 'button-inside',
 				} );
-			},
-		},
-		{
-			type: 'block',
-			blocks: [ 'core/page-list' ],
-			transform: () => {
-				return createBlock( 'core/page-list' );
 			},
 		},
 		{

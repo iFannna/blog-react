@@ -7,8 +7,7 @@
 	"parent": [ "core/navigation" ],
 	"allowedBlocks": [
 		"core/navigation-link",
-		"core/navigation-submenu",
-		"core/page-list"
+		"core/navigation-submenu"
 	],
 	"description": "Add a page, link, or another item to your navigation.",
 	"textdomain": "default",

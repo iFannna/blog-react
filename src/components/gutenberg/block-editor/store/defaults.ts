@@ -188,7 +188,6 @@ export const SETTINGS_DEFAULTS = {
 		'core/navigation-link': { enterDirection: 'rightToLeft' },
 		'core/search': { enterDirection: 'rightToLeft' },
 		'core/social-links': { enterDirection: 'rightToLeft' },
-		'core/page-list': { enterDirection: 'rightToLeft' },
 		'core/spacer': { enterDirection: 'rightToLeft' },
 		'core/home-link': { enterDirection: 'rightToLeft' },
 		'core/site-title': { enterDirection: 'rightToLeft' },

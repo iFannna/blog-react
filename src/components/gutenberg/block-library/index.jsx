@@ -55,8 +55,6 @@ import * as navigationSubmenu from './navigation-submenu';
 import * as nextpage from './nextpage';
 import * as navigationOverlayClose from './navigation-overlay-close';
 import * as pattern from './pattern';
-import * as pageList from './page-list';
-import * as pageListItem from './page-list-item';
 import * as paragraph from './paragraph';
 import * as playlist from './playlist';
 import * as playlistTrack from './playlist-track';
@@ -157,8 +155,6 @@ const getAllBlocks = () => {
 		missing,
 		more,
 		nextpage,
-		pageList,
-		pageListItem,
 		pattern,
 		playlist,
 		playlistTrack,
