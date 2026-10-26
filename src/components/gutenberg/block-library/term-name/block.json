@@ -4,6 +4,7 @@
 	"name": "core/term-name",
 	"title": "Term Name",
 	"category": "theme",
+	"ancestor": [ "core/term-template" ],
 	"description": "Displays the name of a taxonomy term.",
 	"keywords": [ "term title" ],
 	"textdomain": "default",

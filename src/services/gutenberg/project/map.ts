@@ -10,6 +10,7 @@ export interface EditorPostProjectMeta {
   commentCount: number;
   authorName: string;
   authorAvatar: string;
+  authorDescription: string;
   trashed: boolean;
   realId: number | null;
 }
@@ -129,6 +130,7 @@ export function toEditorPost(
       commentCount: article.comment_count ?? 0,
       authorName: article.author_name ?? "",
       authorAvatar: article.author_avatar ?? "",
+      authorDescription: article.author_description ?? "",
       trashed: article.status === 2,
       realId: article.id,
     },
@@ -179,6 +181,7 @@ export function createNewEditorPost(): EditorPost {
       commentCount: 0,
       authorName: "",
       authorAvatar: "",
+      authorDescription: "",
       trashed: false,
       realId: null,
     },

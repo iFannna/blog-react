@@ -4,6 +4,7 @@
 	"name": "core/term-count",
 	"title": "Term Count",
 	"category": "theme",
+	"ancestor": [ "core/term-template" ],
 	"description": "Displays the post count of a taxonomy term.",
 	"textdomain": "default",
 	"usesContext": [ "termId", "taxonomy", "termData" ],

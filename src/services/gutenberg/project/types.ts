@@ -22,6 +22,7 @@ export interface ProjectArticle {
   author_id: number;
   author_name: string;
   author_avatar: string;
+  author_description: string;
   year: number;
   month: number;
   day: number;
