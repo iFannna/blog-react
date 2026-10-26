@@ -35,6 +35,11 @@ import { crop, upload } from '@/components/gutenberg/icons';
 import { store as noticesStore } from '@/stores/gutenberg/notices';
 import { MIN_SIZE } from '../image/constants';
 import { MediaControl, MediaControlPreview } from '../utils/media-control';
+import {
+	isProjectContentSource,
+	updateProjectSiteLogo,
+	useProjectSiteSettings,
+} from '@/services/gutenberg/project/content';
 import { unlock } from '../lock-unlock';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
@@ -42,6 +47,19 @@ const ALLOWED_MEDIA_TYPES = [ 'image' ];
 const { mediaEditKey, openMediaEditorModalKey } = unlock(
 	blockEditorPrivateApis
 );
+
+function getFilenameFromUrl( value ) {
+	if ( ! value ) {
+		return undefined;
+	}
+	try {
+		const path = new URL( value, 'https://example.com' ).pathname;
+		const filename = path.split( '/' ).filter( Boolean ).pop();
+		return filename ? decodeURIComponent( filename ) : undefined;
+	} catch {
+		return undefined;
+	}
+}
 
 const SiteLogo = ( {
 	alt,
@@ -55,6 +73,7 @@ const SiteLogo = ( {
 	iconId,
 	setIcon,
 	canUserEdit,
+	canEditSiteIcon = canUserEdit,
 } ) => {
 	const isLargeViewport = useViewportMatch( 'medium' );
 	const isWideAligned = [ 'wide', 'full' ].includes( align );
@@ -284,7 +303,7 @@ const SiteLogo = ( {
 						</ToolsPanelItem>
 					) }
 
-					{ canUserEdit && (
+					{ canUserEdit && canEditSiteIcon && (
 						<ToolsPanelItem
 							isShownByDefault
 							hasValue={ () => !! shouldSyncIcon }
@@ -367,6 +386,11 @@ export default function LogoEdit( {
 	isSelected,
 } ) {
 	const { width, shouldSyncIcon } = attributes;
+	const projectActive = isProjectContentSource();
+	const projectSite = useProjectSiteSettings();
+	const [ projectLogo, setProjectLogo ] = useState();
+	const [ isSavingProjectLogo, setIsSavingProjectLogo ] = useState( false );
+
 	const {
 		siteLogoId,
 		canUserEdit,
@@ -422,8 +446,32 @@ export default function LogoEdit( {
 	const dropdownMenuProps = useToolsPanelDropdownMenuProps();
 
 	const { editEntityRecord } = useDispatch( coreStore );
+	const { createErrorNotice } = useDispatch( noticesStore );
+
+	const persistProjectLogo = async ( nextLogo ) => {
+		const previousLogo = projectLogo;
+		setProjectLogo( nextLogo );
+		setTemporaryURL();
+		setIsSavingProjectLogo( true );
+		try {
+			await updateProjectSiteLogo( nextLogo );
+		} catch ( error ) {
+			setProjectLogo( previousLogo );
+			createErrorNotice(
+				error instanceof Error
+					? error.message
+					: __( 'Failed to update the site logo.' ),
+				{ type: 'snackbar' }
+			);
+		} finally {
+			setIsSavingProjectLogo( false );
+		}
+	};
 
 	const setLogo = ( newValue, shouldForceSync = false ) => {
+		if ( projectActive ) {
+			return;
+		}
 		// `shouldForceSync` is used to force syncing when the attribute
 		// may not have updated yet.
 		if ( shouldSyncIcon || shouldForceSync ) {
@@ -435,15 +483,41 @@ export default function LogoEdit( {
 		} );
 	};
 
-	const setIcon = ( newValue ) =>
+	const setIcon = ( newValue ) => {
+		if ( projectActive ) {
+			return;
+		}
 		// The new value needs to be `null` to reset the Site Icon.
 		editEntityRecord( 'root', 'site', undefined, {
 			site_icon: newValue ?? null,
 		} );
+	};
 
 	const { alt_text: alt, source_url: logoUrl } = mediaItemData ?? {};
+	const projectLogoValue =
+		projectLogo !== undefined ? projectLogo : projectSite?.logo ?? '';
+	const effectiveLogoUrl = projectActive ? projectLogoValue : logoUrl;
+	const effectiveLogoId = projectActive ? undefined : siteLogoId;
+	const effectiveCanUserEdit = projectActive ? projectSite !== null : canUserEdit;
+	const effectiveIsLoading = projectActive
+		? projectSite === null
+		: siteLogoId === undefined || isRequestingMediaItem;
+	const effectiveAlt = projectActive
+		? projectSite?.site_name || 'Blog'
+		: alt;
+	const effectiveSiteUrl = projectActive
+		? projectSite?.site_url || '/'
+		: url;
+	const effectiveFilename = projectActive
+		? getFilenameFromUrl( projectLogoValue )
+		: mediaItemData?.media_details?.sizes?.full?.file ||
+		  mediaItemData?.slug;
 
 	const onInitialSelectLogo = ( media ) => {
+		if ( projectActive ) {
+			onSelectLogo( media );
+			return;
+		}
 		// Initialize the syncSiteIcon toggle. If we currently have no Site logo and no
 		// site icon, automatically sync the logo to the icon.
 		if ( shouldSyncIcon === undefined ) {
@@ -464,6 +538,18 @@ export default function LogoEdit( {
 			return;
 		}
 
+		if ( projectActive ) {
+			if ( ! media.url ) {
+				return;
+			}
+			if ( isBlobURL( media.url ) ) {
+				setTemporaryURL( media.url );
+				return;
+			}
+			persistProjectLogo( media.url );
+			return;
+		}
+
 		if ( ! media.id && media.url ) {
 			// This is a temporary blob image.
 			setTemporaryURL( media.url );
@@ -475,11 +561,15 @@ export default function LogoEdit( {
 	};
 
 	const onRemoveLogo = () => {
+		if ( projectActive ) {
+			persistProjectLogo( '' );
+			setAttributes( { width: undefined } );
+			return;
+		}
 		setLogo( null );
 		setAttributes( { width: undefined } );
 	};
 
-	const { createErrorNotice } = useDispatch( noticesStore );
 	const onUploadError = ( message ) => {
 		createErrorNotice( message, { type: 'snackbar' } );
 		setTemporaryURL();
@@ -502,13 +592,13 @@ export default function LogoEdit( {
 	};
 
 	const mediaReplaceFlowProps = {
-		mediaURL: logoUrl,
-		name: ! logoUrl ? __( 'Choose logo' ) : __( 'Replace' ),
+		mediaURL: effectiveLogoUrl,
+		name: ! effectiveLogoUrl ? __( 'Choose logo' ) : __( 'Replace' ),
 		onSelect: onSelectLogo,
 		onError: onUploadError,
 		onReset: onRemoveLogo,
 	};
-	const controls = canUserEdit && (
+	const controls = effectiveCanUserEdit && (
 		<BlockControls group="other">
 			<MediaReplaceFlow
 				{ ...mediaReplaceFlowProps }
@@ -519,36 +609,38 @@ export default function LogoEdit( {
 	);
 
 	let logoImage;
-	const isLoading = siteLogoId === undefined || isRequestingMediaItem;
-	if ( isLoading ) {
+	if ( effectiveIsLoading ) {
 		logoImage = <WCSpinner />;
 	}
 
-	// Reset temporary url when logoUrl is available.
+	// Reset temporary url when the logo url is available.
 	useEffect( () => {
-		if ( logoUrl && temporaryURL ) {
+		if ( effectiveLogoUrl && temporaryURL ) {
 			setTemporaryURL();
 		}
-	}, [ logoUrl, temporaryURL ] );
+	}, [ effectiveLogoUrl, temporaryURL ] );
 
-	if ( !! logoUrl || !! temporaryURL ) {
+	if ( !! effectiveLogoUrl || !! temporaryURL ) {
 		logoImage = (
 			<>
 				<SiteLogo
-					alt={ alt }
+					alt={ effectiveAlt }
 					attributes={ attributes }
 					className={ className }
 					isSelected={ isSelected }
 					setAttributes={ setAttributes }
-					logoUrl={ temporaryURL || logoUrl }
+					logoUrl={ temporaryURL || effectiveLogoUrl }
 					setLogo={ setLogo }
-					logoId={ mediaItemData?.id || siteLogoId }
-					siteUrl={ url }
+					logoId={ effectiveLogoId }
+					siteUrl={ effectiveSiteUrl }
 					setIcon={ setIcon }
-					iconId={ siteIconId }
-					canUserEdit={ canUserEdit }
+					iconId={ projectActive ? undefined : siteIconId }
+					canUserEdit={ effectiveCanUserEdit }
+					canEditSiteIcon={ ! projectActive && canUserEdit }
 				/>
-				{ canUserEdit && <DropZone onFilesDrop={ onFilesDrop } /> }
+				{ effectiveCanUserEdit && (
+					<DropZone onFilesDrop={ onFilesDrop } />
+				) }
 			</>
 		);
 	}
@@ -579,23 +671,20 @@ export default function LogoEdit( {
 
 	const blockProps = useBlockProps( { className: classes } );
 
-	const mediaInspectorPanel = ( canUserEdit || logoUrl ) && (
+	const mediaInspectorPanel = ( effectiveCanUserEdit || effectiveLogoUrl ) && (
 		<InspectorControls>
 			<ToolsPanel
 				label={ __( 'Media' ) }
 				dropdownMenuProps={ dropdownMenuProps }
 			>
-				{ ! canUserEdit ? (
+				{ ! effectiveCanUserEdit ? (
 					<div
 						className="block-library-site-logo__inspector-media-replace-container"
 						style={ { gridColumn: '1 / -1' } }
 					>
 						<MediaControlPreview
-							url={ mediaItemData?.source_url }
-							filename={
-								mediaItemData?.media_details?.sizes?.full
-									?.file || mediaItemData?.slug
-							}
+							url={ effectiveLogoUrl }
+							filename={ effectiveFilename }
 							itemGroupProps={ {
 								isBordered: true,
 								className:
@@ -606,22 +695,21 @@ export default function LogoEdit( {
 					</div>
 				) : (
 					<ToolsPanelItem
-						hasValue={ () => !! logoUrl }
+						hasValue={ () => !! effectiveLogoUrl }
 						label={ __( 'Logo' ) }
 						isShownByDefault
 					>
 						<MediaControl
-							mediaId={ siteLogoId }
-							mediaUrl={ logoUrl }
-							filename={
-								mediaItemData?.media_details?.sizes?.full
-									?.file || mediaItemData?.slug
-							}
+							mediaId={ effectiveLogoId }
+							mediaUrl={ effectiveLogoUrl }
+							filename={ effectiveFilename }
 							allowedTypes={ ALLOWED_MEDIA_TYPES }
 							onSelect={ onSelectLogo }
 							onError={ onUploadError }
 							onReset={ onRemoveLogo }
-							isUploading={ !! temporaryURL }
+							isUploading={
+								!! temporaryURL || isSavingProjectLogo
+							}
 							emptyLabel={ __( 'Logo' ) }
 						/>
 					</ToolsPanelItem>
@@ -634,40 +722,45 @@ export default function LogoEdit( {
 		<div { ...blockProps }>
 			{ controls }
 			{ mediaInspectorPanel }
-			{ ( !! logoUrl || !! temporaryURL ) && logoImage }
-			{ ( isLoading ||
-				( ! temporaryURL && ! logoUrl && ! canUserEdit ) ) && (
+			{ ( !! effectiveLogoUrl || !! temporaryURL ) && logoImage }
+			{ ( effectiveIsLoading ||
+				( ! temporaryURL &&
+					! effectiveLogoUrl &&
+					! effectiveCanUserEdit ) ) && (
 				<Placeholder className="site-logo_placeholder" withIllustration>
-					{ isLoading && (
+					{ effectiveIsLoading && (
 						<span className="components-placeholder__preview">
 							<WCSpinner />
 						</span>
 					) }
 				</Placeholder>
 			) }
-			{ ! isLoading && ! temporaryURL && ! logoUrl && canUserEdit && (
-				<MediaPlaceholder
-					onSelect={ onInitialSelectLogo }
-					allowedTypes={ ALLOWED_MEDIA_TYPES }
-					onError={ onUploadError }
-					placeholder={ placeholder }
-					mediaLibraryButton={ ( { open } ) => {
-						return (
-							<Button
-								__next40pxDefaultSize
-								icon={ upload }
-								variant="primary"
-								label={ __( 'Choose logo' ) }
-								showTooltip
-								tooltipPosition="middle right"
-								onClick={ () => {
-									open();
-								} }
-							/>
-						);
-					} }
-				/>
-			) }
+			{ ! effectiveIsLoading &&
+				! temporaryURL &&
+				! effectiveLogoUrl &&
+				effectiveCanUserEdit && (
+					<MediaPlaceholder
+						onSelect={ onInitialSelectLogo }
+						allowedTypes={ ALLOWED_MEDIA_TYPES }
+						onError={ onUploadError }
+						placeholder={ placeholder }
+						mediaLibraryButton={ ( { open } ) => {
+							return (
+								<Button
+									__next40pxDefaultSize
+									icon={ upload }
+									variant="primary"
+									label={ __( 'Choose logo' ) }
+									showTooltip
+									tooltipPosition="middle right"
+									onClick={ () => {
+										open();
+									} }
+								/>
+							);
+						} }
+					/>
+				) }
 		</div>
 	);
 }

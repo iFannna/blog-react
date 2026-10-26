@@ -77,6 +77,7 @@ export interface SiteSettingVO {
   site_desc: string;
   site_url: string;
   favicon: string;
+  logo: string;
   developer_avatar: string;
   developer_name: string;
   developer_intro: string;

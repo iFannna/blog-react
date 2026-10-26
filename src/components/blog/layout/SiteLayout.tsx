@@ -120,6 +120,7 @@ export default async function SiteLayout({
         mobileNavItems={mobileNavItems}
         github={setting?.developer_github ?? ""}
         gitee={setting?.developer_gitee ?? ""}
+        logo={setting?.logo ?? ""}
       />
       {breadcrumbs}
       <main className="site-main">

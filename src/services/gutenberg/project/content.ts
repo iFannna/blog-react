@@ -43,6 +43,7 @@ export interface ProjectSiteSettings {
 	site_name: string;
 	site_desc: string;
 	site_url: string;
+	logo: string;
 }
 
 export interface ProjectAuthor {
@@ -389,6 +390,17 @@ export function useProjectSiteSettings(): ProjectSiteSettings | null {
 	}, [active]);
 
 	return settings;
+}
+
+/** 更新站点 Logo；立即写入 Go 站点设置，供 Header 与所有站点 Logo 区块共用 */
+export async function updateProjectSiteLogo(logo: string) {
+	await apiClient.put("/admin/site-setting", { logo });
+	if (siteSettingsPromise) {
+		siteSettingsPromise = siteSettingsPromise.then((settings) => ({
+			...settings,
+			logo,
+		}));
+	}
 }
 
 let authorsPromise: Promise<ProjectAuthor[]> | null = null;

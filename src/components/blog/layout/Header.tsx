@@ -16,9 +16,13 @@ interface HeaderProps {
   mobileNavItems: MenuItem[];
   github?: string;
   gitee?: string;
+  logo?: string;
 }
 
-export default function Header({ navItems, mobileNavItems, github, gitee }: HeaderProps) {
+const DEFAULT_SITE_LOGO =
+  "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/Blog.png";
+
+export default function Header({ navItems, mobileNavItems, github, gitee, logo }: HeaderProps) {
   const pathname = usePathname();
   const router = useRouter();
   const { prefix } = useLocale();
@@ -174,7 +178,7 @@ export default function Header({ navItems, mobileNavItems, github, gitee }: Head
           <div className="logo header-element">
             <Link href={prefix || "/"} rel="home" className="logo-inner">
               <img
-                src="https://java-ai-sau.oss-cn-beijing.aliyuncs.com/Blog.png"
+                src={logo || DEFAULT_SITE_LOGO}
                 alt="Blog"
                 width={330}
                 height={72}
