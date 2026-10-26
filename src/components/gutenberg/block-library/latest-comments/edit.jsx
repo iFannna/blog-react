@@ -12,6 +12,12 @@ import { useServerSideRender } from '@/components/gutenberg/server-side-render';
 import { useDisabled } from '@/hooks/gutenberg/compose';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 import HtmlRenderer from '../utils/html-renderer';
+import {
+	commentArticleLink,
+	getProjectLocale,
+	isProjectContentSource,
+	useProjectLatestComments,
+} from '@/services/gutenberg/project/content';
 
 /**
  * Minimum number of comments a user can show using this block.
@@ -26,12 +32,123 @@ const MIN_COMMENTS = 1;
  */
 const MAX_COMMENTS = 100;
 
-export default function LatestComments( { attributes, setAttributes, name } ) {
+const EXCERPT_LENGTH = 100;
+
+function formatCommentDate( value ) {
+	if ( ! value ) return '';
+	const date = new Date( String( value ).replace( /-/g, '/' ) );
+	if ( Number.isNaN( date.getTime() ) ) return '';
+	return new Intl.DateTimeFormat( getProjectLocale(), {
+		dateStyle: 'medium',
+	} ).format( date );
+}
+
+function trimContent( value ) {
+	const text = String( value || '' ).trim();
+	if ( text.length <= EXCERPT_LENGTH ) return text;
+	return `${ text.slice( 0, EXCERPT_LENGTH ) }…`;
+}
+
+function ProjectPreview( { attributes } ) {
 	const { commentsToShow, displayAvatar, displayDate, displayContent } =
 		attributes;
+	const { comments, loading, error } = useProjectLatestComments(
+		commentsToShow
+	);
+	const blockProps = useBlockProps();
 
-	const dropdownMenuProps = useToolsPanelDropdownMenuProps();
+	if ( loading ) {
+		return (
+			<div { ...blockProps }>
+				<WCSpinner />
+			</div>
+		);
+	}
 
+	if ( error ) {
+		return (
+			<div { ...blockProps }>
+				<p>{ sprintf( __( 'Error: %s' ), error ) }</p>
+			</div>
+		);
+	}
+
+	if ( ! comments?.length ) {
+		return (
+			<div { ...blockProps }>
+				<p>{ __( 'No comments found.' ) }</p>
+			</div>
+		);
+	}
+
+	const preventNavigation = ( event ) => event.preventDefault();
+
+	return (
+		<ol { ...blockProps }>
+			{ comments.map( ( comment ) => {
+				const link = commentArticleLink( comment );
+				return (
+					<li
+						key={ comment.id }
+						className="wp-block-latest-comments__comment"
+					>
+						<article>
+							<footer className="wp-block-latest-comments__comment-meta">
+								{ displayAvatar && (
+									<img
+										className="avatar avatar-48 photo wp-block-latest-comments__comment-avatar"
+										src={ comment.author_avatar }
+										alt={ comment.author_name }
+										width={ 48 }
+										height={ 48 }
+										decoding="async"
+									/>
+								) }
+								<a
+									className="wp-block-latest-comments__comment-author"
+									href={ link }
+									onClick={ preventNavigation }
+								>
+									{ comment.author_name || __( 'Anonymous' ) }
+								</a>
+								{ ` ${ __( 'on' ) } ` }
+								<a
+									className="wp-block-latest-comments__comment-link"
+									href={ link }
+									onClick={ preventNavigation }
+								>
+									{ comment.article_title }
+								</a>
+								{ displayDate && (
+									<time
+										className="wp-block-latest-comments__comment-date"
+										dateTime={ String( comment.created_at ).replace(
+											' ',
+											'T'
+										) }
+									>
+										{ formatCommentDate( comment.created_at ) }
+									</time>
+								) }
+							</footer>
+							{ displayContent !== 'none' && (
+								<div className="wp-block-latest-comments__comment-excerpt">
+									<p>
+										{ displayContent === 'full'
+											? comment.content
+											: trimContent( comment.content ) }
+									</p>
+								</div>
+							) }
+						</article>
+					</li>
+				);
+			} ) }
+		</ol>
+	);
+}
+
+function CorePreview( { attributes, name } ) {
 	const { content, status, error } = useServerSideRender( {
 		attributes,
 		skipBlockSupportAttributes: true,
@@ -46,6 +163,37 @@ export default function LatestComments( { attributes, setAttributes, name } ) {
 
 	const disabledRef = useDisabled();
 	const blockProps = useBlockProps( { ref: disabledRef } );
+
+	return (
+		<>
+			{ status === 'loading' && (
+				<div { ...blockProps }>
+					<WCSpinner />
+				</div>
+			) }
+			{ status === 'error' && (
+				<div { ...blockProps }>
+					<p>
+						{ sprintf(
+							/* translators: %s: error message returned when rendering the block. */
+							__( 'Error: %s' ),
+							error
+						) }
+					</p>
+				</div>
+			) }
+			{ status === 'success' && (
+				<HtmlRenderer wrapperProps={ blockProps } html={ content } />
+			) }
+		</>
+	);
+}
+
+export default function LatestComments( { attributes, setAttributes, name } ) {
+	const { commentsToShow, displayAvatar, displayDate, displayContent } =
+		attributes;
+
+	const dropdownMenuProps = useToolsPanelDropdownMenuProps();
 
 	return (
 		<>
@@ -143,24 +291,10 @@ export default function LatestComments( { attributes, setAttributes, name } ) {
 					</ToolsPanelItem>
 				</ToolsPanel>
 			</InspectorControls>
-			{ status === 'loading' && (
-				<div { ...blockProps }>
-					<WCSpinner />
-				</div>
-			) }
-			{ status === 'error' && (
-				<div { ...blockProps }>
-					<p>
-						{ sprintf(
-							/* translators: %s: error message returned when rendering the block. */
-							__( 'Error: %s' ),
-							error
-						) }
-					</p>
-				</div>
-			) }
-			{ status === 'success' && (
-				<HtmlRenderer wrapperProps={ blockProps } html={ content } />
+			{ isProjectContentSource() ? (
+				<ProjectPreview attributes={ attributes } />
+			) : (
+				<CorePreview attributes={ attributes } name={ name } />
 			) }
 		</>
 	);

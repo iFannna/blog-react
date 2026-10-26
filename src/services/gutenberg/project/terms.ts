@@ -126,6 +126,18 @@ export function filterProjectTerms(
       (a, b) => direction * a.name.localeCompare(b.name),
     );
   }
+  if (filter.orderby === "count") {
+    const direction = filter.order === "desc" ? -1 : 1;
+    result = [...result].sort(
+      (a, b) => direction * (a.count - b.count),
+    );
+  }
+  if (filter.orderby === "include" && include?.length) {
+    const orderMap = new Map(include.map((id, index) => [id, index]));
+    result = [...result].sort(
+      (a, b) => (orderMap.get(a.id) ?? 0) - (orderMap.get(b.id) ?? 0),
+    );
+  }
   if (filter.perPage && filter.perPage > 0) {
     result = result.slice(0, filter.perPage);
   }

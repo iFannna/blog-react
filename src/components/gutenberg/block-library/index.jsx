@@ -30,19 +30,6 @@ import * as categories from './categories';
 import * as code from './code';
 import * as column from './column';
 import * as columns from './columns';
-import * as comments from './comments';
-import * as commentAuthorAvatar from './comment-author-avatar';
-import * as commentAuthorName from './comment-author-name';
-import * as commentContent from './comment-content';
-import * as commentDate from './comment-date';
-import * as commentEditLink from './comment-edit-link';
-import * as commentReplyLink from './comment-reply-link';
-import * as commentTemplate from './comment-template';
-import * as commentsPaginationPrevious from './comments-pagination-previous';
-import * as commentsPagination from './comments-pagination';
-import * as commentsPaginationNext from './comments-pagination-next';
-import * as commentsPaginationNumbers from './comments-pagination-numbers';
-import * as commentsTitle from './comments-title';
 import * as cover from './cover';
 import * as details from './details';
 import * as file from './file';
@@ -76,9 +63,7 @@ import * as playlistTrack from './playlist-track';
 import * as postAuthor from './post-author';
 import * as postAuthorName from './post-author-name';
 import * as postAuthorBiography from './post-author-biography';
-import * as postComment from './post-comment';
 import * as postCommentsCount from './post-comments-count';
-import * as postCommentsForm from './post-comments-form';
 import * as postCommentsLink from './post-comments-link';
 import * as postContent from './post-content';
 import * as postDate from './post-date';
@@ -121,7 +106,6 @@ import * as tabs from './tabs';
 import * as tagCloud from './tag-cloud';
 import * as templatePart from './template-part';
 import * as termCount from './term-count';
-import * as termDescription from './term-description';
 import * as termName from './term-name';
 import * as termsQuery from './terms-query';
 import * as termTemplate from './term-template';
@@ -161,7 +145,6 @@ const getAllBlocks = () => {
 		code,
 		column,
 		columns,
-		commentAuthorAvatar,
 		cover,
 		details,
 		file,
@@ -216,7 +199,6 @@ const getAllBlocks = () => {
 		postContent,
 		postAuthor,
 		postAuthorName,
-		postComment,
 		postCommentsCount,
 		postCommentsLink,
 		postDate,
@@ -231,26 +213,12 @@ const getAllBlocks = () => {
 		queryNoResults,
 		queryTotal,
 		readMore,
-		comments,
-		commentAuthorName,
-		commentContent,
-		commentDate,
-		commentEditLink,
-		commentReplyLink,
-		commentTemplate,
-		commentsTitle,
-		commentsPagination,
-		commentsPaginationNext,
-		commentsPaginationNumbers,
-		commentsPaginationPrevious,
-		postCommentsForm,
 		tableOfContents,
 		homeLink,
 		icon,
 		logInOut,
 		navigationOverlayClose,
 		termCount,
-		termDescription,
 		termName,
 		termsQuery,
 		termTemplate,

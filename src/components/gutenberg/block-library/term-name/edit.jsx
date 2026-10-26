@@ -12,19 +12,50 @@ import {
 } from '@/components/gutenberg/ui';
 import { decodeEntities } from '@/utils/gutenberg/html-entities';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
+import { isProjectContentSource } from '@/services/gutenberg/project/content';
 import { useTermName } from './use-term-name';
 
-export default function TermNameEdit( {
+export default function TermNameEdit( props ) {
+	return isProjectContentSource() ? (
+		<ProjectTermNameEdit { ...props } />
+	) : (
+		<CoreTermNameEdit { ...props } />
+	);
+}
+
+function ProjectTermNameEdit( { attributes, setAttributes, context } ) {
+	const termName = context?.termData?.name
+		? decodeEntities( context.termData.name )
+		: __( 'Term Name' );
+	return (
+		<TermNameView
+			attributes={ attributes }
+			setAttributes={ setAttributes }
+			termName={ termName }
+		/>
+	);
+}
+
+function CoreTermNameEdit( {
 	attributes,
 	setAttributes,
 	context: { termId, taxonomy },
 } ) {
-	const { level = 0, isLink, levelOptions } = attributes;
 	const { term } = useTermName( termId, taxonomy );
-
 	const termName = term?.name
 		? decodeEntities( term.name )
 		: __( 'Term Name' );
+	return (
+		<TermNameView
+			attributes={ attributes }
+			setAttributes={ setAttributes }
+			termName={ termName }
+		/>
+	);
+}
+
+function TermNameView( { attributes, setAttributes, termName } ) {
+	const { level = 0, isLink, levelOptions } = attributes;
 
 	const blockProps = useBlockProps();
 

@@ -7,6 +7,7 @@ import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 } from '@/components/gutenberg/ui';
+import { isProjectContentSource } from '@/services/gutenberg/project/content';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 import useDeprecatedTextAlign from '../utils/deprecated-text-align-attributes';
 
@@ -17,18 +18,24 @@ function PostAuthorNameEdit( props ) {
 		setAttributes,
 		context: { postType, postId },
 	} = props;
-	const { authorName, supportsAuthor } = useSelect(
+	const { authorName, projectAuthorName, supportsAuthor } = useSelect(
 		( select ) => {
 			const { getEditedEntityRecord, getUser, getPostType } =
 				select( coreStore );
-			const _authorId = getEditedEntityRecord(
+			const currentPost = getEditedEntityRecord(
 				'postType',
 				postType,
 				postId
-			)?.author;
+			);
+			const _authorId = currentPost?.author;
+			const projectActive = isProjectContentSource();
 
 			return {
-				authorName: _authorId ? getUser( _authorId ) : null,
+				authorName:
+					! projectActive && _authorId ? getUser( _authorId ) : null,
+				projectAuthorName: projectActive
+					? currentPost?._project?.authorName ?? ''
+					: null,
 				supportsAuthor:
 					getPostType( postType )?.supports?.author ?? false,
 			};
@@ -38,7 +45,8 @@ function PostAuthorNameEdit( props ) {
 
 	const blockProps = useBlockProps();
 
-	const displayName = authorName?.name || __( 'Author Name' );
+	const displayName =
+		projectAuthorName || authorName?.name || __( 'Author Name' );
 
 	const displayAuthor = isLink ? (
 		<a

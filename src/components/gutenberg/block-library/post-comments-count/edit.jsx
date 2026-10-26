@@ -1,16 +1,31 @@
 import { useBlockProps } from '@/components/gutenberg/block-editor';
 import { useState, useEffect } from '@/lib/gutenberg/element';
+import { useSelect } from '@/stores/gutenberg/data';
+import { store as coreStore } from '@/stores/gutenberg/core-data';
 import apiFetch from '@/services/gutenberg/api-fetch';
+import { isProjectContentSource } from '@/services/gutenberg/project/content';
 import { addQueryArgs } from '@/utils/gutenberg/url';
 
 export default function PostCommentsCountEdit( { context } ) {
 	const { postId } = context;
 	const [ commentsCount, setCommentsCount ] = useState();
+	const projectActive = isProjectContentSource();
+	const projectCount = useSelect(
+		( select ) => {
+			if ( ! projectActive || ! postId ) return undefined;
+			return select( coreStore ).getEditedEntityRecord(
+				'postType',
+				'post',
+				postId
+			)?.comment_count;
+		},
+		[ projectActive, postId ]
+	);
 
 	const blockProps = useBlockProps();
 
 	useEffect( () => {
-		if ( ! postId ) {
+		if ( projectActive || ! postId ) {
 			return;
 		}
 
@@ -27,9 +42,12 @@ export default function PostCommentsCountEdit( { context } ) {
 				setCommentsCount( res.headers.get( 'X-WP-Total' ) );
 			}
 		} );
-	}, [ postId ] );
+	}, [ postId, projectActive ] );
 
-	const hasPostAndComments = postId && commentsCount !== undefined;
+	const effectiveCount = projectActive
+		? String( projectCount ?? 0 )
+		: commentsCount;
+	const hasPostAndComments = postId && effectiveCount !== undefined;
 
 	const blockStyles = {
 		...blockProps.style,
@@ -40,7 +58,7 @@ export default function PostCommentsCountEdit( { context } ) {
 
 	return (
 		<div { ...blockProps } style={ blockStyles }>
-			{ hasPostAndComments ? commentsCount : '0' }
+			{ hasPostAndComments ? effectiveCount : '0' }
 		</div>
 	);
 }

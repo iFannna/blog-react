@@ -12,7 +12,7 @@ import {
 	useInnerBlocksProps,
 	store as blockEditorStore,
 } from '@/components/gutenberg/block-editor';
-import { useEntityRecords } from '@/stores/gutenberg/core-data';
+import { useTermRecords } from '../utils/use-term-records';
 
 // The Term Template's layout attribute arranges the term items, not the
 // blocks of the template, which always stack vertically inside each term
@@ -57,7 +57,6 @@ function TermTemplateBlockPreview( {
 		<li
 			{ ...blockPreviewProps }
 			tabIndex={ 0 }
-			// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
 			role="button"
 			onClick={ handleOnClick }
 			onKeyPress={ handleOnClick }
@@ -112,8 +111,7 @@ export default function TermTemplateEdit( {
 		queryArgs.order = 'asc';
 	}
 
-	const { records: terms } = useEntityRecords(
-		'taxonomy',
+	const { records: terms, isResolving, hasResolved } = useTermRecords(
 		taxonomy,
 		queryArgs
 	);
@@ -136,7 +134,7 @@ export default function TermTemplateEdit( {
 		[ terms, taxonomy ]
 	);
 
-	if ( ! terms ) {
+	if ( ! hasResolved || isResolving ) {
 		return (
 			<ul { ...blockProps }>
 				<li className="wp-block-term term-loading">

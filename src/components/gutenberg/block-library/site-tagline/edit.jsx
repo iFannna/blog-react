@@ -8,6 +8,10 @@ import {
 } from '@/components/gutenberg/block-editor';
 import { __ } from '@/lib/gutenberg/i18n';
 import { createBlock, getDefaultBlockName } from '@/lib/gutenberg/blocks';
+import {
+	isProjectContentSource,
+	useProjectSiteSettings,
+} from '@/services/gutenberg/project/content';
 import useDeprecatedTextAlign from '../utils/deprecated-text-align-attributes';
 
 export default function SiteTaglineEdit( props ) {
@@ -15,22 +19,27 @@ export default function SiteTaglineEdit( props ) {
 
 	const { attributes, setAttributes, insertBlocksAfter } = props;
 	const { level, levelOptions } = attributes;
-	const canUserEdit = useSelect(
+	const projectActive = isProjectContentSource();
+	const projectSite = useProjectSiteSettings();
+	const coreCanUserEdit = useSelect(
 		( select ) =>
+			! projectActive &&
 			select( coreStore ).canUser( 'update', {
 				kind: 'root',
 				name: 'site',
 			} ),
-		[]
+		[ projectActive ]
 	);
+	const canUserEdit = ! projectActive && coreCanUserEdit;
 	// Users who cannot edit the site settings cannot read them either, so the
 	// tagline comes from the base entity instead.
-	const [ tagline, setTagline ] = useEntityProp(
+	const [ coreTagline, setTagline ] = useEntityProp(
 		'root',
 		canUserEdit ? 'site' : '__unstableBase',
 		'description',
 		undefined
 	);
+	const tagline = projectActive ? projectSite?.site_desc ?? '' : coreTagline;
 
 	const TagName = level === 0 ? 'p' : `h${ level }`;
 	const blockProps = useBlockProps( {

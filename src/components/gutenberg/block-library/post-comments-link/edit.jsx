@@ -2,6 +2,7 @@ import { useBlockProps } from '@/components/gutenberg/block-editor';
 import { useState, useEffect } from '@/lib/gutenberg/element';
 import { useSelect } from '@/stores/gutenberg/data';
 import apiFetch from '@/services/gutenberg/api-fetch';
+import { isProjectContentSource } from '@/services/gutenberg/project/content';
 import { addQueryArgs } from '@/utils/gutenberg/url';
 import { __, sprintf, _n } from '@/lib/gutenberg/i18n';
 import { store as coreStore } from '@/stores/gutenberg/core-data';
@@ -9,11 +10,12 @@ import { store as coreStore } from '@/stores/gutenberg/core-data';
 function PostCommentsLinkEdit( { context } ) {
 	const { postType, postId } = context;
 	const [ commentsCount, setCommentsCount ] = useState();
+	const projectActive = isProjectContentSource();
 
 	const blockProps = useBlockProps();
 
 	useEffect( () => {
-		if ( ! postId ) {
+		if ( projectActive || ! postId ) {
 			return;
 		}
 
@@ -29,7 +31,7 @@ function PostCommentsLinkEdit( { context } ) {
 				setCommentsCount( res.headers.get( 'X-WP-Total' ) );
 			}
 		} );
-	}, [ postId ] );
+	}, [ postId, projectActive ] );
 
 	const post = useSelect(
 		( select ) =>
@@ -41,9 +43,13 @@ function PostCommentsLinkEdit( { context } ) {
 		[ postType, postId ]
 	);
 
+	const effectiveCount = projectActive
+		? String( post?.comment_count ?? 0 )
+		: commentsCount;
+
 	let commentsText;
-	if ( commentsCount !== undefined ) {
-		const commentsNumber = parseInt( commentsCount );
+	if ( effectiveCount !== undefined ) {
+		const commentsNumber = parseInt( effectiveCount );
 
 		if ( commentsNumber === 0 ) {
 			commentsText = __( 'No comments' );

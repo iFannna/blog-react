@@ -36,6 +36,12 @@ import { store as noticeStore } from '@/stores/gutenberg/notices';
 import { useInstanceId } from '@/hooks/gutenberg/compose';
 import { createInterpolateElement } from '@/lib/gutenberg/element';
 import {
+	isProjectContentSource,
+	useProjectAuthors,
+	useProjectLatestPosts,
+} from '@/services/gutenberg/project/content';
+import { useProjectTerms } from '@/services/gutenberg/project/terms';
+import {
 	MIN_EXCERPT_LENGTH,
 	MAX_EXCERPT_LENGTH,
 	DEFAULT_EXCERPT_LENGTH,
@@ -112,12 +118,17 @@ function Controls( { attributes, setAttributes } ) {
 		featuredImageSizeHeight,
 		addLinkToFeaturedImage,
 	} = attributes;
+	const projectActive = isProjectContentSource();
+	const projectCategories = useProjectTerms(
+		projectActive ? 'category' : null
+	);
+	const projectAuthors = useProjectAuthors();
 	const {
 		imageSizes,
 		defaultImageWidth,
 		defaultImageHeight,
-		categoriesList,
-		authorList,
+		categoriesList: coreCategoriesList,
+		authorList: coreAuthorList,
 	} = useSelect(
 		( select ) => {
 			const { getEntityRecords, getUsers } = select( coreStore );
@@ -131,16 +142,30 @@ function Controls( { attributes, setAttributes } ) {
 					settings.imageDimensions?.[ featuredImageSizeSlug ]
 						?.height ?? 0,
 				imageSizes: settings.imageSizes,
-				categoriesList: getEntityRecords(
-					'taxonomy',
-					'category',
-					CATEGORIES_LIST_QUERY
-				),
-				authorList: getUsers( USERS_LIST_QUERY ),
+				categoriesList: projectActive
+					? null
+					: getEntityRecords(
+							'taxonomy',
+							'category',
+							CATEGORIES_LIST_QUERY
+					  ),
+				authorList: projectActive
+					? null
+					: getUsers( USERS_LIST_QUERY ),
 			};
 		},
-		[ featuredImageSizeSlug ]
+		[ featuredImageSizeSlug, projectActive ]
 	);
+	const categoriesList = projectActive
+		? projectCategories?.terms ?? []
+		: coreCategoriesList;
+	const authorList = projectActive
+		? ( projectAuthors ?? [] ).map( ( author ) => ( {
+				id: author.id,
+				name: author.name,
+				parent: 0,
+		  } ) )
+		: coreAuthorList;
 
 	const dropdownMenuProps = useToolsPanelDropdownMenuProps();
 
@@ -541,8 +566,22 @@ export default function LatestPostsEdit( {
 		savedLayoutType || ( postLayout === 'grid' ? 'grid' : 'default' );
 	const columnCount =
 		layout?.columnCount ?? ( ! savedLayoutType ? columns : undefined ) ?? 3;
-	const { latestPosts } = useSelect(
+
+	const categoryIds = ( categories ?? [] ).map( ( cat ) => cat.id );
+	const projectLatest = useProjectLatestPosts( {
+		perPage: postsToShow,
+		categoryIds,
+		authorId: selectedAuthor,
+		orderBy,
+		order,
+		fullPost: displayPostContent && displayPostContentRadio === 'full_post',
+	} );
+
+	const { latestPosts: coreLatestPosts } = useSelect(
 		( select ) => {
+			if ( projectActive ) {
+				return { latestPosts: null };
+			}
 			const { getEntityRecords } = select( coreStore );
 			const catIds =
 				categories && categories.length > 0
@@ -568,8 +607,18 @@ export default function LatestPostsEdit( {
 				),
 			};
 		},
-		[ postsToShow, order, orderBy, categories, selectedAuthor ]
+		[
+			postsToShow,
+			order,
+			orderBy,
+			categories,
+			selectedAuthor,
+			projectActive,
+		]
 	);
+	const latestPosts = projectActive
+		? projectLatest.posts
+		: coreLatestPosts;
 
 	// If a user clicks to a link prevent redirection and show a warning.
 	const { createWarningNotice } = useDispatch( noticeStore );
@@ -603,6 +652,17 @@ export default function LatestPostsEdit( {
 				layoutType === 'grid' && columnCount && minimumColumnWidth,
 		} ),
 	} );
+
+	if ( projectActive && projectLatest.error ) {
+		return (
+			<div { ...blockProps }>
+				{ inspectorControls }
+				<Placeholder icon={ pin } label={ __( 'Latest Posts' ) }>
+					{ projectLatest.error }
+				</Placeholder>
+			</div>
+		);
+	}
 
 	if ( ! hasPosts ) {
 		return (
@@ -713,7 +773,6 @@ export default function LatestPostsEdit( {
 								),
 								{
 									a: (
-										// eslint-disable-next-line jsx-a11y/anchor-has-content
 										<a
 											className="wp-block-latest-posts__read-more"
 											href={ post.link }

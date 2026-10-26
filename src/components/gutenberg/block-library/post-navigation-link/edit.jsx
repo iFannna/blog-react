@@ -20,6 +20,11 @@ import {
 import { __, _x } from '@/lib/gutenberg/i18n';
 import { useSelect } from '@/stores/gutenberg/data';
 import { store as coreStore } from '@/stores/gutenberg/core-data';
+import { store as editorStore } from '@/components/gutenberg/editor/store';
+import {
+	isProjectContentSource,
+	useProjectAdjacentPosts,
+} from '@/services/gutenberg/project/content';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 export default function PostNavigationLinkEdit( {
@@ -29,6 +34,18 @@ export default function PostNavigationLinkEdit( {
 } ) {
 	const { type, label, showTitle, linkLabel, arrow, taxonomy } = attributes;
 	const isNext = type === 'next';
+	const projectActive = isProjectContentSource();
+	const currentPostId = useSelect(
+		( select ) =>
+			projectActive ? select( editorStore ).getCurrentPostId() : null,
+		[ projectActive ]
+	);
+	const adjacentPosts = useProjectAdjacentPosts( currentPostId );
+	const adjacentPost = adjacentPosts
+		? isNext
+			? adjacentPosts.next
+			: adjacentPosts.prev
+		: null;
 	let placeholder = isNext ? __( 'Next' ) : __( 'Previous' );
 
 	const arrowMap = {
@@ -42,9 +59,9 @@ export default function PostNavigationLinkEdit( {
 	if ( showTitle ) {
 		placeholder = isNext
 			? /* translators: Label before for next and previous post. There is a space after the colon. */
-				__( 'Next: ' ) // eslint-disable-line @wordpress/i18n-no-flanking-whitespace
+				__( 'Next: ' )
 			: /* translators: Label before for next and previous post. There is a space after the colon. */
-				__( 'Previous: ' ); // eslint-disable-line @wordpress/i18n-no-flanking-whitespace
+				__( 'Previous: ' );
 	}
 
 	const ariaLabel = isNext ? __( 'Next post' ) : __( 'Previous post' );
@@ -235,14 +252,22 @@ export default function PostNavigationLinkEdit( {
 						setAttributes( { label: newLabel } )
 					}
 				/>
-				{ showTitle && (
-					<a
-						href="#post-navigation-pseudo-link"
-						onClick={ ( event ) => event.preventDefault() }
-					>
-						{ __( 'An example title' ) }
-					</a>
-				) }
+				{ showTitle &&
+					( adjacentPost ? (
+						<a
+							href={ adjacentPost.link }
+							onClick={ ( event ) => event.preventDefault() }
+						>
+							{ adjacentPost.title }
+						</a>
+					) : (
+						<a
+							href="#post-navigation-pseudo-link"
+							onClick={ ( event ) => event.preventDefault() }
+						>
+							{ __( 'An example title' ) }
+						</a>
+					) ) }
 				{ isNext && displayArrow && (
 					<span
 						className={ `wp-block-post-navigation-link__arrow-next is-arrow-${ arrow }` }

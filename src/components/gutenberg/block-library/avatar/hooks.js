@@ -1,6 +1,7 @@
 import { store as coreStore, useEntityProp } from '@/stores/gutenberg/core-data';
 import { __, sprintf } from '@/lib/gutenberg/i18n';
 import { useSelect } from '@/stores/gutenberg/data';
+import { isProjectContentSource } from '@/services/gutenberg/project/content';
 import { useDefaultAvatar } from '../utils/hooks';
 
 function getAvatarSizes( sizes ) {
@@ -43,22 +44,31 @@ export function useCommentAvatar( { commentId } ) {
 }
 
 export function useUserAvatar( { userId, postId, postType } ) {
-	const { authorDetails } = useSelect(
+	const { authorDetails, projectAuthor } = useSelect(
 		( select ) => {
 			const { getEditedEntityRecord, getUser } = select( coreStore );
 			if ( userId ) {
 				return {
 					authorDetails: getUser( userId ),
+					projectAuthor: null,
 				};
 			}
-			const _authorId = getEditedEntityRecord(
+			const currentPost = getEditedEntityRecord(
 				'postType',
 				postType,
 				postId
-			)?.author;
+			);
+			if ( isProjectContentSource() ) {
+				return {
+					authorDetails: null,
+					projectAuthor: currentPost?._project ?? null,
+				};
+			}
+			const _authorId = currentPost?.author;
 
 			return {
 				authorDetails: _authorId ? getUser( _authorId ) : null,
+				projectAuthor: null,
 			};
 		},
 		[ postType, postId, userId ]
@@ -71,13 +81,21 @@ export function useUserAvatar( { userId, postId, postType } ) {
 		: null;
 	const { minSize, maxSize } = getAvatarSizes( sizes );
 	const defaultAvatar = useDefaultAvatar();
+	const authorName = projectAuthor
+		? projectAuthor.authorName
+		: authorDetails?.name;
+	const src = projectAuthor
+		? projectAuthor.authorAvatar || defaultAvatar
+		: avatarUrls
+			? avatarUrls[ avatarUrls.length - 1 ]
+			: defaultAvatar;
 	return {
-		src: avatarUrls ? avatarUrls[ avatarUrls.length - 1 ] : defaultAvatar,
+		src,
 		minSize,
 		maxSize,
-		alt: authorDetails
+		alt: authorName
 			? // translators: %s: Author name.
-				sprintf( __( '%s Avatar' ), authorDetails?.name )
+				sprintf( __( '%s Avatar' ), authorName )
 			: __( 'Default Avatar' ),
 	};
 }

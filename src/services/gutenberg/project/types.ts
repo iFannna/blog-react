@@ -18,7 +18,10 @@ export interface ProjectArticle {
   visibility: 1 | 2;
   publish_at: string | null;
   comment_status: number;
+  comment_count: number;
   author_id: number;
+  author_name: string;
+  author_avatar: string;
   year: number;
   month: number;
   day: number;

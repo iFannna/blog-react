@@ -15,6 +15,10 @@ import {
 	__experimentalToolsPanelItem as ToolsPanelItem,
 } from '@/components/gutenberg/ui';
 import { decodeEntities } from '@/utils/gutenberg/html-entities';
+import {
+	isProjectContentSource,
+	useProjectSiteSettings,
+} from '@/services/gutenberg/project/content';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 import useDeprecatedTextAlign from '../utils/deprecated-text-align-attributes';
 
@@ -23,22 +27,27 @@ export default function SiteTitleEdit( props ) {
 
 	const { attributes, setAttributes } = props;
 	const { level, levelOptions, isLink, linkTarget } = attributes;
-	const canUserEdit = useSelect(
+	const projectActive = isProjectContentSource();
+	const projectSite = useProjectSiteSettings();
+	const coreCanUserEdit = useSelect(
 		( select ) =>
+			! projectActive &&
 			select( coreStore ).canUser( 'update', {
 				kind: 'root',
 				name: 'site',
 			} ),
-		[]
+		[ projectActive ]
 	);
+	const canUserEdit = ! projectActive && coreCanUserEdit;
 	// Users who cannot edit the site settings cannot read them either, so the
 	// title comes from the base entity instead.
-	const [ title, setSiteTitle ] = useEntityProp(
+	const [ coreTitle, setSiteTitle ] = useEntityProp(
 		'root',
 		canUserEdit ? 'site' : '__unstableBase',
 		canUserEdit ? 'title' : 'name',
 		undefined
 	);
+	const title = projectActive ? projectSite?.site_name ?? '' : coreTitle;
 	const dropdownMenuProps = useToolsPanelDropdownMenuProps();
 	const blockEditingMode = useBlockEditingMode();
 	const TagName = level === 0 ? 'p' : `h${ level }`;

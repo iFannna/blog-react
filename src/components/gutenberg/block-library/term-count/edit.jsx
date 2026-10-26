@@ -1,6 +1,7 @@
 import { __ } from '@/lib/gutenberg/i18n';
 import { useBlockProps, BlockControls } from '@/components/gutenberg/block-editor';
 import { ToolbarDropdownMenu } from '@/components/gutenberg/ui';
+import { isProjectContentSource } from '@/services/gutenberg/project/content';
 import {
 	bareNumber,
 	numberInParenthesis,
@@ -38,15 +39,46 @@ const BRACKET_TYPES = {
 	},
 };
 
-export default function TermCountEdit( {
+export default function TermCountEdit( props ) {
+	return isProjectContentSource() ? (
+		<ProjectTermCountEdit { ...props } />
+	) : (
+		<CoreTermCountEdit { ...props } />
+	);
+}
+
+function ProjectTermCountEdit( {
+	attributes,
+	setAttributes,
+	context,
+} ) {
+	const termCount = context?.termId ? context?.termData?.count ?? 0 : 0;
+	return (
+		<TermCountView
+			attributes={ attributes }
+			setAttributes={ setAttributes }
+			termCount={ termCount }
+		/>
+	);
+}
+
+function CoreTermCountEdit( {
 	attributes,
 	setAttributes,
 	context: { termId, taxonomy },
 } ) {
-	const { bracketType } = attributes;
 	const term = useTermCount( termId, taxonomy );
+	return (
+		<TermCountView
+			attributes={ attributes }
+			setAttributes={ setAttributes }
+			termCount={ term?.termCount || 0 }
+		/>
+	);
+}
 
-	const termCount = term?.termCount || 0;
+function TermCountView( { attributes, setAttributes, termCount } ) {
+	const { bracketType } = attributes;
 
 	const blockProps = useBlockProps();
 

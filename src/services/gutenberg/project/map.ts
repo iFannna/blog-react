@@ -7,6 +7,9 @@ export interface EditorPostProjectMeta {
   coverImage: string;
   articleType: number;
   commentStatus: number;
+  commentCount: number;
+  authorName: string;
+  authorAvatar: string;
   trashed: boolean;
   realId: number | null;
 }
@@ -25,6 +28,7 @@ export interface EditorPost {
   excerpt: { raw: string; rendered: string; protected: boolean };
   format: "standard";
   comment_status: "open" | "closed";
+  comment_count: number;
   ping_status: "closed";
   categories: number[];
   tags: number[];
@@ -102,6 +106,7 @@ export function toEditorPost(
     },
     format: "standard",
     comment_status: article.comment_status === 1 ? "open" : "closed",
+    comment_count: article.comment_count ?? 0,
     ping_status: "closed",
     categories: article.categories.map((item) => item.id),
     tags: article.tags.map((item) => item.id),
@@ -121,6 +126,9 @@ export function toEditorPost(
       coverImage: article.cover_image,
       articleType: article.type,
       commentStatus: article.comment_status,
+      commentCount: article.comment_count ?? 0,
+      authorName: article.author_name ?? "",
+      authorAvatar: article.author_avatar ?? "",
       trashed: article.status === 2,
       realId: article.id,
     },
@@ -142,6 +150,7 @@ export function createNewEditorPost(): EditorPost {
     excerpt: { raw: "", rendered: "", protected: false },
     format: "standard",
     comment_status: "open",
+    comment_count: 0,
     ping_status: "closed",
     categories: [],
     tags: [],
@@ -167,6 +176,9 @@ export function createNewEditorPost(): EditorPost {
       coverImage: "",
       articleType: 1,
       commentStatus: 1,
+      commentCount: 0,
+      authorName: "",
+      authorAvatar: "",
       trashed: false,
       realId: null,
     },
