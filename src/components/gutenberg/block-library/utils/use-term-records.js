@@ -35,8 +35,8 @@ export function useTermRecords( slug, query = {} ) {
 			} = select( coreStore );
 			const args = [ 'taxonomy', slug, query ];
 			return {
-				records: getEntityRecords( ...args ),
-				total: getEntityRecordsTotalItems?.( ...args ),
+				records: getEntityRecords( ...args ) ?? EMPTY_ARRAY,
+				total: getEntityRecordsTotalItems?.( ...args ) ?? 0,
 				isResolving: isResolving( 'getEntityRecords', args ),
 				hasResolved: hasFinishedResolution( 'getEntityRecords', args ),
 			};

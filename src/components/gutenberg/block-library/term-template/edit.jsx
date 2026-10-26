@@ -144,7 +144,7 @@ export default function TermTemplateEdit( {
 		);
 	}
 
-	if ( ! terms.length ) {
+	if ( ! terms?.length ) {
 		return <p { ...blockProps }> { __( 'No terms found.' ) }</p>;
 	}
 
