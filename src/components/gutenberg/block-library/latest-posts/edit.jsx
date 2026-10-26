@@ -561,6 +561,7 @@ export default function LatestPostsEdit( {
 		featuredImageSizeHeight,
 		addLinkToFeaturedImage,
 	} = attributes;
+	const projectActive = isProjectContentSource();
 	const { type: savedLayoutType, minimumColumnWidth } = layout || {};
 	const layoutType =
 		savedLayoutType || ( postLayout === 'grid' ? 'grid' : 'default' );
@@ -753,16 +754,17 @@ export default function LatestPostsEdit( {
 						/>
 					);
 
+					// 中文没有空格分隔，按字符数截断才能让「最大字数」生效
+					const excerptCharacters = Array.from( excerpt.trim() );
 					const needsReadMore =
-						excerptLength < excerpt.trim().split( ' ' ).length &&
+						excerptLength < excerptCharacters.length &&
 						post.excerpt.raw === '';
 
 					const postExcerpt = needsReadMore ? (
 						<>
-							{ excerpt
-								.trim()
-								.split( ' ', excerptLength )
-								.join( ' ' ) }
+							{ excerptCharacters
+								.slice( 0, excerptLength )
+								.join( '' ) }
 							{ createInterpolateElement(
 								sprintf(
 									/* translators: 1: Hidden accessibility text: Post title */
