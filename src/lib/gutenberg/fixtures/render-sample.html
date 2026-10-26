@@ -350,7 +350,34 @@ console.log( greeting );</code></pre>
 <div class="vendor-widget"><span>未知静态区块的内部 HTML 应保留</span></div>
 <!-- /wp:vendor/widget -->
 
-<!-- wp:latest-posts /-->
+<!-- wp:heading -->
+<h2 class="wp-block-heading">动态区块</h2>
+<!-- /wp:heading -->
+
+<!-- wp:site-title {"level":2} /-->
+
+<!-- wp:site-tagline /-->
+
+<!-- wp:site-logo {"width":120} /-->
+
+<!-- wp:archives {"showPostCounts":true} /-->
+
+<!-- wp:categories {"showPostCounts":true} /-->
+
+<!-- wp:tag-cloud {"numberOfTags":10} /-->
+
+<!-- wp:latest-posts {"postsToShow":3,"displayPostDate":true,"displayAuthor":true} /-->
+
+<!-- wp:latest-comments {"commentsToShow":3} /-->
+
+<!-- wp:calendar /-->
+
+<!-- wp:terms-query {"termQuery":{"perPage":5,"taxonomy":"category","order":"asc","orderBy":"name","include":[],"hideEmpty":true,"showNested":false,"inherit":false}} -->
+<div class="wp-block-terms-query"><!-- wp:term-template -->
+<!-- wp:term-name {"isLink":true} /-->
+<!-- wp:term-count /-->
+<!-- /wp:term-template --></div>
+<!-- /wp:terms-query -->
 
 <!-- wp:paragraph -->
 <p>下面两段验证整块隐藏与视口可见性。</p>

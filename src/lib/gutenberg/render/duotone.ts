@@ -30,12 +30,14 @@ const DUOTONE_PRESETS: DuotonePreset[] = [
 
 /** supports.filter.duotone 对应的前台选择器（来自各 block.json selectors）。 */
 const DUOTONE_SELECTORS: Record<string, string> = {
+	'core/avatar': '.wp-block-avatar img',
 	'core/cover':
 		'.wp-block-cover > .wp-block-cover__image-background, .wp-block-cover > .wp-block-cover__video-background',
 	'core/gallery': '.wp-block-gallery :where(img)',
 	'core/image': '.wp-block-image img',
 	'core/media-text':
 		'.wp-block-media-text > .wp-block-media-text__media img, .wp-block-media-text > .wp-block-media-text__media video',
+	'core/site-logo': '.wp-block-site-logo img',
 	'core/video': '.wp-block-video video',
 };
 

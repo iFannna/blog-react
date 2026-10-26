@@ -145,7 +145,29 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           {/* 文章正文 */}
           <div className="entry-content page-entry-content">
             {article.contentFormat === "gutenberg" ? (
-              <GutenbergContent content={article.content} />
+              <GutenbergContent
+                content={article.content}
+                locale={locale}
+                post={{
+                  id: article.id,
+                  title: article.title,
+                  link: localePath(locale, articleHref(article)),
+                  year: article.year,
+                  month: article.month,
+                  day: article.day,
+                  author: {
+                    id: article.authorId,
+                    name: article.authorName,
+                    avatar: article.authorAvatar,
+                    description: article.authorDescription,
+                  },
+                  categories: article.categories,
+                  tags: article.tags,
+                  commentCount: article.commentCount,
+                  commentStatus: article.commentStatus,
+                }}
+                prevNext={prevNext}
+              />
             ) : (
               <MarkdownContent content={article.content} />
             )}

@@ -475,7 +475,7 @@ export default function CommentsPanel({ articleId, commentStatus }: CommentsPane
   }
 
   return (
-    <section className="article-comments">
+    <section id="comments" className="article-comments">
       <div className="article-comments-heading">
         <h3 className="article-comments-title">评论</h3>
         <p className="article-comments-subtitle">{totalComments} 条讨论</p>

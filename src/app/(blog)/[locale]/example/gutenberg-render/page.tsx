@@ -26,7 +26,7 @@ export function generateStaticParams() {
 
 export const metadata: Metadata = {
 	title: "Gutenberg 区块渲染样例",
-	description: "Gutenberg 静态区块与属性渲染回归样例",
+	description: "Gutenberg 静态区块、动态区块与属性渲染回归样例",
 };
 
 export default async function GutenbergRenderSamplePage({
@@ -47,7 +47,7 @@ export default async function GutenbergRenderSamplePage({
 					items={[
 						{ name: "Home", path: localePath(locale, "/") },
 						{
-							name: "Gutenberg 渲染样例",
+							name: "Gutenberg 区块渲染样例",
 							path: localePath(locale, "/example/gutenberg-render"),
 						},
 					]}
@@ -57,10 +57,10 @@ export default async function GutenbergRenderSamplePage({
 			<div id="primary" className="content-area">
 				<article className="page-entry">
 					<header className="entry-header">
-						<h1 className="entry-title">Gutenberg 静态区块渲染样例</h1>
+						<h1 className="entry-title">Gutenberg 区块渲染样例</h1>
 					</header>
 					<div className="entry-content page-entry-content">
-						<GutenbergContent content={sample} />
+						<GutenbergContent content={sample} locale={locale} />
 					</div>
 				</article>
 			</div>

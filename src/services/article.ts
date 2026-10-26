@@ -42,6 +42,7 @@ export function mapArticleVOToArticle(vo: ArticleVO): Article {
     coverImage: vo.cover_image,
     authorName: vo.author_name,
     authorAvatar: vo.author_avatar,
+    authorDescription: vo.author_description ?? "",
     authorId: vo.author_id,
     categories: (vo.categories || []).map((item) => ({ id: item.id, name: item.name })),
     tags: (vo.tags || []).map((item) => ({ id: item.id, name: item.name })),

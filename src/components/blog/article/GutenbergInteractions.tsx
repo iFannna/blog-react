@@ -4,6 +4,7 @@ import {
 	useEffect,
 	useRef,
 	useState,
+	type ChangeEvent as ReactChangeEvent,
 	type KeyboardEvent as ReactKeyboardEvent,
 	type MouseEvent as ReactMouseEvent,
 	type ReactNode,
@@ -297,6 +298,16 @@ export default function GutenbergInteractions({
 		}
 	};
 
+	// 归档、分类下拉在选中后跳转到对应归档/术语页
+	const handleChange = (event: ReactChangeEvent<HTMLDivElement>) => {
+		const select = (event.target as HTMLElement).closest<HTMLSelectElement>(
+			".wp-block-archives-dropdown select, .wp-block-categories-dropdown select",
+		);
+		if (select?.value) {
+			window.location.assign(select.value);
+		}
+	};
+
 	const handleKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>) => {
 		const target = event.target as HTMLElement;
 
@@ -357,6 +368,7 @@ export default function GutenbergInteractions({
 			ref={rootRef}
 			className="gutenberg-content"
 			onClick={handleClick}
+			onChange={handleChange}
 			onKeyDown={handleKeyDown}
 		>
 			{children}
