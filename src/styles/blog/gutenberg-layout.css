@@ -290,6 +290,24 @@
   padding-bottom: 1rem;
 }
 
+/* Accordion / Tabs：没有运行时脚本时只呈现初始状态 */
+
+.gutenberg-content .wp-block-accordion-item:not(.is-open) > .wp-block-accordion-panel {
+  display: none;
+}
+
+.gutenberg-content .wp-block-tabs .wp-block-tab-panels > .wp-block-tab-panel {
+  display: none;
+}
+
+.gutenberg-content .wp-block-tabs .wp-block-tab-panels > .wp-block-tab-panel:first-child {
+  display: block;
+}
+
+.gutenberg-content .wp-block-tabs .wp-block-tab-list > button:first-of-type {
+  border-bottom: 2px solid currentColor;
+}
+
 .gutenberg-content .wp-block-details > summary {
   display: flex;
   align-items: baseline;
@@ -353,14 +371,19 @@
   max-width: none;
 }
 
-.gutenberg-content .alignwide {
+/* 只有正文顶层区块做容器出血；嵌套区块的宽/全宽由 layout 生成的规则约束 */
+.gutenberg-content > .alignwide {
   width: auto;
   margin-inline: calc(-1 * var(--gb-wide-bleed));
 }
 
-.gutenberg-content .alignfull {
+.gutenberg-content > .alignfull {
   width: auto;
   margin-inline: calc(-1 * var(--gb-full-bleed));
+}
+
+.gutenberg-content :is(.is-layout-constrained, .is-layout-flex, .is-layout-grid) > :is(.alignwide, .alignfull) {
+  margin-inline: 0;
 }
 
 /* Narrow screens */
