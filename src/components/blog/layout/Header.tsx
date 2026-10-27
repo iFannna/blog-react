@@ -26,18 +26,42 @@ export default function Header({ navItems, github, gitee, logo }: HeaderProps) {
   const router = useRouter();
   const { prefix } = useLocale();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // 面板可见性与逻辑开关分离：BlogMate 关闭时面板先保持 250ms 再消失
+  const [isMobileMenuVisible, setIsMobileMenuVisible] = useState(false);
   const [openMobileKeys, setOpenMobileKeys] = useState<Set<string>>(new Set());
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const closeTimerRef = useRef<number | null>(null);
+
+  const clearCloseTimer = useCallback(() => {
+    if (closeTimerRef.current !== null) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  }, []);
+
+  const openMobileMenu = useCallback(() => {
+    clearCloseTimer();
+    setIsMobileMenuVisible(true);
+    setIsMobileMenuOpen(true);
+  }, [clearCloseTimer]);
 
   const closeMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(false);
-    setOpenMobileKeys(new Set());
-  }, []);
+    clearCloseTimer();
+    closeTimerRef.current = window.setTimeout(() => {
+      setIsMobileMenuVisible(false);
+      // 面板真正消失后再清子菜单，避免 250ms 滞留期内看到折叠动画
+      setOpenMobileKeys(new Set());
+    }, 250);
+  }, [clearCloseTimer]);
 
   const toggleMobileMenu = useCallback(() => {
-    setIsMobileMenuOpen((prev) => !prev);
-  }, []);
+    if (isMobileMenuOpen) closeMobileMenu();
+    else openMobileMenu();
+  }, [isMobileMenuOpen, closeMobileMenu, openMobileMenu]);
+
+  useEffect(() => () => clearCloseTimer(), [clearCloseTimer]);
 
   // 桌面多级菜单显隐(点外部收起)
   const { openKeys, toggle, clear } = useDropdownMenu(".primary-nav");
@@ -77,8 +101,14 @@ export default function Header({ navItems, github, gitee, logo }: HeaderProps) {
   const toggleMobileSub = useCallback((key: string) => {
     setOpenMobileKeys((prev) => {
       const next = new Set(prev);
-      if (next.has(key)) next.delete(key);
-      else next.add(key);
+      if (next.has(key)) {
+        // 收起父级时一并收起各级子菜单，和 BlogMate 一致
+        for (const openKey of prev) {
+          if (openKey === key || openKey.startsWith(`${key}/`)) next.delete(openKey);
+        }
+      } else {
+        next.add(key);
+      }
       return next;
     });
   }, []);
@@ -95,7 +125,10 @@ export default function Header({ navItems, github, gitee, logo }: HeaderProps) {
   // 切到桌面端时关闭移动菜单,清掉 state 与全屏遮罩
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 1024) setIsMobileMenuOpen(false);
+      if (window.innerWidth > 1024) {
+        setIsMobileMenuOpen(false);
+        setIsMobileMenuVisible(false);
+      }
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -103,7 +136,7 @@ export default function Header({ navItems, github, gitee, logo }: HeaderProps) {
 
   useEffect(() => {
     const root = document.documentElement;
-    if (isMobileMenuOpen) {
+    if (isMobileMenuVisible) {
       root.classList.add("is-mobile-menu-active");
     } else {
       root.classList.remove("is-mobile-menu-active");
@@ -111,7 +144,7 @@ export default function Header({ navItems, github, gitee, logo }: HeaderProps) {
     return () => {
       root.classList.remove("is-mobile-menu-active");
     };
-  }, [isMobileMenuOpen]);
+  }, [isMobileMenuVisible]);
 
   useEffect(() => {
     if (!isMobileMenuOpen) return;
@@ -382,7 +415,7 @@ function MobileMenuList({ items, trail, pathname, openKeys, onToggle, onNavigate
         if (children.length > 0) {
           const open = openKeys.has(key);
           return (
-            <li key={key} className="menu-item-has-children">
+            <li key={key} className={`menu-item-has-children${open ? " is-open" : ""}`}>
               <button
                 type="button"
                 className="menu-row menu-parent"
@@ -391,12 +424,12 @@ function MobileMenuList({ items, trail, pathname, openKeys, onToggle, onNavigate
               >
                 <span className="menu-label">{item.label}</span>
                 <span className="submenu-toggle" aria-hidden="true">
-                  <svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M2.5 4.5 6 8l3.5-3.5" />
+                  <svg viewBox="0 0 32 32" width="14" height="14" aria-hidden="true">
+                    <path d="M24.958 10.483a1.29 1.29 0 00-1.868 0l-7.074 7.074-7.074-7.074c-.534-.534-1.335-.534-1.868 0s-.534 1.335 0 1.868l8.008 8.008c.267.267.667.4.934.4s.667-.133.934-.4l8.008-8.008a1.29 1.29 0 000-1.868z" />
                   </svg>
                 </span>
               </button>
-              {open && (
+              <div className="submenu-collapse">
                 <ul className="sub-menu">
                   <MobileMenuList
                     items={children}
@@ -407,7 +440,7 @@ function MobileMenuList({ items, trail, pathname, openKeys, onToggle, onNavigate
                     onNavigate={onNavigate}
                   />
                 </ul>
-              )}
+              </div>
             </li>
           );
         }

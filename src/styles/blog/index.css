@@ -515,52 +515,35 @@ p {
   display: none;
 }
 
-/* Mobile Nav —— 抽屉按 BlogMate 口径：面板铺满剩余视口、行高约 45px、子菜单就地折叠 */
+/* Mobile Nav —— 抽屉按 BlogMate 口径：面板铺满视口、行高 45px、子菜单就地折叠 */
 @media (max-width: 1024px) {
-  .header-widgets {
-    order: 3;
-    margin-left: auto;
-  }
   .mobile-nav {
     display: flex;
-    order: 4;
-  }
-  .is-mobile-menu-active .mobile-nav {
-    margin-left: auto;
-  }
-  .is-mobile-menu-active .header-widgets {
-    display: none;
   }
   .primary-nav {
     display: none !important;
   }
 
+  /* 面板：白底、顶部 1px 分隔线、底部投影；BlogMate 的开关是无动画的 */
   .mobile-navigation {
-    display: none;
+    display: block;
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     height: 100vh;
-    max-height: calc(100dvh - 100%);
-    overflow-y: auto;
+    margin-top: -1px;
+    border-top: 1px solid #eaeaea;
     background: var(--color-bg);
+    box-shadow: 0 15px 25px -10px rgba(50, 52, 54, 0.125);
+    overflow: hidden;
+    visibility: hidden;
     z-index: 999;
     padding: 0;
-    /* BlogMate 抽屉行高 44.78px = 13.6px 字号 + 1.8 行高 + 上下 10px；用 px 是因为本站根字号在窄屏会缩到 80% */
     font-size: 13.6px;
   }
   .is-mobile-menu-active .mobile-navigation {
-    display: block;
-    animation: mobile-menu-reveal 0.35s ease-out;
-  }
-  @keyframes mobile-menu-reveal {
-    from {
-      clip-path: circle(0 at 100% 0);
-    }
-    to {
-      clip-path: circle(150% at 100% 0);
-    }
+    visibility: visible;
   }
 
   .mobile-navigation ul {
@@ -569,10 +552,27 @@ p {
     margin: 0;
     padding: 0;
   }
+  /* BlogMate 由菜单列表自身滚动（68vh），面板不滚 */
+  .mobile-navigation > .menu {
+    max-height: 68vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  }
+  .mobile-navigation > .menu::-webkit-scrollbar {
+    width: 5.6px;
+  }
+  .mobile-navigation > .menu::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .mobile-navigation > .menu::-webkit-scrollbar-track {
+    background: transparent;
+  }
   .mobile-navigation li {
     display: block;
     width: 100%;
-    border-bottom: 1px solid var(--color-border-subtle);
+    border-bottom: 1px solid #eaeaea;
   }
   .mobile-navigation .menu-row {
     display: flex;
@@ -581,10 +581,10 @@ p {
     padding: 0;
     background: none;
     border: 0;
-    color: inherit;
+    color: #000;
     font: inherit;
     font-weight: 500;
-    line-height: 1.8;
+    line-height: 23.8px;
     text-align: left;
     text-decoration: none;
     cursor: pointer;
@@ -593,76 +593,127 @@ p {
     flex: 1 1 auto;
     padding: 10px 30px;
   }
-  .mobile-navigation .submenu-toggle {
+  /* 用 3 类名提高优先级，压住后面桌面下拉的 .sub-menu .submenu-toggle 规则 */
+  .mobile-navigation .menu-row > .submenu-toggle {
     flex: 0 0 50px;
     width: 50px;
     align-self: stretch;
-    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-left: 1px solid var(--color-border-subtle);
-    transition: transform 0.25s;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-left: 1px solid rgba(0, 0, 0, 0.09);
+    box-shadow: none;
+    color: #000;
   }
-  .mobile-navigation .menu-parent[aria-expanded="true"] .submenu-toggle {
+  .mobile-navigation .menu-row > .submenu-toggle:hover,
+  .mobile-navigation .menu-row > .submenu-toggle:focus-visible,
+  .mobile-navigation .menu-row:hover > .submenu-toggle,
+  .mobile-navigation .menu-row:focus-visible > .submenu-toggle {
+    background: none;
+    box-shadow: none;
+    color: #000;
+  }
+  .mobile-navigation .submenu-toggle svg {
+    display: block;
+    fill: currentColor;
+    transition: transform 0.35s ease;
+  }
+  /* 只旋转箭头，分隔线和按钮本身不动 */
+  .mobile-navigation .menu-parent[aria-expanded="true"] .submenu-toggle svg {
     transform: rotate(180deg);
   }
-  .mobile-navigation .sub-menu {
-    background: #f8f8f8;
+
+  /* 子菜单：半透明底、就地折叠，展开 350ms（对应 BlogMate 的 slideDown/slideUp） */
+  .mobile-navigation .submenu-collapse {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition: grid-template-rows 0.35s ease, visibility 0s linear 0.35s;
   }
-  /* 桌面端下拉用的是同一个 .sub-menu 类，这里把绝对定位/隐藏等属性还原成文档流内的折叠列表 */
+  .mobile-navigation li.is-open > .submenu-collapse {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition: grid-template-rows 0.35s ease;
+  }
   .mobile-navigation .sub-menu,
   .mobile-navigation .sub-menu .sub-menu {
+    display: block;
     position: static;
     top: auto;
     left: auto;
     width: 100%;
     min-width: 0;
+    min-height: 0;
     margin: 0;
     padding: 0;
-    border-top: 0;
+    border: 0;
     border-radius: 0;
     box-shadow: none;
     font-size: inherit;
     color: inherit;
     opacity: 1;
-    visibility: visible;
+    visibility: inherit;
     transform: none;
     pointer-events: auto;
-    transition: none;
     z-index: auto;
+    background: #f8f8f8;
+    overflow: hidden;
   }
   .mobile-navigation .sub-menu::before {
     display: none;
   }
-  .mobile-navigation .sub-menu .menu-label {
-    padding-left: 50px;
+  .mobile-navigation .sub-menu .menu-row {
+    color: #333;
     font-weight: 400;
   }
-  .mobile-navigation .sub-menu .sub-menu {
-    background: #f1f1f1;
+  .mobile-navigation .sub-menu .menu-label {
+    padding-left: 50px;
   }
   .mobile-navigation .sub-menu .sub-menu .menu-label {
     padding-left: 70px;
   }
-  /* 触屏没有 hover，只有真指针设备才给整条主色反馈 */
-  @media (hover: hover) {
-    .mobile-navigation .menu-row:hover .menu-label {
-      background-color: var(--color-primary);
-      color: var(--color-on-primary);
-    }
+
+  /* 打开抽屉时头部只留 logo 和关闭按钮，与 BlogMate 一致（收起态不动按钮） */
+  .is-mobile-menu-active .header-widgets {
+    display: none;
+  }
+  .is-mobile-menu-active .mobile-nav {
+    margin-left: auto;
   }
 
-  /* Dark mode mobile nav */
+  /* Dark mode mobile nav —— 与 BlogMate 深色实测一致 */
   [data-theme="dark"] .mobile-navigation {
-    background: var(--color-bg);
+    color: rgba(255, 255, 255, 0.7);
+  }
+  [data-theme="dark"] .mobile-navigation li {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+  [data-theme="dark"] .mobile-navigation .menu-row {
     color: rgba(255, 255, 255, 0.7);
   }
   [data-theme="dark"] .mobile-navigation .sub-menu {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.3);
   }
-  [data-theme="dark"] .mobile-navigation .sub-menu .sub-menu {
-    background: rgba(255, 255, 255, 0.07);
+  [data-theme="dark"] .mobile-navigation .sub-menu .menu-row {
+    color: #ffffff;
+  }
+  [data-theme="dark"] .mobile-navigation .submenu-toggle {
+    border-left-color: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.7);
+  }
+  [data-theme="dark"] .mobile-navigation .menu-row > .submenu-toggle {
+    border-left-color: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.7);
+  }
+  [data-theme="dark"] .mobile-navigation .menu-row > .submenu-toggle:hover,
+  [data-theme="dark"] .mobile-navigation .menu-row > .submenu-toggle:focus-visible,
+  [data-theme="dark"] .mobile-navigation .menu-row:hover > .submenu-toggle,
+  [data-theme="dark"] .mobile-navigation .menu-row:focus-visible > .submenu-toggle {
+    background: none;
+    color: rgba(255, 255, 255, 0.7);
   }
 }
 
@@ -683,6 +734,9 @@ p {
   .logo .logo-inner {
     margin-top: 2.1875rem;
     margin-bottom: 1.5625rem;
+  }
+  .mobile-nav {
+    margin-left: 1rem;
   }
 }
 
@@ -1264,6 +1318,8 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 
 .is-mobile-menu-active {
   overflow: hidden;
+  /* 抽屉打开时取消 reserved gutter，否则抽屉右侧会留出滚动条槽位 */
+  scrollbar-gutter: auto;
 }
 
 /* Dark Mode Toggle */
