@@ -304,9 +304,12 @@
   margin-inline: calc(-1 * var(--gb-wide-bleed));
 }
 
+/* 全幅按视口出血，和博客原生的 .page-fullwidth 一致；body 已有 overflow-x: hidden 兜底 */
 .gutenberg-content > .alignfull {
-  width: auto;
-  margin-inline: calc(-1 * var(--gb-full-bleed));
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 
 .gutenberg-content :is(.is-layout-constrained, .is-layout-flex, .is-layout-grid) > :is(.alignwide, .alignfull) {
