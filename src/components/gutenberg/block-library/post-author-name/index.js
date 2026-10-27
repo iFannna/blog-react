@@ -3,14 +3,12 @@ import initBlock from '../utils/init-block';
 import metadata from './block.json';
 import edit from './edit';
 import deprecated from './deprecated';
-import transforms from './transforms';
 
 const { name } = metadata;
 export { metadata, name };
 
 export const settings = {
 	icon,
-	transforms,
 	edit,
 	deprecated,
 };

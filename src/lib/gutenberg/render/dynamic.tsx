@@ -74,7 +74,6 @@ export const DYNAMIC_BLOCK_NAMES = new Set([
   "core/categories",
   "core/latest-comments",
   "core/latest-posts",
-  "core/post-author",
   "core/post-author-biography",
   "core/post-author-name",
   "core/post-comments-count",
@@ -443,12 +442,6 @@ export function getBlockWrapper(
   }
   if (blockName === "core/site-logo" && !readNumber(attributes.width, 0)) {
     classes.add("is-default-size");
-  }
-  if (blockName === "core/post-author") {
-    const textAlign = readString(attributes.textAlign);
-    if (textAlign) {
-      classes.add(`has-text-align-${kebabCase(textAlign)}`);
-    }
   }
   if (blockName === "core/post-terms") {
     const term = readString(attributes.term);
@@ -1165,54 +1158,6 @@ function PostAuthorBiographyBlock({ context }: DynamicBlockProps) {
   return <div dangerouslySetInnerHTML={{ __html: biography }} />;
 }
 
-function PostAuthorBlock({ attributes, context }: DynamicBlockProps) {
-  const post = context.post;
-  if (!post) {
-    return null;
-  }
-  const showAvatar = readBoolean(attributes.showAvatar, true);
-  const showBio = readBoolean(attributes.showBio);
-  const avatarSize = Math.max(readNumber(attributes.avatarSize, 48), 1);
-  const byline = readString(attributes.byline);
-  const name = decodeEntities(post.author.name);
-  const isLink = readBoolean(attributes.isLink);
-  const nameContent = isLink ? (
-    <a
-      href={authorLink(context.locale, post.author.name)}
-      target={readString(attributes.linkTarget) === "_blank" ? "_blank" : undefined}
-      rel="author"
-    >
-      {name}
-    </a>
-  ) : (
-    name
-  );
-  return (
-    <>
-      {showAvatar ? (
-        <div className="wp-block-post-author__avatar">
-          <img
-            width={avatarSize}
-            height={avatarSize}
-            src={post.author.avatar || DEFAULT_AVATAR}
-            alt={name || "Avatar"}
-          />
-        </div>
-      ) : null}
-      <div className="wp-block-post-author__content">
-        {byline ? <p className="wp-block-post-author__byline">{byline}</p> : null}
-        <p className="wp-block-post-author__name">{nameContent}</p>
-        {showBio && post.author.description ? (
-          <p
-            className="wp-block-post-author__bio"
-            dangerouslySetInnerHTML={{ __html: post.author.description }}
-          />
-        ) : null}
-      </div>
-    </>
-  );
-}
-
 function PostCommentsCountBlock({ context }: DynamicBlockProps) {
   if (!context.post) {
     return null;
@@ -1405,8 +1350,6 @@ export function renderDynamicBlock(name: string, props: DynamicBlockProps): Reac
       return <AvatarBlock {...props} />;
     case "core/breadcrumbs":
       return <BreadcrumbsBlock {...props} />;
-    case "core/post-author":
-      return <PostAuthorBlock {...props} />;
     case "core/post-author-name":
       return <PostAuthorNameBlock {...props} />;
     case "core/post-author-biography":

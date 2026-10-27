@@ -58,7 +58,6 @@ import * as pattern from './pattern';
 import * as paragraph from './paragraph';
 import * as playlist from './playlist';
 import * as playlistTrack from './playlist-track';
-import * as postAuthor from './post-author';
 import * as postAuthorName from './post-author-name';
 import * as postAuthorBiography from './post-author-biography';
 import * as postCommentsCount from './post-comments-count';
@@ -106,7 +105,6 @@ import * as termCount from './term-count';
 import * as termName from './term-name';
 import * as termsQuery from './terms-query';
 import * as termTemplate from './term-template';
-import * as textColumns from './text-columns';
 import * as verse from './verse';
 import * as video from './video';
 import * as footnotes from './footnotes';
@@ -172,7 +170,6 @@ const getAllBlocks = () => {
 		tabPanels,
 		tabPanel,
 		tagCloud,
-		textColumns,
 		verse,
 		video,
 		footnotes,
@@ -191,7 +188,6 @@ const getAllBlocks = () => {
 		postExcerpt,
 		postFeaturedImage,
 		postContent,
-		postAuthor,
 		postAuthorName,
 		postCommentsCount,
 		postCommentsLink,

@@ -69,7 +69,6 @@ export const STYLE_BOOK_THEME_SUBCATEGORIES: Omit<
 		blocks: [
 			'core/post-title',
 			'core/post-excerpt',
-			'core/post-author',
 			'core/post-author-name',
 			'core/post-author-biography',
 			'core/post-date',
