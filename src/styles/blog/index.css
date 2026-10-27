@@ -11,6 +11,9 @@
  */
 
 :root {
+  /* 全站容器侧边距：BlogMate 口径，桌面 50px、窄屏 25px */
+  --site-gutter: 50px;
+
   /* Brand */
   --color-primary: #fc6668;
   --color-primary-light: #fd7d7f;
@@ -491,7 +494,7 @@ p {
   max-width: 1420px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 50px;
+  padding: 0 var(--site-gutter);
 }
 
 /* Header Elements */
@@ -605,8 +608,8 @@ p {
 }
 
 @media (max-width: 768px) {
-  .header-container {
-    padding: 0 25px;
+  :root {
+    --site-gutter: 25px;
   }
   .logo img {
     max-height: 2.5rem;
@@ -614,13 +617,6 @@ p {
   .logo .logo-inner {
     margin-top: 2.1875rem;
     margin-bottom: 1.5625rem;
-  }
-  .pyml-slider-container {
-    padding: 0 25px;
-  }
-  .copyright-bar .footer-container {
-    padding-left: 25px;
-    padding-right: 25px;
   }
   .mobile-nav {
     margin-left: 1rem;
@@ -1897,7 +1893,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 .footer-container {
   max-width: 1420px;
   margin: 0 auto;
-  padding: 0 50px;
+  padding: 0 var(--site-gutter);
 }
 
 .footer-widgets {
@@ -2274,13 +2270,6 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 
 [data-theme="dark"] .copyright-bar a {
   color: rgba(255, 255, 255, 0.8);
-}
-
-/* Footer Responsive */
-@media (max-width: 960px) {
-  .footer-container {
-    padding: 0 50px;
-  }
 }
 
 @media (max-width: 782px) {
@@ -2841,7 +2830,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 .pyml-slider-container {
   max-width: 1420px;
   margin: 0 auto;
-  padding: 0 50px;
+  padding: 0 var(--site-gutter);
 }
 
 /* You May Like Card */
@@ -3082,8 +3071,8 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   max-width: 1420px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: var(--site-gutter);
+  padding-right: var(--site-gutter);
   text-align: left;
 }
 
@@ -3337,7 +3326,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 .site-main-container {
   margin: 0 auto;
   max-width: 1420px;
-  padding: 0 50px 3.125rem;
+  padding: 0 var(--site-gutter) 3.125rem;
 }
 @media (max-width: 960px) {
   .site-main-container,
@@ -3346,18 +3335,6 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   .footer-container,
   .breadcrumbs-bar > .breadcrumbs-container {
     max-width: 100%;
-  }
-  .site-main-container {
-    padding-left: 50px;
-    padding-right: 50px;
-  }
-}
-/* BlogMate 口径：窄屏固定 25px 侧边距，不随根字号缩放 */
-@media (max-width: 768px) {
-  .site-main-container,
-  .breadcrumbs-bar > .breadcrumbs-container {
-    padding-left: 25px;
-    padding-right: 25px;
   }
 }
 .article-feed > * + * {
