@@ -457,48 +457,50 @@ add_action( 'after_setup_theme', 'theme_setup' );
               Its sometimes her behaviour are contented. Do listening am eagerness oh objection collected.
             </p>
 
-            <table className="typo-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Role</th>
-                  <th>Email</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Jane Cooper</td>
-                  <td>Developer</td>
-                  <td>jane@example.com</td>
-                  <td><span className="typo-badge is-green">Active</span></td>
-                </tr>
-                <tr>
-                  <td>Floyd Miles</td>
-                  <td>Designer</td>
-                  <td>floyd@example.com</td>
-                  <td><span className="typo-badge is-gray">Inactive</span></td>
-                </tr>
-                <tr>
-                  <td>Ronald Richards</td>
-                  <td>Manager</td>
-                  <td>ronald@example.com</td>
-                  <td><span className="typo-badge is-green">Active</span></td>
-                </tr>
-                <tr>
-                  <td>Marvin McKinney</td>
-                  <td>Writer</td>
-                  <td>marvin@example.com</td>
-                  <td><span className="typo-badge is-yellow">Pending</span></td>
-                </tr>
-                <tr>
-                  <td>Jenny Wilson</td>
-                  <td>Editor</td>
-                  <td>jenny@example.com</td>
-                  <td><span className="typo-badge is-green">Active</span></td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="typo-table-wrap">
+              <table className="typo-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Jane Cooper</td>
+                    <td>Developer</td>
+                    <td>jane@example.com</td>
+                    <td><span className="typo-badge is-green">Active</span></td>
+                  </tr>
+                  <tr>
+                    <td>Floyd Miles</td>
+                    <td>Designer</td>
+                    <td>floyd@example.com</td>
+                    <td><span className="typo-badge is-gray">Inactive</span></td>
+                  </tr>
+                  <tr>
+                    <td>Ronald Richards</td>
+                    <td>Manager</td>
+                    <td>ronald@example.com</td>
+                    <td><span className="typo-badge is-green">Active</span></td>
+                  </tr>
+                  <tr>
+                    <td>Marvin McKinney</td>
+                    <td>Writer</td>
+                    <td>marvin@example.com</td>
+                    <td><span className="typo-badge is-yellow">Pending</span></td>
+                  </tr>
+                  <tr>
+                    <td>Jenny Wilson</td>
+                    <td>Editor</td>
+                    <td>jenny@example.com</td>
+                    <td><span className="typo-badge is-green">Active</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
             <hr className="typo-separator" />
             <div className="typo-spacer" />

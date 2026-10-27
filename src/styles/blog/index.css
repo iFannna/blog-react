@@ -4926,6 +4926,21 @@ ol.typo-list {
   font-weight: 600;
 }
 
+/* 窄屏下表格只在自身容器内横向滚动，避免撑破页面 */
+.typo-table-wrap {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-scrollbar) transparent;
+}
+
+@media (max-width: 640px) {
+  /* 多列表格保留列宽可读性；两列表格仍撑满并正常换行 */
+  .typo-table-wrap .typo-table:has(tr > :nth-child(3)) {
+    min-width: 34rem;
+  }
+}
+
 .typo-badge {
   display: inline-block;
   padding: 0.125rem 0.5625rem;

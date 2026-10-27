@@ -142,7 +142,9 @@ function createComponents(highlighter: HighlighterCore): Components {
     },
 
     table: ({ children }: { children?: ReactNode }) => (
-      <table className="typo-table">{children}</table>
+      <div className="typo-table-wrap">
+        <table className="typo-table">{children}</table>
+      </div>
     ),
 
     img: ({ src, alt }: { src?: string; alt?: string }) => (

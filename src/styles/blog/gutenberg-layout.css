@@ -206,7 +206,8 @@
 }
 
 @media (max-width: 640px) {
-  .gutenberg-content .wp-block-table table {
+  /* 多列表格保留列宽可读性；两列表格仍撑满并正常换行 */
+  .gutenberg-content .wp-block-table table:has(tr > :nth-child(3)) {
     min-width: 34rem;
   }
 }
