@@ -2502,17 +2502,15 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 .article-thumb-link img {
   display: block;
   width: 100%;
-  height: 100%;
+  /* 多出 1px 由容器裁掉，避免底边亚像素取整露白线 */
+  height: calc(100% + 1px);
   object-fit: cover;
-  transform: translateZ(0.0625rem);
-  backface-visibility: hidden;
-  will-change: transform;
   transition: transform cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
 }
 
 .article-thumb-link:hover img,
 .article-thumb-link:focus-visible img {
-  transform: scale3d(1.1, 1.1, 1) translateZ(0.0625rem);
+  transform: scale3d(1.1, 1.1, 1);
 }
 
 .article-thumb-placeholder {
