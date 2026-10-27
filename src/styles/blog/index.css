@@ -488,10 +488,10 @@ p {
 .header-container {
   display: flex;
   align-items: center;
-  max-width: 85vw;
+  max-width: 1420px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 3.125rem;
+  padding: 0 50px;
 }
 
 /* Header Elements */
@@ -606,7 +606,7 @@ p {
 
 @media (max-width: 768px) {
   .header-container {
-    padding: 0 1.875rem;
+    padding: 0 25px;
   }
   .logo img {
     max-height: 2.5rem;
@@ -616,11 +616,11 @@ p {
     margin-bottom: 1.5625rem;
   }
   .pyml-slider-container {
-    padding: 0 1.875rem;
+    padding: 0 25px;
   }
   .copyright-bar .footer-container {
-    padding-left: 1.875rem;
-    padding-right: 1.875rem;
+    padding-left: 25px;
+    padding-right: 25px;
   }
   .mobile-nav {
     margin-left: 1rem;
@@ -1373,7 +1373,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
   flex-grow: 1;
   flex-shrink: 1;
   max-width: 70%;
-  padding-right: 2.1875rem;
+  padding-right: 50px;
   margin-top: 3.125rem;
   margin-bottom: 4.375rem;
 }
@@ -1895,9 +1895,9 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 }
 
 .footer-container {
-  max-width: 85vw;
+  max-width: 1420px;
   margin: 0 auto;
-  padding: 0 3.125rem;
+  padding: 0 50px;
 }
 
 .footer-widgets {
@@ -2279,7 +2279,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 /* Footer Responsive */
 @media (max-width: 960px) {
   .footer-container {
-    padding: 0 1.875rem;
+    padding: 0 50px;
   }
 }
 
@@ -2839,9 +2839,9 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 
 /* You May Like */
 .pyml-slider-container {
-  max-width: 85vw;
+  max-width: 1420px;
   margin: 0 auto;
-  padding: 0 3.125rem;
+  padding: 0 50px;
 }
 
 /* You May Like Card */
@@ -3079,11 +3079,11 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 }
 
 .breadcrumbs-bar > .breadcrumbs-container {
-  max-width: 85vw;
+  max-width: 1420px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 3.125rem;
-  padding-right: 3.125rem;
+  padding-left: 50px;
+  padding-right: 50px;
   text-align: left;
 }
 
@@ -3336,8 +3336,8 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 }
 .site-main-container {
   margin: 0 auto;
-  max-width: 85vw;
-  padding: 0 3.125rem 3.125rem;
+  max-width: 1420px;
+  padding: 0 50px 3.125rem;
 }
 @media (max-width: 960px) {
   .site-main-container,
@@ -3348,8 +3348,16 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
     max-width: 100%;
   }
   .site-main-container {
-    padding-left: 3.125rem;
-    padding-right: 3.125rem;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+/* BlogMate 口径：窄屏固定 25px 侧边距，不随根字号缩放 */
+@media (max-width: 768px) {
+  .site-main-container,
+  .breadcrumbs-bar > .breadcrumbs-container {
+    padding-left: 25px;
+    padding-right: 25px;
   }
 }
 .article-feed > * + * {
