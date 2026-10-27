@@ -515,88 +515,154 @@ p {
   display: none;
 }
 
-/* Mobile Nav */
+/* Mobile Nav —— 抽屉按 BlogMate 口径：面板铺满剩余视口、行高约 45px、子菜单就地折叠 */
 @media (max-width: 1024px) {
+  .header-widgets {
+    order: 3;
+    margin-left: auto;
+  }
   .mobile-nav {
     display: flex;
+    order: 4;
+  }
+  .is-mobile-menu-active .mobile-nav {
+    margin-left: auto;
+  }
+  .is-mobile-menu-active .header-widgets {
+    display: none;
   }
   .primary-nav {
     display: none !important;
   }
 
-  /* Mobile navigation panel */
   .mobile-navigation {
     display: none;
     position: absolute;
     top: 100%;
-    width: 100%;
-    height: 100%;
-    min-height: 100dvh;
     left: 0;
     right: 0;
-    margin: -1px 0 0;
+    height: 100vh;
+    max-height: calc(100dvh - 100%);
+    overflow-y: auto;
     background: var(--color-bg);
-    border-top: 1px solid var(--color-border-subtle);
-    box-shadow: 0 15px 25px -10px rgba(50, 52, 54, 0.125);
     z-index: 999;
-    font-size: 1.0625rem;
     padding: 0;
+    /* BlogMate 抽屉行高 44.78px = 13.6px 字号 + 1.8 行高 + 上下 10px；用 px 是因为本站根字号在窄屏会缩到 80% */
+    font-size: 13.6px;
   }
-
   .is-mobile-menu-active .mobile-navigation {
     display: block;
+    animation: mobile-menu-reveal 0.35s ease-out;
+  }
+  @keyframes mobile-menu-reveal {
+    from {
+      clip-path: circle(0 at 100% 0);
+    }
+    to {
+      clip-path: circle(150% at 100% 0);
+    }
   }
 
-  .mobile-navigation > ul {
-    overflow-y: auto;
-    max-height: 68vh;
+  .mobile-navigation ul {
     display: block;
     list-style: none;
     margin: 0;
     padding: 0;
   }
-
-  .mobile-navigation > ul li {
+  .mobile-navigation li {
     display: block;
     width: 100%;
     border-bottom: 1px solid var(--color-border-subtle);
   }
-
-  .mobile-navigation > ul li:last-child {
-    border-bottom: 0;
-  }
-
-  .mobile-navigation > ul a {
-    display: block;
-    padding: 0;
-    color: inherit;
-    text-decoration: none;
-    background: none;
-    position: relative;
-  }
-
-  .mobile-navigation > ul a > span {
-    display: block;
+  .mobile-navigation .menu-row {
+    display: flex;
+    align-items: center;
     width: 100%;
-    padding: 0.625rem 1.875rem;
+    padding: 0;
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
     font-weight: 500;
-    transition: var(--transition-primary);
+    line-height: 1.8;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
   }
-
-  .mobile-navigation > ul a:hover > span,
-  .mobile-navigation > ul a.active > span {
-    background-color: var(--color-primary);
-    color: var(--color-on-primary);
+  .mobile-navigation .menu-label {
+    flex: 1 1 auto;
+    padding: 10px 30px;
+  }
+  .mobile-navigation .submenu-toggle {
+    flex: 0 0 50px;
+    width: 50px;
+    align-self: stretch;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid var(--color-border-subtle);
+    transition: transform 0.25s;
+  }
+  .mobile-navigation .menu-parent[aria-expanded="true"] .submenu-toggle {
+    transform: rotate(180deg);
+  }
+  .mobile-navigation .sub-menu {
+    background: #f8f8f8;
+  }
+  /* 桌面端下拉用的是同一个 .sub-menu 类，这里把绝对定位/隐藏等属性还原成文档流内的折叠列表 */
+  .mobile-navigation .sub-menu,
+  .mobile-navigation .sub-menu .sub-menu {
+    position: static;
+    top: auto;
+    left: auto;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border-top: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: inherit;
+    color: inherit;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+    transition: none;
+    z-index: auto;
+  }
+  .mobile-navigation .sub-menu::before {
+    display: none;
+  }
+  .mobile-navigation .sub-menu .menu-label {
+    padding-left: 50px;
+    font-weight: 400;
+  }
+  .mobile-navigation .sub-menu .sub-menu {
+    background: #f1f1f1;
+  }
+  .mobile-navigation .sub-menu .sub-menu .menu-label {
+    padding-left: 70px;
+  }
+  /* 触屏没有 hover，只有真指针设备才给整条主色反馈 */
+  @media (hover: hover) {
+    .mobile-navigation .menu-row:hover .menu-label {
+      background-color: var(--color-primary);
+      color: var(--color-on-primary);
+    }
   }
 
   /* Dark mode mobile nav */
   [data-theme="dark"] .mobile-navigation {
     background: var(--color-bg);
-    border-top-color: var(--color-border-subtle);
     color: rgba(255, 255, 255, 0.7);
   }
-  [data-theme="dark"] .mobile-navigation > ul li {
-    border-bottom-color: var(--color-border-subtle);
+  [data-theme="dark"] .mobile-navigation .sub-menu {
+    background: rgba(255, 255, 255, 0.04);
+  }
+  [data-theme="dark"] .mobile-navigation .sub-menu .sub-menu {
+    background: rgba(255, 255, 255, 0.07);
   }
 }
 
@@ -617,9 +683,6 @@ p {
   .logo .logo-inner {
     margin-top: 2.1875rem;
     margin-bottom: 1.5625rem;
-  }
-  .mobile-nav {
-    margin-left: 1rem;
   }
 }
 

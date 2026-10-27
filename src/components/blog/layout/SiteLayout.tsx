@@ -105,19 +105,10 @@ export default async function SiteLayout({
       ],
     },
   ];
-  // 移动端:平铺菜单,不做多级
-  const mobileNavItems = [
-    ...topNavItems,
-    { href: localePath(locale, "/example/typography"), label: "排版" },
-    { href: localePath(locale, "/login"), label: "登录" },
-    { href: localePath(locale, "/register"), label: "注册" },
-  ];
-
   return (
     <div className="site-root">
       <Header
         navItems={navItems}
-        mobileNavItems={mobileNavItems}
         github={setting?.developer_github ?? ""}
         gitee={setting?.developer_gitee ?? ""}
         logo={setting?.logo ?? ""}

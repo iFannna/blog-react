@@ -13,7 +13,6 @@ import { setSidebarLayout } from "@/lib/sidebar-layout";
 
 interface HeaderProps {
   navItems: MenuItem[];
-  mobileNavItems: MenuItem[];
   github?: string;
   gitee?: string;
   logo?: string;
@@ -22,16 +21,18 @@ interface HeaderProps {
 const DEFAULT_SITE_LOGO =
   "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/Blog.png";
 
-export default function Header({ navItems, mobileNavItems, github, gitee, logo }: HeaderProps) {
+export default function Header({ navItems, github, gitee, logo }: HeaderProps) {
   const pathname = usePathname();
   const router = useRouter();
   const { prefix } = useLocale();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openMobileKeys, setOpenMobileKeys] = useState<Set<string>>(new Set());
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const closeMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(false);
+    setOpenMobileKeys(new Set());
   }, []);
 
   const toggleMobileMenu = useCallback(() => {
@@ -73,14 +74,15 @@ export default function Header({ navItems, mobileNavItems, github, gitee, logo }
     return inject(navItems);
   }, [navItems, clear, isAuthenticated, handleSignOut, prefix]);
 
-  const mobileNavItemsAuth = useMemo<MenuItem[]>(() =>
-    mobileNavItems.map((item) => {
-      if (!isAuthenticated) return item;
-      if (item.label === "登录") return { href: `${prefix}/settings`, label: "设置" };
-      if (item.label === "注册") return { label: "退出", onClick: handleSignOut };
-      return item;
-    }),
-  [mobileNavItems, isAuthenticated, handleSignOut, prefix]);
+  const toggleMobileSub = useCallback((key: string) => {
+    setOpenMobileKeys((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  }, []);
+
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -208,23 +210,17 @@ export default function Header({ navItems, mobileNavItems, github, gitee, logo }
             aria-label="移动端导航"
           >
             <ul className="menu">
-              {mobileNavItemsAuth.map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  <li key={item.label}>
-                    <Link
-                      href={item.href || "#"}
-                      className={isActive ? "active" : ""}
-                      onClick={() => {
-                        item.onClick?.();
-                        closeMobileMenu();
-                      }}
-                    >
-                      <span>{item.label}</span>
-                    </Link>
-                  </li>
-                );
-              })}
+              <MobileMenuList
+                items={navItemsWithLayout}
+                trail="m"
+                pathname={pathname}
+                openKeys={openMobileKeys}
+                onToggle={toggleMobileSub}
+                onNavigate={(item) => {
+                  item.onClick?.();
+                  closeMobileMenu();
+                }}
+              />
             </ul>
           </nav>
 
@@ -364,5 +360,70 @@ function DarkModeToggle() {
     >
       <span className="darkmode-face" aria-hidden="true" />
     </button>
+  );
+}
+
+interface MobileMenuListProps {
+  items: MenuItem[];
+  trail: string;
+  pathname: string;
+  openKeys: Set<string>;
+  onToggle: (key: string) => void;
+  onNavigate: (item: MenuItem) => void;
+}
+
+/** 移动抽屉的多级列表：父项就地折叠，子项缩进一级 */
+function MobileMenuList({ items, trail, pathname, openKeys, onToggle, onNavigate }: MobileMenuListProps) {
+  return (
+    <>
+      {items.map((item) => {
+        const key = `${trail}/${item.label}`;
+        const children = item.children ?? [];
+        if (children.length > 0) {
+          const open = openKeys.has(key);
+          return (
+            <li key={key} className="menu-item-has-children">
+              <button
+                type="button"
+                className="menu-row menu-parent"
+                aria-expanded={open}
+                onClick={() => onToggle(key)}
+              >
+                <span className="menu-label">{item.label}</span>
+                <span className="submenu-toggle" aria-hidden="true">
+                  <svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M2.5 4.5 6 8l3.5-3.5" />
+                  </svg>
+                </span>
+              </button>
+              {open && (
+                <ul className="sub-menu">
+                  <MobileMenuList
+                    items={children}
+                    trail={key}
+                    pathname={pathname}
+                    openKeys={openKeys}
+                    onToggle={onToggle}
+                    onNavigate={onNavigate}
+                  />
+                </ul>
+              )}
+            </li>
+          );
+        }
+        const isActive = !!item.href && pathname === item.href;
+        return (
+          <li key={key}>
+            <Link
+              href={item.href || "#"}
+              className={isActive ? "menu-row active" : "menu-row"}
+              onClick={() => onNavigate(item)}
+            >
+              <span className="menu-label">{item.label}</span>
+            </Link>
+          </li>
+        );
+      })}
+    </>
   );
 }
