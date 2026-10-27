@@ -122,17 +122,26 @@ export default function Header({ navItems, github, gitee, logo }: HeaderProps) {
     return () => window.clearTimeout(timer);
   }, [pathname, closeMobileMenu, clear]);
 
-  // 切到桌面端时关闭移动菜单,清掉 state 与全屏遮罩
+  // 跨过 1024 断点时复位两侧菜单，避免残留展开态
   useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1024px)");
+    let wasMobile = mq.matches;
     const handleResize = () => {
-      if (window.innerWidth > 1024) {
+      const isMobile = mq.matches;
+      if (isMobile === wasMobile) return;
+      wasMobile = isMobile;
+      if (isMobile) {
+        clear();
+      } else {
+        clearCloseTimer();
         setIsMobileMenuOpen(false);
         setIsMobileMenuVisible(false);
+        setOpenMobileKeys(new Set());
       }
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [clear, clearCloseTimer]);
 
   useEffect(() => {
     const root = document.documentElement;

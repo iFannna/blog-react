@@ -524,9 +524,10 @@ p {
     display: none !important;
   }
 
-  /* 面板：白底、顶部 1px 分隔线、底部投影；BlogMate 的开关是无动画的 */
+  /* 面板：白底、顶部 1px 分隔线、底部投影；BlogMate 的开关是无动画的。
+     关闭用 display:none，避免子菜单的 visibility:visible 盖过祖先的 hidden 造成文字残留 */
   .mobile-navigation {
-    display: block;
+    display: none;
     position: absolute;
     top: 100%;
     left: 0;
@@ -537,13 +538,12 @@ p {
     background: var(--color-bg);
     box-shadow: 0 15px 25px -10px rgba(50, 52, 54, 0.125);
     overflow: hidden;
-    visibility: hidden;
     z-index: 999;
     padding: 0;
     font-size: 13.6px;
   }
   .is-mobile-menu-active .mobile-navigation {
-    visibility: visible;
+    display: block;
   }
 
   .mobile-navigation ul {
