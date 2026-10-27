@@ -1209,9 +1209,8 @@ function PostNavigationLinkBlock({ attributes, context }: DynamicBlockProps) {
     return null;
   }
   const isNext = readString(attributes.type) !== "previous";
-  // 区块的 previous 指更早的文章，next 指更新的文章；
-  // Go 接口的 prev/next 方向相反（prev 更新、next 更旧），这里做映射。
-  const adjacentPost = isNext ? adjacent.prev : adjacent.next;
+  // 沿用接口语义：prev 是更新的一篇、next 是更早的一篇。
+  const adjacentPost = isNext ? adjacent.next : adjacent.prev;
   if (!adjacentPost) {
     return null;
   }

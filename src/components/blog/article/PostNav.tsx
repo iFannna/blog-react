@@ -5,9 +5,9 @@ import { localePath } from "@/lib/locale";
 
 export default function PostNav({ locale, prevNext }: { locale: string; prevNext: PrevNext }) {
   const { prev, next } = prevNext;
-  // 接口的 prev 是更新的一篇、next 是更早的一篇；展示时按时间顺序还原
-  const previous = next;
-  const nextPost = prev;
+  // 接口的 prev 是更新的一篇、next 是更早的一篇
+  const previous = prev;
+  const nextPost = next;
   if (!previous && !nextPost) return null;
 
   return (
