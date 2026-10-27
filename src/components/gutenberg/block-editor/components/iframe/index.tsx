@@ -107,17 +107,14 @@ function useBubbleEvents( iframeDocument: Document | undefined ) {
 	} );
 }
 
-const iframeSrcCache = new WeakMap< ResolvedAssets, string >();
-const iframeSrcCleanup = globalThis.FinalizationRegistry
-	? new globalThis.FinalizationRegistry< string >( ( url ) =>
-			URL.revokeObjectURL( url )
-		)
-	: undefined;
+const iframeHtmlCache = new WeakMap< ResolvedAssets, string >();
 
-function getIframeSrc( resolvedAssets: ResolvedAssets ) {
-	let src = iframeSrcCache.get( resolvedAssets );
-	if ( src ) {
-		return src;
+// 用 srcdoc 而不是 blob URL：Android WebView 系内核（夸克、vivo、微信内嵌等）
+// 会加载 blob: iframe 但渲染出空白文档，srcdoc 不受影响
+function getIframeHtml( resolvedAssets: ResolvedAssets ) {
+	const cached = iframeHtmlCache.get( resolvedAssets );
+	if ( cached ) {
+		return cached;
 	}
 
 	let body = '';
@@ -152,10 +149,8 @@ function getIframeSrc( resolvedAssets: ResolvedAssets ) {
 	${ body }
 </html>`;
 
-	src = URL.createObjectURL( new Blob( [ html ], { type: 'text/html' } ) );
-	iframeSrcCache.set( resolvedAssets, src );
-	iframeSrcCleanup?.register( resolvedAssets, src );
-	return src;
+	iframeHtmlCache.set( resolvedAssets, html );
+	return html;
 }
 
 function Iframe( {
@@ -199,11 +194,11 @@ function Iframe( {
 			) {
 				event.preventDefault();
 				// Manually handle link fragment navigation within the iframe. The iframe's
-				// location is a blob URL, which can't be used to resolve relative links like
+				// location is `about:srcdoc`, which can't be used to resolve relative links like
 				// `#hash`. The relative link would be resolved against the iframe's base URL
 				// or the parent frame's URL, causing the iframe to navigate to a completely
 				// different page. Setting the `location.hash` works because it really sets the
-				// blob URL's hash.
+				// srcdoc document's hash.
 				//
 				// Links with fragments are used for example with footnotes. Clicking on these
 				// links will scroll smoothly to the anchors in the editor canvas.
@@ -334,7 +329,7 @@ function Iframe( {
 	);
 
 	// The settings are initialized before the iframe renders.
-	const src = getIframeSrc( resolvedAssets! );
+	const srcDoc = getIframeHtml( resolvedAssets! );
 
 	// Make sure to not render the before and after focusable div elements in view
 	// mode. They're only needed to capture focus in edit mode.
@@ -357,7 +352,7 @@ function Iframe( {
 					setRef,
 				] ) }
 				tabIndex={ tabIndex }
-				src={ src }
+				srcDoc={ srcDoc }
 				title={ title }
 				onKeyDown={ ( event ) => {
 					if ( props.onKeyDown ) {
