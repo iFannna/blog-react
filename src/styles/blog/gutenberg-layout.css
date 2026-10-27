@@ -394,3 +394,83 @@
     max-height: 78vh;
   }
 }
+
+/* Dynamic block links
+   Display blocks stay neutral until hover; archives only change color;
+   jump links (including calendar dates) keep the content-area underline.
+   [href] adds specificity so these win regardless of stylesheet order. */
+
+.gutenberg-content .wp-block-archives-list li a[href],
+.gutenberg-content .wp-block-categories-list li a[href],
+.gutenberg-content p.wp-block-tag-cloud a[href],
+.gutenberg-content nav.wp-block-breadcrumbs a[href],
+.gutenberg-content .wp-block-terms-query .wp-block-term-template a[href],
+.gutenberg-content .wp-block-post-terms a[href],
+.gutenberg-content .wp-block-latest-comments__comment-meta a.wp-block-latest-comments__comment-author {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* List links take their hover color from the row, so the count animates
+   together with the label instead of jumping ahead. The term name keeps
+   its own heading color, so it has to inherit the row color explicitly. */
+.gutenberg-content .wp-block-archives-list li:hover a[href],
+.gutenberg-content .wp-block-archives-list li:has(a:focus-visible) a[href],
+.gutenberg-content .wp-block-categories-list li:hover a[href],
+.gutenberg-content .wp-block-categories-list li:has(a:focus-visible) a[href],
+.gutenberg-content .wp-block-term-template li:hover a[href],
+.gutenberg-content .wp-block-term-template li:has(a:focus-visible) a[href] {
+  color: inherit;
+}
+
+.gutenberg-content .wp-block-term-template li:hover .wp-block-term-name,
+.gutenberg-content .wp-block-term-template li:has(a:focus-visible) .wp-block-term-name {
+  color: inherit;
+}
+
+/* Display links without counts color themselves on hover. */
+.gutenberg-content p.wp-block-tag-cloud a[href]:hover,
+.gutenberg-content p.wp-block-tag-cloud a[href]:focus-visible,
+.gutenberg-content nav.wp-block-breadcrumbs a[href]:hover,
+.gutenberg-content nav.wp-block-breadcrumbs a[href]:focus-visible,
+.gutenberg-content .wp-block-post-terms a[href]:hover,
+.gutenberg-content .wp-block-post-terms a[href]:focus-visible,
+.gutenberg-content .wp-block-latest-comments__comment-meta a.wp-block-latest-comments__comment-author:hover,
+.gutenberg-content .wp-block-latest-comments__comment-meta a.wp-block-latest-comments__comment-author:focus-visible {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.0625rem;
+}
+
+/* List links only add the underline; the row supplies the color. */
+.gutenberg-content .wp-block-categories-list li a[href]:hover,
+.gutenberg-content .wp-block-categories-list li a[href]:focus-visible,
+.gutenberg-content .wp-block-terms-query .wp-block-term-template a[href]:hover,
+.gutenberg-content .wp-block-terms-query .wp-block-term-template a[href]:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.0625rem;
+}
+
+/* Rows own the count color and the transition that keeps both in step.
+   The links must not run their own color transition: it would smooth the
+   inherited row color a second time and lag behind the count. */
+.gutenberg-content .wp-block-archives-list li a[href],
+.gutenberg-content .wp-block-categories-list li a[href],
+.gutenberg-content .wp-block-terms-query .wp-block-term-template a[href] {
+  transition: none;
+}
+
+.gutenberg-content .wp-block-archives-list li,
+.gutenberg-content .wp-block-categories-list li,
+.gutenberg-content .wp-block-term-template li {
+  transition: var(--transition-primary);
+}
+
+.gutenberg-content .wp-block-archives-list li:hover,
+.gutenberg-content .wp-block-archives-list li:has(a:focus-visible),
+.gutenberg-content .wp-block-categories-list li:hover,
+.gutenberg-content .wp-block-categories-list li:has(a:focus-visible),
+.gutenberg-content .wp-block-term-template li:hover,
+.gutenberg-content .wp-block-term-template li:has(a:focus-visible) {
+  color: var(--color-primary);
+}
