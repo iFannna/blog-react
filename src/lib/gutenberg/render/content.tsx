@@ -45,6 +45,7 @@ import {
   getDynamicWrapper,
   getTermsForQuery,
   isDynamicBlockName,
+  isWrapperlessDynamicBlock,
   readBoolean,
   readNumber,
   readString,
@@ -199,6 +200,85 @@ function mergeStyle(
   return { ...(existing ?? {}), ...addition };
 }
 
+function safeCssColor(value: unknown): string | null {
+  if (typeof value !== "string") {
+    return null;
+  }
+  const color = value.trim();
+  return color && !/[;{}<>]/.test(color) ? color : null;
+}
+
+/** 区块级 elements.link 颜色只在运行时生成，保存 HTML 里没有对应规则 */
+function elementLinkColor(
+  attributes: Record<string, unknown>,
+): { color: string; hover?: string } | null {
+  const style = isRecord(attributes.style) ? attributes.style : undefined;
+  const elements = isRecord(style?.elements) ? style.elements : undefined;
+  const link = isRecord(elements?.link) ? elements.link : undefined;
+  if (!link) {
+    return null;
+  }
+  const color = isRecord(link.color) ? safeCssColor(link.color.text) : null;
+  const hoverRecord = isRecord(link[":hover"]) ? link[":hover"] : undefined;
+  const hover = isRecord(hoverRecord?.color)
+    ? safeCssColor(hoverRecord.color.text)
+    : null;
+  if (!color && !hover) {
+    return null;
+  }
+  return {
+    color: color || "inherit",
+    hover: hover || undefined,
+  };
+}
+
+function imageSource(node: ReactNode): string {
+  if (Array.isArray(node)) {
+    for (const child of node) {
+      const src = imageSource(child);
+      if (src) {
+        return src;
+      }
+    }
+    return "";
+  }
+  if (isValidElement(node) && node.type === "img") {
+    return readString((node.props as { src?: unknown }).src);
+  }
+  return "";
+}
+
+/** 图片未开灯箱时，按 linkDestination 在渲染期补上链接包裹 */
+function wrapImageLink(
+  node: ReactNode,
+  href: string,
+  target: string,
+  rel: string,
+): ReactNode {
+  if (Array.isArray(node)) {
+    return node.map((child) => wrapImageLink(child, href, target, rel));
+  }
+  if (!isValidElement(node)) {
+    return node;
+  }
+  if (node.type === "a") {
+    return node;
+  }
+  if (node.type === "img") {
+    return createElement(
+      "a",
+      {
+        key: (node as ReactElement).key ?? undefined,
+        href,
+        target: target && target !== "_self" ? target : undefined,
+        rel: rel || (target && target !== "_self" ? "noreferrer noopener" : undefined),
+      },
+      node,
+    );
+  }
+  return node;
+}
+
 /** 把区块级样式应用到内部目标元素（button 链接、table、tab 按钮） */
 function applyToChildren(
   node: ReactNode,
@@ -251,8 +331,22 @@ function decodeInner(value: string): string {
 
 const TERMS_QUERY_PATTERN =
   /<!--\s*wp:terms-query(?:\s+\{(?:(?!-->)[\s\S])*?\})?\s*-->([\s\S]*?)<!--\s*\/wp:terms-query\s*-->/g;
+const NAVIGATION_PATTERN =
+  /<!--\s*wp:navigation(?:\s+\{(?:(?!-->)[\s\S])*?\})?\s*-->([\s\S]*?)<!--\s*\/wp:navigation\s*-->/g;
+const NAVIGATION_SUBMENU_PATTERN =
+  /<!--\s*wp:navigation-submenu(?:\s+\{(?:(?!-->)[\s\S])*?\})?\s*-->([\s\S]*?)<!--\s*\/wp:navigation-submenu\s*-->/g;
+// 循环查询还没接入前台：整段收起，避免子区块用当前文章上下文误渲染
+const QUERY_BLOCK_PATTERN =
+  /<!--\s*wp:query(?:\s+\{(?:(?!-->)[\s\S])*?\})?\s*-->[\s\S]*?<!--\s*\/wp:query\s*-->/g;
 const SELF_CLOSING_BLOCK_PATTERN =
   /<!--\s*wp:([\w/-]+)(?:\s+\{(?:(?!-->)[\s\S])*?\})?\s*\/-->/g;
+
+function markContainerBlock(match: string, inner: string): string {
+  const open = /^<!--[\s\S]*?-->/.exec(match)?.[0] ?? match;
+  return `${open}<div data-gb-dynamic="true" data-gb-inner="${encodeInner(
+    inner,
+  )}"></div>`;
+}
 
 /**
  * 空动态区块在保存内容里只剩注释，解析器会丢弃注释。
@@ -261,14 +355,15 @@ const SELF_CLOSING_BLOCK_PATTERN =
 function markDynamicBlocks(content: string, depth: number): string {
   let marked = content;
 
-  // terms-query 的内部模板需要保留，循环渲染时每个术语复用一次
+  // 查询循环暂不输出，连子区块一起收起，避免把当前文章数据带进循环
+  marked = marked.replace(QUERY_BLOCK_PATTERN, "");
+
+  // 内部模板需要保留，循环渲染时每个术语/菜单项复用一次
   if (depth < 3) {
-    marked = marked.replace(TERMS_QUERY_PATTERN, (match, inner: string) => {
-      const open = /^<!--[\s\S]*?-->/.exec(match)?.[0] ?? match;
-      return `${open}<div data-gb-dynamic="true" data-gb-inner="${encodeInner(
-        inner,
-      )}"></div>`;
-    });
+    marked = marked
+      .replace(TERMS_QUERY_PATTERN, markContainerBlock)
+      .replace(NAVIGATION_PATTERN, markContainerBlock)
+      .replace(NAVIGATION_SUBMENU_PATTERN, markContainerBlock);
   }
 
   return marked.replace(SELF_CLOSING_BLOCK_PATTERN, (match, rawName: string) => {
@@ -484,6 +579,26 @@ function createTransform(
     }
 
     if (isDynamicMarker) {
+      if (isWrapperlessDynamicBlock(block.name)) {
+        const rendered = renderDynamicNode(
+          block.name,
+          block.attributes,
+          context,
+          collector,
+          id,
+          decodeInner(domNode.attribs["data-gb-inner"] ?? ""),
+          depth,
+        );
+        if (rendered === null || rendered === undefined) {
+          return "";
+        }
+        const element = rendered as ReactElement;
+        const key =
+          (reactNode as ReactElement).key ?? (element as ReactElement).key;
+        return key !== null && key !== undefined
+          ? cloneElement(element, { key })
+          : element;
+      }
       const wrapper = getDynamicWrapper(block.name, block.attributes);
       if (!wrapper) {
         return "";
@@ -508,6 +623,20 @@ function createTransform(
         return "";
       }
       childrenChanged = true;
+    }
+
+    const linkColor = elementLinkColor(block.attributes);
+    if (linkColor) {
+      const linkClass = `wp-container-link-${id}`;
+      classNames.push(linkClass, "has-link-color");
+      addCss(
+        `.gutenberg-content .${linkClass} a[href]:not(.wp-block-button__link) { color: ${linkColor.color}; }`,
+      );
+      if (linkColor.hover) {
+        addCss(
+          `.gutenberg-content .${linkClass} a[href]:not(.wp-block-button__link):hover { color: ${linkColor.hover}; }`,
+        );
+      }
     }
 
     const layout = renderLayout(block.name, attributes, id);
@@ -622,6 +751,30 @@ function createTransform(
       }
     }
 
+    if (block.name === "core/image") {
+      const lightboxEnabled =
+        isRecord(lightbox) && lightbox.enabled === true;
+      if (!lightboxEnabled) {
+        const destination = readString(attributes.linkDestination);
+        // url 是 source 属性，只存在于保存后的 <img> 上，不在区块注释里
+        const href =
+          destination === "media"
+            ? imageSource(children)
+            : destination === "custom"
+              ? readString(attributes.href)
+              : "";
+        if (href) {
+          children = wrapImageLink(
+            children,
+            href,
+            readString(attributes.linkTarget),
+            readString(attributes.rel),
+          );
+          childrenChanged = true;
+        }
+      }
+    }
+
     if (block.name === "core/tabs") {
       const tabsState = renderTabsState(
         attributes as { activeTabIndex?: unknown },
@@ -694,6 +847,7 @@ function renderDynamicNode(
     context,
     instanceId,
     depth,
+    innerHtml,
     renderNested: (nestedContent, nestedPost) =>
       renderContentBody(
         nestedContent,

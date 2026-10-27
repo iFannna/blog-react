@@ -5,38 +5,41 @@ import { localePath } from "@/lib/locale";
 
 export default function PostNav({ locale, prevNext }: { locale: string; prevNext: PrevNext }) {
   const { prev, next } = prevNext;
-  if (!prev && !next) return null;
+  // 接口的 prev 是更新的一篇、next 是更早的一篇；展示时按时间顺序还原
+  const previous = next;
+  const nextPost = prev;
+  if (!previous && !nextPost) return null;
 
   return (
     <nav className="post-nav" role="navigation" aria-label="文章导航">
       <h2 className="screen-reader-text">文章导航</h2>
-      {prev && (
+      {previous && (
         <div className="nav-previous">
           <h6 className="nav-title">Previous Post</h6>
-          <Link href={localePath(locale, articleHref(prev))} rel="prev">
+          <Link href={localePath(locale, articleHref(previous))} rel="prev">
             <div className="nav-content">
-              {prev.coverImage && (
+              {previous.coverImage && (
                 <img
-                  src={prev.coverImage}
-                  alt={prev.title}
+                  src={previous.coverImage}
+                  alt={previous.title}
                   loading="lazy"
                 />
               )}
-              <span>{prev.title}</span>
+              <span>{previous.title}</span>
             </div>
           </Link>
         </div>
       )}
-      {next && (
+      {nextPost && (
         <div className="nav-next">
           <h6 className="nav-title">Next Post</h6>
-          <Link href={localePath(locale, articleHref(next))} rel="next">
+          <Link href={localePath(locale, articleHref(nextPost))} rel="next">
             <div className="nav-content">
-              <span>{next.title}</span>
-              {next.coverImage && (
+              <span>{nextPost.title}</span>
+              {nextPost.coverImage && (
                 <img
-                  src={next.coverImage}
-                  alt={next.title}
+                  src={nextPost.coverImage}
+                  alt={nextPost.title}
                   loading="lazy"
                 />
               )}

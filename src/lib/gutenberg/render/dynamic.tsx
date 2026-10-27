@@ -1,6 +1,9 @@
 import type { CSSProperties, ReactNode } from "react";
+import parse from "html-react-parser";
 import { getCSSRules, type Style } from "@/lib/gutenberg/style-engine";
 import { localePath } from "@/lib/locale";
+import { getIconByName } from "@/services/gutenberg/icons/catalog";
+import GutenbergSocialLink from "@/components/blog/article/GutenbergSocialLink";
 import {
   getRenderArchives,
   getRenderAuthors,
@@ -55,7 +58,8 @@ export interface DynamicBlockProps {
   context: DynamicRenderContext;
   instanceId: number;
   depth?: number;
-  renderNested?: (content: string, post: DynamicPostContext) => ReactNode;
+  innerHtml?: string;
+  renderNested?: (content: string, post?: DynamicPostContext) => ReactNode;
 }
 
 export interface DynamicWrapperProps {
@@ -72,17 +76,24 @@ export const DYNAMIC_BLOCK_NAMES = new Set([
   "core/breadcrumbs",
   "core/calendar",
   "core/categories",
+  "core/home-link",
+  "core/icon",
   "core/latest-comments",
   "core/latest-posts",
+  "core/navigation",
+  "core/navigation-link",
+  "core/navigation-submenu",
   "core/post-author-biography",
   "core/post-author-name",
   "core/post-comments-count",
   "core/post-comments-link",
   "core/post-navigation-link",
   "core/post-terms",
+  "core/search",
   "core/site-logo",
   "core/site-tagline",
   "core/site-title",
+  "core/social-link",
   "core/tag-cloud",
   "core/term-count",
   "core/term-name",
@@ -91,6 +102,23 @@ export const DYNAMIC_BLOCK_NAMES = new Set([
 
 export function isDynamicBlockName(name: string): boolean {
   return DYNAMIC_BLOCK_NAMES.has(name);
+}
+
+/**
+ * 这些区块由渲染器自己输出最终标签，不能再套通用动态包裹，
+ * 否则 <li>/<nav>/<form> 会被额外的 div 打断。
+ */
+const WRAPPERLESS_DYNAMIC_BLOCK_NAMES = new Set([
+  "core/home-link",
+  "core/navigation",
+  "core/navigation-link",
+  "core/navigation-submenu",
+  "core/search",
+  "core/social-link",
+]);
+
+export function isWrapperlessDynamicBlock(name: string): boolean {
+  return WRAPPERLESS_DYNAMIC_BLOCK_NAMES.has(name);
 }
 
 const CORE_PREFIX = "core/";
@@ -1181,7 +1209,9 @@ function PostNavigationLinkBlock({ attributes, context }: DynamicBlockProps) {
     return null;
   }
   const isNext = readString(attributes.type) !== "previous";
-  const adjacentPost = isNext ? adjacent.next : adjacent.prev;
+  // 区块的 previous 指更早的文章，next 指更新的文章；
+  // Go 接口的 prev/next 方向相反（prev 更新、next 更旧），这里做映射。
+  const adjacentPost = isNext ? adjacent.prev : adjacent.next;
   if (!adjacentPost) {
     return null;
   }
@@ -1316,6 +1346,243 @@ function TermCountBlock({ attributes, context }: DynamicBlockProps) {
   return <>{`${before}${term.count}${after}`}</>;
 }
 
+function escapeAttribute(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function IconBlock({ attributes }: DynamicBlockProps) {
+  const record = getIconByName(readString(attributes.icon));
+  if (!record) {
+    return null;
+  }
+  const flips = [
+    readBoolean(attributes.flipHorizontal) ? "is-flip-horizontal" : "",
+    readBoolean(attributes.flipVertical) ? "is-flip-vertical" : "",
+  ].filter(Boolean);
+  const rotation = readNumber(attributes.rotation, 0);
+  const ariaLabel = readString(attributes.ariaLabel);
+  let svg = record.content;
+  if (rotation) {
+    // 图标自带 style，必须追加而不是再写一个 style 属性
+    svg = /style="([^"]*)"/.test(svg)
+      ? svg.replace(
+          /style="([^"]*)"/,
+          (_, inline: string) =>
+            `style="${inline.replace(/;\s*$/, "")};rotate:${rotation}deg"`,
+        )
+      : svg.replace(/<svg\b/, `<svg style="rotate:${rotation}deg"`);
+  }
+  const extra: string[] = [];
+  if (flips.length > 0) {
+    extra.push(`class="${flips.join(" ")}"`);
+  }
+  if (ariaLabel) {
+    extra.push(`role="img" aria-label="${escapeAttribute(ariaLabel)}"`);
+  }
+  if (extra.length) {
+    svg = svg.replace(/<svg\b/, `<svg ${extra.join(" ")}`);
+  }
+
+  return <>{parse(svg)}</>;
+}
+
+function SocialLinkBlock({ attributes }: DynamicBlockProps) {
+  return (
+    <GutenbergSocialLink
+      service={readString(attributes.service)}
+      url={readString(attributes.url)}
+      label={readString(attributes.label)}
+      rel={readString(attributes.rel) || undefined}
+    />
+  );
+}
+
+function SearchIcon() {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M13.5 6a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM11.9 10.7a6 6 0 1 0-1.2 1.2l4.9 4.9 1.2-1.2-4.9-4.9Z" />
+    </svg>
+  );
+}
+
+function SearchBlock({ attributes, context, instanceId }: DynamicBlockProps) {
+  const locale = context.locale;
+  const isEnglish = locale === "en-US";
+  const label = readString(attributes.label) || (isEnglish ? "Search" : "搜索");
+  const placeholder = readString(attributes.placeholder);
+  const buttonText =
+    readString(attributes.buttonText) || (isEnglish ? "Search" : "搜索");
+  const showLabel = readBoolean(attributes.showLabel, true);
+  const buttonUseIcon = readBoolean(attributes.buttonUseIcon);
+  const buttonPosition =
+    readString(attributes.buttonPosition) || "button-outside";
+  const width = readNumber(attributes.width, 0);
+  const widthUnit = readString(attributes.widthUnit) || "%";
+  const inputId = `wp-block-search-input-${instanceId}`;
+
+  const classes = ["wp-block-search"];
+  if (buttonPosition === "button-inside") {
+    classes.push("wp-block-search__button-inside");
+  }
+  if (buttonUseIcon && buttonPosition !== "no-button") {
+    classes.push("wp-block-search__icon-button");
+  }
+  if (buttonPosition === "button-only") {
+    classes.push("wp-block-search__button-only");
+  }
+
+  const formStyle: CSSProperties | undefined = width
+    ? { width: `${width}${widthUnit}` }
+    : undefined;
+  const hasButton = buttonPosition !== "no-button";
+
+  return (
+    <form
+      role="search"
+      method="get"
+      action={localePath(locale, "/search")}
+      className={classes.join(" ")}
+      style={formStyle}
+    >
+      <label
+        htmlFor={inputId}
+        className={
+          showLabel ? "wp-block-search__label" : "wp-block-search__label screen-reader-text"
+        }
+      >
+        {label}
+      </label>
+      <div className="wp-block-search__inside-wrapper">
+        <input
+          id={inputId}
+          className="wp-block-search__input"
+          type="search"
+          name="q"
+          placeholder={placeholder}
+        />
+        {hasButton ? (
+          <button
+            type="submit"
+            className={`wp-block-search__button${buttonUseIcon ? " has-icon" : ""}`}
+            aria-label={buttonText}
+          >
+            {buttonUseIcon ? <SearchIcon /> : buttonText}
+          </button>
+        ) : null}
+      </div>
+    </form>
+  );
+}
+
+function navigationHref(url: string): string {
+  return url || "#";
+}
+
+function NavigationLinkBlock({ attributes }: DynamicBlockProps) {
+  const label =
+    readString(attributes.label) ||
+    readString(attributes.title) ||
+    navigationHref(readString(attributes.url));
+  const opensInNewTab = readBoolean(attributes.opensInNewTab);
+  const rel = readString(attributes.rel);
+
+  return (
+    <li className="wp-block-navigation-item">
+      <a
+        className="wp-block-navigation-item__content"
+        href={navigationHref(readString(attributes.url))}
+        target={opensInNewTab ? "_blank" : undefined}
+        rel={opensInNewTab ? rel || "noreferrer noopener" : rel || undefined}
+      >
+        {decodeEntities(label)}
+      </a>
+    </li>
+  );
+}
+
+function NavigationSubmenuBlock({
+  attributes,
+  context,
+  innerHtml,
+  renderNested,
+}: DynamicBlockProps) {
+  const label =
+    readString(attributes.label) ||
+    readString(attributes.title) ||
+    navigationHref(readString(attributes.url));
+  const children = renderNested
+    ? renderNested(innerHtml ?? "", context.post)
+    : null;
+
+  return (
+    <li className="wp-block-navigation-item has-child">
+      <a
+        className="wp-block-navigation-item__content"
+        href={navigationHref(readString(attributes.url))}
+      >
+        {decodeEntities(label)}
+        <span className="wp-block-navigation__submenu-icon" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 12 12" focusable="false">
+            <path d="m2 4 4 4 4-4" fill="none" stroke="currentColor" />
+          </svg>
+        </span>
+      </a>
+      <ul className="wp-block-navigation__submenu-container">{children}</ul>
+    </li>
+  );
+}
+
+function HomeLinkBlock({ context }: DynamicBlockProps) {
+  return (
+    <li className="wp-block-navigation-item">
+      <a
+        className="wp-block-navigation-item__content"
+        href={localePath(context.locale, "/")}
+      >
+        {strings(context.locale).home}
+      </a>
+    </li>
+  );
+}
+
+function NavigationBlock({
+  attributes,
+  context,
+  innerHtml,
+  renderNested,
+}: DynamicBlockProps) {
+  const wrapper = getBlockWrapper("core/navigation", attributes);
+  const classNames = new Set(wrapper.className.split(/\s+/).filter(Boolean));
+  if (readString(attributes.orientation) === "vertical") {
+    classNames.add("is-vertical");
+  }
+  const ariaLabel = readString(attributes.ariaLabel);
+  const children = renderNested
+    ? renderNested(innerHtml ?? "", context.post)
+    : null;
+
+  return (
+    <nav
+      className={[...classNames].join(" ")}
+      style={wrapper.style}
+      id={wrapper.id}
+      aria-label={ariaLabel || undefined}
+    >
+      <ul className="wp-block-navigation__container">{children}</ul>
+    </nav>
+  );
+}
+
 /** 汇总术语查询使用的记录 */
 export async function getTermsForQuery(
   taxonomy: "category" | "post_tag",
@@ -1366,6 +1633,20 @@ export function renderDynamicBlock(name: string, props: DynamicBlockProps): Reac
       return <TermNameBlock {...props} />;
     case "core/term-count":
       return <TermCountBlock {...props} />;
+    case "core/icon":
+      return <IconBlock {...props} />;
+    case "core/social-link":
+      return <SocialLinkBlock {...props} />;
+    case "core/search":
+      return <SearchBlock {...props} />;
+    case "core/navigation":
+      return <NavigationBlock {...props} />;
+    case "core/navigation-link":
+      return <NavigationLinkBlock {...props} />;
+    case "core/navigation-submenu":
+      return <NavigationSubmenuBlock {...props} />;
+    case "core/home-link":
+      return <HomeLinkBlock {...props} />;
     default:
       return null;
   }
