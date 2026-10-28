@@ -1,110 +1,23 @@
 import SiteLayout from "@/components/blog/layout/SiteLayout";
 import Breadcrumbs from "@/components/blog/common/Breadcrumbs";
-import ArchiveTimeline from "@/components/blog/article/ArchiveTimeline";
-import { getArticles } from "@/services/article";
 import { localePath } from "@/lib/locale";
-import type { Article } from "@/types/models";
 
-const PAGE_SIZE = 50;
-// 后端分页有上限，循环翻页直到拉完全部文章；MAX_PAGES 兜底防异常
-const MAX_PAGES = 50;
-
-interface MonthGroup {
-  month: number;
-  articles: Article[];
-}
-interface YearGroup {
-  year: number;
-  months: MonthGroup[];
-  count: number;
-}
-
-// 循环翻页拉取全部已发布文章，total 取后端真实总数
-async function fetchAllArticles(): Promise<{ list: Article[]; total: number }> {
-  let list: Article[] = [];
-  let total = 0;
-  try {
-    for (let page = 1; page <= MAX_PAGES; page++) {
-      const data = await getArticles({ page, size: PAGE_SIZE });
-      total = data.total;
-      list = list.concat(data.list);
-      if (data.list.length === 0 || list.length >= total) break;
-    }
-  } catch (error) {
-    console.error("archive index: fetch articles failed", error);
-  }
-  return { list, total };
-}
-
-function groupByYearMonth(articles: Article[]): YearGroup[] {
-  const byYear = new Map<number, Map<number, Article[]>>();
-  for (const a of articles) {
-    const year = a.year, monthNumber = a.month;
-    let byMonth = byYear.get(year);
-    if (!byMonth) {
-      byMonth = new Map();
-      byYear.set(year, byMonth);
-    }
-    let list = byMonth.get(monthNumber);
-    if (!list) {
-      list = [];
-      byMonth.set(monthNumber, list);
-    }
-    list.push(a);
-  }
-  return [...byYear.keys()]
-    .sort((x, y) => y - x)
-    .map((year) => {
-      const byMonth = byYear.get(year)!;
-      const months: MonthGroup[] = [...byMonth.keys()]
-        .sort((x, y) => y - x)
-        .map((month) => ({
-          month,
-          articles: byMonth
-            .get(month)!
-            .slice()
-            .sort((a, b) => +new Date(b.publishTime) - +new Date(a.publishTime)),
-        }));
-      return { year, months, count: months.reduce((s, m) => s + m.articles.length, 0) };
-    });
-}
-
-export default async function ArchiveIndex({ locale }: { locale: string }) {
-  const { list: articles, total: totalCount } = await fetchAllArticles();
-  const yearGroups = groupByYearMonth(articles);
-  let latest: { year: number; month: number; day: number } | null = null;
-  let latestMs = 0;
-  for (const a of articles) {
-    const ms = +new Date(a.publishTime);
-    if (ms > latestMs) {
-      latestMs = ms;
-      latest = { year: a.year, month: a.month, day: a.day };
-    }
-  }
-
-  const breadcrumbItems = [
-    { name: "Home", path: localePath(locale, "/") },
-    { name: "archive", path: "" },
-  ];
-
+/** 归档索引页：内容已移除，只保留路由、面包屑与站点框架 */
+export default function ArchiveIndex({ locale }: { locale: string }) {
   return (
     <SiteLayout
       locale={locale}
-      breadcrumbs={<Breadcrumbs items={breadcrumbItems} />}
+      breadcrumbs={
+        <Breadcrumbs
+          items={[
+            { name: "Home", path: localePath(locale, "/") },
+            { name: "Archive", path: "" },
+          ]}
+        />
+      }
       showYouMayLike
     >
-      <section className="archive-index">
-        <header className="archive-header">
-          <h1 className="page-heading-2">归档</h1>
-          {totalCount > 0 && latest && (
-            <p className="archive-header-meta">
-              共 {totalCount} 篇 · 跨越 {yearGroups.length} 年 · 最近更新于 {latest.year} 年 {latest.month} 月 {latest.day} 日
-            </p>
-          )}
-        </header>
-
-        <ArchiveTimeline yearGroups={yearGroups} />
-      </section>
+      {null}
     </SiteLayout>
   );
 }
