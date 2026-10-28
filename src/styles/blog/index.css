@@ -3440,8 +3440,7 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
     margin-top: 25px;
     margin-bottom: 1.5625rem;
   }
-  .article-avatar img,
-  .article-avatar-placeholder {
+  .article-avatar {
     display: none;
   }
 }
