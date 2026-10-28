@@ -4769,10 +4769,15 @@ ol.typo-list {
   font-variant-ligatures: none;
 }
 
-/* 代码保持原行宽，超宽时在代码块内滚动，换行会破坏缩进与语义 */
+/*
+ * 代码保持原行宽，超宽时在代码块内滚动，换行会破坏缩进与语义。
+ * 宽度贴合内容而不是撑满容器，滚动到最右时才会保留与左侧一致的内边距。
+ */
 .typo-code-block code,
 .gutenberg-content pre.wp-block-code code {
   display: block;
+  width: max-content;
+  min-width: 100%;
   white-space: pre;
   overflow-wrap: normal;
   word-break: normal;
