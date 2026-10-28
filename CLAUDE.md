@@ -5,102 +5,97 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 # Blog React
 
-Next.js 16 (App Router) 博客 + 文档前端。TypeScript strict；UI 全部用 React 手写，Element Plus 为源码级复刻而非第三方依赖；样式用 CSS 自定义属性。
-
 ## 技术栈
 
-- 框架: Next.js 16 (App Router)
-- 语言: TypeScript (strict)
-- 样式: 博客 `src/styles/blog/index.css`；文档 `src/styles/docs/index.css`；Element Plus 主题产物 `src/styles/element-plus/index.css`（博客与文档根布局都加载）
-- HTTP: axios，Server Components 内通过 `src/services/` 直连后端，客户端走 `/api` 反向代理
-- 组件: Element Plus React 复刻 + 站点自有组件，不引入第三方 UI 库
+- Next.js 16 App Router，TypeScript strict
+- 博客与文档双站，共用组件库与设计 token
+- 样式分三份：`styles/blog`、`styles/docs`、`styles/element-plus`，博客与文档根布局都加载主题
+- axios：服务端经 `services/` 直连后端，客户端走 `/api` 代理
+- 界面手写 React，Element Plus 为源码级复刻，不引入第三方 UI 库
 
-## 常用命令
+## 结构
 
-```bash
-npm run dev     # 开发服务器
-npm run build   # 生产构建
-npm run lint    # ESLint
-```
-
-生产预览未配置 npm script，直接运行 `npx next start`。
-
-类型检查（未配独立 script）：`node node_modules/typescript/bin/tsc --noEmit -p tsconfig.json`
-
-## 版本号约定
-
-- `package.json` 的 `version` 使用改动日期，格式为 `YY.MM.DD`，例如 2026-10-21 写为 `26.10.21`。
-- 每次准备提交改动时，将版本号更新为改动当天日期；同一天多次改动保持同一版本。
-- 不使用语义化版本递增，也不预估版本跨度。
-- 使用 `npm version YY.MM.DD --no-git-tag-version` 更新，确保 `package.json` 与 `package-lock.json` 同步。
-
-## 架构
-
-```
+```text
 src/
-├── app/                      # 只放路由与根布局
-│   ├── (blog)/[locale]/      # 博客路由，URL /<locale>/...
-│   ├── (docs)/[locale]/docs/ # 文档路由，URL /<locale>/docs/<section>/...
-│   └── (root)/               # 无语言前缀的入口，识别语言后跳转
-├── components/
-│   ├── blog/                 # 博客组件（layout / article / common / auth）
-│   ├── docs/                 # 文档站 UI（Layout / Header / Sidebar / DemoBlock）与 examples/ 文档示例
-│   └── element-plus/         # Element Plus 复刻；generated/ 为生成的图标
-├── content/
-│   ├── docs/<locale>/        # Markdown 文档（element-plus/components、notes）
-│   └── demos/                # 示例清单（registry.generated.ts 为生成文件）
-├── services/                 # 后端请求，以及 VO → UI 模型映射
-├── lib/                      # 文档管线、locale、Shiki 高亮
-├── styles/
-│   ├── blog/index.css        # 博客入口样式，由 (blog) 根布局加载
-│   ├── docs/index.css        # 文档入口样式，由 (docs) 根布局加载
-│   └── element-plus/index.css
-├── hooks/  stores/  utils/  types/
+├── app/                        # 只放路由与根布局
+│   ├── (blog)/[locale]/        # 博客 /<locale>/...
+│   ├── (docs)/[locale]/docs/   # 文档 /<locale>/docs/<section>/...
+│   ├── (gutenberg)/[locale]/   # 编辑器 /<locale>/gutenberg
+│   └── (root)/                 # 无语言前缀入口
+├── components/                 # blog、docs、gutenberg、element-plus
+├── content/                    # docs 文档与 demos 示例
+├── services/                   # 请求与 VO 到界面模型映射
+├── lib/                        # 文档管线、locale、高亮、区块渲染
+├── styles/                     # blog、docs、element-plus
+└── hooks/  stores/  utils/  types/
 ```
 
-默认 Server Components，需要交互的组件加 `"use client"`。`src/services/` 负责请求后端，并把 `types/api.ts` 的 snake_case VO 映射为 `types/models.ts` 的 camelCase 模型，组件只消费 UI 模型。
+- `/` 与 `/docs` 固定 307 到 `zh-CN`，`en-US` 只可直达，不做浏览器语言识别
+- 归档索引页只保留路由、面包屑与 You May Like，主内容为空
+- 默认 Server Components，交互组件加 `"use client"`
 
-## 文件命名约定
+## 命令与验证
 
-- 站点自有组件（`src/components/blog/**`、`src/components/docs/**`）用 PascalCase，且与主导出同名（默认导出或主要命名导出），如 `Layout.tsx`、`CommentsPanel.tsx`
-- 其余 TS/TSX 模块用 kebab-case：`src/lib/**`、`src/hooks/**`、`src/services/**`、`src/stores/**`、`src/utils/**`、`src/content/**`
-- 入口样式统一为 `src/styles/<scope>/index.css`；其余样式文件（局部 CSS、`*.module.css`）用 kebab-case
-- `src/app/**` 只放 Next.js 路由文件（`page.tsx`、`layout.tsx`、`route.ts` 等），组件放到 `src/components/**`
-- `src/components/element-plus/**` 是官方实现的 React 迁移，保留上游命名：组件 `ElXxx.tsx`，工具与 hook 用 `use-xxx.ts` / `xxx-utils.ts`
-- 生成图标统一放 `src/components/element-plus/generated/`，不手动编辑；文档示例统一放 `src/components/docs/examples/`，不放进组件库
+| 命令 | 用途 |
+| --- | --- |
+| `npm run dev` | 开发服务器 |
+| `npm run build` | 生产构建 |
+| `npm run lint` | ESLint |
+| `npx next start` | 生产预览 |
+| `node node_modules/typescript/bin/tsc --noEmit -p tsconfig.json` | 类型检查 |
 
-## 样式约定
+- 开发服务器由用户管理，不占用端口
+- 改动后跑类型检查与 ESLint，构建相关再跑 `npm run build`
+- 页面视觉效果由用户确认
 
-- 设计 token（颜色/间距/圆角/阴影）用 CSS 变量定义在 `src/styles/blog/index.css` 的 `:root`；暗色模式用 `[data-theme="dark"]` 覆盖变量，不用 class 切换
-- 布局用自定义 CSS class，博客样式写在 `src/styles/blog/index.css`，文档样式写在 `src/styles/docs/index.css`，两者由各自根布局加载、互不叠加
-- 禁止 `<style>` 标签；内联 style 仅用于 Shiki token 配色等无法用 class 表达的场景
-- 禁止硬编码颜色/间距/圆角，统一用 `var(--color-*)` 等 CSS 变量
-- 尽量不用 `!important`，优先提高选择器特异性（加 class 层级、用 `:not()`）
-- `html { font-size: 100% }` → 1rem = 16px，所有 rem 基于此换算
+## 命名
 
-### 单位约定
+- 组件用 PascalCase，与主导出同名
+- 其余模块用 kebab-case
+- `app/` 只放路由文件，组件放 `components/`
+- Element Plus 保留上游命名，生成图标不手改
+- 文档示例放 `components/docs/examples/`
 
-- 布局尺寸、间距 → rem（1rem = 16px）；超大（接近视口）→ vw/vh
-- 跟字号成比例的内边距 → em
-- 全屏/视口 → vh/vw（移动端优先 dvh/svh）
-- 像素精确的细节（边框、细线、图标、阴影）→ px
-- 小数一位优先；两位及以上需判断（0.667 、0.375、1.25 等数学正常可留）；由旧 10px 基准精确换算的 rem 保留原精度（最多 6 位小数），禁止四舍五入改变像素
+## 样式与单位
 
-## 注释约定
+- token 定义在 `:root`，暗色用 `[data-theme="dark"]` 覆盖变量
+- 博客与文档样式互不叠加
+- 禁止硬编码颜色、间距、圆角
+- 内联 style 只用于 Shiki 等无法用 class 表达的场景
+- 少用 `!important`
+- 基准 1rem = 16px
+- 尺寸与间距用 rem，接近视口用 vw 或 vh
+- 跟字号成比例的间距用 em
+- 边框、细线、图标、阴影用 px
+- 小数一位优先，旧基准换算的 rem 保留原精度
 
-- 只注释「为什么」，不注释「是什么」
-- JSX 注释用中文，CSS 注释用英文且只用来划分组件块
-- 禁止冗余注释、过时注释
+## 注释
 
-## Git 提交约定
+- 单独一行放在代码上方，禁止行尾注释
+- 只写为什么，不写是什么
+- 不使用括号，需要补充就拆短句
+- JSX 用中文，CSS 用英文且只划分组件块
+- 不留冗余与过时注释
 
-- 格式：conventional commits，`type: subject`
-- type 取 feat / fix / style / refactor / chore / docs 
-- subject 英文、祈使句、小写开头、不加句号
-- 不带 scope
-- 不带 body
+## 移植代码豁免
 
-## 编译验证
+以下目录保留上游写法，不按本站命名、注释、样式规范检查：
 
-- 前端开发服务器完全由用户手动管理，不占用端口
-- 改完需要验证服务是否正常运行，若无法正常运行则修改只能正常运行
+- `components/gutenberg`、`services/gutenberg`、`stores/gutenberg`、`lib/gutenberg`、`hooks/gutenberg`、`utils/gutenberg`
+- `components/element-plus`
+- `components/docs/examples`
+
+`GutenbergContent` 注入的文章级样式属于数据驱动，不受禁止 `<style>` 的约束。
+
+## Git
+
+- 格式 `type: subject`
+- type 取 feat、fix、style、refactor、chore、docs
+- subject 英文祈使句，小写开头，不加句号
+- 不带 scope 与 body
+
+## 版本号
+
+- `version` 使用改动日期 `YY.MM.DD`
+- 同一天多次改动保持同一版本
+- 用 `npm version YY.MM.DD --no-git-tag-version` 更新
