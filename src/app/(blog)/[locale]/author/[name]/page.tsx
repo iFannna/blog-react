@@ -56,7 +56,7 @@ export default async function AuthorPage({ params, searchParams }: AuthorPagePro
           { name: authorName, path: "" },
         ]} />
       }
-      sidebar={<Sidebar locale={locale} categories={categories} tags={tags} featuredArticles={articlesData.list.slice(0, 4)} />}
+      sidebar={<Sidebar locale={locale} categories={categories} tags={tags} />}
       youMayLikeArticles={articlesData.list.slice(0, 4)}
     >
       <h1 className="sr-only">作者: {authorName}</h1>

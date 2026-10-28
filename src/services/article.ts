@@ -112,6 +112,14 @@ export async function getArticles(params: GetArticlesParams = {}) {
   return { list: data.list.map(mapArticleVOToArticle), total: data.total };
 }
 
+/** 获取最近 30 天热度最高的文章 */
+export async function getHotArticles(limit = 4) {
+  const data = await apiClient.get<unknown, ArticleVO[]>("/article/hot", {
+    params: { limit },
+  });
+  return data.map(mapArticleVOToArticle);
+}
+
 /** 获取页脚精选文章与编辑推荐，数量不足时由后端用最新文章补齐 */
 export async function getRecommendations(limit = 3) {
   const data = await apiClient.get<unknown, ApiRecommendations>("/article/recommendations", {

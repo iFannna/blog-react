@@ -42,7 +42,7 @@ export default async function HomePage({
     <SiteLayout
       locale={locale}
       showSidebar
-      sidebar={<Sidebar locale={locale} categories={categories} tags={tags} featuredArticles={articlesData.list.slice(0, 4)} />}
+      sidebar={<Sidebar locale={locale} categories={categories} tags={tags} />}
       youMayLikeArticles={articlesData.list.slice(0, 4)}
     >
       <h1 className="sr-only">Blog</h1>

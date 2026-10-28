@@ -62,7 +62,7 @@ export default async function SearchPage({ params, searchParams }: SearchPagePro
           ...(keyword ? [{ name: "Search results", path: localePath(locale, `/search?q=${encodeURIComponent(keyword)}`) }, { name: displayKeyword, path: "" }] : []),
         ]} />
       }
-      sidebar={<Sidebar locale={locale} categories={categories} tags={tags} featuredArticles={articlesData.list.slice(0, 4)} />}
+      sidebar={<Sidebar locale={locale} categories={categories} tags={tags} />}
       youMayLikeArticles={articlesData.list.slice(0, 4)}
     >
       <h1 className="sr-only">搜索: {keyword || "请输入关键词"}</h1>

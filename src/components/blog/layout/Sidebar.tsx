@@ -1,6 +1,7 @@
 import Link from "next/link";
-import type { Article, Category, Tag } from "@/types/models";
+import type { Category, Tag } from "@/types/models";
 import { getSiteSetting } from "@/services/site";
+import { getHotArticles } from "@/services/article";
 import { articleHref } from "@/utils/article";
 import { localePath } from "@/lib/locale";
 import { DateLinks } from "@/components/blog/article/DateLinks";
@@ -11,13 +12,12 @@ interface SidebarProps {
   locale: string;
   categories: Category[];
   tags: Tag[];
-  featuredArticles: Article[];
 }
 
 // 角色固定文案，不从后端读取
 const DEVELOPER_ROLE = "开发者 & 编辑";
 
-export default async function Sidebar({ locale, categories, tags, featuredArticles }: SidebarProps) {
+export default async function Sidebar({ locale, categories, tags }: SidebarProps) {
   // 开发者信息从站点设置读取，React.cache 在单次请求内与 SiteLayout/generateMetadata 去重
   const setting = await getSiteSetting().catch(() => null);
   const developer = {
@@ -25,8 +25,9 @@ export default async function Sidebar({ locale, categories, tags, featuredArticl
     intro: setting?.developer_intro ?? "",
     avatar: setting?.developer_avatar ?? "",
   };
-  const featured = featuredArticles[0];
-  const smallArticles = featuredArticles.slice(1);
+  const hotArticles = await getHotArticles(4).catch(() => []);
+  const featured = hotArticles[0];
+  const smallArticles = hotArticles.slice(1);
 
   return (
     <aside id="secondary" className="sidebar-layout-secondary">
