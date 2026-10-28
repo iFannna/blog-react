@@ -43,7 +43,7 @@ export default async function HomePage({
       locale={locale}
       showSidebar
       sidebar={<Sidebar locale={locale} categories={categories} tags={tags} />}
-      youMayLikeArticles={articlesData.list.slice(0, 4)}
+      showYouMayLike
     >
       <h1 className="sr-only">Blog</h1>
       <ArticleFeed

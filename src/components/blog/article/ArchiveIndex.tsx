@@ -91,7 +91,7 @@ export default async function ArchiveIndex({ locale }: { locale: string }) {
     <SiteLayout
       locale={locale}
       breadcrumbs={<Breadcrumbs items={breadcrumbItems} />}
-      youMayLikeArticles={articles.slice(0, 4)}
+      showYouMayLike
     >
       <section className="archive-index">
         <header className="archive-header">

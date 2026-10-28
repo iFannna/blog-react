@@ -57,7 +57,7 @@ export default async function AuthorPage({ params, searchParams }: AuthorPagePro
         ]} />
       }
       sidebar={<Sidebar locale={locale} categories={categories} tags={tags} />}
-      youMayLikeArticles={articlesData.list.slice(0, 4)}
+      showYouMayLike
     >
       <h1 className="sr-only">作者: {authorName}</h1>
       <section className="author-box">

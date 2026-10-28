@@ -112,6 +112,19 @@ export async function getArticles(params: GetArticlesParams = {}) {
   return { list: data.list.map(mapArticleVOToArticle), total: data.total };
 }
 
+/** 记录一次文章浏览，服务端按主体去重 */
+export async function recordArticleView(id: number) {
+  await apiClient.post(`/article/${id}/view`);
+}
+
+/** 获取个性化推荐文章 */
+export async function getForYou(limit = 4) {
+  const data = await apiClient.get<unknown, ArticleVO[]>("/article/for-you", {
+    params: { limit },
+  });
+  return data.map(mapArticleVOToArticle);
+}
+
 /** 获取最近 30 天热度最高的文章 */
 export async function getHotArticles(limit = 4) {
   const data = await apiClient.get<unknown, ArticleVO[]>("/article/hot", {

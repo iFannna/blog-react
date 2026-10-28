@@ -6,6 +6,7 @@ import Breadcrumbs from "@/components/blog/common/Breadcrumbs";
 import MarkdownContent from "@/components/blog/article/MarkdownContent";
 import GutenbergContent from "@/components/blog/article/GutenbergContent";
 import PostNav from "@/components/blog/article/PostNav";
+import ArticleViewTracker from "@/components/blog/article/ArticleViewTracker";
 import CommentsPanel from "@/components/blog/article/CommentsPanel";
 import { DateLinks } from "@/components/blog/article/DateLinks";
 import { getArticleById, getArticlePrevNext } from "@/services/article";
@@ -71,6 +72,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       }
     >
       <div id="primary" className="content-area">
+        <ArticleViewTracker articleId={article.id} />
         <article className="page-entry">
           {/* 文章头部信息 */}
           <div className="post-category">

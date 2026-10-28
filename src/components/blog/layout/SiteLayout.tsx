@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import type { Article } from "@/types/models";
 import Header from "./Header";
 import Footer from "./Footer";
 import WavesBackground from "@/components/blog/common/WavesBackground";
@@ -16,7 +15,7 @@ interface SiteLayoutProps {
   children: ReactNode;
   showSidebar?: boolean;
   sidebar?: ReactNode;
-  youMayLikeArticles?: Article[];
+  showYouMayLike?: boolean;
   breadcrumbs?: ReactNode;
 }
 
@@ -34,7 +33,7 @@ export default async function SiteLayout({
   children,
   showSidebar = false,
   sidebar,
-  youMayLikeArticles = [],
+  showYouMayLike = false,
   breadcrumbs,
 }: SiteLayoutProps) {
   // 站点设置与计数：后端不可用时用空值兜底，避免整站布局崩溃
@@ -124,9 +123,7 @@ export default async function SiteLayout({
           )}
         </div>
       </main>
-      {youMayLikeArticles.length > 0 && (
-        <YouMayLike articles={youMayLikeArticles} />
-      )}
+      {showYouMayLike && <YouMayLike />}
       <Footer
         locale={locale}
         featuredArticles={recommendations.featured}

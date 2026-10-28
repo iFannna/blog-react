@@ -57,7 +57,7 @@ export default async function TagPage({ params, searchParams }: TagPageProps) {
         ]} />
       }
       sidebar={<Sidebar locale={locale} categories={categories} tags={tags} />}
-      youMayLikeArticles={articlesData.list.slice(0, 4)}
+      showYouMayLike
     >
       <h1 className="sr-only">标签: {tag.name}</h1>
       <ArticleFeed

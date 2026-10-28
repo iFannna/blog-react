@@ -57,7 +57,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
         ]} />
       }
       sidebar={<Sidebar locale={locale} categories={categories} tags={tags} />}
-      youMayLikeArticles={articlesData.list.slice(0, 4)}
+      showYouMayLike
     >
       <h1 className="sr-only">分类: {category.name}</h1>
       <ArticleFeed
