@@ -113,8 +113,6 @@ export default async function ArchivePage({ params, searchParams }: ArchivePageP
       breadcrumbs={<Breadcrumbs items={breadcrumbItems} />}
       sidebar={<Sidebar locale={locale} categories={categories} tags={tags} featuredArticles={articlesData.list.slice(0, 4)} />}
       youMayLikeArticles={articlesData.list.slice(0, 4)}
-      featuredArticles={articlesData.list.slice(0, 3)}
-      editorPickArticles={articlesData.list.slice(3, 6)}
     >
       <h1 className="sr-only">Archive: {label}</h1>
       <ArticleFeed

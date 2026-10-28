@@ -26,6 +26,8 @@ export interface ArticleVO {
   status: number;
   visibility: number;
   publish_at: string;
+  featured_at: string | null;
+  editor_pick_at: string | null;
   view_count: number;
   like_count: number;
   star_count: number;
@@ -39,6 +41,12 @@ export interface ArticleVO {
   created_at: string;
   categories: ApiCategory[];
   tags: ApiTag[];
+}
+
+/** 页脚推荐区块 */
+export interface ApiRecommendations {
+  featured: ArticleVO[];
+  editor_pick: ArticleVO[];
 }
 
 export interface ApiCategory {

@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import WavesBackground from "@/components/blog/common/WavesBackground";
 import BackToTop from "@/components/blog/common/BackToTop";
 import YouMayLike from "@/components/blog/article/YouMayLike";
+import { getRecommendations } from "@/services/article";
 import { getSiteSetting, getGuestbookCount, getFriendLinkCount } from "@/services/site";
 import { getCategories } from "@/services/category";
 import { getTags } from "@/services/tag";
@@ -16,8 +17,6 @@ interface SiteLayoutProps {
   showSidebar?: boolean;
   sidebar?: ReactNode;
   youMayLikeArticles?: Article[];
-  featuredArticles?: Article[];
-  editorPickArticles?: Article[];
   breadcrumbs?: ReactNode;
 }
 
@@ -36,17 +35,16 @@ export default async function SiteLayout({
   showSidebar = false,
   sidebar,
   youMayLikeArticles = [],
-  featuredArticles = [],
-  editorPickArticles = [],
   breadcrumbs,
 }: SiteLayoutProps) {
   // 站点设置与计数：后端不可用时用空值兜底，避免整站布局崩溃
   const setting = await getSiteSetting().catch(() => null);
-  const [guestbookCount, friendLinkCount, categories, tags] = await Promise.all([
+  const [guestbookCount, friendLinkCount, categories, tags, recommendations] = await Promise.all([
     getGuestbookCount().catch(() => 0),
     getFriendLinkCount().catch(() => 0),
     getCategories().catch(() => []),
     getTags().catch(() => []),
+    getRecommendations().catch(() => ({ featured: [], editorPick: [] })),
   ]);
   // 「其他」下拉:归档(分类/标签/作者)、排版、文档、示例、登录、注册;分类/标签为动态数据
   const developerName = setting?.developer_name || "Admin";
@@ -131,8 +129,8 @@ export default async function SiteLayout({
       )}
       <Footer
         locale={locale}
-        featuredArticles={featuredArticles}
-        editorPickArticles={editorPickArticles}
+        featuredArticles={recommendations.featured}
+        editorPickArticles={recommendations.editorPick}
         siteName={setting?.site_name ?? ""}
         email={setting?.developer_email ?? ""}
         phone={setting?.developer_phone ?? ""}

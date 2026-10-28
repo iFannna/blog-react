@@ -58,8 +58,6 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
       }
       sidebar={<Sidebar locale={locale} categories={categories} tags={tags} featuredArticles={articlesData.list.slice(0, 4)} />}
       youMayLikeArticles={articlesData.list.slice(0, 4)}
-      featuredArticles={articlesData.list.slice(0, 3)}
-      editorPickArticles={articlesData.list.slice(3, 6)}
     >
       <h1 className="sr-only">分类: {category.name}</h1>
       <ArticleFeed

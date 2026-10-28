@@ -2,6 +2,7 @@ import apiClient from "@/services/http";
 import type {
   ApiCategory,
   ApiPrevNext,
+  ApiRecommendations,
   ApiTag,
   ArticleVO,
   CommentVO,
@@ -109,6 +110,17 @@ export async function getArticles(params: GetArticlesParams = {}) {
     },
   });
   return { list: data.list.map(mapArticleVOToArticle), total: data.total };
+}
+
+/** 获取页脚精选文章与编辑推荐，数量不足时由后端用最新文章补齐 */
+export async function getRecommendations(limit = 3) {
+  const data = await apiClient.get<unknown, ApiRecommendations>("/article/recommendations", {
+    params: { limit },
+  });
+  return {
+    featured: data.featured.map(mapArticleVOToArticle),
+    editorPick: data.editor_pick.map(mapArticleVOToArticle),
+  };
 }
 
 /** 根据 ID 和发布日期获取文章详情 */

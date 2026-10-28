@@ -64,8 +64,6 @@ export default async function SearchPage({ params, searchParams }: SearchPagePro
       }
       sidebar={<Sidebar locale={locale} categories={categories} tags={tags} featuredArticles={articlesData.list.slice(0, 4)} />}
       youMayLikeArticles={articlesData.list.slice(0, 4)}
-      featuredArticles={articlesData.list.slice(0, 3)}
-      editorPickArticles={articlesData.list.slice(3, 6)}
     >
       <h1 className="sr-only">搜索: {keyword || "请输入关键词"}</h1>
       {!keyword ? (

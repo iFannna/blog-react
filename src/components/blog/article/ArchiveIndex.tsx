@@ -92,8 +92,6 @@ export default async function ArchiveIndex({ locale }: { locale: string }) {
       locale={locale}
       breadcrumbs={<Breadcrumbs items={breadcrumbItems} />}
       youMayLikeArticles={articles.slice(0, 4)}
-      featuredArticles={articles.slice(0, 3)}
-      editorPickArticles={articles.slice(3, 6)}
     >
       <section className="archive-index">
         <header className="archive-header">
