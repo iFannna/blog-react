@@ -5,7 +5,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { ElTag } from "@/components/element-plus/tag";
 import { ElSwitch } from "@/components/element-plus/switch";
 import { useTheme } from "@/hooks/theme";
-import { LOCALE_COOKIE_NAME } from "@/lib/locale";
 import type { DocLocale, DocsHeaderConfig } from "@/lib/docs/types";
 import { useDocsMessages } from "./I18nProvider";
 
@@ -77,7 +76,6 @@ function localeHref(pathname: string, locale: DocLocale): string {
 
 /**
  * 顶栏语言切换：挂载于 /<locale>/docs 下，点击跳到另一语言下的同一页面。
- * 选择写入 cookie，无语言前缀的入口（/docs）识别时优先读取。
  */
 function LocaleToggle({ locale }: { locale: DocLocale }) {
   const pathname = usePathname();
@@ -92,7 +90,6 @@ function LocaleToggle({ locale }: { locale: DocLocale }) {
       aria-label={t.switchLanguage}
       title={t.switchLanguage}
       onClick={() => {
-        document.cookie = `${LOCALE_COOKIE_NAME}=${nextLocale}; path=/; max-age=31536000; sameSite=lax`;
         router.push(localeHref(pathname, nextLocale));
       }}
     >
