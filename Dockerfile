@@ -24,14 +24,15 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
+# 容器内必须监听全部网卡，否则 Caddy 连不上
+ENV HOSTNAME=0.0.0.0
 
-COPY --from=build /app/package.json /app/package-lock.json ./
-COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app/.next ./.next
+# standalone 已含运行所需依赖子集与 server.js
+COPY --from=build /app/.next/standalone ./
+COPY --from=build /app/.next/static ./.next/static
 COPY --from=build /app/public ./public
-# docs 演示在运行期读取 src 下的源码文件，必须保留
-COPY --from=build /app/src ./src
-COPY --from=build /app/next.config.ts /app/tsconfig.json /app/next-env.d.ts ./
+# 文档索引与分节页是 force-dynamic，运行期从磁盘读 Markdown
+COPY --from=build /app/src/content ./src/content
 
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["node", "server.js"]
