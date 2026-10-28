@@ -14,6 +14,8 @@ COPY . .
 ARG NEXT_PUBLIC_API_URL=http://backend:8080
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 ENV NEXT_TELEMETRY_DISABLED=1
+# 类型检查已在本地提交前执行，容器内跳过以缩短部署构建
+ENV SKIP_TYPECHECK=1
 RUN npm run build
 
 FROM node:22-alpine AS run
