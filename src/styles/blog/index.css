@@ -4761,14 +4761,21 @@ ol.typo-list {
   font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", Menlo, Consolas, monospace;
   padding: 0.8em 1em;
   overflow: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-scrollbar) transparent;
+  tab-size: 4;
   font-size: 1rem;
   font-variant-ligatures: none;
 }
 
+/* 代码保持原行宽，超宽时在代码块内滚动，换行会破坏缩进与语义 */
 .typo-code-block code,
 .gutenberg-content pre.wp-block-code code {
   display: block;
-  white-space: pre-wrap;
+  white-space: pre;
+  overflow-wrap: normal;
+  word-break: normal;
   font-size: 90%;
   font-family: inherit;
 }
