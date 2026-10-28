@@ -1149,37 +1149,24 @@ button.animate-arrow {
   overflow: hidden;
   position: relative;
 }
-.social-nav .social-link > span::before,
-.social-nav .social-link > span::after {
-  content: "";
+.social-nav .social-link > span > svg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: 1.25rem;
-  background-repeat: no-repeat;
-  background-position: center;
   transition: transform 0.22s;
 }
-.social-nav .social-link > span::after {
+.social-nav .social-link > span > svg + svg {
   transform: translateY(225%);
 }
-.social-nav .social-link:hover > span::before,
-.social-nav .social-link:focus-visible > span::before {
+.social-nav .social-link:hover > span > svg:first-child,
+.social-nav .social-link:focus-visible > span > svg:first-child {
   transform: translateY(-225%);
 }
-.social-nav .social-link:hover > span::after,
-.social-nav .social-link:focus-visible > span::after {
+.social-nav .social-link:hover > span > svg + svg,
+.social-nav .social-link:focus-visible > span > svg + svg {
   transform: translateY(0);
-}
-.github-social-icon::before,
-.github-social-icon::after {
-  background-image: url("https://java-ai-sau.oss-cn-beijing.aliyuncs.com/github.png");
-}
-.gitee-social-icon::before,
-.gitee-social-icon::after {
-  background-image: url("https://java-ai-sau.oss-cn-beijing.aliyuncs.com/gitee.png");
 }
 
 /* Widget wrapper */

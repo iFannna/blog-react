@@ -19,7 +19,29 @@ interface HeaderProps {
 }
 
 const DEFAULT_SITE_LOGO =
-  "https://java-ai-sau.oss-cn-beijing.aliyuncs.com/Blog.png";
+  "https://lisris.oss-cn-beijing.aliyuncs.com/media/image/2026/10/6a403db0727fe005d8837f3f10a40b16.png";
+
+const GITHUB_ICON_PATH =
+  "M0,0 L34,0 L59,3 L83,8 L113,18 L137,29 L154,39 L170,50 L181,59 L195,71 L205,81 L212,89 L224,104 L234,119 L244,136 L254,157 L263,182 L269,206 L272,225 L273,235 L273,278 L270,301 L265,323 L259,342 L251,362 L243,378 L235,392 L224,408 L211,424 L197,439 L183,452 L166,465 L154,473 L133,485 L113,494 L95,500 L86,499 L81,495 L79,490 L79,415 L77,398 L72,383 L65,373 L63,369 L73,367 L97,362 L115,356 L131,348 L143,339 L155,327 L164,313 L170,299 L174,286 L177,270 L178,260 L178,232 L174,212 L167,195 L157,180 L153,175 L157,154 L157,137 L154,120 L150,108 L148,107 L134,108 L113,115 L94,125 L82,133 L73,132 L53,128 L36,126 L-4,126 L-27,129 L-45,133 L-50,132 L-69,121 L-83,114 L-98,109 L-109,107 L-118,107 L-120,116 L-123,129 L-124,137 L-124,153 L-121,169 L-120,175 L-129,187 L-135,197 L-142,216 L-145,234 L-145,256 L-142,280 L-138,295 L-133,308 L-124,324 L-112,337 L-104,344 L-87,354 L-72,360 L-53,365 L-30,369 L-32,373 L-39,383 L-44,398 L-45,404 L-55,408 L-70,411 L-82,411 L-94,408 L-105,402 L-112,396 L-121,384 L-127,375 L-135,367 L-147,360 L-161,357 L-170,358 L-169,364 L-161,371 L-153,377 L-146,384 L-137,398 L-128,418 L-119,429 L-108,437 L-96,442 L-81,445 L-64,445 L-46,443 L-46,490 L-49,496 L-55,500 L-65,500 L-90,490 L-115,477 L-130,467 L-142,458 L-153,449 L-160,442 L-168,435 L-175,427 L-182,419 L-192,406 L-203,389 L-213,371 L-222,351 L-230,327 L-235,306 L-239,279 L-239,236 L-236,212 L-230,186 L-222,162 L-211,138 L-202,122 L-194,110 L-185,98 L-176,87 L-162,72 L-149,60 L-132,47 L-115,36 L-97,26 L-79,18 L-60,11 L-37,5 L-12,1 Z";
+
+const GITEE_ICON_PATH =
+  "M0,0 L42,0 L65,3 L88,8 L118,18 L147,32 L166,44 L182,56 L196,68 L212,84 L221,95 L231,108 L242,125 L256,152 L264,173 L270,193 L275,217 L277,235 L277,277 L274,301 L268,327 L259,353 L247,378 L239,392 L228,408 L215,424 L204,436 L193,447 L182,456 L169,466 L150,478 L127,490 L107,498 L84,505 L59,510 L42,512 L-1,512 L-30,508 L-54,502 L-79,493 L-102,482 L-120,471 L-138,458 L-153,445 L-172,426 L-181,415 L-194,397 L-207,375 L-216,356 L-225,331 L-231,307 L-235,278 L-235,235 L-232,212 L-227,189 L-218,162 L-210,144 L-199,123 L-191,111 L-182,99 L-174,89 L-162,76 L-151,65 L-140,56 L-127,46 L-110,35 L-92,25 L-68,15 L-50,9 L-24,3 Z M-33,114 L-47,116 L-63,121 L-78,129 L-87,136 L-97,145 L-108,160 L-115,175 L-119,188 L-121,202 L-121,388 L-118,394 L-114,397 L-111,398 L83,398 L97,396 L112,391 L125,384 L135,376 L144,367 L154,352 L160,337 L162,328 L163,319 L163,238 L160,232 L154,228 L2,228 L-3,231 L-6,234 L-7,237 L-7,275 L-4,280 L-1,283 L2,284 L97,285 L103,287 L105,292 L106,295 L106,308 L102,321 L96,329 L88,336 L78,340 L72,341 L-55,341 L-61,338 L-64,332 L-64,205 L-61,193 L-55,184 L-54,181 L-50,179 L-42,174 L-31,171 L154,170 L159,167 L163,161 L163,124 L159,117 L153,114 Z";
+
+function GitHubGlyph() {
+  return (
+    <svg viewBox="0 0 512 512" aria-hidden="true" focusable="false">
+      <path d={GITHUB_ICON_PATH} fill="#000000" transform="translate(239,6)" />
+    </svg>
+  );
+}
+
+function GiteeGlyph() {
+  return (
+    <svg viewBox="0 0 512 512" aria-hidden="true" focusable="false">
+      <path d={GITEE_ICON_PATH} fill="#D81E06" transform="translate(235,0)" />
+    </svg>
+  );
+}
 
 export default function Header({ navItems, github, gitee, logo }: HeaderProps) {
   const pathname = usePathname();
@@ -360,12 +382,18 @@ export default function Header({ navItems, github, gitee, logo }: HeaderProps) {
                   <ul>
                     <li>
                       <a href={github || "#"} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="GitHub">
-                        <span className="github-social-icon" />
+                        <span className="github-social-icon">
+                          <GitHubGlyph />
+                          <GitHubGlyph />
+                        </span>
                       </a>
                     </li>
                     <li>
                       <a href={gitee || "#"} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Gitee">
-                        <span className="gitee-social-icon" />
+                        <span className="gitee-social-icon">
+                          <GiteeGlyph />
+                          <GiteeGlyph />
+                        </span>
                       </a>
                     </li>
                   </ul>
