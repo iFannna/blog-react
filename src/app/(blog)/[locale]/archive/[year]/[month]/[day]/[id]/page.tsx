@@ -25,6 +25,7 @@ const CAT_COLORS = [
 
 interface ArticlePageProps {
   params: Promise<{ locale: string; year: string; month: string; day: string; id: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export async function generateMetadata({
@@ -43,8 +44,9 @@ export async function generateMetadata({
   }
 }
 
-export default async function ArticlePage({ params }: ArticlePageProps) {
+export default async function ArticlePage({ params, searchParams }: ArticlePageProps) {
   const { locale, year, month, day, id } = await params;
+  const resolvedSearchParams = await searchParams;
 
   let article;
   try {
@@ -150,6 +152,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               <GutenbergContent
                 content={article.content}
                 locale={locale}
+                searchParams={resolvedSearchParams}
                 post={{
                   id: article.id,
                   title: article.title,
@@ -157,6 +160,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                   year: article.year,
                   month: article.month,
                   day: article.day,
+                  summary: article.summary,
+                  coverImage: article.coverImage ?? "",
+                  content: article.content,
+                  contentFormat: article.contentFormat,
+                  publishAt: article.publishTime,
                   author: {
                     id: article.authorId,
                     name: article.authorName,

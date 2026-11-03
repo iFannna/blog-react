@@ -52,9 +52,15 @@ import {
   renderDynamicBlock,
   isRecord,
   type DynamicBlockProps,
+  type DynamicPostContext,
+  type DynamicQueryContext,
   type DynamicRenderContext,
   type DynamicTermContext,
 } from "./dynamic";
+import { getRenderQueryPosts } from "@/services/gutenberg/render-data";
+import { getArticlePrevNext } from "@/services/article";
+import { articleHref } from "@/utils/article";
+import { localePath } from "@/lib/locale";
 
 export interface RenderCollector {
   css: string[];
@@ -335,9 +341,9 @@ const NAVIGATION_PATTERN =
   /<!--\s*wp:navigation(?:\s+\{(?:(?!-->)[\s\S])*?\})?\s*-->([\s\S]*?)<!--\s*\/wp:navigation\s*-->/g;
 const NAVIGATION_SUBMENU_PATTERN =
   /<!--\s*wp:navigation-submenu(?:\s+\{(?:(?!-->)[\s\S])*?\})?\s*-->([\s\S]*?)<!--\s*\/wp:navigation-submenu\s*-->/g;
-// 循环查询还没接入前台：整段收起，避免子区块用当前文章上下文误渲染
+// 查询循环保留内部模板，由 QueryBlock 按查询结果循环渲染
 const QUERY_BLOCK_PATTERN =
-  /<!--\s*wp:query(?:\s+\{(?:(?!-->)[\s\S])*?\})?\s*-->[\s\S]*?<!--\s*\/wp:query\s*-->/g;
+  /<!--\s*wp:query(?:\s+\{(?:(?!-->)[\s\S])*?\})?\s*-->([\s\S]*?)<!--\s*\/wp:query\s*-->/g;
 const SELF_CLOSING_BLOCK_PATTERN =
   /<!--\s*wp:([\w/-]+)(?:\s+\{(?:(?!-->)[\s\S])*?\})?\s*\/-->/g;
 
@@ -355,15 +361,16 @@ function markContainerBlock(match: string, inner: string): string {
 function markDynamicBlocks(content: string, depth: number): string {
   let marked = content;
 
-  // 查询循环暂不输出，连子区块一起收起，避免把当前文章数据带进循环
-  marked = marked.replace(QUERY_BLOCK_PATTERN, "");
-
-  // 内部模板需要保留，循环渲染时每个术语/菜单项复用一次
+  // 内部模板需要保留，循环渲染时每篇文章复用一次
   if (depth < 3) {
     marked = marked
+      .replace(QUERY_BLOCK_PATTERN, markContainerBlock)
       .replace(TERMS_QUERY_PATTERN, markContainerBlock)
       .replace(NAVIGATION_PATTERN, markContainerBlock)
       .replace(NAVIGATION_SUBMENU_PATTERN, markContainerBlock);
+  } else {
+    // 嵌套过深时整段收起，避免子区块套用当前文章上下文串数据
+    marked = marked.replace(QUERY_BLOCK_PATTERN, "");
   }
 
   return marked.replace(SELF_CLOSING_BLOCK_PATTERN, (match, rawName: string) => {
@@ -500,6 +507,474 @@ async function TermsQueryBlock({
       {items}
     </ul>
   );
+}
+
+interface ExtractedBlock {
+  attributes: Record<string, unknown>;
+  content: string;
+  full: string;
+  index: number;
+}
+
+function parseAttributesJson(raw: string | undefined): Record<string, unknown> {
+  if (!raw) {
+    return {};
+  }
+  try {
+    const parsed = JSON.parse(raw);
+    return isRecord(parsed) ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function extractContainerBlock(innerHtml: string, name: string): ExtractedBlock | null {
+  const pattern = new RegExp(
+    `<!--\\s*wp:${name}(?:\\s+(\\{(?:(?!-->)[\\s\\S])*?\\}))?\\s*-->([\\s\\S]*?)<!--\\s*\\/wp:${name}\\s*-->`,
+  );
+  const match = pattern.exec(innerHtml);
+  if (!match) {
+    return null;
+  }
+  return {
+    attributes: parseAttributesJson(match[1]),
+    content: match[2],
+    full: match[0],
+    index: match.index,
+  };
+}
+
+function extractSelfClosingBlock(innerHtml: string, name: string): ExtractedBlock | null {
+  const pattern = new RegExp(
+    `<!--\\s*wp:${name}(?:\\s+(\\{(?:(?!-->)[\\s\\S])*?\\}))?\\s*\\/-->`,
+  );
+  const match = pattern.exec(innerHtml);
+  if (!match) {
+    return null;
+  }
+  return {
+    attributes: parseAttributesJson(match[1]),
+    content: "",
+    full: match[0],
+    index: match.index,
+  };
+}
+
+/** 去掉保存内容里的外层包裹标签，QueryBlock 会按属性重新生成 */
+function unwrapBlockWrapper(html: string, tagName: string): string {
+  const tag = /^[a-z][a-z0-9-]*$/.test(tagName) ? tagName : "div";
+  const pattern = new RegExp(`^\\s*<${tag}\\b[^>]*>([\\s\\S]*)<\\/${tag}>\\s*$`);
+  const match = pattern.exec(html);
+  return match ? match[1] : html;
+}
+
+function readIdList(value: unknown): number[] {
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => readNumber(item, 0))
+      .filter((item) => item > 0);
+  }
+  const raw = readString(value);
+  if (!raw) {
+    return [];
+  }
+  return raw
+    .split(",")
+    .map((item) => Number.parseInt(item.trim(), 10))
+    .filter((item) => Number.isFinite(item) && item > 0);
+}
+
+function readTermIds(value: unknown): number[] {
+  return Array.isArray(value)
+    ? value.map((item) => readNumber(item, 0)).filter((item) => item > 0)
+    : [];
+}
+
+interface QueryBlockProps extends DynamicBlockProps {
+  innerHtml: string;
+  collector: RenderCollector;
+  depth: number;
+}
+
+/** 按查询属性取数并循环渲染文章模板 */
+async function QueryBlock({
+  attributes,
+  context,
+  instanceId,
+  innerHtml,
+  collector,
+  depth,
+}: QueryBlockProps) {
+  const query = isRecord(attributes.query) ? attributes.query : {};
+  const queryId = readNumber(attributes.queryId, 0);
+  const perPage = Math.min(Math.max(readNumber(query.perPage, 10), 1), 100);
+  const offset = Math.max(readNumber(query.offset, 0), 0);
+  const pagesLimit = Math.max(readNumber(query.pages, 0), 0);
+  const order = readString(query.order) === "asc" ? "asc" : "desc";
+  const orderBy = readString(query.orderBy) === "title" ? "title" : "publish_at";
+  const postType = readString(query.postType) || "post";
+  const search = readString(query.search).trim();
+  const taxQuery = isRecord(query.taxQuery) ? query.taxQuery : {};
+  const include = isRecord(taxQuery.include) ? taxQuery.include : {};
+  const excludeTerms = isRecord(taxQuery.exclude) ? taxQuery.exclude : {};
+  const categoryIds = readTermIds(include.category);
+  const tagIds = readTermIds(include.post_tag);
+  const excludeCategoryIds = readTermIds(excludeTerms.category);
+  const excludeTagIds = readTermIds(excludeTerms.post_tag);
+  const authorIds = readIdList(query.author);
+  const excludeIds = readIdList(query.exclude);
+  if (readBoolean(query.excludeCurrent) && context.post) {
+    excludeIds.push(context.post.id);
+  }
+
+  const template = extractContainerBlock(innerHtml, "post-template");
+  if (!template) {
+    return null;
+  }
+  const pagination = extractContainerBlock(innerHtml, "query-pagination");
+  const noResults = extractContainerBlock(innerHtml, "query-no-results");
+  const totalBlock = extractSelfClosingBlock(innerHtml, "query-total");
+  const wrapperTagName = readString(attributes.tagName) || "div";
+  const innerContent = unwrapBlockWrapper(innerHtml, wrapperTagName);
+  const templateContent = template.content;
+
+  const fullPost =
+    templateContent.includes("wp:post-content") ||
+    templateContent.includes("wp:post-time-to-read");
+  const options = {
+    page: Math.max(context.queryPages?.[`query-${queryId}-page`] ?? 1, 1),
+    perPage,
+    offset,
+    orderBy,
+    order,
+    categoryIds,
+    excludeCategoryIds,
+    tagIds,
+    excludeTagIds,
+    authorIds,
+    excludeIds,
+    search,
+    fullPost,
+  };
+
+  let result =
+    postType === "post"
+      ? await getRenderQueryPosts(options).catch(() => ({ posts: [], total: 0 }))
+      : { posts: [], total: 0 };
+  let page = options.page;
+  let totalPages = perPage > 0 ? Math.ceil(result.total / perPage) : 0;
+  if (pagesLimit > 0) {
+    totalPages = Math.min(totalPages, pagesLimit);
+  }
+  if (totalPages > 0 && page > totalPages) {
+    page = totalPages;
+    result = await getRenderQueryPosts({ ...options, page }).catch(() => ({
+      posts: [],
+      total: 0,
+    }));
+  }
+
+  const needsAdjacent = templateContent.includes("wp:post-navigation-link");
+  const adjacents = needsAdjacent
+    ? await Promise.all(
+        result.posts.map((post) =>
+          getArticlePrevNext(post.id).catch(() => null),
+        ),
+      )
+    : [];
+
+  const queryContext: DynamicQueryContext = {
+    id: queryId,
+    page,
+    total: result.total,
+    totalPages,
+    perPage,
+  };
+
+  const items = result.posts.map((post, index) => {
+    const postContext: DynamicPostContext = {
+      id: post.id,
+      title: post.title,
+      link: localePath(
+        context.locale,
+        articleHref({
+          id: post.id,
+          year: post.year,
+          month: post.month,
+          day: post.day,
+        }),
+      ),
+      year: post.year,
+      month: post.month,
+      day: post.day,
+      summary: post.summary,
+      coverImage: post.coverImage,
+      content: post.content,
+      contentFormat: post.contentFormat,
+      publishAt: post.publishAt,
+      author: {
+        id: post.authorId,
+        name: post.authorName,
+        avatar: post.authorAvatar,
+        description: post.authorDescription,
+      },
+      categories: post.categories,
+      tags: post.tags,
+      commentCount: post.commentCount,
+      commentStatus: 1,
+    };
+    const body = renderContentBody(
+      templateContent,
+      {
+        ...context,
+        post: postContext,
+        prevNext: adjacents[index] ?? null,
+        query: queryContext,
+      },
+      collector,
+      { depth: depth + 1 },
+    );
+    return (
+      <li key={post.id} className={`wp-block-post post-${post.id}`}>
+        {body}
+      </li>
+    );
+  });
+
+  const templateWrapper = getBlockWrapper("core/post-template", template.attributes, "ul");
+  const templateClasses = new Set(
+    templateWrapper.className.split(/\s+/).filter(Boolean),
+  );
+  const templateLayout = renderLayout(
+    "core/post-template",
+    template.attributes as RenderableAttributes,
+    instanceId,
+  );
+  let templateCss = "";
+  if (templateLayout) {
+    for (const name of templateLayout.className.split(/\s+/).filter(Boolean)) {
+      templateClasses.add(name);
+    }
+    // 异步组件执行时外层样式表已经输出，布局 CSS 直接随列表下发
+    if (templateLayout.css && !collector.cssKeys.has(templateLayout.css)) {
+      collector.cssKeys.add(templateLayout.css);
+      templateCss = templateLayout.css;
+    }
+  }
+
+  const hrefFor = (targetPage: number) => `?query-${queryId}-page=${targetPage}`;
+  const isEnglish = context.locale === "en-US";
+  const paginationNodes: ReactNode[] = [];
+  if (pagination && totalPages > 1) {
+    const arrow = readString(pagination.attributes.paginationArrow) || "none";
+    const showLabel = readBoolean(pagination.attributes.showLabel, true);
+    const previousBlock = extractSelfClosingBlock(
+      pagination.content,
+      "query-pagination-previous",
+    );
+    const numbersBlock = extractSelfClosingBlock(
+      pagination.content,
+      "query-pagination-numbers",
+    );
+    const nextBlock = extractSelfClosingBlock(pagination.content, "query-pagination-next");
+    const arrowCharacters: Record<string, string> = {
+      arrow: "→",
+      chevron: "»",
+    };
+
+    const segments: Array<{ index: number; node: ReactNode }> = [];
+    if (previousBlock && page > 1) {
+      const arrowCharacter = arrowCharacters[arrow] ?? "";
+      segments.push({
+        index: previousBlock.index,
+        node: (
+          <a
+            key="previous"
+            className="wp-block-query-pagination-previous"
+            href={hrefFor(page - 1)}
+          >
+            {arrowCharacter ? (
+              <span
+                className={`wp-block-query-pagination-previous-arrow is-arrow-${arrow}`}
+                aria-hidden
+              >
+                {arrowCharacter === "→" ? "←" : "«"}
+              </span>
+            ) : null}
+            {showLabel
+              ? readString(previousBlock.attributes.label) ||
+                (isEnglish ? "Previous page" : "上一页")
+              : null}
+          </a>
+        ),
+      });
+    }
+    if (numbersBlock) {
+      const midSize = Math.max(readNumber(numbersBlock.attributes.midSize, 2), 0);
+      const pages = new Set<number>([1, totalPages]);
+      for (let target = page - midSize; target <= page + midSize; target += 1) {
+        if (target >= 1 && target <= totalPages) {
+          pages.add(target);
+        }
+      }
+      const sorted = [...pages].sort((a, b) => a - b);
+      const nodes: ReactNode[] = [];
+      let previousPage = 0;
+      for (const target of sorted) {
+        if (previousPage && target - previousPage > 1) {
+          nodes.push(
+            <span key={`dots-${target}`} className="page-numbers dots">
+              …
+            </span>,
+          );
+        }
+        nodes.push(
+          target === page ? (
+            <span key={target} aria-current="page" className="page-numbers current">
+              {target}
+            </span>
+          ) : (
+            <a key={target} className="page-numbers" href={hrefFor(target)}>
+              {target}
+            </a>
+          ),
+        );
+        previousPage = target;
+      }
+      segments.push({ index: numbersBlock.index, node: nodes });
+    }
+    if (nextBlock && page < totalPages) {
+      const arrowCharacter = arrowCharacters[arrow] ?? "";
+      segments.push({
+        index: nextBlock.index,
+        node: (
+          <a
+            key="next"
+            className="wp-block-query-pagination-next"
+            href={hrefFor(page + 1)}
+          >
+            {showLabel
+              ? readString(nextBlock.attributes.label) ||
+                (isEnglish ? "Next page" : "下一页")
+              : null}
+            {arrowCharacter ? (
+              <span
+                className={`wp-block-query-pagination-next-arrow is-arrow-${arrow}`}
+                aria-hidden
+              >
+                {arrowCharacter}
+              </span>
+            ) : null}
+          </a>
+        ),
+      });
+    }
+
+    if (segments.length > 0) {
+      const paginationWrapper = getBlockWrapper(
+        "core/query-pagination",
+        pagination.attributes,
+        "nav",
+      );
+      paginationNodes.push(
+        createElement(
+          "nav",
+          {
+            key: "pagination",
+            className: paginationWrapper.className,
+            style: paginationWrapper.style,
+            id: paginationWrapper.id,
+          },
+          segments
+            .sort((a, b) => a.index - b.index)
+            .map((segment) => segment.node),
+        ),
+      );
+    }
+  }
+
+  const resultNodes: ReactNode[] = [];
+  if (templateCss) {
+    resultNodes.push(
+      <style
+        key="template-css"
+        dangerouslySetInnerHTML={{ __html: templateCss }}
+      />,
+    );
+  }
+  if (result.posts.length > 0) {
+    resultNodes.push(
+      <ul
+        key="posts"
+        className={[...templateClasses].join(" ")}
+        style={templateWrapper.style}
+        id={templateWrapper.id}
+      >
+        {items}
+      </ul>,
+    );
+  }
+  if (paginationNodes.length > 0) {
+    resultNodes.push(...paginationNodes);
+  }
+  if (result.total === 0 && noResults) {
+    resultNodes.push(
+      <Fragment key="no-results">
+        {renderContentBody(
+          noResults.content,
+          { ...context, query: queryContext },
+          collector,
+          { depth: depth + 1 },
+        )}
+      </Fragment>,
+    );
+  }
+  if (totalBlock) {
+    const displayType =
+      readString(totalBlock.attributes.displayType) || "total-results";
+    if (displayType === "range") {
+      const start = result.total > 0 ? offset + (page - 1) * perPage + 1 : 0;
+      const end =
+        result.total > 0 ? Math.min(start + result.posts.length - 1, result.total) : 0;
+      resultNodes.push(
+        <div key="total" className="wp-block-query-total">
+          {isEnglish
+            ? `Showing ${start}–${end} of ${result.total}`
+            : `第 ${start}–${end} 篇，共 ${result.total} 篇`}
+        </div>,
+      );
+    } else {
+      resultNodes.push(
+        <div key="total" className="wp-block-query-total">
+          {isEnglish
+            ? `${result.total} posts`
+            : `共 ${result.total} 篇文章`}
+        </div>,
+      );
+    }
+  }
+
+  let rest = innerContent;
+  for (const segment of [template.full, pagination?.full, noResults?.full, totalBlock?.full]) {
+    if (segment) {
+      rest = rest.replace(segment, "");
+    }
+  }
+  if (rest.trim()) {
+    resultNodes.push(
+      <Fragment key="rest">
+        {renderContentBody(
+          rest,
+          { ...context, query: queryContext },
+          collector,
+          { depth: depth + 1 },
+        )}
+      </Fragment>,
+    );
+  }
+
+  // 外层 wp-block-query 包裹与布局由通用 transform 按区块属性生成
+  return <>{resultNodes}</>;
 }
 
 function createTransform(
@@ -833,6 +1308,18 @@ function renderDynamicNode(
   if (name === "core/terms-query") {
     return (
       <TermsQueryBlock
+        attributes={attributes}
+        context={context}
+        instanceId={instanceId}
+        innerHtml={innerHtml}
+        collector={collector}
+        depth={depth}
+      />
+    );
+  }
+  if (name === "core/query") {
+    return (
+      <QueryBlock
         attributes={attributes}
         context={context}
         instanceId={instanceId}

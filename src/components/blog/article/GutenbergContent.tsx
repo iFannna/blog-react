@@ -16,6 +16,27 @@ interface GutenbergContentProps {
   locale?: string;
   post?: DynamicPostContext;
   prevNext?: PrevNext | null;
+  searchParams?: Record<string, string | string[] | undefined>;
+}
+
+function readQueryPages(
+  searchParams: Record<string, string | string[] | undefined> | undefined,
+): Record<string, number> {
+  const pages: Record<string, number> = {};
+  if (!searchParams) {
+    return pages;
+  }
+  for (const [key, value] of Object.entries(searchParams)) {
+    if (!/^query-\d+-page$/.test(key)) {
+      continue;
+    }
+    const raw = Array.isArray(value) ? value[0] : value;
+    const parsed = Number.parseInt(raw ?? "", 10);
+    if (Number.isFinite(parsed) && parsed > 0) {
+      pages[key] = parsed;
+    }
+  }
+  return pages;
 }
 
 /**
@@ -27,6 +48,7 @@ export default async function GutenbergContent({
   locale = "zh-CN",
   post,
   prevNext,
+  searchParams,
 }: GutenbergContentProps) {
   const languages = [...content.matchAll(CODE_LANGUAGE)].map(
     (match) => match[1],
@@ -38,7 +60,12 @@ export default async function GutenbergContent({
   }
 
   const collector = createRenderCollector();
-  const context: DynamicRenderContext = { locale, post, prevNext };
+  const context: DynamicRenderContext = {
+    locale,
+    post,
+    prevNext,
+    queryPages: readQueryPages(searchParams),
+  };
   const body: ReactNode = renderContentBody(content, context, collector, {
     highlighter,
   });

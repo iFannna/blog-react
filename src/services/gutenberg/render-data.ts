@@ -73,6 +73,27 @@ export interface RenderLatestPostsOptions {
   fullPost?: boolean;
 }
 
+export interface RenderQueryPostsOptions {
+  page: number;
+  perPage: number;
+  offset: number;
+  orderBy: string;
+  order: string;
+  categoryIds: number[];
+  excludeCategoryIds: number[];
+  tagIds: number[];
+  excludeTagIds: number[];
+  authorIds: number[];
+  excludeIds: number[];
+  search: string;
+  fullPost: boolean;
+}
+
+export interface RenderQueryPostsResult {
+  posts: RenderLatestPost[];
+  total: number;
+}
+
 function normalizeTerms(items: RenderTerm[] | null | undefined): RenderTerm[] {
   return (items ?? []).map((item) => ({
     id: Number(item.id),
@@ -154,21 +175,47 @@ export const getRenderArticleDetail = cache(
   },
 );
 
-const latestPostsCache = cache(
-  async (key: string): Promise<RenderLatestPost[]> => {
-    const options = JSON.parse(key) as RenderLatestPostsOptions;
+interface FetchPostsOptions extends RenderQueryPostsOptions {
+  authorId?: number;
+}
+
+const renderPostsCache = cache(
+  async (key: string): Promise<RenderQueryPostsResult> => {
+    const options = JSON.parse(key) as FetchPostsOptions;
     const size = Math.min(Math.max(Number(options.perPage) || 5, 1), 100);
+    const page = Math.max(Number(options.page) || 1, 1);
+    const offset = Math.max(Number(options.offset) || 0, 0);
     const params: Record<string, unknown> = {
-      page: 1,
+      page,
       size,
       order_by: options.orderBy === "title" ? "title" : "publish_at",
       order: options.order === "asc" ? "asc" : "desc",
     };
+    if (offset > 0) {
+      params.offset = offset;
+    }
     if (options.categoryIds.length > 0) {
       params.category_ids = options.categoryIds.join(",");
     }
-    if (options.authorId) {
+    if (options.excludeCategoryIds.length > 0) {
+      params.exclude_category_ids = options.excludeCategoryIds.join(",");
+    }
+    if (options.tagIds.length > 0) {
+      params.tag_ids = options.tagIds.join(",");
+    }
+    if (options.excludeTagIds.length > 0) {
+      params.exclude_tag_ids = options.excludeTagIds.join(",");
+    }
+    if (options.authorIds.length > 0) {
+      params.author_ids = options.authorIds.join(",");
+    } else if (options.authorId) {
       params.author_id = options.authorId;
+    }
+    if (options.excludeIds.length > 0) {
+      params.exclude_ids = options.excludeIds.join(",");
+    }
+    if (options.search) {
+      params.keyword = options.search;
     }
 
     const data = await apiClient.get<
@@ -200,7 +247,7 @@ const latestPostsCache = cache(
       }
     }
 
-    return list.map((article) => {
+    const posts = list.map((article) => {
       const detail = details.get(article.id);
       return {
         id: article.id,
@@ -224,12 +271,39 @@ const latestPostsCache = cache(
         contentFormat: detail?.contentFormat,
       };
     });
+
+    return { posts, total: Number(data.total ?? 0) };
   },
 );
 
 /** 最新文章，按区块查询条件缓存；同一请求内相同条件只请求一次 */
-export function getRenderLatestPosts(
+export async function getRenderLatestPosts(
   options: RenderLatestPostsOptions,
 ): Promise<RenderLatestPost[]> {
-  return latestPostsCache(JSON.stringify(options));
+  const result = await renderPostsCache(
+    JSON.stringify({
+      page: 1,
+      perPage: options.perPage,
+      offset: 0,
+      orderBy: options.orderBy ?? "publish_at",
+      order: options.order ?? "desc",
+      categoryIds: options.categoryIds,
+      excludeCategoryIds: [],
+      tagIds: [],
+      excludeTagIds: [],
+      authorIds: [],
+      authorId: options.authorId,
+      excludeIds: [],
+      search: "",
+      fullPost: Boolean(options.fullPost),
+    } satisfies FetchPostsOptions),
+  );
+  return result.posts;
+}
+
+/** 查询循环取数，返回当前页文章与命中总数 */
+export function getRenderQueryPosts(
+  options: RenderQueryPostsOptions,
+): Promise<RenderQueryPostsResult> {
+  return renderPostsCache(JSON.stringify(options));
 }

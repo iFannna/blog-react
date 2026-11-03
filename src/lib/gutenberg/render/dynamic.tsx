@@ -27,6 +27,11 @@ export interface DynamicPostContext {
   year: number;
   month: number;
   day: number;
+  summary: string;
+  coverImage: string;
+  content?: string;
+  contentFormat?: string;
+  publishAt: string;
   author: {
     id: number;
     name: string;
@@ -46,11 +51,21 @@ export interface DynamicTermContext {
   taxonomy: "category" | "post_tag";
 }
 
+export interface DynamicQueryContext {
+  id: number;
+  page: number;
+  total: number;
+  totalPages: number;
+  perPage: number;
+}
+
 export interface DynamicRenderContext {
   locale: string;
   post?: DynamicPostContext;
   prevNext?: PrevNext | null;
   term?: DynamicTermContext;
+  query?: DynamicQueryContext;
+  queryPages?: Record<string, number>;
 }
 
 export interface DynamicBlockProps {
@@ -87,8 +102,16 @@ export const DYNAMIC_BLOCK_NAMES = new Set([
   "core/post-author-name",
   "core/post-comments-count",
   "core/post-comments-link",
+  "core/post-content",
+  "core/post-date",
+  "core/post-excerpt",
+  "core/post-featured-image",
   "core/post-navigation-link",
   "core/post-terms",
+  "core/post-time-to-read",
+  "core/post-title",
+  "core/query",
+  "core/read-more",
   "core/search",
   "core/site-logo",
   "core/site-tagline",
@@ -113,6 +136,7 @@ const WRAPPERLESS_DYNAMIC_BLOCK_NAMES = new Set([
   "core/navigation",
   "core/navigation-link",
   "core/navigation-submenu",
+  "core/read-more",
   "core/search",
   "core/social-link",
 ]);
@@ -323,6 +347,18 @@ function wrapperTag(blockName: string, attributes: Record<string, unknown>): str
       return "p";
     case "core/breadcrumbs":
       return "nav";
+    case "core/query": {
+      const tag = readString(attributes.tagName) || "div";
+      return /^[a-z][a-z0-9-]*$/.test(tag) && !["script", "style"].includes(tag)
+        ? tag
+        : "div";
+    }
+    case "core/post-title": {
+      const level = Math.min(Math.max(readNumber(attributes.level, 2), 0), 6);
+      return level === 0 ? "p" : `h${level}`;
+    }
+    case "core/post-featured-image":
+      return "figure";
     case "core/terms-query": {
       const tag = readString(attributes.tagName) || "div";
       return /^[a-z][a-z0-9-]*$/.test(tag) && !["script", "style"].includes(tag)
@@ -916,6 +952,11 @@ async function LatestPostsBlock({
                 year: post.year,
                 month: post.month,
                 day: post.day,
+                summary: post.summary,
+                coverImage: post.coverImage,
+                content: post.content,
+                contentFormat: post.contentFormat,
+                publishAt: post.publishAt,
                 author: {
                   id: post.authorId,
                   name: post.authorName,
@@ -1316,6 +1357,382 @@ function PostTermsBlock({ attributes, context }: DynamicBlockProps) {
   );
 }
 
+const MONTH_NAMES = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const WEEKDAY_NAMES = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
+function ordinalSuffix(value: number): string {
+  const mod100 = value % 100;
+  if (mod100 >= 11 && mod100 <= 13) {
+    return "th";
+  }
+  switch (value % 10) {
+    case 1:
+      return "st";
+    case 2:
+      return "nd";
+    case 3:
+      return "rd";
+    default:
+      return "th";
+  }
+}
+
+/** 按 PHP date 的常用 token 格式化文章日期 */
+function formatPhpDate(date: Date, format: string): string {
+  const hours = date.getHours();
+  const pad2 = (value: number) => String(value).padStart(2, "0");
+  const tokens: Record<string, string> = {
+    d: pad2(date.getDate()),
+    D: WEEKDAY_NAMES[date.getDay()].slice(0, 3),
+    j: String(date.getDate()),
+    l: WEEKDAY_NAMES[date.getDay()],
+    N: String(date.getDay() || 7),
+    S: ordinalSuffix(date.getDate()),
+    w: String(date.getDay()),
+    F: MONTH_NAMES[date.getMonth()],
+    m: pad2(date.getMonth() + 1),
+    M: MONTH_NAMES[date.getMonth()].slice(0, 3),
+    n: String(date.getMonth() + 1),
+    Y: String(date.getFullYear()),
+    y: pad2(date.getFullYear() % 100),
+    a: hours < 12 ? "am" : "pm",
+    A: hours < 12 ? "AM" : "PM",
+    g: String(hours % 12 || 12),
+    G: String(hours),
+    h: pad2(hours % 12 || 12),
+    H: pad2(hours),
+    i: pad2(date.getMinutes()),
+    s: pad2(date.getSeconds()),
+  };
+  let result = "";
+  for (let index = 0; index < format.length; index += 1) {
+    const character = format[index];
+    if (character === "\\") {
+      index += 1;
+      if (index < format.length) {
+        result += format[index];
+      }
+      continue;
+    }
+    result += tokens[character] ?? character;
+  }
+  return result;
+}
+
+function postDateObject(post: DynamicPostContext): Date {
+  const value = post.publishAt ? post.publishAt.replace(" ", "T") : "";
+  const parsed = value ? new Date(value) : new Date(NaN);
+  if (!Number.isNaN(parsed.getTime())) {
+    return parsed;
+  }
+  return new Date(post.year, Math.max(post.month - 1, 0), post.day || 1);
+}
+
+const TEXT_ENTITIES: Record<string, string> = {
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  apos: "'",
+  nbsp: " ",
+};
+
+/** 服务端安全的实体解码，避免 vendored decodeEntities 依赖 document */
+function decodeTextEntities(value: string): string {
+  if (!value.includes("&")) {
+    return value;
+  }
+  return value.replace(/&(#x?[0-9a-f]+|[a-z]+);/gi, (match, code: string) => {
+    if (code.startsWith("#")) {
+      const hexadecimal = code[1]?.toLowerCase() === "x";
+      const number = Number.parseInt(code.slice(hexadecimal ? 2 : 1), hexadecimal ? 16 : 10);
+      return Number.isFinite(number) ? String.fromCodePoint(number) : match;
+    }
+    return TEXT_ENTITIES[code.toLowerCase()] ?? match;
+  });
+}
+
+function postTextContent(post: DynamicPostContext, preferContent = false): string {
+  if (!preferContent && post.summary.trim()) {
+    return post.summary.trim();
+  }
+  const content = post.content ?? "";
+  return decodeTextEntities(
+    content
+      .replace(/<!--[\s\S]*?-->/g, " ")
+      .replace(/<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, " "),
+  )
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function PostTitleBlock({ attributes, context }: DynamicBlockProps) {
+  const post = context.post;
+  if (!post) {
+    return null;
+  }
+  const title = decodeTextEntities(post.title) || strings(context.locale).noTitle;
+  if (!readBoolean(attributes.isLink)) {
+    return <>{title}</>;
+  }
+  const target = readString(attributes.linkTarget);
+  return (
+    <a
+      href={post.link}
+      target={target && target !== "_self" ? target : undefined}
+      rel={
+        readString(attributes.rel) ||
+        (target && target !== "_self" ? "noreferrer noopener" : undefined)
+      }
+    >
+      {title}
+    </a>
+  );
+}
+
+function PostExcerptBlock({ attributes, context }: DynamicBlockProps) {
+  const post = context.post;
+  if (!post) {
+    return null;
+  }
+  const text = postTextContent(post);
+  if (!text) {
+    return null;
+  }
+  const length = Math.max(readNumber(attributes.excerptLength, 55), 0);
+  const characters = Array.from(text);
+  const clipped = characters.length > length;
+  const excerpt = clipped
+    ? `${characters.slice(0, length).join("")}…`
+    : text;
+  const moreText = readString(attributes.moreText);
+  const showMore = Boolean(moreText) && clipped;
+  const moreLink = showMore ? (
+    <a className="wp-block-post-excerpt__more-link" href={post.link}>
+      {decodeTextEntities(moreText)}
+    </a>
+  ) : null;
+  const showMoreOnNewLine = readBoolean(attributes.showMoreOnNewLine, true);
+
+  return (
+    <>
+      <p className="wp-block-post-excerpt__excerpt">
+        {excerpt}
+        {moreLink && !showMoreOnNewLine ? <> {moreLink}</> : null}
+      </p>
+      {moreLink && showMoreOnNewLine ? (
+        <p className="wp-block-post-excerpt__more-text">{moreLink}</p>
+      ) : null}
+    </>
+  );
+}
+
+function PostFeaturedImageBlock({ attributes, context }: DynamicBlockProps) {
+  const post = context.post;
+  if (!post?.coverImage) {
+    return null;
+  }
+  const width = readString(attributes.width);
+  const height = readString(attributes.height);
+  const aspectRatio = readString(attributes.aspectRatio);
+  const scale = readString(attributes.scale);
+  const imageStyle: CSSProperties = {};
+  if (width) {
+    imageStyle.width = width;
+  }
+  if (height) {
+    imageStyle.height = height;
+  }
+  if (aspectRatio) {
+    imageStyle.aspectRatio = aspectRatio;
+  }
+  if (scale) {
+    imageStyle.objectFit = scale as CSSProperties["objectFit"];
+  }
+  const image = (
+    <img
+      src={post.coverImage}
+      alt={decodeTextEntities(post.title)}
+      className="attachment-post-thumbnail size-post-thumbnail wp-post-image"
+      style={imageStyle}
+      loading="lazy"
+      decoding="async"
+    />
+  );
+  const target = readString(attributes.linkTarget);
+  const linked = readBoolean(attributes.isLink) ? (
+    <a
+      href={post.link}
+      target={target && target !== "_self" ? target : undefined}
+      rel={
+        readString(attributes.rel) ||
+        (target && target !== "_self" ? "noreferrer noopener" : undefined)
+      }
+    >
+      {image}
+    </a>
+  ) : (
+    image
+  );
+
+  const dimRatio = Math.min(Math.max(readNumber(attributes.dimRatio, 0), 0), 100);
+  if (dimRatio <= 0) {
+    return linked;
+  }
+  const overlayClassNames = [
+    "wp-block-post-featured-image__overlay",
+    "has-background-dim",
+  ];
+  const overlayStyle: CSSProperties = { opacity: dimRatio / 100 };
+  const overlayColor = readString(attributes.overlayColor);
+  const customOverlayColor = readString(attributes.customOverlayColor);
+  const gradient = readString(attributes.gradient);
+  const customGradient = readString(attributes.customGradient);
+  if (gradient) {
+    overlayClassNames.push(`has-${kebabCase(gradient)}-gradient-background`);
+  } else if (customGradient) {
+    overlayStyle.background = customGradient;
+  } else if (overlayColor) {
+    overlayClassNames.push(`has-${kebabCase(overlayColor)}-background-color`);
+  } else if (customOverlayColor) {
+    overlayStyle.backgroundColor = customOverlayColor;
+  }
+  return (
+    <>
+      {linked}
+      <div className={overlayClassNames.join(" ")} style={overlayStyle} />
+    </>
+  );
+}
+
+function PostDateBlock({ attributes, context }: DynamicBlockProps) {
+  const post = context.post;
+  if (!post) {
+    return null;
+  }
+  const date = postDateObject(post);
+  const format = readString(attributes.format);
+  const text = format
+    ? formatPhpDate(date, format)
+    : formatDate(context.locale, post.year, post.month, post.day);
+  const datetime = post.publishAt || `${post.year}-${pad(post.month)}-${pad(post.day)}`;
+  const time = <time dateTime={datetime}>{text}</time>;
+  if (!readBoolean(attributes.isLink)) {
+    return time;
+  }
+  const href = localePath(
+    context.locale,
+    `/archive/${post.year}/${pad(post.month)}/${pad(post.day)}`,
+  );
+  return <a href={href}>{time}</a>;
+}
+
+function PostContentBlock({ context, renderNested }: DynamicBlockProps) {
+  const post = context.post;
+  if (!post?.content) {
+    return null;
+  }
+  if (post.contentFormat === "markdown") {
+    return <MarkdownPostContent content={post.content} />;
+  }
+  return <>{renderNested ? renderNested(post.content, post) : null}</>;
+}
+
+async function MarkdownPostContent({ content }: { content: string }) {
+  const { default: MarkdownContent } = await import(
+    "@/components/blog/article/MarkdownContent"
+  );
+  return <MarkdownContent content={content} />;
+}
+
+function ReadMoreBlock({ attributes, context }: DynamicBlockProps) {
+  const post = context.post;
+  if (!post) {
+    return null;
+  }
+  const wrapper = getBlockWrapper("core/read-more", attributes);
+  const label = readString(attributes.content) || strings(context.locale).readMore;
+  const target = readString(attributes.linkTarget);
+  return (
+    <a
+      href={post.link}
+      className={wrapper.className}
+      style={wrapper.style}
+      id={wrapper.id}
+      target={target && target !== "_self" ? target : undefined}
+      rel={target && target !== "_self" ? "noreferrer noopener" : undefined}
+    >
+      {decodeTextEntities(label)}
+    </a>
+  );
+}
+
+function countWords(text: string): { characters: number; words: number } {
+  const cjk = text.match(/[\u3400-\u9fff\uf900-\ufaff]/g) ?? [];
+  const latin = text
+    .replace(/[\u3400-\u9fff\uf900-\ufaff]/g, " ")
+    .match(/[A-Za-z0-9]+/g) ?? [];
+  return { characters: cjk.length, words: latin.length };
+}
+
+function PostTimeToReadBlock({ attributes, context }: DynamicBlockProps) {
+  const post = context.post;
+  if (!post) {
+    return null;
+  }
+  const text = postTextContent(post, true);
+  if (!text) {
+    return null;
+  }
+  const { characters, words } = countWords(text);
+  const total = characters + words;
+  const speed = Math.max(readNumber(attributes.averageReadingSpeed, 189), 1);
+  const displayMode = readString(attributes.displayMode) || "time";
+  if (displayMode === "words") {
+    if (context.locale === "en-US" && characters === 0) {
+      return <>{`${words.toLocaleString("en-US")} words`}</>;
+    }
+    return <>{`${(characters + words).toLocaleString("zh-CN")} 字`}</>;
+  }
+  const minutes = Math.max(1, Math.round(total / speed));
+  if (readBoolean(attributes.displayAsRange, true)) {
+    const min = Math.max(1, Math.round((total / speed) * 0.8));
+    let max = Math.max(1, Math.round((total / speed) * 1.2));
+    if (min === max) {
+      max += 1;
+    }
+    if (context.locale === "en-US") {
+      return <>{`${min}–${max} minutes`}</>;
+    }
+    return <>{`${min}–${max} 分钟`}</>;
+  }
+  return <>{context.locale === "en-US" ? `${minutes} minutes` : `${minutes} 分钟`}</>;
+}
+
 function TermNameBlock({ attributes, context }: DynamicBlockProps) {
   const term = context.term;
   if (!term) {
@@ -1624,10 +2041,24 @@ export function renderDynamicBlock(name: string, props: DynamicBlockProps): Reac
       return <PostCommentsCountBlock {...props} />;
     case "core/post-comments-link":
       return <PostCommentsLinkBlock {...props} />;
+    case "core/post-content":
+      return <PostContentBlock {...props} />;
+    case "core/post-date":
+      return <PostDateBlock {...props} />;
+    case "core/post-excerpt":
+      return <PostExcerptBlock {...props} />;
+    case "core/post-featured-image":
+      return <PostFeaturedImageBlock {...props} />;
     case "core/post-navigation-link":
       return <PostNavigationLinkBlock {...props} />;
     case "core/post-terms":
       return <PostTermsBlock {...props} />;
+    case "core/post-time-to-read":
+      return <PostTimeToReadBlock {...props} />;
+    case "core/post-title":
+      return <PostTitleBlock {...props} />;
+    case "core/read-more":
+      return <ReadMoreBlock {...props} />;
     case "core/term-name":
       return <TermNameBlock {...props} />;
     case "core/term-count":
