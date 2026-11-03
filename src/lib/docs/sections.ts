@@ -24,6 +24,15 @@ export const DOC_SECTIONS: DocsSectionConfig[] = [
     },
     order: 20,
   },
+  {
+    id: "rss",
+    titles: { "zh-CN": "RSS 订阅", "en-US": "RSS" },
+    descriptions: {
+      "zh-CN": "订阅本站最新文章。",
+      "en-US": "Subscribe to the latest articles.",
+    },
+    order: 30,
+  },
 ];
 
 export function getDocSection(id: string): DocsSectionConfig | undefined {

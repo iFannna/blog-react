@@ -82,6 +82,10 @@ export default async function SiteLayout({
               href: localePath(locale, "/docs/element-plus/components/overview"),
               label: "Element Plus",
             },
+            {
+              href: localePath(locale, "/docs/rss"),
+              label: "RSS",
+            },
           ],
         },
         {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteOrigin } from "@/lib/feed/origin";
 import { getSiteSetting } from "@/services/site";
 import { ElMessageContainer } from "@/components/element-plus/message";
 import { ElMessageBoxContainer } from "@/components/element-plus/message-box";
@@ -17,6 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const keywords = setting?.seo_keywords
     ? setting.seo_keywords.split(/[,，]/).map((k) => k.trim()).filter(Boolean)
     : undefined;
+  const origin = siteOrigin(setting);
+  const feedUrl = origin ? `${origin}/feed.xml` : "/feed.xml";
 
   return {
     title: {
@@ -25,6 +28,11 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description,
     keywords,
+    alternates: {
+      types: {
+        "application/rss+xml": [{ url: feedUrl, title }],
+      },
+    },
     openGraph: {
       type: "website",
       locale: "zh_CN",

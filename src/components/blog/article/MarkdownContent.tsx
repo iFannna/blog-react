@@ -67,7 +67,7 @@ function renderTokens(tokens: HighlightToken[][]) {
   ));
 }
 
-function createComponents(highlighter: HighlighterCore): Components {
+function createComponents(highlighter: HighlighterCore | null): Components {
   const components = {
     h1: ({ children }: { children?: ReactNode }) => (
       <h1 className="typo-heading-1">{children}</h1>
@@ -156,10 +156,13 @@ function createComponents(highlighter: HighlighterCore): Components {
 
     pre: ({ children }: { children?: ReactNode }) => {
       const { lang, code } = extractCode(children);
-      const tokens = highlightTokens(highlighter, code, lang);
+      // 高亮器缺失时输出未着色代码，站内渲染总是拿到高亮器
+      const colored = highlighter
+        ? renderTokens(highlightTokens(highlighter, code, lang))
+        : code;
       const block = (
         <pre className="typo-code-block">
-          <code>{renderTokens(tokens)}</code>
+          <code>{colored}</code>
         </pre>
       );
 
@@ -191,13 +194,23 @@ interface MarkdownContentProps {
   content: string;
 }
 
-export default async function MarkdownContent({ content }: MarkdownContentProps) {
+/** 加载正文代码围栏涉及的语言包 */
+export async function loadMarkdownHighlighter(content: string): Promise<HighlighterCore> {
   const languages = [...content.matchAll(CODE_FENCE)].map((match) => match[1]);
-  const highlighter = await ensureLanguages(languages);
+  return ensureLanguages(languages);
+}
 
+/** 同步产出 Markdown 正文节点，供服务端组件之外的调用方复用 */
+export function renderMarkdownElement(content: string, highlighter: HighlighterCore | null) {
   return (
     <ReactMarkdown remarkPlugins={[remarkGfm]} components={createComponents(highlighter)}>
       {content}
     </ReactMarkdown>
   );
+}
+
+export default async function MarkdownContent({ content }: MarkdownContentProps) {
+  const highlighter = await loadMarkdownHighlighter(content);
+
+  return renderMarkdownElement(content, highlighter);
 }
