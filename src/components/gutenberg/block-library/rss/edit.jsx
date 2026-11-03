@@ -7,7 +7,6 @@ import {
 	Button,
 	Placeholder,
 	RangeControl,
-	Spinner as WCSpinner,
 	ToggleControl,
 	ToolbarGroup,
 	TextControl,
@@ -18,12 +17,11 @@ import {
 } from '@/components/gutenberg/ui';
 import { createInterpolateElement, useState } from '@/lib/gutenberg/element';
 import { grid, list, pencil, rss } from '@/components/gutenberg/icons';
-import { __, _x, sprintf } from '@/lib/gutenberg/i18n';
+import { __, _x } from '@/lib/gutenberg/i18n';
 import { prependHTTPS } from '@/utils/gutenberg/url';
-import { useServerSideRender } from '@/components/gutenberg/server-side-render';
 import { useDisabled } from '@/hooks/gutenberg/compose';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
-import HtmlRenderer from '../utils/html-renderer';
+import RssPreview from './preview';
 
 const DEFAULT_MIN_ITEMS = 1;
 const DEFAULT_MAX_ITEMS = 20;
@@ -62,12 +60,6 @@ export default function RSSEdit( { attributes, setAttributes, name } ) {
 			setIsEditing( false );
 		}
 	}
-
-	const { content, status, error } = useServerSideRender( {
-		attributes,
-		skipBlockSupportAttributes: true,
-		block: name,
-	} );
 
 	const disabledRef = useDisabled();
 	const blockProps = useBlockProps( { ref: isEditing ? null : disabledRef } );
@@ -293,25 +285,11 @@ export default function RSSEdit( { attributes, setAttributes, name } ) {
 					onChange={ ( value ) => setAttributes( { rel: value } ) }
 				/>
 			</InspectorControls>
-			{ status === 'loading' && (
-				<div { ...blockProps }>
-					<WCSpinner />
-				</div>
-			) }
-			{ status === 'error' && (
-				<div { ...blockProps }>
-					<p>
-						{ sprintf(
-							/* translators: %s: error message returned when rendering the block. */
-							__( 'Error: %s' ),
-							error
-						) }
-					</p>
-				</div>
-			) }
-			{ status === 'success' && (
-				<HtmlRenderer wrapperProps={ blockProps } html={ content } />
-			) }
+			<RssPreview
+				attributes={ attributes }
+				blockProps={ blockProps }
+				block={ name }
+			/>
 		</>
 	);
 }

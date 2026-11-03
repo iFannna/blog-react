@@ -14,6 +14,94 @@ const SETTINGS_SCHEMA = {
 	},
 };
 
+// 示例编辑器的 RSS 预览数据，避免示例依赖真实外部订阅源
+const MOCK_RSS_ITEMS = [
+	{
+		title: 'WordPress 6.8 正式发布',
+		link: 'https://wordpress.org/news/',
+		author: 'WordPress',
+		publishedAt: '2026-11-01T08:00:00Z',
+		excerpt: '新版本带来更快的编辑体验、更完善的区块工具与无障碍改进。',
+	},
+	{
+		title: '区块编辑器性能优化实践',
+		link: 'https://make.wordpress.org/core/',
+		author: 'Core Team',
+		publishedAt: '2026-10-28T09:30:00Z',
+		excerpt: '从首屏加载到大型文档编辑，介绍本轮性能优化的关键改动。',
+	},
+	{
+		title: '主题设计的新方向',
+		link: 'https://wordpress.org/themes/',
+		author: 'Design Team',
+		publishedAt: '2026-10-24T14:10:00Z',
+		excerpt: '更灵活的排版系统与全局样式，让主题设计保持一致性。',
+	},
+];
+
+function escapeMockHtml( value ) {
+	return String( value )
+		.replace( /&/g, '&amp;' )
+		.replace( /</g, '&lt;' )
+		.replace( />/g, '&gt;' )
+		.replace( /"/g, '&quot;' );
+}
+
+function buildMockRssHtml( attributes = {} ) {
+	const count = Math.min(
+		Math.max( Number( attributes.itemsToShow ) || 5, 1 ),
+		MOCK_RSS_ITEMS.length
+	);
+	const classes = [ 'wp-block-rss' ];
+	if ( attributes.blockLayout === 'grid' ) {
+		const columns = Math.min( Math.max( Number( attributes.columns ) || 2, 2 ), 6 );
+		classes.push( 'is-grid', `columns-${ columns }` );
+	}
+	const openInNewTab = !! attributes.openInNewTab;
+	const rel = [
+		attributes.rel || '',
+		openInNewTab ? 'noopener noreferrer' : '',
+	]
+		.filter( Boolean )
+		.join( ' ' );
+	const excerptLength = Math.min(
+		Math.max( Number( attributes.excerptLength ) || 55, 10 ),
+		100
+	);
+	const rows = MOCK_RSS_ITEMS.slice( 0, count ).map( ( item ) => {
+		const title = escapeMockHtml( item.title );
+		const titleNode = `<a href="${ item.link }"${
+			openInNewTab ? ' target="_blank"' : ''
+		}${ rel ? ` rel="${ rel }"` : '' }>${ title }</a>`;
+		const author =
+			attributes.displayAuthor && item.author
+				? `<div class="wp-block-rss__item-author">${ escapeMockHtml(
+						item.author
+				  ) }</div>`
+				: '';
+		const date = attributes.displayDate
+			? `<time class="wp-block-rss__item-publish-date" datetime="${
+					item.publishedAt
+			  }">${ new Date( item.publishedAt ).toLocaleDateString(
+					'zh-CN'
+			  ) }</time>`
+			: '';
+		let excerpt = '';
+		if ( attributes.displayExcerpt && item.excerpt ) {
+			const characters = Array.from( item.excerpt );
+			const text =
+				characters.length > excerptLength
+					? `${ characters.slice( 0, excerptLength ).join( '' ) }…`
+					: item.excerpt;
+			excerpt = `<div class="wp-block-rss__item-excerpt">${ escapeMockHtml(
+				text
+			) }</div>`;
+		}
+		return `<li class="wp-block-rss__item"><div class="wp-block-rss__item-title">${ titleNode }</div>${ author }${ date }${ excerpt }</li>`;
+	} );
+	return `<ul class="${ classes.join( ' ' ) }">${ rows.join( '' ) }</ul>`;
+}
+
 function normalize( options ) {
 	let raw = options.path || options.url || '/';
 	if ( /^https?:/i.test( raw ) ) {
@@ -150,6 +238,27 @@ export function installMockApi( locale = 'zh_CN' ) {
 		}
 		if ( pathname === '/wp/v2' || pathname === '/wp/v2/' ) {
 			return respond( store.postsIndex );
+		}
+
+		// Block renderer：示例编辑器只提供 RSS 的静态预览
+		const rendererMatch = pathname.match(
+			/^\/wp\/v2\/block-renderer\/(.+)$/
+		);
+		if ( rendererMatch ) {
+			const blockName = decodeURIComponent( rendererMatch[ 1 ] );
+			if ( blockName === 'core/rss' ) {
+				let attributes = {};
+				const rawAttributes = query.get( 'attributes' );
+				if ( rawAttributes ) {
+					try {
+						attributes = JSON.parse( rawAttributes );
+					} catch {
+						attributes = {};
+					}
+				}
+				return respond( { rendered: buildMockRssHtml( attributes ) } );
+			}
+			return notFound();
 		}
 
 		// Users.

@@ -3,6 +3,7 @@ import "server-only";
 import { cache } from "react";
 import apiClient from "@/services/http";
 import { getArticleById } from "@/services/article";
+import { fetchRssFeed, type RssFeed } from "@/services/rss";
 import type { ArticleVO } from "@/types/api";
 import type { ArticleDetail } from "@/types/models";
 
@@ -273,6 +274,17 @@ const renderPostsCache = cache(
     });
 
     return { posts, total: Number(data.total ?? 0) };
+  },
+);
+
+/** 外部订阅源，同一请求内相同地址与条数只请求一次 */
+export const getRenderRssFeed = cache(
+  async (url: string, items: number): Promise<RssFeed | null> => {
+    try {
+      return await fetchRssFeed(url, items);
+    } catch {
+      return null;
+    }
   },
 );
 

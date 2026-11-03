@@ -10,6 +10,7 @@ import {
   getRenderCategories,
   getRenderLatestComments,
   getRenderLatestPosts,
+  getRenderRssFeed,
   getRenderTags,
   type RenderTerm,
 } from "@/services/gutenberg/render-data";
@@ -113,6 +114,7 @@ export const DYNAMIC_BLOCK_NAMES = new Set([
   "core/post-title",
   "core/query",
   "core/read-more",
+  "core/rss",
   "core/search",
   "core/site-logo",
   "core/site-tagline",
@@ -345,6 +347,8 @@ function wrapperTag(blockName: string, attributes: Record<string, unknown>): str
       return "ul";
     case "core/latest-comments":
       return "ol";
+    case "core/rss":
+      return "ul";
     case "core/tag-cloud":
       return "p";
     case "core/breadcrumbs":
@@ -514,6 +518,10 @@ export function getBlockWrapper(
     if (term) {
       classes.add(`taxonomy-${term}`);
     }
+  }
+  if (blockName === "core/rss" && readString(attributes.blockLayout) === "grid") {
+    classes.add("is-grid");
+    classes.add(`columns-${Math.min(Math.max(readNumber(attributes.columns, 2), 2), 6)}`);
   }
 
   const inline = inlineStyles(attributes.style);
@@ -988,6 +996,122 @@ function postLink(
   post: { id: number; year: number; month: number; day: number },
 ): string {
   return articleLink(locale, post);
+}
+
+function truncateWithEllipsis(value: string, limit: number): string {
+  const characters = Array.from(value.trim());
+  return characters.length > limit
+    ? `${characters.slice(0, limit).join("")}…`
+    : value.trim();
+}
+
+function safeHttpHref(value: string): string {
+  try {
+    const url = new URL(value);
+    return url.protocol === "http:" || url.protocol === "https:"
+      ? url.toString()
+      : "";
+  } catch {
+    return "";
+  }
+}
+
+function formatFeedDate(locale: string, value: string): string {
+  if (!value) {
+    return "";
+  }
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+  try {
+    return new Intl.DateTimeFormat(locale, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }).format(date);
+  } catch {
+    return value;
+  }
+}
+
+async function RssBlock({ attributes, context }: DynamicBlockProps) {
+  const feedURL = readString(attributes.feedURL).trim();
+  if (!feedURL) {
+    return null;
+  }
+  const itemsToShow = Math.min(
+    Math.max(readNumber(attributes.itemsToShow, 5), 1),
+    20,
+  );
+  const feed = await getRenderRssFeed(feedURL, itemsToShow);
+  if (!feed || feed.items.length === 0) {
+    return null;
+  }
+
+  const displayAuthor = readBoolean(attributes.displayAuthor);
+  const displayDate = readBoolean(attributes.displayDate);
+  const displayExcerpt = readBoolean(attributes.displayExcerpt);
+  const excerptLength = Math.min(
+    Math.max(readNumber(attributes.excerptLength, 55), 10),
+    100,
+  );
+  const openInNewTab = readBoolean(attributes.openInNewTab);
+  const customRel = readString(attributes.rel).trim();
+  const rel =
+    [customRel, openInNewTab ? "noopener noreferrer" : ""]
+      .filter(Boolean)
+      .join(" ") || undefined;
+
+  return (
+    <>
+      {feed.items.map((item, index) => {
+        const href = safeHttpHref(item.link);
+        const title =
+          decodeTextEntities(item.title) || strings(context.locale).noTitle;
+        const dateText = displayDate
+          ? formatFeedDate(context.locale, item.publishedAt)
+          : "";
+        const excerpt =
+          displayExcerpt && item.excerpt
+            ? truncateWithEllipsis(item.excerpt, excerptLength)
+            : "";
+        return (
+          <li key={`${item.link}-${index}`} className="wp-block-rss__item">
+            <div className="wp-block-rss__item-title">
+              {href ? (
+                <a
+                  href={href}
+                  target={openInNewTab ? "_blank" : undefined}
+                  rel={rel}
+                >
+                  {title}
+                </a>
+              ) : (
+                title
+              )}
+            </div>
+            {displayAuthor && item.author ? (
+              <div className="wp-block-rss__item-author">
+                {decodeTextEntities(item.author)}
+              </div>
+            ) : null}
+            {dateText ? (
+              <time
+                className="wp-block-rss__item-publish-date"
+                dateTime={item.publishedAt || undefined}
+              >
+                {dateText}
+              </time>
+            ) : null}
+            {excerpt ? (
+              <div className="wp-block-rss__item-excerpt">{excerpt}</div>
+            ) : null}
+          </li>
+        );
+      })}
+    </>
+  );
 }
 
 async function LatestCommentsBlock({ attributes, context }: DynamicBlockProps) {
@@ -2061,6 +2185,8 @@ export function renderDynamicBlock(name: string, props: DynamicBlockProps): Reac
       return <PostTitleBlock {...props} />;
     case "core/read-more":
       return <ReadMoreBlock {...props} />;
+    case "core/rss":
+      return <RssBlock {...props} />;
     case "core/term-name":
       return <TermNameBlock {...props} />;
     case "core/term-count":
