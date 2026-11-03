@@ -93,6 +93,7 @@ export const DYNAMIC_BLOCK_NAMES = new Set([
   "core/categories",
   "core/home-link",
   "core/icon",
+  "core/html",
   "core/latest-comments",
   "core/latest-posts",
   "core/navigation",
@@ -133,6 +134,7 @@ export function isDynamicBlockName(name: string): boolean {
  */
 const WRAPPERLESS_DYNAMIC_BLOCK_NAMES = new Set([
   "core/home-link",
+  "core/html",
   "core/navigation",
   "core/navigation-link",
   "core/navigation-submenu",

@@ -76,6 +76,7 @@ export function toEditorPost(
     "wp:action-create-categories": [{ href: "" }],
     "wp:action-assign-tags": [{ href: "" }],
     "wp:action-create-tags": [{ href: "" }],
+    "wp:action-unfiltered-html": [{ href: "" }],
   };
   if (article.status !== 2) {
     links["wp:action-trash"] = [{ href: "" }];
@@ -170,6 +171,7 @@ export function createNewEditorPost(): EditorPost {
       "wp:action-create-categories": [{ href: "" }],
       "wp:action-assign-tags": [{ href: "" }],
       "wp:action-create-tags": [{ href: "" }],
+      "wp:action-unfiltered-html": [{ href: "" }],
     },
     _project: {
       contentFormat: "gutenberg",

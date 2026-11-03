@@ -61,6 +61,9 @@ import { getRenderQueryPosts } from "@/services/gutenberg/render-data";
 import { getArticlePrevNext } from "@/services/article";
 import { articleHref } from "@/utils/article";
 import { localePath } from "@/lib/locale";
+import CustomHtmlScripts, {
+  type CustomHtmlScript,
+} from "@/components/blog/article/CustomHtmlScripts";
 
 export interface RenderCollector {
   css: string[];
@@ -344,6 +347,8 @@ const NAVIGATION_SUBMENU_PATTERN =
 // 查询循环保留内部模板，由 QueryBlock 按查询结果循环渲染
 const QUERY_BLOCK_PATTERN =
   /<!--\s*wp:query(?:\s+\{(?:(?!-->)[\s\S])*?\})?\s*-->([\s\S]*?)<!--\s*\/wp:query\s*-->/g;
+const HTML_BLOCK_PATTERN =
+  /<!--\s*wp:html(?:\s+\{(?:(?!-->)[\s\S])*?\})?\s*-->([\s\S]*?)<!--\s*\/wp:html\s*-->/g;
 const SELF_CLOSING_BLOCK_PATTERN =
   /<!--\s*wp:([\w/-]+)(?:\s+\{(?:(?!-->)[\s\S])*?\})?\s*\/-->/g;
 
@@ -365,6 +370,7 @@ function markDynamicBlocks(content: string, depth: number): string {
   if (depth < 3) {
     marked = marked
       .replace(QUERY_BLOCK_PATTERN, markContainerBlock)
+      .replace(HTML_BLOCK_PATTERN, markContainerBlock)
       .replace(TERMS_QUERY_PATTERN, markContainerBlock)
       .replace(NAVIGATION_PATTERN, markContainerBlock)
       .replace(NAVIGATION_SUBMENU_PATTERN, markContainerBlock);
@@ -977,6 +983,59 @@ async function QueryBlock({
   return <>{resultNodes}</>;
 }
 
+const SCRIPT_TAG_PATTERN = /<script\b([^>]*)>([\s\S]*?)<\/script>/gi;
+
+function readAttribute(attributes: string, name: string): string {
+  const pattern = new RegExp(
+    `(?:^|\\s)${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s"'>]+))`,
+    "i",
+  );
+  const match = pattern.exec(attributes);
+  return match ? (match[1] ?? match[2] ?? match[3] ?? "") : "";
+}
+
+function hasAttribute(attributes: string, name: string): boolean {
+  return new RegExp(`(?:^|\\s)${name}(?:\\s|=|$)`, "i").test(attributes);
+}
+
+interface HtmlBlockProps extends DynamicBlockProps {
+  innerHtml: string;
+  collector: RenderCollector;
+  depth: number;
+}
+
+/** 自定义 HTML 的脚本交给客户端在挂载后执行，避免 SSR 先跑一遍 */
+function HtmlBlock({
+  innerHtml,
+  context,
+  collector,
+  depth,
+}: HtmlBlockProps) {
+  const scripts: CustomHtmlScript[] = [];
+  const html = innerHtml.replace(
+    SCRIPT_TAG_PATTERN,
+    (match, attributes: string, code: string) => {
+      scripts.push({
+        code: code.trim(),
+        src: readAttribute(attributes, "src"),
+        type: readAttribute(attributes, "type"),
+        async: hasAttribute(attributes, "async"),
+        defer: hasAttribute(attributes, "defer"),
+      });
+      return "";
+    },
+  );
+
+  const body = renderContentBody(html, context, collector, {
+    depth: depth + 1,
+  });
+  return scripts.length > 0 ? (
+    <CustomHtmlScripts scripts={scripts}>{body}</CustomHtmlScripts>
+  ) : (
+    <>{body}</>
+  );
+}
+
 function createTransform(
   collector: RenderCollector,
   context: DynamicRenderContext,
@@ -1320,6 +1379,18 @@ function renderDynamicNode(
   if (name === "core/query") {
     return (
       <QueryBlock
+        attributes={attributes}
+        context={context}
+        instanceId={instanceId}
+        innerHtml={innerHtml}
+        collector={collector}
+        depth={depth}
+      />
+    );
+  }
+  if (name === "core/html") {
+    return (
+      <HtmlBlock
         attributes={attributes}
         context={context}
         instanceId={instanceId}
