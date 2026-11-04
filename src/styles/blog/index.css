@@ -1610,6 +1610,8 @@ body:not(.is-mobile-menu-active) .hamburger .hamburger-box .hamburger-inner::bef
 .search-input {
   appearance: none;
   flex: 1;
+  /* 输入框默认固有宽度约 244px，不放开下限会把同排按钮顶出卡片 */
+  min-width: 0;
   border: 0.125rem solid var(--color-border-subtle);
   border-radius: 0.1875rem;
   background-color: var(--color-bg);
@@ -5758,6 +5760,22 @@ ol.typo-list {
   width: 0.3125rem;
   height: 100%;
   z-index: 1;
+}
+
+/* 最右侧顶级项已经贴着视口右缘，它这一支再向右开会把面板撑到视口外，
+   收起状态也照样占位、让整页能横向滚动，所以改成向左开 */
+.primary-nav > .menu > li:last-child > .sub-menu .sub-menu {
+  left: auto;
+  right: 100%;
+  margin-left: 0;
+  margin-right: 0.3125rem;
+}
+.primary-nav > .menu > li:last-child > .sub-menu .sub-menu::before {
+  left: auto;
+  right: -0.3125rem;
+}
+.primary-nav > .menu > li:last-child > .sub-menu .submenu-toggle .submenu-icon {
+  transform: translateY(-50%) rotate(90deg);
 }
 
 .menu-has-children:hover > .sub-menu,
