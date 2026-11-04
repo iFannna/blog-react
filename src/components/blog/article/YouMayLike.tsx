@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { Article } from "@/types/models";
 import { articleHref } from "@/utils/article";
+import { localePath } from "@/lib/locale";
 import { useLocale } from "@/hooks/locale";
 import { getForYou } from "@/services/article";
 import { DateLinks } from "./DateLinks";
@@ -20,7 +21,7 @@ const CAT_COLORS = [
 const SKELETON_ITEMS = [0, 1, 2, 3];
 
 export default function YouMayLike() {
-  const { locale, prefix } = useLocale();
+  const { locale } = useLocale();
   const pathname = usePathname();
   const [articles, setArticles] = useState<Article[] | null>(null);
 
@@ -75,7 +76,7 @@ export default function YouMayLike() {
               return (
                 <div key={article.id} className="pyml-slide-item">
                   <div className="pyml-slider-backgrounds">
-                    <Link href={`${prefix}${articleHref(article)}`}>
+                    <Link href={localePath(locale, articleHref(article))}>
                       <div className="pyml-slide-bg">
                         {article.coverImage ? (
                           <img
@@ -99,7 +100,7 @@ export default function YouMayLike() {
                           {article.categories.map((cat, i) => (
                             <Link
                               key={cat.id}
-                              href={`${prefix}/category/${cat.name}`}
+                              href={localePath(locale, `/category/${cat.name}`)}
                               className={`article-cat-pill ${CAT_COLORS[i % CAT_COLORS.length]}`}
                             >
                               {cat.name}
@@ -112,7 +113,7 @@ export default function YouMayLike() {
 
                   <div className="slide-inner">
                     <h6>
-                      <Link href={`${prefix}${articleHref(article)}`}>{article.title}</Link>
+                      <Link href={localePath(locale, articleHref(article))}>{article.title}</Link>
                     </h6>
                     <div className="entry-meta">
                       <div className="entry-meta-elements">
@@ -132,7 +133,7 @@ export default function YouMayLike() {
                             )}
                             <span>
                               By{" "}
-                              <a href={`${prefix}/?author=${article.authorName}`} className="article-author-link">{article.authorName}</a>
+                              <Link href={localePath(locale, `/author/${article.authorName}`)} className="article-author-link">{article.authorName}</Link>
                             </span>
                           </span>
                         </span>

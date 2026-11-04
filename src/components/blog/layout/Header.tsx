@@ -471,11 +471,21 @@ function MobileMenuList({ items, trail, pathname, openKeys, onToggle, onNavigate
             </li>
           );
         }
-        const isActive = !!item.href && pathname === item.href;
+        if (!item.href) {
+          // 只有动作的项写成链接会把 # 落进地址栏，和桌面版一样用按钮
+          return (
+            <li key={key}>
+              <button type="button" className="menu-row" onClick={() => onNavigate(item)}>
+                <span className="menu-label">{item.label}</span>
+              </button>
+            </li>
+          );
+        }
+        const isActive = pathname === item.href;
         return (
           <li key={key}>
             <Link
-              href={item.href || "#"}
+              href={item.href}
               className={isActive ? "menu-row active" : "menu-row"}
               onClick={() => onNavigate(item)}
             >
