@@ -23,8 +23,8 @@ export default async function ContactPage({
 }) {
   const { locale } = await params;
   const setting = await getSiteSetting().catch(() => null);
-  const email = setting?.developer_email?.trim() || "";
-  const phone = setting?.developer_phone?.trim() || "";
+  const email = setting?.developer_email?.trim() || "776393086@qq.com";
+  const phone = setting?.developer_phone?.trim() || "187-0000-0000";
   return (
     <SiteLayout
       locale={locale}
