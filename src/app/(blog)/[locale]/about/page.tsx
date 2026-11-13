@@ -1,5 +1,6 @@
 import SiteLayout from "@/components/blog/layout/SiteLayout";
 import Breadcrumbs from "@/components/blog/common/Breadcrumbs";
+import { getSiteSetting } from "@/services/site";
 import { localePath } from "@/lib/locale";
 import type { Metadata } from "next";
 
@@ -50,6 +51,9 @@ export default async function AboutPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const setting = await getSiteSetting().catch(() => null);
+  const email = setting?.developer_email?.trim() || "";
+  const phone = setting?.developer_phone?.trim() || "";
   return (
     <SiteLayout
       locale={locale}
@@ -67,18 +71,18 @@ export default async function AboutPage({
               <div className="page-columns flex-layout">
                 <div className="page-column is-full">
                   <h6 className="page-heading page-heading-6 text-left text-accent">
-                    — My story
+                    — 我的故事
                   </h6>
                   <h2 className="page-heading page-heading-2 text-left">
-                    A passionate blogger and photographer from London.
+                    在读大学生，以代码将想法付诸现实。
                   </h2>
                   <p className="text-medium text-dim">
-                    Add more information about yourself. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    你好，我是赵瑾瑜，目前就读于大学。写代码是我最投入的事情，看着脑海中的构想逐步成形、成为可运行的产物，是每日最有成就感的时刻。
                   </p>
                   <p>
-                    Praesent pharetra sollicitudin sem eget vestibulum. Phasellus mollis id nibh vitae
-                    dignissim. Maecenas vitae eros tincidunt, laoreet tellus in, interdum eros. Interdum
-                    et malesuada fames ac ante ipsum primis in faucibus.
+                    这个博客由我用 React 与 Go 独立完成，从界面设计、接口开发到数据库和部署，
+                    皆由我亲手写就。于我而言，写文章和写代码是同一件事：把零散的思考一点点理清，
+                    再讲给同路的人听。愿这里不只留下技术笔记，也留下一个普通学生缓缓成长的痕迹。
                   </p>
                 </div>
               </div>
@@ -86,7 +90,7 @@ export default async function AboutPage({
               {/* ── Full-width image ── */}
               <figure className="page-image page-fullwidth">
                 <img
-                  src="https://java-ai-sau.oss-cn-beijing.aliyuncs.com/media/image/2026/04/b482211c-135f-426a-b36d-ec519374b6a6.jpg"
+                  src="https://lisris.oss-cn-beijing.aliyuncs.com/media/image/2026/11/c05bf60ca39d267d22273e212ee892de.jpg"
                   alt=""
                 />
               </figure>
@@ -97,19 +101,17 @@ export default async function AboutPage({
                   <div className="page-spacer spacer-sm" />
 
                   <h6 className="page-heading page-heading-6 text-left text-accent">
-                    — Get in touch with me
+                    — 和我聊聊
                   </h6>
                   <h2 className="page-heading page-heading-2 text-left">
-                    Don&apos;t hesitate to say hello
+                    欢迎随时来信
                   </h2>
                   <p className="text-medium text-dim">
-                    Add your contact information. Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    laoreet tellus.
+                    无论是技术交流、项目合作，抑或是希望彼此结识，都欢迎联系我。
                   </p>
                   <p>
-                    Praesent pharetra sollicitudin sem eget vestibulum. Phasellus mollis id nibh vitae
-                    dignissim. Maecenas vitae eros tincidunt, laoreet tellus in, interdum eros. Interdum
-                    et malesuada fames ac ante ipsum primis in faucibus.
+                    我平时偏爱前端交互与后端架构，也在持续学习新的语言与工具。若你已有想法，
+                    或发现本站尚有可改进之处，欢迎来信告知，我会认真阅读每一封。
                   </p>
 
                   <div className="page-spacer spacer-sm" />
@@ -117,20 +119,20 @@ export default async function AboutPage({
                   <div className="page-columns items-top flex-layout">
                     <div className="page-column items-top">
                       <p className="text-17">
-                        <strong>Send an email:</strong>
+                        <strong>邮箱：</strong>
                         <br />
-                        <a href="mailto:mail@example.com">mail@example.com</a>
+                        <a href={`mailto:${email}`}>{email}</a>
                       </p>
                       <p className="text-17">
-                        <strong>Call me:</strong>
+                        <strong>电话：</strong>
                         <br />
-                        <a href="tel:123-456-7890">123-456-7890</a>
+                        <a href={`tel:${phone}`}>{phone}</a>
                       </p>
                     </div>
 
                     <div className="page-column items-top">
                       <p className="text-17">
-                        <strong>Find me on:</strong>
+                        <strong>在这些地方找到我：</strong>
                       </p>
                       <ul className="social-links">
                         {SOCIALS.map((s) => (
